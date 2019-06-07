@@ -17,7 +17,8 @@
         "laravel/passport": "^7.3",
         "laravel/scout": "^7.1",
         "laravel/tinker": "^1.0",
-        "silber/bouncer": "dev-master"
+        "silber/bouncer": "dev-master",
+        "webpatser/laravel-uuid": "2.*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

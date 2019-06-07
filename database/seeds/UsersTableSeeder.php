@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
+class UsersTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+
+        $admin = factory(\App\Models\Users\User::class)->create([
+            'email' => 'nilde@nilde.it',
+            'name' => 'Nilde',
+//            'surname' => 'Nilde',
+            'password' => Hash::make('nilde'),
+        ]);
+//        $admin = App\Models\Users\User::create(new App\Models\Users\User([
+//            'email' => 'nilde@nilde.it',
+//            'name' => 'Nilde',
+//            'surname' => 'Nilde',
+//            'password' => Hash::make('nilde'),
+//        ]));
+//        $admin->verified = true;
+//        $admin->save();
+
+        // Crea qualche altro utente variegato
+        factory(\App\Models\Users\User::class, 5)->create();
+    }
+
+}

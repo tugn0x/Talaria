@@ -15,6 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
+    protected $apiNamespace = 'App\Http\Controllers\Api';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -67,7 +68,31 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('api')
              ->middleware('api')
-             ->namespace($this->namespace)
+             ->namespace($this->apiNamespace)
              ->group(base_path('routes/api.php'));
+
+        $this->scanDirectory('routes/api', [
+            'middleware' => 'api',
+            'namespace' => $this->apiNamespace,
+            'prefix' => 'api',
+        ]);
+    }
+
+    protected function scanDirectory(string $path, array $options)
+    {
+        if (mb_substr($path, -1) !== '/') {
+            $path .= '/';
+        }
+
+        $files = array_diff(scandir(base_path($path)), ['.', '..']);
+        $middleware = $options['middleware'];
+        $namespace = $options['namespace'];
+        $prefix = $options['prefix'];
+
+        foreach ($files as $file) {
+            if (pathinfo($file, PATHINFO_EXTENSION) === 'php') {
+                Route::middleware($middleware)->prefix($prefix)->namespace($namespace)->group(base_path($path . $file));
+            }
+        }
     }
 }
