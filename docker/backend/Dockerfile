@@ -24,7 +24,18 @@ RUN docker-php-ext-install gd
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Setting locales
-RUN echo fr_FR.UTF-8 UTF-8 > /etc/locale.gen && locale-gen
+RUN echo it_IT.UTF-8 UTF-8 > /etc/locale.gen && locale-gen
 
 # Changing Workdir
 WORKDIR /application
+
+RUN useradd -rm -d /home/php -s /bin/bash -u 1000 php
+
+USER php
+
+#COPY ./ /application
+#RUN composer install
+#RUN php artisan key:generate
+#RUN php artisan migrate
+#RUN php artisan passport:install
+

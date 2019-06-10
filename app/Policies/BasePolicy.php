@@ -13,58 +13,161 @@ class BasePolicy
 
     public function before($user, $ability)
     {
-        if ($user->isSuperAdmin()) {
+        if ($user->hasRole('super-admin')) {
             return true;
         }
     }
 
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @return mixed
-     */
-    public function view(User $user, $model)
+    protected function check(User $user, Model $model, $function=NULL)
     {
-        return true;
+        if(is_null($function))
+            throw new \Symfony\Component\HttpKernel\Exception\HttpException('Function Permission Must Be Defined in App\Policies::check for '.$function);
+
+        if($user->may(str_slug($function.'-'.$model->getTable())))
+        {
+            return true;
+        }
+//        \Log::info("PERMISSIONS: \n USER => ".$user."\n REQ: ".str_slug($function.'-'.$model->getTable())."\n");
+        return false;
     }
 
-    /**
-     * Determine whether the user can create models.
-     *
-     * @param  \App\Models\User  $user
-     * @return mixed
-     */
-    public function create(User $user)
+    protected function checkOthers(User $user, Model $model, $function=NULL)
     {
+        if(is_null($function))
+            throw new \Symfony\Component\HttpKernel\Exception\HttpException('Function Permission Must Be Defined in App\Policies::check for '.$function);
+
+        if($user->may($function.'-others-'.str_slug($model->getTable())))
+        {
+            return true;
+        }
+//        \Log::info("PERMISSIONS: \n USER => ".$user."\n REQ: ".str_slug($function.'-'.$model->getTable())."\n");
         return false;
-//        return $user->can('create', Model::class);
     }
 
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @return mixed
-     */
-    public function update(User $user, $model)
+    public function optionList(User $user, Model $model)
     {
-        return false;
-//        return $user->can('update', $model);
+        return $this->check($user,$model,__FUNCTION__);
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @return mixed
-     */
-    public function delete(User $user, $model)
+    public function index(User $user, Model $model)
+    {
+        return $this->check($user,$model,__FUNCTION__);
+    }
+
+    public function indexOthers(User $user, Model $model)
+    {
+        return $this->checkOthers($user,$model,'index');
+    }
+
+    public function show(User $user, Model $model)
+    {
+        return $this->check($user,$model,__FUNCTION__);
+    }
+    public function showOthers(User $user, Model $model)
+    {
+        return $this->checkOthers($user,$model,'show');
+    }
+
+    public function store(User $user, Model $model)
+    {
+        return $this->check($user,$model,__FUNCTION__);
+    }
+
+    public function storeOthers(User $user, Model $model)
+    {
+        return $this->checkOthers($user,$model,'store');
+    }
+
+    public function update(User $user, Model $model)
+    {
+        return $this->check($user,$model,__FUNCTION__);
+    }
+
+    public function updateOthers(User $user, Model $model)
+    {
+        return $this->checkOthers($user,$model,'update');
+    }
+
+    public function delete(User $user, Model $model)
+    {
+        return $this->check($user,$model,__FUNCTION__);
+    }
+
+    public function deleteOthers(User $user, Model $model)
+    {
+        return $this->checkOthers($user,$model,'delete');
+    }
+
+    public function restore(User $user, Model $model)
+    {
+        return $this->check($user,$model,__FUNCTION__);
+    }
+
+    public function restoreOthers(User $user, Model $model)
+    {
+        return $this->checkOthers($user,$model,'restore');
+    }
+
+    public function destroy(User $user, Model $model)
     {
         return false;
-//        return $user->can('delete', $model);
+    }
+
+    public function destroyOthers(User $user, Model $model)
+    {
+        return false;
+    }
+
+    public function bulkDelete(User $user, Model $model)
+    {
+        return $this->check($user,$model,__FUNCTION__);
+    }
+
+    public function bulkSave(User $user, Model $model)
+    {
+        return $this->check($user,$model,__FUNCTION__);
+    }
+
+    public function bulkRestore(User $user, Model $model)
+    {
+        return $this->check($user,$model,__FUNCTION__);
+    }
+
+    public function bulkDestroy(User $user, Model $model)
+    {
+        return false;
+    }
+
+    public function info(User $user, Model $model)
+    {
+        return false;
+    }
+
+    public function attach(User $user, Model $model)
+    {
+        return $this->check($user,$model,__FUNCTION__);
+    }
+
+    public function detach(User $user, Model $model)
+    {
+        return $this->check($user,$model,__FUNCTION__);
+    }
+
+    public function sync(User $user, Model $model)
+    {
+        return $this->check($user,$model,__FUNCTION__);
+    }
+
+    /*
+     * ALIASES
+     */
+    public function view(User $user, Model $model)
+    {
+        return $this->show($user,$model,__FUNCTION__);
+    }
+
+    public function create(User $user, Model $model)
+    {
+        return $this->store($user,$model,__FUNCTION__);
     }
 }

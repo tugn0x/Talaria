@@ -173,7 +173,9 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\HorizonServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\DingoServiceProvider::class,
 
     ],
 
@@ -225,7 +227,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Api' => Dingo\Api\Facade\API::class,
+//        'Route' => Dingo\Api\Facade\Route::class,
+        'ApiRoute' => Dingo\Api\Facade\Route::class,
 
     ],
 
+    'currency_precision' =>  3,
 ];

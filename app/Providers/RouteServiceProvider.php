@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Dingo\Api\Routing\Router;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -15,7 +16,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
-    protected $apiNamespace = 'App\Http\Controllers\Api';
+    protected $api;
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -66,15 +67,17 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->apiNamespace)
-             ->group(base_path('routes/api.php'));
+//        Route::prefix('api')
+//             ->middleware('api')
+//             ->namespace($this->namespace)
+//             ->group(base_path('routes/api.php'));
 
         $this->scanDirectory('routes/api', [
             'middleware' => 'api',
-            'namespace' => $this->apiNamespace,
-            'prefix' => 'api',
+            'namespace' => $this->namespace,
+//            'prefix' => 'api/v1',
+            'prefix' => '',
+            'version' => 'v1',
         ]);
     }
 
@@ -88,10 +91,14 @@ class RouteServiceProvider extends ServiceProvider
         $middleware = $options['middleware'];
         $namespace = $options['namespace'];
         $prefix = $options['prefix'];
+        $version = $options['version'];
+//        $api = app('Dingo\Api\Routing\Router');
 
         foreach ($files as $file) {
             if (pathinfo($file, PATHINFO_EXTENSION) === 'php') {
+//                Route::middleware($middleware)->prefix($prefix)->version($version)->namespace($namespace)->group(base_path($path . $file));
                 Route::middleware($middleware)->prefix($prefix)->namespace($namespace)->group(base_path($path . $file));
+//                require_once base_path($path . $file);
             }
         }
     }

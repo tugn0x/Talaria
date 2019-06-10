@@ -30,6 +30,27 @@ class SampleCommand extends Command
         parent::__construct();
     }
 
+    protected $roles_and_permissions = [
+        'Super Admin' => [
+//            \App\Models\X::class => [
+//                'create',
+//                'update',
+//                ['delete', true], // only owned
+//            ]
+        ],
+        'Lybrary Admin' => [
+            Library::class => [
+                ['update', true], // only owned
+            ]
+        ],
+        'Registered' => [
+
+        ],
+        'Guest' => [
+
+        ],
+    ];
+
     /**
      * Execute the console command.
      *
@@ -37,6 +58,40 @@ class SampleCommand extends Command
      */
     public function handle()
     {
-        $this->line("this is a command");
+        foreach ($this->roles_and_permissions as $role_title => $all_abilities) {
+            /*
+             * Create or get Role
+             */
+//            $role = Bouncer::role()->firstOrCreate([
+//                'name' => str_slug($role_title),
+//                'title' => $role_title,
+//            ]);
+
+            /*
+             * Creazione permessi
+             */
+            foreach ($all_abilities as $model=>$abilities) {
+                foreach ($abilities as $ability) {
+                    if(is_string($ability)) {
+                        $ability = [$ability, false];
+                    }
+                    $this->line($role_title);
+                    $this->line($model);
+                    $this->line(json_encode($ability));
+
+//                    $ability = Bouncer::ability()->firstOrCreate([
+//                        'name' => str_slug($ability[0]),
+//                        'title' => $ability[0],
+//                        'entity_type' => $model,
+//                        'only_owned' => $ability[1]
+//                    ]);
+//
+//                    if (!$role->can($ability)) {
+//                        Bouncer::allow($role)->to($ability);
+//                    }
+                }
+            }
+        }
     }
+
 }

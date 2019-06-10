@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
 //            'surname' => 'Nilde',
             'password' => Hash::make('nilde'),
         ]);
+        $admin->assign('super-admin');
 //        $admin = App\Models\Users\User::create(new App\Models\Users\User([
 //            'email' => 'nilde@nilde.it',
 //            'name' => 'Nilde',

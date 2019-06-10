@@ -2,32 +2,55 @@
 
 use Illuminate\Database\Seeder;
 
+//use Bouncer;
+
 class RolesAndPermissionsSeeder extends Seeder
 {
 
     protected $roles_and_permissions = [
         'Super Admin' => [
-//            ['create', \App\Models\X::class],
-//            ['update', \App\Models\X::class],
-//            ['delete', \App\Models\X::class],
+            'GENERIC' => [
+                'Query'
+            ],
+            'BY_MODEL' => [
+                Library::class => [
+                    ['update', true], // only owned
+                ]
+            ],
         ],
+
         'Lybrary Admin' => [
-//            ['create', \App\Models\X::class],
-//            ['update', \App\Models\X::class],
-//            ['delete', \App\Models\X::class],
+            'GENERIC' => [
+                'Query'
+            ],
+            'BY_MODEL' => [
+                Library::class => [
+                    ['update', true], // only owned
+                ]
+            ],
         ],
-        'registered' => [
-//            ['create', \App\Models\X::class],
-//            ['update', \App\Models\X::class],
-//            ['delete', \App\Models\X::class],
+
+        'Lybrary Operator' => [
+            'GENERIC' => [
+                'Query'
+            ],
+            'BY_MODEL' => [
+                Library::class => [
+                    ['update', true], // only owned
+                ]
+            ],
         ],
-        'guest' => [
-//            ['create', \App\Models\X::class],
-//            ['update', \App\Models\X::class],
-//            ['delete', \App\Models\X::class],
+
+        'Registered' => [
+
+        ],
+
+        'Guest' => [
+
         ],
     ];
     protected $standard_methods = [
+        'show',
         'create',
         'update',
         'delete',
@@ -40,7 +63,7 @@ class RolesAndPermissionsSeeder extends Seeder
      */
     public function run()
     {
-        foreach ($this->roles_and_permissions as $role_title => $abilityies) {
+        foreach ($this->roles_and_permissions as $role_title => $all_abilities) {
             /*
              * Create or get Role
              */
@@ -50,21 +73,38 @@ class RolesAndPermissionsSeeder extends Seeder
             ]);
 
             /*
-             * Creazione permessi
+             * Creating GENERIC permissions
              */
-            foreach ($abilityies as $ability_to_grant) {
+            foreach (array_get($all_abilities, 'GENERIC', []) as $ability) {
+                $this->createAbilityAndAssignToRole($role, $ability);
+            }
 
-                $ability = Bouncer::ability()->firstOrCreate([
-                    'name' => str_slug($ability_to_grant[0]),
-                    'title' => $ability_to_grant[0],
-                    'entity_type' => array_get($ability_to_grant, 1, null),
-                    'only_owned' => array_get($ability_to_grant, 3, false)
-                ]);
-
-                if (!$role->can($ability)) {
-                    Bouncer::allow($role)->to($ability);
+            /*
+             * Creating BY MODEL permissions
+             */
+            foreach (array_get($all_abilities, 'BY_MODEL', []) as $model => $abilities) {
+                foreach ($abilities as $ability) {
+                    $this->createAbilityAndAssignToRole($role, $ability, $model);
                 }
             }
+        }
+    }
+
+    public function createAbilityAndAssignToRole($role, $ability, $model=null)
+    {
+        if (is_string($ability)) {
+            $ability = [$ability, false];
+        }
+
+        $abilityInstance = Bouncer::ability()->firstOrCreate([
+            'name' => str_slug($ability[0]),
+            'title' => $ability[0],
+            'entity_type' => $model,
+            'only_owned' => $ability[1]
+        ]);
+
+        if (!$role->can($abilityInstance)) {
+            Bouncer::allow($role)->to($abilityInstance);
         }
     }
 }

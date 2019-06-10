@@ -19,6 +19,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
+        \Barryvdh\Cors\HandleCors::class,
     ];
 
     /**
@@ -43,16 +44,17 @@ class Kernel extends HttpKernel
 
         'api' => [
             'throttle:60,1',
+            'get_parameter_access_token',
             'bindings',
         ],
 
-        // Convenience group containing the auth middleware for Passport and
-        // Dingo so that the custom 'App\Providers\PassportDingoAuthProvider'
-        // can bridge the auth systems:
-        'auth:api-combined' => [
-            'auth:api', // Passport
-            'api.auth', // Dingo
-        ],
+//        // Convenience group containing the auth middleware for Passport and
+//        // Dingo so that the custom 'App\Providers\PassportDingoAuthProvider'
+//        // can bridge the auth systems:
+//        'auth:api-combined' => [
+//            'auth:api', // Passport
+//            'api.auth', // Dingo
+//        ],
     ];
 
     /**
@@ -72,6 +74,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'get_parameter_access_token' => \App\Http\Middleware\AccessToken::class,
     ];
 
     /**
