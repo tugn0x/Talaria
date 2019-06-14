@@ -18,9 +18,9 @@ trait RolesAbilitiesPermissionsTrait
     public function serializeAuthorizations($items) {
         if(is_string($items))
             if(strpos($items, ',') === false)
-                $roles = [$items];
+                $items = [$items];
             else
-                $roles = explode(',', $items);
+                $items = explode(',', $items);
         return $items;
     }
 
