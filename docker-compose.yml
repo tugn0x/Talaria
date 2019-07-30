@@ -27,6 +27,8 @@ services:
     image: mysql:5.7
     ports:
     - "${DB_EXTERNAL_PORT}:3306"
+    expose:
+     - "${DB_EXTERNAL_PORT}"
     environment:
       - MYSQL_DATABASE=${DB_DATABASE}
       - MYSQL_USER=${DB_USERNAME}

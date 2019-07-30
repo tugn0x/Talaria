@@ -53,7 +53,7 @@ trait RolesAbilitiesPermissionsTrait
     public function hasRole($roles, $requireAll = false)
     {
         $roles = $this->serializeAuthorizations($roles);
-
+//        dd($roles);
         if ($requireAll) {
             return $this->isAll(...$roles);
         } else {

@@ -44,12 +44,12 @@ trait CurrencyTrait
     protected function formatCurrency($value){
         if(!is_numeric($value))
             $value = str_replace(',','',$value);
-        return (float) number_format($value, config('apiclu.currency_precision'), '.', '');
+        return (float) number_format($value, config('api.currency_precision'), '.', '');
     }
 
     protected function getPrecision()
     {
-//        return pow(10,config('apiclu.currency_precision'));
+//        return pow(10,config('api.currency_precision'));
         return pow(10,config('app.currency_precision'));
     }
 }

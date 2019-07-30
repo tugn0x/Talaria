@@ -21,7 +21,8 @@ Route::group([
 //    'middleware' => 'api',
     'as' => 'api.v1.libraries.',
 ], function () {
-    Route::get('/', 'LibraryController@test')->name('test');
+//    Route::get('/', 'LibraryController@test')->name('test');
+    Route::get('/', 'LibraryController@index')->name('index');
 });
 //$api = app('Dingo\Api\Routing\Router');
 //$api->version('v1', function ($api) {

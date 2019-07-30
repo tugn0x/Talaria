@@ -1,12 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Libraries;
 
 use App\Models\Libraries\Library;
+use App\Models\Libraries\LibraryTransformer;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ApiController;
 
-class LibraryController extends Controller
+class LibraryController extends ApiController
 {
+//    /**
+//     * Create a new controller instance.
+//     *
+//     * @return void
+//     */
+    public function __construct(Library $model, LibraryTransformer $transformer)
+    {
+        $this->model = $model;
+
+        $this->transformer = $transformer;
+
+        $this->broadcast = false;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +30,7 @@ class LibraryController extends Controller
      */
     public function index()
     {
-        //
+        return $this->response->collection($this->model->get(), new LibraryTransformer);
     }
 
     /**

@@ -7,9 +7,11 @@ class BaseModel extends Model {
     use ModelTrait;
 
     protected $fillable = [];
+    protected $guarded = [];
     protected $attributes = [];
     protected $casts = [];
     protected $dates = [];
     protected $appends = [];
+    protected $hidden = [];
 //    protected static $observerClass = null;
 }

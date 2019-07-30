@@ -7,7 +7,7 @@ class LibraryObserver extends BaseObserver
 {
 
     protected $rules = [
-        'user_id' => 'required|integer|exists:users,id',
+//        'user_id' => 'required|integer|exists:users,id',
     ];
 
 
@@ -21,6 +21,12 @@ class LibraryObserver extends BaseObserver
     public function saving($model)
     {
         return parent::saving($model);
+
+    }
+
+    public function saved($model)
+    {
+        return parent::saved($model);
 
     }
 
