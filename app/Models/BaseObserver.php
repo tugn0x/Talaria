@@ -8,21 +8,21 @@ class BaseObserver
     protected $validator;
 
     protected $rules = [
-        'title'=>'required|max:255',
-        'open_at'=>'required|date|before:close_at',
-        'close_at'=>'required|date|after:open_at',
-        'status'=>'required|max:255|in:draft,publish,open,closed',
-        'start_at'=>'required|date|before:end_at',
-        'end_at'=>'required|date|after:start_at',
-        'remote_access'=>'boolean',
-        'physical_access'=>'boolean',
-        'evaluation_days'=>'required|integer',
-        'evaluation_manager_days'=>'required|integer',
-        'acceptance_days'=>'required|integer',
-        'description' => 'required|max:21844',
-        'user_id' => 'required|integer|exists:users,id',
-//        'sm_reminder_date'=>'required|date|after:end_at',
-        'sm_reminder_date'=>'required|date|after:close_at',
+//        'title'=>'required|max:255',
+//        'open_at'=>'required|date|before:close_at',
+//        'close_at'=>'required|date|after:open_at',
+//        'status'=>'required|max:255|in:draft,publish,open,closed',
+//        'start_at'=>'required|date|before:end_at',
+//        'end_at'=>'required|date|after:start_at',
+//        'remote_access'=>'boolean',
+//        'physical_access'=>'boolean',
+//        'evaluation_days'=>'required|integer',
+//        'evaluation_manager_days'=>'required|integer',
+//        'acceptance_days'=>'required|integer',
+//        'description' => 'required|max:21844',
+//        'user_id' => 'required|integer|exists:users,id',
+////        'sm_reminder_date'=>'required|date|after:end_at',
+//        'sm_reminder_date'=>'required|date|after:close_at',
     ];
 
     public function __construct()
@@ -46,6 +46,7 @@ class BaseObserver
             {
                 if (!$model->exists)
                 {
+                    dd($this->validator->errors());
 //                    print_r(get_class($model));
 //                    print_r($model->toArray());
 //                    exit(print_r($this->validator->errors()));

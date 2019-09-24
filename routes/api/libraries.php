@@ -23,6 +23,7 @@ Route::group([
 ], function () {
 //    Route::get('/', 'LibraryController@test')->name('test');
     Route::get('/', 'LibraryController@index')->name('index');
+    Route::post('/', 'LibraryController@create')->name('create');
 });
 //$api = app('Dingo\Api\Routing\Router');
 //$api->version('v1', function ($api) {

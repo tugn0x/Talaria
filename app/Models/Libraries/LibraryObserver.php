@@ -7,6 +7,8 @@ class LibraryObserver extends BaseObserver
 {
 
     protected $rules = [
+        'email' => 'required|email',
+        'name' => 'required|integer',
 //        'user_id' => 'required|integer|exists:users,id',
     ];
 

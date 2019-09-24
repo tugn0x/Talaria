@@ -38,9 +38,11 @@ class LibraryController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $this->model->fill($request->all());
+        $this->model->save();
+        return $this->model->toArray();
     }
 
     /**

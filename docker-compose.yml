@@ -20,7 +20,7 @@ services:
       - redis
     volumes:
       - ./:/application
-      - /home/halphass/Scaricati:/application/dump
+#      - /home/halphass/Scaricati:/application/dump
     user: "${UID}"
 
   mysql:
