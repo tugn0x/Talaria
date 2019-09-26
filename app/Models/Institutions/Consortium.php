@@ -8,6 +8,6 @@ class Consortium extends Model
 {
     public function institutions()
     {
-        return $this->belongsToMany(Consortium::class);
+        return $this->belongsToMany(Institution::class);
     }
 }

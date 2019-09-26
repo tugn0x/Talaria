@@ -89,6 +89,7 @@ class LibraryController extends ApiController
     public function update(Request $request, Library $library)
     {
         $this->authorize('update', $library);
+//        $this->authorize('update-lend', $richiesta->borrow_library);
         //
     }
 

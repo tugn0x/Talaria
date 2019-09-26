@@ -13,7 +13,7 @@ class Institution extends Model
         return $this->hasMany(Library::class);
     }
 
-    public function institution_consortia()
+    public function consortia()
     {
         return $this->belongsToMany(Consortium::class);
     }
