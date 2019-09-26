@@ -21,7 +21,7 @@ class LibraryPolicy extends BasePolicy
 
     public function show(User $user, Model $model)
     {
-        return $this->canManage($user, $model) || $this->canManage($user, $model->institute);
+        return $this->canManage($user, $model) || $this->canManage($user, $model->institution);
     }
 
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateConsortiaTable extends Migration
+class CreateProjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateConsortiaTable extends Migration
      */
     public function up()
     {
-        Schema::create('consortia', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
         });
-        Schema::create('entity_consortium', function (Blueprint $table) {
+        Schema::create('library_project', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('consortium');
-            $table->morphs('entity'); // QUESTO è un morph to, in modo da permettere l'inserimento di ENTI e BIBLIOTECHE NEI PROGETTI / CONSORZI
+            $table->bigInteger('project_id');
+            $table->bigInteger('library_id');
             $table->timestamps();
         });
     }
@@ -32,7 +32,7 @@ class CreateConsortiaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('consortia');
-        Schema::dropIfExists('institution_consortium');
+        Schema::dropIfExists('projects');
+        Schema::dropIfExists('library_project');
     }
 }

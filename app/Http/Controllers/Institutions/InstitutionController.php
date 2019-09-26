@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Libraries;
+namespace App\Http\Controllers\Institutions;
 
-use App\Models\Libraries\Institute;
+use App\Models\Institutions\Institution;
 use Illuminate\Http\Request;
 
-class InstituteController extends Controller
+class InstitutionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class InstituteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Libraries\Institute  $institute
+     * @param  \App\Models\Institutions\Institution  $institution
      * @return \Illuminate\Http\Response
      */
-    public function show(Institute $institute)
+    public function show(Institution $institution)
     {
         //
     }
@@ -52,10 +52,10 @@ class InstituteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Libraries\Institute  $institute
+     * @param  \App\Models\Institutions\Institution  $institution
      * @return \Illuminate\Http\Response
      */
-    public function edit(Institute $institute)
+    public function edit(Institution $institution)
     {
         //
     }
@@ -64,10 +64,10 @@ class InstituteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Libraries\Institute  $institute
+     * @param  \App\Models\Institutions\Institution  $institution
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Institute $institute)
+    public function update(Request $request, Institution $institution)
     {
         //
     }
@@ -75,10 +75,10 @@ class InstituteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Libraries\Institute  $institute
+     * @param  \App\Models\Institutions\Institution  $institution
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Institute $institute)
+    public function destroy(Institution $institution)
     {
         //
     }

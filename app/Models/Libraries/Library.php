@@ -35,13 +35,13 @@ class Library extends BaseModel
       'name' => 'json'
     ];
 
-    public function institute()
+    public function institution()
     {
-        return $this->belongsTo(Institute::class);
+        return $this->belongsTo(Institution::class);
     }
 
-//    public function consortia()
-//    {
-//        return $this->morphToMany(Consortium::class, 'entity_consortium');
-//    }
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
 }

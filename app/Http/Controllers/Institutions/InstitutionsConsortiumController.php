@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Libraries;
+namespace App\Http\Controllers\Institutions;
 
 use App\Models\Libraries\InstitutionsConsortium;
 use Illuminate\Http\Request;
