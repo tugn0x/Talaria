@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Institutions\Institution;
 
 //use Bouncer;
 
@@ -55,7 +56,7 @@ class RolesAndPermissionsSeeder extends Seeder
             //Op. Licenze
             'manage-licenses',
         ],
-        \App\Models\Libraries\Institute::class => [
+      \App\Models\Institutions\Institution::class => [
             // Manager, TODO: costui è manager anche di tutte le library sottoposte?
             'manage',
             // ManagerTech.
@@ -63,7 +64,7 @@ class RolesAndPermissionsSeeder extends Seeder
             // Op. Licenze
             'manage-licenses',
         ],
-        \App\Models\Libraries\Consortium::class => [
+      \App\Models\Projects\Project::class => [
             // Manager,
             'manage',
             // ManagerTech.
@@ -71,7 +72,7 @@ class RolesAndPermissionsSeeder extends Seeder
             // Op. Licenze
             'manage-licenses',
         ],
-        \App\Models\Libraries\InstitutionsConsortium::class => [
+        \App\Models\Institutions\Consortium::class => [
             // Op. Licenze
             'manage-licenses',
         ],
