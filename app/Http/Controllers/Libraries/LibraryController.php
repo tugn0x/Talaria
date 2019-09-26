@@ -40,6 +40,7 @@ class LibraryController extends ApiController
      */
     public function create(Request $request)
     {
+//        $this->authorize('create', $this->model);
         $this->model->fill($request->all());
         $this->model->save();
         return $this->model->toArray();
@@ -87,6 +88,7 @@ class LibraryController extends ApiController
      */
     public function update(Request $request, Library $library)
     {
+        $this->authorize('update', $library);
         //
     }
 

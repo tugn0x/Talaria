@@ -188,14 +188,14 @@ trait ModelTrait
      */
     public function setAttribute($key, $value)
     {
-        if (method_exists('getCurrencies', self::class) && $value && (in_array($key, $this->getCurrencies()))) {
-            $value = $this->fromCurrency($value);
-            $this->attributes[$key] = $value;
-        }
-        if ($value && (in_array($key, $this->getDatesWithoutTimezone()))) {
-            $value = $this->fromDateTime($this->asDateWithoutTimezone($value));
-            $this->attributes[$key] = $value;
-        }
+//        if (method_exists('getCurrencies', self::class) && $value && (in_array($key, $this->getCurrencies()))) {
+//            $value = $this->fromCurrency($value);
+//            $this->attributes[$key] = $value;
+//        }
+//        if ($value && (in_array($key, $this->getDatesWithoutTimezone()))) {
+//            $value = $this->fromDateTime($this->asDateWithoutTimezone($value));
+//            $this->attributes[$key] = $value;
+//        }
         return parent::setAttribute($key, $value);
     }
 
@@ -207,17 +207,17 @@ trait ModelTrait
      */
     public function getAttributeValue($key)
     {
-        $value = $this->getAttributeFromArray($key);
-        if (in_array($key, $this->getCurrencies())) {
-            if (! is_null($value)) {
-                return $this->asCurrency($value);
-            }
-        }
-        if (in_array($key, $this->getDatesWithoutTimezone())) {
-            if (! is_null($value)) {
-                return $this->asDateWithoutTimezone($value);
-            }
-        }
+//        $value = $this->getAttributeFromArray($key);
+//        if (in_array($key, $this->getCurrencies())) {
+//            if (! is_null($value)) {
+//                return $this->asCurrency($value);
+//            }
+//        }
+//        if (in_array($key, $this->getDatesWithoutTimezone())) {
+//            if (! is_null($value)) {
+//                return $this->asDateWithoutTimezone($value);
+//            }
+//        }
         return parent::getAttributeValue($key);
     }
 

@@ -6,40 +6,136 @@ use Illuminate\Database\Seeder;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
+    /*
+     * MAPPA GENERICA DEI MACRO-PERMESSI E DEI RUOLI VERI:
+     */
+    protected $roles = [
+        'Super Admin' => [], // SUPER ADMIN DOESN'T ASK FOR PERMISSIONS
+        /*
+         * Amministratore Nilde
+         */
+        'Admin Nilde' => [],
+        /*
+         * Gestore Nilde
+         */
+        'Manager Nilde' => [
+            // create, update, delete delle libraries
+            // create, update, delete delle institution
+        ],
+        /*
+         * Contabile Nilde
+         */
+        'Accountant Nilde' => [],
+        /*
+         * Operatore Alpe
+         */
+        'Operator Standard Licenses' => [],
+        /*
+         * Utente semplice, ricercatore
+         */
+        'Library User' => [],
+    ];
+
+    protected $macro_permissions = [
+        \App\Models\Libraries\Library::class => [
+            //Manager
+            'manage',
+            //Op. Utenti
+            'manage-users',
+            //Op. Borr
+            'borrow',
+            //Op. Lend
+            'lend',
+            //Op. Consegna
+            'deliver',
+            //Op. ILL Borr
+            'ill-borrow',
+            //Op. ILL Lend
+            'ill-lend',
+            //Op. Licenze
+            'manage-licenses',
+        ],
+        \App\Models\Libraries\Institute::class => [
+            // Manager, TODO: costui è manager anche di tutte le library sottoposte?
+            'manage',
+            // ManagerTech.
+            'manage-tech',
+            // Op. Licenze
+            'manage-licenses',
+        ],
+        \App\Models\Libraries\Consortium::class => [
+            // Manager,
+            'manage',
+            // ManagerTech.
+            'manage-tech',
+            // Op. Licenze
+            'manage-licenses',
+        ],
+        \App\Models\Libraries\InstitutionsConsortium::class => [
+            // Op. Licenze
+            'manage-licenses',
+        ],
+    ];
 
     protected $roles_and_permissions = [
         'Super Admin' => [
-            'GENERIC' => [
-                'Query'
-            ],
-            'BY_MODEL' => [
-                Library::class => [
-                    ['update', true], // only owned
-                ]
-            ],
+//            'GENERIC' => [
+//                'Query'
+//            ],
+//            'BY_MODEL' => [
+//                Library::class => [
+//                    ['update', true], // only owned
+//                ]
+//            ],
         ],
 
-        'Lybrary Admin' => [
-            'GENERIC' => [
-                'Query'
-            ],
-            'BY_MODEL' => [
-                Library::class => [
-                    ['update', true], // only owned
-                ]
-            ],
-        ],
+//        'Lybrary Admin' => [
+//            'GENERIC' => [
+//                'Query'
+//            ],
+//            'BY_MODEL' => [
+//                Library::class => [
+//                    ['update', true], // only owned
+//                ]
+//            ],
+//        ],
 
-        'Lybrary Operator' => [
+        'Manager Nilde' => [
             'GENERIC' => [
-                'Query'
+//                'Query'
             ],
             'BY_MODEL' => [
                 Library::class => [
-                    ['update', true], // only owned
+                    'show',
+//                    'create',
+                    'update',
+//                    'delete',
+                ],
+                \App\Models\Users\User::class => [
+                    'show',
+                    'create',
+                    'update',
+                    'delete',
+                ],
+                \App\Models\Libraries\Institute::class => [
+                    'show',
+                    'create',
+                    'update',
+                    'delete',
                 ]
             ],
         ],
+//
+//        'Lybrary Operator' => [
+//            'GENERIC' => [
+//                'Query'
+//            ],
+//            'BY_MODEL' => [
+//                Library::class => [
+//                    ['update', true], // only owned
+//                ]
+//            ],
+//        ],
 
         'Registered' => [
 

@@ -34,4 +34,14 @@ class Library extends BaseModel
     protected $casts = [
       'name' => 'json'
     ];
+
+    public function institute()
+    {
+        return $this->belongsTo(Institute::class);
+    }
+
+//    public function consortia()
+//    {
+//        return $this->morphToMany(Consortium::class, 'entity_consortium');
+//    }
 }
