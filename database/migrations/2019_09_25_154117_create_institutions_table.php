@@ -18,8 +18,7 @@ class CreateInstitutionsTable extends Migration
             $table->timestamps();
         });
         Schema::table('libraries', function (Blueprint $table) {
-            $table->bigIncrements('institution_id')->nullable();
-            $table->timestamps();
+            $table->bigInteger('institution_id')->nullable();            
         });
     }
 
