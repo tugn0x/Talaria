@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Users\User;
-use App\Models\Libraries\Project;
+use App\Models\Projects\Project;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProjectPolicy
@@ -25,7 +25,7 @@ class ProjectPolicy
      * Determine whether the user can view the project.
      *
      * @param  \App\Models\Users\User  $user
-     * @param  \App\Models\Libraries\Project  $project
+     * @param  \App\Models\Projects\Project  $project
      * @return mixed
      */
     public function view(User $user, Project $project)
@@ -48,7 +48,7 @@ class ProjectPolicy
      * Determine whether the user can update the project.
      *
      * @param  \App\Models\Users\User  $user
-     * @param  \App\Models\Libraries\Project  $project
+     * @param  \App\Models\Projects\Project  $project
      * @return mixed
      */
     public function update(User $user, Project $project)
@@ -60,7 +60,7 @@ class ProjectPolicy
      * Determine whether the user can delete the project.
      *
      * @param  \App\Models\Users\User  $user
-     * @param  \App\Models\Libraries\Project  $project
+     * @param  \App\Models\Projects\Project  $project
      * @return mixed
      */
     public function delete(User $user, Project $project)
@@ -72,7 +72,7 @@ class ProjectPolicy
      * Determine whether the user can restore the project.
      *
      * @param  \App\Models\Users\User  $user
-     * @param  \App\Models\Libraries\Project  $project
+     * @param  \App\Models\Projects\Project  $project
      * @return mixed
      */
     public function restore(User $user, Project $project)
@@ -84,7 +84,7 @@ class ProjectPolicy
      * Determine whether the user can permanently delete the project.
      *
      * @param  \App\Models\Users\User  $user
-     * @param  \App\Models\Libraries\Project  $project
+     * @param  \App\Models\Projects\Project  $project
      * @return mixed
      */
     public function forceDelete(User $user, Project $project)

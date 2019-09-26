@@ -13,14 +13,14 @@ class CreateInstitutionsConsortiaTable extends Migration
      */
     public function up()
     {
-        Schema::create('institutions_consortia', function (Blueprint $table) {
+        Schema::create('consortia', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
         });
         Schema::create('institution_consortium', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('consortium');
-            $table->bigInteger('institution');
+            $table->bigInteger('consortium_id');
+            $table->bigInteger('institution_id');
             $table->timestamps();
         });
     }
@@ -32,7 +32,7 @@ class CreateInstitutionsConsortiaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('institutions_consortia');
+        Schema::dropIfExists('consortia');
         Schema::dropIfExists('institution_consortium');
     }
 }

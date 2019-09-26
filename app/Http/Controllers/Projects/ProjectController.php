@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Institutions;
+namespace App\Http\Controllers\Libraries;
 
-use App\Models\Libraries\InstitutionsConsortium;
+use App\Models\Projects\Project;
 use Illuminate\Http\Request;
 
-class InstitutionsConsortiumController extends Controller
+class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class InstitutionsConsortiumController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Libraries\InstitutionsConsortium  $institutionsConsortium
+     * @param  \App\Models\Projects\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function show(InstitutionsConsortium $institutionsConsortium)
+    public function show(Project $project)
     {
         //
     }
@@ -52,10 +52,10 @@ class InstitutionsConsortiumController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Libraries\InstitutionsConsortium  $institutionsConsortium
+     * @param  \App\Models\Projects\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(InstitutionsConsortium $institutionsConsortium)
+    public function edit(Project $project)
     {
         //
     }
@@ -64,10 +64,10 @@ class InstitutionsConsortiumController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Libraries\InstitutionsConsortium  $institutionsConsortium
+     * @param  \App\Models\Projects\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, InstitutionsConsortium $institutionsConsortium)
+    public function update(Request $request, Project $project)
     {
         //
     }
@@ -75,10 +75,10 @@ class InstitutionsConsortiumController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Libraries\InstitutionsConsortium  $institutionsConsortium
+     * @param  \App\Models\Projects\Project $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(InstitutionsConsortium $institutionsConsortium)
+    public function destroy(Project $project)
     {
         //
     }

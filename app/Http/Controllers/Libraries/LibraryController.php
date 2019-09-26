@@ -9,11 +9,11 @@ use App\Http\Controllers\ApiController;
 
 class LibraryController extends ApiController
 {
-//    /**
-//     * Create a new controller instance.
-//     *
-//     * @return void
-//     */
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct(Library $model, LibraryTransformer $transformer)
     {
         $this->model = $model;

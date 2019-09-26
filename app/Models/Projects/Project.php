@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models\Libraries;
+namespace App\Models\Projects;
 
+use App\Models\Libraries\Library;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model

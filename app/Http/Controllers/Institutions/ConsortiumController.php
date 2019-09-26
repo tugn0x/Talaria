@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Libraries;
+namespace App\Http\Controllers\Institutions;
 
-use App\Models\Libraries\Consortium;
+use App\Models\Institutions\Consortium;
 use Illuminate\Http\Request;
 
 class ConsortiumController extends Controller
@@ -41,7 +41,7 @@ class ConsortiumController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Libraries\Consortium  $consortium
+     * @param  \App\Models\Libraries\Consortium $consortium
      * @return \Illuminate\Http\Response
      */
     public function show(Consortium $consortium)
@@ -52,7 +52,7 @@ class ConsortiumController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Libraries\Consortium  $consortium
+     * @param  \App\Models\Libraries\Consortium $consortium
      * @return \Illuminate\Http\Response
      */
     public function edit(Consortium $consortium)
@@ -64,7 +64,7 @@ class ConsortiumController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Libraries\Consortium  $consortium
+     * @param  \App\Models\Libraries\Consortium $consortium
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Consortium $consortium)
@@ -75,7 +75,7 @@ class ConsortiumController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Libraries\Consortium  $consortium
+     * @param  \App\Models\Libraries\Consortium $consortium
      * @return \Illuminate\Http\Response
      */
     public function destroy(Consortium $consortium)
