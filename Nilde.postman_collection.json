@@ -1,0 +1,291 @@
+{
+	"info": {
+		"_postman_id": "879970e5-d62d-4265-9607-921544d34267",
+		"name": "Nilde",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Oauth",
+			"item": [
+				{
+					"name": "OAUTH2:LOGIN CLIENT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"grant_type\": \"client_credentials\",\n  \"client_id\": \"1\",\n  \"client_secret\": \"bK3vrACDLE4WM7smEPvPT5X5XUdn8DfMHDnjGHrB\"\n}"
+						},
+						"url": {
+							"raw": "{{urlbase}}/oauth/token",
+							"host": [
+								"{{urlbase}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OAUTH2:LOGIN W/USER admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"grant_type\": \"password\",\n  \"client_id\": \"1\",\n  \"client_secret\": \"bK3vrACDLE4WM7smEPvPT5X5XUdn8DfMHDnjGHrB\",\n  \"username\": \"nilde@nilde.it\",\n  \"password\": \"nilde\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlbase}}/oauth/token",
+							"host": [
+								"{{urlbase}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OAUTH2:LOGIN W/USER custom",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"grant_type\": \"password\",\n  \"client_id\": \"1\",\n  \"client_secret\": \"bK3vrACDLE4WM7smEPvPT5X5XUdn8DfMHDnjGHrB\",\n  \"username\": \"alessandro.tugnoli@gmail.com\",\n  \"password\": \"nilde\"\n}"
+						},
+						"url": {
+							"raw": "{{urlbase}}/oauth/token",
+							"host": [
+								"{{urlbase}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8f0bb80d-764b-4ce8-ae28-f75e9036bd01",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "5930249f-82cb-4dda-a2d5-bd3768763f13",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Libraries",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/libraries?access_token={{bearer}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"libraries"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "{{bearer}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Library",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"null\",\n    \"ciao\": \"ciao!\",\n    \"email\": \"coppola.odone@example.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/libraries",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"libraries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Library",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"cippassssss\",\n    \"email\": \"coppola.odone@example.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/libraries/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"libraries",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "47f06099-020e-4cc5-af73-a80fefd27c76",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "8d589f6b-9ae9-4aef-970a-f258a360515e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "2d1d1447-699c-411a-bc46-40a97f1ee7e5",
+			"key": "url",
+			"value": "http://api.nilde.local",
+			"type": "string"
+		},
+		{
+			"id": "d9df099e-d536-4a41-b863-44341710e86a",
+			"key": "urlbase",
+			"value": "http://api.nilde.local",
+			"type": "string"
+		},
+		{
+			"id": "7d297dec-46ec-43e4-b677-2e26f22d0c8e",
+			"key": "bearer",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImExYjEyZmU4M2IwZmNjYjI4ZDJmY2Q3ZDkwZWQxZWE2ZTRhZDBmYzNhMmMwZmQyZTA1ODI3YzQ3ODNjNTdhNWJmMzE5MGVhMjU0ZjMwYmY1In0.eyJhdWQiOiIxIiwianRpIjoiYTFiMTJmZTgzYjBmY2NiMjhkMmZjZDdkOTBlZDFlYTZlNGFkMGZjM2EyYzBmZDJlMDU4MjdjNDc4M2M1N2E1YmYzMTkwZWEyNTRmMzBiZjUiLCJpYXQiOjE1NjA1MDIzMDksIm5iZiI6MTU2MDUwMjMwOSwiZXhwIjoxNTYwNTg4NzA5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.PJ5hheq3c3aZY4O-lb1edWqrSno5gUrqq4-9RL3UqpqnsSTCv4ArZiPyRFCURRMv-P_voAONkEOOm0Yhox0CGlmR9NIsUDipZ7UJJHQcfkdmTNz9nGoJFVyHdNq3jrGTijQMplIjCdH8RzFWj6JMkbQkPMcl-8Co1oioIY4Ew-yaLYqhj2g95ZKjFg7VDchScFxsp0iqKp0L1Y65rEngrBW4SG_c79PBVa7R1nR0RkGtE2uMtYBva9EKJAEB9S4pPCZve874zdBtQhTOS1dyh5PIR2cDrqGLNSJyUxOt_Q5euRcpCHs8zu703WZkfOqNVPxIMX8IKlBPDWZuKMsIeU6TWe4OPIjvi3I0fvgIqQYe-8dY0t5ynTw574XHxI9CSPLB6LoEhPzC465BJDe7sGLznS8Xrc1xz5j5JeDZsx78eurWx17dlDaMZUj-31iTL1V7xJSZU7QZWBoEKs4bUyRofPZnSaAQ9YYG6edGInDnHW9eV4vnf5sbYsrSHKZM61xu5YiACiaY_H1An0bXipZDniVvcfdqFubq83fENJgds7_Ay8XTk_JatoWjvpAHGmZO7k0obr49Tr_ZjD6o2_o7LEszZ0cAjGUhi5wHqLo71tgHVBdYak3pYehbcvFPa3oYA6Ci2eHTsT2FHAnruMbOaVZh4wpObwRxPmdnKzk",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": []
+}
