@@ -2,11 +2,15 @@
 
 namespace App\Models\Projects;
 
+use App\Models\BaseModel;
 use App\Models\Libraries\Library;
-use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class Project extends BaseModel
 {
+    protected $fillable = [
+        'name',        
+    ];
+
     public function libraries()
     {
         return $this->belongsToMany(Library::class);

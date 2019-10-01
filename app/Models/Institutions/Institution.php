@@ -2,10 +2,10 @@
 
 namespace App\Models\Institutions;
 
+use App\Models\BaseModel;
 use App\Models\Libraries\Library;
-use Illuminate\Database\Eloquent\Model;
 
-class Institution extends Model
+class Institution extends BaseModel
 {
 
     public function libraries()

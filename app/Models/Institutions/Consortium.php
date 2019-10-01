@@ -2,9 +2,9 @@
 
 namespace App\Models\Institutions;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
-class Consortium extends Model
+class Consortium extends BaseModel
 {
     public function institutions()
     {

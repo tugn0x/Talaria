@@ -57,7 +57,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'manage-licenses',
         ],
       \App\Models\Institutions\Institution::class => [
-            // Manager, TODO: costui è manager anche di tutte le library sottoposte?
+            // Manager
             'manage',
             // ManagerTech.
             'manage-tech',
