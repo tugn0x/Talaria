@@ -2,11 +2,26 @@
 
 namespace App\Http\Controllers\Institutions;
 
+use App\Http\Controllers\ApiController;
 use App\Models\Institutions\Consortium;
+use App\Models\Institutions\ConsortiumTransformer;
 use Illuminate\Http\Request;
 
-class ConsortiumController extends Controller
+class ConsortiumController extends ApiController
 {
+    public function __construct(Consortium $model, ConsortiumTransformer $transformer)
+    {
+        $this->model = $model;
+
+        $this->transformer = $transformer;
+
+        $this->broadcast = false;
+
+//        app('Dingo\Api\Transformer\Factory')->register(Library::class, LibraryTransformer::class);
+
+//        dd($this->transformer);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +29,9 @@ class ConsortiumController extends Controller
      */
     public function index()
     {
-        //
+        $items = $this->model->get();
+//        dd(get_class($this->response->collection($this->model->get(), new $this->transformer())));
+        return $this->response->collection($items, $this->transformer);
     }
 
     /**
@@ -22,10 +39,15 @@ class ConsortiumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+
+    public function create(Request $request)
     {
-        //
+//        $this->authorize('create', $this->model);
+        $model = $this->model->fill($request->only($this->model->getFillable()));
+        $model->save();
+        return $this->response->item($model, $this->transformer);
     }
+
 
     /**
      * Store a newly created resource in storage.

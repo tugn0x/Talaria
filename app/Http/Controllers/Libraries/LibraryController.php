@@ -21,6 +21,10 @@ class LibraryController extends ApiController
         $this->transformer = $transformer;
 
         $this->broadcast = false;
+
+//        app('Dingo\Api\Transformer\Factory')->register(Library::class, LibraryTransformer::class);
+
+//        dd($this->transformer);
     }
 
     /**
@@ -30,7 +34,8 @@ class LibraryController extends ApiController
      */
     public function index()
     {
-        return $this->response->collection($this->model->get(), new LibraryTransformer);
+        $items = $this->model->get();
+        return $this->response->collection($items, $this->transformer);
     }
 
     /**
@@ -41,9 +46,9 @@ class LibraryController extends ApiController
     public function create(Request $request)
     {
 //        $this->authorize('create', $this->model);
-        $this->model->fill($request->all());
-        $this->model->save();
-        return $this->model->toArray();
+        $model = $this->model->fill($request->only($this->model->getFillable()));
+        $model->save();
+        return $this->response->item($model, $this->transformer);
     }
 
     /**
@@ -89,10 +94,10 @@ class LibraryController extends ApiController
     public function update(Request $request, Library $library)
     {
         //solo chi ha l'ability "update" su quella specifica library
-        $this->authorize('update', $library); 
+        $this->authorize('update', $library);
         //        $this->authorize('update-lend', $richiesta->borrow_library);
-        
-        $library->update($request->all());        
+
+        $library->update($request->all());
         return $library->toArray();
     }
 

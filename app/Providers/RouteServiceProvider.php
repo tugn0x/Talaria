@@ -41,6 +41,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapDingoApiRoutes();
+
         //
     }
 
@@ -56,6 +58,16 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
              ->namespace($this->namespace)
              ->group(base_path('routes/web.php'));
+    }
+
+
+    protected function mapDingoApiRoutes()
+    {
+        $api = app('Dingo\Api\Routing\Router');
+        $api->version('v1', function ($api) {
+            $api->get('test', 'App\Http\Controllers\ApiController@test');
+        });
+
     }
 
     /**
@@ -75,8 +87,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->scanDirectory('routes/api', [
             'middleware' => 'api',
             'namespace' => $this->namespace,
-//            'prefix' => 'api/v1',
-            'prefix' => '',
+            'prefix' => 'api/v1',
+//            'prefix' => '',
             'version' => 'v1',
         ]);
     }

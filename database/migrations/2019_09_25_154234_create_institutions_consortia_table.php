@@ -15,7 +15,14 @@ class CreateInstitutionsConsortiaTable extends Migration
     {
         Schema::create('consortia', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('email');
+
             $table->timestamps();
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->softDeletes();
+            $table->integer('deleted_by')->unsigned()->nullable();
         });
         Schema::create('institution_consortium', function (Blueprint $table) {
             $table->bigIncrements('id');

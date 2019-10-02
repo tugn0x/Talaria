@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Auth;
 
 
-class BaseTransformer
+class BaseTransformer extends TransformerAbstract
 {
 
     private $disallow_policy;
@@ -117,7 +117,7 @@ class BaseTransformer
     {
         $fields = $this->applyPolicy($model, $to_merge);
 
-        $fields = $this->applyDateFormat($model, $fields);
+//        $fields = $this->applyDateFormat($model, $fields);
 
         return $fields;
     }

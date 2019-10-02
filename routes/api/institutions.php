@@ -15,18 +15,14 @@ use Illuminate\Http\Request;
 
 
 Route::group([
-    'namespace' => 'Libraries',
-    'prefix' => 'libraries',
+    'namespace' => 'Institutions',
+    'prefix' => 'institutions',
     'middleware' => ['api','auth:api',],
 //    'middleware' => 'api',
-    'as' => 'api.v1.libraries.',
+    'as' => 'api.v1.institutions.',
 ], function () {
 //    Route::get('/', 'LibraryController@test')->name('test');
-    Route::get('libraries', 'LibraryController@index')->name('index');
-    Route::put('libraries/{library}', 'LibraryController@update')->name('update');
-    Route::post('libraries', 'LibraryController@create')->name('create');
+    Route::get('consortia', 'ConsortiumController@index')->name('index');
+    Route::put('consortia/{Consortium}', 'ConsortiumController@update')->name('update');
+    Route::post('consortia', 'ConsortiumController@create')->name('create');
 });
-//$api = app('Dingo\Api\Routing\Router');
-//$api->version('v1', function ($api) {
-//    $api->get('libraries', 'App\Http\Controllers\Libraries\LibraryController@test');
-//});

@@ -21,12 +21,8 @@ class ApiController extends Controller
      *
      * @return void
      */
-//    public function __construct(Model $model, Transformer $transformer)
-//    {
-//        $this->model = $model;
-//
-//        $this->transformer = $transformer;
-//
-//        $this->broadcast = false;
-//    }
+    public function test()
+    {
+        return $this->response->noContent();
+    }
 }
