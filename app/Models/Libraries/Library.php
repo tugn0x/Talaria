@@ -17,6 +17,8 @@ class Library extends BaseModel
     protected $fillable = [
         'name',
         'email',
+        'institution_id',
+        'subject_id'
     ];
 
     /*
@@ -45,5 +47,10 @@ class Library extends BaseModel
     public function projects()
     {
         return $this->belongsToMany(Project::class);
+    }
+
+    public function subject()
+    {
+      return $this->belongsTo(Subject::class);
     }
 }

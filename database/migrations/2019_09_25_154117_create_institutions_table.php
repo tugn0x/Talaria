@@ -15,10 +15,15 @@ class CreateInstitutionsTable extends Migration
     {
         Schema::create('institutions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->timestamps();                        
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->softDeletes();
+            $table->integer('deleted_by')->unsigned()->nullable();
+            $table->string('name');
         });
         Schema::table('libraries', function (Blueprint $table) {
-            $table->bigInteger('institution_id')->nullable();            
+            $table->bigInteger('institution_id')->nullable(false);            
         });
     }
 

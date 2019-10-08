@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectsTable extends Migration
+class CreateInstitutionTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,18 @@ class CreateProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('institution_types', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();            
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->softDeletes();
             $table->integer('deleted_by')->unsigned()->nullable();
-            $table->string('name')->nullable(false);
-            $table->boolean('active')->default(true);
+            $table->string('name');
         });
-        Schema::create('library_project', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('project_id');
-            $table->bigInteger('library_id');
-            $table->timestamps();
+
+        Schema::table('institutions', function (Blueprint $table) {
+            $table->bigInteger('institution_type_id')->nullable(false);            
         });
     }
 
@@ -38,7 +35,9 @@ class CreateProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projects');
-        Schema::dropIfExists('library_project');
+        Schema::dropIfExists('institution_types');
+        Schema::table('institutions', function (Blueprint $table) {
+            $table->dropColumn('institution_type_id');
+        });
     }
 }

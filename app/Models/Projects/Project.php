@@ -8,7 +8,8 @@ use App\Models\Libraries\Library;
 class Project extends BaseModel
 {
     protected $fillable = [
-        'name',        
+        'name',
+        'active'        
     ];
 
     public function libraries()

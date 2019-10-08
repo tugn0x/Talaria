@@ -14,15 +14,14 @@ class CreateLibrariesTable extends Migration
     public function up()
     {
         Schema::create('libraries', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email');
-
+            $table->bigIncrements('id');            
             $table->timestamps();
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->softDeletes();
             $table->integer('deleted_by')->unsigned()->nullable();
+            $table->string('name');
+            $table->string('email');
         });
     }
 
