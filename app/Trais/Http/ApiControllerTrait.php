@@ -1,8 +1,8 @@
 <?php
-namespace App\Traits\Auth;
+namespace App\Traits\Http;
 
 //use Dingo\Api\Dispatcher;
-use App\Http\Controllers\Helpers;
+use App\Traits\Helpers;
 use Illuminate\Cache\TaggableStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;

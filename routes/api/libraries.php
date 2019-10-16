@@ -23,6 +23,7 @@ Route::group([
 ], function () {
 //    Route::get('/', 'LibraryController@test')->name('test');
     Route::get('libraries', 'LibraryController@index')->name('index');
+    Route::get('libraries/{library}', 'LibraryController@show')->name('show');
     Route::put('libraries/{library}', 'LibraryController@update')->name('update');
     Route::post('libraries', 'LibraryController@create')->name('create');
 });

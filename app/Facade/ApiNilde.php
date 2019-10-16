@@ -14,6 +14,6 @@ class ApiNilde extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'api.dispatcher';
+        return 'api.nilde';
     }
 }

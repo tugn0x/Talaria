@@ -10,11 +10,11 @@ trait Helpers
     /**
      * Get the internal dispatcher instance.
      *
-     * @return \App\Traits\Dispatcher
+     * @return \Clu\Api\Dispatcher
      */
-    public function api()
+    public function nilde()
     {
-        return app('api.dispatcher');
+        return app('nilde.dispatcher');
     }
 
     /**
@@ -29,10 +29,7 @@ trait Helpers
     public function __get($key)
     {
         $callable = [
-            'api',
-//            'user',
-//            'auth',
-//            'response',
+            'api', 'user', 'auth', 'response', 'nilde'
         ];
         if (in_array($key, $callable) && method_exists($this, $key)) {
             return $this->$key();

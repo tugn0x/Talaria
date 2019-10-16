@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\Auth\ApiControllerTrait;
+use App\Traits\Http\ApiControllerTrait;
 //use App\Traits\Http\ApiTrait;
 //use App\Http\Controllers\Helpers;
 //use Illuminate\Foundation\Bus\DispatchesJobs;
