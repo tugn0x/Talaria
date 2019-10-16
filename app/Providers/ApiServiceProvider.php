@@ -24,7 +24,7 @@ class ApiServiceProvider extends ServiceProvider {
      *
      * --> Replace with your package name <--
      */
-    protected $packageName = 'apinilde';
+//    protected $packageName = 'apinilde';
 
     /**
      * Bootstrap the application services.
@@ -46,7 +46,7 @@ class ApiServiceProvider extends ServiceProvider {
         $this->setupClassAliases();
 
         $this->registerDispatcher();
-        $this->registerException();
+//        $this->registerException();
     }
 
     /**
@@ -57,7 +57,8 @@ class ApiServiceProvider extends ServiceProvider {
     protected function setupClassAliases()
     {
         $aliases = [
-            'api.dispatcher' => Dispatcher::class
+            'nilde' => Dispatcher::class,
+            'nilde.dispatcher' => Dispatcher::class
         ];
 
         foreach ($aliases as $key => $aliases) {
@@ -74,7 +75,7 @@ class ApiServiceProvider extends ServiceProvider {
      */
     public function registerDispatcher()
     {
-        $this->app->singleton('api.dispatcher', function ($app) {
+        $this->app->singleton('nilde.dispatcher', function ($app) {
             $dispatcher = new Dispatcher($app['\Dingo\Api\Dispatcher']);
             return $dispatcher;
         });

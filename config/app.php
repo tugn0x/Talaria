@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\HorizonServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        \App\Providers\ApiServiceProvider::class,
 //        App\Providers\DingoServiceProvider::class,
 
     ],
@@ -232,6 +233,7 @@ return [
         'Api' => Dingo\Api\Facade\API::class,
 //        'Route' => Dingo\Api\Facade\Route::class,
         'ApiRoute' => Dingo\Api\Facade\Route::class,
+        'ApiNilde' => \App\Facade\ApiNilde::class,
 
     ],
 

@@ -236,5 +236,7 @@ return [
     'api_client' => [
         'name'   => env('NILDE_API_CLIENT_ID', '1'),
         'secret' => env('NILDE_API_CLIENT_SECRET', 'bK3vrACDLE4WM7smEPvPT5X5XUdn8DfMHDnjGHrB'),
-    ]
+    ],
+
+    'page_size' => 20,
 ];

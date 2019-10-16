@@ -16,10 +16,6 @@ class ConsortiumController extends ApiController
         $this->transformer = $transformer;
 
         $this->broadcast = false;
-
-//        app('Dingo\Api\Transformer\Factory')->register(Library::class, LibraryTransformer::class);
-
-//        dd($this->transformer);
     }
 
     /**
@@ -30,7 +26,7 @@ class ConsortiumController extends ApiController
     public function index()
     {
         $items = $this->model->get();
-//        dd(get_class($this->response->collection($this->model->get(), new $this->transformer())));
+        return response()->json($items);
         return $this->response->collection($items, $this->transformer);
     }
 
@@ -42,10 +38,7 @@ class ConsortiumController extends ApiController
 
     public function create(Request $request)
     {
-//        $this->authorize('create', $this->model);
-        $model = $this->model->fill($request->only($this->model->getFillable()));
-        $model->save();
-        return $this->response->item($model, $this->transformer);
+
     }
 
 
@@ -57,7 +50,11 @@ class ConsortiumController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+//        $this->authorize('create', $this->model);
+        $model = $this->model->fill($request->only($this->model->getFillable()));
+        $model->save();
+//        return $this->response->item($model, $this->transformer);
+        return $this->response->item($model, $this->transformer);
     }
 
     /**

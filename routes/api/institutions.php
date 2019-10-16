@@ -24,5 +24,5 @@ Route::group([
 //    Route::get('/', 'LibraryController@test')->name('test');
     Route::get('consortia', 'ConsortiumController@index')->name('index');
     Route::put('consortia/{Consortium}', 'ConsortiumController@update')->name('update');
-    Route::post('consortia', 'ConsortiumController@create')->name('create');
+    Route::post('consortia', 'ConsortiumController@store')->name('store');
 });

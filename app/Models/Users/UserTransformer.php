@@ -1,6 +1,5 @@
-<?php namespace App\Models\Institutions;
+<?php namespace App\Models\Users;
 
-use App\Models\Users\UserTransformer;
 use Carbon\Carbon;
 use App\Models\BaseTransformer;
 use Illuminate\Database\Eloquent\Model;
@@ -8,28 +7,19 @@ use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\ParamBag;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
-class ConsortiumTransformer extends BaseTransformer
+class UserTransformer extends BaseTransformer
 {
 
     protected $availableIncludes = [
 
     ];
 
-    protected $defaultIncludes = [
-        'creator'
-    ];
-
-    public function includeCreator(Model $model)
-    {
-        return $this->item($model, new UserTransformer);
-    }
-
 
 
     public function transform(Model $model)
     {
         $to_merge = [
-            'test' => 'hello',
+            'test' => 'hello user',
         ];
         return $this->applyTransform($model, $to_merge);
     }

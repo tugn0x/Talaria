@@ -32,11 +32,18 @@ class LibraryController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = $this->model->get();
-        return $this->response->collection($items, $this->transformer);
+//        dd(get_class($this->nilde));
+        $collection = $this->nilde->index($this->model->select('*'), $request);
+
+        return $this->response->paginator($collection, new $this->transformer());
     }
+//    public function index()
+//    {
+//        $items = $this->model->get();
+//        return $this->response->collection($items, $this->transformer);
+//    }
 
     /**
      * Show the form for creating a new resource.
@@ -68,47 +75,47 @@ class LibraryController extends ApiController
      * @param  \App\Models\Libraries\Library  $library
      * @return \Illuminate\Http\Response
      */
-    public function show(Library $library)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Libraries\Library  $library
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Library $library)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Libraries\Library  $library
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Library $library)
-    {
-        //solo chi ha l'ability "update" su quella specifica library
-        $this->authorize('update', $library);
-        //        $this->authorize('update-lend', $richiesta->borrow_library);
-
-        $library->update($request->all());
-        return $library->toArray();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Libraries\Library  $library
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Library $library)
-    {
-        //
-    }
+//    public function show(Library $library)
+//    {
+//        //
+//    }
+//
+//    /**
+//     * Show the form for editing the specified resource.
+//     *
+//     * @param  \App\Models\Libraries\Library  $library
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function edit(Library $library)
+//    {
+//        //
+//    }
+//
+//    /**
+//     * Update the specified resource in storage.
+//     *
+//     * @param  \Illuminate\Http\Request  $request
+//     * @param  \App\Models\Libraries\Library  $library
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function update(Request $request, Library $library)
+//    {
+//        //solo chi ha l'ability "update" su quella specifica library
+//        $this->authorize('update', $library);
+//        //        $this->authorize('update-lend', $richiesta->borrow_library);
+//
+//        $library->update($request->all());
+//        return $library->toArray();
+//    }
+//
+//    /**
+//     * Remove the specified resource from storage.
+//     *
+//     * @param  \App\Models\Libraries\Library  $library
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function destroy(Library $library)
+//    {
+//        //
+//    }
 }
