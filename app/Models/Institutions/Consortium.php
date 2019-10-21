@@ -11,7 +11,6 @@ class Consortium extends BaseModel
      */
     protected $fillable = [
         'name',
-        'email',
     ];
 
     public function institutions()

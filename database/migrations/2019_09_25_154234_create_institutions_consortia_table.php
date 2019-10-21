@@ -20,8 +20,7 @@ class CreateInstitutionsConsortiaTable extends Migration
             $table->integer('updated_by')->unsigned()->nullable();
             $table->softDeletes();
             $table->integer('deleted_by')->unsigned()->nullable();
-            $table->string('name');
-            $table->string('email');
+            $table->string('name');            
 
         });
         Schema::create('institution_consortium', function (Blueprint $table) {
