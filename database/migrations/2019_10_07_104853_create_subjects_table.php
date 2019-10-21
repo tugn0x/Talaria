@@ -22,11 +22,7 @@ class CreateSubjectsTable extends Migration
             $table->integer('deleted_by')->unsigned()->nullable();
             $table->string('name');
 
-        });
-
-        Schema::table('libraries', function (Blueprint $table) {
-            $table->bigInteger('subject_id');            
-        });
+        });        
     }
 
     /**

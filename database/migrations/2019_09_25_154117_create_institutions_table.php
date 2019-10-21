@@ -21,10 +21,17 @@ class CreateInstitutionsTable extends Migration
             $table->softDeletes();
             $table->integer('deleted_by')->unsigned()->nullable();
             $table->string('name');
-        });
-        Schema::table('libraries', function (Blueprint $table) {
-            $table->bigInteger('institution_id')->nullable(false);            
-        });
+            $table->bigInteger('institution_type_id')->nullable(false);            
+            $table->bigInteger('country_id')->nullable(false);               
+            $table->string('vatnumber',50)->nullable();
+            $table->string('fiscalcode',50)->nullable();
+            $table->text('invoice_note')->nullable();
+            $table->string('email_pec')->nullable();
+            $table->string('ccu',10)->nullable();
+            $table->string('administrative')->nullable();
+            $table->string('administrative_email')->nullable();
+            $table->string('administrative_phone')->nullable();                    
+        });        
     }
 
     /**

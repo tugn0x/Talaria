@@ -15,9 +15,9 @@ class UsersTableSeeder extends Seeder
 
         $admin = factory(\App\Models\Users\User::class)->create([
             'email' => 'nilde@nilde.it',
-            'name' => 'Nilde',
-//            'surname' => 'Nilde',
-            'password' => Hash::make('nilde'),
+            'name' => 'Nilde',            
+            'surname' => 'Nilde',
+            'password' => Hash::make('nilde'),            
         ]);
         $admin->assign('super-admin');
 //        $admin = App\Models\Users\User::create(new App\Models\Users\User([
@@ -30,7 +30,16 @@ class UsersTableSeeder extends Seeder
 //        $admin->save();
 
         // Crea qualche altro utente variegato
-        factory(\App\Models\Users\User::class, 5)->create();
+        //factory(\App\Models\Users\User::class, 5)->create();
+
+        //creo il mio utente (e non gli assegno alcun ruolo)
+        $myuser = factory(\App\Models\Users\User::class)->create([
+            'email' => 'alessandro.tugnoli@gmail.com',
+            'name' => 'Alessandro',
+            'surname' => 'Tugnoli',
+            'password' => Hash::make('nilde'),
+            'status'=>1,
+        ]);
     }
 
 }

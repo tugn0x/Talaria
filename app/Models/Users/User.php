@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
+use App\Models\Country;
 
 class User extends Authenticatable
 {
@@ -23,6 +24,19 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'name',
+        'surname',
+        'address',
+        'country_id',
+        'town', //citta
+        'district', //provincia
+        'postcode', //cap       
+        'state', //Regione o Stato (EmiliaRomagna, Illinois
+        'phone',
+        'mobile',
+        'preflang',            
+        'registration_date',
+        'privacy_policy_accepted',        
     ];
 
     /**
@@ -43,4 +57,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }

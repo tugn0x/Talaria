@@ -22,6 +22,14 @@ class CreateProjectsTable extends Migration
             $table->integer('deleted_by')->unsigned()->nullable();
             $table->string('name')->nullable(false);
             $table->boolean('active')->default(true);
+            $table->string('vatnumber',50)->nullable();
+            $table->string('fiscalcode',50)->nullable();
+            $table->text('invoice_note')->nullable();
+            $table->string('email_pec')->nullable();
+            $table->string('ccu',10)->nullable();
+            $table->string('administrative')->nullable();
+            $table->string('administrative_email')->nullable();
+            $table->string('administrative_phone')->nullable();   
         });
         Schema::create('library_project', function (Blueprint $table) {
             $table->bigIncrements('id');

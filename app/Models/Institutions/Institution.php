@@ -4,12 +4,24 @@ namespace App\Models\Institutions;
 
 use App\Models\BaseModel;
 use App\Models\Libraries\Library;
+use App\Models\Country;
 
 class Institution extends BaseModel
 {
     protected $fillable = [
         'name',
         'institution_type_id',
+        'country_id',
+        
+        /*info amministrative */
+        'vatnumber',
+        'fiscalcode',
+        'invoice_note',
+        'email_pec',
+        'ccu',
+        'administrative',
+        'administrative_email',
+        'administrative_phone'
     ];
 
     public function libraries()
@@ -25,5 +37,10 @@ class Institution extends BaseModel
     public function institution_type()
     {
         return $this->belongsTo(InstitutionType::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
     }
 }

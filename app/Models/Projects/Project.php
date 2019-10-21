@@ -9,7 +9,16 @@ class Project extends BaseModel
 {
     protected $fillable = [
         'name',
-        'active'        
+        'active',
+         /*info amministrative */
+         'vatnumber',
+         'fiscalcode',
+         'invoice_note',
+         'email_pec',
+         'ccu',
+         'administrative',
+         'administrative_email',
+         'administrative_phone'        
     ];
 
     public function libraries()

@@ -21,11 +21,7 @@ class CreateInstitutionTypesTable extends Migration
             $table->softDeletes();
             $table->integer('deleted_by')->unsigned()->nullable();
             $table->string('name');
-        });
-
-        Schema::table('institutions', function (Blueprint $table) {
-            $table->bigInteger('institution_type_id')->nullable(false);            
-        });
+        });        
     }
 
     /**

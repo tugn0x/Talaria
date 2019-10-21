@@ -27,45 +27,18 @@ class LibraryController extends ApiController
 //        dd($this->transformer);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
-//        dd(get_class($this->nilde));
-        $collection = $this->nilde->index($this->model->select('*'), $request);
-
-        return $this->response->paginator($collection, new $this->transformer());
-    }
-//    public function index()
-//    {
-//        $items = $this->model->get();
-//        return $this->response->collection($items, $this->transformer);
-//    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-//        $this->authorize('create', $this->model);
-        $model = $this->model->fill($request->only($this->model->getFillable()));
-        $model->save();
-        return $this->response->item($model, $this->transformer);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        if( !empty($this->validate) )
+            $this->validate($request, $this->validate);
+
+        $model = $this->nilde->store($this->model, $request);
+
+        if($this->broadcast && config('apiclu.broadcast'))
+            broadcast(new ApiStoreBroadcast($model, $model->getTable(), $request->input('include')));
+
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
     }
+
+   
 }
