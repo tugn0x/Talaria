@@ -7,6 +7,7 @@ use App\Models\BaseModel;
 use App\Models\Institutions\Institution;
 use App\Models\Projects\Project;
 use App\Models\Country;
+use App\Models\Users\User;
 
 class Library extends BaseModel
 {
@@ -98,4 +99,14 @@ class Library extends BaseModel
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function departments()
+    {
+        return $this->hasMany(Department::class);
+    }    
 }

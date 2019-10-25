@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 use App\Models\Country;
+use App\Models\Libraries\Library;
 
 class User extends Authenticatable
 {
@@ -62,4 +63,31 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function labels()
+    {
+        return $this->hasMany(Label::class);
+    }
+
+
+    public function libraries()
+    {
+        return $this->belongsToMany(Library::class); /*->withPivot('department_id','title_id'); //ha senso fatta cosi?  */
+        
+    }      
+
+    /*
+    // e queste come le faccio? vorrei ottenere il dipartimento dell'utente associato a quella biblioteca
+    public function departments($bibid)
+    {
+    
+    } 
+    // e queste come le faccio? vorrei ottenere la qualifica che l'utente si è scelto tra quelle definite dal tipoEnte dell'ente della biblioteca che ha scelto
+    public function titles($bibid)
+    {
+    
+    } 
+    */
+
+
 }

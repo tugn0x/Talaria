@@ -35,6 +35,17 @@ class CreateUsersTable extends Migration
             $table->dateTime('privacy_policy_accepted')->nullable();                       
             $table->smallInteger('status')->nullable();  
         });
+
+        Schema::create('library_user', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->timestamps();
+            $table->bigInteger('user_id');
+            $table->bigInteger('library_id');            
+            $table->bigInteger('department_id');
+            $table->bigInteger('title_id');
+            $table->smallInteger('status');
+            
+        });
     }
 
     /**
@@ -45,5 +56,12 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
+        Schema::table('patron_docdel_requests', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+        });
+        Schema::table('labels', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+        });
+        Schema::dropIfExists('library_user');
     }
 }
