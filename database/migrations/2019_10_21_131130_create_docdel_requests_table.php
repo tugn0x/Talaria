@@ -20,11 +20,11 @@ class CreateDocdelRequestsTable extends Migration
             $table->integer('updated_by')->unsigned()->nullable();
             $table->softDeletes();
             $table->integer('deleted_by')->unsigned()->nullable();
-            $table->bigIncrements('docdel_request_parent_id')->nullable();
-            $table->bigIncrements('reference_id')->nullable(false);
-            $table->bigIncrements('patron_docdel_request_id')->nullable();
-            $table->bigIncrements('borrowing_library_id')->nullable(false);
-            $table->bigIncrements('lending_library_id')->nullable();
+            $table->bigInteger('docdel_request_parent_id')->nullable();
+            $table->bigInteger('reference_id')->nullable(false);
+            $table->bigInteger('patron_docdel_request_id')->nullable();
+            $table->bigInteger('borrowing_library_id')->nullable(false);
+            $table->bigInteger('lending_library_id')->nullable();
             $table->smallInteger('request_type')->nullable(false); //0=DD 1: ILL
             $table->dateTime('request_date')->nullable(); //dd_datarichie
             $table->string('request_protnr')->nullable(); //dd_nprotrichie

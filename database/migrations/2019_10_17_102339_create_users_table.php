@@ -41,8 +41,8 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->bigInteger('user_id');
             $table->bigInteger('library_id');            
-            $table->bigInteger('department_id');
-            $table->bigInteger('title_id');
+            $table->bigInteger('department_id')->nullable(true);
+            $table->bigInteger('title_id')->nullable(true);
             $table->smallInteger('status');
             
         });
@@ -56,12 +56,12 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
-        Schema::table('patron_docdel_requests', function (Blueprint $table) {
+     /*   Schema::table('patron_docdel_requests', function (Blueprint $table) {
             $table->dropColumn('user_id');
         });
         Schema::table('labels', function (Blueprint $table) {
             $table->dropColumn('user_id');
-        });
+        });*/
         Schema::dropIfExists('library_user');
     }
 }

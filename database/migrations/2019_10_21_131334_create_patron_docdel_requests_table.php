@@ -20,8 +20,8 @@ class CreatePatronDocdelRequestsTable extends Migration
             $table->integer('updated_by')->unsigned()->nullable();
             $table->softDeletes();
             $table->integer('deleted_by')->unsigned()->nullable();
-            $table->bigIncrements('reference_id')->nullable(false);
-            $table->bigIncrements('user_id')->nullable(false);                                              
+            $table->bigInteger('reference_id')->nullable(false);
+            $table->bigInteger('user_id')->nullable(false);                                              
             $table->integer('librarycounter')->nullable(); 
             $table->dateTime('insert_date')->nullable(); //o usiamo created_at?
             $table->smallInteger('status')->nullable();            

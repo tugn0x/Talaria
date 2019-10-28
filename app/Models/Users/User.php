@@ -72,7 +72,7 @@ class User extends Authenticatable
 
     public function libraries()
     {
-        return $this->belongsToMany(Library::class); /*->withPivot('department_id','title_id'); //ha senso fatta cosi?  */
+        return $this->belongsToMany(Library::class)->withPivot('department_id','title_id')->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title
         
     }      
 

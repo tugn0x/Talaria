@@ -16,14 +16,22 @@ class CreateTitlesTable extends Migration
         Schema::create('titles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->softDeletes();
+            $table->integer('deleted_by')->unsigned()->nullable();
             $table->string('name');
         });
 
         Schema::create('institution_type_title', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('institution_type_id');
-            $table->bigInteger('title_id');
             $table->timestamps();
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->softDeletes();
+            $table->integer('deleted_by')->unsigned()->nullable();
+            $table->bigInteger('institution_type_id');
+            $table->bigInteger('title_id');            
         });
     }
 
