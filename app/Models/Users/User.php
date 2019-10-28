@@ -70,10 +70,10 @@ class User extends Authenticatable
     }
 
 
+    //nota: chiamando questo metodo sull'utente, mi trovo i dati della sua bibliolteca + dipartimento + title
     public function libraries()
     {
-        return $this->belongsToMany(Library::class)->withPivot('department_id','title_id')->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title
-        
+        return $this->belongsToMany(Library::class)->withPivot('department_id','title_id')->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps        
     }      
 
     /*
