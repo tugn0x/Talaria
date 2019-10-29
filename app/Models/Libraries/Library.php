@@ -59,7 +59,8 @@ class Library extends BaseModel
          'ccu',
          'administrative',
          'administrative_email',
-         'administrative_phone'
+         'administrative_phone',         
+         'terzo_code', /*codice in SIGLA, SOLO gli amminiistrativi lo possono vedere/modificare*/
     ];
 
     /*
