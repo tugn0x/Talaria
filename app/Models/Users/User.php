@@ -4,7 +4,6 @@ namespace App\Models\Users;
 
 use App\Traits\Auth\RolesAbilitiesPermissionsTrait;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 use App\Models\Country;
@@ -73,25 +72,13 @@ class User extends Authenticatable
     //nota: chiamando questo metodo sull'utente, mi trovo i dati della sua bibliolteca + dipartimento + title
     public function libraries()
     {
+        //return $this->belongsToMany(Library::class)->withPivot('department_id','title_id')->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title (solo gli id) e timestamps
+
+        //in questo modo ottengo anche i model di depatment/title!
+        //ci accedo come $myuser2->libraries->first()->pivot->department
         return $this->belongsToMany(Library::class)
             ->using(LibraryUser::class)
             ->withPivot('department_id','title_id')
-            ->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps
-//        return $this->belongsToMany(Library::class)->withPivot('department_id','title_id')->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps
+            ->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps        
     }
-
-    /*
-    // e queste come le faccio? vorrei ottenere il dipartimento dell'utente associato a quella biblioteca
-    public function departments($bibid)
-    {
-
-    }
-    // e queste come le faccio? vorrei ottenere la qualifica che l'utente si è scelto tra quelle definite dal tipoEnte dell'ente della biblioteca che ha scelto
-    public function titles($bibid)
-    {
-
-    }
-    */
-
-
 }

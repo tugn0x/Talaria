@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Users\Department;
+use App\Models\Libraries\Department;
 use Illuminate\Database\Seeder;
 
 class DepartmentsTableSeeder extends Seeder

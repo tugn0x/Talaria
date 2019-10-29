@@ -3,7 +3,8 @@
 namespace App\Models\Users;
 
 use App\Models\BaseModel;
-use App\Models\Libraries\Library;
+use App\Models\Libraries\Department;
+use App\Models\Users\Title;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class LibraryUser extends Pivot

@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Models\Users;
+namespace App\Models\Libraries;
 
 use App\Models\BaseModel;
-use App\Models\Libraries\Library;
 
 class Department extends BaseModel
 {

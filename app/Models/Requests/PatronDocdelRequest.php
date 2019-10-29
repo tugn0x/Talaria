@@ -20,6 +20,7 @@ class PatronDocdelRequest extends BaseModel
         'forlibrary_note', //note ute->bib
         'fromlibrary_note', //note bib->ute
         'deleted' //rm_cancella:  Richiesta di cancellazione per ordine DD: 0=NonRichiesta, 1=Richiesta 
+        /*'filename', */ //lo mettiamo anche qui x file dato all'utente (se licenza lo consente)?
 
         //	rm_tempo_consegna_ut  	Tempo totale di consegna: rm_dataeva-rm_datarichie 
         // 	rm_tempo_iniziolav 	 	Tempo per la presa in gestionde da parte della bib: dd_datarichie-rm_datarichie 
