@@ -15,9 +15,9 @@ class UsersTableSeeder extends Seeder
 
         $admin = factory(\App\Models\Users\User::class)->create([
             'email' => 'nilde@nilde.it',
-            'name' => 'Nilde',            
+            'name' => 'Nilde',
             'surname' => 'Nilde',
-            'password' => Hash::make('nilde'),            
+            'password' => Hash::make('nilde'),
         ]);
         $admin->assign('super-admin');
 //        $admin = App\Models\Users\User::create(new App\Models\Users\User([
@@ -40,15 +40,23 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('nilde'),
             'status'=>1,
             'country_id'=>1
-        ]);        
-
-        DB::table('library_user')->insert([
-            'library_id' => 1,
-            'user_id' => 2,
-            'status'=>1,
-            'department_id'=>1,
-            'title_id'=>2,
         ]);
+
+        $myuser->libraries()->sync([
+            1 => [
+                'status'=>1,
+                'department_id'=>1,
+                'title_id'=>2,
+            ]
+        ]);
+
+//        DB::table('library_user')->insert([
+//            'library_id' => 1,
+//            'user_id' => 2,
+//            'status'=>1,
+//            'department_id'=>1,
+//            'title_id'=>2,
+//        ]);
     }
 
 }

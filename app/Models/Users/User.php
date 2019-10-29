@@ -31,13 +31,13 @@ class User extends Authenticatable
         'country_id',
         'town', //citta
         'district', //provincia
-        'postcode', //cap       
+        'postcode', //cap
         'state', //Regione o Stato (EmiliaRomagna, Illinois
         'phone',
         'mobile',
-        'preflang',            
+        'preflang',
         'registration_date',
-        'privacy_policy_accepted',        
+        'privacy_policy_accepted',
     ];
 
     /**
@@ -73,20 +73,24 @@ class User extends Authenticatable
     //nota: chiamando questo metodo sull'utente, mi trovo i dati della sua bibliolteca + dipartimento + title
     public function libraries()
     {
-        return $this->belongsToMany(Library::class)->withPivot('department_id','title_id')->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps        
-    }      
+        return $this->belongsToMany(Library::class)
+            ->using(LibraryUser::class)
+            ->withPivot('department_id','title_id')
+            ->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps
+//        return $this->belongsToMany(Library::class)->withPivot('department_id','title_id')->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps
+    }
 
     /*
     // e queste come le faccio? vorrei ottenere il dipartimento dell'utente associato a quella biblioteca
     public function departments($bibid)
     {
-    
-    } 
+
+    }
     // e queste come le faccio? vorrei ottenere la qualifica che l'utente si è scelto tra quelle definite dal tipoEnte dell'ente della biblioteca che ha scelto
     public function titles($bibid)
     {
-    
-    } 
+
+    }
     */
 
 
