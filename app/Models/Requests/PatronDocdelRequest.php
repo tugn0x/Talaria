@@ -2,6 +2,7 @@
 
 namespace App\Models\Requests;
 use App\Models\BaseModel;
+use App\Models\Libraries\Library;
 use App\Models\Reference;
 use App\Models\Users\User;
 
@@ -9,6 +10,7 @@ class PatronDocdelRequest extends BaseModel
 {
 
     protected $fillable = [
+        'borrowing_library_id',
         'reference_id',
         'user_id',
         'insert_date', //o usiamo created_at?
@@ -41,6 +43,11 @@ class PatronDocdelRequest extends BaseModel
     public function docdelrequests()
     {
         return $this->hasMany(DocdelRequest::class);
+    }
+
+    public function library()
+    {
+        return $this->belongsTo(Library::class);
     }
 
 }

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 use App\Models\Country;
 use App\Models\Libraries\Library;
+use App\Models\Requests\PatronDocdelRequest;
 
 class User extends Authenticatable
 {
@@ -66,6 +67,11 @@ class User extends Authenticatable
     public function labels()
     {
         return $this->hasMany(Label::class);
+    }
+
+    public function patronddrequests()
+    {
+        return $this->hasMany(PatronDocdelRequest::class);
     }
 
 

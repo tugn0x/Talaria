@@ -8,6 +8,7 @@ use App\Models\Institutions\Institution;
 use App\Models\Projects\Project;
 use App\Models\Country;
 use App\Models\Users\User;
+use App\Models\Requests\PatronDocdelRequest;
 
 class Library extends BaseModel
 {
@@ -109,5 +110,10 @@ class Library extends BaseModel
     public function departments()
     {
         return $this->hasMany(Department::class);
-    }    
+    }   
+    
+    public function patronddrequests()
+    {
+        return $this->hasMany(PatronDocdelRequest::class);
+    }
 }
