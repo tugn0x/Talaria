@@ -13,7 +13,7 @@ class Project extends BaseModel
          /*info amministrative */
          'vatnumber',
          'fiscalcode',
-         'invoice_note',
+         'invoice_header',
          'email_pec',
          'ccu',
          'administrative',
