@@ -93,7 +93,7 @@ trait ApiControllerTrait
 
         $model = $this->nilde->store($this->model, $request);
 
-        if($this->broadcast && config('apiclu.broadcast'))
+        if($this->broadcast && config('apinilde.broadcast'))
             broadcast(new ApiStoreBroadcast($model, $model->getTable(), $request->input('include')));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
@@ -107,7 +107,7 @@ trait ApiControllerTrait
 
         $model = $this->nilde->update($this->model, $request, $id);
 
-        if($this->broadcast && config('apiclu.broadcast'))
+        if($this->broadcast && config('apinilde.broadcast'))
             broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
@@ -124,7 +124,7 @@ trait ApiControllerTrait
     {
         $model = $this->nilde->delete($this->model, $request, $id);
 
-        if($this->broadcast && config('apiclu.broadcast'))
+        if($this->broadcast && config('apinilde.broadcast'))
             broadcast(new ApiDeleteBroadcast($model->id, $model->getTable()));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
@@ -155,7 +155,7 @@ trait ApiControllerTrait
     {
         $model = $this->nilde->restore($this->model, $request, $id);
 
-        if($this->broadcast && config('apiclu.broadcast'))
+        if($this->broadcast && config('apinilde.broadcast'))
             broadcast(new ApiRestoreBroadcast($model->id, $model->getTable()));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());

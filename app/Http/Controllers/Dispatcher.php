@@ -159,7 +159,7 @@ class Dispatcher extends BaseController
             }
         }
 
-        Event::fire($model->getTable() . '.store', $model);
+        event($model->getTable() . '.store', $model);
 
         $fillable = $model->getFillable();
         $new_model = array_filter($request->only($fillable), function($val)
@@ -177,14 +177,14 @@ class Dispatcher extends BaseController
         //If create fails
         if(!$model->exists)
         {
-            throw new \Dingo\Api\Exception\StoreResourceFailedException(trans('apiclu::response.create_failed'), $model->getInternalErrors());
+            throw new \Dingo\Api\Exception\StoreResourceFailedException(trans('apinilde::response.create_failed'), $model->getInternalErrors());
         }
 
         if( $onStored )
             $model = call_user_func_array($onStored, [$model, $request]);
 
         //Fire events
-        Event::fire($model->getTable() . '.stored', $model);
+        event($model->getTable() . '.stored', $model);
 
         return $model;
     }
@@ -208,11 +208,11 @@ class Dispatcher extends BaseController
         {
             if( \Schema::hasColumn($model->getTable(), 'updated_at') && $model->updated_at->ne(\Carbon\Carbon::parse($request->input('updated_at'))) )
             {
-                throw new \Symfony\Component\HttpKernel\Exception\ConflictHttpException(trans('apiclu::response.update_failed'));
+                throw new \Symfony\Component\HttpKernel\Exception\ConflictHttpException(trans('apinilde::response.update_failed'));
             }
         }
 
-        Event::fire($model->getTable() . '.update', $model);
+        event($model->getTable() . '.update', $model);
 
         $fillable = $model->getFillable();
         $new_model = array_filter($request->only($fillable), function($val)
@@ -236,13 +236,13 @@ class Dispatcher extends BaseController
          */
         if(!$model->update())
         {
-            throw new \Dingo\Api\Exception\UpdateResourceFailedException(trans('apiclu::response.update_failed'), $model->getInternalErrors());
+            throw new \Dingo\Api\Exception\UpdateResourceFailedException(trans('apinilde::response.update_failed'), $model->getInternalErrors());
         }
 
         if( $onUpdated )
             $model = call_user_func_array($onUpdated, [$model, $request]);
 
-        Event::fire($model->getTable() . '.updated', $model);
+        event($model->getTable() . '.updated', $model);
 
         return $model;
     }
@@ -261,21 +261,21 @@ class Dispatcher extends BaseController
 
         $model = $id ? $model->findOrFail($id) : $model;
 
-        Event::fire($model->getTable() . '.delete', $model);
+        event($model->getTable() . '.delete', $model);
 
         if( $onDelete )
             $model = call_user_func_array($onDelete, [$model, $request]);
 
         if(!$model->delete())
         {
-            throw new \Dingo\Api\Exception\UpdateResourceFailedException(trans('apiclu::response.delete_failed'), $model->getInternalErrors());
+            throw new \Dingo\Api\Exception\UpdateResourceFailedException(trans('apinilde::response.delete_failed'), $model->getInternalErrors());
         }
 
         if( $onDeleted )
             $model = call_user_func_array($onDeleted, [$model, $request]);
 
         //Fire events
-        Event::fire($model->getTable() . '.deleted', $model);
+        event($model->getTable() . '.deleted', $model);
 
         return $model;
     }
@@ -287,7 +287,7 @@ class Dispatcher extends BaseController
         $collection->errors = [];
         if(!$ids instanceof Builder)
             $ids = is_array($ids) ? $ids : explode(',', $ids);
-        Event::fire($model->getTable() . '.bulk.delete', $model);
+        event($model->getTable() . '.bulk.delete', $model);
 
 //        $h = explode('/',$request->path());
 //        $h = $h[count($h)-3];
@@ -311,7 +311,7 @@ class Dispatcher extends BaseController
             $collection = call_user_func_array($onBlukDeleted, [$collection, $request]);
 
         //Fire events
-        Event::fire($model->getTable() . '.bulk.deleted', $collection);
+        event($model->getTable() . '.bulk.deleted', $collection);
 
         return $collection;
     }
@@ -323,21 +323,21 @@ class Dispatcher extends BaseController
         if($this->haveToAuthorize)
             $this->authorize($model);
 
-        Event::fire($model->getTable() . '.destroy', $model);
+        event($model->getTable() . '.destroy', $model);
 
         if( $onDestroy )
             $model = call_user_func_array($onDestroy, [$model, $request]);
 
         if(!$model->forceDelete())
         {
-            throw new \Dingo\Api\Exception\UpdateResourceFailedException(trans('apiclu::response.destroy_failed'), $model->getInternalErrors());
+            throw new \Dingo\Api\Exception\UpdateResourceFailedException(trans('apinilde::response.destroy_failed'), $model->getInternalErrors());
         }
 
         if( $onDestroyed )
             $model = call_user_func_array($onDestroyed, [$model, $request]);
 
         //Fire events
-        Event::fire($model->getTable() . '.destroyed', $model);
+        event($model->getTable() . '.destroyed', $model);
 
         return $model;
     }
@@ -349,7 +349,7 @@ class Dispatcher extends BaseController
         if(!$ids instanceof Builder)
             $ids = is_array($ids) ? $ids : explode(',', $ids);
 
-        Event::fire($model->getTable() . '.bulk.destroy', $model);
+        event($model->getTable() . '.bulk.destroy', $model);
 
         foreach($ids as $id)
         {
@@ -365,7 +365,7 @@ class Dispatcher extends BaseController
             $collection = call_user_func_array($onBlukDestroyed, [$collection, $request]);
 
         //Fire events
-        Event::fire($model->getTable() . '.bulk.destroyed', $collection);
+        event($model->getTable() . '.bulk.destroyed', $collection);
 
         return $collection;
     }
@@ -377,20 +377,20 @@ class Dispatcher extends BaseController
         if($this->haveToAuthorize)
             $this->authorize($model);
 
-        Event::fire($model->getTable() . '.restore', $model);
+        event($model->getTable() . '.restore', $model);
 
         if( $onRestore )
             $model = call_user_func_array($onRestore, [$model, $request]);
 
         if(!$model->restore())
         {
-            throw new \Dingo\Api\Exception\UpdateResourceFailedException(trans('apiclu::response.restore_failed'), $model->getInternalErrors());
+            throw new \Dingo\Api\Exception\UpdateResourceFailedException(trans('apinilde::response.restore_failed'), $model->getInternalErrors());
         }
 
         if( $onRestored )
             $model = call_user_func_array($onRestored, [$model, $request]);
 
-        Event::fire($model->getTable() . '.restored', $model);
+        event($model->getTable() . '.restored', $model);
 
         return $model;
     }
@@ -403,7 +403,7 @@ class Dispatcher extends BaseController
         if(!$ids instanceof Builder)
             $ids = is_array($ids) ? $ids : explode(',', $ids);
 
-        Event::fire($model->getTable() . '.bulk.restore', $model);
+        event($model->getTable() . '.bulk.restore', $model);
 
         foreach($ids as $id)
         {
@@ -419,7 +419,7 @@ class Dispatcher extends BaseController
             $collection = call_user_func_array($onBlukRestored, [$collection, $request]);
 
         //Fire events
-        Event::fire($model->getTable() . '.bulk.restored', $collection);
+        event($model->getTable() . '.bulk.restored', $collection);
 
         return $collection;
     }
@@ -435,7 +435,7 @@ class Dispatcher extends BaseController
 //        if(!is_array($request)||empty($request))
 //            return $collection;
 
-        Event::fire($model->getTable() . '.bulk.save', $model);
+        event($model->getTable() . '.bulk.save', $model);
 
         $h = explode('/',$request->path());
         $h = $h[count($h)-2];
@@ -460,7 +460,7 @@ class Dispatcher extends BaseController
             $collection = call_user_func_array($onBlukSaved, [$collection, $request]);
 
         //Fire events
-        Event::fire($model->getTable() . '.bulk.saved', $collection);
+        event($model->getTable() . '.bulk.saved', $collection);
 
         return $collection;
     }
@@ -488,7 +488,7 @@ class Dispatcher extends BaseController
         if( $onAttach )
             $model = call_user_func_array($onAttach, [$model, $request, $relation_name, $ids]);
 
-        Event::fire($model->getTable() . '.attach.', [ $relation_name,  $model ]);
+        event($model->getTable() . '.attach.', [ $relation_name,  $model ]);
 
         /*
          * This is the relationship
@@ -551,7 +551,7 @@ class Dispatcher extends BaseController
         elseif ($relation instanceof \Illuminate\Database\Eloquent\Relations\BelongsTo)
         {
             if(!$relation->associate($objects)->exists)
-                throw new \Dingo\Api\Exception\UpdateResourceFailedException(trans('apiclu::response.attach_failed'), $model->getInternalErrors());
+                throw new \Dingo\Api\Exception\UpdateResourceFailedException(trans('apinilde::response.attach_failed'), $model->getInternalErrors());
         }
 
 
@@ -562,7 +562,7 @@ class Dispatcher extends BaseController
         if( $onAttached )
             $model = call_user_func_array($onAttached, [$model, $request, $relation_name, $ids]);
 
-        Event::fire($model->getTable() . '.attached', [ $relation_name,  $model ]);
+        event($model->getTable() . '.attached', [ $relation_name,  $model ]);
 
         return $model;
     }
@@ -586,7 +586,7 @@ class Dispatcher extends BaseController
         if( $onDetach )
             $model = call_user_func_array($onDetach, [$model, $request, $relation_name, $ids]);
 
-        Event::fire($model->getTable() . '.detach.', [ $relation_name,  $model ]);
+        event($model->getTable() . '.detach.', [ $relation_name,  $model ]);
 
         /*
          * This is the relationship
@@ -649,7 +649,7 @@ class Dispatcher extends BaseController
         elseif ($relation instanceof \Illuminate\Database\Eloquent\Relations\BelongsTo)
         {
             if(!$relation->dissociate()->exists)
-                throw new \Dingo\Api\Exception\UpdateResourceFailedException(trans('apiclu::response.detach_failed'), $model->getInternalErrors());
+                throw new \Dingo\Api\Exception\UpdateResourceFailedException(trans('apinilde::response.detach_failed'), $model->getInternalErrors());
         }
 
         /*
@@ -658,7 +658,7 @@ class Dispatcher extends BaseController
         if( $onDetached )
             $model = call_user_func_array($onDetached, [$model, $request, $relation_name, $ids]);
 
-        Event::fire($model->getTable() . '.detached', [ $relation_name,  $model ]);
+        event($model->getTable() . '.detached', [ $relation_name,  $model ]);
 
         return $model;
     }
@@ -683,7 +683,7 @@ class Dispatcher extends BaseController
         if( $onSync )
             $model = call_user_func_array($onSync, [$model, $request, $relation_name, $ids]);
 
-        Event::fire($model->getTable() . '.sync.', [ $relation_name,  $model ]);
+        event($model->getTable() . '.sync.', [ $relation_name,  $model ]);
 
         /*
          * This is the relationship
@@ -723,7 +723,7 @@ class Dispatcher extends BaseController
         if( $onSynced )
             $model = call_user_func_array($onSynced, [$model, $request, $relation_name, $ids]);
 
-        Event::fire($model->getTable() . '.synced', [ $relation_name,  $model ]);
+        event($model->getTable() . '.synced', [ $relation_name,  $model ]);
 
         return $model;
     }

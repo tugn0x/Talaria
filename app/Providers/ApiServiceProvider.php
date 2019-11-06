@@ -101,7 +101,7 @@ class ApiServiceProvider extends ServiceProvider {
 //
 //        $this->app['Dingo\Api\Exception\Handler']->register(function (\Illuminate\Auth\Access\AuthorizationException $exception) use ($response)
 //        {
-//            return $response->errorUnauthorized($exception->getMessage() ?: trans('apiclu::auth.unauthorized'));
+//            return $response->errorUnauthorized($exception->getMessage() ?: trans('apinilde::auth.unauthorized'));
 //        });
 //    }
 

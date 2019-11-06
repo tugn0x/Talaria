@@ -46,7 +46,7 @@ class BaseObserver
             {
                 if (!$model->exists)
                 {
-                    dd($this->validator->errors());
+//                    dd($this->validator->errors());
 //                    print_r(get_class($model));
 //                    print_r($model->toArray());
 //                    exit(print_r($this->validator->errors()));

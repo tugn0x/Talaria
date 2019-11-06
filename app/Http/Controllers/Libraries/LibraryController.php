@@ -34,11 +34,11 @@ class LibraryController extends ApiController
 
         $model = $this->nilde->store($this->model, $request);
 
-        if($this->broadcast && config('apiclu.broadcast'))
+        if($this->broadcast && config('apinilde.broadcast'))
             broadcast(new ApiStoreBroadcast($model, $model->getTable(), $request->input('include')));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
     }
 
-   
+
 }

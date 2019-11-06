@@ -1,6 +1,5 @@
 <?php  namespace App\Traits;
 
-//use Dingo\Api\Http\Request; // Request sostituito per poter utilizzare le form request anche richiamando il dispatcher. FormRequest estende le request base anzichpè quelle di dingo!
 use Illuminate\Http\Request;
 //use App\Events\ApiStoreBroadcast;
 //use App\Events\ApiDeleteBroadcast;
@@ -39,7 +38,7 @@ trait ApiTrait
      */
     public function index(Request $request)
     {
-        $collection = $this->clu->index($this->model->select('*'), $request);
+        $collection = $this->nilde->index($this->model->select('*'), $request);
 
         return $this->response->paginator($collection, new $this->transformer());
     }
@@ -53,14 +52,14 @@ trait ApiTrait
      */
     public function optionList(Request $request)
     {
-        $collection = $this->clu->optionList($this->model, $request);
+        $collection = $this->nilde->optionList($this->model, $request);
 
         return $this->response->array($collection->toArray());
     }
 
     public function show(Request $request, $id)
     {
-        $model = $this->clu->show($this->model, $request, $id);
+        $model = $this->nilde->show($this->model, $request, $id);
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
     }
@@ -70,7 +69,7 @@ trait ApiTrait
         if( !empty($this->validate) )
             $this->validate($request, $this->validate);
 
-        $model = $this->clu->store($this->model, $request);
+        $model = $this->nilde->store($this->model, $request);
 
         if($this->broadcast && config('api.broadcast'))
             broadcast(new ApiStoreBroadcast($model, $model->getTable(), $request->input('include')));
@@ -84,7 +83,7 @@ trait ApiTrait
         if(!empty($this->validate) )
             $this->validate($request, $this->validate);
 
-        $model = $this->clu->update($this->model, $request, $id);
+        $model = $this->nilde->update($this->model, $request, $id);
 
         if($this->broadcast && config('api.broadcast'))
             broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
@@ -94,14 +93,14 @@ trait ApiTrait
 
     public function bulkSave(Request $request)
     {
-        $collection = $this->clu->bulkSave($this->model, $request);
+        $collection = $this->nilde->bulkSave($this->model, $request);
 
         return $this->response->collection($collection, new $this->transformer());
     }
 
     public function delete(Request $request, $id)
     {
-        $model = $this->clu->delete($this->model, $request, $id);
+        $model = $this->nilde->delete($this->model, $request, $id);
 
         if($this->broadcast && config('api.broadcast'))
             broadcast(new ApiDeleteBroadcast($model->id, $model->getTable()));
@@ -111,28 +110,28 @@ trait ApiTrait
 
     public function bulkDelete(Request $request, $ids)
     {
-        $collection = $this->clu->bulkDelete($this->model, $request, $ids);
+        $collection = $this->nilde->bulkDelete($this->model, $request, $ids);
 
         return $this->response->collection($collection, new $this->transformer());
     }
 
     public function destroy(Request $request, $id)
     {
-        $model = $this->clu->destroy($this->model, $request, $id);
+        $model = $this->nilde->destroy($this->model, $request, $id);
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
     }
 
     public function bulkDestroy(Request $request, $ids)
     {
-        $collection = $this->clu->bulkDestroy($this->model, $request, $ids);
+        $collection = $this->nilde->bulkDestroy($this->model, $request, $ids);
 
         return $this->response->collection($collection, new $this->transformer());
     }
 
     public function restore(Request $request, $id)
     {
-        $model = $this->clu->restore($this->model, $request, $id);
+        $model = $this->nilde->restore($this->model, $request, $id);
 
         if($this->broadcast && config('api.broadcast'))
             broadcast(new ApiRestoreBroadcast($model->id, $model->getTable()));
@@ -142,7 +141,7 @@ trait ApiTrait
 
     public function bulkRestore(Request $request, $ids)
     {
-        $collection = $this->clu->bulkRestore($this->model, $request, $ids);
+        $collection = $this->nilde->bulkRestore($this->model, $request, $ids);
 
         return $this->response->collection($collection, new $this->transformer());
     }
@@ -158,7 +157,7 @@ trait ApiTrait
         if(!empty($this->validate) )
             $this->validate($request, $this->validate);
 
-        $model = $this->clu->attach($this->model, $request, $id, $relation_name, $ids);
+        $model = $this->nilde->attach($this->model, $request, $id, $relation_name, $ids);
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
     }
@@ -168,7 +167,7 @@ trait ApiTrait
         if(!empty($this->validate) )
             $this->validate($request, $this->validate);
 
-        $model = $this->clu->detach($this->model, $request, $id, $relation_name, $ids);
+        $model = $this->nilde->detach($this->model, $request, $id, $relation_name, $ids);
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
     }
@@ -178,7 +177,7 @@ trait ApiTrait
         if(!empty($this->validate) )
             $this->validate($request, $this->validate);
 
-        $model = $this->clu->sync($this->model, $request, $id, $relation_name, $ids);
+        $model = $this->nilde->sync($this->model, $request, $id, $relation_name, $ids);
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
     }

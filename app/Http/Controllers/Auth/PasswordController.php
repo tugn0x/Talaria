@@ -3,9 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ResetsPasswords;
+use App\Traits\Http\Auth\PasswordControllerTrait;
 
-class ResetPasswordController extends Controller
+//use Clu\Api\Auth\PasswordControllerTrait;
+
+/**
+ * Password resource representation.
+ *
+ * @Resource("Password", uri="/auth")
+ */
+class PasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -18,17 +25,10 @@ class ResetPasswordController extends Controller
     |
     */
 
-    use ResetsPasswords;
+    use PasswordControllerTrait;
 
     /**
-     * Where to redirect users after resetting their password.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
+     * Create a new password controller instance.
      *
      * @return void
      */

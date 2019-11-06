@@ -23,10 +23,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname',
         'email',
         'password',
-        'name',
-        'surname',
+
         'address',
         'country_id',
         'town', //citta
@@ -85,6 +85,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Library::class)
             ->using(LibraryUser::class)
             ->withPivot('department_id','title_id')
-            ->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps        
+            ->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps
     }
 }
