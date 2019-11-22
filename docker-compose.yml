@@ -11,6 +11,7 @@ services:
     - ./:/application
     depends_on:
     - backend
+    restart: always
 
   backend:
     build: ./docker/backend
@@ -22,6 +23,7 @@ services:
       - ./:/application
 #      - /home/halphass/Scaricati:/application/dump
     user: "${UID}"
+    restart: always
 
   mysql:
     image: mysql:5.7
@@ -36,6 +38,7 @@ services:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     volumes:
       - ./docker/data/db-data:/var/lib/mysql
+    restart: always
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -50,6 +53,7 @@ services:
     - PMA_HOST=${DB_HOST}
     ports:
     - "${PMA_PORT}:80"
+    restart: always
 
   horizon:
     build: ./docker/backend
@@ -60,11 +64,13 @@ services:
     - redis
     volumes:
     - ./:/application
+    restart: always
 
   redis:
     image: redis:alpine
     ports:
     - "6379:6379"
+    restart: always
 
 #volumes:
 #  db-data:
