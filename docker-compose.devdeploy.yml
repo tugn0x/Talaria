@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  traefik:
+    container_name: nose_traefik
+    image: traefik:v1.7.18
+    ports:
+    - 80:80
+    - 443:443
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - ./docker/traefik:/etc/traefik
+    restart: always
+
+  nginx:
+    labels:
+    - "traefik.port=80"
+    - "traefik.enable=true"
+    - "traefik.frontend.rule=Host:${APP_URL},www.${APP_URL}"
+    - "traefik.docker.network=proxy"
+
+  phpmyadmin:
+    ports:
+    labels:
+    - "traefik.port=80"
+    - "traefik.enable=true"
+    - "traefik.backend=phpmyadmin"
+    - "traefik.frontend.rule=Host:${APP_URL},www.${APP_URL};PathPrefixStrip:/phpmyadmin"
+
+
