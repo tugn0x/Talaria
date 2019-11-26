@@ -84,7 +84,7 @@ services:
     - "traefik.enable=true"
     - "traefik.backend=phpmyadmin"
     - "traefik.frontend.rule=Host:${API_DOMAIN},www.${API_DOMAIN};PathPrefixStrip:/phpmyadmin/"
-    - "traefik.frontend.auth.basic=${PMA_AUTH}"
+#    - "traefik.frontend.auth.basic=${PMA_AUTH}"
 
   horizon:
     build: ./docker/backend
