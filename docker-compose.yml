@@ -79,11 +79,11 @@ services:
     expose:
     - 80
     restart: always
-    labels:
-    - "traefik.port=80"
-    - "traefik.enable=true"
-    - "traefik.backend=phpmyadmin"
-    - "traefik.frontend.rule=Host:${API_DOMAIN},www.${API_DOMAIN};PathPrefixStrip:/phpmyadmin/"
+#    labels:
+#    - "traefik.port=80"
+#    - "traefik.enable=true"
+#    - "traefik.backend=phpmyadmin"
+#    - "traefik.frontend.rule=Host:${API_DOMAIN},www.${API_DOMAIN};PathPrefixStrip:/phpmyadmin/"
 
   horizon:
     build: ./docker/backend
