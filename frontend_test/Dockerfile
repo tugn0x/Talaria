@@ -8,6 +8,8 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 #COPY ./.gitfake .git
 
+RUN npm config set registry http://registry.npmjs.org/
+
 RUN npm install -g cross-env
 
 #RUN npm run setup
