@@ -24,5 +24,5 @@ services:
 
   phpmyadmin:
     labels:
-    - "traefik.http.middlewares.test-auth.basicauth.users=${PMA_AUTH}"
+    - "traefik.frontend.auth.basic=${PMA_AUTH}"
 #    - "traefik.enable=false"
