@@ -44,6 +44,11 @@ class BasePolicy
 //        return false;
 //    }
 
+    public function viewAny(User $user, Model $model)
+    {
+        return $this->check($user,$model,__FUNCTION__);
+    }
+
     public function optionList(User $user, Model $model)
     {
         return $this->check($user,$model,__FUNCTION__);
