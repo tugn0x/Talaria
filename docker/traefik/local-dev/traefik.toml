@@ -1,0 +1,29 @@
+#logLevel = "DEBUG"
+#debug = true
+logLevel = "ERROR"
+debug = false
+
+# Traefik will listen for traffic on both HTTP and HTTPS.
+defaultEntryPoints = ["http"]
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+
+[backend]
+entryPoint = "backend"
+
+#[frontend]
+#entryPoint = "frontend"
+
+
+# These options are for Traefik's integration with Docker.
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "docker.localhost"
+#watch = true
+exposedByDefault = false
+
+#[file]
+#watch = true
+

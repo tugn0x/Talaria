@@ -2,18 +2,38 @@ version: '3.4'
 
 services:
 
+  traefik:
+    image: traefik:v1.7.18
+    ports:
+    - 80:80
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - ./docker/traefik/local-dev:/etc/traefik
+    restart: always
+    depends_on:
+    - nginx
+    - phpmyadmin
+
   nginx:
     image: nginx:alpine
-    ports:
-    - "${WEBSERVER_EXTERNAL_PORT}:80"
+#    ports:
+#    - "${WEBSERVER_EXTERNAL_PORT}:80"
+#    - "8001:80"
+    expose:
+      - 80
     volumes:
     - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     - ./:/application
     depends_on:
-    - backend
+    - laravel
     restart: always
+    labels:
+    - "traefik.port=80"
+    - "traefik.enable=true"
+    - "traefik.frontend.rule=Host:${API_DOMAIN},www.${API_DOMAIN}"
+    - "traefik.docker.network=proxy"
 
-  backend:
+  laravel:
     build: ./docker/backend
     image: backend
     depends_on:
@@ -27,8 +47,8 @@ services:
 
   mysql:
     image: mysql:5.7
-    ports:
-    - "${DB_EXTERNAL_PORT}:3306"
+#    ports:
+#    - "${DB_EXTERNAL_PORT}:3306"
     expose:
      - "${DB_EXTERNAL_PORT}"
     environment:
@@ -51,9 +71,17 @@ services:
     - PMA_USER=root
     - PMA_PASSWORD=${DB_PASSWORD}
     - PMA_HOST=${DB_HOST}
-    ports:
-    - "${PMA_PORT}:80"
+#    ports:
+#    - "${PMA_PORT}:80"
+#    - "8002:80"
+    expose:
+    - 80
     restart: always
+    labels:
+    - "traefik.port=80"
+    - "traefik.enable=true"
+    - "traefik.backend=phpmyadmin"
+    - "traefik.frontend.rule=Host:${API_DOMAIN},www.${API_DOMAIN};PathPrefixStrip:/phpmyadmin"
 
   horizon:
     build: ./docker/backend
@@ -74,3 +102,6 @@ services:
 
 #volumes:
 #  db-data:
+
+#  networks:
+#  - frontend

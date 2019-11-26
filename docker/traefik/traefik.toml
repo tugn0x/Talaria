@@ -17,8 +17,8 @@ defaultEntryPoints = ["http", "https"]
 
 
 
-[backend]
-entryPoint = "backend"
+[nginx]
+entryPoint = "nginx"
 
 #[frontend]
 #entryPoint = "frontend"
@@ -50,8 +50,8 @@ entryPoint = "https"
 
 [[acme.domains]]
   main = "devnilde-api.bo.cnr.it"
-[[acme.domains]]
-  main = "devnilde.bo.cnr.it"
+#[[acme.domains]]
+#  main = "devnilde.bo.cnr.it"
 
 # https://docs.traefik.io/configuration/logs/
 # Comment out the next line to enable Traefik's access logs.
