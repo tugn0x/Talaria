@@ -21,3 +21,7 @@ services:
     - "traefik.enable=true"
     - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN},www.${FRONTEND_DOMAIN}"
     - "traefik.docker.network=proxy"
+
+  phpmyadmin:
+    labels:
+    - "traefik.enable=false"
