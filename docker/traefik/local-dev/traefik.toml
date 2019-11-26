@@ -10,8 +10,8 @@ defaultEntryPoints = ["http"]
   [entryPoints.http]
   address = ":80"
 
-[backend]
-entryPoint = "backend"
+[nginx]
+entryPoint = "nginx"
 
 #[frontend]
 #entryPoint = "frontend"

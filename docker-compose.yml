@@ -30,6 +30,7 @@ services:
     labels:
     - "traefik.port=80"
     - "traefik.enable=true"
+    - "traefik.backend=nginx"
     - "traefik.frontend.rule=Host:${API_DOMAIN},www.${API_DOMAIN}"
     - "traefik.docker.network=proxy"
 
@@ -71,6 +72,7 @@ services:
     - PMA_USER=root
     - PMA_PASSWORD=${DB_PASSWORD}
     - PMA_HOST=${DB_HOST}
+    - PMA_ABSOLUTE_URI=http://${API_DOMAIN}/phpmyadmin/
 #    ports:
 #    - "${PMA_PORT}:80"
 #    - "8002:80"
@@ -81,7 +83,7 @@ services:
     - "traefik.port=80"
     - "traefik.enable=true"
     - "traefik.backend=phpmyadmin"
-    - "traefik.frontend.rule=Host:${API_DOMAIN},www.${API_DOMAIN};PathPrefixStrip:/phpmyadmin"
+    - "traefik.frontend.rule=Host:${API_DOMAIN},www.${API_DOMAIN};PathPrefixStrip:/phpmyadmin/"
 
   horizon:
     build: ./docker/backend
