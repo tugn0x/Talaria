@@ -20,8 +20,8 @@ defaultEntryPoints = ["http", "https"]
 [nginx]
 entryPoint = "nginx"
 
-#[frontend]
-#entryPoint = "frontend"
+[frontend]
+entryPoint = "frontend"
 
 
 # These options are for Traefik's integration with Docker.
@@ -50,8 +50,8 @@ entryPoint = "https"
 
 [[acme.domains]]
   main = "devnilde-api.bo.cnr.it"
-#[[acme.domains]]
-#  main = "devnilde.bo.cnr.it"
+[[acme.domains]]
+  main = "devnilde.bo.cnr.it"
 
 # https://docs.traefik.io/configuration/logs/
 # Comment out the next line to enable Traefik's access logs.
