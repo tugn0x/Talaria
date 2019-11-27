@@ -35,7 +35,11 @@ services:
     - "traefik.docker.network=proxy"
 
   laravel:
-    build: ./docker/backend
+    build:
+      context: ./docker/backend
+      dockerfile: Dockerfile
+      args:
+        UID: ${UID}
     image: backend
     depends_on:
       - mysql

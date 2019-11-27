@@ -1,5 +1,9 @@
 FROM php:7.2-fpm
 
+ARG UID
+
+RUN echo "BUILDING WITH USER ${UID}"
+
 # Installing dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
@@ -29,7 +33,7 @@ RUN echo it_IT.UTF-8 UTF-8 > /etc/locale.gen && locale-gen
 # Changing Workdir
 WORKDIR /application
 
-RUN useradd -rm -d /home/php -s /bin/bash -u 1000 php
+RUN useradd -rm -d /home/php -s /bin/bash -u ${UID} php
 
 USER php
 
