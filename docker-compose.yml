@@ -91,7 +91,11 @@ services:
 #    - "traefik.frontend.auth.basic=${PMA_AUTH}"
 
   horizon:
-    build: ./docker/backend
+    build:
+      context: ./docker/backend
+      dockerfile: Dockerfile
+      args:
+        UID: ${UID}
     image: backend
     command: php artisan horizon
     depends_on:
