@@ -111,6 +111,21 @@ services:
     - "6379:6379"
     restart: always
 
+  shibboleth:
+    image: unicon/shibboleth-sp
+#    expose:
+#      - 80
+#      - 443
+    labels:
+    - "traefik.port=80"
+    - "traefik.enable=true"
+    - "traefik.backend=shibboleth"
+    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefixStrip:/sp/"
+    - "traefik.docker.network=proxy"
+    volumes:
+      - ./docker/shibboleth/etc:/etc/shibboleth
+#      - ./docker/shibboleth/html:/var/www/html
+
 #volumes:
 #  db-data:
 
