@@ -15,6 +15,9 @@ defaultEntryPoints = ["http","https"]
   [entryPoints.https]
   address = ":443"
     [entryPoints.https.tls]
+      [[entryPoints.https.tls.certificates]]
+      certFile = "/etc/ssl/traefik/localhost.crt"
+      keyFile = "etc/ssl/traefik/localhost.key"
 
 [nginx]
 entryPoint = "nginx"
