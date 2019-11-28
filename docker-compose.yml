@@ -139,6 +139,10 @@ services:
     volumes:
       - ./docker/shibboleth/etc:/etc/shibboleth
       - ./docker/shibboleth/html:/var/www/html
+      - ./docker/shibboleth/shib.conf:/etc/httpd/conf.d/shibb.conf
+      - ./docker/server_ssl_cert.crt:/etc/pki/tls/certs/localhost.crt
+      - ./docker/server_ssl_cert.key:/etc/pki/tls/private/localhost.key      
+
 
 #volumes:
 #  db-data:
