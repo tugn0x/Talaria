@@ -112,6 +112,17 @@ services:
     - "6379:6379"
     restart: always
 
+  frontend:
+    build: ./frontend_test
+    expose:
+    - 3000
+    restart: always
+    labels:
+    - "traefik.port=3000"
+    - "traefik.enable=true"
+    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN}"
+    - "traefik.docker.network=proxy"
+
   shibboleth:
     image: unicon/shibboleth-sp
     expose:
@@ -119,13 +130,15 @@ services:
       - 443
     labels:
     - "traefik.port=443"
+    - "traefik.protocol=https"
     - "traefik.enable=true"
     - "traefik.backend=shibboleth"
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefixStrip:/Shibboleth.sso/"
+    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/Shibboleth.sso/,/sp/"
     - "traefik.docker.network=proxy"
+#    - "traefik.frontend.passTLSCert=true"
     volumes:
       - ./docker/shibboleth/etc:/etc/shibboleth
-#      - ./docker/shibboleth/html:/var/www/html
+      - ./docker/shibboleth/html:/var/www/html
 
 #volumes:
 #  db-data:

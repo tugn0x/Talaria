@@ -1,7 +1,8 @@
-#logLevel = "DEBUG"
-#debug = true
-logLevel = "ERROR"
-debug = false
+logLevel = "DEBUG"
+debug = true
+#logLevel = "ERROR"
+#debug = false
+insecureSkipVerify = true
 
 # Traefik will listen for traffic on both HTTP and HTTPS.
 defaultEntryPoints = ["http","https"]
@@ -9,8 +10,8 @@ defaultEntryPoints = ["http","https"]
 [entryPoints]
   [entryPoints.http]
   address = ":80"
-    [entryPoints.http.redirect]
-    entryPoint = "https"
+#    [entryPoints.http.redirect]
+#    entryPoint = "https"
   [entryPoints.https]
   address = ":443"
     [entryPoints.https.tls]
@@ -18,8 +19,8 @@ defaultEntryPoints = ["http","https"]
 [nginx]
 entryPoint = "nginx"
 
-#[frontend]
-#entryPoint = "frontend"
+[frontend]
+entryPoint = "frontend"
 
 
 # These options are for Traefik's integration with Docker.
