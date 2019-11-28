@@ -135,7 +135,7 @@ services:
     - "traefik.protocol=https"
     - "traefik.enable=true"
     - "traefik.backend=shibboleth"
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/Shibboleth.sso/,/sp/"
+    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/Shibboleth.sso/,/sp/,/shibb/"
     - "traefik.docker.network=proxy"
 #    - "traefik.frontend.passTLSCert=true"
     - "traefik.proxy.passTLSCert=true"

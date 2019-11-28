@@ -52,7 +52,7 @@
     </Attribute>
     
     <!-- Other eduPerson attributes (SAML 2 names followed by SAML 1 names)... -->
-    <!--
+
     <Attribute name="urn:oid:1.3.6.1.4.1.5923.1.1.1.11" id="assurance"/>    
     <Attribute name="urn:oid:1.3.6.1.4.1.5923.1.5.1.1" id="member"/>
     <Attribute name="urn:oid:1.3.6.1.4.1.5923.1.6.1.1" id="eduCourseOffering"/>
@@ -79,10 +79,9 @@
     <Attribute name="urn:mace:dir:attribute-def:eduPersonPrimaryOrgUnitDN" id="primary-orgunit-dn"/>
     <Attribute name="urn:mace:dir:attribute-def:eduPersonOrgUnitDN" id="orgunit-dn"/>
     <Attribute name="urn:mace:dir:attribute-def:eduPersonOrgDN" id="org-dn"/>
-    -->
+
     
     <!-- Older LDAP-defined attributes (SAML 2.0 names followed by SAML 1 names)... -->
-    <!--
     <Attribute name="urn:oid:2.5.4.3" id="cn"/>
     <Attribute name="urn:oid:2.5.4.4" id="sn"/>
     <Attribute name="urn:oid:2.5.4.42" id="givenName"/>
@@ -138,10 +137,10 @@
     <Attribute name="urn:mace:dir:attribute-def:ou" id="ou"/>
     <Attribute name="urn:mace:dir:attribute-def:businessCategory" id="businessCategory"/>
     <Attribute name="urn:mace:dir:attribute-def:physicalDeliveryOfficeName" id="physicalDeliveryOfficeName"/>
-    -->
+    
 
     <!-- SCHAC attributes... -->
-    <!--
+    
     <Attribute name="urn:oid:1.3.6.1.4.1.25178.1.2.9" id="schacHomeOrganization">
         <AttributeDecoder xsi:type="StringAttributeDecoder" caseSensitive="false"/>
     </Attribute>
@@ -161,6 +160,6 @@
     <Attribute name="urn:oid:1.3.6.1.4.1.25178.1.2.21" id="schacProjectSpecificRole">
         <AttributeDecoder xsi:type="StringAttributeDecoder" caseSensitive="false"/>
     </Attribute>
-    -->
+    
 
 </Attributes>
