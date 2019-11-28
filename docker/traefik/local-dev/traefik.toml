@@ -4,11 +4,16 @@ logLevel = "ERROR"
 debug = false
 
 # Traefik will listen for traffic on both HTTP and HTTPS.
-defaultEntryPoints = ["http"]
+defaultEntryPoints = ["http","hhtps"]
 
 [entryPoints]
   [entryPoints.http]
   address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
 
 [nginx]
 entryPoint = "nginx"

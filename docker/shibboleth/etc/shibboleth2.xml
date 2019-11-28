@@ -10,7 +10,7 @@
     -->
 
     <!-- The ApplicationDefaults element is where most of Shibboleth's SAML bits are defined. -->
-    <ApplicationDefaults entityID="https://sp.example.org/shibboleth"
+    <ApplicationDefaults entityID="https://nilde.local/sp"
         REMOTE_USER="eppn subject-id pairwise-id persistent-id"
         cipherSuites="DEFAULT:!EXP:!LOW:!aNULL:!eNULL:!DES:!IDEA:!SEED:!RC4:!3DES:!kRSA:!SSLv2:!SSLv3:!TLSv1:!TLSv1.1">
 
@@ -23,16 +23,22 @@
         "false", this makes an assertion stolen in transit easier for attackers to misuse.
         -->
         <Sessions lifetime="28800" timeout="3600" relayState="ss:mem"
-                  checkAddress="false" handlerSSL="false" cookieProps="http">
+                  checkAddress="false" handlerSSL="true" cookieProps="https">
 
             <!--
             Configures SSO for a default IdP. To properly allow for >1 IdP, remove
             entityID property and adjust discoveryURL to point to discovery service.
             You can also override entityID on /Login query string, or in RequestMap/htaccess.
             -->
-            <SSO entityID="https://idp.example.org/idp/shibboleth"
+            <!--<SSO entityID="https://idp.example.org/idp/shibboleth"
                  discoveryProtocol="SAMLDS" discoveryURL="https://ds.example.org/DS/WAYF">
               SAML2
+            </SSO>-->      
+            
+            <!-- IDEM TEST WAYF -->
+            <!-- sarà accessibile come Shibboleth.sso/Login -->
+            <SSO discoveryProtocol="SAMLDS" discoveryURL="https://wayf.idem-test.garr.it/WAYF">
+            SAML2
             </SSO>
 
             <!-- SAML and local-only logout. -->
@@ -59,7 +65,7 @@
         also add your own attributes with values that can be plugged into the
         templates, e.g., helpLocation below.
         -->
-        <Errors supportContact="root@localhost"
+        <Errors supportContact="biblio-idem@area.bo.cnr.it"
             helpLocation="/about.html"
             styleSheet="/shibboleth-sp/main.css"/>
 
@@ -81,6 +87,13 @@
               attributeValue="http://refeds.org/category/hide-from-discovery" />
         </MetadataProvider>
         -->
+
+        <!-- IDEM TEST metadata -->
+        <MetadataProvider type="XML" url="http://md.idem.garr.it/metadata/idem-test-metadata-sha256.xml"
+                  legacyOrgName="true" backingFilePath="idem-test-metadata-sha256.xml" maxRefreshDelay="7200">
+            <MetadataFilter type="Signature" certificate="idem-cert.pem"/>
+            <MetadataFilter type="RequireValidUntil" maxValidityInterval="864000" />
+        </MetadataProvider>
 
         <!-- Example of remotely supplied "on-demand" signed metadata. -->
         <!--
