@@ -4,7 +4,7 @@ logLevel = "ERROR"
 debug = false
 
 # Traefik will listen for traffic on both HTTP and HTTPS.
-defaultEntryPoints = ["http","hhtps"]
+defaultEntryPoints = ["http","https"]
 
 [entryPoints]
   [entryPoints.http]
