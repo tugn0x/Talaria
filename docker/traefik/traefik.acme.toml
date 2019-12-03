@@ -14,9 +14,6 @@ defaultEntryPoints = ["http", "https"]
   [entryPoints.https]
   address = ":443"
     [entryPoints.https.tls]
-      [[entryPoints.https.tls.certificates]]
-      certFile = "/etc/ssl/traefik/localhost.crt"
-      keyFile = "etc/ssl/traefik/localhost.key"
 
 
 
@@ -36,6 +33,25 @@ exposedByDefault = false
 
 #[file]
 #watch = true
+
+
+# These options are for Traefik's integration with Let's Encrypt.
+# Your certificates are stored inside /acme.json inside the container,
+# which is /root/compose/acme.json on your server.
+[acme]
+email = "amministrazione@inkode.it"
+storage = "/etc/traefik/acme/acme.json"
+#caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
+caServer = "https://acme-v02.api.letsencrypt.org/directory"
+OnHostRule = true
+entryPoint = "https"
+  [acme.httpChallenge]
+  entryPoint = "http"
+
+[[acme.domains]]
+  main = "devnilde-api.bo.cnr.it"
+[[acme.domains]]
+  main = "devnilde.bo.cnr.it"
 
 # https://docs.traefik.io/configuration/logs/
 # Comment out the next line to enable Traefik's access logs.
