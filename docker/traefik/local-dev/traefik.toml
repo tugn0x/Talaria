@@ -19,6 +19,8 @@ defaultEntryPoints = ["http","https"]
       certFile = "/etc/ssl/traefik/localhost.crt"
       keyFile = "etc/ssl/traefik/localhost.key"
 
+
+
 [nginx]
 entryPoint = "nginx"
 
@@ -35,4 +37,8 @@ exposedByDefault = false
 
 #[file]
 #watch = true
+
+# https://docs.traefik.io/configuration/logs/
+# Comment out the next line to enable Traefik's access logs.
+# [accessLog]
 
