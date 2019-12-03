@@ -20,6 +20,7 @@
     print "<p>Your schacHomeOrganization is <strong>" . $_SERVER["schacHomeOrganization"] . "</strong></p>";
     print "<p>Your schacHomeOrganizationType is <strong>" . $_SERVER["schacHomeOrganizationType"] . "</strong></p>";
 
+    print_r($_SERVER);
    ?>
   </body>
  </html>
