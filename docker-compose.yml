@@ -126,7 +126,8 @@ services:
     - "traefik.docker.network=proxy"
 
   shibboleth:
-    image: unicon/shibboleth-sp
+#    image: unicon/shibboleth-sp
+    build: ./docker/shibboleth
     expose:
       - 80
       - 443
@@ -144,7 +145,7 @@ services:
       - ./docker/shibboleth/html:/var/www/html
       - ./docker/shibboleth/shib.conf:/etc/httpd/conf.d/shibb.conf
       - "${SSL_CERT_PATH}:/etc/pki/tls/certs/localhost.crt"
-      - "${SSL_KEY_PATH}:/etc/pki/tls/private/localhost.key"     
+      - "${SSL_KEY_PATH}:/etc/pki/tls/private/localhost.key"
 
 
 #volumes:
