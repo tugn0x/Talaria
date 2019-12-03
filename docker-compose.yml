@@ -8,8 +8,8 @@ services:
     - "${WEBSERVER_EXTERNAL_PORT}:80"
     - 443:443
     volumes:
-    - ./docker/certs/server_ssl_cert.crt:/etc/ssl/traefik/localhost.crt
-    - ./docker/certs/server_ssl_cert.key:/etc/ssl/traefik/localhost.key
+    - "${SSL_CERT_PATH}:/etc/ssl/traefik/localhost.crt"
+    - "${SSL_KEY_PATH}:/etc/ssl/traefik/localhost.key"
     - /var/run/docker.sock:/var/run/docker.sock:ro
     - ./docker/traefik/local-dev:/etc/traefik
     restart: always
@@ -143,8 +143,8 @@ services:
       - ./docker/shibboleth/etc:/etc/shibboleth
       - ./docker/shibboleth/html:/var/www/html
       - ./docker/shibboleth/shib.conf:/etc/httpd/conf.d/shibb.conf
-      - ./docker/certs/server_ssl_cert.crt:/etc/pki/tls/certs/localhost.crt
-      - ./docker/certs/server_ssl_cert.key:/etc/pki/tls/private/localhost.key
+      - "${SSL_CERT_PATH}:/etc/pki/tls/certs/localhost.crt"
+      - "${SSL_KEY_PATH}:/etc/pki/tls/private/localhost.key"     
 
 
 #volumes:
