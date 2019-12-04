@@ -18,6 +18,7 @@
     print "<p>Your IDP Entity ID is <strong>".$_SERVER["Shib-Identity-Provider"]."</strong></p>";    
     print "<p>Your persistent-id is <strong>".$_SERVER["persistent-id"]."</strong></p>";    
     print "<p>Your affiliation is <strong>" . $_SERVER["affiliation"] . "</strong></p>";
+    print "<p>Your entitlement is <strong>" . $_SERVER["entitlement"] . "</strong></p>";
     print "<p>Your eduPersonPrincipalName is <strong>" . $_SERVER["eppn"] . "</strong></p>";
     print "<p>Your schacHomeOrganization is <strong>" . $_SERVER["schacHomeOrganization"] . "</strong></p>";
     print "<p>Your schacHomeOrganizationType is <strong>" . $_SERVER["schacHomeOrganizationType"] . "</strong></p>";
