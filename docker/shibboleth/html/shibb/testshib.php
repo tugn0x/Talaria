@@ -15,12 +15,16 @@
 
     print "<p>Let see all other attributes:</p>";
     print "<p>Your REMOTE_USER is <strong>" . $_SERVER["REMOTE_USER"] . "</strong></p>";
+    print "<p>Your IDP Entity ID is <strong>".$_SERVER["Shib-Identity-Provider"]."</storng></p>";    
+    print "<p>Your persistent-id is <strong>".$_SERVER["persistent-id"]."</storng></p>";    
     print "<p>Your affiliation is <strong>" . $_SERVER["affiliation"] . "</strong></p>";
-    print "<p>Your email is <strong>" . $_SERVER['mail'] . "</strong></p>";
     print "<p>Your eduPersonPrincipalName is <strong>" . $_SERVER["eppn"] . "</strong></p>";
     print "<p>Your schacHomeOrganization is <strong>" . $_SERVER["schacHomeOrganization"] . "</strong></p>";
     print "<p>Your schacHomeOrganizationType is <strong>" . $_SERVER["schacHomeOrganizationType"] . "</strong></p>";
+    print "<p>Your email is <strong>" . $_SERVER['mail'] . "</strong></p>";
+    
 
+    print "<hr/>Now all SERVER variables:<br/>";
     print_r($_SERVER);
    ?>
   </body>
