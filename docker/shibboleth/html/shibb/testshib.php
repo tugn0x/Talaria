@@ -15,6 +15,7 @@
 
     print "<p>Let see all other attributes:</p>";
     print "<p>Your REMOTE_USER is <strong>" . $_SERVER["REMOTE_USER"] . "</strong></p>";
+    print "<p>Your affiliation is <strong>" . $_SERVER["affiliation"] . "</strong></p>";
     print "<p>Your email is <strong>" . $_SERVER['mail'] . "</strong></p>";
     print "<p>Your eduPersonPrincipalName is <strong>" . $_SERVER["eppn"] . "</strong></p>";
     print "<p>Your schacHomeOrganization is <strong>" . $_SERVER["schacHomeOrganization"] . "</strong></p>";
