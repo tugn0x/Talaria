@@ -146,9 +146,9 @@ services:
       - ./docker/shibboleth/shib.conf:/etc/httpd/conf.d/shibb.conf
       - "${SSL_CERT_PATH}:/etc/pki/tls/certs/localhost.crt"
       - "${SSL_KEY_PATH}:/etc/pki/tls/private/localhost.key"
-      - ./docker/shibboleth/log/apache-native.log:/var/log/apache2/native.log
-      - ./docker/shibboleth/log/apache-native_warn.log:/var/log/apache2/native_warn.log
+      - ./docker/shibboleth/log/apache-native.log:/var/log/apache2/native.log      
       - ./docker/shibboleth/log/shibd.log:/var/log/shibboleth/shibd.log
+      - ./docker/shibboleth/log/shibd_warn.log:/var/log/shibboleth/shibd_warn.log
       - ./docker/shibboleth/log/transaction.log:/var/log/shibboleth/transaction.log
       - ./docker/shibboleth/log/signature.log:/var/log/shibboleth/signature.log
 
