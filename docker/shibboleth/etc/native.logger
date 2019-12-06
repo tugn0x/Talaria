@@ -35,8 +35,9 @@ log4j.appender.native_log.maxBackupIndex=0
 log4j.appender.native_log.layout=org.apache.log4j.PatternLayout
 log4j.appender.native_log.layout.ConversionPattern=sp-native %d{%Y-%m-%d %H:%M:%S} %p %c %x: %m%n
 
-#log4j.appender.warn_log=org.apache.log4j.RollingFileAppender
+log4j.appender.warn_log=org.apache.log4j.RollingFileAppender
 #log4j.appender.warn_log.fileName=/var/log/shibboleth-www/native_warn.log
-#log4j.appender.warn_log.layout=org.apache.log4j.PatternLayout
-#log4j.appender.warn_log.layout.ConversionPattern=%d{%Y-%m-%d %H:%M:%S} %p %c %x: %m%n
-#log4j.appender.warn_log.threshold=WARN
+log4j.appender.warn_log.fileName=/var/log/apache2/native_warn.log
+log4j.appender.warn_log.layout=org.apache.log4j.PatternLayout
+log4j.appender.warn_log.layout.ConversionPattern=%d{%Y-%m-%d %H:%M:%S} %p %c %x: %m%n
+log4j.appender.warn_log.threshold=WARN
