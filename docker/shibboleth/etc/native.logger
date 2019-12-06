@@ -1,5 +1,5 @@
 # set overall behavior
-log4j.rootCategory=WARN, native_log
+log4j.rootCategory=WARN, native_log, warn_log
 
 # fairly verbose for DEBUG, so generally leave at WARN/INFO
 log4j.category.XMLTooling.XMLObject=WARN
