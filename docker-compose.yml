@@ -157,12 +157,8 @@ services:
     image: spid-auth-proxy
     build: ./docker/spid
       #context: .
-      #dockerfile: Dockerfile      
-    ports:  
-      - 80
-      - 443      
-    expose:
-      - 80
+      #dockerfile: Dockerfile         
+    expose:      
       - 443      
     labels:
     - "traefik.port=443"
