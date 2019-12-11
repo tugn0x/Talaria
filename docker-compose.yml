@@ -154,7 +154,7 @@ services:
   
   #SPID
   authproxy:
-    #image: spid-auth-proxy
+    image: spid-auth-proxy
     build:
       context: ./docker/spid
       dockerfile: Dockerfile
