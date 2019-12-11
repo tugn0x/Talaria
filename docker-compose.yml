@@ -158,6 +158,9 @@ services:
     build: ./docker/spid
       #context: .
       #dockerfile: Dockerfile      
+    ports:  
+      - 80
+      - 443      
     expose:
       - 80
       - 443      
@@ -166,16 +169,16 @@ services:
     - "traefik.protocol=https"
     - "traefik.enable=true"
     - "traefik.backend=authproxy"
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefixStrip:/spid/"
+    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/metadata/,/spid/"
     - "traefik.docker.network=proxy"
 #    - "traefik.frontend.passTLSCert=true"
     - "traefik.proxy.passTLSCert=true"  
     volumes:
-      - '/docker/spid/certs:/opt/shibboleth-sp/certs'
+      #- '/docker/spid/certs:/opt/shibboleth-sp/certs'
       - '/docker/spid/log:/var/log'
-      #- '/docker/spid/certs/saml:/opt/shibboleth-sp/certs:ro'
-      #- '${SSL_CERT_PATH}:/etc/pki/tls/certs/server.crt:ro'
-      #- '${SSL_KEY_PATH}:/etc/pki/tls/private/server.key:ro'
+      - '/docker/spid/certs/saml:/opt/shibboleth-sp/certs:ro'
+      - '${SSL_CERT_PATH}:/etc/pki/tls/certs/server.crt:ro'
+      - '${SSL_KEY_PATH}:/etc/pki/tls/private/server.key:ro'
 
     environment:
       #MODE: 'prod'
