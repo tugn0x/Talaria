@@ -151,6 +151,43 @@ services:
       - ./docker/shibboleth/log/shibd_warn.log:/var/log/shibboleth/shibd_warn.log
       - ./docker/shibboleth/log/transaction.log:/var/log/shibboleth/transaction.log
       - ./docker/shibboleth/log/signature.log:/var/log/shibboleth/signature.log
+  
+  #SPID
+  authproxy:
+    image: spid-auth-proxy
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - 80
+      - 443      
+    labels:
+    - "traefik.port=443"
+    - "traefik.protocol=https"
+    - "traefik.enable=true"
+    - "traefik.backend=authproxy"
+    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefixStrip:/spid/"
+    - "traefik.docker.network=proxy"
+#    - "traefik.frontend.passTLSCert=true"
+    - "traefik.proxy.passTLSCert=true"  
+    volumes:
+      - '/docker/spid/certs:/opt/shibboleth-sp/certs'
+      - '/docker/spid/log:/var/log'
+      #- '/docker/spid/certs/saml:/opt/shibboleth-sp/certs:ro'
+      #- '${SSL_CERT_PATH}:/etc/pki/tls/certs/server.crt:ro'
+      #- '${SSL_KEY_PATH}:/etc/pki/tls/private/server.key:ro'
+
+    environment:
+      ORGANIZATION: 'CNR Area della Ricerca di Bologna'
+      SERVER_NAME: 'devnilde.bo.cnr.it'
+      ENTITY_ID: 'https://devnilde.bo.cnr.it/spid'
+      TARGET_BACKEND: 'https://devnilde.bo.cnr.it'
+      TARGET_LOCATION: '/spid/login'
+      ACS_INDEXES: '1;2'
+      ACS_1_LABEL: 'set 1'
+      ACS_1_ATTRS: 'name;familyName;fiscalNumber;email'
+      ACS_2_LABEL: 'set 2'
+      ACS_2_ATTRS: 'spidCode;fiscalNumber'    
 
 
 #volumes:
