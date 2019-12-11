@@ -45,13 +45,13 @@
             <Logout>SAML2 Local</Logout>
 
             <!-- Administrative logout. -->
-            <LogoutInitiator type="Admin" Location="/Logout/Admin" acl="127.0.0.1 ::1 172.18.0.0/16 172.16.0.1/16" />
+            <LogoutInitiator type="Admin" Location="/Logout/Admin" acl="127.0.0.1 ::1 172.0.0.0/8" />
           
             <!-- Extension service that generates "approximate" metadata based on SP configuration. -->
             <Handler type="MetadataGenerator" Location="/Metadata" signing="false"/>
 
             <!-- Status reporting service. -->
-            <Handler type="Status" Location="/Status" acl="127.0.0.1 ::1 172.18.0.0/16 172.16.0.1/16"/>
+            <Handler type="Status" Location="/Status" acl="127.0.0.1 ::1 172.0.0.0/8"/>
 
             <!-- Session diagnostic service. -->
             <Handler type="Session" Location="/Session" showAttributeValues="false"/>
