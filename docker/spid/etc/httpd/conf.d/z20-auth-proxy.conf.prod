@@ -1,0 +1,33 @@
+<IfModule mod_shib>
+    <IfModule mod_proxy.c>
+        <IfModule mod_ssl.c>
+            SSLProxyEngine On
+            SSLProxyCheckPeerCN Off
+            SSLProxyCheckPeerName Off
+        </IfModule>
+
+        ProxyPreserveHost Off
+        ProxyRequests Off
+
+        <Location "/error">
+            # See: https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPErrors
+            ProxyPass ${X_TARGET_BACKEND}/error
+            ProxyPassReverse ${X_TARGET_BACKEND}/error
+        </Location>
+
+        <Location ${X_TARGET_LOCATION}>
+            AuthType shibboleth
+            ShibRequestSetting requireSession 1
+            Require shib-session
+            ShibUseHeaders On
+
+            ProxyPass ${X_TARGET_BACKEND}${X_TARGET_LOCATION}
+            ProxyPassReverse ${X_TARGET_BACKEND}${X_TARGET_LOCATION}
+        </Location>
+
+        <LocationMatch "^/(?!(error|iam|metadata))">
+            ProxyPass ${X_TARGET_BACKEND}
+            ProxyPassReverse ${X_TARGET_BACKEND}
+        </LocationMatch>
+    </IfModule>
+</IfModule>

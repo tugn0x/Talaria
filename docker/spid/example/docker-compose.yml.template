@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  backend_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SERVER_NAME: '${SERVER_NAME}'
+#   networks:
+#     - example_net
+  auth_proxy:
+    image: spid-auth-proxy
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - './certs:/opt/shibboleth-sp/certs'
+      - './log/httpd:/var/log/httpd'
+      - './log/shibboleth:/var/log/shibboleth'
+      - './log/shibboleth-www:/var/log/shibboleth-www'
+    environment:
+      SERVER_NAME: '${SERVER_NAME}'
+      ENTITY_ID: 'https://${SERVER_NAME}'
+      TARGET_BACKEND: 'http://backend_app:8080'
+      TARGET_LOCATION: '/login'
+      ACS_INDEXES: '0;99;100'
+      ACS_0_LABEL: 'base set'
+      ACS_0_ATTRS: 'fiscalNumber;name'
+      ACS_99_LABEL: 'eIDAS Natural Person Minimum Attribute Set'
+      ACS_99_ATTRS: 'spidCode;name;familyName;dateOfBirth'
+      ACS_100_LABEL: 'eIDAS Natural Person Full Attribute Set'
+      ACS_100_ATTRS: 'spidCode;name;familyName;dateOfBirth;placeOfBirth;address;gender'
+    depends_on:
+      - backend_app
+#   networks:
+#     - example_net
+
+#
+# Enable networks if you're on OpenStack
+#
+
+#networks:
+#  example_net:
+#    driver_opts:
+#      com.docker.network.driver.mtu: 1400
+
+# vim: ft=yaml

@@ -178,6 +178,7 @@ services:
       #- '${SSL_KEY_PATH}:/etc/pki/tls/private/server.key:ro'
 
     environment:
+      #MODE: 'prod'
       ORGANIZATION: 'CNR Area della Ricerca di Bologna'
       SERVER_NAME: 'devnilde.bo.cnr.it'
       ENTITY_ID: 'https://devnilde.bo.cnr.it/spid'

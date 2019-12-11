@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  authproxy:
+    image: spid-auth-proxy
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - '/tmp/certs:/opt/shibboleth-sp/certs'
+      - '/tmp/log:/var/log'
+    environment:
+      ORGANIZATION: 'My eGov Service'
+      SERVER_NAME: 'my.auth.proxy.com'
+      ENTITY_ID: 'https://my.auth.proxy.com'
+      TARGET_BACKEND: 'https://mytargetapp.my.cloud.provider.com'
+      TARGET_LOCATION: '/login'
+      ACS_INDEXES: '1;2'
+      ACS_1_LABEL: 'set 1'
+      ACS_1_ATTRS: 'name;familyName;fiscalNumber;email'
+      ACS_2_LABEL: 'set 2'
+      ACS_2_ATTRS: 'spidCode;fiscalNumber'
+
