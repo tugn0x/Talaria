@@ -158,10 +158,14 @@ services:
     build: ./docker/spid
       #context: .
       #dockerfile: Dockerfile         
+    #expose:      
+    #  - 443      
     expose:      
-      - 443      
+      - 4443      
+    ports:
+      - "4443:443"
     labels:
-    - "traefik.port=443"
+    - "traefik.port=4443"
     - "traefik.protocol=https"
     - "traefik.enable=true"
     - "traefik.backend=authproxy"
