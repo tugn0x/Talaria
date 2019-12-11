@@ -156,7 +156,7 @@ services:
   authproxy:
     image: spid-auth-proxy
     build:
-      context: .
+      context: ./docker/spid
       dockerfile: Dockerfile
     expose:
       - 80
