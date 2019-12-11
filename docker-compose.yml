@@ -175,8 +175,8 @@ services:
     - "traefik.proxy.passTLSCert=true"  
     volumes:
       #- '/docker/spid/certs:/opt/shibboleth-sp/certs'
-      - '/docker/spid/log:/var/log'
-      - '/docker/spid/certs/saml:/opt/shibboleth-sp/certs:ro'
+      - './docker/spid/log:/var/log'
+      - './docker/spid/certs/saml:/opt/shibboleth-sp/certs:ro'
       - '${SSL_CERT_PATH}:/etc/pki/tls/certs/server.crt:ro'
       - '${SSL_KEY_PATH}:/etc/pki/tls/private/server.key:ro'
 
