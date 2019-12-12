@@ -184,7 +184,7 @@ services:
       SERVER_NAME: 'devnilde.bo.cnr.it'
       ENTITY_ID: 'https://devnilde.bo.cnr.it/spid'
       ERROR_URL: 'https://devnilde.bo.cnr.it/error'
-      TARGET_BACKEND: 'https://devnilde.bo.cnr.it/spid'
+      TARGET_BACKEND: 'https://devnilde.bo.cnr.it'
       TARGET_LOCATION: '/login'
       ACS_INDEXES: '1'
       ACS_1_LABEL: 'set 1'
