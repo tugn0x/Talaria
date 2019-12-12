@@ -18,7 +18,7 @@
         NameIDFormat="urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
         policyId="default" requireSignedAssertions="true" sessionHook="/iam/AttrChecker"
         cipherSuites="DEFAULT:!EXP:!LOW:!aNULL:!eNULL:!DES:!IDEA:!SEED:!RC4:!3DES:!kRSA:!SSLv2:!SSLv3:!TLSv1:!TLSv1.1">
-
+ 
         <!--
         Controls session lifetimes, address checks, cookie handling, and the protocol handlers.
         Each Application has an effectively unique handlerURL, which defaults to "/Shibboleth.sso"
