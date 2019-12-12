@@ -8,7 +8,7 @@
     By default, in-memory StorageService, ReplayCache, ArtifactMap, and SessionCache
     are used. See example-shibboleth2.xml for samples of explicitly configuring them.
     -->
-
+ 
     <!-- The ApplicationDefaults element is where most of Shibboleth's SAML bits are defined. -->
     <ApplicationDefaults entityID="%ENTITY_ID%"
         REMOTE_USER="eppn persistent-id targeted-id" signing="true"
