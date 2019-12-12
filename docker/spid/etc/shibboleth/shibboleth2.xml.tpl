@@ -16,7 +16,7 @@
         digestAlg="http://www.w3.org/2001/04/xmlenc#sha512"
         authnContextClassRef="https://www.spid.gov.it/SpidL1" authnContextComparison="exact"
         NameIDFormat="urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
-        policyId="default" requireSignedAssertions="true" sessionHook="/spid/iam/AttrChecker"
+        policyId="default" requireSignedAssertions="true" sessionHook="spid/iam/AttrChecker"
         cipherSuites="DEFAULT:!EXP:!LOW:!aNULL:!eNULL:!DES:!IDEA:!SEED:!RC4:!3DES:!kRSA:!SSLv2:!SSLv3:!TLSv1:!TLSv1.1">
 
         <!--
@@ -27,7 +27,7 @@
         cookieProps to "https" for SSL-only sites. Note that while we default checkAddress to
         "false", this makes an assertion stolen in transit easier for attackers to misuse.
         -->
-        <Sessions lifetime="1800" timeout="3600" relayState="ss:mem" handlerURL="/spid/iam" redirectLimit="exact"
+        <Sessions lifetime="1800" timeout="3600" relayState="ss:mem" handlerURL="spid/iam" redirectLimit="exact"
             checkAddress="false" handlerSSL="true" cookieProps="https">
 
 %SESSION_INITIATOR%
