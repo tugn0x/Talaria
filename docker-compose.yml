@@ -182,7 +182,7 @@ services:
       MODE: 'prod'
       ORGANIZATION: 'CNR Area della Ricerca di Bologna'
       SERVER_NAME: 'devnilde.bo.cnr.it'
-      ENTITY_ID: 'https://devnilde.bo.cnr.it/spid'
+      ENTITY_ID: 'https://devnilde.bo.cnr.it'
       ERROR_URL: 'https://devnilde.bo.cnr.it/error'
       TARGET_BACKEND: 'https://devnilde.bo.cnr.it'
       TARGET_LOCATION: '/login'
