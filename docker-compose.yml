@@ -172,6 +172,8 @@ services:
     volumes:
       #- '/docker/spid/certs:/opt/shibboleth-sp/certs'
       - './docker/spid/log:/var/log'
+      - './docker/spid/etc/shibboleth/shibboleth2.xml.tpl:/etc/shibboleth/shibboleth2.xml.tpl'
+      - './docker/spid/etc/shibboleth/shibd.logger:/etc/shibboleth/shibd.logger'
       - './docker/spid/certs:/opt/shibboleth-sp/certs:ro'
       - '${SSL_CERT_PATH}:/etc/pki/tls/certs/server.crt:ro'
       - '${SSL_KEY_PATH}:/etc/pki/tls/private/server.key:ro'
