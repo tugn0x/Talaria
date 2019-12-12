@@ -179,17 +179,16 @@ services:
       - '${SSL_KEY_PATH}:/etc/pki/tls/private/server.key:ro'
 
     environment:
-      #MODE: 'prod'
+      MODE: 'prod'
       ORGANIZATION: 'CNR Area della Ricerca di Bologna'
       SERVER_NAME: 'devnilde.bo.cnr.it'
       ENTITY_ID: 'https://devnilde.bo.cnr.it/spid'
+      ERROR_URL: 'https://devnilde.bo.cnr.it/error'
       TARGET_BACKEND: 'https://devnilde.bo.cnr.it'
-      TARGET_LOCATION: '/spid/login'
-      ACS_INDEXES: '1;2'
+      TARGET_LOCATION: '/login'
+      ACS_INDEXES: '1'
       ACS_1_LABEL: 'set 1'
-      ACS_1_ATTRS: 'name;familyName;fiscalNumber;email'
-      ACS_2_LABEL: 'set 2'
-      ACS_2_ATTRS: 'spidCode;fiscalNumber'    
+      ACS_1_ATTRS: 'name;familyName;fiscalNumber;email;spidCode;fiscalNumber'      
 
 
 #volumes:
