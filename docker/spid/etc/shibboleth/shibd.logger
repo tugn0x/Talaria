@@ -1,5 +1,5 @@
 # set overall behavior
-log4j.rootCategory=INFO, shibd_log, warn_log
+log4j.rootCategory=INFO, shibd_log, warn_log, tran_log,sig_log
 
 # fairly verbose for DEBUG, so generally leave at INFO
 log4j.category.XMLTooling.XMLObject=INFO
