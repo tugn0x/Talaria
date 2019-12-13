@@ -199,9 +199,8 @@ services:
     image:  italia/spid-testenv2
     expose:
       - 8088
-#    ports:
-#      - 8088:8088
-##      - 443
+      - 80
+      - 443
     labels:
     - "traefik.port=8088"
     - "traefik.protocol=idpshib"
