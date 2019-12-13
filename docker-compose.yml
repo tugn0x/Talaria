@@ -146,33 +146,33 @@ services:
       - ./docker/shibboleth/shib.conf:/etc/httpd/conf.d/shibb.conf
       - "${SSL_CERT_PATH}:/etc/pki/tls/certs/localhost.crt"
       - "${SSL_KEY_PATH}:/etc/pki/tls/private/localhost.key"
-      - ./docker/shibboleth/log/apache-native.log:/var/log/apache2/native.log      
+      - ./docker/shibboleth/log/apache-native.log:/var/log/apache2/native.log
       - ./docker/shibboleth/log/shibd.log:/var/log/shibboleth/shibd.log
       - ./docker/shibboleth/log/shibd_warn.log:/var/log/shibboleth/shibd_warn.log
       - ./docker/shibboleth/log/transaction.log:/var/log/shibboleth/transaction.log
       - ./docker/shibboleth/log/signature.log:/var/log/shibboleth/signature.log
-  
+
   #SPID
   authproxy:
     #image: spid-auth-proxy
     #build: ./docker/spid
       #context: .
-      #dockerfile: Dockerfile         
+      #dockerfile: Dockerfile
     image: italia/spid-auth-docker
-    expose:      
-      - 443      
+    expose:
+      - 443
     labels:
     - "traefik.port=443"
     - "traefik.protocol=https"
     - "traefik.enable=true"
     - "traefik.backend=authproxy"
-    #- "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefixStrip:/spid/"    
+    #- "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefixStrip:/spid/"
     - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/iam,/metadata,/login"
     - "traefik.docker.network=proxy"
 #    - "traefik.frontend.passTLSCert=true"
-    - "traefik.proxy.passTLSCert=true"  
+    - "traefik.proxy.passTLSCert=true"
     volumes:
-      #- '/docker/spid/certs:/opt/shibboleth-sp/certs'      
+      #- '/docker/spid/certs:/opt/shibboleth-sp/certs'
       #- './docker/spid/etc/shibboleth/shibboleth2.xml.tpl:/etc/shibboleth/shibboleth2.xml.tpl'
       #- './docker/spid/etc/shibboleth/shibd.logger:/etc/shibboleth/shibd.logger'
       - './docker/spid/log:/var/log'
@@ -180,7 +180,7 @@ services:
       - './docker/spid/certs:/opt/shibboleth-sp/certs:ro'
       # Certificati HTTPS
       - '${SSL_CERT_PATH}:/etc/pki/tls/certs/server.crt:ro'
-      - '${SSL_KEY_PATH}:/etc/pki/tls/private/server.key:ro' 
+      - '${SSL_KEY_PATH}:/etc/pki/tls/private/server.key:ro'
 
     environment:
       MODE: 'prod'
@@ -192,28 +192,31 @@ services:
       TARGET_LOCATION: '/login'
       ACS_INDEXES: '1'
       ACS_1_LABEL: 'set 1'
-      ACS_1_ATTRS: 'name;familyName;fiscalNumber;email;spidCode;fiscalNumber'      
+      ACS_1_ATTRS: 'name;familyName;fiscalNumber;email;spidCode;fiscalNumber'
 
   #SPID TEST IDP
   spidtestenv:
     image:  italia/spid-testenv2
-    expose:            
-      - 8088  
+    expose:
+      - 8088
+#    ports:
+#      - 8088:8088
+##      - 443
     labels:
     - "traefik.port=8088"
     - "traefik.protocol=idpshib"
     - "traefik.enable=true"
-    - "traefik.backend=spidtestenv"    
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN}"
+    - "traefik.backend=spidtestenv"
+    - "traefik.frontend.rule=Host:spid-idp.inkode.it"
     - "traefik.docker.network=proxy"
-    - "traefik.proxy.passTLSCert=true"  
-    volumes:       
+    - "traefik.proxy.passTLSCert=true"
+    volumes:
       # Certificati e configurazione SAML
-      - './docker/spid-test-idp/conf:/app/conf'      
+      - './docker/spid-test-idp/conf:/app/conf'
       # Certificati HTTPS
       - '${SSL_CERT_PATH}:/app/conf/idpSSL.crt:ro'
       - '${SSL_KEY_PATH}:/app/conf/idpSSL.key:ro'
-     
+
 
 
 #volumes:

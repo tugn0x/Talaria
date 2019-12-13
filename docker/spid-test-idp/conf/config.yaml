@@ -3,7 +3,7 @@
 
 # URL da usare per generare l'entityID dell'IdP e gli URL degli endpoint
 # SAML indicati nel metadata dell'IdP
-base_url: "http://devnilde.bo.cnr.it:8088"
+base_url: "http://spid-idp.inkode.it:8088"
 
 # Chiave e certificato necessari per la firma dei messaggi SAML
 key_file: "./conf/idp.key"
