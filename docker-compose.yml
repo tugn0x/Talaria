@@ -154,10 +154,11 @@ services:
   
   #SPID
   authproxy:
-    image: spid-auth-proxy
-    build: ./docker/spid
+    #image: spid-auth-proxy
+    #build: ./docker/spid
       #context: .
       #dockerfile: Dockerfile         
+    image: italia/spid-auth-docker
     expose:      
       - 443      
     labels:
@@ -171,13 +172,17 @@ services:
 #    - "traefik.frontend.passTLSCert=true"
     - "traefik.proxy.passTLSCert=true"  
     volumes:
-      #- '/docker/spid/certs:/opt/shibboleth-sp/certs'
+      #- '/docker/spid/certs:/opt/shibboleth-sp/certs'      
+      #- './docker/spid/etc/shibboleth/shibboleth2.xml.tpl:/etc/shibboleth/shibboleth2.xml.tpl'
+      #- './docker/spid/etc/shibboleth/shibd.logger:/etc/shibboleth/shibd.logger'
       - './docker/spid/log:/var/log'
-      - './docker/spid/etc/shibboleth/shibboleth2.xml.tpl:/etc/shibboleth/shibboleth2.xml.tpl'
-      - './docker/spid/etc/shibboleth/shibd.logger:/etc/shibboleth/shibd.logger'
       - './docker/spid/certs:/opt/shibboleth-sp/certs:ro'
       - '${SSL_CERT_PATH}:/etc/pki/tls/certs/server.crt:ro'
       - '${SSL_KEY_PATH}:/etc/pki/tls/private/server.key:ro'
+
+  
+      
+
 
     environment:
       MODE: 'prod'
