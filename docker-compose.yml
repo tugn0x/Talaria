@@ -199,10 +199,10 @@ services:
   spidtestenv:
     image:  italia/spid-testenv2
     expose:
-      - 8088      
+      - 8088
     labels:
     - "traefik.port=8088"
-    - "traefik.protocol=idpshib"
+    - "traefik.protocol=http"
     - "traefik.enable=true"
     - "traefik.backend=spidtestenv"
     - "traefik.frontend.rule=Host:spid-idp.inkode.it"
