@@ -201,7 +201,7 @@ services:
     expose:
       - 8088
     ports:
-      - 8088:8088
+      - 18088:8088
 #    labels:
 #    - "traefik.port=8088"
 #    - "traefik.protocol=http"
