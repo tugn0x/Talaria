@@ -18,7 +18,7 @@ cert_file: "./conf/idp.crt"
 metadata:
    # Sono supportati anche metacaratteri,
    # es: "*.xml", "sp_metadat?.xml" o "sp[-_]metadat[a-z].xml"
-#  local:
+  local:
 #    - "./conf/sp_metadata.xml"
     - "./conf/devnilde_spidsp_metadata.xml"
 #  remote:
