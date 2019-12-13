@@ -167,7 +167,7 @@ services:
     - "traefik.enable=true"
     - "traefik.backend=authproxy"
     #- "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefixStrip:/spid/"    
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/iam,/metadata"
+    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/iam,/metadata,/login"
     - "traefik.docker.network=proxy"
 #    - "traefik.frontend.passTLSCert=true"
     - "traefik.proxy.passTLSCert=true"  
