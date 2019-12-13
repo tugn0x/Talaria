@@ -201,7 +201,7 @@ services:
       - 8088  
     labels:
     - "traefik.port=8088"
-    #- "traefik.protocol=https"
+    - "traefik.protocol=idpshib"
     - "traefik.enable=true"
     - "traefik.backend=spidtestenv"    
     - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN}"
