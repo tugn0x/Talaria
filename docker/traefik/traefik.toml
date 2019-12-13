@@ -13,7 +13,7 @@ defaultEntryPoints = ["http", "https"]
     [entryPoints.http.redirect]
     entryPoint = "https"
   [entryPoints.idpshib]
-    address = ":8088"  
+    address = ":8088"
   [entryPoints.https]
   address = ":443"
     [entryPoints.https.tls]
@@ -44,3 +44,21 @@ exposedByDefault = false
 # Comment out the next line to enable Traefik's access logs.
 # [accessLog]
 
+
+
+
+# These options are for Traefik's integration with Let's Encrypt.
+# Your certificates are stored inside /acme.json inside the container,
+# which is /root/compose/acme.json on your server.
+[acme]
+email = "amministrazione@inkode.it"
+storage = "/etc/traefik/acme/acme.json"
+#caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
+caServer = "https://acme-v02.api.letsencrypt.org/directory"
+OnHostRule = false
+entryPoint = "https"
+  [acme.httpChallenge]
+  entryPoint = "http"
+
+[[acme.domains]]
+  main = "spid-idp.inkode.it"
