@@ -204,7 +204,7 @@ services:
     #- "traefik.protocol=https"
     - "traefik.enable=true"
     - "traefik.backend=spidtestenv"    
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/idp"
+    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN}"
     - "traefik.docker.network=proxy"
     - "traefik.proxy.passTLSCert=true"  
     volumes:       
