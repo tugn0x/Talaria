@@ -173,7 +173,8 @@ services:
     - "traefik.proxy.passTLSCert=true"
     volumes:
       #- '/docker/spid/certs:/opt/shibboleth-sp/certs'
-      #- './docker/spid/etc/shibboleth/shibboleth2.xml.tpl:/etc/shibboleth/shibboleth2.xml.tpl'
+      - './docker/spid/etc/shibboleth/shibboleth2.xml.tpl:/etc/shibboleth/shibboleth2.xml.tpl'
+      - './docker/spid/etc/shibboleth/spid-idp.inkode.it.xml:/opt/shibboleth-sp/metadata/spid-idp.inkode.it.xml'
       #- './docker/spid/etc/shibboleth/shibd.logger:/etc/shibboleth/shibd.logger'
       - './docker/spid/log:/var/log'
       # Certificati SAML
@@ -198,9 +199,7 @@ services:
   spidtestenv:
     image:  italia/spid-testenv2
     expose:
-      - 8088
-      - 80
-      - 443
+      - 8088      
     labels:
     - "traefik.port=8088"
     - "traefik.protocol=idpshib"
@@ -208,7 +207,7 @@ services:
     - "traefik.backend=spidtestenv"
     - "traefik.frontend.rule=Host:spid-idp.inkode.it"
     - "traefik.docker.network=proxy"
-    - "traefik.proxy.passTLSCert=true"
+    #- "traefik.proxy.passTLSCert=true"
     volumes:
       # Certificati e configurazione SAML
       - './docker/spid-test-idp/conf:/app/conf'

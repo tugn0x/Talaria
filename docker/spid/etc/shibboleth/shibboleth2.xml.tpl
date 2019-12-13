@@ -122,6 +122,12 @@
             path="/opt/shibboleth-sp/metadata/validator.xml"
             id="https://validator.spid.gov.it" />
 
+        <MetadataProvider
+            type="XML"
+            validate="true"
+            path="/opt/shibboleth-sp/metadata/spid-idp.inkode.it.xml"
+            id="https://spid-idp.inkode.it" />    
+
         <!-- Map to extract attributes from SAML assertions. -->
         <AttributeExtractor type="XML" validate="true" reloadChanges="true" path="attribute-map.xml"/>
 
