@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\ApiController;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Traits\Http\Auth\AuthControllerTrait;
@@ -11,7 +12,7 @@ use App\Traits\Http\Auth\AuthControllerTrait;
  *
  * @Resource("Auth", uri="/auth")
  */
-class AuthController extends Controller
+class AuthController extends ApiController
 {
     /*
     |--------------------------------------------------------------------------

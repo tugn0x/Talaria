@@ -20,3 +20,4 @@ QUESTIONS.md
 nildeSPMetadata.xml
 
 ./docker/certs/production
+/front_tests
