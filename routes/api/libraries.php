@@ -18,7 +18,6 @@ Route::group([
     'namespace' => 'Libraries',
     'prefix' => 'libraries',
     'middleware' => ['api','auth:api',],
-//    'middleware' => 'api',
     'as' => 'api.v1.libraries.',
 ], function () {
 //    Route::get('/', 'LibraryController@test')->name('test');

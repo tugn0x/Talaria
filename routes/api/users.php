@@ -13,7 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => ['api','auth:api'], 'prefix' => 'auth'], function () {
+Route::group([
+    'middleware' => ['api','auth:api'],
+    'prefix' => 'auth',
+    ], function () {
     Route::get('me', ['as' => 'auth.me.show', 'uses' => 'Auth\AuthController@me']);
     Route::put('me', ['as' => 'auth.me.update', 'uses' => 'Auth\AuthController@updateMe']);
     Route::get('permissions', ['as' => 'auth.permissions', 'uses' => 'Auth\AuthController@permissions']);
