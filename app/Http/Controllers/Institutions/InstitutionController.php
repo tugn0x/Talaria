@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Institutions;
 
+use App\Http\Controllers\ApiController;
 use App\Models\Institutions\Institution;
 use Illuminate\Http\Request;
 
-class InstitutionController extends Controller
+class InstitutionController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -37,49 +38,49 @@ class InstitutionController extends Controller
     {
         //
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Institutions\Institution  $institution
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Institution $institution)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Institutions\Institution  $institution
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Institution $institution)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Institutions\Institution  $institution
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Institution $institution)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Institutions\Institution  $institution
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Institution $institution)
-    {
-        //
-    }
+//
+//    /**
+//     * Display the specified resource.
+//     *
+//     * @param  \App\Models\Institutions\Institution  $institution
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function show(Institution $institution)
+//    {
+//        //
+//    }
+//
+//    /**
+//     * Show the form for editing the specified resource.
+//     *
+//     * @param  \App\Models\Institutions\Institution  $institution
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function edit(Institution $institution)
+//    {
+//        //
+//    }
+//
+//    /**
+//     * Update the specified resource in storage.
+//     *
+//     * @param  \Illuminate\Http\Request  $request
+//     * @param  \App\Models\Institutions\Institution  $institution
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function update(Request $request, Institution $institution)
+//    {
+//        //
+//    }
+//
+//    /**
+//     * Remove the specified resource from storage.
+//     *
+//     * @param  \App\Models\Institutions\Institution  $institution
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function destroy(Institution $institution)
+//    {
+//        //
+//    }
 }

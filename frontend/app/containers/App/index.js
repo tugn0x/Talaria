@@ -22,7 +22,7 @@ import LoginPage from 'containers/LoginPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
 import SignupPage from "containers/SignupPage/Loadable";
-import ForgotPassword from "../../../../frontend_nose/app/containers/ForgotPassword/Loadable";
+// import ForgotPassword from "../../../../frontend/app/containers/ForgotPassword/Loadable";
 
 
 function App(props) {

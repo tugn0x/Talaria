@@ -21,3 +21,4 @@ nildeSPMetadata.xml
 
 ./docker/certs/production
 /front_tests
+/frontend/.no_git

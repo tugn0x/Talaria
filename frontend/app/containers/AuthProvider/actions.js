@@ -1,0 +1,211 @@
+/*
+ *
+ * Auth actions
+ *
+ */
+
+import { SYNC_AUTH, STOP_LOADING, REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_REFRESH, REQUEST_LOGIN_SUCCESS, REQUEST_LOGOUT_SUCCESS, REQUEST_REFRESH_SUCCESS, REQUEST_ERROR, REQUEST_SIGNUP, REQUEST_SIGNUP_SUCCESS, REQUEST_PROFILE, REQUEST_PROFILE_SUCCESS , REQUEST_VERIFICATION, REQUEST_VERIFICATION_SUCCESS, REQUEST_NEW_TOKEN, REQUEST_NEW_TOKEN_SUCCESS, REQUEST_CHANGE_PASSWORD, REQUEST_CHANGE_PASSWORD_SUCCESS, REQUEST_FORGOT_PASSWORD, REQUEST_FORGOT_PASSWORD_SUCCESS, REQUEST_RESET_PASSWORD, REQUEST_RESET_PASSWORD_SUCCESS, REQUEST_UPDATE_PROFILE, REQUEST_UPDATE_PROFILE_SUCCESS, REQUEST_DELETE_PROFILE, REQUEST_DELETE_PROFILE_SUCCESS, REQUEST_REGION_GROUPS_FAILURE, REQUEST_REGION_GROUPS, REQUEST_REGION_GROUPS_SUCCESS } from './constants';
+
+export function stopLoading(request) {
+  return {
+    type: STOP_LOADING,
+    request: request
+  };
+}
+export function syncAuth(request) {
+  return {
+    type: SYNC_AUTH,
+    request: request
+  };
+}
+
+export function requestLogin(request) {
+  return {
+    type: REQUEST_LOGIN,
+    request: request
+  };
+}
+
+export function requestLoginSuccess(result) {
+  return {
+    type: REQUEST_LOGIN_SUCCESS,
+    result: result
+  };
+}
+
+export function requestLogout() {
+  return {
+    type: REQUEST_LOGOUT,
+  };
+}
+
+export function requestLogoutSuccess() {
+  return {
+    type: REQUEST_LOGOUT_SUCCESS,
+  };
+}
+
+export function requestRefresh() {
+  return {
+    type: REQUEST_REFRESH,
+  };
+}
+
+export function requestChangePassword(request){
+  return{
+    type: REQUEST_CHANGE_PASSWORD,
+    request: request
+  };
+}
+
+export function requestChangePasswordSuccess() {
+  return {
+    type: REQUEST_CHANGE_PASSWORD_SUCCESS
+  }
+}
+
+export function requestForgotPassword(request){
+  return{
+    type: REQUEST_FORGOT_PASSWORD,
+    request: request
+  }
+}
+
+export function requestForgotPasswordSuccess(){
+  return{
+    type: REQUEST_FORGOT_PASSWORD_SUCCESS
+  }
+}
+
+export function requestResetPassword(request){
+  return{
+    type: REQUEST_RESET_PASSWORD,
+    request: request
+  }
+}
+
+export function requestResetPasswordSuccess(){
+  return{
+    type: REQUEST_RESET_PASSWORD_SUCCESS
+  }
+}
+
+
+export function requestRefreshSuccess() {
+  return {
+    type: REQUEST_REFRESH_SUCCESS,
+  };
+}
+
+export function requestError(errorMessage) {
+  return {
+    type: REQUEST_ERROR,
+    error: errorMessage
+  };
+}
+
+export function requestSignup(request) {
+  return {
+    type: REQUEST_SIGNUP,
+    request: request
+  };
+}
+
+export function requestSignupSuccess(result) {
+  return {
+    type: REQUEST_SIGNUP_SUCCESS,
+    result: result
+  };
+}
+
+export function requestProfile(request) {
+  return {
+    type: REQUEST_PROFILE,
+    request: request
+  };
+}
+
+export function requestProfileSuccess(result) {
+  return {
+    type: REQUEST_PROFILE_SUCCESS,
+    result: result
+  };
+}
+
+export function requestProfileUpdate(request) {
+  return {
+    type: REQUEST_UPDATE_PROFILE,
+    request: request
+  };
+}
+
+export function requestProfileUpdateSuccess(result) {
+  return {
+    type: REQUEST_UPDATE_PROFILE_SUCCESS,
+    result: result
+  };
+}
+
+export function requestProfileDelete(request) {
+  return {
+    type: REQUEST_DELETE_PROFILE,
+    request: request
+  };
+}
+
+export function requestProfileDeleteSuccess(result) {
+  return {
+    type: REQUEST_DELETE_PROFILE_SUCCESS,
+    result: result
+  };
+}
+
+
+export function requestVerification(request) {
+  return {
+    type: REQUEST_VERIFICATION,
+    request: request
+  };
+}
+
+export function requestVerificationSuccess(result) {
+  return {
+    type: REQUEST_VERIFICATION_SUCCESS,
+    result: result
+  };
+}
+
+
+export function requestNewToken(request) {
+  return {
+    type: REQUEST_NEW_TOKEN,
+    request: request
+  };
+}
+
+export function requestNewTokenSuccess(result) {
+  return {
+    type: REQUEST_NEW_TOKEN_SUCCESS,
+    result: result
+  };
+}
+
+export function requestRegionGroupsFailure(error) {
+  return {
+    type: REQUEST_REGION_GROUPS_FAILURE,
+    error: error
+  };
+}
+
+export function requestRegionGroups() {
+  return {
+    type: REQUEST_REGION_GROUPS
+  };
+}
+
+export function requestRegionGroupsSuccess(result) {
+  return {
+    type: REQUEST_REGION_GROUPS_SUCCESS,
+    result: result
+  };
+}
