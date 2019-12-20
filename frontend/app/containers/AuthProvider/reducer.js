@@ -5,7 +5,7 @@
  */
 import produce from 'immer';
 import moment from "moment";
-import { SYNC_AUTH, STOP_LOADING, REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_REFRESH, REQUEST_LOGIN_SUCCESS, REQUEST_LOGOUT_SUCCESS, REQUEST_REFRESH_SUCCESS, REQUEST_ERROR, REQUEST_SIGNUP, REQUEST_SIGNUP_SUCCESS, REQUEST_PROFILE, REQUEST_PROFILE_SUCCESS, REQUEST_NEW_TOKEN, REQUEST_NEW_TOKEN_SUCCESS, REQUEST_CHANGE_PASSWORD, REQUEST_CHANGE_PASSWORD_SUCCESS, REQUEST_FORGOT_PASSWORD, REQUEST_FORGOT_PASSWORD_SUCCESS, REQUEST_RESET_PASSWORD, REQUEST_RESET_PASSWORD_SUCCESS, REQUEST_UPDATE_PROFILE, REQUEST_UPDATE_PROFILE_SUCCESS, REQUEST_DELETE_PROFILE, REQUEST_DELETE_PROFILE_SUCCESS, REQUEST_REGION_GROUPS_FAILURE, REQUEST_REGION_GROUPS, REQUEST_REGION_GROUPS_SUCCESS } from './constants';
+import { SYNC_AUTH, STOP_LOADING, REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_REFRESH, REQUEST_LOGIN_SUCCESS, REQUEST_LOGOUT_SUCCESS, REQUEST_REFRESH_SUCCESS, REQUEST_ERROR, REQUEST_SIGNUP, REQUEST_SIGNUP_SUCCESS, REQUEST_PERMISSIONS, REQUEST_PERMISSIONS_SUCCESS, REQUEST_PROFILE, REQUEST_PROFILE_SUCCESS, REQUEST_NEW_TOKEN, REQUEST_NEW_TOKEN_SUCCESS, REQUEST_CHANGE_PASSWORD, REQUEST_CHANGE_PASSWORD_SUCCESS, REQUEST_FORGOT_PASSWORD, REQUEST_FORGOT_PASSWORD_SUCCESS, REQUEST_RESET_PASSWORD, REQUEST_RESET_PASSWORD_SUCCESS, REQUEST_UPDATE_PROFILE, REQUEST_UPDATE_PROFILE_SUCCESS, REQUEST_DELETE_PROFILE, REQUEST_DELETE_PROFILE_SUCCESS } from './constants';
 
 
 export const initialState = {
@@ -14,6 +14,7 @@ export const initialState = {
     email: null,
     is_verified: false,
   },
+  permissions: [],
   error: null,
   oauth: {
     token: null,
@@ -82,7 +83,17 @@ const authReducer = (state = initialState, action) =>
       case REQUEST_PROFILE_SUCCESS:
           draft.loading = false;
           draft.error = initialState.error;
-          draft.user = action.result.data;
+          draft.user = action.result;
+        break;
+      case REQUEST_PERMISSIONS:
+          draft.loading = true;
+          draft.error = initialState.error;
+        break;
+      case REQUEST_PERMISSIONS_SUCCESS:
+          console.log('case REQUEST_PERMISSIONS_SUCCESS', action.result)
+          draft.loading = false;
+          draft.error = initialState.error;
+          draft.permissions = action.result;
         break;
       case REQUEST_NEW_TOKEN:
           draft.loading = true;
@@ -137,18 +148,6 @@ const authReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = initialState.error;
         draft.user = initialState.user;
-        break;
-      case REQUEST_REGION_GROUPS_FAILURE:
-          draft.loading = false;
-          draft.error = action.error;
-        break;
-      case REQUEST_REGION_GROUPS:
-          draft.loading_options = true;
-          draft.error = null;
-        break;
-      case REQUEST_REGION_GROUPS_SUCCESS:
-          draft.loading_options = false;
-          draft.region_groups = action.result
         break;
 
 

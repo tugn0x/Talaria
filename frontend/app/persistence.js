@@ -3,13 +3,13 @@ import produce from "immer";
 import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { createSelector } from 'reselect';
 // import { toggleDrawer } from 'containers/Sidebar/actions';
-import { syncAuth, requestRefresh, requestRegionGroups } from "containers/AuthProvider/actions";
+import { syncAuth, requestRefresh } from "containers/AuthProvider/actions";
 import { setToken } from 'utils/api';
 // import { isMobileOrTablet } from 'utils/mobileDetector';
-import { REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_LOGIN_SUCCESS, REQUEST_LOGOUT_SUCCESS, REQUEST_REFRESH_SUCCESS, REQUEST_SIGNUP_SUCCESS, REQUEST_PROFILE_SUCCESS, REQUEST_REFRESH, REQUEST_UPDATE_PROFILE_SUCCESS, REQUEST_REGION_GROUPS } from 'containers/AuthProvider/constants';
+import { REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_LOGIN_SUCCESS, REQUEST_LOGOUT_SUCCESS, REQUEST_REFRESH_SUCCESS, REQUEST_SIGNUP_SUCCESS, REQUEST_PROFILE_SUCCESS, REQUEST_PERMISSIONS_SUCCESS, REQUEST_REFRESH, REQUEST_UPDATE_PROFILE_SUCCESS } from 'containers/AuthProvider/constants';
 // import { REQUEST_ILLNESS, REQUEST_PERCEPTION } from 'containers/SubmitPage/constants';
 
-const SKIP_REFRESH = [REQUEST_REGION_GROUPS, REQUEST_REFRESH, REQUEST_LOGIN, REQUEST_LOGOUT];
+const SKIP_REFRESH = [REQUEST_REFRESH, REQUEST_LOGIN, REQUEST_LOGOUT];
 const SYNC_PERSISTANCE_REQUEST = "persitance/SYNC_PERSISTANCE_REQUEST";
 const SYNC_PERSISTANCE_SUCCESS = "persitance/SYNC_PERSISTANCE_SUCCESS";
 
@@ -64,7 +64,7 @@ export const persitanceReducer = (state = initialState, action) =>
   });
 
 export const persitanceMiddleWare = store => next => action => {
-  console.log('persitanceMiddleWare', store, next, action)
+  // console.log('persitanceMiddleWare', store, next, action)
   if(action.type.includes("REQUEST_") && !action.type.includes("SUCCESS") && !action.type.includes("ERROR") && SKIP_REFRESH.indexOf(action.type) === -1) {
     store.dispatch(requestRefresh())
   }
@@ -74,6 +74,7 @@ export const persitanceMiddleWare = store => next => action => {
     case REQUEST_LOGIN_SUCCESS:
     case REQUEST_REFRESH_SUCCESS:
     case REQUEST_SIGNUP_SUCCESS:
+    case REQUEST_PERMISSIONS_SUCCESS:
     case REQUEST_PROFILE_SUCCESS:
     case REQUEST_UPDATE_PROFILE_SUCCESS:
       const state = store.getState();
@@ -89,7 +90,7 @@ export const persitanceMiddleWare = store => next => action => {
 
 export function* refreshPersistance() {
   const authStore = persistore.get("auth");
-  console.log('refreshPersistance', authStore)
+  // console.log('refreshPersistance', authStore)
   if(authStore) {
     setToken(authStore.oauth.token);
     yield put(syncAuth(authStore))
@@ -100,7 +101,6 @@ export function* refreshPersistance() {
   yield put(requestRefresh())
   // yield put(requestIllness())
   // yield put(requestPerception())
-  // yield put(requestRegionGroups())
   yield put(syncPersistanceSuccess())
 }
 

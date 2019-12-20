@@ -11,7 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import messages from './messages';
 import { requestLogin, requestVerification, requestLogout, requestNewToken } from '../AuthProvider/actions';
-import LoginForm from "../../components/LoginForm";
+import { LoginForm } from "../../components";
 // import VerificationForm from "../../../../frontend/app/components/VerificationForm";
 
 // import { withStyles } from '@material-ui/core/styles';

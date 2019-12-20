@@ -114,6 +114,11 @@ export const getProfile = (options) => {
   return request(`${BASE_URL}/api/v1/auth/me`, options)
 };
 
+export const getPermissions = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/auth/permissions`, options)
+};
+
 export const verifySms = (options) => {
   options = getOption(options);
   return request(`${BASE_URL}/oauth/verify/`, options)
@@ -124,28 +129,18 @@ export const newToken = (options) => {
   return request(`${BASE_URL}/oauth/resend-code/`, options)
 };
 
-export const getRegionGroups = (options) => {
-  options = getOption(options);
-  return request(`${BASE_URL}/api/reports/region_groups/`, options)
-};
+// export const getIllness = (options) => {
+//   options = getOption(options);
+//   return request(`${BASE_URL}/api/reports/illnesses/`, options)
+// };
 
-export const getIllness = (options) => {
-  options = getOption(options);
-  return request(`${BASE_URL}/api/reports/illnesses/`, options)
-};
-
-export const getPerceptions = (options) => {
-  options = getOption(options);
-  return request(`${BASE_URL}/api/reports/perceived_smells/`, options)
-};
-
-export const getReports = (options) => {
-  options = getOption(options);
-  return request(`${BASE_URL}/api/reports/public/regions?report=`+options.report, options)
-};
+// export const getPerceptions = (options) => {
+//   options = getOption(options);
+//   return request(`${BASE_URL}/api/reports/perceived_smells/`, options)
+// };
 
 
-export const getNews = (options) => {
-  options = getOption(options);
-  return request(`${BASE_URL}/api/news/`, options)
-};
+// export const getNews = (options) => {
+//   options = getOption(options);
+//   return request(`${BASE_URL}/api/news/`, options)
+// };

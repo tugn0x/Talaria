@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use InvalidArgumentException;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
+use Illuminate\Support\Arr;
+
 
 trait RolesAbilitiesPermissionsTrait
 {

@@ -31,7 +31,7 @@ function App(props) {
   }, []);
   return (
     <div>
-      {JSON.stringify(props)}
+      {/*{JSON.stringify(props)}*/}
       <Switch>
         <Route exact path={"/signup"} component={() => <SignupPage auth={props.auth} history={history} />} />
         {/*<Route exact path={"/fgot-pwd"} component={() => <ForgotPassword auth={props.auth} history={history} />} />*/}

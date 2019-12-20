@@ -114,16 +114,16 @@ services:
     - "6379:6379"
     restart: always
 
-  frontend:
-    build: ./frontend_test
-    expose:
-    - 3000
-    restart: always
-    labels:
-    - "traefik.port=3000"
-    - "traefik.enable=true"
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN}"
-    - "traefik.docker.network=proxy"
+#  frontend:
+#    build: ./frontend_test
+#    expose:
+#    - 3000
+#    restart: always
+#    labels:
+#    - "traefik.port=3000"
+#    - "traefik.enable=true"
+#    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN}"
+#    - "traefik.docker.network=proxy"
 
   shibboleth:
 #    image: unicon/shibboleth-sp

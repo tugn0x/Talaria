@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'domain' => env('API_DOMAIN', null),
+    'domain' => env('LARAVEL_API_DOMAIN', null),
 
     /*
     |--------------------------------------------------------------------------

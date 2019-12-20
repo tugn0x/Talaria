@@ -1,5 +1,5 @@
 import { call, put, select, takeLatest  } from 'redux-saga/effects';
-import { REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_REFRESH, REQUEST_SIGNUP, REQUEST_PROFILE, REQUEST_NEW_TOKEN, REQUEST_VERIFICATION, REQUEST_CHANGE_PASSWORD, REQUEST_RESET_PASSWORD, REQUEST_FORGOT_PASSWORD, REQUEST_UPDATE_PROFILE, REQUEST_DELETE_PROFILE, REQUEST_REGION_GROUPS, REQUEST_REGION_GROUPS_SUCCESS } from 'containers/AuthProvider/constants';
+import { REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_REFRESH, REQUEST_SIGNUP, REQUEST_PROFILE, REQUEST_PERMISSIONS, REQUEST_NEW_TOKEN, REQUEST_VERIFICATION, REQUEST_CHANGE_PASSWORD, REQUEST_RESET_PASSWORD, REQUEST_FORGOT_PASSWORD, REQUEST_UPDATE_PROFILE, REQUEST_DELETE_PROFILE } from 'containers/AuthProvider/constants';
 import {
   requestError,
   requestLoginSuccess,
@@ -14,17 +14,14 @@ import {
   requestResetPasswordSuccess,
   requestProfileUpdateSuccess,
   requestProfileDeleteSuccess,
-  requestRegionGroups,
-  requestRegionGroupsSuccess,
-  requestRegionGroupsFailure
+  requestPermissionsSuccess,
 } from '../../containers/AuthProvider/actions';
 import makeSelectAuth, { tokensExistsExpired  } from '../../containers/AuthProvider/selectors';
 import { push } from 'connected-react-router';
 
-import { login, loginRefresh, oauthOption, oauthOptionRefreshToken, signup, getProfile, setToken, verifySms, newToken, changePassword, forgotPassword, resetPassword, updateProfile, deleteProfile } from 'utils/api';
+import { login, loginRefresh, oauthOption, oauthOptionRefreshToken, signup, getProfile, getPermissions, setToken, verifySms, newToken, changePassword, forgotPassword, resetPassword, updateProfile, deleteProfile } from 'utils/api';
 
 // import { enqueueSuccess } from '../NotificationSnake/actions';
-import {getRegionGroups} from "../../utils/api";
 
 // Individual exports for testing
 export function* loginAuthSaga(action) {
@@ -42,6 +39,8 @@ export function* loginAuthSaga(action) {
     setToken(request.access_token);
     yield put(requestLoginSuccess(request));
     yield call(userProfileSaga);
+    yield call(userPermissionsSaga);
+    yield put(push("/"));
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -58,14 +57,15 @@ export function* signupAuthSaga(action) {
       password: action.request.password,
       confirm_password: action.request.confirm_password,
       accept_privacy_policy: action.request.accept_privacy_policy,
-      region_group: action.request.region_group,
     })
   };
   try {
     const request = yield call(signup, signupOption);
     setToken(request.access_token);
     yield call(userProfileSaga);
+    yield call(userPermissionsSaga);
     yield put(requestSignupSuccess(request));
+    // yield put(requestPermissionsSuccess(request));
     yield put(push("/"));
   } catch(e) {
     yield put(requestError(e.message));
@@ -77,9 +77,31 @@ export function* userProfileSaga() {
     method: 'get'
   };
   try {
+    console.log('userProfileSaga')
+    console.log('userProfileSaga')
+    console.log('userProfileSaga')
+    console.log('userProfileSaga')
     const request = yield call(getProfile, options);
     yield put(requestProfileSuccess(request));
-    yield put(push("/"));
+    // yield put(push("/"));
+  } catch(e) {
+    yield put(requestError(e.message));
+    yield call(logoutAuthSaga);
+  }
+}
+
+export function* userPermissionsSaga() {
+  const options = {
+    method: 'get'
+  };
+  try {
+    console.log('userPermissionsSaga')
+    console.log('userPermissionsSaga')
+    console.log('userPermissionsSaga')
+    console.log('userPermissionsSaga')
+    const request = yield call(getPermissions, options);
+    yield put(requestPermissionsSuccess(request));
+    // yield put(push("/"));
   } catch(e) {
     yield put(requestError(e.message));
     yield call(logoutAuthSaga);
@@ -220,18 +242,6 @@ export function* refreshAuthSaga() {
   }
 }
 
-export function* getRegionGroupsSaga(action){
-  const submitOption = {
-    method: 'get'
-  };
-  try {
-    const request = yield call(getRegionGroups, submitOption);
-    yield put(requestRegionGroupsSuccess(request.results));
-  } catch(e) {
-    yield put(requestRegionGroupsFailure(e.message));
-  }
-}
-
 /**
  * Root saga manages watcher lifecycle
  */
@@ -245,6 +255,7 @@ export default function* authSaga() {
   yield takeLatest(REQUEST_REFRESH, refreshAuthSaga);
   yield takeLatest(REQUEST_SIGNUP, signupAuthSaga);
   yield takeLatest(REQUEST_PROFILE, userProfileSaga);
+  yield takeLatest(REQUEST_PERMISSIONS, userPermissionsSaga);
   yield takeLatest(REQUEST_VERIFICATION, verificationAuthSaga);
   yield takeLatest(REQUEST_NEW_TOKEN, requestNewTokenAuthSaga);
   yield takeLatest(REQUEST_CHANGE_PASSWORD,changePasswordSaga);
@@ -252,6 +263,5 @@ export default function* authSaga() {
   yield takeLatest(REQUEST_RESET_PASSWORD,resetPasswordSaga);
   yield takeLatest(REQUEST_UPDATE_PROFILE, userProfileUpdateSaga);
   yield takeLatest(REQUEST_DELETE_PROFILE, userProfileDeleteSaga);
-  yield takeLatest(REQUEST_REGION_GROUPS, getRegionGroupsSaga);
 
 }

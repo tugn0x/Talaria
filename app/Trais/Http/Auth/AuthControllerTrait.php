@@ -68,8 +68,12 @@ trait AuthControllerTrait
 	{
 		if (Auth::check()) {
 			$user = Auth::user();
-			$token_perms = base64_encode((string)json_encode($user->getCustomClaims()));
-			return $this->response->array(['token_perms' => $token_perms]);
+            $token_perms = [
+                "roles" => $user->roles->pluck('name'),
+                "permissions" => $user->abilities,
+            ];
+//			$token_perms = base64_encode((string)json_encode($token_perms));
+			return $this->response->array($token_perms);
 		}
 		return $this->response->errorUnauthorized(trans('apinilde::auth.unauthorized'));
 	}

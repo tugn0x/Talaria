@@ -12,7 +12,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import messages from './messages';
 import { requestSignup } from '../AuthProvider/actions';
-import SignupForm from "../../components/SignupForm";
+import { SignupForm } from "../../components";
 
 export function SignupPage(props) {
   const [open, setOpen] = React.useState(false);
