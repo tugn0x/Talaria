@@ -74,6 +74,10 @@ class User extends Authenticatable
         return $this->hasMany(PatronDocdelRequest::class);
     }
 
+    public function oauth_social_providers()
+    {
+        return $this->hasMany(OauthSocialProvider::class);
+    }
 
     //nota: chiamando questo metodo sull'utente, mi trovo i dati della sua bibliolteca + dipartimento + title
     public function libraries()

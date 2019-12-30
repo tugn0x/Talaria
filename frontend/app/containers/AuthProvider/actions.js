@@ -20,6 +20,7 @@ export function syncAuth(request) {
 }
 
 export function requestLogin(request) {
+  console.log('requestLogin')
   return {
     type: REQUEST_LOGIN,
     request: request

@@ -20,11 +20,7 @@
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
-Route::get('auth/social/facebook', 'Auth\SocialAuthController@redirectToProvider');
-//Route::get('auth/social/{provider}', 'Auth\SocialAuthController@redirectToProvider');
-Route::get('auth/social/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
-
-
-//Route::get('auth/social/{provider}', 'Auth\AuthController@redirectToProvider');
-//Route::get('auth/social/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+Route::group(['middleware' => ['api']], function () {
+    Route::get('auth/social/{provider}/callback', 'Auth\SocialAuthController@handleProviderCallback');
+    Route::get('auth/social/{provider}', 'Auth\SocialAuthController@redirectToProvider');
+});

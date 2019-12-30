@@ -16,10 +16,9 @@ class AccessToken
     public function handle($request, Closure $next)
     {
 //        exit('passo');
-        if(!$request->header('Authorization') && $request->has('access_token'))
+        if(!$request->header('Authorization') && $request->hasAny(['access_token', 'state']))
         {
-            $request->headers->set('Authorization', 'Bearer '.$request->input('access_token'));
-            return $next($request);
+            $request->headers->set('Authorization', 'Bearer '.$request->input('access_token', $request->input('state')));
         }
 
         return $next($request);

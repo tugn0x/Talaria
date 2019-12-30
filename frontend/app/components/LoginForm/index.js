@@ -27,16 +27,19 @@ import { Link as RouterLink, withRouter } from "react-router-dom";
     }
 
     const submitChange = (e) =>{
-      console.log('submitChange')
-      console.log(props.googleReCaptchaProps)
-      console.log(process.env)
+      e.preventDefault();
+      props.login({ ...formData })
+      return
+      // console.log('submitChange')
+      // console.log(props.googleReCaptchaProps)
+      // console.log(process.env)
       props.googleReCaptchaProps.executeRecaptcha('homepage').then(token => {
         props.login({ ...formData, recaptcha: token })
       }).catch(error => {
         console.log("ERROR IN submitChange executeRecaptcha")
         console.error("error", error);
       });
-      e.preventDefault();
+      // e.preventDefault();
     }
   return (
     <div>
@@ -47,7 +50,7 @@ import { Link as RouterLink, withRouter } from "react-router-dom";
               <CardGroup>
                 <Card className="p-4">
                   <CardBody>
-                    <Form>
+                    <Form onSubmit={submitChange}>
                       <h1><FormattedMessage {...messages.header} /></h1>
                       <p className="text-muted"><FormattedMessage {...messages.loginDescription} /></p>
                       <InputGroup className="mb-3">
@@ -83,9 +86,10 @@ import { Link as RouterLink, withRouter } from "react-router-dom";
                       <Row>
                         <Col xs="6">
                           <Button
+                            type="submit"
                             color="primary"
                             className="px-4"
-                            onClick={(e) => submitChange(e)}
+                            // onClick={(e) => submitChange(e)}
                             disabled={props.auth.loading || formData.password === '' || formData.username === ''}
                           >
                             <FormattedMessage {...messages.loginButton} />

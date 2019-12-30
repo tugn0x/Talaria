@@ -26,7 +26,7 @@ class AddBorrowingLibraryIdFieldToPatronDocdelRequests extends Migration
     public function down()
     {
         Schema::table('patron_docdel_requests', function (Blueprint $table) {
-            //
+            $table->dropColumn('borrowing_library_id');
         });
     }
 }

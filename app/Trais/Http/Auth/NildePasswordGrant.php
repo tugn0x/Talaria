@@ -21,6 +21,7 @@ use League\OAuth2\Server\ResponseTypes\ResponseTypeInterface;
 use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 use Psr\Http\Message\ServerRequestInterface;
 use League\OAuth2\Server\Grant\PasswordGrant;
+use App\Models\Users\User;
 
 /**
  * Password grant class.
@@ -40,7 +41,7 @@ class NildePasswordGrant extends PasswordGrant
         $client = $this->validateClient($request);
         $scopes = $this->validateScopes($this->getRequestParameter('scope', $request));
         $user_id = $this->getRequestParameter('user_id', $request);
-        $user = \App\Models\User\User::findOrFail($user_id);
+        $user = User::findOrFail($user_id);
 
         // Finalize the requested scopes
         $scopes = $this->scopeRepository->finalizeScopes($scopes, $this->getIdentifier(), $client, $user->getKey());

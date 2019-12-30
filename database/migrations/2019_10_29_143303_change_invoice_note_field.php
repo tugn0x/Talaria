@@ -32,6 +32,15 @@ class ChangeInvoiceNoteField extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('libraries', function (Blueprint $table) {
+            $table->renameColumn('invoice_header','invoice_note');
+        });
+        Schema::table('institutions', function (Blueprint $table) {
+            $table->renameColumn('invoice_header','invoice_note');
+        });
+
+        Schema::table('projects', function (Blueprint $table) {
+            $table->renameColumn('invoice_header','invoice_note');
+        });
     }
 }

@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { syncPersistanceRequest, isSync } from "../../persistence";
+import {facebookOAuthUrl} from "../../utils/api"
 
 
 import HomePage from 'containers/HomePage/Loadable';
@@ -31,6 +32,7 @@ function App(props) {
   }, []);
   return (
     <div>
+      {facebookOAuthUrl()}
       {/*{JSON.stringify(props)}*/}
       <Switch>
         <Route exact path={"/signup"} component={() => <SignupPage auth={props.auth} history={history} />} />

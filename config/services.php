@@ -48,6 +48,14 @@ return [
         'client_id' => env('FACEBOOK_APP_ID'),
         'client_secret' => env('FACEBOOK_APP_SECRET'),
         'redirect' => env('FACEBOOK_REDIRECT'),
+        'user_scopes' => [
+            'email',
+            'public_profile',
+//            'user_about_me',
+//            'user_birthday',
+//            'user_hometown',
+//            'user_location',
+        ],
     ],
 
 ];

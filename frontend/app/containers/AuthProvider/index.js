@@ -37,3 +37,4 @@ const withConnect = connect(
 );
 
 export default compose(withConnect)(Auth);
+
