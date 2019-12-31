@@ -43,6 +43,7 @@ class SocialAuthController extends ApiController
      */
     public function handleProviderCallback(Request $request, AuthorizationServer $authorizationServer, string $provider)
     {
+//        dd($request->all());
         // check if there is an already authenticated user
         $user = $this->getUserIfAuthenticated($request);
 
@@ -77,6 +78,48 @@ class SocialAuthController extends ApiController
          */
         $oauth = $this->getOauthToken($authorizationServer, $user->id);
         return $oauth;
+    }
+
+    public function signupFromProvider(Request $request, AuthorizationServer $authorizationServer, string $provider)
+    {
+        $user = $this->getUserIfAuthenticated($request);
+
+        $providerUser = Socialite::driver($provider)->userFromToken($request->accessToken);
+
+        if(!$user) {
+            $userData = $this->$provider($providerUser);
+            $user = User::firstOrNew(['email' => $userData['email']]);
+            if(!$user->exists) {
+                $user->forceFill($userData);
+                $user->password = Hash::make($userData['password']);
+                $user->save();
+            }
+        }
+
+        // make provider stuffs to user
+        if($user) {
+            $user->oauth_social_providers()->firstOrCreate([
+                'provider_name' => $provider,
+                'provider_id' => $providerUser->id,
+                'user_id' => $user->id,
+            ]);
+            OauthSocialProvider::where([
+                ['provider_name', $provider],
+                ['provider_id', $providerUser->id],
+                ['user_id', '<>', $user->id],
+            ])->delete();
+        }
+        /*
+         * return an access_token
+         */
+        $oauth = $this->getOauthToken($authorizationServer, $user->id);
+        return $oauth;
+
+//        return [
+//            $providerUser,
+//            $user ? $user->toArray() : []
+//        ];
+
     }
 
     public function facebook($providerUser) {

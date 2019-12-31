@@ -12,7 +12,10 @@ services:
     - ./docker/traefik:/etc/traefik
 
   frontend:
-    build: ./frontend_test
+    build: ./frontend
+    volumes:
+    - ./frontend:/usr/src/app
+    - ./.env:/usr/src/.env
     expose:
     - 3000
     restart: always

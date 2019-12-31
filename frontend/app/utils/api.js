@@ -135,6 +135,11 @@ export const facebookOAuthUrl = () => {
   return `${process.env.FACEBOOK_LOGIN}?state=${token ? token : ''}`
 }
 
+export const socialOauth = (provider, options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/auth/social/${provider}/signup`, options)
+};
+
 // export const getIllness = (options) => {
 //   options = getOption(options);
 //   return request(`${BASE_URL}/api/reports/illnesses/`, options)
