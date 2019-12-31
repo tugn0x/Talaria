@@ -29,7 +29,8 @@ const styles = (theme) => {
 
 function LoginPage(props) {
   useEffect(() => {
-    props.prepareFacebook()
+    props.prepareFacebook();
+    props.prepareGoogle();
   });
 
 
@@ -40,6 +41,7 @@ function LoginPage(props) {
       <h1>LOGINAPGE</h1>
 
       <button onClick={props.loginFacebook}>Connect with Facebook</button>
+      <button onClick={props.loginGoogle}>Connect with Google</button>
         {!props.auth.oauth.token && <LoginForm {...props} login={(request) => props.dispatch(requestLogin(request))} />}
         {/*{props.auth.oauth.token && !props.auth.user.is_verified && <VerificationForm {...props} auth={props.auth} verify={(request) => props.dispatch(requestVerification(request))} logout={(request) => props.dispatch(requestLogout(request))} newtoken={(request) => props.dispatch(requestNewToken(request))} />}*/}
       </div>
@@ -62,9 +64,9 @@ const mapStateToProps = createStructuredSelector({
 // }
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
-  // prepareGoogle: () => dispatch(socialLoginPrepare('google', { client_id: googleClientId })),
-  // loginGoogle: () => dispatch(socialLoginRequest('google')),
-  prepareFacebook: () => dispatch(socialLoginPrepare('facebook', { appId: process.env.FACEBOOK_APP_ID, redirect_uri:`${process.env.FACEBOOK_REDIRECT}` })),
+  prepareGoogle: () => dispatch(socialLoginPrepare('google', { client_id: process.env.GOOGLE_CLIENT_ID })),
+  loginGoogle: () => dispatch(socialLoginRequest('google')),
+  prepareFacebook: () => dispatch(socialLoginPrepare('facebook', { appId: process.env.FACEBOOK_APP_ID })),
   loginFacebook: () => dispatch(socialLoginRequest('facebook')),
 })
 

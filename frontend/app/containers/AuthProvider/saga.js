@@ -321,7 +321,9 @@ export function* loginFacebook ({ scope = 'public_profile,email', fields = 'id,n
 }
 
 export function* prepareGoogle ({ client_id, ...options }) {
+  console.log('prepareGoogle')
   yield call(socialPromises.loadScript, '//apis.google.com/js/platform.js')
+  console.log('//apis.google.com/js/platform.js')
   yield call(socialPromises.loadGoogleAuth2)
   yield call(window.gapi.auth2.init, { client_id, ...options })
 }
@@ -348,6 +350,9 @@ export function* socialLoginPrepareSaga(action) {
     case 'facebook':
       yield call(prepareFacebook, action.options)
       break;
+    case 'google':
+      yield call(prepareGoogle, action.options)
+      break;
   }
 }
 
@@ -356,6 +361,9 @@ export function* socialLoginRequestSaga(action) {
   switch (action.provider) {
     case 'facebook':
       yield call(loginFacebook, action.options)
+      break;
+    case 'google':
+      yield call(loginGoogle, action.options)
       break;
   }
 }

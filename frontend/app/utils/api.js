@@ -129,11 +129,11 @@ export const newToken = (options) => {
   return request(`${BASE_URL}/oauth/resend-code/`, options)
 };
 
-export const facebookOAuthUrl = () => {
-  const token = apiToken.get()
-  console.log('facebookOAuthUrl', token, process.env.FACEBOOK_LOGIN)
-  return `${process.env.FACEBOOK_LOGIN}?state=${token ? token : ''}`
-}
+// export const facebookOAuthUrl = () => {
+//   const token = apiToken.get()
+//   console.log('facebookOAuthUrl', token, process.env.FACEBOOK_LOGIN)
+//   return `${process.env.FACEBOOK_LOGIN}?state=${token ? token : ''}`
+// }
 
 export const socialOauth = (provider, options) => {
   options = getOption(options);
