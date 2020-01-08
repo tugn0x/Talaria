@@ -126,7 +126,7 @@ services:
     labels:
     - "traefik.port=3000"
     - "traefik.enable=true"
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN}"
+    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/,/spidlogin"
     - "traefik.docker.network=proxy"
 
   shibboleth:
@@ -171,7 +171,7 @@ services:
     - "traefik.enable=true"
     - "traefik.backend=authproxy"
     #- "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefixStrip:/spid/"
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/iam,/metadata,/login"
+    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/iam,/metadata,/login,/access,/whoami"
     - "traefik.docker.network=proxy"
 #    - "traefik.frontend.passTLSCert=true"
     - "traefik.proxy.passTLSCert=true"
@@ -179,6 +179,7 @@ services:
       #- '/docker/spid/certs:/opt/shibboleth-sp/certs'
       - './docker/spid/etc/shibboleth/shibboleth2.xml.tpl:/etc/shibboleth/shibboleth2.xml.tpl'
       - './docker/spid/etc/shibboleth/spid-idp.inkode.it.xml:/opt/shibboleth-sp/metadata/spid-idp.inkode.it.xml'
+      - './docker/spid/var/www/html:/var/www/html'
       #- './docker/spid/etc/shibboleth/shibd.logger:/etc/shibboleth/shibd.logger'
       - './docker/spid/log:/var/log'
       # Certificati SAML
@@ -187,14 +188,15 @@ services:
       - '${SSL_CERT_PATH}:/etc/pki/tls/certs/server.crt:ro'
       - '${SSL_KEY_PATH}:/etc/pki/tls/private/server.key:ro'
 
+    #NOTA: queste var di ambiente servono al container spid-sp per generare in automatico la config dell'apache per il proxypass e abilitare gli header shibboleth    
     environment:
-      MODE: 'prod'
+      MODE: 'dev'  #uso 'dev' cosi' ho anche il supporto per le url /whoami per debug
       ORGANIZATION: 'CNR Area della Ricerca di Bologna'
       SERVER_NAME: 'devnilde.bo.cnr.it'
       ENTITY_ID: 'https://devnilde.bo.cnr.it'
       ERROR_URL: 'https://devnilde.bo.cnr.it/error'
-      TARGET_BACKEND: 'https://devnilde.bo.cnr.it'
-      TARGET_LOCATION: '/login'
+      TARGET_BACKEND: 'https://devnilde.bo.cnr.it' #url del frontend React
+      TARGET_LOCATION: '/spidlogin'                #path del frontend React a cui verrà rediretto (ed è in pratica quello che viene specificato nel param "target" della chiamata)
       ACS_INDEXES: '1'
       ACS_1_LABEL: 'set 1'
       ACS_1_ATTRS: 'name;familyName;fiscalNumber;email;spidCode;fiscalNumber'
