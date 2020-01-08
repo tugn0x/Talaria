@@ -3,6 +3,7 @@
         <title>Access</title>
     </head>
     <body>
+    <h1>Access Test page</h1>
         <ul>
             <li>
                 <a href="https://%SERVER_NAME%/iam/Login?target=https://%SERVER_NAME%/whoami&entityID=https://idp.spid.gov.it">
