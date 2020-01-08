@@ -1,9 +1,10 @@
 <html>
     <head>
-        <title>Who Am I</title>
+        <title>login spid test page</title>
     </head>
     <body>
-        <h1>WhoAmI - Test SPID env variables</h1>
+        <h1>Login SPID test</h1>
+        <h3>da questa pagina poi dovremmo parsare i dati e forwardare al frontend React!</h3>
 
         <h2>Server Environment</h2>
         <pre><?php print_r($_SERVER); ?></pre>
