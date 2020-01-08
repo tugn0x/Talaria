@@ -115,11 +115,6 @@ class SocialAuthController extends ApiController
         $oauth = $this->getOauthToken($authorizationServer, $user->id);
         return $oauth;
 
-//        return [
-//            $providerUser,
-//            $user ? $user->toArray() : []
-//        ];
-
     }
 
     public function facebook($providerUser) {
@@ -128,6 +123,17 @@ class SocialAuthController extends ApiController
             'email' => $providerUser->email,
             'name' => array_shift($name),
             'surname' => array_pop($name),
+            'email_verified_at' => Carbon::now(),
+//            'status' => 1,
+            'password' => substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(16/strlen($x)) )),1,16),
+        ];
+    }
+
+    public function google($providerUser) {
+        return [
+            'email' => $providerUser->email,
+            'name' => $providerUser->user['given_name'],
+            'surname' => $providerUser->user['family_name'],
             'email_verified_at' => Carbon::now(),
 //            'status' => 1,
             'password' => substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(16/strlen($x)) )),1,16),

@@ -207,9 +207,7 @@ export function requestNewTokenSuccess(result) {
 
 export function socialLoginPrepare(provider, options) {
   return {
-    type: SOCIAL_LOGIN_PREPARE,
-    provider: provider,
-    options: options,
+    type: SOCIAL_LOGIN_PREPARE
   };
 }
 export function socialLoginRequest(provider) {

@@ -29,8 +29,7 @@ const styles = (theme) => {
 
 function LoginPage(props) {
   useEffect(() => {
-    props.prepareFacebook();
-    props.prepareGoogle();
+    props.prepareSocialLogin();
   });
 
 
@@ -64,9 +63,8 @@ const mapStateToProps = createStructuredSelector({
 // }
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
-  prepareGoogle: () => dispatch(socialLoginPrepare('google', { client_id: process.env.GOOGLE_CLIENT_ID })),
+  prepareSocialLogin: () => dispatch(socialLoginPrepare()),
   loginGoogle: () => dispatch(socialLoginRequest('google')),
-  prepareFacebook: () => dispatch(socialLoginPrepare('facebook', { appId: process.env.FACEBOOK_APP_ID })),
   loginFacebook: () => dispatch(socialLoginRequest('facebook')),
 })
 

@@ -11,9 +11,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
-        $this->middleware('auth');
+//        exit($request->getUri()."\n\nciaociaociao\n");
+//        $this->middleware('auth');
     }
 
     /**

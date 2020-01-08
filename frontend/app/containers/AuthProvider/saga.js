@@ -335,25 +335,27 @@ export function* prepareFacebook ({ appId, version = 'v2.8', ...options }) {
 }
 
 export function* loginGoogle ({ scope = 'profile', ...options } = {}) {
+  const provider = 'google'
   const auth2 = yield call(window.gapi.auth2.getAuthInstance)
+  console.log(auth2)
   const user = yield call([auth2, auth2.signIn], { scope, ...options })
-  const profile = yield call([user, user.getBasicProfile])
-  const name = yield call([profile, profile.getName])
-  const picture = yield call([profile, profile.getImageUrl])
-  yield put(socialLoginSuccess({ name, picture }))
+  // const data = {...user.Zi}
+  // const data = {...user}
+  const data = {accessToken: user.Zi.access_token}
+  console.log(data)
+  console.log(data)
+  console.log(data)
+  yield call(socialOauthSaga, {provider, data})
+  // const profile = yield call([user, user.getBasicProfile])
+  // const name = yield call([profile, profile.getName])
+  // const picture = yield call([profile, profile.getImageUrl])
+  // yield put(socialLoginSuccess({ name, picture }))
 }
 
 
-export function* socialLoginPrepareSaga(action) {
-  console.log('socialLoginPrepareSaga', action)
-  switch (action.provider) {
-    case 'facebook':
-      yield call(prepareFacebook, action.options)
-      break;
-    case 'google':
-      yield call(prepareGoogle, action.options)
-      break;
-  }
+export function* socialLoginPrepareSaga() {
+      yield call(prepareFacebook, { appId: process.env.FACEBOOK_APP_ID })
+      yield call(prepareGoogle, { client_id: process.env.GOOGLE_CLIENT_ID })
 }
 
 export function* socialLoginRequestSaga(action) {
