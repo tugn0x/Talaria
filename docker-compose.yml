@@ -175,8 +175,7 @@ services:
       #- '/docker/spid/certs:/opt/shibboleth-sp/certs'
       - './docker/spid/etc/shibboleth/shibboleth2.xml.tpl:/etc/shibboleth/shibboleth2.xml.tpl'
       - './docker/spid/etc/shibboleth/spid-idp.inkode.it.xml:/opt/shibboleth-sp/metadata/spid-idp.inkode.it.xml'
-      #- './docker/spid/var/www/html:/var/www/html'
-      - './docker/spid/var/www/html/whoami:/var/www/html/whoami'
+      - './docker/spid/var/www/html:/var/www/html'
       #- './docker/spid/etc/shibboleth/shibd.logger:/etc/shibboleth/shibd.logger'
       - './docker/spid/log:/var/log'
       # Certificati SAML

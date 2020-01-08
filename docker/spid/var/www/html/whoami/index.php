@@ -3,7 +3,7 @@
         <title>Who Am I</title>
     </head>
     <body>
-        <h1>WhoAmI</h1>
+        <h1>WhoAmI - Test SPID env variables</h1>
 
         <h2>Server Environment</h2>
         <pre><?php print_r($_SERVER); ?></pre>
