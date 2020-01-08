@@ -122,7 +122,7 @@ services:
     labels:
     - "traefik.port=3000"
     - "traefik.enable=true"
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN}"
+    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/,/spidlogin"
     - "traefik.docker.network=proxy"
 
   shibboleth:
@@ -167,7 +167,7 @@ services:
     - "traefik.enable=true"
     - "traefik.backend=authproxy"
     #- "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefixStrip:/spid/"
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/iam,/metadata,/login,/access,/whoami,/spidlogin"
+    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/iam,/metadata,/login,/access,/whoami"
     - "traefik.docker.network=proxy"
 #    - "traefik.frontend.passTLSCert=true"
     - "traefik.proxy.passTLSCert=true"
