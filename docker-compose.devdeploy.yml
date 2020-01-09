@@ -16,7 +16,7 @@ services:
     volumes:
     - ./frontend:/usr/src/app
     - ./.env:/usr/src/.env
-    command: npm i; npm start
+    command: "npm install && npm start"
     expose:
     - 3000
     restart: always
