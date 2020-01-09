@@ -14,7 +14,7 @@ RUN npm install -g cross-env
 RUN npm install
 
 #RUN npm run build:docker
-RUN npm run build
+#RUN npm run build
 
 #START
 #CMD npm run start:docker
