@@ -16,13 +16,14 @@ services:
     volumes:
     - ./frontend:/usr/src/app
     - ./.env:/usr/src/.env
+    command: bash -c "npm install; npm start"
     expose:
     - 3000
     restart: always
     labels:
     - "traefik.port=3000"
     - "traefik.enable=true"
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN}"
+    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/,/spidlogin"
     - "traefik.docker.network=proxy"
 
   phpmyadmin:

@@ -188,7 +188,7 @@ services:
       - '${SSL_CERT_PATH}:/etc/pki/tls/certs/server.crt:ro'
       - '${SSL_KEY_PATH}:/etc/pki/tls/private/server.key:ro'
 
-    #NOTA: queste var di ambiente servono al container spid-sp per generare in automatico la config dell'apache per il proxypass e abilitare gli header shibboleth    
+    #NOTA: queste var di ambiente servono al container spid-sp per generare in automatico la config dell'apache per il proxypass e abilitare gli header shibboleth
     environment:
       MODE: 'dev'  #uso 'dev' cosi' ho anche il supporto per le url /whoami per debug
       ORGANIZATION: 'CNR Area della Ricerca di Bologna'
