@@ -126,8 +126,7 @@ services:
     labels:
     - "traefik.port=3000"
     - "traefik.enable=true"
-#    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/,/spidlogin"
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN}"
+    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/,/spidlogin"
     - "traefik.docker.network=proxy"
 
   shibboleth:
