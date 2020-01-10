@@ -1,0 +1,464 @@
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700,900);
+
+$spid-button-default: #0073e6;
+$spid-button-active: #0059b3;
+$font-family: "Titillium Web", HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+
+.spid-enter-container {
+    min-width: 300px;
+
+    a {
+        cursor: pointer;
+        color: #06c;
+    }
+
+    h1 {
+        color: #17324d;
+        font-size: 2rem;
+        font-family: $font-family;
+       // min-width: 400px;
+    }
+}
+
+.spid-idp-list {
+    display: flex;
+    flex-flow: row wrap;
+
+    .spid-button-idp {
+        margin: 12px auto;
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        background: #f5f6f7;
+        border-radius: 3px;
+
+        img {
+            max-height: 30px;
+            height: 100%;
+            width: auto;
+        }
+
+        span {
+            padding-top: 5px;
+            font-family: $font-family;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        form {
+            height: 100%;
+            padding: 10px;
+
+            &:active {
+                border: 3px solid rgb(247, 145, 13);
+            }
+
+            .spid-button-idp-button {
+                border: 0;
+                width: 100%;
+                cursor: pointer;
+                background: #f5f6f7;
+                padding: 5px;
+                height: 100%;
+
+                &[disabled] {
+                    opacity: 0.2;
+                    cursor: not-allowed;
+                }
+            }
+        }
+
+        a {
+            height: 100%;
+            border: 3px solid white;
+            padding: 10px;
+            text-decoration: none;
+
+            &:active {
+                border: 3px solid rgb(247, 145, 13);
+            }
+
+            &[disabled] {
+                opacity: 0.2;
+                cursor: not-allowed;
+                pointer-events: none;
+            }
+        }
+    }
+}
+
+.spid-button-logo {
+    float: left;
+    width: 50%;
+}
+
+.spid-button-close-button {
+    float: right;
+    margin-top: 5px;
+}
+
+.spid-button, .spid-cancel-access-button {
+    font-family: $font-family;
+}
+
+.spid-button-navigable {
+    background: transparent;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.spid-enter-container {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+}
+
+.spid-non-hai-spid {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    
+    text-align: center;
+    font-size: 15px;
+    font-family: $font-family;
+
+    a {
+        font-weight: bold;
+    }
+}
+
+.spid-enter {
+    height: 0; // fix Safari, non comprime l'altezza del div quando i figli sono nascosti
+}
+
+.spid-button-panel {
+    top: 0;
+    left: 0;
+    margin-left: 0%;
+    margin-top: 0%;
+    margin-right: 0%;
+    width: 100vw;
+    height: 100vh;
+    color: #000;
+    position: fixed;
+    z-index: 1;
+    overflow: auto;
+    background: white;
+}
+
+.spid-button-header {
+    background-color: #fff;
+    color: #fff;
+    display: block;
+    overflow: hidden;
+    position: static;
+    min-width: 300px;
+    padding: 40px;
+
+    .spid-button-logo {
+        float: left;
+        width: 33.33333vw;
+        font-size: 30px;
+    }
+
+    .spid-button-panel-back {
+        & a,
+        & button,
+        & button a {
+            float: left;
+            width: auto;
+            border: none;
+            outline: none;
+            display: block;
+            cursor: pointer;
+        }
+
+        & button:hover,
+        & button:focus,
+        & a:hover,
+        & a:focus {
+            opacity: 0.5;
+        }
+
+        & img {
+            max-height: 50px;
+        }
+
+        min-width: 32px;
+    }
+
+    .spid-button-logo img {
+        max-height: 37px;
+    }
+}
+
+.spid-button-panel-content {
+    position: relative;
+    display: block;
+    min-width: 300px;
+    margin-bottom: 10px;
+
+    .spid-enter-title-page {
+        background: transparent;
+        display: block;
+        text-align: center;
+    }
+}
+
+.spid-button-panel-content-center {
+    text-align: center;
+    margin: auto;
+    overflow: auto;
+    height: 100%;
+    margin-bottom: 60px;
+    max-width: 500px;
+}
+
+.spid-button-icon {
+    border: none;
+    padding-right: 8px;
+    vertical-align: middle;
+    display: inline-block;
+
+    & svg {
+        fill: #fff;
+    }
+}
+
+.spid-button-little-man-icon {
+    width: 32px;
+    opacity: 0;
+    position: absolute;
+}
+
+@media screen and (max-width: 767px) {
+    .spid-button-little-man-icon {
+        display: none;
+    }
+}
+
+.spid-button-text {
+    vertical-align: top;
+}
+
+.spid-button-size-small {
+    font-size: 14px;
+    height: 40px;
+    padding: 10px 20px;
+
+    & > span img {
+        width: 16px;
+        height: 16px;
+        border: 0;
+    }
+}
+
+.spid-button-size-medium {
+    font-size: 16px;
+    height: 48px;
+    padding: 12px 24px;
+
+    & > span img {
+        width: 24px;
+        height: 24px;
+        border: 0;
+    }
+}
+
+.spid-button-size-large {
+    font-size: 18px;
+    height: 56px;
+    padding: 12px 28px;
+
+    & > span img {
+        width: 32px;
+        height: 32px;
+        border: 0;
+    }
+}
+
+.spid-button-fluid {
+    width: 100%;
+    max-width: 400px;
+}
+
+.spid-cancel-access-button {
+    background-color: #fcfdff;
+    padding: 12px 24px;
+    color: #50565c;
+    font-family: $font-family;
+    font-weight: 600;
+    font-size: 16px;
+    display: inline-block;
+    box-shadow: inset 0 0 0 1px #e6e9f2;
+    border-radius: 4px;
+    border: 0 solid transparent;
+    height: 55px;
+    margin: auto;
+    width: 90%;
+    text-align: center;
+    line-height: 1.5;
+    vertical-align: middle;
+    cursor: pointer;
+
+    &:active:focus {
+        box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(92, 111, 130, 0.5);
+    }
+
+    &:active {
+        color: #5c6f82;
+    }
+
+    &:hover {
+        color: #50565c;
+        -webkit-box-shadow: inset 0 0 0 1px #c9cedc;
+        box-shadow: inset 0 0 0 1px #c9cedc;
+    }
+}
+
+.spid-button-col {
+    float: left;
+    width: 100vw;
+    width: 24.99999%;
+
+    &.xs12 {
+        width: 49.99999%;
+    }
+}
+
+#spid-enter-title-container {
+    padding-top: 1.25em;
+}
+
+#spid-button-action-button-container {
+    width: 100%;
+
+    & button {
+        border: none;
+    }
+}
+
+.spid-button-action-button {
+    width: 49.99999%;
+    height: 65px;
+    color: $spid-button-default;
+    font-weight: 700;
+    background-color: #fff;
+    display: block;
+    float: left;
+
+    span {
+        position: relative;
+        top: -4px;
+    }
+}
+
+.spid-button-visibile {
+    display: block !important;
+    opacity: 0;
+}
+
+.spid-button-positive {
+    color: #fff;
+    background-color: $spid-button-default;
+
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $spid-button-active;
+        color: #fff;
+    }
+
+    &:visited {
+        background-color: $spid-button-default;
+        color: #fff;
+    }
+
+    svg {
+        fill: #fff;
+    }
+}
+
+.spid-button-negative {
+    color: $spid-button-default;
+    background-color: #fff;
+
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: #fff;
+        color: $spid-button-active;
+    }
+
+    &:visited {
+        background-color: #fff;
+        color: $spid-button-default;
+    }
+}
+
+.spid-button-rounded {
+    border-radius: 4px;
+    margin: 16px;
+}
+
+.spid-button-sharp {
+    border-radius: 0;
+}
+
+/*
+ * Deve essere l'ultimo set di regole, così che dopo che i pulsanti sono stati renderizzati con invisibilità inline
+ * si da tempo al browser di caricare e parsare i fogli di stile appena iniettati, di google font e del presente
+ * così da evitare di vedere prima i pulsanti "rotti" che poi si aggiustano gradualmente mentre il CSS viene scaricato e parsato
+ * in questo modo i pulsanti appaiono pochi istanti dopo correttamente stilizzati, sovrascrivendo l'attributo hidden
+ */
+.spid-button {
+    position: relative;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+
+    & .spid-button-logo {
+        position: absolute;
+        display: block;
+        margin: auto;
+        width: 12%;
+        top: 30%;
+        left: 14%;
+    }
+}
+
+.spid-foot-btn {
+    text-align: center;
+    max-width: 500px;
+    bottom: 0;
+    background-color: white;
+    margin: -40px auto auto auto;
+    width: 100%;
+    padding-bottom: 4%;
+
+    // circular shadow
+    position: relative;
+    &::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        -webkit-box-shadow: 0 0 2rem rgba(0, 0, 0, 0.15);
+        box-shadow: 0 0 2rem rgba(0, 0, 0, 0.15);
+        left: 10%;
+        right: 10%;
+        width: 80%;
+        height: 50%;
+        border-radius: 100%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .spid-foot-btn {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}

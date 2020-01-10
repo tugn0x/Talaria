@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <title lang="en">SPID Smart Button</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="dist/spid-button.min.js"></script>
+    <script type="text/javascript">
+        /* eslint-disable indent */
+        document.addEventListener('DOMContentLoaded', function () {
+            SPID.init({
+                //lang: 'it',
+                selector: '#my-spid-button',  // opzionale
+                method: 'POST',               // opzionale
+                url: '/Login/{{idp}}',
+                fieldName: 'idp',
+                extraFields: {                // opzionale
+                    foo: 'bar',
+                    baz: 'baz'
+                },
+                mapping: {                    // opzionale
+                    'https://loginspid.aruba.it': 4,
+                    'https://posteid.poste.it': 5,
+                    'https://idp.namirialtsp.com/idp': 7,
+                },
+                supported: [
+                    'https://identity.sieltecloud.it',
+                    'https://loginspid.aruba.it',
+                    'https://identity.infocert.it',
+                    'https://login.id.tim.it/affwebservices/public/saml2sso',
+                    'https://idp.namirialtsp.com/idp',
+                    'https://spid.register.it',
+                    'https://id.lepida.it/idp/shibboleth'
+                ],
+                extraProviders: [
+                    { "entityID": "http://spid-idp.inkode.it:8088", "entityName": "Test IdP", "active": true }
+                ],
+                protocol: "SAML",
+                size: "medium",
+                colorScheme: "positive",
+                cornerStyle: "rounded"
+            });
+
+            SPID.init({
+                selector: '#my-spid-button2',  // opzionale
+                url: '/Login/{{idp}}',
+                supported: [],
+                extraProviders: [
+                    {
+                        "entityID": "https://testidp.mycorp.com/",
+                        "entityName": "Test IdP"
+                    }
+                ]
+            });
+        });
+
+/* eslint-enable indent */
+    </script>
+</head>
+
+<body style="background-color: #EEE">
+    <div id="my-spid-button">
+        <noscript>
+            Il login tramite SPID richiede che JavaScript sia abilitato nel browser
+        </noscript>
+    </div>
+
+    <div id="my-spid-button2"></div>
+</body>
+
+</html>

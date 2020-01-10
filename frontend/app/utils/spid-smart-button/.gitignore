@@ -1,0 +1,10 @@
+.DS_store
+nbproject/
+node_modules/
+.sass-cache/
+.grunt/
+_SpecRunner.html
+reports/
+*.min.*
+*debug.log
+/dist/img/**
