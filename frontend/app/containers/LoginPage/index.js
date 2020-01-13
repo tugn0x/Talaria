@@ -12,7 +12,6 @@ import { compose } from 'redux';
 import messages from './messages';
 import { requestLogin, socialLoginPrepare, socialLoginRequest, requestVerification, requestLogout, requestNewToken } from '../AuthProvider/actions';
 import { LoginForm } from "../../components";
-import { SPIDButton } from "../../components";
 
 // import VerificationForm from "../../../../frontend/app/components/VerificationForm";
 
@@ -31,6 +30,7 @@ const styles = (theme) => {
 function LoginPage(props) {
   useEffect(() => {
     props.prepareSocialLogin();
+    console.log("use effect")
   });
 
     // this.props.prepareGoogle()
@@ -40,9 +40,13 @@ function LoginPage(props) {
       <h1>LOGINAPGE</h1>
 
       <button onClick={props.loginFacebook}>Connect with Facebook</button>
-      <button onClick={props.loginGoogle}>Connect with Google</button>      
+      <button onClick={props.loginGoogle}>Connect with Google</button>
       <a href="https://devnilde.bo.cnr.it/Shibboleth.sso/Login?target=https://devnilde.bo.cnr.it/shibb/testshib.php">IDEM Login</a>
-      <SPIDButton />              
+      <div id="my-spid-button">
+        <noscript>
+          Il login tramite SPID richiede che JavaScript sia abilitato nel browser
+        </noscript>
+      </div>
         {!props.auth.oauth.token && <LoginForm {...props} login={(request) => props.dispatch(requestLogin(request))} />}
         {/*{props.auth.oauth.token && !props.auth.user.is_verified && <VerificationForm {...props} auth={props.auth} verify={(request) => props.dispatch(requestVerification(request))} logout={(request) => props.dispatch(requestLogout(request))} newtoken={(request) => props.dispatch(requestNewToken(request))} />}*/}
       </div>

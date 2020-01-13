@@ -321,11 +321,26 @@ export function* loginFacebook ({ scope = 'public_profile,email', fields = 'id,n
 }
 
 export function* prepareGoogle ({ client_id, ...options }) {
-  console.log('prepareGoogle')
   yield call(socialPromises.loadScript, '//apis.google.com/js/platform.js')
-  console.log('//apis.google.com/js/platform.js')
+  // console.log('//apis.google.com/js/platform.js')
   yield call(socialPromises.loadGoogleAuth2)
   yield call(window.gapi.auth2.init, { client_id, ...options })
+}
+
+export function* prepareSPID ({ client_id, ...options }) {
+  const authDomain = yield select(makeSelectAuth())
+  console.log('prepareSPID')
+  yield call(socialPromises.loadScript, '/spid-login-button/spid-button.min.js')
+  yield call(window.SPID.init, {
+    selector: '#my-spid-button',
+    lang: 'it',
+    method: 'GET',
+    url: `/iam/Login1?target=https://${process.env.FRONTEND_DOMAIN}/whoami&entityID={{idp}}&token=${authDomain.oauth.access_token ? authDomain.oauth.access_token : ''}`,
+    supported: [],
+    extraProviders: [
+      { "entityID": "http://spid-idp.inkode.it:8088", "entityName": "Test IdP", "active": true }
+    ]
+  })
 }
 
 export function* prepareFacebook ({ appId, version = 'v2.8', ...options }) {
@@ -356,6 +371,7 @@ export function* loginGoogle ({ scope = 'profile', ...options } = {}) {
 export function* socialLoginPrepareSaga() {
       yield call(prepareFacebook, { appId: process.env.FACEBOOK_APP_ID })
       yield call(prepareGoogle, { client_id: process.env.GOOGLE_CLIENT_ID })
+      yield call(prepareSPID, {})
 }
 
 export function* socialLoginRequestSaga(action) {

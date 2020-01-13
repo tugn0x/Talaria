@@ -25,6 +25,7 @@ const app = express();
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
+app.use('/spid-login-button/', express.static(`${__dirname}/../spid-smart-button/dist`));
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
@@ -37,6 +38,8 @@ const customHost = argv.host || environment.HOST;
 const host = customHost || null; // Let http.Server use its default IPv6/4 host
 const prettyHost = customHost || 'localhost';
 
+console.log('eccomi....')
+console.log(`${__dirname}/../spid-smart-button/dist`)
 // use the gzipped bundle
 app.get('*.js', (req, res, next) => {
   req.url = req.url + '.gz'; // eslint-disable-line

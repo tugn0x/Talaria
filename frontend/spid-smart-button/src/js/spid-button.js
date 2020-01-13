@@ -22,7 +22,7 @@ var SPID = (function () {
                     'alt="', altText, '" style="float:left" />'
             ].join('');
         };
-    
+
         var hiddenField = function (name, value) {
             return ['<input type="hidden" name="', name, '" value="', value, '" />'].join('');
         };
@@ -80,7 +80,7 @@ var SPID = (function () {
         var EscKeyHandler;
         spidObj.prototype._showProvidersPanel = function () {
             var spid = this;
-            
+
             spid._btn.classList.add("spid-button-transition");
             spid._showElement(spid._wrapper);
             spid._giveFocusTo(spid._wrapper.querySelector('.spid-button-panel-select'));
@@ -97,7 +97,7 @@ var SPID = (function () {
                 btn.setAttribute('style', 'animation-delay: ' + delaySeconds + 's');
                 delaySeconds = delaySeconds + 0.10;
             });
-            
+
             setTimeout(function () {
                 spid._btn.classList.remove('spid-button-transition');
                 spid._wrapper.querySelector('.spid-button-logo').classList.remove('spid-button-fade-in-left');
@@ -108,7 +108,7 @@ var SPID = (function () {
                     btn.removeAttribute('style');
                 });
             }, 2000);
-            
+
 
             // setup the Esc Key handler
             EscKeyHandler = function (event) {
@@ -139,7 +139,7 @@ var SPID = (function () {
 
         spidObj.prototype._render = function () {
             var spid = this;
-            
+
             // only the first matching placeholder will be rendered
             var placeholder = document.querySelector(spid.config.selector);
             if (!placeholder) {
@@ -154,7 +154,7 @@ var SPID = (function () {
             spid._btn.addEventListener('click', function (e) {
                 spid._showProvidersPanel();
             });
-            
+
             // render modal containers
             // if wrapper does not exist, create it
             if (!spid._btn.querySelector('.spid-enter-container')) {
@@ -248,7 +248,7 @@ var SPID = (function () {
 
         spidObj.prototype._renderProviderButton = function (idp) {
             var spid = this;
-            
+
             var isExtraProvider = false;
             spid.config.extraProviders.forEach(function (idp2) {
                 if (idp.entityID == idp2.entityID) isExtraProvider = true;
@@ -262,14 +262,14 @@ var SPID = (function () {
             var linkTitle = isActive
                 ? spid._getI18n('accedi_con_idp', idp.entityName)
                 : spid._getI18n('idp_disabled');
-            
+
             // apply mapping if any
             var entityID = (idp.entityID in spid.config.mapping)
                 ? spid.config.mapping[idp.entityID]
                 : idp.entityID;
 
             var actionURL = spid.config.url.replace('{{idp}}', encodeURIComponent(entityID));
-            
+
             var buttonContent = idp.logo
                 ? ['<img src="', SPID.assetsBaseUrl, 'img/idp-logos/', idp.logo, '" alt="', idp.entityName, '">'].join('')
                 : ['<span>', idp.entityName, '</span>'].join('');
@@ -310,7 +310,7 @@ var SPID = (function () {
             var fluid = spid.config.fluid ? " spid-button-fluid " : "";
             var imgPath = spid.config.colorScheme == 'negative' ? 'img/spid-ico-circle-lb.svg' : 'img/spid-ico-circle-bb.svg';
             return [
-                '<button class="spid-button spid-button-', spid.config.colorScheme, ' spid-button-', spid.config.cornerStyle, ' spid-button-size-', spid.config.size, fluid,'" hidden>',
+                '<button class="spid-button spid-button-', spid.config.colorScheme, ' spid-button-', spid.config.cornerStyle, ' spid-button-size-', spid.config.size, fluid,'">',
                     '<span aria-hidden="true" class="spid-button-icon">',
                         '<img src="', SPID.assetsBaseUrl, imgPath,'" alt="', spid._getI18n('entra_con_SPID'),'" />',
                     '</span>',
@@ -355,7 +355,7 @@ var SPID = (function () {
                     for (var key in defaults)
                         if (!(key in config))
                             config[key] = defaults[key];
-                    
+
                     // more validation
                     if (!config.url) {
                         error = 'Non è stato fornito l\'url obbligatorio in configurazione';
@@ -375,11 +375,11 @@ var SPID = (function () {
                     console.error(error);
                     return;
                 }
-                
+
                 // clone providers
                 var providers = JSON.parse(JSON.stringify(SPID.providers));
 
-                // add extra providers  
+                // add extra providers
                 config.extraProviders.forEach(function (idp) {
                     // set defaults
                     if (!('protocols' in idp)) idp.protocols = ["SAML"];
@@ -387,7 +387,7 @@ var SPID = (function () {
                     providers.push(idp);
                     config.supported.push(idp.entityID);
                 });
-                
+
                 var spid = new spidObj(config, providers);
                 spid._render();
                 return spid;
