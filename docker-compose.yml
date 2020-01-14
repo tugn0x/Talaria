@@ -158,6 +158,7 @@ services:
 
   #SPID
   authproxy:
+    restart: always
     #image: spid-auth-proxy
     #build: ./docker/spid
       #context: .
@@ -180,6 +181,7 @@ services:
       - './docker/spid/etc/shibboleth/shibboleth2.xml.tpl:/etc/shibboleth/shibboleth2.xml.tpl'
       - './docker/spid/etc/shibboleth/spid-idp.inkode.it.xml:/opt/shibboleth-sp/metadata/spid-idp.inkode.it.xml'
       - './docker/spid/var/www/html:/var/www/html'
+#      - ./docker/spid/httpd/logs:/etc/httpd/logs
       #- './docker/spid/etc/shibboleth/shibd.logger:/etc/shibboleth/shibd.logger'
       - './docker/spid/log:/var/log'
       # Certificati SAML
@@ -192,14 +194,16 @@ services:
     environment:
       MODE: 'dev'  #uso 'dev' cosi' ho anche il supporto per le url /whoami per debug
       ORGANIZATION: 'CNR Area della Ricerca di Bologna'
-      SERVER_NAME: 'devnilde.bo.cnr.it'
-      ENTITY_ID: 'https://devnilde.bo.cnr.it'
-      ERROR_URL: 'https://devnilde.bo.cnr.it/error'
-      TARGET_BACKEND: 'https://devnilde.bo.cnr.it' #url del frontend React
+      SERVER_NAME: ${FRONTEND_DOMAIN}
+      ENTITY_ID: 'https://${FRONTEND_DOMAIN}'
+      ERROR_URL: 'https://${FRONTEND_DOMAIN}/error'
+      TARGET_BACKEND: 'https://${FRONTEND_DOMAIN}' #url del frontend React
       TARGET_LOCATION: '/spidlogin'                #path del frontend React a cui verrà rediretto (ed è in pratica quello che viene specificato nel param "target" della chiamata)
       ACS_INDEXES: '1'
       ACS_1_LABEL: 'set 1'
-      ACS_1_ATTRS: 'name;familyName;fiscalNumber;email;spidCode;fiscalNumber'
+      IDENTITY_PROVIDER_BACKEND_SIGNUP: '${APP_URL}/idp/SPID/signup'
+#      IDENTITY_PROVIDER_FRONTEND_CALLBACK: '${IDENTITY_PROVIDER_FRONTEND_CALLBACK}'
+      IDENTITY_PROVIDER_FRONTEND_CALLBACK: 'https://${FRONTEND_DOMAIN}/fromidentityprovider'
 
   #SPID TEST IDP
   spidtestenv:

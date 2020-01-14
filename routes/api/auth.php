@@ -20,5 +20,6 @@ Route::group([
         Route::post('logout', 'AuthController@logout')->name('logout');
     });
 
-    Route::post('social/{provider}/signup', 'SocialAuthController@signupFromProvider');
+    Route::post('social/{provider}/signup', 'SocialAuthController@signupFromSocialProvider');
+    Route::post('idp/{provider}/signup', 'SocialAuthController@signupFromIdentityProvider');
 });

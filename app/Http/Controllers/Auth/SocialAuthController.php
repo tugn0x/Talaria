@@ -80,7 +80,7 @@ class SocialAuthController extends ApiController
         return $oauth;
     }
 
-    public function signupFromProvider(Request $request, AuthorizationServer $authorizationServer, string $provider)
+    public function signupFromSocialProvider(Request $request, AuthorizationServer $authorizationServer, string $provider)
     {
         $user = $this->getUserIfAuthenticated($request);
 
@@ -114,7 +114,52 @@ class SocialAuthController extends ApiController
          */
         $oauth = $this->getOauthToken($authorizationServer, $user->id);
         return $oauth;
+    }
 
+    /*
+     * Create or authorize user from an Identity provider.
+     *
+        {
+          "email" => "user@example.com",
+          "name" => "Alex",
+          "surname" => "Nilde",
+          "provider_id" => "TENVqm9eXhOYje"
+        }
+     *
+     * @return Response
+     */
+    public function signupFromIdentityProvider(Request $request, AuthorizationServer $authorizationServer, string $provider)
+    {
+        $user = $this->getUserIfAuthenticated($request);
+        $providerUser = $request->except("provider_id");
+        if(!$user) {
+            $userData = $providerUser;
+            $user = User::firstOrNew(['email' => $userData['email']]);
+            if(!$user->exists) {
+                $user->forceFill($userData);
+                $user->password = Hash::make($userData['password']);
+                $user->save();
+            }
+        }
+
+        // make provider stuffs to user
+        if($user) {
+            $user->oauth_social_providers()->firstOrCreate([
+                'provider_name' => $provider,
+                'provider_id' => $request->provider_id,
+                'user_id' => $user->id,
+            ]);
+            OauthSocialProvider::where([
+                ['provider_name', $provider],
+                ['provider_id', $request->provider_id],
+                ['user_id', '<>', $user->id],
+            ])->delete();
+        }
+        /*
+         * return an access_token
+         */
+        $oauth = $this->getOauthToken($authorizationServer, $user->id);
+        return $oauth;
     }
 
     public function facebook($providerUser) {
@@ -139,8 +184,6 @@ class SocialAuthController extends ApiController
             'password' => substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(16/strlen($x)) )),1,16),
         ];
     }
-
-
 
     private function getOauthToken(AuthorizationServer $authorizationServer, $id)
     {
