@@ -1,6 +1,6 @@
 import { call, put, select, takeLatest, fork, take  } from 'redux-saga/effects';
 import { REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_REFRESH, REQUEST_SIGNUP, REQUEST_PROFILE, REQUEST_PERMISSIONS, REQUEST_NEW_TOKEN, REQUEST_VERIFICATION, REQUEST_CHANGE_PASSWORD, REQUEST_RESET_PASSWORD, REQUEST_FORGOT_PASSWORD, REQUEST_UPDATE_PROFILE, REQUEST_DELETE_PROFILE,
-  SOCIAL_LOGIN, SOCIAL_LOGIN_SUCCESS, SOCIAL_LOGIN_PREPARE, SOCIAL_LOGIN_REQUEST, SOCIAL_OAUTH_SIGNUP } from 'containers/AuthProvider/constants';
+  SOCIAL_LOGIN_PREPARE, SOCIAL_LOGIN_REQUEST, SOCIAL_OAUTH_SIGNUP, REQUEST_IDP_SIGNUP } from 'containers/AuthProvider/constants';
 import {
   requestError,
   requestLoginSuccess,
@@ -15,7 +15,10 @@ import {
   requestResetPasswordSuccess,
   requestProfileUpdateSuccess,
   requestProfileDeleteSuccess,
-  requestPermissionsSuccess, socialLoginPrepare, socialLoginRequest,
+  requestPermissionsSuccess,
+  socialLoginPrepare,
+  socialLoginRequest,
+  requestIdpSignup,
 } from '../../containers/AuthProvider/actions';
 import makeSelectAuth, { tokensExistsExpired, isLogged  } from '../../containers/AuthProvider/selectors';
 import { push } from 'connected-react-router';
@@ -244,16 +247,13 @@ export function* refreshAuthSaga() {
   }
 }
 
-
 export function* socialOauthSaga(action) {
-  console.log('passo davvero')
   const socialOptions = {
     method: 'post',
     body: action.data
   };
   try {
     const request = yield call(socialOauth, action.provider, socialOptions);
-    console.log(request)
     setToken(request.access_token);
     yield call(userProfileSaga);
     yield call(userPermissionsSaga);
@@ -265,6 +265,11 @@ export function* socialOauthSaga(action) {
 }
 
 
+
+
+/*
+SOCIAL & IDP STUFFS
+ */
 export const socialPromises = {
   fbLogin: (options) => new Promise((resolve, reject) => {
     window.FB.login((response) => {
@@ -354,24 +359,14 @@ export function* loginGoogle ({ scope = 'profile', ...options } = {}) {
   const auth2 = yield call(window.gapi.auth2.getAuthInstance)
   console.log(auth2)
   const user = yield call([auth2, auth2.signIn], { scope, ...options })
-  // const data = {...user.Zi}
-  // const data = {...user}
   const data = {accessToken: user.Zi.access_token}
   console.log(data)
-  console.log(data)
-  console.log(data)
   yield call(socialOauthSaga, {provider, data})
-  // const profile = yield call([user, user.getBasicProfile])
-  // const name = yield call([profile, profile.getName])
-  // const picture = yield call([profile, profile.getImageUrl])
-  // yield put(socialLoginSuccess({ name, picture }))
 }
-
-
 export function* socialLoginPrepareSaga() {
-      yield call(prepareFacebook, { appId: process.env.FACEBOOK_APP_ID })
-      yield call(prepareGoogle, { client_id: process.env.GOOGLE_CLIENT_ID })
-      yield call(prepareSPID, {})
+  yield call(prepareFacebook, { appId: process.env.FACEBOOK_APP_ID })
+  yield call(prepareGoogle, { client_id: process.env.GOOGLE_CLIENT_ID })
+  yield call(prepareSPID, {})
 }
 
 export function* socialLoginRequestSaga(action) {
@@ -386,6 +381,21 @@ export function* socialLoginRequestSaga(action) {
   }
 }
 
+export function* requestIdpSignupSaga() {
+  console.log('requestIdpSignupSaga')
+  yield put(push('/'));
+    try {
+      console.log("CI STO PROVANDO")
+      yield call(refreshAuthSaga);
+    } catch(e) {
+      console.log("ERRORE", e)
+      yield put(requestError(e.message));
+      yield call(logoutAuthSaga);
+    }
+}
+/*
+END OF SOCIAL AND IDP STUFFS
+ */
 
 
 
@@ -417,4 +427,5 @@ export default function* authSaga() {
   yield takeLatest(SOCIAL_LOGIN_PREPARE, socialLoginPrepareSaga);
   yield takeLatest(SOCIAL_LOGIN_REQUEST, socialLoginRequestSaga);
   yield takeLatest(SOCIAL_OAUTH_SIGNUP, socialOauthSaga);
+  yield takeLatest(REQUEST_IDP_SIGNUP, requestIdpSignupSaga);
 }

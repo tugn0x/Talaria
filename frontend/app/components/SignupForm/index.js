@@ -45,7 +45,7 @@ function SignupForm() {
                   <Button color="success" block>Create Account</Button>
                 </Form>
               </CardBody>
-              {/*<CardFooter className="p-4">
+              <CardFooter className="p-4">
                 <Row>
                   <Col xs="12" sm="6">
                     <Button className="btn-facebook mb-1" block><span>facebook</span></Button>
@@ -54,7 +54,7 @@ function SignupForm() {
                     <Button className="btn-twitter mb-1" block><span>twitter</span></Button>
                   </Col>
                 </Row>
-              </CardFooter>*/}
+              </CardFooter>
             </Card>
           </Col>
         </Row>

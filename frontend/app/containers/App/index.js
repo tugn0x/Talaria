@@ -18,6 +18,7 @@ import { syncPersistanceRequest, isSync } from "../../persistence";
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
+import IdpPage from 'containers/IdpPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
 import SignupPage from "containers/SignupPage/Loadable";
@@ -33,6 +34,7 @@ function App(props) {
       {/*{JSON.stringify(props)}*/}
       <Switch>
         <Route exact path={"/signup"} component={() => <SignupPage auth={props.auth} history={history} />} />
+        <Route path="/idp-callback/:refresh_token" component={IdpPage} />
         {/*<Route exact path={"/fgot-pwd"} component={() => <ForgotPassword auth={props.auth} history={history} />} />*/}
         {!props.isLogged && <Route component={() => <LoginPage auth={props.auth} tokensExistsExpired={props.tokensExistsExpired} />} />}
         <Route exact path="/" component={HomePage} />
