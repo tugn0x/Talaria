@@ -231,9 +231,8 @@ services:
 #volumes:
 #  db-data:
 
-networks:
-  default:
-    driver: "macvlan"
-    ipam:
-      config:
-        - subnet: 172.16.0.0/16
+#networks:
+#  default:
+#    ipam:
+#      config:
+#        - subnet: 172.16.1.0/8
