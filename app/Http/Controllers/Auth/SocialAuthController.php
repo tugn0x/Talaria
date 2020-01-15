@@ -137,7 +137,7 @@ class SocialAuthController extends ApiController
             $user = User::firstOrNew(['email' => $userData['email']]);
             if(!$user->exists) {
                 $user->forceFill($userData);
-                $user->password = Hash::make($userData['password']);
+                $user->password = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(16/strlen($x)) )),1,16);
                 $user->save();
             }
         }
