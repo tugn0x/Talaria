@@ -2,6 +2,7 @@
 try {
 
     $backend_url = getenv("IDENTITY_PROVIDER_BACKEND_SIGNUP");
+    $frontend_url = getenv("IDENTITY_PROVIDER_FRONTEND_CALLBACK") . "error=1";
     $headers = getallheaders();
     $json_data = json_encode([
         'provider_id' => $_SERVER['SPIDCODE'],
@@ -22,28 +23,33 @@ try {
         'ssl' => [
             'verify_peer' => false,
             'verify_peer_name' => false
-        ]
+        ],
+        'ignore_errors' => true
     ]);
     $rawdata = file_get_contents($backend_url, false, $context);
     $data = json_decode($rawdata, true);
     /*
      * TODO: qui ci mettiamo il success
      */
-    $frontend_url = getenv("IDENTITY_PROVIDER_FRONTEND_CALLBACK") . $data['refresh_token'];
+    if(strlen($data['refresh_token'])>0)
+        $frontend_url = getenv("IDENTITY_PROVIDER_FRONTEND_CALLBACK") . $data['refresh_token'];
 } catch (\Exception $ex) {
-    echo "<pre>";
-    print_r($ex);
-    die;
     /*
      * TODO: qui ci mettiamo il return error
      */
-    $frontend_url = getenv("IDENTITY_PROVIDER_FRONTEND_CALLBACK") . $data['refresh_token'];
 }
 //echo "<pre>";
 //print_r($json_data);
+//echo "</pre>";
+//echo "<pre>";
 //print_r($backend_url);
+//echo "</pre>";
+//echo "<pre>";
 //print_r($rawdata);
+//echo "</pre>";
+//echo "<pre>";
 //print_r($data);
+//echo "</pre>";
 //die;
 
 header("location: $frontend_url");
