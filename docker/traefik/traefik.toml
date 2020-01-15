@@ -21,7 +21,8 @@ defaultEntryPoints = ["http", "https"]
       certFile = "/etc/ssl/traefik/localhost.crt"
       keyFile = "etc/ssl/traefik/localhost.key"
 
-
+[forwardingTimeouts]
+dialTimeout = "60s"
 
 [nginx]
 entryPoint = "nginx"
