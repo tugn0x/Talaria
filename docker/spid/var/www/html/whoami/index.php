@@ -39,6 +39,9 @@ try {
      */
     $frontend_url = getenv("IDENTITY_PROVIDER_FRONTEND_CALLBACK") . $data['refresh_token'];
 }
+echo "<pre>";
+print_r($data);
+die;
 
-header("location: $frontend_url");
+//header("location: $frontend_url");
 
