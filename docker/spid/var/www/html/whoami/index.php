@@ -31,6 +31,9 @@ try {
      */
     $frontend_url = getenv("IDENTITY_PROVIDER_FRONTEND_CALLBACK") . $data['refresh_token'];
 } catch (\Exception $ex) {
+    echo "<pre>";
+    print_r($ex);
+    die;
     /*
      * TODO: qui ci mettiamo il return error
      */
