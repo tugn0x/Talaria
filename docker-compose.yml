@@ -226,8 +226,6 @@ services:
       - '${SSL_CERT_PATH}:/app/conf/idpSSL.crt:ro'
       - '${SSL_KEY_PATH}:/app/conf/idpSSL.key:ro'
 
-
-
 #volumes:
 #  db-data:
 
