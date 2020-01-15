@@ -5,9 +5,9 @@ try {
     $headers = getallheaders();
     $json_data = json_encode([
         'provider_id' => $_SERVER['SPIDCODE'],
-        'email' => $headers['HTTP_EMAIL'],
-        "name" => $headers['HTTP_NAME'],
-        "surname" => $headers['HTTP_FAMILYNAME'],
+        'email' => $headers['EMAIL'],
+        "name" => $headers['NAME'],
+        "surname" => $headers['FAMILYNAME'],
     ]);
     $context = stream_context_create([
         'http' => [
@@ -39,9 +39,12 @@ try {
      */
     $frontend_url = getenv("IDENTITY_PROVIDER_FRONTEND_CALLBACK") . $data['refresh_token'];
 }
-echo "<pre>";
-print_r($data);
-die;
+//echo "<pre>";
+//print_r($json_data);
+//print_r($backend_url);
+//print_r($rawdata);
+//print_r($data);
+//die;
 
-//header("location: $frontend_url");
+header("location: $frontend_url");
 
