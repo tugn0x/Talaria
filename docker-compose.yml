@@ -158,7 +158,7 @@ services:
 
   #SPID
   authproxy:
-    restart: always
+#    restart: always
     #image: spid-auth-proxy
     #build: ./docker/spid
       #context: .
@@ -201,6 +201,7 @@ services:
       TARGET_LOCATION: '/spidlogin'                #path del frontend React a cui verrà rediretto (ed è in pratica quello che viene specificato nel param "target" della chiamata)
       ACS_INDEXES: '1'
       ACS_1_LABEL: 'set 1'
+      ACS_1_ATTRS: 'name;familyName;fiscalNumber;email;spidCode;fiscalNumber'
       IDENTITY_PROVIDER_BACKEND_SIGNUP: '${APP_URL}/idp/SPID/signup'
       IDENTITY_PROVIDER_FRONTEND_CALLBACK: 'https://${FRONTEND_DOMAIN}/idp-callback/'
 
