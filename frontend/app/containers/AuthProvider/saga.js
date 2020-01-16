@@ -340,7 +340,7 @@ export function* prepareSPID ({ client_id, ...options }) {
     selector: '#my-spid-button',
     lang: 'it',
     method: 'GET',
-    url: `/iam/Login1?entityID={{idp}}&target=https://${process.env.FRONTEND_DOMAIN}/whoami?token=${authDomain.oauth.access_token ? authDomain.oauth.access_token : ''}`,
+    url: `/iam/Login1?entityID={{idp}}&target=https://${process.env.FRONTEND_DOMAIN}/spidlogin?token=${authDomain.oauth.access_token ? authDomain.oauth.access_token : ''}`,
     supported: [],
     extraProviders: [
       { "entityID": "http://spid-idp.inkode.it:8088", "entityName": "Test IdP", "active": true }

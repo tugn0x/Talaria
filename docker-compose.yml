@@ -126,7 +126,7 @@ services:
     labels:
     - "traefik.port=3000"
     - "traefik.enable=true"
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/,/spidlogin"
+    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/"
     - "traefik.docker.network=proxy"
 
   shibboleth:
@@ -172,7 +172,7 @@ services:
     - "traefik.enable=true"
     - "traefik.backend=authproxy"
     #- "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefixStrip:/spid/"
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/iam,/metadata,/login,/access,/whoami"
+    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/iam,/metadata,/login,/access,/whoami,/spidlogin"
     - "traefik.docker.network=proxy"
 #    - "traefik.frontend.passTLSCert=true"
     - "traefik.proxy.passTLSCert=true"
@@ -196,9 +196,9 @@ services:
       ORGANIZATION: 'CNR Area della Ricerca di Bologna'
       SERVER_NAME: ${FRONTEND_DOMAIN}
       ENTITY_ID: 'https://${FRONTEND_DOMAIN}'
-      ERROR_URL: 'https://${FRONTEND_DOMAIN}/error'
-      TARGET_BACKEND: 'https://${FRONTEND_DOMAIN}' #url del frontend React
-      TARGET_LOCATION: '/spidlogin'                #path del frontend React a cui verrà rediretto (ed è in pratica quello che viene specificato nel param "target" della chiamata)
+      ERROR_URL: 'https://${FRONTEND_DOMAIN}/error'      
+      TARGET_BACKEND: 'https://${FRONTEND_DOMAIN}' #url del frontend React  [NON USATA]
+      TARGET_LOCATION: '/xx'                #path del frontend React a cui verrà rediretto (ed è in pratica quello che viene specificato nel param "target" della chiamata) [NON USATA]
       ACS_INDEXES: '1'
       ACS_1_LABEL: 'set 1'
       ACS_1_ATTRS: 'name;familyName;fiscalNumber;email;spidCode;fiscalNumber'
