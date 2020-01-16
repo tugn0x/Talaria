@@ -178,6 +178,8 @@ services:
     - "traefik.proxy.passTLSCert=true"
     volumes:
       #- '/docker/spid/certs:/opt/shibboleth-sp/certs'
+      - './docker/spid/httpd/conf.d/z20-auth-proxy.conf.dev:/etc/httpd/conf.d/z20-auth-proxy.conf.dev'
+      - './docker/spid/httpd/conf.d/z20-auth-proxy.conf.prod:/etc/httpd/conf.d/z20-auth-proxy.conf.prod'
       - './docker/spid/etc/shibboleth/shibboleth2.xml.tpl:/etc/shibboleth/shibboleth2.xml.tpl'
       - './docker/spid/etc/shibboleth/spid-idp.inkode.it.xml:/opt/shibboleth-sp/metadata/spid-idp.inkode.it.xml'
       - './docker/spid/var/www/html:/var/www/html'
