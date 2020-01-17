@@ -8,7 +8,7 @@ try {
         'provider_id' => $_SERVER['persistent-id'],
         'email' => $_SERVER['mail'],
         "name" => $_SERVER['givenName'],
-        "surname" => $_SERVER['sn'],
+        "surname" => $_SERVER['sn'] ?? $_SERVER['givenName'],
         //"identity-provider" => $_SERVER["Shib-Identity-Provider"]
     ]);
     $context = stream_context_create([
@@ -40,20 +40,23 @@ try {
      */
 }
 
-//echo "<pre>";
-//print_r($json_data);
-//echo "</pre>";
-//echo "<pre>";
-//print_r($backend_url);
-//echo "</pre>";
-//echo "<pre>";
-//print_r($rawdata);
-//echo "</pre>";
-//echo "<pre>";
-//print_r($data);
-//echo "</pre>";
-//var_dump($http_response_header);
-//die;
+echo "<pre>";
+print_r($_SERVER);
+echo "</pre>";
+echo "<pre>";
+print_r($json_data);
+echo "</pre>";
+echo "<pre>";
+print_r($backend_url);
+echo "</pre>";
+echo "<pre>";
+print_r($rawdata);
+echo "</pre>";
+echo "<pre>";
+print_r($data);
+echo "</pre>";
+var_dump($http_response_header);
+die;
 
 header("location: $frontend_url");
 
