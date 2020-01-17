@@ -40,23 +40,23 @@ try {
 }
 
 
-echo "<pre>";
-print_r($_SERVER);
-echo "</pre>";
-echo "<pre>";
-print_r($json_data);
-echo "</pre>";
-echo "<pre>";
-print_r($backend_url);
-echo "</pre>";
-echo "<pre>";
-print_r($rawdata);
-echo "</pre>";
-echo "<pre>";
-print_r($data);
-echo "</pre>";
-var_dump($http_response_header);
-die;
+//echo "<pre>";
+//print_r($_SERVER);
+//echo "</pre>";
+//echo "<pre>";
+//print_r($json_data);
+//echo "</pre>";
+//echo "<pre>";
+//print_r($backend_url);
+//echo "</pre>";
+//echo "<pre>";
+//print_r($rawdata);
+//echo "</pre>";
+//echo "<pre>";
+//print_r($data);
+//echo "</pre>";
+//var_dump($http_response_header);
+//die;
 
 header("location: $frontend_url");
 
