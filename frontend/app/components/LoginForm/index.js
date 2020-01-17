@@ -122,7 +122,7 @@ import GarrImg from '../../images/idem.svg'
                         <Button className="btn-google-plus mb-1" block onClick={props.loginGoogle}><span>Google</span></Button>
                       </Col>
                       <Col xs="6" sm="6">
-                        <a href="https://devnilde.bo.cnr.it/Shibboleth.sso/Login?target=https://devnilde.bo.cnr.it/shibb/testshib.php">
+                        <a href="https://devnilde.bo.cnr.it/Shibboleth.sso/Login?target=https://devnilde.bo.cnr.it/shibb/shiblogin.php">
                           <img src={GarrImg}/>
                         </a>
                       </Col>

@@ -155,6 +155,9 @@ services:
       - ./docker/shibboleth/log/shibd_warn.log:/var/log/shibboleth/shibd_warn.log
       - ./docker/shibboleth/log/transaction.log:/var/log/shibboleth/transaction.log
       - ./docker/shibboleth/log/signature.log:/var/log/shibboleth/signature.log
+    environment:
+      IDENTITY_PROVIDER_BACKEND_SIGNUP: '${APP_URL}/api/v1/auth/idp/IDEM/signup'
+      IDENTITY_PROVIDER_FRONTEND_CALLBACK: 'https://${FRONTEND_DOMAIN}/idp-callback/'
 
   #SPID
   authproxy:
