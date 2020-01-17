@@ -6,9 +6,9 @@ try {
     $headers = getallheaders();
     $json_data = json_encode([
         'provider_id' => $_SERVER['SPIDCODE'],
-        'email' => $headers['EMAIL'],
-        "name" => $headers['NAME'],
-        "surname" => $headers['FAMILYNAME'],
+        'email' => $_SERVER['EMAIL'],
+        "name" => $_SERVER['NAME'],
+        "surname" => $_SERVER['FAMILYNAME'],
     ]);
     $context = stream_context_create([
         'http' => [
