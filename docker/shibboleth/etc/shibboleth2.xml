@@ -48,7 +48,75 @@
             <LogoutInitiator type="Admin" Location="/Logout/Admin" acl="127.0.0.1 ::1 172.0.0.0/8" />
           
             <!-- Extension service that generates "approximate" metadata based on SP configuration. -->
-            <Handler type="MetadataGenerator" Location="/Metadata" signing="false"/>
+            <Handler type="MetadataGenerator" Location="/Metadata" signing="false">
+                <mdui:UIInfo xmlns:mdui='urn:oasis:names:tc:SAML:metadata:ui'>
+                <mdui:DisplayName xml:lang="en">NILDE6 SP TEST</mdui:DisplayName>
+                <mdui:DisplayName xml:lang="it">NILDE6 SP TEST</mdui:DisplayName>
+                <mdui:Description xml:lang="en">NILDE Web Application: document delivery service</mdui:Description>
+                <mdui:Description xml:lang="it">NILDE Servizio di document delivery</mdui:Description>
+                <mdui:InformationURL xml:lang="en">https://devnilde.bo.cnr.it</mdui:InformationURL>
+                <mdui:InformationURL xml:lang="it">https://devnilde.bo.cnr.it</mdui:InformationURL>
+                <mdui:PrivacyStatementURL xml:lang="en">PRIVACYURL_ENG</mdui:PrivacyStatementURL>
+                <mdui:PrivacyStatementURL xml:lang="it">PRIVACYURL_ITA</mdui:PrivacyStatementURL>
+                <mdui:Logo height="16" width="16" xml:lang="en">FAVICON-PNG-ENG</mdui:Logo>
+                <mdui:Logo height="16" width="16" xml:lang="it">FAVICON-PNG-ITA</mdui:Logo>
+                <mdui:Logo height="60" width="80" xml:lang="en">LOGO-PNG-ENG</mdui:Logo>
+                <mdui:Logo height="60" width="80" xml:lang="it">LOGO-PNG-ITA</mdui:Logo>
+                </mdui:UIInfo>
+
+                <md:AttributeConsumingService index="1">
+                    <md:ServiceName xml:lang="en">NILDE document delivery service</md:ServiceName>
+                    <md:ServiceName xml:lang="it">Servizio di document delivery NILDE</md:ServiceName>
+                    <md:ServiceDescription xml:lang="en">DESCRIPTION_ENG</md:ServiceDescription>
+                    <md:ServiceDescription xml:lang="it">DESCRIPTION_ITA</md:ServiceDescription>
+                    <!-- Required attribute: mail, eduPersonPrincipalName, eduPersonTargetedID, givenName, surname -->
+                    <md:RequestedAttribute FriendlyName="email"
+                        Name="urn:oid:0.9.2342.19200300.100.1.3"
+                        NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" 
+                        isRequired="true" />
+
+                    <md:RequestedAttribute FriendlyName="givenName"
+                        Name="urn:oid:2.5.4.42"
+                        NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                        isRequired="true" />
+
+                    <md:RequestedAttribute FriendlyName="surname"
+                        Name="urn:oid:2.5.4.4"
+                        NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                        isRequired="true" />                                
+
+                     <md:RequestedAttribute FriendlyName="persistent-id"
+                        Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.10"
+                        NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                        isRequired="true" />      
+
+                    <md:RequestedAttribute FriendlyName="eduPersonPrincipalName"
+                        Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6"
+                        NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                        isRequired="false" />                          
+                                        
+                </md:AttributeConsumingService>       
+                
+                <md:Organization>
+                    <md:OrganizationName xml:lang="en">National Research Council (CNR) - Bologna Library</md:OrganizationName>
+                    <md:OrganizationName xml:lang="it">Consiglio Nazionale delle Ricerche (CNR) - Biblioteca d'Area di Bologna</md:OrganizationName>
+                    <md:OrganizationDisplayName xml:lang="en">National Research Council (CNR) - Bologna Library</md:OrganizationDisplayName>
+                    <md:OrganizationDisplayName xml:lang="it">Consiglio Nazionale delle Ricerche (CNR) - Biblioteca d'Area di Bologna</md:OrganizationDisplayName>
+                    <md:OrganizationURL xml:lang="en">http://biblioteca.bo.cnr.it</md:OrganizationURL>
+                    <md:OrganizationURL xml:lang="it">http://biblioteca.bo.cnr.it</md:OrganizationURL>
+                </md:Organization>
+
+                <md:ContactPerson contactType="technical">
+                    <md:GivenName>Alessandro</md:GivenName>
+                    <md:SurName>Tugnoli</md:SurName>
+                    <md:EmailAddress>mailto:biblio-idem@area.bo.cnr.it</md:EmailAddress>
+                </md:ContactPerson>
+                <md:ContactPerson contactType="technical">
+                    <md:GivenName>Silvana</md:GivenName>
+                    <md:SurName>Mangiaracina</md:SurName>
+                    <md:EmailAddress>mailto:biblio-idem@area.bo.cnr.it</md:EmailAddress>
+                </md:ContactPerson>
+            </Handler>
 
             <!-- Status reporting service. -->
             <Handler type="Status" Location="/Status" acl="127.0.0.1 ::1 172.0.0.0/8"/>
