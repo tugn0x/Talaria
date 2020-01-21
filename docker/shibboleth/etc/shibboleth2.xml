@@ -64,7 +64,7 @@
                     <mdui:Logo height="60" width="80" xml:lang="it">LOGO-PNG-ITA</mdui:Logo>
                 </mdui:UIInfo>
 
-                <md:AttributeConsumingService index="0">
+                <md:AttributeConsumingService xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" index="0">
                     <md:ServiceName xml:lang="en">NILDE document delivery service</md:ServiceName>
                     <md:ServiceName xml:lang="it">Servizio di document delivery NILDE</md:ServiceName>
                     <md:ServiceDescription xml:lang="en">DESCRIPTION_ENG</md:ServiceDescription>
@@ -97,7 +97,7 @@
                                         
                 </md:AttributeConsumingService>       
                 
-                <md:Organization>
+                <md:Organization xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata">
                     <md:OrganizationName xml:lang="en">National Research Council (CNR) - Bologna Library</md:OrganizationName>
                     <md:OrganizationName xml:lang="it">Consiglio Nazionale delle Ricerche (CNR) - Biblioteca d'Area di Bologna</md:OrganizationName>
                     <md:OrganizationDisplayName xml:lang="en">National Research Council (CNR) - Bologna Library</md:OrganizationDisplayName>
@@ -106,12 +106,12 @@
                     <md:OrganizationURL xml:lang="it">http://biblioteca.bo.cnr.it</md:OrganizationURL>
                 </md:Organization>
 
-                <md:ContactPerson contactType="technical">
+                <md:ContactPerson xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" contactType="technical">
                     <md:GivenName>Alessandro</md:GivenName>
                     <md:SurName>Tugnoli</md:SurName>
                     <md:EmailAddress>mailto:biblio-idem@area.bo.cnr.it</md:EmailAddress>
                 </md:ContactPerson>
-                <md:ContactPerson contactType="technical">
+                <md:ContactPerson xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" contactType="technical">
                     <md:GivenName>Silvana</md:GivenName>
                     <md:SurName>Mangiaracina</md:SurName>
                     <md:EmailAddress>mailto:biblio-idem@area.bo.cnr.it</md:EmailAddress>
