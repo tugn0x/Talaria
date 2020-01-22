@@ -9,7 +9,8 @@ try {
         'email' => ($_SERVER['mail']!=null?$_SERVER['mail']:($_SERVER['eppn']!=null?$_SERVER['eppn']:'')),
         "name" => ($_SERVER['givenName']!=null?$_SERVER['givenName']:''),
         "surname" => ($_SERVER['sn']!=null?$_SERVER['sn']:''),
-        //"identity-provider" => $_SERVER["Shib-Identity-Provider"]
+        "affiliation" => ($_SERVER['affiliation']!=null?$_SERVER['affiliation']:''),
+        "identity_provider" => $_SERVER["Shib-Identity-Provider"]
     ]);
     $context = stream_context_create([
         'http' => [
@@ -41,7 +42,7 @@ try {
 }
 
 // COMMENTARE DA QUI
-echo "<h1>IDEM DEBUG</h1><pre>";
+/*echo "<h1>IDEM DEBUG</h1><pre>";
 print_r($_SERVER);
 echo "</pre>";
 echo "<pre>";
@@ -58,6 +59,7 @@ print_r($data);
 echo "</pre>";
 var_dump($http_response_header);
 die;
+*/
 // COMMENTARE FIN QUI
 
 
