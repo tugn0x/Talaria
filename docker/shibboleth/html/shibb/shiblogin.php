@@ -13,7 +13,7 @@ try {
         "surname" => ($_SERVER['sn']!=null?$_SERVER['sn']:''),
     ]);
 
-    /*
+//    /*
     $front_extra_data=array();
 
     if (isset($_SERVER["Shib-Identity-Provider"]) && $_SERVER["Shib-Identity-Provider"]!='')
@@ -24,7 +24,7 @@ try {
 
     if (isset($_SERVER["entitlement"]) && $_SERVER["entitlement"]!='')
         $front_extra_data["entitlement"]=$_SERVER["entitlement"];
-    */
+//    */
 
     $context = stream_context_create([
         'http' => [
