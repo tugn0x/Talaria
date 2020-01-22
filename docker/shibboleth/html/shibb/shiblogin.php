@@ -8,7 +8,7 @@ try {
         'provider_id' => $_SERVER['persistent-id'],
         'email' => ($_SERVER['mail']!=null?$_SERVER['mail']:($_SERVER['eppn']!=null?$_SERVER['eppn']:'')),
         "name" => ($_SERVER['givenName']!=null?$_SERVER['givenName']:''),
-        "surname" => ($_SERVER['surname']!=null?$_SERVER['surname']:''),
+        "surname" => ($_SERVER['sn']!=null?$_SERVER['sn']:''),
         //"identity-provider" => $_SERVER["Shib-Identity-Provider"]
     ]);
     $context = stream_context_create([
