@@ -48,8 +48,8 @@ try {
     if(strlen($data['refresh_token'])>0)
         $frontend_url = getenv("IDENTITY_PROVIDER_FRONTEND_CALLBACK") . $data['refresh_token'];
 
-    if(!empty($front_extra_data))    
-        $frontend_url.="&".http_build_query($front_extra_data);
+   /* if(!empty($front_extra_data))    
+        $frontend_url.="&".http_build_query($front_extra_data);*/
 
 } catch (\Exception $ex) {
     /*
@@ -58,7 +58,7 @@ try {
 }
 
 // COMMENTARE DA QUI
-
+/*
 echo "<h1>IDEM DEBUG</h1><pre>";
 print_r($_SERVER);
 echo "</pre>";
@@ -80,7 +80,7 @@ echo "</pre>";
 var_dump($http_response_header);
 var_dump($frontend_url);
 die;
-
+*/
 // COMMENTARE FIN QUI
 
 
