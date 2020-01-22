@@ -13,6 +13,7 @@ try {
         "surname" => ($_SERVER['sn']!=null?$_SERVER['sn']:''),                    
     ]);    
 
+    /*
     $front_extra_data=array();
 
     if (isset($_SERVER["Shib-Identity-Provider"]) && $_SERVER["Shib-Identity-Provider"]!='') 
@@ -22,7 +23,8 @@ try {
         $front_extra_data["affiliation"]=$_SERVER["affiliation"];
     
     if (isset($_SERVER["entitlement"]) && $_SERVER["entitlement"]!='')
-        $front_extra_data["entitlement"]=$_SERVER["entitlement"];    
+        $front_extra_data["entitlement"]=$_SERVER["entitlement"]; 
+    */
 
     $context = stream_context_create([
         'http' => [
@@ -48,8 +50,10 @@ try {
     if(strlen($data['refresh_token'])>0)
         $frontend_url = getenv("IDENTITY_PROVIDER_FRONTEND_CALLBACK") . $data['refresh_token'];
 
-    if(!empty($front_extra_data))    
+    /*
+        if(!empty($front_extra_data))    
         $frontend_url.="&".http_build_query($front_extra_data);
+    */
 
 } catch (\Exception $ex) {
     /*
