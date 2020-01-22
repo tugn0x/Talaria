@@ -6,13 +6,14 @@ try {
     //$headers = getallheaders();
     $json_data = json_encode([
         'provider_id' => $_SERVER['persistent-id'],
+        "identity_provider" => $_SERVER["Shib-Identity-Provider"],
         'email' => ($_SERVER['mail']!=null?$_SERVER['mail']:($_SERVER['eppn']!=null?$_SERVER['eppn']:'')),
         "name" => ($_SERVER['givenName']!=null?$_SERVER['givenName']:''),
-        "surname" => ($_SERVER['sn']!=null?$_SERVER['sn']:''),
-        "affiliation" => ($_SERVER['affiliation']!=null?$_SERVER['affiliation']:''),
-        "entitlement" => ($_SERVER['entitlement']!=null?$_SERVER['entitlement']:''),
-        "identity_provider" => $_SERVER["Shib-Identity-Provider"]
-    ]);
+        "surname" => ($_SERVER['sn']!=null?$_SERVER['sn']:''),                
+        "affiliation"=>(isset($_SERVER["affiliation"])?$_SERVER["affiliation"]:''),
+        "entitlement"=>(isset($_SERVER["entitlement"])?$_SERVER["entitlement"]:'')        
+    ]);    
+
     $context = stream_context_create([
         'http' => [
             'method' => 'POST',
