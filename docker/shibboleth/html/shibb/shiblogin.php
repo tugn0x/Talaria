@@ -48,8 +48,8 @@ try {
     if(strlen($data['refresh_token'])>0)
         $frontend_url = getenv("IDENTITY_PROVIDER_FRONTEND_CALLBACK") . $data['refresh_token'];
 
-   /* if(!empty($front_extra_data))    
-        $frontend_url.="&".http_build_query($front_extra_data);*/
+    if(!empty($front_extra_data))    
+        $frontend_url.="&".http_build_query($front_extra_data);
 
 } catch (\Exception $ex) {
     /*
