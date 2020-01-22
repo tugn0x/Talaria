@@ -58,7 +58,7 @@ try {
 }
 
 // COMMENTARE DA QUI
-
+/*
 echo "<h1>IDEM DEBUG</h1><pre>";
 print_r($_SERVER);
 echo "</pre>";
@@ -80,7 +80,7 @@ echo "</pre>";
 var_dump($http_response_header);
 var_dump($frontend_url);
 die;
-
+*/
 // COMMENTARE FIN QUI
 
 
