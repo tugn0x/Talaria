@@ -4,26 +4,26 @@ try {
     $backend_url = getenv("IDENTITY_PROVIDER_BACKEND_SIGNUP");
     $frontend_url = getenv("IDENTITY_PROVIDER_FRONTEND_CALLBACK") . "error=1";
     //$headers = getallheaders();
-    
+
     //NB:questi campi vanno a laravel e vengono memorizzati nell'utente (quindi i campi devono esistere nel model)
     $json_data = json_encode([
-        'provider_id' => $_SERVER['persistent-id'],       
+        'provider_id' => $_SERVER['persistent-id'],
         'email' => ($_SERVER['mail']!=null?$_SERVER['mail']:($_SERVER['eppn']!=null?$_SERVER['eppn']:'')),
         "name" => ($_SERVER['givenName']!=null?$_SERVER['givenName']:''),
-        "surname" => ($_SERVER['sn']!=null?$_SERVER['sn']:''),                    
-    ]);    
+        "surname" => ($_SERVER['sn']!=null?$_SERVER['sn']:''),
+    ]);
 
     /*
     $front_extra_data=array();
 
-    if (isset($_SERVER["Shib-Identity-Provider"]) && $_SERVER["Shib-Identity-Provider"]!='') 
+    if (isset($_SERVER["Shib-Identity-Provider"]) && $_SERVER["Shib-Identity-Provider"]!='')
         $front_extra_data["identity-provider"]=$_SERVER["Shib-Identity-Provider"];
 
     if (isset($_SERVER["affiliation"]) && $_SERVER["affiliation"]!='')
         $front_extra_data["affiliation"]=$_SERVER["affiliation"];
-    
+
     if (isset($_SERVER["entitlement"]) && $_SERVER["entitlement"]!='')
-        $front_extra_data["entitlement"]=$_SERVER["entitlement"]; 
+        $front_extra_data["entitlement"]=$_SERVER["entitlement"];
     */
 
     $context = stream_context_create([
@@ -50,10 +50,10 @@ try {
     if(strlen($data['refresh_token'])>0)
         $frontend_url = getenv("IDENTITY_PROVIDER_FRONTEND_CALLBACK") . $data['refresh_token'];
 
-    /*
-        if(!empty($front_extra_data))    
-        $frontend_url.="&".http_build_query($front_extra_data);
-    */
+//    /*
+        if(!empty($front_extra_data))
+        $frontend_url.="?".http_build_query($front_extra_data);
+//    */
 
 } catch (\Exception $ex) {
     /*
