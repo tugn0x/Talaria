@@ -6,7 +6,7 @@ try {
     //$headers = getallheaders();
     $json_data = json_encode([
         'provider_id' => $_SERVER['persistent-id'],
-        'email' => ($_SERVER['email']!=null?$_SERVER['email']:($_SERVER['eppn']!=null?$_SERVER['eppn']:'')),
+        'email' => ($_SERVER['mail']!=null?$_SERVER['mail']:($_SERVER['eppn']!=null?$_SERVER['eppn']:'')),
         "name" => ($_SERVER['givenName']!=null?$_SERVER['givenName']:''),
         "surname" => ($_SERVER['surname']!=null?$_SERVER['surname']:''),
         //"identity-provider" => $_SERVER["Shib-Identity-Provider"]
