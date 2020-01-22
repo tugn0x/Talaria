@@ -4,19 +4,25 @@ try {
     $backend_url = getenv("IDENTITY_PROVIDER_BACKEND_SIGNUP");
     $frontend_url = getenv("IDENTITY_PROVIDER_FRONTEND_CALLBACK") . "error=1";
     //$headers = getallheaders();
-    $data = [
-        'provider_id' => $_SERVER['persistent-id'],
-        "identity_provider" => $_SERVER["Shib-Identity-Provider"],
+    
+    //NB:questi campi vanno a laravel e vengono memorizzati nell'utente (quindi i campi devono esistere nel model)
+    $json_data = json_encode([
+        'provider_id' => $_SERVER['persistent-id'],       
         'email' => ($_SERVER['mail']!=null?$_SERVER['mail']:($_SERVER['eppn']!=null?$_SERVER['eppn']:'')),
         "name" => ($_SERVER['givenName']!=null?$_SERVER['givenName']:''),
         "surname" => ($_SERVER['sn']!=null?$_SERVER['sn']:''),                    
-    ];    
+    ]);    
+
+    $front_extra_data=array();
+
+    if (isset($_SERVER["Shib-Identity-Provider"]) && $_SERVER["Shib-Identity-Provider"]!='') 
+        $front_extra_data["identity-provider"]=$_SERVER["Shib-Identity-Provider"];
 
     if (isset($_SERVER["affiliation"]) && $_SERVER["affiliation"]!='')
-        $data["affiliation"]=$_SERVER["affiliation"];
+        $front_extra_data["affiliation"]=$_SERVER["affiliation"];
     
     if (isset($_SERVER["entitlement"]) && $_SERVER["entitlement"]!='')
-        $data["entitlement"]=$_SERVER["entitlement"];
+        $front_extra_data["entitlement"]=$_SERVER["entitlement"];
 
     $json_data=json_encode($data);
 
@@ -43,6 +49,10 @@ try {
      */
     if(strlen($data['refresh_token'])>0)
         $frontend_url = getenv("IDENTITY_PROVIDER_FRONTEND_CALLBACK") . $data['refresh_token'];
+
+    if(!empty($front_extra_data))    
+        $frontend_url.="&".http_build_query($front_extra_data);
+
 } catch (\Exception $ex) {
     /*
      * TODO: qui ci mettiamo il return error
@@ -50,7 +60,7 @@ try {
 }
 
 // COMMENTARE DA QUI
-/*
+
 echo "<h1>IDEM DEBUG</h1><pre>";
 print_r($_SERVER);
 echo "</pre>";
@@ -67,8 +77,9 @@ echo "<pre>";
 print_r($data);
 echo "</pre>";
 var_dump($http_response_header);
+var_dump($frontend_url);
 die;
-*/
+
 // COMMENTARE FIN QUI
 
 
