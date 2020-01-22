@@ -4,15 +4,21 @@ try {
     $backend_url = getenv("IDENTITY_PROVIDER_BACKEND_SIGNUP");
     $frontend_url = getenv("IDENTITY_PROVIDER_FRONTEND_CALLBACK") . "error=1";
     //$headers = getallheaders();
-    $json_data = json_encode([
+    $data = [
         'provider_id' => $_SERVER['persistent-id'],
         "identity_provider" => $_SERVER["Shib-Identity-Provider"],
         'email' => ($_SERVER['mail']!=null?$_SERVER['mail']:($_SERVER['eppn']!=null?$_SERVER['eppn']:'')),
         "name" => ($_SERVER['givenName']!=null?$_SERVER['givenName']:''),
-        "surname" => ($_SERVER['sn']!=null?$_SERVER['sn']:''),                
-        "affiliation"=>(isset($_SERVER["affiliation"])?$_SERVER["affiliation"]:''),
-        "entitlement"=>(isset($_SERVER["entitlement"])?$_SERVER["entitlement"]:'')        
-    ]);    
+        "surname" => ($_SERVER['sn']!=null?$_SERVER['sn']:''),                    
+    ];    
+
+    if (isset($_SERVER["affiliation"]) && $_SERVER["affiliation"]!='')
+        $data["affiliation"]=$_SERVER["affiliation"];
+    
+    if (isset($_SERVER["entitlement"]) && $_SERVER["entitlement"]!='')
+        $data["entitlement"]=$_SERVER["entitlement"];
+
+    $json_data=json_encode($data);
 
     $context = stream_context_create([
         'http' => [
@@ -44,7 +50,7 @@ try {
 }
 
 // COMMENTARE DA QUI
-/*echo "<h1>IDEM DEBUG</h1><pre>";
+echo "<h1>IDEM DEBUG</h1><pre>";
 print_r($_SERVER);
 echo "</pre>";
 echo "<pre>";
@@ -61,7 +67,7 @@ print_r($data);
 echo "</pre>";
 var_dump($http_response_header);
 die;
-*/
+
 // COMMENTARE FIN QUI
 
 
