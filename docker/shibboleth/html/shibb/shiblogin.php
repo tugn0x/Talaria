@@ -22,9 +22,7 @@ try {
         $front_extra_data["affiliation"]=$_SERVER["affiliation"];
     
     if (isset($_SERVER["entitlement"]) && $_SERVER["entitlement"]!='')
-        $front_extra_data["entitlement"]=$_SERVER["entitlement"];
-
-    $json_data=json_encode($data);
+        $front_extra_data["entitlement"]=$_SERVER["entitlement"];    
 
     $context = stream_context_create([
         'http' => [
@@ -66,6 +64,9 @@ print_r($_SERVER);
 echo "</pre>";
 echo "<pre>";
 print_r($json_data);
+echo "</pre>";
+echo "<pre>";
+print_r($front_extra_data);
 echo "</pre>";
 echo "<pre>";
 print_r($backend_url);
