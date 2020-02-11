@@ -68,7 +68,6 @@ class SocialAuthController extends ApiController
             $user = User::firstOrNew(['email' => $userData['email']]);
             if(!$user->exists) {
                 $user->forceFill($userData);
-                $user->password = Hash::make($userData['password']);
                 $user->save();
             }
         }
@@ -104,7 +103,6 @@ class SocialAuthController extends ApiController
             $user = User::firstOrNew(['email' => $userData['email']]);
             if(!$user->exists) {
                 $user->forceFill($userData);
-                $user->password = Hash::make($userData['password']);
                 $user->save();
             }
         }
@@ -155,7 +153,6 @@ class SocialAuthController extends ApiController
             $user = User::firstOrNew(['email' => $userData['email']]);
             if(!$user->exists) {
                 $user->forceFill($userData);
-                $user->password = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(16/strlen($x)) )),1,16);
                 $user->save();
             }
         }
@@ -187,8 +184,8 @@ class SocialAuthController extends ApiController
             'name' => array_shift($name),
             'surname' => array_pop($name),
             'email_verified_at' => Carbon::now(),
+            'privacy_policy_accepted' => Carbon::now(),
 //            'status' => 1,
-            'password' => substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(16/strlen($x)) )),1,16),
         ];
     }
 
@@ -198,8 +195,9 @@ class SocialAuthController extends ApiController
             'name' => $providerUser->user['given_name'],
             'surname' => $providerUser->user['family_name'],
             'email_verified_at' => Carbon::now(),
+            'privacy_policy_accepted' => Carbon::now(),
 //            'status' => 1,
-            'password' => substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(16/strlen($x)) )),1,16),
+//            'password' => substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(16/strlen($x)) )),1,16),
         ];
     }
 

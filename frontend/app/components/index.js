@@ -1,7 +1,12 @@
 import HeaderBar from './HeaderBar';
-import SignupForm from './SignupForm';
-import LoginForm from './LoginForm';
 import Footer from './Footer';
+
+/*
+USER AUTHENTICATION
+ */
+import SignupForm from './Auth/SignupForm';
+import LoginForm from './Auth/LoginForm';
+
 
 export {
   HeaderBar,

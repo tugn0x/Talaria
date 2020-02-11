@@ -2,6 +2,7 @@
 
 use App\Models\BaseObserver;
 use \Auth;
+use Str;
 
 class UserObserver extends BaseObserver
 {
@@ -80,7 +81,7 @@ class UserObserver extends BaseObserver
         //generate password if not defined, only if model isn't created
         if( (empty($model->password) || is_null($model->password)) && !$model->exists)
         {
-            $password = str_random(9);
+            $password = Str::random(12);
             $model->password = $password;
             $model->password_confirmation = $password;
         }

@@ -25,7 +25,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { withGoogleReCaptcha } from "react-google-recaptcha-v3"
 import { Link as RouterLink, withRouter } from "react-router-dom";
-import GarrImg from '../../images/idem.svg'
+import GarrImg from '../../../images/idem.svg'
 
   function LoginForm(props) {
     const [formData,setFormData] = React.useState({
