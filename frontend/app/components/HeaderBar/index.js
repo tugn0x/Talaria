@@ -10,13 +10,15 @@ import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import DefaultHeader from "./DefaultHeader";
 
 function HeaderBar(props) {
   console.log('HeaderBar', props)
   return (
     <header className="app-header navbar">
-      <FormattedMessage {...messages.header} />
-      Qui ci dobbiamo passare i dati di auth
+      {/*<FormattedMessage {...messages.header} />*/}
+      {/*Qui ci dobbiamo passare i dati di auth*/}
+      <DefaultHeader/>
     </header>
   );
 }

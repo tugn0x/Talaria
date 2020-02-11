@@ -64,8 +64,8 @@ export function* signupAuthSaga(action) {
       username: action.request.email,
       password: action.request.password,
       password_confirmation: action.request.password_confirmation,
-      // privacy_policy_accepted: action.request.privacy_policy_accepted,
-      privacy_policy_accepted: 1,
+      privacy_policy_accepted: action.request.privacy_policy_accepted,
+      // privacy_policy_accepted: new Date(),
     })
   };
   try {
