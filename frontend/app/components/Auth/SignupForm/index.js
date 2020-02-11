@@ -3,13 +3,15 @@
  * SignupForm
  *
  */
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
 import { withGoogleReCaptcha } from "react-google-recaptcha-v3"
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import {withRouter} from "react-router-dom";
+import './style.scss';
+const validEmailRegex = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$";
 
 function SignupForm(props) {
   const [formData,setFormData] = React.useState({
@@ -19,18 +21,26 @@ function SignupForm(props) {
     confirm_passwprd: "",
   });
 
+  const [canSubmit, setCanSubmit] = React.useState(false)
+
   const linkTo = (path) => {
     props.history.push(`/${path}`)
   };
 
   const handleChange = (e) =>{
-    console.log(e.target.name, e.target.value)
-    setFormData({ ...formData,[e.target.name]: e.target.value })
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const submitChange = (e) =>{
     e.preventDefault();
-    props.signup({ ...formData })
+    const form = e.target;
+    form.classList.add('was-validated'); 
+    if (form.checkValidity() === false) {
+      console.log("Dont Send Form")
+    } else {
+      props.signup({ ...formData })
+      console.log("Send Form")
+    } 
     return
     props.googleReCaptchaProps.executeRecaptcha('homepage').then(token => {
       props.signup({ ...formData, recaptcha: token })
@@ -47,7 +57,7 @@ function SignupForm(props) {
           <Col md="9" lg="7" xl="6">
             <Card className="mx-4">
               <CardBody className="p-4">
-                <Form onSubmit={submitChange}>
+                <Form onSubmit={submitChange}  noValidate>
                   <h1>Register</h1>
                   <p className="text-muted">Create your account</p>
                   <InputGroup className="mb-3">
@@ -61,7 +71,11 @@ function SignupForm(props) {
                       name="name"
                       value={formData.name}
                       onChange={(e) => handleChange(e, 'name')}
+                      required
                     />
+                    <div className="invalid-feedback">
+                      Please choose a username.
+                    </div>
                   </InputGroup>
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
@@ -69,25 +83,33 @@ function SignupForm(props) {
                     </InputGroupAddon>
                     <Input
                       type="text"
-                      placeholder="Surame"
+                      placeholder="Surname"
                       autoComplete="surname"
                       name="surname"
                       value={formData.surname}
                       onChange={(e) => handleChange(e, 'surname')}
+                      required
                     />
+                    <div className="invalid-feedback">
+                      Please choose a surname.
+                    </div>
                   </InputGroup>
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>@</InputGroupText>
                     </InputGroupAddon>
                     <Input
-                      type="text"
+                      type="email"
                       placeholder="Email"
                       autoComplete="email"
                       name="email"
                       value={formData.email}
                       onChange={(e) => handleChange(e, 'email')}
+                      required
                     />
+                    <div className="invalid-feedback">
+                      Please provide a valid email
+                    </div>
                   </InputGroup>
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
@@ -102,6 +124,7 @@ function SignupForm(props) {
                       name="password"
                       value={formData.password}
                       onChange={(e) => handleChange(e, 'password')}
+                      required
                     />
                   </InputGroup>
                   <InputGroup className="mb-4">
@@ -116,8 +139,13 @@ function SignupForm(props) {
                       autoComplete="password_confirmation"
                       name="password_confirmation"
                       value={formData.password_confirmation}
-                      onChange={(e) => handleChange(e, 'password')}
+                      onChange={(e) => handleChange(e, 'password_confirmation')}
+                      pattern={formData.password}
+                      required
                     />
+                    <div className="invalid-feedback">
+                      Passwords must match
+                    </div>
                   </InputGroup>
                   <Button color="success" block>Create Account</Button>
                 </Form>
