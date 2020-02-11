@@ -114,6 +114,21 @@ services:
       - "6379:6379"
     restart: always
 
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend:/usr/src/app
+      - ./.env:/usr/src/.env
+    command: npm start
+    expose:
+      - 3000
+    restart: always
+    labels:
+      - "traefik.port=3000"
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/"
+      - "traefik.docker.network=proxy"
+      -
 networks:
   default:
     ipam:
