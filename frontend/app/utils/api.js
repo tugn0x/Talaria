@@ -72,7 +72,7 @@ export const loginRefresh = (options) => {
 
 export const signup = (options) => {
   options = getOption(options);
-  return request(`${BASE_URL}/oauth/register/`, options)
+  return request(`${BASE_URL}/api/v1/auth/register/`, options)
 };
 
 export const submit = (options) => {

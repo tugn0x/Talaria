@@ -2,7 +2,9 @@
 
 namespace App\Models\Users;
 
+use App\Models\Libraries\UserObserver;
 use App\Traits\Auth\RolesAbilitiesPermissionsTrait;
+use App\Traits\Model\ModelTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
@@ -10,11 +12,9 @@ use App\Models\Country;
 use App\Models\Libraries\Library;
 use App\Models\Requests\PatronDocdelRequest;
 
-class User extends Authenticatable
+class User extends UserBase
 {
-    use Notifiable,
-        HasApiTokens,
-        RolesAbilitiesPermissionsTrait;
+    protected static $observerClass = UserObserver::class;
 
     /**
      * The attributes that are mass assignable.
@@ -26,6 +26,7 @@ class User extends Authenticatable
         'surname',
         'email',
         'password',
+        'password_confirmation',
 
         'address',
         'country_id',
@@ -48,6 +49,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'password_confirmation',
     ];
 
     /**
@@ -90,5 +92,10 @@ class User extends Authenticatable
             ->using(LibraryUser::class)
             ->withPivot('department_id','title_id')
             ->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps
+    }
+
+    public function social_providers()
+    {
+        return $this->hasMany(OauthSocialProvider::class);
     }
 }

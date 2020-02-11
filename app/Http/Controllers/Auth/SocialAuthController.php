@@ -35,6 +35,16 @@ class SocialAuthController extends ApiController
             return $request->user('api');
         }
     }
+    private function getUserByProviderID($provider, $provider_id)
+    {
+        $socialAccount = OauthSocialProvider::where([
+            ['provider_name', $provider],
+            ['provider_id', $provider_id],
+        ])->first();
+        if($socialAccount) {
+            return $socialAccount->user;
+        }
+    }
 
     /**
      * Obtain the user information from Facebook.
@@ -43,12 +53,15 @@ class SocialAuthController extends ApiController
      */
     public function handleProviderCallback(Request $request, AuthorizationServer $authorizationServer, string $provider)
     {
-//        dd($request->all());
         // check if there is an already authenticated user
         $user = $this->getUserIfAuthenticated($request);
 
         // this user we get back is not our user model, but a special user object that has all the information we need
         $providerUser = Socialite::driver($provider)->stateless()->user();
+
+        if(!$user) {
+            $user = $this->getUserByProviderID($provider, $providerUser->id);
+        }
 
         if(!$user) {
             $userData = $this->$provider($providerUser);
@@ -132,6 +145,11 @@ class SocialAuthController extends ApiController
     {
         $user = $this->getUserIfAuthenticated($request);
         $providerUser = $request->except("provider_id");
+
+        if(!$user) {
+            $user = $this->getUserByProviderID($provider, $request->provider_id);
+        }
+
         if(!$user) {
             $userData = $providerUser;
             $user = User::firstOrNew(['email' => $userData['email']]);

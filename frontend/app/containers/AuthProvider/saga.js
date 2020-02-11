@@ -58,10 +58,14 @@ export function* signupAuthSaga(action) {
     body: Object.assign(oauthOption, {
       recaptcha: action.request.recaptcha,
       first_name: action.request.first_name,
+      name: action.request.name,
+      surname: action.request.surname,
       email: action.request.email,
+      username: action.request.email,
       password: action.request.password,
-      confirm_password: action.request.confirm_password,
-      accept_privacy_policy: action.request.accept_privacy_policy,
+      password_confirmation: action.request.password_confirmation,
+      // privacy_policy_accepted: action.request.privacy_policy_accepted,
+      privacy_policy_accepted: 1,
     })
   };
   try {
@@ -385,10 +389,10 @@ export function* requestIdpSignupSaga() {
   console.log('requestIdpSignupSaga')
   yield put(push('/'));
     try {
-      console.log("CI STO PROVANDO")
+      // console.log("CI STO PROVANDO")
       yield call(refreshAuthSaga);
     } catch(e) {
-      console.log("ERRORE", e)
+      // console.log("ERRORE", e)
       yield put(requestError(e.message));
       yield call(logoutAuthSaga);
     }

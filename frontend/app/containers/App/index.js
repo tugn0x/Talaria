@@ -37,7 +37,7 @@ function App(props) {
         <Route path="/idp-callback/:refresh_token" component={IdpPage} />
         {/*<Route exact path={"/fgot-pwd"} component={() => <ForgotPassword auth={props.auth} history={history} />} />*/}
         {!props.isLogged && <Route component={() => <LoginPage auth={props.auth} tokensExistsExpired={props.tokensExistsExpired} />} />}
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" component={() => <HomePage auth={props.auth}/> }  />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

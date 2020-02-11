@@ -1,9 +1,10 @@
 <?php namespace App\Traits\Http\Auth;
 
+use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Auth;
-use Dingo\Api\Http\Request;
+//use Dingo\Api\Http\Request;
 use App\Models\Users\UserTransformer;
 use App\Models\Users\User;
 //use Event;
@@ -23,10 +24,16 @@ trait AuthControllerTrait
 	public function postRegister(Request $request)
 	{
 		$this->validate($request, [
+		    'email' => 'required|email',
+		    'password' => 'required',
+		    'password_confirmation' => 'required',
+		    'name' => 'required',
+		    'surname' => 'required',
+		    'username' => 'required',
 //			'g-recaptcha-response' => 'required|recaptcha'
 		]);
 
-		$controller = \App::make('App\Http\Controllers\UserController');
+		$controller = \App::make('App\Http\Controllers\Users\UserController');
 		$controller->nilde->disableAuthorize();
 		$response = $controller->store($request);
 		$controller->nilde->enableAuthorize();

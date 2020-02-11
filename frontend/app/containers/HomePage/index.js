@@ -17,10 +17,10 @@ import { Switch, Route } from 'react-router-dom';
 <Route path={"/p"} component={Patron}/>
 */
 
-export default function HomePage() {
+export default function HomePage(props) {
   return (
     <div className="app sidebar-minimized sidebar-show">
-      <HeaderBar/>
+      <HeaderBar auth={props.auth}/>
 
       <Switch>
 

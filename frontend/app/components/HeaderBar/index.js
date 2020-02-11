@@ -11,7 +11,8 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-function HeaderBar() {
+function HeaderBar(props) {
+  console.log('HeaderBar', props)
   return (
     <header className="app-header navbar">
       <FormattedMessage {...messages.header} />
