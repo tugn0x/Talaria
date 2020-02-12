@@ -187,13 +187,13 @@ export function* forgotPasswordSaga(action){
     yield put(requestForgotPasswordSuccess(request));
   } catch (error) {
     yield put(requestError(error.message));
-  }  
+  }
 }
 
 export function* resetPasswordSaga(action){
   const resetPasswordOption = {
     method: 'post',
-    body: action.request
+    body: {...oauthOption, ...action.request, username: action.request.email}
   }
   try {
     const request = yield call(resetPassword, resetPasswordOption);

@@ -9,7 +9,7 @@ Route::group([
     'namespace' => 'Auth',
     'prefix' => 'auth',
 //    'middleware' => ['api','auth:api',],
-    'middleware' => 'api',
+//    'middleware' => 'api',
     'as' => 'api.v1.auth.',
 ], function () {
     Route::post('register', 'AuthController@postRegister')->name('register');
@@ -17,8 +17,8 @@ Route::group([
     Route::post('reset-password', 'PasswordController@resetPassword')->name('reset-password');
 
     Route::group(['middleware' => 'auth:api'], function () {
-        Route::post('logout', 'AuthController@logout')->name('logout');
         Route::post('change-password', 'PasswordController@changePassword')->name('change-password');
+        Route::post('logout', 'AuthController@logout')->name('logout');
     });
 
     Route::post('social/{provider}/signup', 'SocialAuthController@signupFromSocialProvider');

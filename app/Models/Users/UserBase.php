@@ -21,4 +21,7 @@ class UserBase extends Authenticatable
         RolesAbilitiesPermissionsTrait,
         ModelTrait;
 
+    public function updatePassword($password) {
+        return self::where('id', $this->id)->update(['password'=> \Hash::make($password)]);
+    }
 }

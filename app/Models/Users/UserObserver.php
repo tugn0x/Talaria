@@ -34,7 +34,7 @@ class UserObserver extends BaseObserver
         if($model->exists)
         {
             // remove password from rules in case of update
-            $rules = array_except($this->validator->getRules(), ['password']);
+            $rules = \Arr::except($this->validator->getRules(), ['password']);
             $this->validator->setRules($rules);
         }
 
@@ -44,7 +44,7 @@ class UserObserver extends BaseObserver
             {
                 if($model->exists)
                 {
-                    $rules = array_except($this->validator->getRules(), [$field]);
+                    $rules = \Arr::except($this->validator->getRules(), [$field]);
                     $this->validator->setRules($rules);
                     return true;
                 }

@@ -19,6 +19,7 @@ Route::group([
     ], function () {
     Route::get('me', ['as' => 'auth.me.show', 'uses' => 'Auth\AuthController@me']);
     Route::put('me', ['as' => 'auth.me.update', 'uses' => 'Auth\AuthController@updateMe']);
+//    Route::put('change-password', ['as' => 'auth.password.change-password', 'uses' => 'Auth\PasswordController@changePassword']);
     Route::get('permissions', ['as' => 'auth.permissions', 'uses' => 'Auth\AuthController@permissions']);
 
 });

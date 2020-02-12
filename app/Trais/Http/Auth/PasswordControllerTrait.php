@@ -65,6 +65,7 @@ trait PasswordControllerTrait {
 			'token' => 'required',
 			'email' => 'required|email',
 			'password' => 'required|confirmed',
+//			'password_confirmation' => 'required',
 		]);
 
 		$credentials = $request->only(
@@ -99,7 +100,7 @@ trait PasswordControllerTrait {
                 return \Route::dispatch($proxy);
 
 			default:
-				return $this->response->error('Wrong '.$response, 422);
+				return $this->response->error($response, 422);
 		}
 	}
 
@@ -112,6 +113,7 @@ trait PasswordControllerTrait {
 	 */
 	protected function setNewPassword($user, $password)
 	{
+	    \Log::info($password);
 		$user->updatePassword($password);
 	}
 
@@ -123,9 +125,12 @@ trait PasswordControllerTrait {
             'new_confirm_password' => ['same:new_password'],
         ]);
 
-        User::find(auth()->user()->id)->update(['password'=> \Hash::make($request->new_password)]);
+        auth()->user()->updatePassword($request->new_password);
 
-        return $this->response->success('Wrong ', 200);
+
+        return $this->response->array([
+            'success' => true
+        ]);
     }
 
 
