@@ -10,10 +10,12 @@ import { AppSwitch } from '@coreui/react'
 import { withGoogleReCaptcha } from "react-google-recaptcha-v3"
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import globalMessages from 'app/utils/globalMessages'
+import globalMessages from '../../../utils/globalMessages'
 import {withRouter} from "react-router-dom";
 import {formatDate} from '../../../utils/dates'
 import {Loader, SocialAuth} from "../..";
+
+import {useIntl} from 'react-intl';
 
 import './style.scss';
 
@@ -27,6 +29,7 @@ function SignupForm(props) {
     confirm_password: "",
     privacy_policy_accepted: "",
   });
+  const intl = useIntl();
 
   // const [canSubmit, setCanSubmit] = React.useState(false)
 
@@ -61,7 +64,7 @@ function SignupForm(props) {
     });
     // e.preventDefault();
   }
-  console.log(<FormattedMessage {...globalMessages.password_repeat} />)
+  // console.log(<FormattedMessage {...globalMessages.password_repeat} />)
   return (
     <div className="app flex-row align-items-center">
       <Container>
@@ -71,7 +74,7 @@ function SignupForm(props) {
             <Card className="mx-4">
               <CardBody className="p-4">
                 <Form onSubmit={submitChange}  noValidate>
-                  <h1><FormattedMessage {...messages.header} /></h1>
+                  <h1><FormattedMessage {...messages.subtitle} /></h1>
                   <p className="text-muted">
                     <FormattedMessage {...messages.subtitle} />
                   </p>
@@ -150,7 +153,9 @@ function SignupForm(props) {
                     </InputGroupAddon>
                     <Input
                       type="password"
-                      placeholder={ <FormattedMessage {...globalMessages.password_repeat} />}
+                      // placeholder={ <FormattedMessage {...globalMessages.password_repeat} />}
+                      // placeholder={ intl.formatMessage(...messages.header)}
+                      placeholder={ intl.formatMessage({ id: 'app.components.SignupForm.passwordConfirmation' })}
                       autoComplete="password_confirmation"
                       name="password_confirmation"
                       value={formData.password_confirmation}

@@ -11,10 +11,14 @@ export const scope = 'app.components.SignupForm';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Sign up!',
+    defaultMessage: 'Sign up! HOHOHOH',
   },
   subtitle: {
     id: `${scope}.subtitle`,
-    defaultMessage: 'Create a profile!',
+    defaultMessage: 'Create a profile! HOHOHOH',
+  },
+  passwordConfirmation: {
+    id: `${scope}.passwordConfirmation`,
+    defaultMessage: 'ripeti la passwortd, mò',
   },
 });
