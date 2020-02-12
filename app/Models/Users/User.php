@@ -93,9 +93,4 @@ class User extends UserBase
             ->withPivot('department_id','title_id')
             ->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps
     }
-
-    public function social_providers()
-    {
-        return $this->hasMany(OauthSocialProvider::class);
-    }
 }

@@ -14,6 +14,7 @@ import {withRouter} from "react-router-dom";
 import './style.scss';
 const validEmailRegex = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$";
 import {formatDate} from '../../../utils/dates'
+import {Loader, SocialAuth} from "../..";
 
 function SignupForm(props) {
   const [formData,setFormData] = React.useState({
@@ -60,6 +61,7 @@ function SignupForm(props) {
   return (
     <div className="app flex-row align-items-center">
       <Container>
+        <Loader show={props.auth.loading} >
         <Row className="justify-content-center">
           <Col md="9" lg="7" xl="6">
             <Card className="mx-4">
@@ -166,18 +168,12 @@ function SignupForm(props) {
                 </Form>
               </CardBody>
               <CardFooter className="p-4">
-                <Row>
-                  <Col xs="12" sm="6">
-                    <Button className="btn-facebook mb-1" block><span>facebook</span></Button>
-                  </Col>
-                  <Col xs="12" sm="6">
-                    <Button className="btn-twitter mb-1" block><span>twitter</span></Button>
-                  </Col>
-                </Row>
+                <SocialAuth loginFacebook={props.loginFacebook} loginGoogle={props.loginGoogle}/>
               </CardFooter>
             </Card>
           </Col>
         </Row>
+        </Loader>
       </Container>
     </div>
   );

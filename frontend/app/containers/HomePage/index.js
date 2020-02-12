@@ -10,6 +10,10 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { HeaderBar, Footer } from '../../components'
 import { Switch, Route } from 'react-router-dom';
+import {requestLogout} from "../AuthProvider/actions";
+import {createStructuredSelector} from "reselect";
+import {compose} from "redux";
+import { connect } from 'react-redux';
 
 /*
 <Route path={"/library"} component={Library}/>
@@ -17,11 +21,10 @@ import { Switch, Route } from 'react-router-dom';
 <Route path={"/p"} component={Patron}/>
 */
 
-export default function HomePage(props) {
+function HomePage(props) {
   return (
     <div className="app sidebar-minimized sidebar-show">
-      <HeaderBar auth={props.auth}/>
-
+      <HeaderBar auth={props.auth} logout={(request) => props.dispatch(requestLogout(request))}/>
       <Switch>
 
         <div className="app-body">
@@ -43,3 +46,16 @@ export default function HomePage(props) {
     </div>
   );
 }
+const mapStateToProps = createStructuredSelector({
+
+});
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+})
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(withConnect)(HomePage);

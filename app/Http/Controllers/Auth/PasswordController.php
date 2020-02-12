@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\Controller;
 use App\Traits\Http\Auth\PasswordControllerTrait;
 
@@ -12,7 +13,7 @@ use App\Traits\Http\Auth\PasswordControllerTrait;
  *
  * @Resource("Password", uri="/auth")
  */
-class PasswordController extends Controller
+class PasswordController extends ApiController
 {
     /*
     |--------------------------------------------------------------------------

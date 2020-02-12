@@ -26,6 +26,7 @@ import messages from './messages';
 import { withGoogleReCaptcha } from "react-google-recaptcha-v3"
 import { Link as RouterLink, withRouter } from "react-router-dom";
 import GarrImg from '../../../images/idem.svg'
+import {SocialAuth} from "../..";
 
   function LoginForm(props) {
     const [formData,setFormData] = React.useState({
@@ -113,28 +114,7 @@ import GarrImg from '../../../images/idem.svg'
                       </Row>
                     </Form>
                   </CardBody>
-                  <CardFooter className="p-4">
-                    <Row>
-                      <Col xs="12" sm="6">
-                        <Button className="btn-facebook mb-1" block onClick={props.loginFacebook}><span>Facebook</span></Button>
-                      </Col>
-                      <Col xs="12" sm="6">
-                        <Button className="btn-google-plus mb-1" block onClick={props.loginGoogle}><span>Google</span></Button>
-                      </Col>
-                      <Col xs="6" sm="6">
-                        <a href="https://devnilde.bo.cnr.it/Shibboleth.sso/Login?target=https://devnilde.bo.cnr.it/shibb/shiblogin.php">
-                          <img src={GarrImg}/>
-                        </a>
-                      </Col>
-                      <Col xs="12" sm="12">
-                        <div id="my-spid-button">
-                          <noscript>
-                            Il login tramite SPID richiede che JavaScript sia abilitato nel browser
-                          </noscript>
-                        </div>
-                      </Col>
-                    </Row>
-                  </CardFooter>
+                  <SocialAuth loginFacebook={props.loginFacebook} loginGoogle={props.loginGoogle}/>
                 </Card>
                 <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
                   <CardBody className="text-center">

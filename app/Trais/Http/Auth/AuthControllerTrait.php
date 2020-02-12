@@ -75,15 +75,24 @@ trait AuthControllerTrait
 	{
 		if (Auth::check()) {
 			$user = Auth::user();
+//			dd(get_class($user->abilities->groupBy('entity_type')));
             $token_perms = [
+                "resources" => $user->abilities()
+                    ->select('abilities.entity_id','abilities.entity_type','abilities.name')
+                    ->get()
+                    ->groupBy('entity_type'),
                 "roles" => $user->roles->pluck('name'),
-                "permissions" => $user->abilities,
+                "permissions" => $user->abilities
             ];
 //			$token_perms = base64_encode((string)json_encode($token_perms));
 			return $this->response->array($token_perms);
 		}
 		return $this->response->errorUnauthorized(trans('apinilde::auth.unauthorized'));
 	}
+
+//	private function permissionResources(User $user) {
+//        $reso
+//    }
 
 	/**
 	 * Show user info retrived by token.

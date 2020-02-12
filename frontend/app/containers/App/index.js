@@ -22,7 +22,7 @@ import IdpPage from 'containers/IdpPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
 import SignupPage from "containers/SignupPage/Loadable";
-// import ForgotPassword from "../../../../frontend/app/containers/ForgotPassword/Loadable";
+import ForgotPassword from "containers/ForgotPassword/Loadable";
 
 
 function App(props) {
@@ -31,14 +31,13 @@ function App(props) {
   }, []);
   return (
     <div>
-      {/*{JSON.stringify(props)}*/}
       <Switch>
         <Route exact path={"/signup"} component={() => <SignupPage auth={props.auth} history={history} />} />
         <Route path="/idp-callback/:refresh_token" component={IdpPage} />
-        {/*<Route exact path={"/fgot-pwd"} component={() => <ForgotPassword auth={props.auth} history={history} />} />*/}
+        <Route path={"/forgot-password/"} component={({match}) => <ForgotPassword auth={props.auth} history={history} match={match} />} />
         {!props.isLogged && <Route component={() => <LoginPage auth={props.auth} tokensExistsExpired={props.tokensExistsExpired} />} />}
-        <Route exact path="/" component={() => <HomePage auth={props.auth}/> }  />
-        <Route component={NotFoundPage} />
+        <Route exact path="*" component={() => <HomePage auth={props.auth}/> }  />
+        {/*<Route component={NotFoundPage} />*/}
       </Switch>
       <GlobalStyle />
     </div>

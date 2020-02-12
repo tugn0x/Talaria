@@ -1,6 +1,6 @@
 <?php namespace App\Traits\Http\Auth;
 
-use Dingo\Api\Http\Request;
+use Illuminate\Http\Request;
 use Event;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Password;

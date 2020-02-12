@@ -15,16 +15,19 @@ class UsersTableSeeder extends Seeder
 
         $admin = factory(\App\Models\Users\User::class)->create([
             'email' => 'nilde@nilde.it',
-            'name' => 'Nilde',
-            'surname' => 'Nilde',
-            'password' => Hash::make('nilde'),
+            'name' => 'nildenilde',
+            'surname' => 'nildenilde',
+            'password' => 'nildenilde',
+            'password_confirmation' => 'nildenilde',
+            'privacy_policy_accepted'=>now(),
+            'country_id'=>1,
         ]);
         $admin->assign('super-admin');
 //        $admin = App\Models\Users\User::create(new App\Models\Users\User([
 //            'email' => 'nilde@nilde.it',
-//            'name' => 'Nilde',
-//            'surname' => 'Nilde',
-//            'password' => Hash::make('nilde'),
+//            'name' => 'nildenilde',
+//            'surname' => 'nildenilde',
+//            'password' => ('nildenilde'),
 //        ]));
 //        $admin->verified = true;
 //        $admin->save();
@@ -37,9 +40,11 @@ class UsersTableSeeder extends Seeder
             'email' => 'alessandro.tugnoli@gmail.com',
             'name' => 'Alessandro',
             'surname' => 'Tugnoli',
-            'password' => Hash::make('nilde'),
+            'password' => 'nildenilde',
+            'password_confirmation' => 'nildenilde',
             'status'=>1,
-            'country_id'=>1
+            'country_id'=>1,
+            'privacy_policy_accepted'=>now(),
         ]);
 
         $myuser->libraries()->sync([
@@ -49,6 +54,31 @@ class UsersTableSeeder extends Seeder
                 'title_id'=>2,
             ]
         ]);
+
+        $myuser = factory(\App\Models\Users\User::class)->create([
+            'email' => 'giorgio@nilde.com',
+            'name' => 'giorgio',
+            'surname' => 'giorgio',
+            'password' => 'nildenilde',
+            'password_confirmation' => 'nildenilde',
+            'status'=>1,
+            'country_id'=>1,
+            'privacy_policy_accepted'=>now(),
+        ]);
+
+        foreach (\App\Models\Libraries\Library::all() as $item) {
+            $myuser->allow('manage', $item);
+        }
+
+        /*
+         *
+        $contentIds = \Auth::user()->abilities()
+            ->select('abilities.entity_id')
+            ->whereIn('abilities.entity_type', config('constants.module_classes.App\Models\Modules\Cms'))
+            ->get()
+            ->pluck('entity_id')
+            ->toArray();
+         */
 
 //        DB::table('library_user')->insert([
 //            'library_id' => 1,

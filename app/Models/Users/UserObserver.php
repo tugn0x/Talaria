@@ -12,7 +12,7 @@ class UserObserver extends BaseObserver
         'email' => 'sometimes|required|email|max:255|unique:users,email',
         'password' => 'required|confirmed|min:8|max:60',
 
-        'country_id' => 'nullable|exists:countries',
+        'country_id' => 'nullable|exists:countries,id',
         'address' => 'nullable|max:255',
         'town' => 'nullable|max:255',
         'district' => 'nullable|max:255',
@@ -22,7 +22,6 @@ class UserObserver extends BaseObserver
         'mobile' => 'nullable|max:255',
 
         'nationality' => 'nullable|integer|exists:countries,id',
-        'phone' => 'nullable|max:255',
         'preflang' => 'nullable|max:255', // TODO: language config or DB
 
         'privacy_policy_accepted' => 'required|date',
