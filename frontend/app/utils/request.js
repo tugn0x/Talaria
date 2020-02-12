@@ -26,13 +26,14 @@ function checkStatus(response) {
   } 
   return response.json().then(res => {
     const error = new Error(response.statusText);
-   // console.log(res)
-    if(typeof res.error_description !== "undefined") {
-      error.message = {error: [res.error_description]};
+    if(typeof res.message !== "undefined") {
+      error.message = res.message;
     } else {
       error.message = res.error || res.errors;
     }
+  
     error.response = response;
+    
     throw error;
   })
 }

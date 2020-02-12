@@ -75,9 +75,6 @@ function ForgotPasswordForm(props){
 
   return(
     <div className="app flex-row align-items-center">
-      {/* requestError !== null && 
-        <h3>{requestError.message}</h3> */
-      }
       <Container>
        {/*  <Loader show={props.auth.loading} > */}
           <Row className="justify-content-center">
@@ -103,6 +100,9 @@ function ForgotPasswordForm(props){
                         <FormattedMessage {...globalMessages.invalid_email} />
                       </div>
                     </InputGroup>
+                    {requestError !== null && 
+                      <div className="text-danger">{requestError}</div>
+                    }
                     <Button color="success" block>
                       <FormattedMessage {...messages.submitFormButton} />
                     </Button>

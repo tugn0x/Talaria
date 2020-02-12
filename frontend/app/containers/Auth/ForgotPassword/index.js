@@ -21,6 +21,7 @@ import { compose } from 'redux';
 function ForgotPasswordPage(props) {
   // console.log(props)
   const {requestError} = props
+  
   return (
     <>
       {!props.match.params.reset_token && <ForgotPasswordForm requestError={requestError} forgot={ (email) => props.dispatch(requestForgotPassword({"email": email})) } /> }
@@ -33,6 +34,7 @@ function ForgotPasswordPage(props) {
 
 const mapStateToProps = createStructuredSelector({
   requestError: requestError(),
+ // requestSuccess: requestSuccess(),
 });
 
 function mapDispatchToProps(dispatch) {

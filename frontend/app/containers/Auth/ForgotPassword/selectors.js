@@ -4,7 +4,7 @@ import { initialState } from '../AuthProvider/reducer';
  * Direct selector to the auth state domain
  */
 
-const selectForgotPassword = state => state.error || initialState;
+const selectForgotPassword = state => state.auth || initialState;
 
 /**
  * Other specific selectors
@@ -17,8 +17,14 @@ const selectForgotPassword = state => state.error || initialState;
 const requestError = () =>
   createSelector(
     selectForgotPassword,
-    substate => substate,
+    substate => substate.error,
   );
+/* 
+const requestSucces = () =>
+  createSelector(
+    selectForgotPassword,
+    substate => substate.error,
+); */
 
 
 
