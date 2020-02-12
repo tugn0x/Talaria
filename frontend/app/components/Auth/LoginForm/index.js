@@ -65,7 +65,7 @@ import {SocialAuth} from "../..";
                   <CardBody>
                     <Form onSubmit={submitChange}>
                       <h1><FormattedMessage {...messages.header} /></h1>
-                      <p className="text-muted"><FormattedMessage {...messages.loginDescription} /></p>
+                      {/* <p className="text-muted"><FormattedMessage {...messages.loginDescription} /></p> */}
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
@@ -97,19 +97,21 @@ import {SocialAuth} from "../..";
                         />
                       </InputGroup>
                       <Row>
-                        <Col xs="6">
+                        <Col xs="12">
                           <Button
                             type="submit"
-                            color="primary"
-                            className="px-4"
+                            color="grey"
+                            className="px-4 fullWidth"
                             // onClick={(e) => submitChange(e)}
                             disabled={props.auth.loading || formData.password === '' || formData.username === ''}
                           >
                             <FormattedMessage {...messages.loginButton} />
                           </Button>
                         </Col>
-                        <Col xs="6" className="text-right">
-                          <a href='/forgot-password' color="link" className="px-0">Forgot password?</a>
+                        <Col xs="12">
+                            <a href='/forgot-password' className="px-0 text-grey">
+                              <FormattedMessage {...messages.forgot} />
+                            </a>
                         </Col>
                       </Row>
                     </Form>

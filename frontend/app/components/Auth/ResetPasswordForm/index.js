@@ -71,7 +71,21 @@ function ResetPasswordForm(props){
               <Card className="mx-4">
                 <CardBody className="p-4">
                   <Form onSubmit={submitForm}  noValidate>
-                  <h3>RESET PASSWORD</h3>
+                  <h3> <FormattedMessage {...messages.header} /></h3>
+                  <InputGroup className="mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>@</InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      type="text"
+                      placeholder="Token"
+                      autoComplete="token"
+                      name="token"
+                      value={formData.token}
+                      onChange={(e) => handleChange(e, 'token')}
+                      required
+                    />
+                  </InputGroup>
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>@</InputGroupText>

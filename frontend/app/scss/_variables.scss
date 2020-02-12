@@ -1,7 +1,20 @@
 // Variable overrides
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Archivo:400,500,700&display=swap');
+
+$font-family-base: 'Archivo', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica',
+  'Arial', sans-serif;
+
+
+// COLORS
+
 // $primary: #A65255;
 $theme_color: #A65255;
-$font-family-base: 'Archivo';
-$paper_light: #F5F1EB;
-$paper_medium: #D6CBC3;
-$paper_white: #F5F5F5
+$light: #F5F1EB;
+$dark: #D6CBC3;
+$white: #F5F5F5;
+$grey: #444444;
+$theme-colors: (
+  "brown": #A65255,
+  "grey": #444444
+);

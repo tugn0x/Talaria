@@ -21,7 +21,7 @@ import logomini from '../../images/logo.png'
 function HeaderBar(props) {
   console.log('HeaderBar', props)
   return (
-    <header className="app-header navbar">
+    <header className="app-header navbar bg-dark">
       {/*<FormattedMessage {...messages.header} />*/}
       {/*Qui ci dobbiamo passare i dati di auth*/}
       {/*<DefaultHeader/>*/}

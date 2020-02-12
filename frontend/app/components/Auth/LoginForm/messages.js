@@ -25,4 +25,8 @@ export default defineMessages({
     id: `${scope}.signup`,
     defaultMessage: 'Register now',
   },
+  forgot: {
+    id: `${scope}.forgot`,
+    defaultMessage: 'Forgot Password',
+  },
 });
