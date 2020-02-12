@@ -23,19 +23,16 @@ function ForgotPasswordPage(props) {
   console.log(props)
   return (
     <>
-      <Switch>
-        <Route exact path={"/"} component={() => <ForgotPasswordForm auth={props.auth} requestToken={(request) => props.dispatch(requestForgotPassword(request))} />}/>
-        {/*<Route component={NotFoundPage} />*/}
-      </Switch>
-      {/*{!props.auth.isForgotPasswordMode && <ForgotPasswordForm auth={props.auth} requestToken={(request) => props.dispatch(requestForgotPassword(request))} />}*/}
-      {/*{ props.auth.isForgotPasswordMode && <TokenForm auth={props.auth} resetPassword={(request) => props.dispatch(requestResetPassword(request))} />}*/}
+      {!props.match.params.reset_token && <h1>Qui il form!</h1>}
+      {
+        props.match.params.reset_token && <>LOADING... e poi response</>
+      }
     </>
   );
 }
 
 const mapStateToProps = createStructuredSelector({
-  //mapPage: makeSelectMapPage(),
-  //wmsVisible: makeSelectVisibleWmsLayer()
+
 });
 
 function mapDispatchToProps(dispatch) {

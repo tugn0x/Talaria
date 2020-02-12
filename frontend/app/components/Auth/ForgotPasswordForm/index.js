@@ -59,52 +59,7 @@ function ForgotPasswordForm(props){
       <Loader show={props.auth.loading} >
         PASSWORD DIMENTICATA
         {/*
-      <Typography variant="caption" align="center">
-        Per resettare la password è necessario richiedere un token di verifica via SMS. Inserisci il tuo numero di telefono e procedi con la richiesta
-      </Typography>
-      <form noValidate>
-        <TextField
-          variant="filled"
-          margin="normal"
-          required
-          fullWidth
-          name="username"
-          value={formData.username}
-          onChange={(e) => updateFormData(e, 'username')}
-          label="Numero di telefono"
-          InputProps={{
-            startAdornment: <InputAdornment position="start" style={{width: "40px"}}>+39</InputAdornment>,
-          }}
-          id="username"
-        />
-        {props.auth.error && (
-            <ErrorBox error={props.auth.error} />
-          )}
-        <Box my={2}>
-        <Button
-          type="submit"
-          fullWidth
-          onClick={(e) => submitForm(e)}
-          disabled={props.auth.loading || formData.username.length < 3}
-          variant="contained"
-          color="secondary"
-        >
-          Richiedi token
-        </Button>
-        </Box>
-        <Grid container>
-          <Grid item xs>
-            <Link to="/" color="inherit" component={RouterLink}>
-              Accedi
-            </Link>
-          </Grid>
-          <Grid item>
-            <Link to="/register" color="inherit" component={RouterLink}>
-              Registra un nuovo account
-            </Link>
-          </Grid>
-        </Grid>
-      </form>
+      Qui il form con l'email e il pulsante, ti passi l'action dalla pagina col dispatch ecc..
       */}
       </Loader>
     </div>
