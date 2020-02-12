@@ -149,7 +149,7 @@ function SignupForm(props) {
                       name="password_confirmation"
                       value={formData.password_confirmation}
                       onChange={(e) => handleChange(e, 'password_confirmation')}
-                      pattern={formData.password_confirmation}
+                      pattern={formData.password}
                       required
                     />
                     <div className="invalid-feedback">

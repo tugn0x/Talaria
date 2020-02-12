@@ -4,11 +4,14 @@
 // Import styles
 @import "~@coreui/coreui/scss/coreui.scss";
 
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Archivo:400,500,700&display=swap');
+
 // Temp fix for reactstrap
 @import '~@coreui/coreui/scss/_dropdown-menu-right.scss';
 
 // If you want to add something do it here
-@import "custom";
+@import "global";
 
 // ie fixes
 @import "ie-fix";
