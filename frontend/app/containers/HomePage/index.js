@@ -10,7 +10,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { HeaderBar, Footer } from '../../components'
 import { Switch, Route } from 'react-router-dom';
-import {requestLogout} from "../AuthProvider/actions";
+import {requestLogout} from "../Auth/AuthProvider/actions";
 import {createStructuredSelector} from "reselect";
 import {compose} from "redux";
 import { connect } from 'react-redux';

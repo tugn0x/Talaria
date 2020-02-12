@@ -9,10 +9,10 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { Switch, Route } from 'react-router-dom';
-import ForgotPasswordForm from '../../components';
-import TokenForm from '../../components';
+import ForgotPasswordForm from '../../../components';
+import TokenForm from '../../../components';
 
-import {requestForgotPassword, requestResetPassword} from '../../containers/AuthProvider/actions';
+import {requestForgotPassword, requestResetPassword} from '../AuthProvider/actions';
 
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';

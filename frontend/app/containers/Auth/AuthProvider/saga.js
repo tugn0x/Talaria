@@ -1,6 +1,6 @@
 import { call, put, select, takeLatest, fork, take  } from 'redux-saga/effects';
 import { REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_REFRESH, REQUEST_SIGNUP, REQUEST_PROFILE, REQUEST_PERMISSIONS, REQUEST_NEW_TOKEN, REQUEST_VERIFICATION, REQUEST_CHANGE_PASSWORD, REQUEST_RESET_PASSWORD, REQUEST_FORGOT_PASSWORD, REQUEST_UPDATE_PROFILE, REQUEST_DELETE_PROFILE,
-  SOCIAL_LOGIN_PREPARE, SOCIAL_LOGIN_REQUEST, SOCIAL_OAUTH_SIGNUP, REQUEST_IDP_SIGNUP } from 'containers/AuthProvider/constants';
+  SOCIAL_LOGIN_PREPARE, SOCIAL_LOGIN_REQUEST, SOCIAL_OAUTH_SIGNUP, REQUEST_IDP_SIGNUP } from 'containers/Auth/AuthProvider/constants';
 import {
   requestError,
   requestLoginSuccess,
@@ -19,8 +19,8 @@ import {
   socialLoginPrepare,
   socialLoginRequest,
   requestIdpSignup,
-} from '../../containers/AuthProvider/actions';
-import makeSelectAuth, { tokensExistsExpired, isLogged  } from '../../containers/AuthProvider/selectors';
+} from './actions';
+import makeSelectAuth, { tokensExistsExpired, isLogged  } from './selectors';
 import { push } from 'connected-react-router';
 
 import { login, loginRefresh, oauthOption, oauthOptionRefreshToken, signup, getProfile, getPermissions, setToken, verifySms, newToken, changePassword, forgotPassword, resetPassword, updateProfile, deleteProfile, socialOauth } from 'utils/api';

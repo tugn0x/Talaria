@@ -23,11 +23,8 @@ import 'app.scss'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Import root app
-import App from 'containers/App';
+import {App, LanguageProvider, AuthProvider} from 'containers';
 
-// Import Language Provider
-import LanguageProvider from 'containers/LanguageProvider';
-import AuthProvider from 'containers/AuthProvider';
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3"
 import { RECAPTCHA_SITE_KEY } from "utils/constants";
 

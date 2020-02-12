@@ -11,12 +11,12 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import messages from './messages';
 import { requestLogin, socialLoginPrepare, socialLoginRequest, requestVerification, requestLogout, requestNewToken } from '../AuthProvider/actions';
-import { LoginForm } from "../../components";
+import { LoginForm } from "../../../components";
 
 // import VerificationForm from "../../../../frontend/app/components/VerificationForm";
 
 // import { withStyles } from '@material-ui/core/styles';
-// import VerificationForm from "../../components/VerificationForm";
+// import VerificationForm from "../../../components/VerificationForm";
 //
 // import TwoColumnLayout from "components/TwoColumnLayout";
 

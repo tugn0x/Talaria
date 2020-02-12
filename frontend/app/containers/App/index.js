@@ -15,14 +15,10 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { syncPersistanceRequest, isSync } from "../../persistence";
 
-import HomePage from 'containers/HomePage/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import LoginPage from 'containers/LoginPage/Loadable';
-import IdpPage from 'containers/IdpPage/Loadable';
+import {HomePage, NotFoundPage, LoginPage, IdpPage} from 'containers';
 
 import GlobalStyle from '../../global-styles';
-import SignupPage from "containers/SignupPage/Loadable";
-import ForgotPassword from "containers/ForgotPassword/Loadable";
+import {SignupPage, ForgotPassword} from "containers";
 
 
 function App(props) {

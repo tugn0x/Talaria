@@ -3,10 +3,10 @@ import produce from "immer";
 import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { createSelector } from 'reselect';
 // import { toggleDrawer } from 'containers/Sidebar/actions';
-import { syncAuth, requestRefresh } from "containers/AuthProvider/actions";
+import { syncAuth, requestRefresh } from "containers/Auth/AuthProvider/actions";
 import { setToken } from 'utils/api';
 // import { isMobileOrTablet } from 'utils/mobileDetector';
-import { REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_LOGIN_SUCCESS, REQUEST_LOGOUT_SUCCESS, REQUEST_REFRESH_SUCCESS, REQUEST_SIGNUP_SUCCESS, REQUEST_PROFILE_SUCCESS, REQUEST_PERMISSIONS_SUCCESS, REQUEST_REFRESH, REQUEST_UPDATE_PROFILE_SUCCESS } from 'containers/AuthProvider/constants';
+import { REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_LOGIN_SUCCESS, REQUEST_LOGOUT_SUCCESS, REQUEST_REFRESH_SUCCESS, REQUEST_SIGNUP_SUCCESS, REQUEST_PROFILE_SUCCESS, REQUEST_PERMISSIONS_SUCCESS, REQUEST_REFRESH, REQUEST_UPDATE_PROFILE_SUCCESS } from 'containers/Auth/AuthProvider/constants';
 // import { REQUEST_ILLNESS, REQUEST_PERCEPTION } from 'containers/SubmitPage/constants';
 
 const SKIP_REFRESH = [REQUEST_REFRESH, REQUEST_LOGIN, REQUEST_LOGOUT];
