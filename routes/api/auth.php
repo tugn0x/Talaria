@@ -14,7 +14,7 @@ Route::group([
 ], function () {
     Route::post('register', 'AuthController@postRegister')->name('register');
     Route::post('forgot-password', 'PasswordController@forgotPassword')->name('forgot-password');
-    Route::get('reset-password', 'PasswordController@resetPassword')->name('reset-password');
+    Route::post('reset-password', 'PasswordController@resetPassword')->name('reset-password');
 
     Route::group(['middleware' => 'auth:api'], function () {
         Route::post('logout', 'AuthController@logout')->name('logout');

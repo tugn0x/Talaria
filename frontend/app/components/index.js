@@ -8,6 +8,7 @@ import SignupForm from './Auth/SignupForm';
 import LoginForm from './Auth/LoginForm';
 import SocialAuth from './Auth/SocialAuth';
 import ForgotPasswordForm from './Auth/ForgotPasswordForm';
+import ResetPasswordForm from './Auth/ResetPasswordForm';
 /*
 FORM STUFFS
  */
@@ -22,6 +23,7 @@ export {
   Footer,
   SocialAuth,
   ForgotPasswordForm,
+  ResetPasswordForm,
 
   ErrorBox,
   Loader,
