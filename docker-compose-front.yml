@@ -44,6 +44,8 @@ services:
       args:
         UID: ${UID}
     image: backend
+    env_file:
+      - .env
     depends_on:
       - mysql
       - redis
@@ -101,6 +103,8 @@ services:
         UID: ${UID}
     image: backend
     command: php artisan horizon
+    env_file:
+      - .env
     depends_on:
       - mysql
       - redis

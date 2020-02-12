@@ -10,7 +10,7 @@ export default function Loader(props) {
   return (
   <>
    {props.show && (
-     <p>Loading..</p>
+     <p>Loading.. {/*TODO: AGGIUNGERE QUI UN LOADER!*/}</p>
    )}
    {!props.show && props.children}
   </>

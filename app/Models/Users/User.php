@@ -3,6 +3,7 @@
 namespace App\Models\Users;
 
 use App\Models\Libraries\UserObserver;
+use App\Notifications\Account\ResetPassword;
 use App\Traits\Auth\RolesAbilitiesPermissionsTrait;
 use App\Traits\Model\ModelTrait;
 use Illuminate\Notifications\Notifiable;
@@ -92,5 +93,16 @@ class User extends UserBase
             ->using(LibraryUser::class)
             ->withPivot('department_id','title_id')
             ->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token, $this->email));
     }
 }

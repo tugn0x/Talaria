@@ -1,5 +1,6 @@
 <?php namespace App\Traits\Http\Auth;
 
+use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 use Event;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
@@ -113,5 +114,19 @@ trait PasswordControllerTrait {
 	{
 		$user->updatePassword($password);
 	}
+
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', new MatchOldPassword()],
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],
+        ]);
+
+        User::find(auth()->user()->id)->update(['password'=> \Hash::make($request->new_password)]);
+
+        return $this->response->success('Wrong ', 200);
+    }
+
 
 }

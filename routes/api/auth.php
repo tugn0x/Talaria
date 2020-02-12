@@ -18,6 +18,7 @@ Route::group([
 
     Route::group(['middleware' => 'auth:api'], function () {
         Route::post('logout', 'AuthController@logout')->name('logout');
+        Route::post('change-password', 'PasswordController@changePassword')->name('change-password');
     });
 
     Route::post('social/{provider}/signup', 'SocialAuthController@signupFromSocialProvider');

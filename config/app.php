@@ -14,6 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'frontend_domain' => env('FRONTEND_DOMAIN', 'nilde.bo.cnr.it'),
 
     /*
     |--------------------------------------------------------------------------
