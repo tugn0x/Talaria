@@ -92,7 +92,7 @@ export const changePassword = (options) => {
 
 export const forgotPassword = (options) => {
   options = getOption(options);
-  return request(`${BASE_URL}/oauth/reset-password-request/`, options)
+  return request(`${BASE_URL}/api/v1/auth/forgot-password/`, options)
 }
 export const resetPassword = (options) => {
   options = getOption(options);

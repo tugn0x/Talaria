@@ -9,6 +9,7 @@ function parseJSON(response) {
   if (response.status === 204 || response.status === 205) {
     return null;
   }
+  
   return response.json();
 }
 
@@ -25,6 +26,7 @@ function checkStatus(response) {
   } 
   return response.json().then(res => {
     const error = new Error(response.statusText);
+   // console.log(res)
     if(typeof res.error_description !== "undefined") {
       error.message = {error: [res.error_description]};
     } else {

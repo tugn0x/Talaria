@@ -31,8 +31,6 @@ function SignupForm(props) {
   });
   const intl = useIntl();
 
-  // const [canSubmit, setCanSubmit] = React.useState(false)
-
   const linkTo = (path) => {
     props.history.push(`/${path}`)
   };
@@ -64,7 +62,6 @@ function SignupForm(props) {
     });
     // e.preventDefault();
   }
-  // console.log(<FormattedMessage {...globalMessages.password_repeat} />)
   return (
     <div className="app flex-row align-items-center">
       <Container>
@@ -84,8 +81,8 @@ function SignupForm(props) {
                     </InputGroupAddon>
                     <Input
                       type="text"
-                      placeholder={globalMessages.name.defaultMessage}
-                      autoComplete="name"
+                      placeholder={intl.formatMessage({ id: 'app.global.name' })}
+                      autoComplete={intl.formatMessage({ id: 'app.global.name' })}
                       name="name"
                       value={formData.name}
                       onChange={(e) => handleChange(e, 'name')}
@@ -101,8 +98,8 @@ function SignupForm(props) {
                     </InputGroupAddon>
                     <Input
                       type="text"
-                      placeholder={globalMessages.surname.defaultMessage}
-                      autoComplete="surname"
+                      placeholder={ intl.formatMessage({ id: 'app.global.surname' })}
+                      autoComplete={ intl.formatMessage({ id: 'app.global.surname' })}
                       name="surname"
                       value={formData.surname}
                       onChange={(e) => handleChange(e, 'surname')}
@@ -153,9 +150,7 @@ function SignupForm(props) {
                     </InputGroupAddon>
                     <Input
                       type="password"
-                      // placeholder={ <FormattedMessage {...globalMessages.password_repeat} />}
-                      // placeholder={ intl.formatMessage(...messages.header)}
-                      placeholder={ intl.formatMessage({ id: 'app.components.SignupForm.passwordConfirmation' })}
+                      placeholder={ intl.formatMessage({ id: 'app.global.password_repeat' })}
                       autoComplete="password_confirmation"
                       name="password_confirmation"
                       value={formData.password_confirmation}
@@ -175,7 +170,9 @@ function SignupForm(props) {
                     <Label check className="form-check-label" htmlFor="privacy_policy_accepted">Privacy policy</Label>
                   </InputGroup>
 
-                  <Button color="success" block>Create Account</Button>
+                  <Button color="success" block>
+                    <FormattedMessage {...messages.subtitle} />
+                  </Button>
                 </Form>
               </CardBody>
               <CardFooter className="p-4">
