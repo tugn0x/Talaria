@@ -9,32 +9,49 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { Switch, Route } from 'react-router-dom';
+import {Container,Row, Col, Card, CardBody} from 'reactstrap'
 import ForgotPasswordForm from '../../../components/Auth/ForgotPasswordForm';
 import ResetPasswordForm from '../../../components/Auth/ResetPasswordForm';
 import {requestForgotPassword, requestResetPassword} from '../AuthProvider/actions';
 import { createStructuredSelector } from 'reselect';
-import requestError from './selectors';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-
+import Loader from "../../../components/Form/Loader";
 
 function ForgotPasswordPage(props) {
-  console.log(props)
-  const {requestError} = props
-
   return (
     <>
-      {!props.match.params.reset_token && !props.auth.isForgotPasswordMode && <ForgotPasswordForm requestError={requestError} forgot={ (email) => props.dispatch(requestForgotPassword({"email": email})) } /> }
+      {!props.match.params.reset_token && !props.auth.isForgotPasswordMode && 
+        <Loader show={props.auth.loading}>
+          <ForgotPasswordForm requestError={props.auth.error} forgot={ (email) => props.dispatch(requestForgotPassword({"email": email})) } /> 
+        </Loader>  
+      }
       {
-        (props.auth.isForgotPasswordMode || props.match.params.reset_token) && <>ciaociasdejfgrjge</> && <ResetPasswordForm token={props.match.params.reset_token}/>
+        props.auth.isForgotPasswordMode &&  
+          <div className="app flex-row align-items-center">
+            <Container>
+              <Row>
+                <Col md="12">
+                  <Card className="mx-4">
+                    <CardBody className="p-4">
+                      <h3>Abbiamo inviato una mail</h3>
+                    </CardBody>
+                  </Card>
+                </Col>
+              </Row>
+            </Container>
+          </div>
+      }
+      {
+        (props.match.params.reset_token) && 
+          <ResetPasswordForm requestError={props.auth.error} reset={(formData) => props.dispatch(requestResetPassword(formData))} token={props.match.params.reset_token}/>
       }
     </>
   );
 }
 
 const mapStateToProps = createStructuredSelector({
-  requestError: requestError(),
- // requestSuccess: requestSuccess(),
+  
 });
 
 function mapDispatchToProps(dispatch) {

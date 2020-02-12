@@ -8,40 +8,22 @@ import React from 'react';
 import { Link as RouterLink } from "react-router-dom";
 import { withGoogleReCaptcha } from "react-google-recaptcha-v3"
 import { Card, CardBody, Button, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row, Label, FormGroup } from 'reactstrap';
-import {ErrorBox, Loader} from "../..";
+// import {ErrorBox} from "../..";
 import messages from './messages';
 import globalMessages from '../../../utils/globalMessages'
 import { FormattedMessage } from 'react-intl';
 import {useIntl} from 'react-intl';
 
-/* const styles = (theme) => {
-  return {
-    errorBox: {
-      textAlign: "center",
-      padding: theme.spacing(.5),
-      color: theme.palette.common.white,
-      backgroundColor: theme.palette.error.main,
-    },
-    page: {
-      width:"100%",
-    },
-    formGroup:{
-      width:"100%",
-    },
-  }
-}; */
-
-
 
 function ResetPasswordForm(props){
 
-  const {requestError} = props
+  const {token, reset, requestError} = props
 
   const intl = useIntl()
 
   const [formData,setFormData] = React.useState({
     email: "",
-    token: props.token ? props.token : '',
+    token: token ? token : '',
     password: "",
     password_confirmation: "",
     recaptcha: ""
@@ -51,6 +33,8 @@ function ResetPasswordForm(props){
     setFormData({ ...formData, recaptcha: token })
   }
   */
+
+  console.log()
   const handleChange = (e) =>{
     setFormData({
       ...formData,[e.target.name]:e.target.value
@@ -66,8 +50,8 @@ function ResetPasswordForm(props){
     if (form.checkValidity() === false) {
       console.log("Dont Send Form")
     } else {
-      props.reset(formData.email)
-      console.log("Send Form")
+      reset(formData)
+      // console.log(formData.email, formData.password, token)
     }
     return
     /* props.googleReCaptchaProps.executeRecaptcha('reset').then(token => {
@@ -82,44 +66,12 @@ function ResetPasswordForm(props){
   return(
     <div className="app flex-row align-items-center">
       <Container>
-       {/*  <Loader show={props.auth.loading} > */}
-       <h1>MI serve</h1>
-        <ul>
-          <li>
-            token (se presente recuperare da param in get)
-          </li>
-          <li>
-            indirizzo email
-          </li>
-          <li>
-            conferma password
-          </li>
-          <li>
-            password
-          </li>
-          </ul>
           <Row className="justify-content-center">
             <Col md="9" lg="7" xl="6">
               <Card className="mx-4">
                 <CardBody className="p-4">
                   <Form onSubmit={submitForm}  noValidate>
-                  <InputGroup className="mb-3">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>@</InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      type="text"
-                      placeholder="Reset Token"
-                      autoComplete="token"
-                      name="email"
-                      value={formData.token}
-                      onChange={(e) => handleChange(e, 'token')}
-                      required
-                    />
-                    <div className="invalid-feedback">
-                      <FormattedMessage {...globalMessages.invalid_email} />
-                    </div>
-                  </InputGroup>
+                  <h3>RESET PASSWORD</h3>
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>@</InputGroupText>
@@ -169,8 +121,11 @@ function ResetPasswordForm(props){
                       pattern={formData.password}
                       required
                     />
+                    <div className="invalid-feedback">
+                      <FormattedMessage {...globalMessages.password_match} />
+                    </div>
                   </InputGroup>
-                    {requestError !== null &&
+                    {requestError !== null && 
                       <div className="text-danger">{requestError}</div>
                     }
                     <Button color="success" block>
@@ -181,7 +136,6 @@ function ResetPasswordForm(props){
               </Card>
             </Col>
           </Row>
-       {/*  </Loader> */}
       </Container>
     </div>
   );

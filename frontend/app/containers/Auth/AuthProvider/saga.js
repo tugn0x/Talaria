@@ -198,7 +198,7 @@ export function* resetPasswordSaga(action){
   try {
     const request = yield call(resetPassword, resetPasswordOption);
     yield put(requestResetPasswordSuccess(request));
-    yield put(push("/"));
+   // yield put(push("/"));
   } catch (error) {
     yield put(requestError(error.message));
 
