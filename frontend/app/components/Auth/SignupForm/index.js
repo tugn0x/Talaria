@@ -10,11 +10,14 @@ import { AppSwitch } from '@coreui/react'
 import { withGoogleReCaptcha } from "react-google-recaptcha-v3"
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import globalMessages from 'app/utils/globalMessages'
 import {withRouter} from "react-router-dom";
-import './style.scss';
-const validEmailRegex = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$";
 import {formatDate} from '../../../utils/dates'
 import {Loader, SocialAuth} from "../..";
+
+import './style.scss';
+
+// const validEmailRegex = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$";
 
 function SignupForm(props) {
   const [formData,setFormData] = React.useState({
@@ -58,6 +61,7 @@ function SignupForm(props) {
     });
     // e.preventDefault();
   }
+  console.log(<FormattedMessage {...globalMessages.password_repeat} />)
   return (
     <div className="app flex-row align-items-center">
       <Container>
@@ -67,15 +71,17 @@ function SignupForm(props) {
             <Card className="mx-4">
               <CardBody className="p-4">
                 <Form onSubmit={submitChange}  noValidate>
-                  <h1>Register</h1>
-                  <p className="text-muted">Create your account</p>
+                  <h1><FormattedMessage {...messages.header} /></h1>
+                  <p className="text-muted">
+                    <FormattedMessage {...messages.subtitle} />
+                  </p>
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>name</InputGroupText>
                     </InputGroupAddon>
                     <Input
                       type="text"
-                      placeholder="Name"
+                      placeholder={globalMessages.name.defaultMessage}
                       autoComplete="name"
                       name="name"
                       value={formData.name}
@@ -83,7 +89,7 @@ function SignupForm(props) {
                       required
                     />
                     <div className="invalid-feedback">
-                      Please choose a username.
+                      <FormattedMessage {...globalMessages.invalid_name} />
                     </div>
                   </InputGroup>
                   <InputGroup className="mb-3">
@@ -92,7 +98,7 @@ function SignupForm(props) {
                     </InputGroupAddon>
                     <Input
                       type="text"
-                      placeholder="Surname"
+                      placeholder={globalMessages.surname.defaultMessage}
                       autoComplete="surname"
                       name="surname"
                       value={formData.surname}
@@ -100,7 +106,7 @@ function SignupForm(props) {
                       required
                     />
                     <div className="invalid-feedback">
-                      Please choose a surname.
+                      <FormattedMessage {...globalMessages.invalid_surname} />
                     </div>
                   </InputGroup>
                   <InputGroup className="mb-3">
@@ -117,7 +123,7 @@ function SignupForm(props) {
                       required
                     />
                     <div className="invalid-feedback">
-                      Please provide a valid email
+                      <FormattedMessage {...globalMessages.invalid_email} />
                     </div>
                   </InputGroup>
                   <InputGroup className="mb-3">
@@ -144,7 +150,7 @@ function SignupForm(props) {
                     </InputGroupAddon>
                     <Input
                       type="password"
-                      placeholder="Repeat password"
+                      placeholder={ <FormattedMessage {...globalMessages.password_repeat} />}
                       autoComplete="password_confirmation"
                       name="password_confirmation"
                       value={formData.password_confirmation}
@@ -153,7 +159,7 @@ function SignupForm(props) {
                       required
                     />
                     <div className="invalid-feedback">
-                      Passwords must match
+                      <FormattedMessage {...globalMessages.password_match} />
                     </div>
                   </InputGroup>
                   <InputGroup className="mb-4">
