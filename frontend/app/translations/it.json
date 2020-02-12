@@ -4,8 +4,10 @@
   "app.global.password_repeat": "Ripeti la Password",
   "app.global.invalid_name": "Inserisci un nome",
   "app.global.invalid_surname": "Inserisci un cognome",
+  "app.global.invalid_email": "Inserisci un indirizzo email valida",
   "app.containers.HomePage.header": "ITALIANO HOMEPAGE CONTAINER",
   "app.containers.NotFoundPage.header": "",
   "app.components.SignupForm.header": "Registrati",
-  "app.components.SignupForm.subtitle": "Crea un profilo"
+  "app.components.SignupForm.subtitle": "Crea un profilo",
+  "app.components.ForgotPasswordForm.submitFormButton": "Richiedi una nuova password"
 }

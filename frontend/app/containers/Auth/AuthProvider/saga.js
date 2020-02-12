@@ -187,7 +187,7 @@ export function* forgotPasswordSaga(action){
     yield put(requestForgotPasswordSuccess(request));
   } catch (error) {
     yield put(requestError(error.message));
-
+    console.log("response")
   }
 }
 
