@@ -1,8 +1,11 @@
 {
-  "app.global.password_repeat": "Ripeti Password",
+  "app.global.name": "Nome",
+  "app.global.surname": "Cognome",
+  "app.global.password_repeat": "Ripeti la Password",
+  "app.global.invalid_name": "Inserisci un nome",
+  "app.global.invalid_surname": "Inserisci un cognome",
   "app.containers.HomePage.header": "ITALIANO HOMEPAGE CONTAINER",
   "app.containers.NotFoundPage.header": "",
   "app.components.SignupForm.header": "Registrati",
-  "app.components.SignupForm.passwordConfirmation": "Ripeti la password",
   "app.components.SignupForm.subtitle": "Crea un profilo"
 }
