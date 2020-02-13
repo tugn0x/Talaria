@@ -169,7 +169,6 @@ function SignupForm(props) {
                                onChange={(e) => handlePrivacyPolicty(e)}/>
                     <Label check className="form-check-label" htmlFor="privacy_policy_accepted">Privacy policy</Label>
                   </InputGroup>
-
                   <Button color="success" block>
                     <FormattedMessage {...messages.subtitle} />
                   </Button>

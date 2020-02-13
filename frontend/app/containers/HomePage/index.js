@@ -10,7 +10,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { HeaderBar, Footer } from '../../components'
 import { Switch, Route } from 'react-router-dom';
-import {requestLogout} from "../Auth/AuthProvider/actions";
+import {requestLogout, requestProfileUpdate} from "../Auth/AuthProvider/actions";
 import {createStructuredSelector} from "reselect";
 import {compose} from "redux";
 import { connect } from 'react-redux';
@@ -22,15 +22,16 @@ import Profile from '../User/Profile'
 */
 
 export const Routes = (props) => {
-  console.log(props)
+ 
   return (
     <Switch>
-      <Route exact path={"/user-profile"} component={() => <Profile user={props.auth.user} />}/>
+      <Route exact path={"/user-profile"} component={() => <Profile user={props.auth.user} updateProfile={(formData) => props.dispatch(requestProfileUpdate(formData)) } />}/>
     </Switch>
   )
 }
 
 function HomePage(props) {
+  console.log(props)
   return (
     <>
       <div className="app sidebar-minimized sidebar-show">
@@ -43,7 +44,7 @@ function HomePage(props) {
             <h1>
               <FormattedMessage {...messages.header} /> HOOOOME PAGE
             </h1>
-            <Routes auth={props.auth} />
+            <Routes auth={props.auth} dispatch={props.dispatch}/>
           </main>
         </div>
         <Footer/>

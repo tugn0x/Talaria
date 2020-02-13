@@ -125,7 +125,7 @@ export function* userProfileUpdateSaga(action) {
   try {
     const request = yield call(updateProfile, options);
     yield put(requestProfileUpdateSuccess(request));
-    yield put(enqueueSuccess("Profilo aggiornato"));
+    // yield put(enqueueSuccess("Profilo aggiornato"));
   } catch(e) {
     yield put(requestError(e.message));
     yield call(logoutAuthSaga);
