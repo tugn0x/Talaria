@@ -87,7 +87,7 @@ export const asyncSubmit = (options) => {
 
 export const changePassword = (options) => {
   options = getOption(options);
-  return request(`${BASE_URL}/oauth/change-password/`, options)
+  return request(`${BASE_URL}/api/v1/auth/change-password/`, options)
 };
 
 export const forgotPassword = (options) => {

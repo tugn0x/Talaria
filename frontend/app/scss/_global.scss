@@ -16,6 +16,14 @@ p, label {
     line-height: 1.5em;
 }
 
+a {
+    color: black;
+    &:hover {
+        text-decoration: underline;
+        color: black;
+    }
+}
+
 .btn {
     border-radius: 0;
 }

@@ -13,24 +13,6 @@ import messages from './messages';
 import globalMessages from '../../../utils/globalMessages'
 import { FormattedMessage } from 'react-intl';
 
-/* const styles = (theme) => {
-  return {
-    errorBox: {
-      textAlign: "center",
-      padding: theme.spacing(.5),
-      color: theme.palette.common.white,
-      backgroundColor: theme.palette.error.main,
-    },
-    page: {
-      width:"100%",
-    },
-    formGroup:{
-      width:"100%",
-    },
-  }
-}; */
-
-
 
 function ForgotPasswordForm(props){
   
@@ -51,8 +33,6 @@ function ForgotPasswordForm(props){
     })
   }
 
-  
-  
   const submitForm = (e) =>{
     e.preventDefault();
     const form = e.target;

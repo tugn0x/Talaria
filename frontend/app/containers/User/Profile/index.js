@@ -4,10 +4,10 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 // import globalMessages from '../../../utils/globalMessages'
 import {useIntl} from 'react-intl';
-
+import Loader from '../../../components/Form/Loader.js'
 
 const Profile = (props) => {
-    const {user, updateProfile} = props
+    const {user, updateProfile, loading} = props
     const [formData,setFormData] = React.useState({
         name: { 
             value: user ? user.name : "",
@@ -56,13 +56,8 @@ const Profile = (props) => {
       let sendData = {}
       const intl = useIntl();
     
-      /* React.useEffect(() => {
-          console.log('Profile', props.user)
-      }, []) */
-    
-      const handleChange = (e, input_name) =>{
+      const handleChange = (e) =>{
         setFormData({ ...formData, [e.target.name]: { ...formData[e.target.name], value: e.target.value }  })
-        
       }
     
       const submitForm = (e) =>{
@@ -91,7 +86,7 @@ const Profile = (props) => {
     return (
         <div className="app flex-row align-items-center">
             <Container>
-                {/* <Loader show={props.auth.loading} > */}
+                <Loader show={loading} > 
                     <Row className="justify-content-center">
                         <Col md="9" lg="7" xl="6">
                             <Card className="mx-4">
@@ -102,30 +97,26 @@ const Profile = (props) => {
                                         <FormattedMessage {...messages.subtitle} />
                                     </p>
                                     {
-                                       /*  console.log(intl.formatMessage({ id: 'app.containers.UserProfile.phone' })) */
-                                    }
-                                    {
-                                    Object.keys(formData).map(key => {
-                                        const input = formData[key]
-                                        console.log(formData)
-                                        return (
-                                            <InputGroup key={key} className="mb-3">
-                                                <InputGroupAddon addonType="prepend">
-                                                    <InputGroupText>{key}</InputGroupText>
-                                                </InputGroupAddon>
-                                                <CustomInput 
-                                                    className="form-control"
-                                                    id={key}
-                                                    type={input.type}
-                                                    placeholder={ intl.formatMessage({ id: `app.containers.UserProfile.${key}` })}
-                                                    name={key}
-                                                    value={input.value !== null ? input.value : ''}
-                                                    onChange={(e) => handleChange(e)}
-                                                    required={input.required ? input.required : false}
-                                                />
-                                            </InputGroup>
-                                        )
-                                    }) 
+                                        Object.keys(formData).map(key => {
+                                            const input = formData[key]
+                                            return (
+                                                <InputGroup key={key} className="mb-3">
+                                                    <InputGroupAddon addonType="prepend">
+                                                        <InputGroupText>{key}</InputGroupText>
+                                                    </InputGroupAddon>
+                                                    <CustomInput 
+                                                        className="form-control"
+                                                        id={key}
+                                                        type={input.type}
+                                                        placeholder={typeof messages[key] !== 'undefined' ? intl.formatMessage(messages[key]) : '' }
+                                                        name={key}
+                                                        value={input.value !== null ? input.value : ''}
+                                                        onChange={(e) => handleChange(e)}
+                                                        required={input.required ? input.required : false}
+                                                    />
+                                                </InputGroup>
+                                            )
+                                        }) 
                                     }
                                     <Button color="success" type="submit" block>
                                         <FormattedMessage {...messages.subtitle} />
@@ -138,7 +129,7 @@ const Profile = (props) => {
                             </Card>
                         </Col>
                     </Row> 
-                {/* </Loader>  */}
+                </Loader>  
             </Container>
         </div>      
     )

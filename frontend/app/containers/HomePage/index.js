@@ -10,11 +10,12 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { HeaderBar, Footer } from '../../components'
 import { Switch, Route } from 'react-router-dom';
-import {requestLogout, requestProfileUpdate} from "../Auth/AuthProvider/actions";
+import {requestLogout, requestProfileUpdate, requestChangePassword} from "../Auth/AuthProvider/actions";
 import {createStructuredSelector} from "reselect";
 import {compose} from "redux";
 import { connect } from 'react-redux';
-import Profile from '../User/Profile'
+import Profile from '../User/Profile';
+import ChangePassword from '../User/ChangePassword';
 /*
 <Route path={"/library"} component={Library}/>
 <Route path={"/institute"} component={Institute}/>
@@ -25,7 +26,9 @@ export const Routes = (props) => {
  
   return (
     <Switch>
-      <Route exact path={"/user-profile"} component={() => <Profile user={props.auth.user} updateProfile={(formData) => props.dispatch(requestProfileUpdate(formData)) } />}/>
+      <Route exact path={"/user-profile"} component={() => <Profile loading={props.auth.loading} user={props.auth.user} updateProfile={(formData) => props.dispatch(requestProfileUpdate(formData)) } />}/>
+      <Route exact path={"/change-password"} component={() => <ChangePassword loading={props.auth.loading} changePassword={(formData) => props.dispatch(requestChangePassword(formData)) } />}/>
+      <Route exact path={"/"} component={() => <h1><FormattedMessage {...messages.header} /> HOOOOME PAGE</h1>}/>
     </Switch>
   )
 }
@@ -41,9 +44,6 @@ function HomePage(props) {
               Menu contestuale
           </div>
           <main className="main">
-            <h1>
-              <FormattedMessage {...messages.header} /> HOOOOME PAGE
-            </h1>
             <Routes auth={props.auth} dispatch={props.dispatch}/>
           </main>
         </div>
