@@ -34,7 +34,6 @@ function ResetPasswordForm(props){
   }
   */
 
-  console.log()
   const handleChange = (e) =>{
     setFormData({
       ...formData,[e.target.name]:e.target.value
@@ -62,7 +61,6 @@ function ResetPasswordForm(props){
 
   }
 
-
   return(
     <div className="app flex-row align-items-center">
       <Container>
@@ -71,6 +69,7 @@ function ResetPasswordForm(props){
               <Card className="mx-4">
                 <CardBody className="p-4">
                   <Form onSubmit={submitForm}  noValidate>
+                  {/* <h3>Abbiamo inviato una mail</h3> */}
                   <h3> <FormattedMessage {...messages.header} /></h3>
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">

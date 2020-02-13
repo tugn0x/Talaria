@@ -27,23 +27,7 @@ function ForgotPasswordPage(props) {
         </Loader>  
       }
       {
-        props.auth.isForgotPasswordMode &&  
-          <div className="app flex-row align-items-center">
-            <Container>
-              <Row>
-                <Col md="12">
-                  <Card className="mx-4">
-                    <CardBody className="p-4">
-                      <h3>Abbiamo inviato una mail</h3>
-                    </CardBody>
-                  </Card>
-                </Col>
-              </Row>
-            </Container>
-          </div>
-      }
-      {
-        (props.match.params.reset_token) && 
+         (props.match.params.reset_token || props.auth.isForgotPasswordMode) && 
           <ResetPasswordForm requestError={props.auth.error} reset={(formData) => props.dispatch(requestResetPassword(formData))} token={props.match.params.reset_token}/>
       }
     </>

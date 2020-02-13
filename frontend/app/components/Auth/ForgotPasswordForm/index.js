@@ -51,7 +51,7 @@ function ForgotPasswordForm(props){
     })
   }
 
-  // console.log(requestError)
+  
   
   const submitForm = (e) =>{
     e.preventDefault();
