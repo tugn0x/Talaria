@@ -51,6 +51,13 @@ class User extends UserBase
         'password',
         'remember_token',
         'password_confirmation',
+
+        "deleted_at",
+        "created_by",
+        "updated_by",
+        "deleted_by",
+        "created_at",
+        "updated_at",
     ];
 
     /**

@@ -116,7 +116,7 @@ trait AuthControllerTrait
 	public function updateMe(Request $request)
 	{
 		$user = Auth::user();
-		$controller = \App::make('App\Http\Controllers\UserController');
+		$controller = \App::make('App\Http\Controllers\Users\UserController');
 		$controller->nilde->disableAuthorize();
 		$update = $controller->update($request, $user->id);
 		$controller->nilde->enableAuthorize();
