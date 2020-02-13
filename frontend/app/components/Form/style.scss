@@ -1,4 +1,11 @@
+@import '../../scss/vendors/variables';
+
 .spinner-border {
     display: block;
     margin: 0 auto;
+}
+
+.error-box {
+    color: $danger;
+    text-align: center;
 }

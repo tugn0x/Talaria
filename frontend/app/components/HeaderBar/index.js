@@ -19,7 +19,10 @@ import logo from '../../images/logo_home.gif'
 import logomini from '../../images/logo.png'
 
 function HeaderBar(props) {
-  console.log('HeaderBar', props)
+  // console.log('HeaderBar', props)
+  
+  const { auth } = props
+  
   return (
     <header className="app-header navbar bg-dark">
       {/*<FormattedMessage {...messages.header} />*/}
@@ -48,17 +51,12 @@ function HeaderBar(props) {
           <NavItem className="d-md-down-none">
             <NavLink to="#" className="nav-link"><i className="icon-bell"></i><Badge pill color="danger">5</Badge></NavLink>
           </NavItem>
-          <NavItem className="d-md-down-none">
-            <NavLink to="#" className="nav-link"><i className="icon-list"></i></NavLink>
-          </NavItem>
-          <NavItem className="d-md-down-none">
-            <NavLink to="#" className="nav-link"><i className="icon-location-pin"></i></NavLink>
-          </NavItem>
         */}
         <UncontrolledDropdown nav direction="down">
           <DropdownToggle nav>
             {/*<img src={'../../assets/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />*/}
-            <i className="fa fa-3x fa-user"></i>
+            <i className="fa fa-3x fa-user float-left"></i>
+            <span className="user-name float-right">{auth.user.name}</span>
           </DropdownToggle>
           <DropdownMenu right>
             <DropdownItem header tag="div" className="text-center"><strong>Libraries</strong></DropdownItem>
@@ -71,7 +69,7 @@ function HeaderBar(props) {
             {/*<DropdownItem><i className="fa fa-envelope-o"></i> Messages<Badge color="success">42</Badge></DropdownItem>*/}
             {/*<DropdownItem><i className="fa fa-tasks"></i> Tasks<Badge color="danger">42</Badge></DropdownItem>*/}
             {/*<DropdownItem><i className="fa fa-comments"></i> Comments<Badge color="warning">42</Badge></DropdownItem>*/}
-            <DropdownItem><i className="fa fa-user"></i> Profile</DropdownItem>
+            <DropdownItem><i className="fa fa-user"></i><Link to="/user-profile">Profile</Link></DropdownItem>
             <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
             {/*<DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>*/}
             <DropdownItem onClick={e => props.logout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>

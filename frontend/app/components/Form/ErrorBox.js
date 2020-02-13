@@ -2,17 +2,18 @@ import React from "react";
 // import useStyles from 'useStyles';
 // import Typography from '@material-ui/core/Typography';
 
-function renderError(classes, error) {
+
+function RenderError(error) {
   if(typeof error == "string") {
     return (
-      <p className={classes.errorBox}>
+      <p key={error} className="error-box">
         {error}
       </p>
     )
   } else {
     return (
       error.map( errorString =>
-        <p className={classes.errorBox}>
+        <p key={errorString} className="error-box" >
           {errorString}
         </p>
       )
@@ -21,13 +22,12 @@ function renderError(classes, error) {
 }
 
 function ErrorBox(props) {
-  // const classes = useStyles();
   if(props.error && typeof props.error == 'string') {
     return [
-      renderError(classes, props.error)
+      RenderError(props.error)
     ]
   }
-  return props.error && Object.keys(props.error).map(key => renderError(classes, props.error[key]))
+  return props.error && Object.keys(props.error).map(key => <RenderError key={props.error[key]} error={props.error[key]} /> )
 }
 
 export default ErrorBox;

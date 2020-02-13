@@ -27,12 +27,15 @@ import { withGoogleReCaptcha } from "react-google-recaptcha-v3"
 import { Link as RouterLink, withRouter } from "react-router-dom";
 import GarrImg from '../../../images/idem.svg'
 import {SocialAuth} from "../..";
+import ErrorBox from "../../Form/ErrorBox";
 
   function LoginForm(props) {
     const [formData,setFormData] = React.useState({
       username: "",
       password: ""
     });
+
+    const error = props.auth.error
 
     const linkTo = (path) => {
       props.history.push(`/${path}`)
@@ -41,6 +44,8 @@ import {SocialAuth} from "../..";
     const handleChange = (e) =>{
       setFormData({ ...formData,[e.target.name]: e.target.value })
     }
+
+    
 
     const submitChange = (e) =>{
       e.preventDefault();
@@ -96,6 +101,7 @@ import {SocialAuth} from "../..";
                           onChange={(e) => handleChange(e, 'password')}
                         />
                       </InputGroup>
+                      <ErrorBox error={error}/>
                       <Row>
                         <Col xs="12">
                           <Button
