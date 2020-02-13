@@ -49,16 +49,16 @@ function ResetPasswordForm(props){
     if (form.checkValidity() === false) {
       console.log("Dont Send Form")
     } else {
-      reset(formData)
-      // console.log(formData.email, formData.password, token)
+      console.log("Sending Form")
+      props.googleReCaptchaProps.executeRecaptcha('ResetPassword').then(token => {
+        reset({ ...formData, recaptcha: token })
+      }).catch(error => {
+        console.log("ERROR IN submitChange executeRecaptcha")
+        console.error("error", error);
+      });
+      
     }
     return
-    /* props.googleReCaptchaProps.executeRecaptcha('reset').then(token => {
-      props.requestToken({ ...formData, recaptcha: token })
-    }).catch(error => {
-      console.error("error", error);
-    }); */
-
   }
 
   return(

@@ -21,7 +21,7 @@ import logomini from '../../images/logo.png'
 function HeaderBar(props) {
   // console.log('HeaderBar', props)
   
-  const { auth } = props
+  const { auth, isLogged } = props
   
   return (
     <header className="app-header navbar bg-dark">
@@ -59,21 +59,29 @@ function HeaderBar(props) {
             <span className="user-name float-right">{auth.user.name}</span>
           </DropdownToggle>
           <DropdownMenu right>
-            <DropdownItem header tag="div" className="text-center"><strong>Libraries</strong></DropdownItem>
-            <DropdownItem><i className="fa fa-book"></i> CNR</DropdownItem>
-            <DropdownItem><i className="fa fa-book"></i> Salaborsa</DropdownItem>
-            {/*<DropdownItem><i className="fa fa-file"></i> Projects<Badge color="primary">42</Badge></DropdownItem>*/}
-            <DropdownItem divider />
-            <DropdownItem header tag="div" className="text-center"><strong>User Account</strong></DropdownItem>
-            {/*<DropdownItem><i className="fa fa-bell-o"></i> Updates<Badge color="info">42</Badge></DropdownItem>*/}
-            {/*<DropdownItem><i className="fa fa-envelope-o"></i> Messages<Badge color="success">42</Badge></DropdownItem>*/}
-            {/*<DropdownItem><i className="fa fa-tasks"></i> Tasks<Badge color="danger">42</Badge></DropdownItem>*/}
-            {/*<DropdownItem><i className="fa fa-comments"></i> Comments<Badge color="warning">42</Badge></DropdownItem>*/}
-            <DropdownItem><i className="fa fa-user"></i><Link to="/user-profile">Profile</Link></DropdownItem>
-            <DropdownItem><i className="fa fa-lock"></i><Link to="/change-password">Change Password</Link></DropdownItem>
-            <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
-            {/*<DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>*/}
-            <DropdownItem onClick={e => props.logout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>
+            { 
+              isLogged && (
+                <>
+                <DropdownItem header tag="div" className="text-center"><strong>Libraries</strong></DropdownItem>
+                <DropdownItem><i className="fa fa-book"></i> CNR</DropdownItem>
+                <DropdownItem><i className="fa fa-book"></i> Salaborsa</DropdownItem>
+                {/*<DropdownItem><i className="fa fa-file"></i> Projects<Badge color="primary">42</Badge></DropdownItem>*/}
+                <DropdownItem divider />
+                <DropdownItem header tag="div" className="text-center"><strong>User Account</strong></DropdownItem>
+                {/*<DropdownItem><i className="fa fa-bell-o"></i> Updates<Badge color="info">42</Badge></DropdownItem>*/}
+                {/*<DropdownItem><i className="fa fa-envelope-o"></i> Messages<Badge color="success">42</Badge></DropdownItem>*/}
+                {/*<DropdownItem><i className="fa fa-tasks"></i> Tasks<Badge color="danger">42</Badge></DropdownItem>*/}
+                {/*<DropdownItem><i className="fa fa-comments"></i> Comments<Badge color="warning">42</Badge></DropdownItem>*/}
+                <DropdownItem><i className="fa fa-user"></i><Link to="/user-profile">Profile</Link></DropdownItem>
+                <DropdownItem><i className="fa fa-lock"></i><Link to="/change-password">Change Password</Link></DropdownItem>
+                <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
+                {/*<DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>*/}
+                <DropdownItem onClick={e => props.logout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>
+                </>
+              ) ||
+              <DropdownItem><Link to="/">Login</Link></DropdownItem>
+            }
+            
           </DropdownMenu>
         </UncontrolledDropdown>
       </Nav>

@@ -28,20 +28,22 @@ function SignupForm(props) {
     password: "",
     confirm_password: "",
     privacy_policy_accepted: "",
+    recaptcha: '',
   });
   const intl = useIntl();
-
-  const linkTo = (path) => {
-    props.history.push(`/${path}`)
-  };
-
-  const handleChange = (e, input_name) =>{
+  
+  const handleChange = (e) =>{
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
+  
   const handlePrivacyPolicty = (e) =>{
     const value = e.target.checked ? formatDate() : ''
     setFormData({ ...formData,['privacy_policy_accepted']: value })
   }
+
+  /* useEffect(() => {
+    console.log(props.googleReCaptchaProps.executeRecaptcha('homepage'))
+  }, []) */
 
   const submitChange = (e) =>{
     e.preventDefault();
@@ -50,22 +52,20 @@ function SignupForm(props) {
     if (form.checkValidity() === false) {
       console.log("Dont Send Form")
     } else {
-      props.signup({ ...formData })
-      console.log("Send Form")
+      props.googleReCaptchaProps.executeRecaptcha('Signup').then(token => {
+        props.signup({ ...formData, recaptcha: token })
+      }).catch(error => {
+        console.log("ERROR IN submitChange executeRecaptcha")
+        console.error("error", error);
+      });
     }
     return
-    props.googleReCaptchaProps.executeRecaptcha('homepage').then(token => {
-      props.signup({ ...formData, recaptcha: token })
-    }).catch(error => {
-      console.log("ERROR IN submitChange executeRecaptcha")
-      console.error("error", error);
-    });
-    // e.preventDefault();
   }
+
   return (
     <div className="app flex-row align-items-center">
       <Container>
-        <Loader show={props.auth.loading} >
+        {/* <Loader show={props.auth.loading} > */}
         <Row className="justify-content-center">
           <Col md="9" lg="7" xl="6">
             <Card className="mx-4">
@@ -85,7 +85,7 @@ function SignupForm(props) {
                       autoComplete={intl.formatMessage({ id: 'app.global.name' })}
                       name="name"
                       value={formData.name}
-                      onChange={(e) => handleChange(e, 'name')}
+                      onChange={(e) => handleChange(e)}
                       required
                     />
                     <div className="invalid-feedback">
@@ -102,7 +102,7 @@ function SignupForm(props) {
                       autoComplete={ intl.formatMessage({ id: 'app.global.surname' })}
                       name="surname"
                       value={formData.surname}
-                      onChange={(e) => handleChange(e, 'surname')}
+                      onChange={(e) => handleChange(e)}
                       required
                     />
                     <div className="invalid-feedback">
@@ -119,7 +119,7 @@ function SignupForm(props) {
                       autoComplete="email"
                       name="email"
                       value={formData.email}
-                      onChange={(e) => handleChange(e, 'email')}
+                      onChange={(e) => handleChange(e)}
                       required
                     />
                     <div className="invalid-feedback">
@@ -138,7 +138,7 @@ function SignupForm(props) {
                       autoComplete="current-password"
                       name="password"
                       value={formData.password}
-                      onChange={(e) => handleChange(e, 'password')}
+                      onChange={(e) => handleChange(e)}
                       required
                     />
                   </InputGroup>
@@ -154,7 +154,7 @@ function SignupForm(props) {
                       autoComplete="password_confirmation"
                       name="password_confirmation"
                       value={formData.password_confirmation}
-                      onChange={(e) => handleChange(e, 'password_confirmation')}
+                      onChange={(e) => handleChange(e)}
                       pattern={formData.password}
                       required
                     />
@@ -166,21 +166,26 @@ function SignupForm(props) {
                     <AppSwitch className={'mx-1'} color={'primary'}
                                value={formData.privacy_policy_accepted}
                                name='privacy_policy_accepted'
-                               onChange={(e) => handlePrivacyPolicty(e)}/>
+                               onChange={(e) => handlePrivacyPolicty(e)}
+                               required
+                               />
                     <Label check className="form-check-label" htmlFor="privacy_policy_accepted">Privacy policy</Label>
+                   {/*  <div className="invalid-feedback">
+                      Privacy policy is mandatory
+                    </div> */}
                   </InputGroup>
                   <Button color="success" block>
                     <FormattedMessage {...messages.subtitle} />
                   </Button>
                 </Form>
               </CardBody>
-              <CardFooter className="p-4">
+              {/* <CardFooter className="p-4">
                 <SocialAuth loginFacebook={props.loginFacebook} loginGoogle={props.loginGoogle}/>
-              </CardFooter>
+              </CardFooter> */}
             </Card>
           </Col>
         </Row>
-        </Loader>
+        {/* </Loader> */}
       </Container>
     </div>
   );

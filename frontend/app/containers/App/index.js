@@ -14,9 +14,9 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { syncPersistanceRequest, isSync } from "../../persistence";
-
+import {requestLogout} from "../Auth/AuthProvider/actions";
 import {HomePage, NotFoundPage, LoginPage, IdpPage} from 'containers';
-
+import { HeaderBar, Footer } from 'components'
 import GlobalStyle from '../../global-styles';
 import {SignupPage, ForgotPassword} from "containers";
 
@@ -25,10 +25,12 @@ function App(props) {
   useEffect(() => {
     props.dispatch(syncPersistanceRequest());
   }, []);
+  console.log("APP", props)
   return (
     <div>
+      <HeaderBar isLogged={props.isLogged} auth={props.auth} logout={(request) => props.dispatch(requestLogout(request))}/>
       <Switch>
-        <Route exact path={"/signup"} component={() => <SignupPage auth={props.auth} history={history} />} />
+        <Route exact path={"/signup"}  component={() => <SignupPage auth={props.auth} history={history} />} />
         <Route path={"/forgot-password/:reset_token?"} component={({match}) => <ForgotPassword auth={props.auth} history={history} match={match} />} />
         <Route path="/idp-callback/:refresh_token" component={IdpPage} />
         {!props.isLogged && <Route component={() => <LoginPage auth={props.auth} tokensExistsExpired={props.tokensExistsExpired} />} />}

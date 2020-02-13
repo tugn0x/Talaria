@@ -10,7 +10,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { HeaderBar, Footer } from '../../components'
 import { Switch, Route } from 'react-router-dom';
-import {requestLogout, requestProfileUpdate, requestChangePassword} from "../Auth/AuthProvider/actions";
+import {requestProfileUpdate, requestChangePassword} from "../Auth/AuthProvider/actions";
 import {createStructuredSelector} from "reselect";
 import {compose} from "redux";
 import { connect } from 'react-redux';
@@ -34,11 +34,10 @@ export const Routes = (props) => {
 }
 
 function HomePage(props) {
-  console.log(props)
+ // console.log(props)
   return (
     <>
       <div className="app sidebar-minimized sidebar-show">
-        <HeaderBar auth={props.auth} logout={(request) => props.dispatch(requestLogout(request))}/>
         <div className="app-body">
           <div className="sidebar">
               Menu contestuale

@@ -23,7 +23,7 @@ function ForgotPasswordPage(props) {
     <>
       {!props.match.params.reset_token && !props.auth.isForgotPasswordMode && 
         <Loader show={props.auth.loading}>
-          <ForgotPasswordForm requestError={props.auth.error} forgot={ (email) => props.dispatch(requestForgotPassword({"email": email})) } /> 
+          <ForgotPasswordForm requestError={props.auth.error} forgot={ (formData) => props.dispatch(requestForgotPassword(formData)) } /> 
         </Loader>  
       }
       {

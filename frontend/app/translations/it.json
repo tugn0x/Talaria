@@ -12,6 +12,6 @@
   "app.components.ForgotPasswordForm.submitFormButton": "Richiedi una nuova password",
   "app.components.LoginForm.header": "Accedi a Nilde",
   "app.components.LoginForm.loginButton": "Accedi",
-  "app.components.LoginForm.forgot": "Ho dimenticato i dati di accesso"
-  
+  "app.components.LoginForm.forgot": "Ho dimenticato i dati di accesso",
+  "app.components.ForgotPasswordForm.header": "Password Dimenticata"
 }

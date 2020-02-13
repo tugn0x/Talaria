@@ -11,7 +11,7 @@ export const scope = 'app.components.ForgotPasswordForm';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'This is the LoginForm component!',
+    defaultMessage: 'Forgot Password',
   },
   submitFormButton: {
     id: `${scope}.submitFormButton`,

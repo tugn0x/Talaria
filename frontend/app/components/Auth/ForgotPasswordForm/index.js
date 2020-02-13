@@ -40,16 +40,16 @@ function ForgotPasswordForm(props){
     if (form.checkValidity() === false) {
       console.log("Dont Send Form")
     } else {
-      props.forgot(formData.email)
-      console.log("Send Form")
+      console.log("...Sending Form")
+      props.googleReCaptchaProps.executeRecaptcha('ForgotPassword').then(token => {
+        props.forgot({ ...formData, recaptcha: token })
+      }).catch(error => {
+        console.log("ERROR IN submitChange executeRecaptcha")
+        console.error("error", error);
+      });
+      
     }
     return
-    /* props.googleReCaptchaProps.executeRecaptcha('forgot').then(token => {
-      props.requestToken({ ...formData, recaptcha: token })
-    }).catch(error => {
-      console.error("error", error);
-    }); */
-    
   }
   
 
@@ -62,7 +62,7 @@ function ForgotPasswordForm(props){
               <Card className="mx-4">
                 <CardBody className="p-4">
                   <Form onSubmit={submitForm}  noValidate>
-                    <h3>PASSWORD DIMENTICATA</h3>
+                    <h3><FormattedMessage {...messages.header} /></h3>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>@</InputGroupText>
