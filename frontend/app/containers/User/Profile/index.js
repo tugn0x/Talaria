@@ -53,36 +53,41 @@ const Profile = (props) => {
             required: true,
         },
       });
-      let sendData = {}
-      const intl = useIntl();
 
-      const handleChange = (e) =>{
+    let sendData = {}
+    const intl = useIntl();
+
+    const handleChange = (e) =>{
         setFormData({ ...formData, [e.target.name]: { ...formData[e.target.name], value: e.target.value }  })
-      }
+    }
 
-      const submitForm = (e) =>{
+    const submitForm = (e) =>{
         e.preventDefault();
         const form = e.target;
         form.classList.add('was-validated');
         if (form.checkValidity() === false) {
-          console.log("Dont Send Form")
+            console.log("Dont Send Form")
         } else {
-          Object.keys(formData).map(key => {
-              sendData = {...sendData,  [key]: formData[key].value }
-          })
-          updateProfile({ ...sendData })
-          console.log("Send Form", sendData)
+            Object.keys(formData).map(key => {
+                sendData = {...sendData,  [key]: formData[key].value }
+            })
+            updateProfile({ ...sendData })
+            console.log("Send Form", sendData)
         }
         return
+        /* 
+        Recaptcha
         props.googleReCaptchaProps.executeRecaptcha('homepage').then(token => {
-          props.signup({ ...formData, recaptcha: token })
+            props.signup({ ...formData, recaptcha: token })
         }).catch(error => {
+
           console.log("ERROR IN submitChange executeRecaptcha")
           console.error("error", error);
         });
-        // e.preventDefault();
-      }
+        // e.preventDefault(); */
+    }
 
+      
     return (
         <div className="app flex-row align-items-center">
             <Container>
@@ -124,7 +129,6 @@ const Profile = (props) => {
                                     </Form>
                                 </CardBody>
                                 <CardFooter className="p-4">
-
                                 </CardFooter>
                             </Card>
                         </Col>

@@ -1,19 +1,16 @@
 import React from "react";
-// import useStyles from 'useStyles';
-// import Typography from '@material-ui/core/Typography';
 
-
-function RenderError(error) {
+function RenderError(error, className = "") {
   if(typeof error == "string") {
     return (
-      <p key={error} className="error-box">
+      <p key={error} className={`${className} error-box`}>
         {error}
       </p>
     )
   } else {
     return (
       error.map( errorString =>
-        <p key={errorString} className="error-box" >
+        <p key={errorString} className={`${className} error-box`} >
           {errorString}
         </p>
       )

@@ -14,7 +14,7 @@ import globalMessages from 'utils/globalMessages'
 import {withRouter} from "react-router-dom";
 import {formatDate} from 'utils/dates'
 import {Loader, SocialAuth} from "../..";
-
+import ErrorBox from 'components/Form'
 import {useIntl} from 'react-intl';
 
 import './style.scss';
@@ -52,12 +52,13 @@ function SignupForm(props) {
     if (form.checkValidity() === false) {
       console.log("Dont Send Form")
     } else {
-      props.googleReCaptchaProps.executeRecaptcha('Signup').then(token => {
+      console.log('Sending Form Sign up')
+      /* props.googleReCaptchaProps.executeRecaptcha('Signup').then(token => {
         props.signup({ ...formData, recaptcha: token })
       }).catch(error => {
         console.log("ERROR IN submitChange executeRecaptcha")
         console.error("error", error);
-      });
+      }); */
     }
     return
   }
@@ -88,9 +89,12 @@ function SignupForm(props) {
                       onChange={(e) => handleChange(e)}
                       required
                     />
-                    <div className="invalid-feedback">
+                    <ErrorBox className="invalid-feedback">
                       <FormattedMessage {...globalMessages.invalid_name} />
-                    </div>
+                    </ErrorBox>
+                    {/* <div className="invalid-feedback">
+                      <FormattedMessage {...globalMessages.invalid_name} />
+                    </div> */}
                   </InputGroup>
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
@@ -163,16 +167,13 @@ function SignupForm(props) {
                     </div>
                   </InputGroup>
                   <InputGroup className="mb-4">
-                    <AppSwitch className={'mx-1'} color={'primary'}
+                    <AppSwitch className="mx-1" color="primary"
                                value={formData.privacy_policy_accepted}
                                name='privacy_policy_accepted'
                                onChange={(e) => handlePrivacyPolicty(e)}
                                required
                                />
-                    <Label check className="form-check-label" htmlFor="privacy_policy_accepted">Privacy policy</Label>
-                   {/*  <div className="invalid-feedback">
-                      Privacy policy is mandatory
-                    </div> */}
+                    <Label check className="form-check-label" htmlFor="privacy_policy_accepted">Privacy policy</Label> 
                   </InputGroup>
                   <Button color="success" block>
                     <FormattedMessage {...messages.subtitle} />
