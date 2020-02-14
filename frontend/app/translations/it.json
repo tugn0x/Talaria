@@ -2,6 +2,7 @@
   "app.global.name": "Nome",
   "app.global.surname": "Cognome",
   "app.global.password_repeat": "Ripeti la Password",
+  "app.global.password_match": "Le password devono corrispondere",
   "app.global.invalid_name": "Inserisci un nome",
   "app.global.invalid_surname": "Inserisci un cognome",
   "app.global.invalid_email": "Inserisci un indirizzo email valida",

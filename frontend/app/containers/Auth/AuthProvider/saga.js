@@ -26,7 +26,7 @@ import { push } from 'connected-react-router';
 import { login, loginRefresh, oauthOption, oauthOptionRefreshToken, signup, getProfile, getPermissions, setToken, verifySms, newToken, changePassword, forgotPassword, resetPassword, updateProfile, deleteProfile, socialOauth } from 'utils/api';
 // import {socialLogin} from "../../../../fblogin/src/store/social/actions";
 
-// import { enqueueSuccess } from '../NotificationSnake/actions';
+import { enqueueToasterSuccess } from 'containers/Toaster/actions';
 
 // Individual exports for testing
 export function* loginAuthSaga(action) {
@@ -125,10 +125,11 @@ export function* userProfileUpdateSaga(action) {
   try {
     const request = yield call(updateProfile, options);
     yield put(requestProfileUpdateSuccess(request));
+    yield put(enqueueToasterSuccess('Profilo aggiornato'))
     // yield put(enqueueSuccess("Profilo aggiornato"));
   } catch(e) {
     yield put(requestError(e.message));
-    yield call(logoutAuthSaga);
+   // yield call(logoutAuthSaga);
   }
 }
 

@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link as RouterLink } from "react-router-dom";
 import { withGoogleReCaptcha } from "react-google-recaptcha-v3"
 import { Card, CardBody, Button, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row, Label, FormGroup } from 'reactstrap';
@@ -13,7 +13,7 @@ import messages from './messages';
 import globalMessages from 'utils/globalMessages'
 import { FormattedMessage } from 'react-intl';
 import {useIntl} from 'react-intl';
-
+import {ErrorBox} from 'components';
 
 function ResetPasswordForm(props){
 
@@ -48,6 +48,7 @@ function ResetPasswordForm(props){
     form.classList.add('was-validated');
     if (form.checkValidity() === false) {
       console.log("Dont Send Form")
+      return
     } else {
       console.log("Sending Form")
       props.googleReCaptchaProps.executeRecaptcha('ResetPassword').then(token => {
@@ -98,9 +99,7 @@ function ResetPasswordForm(props){
                       onChange={(e) => handleChange(e, 'email')}
                       required
                     />
-                    <div className="invalid-feedback">
-                      <FormattedMessage {...globalMessages.invalid_email} />
-                    </div>
+                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.invalid_email' })} /> 
                   </InputGroup>
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
@@ -134,12 +133,10 @@ function ResetPasswordForm(props){
                       pattern={formData.password}
                       required
                     />
-                    <div className="invalid-feedback">
-                      <FormattedMessage {...globalMessages.password_match} />
-                    </div>
+                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.password_match' })} /> 
                   </InputGroup>
                     {requestError !== null &&
-                      <div className="text-danger">{requestError}</div>
+                      <ErrorBox className="text-danger" error={  requestError } /> 
                     }
                     <Button color="success" block>
                       <FormattedMessage {...messages.submitFormButton} />

@@ -5,7 +5,7 @@
  */
 import produce from 'immer';
 import moment from "moment";
-import { SYNC_AUTH, STOP_LOADING, REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_REFRESH, REQUEST_LOGIN_SUCCESS, REQUEST_LOGOUT_SUCCESS,
+import { SYNC_AUTH, RESET_ERROR, STOP_LOADING, REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_REFRESH, REQUEST_LOGIN_SUCCESS, REQUEST_LOGOUT_SUCCESS,
   REQUEST_REFRESH_SUCCESS, REQUEST_ERROR, REQUEST_SIGNUP, REQUEST_SIGNUP_SUCCESS, REQUEST_PERMISSIONS, REQUEST_PERMISSIONS_SUCCESS,
   REQUEST_PROFILE, REQUEST_PROFILE_SUCCESS, REQUEST_NEW_TOKEN, REQUEST_NEW_TOKEN_SUCCESS, REQUEST_CHANGE_PASSWORD,
   REQUEST_CHANGE_PASSWORD_SUCCESS, REQUEST_FORGOT_PASSWORD, REQUEST_FORGOT_PASSWORD_SUCCESS, REQUEST_RESET_PASSWORD, REQUEST_RESET_PASSWORD_SUCCESS,
@@ -70,6 +70,10 @@ const authReducer = (state = initialState, action) =>
           draft.error = action.error;
           draft.isForgotPasswordMode = false;
         break;
+      case RESET_ERROR:
+        draft.loading = false;
+        draft.error = initialState.error;
+      break;
       case REQUEST_SIGNUP:
           draft.loading = true;
           draft.error = initialState.error;

@@ -14,7 +14,7 @@ import globalMessages from 'utils/globalMessages'
 import {withRouter} from "react-router-dom";
 import {formatDate} from 'utils/dates'
 import {Loader, SocialAuth} from "../..";
-import ErrorBox from 'components/Form'
+import {ErrorBox} from 'components';
 import {useIntl} from 'react-intl';
 
 import './style.scss';
@@ -89,12 +89,7 @@ function SignupForm(props) {
                       onChange={(e) => handleChange(e)}
                       required
                     />
-                    <ErrorBox className="invalid-feedback">
-                      <FormattedMessage {...globalMessages.invalid_name} />
-                    </ErrorBox>
-                    {/* <div className="invalid-feedback">
-                      <FormattedMessage {...globalMessages.invalid_name} />
-                    </div> */}
+                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.invalid_name' })} /> 
                   </InputGroup>
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
@@ -109,9 +104,7 @@ function SignupForm(props) {
                       onChange={(e) => handleChange(e)}
                       required
                     />
-                    <div className="invalid-feedback">
-                      <FormattedMessage {...globalMessages.invalid_surname} />
-                    </div>
+                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.invalid_surname' })} /> 
                   </InputGroup>
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
@@ -126,9 +119,7 @@ function SignupForm(props) {
                       onChange={(e) => handleChange(e)}
                       required
                     />
-                    <div className="invalid-feedback">
-                      <FormattedMessage {...globalMessages.invalid_email} />
-                    </div>
+                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.invalid_email' })} /> 
                   </InputGroup>
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
@@ -162,9 +153,7 @@ function SignupForm(props) {
                       pattern={formData.password}
                       required
                     />
-                    <div className="invalid-feedback">
-                      <FormattedMessage {...globalMessages.password_match} />
-                    </div>
+                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.password_match' })} /> 
                   </InputGroup>
                   <InputGroup className="mb-4">
                     <AppSwitch className="mx-1" color="primary"

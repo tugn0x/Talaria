@@ -3,16 +3,16 @@ import React from "react";
 function RenderError(error, className = "") {
   if(typeof error == "string") {
     return (
-      <p key={error} className={`${className} error-box`}>
+      <div key={error} className={`${className} error-box`}>
         {error}
-      </p>
+      </div>
     )
   } else {
     return (
       error.map( errorString =>
-        <p key={errorString} className={`${className} error-box`} >
+        <div key={errorString} className={`${className} error-box`} >
           {errorString}
-        </p>
+        </div>
       )
     )
   }
@@ -21,10 +21,10 @@ function RenderError(error, className = "") {
 function ErrorBox(props) {
   if(props.error && typeof props.error == 'string') {
     return [
-      RenderError(props.error)
+      RenderError(props.error, props.className)
     ]
   }
-  return props.error && Object.keys(props.error).map(key => <RenderError key={props.error[key]} error={props.error[key]} /> )
+  return props.error && Object.keys(props.error).map(key => <RenderError key={props.error[key]} className={props.className} error={props.error[key]} /> )
 }
 
 export default ErrorBox;

@@ -27,7 +27,7 @@ import {App, LanguageProvider, AuthProvider} from 'containers';
 
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3"
 import { RECAPTCHA_SITE_KEY } from "utils/constants";
-
+import Toaster from 'containers/Toaster';
 // Load the favicon and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
@@ -46,12 +46,14 @@ const initialState = {};
 const { store } = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
+
 const render = messages => {
   initializeReactGA(history);
   ReactDOM.render(
     <Provider store={store}>
       <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY} language={"it"}>
         {/*<SnackbarProvider maxSnack={3}>*/}
+          <Toaster />
           <LanguageProvider messages={messages}>
             <ConnectedRouter history={history}>
               <AuthProvider>

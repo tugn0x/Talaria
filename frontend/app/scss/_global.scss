@@ -37,6 +37,10 @@ a {
     display: none !important;
 }
 
+.invalid-feedback {
+    text-align: left !important;
+}
+
 form {
     &.was-validated {
         .form-check-input[aria-checked=false] ~ .switch-slider {

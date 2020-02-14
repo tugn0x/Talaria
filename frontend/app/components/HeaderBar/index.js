@@ -55,8 +55,14 @@ function HeaderBar(props) {
         <UncontrolledDropdown nav direction="down">
           <DropdownToggle nav>
             {/*<img src={'../../assets/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />*/}
-            <i className="fa fa-3x fa-user float-left"></i>
-            <span className="user-name float-right">{auth.user.name}</span>
+            { isLogged && (
+              <>
+                <i className="fa fa-3x fa-user float-left"></i>
+                <span className="user-name float-right">{auth.user.name}</span>
+              </>
+            ) || 
+              (<i className="fa fa-3x fa-bars float-left"></i>)
+            }
           </DropdownToggle>
           <DropdownMenu right>
             {

@@ -28,7 +28,7 @@ function ForgotPasswordPage(props) {
       }
       {
          (props.match.params.reset_token || props.auth.isForgotPasswordMode) &&
-          <ResetPasswordForm requestError={props.auth.error} reset={(formData) => props.dispatch(requestResetPassword(formData))} token={props.match.params.reset_token}/>
+          <ResetPasswordForm requestError={props.auth.error}  reset={(formData) => props.dispatch(requestResetPassword(formData))} token={props.match.params.reset_token}/>
       }
     </>
   );

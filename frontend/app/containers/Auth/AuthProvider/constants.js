@@ -12,6 +12,7 @@ export const REQUEST_LOGOUT_SUCCESS = 'app/Auth/REQUEST_LOGOUT_SUCCESS';
 export const REQUEST_REFRESH_SUCCESS = 'app/Auth/REQUEST_REFRESH_SUCCESS';
 export const REQUEST_ERROR = 'app/Auth/REQUEST_ERROR';
 
+export const RESET_ERROR = 'app/Auth/RESET_ERROR';
 export const REQUEST_SIGNUP = 'app/Auth/REQUEST_SIGNUP';
 export const REQUEST_SIGNUP_SUCCESS = 'app/Auth/REQUEST_SIGNUP_SUCCESS';
 
