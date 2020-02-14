@@ -18,7 +18,7 @@ import {
   requestPermissionsSuccess,
   socialLoginPrepare,
   socialLoginRequest,
-  requestIdpSignup,
+  requestIdpSignup, requestPermissions,
 } from './actions';
 import makeSelectAuth, { tokensExistsExpired, isLogged  } from './selectors';
 import { push } from 'connected-react-router';
@@ -242,6 +242,7 @@ export function* refreshAuthSaga() {
       setToken(request.access_token);
       yield put(requestLoginSuccess(request));
       yield call(userProfileSaga);
+      yield call(requestPermissions);
     } catch(e) {
       yield put(requestError(e.message));
       yield call(logoutAuthSaga);

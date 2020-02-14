@@ -4,50 +4,50 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 // import globalMessages from '../../../utils/globalMessages'
 import {useIntl} from 'react-intl';
-import Loader from '../../../components/Form/Loader.js'
+import Loader from 'components/Form/Loader.js'
 
 const Profile = (props) => {
     const {user, updateProfile, loading} = props
     const [formData,setFormData] = React.useState({
-        name: { 
+        name: {
             value: user ? user.name : "",
             type: "text",
             required: true,
         },
-        surname: { 
+        surname: {
             value: user ? user.surname : "",
             type: "text",
             required: true,
         },
-        address: { 
+        address: {
             value: user ? user.address : "",
             type: "text",
         },
-        town: { 
+        town: {
             value: user ? user.town : "",
             type: "text",
         },
-        district: { 
+        district: {
             value: user ? user.district : "",
             type: "text",
         },
-        postcode: { 
+        postcode: {
             value: user ? user.postcode : "",
             type: "number",
         },
-        state: { 
+        state: {
             value: user ? user.state : "",
             type: "text",
         },
-        phone: { 
+        phone: {
             value: user ? user.phone : "",
             type: "number",
         },
-        mobile: { 
+        mobile: {
             value: user ? user.mobile : "",
             type: "number",
         },
-        email: { 
+        email: {
             value: user ? user.email : "",
             type: "email",
             required: true,
@@ -55,11 +55,11 @@ const Profile = (props) => {
       });
       let sendData = {}
       const intl = useIntl();
-    
+
       const handleChange = (e) =>{
         setFormData({ ...formData, [e.target.name]: { ...formData[e.target.name], value: e.target.value }  })
       }
-    
+
       const submitForm = (e) =>{
         e.preventDefault();
         const form = e.target;
@@ -82,11 +82,11 @@ const Profile = (props) => {
         });
         // e.preventDefault();
       }
-      
+
     return (
         <div className="app flex-row align-items-center">
             <Container>
-                <Loader show={loading} > 
+                <Loader show={loading} >
                     <Row className="justify-content-center">
                         <Col md="9" lg="7" xl="6">
                             <Card className="mx-4">
@@ -104,7 +104,7 @@ const Profile = (props) => {
                                                     <InputGroupAddon addonType="prepend">
                                                         <InputGroupText>{key}</InputGroupText>
                                                     </InputGroupAddon>
-                                                    <CustomInput 
+                                                    <CustomInput
                                                         className="form-control"
                                                         id={key}
                                                         type={input.type}
@@ -116,7 +116,7 @@ const Profile = (props) => {
                                                     />
                                                 </InputGroup>
                                             )
-                                        }) 
+                                        })
                                     }
                                     <Button color="success" type="submit" block>
                                         <FormattedMessage {...messages.subtitle} />
@@ -124,14 +124,14 @@ const Profile = (props) => {
                                     </Form>
                                 </CardBody>
                                 <CardFooter className="p-4">
-                                
+
                                 </CardFooter>
                             </Card>
                         </Col>
-                    </Row> 
-                </Loader>  
+                    </Row>
+                </Loader>
             </Container>
-        </div>      
+        </div>
     )
 }
 

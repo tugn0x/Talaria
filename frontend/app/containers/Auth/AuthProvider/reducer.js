@@ -112,6 +112,7 @@ const authReducer = (state = initialState, action) =>
       case SYNC_AUTH:
           draft.oauth = action.request.oauth;
           draft.user = action.request.user;
+          draft.permissions = action.request.permissions;
         break;
       case REQUEST_CHANGE_PASSWORD:
         draft.loading = true;

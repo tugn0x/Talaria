@@ -10,7 +10,7 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import messages from './messages';
-import { requestIdpSignup, requestLogin, socialLoginPrepare, socialLoginRequest, requestVerification, requestLogout, requestNewToken, requestRefresh } from '../AuthProvider/actions';
+import { requestIdpSignup, requestLogin, socialLoginPrepare, socialLoginRequest, requestVerification, requestLogout, requestNewToken, requestRefresh } from 'containers/Auth/AuthProvider/actions';
 
 const styles = (theme) => {
   return {

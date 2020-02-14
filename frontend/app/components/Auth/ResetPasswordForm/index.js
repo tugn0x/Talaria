@@ -10,7 +10,7 @@ import { withGoogleReCaptcha } from "react-google-recaptcha-v3"
 import { Card, CardBody, Button, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row, Label, FormGroup } from 'reactstrap';
 // import {ErrorBox} from "../..";
 import messages from './messages';
-import globalMessages from '../../../utils/globalMessages'
+import globalMessages from 'utils/globalMessages'
 import { FormattedMessage } from 'react-intl';
 import {useIntl} from 'react-intl';
 
@@ -56,7 +56,7 @@ function ResetPasswordForm(props){
         console.log("ERROR IN submitChange executeRecaptcha")
         console.error("error", error);
       });
-      
+
     }
     return
   }
@@ -138,7 +138,7 @@ function ResetPasswordForm(props){
                       <FormattedMessage {...globalMessages.password_match} />
                     </div>
                   </InputGroup>
-                    {requestError !== null && 
+                    {requestError !== null &&
                       <div className="text-danger">{requestError}</div>
                     }
                     <Button color="success" block>

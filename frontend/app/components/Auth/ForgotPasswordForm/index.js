@@ -10,14 +10,14 @@ import { withGoogleReCaptcha } from "react-google-recaptcha-v3"
 import { Card, CardBody, Button, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row, Label, FormGroup } from 'reactstrap';
 import {ErrorBox, Loader} from "../..";
 import messages from './messages';
-import globalMessages from '../../../utils/globalMessages'
+import globalMessages from 'utils/globalMessages'
 import { FormattedMessage } from 'react-intl';
 
 
 function ForgotPasswordForm(props){
-  
+
   const {requestError} = props
-  
+
   const [formData,setFormData] = React.useState({
     email: "",
     recaptcha: ""
@@ -47,11 +47,11 @@ function ForgotPasswordForm(props){
         console.log("ERROR IN submitChange executeRecaptcha")
         console.error("error", error);
       });
-      
+
     }
     return
   }
-  
+
 
   return(
     <div className="app flex-row align-items-center">
@@ -80,7 +80,7 @@ function ForgotPasswordForm(props){
                         <FormattedMessage {...globalMessages.invalid_email} />
                       </div>
                     </InputGroup>
-                    {requestError !== null && 
+                    {requestError !== null &&
                       <div className="text-danger">{requestError}</div>
                     }
                     <Button color="success" block>

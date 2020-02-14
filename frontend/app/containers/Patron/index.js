@@ -1,6 +1,6 @@
 /**
  *
- * Consumer
+ * Patron
  *
  */
 
@@ -13,15 +13,14 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectConsumer from './selectors';
+import makeSelectPatron from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 
-export function Consumer() {
-  useInjectReducer({ key: 'consumer', reducer });
-  useInjectSaga({ key: 'consumer', saga });
-
+export function Patron() {
+  useInjectReducer({ key: 'patron', reducer });
+  useInjectSaga({ key: 'patron', saga });
   return (
     <div>
       <FormattedMessage {...messages.header} />
@@ -29,12 +28,12 @@ export function Consumer() {
   );
 }
 
-Consumer.propTypes = {
+Patron.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  consumer: makeSelectConsumer(),
+  patron: makeSelectPatron(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -48,4 +47,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(Consumer);
+export default compose(withConnect)(Patron);

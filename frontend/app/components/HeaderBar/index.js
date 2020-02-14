@@ -15,14 +15,14 @@ import { DropdownItem, DropdownMenu, DropdownToggle, Nav, UncontrolledDropdown, 
 import PropTypes from 'prop-types';
 
 import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
-import logo from '../../images/logo_home.gif'
-import logomini from '../../images/logo.png'
+import logo from 'images/logo_home.gif'
+import logomini from 'images/logo.png'
 
 function HeaderBar(props) {
   // console.log('HeaderBar', props)
-  
+
   const { auth, isLogged } = props
-  
+
   return (
     <header className="app-header navbar bg-dark">
       {/*<FormattedMessage {...messages.header} />*/}
@@ -59,14 +59,19 @@ function HeaderBar(props) {
             <span className="user-name float-right">{auth.user.name}</span>
           </DropdownToggle>
           <DropdownMenu right>
-            { 
+            {
               isLogged && (
                 <>
-                <DropdownItem header tag="div" className="text-center"><strong>Libraries</strong></DropdownItem>
-                <DropdownItem><i className="fa fa-book"></i> CNR</DropdownItem>
-                <DropdownItem><i className="fa fa-book"></i> Salaborsa</DropdownItem>
-                {/*<DropdownItem><i className="fa fa-file"></i> Projects<Badge color="primary">42</Badge></DropdownItem>*/}
-                <DropdownItem divider />
+                  {
+                    auth.permissions.resources && "libraries" in auth.permissions.resources && (<>
+                      <DropdownItem header tag="div" className="text-center"><strong>Libraries</strong></DropdownItem>
+                        {/*{auth.permissions.resources.libraries.map((item) => <DropdownItem><i className="fa fa-book"></i> {item.entity.name}</DropdownItem>)}*/}
+                        {auth.permissions.resources.libraries.map((item) => <DropdownItem><i className="fa fa-book"></i> {item.resource.name}</DropdownItem>)}
+                      <DropdownItem><i className="fa fa-book"></i> CNR</DropdownItem>
+                      <DropdownItem><i className="fa fa-book"></i> Salaborsa</DropdownItem>
+                      <DropdownItem divider />
+                    </>)
+                  }
                 <DropdownItem header tag="div" className="text-center"><strong>User Account</strong></DropdownItem>
                 {/*<DropdownItem><i className="fa fa-bell-o"></i> Updates<Badge color="info">42</Badge></DropdownItem>*/}
                 {/*<DropdownItem><i className="fa fa-envelope-o"></i> Messages<Badge color="success">42</Badge></DropdownItem>*/}
@@ -81,7 +86,7 @@ function HeaderBar(props) {
               ) ||
               <DropdownItem><Link to="/">Login</Link></DropdownItem>
             }
-            
+
           </DropdownMenu>
         </UncontrolledDropdown>
       </Nav>

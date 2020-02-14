@@ -1,6 +1,6 @@
 /*
  *
- * Consumer actions
+ * LibrarySettings actions
  *
  */
 

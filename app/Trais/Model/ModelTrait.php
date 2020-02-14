@@ -19,6 +19,8 @@ trait ModelTrait
     protected $userstamping = true;
     protected static $observerClass = null;
 
+    protected static $stringIdentifies = 'name';
+
     protected $internalMessagesAttributes = ['internal_messages_error', 'internal_messages_info'];
 
     protected $tmp = array();
@@ -232,6 +234,10 @@ trait ModelTrait
     {
         $original = $this->hasCast($field) ? $this->castAttribute($field, $this->getOriginal($field)) : $this->getOriginal($field);
         return $original === $this->$field;
+    }
+
+    protected static function getName($id) {
+        return \DB::table(self::$table)->select(self::$stringIdentifies)->where('id', $id)->first();
     }
 
 }

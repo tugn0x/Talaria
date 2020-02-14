@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\Controller;
+//use App\Traits\Http\Auth\PermissionControllerTrait;
 use Illuminate\Http\Request;
 use App\Models\User\Permission;
 use App\Models\User\PermissionTransformer;
@@ -10,9 +12,8 @@ use App\Models\User\PermissionTransformer;
  *
  * @Resource("Permission", uri="/permission")
  */
-class PermissionController extends Controller
+class PermissionController extends ApiController
 {
-    use PermissionControllerTrait;
     /**
      * Create a new controller instance.
      *

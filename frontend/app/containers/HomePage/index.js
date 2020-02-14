@@ -8,7 +8,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import { HeaderBar, Footer } from '../../components'
+import { HeaderBar, Footer } from 'components'
 import { Switch, Route } from 'react-router-dom';
 import {requestProfileUpdate, requestChangePassword} from "../Auth/AuthProvider/actions";
 import {createStructuredSelector} from "reselect";
@@ -23,7 +23,7 @@ import ChangePassword from '../User/ChangePassword';
 */
 
 export const Routes = (props) => {
- 
+
   return (
     <Switch>
       <Route exact path={"/user-profile"} component={() => <Profile loading={props.auth.loading} user={props.auth.user} updateProfile={(formData) => props.dispatch(requestProfileUpdate(formData)) } />}/>

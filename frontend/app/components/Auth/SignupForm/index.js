@@ -10,9 +10,9 @@ import { AppSwitch } from '@coreui/react'
 import { withGoogleReCaptcha } from "react-google-recaptcha-v3"
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import globalMessages from '../../../utils/globalMessages'
+import globalMessages from 'utils/globalMessages'
 import {withRouter} from "react-router-dom";
-import {formatDate} from '../../../utils/dates'
+import {formatDate} from 'utils/dates'
 import {Loader, SocialAuth} from "../..";
 
 import {useIntl} from 'react-intl';
@@ -31,11 +31,11 @@ function SignupForm(props) {
     recaptcha: '',
   });
   const intl = useIntl();
-  
+
   const handleChange = (e) =>{
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
-  
+
   const handlePrivacyPolicty = (e) =>{
     const value = e.target.checked ? formatDate() : ''
     setFormData({ ...formData,['privacy_policy_accepted']: value })

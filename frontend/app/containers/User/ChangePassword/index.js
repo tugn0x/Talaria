@@ -3,14 +3,14 @@ import { CustomInput, Button, Card, CardBody, CardFooter, Col, Container, Form, 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { withGoogleReCaptcha } from "react-google-recaptcha-v3"
-import globalMessages from '../../../utils/globalMessages'
+import globalMessages from 'utils/globalMessages'
 import {useIntl} from 'react-intl';
-import Loader from '../../../components/Form/Loader.js'
+import Loader from 'components/Form/Loader.js'
 
 const ChangePassword = (props) => {
-    
+
     const { loading, changePassword} = props
-  
+
     const intl = useIntl()
 
     const [formData,setFormData] = React.useState({
@@ -47,13 +47,13 @@ const ChangePassword = (props) => {
         }).catch(error => {
           console.error("error", error);
         }); */
-        
+
     }
-    
+
     return (
         <div className="app flex-row align-items-center">
             <Container>
-                <Loader show={loading} > 
+                <Loader show={loading} >
                     <Row className="justify-content-center">
                         <Col md="9" lg="7" xl="6">
                             <Card className="mx-4">
@@ -83,7 +83,7 @@ const ChangePassword = (props) => {
                                                 placeholder="New Password"
                                                 autoComplete="email"
                                                 name="new_password"
-                                                pattern=".{8,}" 
+                                                pattern=".{8,}"
                                                 title="Password must be min 8 chars"
                                                 value={formData.new_password}
                                                 onChange={(e) => handleChange(e)}
@@ -119,13 +119,13 @@ const ChangePassword = (props) => {
                                         </Button>
                                     </Form>
                                 </CardBody>
-                            </Card> 
+                            </Card>
                         </Col>
                     </Row>
                 </Loader>
             </Container>
         </div>
-    )                          
+    )
 }
 
 

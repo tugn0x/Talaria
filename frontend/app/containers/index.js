@@ -14,7 +14,10 @@ import IdpPage from "./Auth/IdpPage/Loadable"
 import LoginPage from "./Auth/LoginPage/Loadable"
 import SignupPage from "./Auth/SignupPage/Loadable"
 
-
+/*
+LIBRARY STUFFS
+ */
+import LibrarySettings from "./Library/LibrarySettings/Loadable"
 
 
 export {
@@ -29,5 +32,7 @@ export {
   IdpPage,
   LoginPage,
   SignupPage,
+
+  LibrarySettings,
 }
 

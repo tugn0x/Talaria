@@ -10,8 +10,8 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import messages from './messages';
-import { requestLogin, socialLoginPrepare, socialLoginRequest, requestVerification, requestLogout, requestNewToken } from '../AuthProvider/actions';
-import { LoginForm } from "../../../components";
+import { requestLogin, socialLoginPrepare, socialLoginRequest, requestVerification, requestLogout, requestNewToken } from 'containers/Auth/AuthProvider/actions';
+import { LoginForm } from "components";
 
 // import VerificationForm from "../../../../frontend/app/components/VerificationForm";
 

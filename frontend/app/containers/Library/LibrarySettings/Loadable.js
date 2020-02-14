@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for Consumer
+ * Asynchronously loads the component for LibrarySettings
  *
  */
 

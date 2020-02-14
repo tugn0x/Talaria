@@ -11,8 +11,8 @@ import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
-import { IdpPage } from '../index';
-import { DEFAULT_LOCALE } from '../../../i18n';
+import { IdpPage } from 'containers';
+import { DEFAULT_LOCALE } from 'i18n';
 
 describe('<IdpPage />', () => {
   it('Expect to not log errors in console', () => {

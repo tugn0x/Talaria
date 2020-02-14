@@ -1,9 +1,9 @@
 // import produce from 'immer';
-import consumerReducer from '../reducer';
+import patronReducer from '../reducer';
 // import { someAction } from '../actions';
 
 /* eslint-disable default-case, no-param-reassign */
-describe('consumerReducer', () => {
+describe('patronReducer', () => {
   let state;
   beforeEach(() => {
     state = {
@@ -13,7 +13,7 @@ describe('consumerReducer', () => {
 
   it('returns the initial state', () => {
     const expectedResult = state;
-    expect(consumerReducer(undefined, {})).toEqual(expectedResult);
+    expect(patronReducer(undefined, {})).toEqual(expectedResult);
   });
 
   /**

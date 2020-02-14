@@ -17,7 +17,7 @@ import { syncPersistanceRequest, isSync } from "../../persistence";
 import {requestLogout} from "../Auth/AuthProvider/actions";
 import {HomePage, NotFoundPage, LoginPage, IdpPage} from 'containers';
 import { HeaderBar, Footer } from 'components'
-import GlobalStyle from '../../global-styles';
+import GlobalStyle from 'global-styles';
 import {SignupPage, ForgotPassword} from "containers";
 
 

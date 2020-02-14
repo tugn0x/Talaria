@@ -1,5 +1,6 @@
 <?php namespace App\Traits\Http\Auth;
 
+use App\Models\Users\AuthResourceTransformer;
 use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -10,6 +11,8 @@ use App\Models\Users\User;
 //use Event;
 use Gate;
 use League\OAuth2\Server\AuthorizationServer;
+use function foo\func;
+
 //use Authorizer;
 
 trait AuthControllerTrait
@@ -75,20 +78,60 @@ trait AuthControllerTrait
 	{
 		if (Auth::check()) {
 			$user = Auth::user();
-//			dd(get_class($user->abilities->groupBy('entity_type')));
+            $resources = $user->abilities()
+                ->select('abilities.entity_id','abilities.entity_type','abilities.name')
+                ->distinct()
+                ->get()
+                ->map(function ($item) {
+                    $entity = $item->entity_type::select('name')->where('id', $item->entity_id)->first();
+                    $item->resource = $entity->getTable();
+                    $item->entity_name = $entity ? $entity->name : '';
+                    unset($item->pivot);
+                    return $item;
+                })
+                ->groupBy(['resource','entity_id']);
+            $resources_array = [];
+            foreach ($resources as $class=>$items) {
+                $resources_array[$class] = [];
+                foreach ($items as $id=>$perms) {
+                    $resources_array[$class][] = [
+                        'resource' => [
+                            'id' => $id,
+                            'name' => $perms[0]['entity_name']
+                        ],
+                        'permissions' => \Arr::pluck($perms, 'name')
+                    ];
+                }
+            }
             $token_perms = [
-                "resources" => $user->abilities()
-                    ->select('abilities.entity_id','abilities.entity_type','abilities.name')
-                    ->get()
-                    ->groupBy('entity_type'),
                 "roles" => $user->roles->pluck('name'),
-                "permissions" => $user->abilities
+                "permissions" => $user->abilities,
+                "resources" => $resources_array,
             ];
 //			$token_perms = base64_encode((string)json_encode($token_perms));
 			return $this->response->array($token_perms);
 		}
 		return $this->response->errorUnauthorized(trans('apinilde::auth.unauthorized'));
 	}
+
+	public function resources(Request $request)
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            $resources = $user->abilities()
+                ->select('abilities.entity_id','abilities.entity_type','abilities.name')
+                ->distinct()
+                ->get()
+                ->map(function ($item) {
+                    $entity = $item->entity_type::select('name')->where('id', $item->entity_id)->first();
+                    $item->entity_name = $entity ? $entity->name : '';
+                    unset($item->pivot);
+                    return $item;
+                })
+                ->groupBy(['entity_type', 'entity_id']);
+            return $this->response->array($resources);
+        }
+    }
 
 //	private function permissionResources(User $user) {
 //        $reso
