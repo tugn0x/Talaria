@@ -61,11 +61,10 @@ class UserObserver extends BaseObserver
 
     public function created($model)
     {
-//        if(!is_null(config('nilde.user_default_roles')))
-//        {
-//            $default_role = $model->roles()->getModel()->where('id',config('nilde.user_default_roles'))->get();
-//            $model->roles()->attach($default_role);
-//        }
+        if(!is_null(config('api.user_default_roles')))
+        {
+            $model->assign(config('api.user_default_roles'));
+        }
     }
 
     public function updating($model)

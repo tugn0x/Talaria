@@ -18,18 +18,18 @@ class BasePolicy
         }
     }
 
-//    protected function check(User $user, Model $model, $function=NULL)
-//    {
-//        if(is_null($function))
-//            throw new \Symfony\Component\HttpKernel\Exception\HttpException('Function Permission Must Be Defined in App\Policies::check for '.$function);
-//
-//        if($user->can(str_slug($function.'-'.$model->getTable())))
-//        {
-//            return true;
-//        }
-////        \Log::info("PERMISSIONS: \n USER => ".$user."\n REQ: ".str_slug($function.'-'.$model->getTable())."\n");
-//        return false;
-//    }
+    protected function check(User $user, Model $model, $function=NULL)
+    {
+        if(is_null($function))
+            throw new \Symfony\Component\HttpKernel\Exception\HttpException('Function Permission Must Be Defined in App\Policies::check for '.$function);
+
+        if($user->can(\Str::slug($function.'-'.$model->getTable())))
+        {
+            return true;
+        }
+//        \Log::info("PERMISSIONS: \n USER => ".$user."\n REQ: ".str_slug($function.'-'.$model->getTable())."\n");
+        return false;
+    }
 //
 //    protected function checkOthers(User $user, Model $model, $function=NULL)
 //    {
@@ -51,7 +51,7 @@ class BasePolicy
 
     public function optionList(User $user, Model $model)
     {
-        return $this->check($user,$model,__FUNCTION__);
+        return $this->check($user, $model,__FUNCTION__);
     }
 
     public function index(User $user, Model $model)

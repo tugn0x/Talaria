@@ -21,11 +21,25 @@ class LibraryController extends ApiController
         $this->transformer = $transformer;
 
         $this->broadcast = false;
-
-//        app('Dingo\Api\Transformer\Factory')->register(Library::class, LibraryTransformer::class);
-
-//        dd($this->transformer);
     }
+
+//    public function optionList(Request $request)
+//    {
+//        $this->nilde->disableAuthorize();
+//
+//        $collection = $this->nilde->optionList($this->model, $request, function($collection, $request)
+//        {
+//            if($request->get('type'))
+//            {
+//                $collection->where('valid', 1);
+//            }
+//
+//            return $collection;
+//        });
+//        $this->nilde->enableAuthorize();
+//
+//        return $this->response->array($collection->sortBy('name')->values()->sortBy('id')->all());
+//    }
 
     public function store(Request $request)
     {

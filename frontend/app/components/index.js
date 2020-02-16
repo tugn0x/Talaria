@@ -9,6 +9,7 @@ import LoginForm from './Auth/LoginForm';
 import SocialAuth from './Auth/SocialAuth';
 import ForgotPasswordForm from './Auth/ForgotPasswordForm';
 import ResetPasswordForm from './Auth/ResetPasswordForm';
+import ChangePasswordForm from './Auth/ChangePasswordForm';
 /*
 FORM STUFFS
  */

@@ -10,32 +10,34 @@ class RolesAndPermissionsSeeder extends Seeder
     /*
      * MAPPA GENERICA DEI MACRO-PERMESSI E DEI RUOLI VERI:
      */
-    protected $roles = [
-        'Super Admin' => [], // SUPER ADMIN DOESN'T ASK FOR PERMISSIONS
-        /*
-         * Amministratore Nilde
-         */
-        'Admin Nilde' => [],
-        /*
-         * Gestore Nilde
-         */
-        'Manager Nilde' => [
-            // create, update, delete delle libraries
-            // create, update, delete delle institution
-        ],
-        /*
-         * Contabile Nilde
-         */
-        'Accountant Nilde' => [],
-        /*
-         * Operatore Alpe
-         */
-        'Operator Standard Licenses' => [],
-        /*
-         * Utente semplice, ricercatore
-         */
-        'Library User' => [],
-    ];
+//    protected $roles = [
+//        'Super Admin' => [], // SUPER ADMIN DOESN'T ASK FOR PERMISSIONS
+//        /*
+//         * Amministratore Nilde
+//         */
+//        'Admin Nilde' => [],
+//        /*
+//         * Gestore Nilde
+//         */
+//        'Manager Nilde' => [
+//            // create, update, delete delle libraries
+//            // create, update, delete delle institution
+//        ],
+//        /*
+//         * Contabile Nilde
+//         */
+//        'Accountant Nilde' => [],
+//        /*
+//         * Operatore Alpe
+//         */
+//        'Operator Standard Licenses' => [],
+//        /*
+//         * Utente semplice, ricercatore
+//         */
+//        'Patron' => [],
+////        'Library User' => [],
+//
+//    ];
 
     protected $macro_permissions = [
         \App\Models\Libraries\Library::class => [
@@ -137,6 +139,10 @@ class RolesAndPermissionsSeeder extends Seeder
 //                ]
 //            ],
 //        ],
+
+        'Patron' => [
+
+        ],
 
         'Registered' => [
 

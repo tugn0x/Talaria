@@ -21,10 +21,11 @@ Route::group([
     'as' => 'api.v1.libraries.',
 ], function () {
 //    Route::get('/', 'LibraryController@test')->name('test');
-    Route::get('libraries', 'LibraryController@index')->name('index');
-    Route::get('libraries/{library}', 'LibraryController@show')->name('show');
-    Route::put('libraries/{library}', 'LibraryController@update')->name('update');
-    Route::post('libraries', 'LibraryController@create')->name('create');
+    Route::get('', 'LibraryController@index')->name('index');
+    Route::get('option-items', 'LibraryController@optionList')->name('option-items');
+    Route::get('{library}', 'LibraryController@show')->name('show');
+    Route::put('{library}', 'LibraryController@update')->name('update');
+    Route::post('', 'LibraryController@create')->name('create');
 });
 //$api = app('Dingo\Api\Routing\Router');
 //$api->version('v1', function ($api) {

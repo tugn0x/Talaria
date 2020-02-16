@@ -104,10 +104,10 @@ export function* userPermissionsSaga() {
     method: 'get'
   };
   try {
-    console.log('userPermissionsSaga')
-    console.log('userPermissionsSaga')
-    console.log('userPermissionsSaga')
-    console.log('userPermissionsSaga')
+    // console.log('userPermissionsSaga')
+    // console.log('userPermissionsSaga')
+    // console.log('userPermissionsSaga')
+    // console.log('userPermissionsSaga')
     const request = yield call(getPermissions, options);
     yield put(requestPermissionsSuccess(request));
     // yield put(push("/"));

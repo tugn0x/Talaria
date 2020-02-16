@@ -239,4 +239,9 @@ return [
     ],
 
     'page_size' => 20,
+
+    'user_default_roles' => [
+        'registered',
+        /*'patron'*/
+    ]
 ];

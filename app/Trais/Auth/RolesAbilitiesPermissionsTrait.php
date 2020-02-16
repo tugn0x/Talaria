@@ -16,6 +16,9 @@ trait RolesAbilitiesPermissionsTrait
     public function isSuperAdmin() {
         return $this->hasRole('super-admin');
     }
+    public function permissions() {
+        return $this->abilities()->wherePivot('forbidden', false);
+    }
 
     public function serializeAuthorizations($items) {
         if(is_string($items))

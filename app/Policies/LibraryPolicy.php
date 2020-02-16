@@ -18,6 +18,10 @@ class LibraryPolicy extends BasePolicy
     {
         //
     }
+    public function optionList(User $user, Model $model)
+    {
+        return true;
+    }
 
     public function show(User $user, Model $model)
     {

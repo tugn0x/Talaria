@@ -2,7 +2,6 @@ import React from 'react';
 import { CustomInput, Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row, Label, FormGroup } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import { withGoogleReCaptcha } from "react-google-recaptcha-v3"
 import globalMessages from 'utils/globalMessages'
 import {useIntl} from 'react-intl';
 import Loader from 'components/Form/Loader.js'
@@ -17,13 +16,7 @@ const ChangePassword = (props) => {
         current_password: "",
         new_password: "",
         new_confirm_password: "",
-        // recaptcha: ""
     });
-
-    /* const setRecaptcha = (token) => {
-        setFormData({ ...formData, recaptcha: token })
-    }
-    */
 
     const handleChange = (e) =>{
         setFormData({
@@ -41,13 +34,6 @@ const ChangePassword = (props) => {
           changePassword(formData)
           console.log("Send Form")
         }
-        return
-        /* props.googleReCaptchaProps.executeRecaptcha('forgot').then(token => {
-          props.requestToken({ ...formData, recaptcha: token })
-        }).catch(error => {
-          console.error("error", error);
-        }); */
-
     }
 
     return (
@@ -129,4 +115,4 @@ const ChangePassword = (props) => {
 }
 
 
-export default withGoogleReCaptcha((ChangePassword));
+export default ChangePassword;

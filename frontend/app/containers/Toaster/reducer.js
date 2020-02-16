@@ -17,7 +17,7 @@ export default (state = defaultState, action) => {
                 ],
             };
 
-        case CLOSE_SNACKBAR:
+        case CLOSE_TOASTER:
             return {
                 ...state,
                 notifications: state.notifications.map(notification => (
@@ -43,7 +43,7 @@ export default (state = defaultState, action) => {
                 )),
             }
 
-       
+
  */
         default:
             return state;

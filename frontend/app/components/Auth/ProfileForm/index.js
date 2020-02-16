@@ -4,9 +4,9 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 // import globalMessages from '../../../utils/globalMessages'
 import {useIntl} from 'react-intl';
-import Loader from 'components/Form/Loader.js'
+import Loader from 'components/Form/Loader.js';
 
-const Profile = (props) => {
+const ProfileForm = (props) => {
     const {user, updateProfile, loading} = props
     const [formData,setFormData] = React.useState({
         name: {
@@ -75,7 +75,7 @@ const Profile = (props) => {
             console.log("Send Form", sendData)
         }
         return
-        /* 
+        /*
         Recaptcha
         props.googleReCaptchaProps.executeRecaptcha('homepage').then(token => {
             props.signup({ ...formData, recaptcha: token })
@@ -87,7 +87,7 @@ const Profile = (props) => {
         // e.preventDefault(); */
     }
 
-      
+
     return (
         <div className="app flex-row align-items-center">
             <Container>
@@ -139,4 +139,4 @@ const Profile = (props) => {
     )
 }
 
-export default Profile
+export default ProfileForm

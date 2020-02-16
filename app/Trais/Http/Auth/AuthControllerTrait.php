@@ -1,6 +1,7 @@
 <?php namespace App\Traits\Http\Auth;
 
 use App\Models\Users\AuthResourceTransformer;
+use App\Models\Users\PermissionTransformer;
 use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -78,18 +79,24 @@ trait AuthControllerTrait
 	{
 		if (Auth::check()) {
 			$user = Auth::user();
-            $resources = $user->abilities()
+            $resources = $user->permissions()
                 ->select('abilities.entity_id','abilities.entity_type','abilities.name')
+                ->whereNotNull('abilities.entity_id')
                 ->distinct()
                 ->get()
                 ->map(function ($item) {
-                    $entity = $item->entity_type::select('name')->where('id', $item->entity_id)->first();
-                    $item->resource = $entity->getTable();
-                    $item->entity_name = $entity ? $entity->name : '';
-                    unset($item->pivot);
+                    $entity = $item->entity_type::select('name')->find($item->entity_id);
+                    if($entity) {
+                        $item->resource = $entity->getTable();
+                        $item->entity_name = $entity ? $entity->name : '';
+                    }
                     return $item;
                 })
+                ->filter(function ($item) {
+                    return $item->entity_name;
+                })
                 ->groupBy(['resource','entity_id']);
+//            return $this->response->collection($resources, new PermissionTransformer);
             $resources_array = [];
             foreach ($resources as $class=>$items) {
                 $resources_array[$class] = [];
@@ -105,7 +112,7 @@ trait AuthControllerTrait
             }
             $token_perms = [
                 "roles" => $user->roles->pluck('name'),
-                "permissions" => $user->abilities,
+//                "permissions" => $user->abilities,
                 "resources" => $resources_array,
             ];
 //			$token_perms = base64_encode((string)json_encode($token_perms));

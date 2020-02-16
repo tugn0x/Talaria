@@ -25,6 +25,7 @@ function HeaderBar(props) {
 
   return (
     <header className="app-header navbar bg-dark">
+      {isLogged && <AppSidebarToggler className="d-md-down-none" display="lg"/>}
       {/*<FormattedMessage {...messages.header} />*/}
       {/*Qui ci dobbiamo passare i dati di auth*/}
       {/*<DefaultHeader/>*/}
@@ -52,6 +53,11 @@ function HeaderBar(props) {
             <NavLink to="#" className="nav-link"><i className="icon-bell"></i><Badge pill color="danger">5</Badge></NavLink>
           </NavItem>
         */}
+        {
+          !isLogged && (<NavItem>
+            <Link to="/login" className="nav-link">Login</Link>
+          </NavItem>)
+        }
         <UncontrolledDropdown nav direction="down">
           <DropdownToggle nav>
             {/*<img src={'../../assets/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />*/}
@@ -60,8 +66,7 @@ function HeaderBar(props) {
                 <i className="fa fa-3x fa-user float-left"></i>
                 <span className="user-name float-right">{auth.user.name}</span>
               </>
-            ) || 
-              (<i className="fa fa-3x fa-bars float-left"></i>)
+            )
             }
           </DropdownToggle>
           <DropdownMenu right>
@@ -71,10 +76,9 @@ function HeaderBar(props) {
                   {
                     auth.permissions.resources && "libraries" in auth.permissions.resources && (<>
                       <DropdownItem header tag="div" className="text-center"><strong>Libraries</strong></DropdownItem>
-                        {/*{auth.permissions.resources.libraries.map((item) => <DropdownItem><i className="fa fa-book"></i> {item.entity.name}</DropdownItem>)}*/}
                         {auth.permissions.resources.libraries.map((item) => <DropdownItem><i className="fa fa-book"></i> {item.resource.name}</DropdownItem>)}
-                      <DropdownItem><i className="fa fa-book"></i> CNR</DropdownItem>
-                      <DropdownItem><i className="fa fa-book"></i> Salaborsa</DropdownItem>
+                      {/*<DropdownItem><i className="fa fa-book"></i> CNR</DropdownItem>*/}
+                      {/*<DropdownItem><i className="fa fa-book"></i> Salaborsa</DropdownItem>*/}
                       <DropdownItem divider />
                     </>)
                   }
@@ -89,8 +93,7 @@ function HeaderBar(props) {
                 {/*<DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>*/}
                 <DropdownItem onClick={e => props.logout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>
                 </>
-              ) ||
-              <DropdownItem><Link to="/">Login</Link></DropdownItem>
+              )
             }
 
           </DropdownMenu>
