@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { syncPersistanceRequest, isSync } from "../../persistence";
-import {requestLogout,resetError} from "../Auth/AuthProvider/actions";
+import {requestLogout} from "../Auth/AuthProvider/actions";
 import {HomePage, NotFoundPage, LoginPage, IdpPage} from 'containers';
 import { HeaderBar, Footer } from 'components'
 import GlobalStyle from 'global-styles';
@@ -28,9 +28,7 @@ function App(props) {
     props.dispatch(syncPersistanceRequest());
   }, []);
   
-  useEffect(() => {
-     props.dispatch(resetError());
-  }, [props.routerLocation]) 
+  
   
   return (
     <div>
@@ -54,7 +52,6 @@ App.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   isSync: isSync(),
-  routerLocation: makeSelectLocation()
 });
 
 function mapDispatchToProps(dispatch) {

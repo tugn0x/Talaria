@@ -21,12 +21,12 @@ export default defineMessages({
     id: `${scope}.loginDescription`,
     defaultMessage: 'Sign In to your account',
   },
-  register: {
-    id: `${scope}.signup`,
+  signUpButton: {
+    id: `${scope}.signUpButton`,
     defaultMessage: 'Register now',
   },
   forgot: {
     id: `${scope}.forgot`,
     defaultMessage: 'Forgot Password',
-  },
+  }
 });

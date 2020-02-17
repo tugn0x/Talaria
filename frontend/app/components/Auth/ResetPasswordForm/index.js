@@ -17,7 +17,7 @@ import {ErrorBox} from 'components';
 
 function ResetPasswordForm(props){
 
-  const {token, reset, requestError} = props
+  const {token, reset} = props
 
   const intl = useIntl()
 
@@ -135,9 +135,6 @@ function ResetPasswordForm(props){
                     />
                     <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.password_match' })} /> 
                   </InputGroup>
-                    {requestError !== null &&
-                      <ErrorBox className="text-danger" error={  requestError } /> 
-                    }
                     <Button color="success" block>
                       <FormattedMessage {...messages.submitFormButton} />
                     </Button>

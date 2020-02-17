@@ -7,6 +7,8 @@ html,body {
     font-size: 16px;
 }
 
+
+
 #app {
     background-color: $light;
     min-height: 100%;
@@ -27,10 +29,17 @@ a {
 
 .btn {
     border-radius: 0;
+    height: 45px;
 }
 
 .fullWidth {
     width: 100%;
+}
+
+.linkButton {
+    &:hover {
+        text-decoration: none;
+    }
 }
 
 .grecaptcha-badge {
@@ -52,3 +61,9 @@ form {
     }
 }
 
+
+.btn-brown:not(:disabled):not(.disabled).active {
+    &:hover {
+        background-color:rgb(200, 130, 133);
+    }
+}

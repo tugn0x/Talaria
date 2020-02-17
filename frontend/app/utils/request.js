@@ -20,6 +20,8 @@ function parseJSON(response) {
  *
  * @return {object|undefined} Returns either the response, or throws an error
  */
+import { toast } from "react-toastify";
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -33,7 +35,8 @@ function checkStatus(response) {
     }
   
     error.response = response;
-    
+    toast.error(error.message)
+
     throw error;
   })
 }

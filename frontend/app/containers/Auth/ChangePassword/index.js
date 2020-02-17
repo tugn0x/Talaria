@@ -16,11 +16,13 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Loader from "components/Form/Loader";
+import {useIntl} from 'react-intl';
 
 function ChangePasswordPage(props) {
+  const intl = useIntl();
   return (
       <Loader show={props.auth.loading}>
-        <ChangePasswordForm requestError={props.auth.error} changePassword={ (formData) => props.dispatch(requestChangePassword(formData)) } />
+        <ChangePasswordForm changePassword={ (formData) => props.dispatch(requestChangePassword(formData, intl.formatMessage({ id: 'app.containers.ChangePassword.updateMessage' }))) } />
       </Loader>
   );
 }

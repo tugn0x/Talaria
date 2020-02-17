@@ -6,23 +6,20 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
-import { Switch, Route } from 'react-router-dom';
-import {Container,Row, Col, Card, CardBody} from 'reactstrap'
 import ProfileForm from 'components/Auth/ProfileForm';
 import {requestProfileUpdate} from 'containers/Auth/AuthProvider/actions';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Loader from "components/Form/Loader";
+import {useIntl} from 'react-intl';
 
 function ProfilePage(props) {
+  const intl = useIntl();
   return (
       <Loader show={props.auth.loading}>
         <ProfileForm
-          requestError={props.auth.error}
-          updateProfile={ (formData) => props.dispatch(requestProfileUpdate(formData)) }
+          updateProfile={ (formData) => props.dispatch(requestProfileUpdate(formData, intl.formatMessage({ id: 'app.containers.ProfilePage.updateMessage' }))) }
           user={props.auth.user}
         />
       </Loader>

@@ -16,8 +16,6 @@ import { FormattedMessage } from 'react-intl';
 
 function ForgotPasswordForm(props){
 
-  const {requestError} = props
-
   const [formData,setFormData] = React.useState({
     email: "",
     recaptcha: ""
@@ -80,9 +78,6 @@ function ForgotPasswordForm(props){
                         <FormattedMessage {...globalMessages.invalid_email} />
                       </div>
                     </InputGroup>
-                    {requestError !== null &&
-                      <div className="text-danger">{requestError}</div>
-                    }
                     <Button color="success" block>
                       <FormattedMessage {...messages.submitFormButton} />
                     </Button>

@@ -9,7 +9,7 @@ import history from 'utils/history';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import  { persitanceReducer } from './persistence';
 import authProviderReducer from 'containers/Auth/AuthProvider/reducer';
-import toasterNotificationReducer from 'containers/Toaster/reducer';
+
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -20,7 +20,6 @@ export default function createReducer(injectedReducers = {}) {
     router: connectRouter(history),
     persistence: persitanceReducer,
     auth: authProviderReducer,
-    toasterNotification: toasterNotificationReducer,
     ...injectedReducers,
   });
 

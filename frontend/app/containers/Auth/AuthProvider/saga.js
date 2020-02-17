@@ -22,11 +22,10 @@ import {
 } from './actions';
 import makeSelectAuth, { tokensExistsExpired, isLogged  } from './selectors';
 import { push } from 'connected-react-router';
-
+import { toast } from "react-toastify";
 import { login, loginRefresh, oauthOption, oauthOptionRefreshToken, signup, getProfile, getPermissions, setToken, verifySms, newToken, changePassword, forgotPassword, resetPassword, updateProfile, deleteProfile, socialOauth } from 'utils/api';
 // import {socialLogin} from "../../../../fblogin/src/store/social/actions";
 
-import { enqueueToasterSuccess } from 'containers/Toaster/actions';
 
 // Individual exports for testing
 export function* loginAuthSaga(action) {
@@ -104,13 +103,8 @@ export function* userPermissionsSaga() {
     method: 'get'
   };
   try {
-    // console.log('userPermissionsSaga')
-    // console.log('userPermissionsSaga')
-    // console.log('userPermissionsSaga')
-    // console.log('userPermissionsSaga')
     const request = yield call(getPermissions, options);
     yield put(requestPermissionsSuccess(request));
-    // yield put(push("/"));
   } catch(e) {
     yield put(requestError(e.message));
     yield call(logoutAuthSaga);
@@ -118,15 +112,16 @@ export function* userPermissionsSaga() {
 }
 
 export function* userProfileUpdateSaga(action) {
+  
   const options = {
     method: 'PUT',
     body: action.request
   };
+  
   try {
     const request = yield call(updateProfile, options);
     yield put(requestProfileUpdateSuccess(request));
-    yield put(enqueueToasterSuccess('Profilo aggiornato'))
-    // yield put(enqueueSuccess("Profilo aggiornato"));
+    yield call(toast.success(action.message)) 
   } catch(e) {
     yield put(requestError(e.message));
    // yield call(logoutAuthSaga);
@@ -140,7 +135,7 @@ export function* userProfileDeleteSaga() {
   try {
     const request = yield call(deleteProfile, options);
     yield put(requestProfileDeleteSuccess(request));
-    yield put(enqueueSuccess("Profilo eliminato"));
+    // yield call(toast.success("Profilo eliminato")) 
     yield call(logoutAuthSaga);
   } catch(e) {
     yield put(requestError(e.message));
@@ -172,7 +167,7 @@ export function* changePasswordSaga(action) {
   try {
     const request = yield call(changePassword, changePasswordOption);
     yield put(requestChangePasswordSuccess(request));
-    yield put(enqueueSuccess("Password aggiornata"));
+    yield call(toast.success(action.message)) 
   } catch (error) {
       yield put(requestError(error.message));
   }
@@ -200,9 +195,9 @@ export function* resetPasswordSaga(action){
     const request = yield call(resetPassword, resetPasswordOption);
     yield put(requestResetPasswordSuccess(request));
     yield put(push("/"));
+    yield call(toast.success(action.message))
   } catch (error) {
     yield put(requestError(error.message));
-
   }
 }
 

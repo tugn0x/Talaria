@@ -19,8 +19,6 @@ import {useIntl} from 'react-intl';
 
 import './style.scss';
 
-// const validEmailRegex = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$";
-
 function SignupForm(props) {
   const [formData,setFormData] = React.useState({
     name: "",
@@ -40,10 +38,6 @@ function SignupForm(props) {
     const value = e.target.checked ? formatDate() : ''
     setFormData({ ...formData,['privacy_policy_accepted']: value })
   }
-
-  /* useEffect(() => {
-    console.log(props.googleReCaptchaProps.executeRecaptcha('homepage'))
-  }, []) */
 
   const submitChange = (e) =>{
     e.preventDefault();
@@ -77,9 +71,9 @@ function SignupForm(props) {
                     <FormattedMessage {...messages.subtitle} />
                   </p>
                   <InputGroup className="mb-3">
-                    <InputGroupAddon addonType="prepend">
+                    {/* <InputGroupAddon addonType="prepend">
                       <InputGroupText>name</InputGroupText>
-                    </InputGroupAddon>
+                    </InputGroupAddon> */}
                     <Input
                       type="text"
                       placeholder={intl.formatMessage({ id: 'app.global.name' })}
@@ -92,9 +86,9 @@ function SignupForm(props) {
                     <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.invalid_name' })} /> 
                   </InputGroup>
                   <InputGroup className="mb-3">
-                    <InputGroupAddon addonType="prepend">
+                   {/*  <InputGroupAddon addonType="prepend">
                       <InputGroupText>surname</InputGroupText>
-                    </InputGroupAddon>
+                    </InputGroupAddon> */}
                     <Input
                       type="text"
                       placeholder={ intl.formatMessage({ id: 'app.global.surname' })}

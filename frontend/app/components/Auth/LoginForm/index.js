@@ -27,15 +27,14 @@ import { withGoogleReCaptcha } from "react-google-recaptcha-v3"
 import { Link as RouterLink, withRouter } from "react-router-dom";
 // import GarrImg from '../../../images/idem.svg'
 import {SocialAuth} from "../..";
-import ErrorBox from "components/Form/ErrorBox";
+import './style.scss'
+
 
   function LoginForm(props) {
     const [formData,setFormData] = React.useState({
       username: "",
       password: ""
     });
-
-    const error = props.auth.error
 
     const linkTo = (path) => {
       props.history.push(`/${path}`)
@@ -61,12 +60,12 @@ import ErrorBox from "components/Form/ErrorBox";
     }
   return (
     <div>
-      <div className="app flex-row align-items-center">
+      <div className="app flex-row align-items-center login-form">
         <Container>
           <Row className="justify-content-center">
-            <Col md="8">
+            <Col md="6">
               <CardGroup>
-                <Card className="p-4">
+                <Card>
                   <CardBody>
                     <Form onSubmit={submitChange}>
                       <h1><FormattedMessage {...messages.header} /></h1>
@@ -101,7 +100,6 @@ import ErrorBox from "components/Form/ErrorBox";
                           onChange={(e) => handleChange(e, 'password')}
                         />
                       </InputGroup>
-                      <ErrorBox error={error}/>
                       <Row>
                         <Col xs="12">
                           <Button
@@ -123,11 +121,22 @@ import ErrorBox from "components/Form/ErrorBox";
                     </Form>
                   </CardBody>
                   <SocialAuth loginFacebook={props.loginFacebook} loginGoogle={props.loginGoogle}/>
+                  <Link className="linkButton" to="/signup">
+                    <Button
+                      color="brown"
+                      className="signUpButton"
+                      active
+                      tabIndex={-1}
+                      onClick={() => linkTo("signup")}
+                    >
+                      <FormattedMessage {...messages.signUpButton} />
+                    </Button>
+                  </Link>
                 </Card>
-                <Card className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
+                {/* <Card className="text-white bg-primary py-5 d-md-down-none">
                   <CardBody className="text-center">
                     <div>
-                      <h2>Sign up</h2>
+                      <h2><FormattedMessage {...messages.register} /></h2>
                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
                         labore et dolore magna aliqua.</p>
                       <Link to="/signup">
@@ -143,7 +152,7 @@ import ErrorBox from "components/Form/ErrorBox";
                       </Link>
                     </div>
                   </CardBody>
-                </Card>
+                </Card> */}
               </CardGroup>
             </Col>
           </Row>
