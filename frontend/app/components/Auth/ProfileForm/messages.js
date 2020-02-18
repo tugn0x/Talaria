@@ -13,6 +13,18 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Account Profile!',
   },
+  name: {
+    id: `${scope}.name`,
+    defaultMessage: 'Name',
+  },
+  email: {
+    id: `${scope}.email`,
+    defaultMessage: 'Email',
+  },
+  surname: {
+    id: `${scope}.surname`,
+    defaultMessage: 'Surname',
+  },
   subtitle: {
     id: `${scope}.subtitle`,
     defaultMessage: 'Update your profile',

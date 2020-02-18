@@ -15,6 +15,7 @@ FORM STUFFS
  */
 import ErrorBox from './Form/ErrorBox'
 import Loader from './Form/Loader'
+import CustomForm from './Form/CustomForm'
 
 export {
   HeaderBar,
@@ -26,6 +27,7 @@ export {
   ForgotPasswordForm,
   ResetPasswordForm,
 
+  CustomForm,
   ErrorBox,
   Loader,
 }

@@ -1,5 +1,6 @@
 {
   "app.global.name": "Nome",
+  "app.global.email": "Email",
   "app.global.surname": "Cognome",
   "app.global.password_repeat": "Ripeti la Password",
   "app.global.password_match": "Le password devono corrispondere",
@@ -12,7 +13,7 @@
   "app.containers.ProfilePage.updateMessage": "Profilo aggiornato",
   "app.containers.NotFoundPage.header": "",
   "app.containers.UserProfile.header": "Profilo utente",
-  "app.containers.UserProfile.subtitle": "aggiorna il profilo",
+  "app.containers.UserProfile.subtitle": "Aggiorna il profilo",
   "app.containers.UserProfile.address": "Indirizzo",
   "app.containers.UserProfile.district": "Quartiere",
   "app.containers.UserProfile.mobile": "Cellulare",

@@ -37,4 +37,8 @@ export default defineMessages({
     id: `${scope}.password_match`,
     defaultMessage: 'Password must match',
   },
+  email: {
+    id: `${scope}.email`,
+    defaultMessage: 'Email',
+  },
 });
