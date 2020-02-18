@@ -48,7 +48,7 @@ services:
       - .env
     depends_on:
       - mysql
-      - redis
+#      - redis
     volumes:
       - ./:/application
     #      - /home/halphass/Scaricati:/application/dump
@@ -94,29 +94,6 @@ services:
       - "traefik.backend=phpmyadmin"
       - "traefik.frontend.rule=Host:${API_DOMAIN};PathPrefixStrip:/phpmyadmin/"
   #    - "traefik.frontend.auth.basic=${PMA_AUTH}"
-
-  horizon:
-    build:
-      context: ./docker/backend
-      dockerfile: Dockerfile
-      args:
-        UID: ${UID}
-    image: backend
-    command: php artisan horizon
-    env_file:
-      - .env
-    depends_on:
-      - mysql
-      - redis
-    volumes:
-      - ./:/application
-    restart: always
-
-  redis:
-    image: redis:alpine
-    ports:
-      - "6379:6379"
-    restart: always
 
   frontend:
     build: ./frontend
