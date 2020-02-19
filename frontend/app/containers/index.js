@@ -14,8 +14,8 @@ import ForgotPassword from "./Auth/ForgotPassword/Loadable"
 import IdpPage from "./Auth/IdpPage/Loadable"
 import LoginPage from "./Auth/LoginPage/Loadable"
 import SignupPage from "./Auth/SignupPage/Loadable"
-import ChangePassword from "./User/ChangePassword/Loadable"
-import ProfilePage from "./User/ProfilePage/Loadable"
+// import ChangePassword from "./User/ChangePassword/Loadable"
+// import ProfilePage from "./User/ProfilePage/Loadable"
 import UserPage from "./User/UserPage/Loadable"
 
 /*
@@ -33,11 +33,11 @@ export {
 
   AuthProvider,
   ForgotPassword,
-  ChangePassword,
   IdpPage,
   LoginPage,
   SignupPage,
-  ProfilePage,
+  // ProfilePage,
+  // ChangePassword,
   UserPage,
 
   LibrarySettings,

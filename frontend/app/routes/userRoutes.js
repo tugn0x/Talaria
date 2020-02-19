@@ -1,8 +1,7 @@
 import React from 'react';
 
-import Profile from 'containers/Auth/ProfilePage';
-// import ChangePassword from 'containers/User/ChangePassword';
-import ChangePassword from 'containers/Auth/ChangePassword';
+import Profile from 'containers/User/ProfilePage';
+import ChangePassword from 'containers/User/ChangePassword';
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const userRoutes = [
