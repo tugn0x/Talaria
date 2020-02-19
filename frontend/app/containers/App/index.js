@@ -28,25 +28,30 @@ function App(props) {
     props.dispatch(syncPersistanceRequest());
   }, []);
 
+  const authProps = {
+    auth: props.auth,
+    isLogged: props.isLogged,
+    logout: (request) => props.dispatch(requestLogout(request))
+  }
+
 
 
   return (
     <div>
-      {/*<HeaderBar isLogged={props.isLogged} auth={props.auth} logout={(request) => props.dispatch(requestLogout(request))}/>*/}
       <Switch>
-        <Route exact path={"/signup"}  component={() => <SignupPage auth={props.auth} history={history} />} />
-        <Route path={"/forgot-password/:reset_token?"} component={({match}) => <ForgotPassword auth={props.auth} history={history} match={match} />} />
+        <Route exact path={"/signup"}  component={() => <SignupPage {...authProps} history={history} />} />
+        <Route path={"/forgot-password/:reset_token?"} component={({match}) => <ForgotPassword {...authProps} history={history} match={match} />} />
         <Route path="/idp-callback/:refresh_token" component={IdpPage} />
-        {!props.isLogged && <Route component={() => <LoginPage auth={props.auth} tokensExistsExpired={props.tokensExistsExpired} />} />}
+        {!props.isLogged && <Route component={() => <LoginPage {...authProps} tokensExistsExpired={props.tokensExistsExpired} />} />}
 
-        <Route path="/user" component={() => <UserPage auth={props.auth}/> }  />
+        <Route path="/user" component={() => <UserPage {...authProps}/> }  />
 
-        <Route path="/patron" component={() => <HomePage auth={props.auth}/> }  />
-        <Route path="/library" component={() => <HomePage auth={props.auth}/> }  />
-        <Route path="/consortium" component={() => <HomePage auth={props.auth}/> }  />
-        <Route path="/institution" component={() => <HomePage auth={props.auth}/> }  />
-        <Route path="/alpe" component={() => <HomePage auth={props.auth}/> }  />
-        <Route path="/" component={(routerProps) => <HomePage auth={props.auth}>
+        <Route path="/patron" component={() => <HomePage {...authProps}/> }  />
+        <Route path="/library" component={() => <HomePage {...authProps}/> }  />
+        <Route path="/consortium" component={() => <HomePage {...authProps}/> }  />
+        <Route path="/institution" component={() => <HomePage {...authProps}/> }  />
+        <Route path="/alpe" component={() => <HomePage {...authProps}/> }  />
+        <Route exact path="/" component={(routerProps) => <HomePage {...authProps}>
           <h1 style={{color: 'green'}}>ciao</h1>
         </HomePage> }/>
         {/*<Route component={NotFoundPage} />*/}

@@ -15,7 +15,7 @@ function BasePage(props) {
 
   return (
     <>
-      <HeaderBar isLogged={props.isLogged} auth={props.auth} logout={(request) => props.dispatch(requestLogout(request))}/>
+      <HeaderBar isLogged={props.isLogged} auth={props.auth} logout={(request) => props.logout(request)}/>
       {props.headermenu && (
         <div>HEADER SECONDARIO</div>
       )}
