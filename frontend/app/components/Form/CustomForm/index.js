@@ -10,8 +10,8 @@ import {useIntl} from 'react-intl'
 
 const CustomForm = ({
         submitCallBack = () => null,
-        title = 'Titolo del form', 
-        className = '', 
+        title = 'Titolo del form',
+        className = '',
         submitText = "Submit",
         submitColor = "brown",
         fields = {},
@@ -36,13 +36,13 @@ const CustomForm = ({
         const targetType = e.target.type
         switch(targetType) {
             case "checkbox":
-                setFormData({ ...formData, [e.target.name]:  e.target.checked })    
+                setFormData({ ...formData, [e.target.name]:  e.target.checked })
                 break;
             default:
                 setFormData({ ...formData, [e.target.name]:  e.target.value   })
                 break;
         }
-        
+
         console.log("new formData", formData)
     }
 
@@ -62,7 +62,7 @@ const CustomForm = ({
     }
 
     return (
-        Object.keys(fields).length && 
+        Object.keys(fields).length &&
         (
             <Card className="mx-4">
                 <CardBody className="p-4">
@@ -72,7 +72,7 @@ const CustomForm = ({
                             {Object.keys(fields).map(key => {
                                 const field = fields[key];
                                 return (<InputGroup key={field.name} className="mb-3">
-                                        {field.label && field.label !== "" && 
+                                        {field.label && field.label !== "" &&
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
                                                 {intl.formatMessage({ id: field.label })}
@@ -90,7 +90,7 @@ const CustomForm = ({
                                                     onChange={(e) => handleChange(e)}
                                                     required={field.required ? field.required : false}
                                                     checked={formData[key]}
-                                                />) 
+                                                />)
                                             ||
                                             field.type === 'select' &&
                                                 ( <CustomInput
@@ -103,8 +103,14 @@ const CustomForm = ({
                                                     onChange={(e) => handleChange(e)}
                                                     required={field.required ? field.required : false}
                                                 >
-                                                {field.options.map((opt, i) => (<option key={`${field.label}-${i}`} value={opt.value}>{opt.label}</option>))}
-                                                </CustomInput>) 
+                                                {/*{field.options.map((opt, i) => (<option key={`${field.label}-${i}`} value={opt.value}>{opt.label}</option>))}*/}
+                                                {
+                                                  (typeof field.options === 'string') ?
+                                                    props[`${field.options}`].map((opt, i) => (<option key={`${field.label}-${i}`} value={opt.value}>{opt.label}</option>)) :
+                                                    field.options.map((opt, i) => (<option key={`${field.label}-${i}`} value={opt.value}>{opt.label}</option>))
+                                                }
+
+                                                </CustomInput>)
                                             ||
                                                 (<CustomInput
                                                     className="form-control"
@@ -115,7 +121,7 @@ const CustomForm = ({
                                                     value={formData[key] ? formData[key] : ""}
                                                     onChange={(e) => handleChange(e)}
                                                     required={field.required ? field.required : false}
-                                                />)  
+                                                />)
                                             }
                                         </InputGroup>
                                     )
