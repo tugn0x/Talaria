@@ -21,7 +21,6 @@ import {
   requestIdpSignup, requestPermissions,
 } from './actions';
 import {requestMyLibraries} from 'containers/Patron/actions'
-import {requestMyLibrariesSaga} from 'containers/Patron/saga'
 import makeSelectAuth, { tokensExistsExpired, isLogged  } from './selectors';
 import { push } from 'connected-react-router';
 import { toast } from "react-toastify";
@@ -46,8 +45,7 @@ export function* loginAuthSaga(action) {
     yield put(requestLoginSuccess(request));
     yield call(userProfileSaga);
     yield call(userPermissionsSaga);
-    yield call(requestMyLibrariesSaga);
-    // yield call(requestMyLibraries());
+    yield put(requestMyLibraries())
     yield put(push("/"));
   } catch(e) {
     yield put(requestError(e.message));

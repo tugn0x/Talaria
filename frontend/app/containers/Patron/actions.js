@@ -12,11 +12,10 @@ export function defaultAction() {
   };
 }
 
-export function requestMyLibraries(request) {
-  console.log('requestMyLibraries(request) ACTION')
+export function requestMyLibraries() {
   return {
     type: REQUEST_MY_LIBRARIES,
-    request: request
+    // request: request
   };
 }
 
