@@ -58,10 +58,7 @@ function SignupForm(props) {
   }
 
   return (
-    <div className="app flex-row align-items-center">
-      <Container>
-        {/* <Loader show={props.auth.loading} > */}
-        <Row className="justify-content-center">
+      <Row className="justify-content-center">
           <Col md="9" lg="7" xl="6">
             <Card className="mx-4">
               <CardBody className="p-4">
@@ -169,9 +166,6 @@ function SignupForm(props) {
             </Card>
           </Col>
         </Row>
-        {/* </Loader> */}
-      </Container>
-    </div>
   );
 }
 SignupForm.propTypes = {};

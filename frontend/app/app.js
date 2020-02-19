@@ -27,7 +27,7 @@ import {App, LanguageProvider, AuthProvider} from 'containers';
 
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3"
 import { RECAPTCHA_SITE_KEY } from "utils/constants";
-import Toaster from 'containers/Toaster';
+import Toaster from 'components/Toaster';
 // Load the favicon and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';

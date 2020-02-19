@@ -13,4 +13,24 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'This is the HeaderBar component!',
   },
+  UserAccount: {
+    id: `${scope}.UserAccount`,
+    defaultMessage: 'User Account',
+  },
+  Profile: {
+    id: `${scope}.Profile`,
+    defaultMessage: 'Profile',
+  },
+  ChangePassword: {
+    id: `${scope}.ChangePassword`,
+    defaultMessage: 'Change Password',
+  },
+  Libraries: {
+    id: `${scope}.Libraries`,
+    defaultMessage: 'Libraries',
+  },
+  Logout: {
+    id: `${scope}.Logout`,
+    defaultMessage: 'Logout',
+  },
 });

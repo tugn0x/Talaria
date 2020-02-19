@@ -59,9 +59,7 @@ import './style.scss'
       // e.preventDefault();
     }
   return (
-    <div>
-      <div className="app flex-row align-items-center login-form">
-        <Container>
+        <div className="login-form">
           <Row className="justify-content-center">
             <Col md="6">
               <CardGroup>
@@ -156,10 +154,7 @@ import './style.scss'
               </CardGroup>
             </Col>
           </Row>
-        </Container>
-      </div>
-
-    </div>
+        </div>
   );
 }
 

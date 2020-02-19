@@ -136,15 +136,11 @@ export const socialOauth = (options) => {
 
 
 export const getMyLibraries = (options) => {
-  console.log('getMyLibraries')
-  console.log('getMyLibraries')
-  console.log('getMyLibraries')
-  console.log('getMyLibraries')
-  console.log('getMyLibraries')
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/libraries/my`, options)
 };
-export const libraryList = (options) => {
+
+export const getLibraryList = (options) => {
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/libraries/option-items?label=name`, options)
 };

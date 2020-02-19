@@ -14,8 +14,10 @@ $light: #F5F1EB;
 $dark: #D6CBC3;
 $white: #F5F5F5;
 $grey: #444444;
+$orange: #DF8969;
+$brown: #A65255;
 $theme-colors: (
-  "brown": #A65255,
-  "grey": #444444,
-  "orange": #DF8969,
+  "brown": $brown,
+  "grey": $grey,
+  "orange": $orange,
 );

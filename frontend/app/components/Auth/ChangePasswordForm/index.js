@@ -37,80 +37,76 @@ const ChangePassword = (props) => {
     }
 
     return (
-        <div className="app flex-row align-items-center">
-            <Container>
-                <Loader show={loading} >
-                    <Row className="justify-content-center">
-                        <Col md="9" lg="7" xl="6">
-                            <Card className="mx-4">
-                                <CardBody className="p-4">
-                                    <Form onSubmit={submitForm}  noValidate>
-                                        <h3>Cambia Password</h3>
-                                        <InputGroup className="mb-3">
-                                            <InputGroupAddon addonType="prepend">
-                                                <InputGroupText><i className="icon-lock"></i></InputGroupText>
-                                            </InputGroupAddon>
-                                            <Input
-                                                type="password"
-                                                placeholder="Current Password"
-                                                autoComplete="email"
-                                                name="current_password"
-                                                value={formData.current_password}
-                                                onChange={(e) => handleChange(e)}
-                                                required
-                                            />
-                                        </InputGroup>
-                                        <InputGroup className="mb-3">
-                                            <InputGroupAddon addonType="prepend">
-                                                <InputGroupText><i className="icon-lock"></i></InputGroupText>
-                                            </InputGroupAddon>
-                                            <Input
-                                                type="password"
-                                                placeholder="New Password"
-                                                autoComplete="email"
-                                                name="new_password"
-                                                pattern=".{8,}"
-                                                title="Password must be min 8 chars"
-                                                value={formData.new_password}
-                                                onChange={(e) => handleChange(e)}
-                                                required
-                                            />
-                                            <div className="invalid-feedback">
-                                                <FormattedMessage {...globalMessages.invalid_email} />
-                                            </div>
-                                        </InputGroup>
-                                        <InputGroup className="mb-4">
-                                            <InputGroupAddon addonType="prepend">
-                                                <InputGroupText>
-                                                    <i className="icon-lock"></i>
-                                                </InputGroupText>
-                                            </InputGroupAddon>
-                                            <Input
-                                                type="password"
-                                                placeholder={ intl.formatMessage({ id: 'app.global.password_repeat' })}
-                                                autoComplete="password_confirmation"
-                                                name="new_confirm_password"
-                                                value={formData.new_confirm_password}
-                                                onChange={(e) => handleChange(e)}
-                                                pattern={formData.new_password}
-                                                required
-                                            />
-                                            <div className="invalid-feedback">
-                                                {/* <FormattedMessage {...globalMessages.password_match} /> */}
-                                            </div>
-                                        </InputGroup>
-                                        <Button color="success" block>
-                                            Submit
-                                           {/*  <FormattedMessage {...messages.submitFormButton} /> */}
-                                        </Button>
-                                    </Form>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Loader>
-            </Container>
-        </div>
+            <Loader show={loading} >
+                <Row className="justify-content-center">
+                    <Col md="9" lg="7" xl="6">
+                        <Card className="mx-4">
+                            <CardBody className="p-4">
+                                <Form onSubmit={submitForm}  noValidate>
+                                    <h3>Cambia Password</h3>
+                                    <InputGroup className="mb-3">
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText><i className="icon-lock"></i></InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input
+                                            type="password"
+                                            placeholder="Current Password"
+                                            autoComplete="email"
+                                            name="current_password"
+                                            value={formData.current_password}
+                                            onChange={(e) => handleChange(e)}
+                                            required
+                                        />
+                                    </InputGroup>
+                                    <InputGroup className="mb-3">
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText><i className="icon-lock"></i></InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input
+                                            type="password"
+                                            placeholder="New Password"
+                                            autoComplete="email"
+                                            name="new_password"
+                                            pattern=".{8,}"
+                                            title="Password must be min 8 chars"
+                                            value={formData.new_password}
+                                            onChange={(e) => handleChange(e)}
+                                            required
+                                        />
+                                        <div className="invalid-feedback">
+                                            <FormattedMessage {...globalMessages.invalid_email} />
+                                        </div>
+                                    </InputGroup>
+                                    <InputGroup className="mb-4">
+                                        <InputGroupAddon addonType="prepend">
+                                            <InputGroupText>
+                                                <i className="icon-lock"></i>
+                                            </InputGroupText>
+                                        </InputGroupAddon>
+                                        <Input
+                                            type="password"
+                                            placeholder={ intl.formatMessage({ id: 'app.global.password_repeat' })}
+                                            autoComplete="password_confirmation"
+                                            name="new_confirm_password"
+                                            value={formData.new_confirm_password}
+                                            onChange={(e) => handleChange(e)}
+                                            pattern={formData.new_password}
+                                            required
+                                        />
+                                        <div className="invalid-feedback">
+                                            {/* <FormattedMessage {...globalMessages.password_match} /> */}
+                                        </div>
+                                    </InputGroup>
+                                    <Button color="success" block>
+                                        Submit
+                                        {/*  <FormattedMessage {...messages.submitFormButton} /> */}
+                                    </Button>
+                                </Form>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                </Row>
+            </Loader>
     )
 }
 

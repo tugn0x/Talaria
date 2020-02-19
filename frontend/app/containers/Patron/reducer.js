@@ -14,17 +14,15 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const PatronReducer = (state = initialState, action) =>
-  produce(state, (/* draft */) => {
+  produce(state, (draft) => {
     switch (action.type) {
       case DEFAULT_ACTION:
         break;
       case REQUEST_MY_LIBRARIES:
-        console.log('REDU REQUEST_MY_LIBRARIES')
         draft.loading = true;
         draft.error = initialState.error;
         break;
       case REQUEST_MY_LIBRARIES_SUCCESS:
-        console.log('case REQUEST_MY_LIBRARIES_SUCCESS', action.result)
         draft.loading = false;
         draft.error = initialState.error;
         draft.my_libraries = action.result;
