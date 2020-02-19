@@ -10,6 +10,9 @@ import SocialAuth from './Auth/SocialAuth';
 import ForgotPasswordForm from './Auth/ForgotPasswordForm';
 import ResetPasswordForm from './Auth/ResetPasswordForm';
 import ChangePasswordForm from './Auth/ChangePasswordForm';
+
+
+import Toaster from "./Toaster/Loadable"
 /*
 FORM STUFFS
  */
@@ -22,7 +25,7 @@ export {
   HeaderBar,
   Footer,
   BasePage,
-
+  Toaster,
   SignupForm,
   LoginForm,
   SocialAuth,

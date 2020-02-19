@@ -4,7 +4,7 @@ import App from "./App"
 import HomePage from "./HomePage/Loadable"
 import LanguageProvider from "./LanguageProvider"
 import NotFoundPage from "./NotFoundPage/Loadable"
-import Toaster from "./Toaster/Loadable"
+
 
 /*
 USER AUTHENTICATION
@@ -27,7 +27,6 @@ import LibrarySettings from "./Library/LibrarySettings/Loadable"
 
 export {
   App,
-  Toaster,
   HomePage,
   LanguageProvider,
   NotFoundPage,

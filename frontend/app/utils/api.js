@@ -142,7 +142,8 @@ export const getMyLibraries = (options) => {
 
 export const getLibraryList = (options) => {
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/option-items?label=name`, options)
+  const query = options.query ? options.query : ""; 
+  return request(`${BASE_URL}/api/v1/libraries/option-items?label=name&q=${query}`, options)
 };
 
 
