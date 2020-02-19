@@ -11,11 +11,12 @@ USER AUTHENTICATION
  */
 import AuthProvider from "./Auth/AuthProvider/Loadable"
 import ForgotPassword from "./Auth/ForgotPassword/Loadable"
-import ChangePassword from "./Auth/ChangePassword/Loadable"
 import IdpPage from "./Auth/IdpPage/Loadable"
 import LoginPage from "./Auth/LoginPage/Loadable"
 import SignupPage from "./Auth/SignupPage/Loadable"
-import ProfilePage from "./Auth/ProfilePage/Loadable"
+import ChangePassword from "./User/ChangePassword/Loadable"
+import ProfilePage from "./User/ProfilePage/Loadable"
+import UserPage from "./User/UserPage/Loadable"
 
 /*
 LIBRARY STUFFS
@@ -37,6 +38,7 @@ export {
   LoginPage,
   SignupPage,
   ProfilePage,
+  UserPage,
 
   LibrarySettings,
 }

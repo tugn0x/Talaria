@@ -1,5 +1,5 @@
 /*
- * HomePage
+ * UserPage
  *
  * This is the first thing users see of our App, at the '/' route
  *
@@ -13,9 +13,18 @@ import {compose} from "redux";
 import { connect } from 'react-redux';
 import {BasePage} from "components";
 import userRoutes from "routes/userRoutes";
+// import {withGoogleReCaptcha} from "react-google-recaptcha-v3";
+// import {
+//   BrowserRouter as Router,
+//   Switch,
+//   Route,
+//   Link,
+//   useParams
+// } from "react-router-dom";
 
-function HomePage(props) {
-  console.log('HomePage', props)
+
+function UserPage(props) {
+  console.log('UserPage', props)
   return (
     <>
       <BasePage {...props} routes={userRoutes} messages={messages}/>
@@ -35,4 +44,4 @@ const withConnect = connect(
 );
 
 // export default withRouter(withGoogleReCaptcha((SignupForm)));
-export default compose(withConnect)(HomePage);
+export default compose(withConnect)(UserPage);

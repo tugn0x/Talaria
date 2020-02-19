@@ -20,14 +20,26 @@ Route::group([
     'middleware' => ['api','auth:api',],
     'as' => 'api.v1.libraries.',
 ], function () {
-//    Route::get('/', 'LibraryController@test')->name('test');
+
+    Route::group([
+        'as' => 'api.v1.libraries.library-users.',
+    ], function () {
+        Route::get('my', 'LibraryUserController@my')->name('my');
+        Route::post('{library}/library-users', 'LibraryUserController@store')->name('store');
+
+        Route::get('{library}/library-users', 'LibraryUserController@index')->name('index');
+        Route::put('{library}/library-users/{library_user}', 'LibraryUserController@update')->name('update');
+        Route::get('{library}/library-users/{library_user}', 'LibraryUserController@show')->name('show');
+    });
+
+
     Route::get('', 'LibraryController@index')->name('index');
     Route::get('option-items', 'LibraryController@optionList')->name('option-items');
-    Route::get('{library}', 'LibraryController@show')->name('show');
-    Route::put('{library}', 'LibraryController@update')->name('update');
+    Route::get('{id}', 'LibraryController@show')->name('show');
+    Route::put('{id}', 'LibraryController@update')->name('update');
     Route::post('', 'LibraryController@create')->name('create');
+
+
+
 });
-//$api = app('Dingo\Api\Routing\Router');
-//$api->version('v1', function ($api) {
-//    $api->get('libraries', 'App\Http\Controllers\Libraries\LibraryController@test');
-//});
+

@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Exception;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Schema;
 
 class Dispatcher extends BaseController
 {
@@ -156,6 +157,8 @@ class Dispatcher extends BaseController
             if (!Gate::denies('storeOthers', $model) && $request->input('user_id'))
             {
                 $model->user_id = $request->input('user_id');
+            } elseif (Schema::hasColumn($model->getTable(), 'user_id')) {
+                $model->user_id = auth()->user()->id;
             }
         }
 

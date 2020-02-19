@@ -11,7 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import messages from './messages';
 import { requestLogin, socialLoginPrepare, socialLoginRequest, requestVerification, requestLogout, requestNewToken } from 'containers/Auth/AuthProvider/actions';
-import { LoginForm } from "components";
+import { LoginForm, BasePage } from "components";
 
 // import VerificationForm from "../../../../frontend/app/components/VerificationForm";
 
@@ -36,12 +36,12 @@ function LoginPage(props) {
     // this.props.prepareGoogle()
 
   return (
-    <div>
+    <BasePage {...props} routes={[]} messages={messages}>
       {/*<h1>LOGINPAGE</h1>*/}
 
         {!props.auth.oauth.token && <LoginForm {...props} login={(request) => props.dispatch(requestLogin(request))} />}
         {/*{props.auth.oauth.token && !props.auth.user.is_verified && <VerificationForm {...props} auth={props.auth} verify={(request) => props.dispatch(requestVerification(request))} logout={(request) => props.dispatch(requestLogout(request))} newtoken={(request) => props.dispatch(requestNewToken(request))} />}*/}
-      </div>
+    </BasePage>
 
   );
 }

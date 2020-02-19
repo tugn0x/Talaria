@@ -7,7 +7,7 @@ use App\Models\Users\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Database\Eloquent\Model;
 
-class LibraryPolicy extends BasePolicy
+class LibraryUserPolicy extends BasePolicy
 {
     /**
      * Create a new policy instance.
@@ -18,15 +18,24 @@ class LibraryPolicy extends BasePolicy
     {
         //
     }
-    public function optionList(User $user, Model $model)
+    public function my(User $user, Model $model)
     {
-//        return $this->canManage($user, $model);
+        return true;
+    }
+
+    public function storeOthers(User $user, Model $model)
+    {
+        return false;
+    }
+
+    public function create(User $user, Model $model)
+    {
         return true;
     }
 
     public function show(User $user, Model $model)
     {
-        return $this->canManage($user, $model);
+        return $this->canManage($user, $model) || $this->canManage($user, $model->institution);
     }
 
 

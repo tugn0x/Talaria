@@ -12,7 +12,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import messages from './messages';
 import {requestSignup, socialLoginPrepare, socialLoginRequest} from '../AuthProvider/actions';
-import { SignupForm } from "components";
+import { SignupForm, BasePage } from "components";
 
 export function SignupPage(props) {
   const [open, setOpen] = React.useState(false);
@@ -31,9 +31,11 @@ export function SignupPage(props) {
 
 
   return (
-    <div>
-      <SignupForm {...props} handleOpen={handleOpen} signup={(request, redirect) => props.dispatch(requestSignup(request, redirect))} />
-    </div>
+    <BasePage {...props} routes={[]} messages={messages}>
+      <div>
+        <SignupForm {...props} handleOpen={handleOpen} signup={(request, redirect) => props.dispatch(requestSignup(request, redirect))} />
+      </div>
+    </BasePage>
   );
 }
 

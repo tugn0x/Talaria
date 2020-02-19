@@ -2,6 +2,7 @@
 
 namespace App\Models\Users;
 
+use App\Models\Libraries\LibraryUser;
 use App\Models\Libraries\UserObserver;
 use App\Notifications\Account\ResetPassword;
 use App\Traits\Auth\RolesAbilitiesPermissionsTrait;
@@ -100,6 +101,11 @@ class User extends UserBase
             ->using(LibraryUser::class)
             ->withPivot('department_id','title_id')
             ->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps
+    }
+
+    public function user_libraries()
+    {
+        return $this->belongsToMany(LibraryUser::class);
     }
 
     /**

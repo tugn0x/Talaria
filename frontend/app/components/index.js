@@ -16,16 +16,19 @@ FORM STUFFS
 import ErrorBox from './Form/ErrorBox'
 import Loader from './Form/Loader'
 import CustomForm from './Form/CustomForm'
+import BasePage from './BasePage'
 
 export {
   HeaderBar,
+  Footer,
+  BasePage,
 
   SignupForm,
   LoginForm,
-  Footer,
   SocialAuth,
   ForgotPasswordForm,
   ResetPasswordForm,
+  ChangePasswordForm,
 
   CustomForm,
   ErrorBox,

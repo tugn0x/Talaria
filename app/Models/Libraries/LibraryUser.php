@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Models\Libraries;
+
+use App\Models\BaseModel;
+use App\Models\Libraries\Department;
+use App\Models\Libraries\Library;
+use App\Models\Users\Title;
+use App\Models\Users\User;
+use App\Traits\Model\OwnerTrait;
+use Illuminate\Database\Eloquent\Relations\Pivot;
+
+//class LibraryUser extends Pivot
+class LibraryUser extends BaseModel
+{
+
+    protected $userstamping = false;
+    public static function bootSoftDeletes() {}
+    protected static $observerClass = LibraryUserObserver::class;
+
+    protected $table = 'library_user';
+
+    protected $fillable = [
+        'user_id',
+        'library_id',
+    ];
+
+    protected $attributes = [
+        'status' => 0
+    ];
+
+    public function getOwnerFiled()
+    {
+        return 'user_id';
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function library()
+    {
+        return $this->belongsTo(Library::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function title()
+    {
+        return $this->belongsTo(Title::class);
+    }
+
+    public function scopeInStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }
+}

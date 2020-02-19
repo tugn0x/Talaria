@@ -31,18 +31,17 @@ class BasePolicy
         return false;
     }
 //
-//    protected function checkOthers(User $user, Model $model, $function=NULL)
-//    {
-//        if(is_null($function))
-//            throw new \Symfony\Component\HttpKernel\Exception\HttpException('Function Permission Must Be Defined in App\Policies::check for '.$function);
-//
-//        if($user->can($function.'-others-'.str_slug($model->getTable())))
-//        {
-//            return true;
-//        }
-////        \Log::info("PERMISSIONS: \n USER => ".$user."\n REQ: ".str_slug($function.'-'.$model->getTable())."\n");
-//        return false;
-//    }
+    protected function checkOthers(User $user, Model $model, $function=NULL)
+    {
+        if(is_null($function))
+            throw new \Symfony\Component\HttpKernel\Exception\HttpException('Function Permission Must Be Defined in App\Policies::check for '.$function);
+
+        if($user->can($function.'-others-'.\Str::slug($model->getTable())))
+        {
+            return true;
+        }
+        return false;
+    }
 
     public function viewAny(User $user, Model $model)
     {
