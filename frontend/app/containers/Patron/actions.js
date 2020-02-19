@@ -4,7 +4,7 @@
  *
  */
 
-import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS, 
+import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS, REQUEST_ERROR, STOP_LOADING} from "./constants";
 
 export function defaultAction() {
@@ -26,14 +26,14 @@ export function requestMyLibrariesSuccess(result) {
   };
 }
 
-export function requestGetLibrariesList(request = "") {
+export function requestGetLibraryList(request = "") {
   return {
     type: REQUEST_GET_LIBRARIES_LIST,
     request
-  }; 
+  };
 }
 
-export function requestGetLibrariesListSuccess(result) {
+export function requestGetLibraryListSuccess(result) {
   return {
     type: REQUEST_GET_LIBRARIES_LIST_SUCCESS,
     result

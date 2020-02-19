@@ -11,16 +11,19 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Loader from "components/Form/Loader";
 import {BasePage} from "components";
-import {requestGetLibrariesList} from '../actions'
+import {requestGetLibraryList} from '../actions'
 import {useIntl} from 'react-intl';
 import messages from './messages'
 
 function MyLibrariesPage(props) {
+  console.log('NUOVE PROPS', props)
   const intl = useIntl();
 
   useEffect(() => {
-    console.log('mibraries poage')
-    props.dispatch(requestGetLibrariesList())
+    console.log('NUOVE useEffect', props.patron.loading)
+    if(!props.patron.loading) {
+      props.dispatch(requestGetLibraryList())
+    }
    }, [])
 
   return (

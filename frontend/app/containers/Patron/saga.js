@@ -4,11 +4,11 @@ import {
   requestError,
   stopLoading,
   requestMyLibrariesSuccess,
-  requestGetLibrariesList
+  requestGetLibraryList
 } from './actions';
 import { push } from 'connected-react-router';
 import { toast } from "react-toastify";
-import { getMyLibraries, getLibrarieslist } from 'utils/api';
+import { getMyLibraries, getLibraryList } from 'utils/api';
 
 
 export function* requestMyLibrariesSaga() {
@@ -23,14 +23,14 @@ export function* requestMyLibrariesSaga() {
   }
 }
 
-export function* requestGetLibrariesListSaga(action) {
-  console.log('requestGetLibrariesListSaga')
+export function* requestGetLibraryListSaga(action) {
+  console.log('requestGetLibraryListSaga')
   const options = {
     method: 'get'
   }
   try {
-    const request = yield call(getLibrarieslist, options);
-    yield put(requestGetLibrariesListSuccess(request));
+    const request = yield call(getLibraryList, options);
+    yield put(requestGetLibraryListSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -42,5 +42,5 @@ export function* requestGetLibrariesListSaga(action) {
  */
 export default function* patronSaga() {
   yield takeLatest(REQUEST_MY_LIBRARIES, requestMyLibrariesSaga);
-  yield takeLatest(REQUEST_GET_LIBRARIES_LIST, requestGetLibrariesListSaga);
+  yield takeLatest(REQUEST_GET_LIBRARIES_LIST, requestGetLibraryListSaga);
 }

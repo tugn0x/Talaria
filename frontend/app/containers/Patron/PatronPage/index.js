@@ -13,6 +13,7 @@ import {compose} from "redux";
 import { connect } from 'react-redux';
 import {BasePage} from "components";
 import patronRoutes from "routes/patronRoutes";
+import makeSelectPatron  from '../selectors';
 
 function PatronPage(props) {
   console.log('PatronPage', props)
@@ -23,7 +24,7 @@ function PatronPage(props) {
   );
 }
 const mapStateToProps = createStructuredSelector({
-
+  patron: makeSelectPatron()
 });
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
