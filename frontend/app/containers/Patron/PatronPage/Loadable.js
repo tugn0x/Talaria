@@ -1,7 +1,5 @@
 /**
- *
- * Asynchronously loads the component for Patron
- *
+ * Asynchronously loads the component for PatronPage
  */
 
 import loadable from 'utils/loadable';

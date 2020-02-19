@@ -129,16 +129,43 @@ export const newToken = (options) => {
   return request(`${BASE_URL}/oauth/resend-code/`, options)
 };
 
-// export const facebookOAuthUrl = () => {
-//   const token = apiToken.get()
-//   console.log('facebookOAuthUrl', token, process.env.FACEBOOK_LOGIN)
-//   return `${process.env.FACEBOOK_LOGIN}?state=${token ? token : ''}`
-// }
-
-export const socialOauth = (provider, options) => {
+export const socialOauth = (options) => {
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/auth/social/${provider}/signup`, options)
 };
+
+
+export const getMyLibraries = (options) => {
+  console.log('getMyLibraries')
+  console.log('getMyLibraries')
+  console.log('getMyLibraries')
+  console.log('getMyLibraries')
+  console.log('getMyLibraries')
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/my`, options)
+};
+export const libraryList = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/option-items?label=name`, options)
+};
+
+
+/*
+curl --location --request POST 'https://api.nilde.local/api/v1/libraries/16/library-users' \
+--header 'accept: application/json' \
+--header 'authorization: Bearer ey2PJBwgV2d5XEWD0FPqcV...' \
+--header 'content-type: application/json' \
+--data-raw '{
+	"library_id": "15"
+}'
+ */
+export const requestAccess = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/libraries/${options.body.library_id}/library-users`, options)
+};
+
+
+
 
 // export const getIllness = (options) => {
 //   options = getOption(options);

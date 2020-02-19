@@ -20,6 +20,8 @@ import {
   socialLoginRequest,
   requestIdpSignup, requestPermissions,
 } from './actions';
+import {requestMyLibraries} from 'containers/Patron/actions'
+import {requestMyLibrariesSaga} from 'containers/Patron/saga'
 import makeSelectAuth, { tokensExistsExpired, isLogged  } from './selectors';
 import { push } from 'connected-react-router';
 import { toast } from "react-toastify";
@@ -44,6 +46,8 @@ export function* loginAuthSaga(action) {
     yield put(requestLoginSuccess(request));
     yield call(userProfileSaga);
     yield call(userPermissionsSaga);
+    yield call(requestMyLibrariesSaga);
+    // yield call(requestMyLibraries());
     yield put(push("/"));
   } catch(e) {
     yield put(requestError(e.message));
@@ -112,16 +116,16 @@ export function* userPermissionsSaga() {
 }
 
 export function* userProfileUpdateSaga(action) {
-  
+
   const options = {
     method: 'PUT',
     body: action.request
   };
-  
+
   try {
     const request = yield call(updateProfile, options);
     yield put(requestProfileUpdateSuccess(request));
-    yield call(toast.success(action.message)) 
+    yield call(toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
    // yield call(logoutAuthSaga);
@@ -135,7 +139,7 @@ export function* userProfileDeleteSaga() {
   try {
     const request = yield call(deleteProfile, options);
     yield put(requestProfileDeleteSuccess(request));
-    // yield call(toast.success("Profilo eliminato")) 
+    // yield call(toast.success("Profilo eliminato"))
     yield call(logoutAuthSaga);
   } catch(e) {
     yield put(requestError(e.message));
@@ -167,7 +171,7 @@ export function* changePasswordSaga(action) {
   try {
     const request = yield call(changePassword, changePasswordOption);
     yield put(requestChangePasswordSuccess(request));
-    yield call(toast.success(action.message)) 
+    yield call(toast.success(action.message))
   } catch (error) {
       yield put(requestError(error.message));
   }

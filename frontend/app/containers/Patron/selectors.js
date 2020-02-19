@@ -2,18 +2,10 @@ import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
 /**
- * Direct selector to the patron state domain
+ * Direct selector to the mapPage state domain
  */
 
 const selectPatronDomain = state => state.patron || initialState;
-
-/**
- * Other specific selectors
- */
-
-/**
- * Default selector used by Patron
- */
 
 const makeSelectPatron = () =>
   createSelector(
@@ -22,4 +14,3 @@ const makeSelectPatron = () =>
   );
 
 export default makeSelectPatron;
-export { selectPatronDomain };

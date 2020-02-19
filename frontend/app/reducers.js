@@ -9,6 +9,7 @@ import history from 'utils/history';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import  { persitanceReducer } from './persistence';
 import authProviderReducer from 'containers/Auth/AuthProvider/reducer';
+import patronReducer from 'containers/Patron/reducer';
 
 
 /**
@@ -20,6 +21,7 @@ export default function createReducer(injectedReducers = {}) {
     router: connectRouter(history),
     persistence: persitanceReducer,
     auth: authProviderReducer,
+    patron: patronReducer,
     ...injectedReducers,
   });
 

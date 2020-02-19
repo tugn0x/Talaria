@@ -8,6 +8,7 @@ import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
 import { persitanceMiddleWare, persistanceSaga } from './persistence';
 import authProviderSaga from './containers/Auth/AuthProvider/saga';
+import patronSaga from './containers/Patron/saga';
 
 export default function configureStore(initialState = {}, history) {
   let composeEnhancers = compose;
@@ -47,6 +48,7 @@ export default function configureStore(initialState = {}, history) {
   // Extensions
   sagaMiddleware.run(persistanceSaga);
   sagaMiddleware.run(authProviderSaga);
+  sagaMiddleware.run(patronSaga);
   store.runSaga = sagaMiddleware.run;
   store.injectedReducers = {}; // Reducer registry
   store.injectedSagas = {}; // Saga registry
