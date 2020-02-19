@@ -13,21 +13,9 @@ import {compose} from "redux";
 import { connect } from 'react-redux';
 import {BasePage} from "components";
 import patronRoutes from "routes/patronRoutes";
-import {requestMyLibraries} from 'containers/Patron/actions'
-// import {withGoogleReCaptcha} from "react-google-recaptcha-v3";
-// import {
-//   BrowserRouter as Router,
-//   Switch,
-//   Route,
-//   Link,
-//   useParams
-// } from "react-router-dom";
-
 
 function PatronPage(props) {
   console.log('PatronPage', props)
-  
- 
   return (
     <>
       <BasePage {...props} routes={patronRoutes} messages={messages}/>
