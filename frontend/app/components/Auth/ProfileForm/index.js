@@ -13,23 +13,19 @@ const ProfileForm = (props) => {
     const {user, updateProfile, loading} = props
     const intl = useIntl();
     return (
-        <div className="app flex-row align-items-center">
-            <Container>
-                <Loader show={loading} >
-                    <Row className="justify-content-center">
-                        <Col md="9" lg="7" xl="6">
-                            <CustomForm 
-                                submitCallBack={(formData) => updateProfile(formData) } 
-                                requestData={user}  
-                                fields={fields} 
-                                title={intl.formatMessage({ id: 'app.containers.UserProfile.header' })} 
-                                submitText={intl.formatMessage({ id: 'app.containers.UserProfile.subtitle' })}
-                                /> 
-                        </Col>
-                    </Row>
-                </Loader>
-            </Container>
-        </div>
+        <Loader show={loading} >
+            <Row className="justify-content-center">
+                <Col md="9" lg="7" xl="6">
+                    <CustomForm 
+                        submitCallBack={(formData) => updateProfile(formData) } 
+                        requestData={user}  
+                        fields={fields} 
+                        title={intl.formatMessage({ id: 'app.containers.UserProfile.header' })} 
+                        submitText={intl.formatMessage({ id: 'app.containers.UserProfile.subtitle' })}
+                        /> 
+                </Col>
+            </Row>
+        </Loader>
     )
 }
 

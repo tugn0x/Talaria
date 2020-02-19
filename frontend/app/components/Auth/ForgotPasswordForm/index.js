@@ -52,43 +52,37 @@ function ForgotPasswordForm(props){
 
 
   return(
-    <div className="app flex-row align-items-center">
-      <Container>
-       {/*  <Loader show={props.auth.loading} > */}
-          <Row className="justify-content-center">
-            <Col md="9" lg="7" xl="6">
-              <Card className="mx-4">
-                <CardBody className="p-4">
-                  <Form onSubmit={submitForm}  noValidate>
-                    <h3><FormattedMessage {...messages.header} /></h3>
-                    <InputGroup className="mb-3">
-                      <InputGroupAddon addonType="prepend">
-                        <InputGroupText>@</InputGroupText>
-                      </InputGroupAddon>
-                      <Input
-                        type="email"
-                        placeholder="Email"
-                        autoComplete="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={(e) => handleChange(e, 'email')}
-                        required
-                      />
-                      <div className="invalid-feedback">
-                        <FormattedMessage {...globalMessages.invalid_email} />
-                      </div>
-                    </InputGroup>
-                    <Button color="success" block>
-                      <FormattedMessage {...messages.submitFormButton} />
-                    </Button>
-                  </Form>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-       {/*  </Loader> */}
-      </Container>
-    </div>
+        <Row className="justify-content-center">
+          <Col md="9" lg="7" xl="6">
+            <Card className="mx-4">
+              <CardBody className="p-4">
+                <Form onSubmit={submitForm}  noValidate>
+                  <h3><FormattedMessage {...messages.header} /></h3>
+                  <InputGroup className="mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>@</InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      type="email"
+                      placeholder="Email"
+                      autoComplete="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={(e) => handleChange(e, 'email')}
+                      required
+                    />
+                    <div className="invalid-feedback">
+                      <FormattedMessage {...globalMessages.invalid_email} />
+                    </div>
+                  </InputGroup>
+                  <Button color="success" block>
+                    <FormattedMessage {...messages.submitFormButton} />
+                  </Button>
+                </Form>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
   );
 }
 

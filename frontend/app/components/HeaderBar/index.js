@@ -20,13 +20,16 @@ import logomini from 'images/logo.png'
 
 function HeaderBar(props) {
   // console.log('HeaderBar', props)
+  
+  const { auth, isLogged, history } = props
 
-  const { auth, isLogged } = props
+  const linkTo = (path) => {
+    history.push(`${path}`)
+  };
 
   return (
     <header className="app-header navbar bg-dark">
       {isLogged && <AppSidebarToggler className="d-md-down-none" display="lg"/>}
-      {/*<FormattedMessage {...messages.header} />*/}
       {/*Qui ci dobbiamo passare i dati di auth*/}
       {/*<DefaultHeader/>*/}
       <AppNavbarBrand
@@ -34,26 +37,7 @@ function HeaderBar(props) {
         minimized={{ src: logomini, width: 30, height: 30, alt: 'Nilde Logo' }}
         href={'/'}
       />
-      {/*<AppSidebarToggler className="d-md-down-none" display="lg" />*/}
-      {/*
-        <Nav className="d-md-down-none" navbar>
-          <NavItem className="px-3">
-            <NavLink to="/dashboard" className="nav-link" >Dashboard</NavLink>
-          </NavItem>
-          <NavItem className="px-3">
-            <Link to="/users" className="nav-link">Users</Link>
-          </NavItem>
-          <NavItem className="px-3">
-            <NavLink to="#" className="nav-link">Settings</NavLink>
-          </NavItem>
-        </Nav>
-        */}
       <Nav className="ml-auto" navbar>
-        {/*
-          <NavItem className="d-md-down-none">
-            <NavLink to="#" className="nav-link"><i className="icon-bell"></i><Badge pill color="danger">5</Badge></NavLink>
-          </NavItem>
-        */}
         {
           !isLogged && (<NavItem>
             <Link to="/login" className="nav-link">Login</Link>
@@ -61,7 +45,6 @@ function HeaderBar(props) {
         }
         <UncontrolledDropdown nav direction="down">
           <DropdownToggle nav>
-            {/*<img src={'../../assets/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />*/}
             { isLogged && (
               <>
                 <i className="fa fa-3x fa-user float-left"></i>
@@ -76,23 +59,15 @@ function HeaderBar(props) {
                 <>
                   {
                     auth.permissions.resources && "libraries" in auth.permissions.resources && (<>
-                      <DropdownItem header tag="div" className="text-center"><strong>Libraries</strong></DropdownItem>
+                      <DropdownItem header tag="div" className="text-center"><strong><FormattedMessage {...messages.Libraries} /></strong></DropdownItem>
                         {auth.permissions.resources.libraries.map((item) => <DropdownItem><i className="fa fa-book"></i> {item.resource.name}</DropdownItem>)}
-                      {/*<DropdownItem><i className="fa fa-book"></i> CNR</DropdownItem>*/}
-                      {/*<DropdownItem><i className="fa fa-book"></i> Salaborsa</DropdownItem>*/}
                       <DropdownItem divider />
                     </>)
                   }
-                <DropdownItem header tag="div" className="text-center"><strong>User Account</strong></DropdownItem>
-                {/*<DropdownItem><i className="fa fa-bell-o"></i> Updates<Badge color="info">42</Badge></DropdownItem>*/}
-                {/*<DropdownItem><i className="fa fa-envelope-o"></i> Messages<Badge color="success">42</Badge></DropdownItem>*/}
-                {/*<DropdownItem><i className="fa fa-tasks"></i> Tasks<Badge color="danger">42</Badge></DropdownItem>*/}
-                {/*<DropdownItem><i className="fa fa-comments"></i> Comments<Badge color="warning">42</Badge></DropdownItem>*/}
-                <DropdownItem><i className="fa fa-user"></i><Link to="/user/user-profile">Profile</Link></DropdownItem>
-                <DropdownItem><i className="fa fa-lock"></i><Link to="/user/change-password">Change Password</Link></DropdownItem>
-                {/*<DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>*/}
-                {/*<DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>*/}
-                <DropdownItem onClick={e => props.logout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>
+                <DropdownItem header tag="div" className="text-center"><FormattedMessage {...messages.UserAccount} /></DropdownItem>
+                <DropdownItem onClick={() => linkTo("/user/user-profile")}><i className="fa fa-user"></i><span><FormattedMessage {...messages.Profile} /></span></DropdownItem>
+                <DropdownItem onClick={() => linkTo("/user/change-password")}><i className="fa fa-lock"></i><span><FormattedMessage {...messages.ChangePassword} /></span></DropdownItem>
+                <DropdownItem onClick={e => props.logout(e)}><i className="fa fa-lock"></i><FormattedMessage {...messages.Logout} /></DropdownItem>
                 </>
               )
             }

@@ -17,7 +17,7 @@ import { syncPersistanceRequest, isSync } from "../../persistence";
 import {requestLogout} from "../Auth/AuthProvider/actions";
 import {HomePage, NotFoundPage, LoginPage, IdpPage, UserPage, PatronPage} from 'containers';
 import { HeaderBar, Footer } from 'components'
-import GlobalStyle from 'global-styles';
+/* import GlobalStyle from 'global-styles'; */
 import {SignupPage, ForgotPassword} from "containers";
 import {makeSelectLocation} from './selectors'
 
@@ -37,7 +37,7 @@ function App(props) {
 
 
   return (
-    <div>
+    <>
       <Switch>
         <Route exact path={"/signup"}  component={() => <SignupPage {...authProps} history={history} />} />
         <Route path={"/forgot-password/:reset_token?"} component={({match}) => <ForgotPassword {...authProps} history={history} match={match} />} />
@@ -56,9 +56,9 @@ function App(props) {
         </HomePage> }/>
         {/*<Route component={NotFoundPage} />*/}
       </Switch>
-      <GlobalStyle />
+      {/* <GlobalStyle /> */}
       <Footer/>
-    </div>
+    </>
   );
 }
 

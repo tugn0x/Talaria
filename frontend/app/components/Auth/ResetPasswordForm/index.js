@@ -63,88 +63,84 @@ function ResetPasswordForm(props){
   }
 
   return(
-    <div className="app flex-row align-items-center">
-      <Container>
-          <Row className="justify-content-center">
-            <Col md="9" lg="7" xl="6">
-              <Card className="mx-4">
-                <CardBody className="p-4">
-                  <Form onSubmit={submitForm}  noValidate>
-                  {/* <h3>Abbiamo inviato una mail</h3> */}
-                  <h3> <FormattedMessage {...messages.header} /></h3>
-                  <InputGroup className="mb-3">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>@</InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      type="text"
-                      placeholder="Token"
-                      autoComplete="token"
-                      name="token"
-                      value={formData.token}
-                      onChange={(e) => handleChange(e, 'token')}
-                      required
-                    />
-                  </InputGroup>
-                  <InputGroup className="mb-3">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>@</InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      type="email"
-                      placeholder="Email"
-                      autoComplete="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={(e) => handleChange(e, 'email')}
-                      required
-                    />
-                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.invalid_email' })} /> 
-                  </InputGroup>
-                  <InputGroup className="mb-3">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="icon-lock"></i>
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      autoComplete="current-password"
-                      name="password"
-                      value={formData.password}
-                      onChange={(e) => handleChange(e, 'password')}
-                      required
-                    />
-                  </InputGroup>
-                  <InputGroup className="mb-4">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="icon-lock"></i>
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      type="password"
-                      placeholder={ intl.formatMessage({ id: 'app.global.password_repeat' })}
-                      autoComplete="password_confirmation"
-                      name="password_confirmation"
-                      value={formData.password_confirmation}
-                      onChange={(e) => handleChange(e, 'password_confirmation')}
-                      pattern={formData.password}
-                      required
-                    />
-                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.password_match' })} /> 
-                  </InputGroup>
-                    <Button color="success" block>
-                      <FormattedMessage {...messages.submitFormButton} />
-                    </Button>
-                  </Form>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-      </Container>
-    </div>
+      <Row className="justify-content-center">
+        <Col md="9" lg="7" xl="6">
+          <Card className="mx-4">
+            <CardBody className="p-4">
+              <Form onSubmit={submitForm}  noValidate>
+              {/* <h3>Abbiamo inviato una mail</h3> */}
+              <h3> <FormattedMessage {...messages.header} /></h3>
+              <InputGroup className="mb-3">
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>@</InputGroupText>
+                </InputGroupAddon>
+                <Input
+                  type="text"
+                  placeholder="Token"
+                  autoComplete="token"
+                  name="token"
+                  value={formData.token}
+                  onChange={(e) => handleChange(e, 'token')}
+                  required
+                />
+              </InputGroup>
+              <InputGroup className="mb-3">
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>@</InputGroupText>
+                </InputGroupAddon>
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  autoComplete="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={(e) => handleChange(e, 'email')}
+                  required
+                />
+                <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.invalid_email' })} /> 
+              </InputGroup>
+              <InputGroup className="mb-3">
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <i className="icon-lock"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  autoComplete="current-password"
+                  name="password"
+                  value={formData.password}
+                  onChange={(e) => handleChange(e, 'password')}
+                  required
+                />
+              </InputGroup>
+              <InputGroup className="mb-4">
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <i className="icon-lock"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                <Input
+                  type="password"
+                  placeholder={ intl.formatMessage({ id: 'app.global.password_repeat' })}
+                  autoComplete="password_confirmation"
+                  name="password_confirmation"
+                  value={formData.password_confirmation}
+                  onChange={(e) => handleChange(e, 'password_confirmation')}
+                  pattern={formData.password}
+                  required
+                />
+                <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.password_match' })} /> 
+              </InputGroup>
+                <Button color="success" block>
+                  <FormattedMessage {...messages.submitFormButton} />
+                </Button>
+              </Form>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
   );
 }
 
