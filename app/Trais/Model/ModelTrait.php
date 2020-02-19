@@ -240,4 +240,10 @@ trait ModelTrait
         return \DB::table(self::$table)->select(self::$stringIdentifies)->where('id', $id)->first();
     }
 
+    public function scopeSimpleSearch($query, $q)
+    {
+        $q = trim($q);
+
+        return $query->where('name', 'like', '%'. $q .'%');
+    }
 }
