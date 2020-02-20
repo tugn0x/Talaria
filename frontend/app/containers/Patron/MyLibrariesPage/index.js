@@ -18,13 +18,13 @@ import {fields} from './fields'
 import CustomForm from 'components/Form/CustomForm';
 import {requestGetLibraryList} from '../actions'
 
-function MyLibrariesPage(props) {
+function MyLibrariesPage({patron, dispatch}) {
   // console.log('NUOVE PROPS', props)
   const intl = useIntl();
 
   useEffect(() => {
     // console.log('NUOVE useEffect', props.patron.loading)
-    if(!props.patron.loading) {
+    if(!patron.loading) {
       props.dispatch(requestGetLibraryList())
     }
    }, [])
