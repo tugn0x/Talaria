@@ -1,9 +1,9 @@
 export const fields = {
-    selectLibraryInput: {
+    librariesList: {
         type: "custom-select",
-        name: "selectLibraryInput",
-        label: "selectLibraryInput",
-        placeholder: "selectLibraryInput",
+        name: "librariesList",
+        label: "app.containers.MyLibrariesPage.selectLibrary",
+        placeholder: "app.containers.MyLibrariesPage.selectLibrary",
         options: "librariesList"
     }, 
 }

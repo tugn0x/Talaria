@@ -3,7 +3,8 @@ import { Col, Card, CardBody, InputGroup, InputGroupAddon, InputGroupText, Custo
 import PropTypes from 'prop-types';
 import {useIntl} from 'react-intl'
 import Select from 'react-select'; 
-import AsyncSelect from 'react-select/async';
+import './style.scss'
+import {uniqBy} from 'lodash'
 // PROPS
 // fields
 // callback action
@@ -25,8 +26,7 @@ const CustomForm = (props) => {
 
 
     const [selectedOption, setSelectedOption] = useState(null)
-    const [selectInputValue, setSelectInputValue] = useState("")
-
+    
     const [formData, setFormData] = useState(() => {
         let data = {}
         Object.keys(fields).map(key => {
@@ -39,17 +39,19 @@ const CustomForm = (props) => {
         return data
     })
     
+    
+    /* CUSTOM SELECT Handle */
     const handleSearchCustomSelect = (newValue) => {
         const inputValue = newValue.replace(/\W/g, '');
         searchCustomSelect(inputValue)
-        // return inputValue;
     };
 
-    const handleSelectedOption = (selectedOption) =>{
-        setSelectedOption(selectedOption)
-        console.log("handleCustomSelectChange", selectedOption)
+    const handleChangeCustomSelect = (selectedOption, key) => {
+       setFormData({ ...formData, [key]:  uniqBy([...formData[key], selectedOption], 'value' )})
+       setSelectedOption(selectedOption)
     }
 
+    /* HANDLE CHANGE Generico */
     const handleChange = (e) =>{
         const targetType = e.target.type
         switch(targetType) {
@@ -60,7 +62,6 @@ const CustomForm = (props) => {
                 setFormData({ ...formData, [e.target.name]:  e.target.value   })
                 break;
         }
-
         // console.log("new formData", formData)
     }
 
@@ -74,7 +75,7 @@ const CustomForm = (props) => {
             return
         } else {
             submitCallBack(formData)
-            // console.log("Send Form", formData)
+            console.log("Send Form", formData)
         }
         return
     }
@@ -89,7 +90,6 @@ const CustomForm = (props) => {
                         <Row>
                             {Object.keys(fields).map(key => {
                                 const field = fields[key];
-                                console.log(props[field.options])
                                 return (<InputGroup key={field.name} className="mb-3">
                                         {field.label && field.label !== "" &&
                                             <InputGroupAddon addonType="prepend">
@@ -131,10 +131,11 @@ const CustomForm = (props) => {
                                             ||
                                             field.type === 'custom-select' &&
                                                 ( <Select
-                                                    className="form-control"
+                                                    className="library-custom-select"
+                                                    type="custom-select"
                                                     value={selectedOption}
-                                                    onChange={(selectedOption) =>  handleSelectedOption(selectedOption) }
-                                                   // inputValue={}
+                                                    name={key}
+                                                    onChange={(selectedOption) => handleChangeCustomSelect(selectedOption, key)}
                                                     onInputChange={(input) => handleSearchCustomSelect(input) }
                                                     options={props[field.options]}
                                                 />)

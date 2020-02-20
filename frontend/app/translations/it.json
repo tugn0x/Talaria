@@ -22,6 +22,8 @@
   "app.containers.UserProfile.state": "Stato",
   "app.containers.UserProfile.postcode": "Codice Postale",
   "app.containers.UserProfile.town": "Citta'",
+  "app.containers.MyLibrariesPage.title": "Form librerie",
+  "app.containers.MyLibrariesPage.selectLibrary": "Seleziona una libreria",
   "app.components.HeaderBar.UserAccount": "Account utente", 
   "app.components.HeaderBar.ChangePassword": "Cambia Password", 
   "app.components.HeaderBar.Profile": "Profilo", 

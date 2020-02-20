@@ -8,12 +8,16 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.MyLibrariesPage';
 
 export default defineMessages({
-  header: {
-    id: `${scope}.header`,
-    defaultMessage: 'This is the HomePage container w/my little edit 5!',
-  },
   updateMessage: {
     id: `${scope}.updateMessage`,
     defaultMessage: 'Profile Updated',
+  },
+  title: {
+    id: `${scope}.title`,
+    defaultMessage: 'My Libraries Form',
+  },
+  selectLibrary: {
+    id: `${scope}.selectLibrary`,
+    defaultMessage: 'Select library',
   },
 });
