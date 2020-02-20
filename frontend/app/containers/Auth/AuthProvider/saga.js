@@ -28,6 +28,13 @@ import { login, loginRefresh, oauthOption, oauthOptionRefreshToken, signup, getP
 // import {socialLogin} from "../../../../fblogin/src/store/social/actions";
 
 
+
+export function* defaultAuthCallsSaga() {
+  // console.log('defaultAuthCallsSaga')
+  yield call(userProfileSaga);
+  yield call(userPermissionsSaga);
+  yield put(requestMyLibraries())
+}
 // Individual exports for testing
 export function* loginAuthSaga(action) {
   // See example in containers/HomePage/saga.js
@@ -43,9 +50,7 @@ export function* loginAuthSaga(action) {
     const request = yield call(login, loginOption);
     setToken(request.access_token);
     yield put(requestLoginSuccess(request));
-    yield call(userProfileSaga);
-    yield call(userPermissionsSaga);
-    yield put(requestMyLibraries())
+    yield call(defaultAuthCallsSaga);
     yield put(push("/"));
   } catch(e) {
     yield put(requestError(e.message));
@@ -72,10 +77,8 @@ export function* signupAuthSaga(action) {
   try {
     const request = yield call(signup, signupOption);
     setToken(request.access_token);
-    yield call(userProfileSaga);
-    yield call(userPermissionsSaga);
     yield put(requestSignupSuccess(request));
-    // yield put(requestPermissionsSuccess(request));
+    yield call(defaultAuthCallsSaga);
     yield put(push("/"));
   } catch(e) {
     yield put(requestError(e.message));
@@ -87,10 +90,7 @@ export function* userProfileSaga() {
     method: 'get'
   };
   try {
-    console.log('userProfileSaga')
-    console.log('userProfileSaga')
-    console.log('userProfileSaga')
-    console.log('userProfileSaga')
+    // console.log('userProfileSaga')
     const request = yield call(getProfile, options);
     yield put(requestProfileSuccess(request));
     // yield put(push("/"));
@@ -126,7 +126,7 @@ export function* userProfileUpdateSaga(action) {
     yield call(toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
-   // yield call(logoutAuthSaga);
+    // yield call(logoutAuthSaga);
   }
 }
 
@@ -171,7 +171,7 @@ export function* changePasswordSaga(action) {
     yield put(requestChangePasswordSuccess(request));
     yield call(toast.success(action.message))
   } catch (error) {
-      yield put(requestError(error.message));
+    yield put(requestError(error.message));
   }
 }
 
@@ -239,8 +239,7 @@ export function* refreshAuthSaga() {
       const request = yield call(loginRefresh, loginOption);
       setToken(request.access_token);
       yield put(requestLoginSuccess(request));
-      yield call(userProfileSaga);
-      yield call(requestPermissions);
+      yield call(defaultAuthCallsSaga);
     } catch(e) {
       yield put(requestError(e.message));
       yield call(logoutAuthSaga);
@@ -258,9 +257,8 @@ export function* socialOauthSaga(action) {
   try {
     const request = yield call(socialOauth, action.provider, socialOptions);
     setToken(request.access_token);
-    yield call(userProfileSaga);
-    yield call(userPermissionsSaga);
     yield put(requestSignupSuccess(request));
+    yield call(defaultAuthCallsSaga);
     yield put(push("/"));
   } catch(e) {
     yield put(requestError(e.message));
@@ -312,12 +310,12 @@ export function* loginFacebook ({ scope = 'public_profile,email', fields = 'id,n
   try {
     const provider = 'facebook'
     const data = yield call(socialPromises.fbLogin, { scope, ...options })
-    console.log(data)
+    // console.log(data)
     const testdata = yield call(socialPromises.fbGetMe, { fields })
     const loggedIn = yield select(isLogged());
-    console.log('testdata', testdata,testdata.email,loggedIn)
+    // console.log('testdata', testdata,testdata.email,loggedIn)
     if(testdata.email || loggedIn) {
-      console.log('socialOauthSaga')
+      // console.log('socialOauthSaga')
       yield call(socialOauthSaga, {provider, data})
     } else {
       yield put(requestError("email address required"))
@@ -337,7 +335,7 @@ export function* prepareGoogle ({ client_id, ...options }) {
 
 export function* prepareSPID ({ client_id, ...options }) {
   const authDomain = yield select(makeSelectAuth())
-  console.log('prepareSPID')
+  // console.log('prepareSPID')
   yield call(socialPromises.loadScript, '/spid-login-button/spid-button.min.js')
   yield call(window.SPID.init, {
     selector: '#my-spid-button',
@@ -360,10 +358,11 @@ export function* prepareFacebook ({ appId, version = 'v2.8', ...options }) {
 export function* loginGoogle ({ scope = 'profile', ...options } = {}) {
   const provider = 'google'
   const auth2 = yield call(window.gapi.auth2.getAuthInstance)
-  console.log(auth2)
+  // console.log(auth2)
   const user = yield call([auth2, auth2.signIn], { scope, ...options })
-  const data = {accessToken: user.Zi.access_token}
-  console.log(data)
+  // console.log('loginGoogle', user)
+  const data = {accessToken: user.uc.access_token}
+  // console.log(data)
   yield call(socialOauthSaga, {provider, data})
 }
 export function* socialLoginPrepareSaga() {
@@ -373,7 +372,7 @@ export function* socialLoginPrepareSaga() {
 }
 
 export function* socialLoginRequestSaga(action) {
-  console.log('socialLoginRequestSaga', action)
+  // console.log('socialLoginRequestSaga', action)
   switch (action.provider) {
     case 'facebook':
       yield call(loginFacebook, action.options)
@@ -385,16 +384,16 @@ export function* socialLoginRequestSaga(action) {
 }
 
 export function* requestIdpSignupSaga() {
-  console.log('requestIdpSignupSaga')
+  // console.log('requestIdpSignupSaga')
   yield put(push('/'));
-    try {
-      // console.log("CI STO PROVANDO")
-      yield call(refreshAuthSaga);
-    } catch(e) {
-      // console.log("ERRORE", e)
-      yield put(requestError(e.message));
-      yield call(logoutAuthSaga);
-    }
+  try {
+    // console.log("CI STO PROVANDO")
+    yield call(refreshAuthSaga);
+  } catch(e) {
+    // console.log("ERRORE", e)
+    yield put(requestError(e.message));
+    yield call(logoutAuthSaga);
+  }
 }
 /*
 END OF SOCIAL AND IDP STUFFS

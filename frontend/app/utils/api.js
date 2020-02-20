@@ -129,7 +129,7 @@ export const newToken = (options) => {
   return request(`${BASE_URL}/oauth/resend-code/`, options)
 };
 
-export const socialOauth = (options) => {
+export const socialOauth = (provider, options) => {
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/auth/social/${provider}/signup`, options)
 };
@@ -142,7 +142,7 @@ export const getMyLibraries = (options) => {
 
 export const getLibraryList = (options) => {
   options = getOption(options);
-  const query = options.query ? options.query : ""; 
+  const query = options.query ? options.query : "";
   return request(`${BASE_URL}/api/v1/libraries/option-items?label=name&q=${query}`, options)
 };
 

@@ -108,7 +108,7 @@ export function* refreshPersistance() {
  * Root saga manages watcher lifecycle
  */
 export function* persistanceSaga() {
-  console.log('persistanceSaga')
+  // console.log('persistanceSaga')
   yield takeLatest(SYNC_PERSISTANCE_REQUEST, refreshPersistance);
 }
 

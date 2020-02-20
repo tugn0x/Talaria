@@ -19,13 +19,11 @@ const styles = (theme) => {
 };
 
 function IdpPage(props) {
-  console.log('IdpPage')
-  console.log('IdpPage')
-  console.log('IdpPage')
+  // console.log('IdpPage')
   // console.log(props.match.params.refresh_token)
   useEffect(() => {
     props.idpSignup(props.match.params.refresh_token);
-    console.log("use effect")
+    // console.log("use effect")
   });
 
     // this.props.prepareGoogle()

@@ -30,7 +30,7 @@ const styles = (theme) => {
 function LoginPage(props) {
   useEffect(() => {
     props.prepareSocialLogin();
-    console.log("use effect")
+    // console.log("use effect")
   });
 
     // this.props.prepareGoogle()

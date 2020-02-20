@@ -22,7 +22,7 @@ import {SignupPage, ForgotPassword} from "containers";
 import {makeSelectLocation} from './selectors'
 
 function App(props) {
-  console.log("APP", props)
+  // console.log("APP", props)
 
   useEffect(() => {
     props.dispatch(syncPersistanceRequest());

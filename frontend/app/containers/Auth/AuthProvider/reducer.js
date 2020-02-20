@@ -95,7 +95,7 @@ const authReducer = (state = initialState, action) =>
           draft.error = initialState.error;
         break;
       case REQUEST_PERMISSIONS_SUCCESS:
-          console.log('case REQUEST_PERMISSIONS_SUCCESS', action.result)
+          // console.log('case REQUEST_PERMISSIONS_SUCCESS', action.result)
           draft.loading = false;
           draft.error = initialState.error;
           draft.permissions = action.result;

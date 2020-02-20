@@ -4,6 +4,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Http\Kernel;
 use Dingo\Api\Http\Request;
 use App\Http\Controllers\Dispatcher;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * A Laravel 5's package for Api.
@@ -34,6 +35,17 @@ class ApiServiceProvider extends ServiceProvider {
     public function boot(Request $request, Kernel $kernel)
     {
 //        $this->bootMailPlugin();
+//        $this->extendValidator();
+    }
+
+    public function extendValidator()
+    {
+        Validator::extend('recaptcha-v3', 'App\Rules\RecapthaV3@passes');
+        Validator::extend('match-old-password', 'App\Rules\MatchOldPassword@passes');
+//        Validator::extend('foo', function ($attribute, $value, $parameters, $validator) {
+//            return $value == 'foo';
+//        });
+
     }
 
     /**

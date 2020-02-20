@@ -30,6 +30,16 @@ function SignupForm(props) {
   });
   const intl = useIntl();
 
+  // useEffect(() => {
+  //
+  //   props.googleReCaptchaProps.executeRecaptcha('Signup').then(token => {
+  //     console.log(token)
+  //   }).catch(error => {
+  //     console.log("ERROR IN submitChange executeRecaptcha")
+  //     console.error("error", error);
+  //   });
+  // })
+
   const handleChange = (e) =>{
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
@@ -47,12 +57,12 @@ function SignupForm(props) {
       console.log("Dont Send Form")
     } else {
       console.log('Sending Form Sign up')
-      /* props.googleReCaptchaProps.executeRecaptcha('Signup').then(token => {
+      props.googleReCaptchaProps.executeRecaptcha('Signup').then(token => {
         props.signup({ ...formData, recaptcha: token })
       }).catch(error => {
         console.log("ERROR IN submitChange executeRecaptcha")
         console.error("error", error);
-      }); */
+      });
     }
     return
   }
@@ -80,7 +90,7 @@ function SignupForm(props) {
                       onChange={(e) => handleChange(e)}
                       required
                     />
-                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.invalid_name' })} /> 
+                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.invalid_name' })} />
                   </InputGroup>
                   <InputGroup className="mb-3">
                    {/*  <InputGroupAddon addonType="prepend">
@@ -95,7 +105,7 @@ function SignupForm(props) {
                       onChange={(e) => handleChange(e)}
                       required
                     />
-                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.invalid_surname' })} /> 
+                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.invalid_surname' })} />
                   </InputGroup>
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
@@ -110,7 +120,7 @@ function SignupForm(props) {
                       onChange={(e) => handleChange(e)}
                       required
                     />
-                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.invalid_email' })} /> 
+                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.invalid_email' })} />
                   </InputGroup>
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
@@ -144,7 +154,7 @@ function SignupForm(props) {
                       pattern={formData.password}
                       required
                     />
-                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.password_match' })} /> 
+                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.password_match' })} />
                   </InputGroup>
                   <InputGroup className="mb-4">
                     <AppSwitch className="mx-1" color="primary"
@@ -153,7 +163,7 @@ function SignupForm(props) {
                                onChange={(e) => handlePrivacyPolicty(e)}
                                required
                                />
-                    <Label check className="form-check-label" htmlFor="privacy_policy_accepted">Privacy policy</Label> 
+                    <Label check className="form-check-label" htmlFor="privacy_policy_accepted">Privacy policy</Label>
                   </InputGroup>
                   <Button color="success" block>
                     <FormattedMessage {...messages.subtitle} />

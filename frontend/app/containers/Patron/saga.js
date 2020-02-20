@@ -24,7 +24,7 @@ export function* requestMyLibrariesSaga() {
 }
 
 export function* requestGetLibraryListSaga(action) {
-  console.log('requestGetLibraryListSaga')
+  // console.log('requestGetLibraryListSaga')
   const options = {
     method: 'get'
   }

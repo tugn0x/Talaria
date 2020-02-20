@@ -16,11 +16,11 @@ import {useIntl} from 'react-intl';
 import messages from './messages'
 
 function MyLibrariesPage(props) {
-  console.log('NUOVE PROPS', props)
+  // console.log('NUOVE PROPS', props)
   const intl = useIntl();
 
   useEffect(() => {
-    console.log('NUOVE useEffect', props.patron.loading)
+    // console.log('NUOVE useEffect', props.patron.loading)
     if(!props.patron.loading) {
       props.dispatch(requestGetLibraryList())
     }

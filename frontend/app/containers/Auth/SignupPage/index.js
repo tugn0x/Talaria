@@ -18,7 +18,7 @@ export function SignupPage(props) {
   const [open, setOpen] = React.useState(false);
   useEffect(() => {
     props.prepareSocialLogin();
-    console.log("use effect")
+    // console.log("use effect")
   });
 
   const handleOpen = () => {
