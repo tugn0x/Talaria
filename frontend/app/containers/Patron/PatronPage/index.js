@@ -19,12 +19,12 @@ import {requestGetLibraryList} from '../actions'
 function PatronPage(props) {
   console.log('PatronPage', props)
 
-  const {patron, dispatch} = props
-  
+  // const {patron, dispatch} = props
+
   useEffect(() => {
-    if(!patron.loading) {
-      dispatch(requestGetLibraryList())
-    }
+    // if(!patron.loading) {
+    //   dispatch(requestGetLibraryList())
+    // }
    }, [])
 
   return (
@@ -34,7 +34,7 @@ function PatronPage(props) {
   );
 }
 const mapStateToProps = createStructuredSelector({
-  patron: makeSelectPatron()
+  // patron: makeSelectPatron()
 });
 
 const mapDispatchToProps = (dispatch) => ({
