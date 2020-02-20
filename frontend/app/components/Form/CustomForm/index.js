@@ -87,7 +87,7 @@ const CustomForm = (props) => {
                 <CardBody className="p-4">
                     { title !== "" ? <h1>{title}</h1> : '' }
                     <Form onSubmit={onSubmit} noValidate>
-                        <Row>
+                        <div>
                             {Object.keys(fields).map(key => {
                                 const field = fields[key];
                                 return (<InputGroup key={field.name} className="mb-3">
@@ -154,7 +154,7 @@ const CustomForm = (props) => {
                                         </InputGroup>
                                     )
                             })}
-                        </Row>
+                        </div>
                         <Button color={submitColor} type="submit" block>
                             {submitText}
                         </Button>

@@ -13,19 +13,10 @@ import {compose} from "redux";
 import { connect } from 'react-redux';
 import {BasePage} from "components";
 import patronRoutes from "routes/patronRoutes";
-import makeSelectPatron, {isPatronLoading}  from '../selectors';
-import {requestGetLibraryList} from '../actions'
+
 
 function PatronPage(props) {
   console.log('PatronPage', props)
-
-  const {isLoading, dispatch} = props
-
-  useEffect(() => {
-    if(!isLoading) {
-       dispatch(requestGetLibraryList())
-    }
-   }, [])
 
   return (
     <>
@@ -34,7 +25,7 @@ function PatronPage(props) {
   );
 }
 const mapStateToProps = createStructuredSelector({
-  isLoading: isPatronLoading()
+  
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -17,13 +17,15 @@ import messages from './messages'
 import {fields} from './fields'
 import CustomForm from 'components/Form/CustomForm';
 import {requestGetLibraryList} from '../actions'
-import makeSelectPatron  from '../selectors';
+import makeSelectPatron, {isPatronLoading} from '../selectors';
 
-function MyLibrariesPage({patron, dispatch}) {
+function MyLibrariesPage(props) {
   const intl = useIntl();
   
+  const {isLoading, dispatch, patron} = props
+
   useEffect(() => {
-    if(!patron.loading) {
+    if(!isLoading) {
       dispatch(requestGetLibraryList())
     }
    }, [])
@@ -44,6 +46,7 @@ function MyLibrariesPage({patron, dispatch}) {
 }
 
 const mapStateToProps = createStructuredSelector({
+  isLoading: isPatronLoading(),
   patron: makeSelectPatron()
 });
 

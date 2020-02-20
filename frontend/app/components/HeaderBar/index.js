@@ -21,7 +21,7 @@ import logomini from 'images/logo.png'
 function HeaderBar(props) {
   // console.log('HeaderBar', props)
   
-  const { auth, isLogged, history } = props
+  const { auth, isLogged, history, headermenu } = props
 
   const linkTo = (path) => {
     history.push(`${path}`)
@@ -29,9 +29,7 @@ function HeaderBar(props) {
 
   return (
     <header className="app-header navbar bg-dark">
-      {isLogged && <AppSidebarToggler className="d-md-down-none" display="lg"/>}
-      {/*Qui ci dobbiamo passare i dati di auth*/}
-      {/*<DefaultHeader/>*/}
+      {isLogged && /* headermenu && */ <AppSidebarToggler className="d-md-down-none" display="lg"/>}
       <AppNavbarBrand
         full={{ src: logo, width: 89, height: 25, alt: 'Nilde Logo' }}
         minimized={{ src: logomini, width: 30, height: 30, alt: 'Nilde Logo' }}
