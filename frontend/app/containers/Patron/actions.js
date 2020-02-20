@@ -26,7 +26,7 @@ export function requestMyLibrariesSuccess(result) {
   };
 }
 
-export function requestGetLibraryList(request = "") {
+export function requestGetLibraryList(request) {
   return {
     type: REQUEST_GET_LIBRARIES_LIST,
     request

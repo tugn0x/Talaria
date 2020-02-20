@@ -4,7 +4,8 @@ import {
   requestError,
   stopLoading,
   requestMyLibrariesSuccess,
-  requestGetLibraryList
+  requestGetLibraryList,
+  requestGetLibraryListSuccess
 } from './actions';
 import { push } from 'connected-react-router';
 import { toast } from "react-toastify";
@@ -26,7 +27,8 @@ export function* requestMyLibrariesSaga() {
 export function* requestGetLibraryListSaga(action) {
   // console.log('requestGetLibraryListSaga')
   const options = {
-    method: 'get'
+    method: 'get',
+    query: action.request
   }
   try {
     const request = yield call(getLibraryList, options);

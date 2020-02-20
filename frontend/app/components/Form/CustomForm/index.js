@@ -2,23 +2,30 @@ import React, {useState} from 'react'
 import { Col, Card, CardBody, InputGroup, InputGroupAddon, InputGroupText, CustomInput, Form, Button, Row } from 'reactstrap'
 import PropTypes from 'prop-types';
 import {useIntl} from 'react-intl'
-
+import Select from 'react-select'; 
+import AsyncSelect from 'react-select/async';
 // PROPS
 // fields
 // callback action
 // classes
 
-const CustomForm = ({
+const CustomForm = (props) => {
+
+    const intl = useIntl();
+    const {
         submitCallBack = () => null,
         title = 'Titolo del form',
         className = '',
         submitText = "Submit",
         submitColor = "brown",
         fields = {},
-        requestData = {}
-    }) => {
+        requestData = {},
+        searchCustomSelect = () => null
+    } = props
 
-    const intl = useIntl();
+
+    const [selectedOption, setSelectedOption] = useState(null)
+    const [selectInputValue, setSelectInputValue] = useState("")
 
     const [formData, setFormData] = useState(() => {
         let data = {}
@@ -31,6 +38,17 @@ const CustomForm = ({
         })
         return data
     })
+    
+    const handleSearchCustomSelect = (newValue) => {
+        const inputValue = newValue.replace(/\W/g, '');
+        searchCustomSelect(inputValue)
+        // return inputValue;
+    };
+
+    const handleSelectedOption = (selectedOption) =>{
+        setSelectedOption(selectedOption)
+        console.log("handleCustomSelectChange", selectedOption)
+    }
 
     const handleChange = (e) =>{
         const targetType = e.target.type
@@ -71,6 +89,7 @@ const CustomForm = ({
                         <Row>
                             {Object.keys(fields).map(key => {
                                 const field = fields[key];
+                                console.log(props[field.options])
                                 return (<InputGroup key={field.name} className="mb-3">
                                         {field.label && field.label !== "" &&
                                             <InputGroupAddon addonType="prepend">
@@ -86,7 +105,7 @@ const CustomForm = ({
                                                     type={field.type}
                                                     placeholder={field.placeholder ?  intl.formatMessage({ id: field.placeholder }) : 'default placeholder' }
                                                     name={key}
-                                                    // value={formData[key] ? formData[key] : ""}
+                                                    value={formData[key] ? formData[key] : ""}
                                                     onChange={(e) => handleChange(e)}
                                                     required={field.required ? field.required : false}
                                                     checked={formData[key]}
@@ -103,14 +122,22 @@ const CustomForm = ({
                                                     onChange={(e) => handleChange(e)}
                                                     required={field.required ? field.required : false}
                                                 >
-                                                {/*{field.options.map((opt, i) => (<option key={`${field.label}-${i}`} value={opt.value}>{opt.label}</option>))}*/}
-                                                {
-                                                  (typeof field.options === 'string') ?
-                                                    props[`${field.options}`].map((opt, i) => (<option key={`${field.label}-${i}`} value={opt.value}>{opt.label}</option>)) :
-                                                    field.options.map((opt, i) => (<option key={`${field.label}-${i}`} value={opt.value}>{opt.label}</option>))
+                                                { (typeof field.options === 'string') ?
+                                                  props[field.options] && props[field.options].map((opt, i) => (<option key={`${field.name}-${i}`} value={opt.id}>{opt.name}</option>)) :
+                                                    field.options.map((opt, i) => (<option key={`${field.name}-${i}`} value={opt.id}>{opt.name}</option>))
                                                 }
 
                                                 </CustomInput>)
+                                            ||
+                                            field.type === 'custom-select' &&
+                                                ( <Select
+                                                    className="form-control"
+                                                    value={selectedOption}
+                                                    onChange={(selectedOption) =>  handleSelectedOption(selectedOption) }
+                                                   // inputValue={}
+                                                    onInputChange={(input) => handleSearchCustomSelect(input) }
+                                                    options={props[field.options]}
+                                                />)
                                             ||
                                                 (<CustomInput
                                                     className="form-control"
@@ -118,6 +145,7 @@ const CustomForm = ({
                                                     type={field.type}
                                                     placeholder={field.placeholder ?  intl.formatMessage({ id: field.placeholder }) : 'default placeholder' }
                                                     name={key}
+                                                    isSearchable={true}
                                                     value={formData[key] ? formData[key] : ""}
                                                     onChange={(e) => handleChange(e)}
                                                     required={field.required ? field.required : false}

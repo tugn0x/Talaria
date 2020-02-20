@@ -35,7 +35,7 @@ const PatronReducer = (state = initialState, action) =>
       case REQUEST_GET_LIBRARIES_LIST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.librariesList = action.result;
+        draft.librariesList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break;
       case STOP_LOADING:
         draft.loading = false;

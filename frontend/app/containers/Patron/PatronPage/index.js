@@ -14,18 +14,29 @@ import { connect } from 'react-redux';
 import {BasePage} from "components";
 import patronRoutes from "routes/patronRoutes";
 import makeSelectPatron  from '../selectors';
+import {requestGetLibraryList} from '../actions'
 
 function PatronPage(props) {
   console.log('PatronPage', props)
+
+  const {patron, dispatch} = props
+  
+  useEffect(() => {
+    if(!patron.loading) {
+      dispatch(requestGetLibraryList())
+    }
+   }, [])
+
   return (
     <>
-      <BasePage {...props} routes={patronRoutes} messages={messages}/>
+      <BasePage {...props} routes={patronRoutes} messages={messages} />
     </>
   );
 }
 const mapStateToProps = createStructuredSelector({
   patron: makeSelectPatron()
 });
+
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
 })

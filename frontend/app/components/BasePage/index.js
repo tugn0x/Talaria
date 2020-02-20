@@ -31,7 +31,6 @@ function BasePage(props) {
           <Container>
             <Switch>
               {props.routes && props.routes.map((route, idx) => {
-                console.log('props', props)
                 return route.component ? (
                   <Route
                     key={'userRoutes_'+idx}
