@@ -65,6 +65,7 @@ function HeaderBar(props) {
                     </>)
                   }
                 <DropdownItem header tag="div" className="text-center"><FormattedMessage {...messages.UserAccount} /></DropdownItem>
+                <DropdownItem onClick={() => linkTo("/patron/my-libraries")}><i className="fa fa-user"></i><span>Patron</span></DropdownItem>
                 <DropdownItem onClick={() => linkTo("/user/user-profile")}><i className="fa fa-user"></i><span><FormattedMessage {...messages.Profile} /></span></DropdownItem>
                 <DropdownItem onClick={() => linkTo("/user/change-password")}><i className="fa fa-lock"></i><span><FormattedMessage {...messages.ChangePassword} /></span></DropdownItem>
                 <DropdownItem onClick={e => props.logout(e)}><i className="fa fa-lock"></i><FormattedMessage {...messages.Logout} /></DropdownItem>

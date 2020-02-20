@@ -13,4 +13,11 @@ const makeSelectPatron = () =>
     substate => substate,
   );
 
+const isPatronLoading = () => 
+createSelector(
+  selectPatronDomain,
+  substate => (substate.loading)
+);
+
 export default makeSelectPatron;
+export {  isPatronLoading };

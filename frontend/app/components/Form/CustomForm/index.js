@@ -146,7 +146,6 @@ const CustomForm = (props) => {
                                                     type={field.type}
                                                     placeholder={field.placeholder ?  intl.formatMessage({ id: field.placeholder }) : 'default placeholder' }
                                                     name={key}
-                                                    isSearchable={true}
                                                     value={formData[key] ? formData[key] : ""}
                                                     onChange={(e) => handleChange(e)}
                                                     required={field.required ? field.required : false}
