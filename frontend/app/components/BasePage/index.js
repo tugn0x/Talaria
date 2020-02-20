@@ -23,7 +23,17 @@ function BasePage(props) {
       <div className="app-body">
         {props.headermenu && (
           <div className="sidebar">
-            Menu contestuale
+            <div className="scrollbar-container sidebar-nav ps ps-container">
+              <p>Menu Contestuale</p>
+              <ul>
+                <li>Pippo</li>
+                <li>Pippo</li>
+                <li>Pippo</li>
+                <li>Pippo</li>
+                <li>Pippo</li>
+                <li>Pippo</li>
+              </ul>
+            </div>
           </div>
         )}
         <main className="main">
