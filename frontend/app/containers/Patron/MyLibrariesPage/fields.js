@@ -4,6 +4,7 @@ export const fields = {
         name: "librariesList",
         label: "app.containers.MyLibrariesPage.selectLibrary",
         placeholder: "app.containers.MyLibrariesPage.selectLibrary",
-        options: "librariesList"
+        options: "librariesList",
+        required: true
     }, 
 }

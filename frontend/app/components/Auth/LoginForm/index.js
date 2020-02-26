@@ -48,8 +48,8 @@ import './style.scss'
 
     const submitChange = (e) =>{
       e.preventDefault();
-      props.login({ ...formData })
-      return
+    //  props.login({ ...formData })
+     // return
       props.googleReCaptchaProps.executeRecaptcha('homepage').then(token => {
         props.login({ ...formData, recaptcha: token })
       }).catch(error => {

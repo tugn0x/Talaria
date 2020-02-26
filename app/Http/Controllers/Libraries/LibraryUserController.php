@@ -31,7 +31,7 @@ class LibraryUserController extends ApiController
     {
         $this->authorize($this->model);
         $count = $request->input('pageSize', config('api.page_size'));
-        $my_applications = $this->model->owned()->orderBy('updated_at','desc')->paginate($count);
+        $my_applications = $this->model->owned()->with('library')->orderBy('updated_at','desc')->paginate($count);
 
         return $this->response->paginator($my_applications, new $this->transformer());
     }

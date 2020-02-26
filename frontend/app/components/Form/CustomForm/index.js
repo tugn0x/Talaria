@@ -20,24 +20,27 @@ const CustomForm = (props) => {
         submitText = "Submit",
         submitColor = "brown",
         fields = {},
-        requestData = {},
         searchCustomSelect = () => null
     } = props
 
 
     const [selectedOption, setSelectedOption] = useState(null)
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
     
     const [formData, setFormData] = useState(() => {
         let data = {}
         Object.keys(fields).map(key => {
+            const field = fields[key]
             if(fields[key].type === 'checkbox') {
-                data = {...data, [key]: requestData[key] ? requestData[key] : false }
+                data = {...data, [key]: field.options && props[field.options][field.name] !== null ? props[field.options][field.name]  : false }
+            }else if(fields[key].type === 'custom-select' || fields[key].type === 'select'){
+                data = {...data, [key]: [] }
             }else {
-                data = {...data, [key]: requestData[key] ? requestData[key] : "" }
+                data = {...data, [key]: field.options && props[field.options][field.name] !== null ? props[field.options][field.name]  : "" }
             }
         })
-        return data
-    })
+        return data 
+    }) 
     
     
     /* CUSTOM SELECT Handle */
@@ -47,8 +50,9 @@ const CustomForm = (props) => {
     };
 
     const handleChangeCustomSelect = (selectedOption, key) => {
-       setFormData({ ...formData, [key]:  uniqBy([...formData[key], selectedOption], 'value' )})
+       setFormData({ [key]:  uniqBy([selectedOption], 'value' ) })
        setSelectedOption(selectedOption)
+       setIsSubmitDisabled(false)
     }
 
     /* HANDLE CHANGE Generico */
@@ -62,7 +66,7 @@ const CustomForm = (props) => {
                 setFormData({ ...formData, [e.target.name]:  e.target.value   })
                 break;
         }
-        // console.log("new formData", formData)
+        setIsSubmitDisabled(false)
     }
 
 
@@ -83,9 +87,9 @@ const CustomForm = (props) => {
     return (
         Object.keys(fields).length &&
         (
-            <Card className="mx-4">
+            <Card>
                 <CardBody className="p-4">
-                    { title !== "" ? <h1>{title}</h1> : '' }
+                    { title !== "" ? <h2>{title}</h2> : '' }
                     <Form onSubmit={onSubmit} noValidate>
                         <div>
                             {Object.keys(fields).map(key => {
@@ -130,14 +134,15 @@ const CustomForm = (props) => {
                                                 </CustomInput>)
                                             ||
                                             field.type === 'custom-select' &&
-                                                ( <Select
-                                                    className="library-custom-select"
+                                                (<Select
+                                                    className="form-custom-select"
                                                     type="custom-select"
                                                     value={selectedOption}
                                                     name={key}
                                                     onChange={(selectedOption) => handleChangeCustomSelect(selectedOption, key)}
                                                     onInputChange={(input) => handleSearchCustomSelect(input) }
                                                     options={props[field.options]}
+                                                    required
                                                 />)
                                             ||
                                                 (<CustomInput
@@ -150,12 +155,13 @@ const CustomForm = (props) => {
                                                     onChange={(e) => handleChange(e)}
                                                     required={field.required ? field.required : false}
                                                 />)
+                                            
                                             }
                                         </InputGroup>
                                     )
                             })}
                         </div>
-                        <Button color={submitColor} type="submit" block>
+                        <Button color={submitColor} disabled={isSubmitDisabled} type="submit" block>
                             {submitText}
                         </Button>
                     </Form>

@@ -28,7 +28,7 @@ function HeaderBar(props) {
   };
 
   return (
-    <header className="app-header navbar bg-dark">
+    <header className="app-header navbar bg-dark px-4">
       {isLogged && /* headermenu && */ <AppSidebarToggler className="d-md-down-none" display="lg"/>}
       <AppNavbarBrand
         full={{ src: logo, width: 89, height: 25, alt: 'Nilde Logo' }}
@@ -45,8 +45,9 @@ function HeaderBar(props) {
           <DropdownToggle nav>
             { isLogged && (
               <>
-                <i className="fa fa-3x fa-user float-left"></i>
-                <span className="user-name float-right">{auth.user.name}</span>
+                <i className="fa fa-2x fa-user d-table-cell"></i>
+                <span className="user-name d-table-cell align-middle px-3">{auth.user.name}</span>
+                <i className="fa fa-1x fa-sort-down d-table-cell align-middle"></i>
               </>
             )
             }

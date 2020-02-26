@@ -1,7 +1,7 @@
 import React from 'react';
-import { CustomInput, Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row, Label, FormGroup } from 'reactstrap';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import { Col, Row } from 'reactstrap';
+/* import { FormattedMessage } from 'react-intl';
+import messages from './messages'; */
 // import globalMessages from '../../../utils/globalMessages'
 import {useIntl} from 'react-intl';
 import Loader from 'components/Form/Loader.js';
@@ -18,7 +18,7 @@ const ProfileForm = (props) => {
                 <Col md="9" lg="7" xl="6">
                     <CustomForm 
                         submitCallBack={(formData) => updateProfile(formData) } 
-                        requestData={user}  
+                        user={user}  
                         fields={fields} 
                         title={intl.formatMessage({ id: 'app.containers.UserProfile.header' })} 
                         submitText={intl.formatMessage({ id: 'app.containers.UserProfile.subtitle' })}

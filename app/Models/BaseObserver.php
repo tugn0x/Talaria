@@ -47,7 +47,7 @@ class BaseObserver
                 if (!$model->exists)
                 {
 //                    exit(print_r($model->password_confirmation));
-                    exit(print_r($this->validator->errors()));
+//                    exit(print_r($this->validator->errors()));
 //                    print_r(get_class($model));
 //                    print_r($model->toArray());
 //                    exit(print_r($this->validator->errors()));

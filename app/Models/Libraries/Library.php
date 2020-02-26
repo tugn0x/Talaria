@@ -14,6 +14,7 @@ class Library extends BaseModel
 {
     protected static $observerClass = LibraryObserver::class;
 
+
     /*
      * Fillable attributes
      */
@@ -68,9 +69,9 @@ class Library extends BaseModel
      * Accessor & relation to automatically append on model instance
      */
     protected $appends = [
-
+        
     ];
-
+    
     /*
      * Default attributes
      */

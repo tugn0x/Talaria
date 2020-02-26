@@ -21,12 +21,12 @@ class LibraryUserTransformer extends BaseTransformer
 
     public function includeLibrary(Model $model)
     {
-        return $this->item($model, new LibraryTransformer);
+        return $this->item($model->library, new LibraryTransformer);
     }
 
 
 
-    public function transform(Model $model)
+    public function toArray(Model $model)
     {
         $to_merge = [
             'test' => 'hello user',

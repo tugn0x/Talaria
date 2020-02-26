@@ -12,6 +12,8 @@ import ResetPasswordForm from './Auth/ResetPasswordForm';
 import ChangePasswordForm from './Auth/ChangePasswordForm';
 
 
+import MyLibrariesList from './Patron/MyLibrariesList';
+
 import Toaster from "./Toaster/Loadable"
 /*
 FORM STUFFS
@@ -32,7 +34,7 @@ export {
   ForgotPasswordForm,
   ResetPasswordForm,
   ChangePasswordForm,
-
+  MyLibrariesList,
   CustomForm,
   ErrorBox,
   Loader,

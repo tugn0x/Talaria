@@ -156,9 +156,10 @@ curl --location --request POST 'https://api.nilde.local/api/v1/libraries/16/libr
 	"library_id": "15"
 }'
  */
-export const requestAccess = (options) => {
+export const requestAccessToLibrary = (options) => {
+  const library_id = options.body.library_id
   options = getOption(options);
-  return request(`${BASE_URL}/libraries/${options.body.library_id}/library-users`, options)
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users`, options)
 };
 
 
