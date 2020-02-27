@@ -8,33 +8,23 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import {Switch, Route, withRouter} from 'react-router-dom';
-import {HeaderBar} from 'components';
+import {HeaderBar, SideBar} from 'components';
 import {Container} from "reactstrap"
 
 function BasePage(props) {
   console.log('BasePage',props)
+  const lightRoutes = props.routes.filter((item)=>{
+    return item;
+  }).map((item)=>{
+    return {...item, path: props.match.path+item.path, component:null}
+  });
 
   return (
     <>
-      <HeaderBar isLogged={props.isLogged} headermenu={props.headermenu} history={props.history} auth={props.auth} logout={(request) => props.logout(request)}/>
-      {props.headermenu && (
-        <div>HEADER SECONDARIO</div>
-      )}
+      <HeaderBar isLogged={props.isLogged} location={props.location} headermenu={props.headermenu} history={props.history} auth={props.auth} routes={lightRoutes} logout={(request) => props.logout(request)}/>
       <div className="app-body">
         {props.headermenu && (
-          <div className="sidebar">
-            <div className="scrollbar-container sidebar-nav ps ps-container">
-              <p>Menu Contestuale</p>
-              <ul>
-                <li>Pippo</li>
-                <li>Pippo</li>
-                <li>Pippo</li>
-                <li>Pippo</li>
-                <li>Pippo</li>
-                <li>Pippo</li>
-              </ul>
-            </div>
-          </div>
+          <SideBar routes={lightRoutes} location={props.location}/>
         )}
         <main className="main">
           <h1><FormattedMessage {...props.messages.header} /></h1>

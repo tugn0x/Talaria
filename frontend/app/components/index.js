@@ -1,5 +1,6 @@
 import HeaderBar from './HeaderBar';
 import Footer from './Footer';
+import SideBar from './SideBar';
 
 /*
 USER AUTHENTICATION
@@ -38,4 +39,5 @@ export {
   CustomForm,
   ErrorBox,
   Loader,
+  SideBar,
 }

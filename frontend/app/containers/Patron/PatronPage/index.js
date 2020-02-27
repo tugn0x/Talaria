@@ -17,15 +17,14 @@ import patronRoutes from "routes/patronRoutes";
 
 function PatronPage(props) {
   console.log('PatronPage', props)
-
   return (
     <>
-      <BasePage {...props} routes={patronRoutes} messages={messages} />
+      <BasePage {...props} routes={patronRoutes} messages={messages} headermenu={true}/>
     </>
   );
 }
 const mapStateToProps = createStructuredSelector({
-  
+
 });
 
 const mapDispatchToProps = (dispatch) => ({
