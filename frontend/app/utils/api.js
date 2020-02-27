@@ -158,7 +158,6 @@ export const getReferencesList = (options) => {
 };
 
 export const createReferences = (options) => {
-  console.log(options)
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/references`, options)
 };

@@ -19,6 +19,11 @@ export const fields = {
         required: true,
         name: "page_end",
     },
+    abstract: {
+        type: "text",
+        required: true,
+        name: "abstract",
+    },
     pub_title: {
         type: "text",
         required: true,

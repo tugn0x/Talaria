@@ -15,7 +15,7 @@ export const initialState = {
   my_libraries: [],
   error: null,
   librariesList: [],
-  references: []
+  referencesList: []
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -37,6 +37,7 @@ const PatronReducer = (state = initialState, action) =>
       case REQUEST_REFERENCES_LIST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
+        draft.referencesList = action.result.data;
         break;
       case REQUEST_MY_LIBRARIES:
         draft.loading = true;

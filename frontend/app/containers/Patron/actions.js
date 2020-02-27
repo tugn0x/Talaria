@@ -24,10 +24,9 @@ export function requestPostReferences(request) {
   };
 }
 
-export function requestPostReferencesSuccess(result) {
+export function requestPostReferencesSuccess() {
   return {
     type: REQUEST_POST_REFERENCES_SUCCESS,
-    result
   };
 }
 

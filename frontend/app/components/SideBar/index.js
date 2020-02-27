@@ -33,10 +33,13 @@ function SideBar(props) {
   return (
     <div className="sidebar">
       <div className="scrollbar-container sidebar-nav ps ps-container">
-        {/*<p>Menu Contestuale</p>*/}
         <ul className="nav">
           {
-            routes.map((item)=>(<li key={item.name} className="nav-item"><a className="nav-link" href={item.path}>{item.name}</a></li>))
+            routes.map((route) => (
+              <li key={route.name} className="nav-item">
+                <a className="nav-link" href={route.path}>{route.name}</a>
+              </li>
+            ))
           }
         </ul>
       </div>

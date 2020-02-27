@@ -8,7 +8,8 @@ import {
   requestGetLibraryList,
   requestGetLibraryListSuccess,
   requestAccessToLibrarySuccess,
-  requestReferencesListSuccess
+  requestReferencesListSuccess,
+  requestPostReferencesSuccess
 } from './actions';
 import { push } from 'connected-react-router';
 import { toast } from "react-toastify";
@@ -81,7 +82,8 @@ export function* requestPostReferencesSaga(action) {
   };
   try {
     const request = yield call(createReferences, options);
-   // yield put(requestReferencesListSuccess(request));
+    yield put(requestPostReferencesSuccess());
+    yield call(toast.success('Referenza creata'))
   } catch(e) {
     yield put(requestError(e.message));
   }

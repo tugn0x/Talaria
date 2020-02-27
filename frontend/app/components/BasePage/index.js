@@ -19,7 +19,7 @@ function BasePage(props) {
   }).map((item)=>{
     return {...item, path: props.match.path+item.path, component:null}
   });
-
+  
   return (
     <>
       <HeaderBar isLogged={props.isLogged} location={props.location} headermenu={props.headermenu} history={props.history} auth={props.auth} logout={(request) => props.logout(request)}/>

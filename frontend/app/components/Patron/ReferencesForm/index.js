@@ -14,7 +14,7 @@ const ReferencesForm = (props) => {
             <Row className="justify-content-center">
                 <Col md="9" lg="7" xl="6">
                     <CustomForm 
-                        submitCallBack={(formData) => createReferences(formData) } 
+                        submitCallBack={(formData) => createReferences(formData)} 
                         // user={user}  
                         fields={fields} 
                         title={intl.formatMessage(messages.header)} 
