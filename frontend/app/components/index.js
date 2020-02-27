@@ -1,4 +1,5 @@
 import HeaderBar from './HeaderBar';
+// import SubHeaderBar from './SubHeaderBar';
 import Footer from './Footer';
 import SideBar from './SideBar';
 
@@ -12,8 +13,9 @@ import ForgotPasswordForm from './Auth/ForgotPasswordForm';
 import ResetPasswordForm from './Auth/ResetPasswordForm';
 import ChangePasswordForm from './Auth/ChangePasswordForm';
 
-
+// Patron
 import MyLibrariesList from './Patron/MyLibrariesList';
+import ReferencesForm from './Patron/ReferencesForm';
 
 import Toaster from "./Toaster/Loadable"
 /*
@@ -36,6 +38,7 @@ export {
   ResetPasswordForm,
   ChangePasswordForm,
   MyLibrariesList,
+  ReferencesForm,
   CustomForm,
   ErrorBox,
   Loader,

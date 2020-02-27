@@ -14,15 +14,15 @@ export default defineMessages({
     defaultMessage: 'Account Profile!',
   },
   name: {
-    id: `${scope}.name`,
+    id: `app.global.name`,
     defaultMessage: 'Name',
   },
   email: {
-    id: `${scope}.email`,
+    id: `app.global.email`,
     defaultMessage: 'Email',
   },
   surname: {
-    id: `${scope}.surname`,
+    id: `app.global.surname`,
     defaultMessage: 'Surname',
   },
   subtitle: {

@@ -12,8 +12,8 @@ export default defineMessages({
     id: `${scope}.title`,
     defaultMessage: 'Add a new library',
   },
-  selectLibrary: {
-    id: `${scope}.selectLibrary`,
+  librariesList: {
+    id: `${scope}.librariesList`,
     defaultMessage: 'Select library',
   },
 });

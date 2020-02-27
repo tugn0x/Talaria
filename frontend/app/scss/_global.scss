@@ -5,6 +5,7 @@ html,body {
     font-family: $font-family-base;
     font-weight: 400;
     font-size: 16px;
+    color: $grey;
 }
 
 p, label {
@@ -26,16 +27,6 @@ a {
     }
 }
 
-
-.form-control {
-    &:focus {
-        outline: none;
-        border-color: $theme_color;
-        box-shadow: 0 0 0 0.2rem rgba(240, 104, 70, 0.25);
-        -webkit-box-shadow:  0 0 0 0.2rem rgba(240, 104, 70, 0.25);
-        -moz-box-shadow:  0 0 0 0.2rem rgba(240, 104, 70, 0.25);
-    }
-}
 
 .btn {
     border-radius: 0;
@@ -96,25 +87,10 @@ form {
     }
 }
 
-
-.dropdown-menu {
-    background-color: $white;
-    border: 1px solid #44444426;
-    top: 8px !important;
-    box-shadow: 0px 3px 6px #00000029;
-    -webkit-box-shadow: 0px 3px 6px #00000029;
-    -moz-box-shadow: 0px 3px 6px #00000029;
-    .dropdown-header {
-        background-color: transparent;
-        color: $grey;
-        font-size: 1rem;
-    }
-    .dropdown-item {
-        &:focus, &:active, &:hover {
-            background-color: $orange;
-            color: white;
-            font-weight: 700;
-        }
+ul.list-inline {
+    li {
+        display: inline-block;
+        margin-right: 2rem;
     }
 }
 

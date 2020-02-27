@@ -1,0 +1,43 @@
+@import '../../scss/vendors/variables';
+
+.dropdown {
+    .fa-sort-down {
+        position: absolute;
+        top: -6px;
+        right: -15px;
+    }
+}
+
+.dropdown-menu {
+    background-color: $white;
+    border: 1px solid #44444426;
+    top: 8px !important;
+    box-shadow: 0px 3px 6px #00000029;
+    -webkit-box-shadow: 0px 3px 6px #00000029;
+    -moz-box-shadow: 0px 3px 6px #00000029;
+    .dropdown-header {
+        background-color: transparent;
+        color: $grey;
+        font-size: 1rem;
+    }
+    .dropdown-item {
+        &:focus, &:active, &:hover {
+            background-color: $orange;
+            color: white;
+            font-weight: 700;
+        }
+    }
+}
+
+.navbar-toggler {
+    position: absolute;
+    left: 1rem;
+}
+
+.navbar-brand {
+    position: relative;
+    > img {
+        position: absolute;
+        left: 0;
+    }
+}

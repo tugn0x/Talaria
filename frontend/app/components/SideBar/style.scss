@@ -1,0 +1,7 @@
+@import '../../scss/vendors/variables';
+
+.sidebar .nav-link {
+    &:hover {
+        background: $brown;
+    }
+}

@@ -20,7 +20,8 @@ const CustomForm = (props) => {
         submitText = "Submit",
         submitColor = "brown",
         fields = {},
-        searchCustomSelect = () => null
+        searchCustomSelect = () => null,
+        messages,
     } = props
 
 
@@ -95,19 +96,17 @@ const CustomForm = (props) => {
                             {Object.keys(fields).map(key => {
                                 const field = fields[key];
                                 return (<InputGroup key={field.name} className="mb-3">
-                                        {field.label && field.label !== "" &&
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
-                                                {intl.formatMessage({ id: field.label })}
+                                                    {intl.formatMessage(messages[field.name])}
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                        }
                                             {field.type === 'checkbox' &&
                                                 (<CustomInput
                                                     className="form-control"
                                                     id={field.name}
                                                     type={field.type}
-                                                    placeholder={field.placeholder ?  intl.formatMessage({ id: field.placeholder }) : 'default placeholder' }
+                                                    // placeholder={field.placeholder ?  intl.formatMessage({ id: field.placeholder }) : 'default placeholder' }
                                                     name={key}
                                                     value={formData[key] ? formData[key] : ""}
                                                     onChange={(e) => handleChange(e)}
@@ -120,7 +119,7 @@ const CustomForm = (props) => {
                                                     className="form-control"
                                                     id={field.name}
                                                     type={field.type}
-                                                    placeholder={field.placeholder  ? intl.formatMessage({ id: field.placeholder }) : 'default placeholder' }
+                                                    placeholder={intl.formatMessage(messages[field.name])}
                                                     name={key}
                                                     value={formData[key] ? formData[key] : ""}
                                                     onChange={(e) => handleChange(e)}
@@ -149,7 +148,7 @@ const CustomForm = (props) => {
                                                     className="form-control"
                                                     id={field.name}
                                                     type={field.type}
-                                                    placeholder={field.placeholder ?  intl.formatMessage({ id: field.placeholder }) : 'default placeholder' }
+                                                    placeholder={intl.formatMessage(messages[field.name])}
                                                     name={key}
                                                     value={formData[key] ? formData[key] : ""}
                                                     onChange={(e) => handleChange(e)}

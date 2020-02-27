@@ -11,12 +11,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { Link, NavLink } from 'react-router-dom';
-import { DropdownItem, DropdownMenu, DropdownToggle, Nav, UncontrolledDropdown, Badge, NavItem } from 'reactstrap';
-import PropTypes from 'prop-types';
-
-import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
-import logo from 'images/logo_home.gif'
-import logomini from 'images/logo.png'
+import './style.scss'
 
 function SideBar(props) {
   console.log('SideBar', props)
@@ -39,10 +34,9 @@ function SideBar(props) {
     <div className="sidebar">
       <div className="scrollbar-container sidebar-nav ps ps-container">
         {/*<p>Menu Contestuale</p>*/}
-        <ul>
-          <li>SISTEMARE IL COLORE A QUESTI IN BASSO</li>
+        <ul className="nav">
           {
-            routes.map((item)=>(<li><a href={item.path}>{item.name}</a></li>))
+            routes.map((item)=>(<li key={item.name} className="nav-item"><a className="nav-link" href={item.path}>{item.name}</a></li>))
           }
         </ul>
       </div>

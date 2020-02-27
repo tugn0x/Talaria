@@ -7,12 +7,10 @@ $font-family-base: 'Archivo', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantare
 
 
 // COLORS
-
-// $primary: #A65255;
 $theme_color: #A65255;
-$light: #F5F1EB;
-$dark: #D6CBC3;
 $white: #F5F5F5;
+$grey-lighter: #EBE3DD;
+$grey-light: #D6CBC3;
 $grey: #444444;
 $orange: #DF8969;
 $brown: #A65255;
@@ -20,4 +18,6 @@ $theme-colors: (
   "brown": $brown,
   "grey": $grey,
   "orange": $orange,
+  "grey-light": $grey-light,
+  "grey-lighter": $grey-lighter,
 );

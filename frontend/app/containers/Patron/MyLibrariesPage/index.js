@@ -40,8 +40,9 @@ function MyLibrariesPage(props) {
       <CustomForm 
         submitCallBack={ (formData) => dispatch(requestAccessToLibrary(formData.librariesList)) } 
         librariesList={patron.librariesList} 
-        fields={fields} 
-        title={intl.formatMessage({id: 'app.containers.MyLibrariesPage.title'})}
+        fields={fields}
+        messages={messages} 
+        title={intl.formatMessage(messages.title)}
         searchCustomSelect={(input) => {
           dispatch(requestGetLibraryList(input))
         }}

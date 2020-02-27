@@ -146,21 +146,24 @@ export const getLibraryList = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/option-items?label=name&q=${query}`, options)
 };
 
-
-/*
-curl --location --request POST 'https://api.nilde.local/api/v1/libraries/16/library-users' \
---header 'accept: application/json' \
---header 'authorization: Bearer ey2PJBwgV2d5XEWD0FPqcV...' \
---header 'content-type: application/json' \
---data-raw '{
-	"library_id": "15"
-}'
- */
 export const requestAccessToLibrary = (options) => {
   const library_id = options.body.library_id
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users`, options)
 };
+
+export const getReferencesList = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/references/my`, options)
+};
+
+export const createReferences = (options) => {
+  console.log(options)
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/references`, options)
+};
+
+
 
 
 
