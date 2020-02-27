@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Models\Libraries\Library;
 use App\Models\Libraries\LibraryUser;
+use App\Models\Reference;
 use App\Policies\LibraryPolicy;
 use App\Policies\LibraryUserPolicy;
+use App\Policies\ReferencesPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
@@ -23,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Model' => 'App\Policies\ModelPolicy',
         Library::class => LibraryPolicy::class,
         LibraryUser::class => LibraryUserPolicy::class,
+        Reference::class => ReferencesPolicy::class,
     ];
 
     /**

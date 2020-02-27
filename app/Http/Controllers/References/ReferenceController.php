@@ -30,16 +30,37 @@ class ReferenceController extends ApiController
         return $this->response->collection($items, $this->transformer);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    public function create(Request $request)
+    public function my(Request $request)
     {
+        $this->authorize($this->model);
+        $count = $request->input('pageSize', config('api.page_size'));
+        $my_applications = $this->model->owned()->orderBy('updated_at','desc')->paginate($count);
 
+        return $this->response->paginator($my_applications, new $this->transformer());
     }
+
+    public function store(Request $request)
+    {
+        $model = $this->nilde->store($this->model, $request, null, function ($model, $request) {
+//            $model = $model->firstOrNew([
+//                'user_id' => $model->user_id,
+//                'library_id' => $request->library,
+//            ]);
+            return $model;
+        });
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+    }
+
+//    /**
+//     * Show the form for creating a new resource.
+//     *
+//     * @return \Illuminate\Http\Response
+//     */
+//
+//    public function create(Request $request)
+//    {
+//
+//    }
 
 
 //    /**
