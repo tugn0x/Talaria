@@ -3,7 +3,7 @@
 namespace App\Models\Users;
 
 use App\Models\BaseModel;
-use App\Models\Reference;
+use App\Models\References\Reference;
 use Illuminate\Database\Eloquent\Model;
 
 class OauthSocialProvider extends Model

@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\References\ReferenceObserver;
 use App\Models\Requests\DocdelRequest;
 use App\Models\Requests\PatronDocdelRequest;
 use App\Models\Users\Label;
 
 class Reference extends BaseModel
 {
+    protected static $observerClass = ReferenceObserver::class;
+
     protected $fillable = [
         'material_type',
         'pub_title',
@@ -21,8 +24,8 @@ class Reference extends BaseModel
         'page_end',
         'abstract',
         'doi',
-        'issn',            
-        'publisher', 
+        'issn',
+        'publisher',
         'publishing_place',
         'isbn',
         'sid',
