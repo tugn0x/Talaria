@@ -30,8 +30,10 @@ function HeaderBar(props) {
   };
 
   const isCurrentPage = (pagePath) => {
-    // console.log(pagePath, props.location.pathname)
-    return new RegExp(`^\/${pagePath.replace("/", "\/")}(.*?)`).test(props.location.pathname);
+    /*
+    TODO: IMPROVE REGEX!
+    */
+    return pagePath === props.location.pathname || new RegExp(`^\/${pagePath.replace("/", "\/")}(.*?)`).test(props.location.pathname);
   };
 
 

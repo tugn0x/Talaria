@@ -14,17 +14,40 @@ import SubHeaderBar from 'components/SubHeaderBar'
 
 function BasePage(props) {
   console.log('BasePage',props)
-  const lightRoutes = props.routes.filter((route)=>{
-    return route;
-  }).map((route)=>{
-    return {
-      ...route, 
-      path: props.match.path+route.path, 
-      url: route.url ? props.match.path+route.url : null, 
-      component:null,
-    }
-  });
-  
+
+  const isCurrentPage = (pagePath) => {
+    // console.log(props.location)
+    /*
+    TODO: IMPROVE REGEX!
+    */
+    return pagePath === props.location.pathname || new RegExp(`^\/${pagePath.replace("/", "\/")}(.*?)`).test(props.location.pathname);
+  };
+
+  const mapRoutes = (routes, auth) => {
+    return filterRoutes(routes, auth).map((route)=>{
+      const url = route.url ? props.match.path+route.url : props.match.path+route.path
+      return {
+        ...route,
+        path: props.match.path+route.path,
+        url: url,
+        component:null,
+        current: isCurrentPage(url),
+        children: route.children ? mapRoutes(filterRoutes(route.children, auth)) : []
+      }
+    })
+  }
+
+  const filterRoutes = (routes, auth) => {
+    return routes.filter((route)=>{
+        /*
+        TODO: ADDING ROLES & PERMISSION CHECK
+         */
+        return true;
+      })
+  }
+
+  const lightRoutes = mapRoutes(props.routes, props.auth)
+
   return (
     <>
       <HeaderBar isLogged={props.isLogged} location={props.location} headermenu={props.headermenu} history={props.history} auth={props.auth} logout={(request) => props.logout(request)}/>
