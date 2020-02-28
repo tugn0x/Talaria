@@ -16,11 +16,7 @@ function BasePage(props) {
   console.log('BasePage',props)
 
   const isCurrentPage = (pagePath) => {
-    // console.log(props.location)
-    /*
-    TODO: IMPROVE REGEX!
-    */
-    return pagePath === props.location.pathname || new RegExp(`^\/${pagePath.replace("/", "\/")}(.*?)`).test(props.location.pathname);
+    return pagePath === props.location.pathname || new RegExp(`^${pagePath.replace("/", "\/")}(.*?)`).test(props.location.pathname);
   };
 
   const mapRoutes = (routes, auth) => {
