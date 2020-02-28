@@ -14,10 +14,15 @@ import SubHeaderBar from 'components/SubHeaderBar'
 
 function BasePage(props) {
   console.log('BasePage',props)
-  const lightRoutes = props.routes.filter((item)=>{
-    return item;
-  }).map((item)=>{
-    return {...item, path: props.match.path+item.path, component:null}
+  const lightRoutes = props.routes.filter((route)=>{
+    return route;
+  }).map((route)=>{
+    return {
+      ...route, 
+      path: props.match.path+route.path, 
+      url: route.url ? props.match.path+route.url : null, 
+      component:null,
+    }
   });
   
   return (
@@ -33,6 +38,7 @@ function BasePage(props) {
           <Container>
             <Switch>
               {props.routes && props.routes.map((route, idx) => {
+                // console.log(`${props.match.path}`)
                 return route.component ? (
                   <Route
                     key={'userRoutes_'+idx}

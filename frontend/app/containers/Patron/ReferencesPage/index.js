@@ -28,8 +28,7 @@ const ReferencesPage = (props) => {
 
 
     useEffect(() => {
-        
-       // console.log(location)
+       console.log(props)
     })
 
     return (
@@ -39,9 +38,14 @@ const ReferencesPage = (props) => {
                 <ReferencesForm 
                     loading={isLoading} 
                     createReferences={ (formData) => dispatch(requestPostReferences(formData)) } />
+            
+            || !isNew && match.params.id &&
+            
+                <h4>Update Form</h4>
+        
             ||
                 <>
-                    <a href={`patron/references/new`} className="text-link">
+                    <a href={`${match.url}/new`} className="text-link">
                         Create new Reference
                     </a>
                     <h3>References List</h3>
@@ -50,7 +54,7 @@ const ReferencesPage = (props) => {
                         {referencesList.length > 0 &&
                             referencesList.map(reference => (
                                 <li key={reference.id}>
-                                    <a href={`patron/references/${reference.id}`}>
+                                    <a href={`${match.url}/${reference.id}`}>
                                         {reference.pub_title}
                                     </a>
                                 </li>
