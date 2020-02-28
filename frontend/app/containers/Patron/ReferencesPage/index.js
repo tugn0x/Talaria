@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import makeSelectPatron, {isPatronLoading} from '../selectors';
-import {ReferencesForm} from 'components';
+import {ReferencesForm, ReferencesList} from 'components';
 import {requestPostReferences} from '../actions'
 
 const ReferencesPage = (props) => {
@@ -12,6 +12,7 @@ const ReferencesPage = (props) => {
     const referencesList = patron.referencesList
     
     const [isNew, setIsNew] = useState(location.pathname.includes('new'))
+    const [currentReference, setCurrentReference] = useState({})
     // const [isSingle, setIsSingle] = useState(match.params)
 
     useEffect(() => {
@@ -23,46 +24,32 @@ const ReferencesPage = (props) => {
         if(!isLoading) {
             dispatch(requestReferencesList())
         }
-       // console.log(match)
     }, [])
 
-
     useEffect(() => {
-       console.log(props)
-    })
+        if(!isNew && match.params.id){
+            setCurrentReference(referencesList.filter(reference => reference.id === parseInt(match.params.id))[0])
+        }
+    }, [referencesList])
 
     return (
         <>
             <h1>References Page</h1>
-            { isNew && 
+            {isNew && 
                 <ReferencesForm 
                     loading={isLoading} 
                     createReferences={ (formData) => dispatch(requestPostReferences(formData)) } />
             
             || !isNew && match.params.id &&
-            
-                <h4>Update Form</h4>
-        
-            ||
                 <>
-                    <a href={`${match.url}/new`} className="text-link">
-                        Create new Reference
-                    </a>
-                    <h3>References List</h3>
-                    <div className="referencesList">
-                        <ul>
-                        {referencesList.length > 0 &&
-                            referencesList.map(reference => (
-                                <li key={reference.id}>
-                                    <a href={`${match.url}/${reference.id}`}>
-                                        {reference.pub_title}
-                                    </a>
-                                </li>
-                            ))
-                        }
-                        </ul>
-                    </div>
+                    <h4>Update Form</h4>
+                    <ReferencesForm 
+                        currentReference={currentReference}
+                        loading={isLoading} 
+                        createReferences={ (formData, method) => dispatch(requestPostReferences(formData, method)) } />
                 </>
+            ||
+                <ReferencesList match={match} referencesList={referencesList} />
             }
         </>
     )

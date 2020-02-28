@@ -13,7 +13,7 @@ import messages from './messages';
 import { Link, NavLink } from 'react-router-dom';
 import { DropdownItem, DropdownMenu, DropdownToggle, Nav, UncontrolledDropdown, Badge, NavItem } from 'reactstrap';
 import PropTypes from 'prop-types';
-
+import SubHeaderBar from 'components/SubHeaderBar'
 import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from 'images/logo_home.gif'
 import logomini from 'images/logo.png'
@@ -23,7 +23,7 @@ import './style.scss'
 function HeaderBar(props) {
   // console.log('HeaderBar', props)
 
-  const { auth, isLogged, history, headermenu } = props
+  const { auth, isLogged, history, headermenu, routes } = props
 
   const linkTo = (path) => {
     history.push(`${path}`)
@@ -41,7 +41,7 @@ function HeaderBar(props) {
     <>
       <header className="app-header navbar bg-grey-light px-4">
         <div className="header-container container">
-          {isLogged && headermenu && <AppSidebarToggler className="d-md-down-none" display="lg"/>}
+          {isLogged && headermenu && <AppSidebarToggler  display="lg"/>}
           <AppNavbarBrand
             full={{ src: logo, width: 89, height: 25, alt: 'Nilde Logo' }}
             minimized={{ src: logomini, width: 30, height: 30, alt: 'Nilde Logo' }}
@@ -58,7 +58,7 @@ function HeaderBar(props) {
                 { isLogged && (
                     <>
                       <i className="fa fa-2x fa-user d-table-cell"></i>
-                      <span className="user-name d-table-cell align-middle px-3">{auth.user.name}</span>
+                      <span className="user-name d-none d-md-table-cell align-middle px-3">{auth.user.name}</span>
                       <i className="fa fa-2x fa-sort-down d-table-cell align-middle"></i>
                     </>
                   )
@@ -89,6 +89,7 @@ function HeaderBar(props) {
           </Nav>
         </div>
       </header>
+      <SubHeaderBar routes={routes} headermenu={headermenu} />
     </>
   );
 }

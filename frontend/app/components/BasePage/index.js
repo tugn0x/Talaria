@@ -10,7 +10,7 @@ import messages from './messages';
 import {Switch, Route, withRouter} from 'react-router-dom';
 import {HeaderBar, SideBar} from 'components';
 import {Container} from "reactstrap"
-import SubHeaderBar from 'components/SubHeaderBar'
+
 
 function BasePage(props) {
   console.log('BasePage',props)
@@ -46,18 +46,22 @@ function BasePage(props) {
 
   return (
     <>
-      <HeaderBar isLogged={props.isLogged} location={props.location} headermenu={props.headermenu} history={props.history} auth={props.auth} logout={(request) => props.logout(request)}/>
+      <HeaderBar 
+        isLogged={props.isLogged} 
+        routes={lightRoutes} 
+        location={props.location} 
+        headermenu={props.headermenu} 
+        history={props.history} 
+        auth={props.auth} 
+        logout={(request) => props.logout(request)}/>
       <div className="app-body">
         {props.headermenu && (
           <SideBar routes={lightRoutes} location={props.location}/>
         )}
         <main className="main">
-          <SubHeaderBar routes={lightRoutes} headermenu={props.headermenu} />
-          <h1 className="container"><FormattedMessage {...props.messages.header} /></h1>
           <Container>
             <Switch>
               {props.routes && props.routes.map((route, idx) => {
-                // console.log(`${props.match.path}`)
                 return route.component ? (
                   <Route
                     key={'userRoutes_'+idx}

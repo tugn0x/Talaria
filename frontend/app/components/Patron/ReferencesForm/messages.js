@@ -84,5 +84,13 @@ export default defineMessages({
     id: `${scope}.pmid`,
     defaultMessage: 'Pmid',
   },
+  updateSubmitText: {
+    id: `${scope}.updateSubmitText`,
+    defaultMessage: 'Update Reference',
+  },
+  createSubmitText: {
+    id: `${scope}.createSubmitText`,
+    defaultMessage: 'Create Reference',
+  },
 });
 

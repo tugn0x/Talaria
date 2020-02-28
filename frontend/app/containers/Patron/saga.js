@@ -1,6 +1,6 @@
 import { call, put, select, takeLatest, fork, take  } from 'redux-saga/effects';
 import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARIES_LIST, REQUEST_ACCESS_TO_LIBRARIES, REQUEST_REFERENCES_LIST,
-  REQUEST_POST_REFERENCES } from './constants';
+  REQUEST_POST_REFERENCES, REQUEST_UPDATE_REFERENCES } from './constants';
 import {
   requestError,
   stopLoading,
@@ -56,6 +56,7 @@ export function* requestAccessToLibrarySaga(action) {
   try {
     const request = yield call(requestAccessToLibrary, options);
     yield call(requestMyLibrariesSaga)
+    yield call(toast.success('Libreria Aggiunta'))
    // yield put(requestAccessToLibrarySuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
@@ -77,13 +78,17 @@ export function* requestReferencesListSaga() {
 export function* requestPostReferencesSaga(action) {
   console.log(action)
   const options = {
-    method: 'post',
+    method: action.method,
     body: action.request
   };
   try {
     const request = yield call(createReferences, options);
     yield put(requestPostReferencesSuccess());
-    yield call(toast.success('Referenza creata'))
+    if(action.method === 'post'){
+      yield call(toast.success('Referenza creata'))
+    } else {
+      yield call(toast.success('Referenza aggiornata'))
+    }
   } catch(e) {
     yield put(requestError(e.message));
   }

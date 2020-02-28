@@ -3,6 +3,7 @@ export const fields = {
         type: "custom-select",
         name: "librariesList",
         options: "librariesList",
-        required: true
+        required: true,
+        selectedOption: "library_selected"
     }, 
 }

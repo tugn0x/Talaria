@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Col, Card, CardBody, InputGroup, InputGroupAddon, InputGroupText, CustomInput, Form, Button, Row } from 'reactstrap'
 import PropTypes from 'prop-types';
 import {useIntl} from 'react-intl'
@@ -22,28 +22,30 @@ const CustomForm = (props) => {
         fields = {},
         searchCustomSelect = () => null,
         messages,
+        updateFormData
     } = props
 
 
     const [selectedOption, setSelectedOption] = useState(null)
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
     
-    const [formData, setFormData] = useState(() => {
+    const handleFormData = () => {
         let data = {}
         Object.keys(fields).map(key => {
             const field = fields[key]
             if(fields[key].type === 'checkbox') {
-                data = {...data, [key]: field.options && props[field.options][field.name] !== null ? props[field.options][field.name]  : false }
+                data = {...data, [key]: updateFormData && updateFormData[field.name] ? updateFormData[field.name]  : false }
             }else if(fields[key].type === 'custom-select' || fields[key].type === 'select'){
                 data = {...data, [key]: [] }
             }else {
-                data = {...data, [key]: field.options && props[field.options][field.name] !== null ? props[field.options][field.name]  : "" }
+                data = {...data, [key]: updateFormData && updateFormData[field.name]  ? updateFormData[field.name]  : '' }
             }
         })
         return data 
-    }) 
+    }
     
-    
+    const [formData, setFormData] = useState(handleFormData()) 
+
     /* CUSTOM SELECT Handle */
     const handleSearchCustomSelect = (newValue) => {
         const inputValue = newValue.replace(/\W/g, '');
@@ -51,7 +53,7 @@ const CustomForm = (props) => {
     };
 
     const handleChangeCustomSelect = (selectedOption, key) => {
-       setFormData({ [key]:  uniqBy([selectedOption], 'value' ) })
+       setFormData({ [key]:  {...selectedOption} })
        setSelectedOption(selectedOption)
        setIsSubmitDisabled(false)
     }
@@ -85,10 +87,15 @@ const CustomForm = (props) => {
         return
     }
 
+    useEffect(() => {
+       if(updateFormData){
+            setFormData(handleFormData())
+       }
+    }, [updateFormData])
+
     return (
         Object.keys(fields).length &&
-        (
-            <Card>
+            (<Card>
                 <CardBody className="p-4">
                     { title !== "" ? <h2>{title}</h2> : '' }
                     <Form onSubmit={onSubmit} noValidate>
@@ -138,7 +145,7 @@ const CustomForm = (props) => {
                                                     type="custom-select"
                                                     value={selectedOption}
                                                     name={key}
-                                                    onChange={(selectedOption) => handleChangeCustomSelect(selectedOption, key)}
+                                                    onChange={(selectedOption) => handleChangeCustomSelect(selectedOption, field.selectedOption)}
                                                     onInputChange={(input) => handleSearchCustomSelect(input) }
                                                     options={props[field.options]}
                                                     required
@@ -154,7 +161,6 @@ const CustomForm = (props) => {
                                                     onChange={(e) => handleChange(e)}
                                                     required={field.required ? field.required : false}
                                                 />)
-                                            
                                             }
                                         </InputGroup>
                                     )
@@ -165,8 +171,7 @@ const CustomForm = (props) => {
                         </Button>
                     </Form>
                 </CardBody>
-            </Card>
-        )
+            </Card>)
     )
 }
 

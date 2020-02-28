@@ -16,4 +16,8 @@ export default defineMessages({
     id: `${scope}.librariesList`,
     defaultMessage: 'Select library',
   },
+  libraryAdded: {
+    id: `${scope}.libraryAdded`,
+    defaultMessage: 'Library added',
+  },
 });

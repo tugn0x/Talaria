@@ -41,4 +41,8 @@ export default defineMessages({
     id: `${scope}.email`,
     defaultMessage: 'Email',
   },
+  update: {
+    id: `${scope}.update`,
+    defaultMessage: 'Update',
+  },
 });

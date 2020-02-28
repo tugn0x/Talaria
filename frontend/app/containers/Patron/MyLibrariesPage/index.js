@@ -38,7 +38,7 @@ function MyLibrariesPage(props) {
     <div className="my-libraries">
       <MyLibrariesList my_libraries={my_libraries} />
       <CustomForm 
-        submitCallBack={ (formData) => dispatch(requestAccessToLibrary(formData.librariesList)) } 
+        submitCallBack={ (formData) => dispatch(requestAccessToLibrary(formData.library_selected)) } 
         librariesList={patron.librariesList} 
         fields={fields}
         messages={messages} 

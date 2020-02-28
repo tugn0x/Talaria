@@ -19,9 +19,10 @@ const ProfileForm = (props) => {
                 <Col md="9" lg="7" xl="6">
                     <CustomForm 
                         submitCallBack={(formData) => updateProfile(formData) } 
-                        user={user}  
+                       // user={user}  
                         fields={fields} 
                         messages={messages}
+                        updateFormData={user}
                         title={intl.formatMessage(messages.header)} 
                         submitText={intl.formatMessage(messages.subtitle)}
                         /> 

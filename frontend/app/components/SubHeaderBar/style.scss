@@ -1,8 +1,14 @@
 .app-subheader {
     ul {
         margin-bottom: 0;
-        padding: 1rem;
+        padding: 0 1rem;
         li {
+            padding: 0.5rem 0.2rem;
+            &.current-page {
+                a {
+                    text-decoration: underline;
+                }
+            }
             a {
                 text-transform: uppercase;
                 font-size: 0.825rem;

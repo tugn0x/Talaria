@@ -7,6 +7,7 @@
   "app.global.invalid_name": "Inserisci un nome",
   "app.global.invalid_surname": "Inserisci un cognome",
   "app.global.invalid_email": "Inserisci un indirizzo email valida",
+  "app.global.update": "Aggiorna",
   "app.containers.HomePage.header": "ITALIANO HOMEPAGE CONTAINER",
   "app.containers.UserPage.header": "ITALIANO UserPage CONTAINER",
   "app.containers.ChangePassword.updateMessage": "Password modificata",
@@ -25,8 +26,9 @@
   "app.containers.UserProfile.town": "Citta'",
 
   "app.containers.MyLibrariesPage.title": "Aggiungi una libreria",
-  "app.containers.MyLibrariesPage.selectLibrary": "Seleziona una libreria",
+  "app.containers.MyLibrariesPage.librariesList": "Seleziona una libreria",
   "app.containers.MyLibrariesList.header": "Le mie librerie",
+  "app.containers.MyLibrariesList.libraryAdded": "Libreria aggiunta",
 
   "app.components.ReferencesForm.header": "Form Referenze",
   "app.components.ReferencesForm.pubyear": "Anno di pubblicazione",
@@ -47,6 +49,8 @@
   "app.components.ReferencesForm.isbn": "Isbn",
   "app.components.ReferencesForm.sid": "Sid",
   "app.components.ReferencesForm.pmid": "Pmid",
+  "app.components.ReferencesForm.updateSubmitText": "Aggiorna referenza",
+  "app.components.ReferencesForm.createSubmitText": "Crea una referenza",
 
   "app.components.HeaderBar.UserAccount": "Account utente", 
   "app.components.HeaderBar.ChangePassword": "Cambia Password", 

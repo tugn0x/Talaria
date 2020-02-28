@@ -164,9 +164,6 @@ export const createReferences = (options) => {
 
 
 
-
-
-
 // export const getIllness = (options) => {
 //   options = getOption(options);
 //   return request(`${BASE_URL}/api/reports/illnesses/`, options)
