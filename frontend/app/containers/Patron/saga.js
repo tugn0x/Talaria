@@ -4,12 +4,12 @@ import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARIES_LIST, REQUEST_ACCESS_TO_LIB
 import {
   requestError,
   stopLoading,
+  requestSuccess,
   requestMyLibrariesSuccess,
   requestGetLibraryList,
   requestGetLibraryListSuccess,
-  requestAccessToLibrarySuccess,
   requestReferencesListSuccess,
-  requestPostReferencesSuccess
+  requestReferencesList
 } from './actions';
 import { push } from 'connected-react-router';
 import { toast } from "react-toastify";
@@ -17,7 +17,8 @@ import { getMyLibraries,
           getLibraryList, 
           requestAccessToLibrary, 
           getReferencesList, 
-          createReferences } from 'utils/api';
+          createReferences,
+          updateReferences } from 'utils/api';
 
 
 export function* requestMyLibrariesSaga() {
@@ -33,7 +34,6 @@ export function* requestMyLibrariesSaga() {
 }
 
 export function* requestGetLibraryListSaga(action) {
-  // console.log('requestGetLibraryListSaga')
   const options = {
     method: 'get',
     query: action.request
@@ -56,8 +56,7 @@ export function* requestAccessToLibrarySaga(action) {
   try {
     const request = yield call(requestAccessToLibrary, options);
     yield call(requestMyLibrariesSaga)
-    yield call(toast.success('Libreria Aggiunta'))
-   // yield put(requestAccessToLibrarySuccess(request));
+    yield call(() => toast.success('Libreria Aggiunta'))
   } catch(e) {
     yield put(requestError(e.message));
   } 
@@ -76,19 +75,29 @@ export function* requestReferencesListSaga() {
 }
 
 export function* requestPostReferencesSaga(action) {
-  console.log(action)
   const options = {
-    method: action.method,
+    method: 'post',
     body: action.request
   };
   try {
     const request = yield call(createReferences, options);
-    yield put(requestPostReferencesSuccess());
-    if(action.method === 'post'){
-      yield call(toast.success('Referenza creata'))
-    } else {
-      yield call(toast.success('Referenza aggiornata'))
-    }
+    yield put(requestSuccess());
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestUpdateReferencesSaga(action) {
+  const options = {
+    method: 'put',
+    body: action.request,
+    id: action.id
+  };
+  try {
+    const request = yield call(updateReferences, options);
+    yield put(requestReferencesList())
+    yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -103,4 +112,5 @@ export default function* patronSaga() {
   yield takeLatest(REQUEST_ACCESS_TO_LIBRARIES, requestAccessToLibrarySaga);
   yield takeLatest(REQUEST_REFERENCES_LIST, requestReferencesListSaga);
   yield takeLatest(REQUEST_POST_REFERENCES, requestPostReferencesSaga);
+  yield takeLatest(REQUEST_UPDATE_REFERENCES, requestUpdateReferencesSaga);
 }

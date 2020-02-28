@@ -32,11 +32,11 @@ function MyLibrariesPage(props) {
    }, [])
 
    
-  const my_libraries = patron.my_libraries
+  // const my_libraries = patron.my_libraries
   
   return (
     <div className="my-libraries">
-      <MyLibrariesList my_libraries={my_libraries} />
+      <MyLibrariesList my_libraries={patron.my_libraries} />
       <CustomForm 
         submitCallBack={ (formData) => dispatch(requestAccessToLibrary(formData.library_selected)) } 
         librariesList={patron.librariesList} 

@@ -6,10 +6,10 @@
 
 import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS, 
-  REQUEST_ACCESS_TO_LIBRARIES, REQUEST_ACCESS_TO_LIBRARIES_SUCCESS, 
+  REQUEST_ACCESS_TO_LIBRARIES,
   REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS, 
-  REQUEST_POST_REFERENCES, REQUEST_POST_REFERENCES_SUCCESS, 
-  REQUEST_UPDATE_REFERENCES, REQUEST_UPDATE_REFERENCES_SUCCESS, REQUEST_ERROR, STOP_LOADING} from "./constants";
+  REQUEST_POST_REFERENCES, REQUEST_SUCCESS,
+  REQUEST_UPDATE_REFERENCES, REQUEST_ERROR, STOP_LOADING} from "./constants";
 
 export function defaultAction() {
   return {
@@ -17,30 +17,20 @@ export function defaultAction() {
   };
 }
 
-export function requestUpdateReferences(request) {
+export function requestUpdateReferences(request, id, message) {
   return {
     type: REQUEST_UPDATE_REFERENCES,
-    request
+    request,
+    id,
+    message
   };
 }
 
-export function requestUpdateReferencesSuccess() {
-  return {
-    type: REQUEST_UPDATE_REFERENCES_SUCCESS,
-  };
-}
-
-export function requestPostReferences(request, method = 'POST') {
+export function requestPostReferences(request, message) {
   return {
     type: REQUEST_POST_REFERENCES,
     request,
-    method
-  };
-}
-
-export function requestPostReferencesSuccess() {
-  return {
-    type: REQUEST_POST_REFERENCES_SUCCESS,
+    message
   };
 }
 
@@ -91,10 +81,16 @@ export function requestAccessToLibrary(request) {
   };
 }
 
-export function requestAccessToLibrarySuccess(result) {
+/* export function requestAccessToLibrarySuccess(result) {
   return {
     type: REQUEST_ACCESS_TO_LIBRARIES_SUCCESS,
     result
+  };
+} */
+
+export function requestSuccess() {
+  return {
+    type: REQUEST_SUCCESS,
   };
 }
 

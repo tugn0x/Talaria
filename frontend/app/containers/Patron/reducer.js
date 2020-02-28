@@ -6,10 +6,10 @@
 import produce from 'immer';
 import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS, 
-  REQUEST_ACCESS_TO_LIBRARIES, REQUEST_ACCESS_TO_LIBRARIES_SUCCESS, 
+  REQUEST_ACCESS_TO_LIBRARIES, 
   REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS, 
-  REQUEST_POST_REFERENCES, REQUEST_POST_REFERENCES_SUCCESS, 
-  REQUEST_UPDATE_REFERENCES, REQUEST_UPDATE_REFERENCES_SUCCESS, STOP_LOADING, REQUEST_ERROR } from './constants';
+  REQUEST_POST_REFERENCES, REQUEST_SUCCESS, 
+  REQUEST_UPDATE_REFERENCES, STOP_LOADING, REQUEST_ERROR } from './constants';
 
 export const initialState = {
   loading: false,
@@ -28,16 +28,8 @@ const PatronReducer = (state = initialState, action) =>
       case REQUEST_UPDATE_REFERENCES:
         draft.loading = true;
         break;
-      case REQUEST_UPDATE_REFERENCES_SUCCESS:
-        draft.loading = false;
-        draft.error = initialState.error;
-        break;
       case REQUEST_POST_REFERENCES:
         draft.loading = true;
-        break;
-      case REQUEST_POST_REFERENCES_SUCCESS:
-        draft.loading = false;
-        draft.error = initialState.error;
         break;
       case REQUEST_REFERENCES_LIST:
         draft.loading = true;
@@ -68,10 +60,14 @@ const PatronReducer = (state = initialState, action) =>
         draft.loading = true;
         draft.error = initialState.error;
         break;
-      case REQUEST_ACCESS_TO_LIBRARIES_SUCCESS:
+      /* case REQUEST_ACCESS_TO_LIBRARIES_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
         // draft.librariesList = action.result.map(item => { return {value: item.id, label: item.name} } );
+        break; */
+      case REQUEST_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
         break;
       case STOP_LOADING:
         draft.loading = false;

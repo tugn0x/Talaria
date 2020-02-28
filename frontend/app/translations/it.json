@@ -25,11 +25,13 @@
   "app.containers.UserProfile.postcode": "Codice Postale",
   "app.containers.UserProfile.town": "Citta'",
 
+  "app.containers.ReferencePage.referenceAdded": "Referenza aggiunta",
+  "app.containers.ReferencePage.referenceUpdate": "Referenza aggiornata",
+
   "app.containers.MyLibrariesPage.title": "Aggiungi una libreria",
   "app.containers.MyLibrariesPage.librariesList": "Seleziona una libreria",
   "app.containers.MyLibrariesList.header": "Le mie librerie",
-  "app.containers.MyLibrariesList.libraryAdded": "Libreria aggiunta",
-
+  
   "app.components.ReferencesForm.header": "Form Referenze",
   "app.components.ReferencesForm.pubyear": "Anno di pubblicazione",
   "app.components.ReferencesForm.material_type": "Tipo materiale",
@@ -57,14 +59,18 @@
   "app.components.HeaderBar.Profile": "Profilo", 
   "app.components.HeaderBar.Libraries": "Librerie", 
   "app.components.HeaderBar.Logout": "Esci", 
+
   "app.components.SignupForm.header": "Registrati",
   "app.components.SignupForm.subtitle": "Crea un profilo",
+
   "app.components.ForgotPasswordForm.submitFormButton": "Richiedi una nuova password",
+
   "app.components.LoginForm.header": "Accedi a Nilde",
   "app.components.LoginForm.loginButton": "Accedi",
   "app.components.LoginForm.forgot": "Ho dimenticato i dati di accesso",
   "app.components.LoginForm.signUpButton": "Registrati",
   "app.components.LoginForm.garrButton": "Accedi con Idem",
+
   "app.components.ForgotPasswordForm.header": "Password Dimenticata",
   "app.components.Footer.header": "Questo l header del Footer"
 }

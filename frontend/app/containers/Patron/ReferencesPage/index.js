@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import makeSelectPatron, {isPatronLoading} from '../selectors';
 import {ReferencesForm, ReferencesList} from 'components';
-import {requestPostReferences} from '../actions'
+import {requestPostReferences,requestUpdateReferences} from '../actions'
+import messages from './messages'
+import {useIntl} from 'react-intl';
 
 const ReferencesPage = (props) => {
     const {dispatch, isLoading, location, match, patron} = props
@@ -14,6 +16,7 @@ const ReferencesPage = (props) => {
     const [isNew, setIsNew] = useState(location.pathname.includes('new'))
     const [currentReference, setCurrentReference] = useState({})
     // const [isSingle, setIsSingle] = useState(match.params)
+    const intl = useIntl();
 
     useEffect(() => {
         setIsNew(location.pathname.includes('new'))
@@ -21,7 +24,7 @@ const ReferencesPage = (props) => {
 
 
     useEffect(() => {
-        if(!isLoading) {
+        if(!isLoading && !isNew) {
             dispatch(requestReferencesList())
         }
     }, [])
@@ -31,14 +34,14 @@ const ReferencesPage = (props) => {
             setCurrentReference(referencesList.filter(reference => reference.id === parseInt(match.params.id))[0])
         }
     }, [referencesList])
-
+    
     return (
         <>
             <h1>References Page</h1>
             {isNew && 
                 <ReferencesForm 
                     loading={isLoading} 
-                    createReferences={ (formData) => dispatch(requestPostReferences(formData)) } />
+                    createReferences={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } />
             
             || !isNew && match.params.id &&
                 <>
@@ -46,7 +49,7 @@ const ReferencesPage = (props) => {
                     <ReferencesForm 
                         currentReference={currentReference}
                         loading={isLoading} 
-                        createReferences={ (formData, method) => dispatch(requestPostReferences(formData, method)) } />
+                        updateReferences={ (formData) => dispatch(requestUpdateReferences(formData, match.params.id, `${intl.formatMessage(messages.referenceUpdate)}`)) } />
                 </>
             ||
                 <ReferencesList match={match} referencesList={referencesList} />
