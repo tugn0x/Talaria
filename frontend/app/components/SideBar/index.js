@@ -21,27 +21,23 @@ function SideBar(props) {
   const current = props.routes.filter((route)=>route.current)
   const routes = current.length ? current[0].children : [];
 
-  const linkTo = (path) => {
-    history.push(`${path}`)
-  };
-
-
-  const isCurrentPage = (pagePath) => {
-    // console.log(pagePath, props.location.pathname)
-    return new RegExp(`^\/${pagePath.replace("/", "\/")}(.*?)`).test(props.location.pathname);
-  };
-
-
   return routes && routes.length > 0 ? (
     <div className="sidebar">
       <div className="scrollbar-container sidebar-nav ps ps-container">
-        <ul className="nav">
+        <nav>
           {routes.map((route) => (
-            <li key={route.name} className="nav-item">
-              <a className="nav-link" href={`${route.url ? route.url : route.path}`}>{route.name}</a>
-            </li>)
+            <NavLink
+              className="nav-link btn"
+              key={route.name} 
+              to={`${route.url ? route.url : route.path}`}
+              activeClassName="current"
+            >
+              <i className={`fa fa-${route.icon ? route.icon : ''}`}></i>
+              {route.name}
+            </NavLink>
+           )
           )}
-        </ul>
+        </nav>
       </div>
     </div>
   ) : null

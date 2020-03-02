@@ -24,10 +24,12 @@ function HeaderBar(props) {
   // console.log('HeaderBar', props)
 
   const { auth, isLogged, history, headermenu, routes } = props
+  
+  const currentRouteChildren = routes.filter(route => route.current)[0].children;
 
-  const linkTo = (path) => {
+  /* const linkTo = (path) => {
     history.push(`${path}`)
-  };
+  }; */
 
   const isCurrentPage = (pagePath) => {
     /*
@@ -35,13 +37,13 @@ function HeaderBar(props) {
     */
     return pagePath === props.location.pathname || new RegExp(`^\/${pagePath.replace("/", "\/")}(.*?)`).test(props.location.pathname);
   };
-
+  console.log(routes.filter(route => route.current)[0].children)
 
   return (
     <>
       <header className="app-header navbar bg-grey-light px-4">
         <div className="header-container container">
-          {isLogged && headermenu && <AppSidebarToggler  display="lg"/>}
+          {isLogged && currentRouteChildren.length > 0 && <AppSidebarToggler  display="xs"/>}
           <AppNavbarBrand
             full={{ src: logo, width: 89, height: 25, alt: 'Nilde Logo' }}
             minimized={{ src: logomini, width: 30, height: 30, alt: 'Nilde Logo' }}
@@ -77,9 +79,18 @@ function HeaderBar(props) {
                       }
                     <DropdownItem header tag="div" className="text-center"><FormattedMessage {...messages.UserAccount} /></DropdownItem>
                     {/*<DropdownItem onClick={() => linkTo("/patron/my-libraries")}><i className="fa fa-user"></i><span>Patron</span></DropdownItem>*/}
-                    <DropdownItem onClick={() => linkTo("/user/user-profile")}><i className="fa fa-user"></i><span><FormattedMessage {...messages.Profile} /></span></DropdownItem>
-                    <DropdownItem onClick={() => linkTo("/user/change-password")} style={{backgroundColor: isCurrentPage("/user/change-password") ? 'green' : 'grey'}}><i className="fa fa-lock"></i><span><FormattedMessage {...messages.ChangePassword} /></span></DropdownItem>
-                    <DropdownItem onClick={e => props.logout(e)}><i className="fa fa-lock"></i><FormattedMessage {...messages.Logout} /></DropdownItem>
+                      <NavLink to="/user/user-profile" className="dropdown-item btn" activeClassName="current">
+                        <i className="fa fa-user"></i>
+                        <span><FormattedMessage {...messages.Profile} /></span>
+                      </NavLink>
+                      <NavLink to="/user/change-password" className="dropdown-item btn" activeClassName="current">
+                        <i className="fa fa-lock"></i>
+                        <span><FormattedMessage {...messages.ChangePassword} /></span>
+                      </NavLink>
+                      <NavLink to="#" onClick={e => props.logout(e)} className="dropdown-item btn" activeClassName="current">
+                        <i className="fa fa-lock"></i>
+                        <span><FormattedMessage {...messages.Logout} /></span>
+                      </NavLink>
                     </>
                   )
                 }

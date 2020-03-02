@@ -9,7 +9,6 @@ import React, {useEffect} from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {Row, Col, Card, CardBody,Button} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import {fields} from './fields';
 import messages from './messages';
@@ -36,7 +35,7 @@ function MyLibrariesPage(props) {
   
   return (
     <div className="my-libraries">
-      <MyLibrariesList my_libraries={patron.my_libraries} />
+      <MyLibrariesList my_libraries={patron.my_libraries} match={props.match} />
       <CustomForm 
         submitCallBack={ (formData) => dispatch(requestAccessToLibrary(formData.library_selected)) } 
         librariesList={patron.librariesList} 

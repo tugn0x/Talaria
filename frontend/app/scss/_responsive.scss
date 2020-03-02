@@ -1,0 +1,14 @@
+@include media-breakpoint-down(md) {
+    .app-subheader {
+        margin-top: 55px;
+    }
+    .table-title {
+        margin-top: 6rem;
+    }
+}
+
+@include media-breakpoint-down(lg) {
+    .app-body {
+        margin-top: 0;
+    }
+}

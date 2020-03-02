@@ -1,7 +1,11 @@
 @import '../../scss/vendors/variables';
 
 .sidebar .nav-link {
-    &:hover {
-        background: $brown;
+    padding: .75rem 0.5rem;
+    &:hover, &.current {
+        background: $orange;
+    }
+    i:before {
+        padding-right: 10px;
     }
 }

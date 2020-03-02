@@ -21,7 +21,7 @@
         font-size: 1rem;
     }
     .dropdown-item {
-        &:focus, &:active, &:hover {
+        &:focus, &:active, &:hover, &.current {
             background-color: $orange;
             color: white;
             font-weight: 700;
