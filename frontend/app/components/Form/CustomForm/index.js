@@ -99,10 +99,10 @@ const CustomForm = (props) => {
                 <CardBody className="p-4">
                     { title !== "" ? <h2>{title}</h2> : '' }
                     <Form onSubmit={onSubmit} noValidate>
-                        <div>
+                        <Row>
                             {Object.keys(fields).map(key => {
                                 const field = fields[key];
-                                return (<InputGroup key={field.name} className="mb-3">
+                                return (<InputGroup key={field.name} className={`${field.width ? field.width : ""} mb-3`}>
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
                                                     {intl.formatMessage(messages[field.name])}
@@ -165,7 +165,7 @@ const CustomForm = (props) => {
                                         </InputGroup>
                                     )
                             })}
-                        </div>
+                        </Row>
                         <Button color={submitColor} disabled={isSubmitDisabled} type="submit" block>
                             {submitText}
                         </Button>

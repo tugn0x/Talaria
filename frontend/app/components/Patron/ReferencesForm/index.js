@@ -15,7 +15,7 @@ const ReferencesForm = (props) => {
     return (
         <Loader show={props.loading} >
             <Row className="justify-content-center">
-                <Col md="9" lg="7" xl="6">
+                <Col md="10" lg="8">
                     {currentReference && Object.keys(currentReference).length > 0 &&
                         <CustomForm 
                             submitCallBack={(formData) => updateReferences(formData)} 

@@ -9,7 +9,7 @@ import React from 'react';
 // import styled from 'styled-components';
 
 import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import messages from 'routes/messages';
 import { Link, NavLink } from 'react-router-dom';
 import './style.scss'
 
@@ -33,7 +33,7 @@ function SideBar(props) {
               activeClassName="current"
             >
               <i className={`fa fa-${route.icon ? route.icon : ''}`}></i>
-              {route.name}
+              <FormattedMessage {...messages[route.name]}/>
             </NavLink>
            )
           )}

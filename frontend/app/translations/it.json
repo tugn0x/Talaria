@@ -54,6 +54,8 @@
   "app.components.ReferencesForm.updateSubmitText": "Aggiorna referenza",
   "app.components.ReferencesForm.createSubmitText": "Crea una referenza",
 
+  "app.components.ReferencesList.createNewReference": "Nuova referenza",
+
   "app.components.HeaderBar.UserAccount": "Account utente", 
   "app.components.HeaderBar.ChangePassword": "Cambia Password", 
   "app.components.HeaderBar.Profile": "Profilo", 
@@ -72,5 +74,11 @@
   "app.components.LoginForm.garrButton": "Accedi con Idem",
 
   "app.components.ForgotPasswordForm.header": "Password Dimenticata",
-  "app.components.Footer.header": "Questo l header del Footer"
+  "app.components.Footer.header": "Questo l header del Footer",
+
+  "app.routes.Reference": "Referenze",
+  "app.routes.ReferenceNew": "Nuova referenza",
+  "app.routes.Searches": "Ricerche",
+  "app.routes.Requests": "Richieste",
+  "app.routes.Libraries": "Librerie"
 }

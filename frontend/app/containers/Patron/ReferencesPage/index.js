@@ -43,13 +43,15 @@ const ReferencesPage = (props) => {
                     loading={isLoading} 
                     createReferences={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } />
             
-            || !isNew && match.params.id &&
+            || !isNew && match.params.id && 
                 <>
                     <h4>Update Form</h4>
-                    <ReferencesForm 
-                        currentReference={currentReference}
-                        loading={isLoading} 
-                        updateReferences={ (formData) => dispatch(requestUpdateReferences(formData, match.params.id, `${intl.formatMessage(messages.referenceUpdate)}`)) } />
+                    { currentReference && Object.keys(currentReference).length > 0 &&
+                        <ReferencesForm 
+                            currentReference={currentReference}
+                            loading={isLoading} 
+                            updateReferences={ (formData) => dispatch(requestUpdateReferences(formData, match.params.id, `${intl.formatMessage(messages.referenceUpdate)}`)) } />
+                    }
                 </>
             ||
                 <ReferencesList match={match} referencesList={referencesList} />

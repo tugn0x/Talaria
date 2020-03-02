@@ -25,8 +25,8 @@ function HeaderBar(props) {
 
   const { auth, isLogged, history, headermenu, routes } = props
   
-  const currentRouteChildren = routes.filter(route => route.current)[0].children;
-
+  const currentRoute = routes.filter(route => route.current);
+  
   /* const linkTo = (path) => {
     history.push(`${path}`)
   }; */
@@ -37,13 +37,13 @@ function HeaderBar(props) {
     */
     return pagePath === props.location.pathname || new RegExp(`^\/${pagePath.replace("/", "\/")}(.*?)`).test(props.location.pathname);
   };
-  console.log(routes.filter(route => route.current)[0].children)
+  
 
   return (
     <>
       <header className="app-header navbar bg-grey-light px-4">
         <div className="header-container container">
-          {isLogged && currentRouteChildren.length > 0 && <AppSidebarToggler  display="xs"/>}
+          {isLogged && headermenu && currentRoute && currentRoute[0].children.length > 0 && <AppSidebarToggler  display="xs"/>}
           <AppNavbarBrand
             full={{ src: logo, width: 89, height: 25, alt: 'Nilde Logo' }}
             minimized={{ src: logomini, width: 30, height: 30, alt: 'Nilde Logo' }}
