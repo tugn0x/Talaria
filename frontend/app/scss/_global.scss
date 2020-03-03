@@ -94,6 +94,10 @@ ul.list-inline {
     }
 }
 
+.card {
+    border-radius: 0
+}
+
 /// TABLE LIST ///
 
 .table-title {
@@ -138,6 +142,14 @@ ul.list-inline {
 .btn-plus {
     display: block;
     padding: 0.45rem;
+    background: none;
+    border: none;
+    &:active, &:focus {
+        border: none;
+        box-shadow: 0 0 0;
+        -webkit-box-shadow: 0 0 0;
+        -moz-box-shadow: 0 0 0;
+    }
     > * {
         display: table-cell;
         vertical-align: middle;

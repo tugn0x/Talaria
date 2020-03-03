@@ -81,7 +81,8 @@ export function* requestPostReferencesSaga(action) {
   };
   try {
     const request = yield call(createReferences, options);
-    yield put(requestSuccess());
+//    yield put(requestSuccess());
+    yield call(requestReferencesListSaga)
     yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));

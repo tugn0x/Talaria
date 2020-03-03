@@ -22,21 +22,17 @@ const SubHeaderBar = (props) => {
     },[])
     
     return (
-        <> 
-            {props.headermenu && (
-                <div className="app-subheader bg-grey-lighter">
-                    <div className="container">
-                        <ul className="subheader-menu list-inline pl-0">
-                            { routes.map((route,i)=> (
-                                <li key={`${route.url}-${i}`} className={`${route.current ? 'current-page' : ''}`}>
-                                    <a href={route.url}><FormattedMessage {...messages[route.name]}/></a>
-                                </li>)
-                            )}
-                        </ul>
-                    </div>
-                </div>
-            )}
-        </>
+        <div className="app-subheader bg-grey-lighter">
+            <div className="container">
+                <ul className="subheader-menu list-inline pl-0">
+                    { routes.map((route,i)=> (
+                        <li key={`${route.url}-${i}`} className={`${route.current ? 'current-page' : ''}`}>
+                            <a href={route.url}><FormattedMessage {...messages[route.name]}/></a>
+                        </li>)
+                    )}
+                </ul>
+            </div>
+        </div>
     )
 }
 

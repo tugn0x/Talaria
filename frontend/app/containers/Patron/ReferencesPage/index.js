@@ -9,6 +9,7 @@ import {requestPostReferences,requestUpdateReferences} from '../actions'
 import messages from './messages'
 import {useIntl} from 'react-intl';
 
+
 const ReferencesPage = (props) => {
     const {dispatch, isLoading, location, match, patron} = props
     const referencesList = patron.referencesList
@@ -42,8 +43,7 @@ const ReferencesPage = (props) => {
                 <ReferencesForm 
                     loading={isLoading} 
                     createReferences={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } />
-            
-            || !isNew && match.params.id && 
+            ||  !isNew && match.params.id && 
                 <>
                     <h4>Update Form</h4>
                     { currentReference && Object.keys(currentReference).length > 0 &&
@@ -54,7 +54,12 @@ const ReferencesPage = (props) => {
                     }
                 </>
             ||
-                <ReferencesList match={match} referencesList={referencesList} />
+                <ReferencesList 
+                    match={match} 
+                    referencesList={referencesList} 
+                    loading={isLoading} 
+                    createReferences={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) }
+                />
             }
         </>
     )

@@ -1,19 +1,27 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Table, Row, Col,Button} from 'reactstrap'
 import messages from './messages'
 import { FormattedMessage } from 'react-intl';
 import './style.scss'
+import {Modal, ModalHeader, ModalBody} from 'reactstrap'
+import {ReferencesForm} from 'components';
+import CustomModal from 'components/Modal/Loadable'
+
 
 const ReferencesList = (props) => {
     const {match, referencesList} = props
+
+    const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
+
     return (
         <>
-            <a href={`${match.url}/new`} className="btn float-right btn-plus">
+            <Button className="float-right btn-plus" onClick={toggle}>
                 <i className="fa fa-plus"></i>
                 <span>
                     <FormattedMessage {...messages.createNewReference} />
                 </span>
-            </a>
+            </Button>
             <h4 className="table-title"><FormattedMessage {...messages.header} /></h4>
             <div className="table referencesList">
                 <Row className="thead">
@@ -51,9 +59,20 @@ const ReferencesList = (props) => {
                                 </Col>
                             </Row>
                         ))
+                    ||
+                        <h5 className="text-center">
+                            Non ci sono Referenze
+                        </h5>
                     }
                 </div>
             </div> 
+            <CustomModal 
+                modal={modal} 
+                toggle={toggle}>
+                <ReferencesForm 
+                    loading={props.loading} 
+                    createReferences={ (formData) => props.createReferences(formData) } />
+            </CustomModal>
         </>
     )
 }

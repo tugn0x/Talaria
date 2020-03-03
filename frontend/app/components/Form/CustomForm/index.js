@@ -102,12 +102,15 @@ const CustomForm = (props) => {
                         <Row>
                             {Object.keys(fields).map(key => {
                                 const field = fields[key];
-                                return (<InputGroup key={field.name} className={`${field.width ? field.width : ""} mb-3`}>
-                                            <InputGroupAddon addonType="prepend">
+                                return (<fieldset key={field.name} className={`${field.width ? field.width : ""} mb-3`}>
+                                            <div className="form-label">
+                                                {intl.formatMessage(messages[field.name])}
+                                            </div>
+                                            {/* <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
                                                     {intl.formatMessage(messages[field.name])}
                                                 </InputGroupText>
-                                            </InputGroupAddon>
+                                            </InputGroupAddon> */}
                                             {field.type === 'checkbox' &&
                                                 (<CustomInput
                                                     className="form-control"
@@ -162,7 +165,7 @@ const CustomForm = (props) => {
                                                     required={field.required ? field.required : false}
                                                 />)
                                             }
-                                        </InputGroup>
+                                        </fieldset>
                                     )
                             })}
                         </Row>

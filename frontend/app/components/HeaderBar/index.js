@@ -21,11 +21,11 @@ import './style.scss'
 
 
 function HeaderBar(props) {
-  // console.log('HeaderBar', props)
+  console.log('HeaderBar', props)
 
   const { auth, isLogged, history, headermenu, routes } = props
   
- // const currentRoute = routes.filter(route => route.current);
+  const currentRoute = routes.filter(route => route.current).length > 0 ? routes.filter(route => route.current) : null;
   
   /* const linkTo = (path) => {
     history.push(`${path}`)
@@ -43,7 +43,10 @@ function HeaderBar(props) {
     <>
       <header className="app-header navbar bg-grey-light px-4">
         <div className="header-container container">
-          {isLogged && headermenu && <AppSidebarToggler  display="xs"/>}
+          { isLogged && headermenu && 
+            currentRoute && currentRoute[0].children.length > 0 && 
+            <AppSidebarToggler  display="xs"/>
+          }
           <AppNavbarBrand
             full={{ src: logo, width: 89, height: 25, alt: 'Nilde Logo' }}
             minimized={{ src: logomini, width: 30, height: 30, alt: 'Nilde Logo' }}
@@ -100,7 +103,8 @@ function HeaderBar(props) {
           </Nav>
         </div>
       </header>
-      <SubHeaderBar routes={routes} headermenu={headermenu} />
+      { headermenu && <SubHeaderBar routes={routes} /> }
+      
     </>
   );
 }
