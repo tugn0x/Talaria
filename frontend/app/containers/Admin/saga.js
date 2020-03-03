@@ -7,16 +7,19 @@ import {
   requestUsersListSuccess
 } from './actions';
 import { toast } from "react-toastify";
+import {getUsersList} from 'utils/api'
 
 
 
-
-export function* requestUsersListSaga(action) {
+export function* requestUsersListSaga() {
+  console.log('requestUsersListSaga')
+  console.log('requestUsersListSaga')
+  console.log('requestUsersListSaga')
   const options = {
     method: 'get'
   };
   try {
-    // const request = yield call(getReferencesList, options);
+    const request = yield call(getUsersList, options);
     // yield put(requestUsersListSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));

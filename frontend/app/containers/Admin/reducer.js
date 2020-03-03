@@ -19,6 +19,10 @@ const AdminReducer = (state = initialState, action) =>
     switch (action.type) {
       case DEFAULT_ACTION:
         break;
+      case REQUEST_USERS_LIST:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
       case REQUEST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;

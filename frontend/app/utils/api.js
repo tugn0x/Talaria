@@ -167,6 +167,10 @@ export const updateReferences = (options) => {
   return request(`${BASE_URL}/api/v1/references/${options.id}`, options)
 };
 
+export const getUsersList = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/users/labels`, options)
+};
 
 // export const getIllness = (options) => {
 //   options = getOption(options);

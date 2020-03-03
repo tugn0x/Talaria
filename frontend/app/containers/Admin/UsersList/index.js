@@ -4,17 +4,25 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {useIntl} from 'react-intl';
 import UsersListTable from 'components/Admin/UsersListTable'
+import {requestUsersList} from '../actions'
+import makeSelectAdmin, {isAdminLoading} from '../selectors';
 
 const UsersList = (props) => {
     console.log('UsersList', props)
-    /* const {dispatch, isLoading, location, match, patron} = props
+    const {dispatch, isLoading} = props
+    /* 
     const referencesList = patron.referencesList */
     
    /*  const [isNew, setIsNew] = useState(location.pathname.includes('new'))
     const [currentReference, setCurrentReference] = useState({}) */
     // const [isSingle, setIsSingle] = useState(match.params)
     const intl = useIntl();
-
+    
+    useEffect(() => {
+        if(!isLoading) {
+            dispatch(requestUsersList())
+        }
+    }, [])
    /*  useEffect(() => {
         setIsNew(location.pathname.includes('new'))
     }, [location.pathname])
@@ -40,8 +48,8 @@ const UsersList = (props) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-    // isLoading: isPatronLoading(),
-   // patron: makeSelectPatron()
+    isLoading: isAdminLoading(),
+    admin: makeSelectAdmin()
 });
   
 function mapDispatchToProps(dispatch) {
