@@ -1,0 +1,31 @@
+@import '../../scss/vendors/variables';
+
+.btn-plus {
+    display: block;
+    padding: 0.45rem;
+    background: none;
+    border: none;
+    &:active, &:focus {
+        border: none;
+        box-shadow: 0 0 0;
+        -webkit-box-shadow: 0 0 0;
+        -moz-box-shadow: 0 0 0;
+    }
+    > * {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    i {
+        &:before {
+            font-size: 28px;
+            padding-right: 15px;
+        }
+    }
+    &:hover {
+        background-color: $orange;
+        span, i:before {
+            color: white;
+        }
+        text-decoration: none;
+    }
+}

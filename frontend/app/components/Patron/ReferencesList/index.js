@@ -1,27 +1,24 @@
 import React, {useState} from 'react'
-import {Table, Row, Col,Button} from 'reactstrap'
+import {Row, Col} from 'reactstrap'
 import messages from './messages'
 import { FormattedMessage } from 'react-intl';
-import './style.scss'
-import {Modal, ModalHeader, ModalBody} from 'reactstrap'
 import {ReferencesForm} from 'components';
 import CustomModal from 'components/Modal/Loadable'
-
+import {useIntl} from 'react-intl';
+import ButtonPlus from 'components/Button/ButtonPlus'
 
 const ReferencesList = (props) => {
     const {match, referencesList} = props
-
+    const intl = useIntl();
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
 
     return (
         <>
-            <Button className="float-right btn-plus" onClick={toggle}>
-                <i className="fa fa-plus"></i>
-                <span>
-                    <FormattedMessage {...messages.createNewReference} />
-                </span>
-            </Button>
+            <ButtonPlus 
+                onClickHandle={toggle}
+                text={intl.formatMessage(messages.createNewReference)}
+            />
             <h4 className="table-title"><FormattedMessage {...messages.header} /></h4>
             <div className="table referencesList">
                 <Row className="thead">

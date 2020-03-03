@@ -6,7 +6,7 @@ import ReferencesPage from 'containers/Patron/ReferencesPage/Loadable';
 const patronRoutes = [
   { path: '/references/:id?', url:"/references", name: `Reference`, component: ReferencesPage, header: true, roles: ['registered'],
     children: [
-      { path: '/references/new', icon: "plus", name: `ReferenceNew`, component: ChangePassword, },
+      { path: '/references/new', icon: "plus", name: `ReferenceNew`, component: null, },
     ]
   },
   

@@ -12,4 +12,8 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'My Libraries',
   },
+  createNewLibrary: {
+    id: `${scope}.createNewLibrary`,
+    defaultMessage: 'Create new library',
+  },
 });

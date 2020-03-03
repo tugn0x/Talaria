@@ -13,10 +13,9 @@ import {useIntl} from 'react-intl';
 import {fields} from './fields';
 import messages from './messages';
 import { FormattedMessage } from 'react-intl';
-import CustomForm from 'components/Form/CustomForm';
 import {requestGetLibraryList, requestAccessToLibrary, requestMyLibraries} from '../actions'
 import makeSelectPatron, {isPatronLoading} from '../selectors';
-import MyLibrariesList from 'components/Patron/MyLibrariesList';
+import {MyLibrariesList} from 'components';
 
 
 function MyLibrariesPage(props) {
@@ -35,16 +34,15 @@ function MyLibrariesPage(props) {
   
   return (
     <div className="my-libraries">
-      <MyLibrariesList my_libraries={patron.my_libraries} match={props.match} />
-      <CustomForm 
-        submitCallBack={ (formData) => dispatch(requestAccessToLibrary(formData.library_selected)) } 
+      <h1>Libraries Page</h1>
+      <MyLibrariesList 
+        my_libraries={patron.my_libraries} match={props.match} 
+        requestAccessToLibrary={ (formData) => dispatch(requestAccessToLibrary(formData.library_selected)) } 
         librariesList={patron.librariesList} 
         fields={fields}
         messages={messages} 
         title={intl.formatMessage(messages.title)}
-        searchCustomSelect={(input) => {
-          dispatch(requestGetLibraryList(input))
-        }}
+        searchCustomSelect={(input) => dispatch(requestGetLibraryList(input)) }
       />
     </div>
   );
