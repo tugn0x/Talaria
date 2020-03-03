@@ -28,4 +28,8 @@ export default defineMessages({
         id: `${scope}.Libraries`,
         defaultMessage: 'My Libraries',
     },
+    UsersList: {
+        id: `${scope}.UsersList`,
+        defaultMessage: 'Users list',
+    },
 });

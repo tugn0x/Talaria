@@ -15,7 +15,7 @@ const SubHeaderBar = (props) => {
         let totalWidth = 0
         if(linkElements.length > 0 && subheaderMenu){
             linkElements.forEach(el => {
-                totalWidth += ( el.clientWidth + 30) 
+                totalWidth += ( el.clientWidth + 40) 
             })
             subheaderMenu.style.width = `${totalWidth}px`
         }

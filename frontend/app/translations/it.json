@@ -81,5 +81,6 @@
   "app.routes.ReferenceNew": "Nuova referenza",
   "app.routes.Searches": "Ricerche",
   "app.routes.Requests": "Richieste",
-  "app.routes.Libraries": "Librerie"
+  "app.routes.Libraries": "Librerie",
+  "app.routes.UsersList": "Lista utenti"
 }

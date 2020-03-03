@@ -18,6 +18,7 @@ import SignupPage from "./Auth/SignupPage/Loadable"
 // import ProfilePage from "./User/ProfilePage/Loadable"
 import UserPage from "./User/UserPage/Loadable"
 import PatronPage from "./Patron/PatronPage/Loadable"
+import AdminPage from "./Admin/AdminPage/Loadable"
 
 /*
 LIBRARY STUFFS
@@ -39,9 +40,8 @@ export {
   // ProfilePage,
   // ChangePassword,
   UserPage,
-
+  AdminPage,
   PatronPage,
-
   LibrarySettings,
 }
 
