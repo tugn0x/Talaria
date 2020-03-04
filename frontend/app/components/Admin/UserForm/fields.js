@@ -5,6 +5,7 @@ export const fields = {
         name: "name",
         label: 'app.global.name',
         placeholder: 'app.global.name',
+        width: "col-md-6"
     },
     surname: {
         type: "text",
@@ -12,6 +13,7 @@ export const fields = {
         name: "surname",
         label: 'app.global.surname',
         placeholder: 'app.global.surname',
+        width: "col-md-6"
     },
     email: {
         type: "email",
@@ -19,6 +21,7 @@ export const fields = {
         name: "email",
         label: 'app.global.email',
         placeholder: 'app.global.email',
+        width: "col-md-6"
     },
     /* role: {
         type: "select",
@@ -33,28 +36,28 @@ export const fields = {
         name: "address",
         label: 'app.containers.UserProfile.address',
         placeholder: 'app.containers.UserProfile.address',
-        
+        width: "col-md-6"
     },
     town: {
         type: "text",
         name: "town",
         label: 'app.containers.UserProfile.town',
         placeholder: 'app.containers.UserProfile.town',
-        
+        width: "col-md-6"
     },
     district: {
         type: "text",
         name: "district",
         label: 'app.containers.UserProfile.district',
         placeholder: 'app.containers.UserProfile.town',
-        
+        width: "col-md-6"
     },
     postcode: {
         type: "number",
         name: "postcode",
         label: 'app.containers.UserProfile.postcode',
         placeholder: 'app.containers.UserProfile.town',
-        
+        width: "col-md-6"
     },
     /*  checkbox: {
         type: "checkbox",
@@ -68,21 +71,21 @@ export const fields = {
         name: "state",
         label: 'app.containers.UserProfile.state',
         placeholder: 'app.containers.UserProfile.town',
-        
+        width: "col-md-6"
     },
     phone: {
         type: "number",
         name: "phone",
         label: 'app.containers.UserProfile.phone',
         placeholder: 'app.containers.UserProfile.town',
-        
+        width: "col-md-6"
     },
     mobile: {
         type: "number",
         name: "mobile",
         label: 'app.containers.UserProfile.mobile',
         placeholder: 'app.containers.UserProfile.town',
-        
+        width: "col-md-6"
     },
     /* select: {
         type: "select",

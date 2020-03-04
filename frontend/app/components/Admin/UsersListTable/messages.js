@@ -5,11 +5,12 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.components.AdminList';
+export const scope = 'app.components.UsersList';
 
 export default defineMessages({
   header: {
     id: `${scope}.header`,
     defaultMessage: 'Admin List Page',
   },
+  
 });

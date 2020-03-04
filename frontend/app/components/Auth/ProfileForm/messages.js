@@ -13,48 +13,9 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Account Profile!',
   },
-  name: {
-    id: `app.global.name`,
-    defaultMessage: 'Name',
-  },
-  email: {
-    id: `app.global.email`,
-    defaultMessage: 'Email',
-  },
-  surname: {
-    id: `app.global.surname`,
-    defaultMessage: 'Surname',
-  },
   subtitle: {
     id: `${scope}.subtitle`,
     defaultMessage: 'Update your profile',
   },
-  address: {
-    id: `${scope}.address`,
-    defaultMessage: 'Address',
-  },
-  district: {
-    id: `${scope}.district`,
-    defaultMessage: 'District',
-  },
-  mobile: {
-    id: `${scope}.mobile`,
-    defaultMessage: 'Mobile',
-  },
-  phone: {
-    id: `${scope}.phone`,
-    defaultMessage: 'Phone',
-  },
-  state: {
-    id: `${scope}.state`,
-    defaultMessage: 'State',
-  },
-  postcode: {
-    id: `${scope}.postcode`,
-    defaultMessage: 'Postcode',
-  },
-  town: {
-    id: `${scope}.town`,
-    defaultMessage: 'Town',
-  },
+  
 });

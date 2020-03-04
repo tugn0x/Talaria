@@ -8,8 +8,8 @@ import {
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
-import {getUsersList, updateUser} from 'utils/api'
-
+import {getUsersList, updateUser, createUser} from 'utils/api'
+import moment from 'moment';
 
 
 export function* requestUsersListSaga() {
@@ -43,14 +43,13 @@ export function* requestUpdateUserSaga(action) {
 export function* requestPostUserSaga(action) {
   const options = {
     method: 'post',
-    body: action.request
+    body: {...action.request, privacy_policy_accepted: moment().format('YYYY-MM-DD hh:mm:ss') }
   };
   try {
-    console.log(options)
     const request = yield call(createUser, options);
-    /* yield call(requestUsersListSaga);
+    yield call(requestUsersListSaga);
     yield put(push("/admin/users-list"));
-    yield call(() => toast.success(action.message)) */
+    yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
   }

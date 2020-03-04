@@ -8,6 +8,13 @@
   "app.global.invalid_surname": "Inserisci un cognome",
   "app.global.invalid_email": "Inserisci un indirizzo email valida",
   "app.global.update": "Aggiorna",
+  "app.global.address": "Indirizzo",
+  "app.global.district": "Quartiere",
+  "app.global.mobile": "Cellulare",
+  "app.global.phone": "Telefono",
+  "app.global.state": "Stato",
+  "app.global.postcode": "Codice Postale",
+  "app.global.town": "Citta'",
   "app.containers.HomePage.header": "ITALIANO HOMEPAGE CONTAINER",
   "app.containers.UserPage.header": "ITALIANO UserPage CONTAINER",
   "app.containers.ChangePassword.updateMessage": "Password modificata",
@@ -17,13 +24,6 @@
 
   "app.containers.UserProfile.header": "Profilo utente",
   "app.containers.UserProfile.subtitle": "Aggiorna il profilo",
-  "app.containers.UserProfile.address": "Indirizzo",
-  "app.containers.UserProfile.district": "Quartiere",
-  "app.containers.UserProfile.mobile": "Cellulare",
-  "app.containers.UserProfile.phone": "Telefono",
-  "app.containers.UserProfile.state": "Stato",
-  "app.containers.UserProfile.postcode": "Codice Postale",
-  "app.containers.UserProfile.town": "Citta'",
 
   "app.containers.ReferencePage.referenceAdded": "Riferimento aggiunta",
   "app.containers.ReferencePage.referenceUpdate": "Riferimento aggiornata",
@@ -55,6 +55,13 @@
   "app.components.ReferencesForm.updateSubmitText": "Aggiorna riferimento",
   "app.components.ReferencesForm.createSubmitText": "Crea una riferimento",
 
+  "app.components.UserForm.header": "Form aggiorna utente",
+  "app.components.UserForm.subtitle": "Aggiorna utente",
+  "app.components.UserForm.editUser": "Modifica utente",
+  "app.components.UserForm.createNewUser": "Crea nuovo utente",
+
+  "app.components.UsersList.header": "Lista Utenti",
+
   "app.components.ReferencesList.createNewReference": "Nuova riferimento",
 
   "app.components.HeaderBar.UserAccount": "Account utente",
@@ -82,5 +89,6 @@
   "app.routes.Searches": "Ricerche",
   "app.routes.Requests": "Richieste",
   "app.routes.Libraries": "Biblioteche",
-  "app.routes.UsersList": "Lista utenti"
+  "app.routes.UsersList": "Lista utenti",
+  "app.routes.UserNew": "Crea un nuovo utente"
 }

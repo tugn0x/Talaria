@@ -95,7 +95,7 @@ const CustomForm = (props) => {
 
     return (
         Object.keys(fields).length &&
-            (<Card>
+            (<Card className="card-form">
                 <CardBody className="p-4">
                     { title !== "" ? <h2>{title}</h2> : '' }
                     <Form onSubmit={onSubmit} noValidate>

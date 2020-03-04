@@ -2,31 +2,41 @@ import React, {useState} from 'react';
 import {Row, Col} from 'reactstrap';
 import messages from './messages';
 import { useIntl } from 'react-intl';
+import globalMessages from 'utils/globalMessages'
+import ButtonPlus from 'components/Button/ButtonPlus'
+import CustomModal from 'components/Modal/Loadable'
+import UserForm from 'components/Admin/UserForm/Loadable'
 import './style.scss'
 
 function UsersListTable(props) {
     console.log('UsersListTable', props)
-    const {usersList, match} = props
+    const {usersList, match, loading, createUser} = props
+    const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
     const intl = useIntl();
     return (
         <>
+            <ButtonPlus 
+                onClickHandle={toggle}
+                text={"Create new user"}
+            />
             <h4 className="table-title">{intl.formatMessage(messages.header)}</h4>
             <div className="table admin-list">
                 <Row className="thead">
                     <Col xs={3}>
-                        <span>Name</span>
+                        <span>{intl.formatMessage(globalMessages.name)}</span>
                         <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
                     </Col>
                     <Col xs={3}>
-                        <span>Surname</span>
+                        <span>{intl.formatMessage(globalMessages.surname)}</span>
                         <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
                     </Col>
                     <Col xs={3}>
-                        <span>Email</span>
+                        <span>{intl.formatMessage(globalMessages.email)}</span>
                         <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
                     </Col>
                     <Col xs={3}>
-                        <span>Edit user</span>
+                        <span>{intl.formatMessage({id: 'app.components.UserForm.editUser'})}</span>
                     </Col>
                 </Row>
                 <div className="tbody">
@@ -60,7 +70,13 @@ function UsersListTable(props) {
                     }
                 </div>
             </div> 
-            
+            <CustomModal 
+                modal={modal} 
+                toggle={toggle}>
+                 <UserForm 
+                    loading={loading} 
+                    createUser={ (formData) => createUser(formData) } />
+            </CustomModal>
           </>
     )
 }

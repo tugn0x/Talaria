@@ -45,7 +45,12 @@ const UsersList = (props) => {
                     loading={isLoading}
                 />
             ||  
-                <UsersListTable usersList={admin.usersList} match={match}/>    
+                <UsersListTable 
+                    usersList={admin.usersList} 
+                    match={match} 
+                    loading={isLoading}
+                    createUser={ (formData) => dispatch(requestPostUser(formData, "User added!!!" )) }
+                />    
             }
         </>
     )

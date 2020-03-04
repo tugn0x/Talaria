@@ -4,6 +4,7 @@ import { Col, Row } from 'reactstrap';
 import messages from './messages'; */
 // import globalMessages from '../../../utils/globalMessages'
 import messages from './messages'; 
+import globalMessages from 'utils/globalMessages'
 import {useIntl} from 'react-intl';
 import Loader from 'components/Form/Loader.js';
 
@@ -21,7 +22,7 @@ const ProfileForm = (props) => {
                         submitCallBack={(formData) => updateProfile(formData) } 
                        // user={user}  
                         fields={fields} 
-                        messages={messages}
+                        messages={globalMessages}
                         updateFormData={user}
                         title={intl.formatMessage(messages.header)} 
                         submitText={intl.formatMessage(messages.subtitle)}

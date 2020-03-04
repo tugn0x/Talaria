@@ -17,6 +17,38 @@ export default defineMessages({
     id: `${scope}.surname`,
     defaultMessage: 'Surname',
   },
+  email: {
+    id: `${scope}.email`,
+    defaultMessage: 'Email',
+  },
+  address: {
+    id: `${scope}.address`,
+    defaultMessage: 'Address',
+  },
+  district: {
+    id: `${scope}.district`,
+    defaultMessage: 'District',
+  },
+  mobile: {
+    id: `${scope}.mobile`,
+    defaultMessage: 'Mobile',
+  },
+  phone: {
+    id: `${scope}.phone`,
+    defaultMessage: 'Phone',
+  },
+  state: {
+    id: `${scope}.state`,
+    defaultMessage: 'State',
+  },
+  postcode: {
+    id: `${scope}.postcode`,
+    defaultMessage: 'Postcode',
+  },
+  town: {
+    id: `${scope}.town`,
+    defaultMessage: 'Town',
+  },
   password_repeat: {
     id: `${scope}.password_repeat`,
     defaultMessage: 'Repeat password',
@@ -36,10 +68,6 @@ export default defineMessages({
   password_match: {
     id: `${scope}.password_match`,
     defaultMessage: 'Password must match',
-  },
-  email: {
-    id: `${scope}.email`,
-    defaultMessage: 'Email',
   },
   update: {
     id: `${scope}.update`,
