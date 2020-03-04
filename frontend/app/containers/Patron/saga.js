@@ -13,10 +13,10 @@ import {
 } from './actions';
 import { push } from 'connected-react-router';
 import { toast } from "react-toastify";
-import { getMyLibraries, 
-          getLibraryList, 
-          requestAccessToLibrary, 
-          getReferencesList, 
+import { getMyLibraries,
+          getLibraryList,
+          requestAccessToLibrary,
+          getReferencesList,
           createReferences,
           updateReferences } from 'utils/api';
 
@@ -52,14 +52,14 @@ export function* requestAccessToLibrarySaga(action) {
     body: {
       library_id: action.request.library_id
     }
-  }; 
+  };
   try {
     const request = yield call(requestAccessToLibrary, options);
     yield call(requestMyLibrariesSaga)
-    yield call(() => toast.success('Libreria Aggiunta'))
+    yield call(() => toast.success('Biblioteca Aggiunta'))
   } catch(e) {
     yield put(requestError(e.message));
-  } 
+  }
 }
 
 export function* requestReferencesListSaga() {

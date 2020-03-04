@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Models\Libraries\Library;
 use App\Models\Libraries\LibraryUser;
 use App\Models\Reference;
+use App\Models\Users\User;
+use App\Policies\BasePolicy;
 use App\Policies\LibraryPolicy;
 use App\Policies\LibraryUserPolicy;
 use App\Policies\ReferencesPolicy;
@@ -26,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         Library::class => LibraryPolicy::class,
         LibraryUser::class => LibraryUserPolicy::class,
         Reference::class => ReferencesPolicy::class,
+        User::class => BasePolicy::class,
     ];
 
     /**
