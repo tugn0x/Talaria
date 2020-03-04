@@ -13,6 +13,7 @@ export const initialState = {
   loading: false,
   usersList: [],
   error: null,
+  pagination: []
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -29,6 +30,12 @@ const AdminReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = initialState.error;
         draft.usersList = action.result.data
+        draft.pagination = Object.keys(action.result)
+          .filter(key => !['data'].includes(key))
+          .reduce((obj, key) => {
+            obj[key] = action.result[key];
+            return obj;
+          }, {});
         break;
       case REQUEST_UPDATE_USER:
         draft.loading = true;

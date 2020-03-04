@@ -168,8 +168,9 @@ export const updateReferences = (options) => {
 };
 
 export const getUsersList = (options) => {
+  const page = options.page;
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/users/users`, options)
+  return request(`${BASE_URL}/api/v1/users/users?page=${page}`, options)
 };
 
 export const createUser = (options) => {

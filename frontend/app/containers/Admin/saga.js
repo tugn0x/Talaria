@@ -12,9 +12,10 @@ import {getUsersList, updateUser, createUser} from 'utils/api'
 import moment from 'moment';
 
 
-export function* requestUsersListSaga() {
+export function* requestUsersListSaga(action = {}) {
   const options = {
-    method: 'get'
+    method: 'get',
+    page: action.page ? action.page.toString() : '1'
   };
   try {
     const request = yield call(getUsersList, options);
@@ -29,7 +30,6 @@ export function* requestUpdateUserSaga(action) {
     method: 'put',
     body: action.request
   };
-  
   try {
     const request = yield call(updateUser, options);
     yield call(requestUsersListSaga);

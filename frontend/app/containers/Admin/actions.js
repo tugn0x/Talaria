@@ -16,9 +16,10 @@ export function defaultAction() {
   };
 }
 
-export function requestUsersList() {
+export function requestUsersList(page) {
   return {
     type: REQUEST_USERS_LIST,
+    page
   };
 }
 

@@ -46,10 +46,12 @@ const UsersList = (props) => {
                 />
             ||  
                 <UsersListTable 
-                    usersList={admin.usersList} 
+                    usersList={admin.usersList}
+                    pagination={admin.pagination} 
                     match={match} 
                     loading={isLoading}
                     createUser={ (formData) => dispatch(requestPostUser(formData, "User added!!!" )) }
+                    getUsersList={(page) =>  dispatch(requestUsersList(page))}
                 />    
             }
         </>

@@ -47,6 +47,21 @@ button {
     }
 }
 
+.btn-link {
+    background: none;
+    border: none;
+    color: $grey-nav-link;
+    &:hover {
+        color: $grey-nav-link-hover;
+        background: none;
+        border: none;
+    }
+    &.disabled, &:disabled {
+        color: $grey-nav-link;
+        opacity: 0.5;
+    }
+}
+
 #app {
     background-color: $light;
     min-height: 100%;
@@ -55,8 +70,13 @@ button {
     flex-direction: column;
 }
 
+
+
 .app-body {
     flex: 1;
+    .main {
+        margin-bottom: 4rem;
+    }
 }
 
 .fullWidth {

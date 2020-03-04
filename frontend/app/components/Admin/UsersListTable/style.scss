@@ -6,10 +6,6 @@
     a {
         display: table-cell;
         vertical-align: middle;
-        color: $grey-nav-link;
-        &:hover {
-            color: $grey-nav-link-hover;
-        }
         i:before {
             font-size: 1.5rem;
         }

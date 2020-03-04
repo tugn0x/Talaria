@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
 
-        $admin = factory(\App\Models\Users\User::class)->create([
+     /*   $admin = factory(\App\Models\Users\User::class)->create([
             'email' => 'nilde@nilde.it',
             'name' => 'nildenilde',
             'surname' => 'nildenilde',
@@ -33,7 +33,7 @@ class UsersTableSeeder extends Seeder
 //        $admin->save();
 
         // Crea qualche altro utente variegato
-        //factory(\App\Models\Users\User::class, 5)->create();
+        factory(\App\Models\Users\User::class, 25)->create();
 
         //creo il mio utente (e non gli assegno alcun ruolo)
         $myuser = factory(\App\Models\Users\User::class)->create([
@@ -65,10 +65,13 @@ class UsersTableSeeder extends Seeder
             'country_id'=>1,
             'privacy_policy_accepted'=>now(),
         ]);
-
+*/
+/*
         foreach (\App\Models\Libraries\Library::all() as $item) {
             $myuser->allow('manage', $item);
         }
+        */
+        factory(\App\Models\Users\User::class, 25)->create();
 
         /*
          *

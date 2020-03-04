@@ -6,14 +6,17 @@ import globalMessages from 'utils/globalMessages'
 import ButtonPlus from 'components/Button/ButtonPlus'
 import CustomModal from 'components/Modal/Loadable'
 import UserForm from 'components/Admin/UserForm/Loadable'
+import Pagination from 'components/Pagination/Loadable'
 import './style.scss'
 
 function UsersListTable(props) {
     console.log('UsersListTable', props)
-    const {usersList, match, loading, createUser} = props
+    const {usersList, pagination, match, loading, createUser, getUsersList} = props
+    const {current_page, last_page} = pagination
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const intl = useIntl();
+    
     return (
         <>
             <ButtonPlus 
@@ -58,10 +61,10 @@ function UsersListTable(props) {
                                 </span>
                             </Col>
                             <Col xs={3} className="edit-icons" >
-                                <a href={`${match.url}/${user.id}`} className="nav-link">
+                                <a href={`${match.url}/${user.id}`} className="btn btn-link">
                                     <i className="fa fa-edit"></i>
                                 </a>
-                                <a href="#" onClick={() => console.log('delete user')} className="nav-link">
+                                <a href="#" onClick={() => console.log('delete user')} className="btn btn-link">
                                     <i className="fa fa-trash"></i>
                                 </a>
                             </Col>
@@ -77,6 +80,13 @@ function UsersListTable(props) {
                     loading={loading} 
                     createUser={ (formData) => createUser(formData) } />
             </CustomModal>
+            {Object.keys(pagination).length > 0 &&
+                <Pagination 
+                    current_page={current_page}
+                    last_page={last_page}
+                    setPage={(page) => getUsersList(page)}
+                />
+            }
           </>
     )
 }
