@@ -51,8 +51,9 @@ class BaseObserver
 //                    print_r(get_class($model));
 //                    print_r($model->toArray());
 //                    exit(print_r($this->validator->errors()));
+                    //throw new \Dingo\Api\Exception\StoreResourceFailedException(trans('api::response.create_failed'), $this->validator->errors());
                     throw new \Dingo\Api\Exception\StoreResourceFailedException(trans('api::response.create_failed'), $this->validator->errors());
-                }
+}
                 else
                 {
 //                    print_r(get_class($model));
