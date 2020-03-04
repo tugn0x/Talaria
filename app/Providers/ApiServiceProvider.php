@@ -1,5 +1,6 @@
 <?php namespace App\Providers;
 
+use Dingo\Api\Exception\Handler as ExceptionHandler;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Http\Kernel;
 use Dingo\Api\Http\Request;
@@ -59,6 +60,7 @@ class ApiServiceProvider extends ServiceProvider {
 
         $this->registerDispatcher();
 //        $this->registerException();
+        $this->registerExceptionHandler();
     }
 
     /**
@@ -93,6 +95,12 @@ class ApiServiceProvider extends ServiceProvider {
         });
     }
 
+    protected function registerExceptionHandler()
+    {
+        $this->app->singleton('api.exception', function ($app) {
+            return new ExceptionHandler($app['Illuminate\Contracts\Debug\ExceptionHandler'], config('api.errorFormat'), config('api.debug'));
+        });
+    }
 //    private function registerException()
 //    {
 //        $response = $this->app['api.http.response'];

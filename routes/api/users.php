@@ -34,5 +34,5 @@ Route::group([
     Route::get('users', 'UserController@index')->name('index');
     Route::get('users/{user}', 'UserController@show')->name('show');
     Route::put('users/{user}', 'UserController@update')->name('update');
-    Route::post('users', 'UserController@create')->name('create');
+    Route::post('users', 'UserController@store')->name('create');
 });
