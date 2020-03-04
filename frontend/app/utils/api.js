@@ -169,7 +169,27 @@ export const updateReferences = (options) => {
 
 export const getUsersList = (options) => {
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/users/labels`, options)
+  return request(`${BASE_URL}/api/v1/users/users`, options)
+};
+
+export const createUser = (options) => {
+  options = getOption(options);
+  console.log(options)
+  return request(`${BASE_URL}/api/v1/users/users`, options)
+};
+
+/* 
+GET SINGLE USER
+export const getUser = (options) => {
+  const user_id = options.body.id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/users/users/${user_id}`, options)
+}; */
+
+export const updateUser = (options) => {
+  const user_id = options.body.id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/users/users/${user_id}`, options)
 };
 
 // export const getIllness = (options) => {

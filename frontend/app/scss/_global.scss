@@ -118,7 +118,7 @@ ul.list-inline {
             &:not(:last-child) {
                 border-right: 2px solid $grey-lighter;
             }
-            i {
+            &:not(.edit-icons) i {
                 float: right;
                 line-height: 18px;
                 cursor: pointer;
@@ -142,7 +142,7 @@ ul.list-inline {
                         padding-left: .65rem;
                     }
                 }
-                > * {
+                &:not(.edit-icons) > * {
                     position: absolute;
                     top: 50%;
                     margin: 0 auto;

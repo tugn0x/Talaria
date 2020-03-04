@@ -1,5 +1,5 @@
-import { call, put, select, takeLatest, fork, take  } from 'redux-saga/effects';
-import { REQUEST_USERS_LIST } from './constants';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_POST_USER } from './constants';
 import {
   requestError,
   stopLoading,
@@ -7,25 +7,54 @@ import {
   requestUsersListSuccess
 } from './actions';
 import { toast } from "react-toastify";
-import {getUsersList} from 'utils/api'
+import { push } from 'connected-react-router';
+import {getUsersList, updateUser} from 'utils/api'
 
 
 
 export function* requestUsersListSaga() {
-  console.log('requestUsersListSaga')
-  console.log('requestUsersListSaga')
-  console.log('requestUsersListSaga')
   const options = {
     method: 'get'
   };
   try {
     const request = yield call(getUsersList, options);
-    // yield put(requestUsersListSuccess(request));
+    yield put(requestUsersListSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
   }
 }
 
+export function* requestUpdateUserSaga(action) {
+  const options = {
+    method: 'put',
+    body: action.request
+  };
+  
+  try {
+    const request = yield call(updateUser, options);
+    yield call(requestUsersListSaga);
+    yield put(push("/admin/users-list"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestPostUserSaga(action) {
+  const options = {
+    method: 'post',
+    body: action.request
+  };
+  try {
+    console.log(options)
+    const request = yield call(createUser, options);
+    /* yield call(requestUsersListSaga);
+    yield put(push("/admin/users-list"));
+    yield call(() => toast.success(action.message)) */
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
 
 
 /**
@@ -33,4 +62,6 @@ export function* requestUsersListSaga() {
  */
 export default function* adminSaga() {
   yield takeLatest(REQUEST_USERS_LIST, requestUsersListSaga);
+  yield takeLatest(REQUEST_UPDATE_USER, requestUpdateUserSaga);
+  yield takeLatest(REQUEST_POST_USER, requestPostUserSaga);
 }
