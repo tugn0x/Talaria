@@ -167,6 +167,7 @@ export const updateReferences = (options) => {
   return request(`${BASE_URL}/api/v1/references/${options.id}`, options)
 };
 
+// ADMIN USERS MANAGE
 export const getUsersList = (options) => {
   const page = options.page;
   options = getOption(options);
@@ -178,13 +179,11 @@ export const createUser = (options) => {
   return request(`${BASE_URL}/api/v1/users/users`, options)
 };
 
-/* 
-GET SINGLE USER
 export const getUser = (options) => {
-  const user_id = options.body.id
+  const user_id = options.id
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/users/users/${user_id}`, options)
-}; */
+};
 
 export const updateUser = (options) => {
   const user_id = options.body.id

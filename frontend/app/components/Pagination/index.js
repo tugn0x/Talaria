@@ -1,13 +1,15 @@
 import React from 'react'
 import {Button} from 'reactstrap'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router'
 import './style.scss'
 
 const Pagination = (props) => {
-    const {current_page, last_page, setPage} = props
+    const {current_page, last_page, setPage, url} = props
     
     return (
         <div className="pagination">
+            
             <Button className="backward" color="link" onClick={() => setPage(1)} disabled={current_page !== 1 ? false : true}>
                 <i className="fa fa-backward"></i>
             </Button>

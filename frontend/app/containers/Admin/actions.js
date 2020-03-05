@@ -30,6 +30,21 @@ export function requestUsersListSuccess(result) {
   };
 }
 
+
+export function requestUser(id) {
+  return {
+    type: REQUEST_USER,
+    id
+  };
+}
+
+export function requestUserSuccess(result) {
+  return {
+    type: REQUEST_USER_SUCCESS,
+    result
+  };
+}
+
 export function requestPostUser(request, message) {
   return {
     type: REQUEST_POST_USER,

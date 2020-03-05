@@ -7,21 +7,27 @@ import ButtonPlus from 'components/Button/ButtonPlus'
 import CustomModal from 'components/Modal/Loadable'
 import UserForm from 'components/Admin/UserForm/Loadable'
 import Pagination from 'components/Pagination/Loadable'
+/* import { generatePath } from "react-router"; */
 import './style.scss'
 
 function UsersListTable(props) {
     console.log('UsersListTable', props)
-    const {usersList, pagination, match, loading, createUser, getUsersList} = props
+    const {usersList, pagination, match, loading, createUser, history, path} = props
     const {current_page, last_page} = pagination
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const intl = useIntl();
     
+    const linkTo = (path) => {
+       // history.push(generatePath(path, { page: page }))
+       history.push(path)
+    };
+    
     return (
         <>
             <ButtonPlus 
                 onClickHandle={toggle}
-                text={"Create new user"}
+                text={intl.formatMessage({id: 'app.routes.UserNew'})}
             />
             <h4 className="table-title">{intl.formatMessage(messages.header)}</h4>
             <div className="table admin-list">
@@ -46,7 +52,7 @@ function UsersListTable(props) {
                      {usersList.length > 0 && usersList.map(user => (
                         <Row key={`user-${user.id}`}>
                             <Col xs={3}>
-                                <a href={`${match.url}/${user.id}`}>
+                                <a href={`${match.path}/user/${user.id}`}>
                                     {user.name}
                                 </a>
                             </Col>
@@ -61,7 +67,7 @@ function UsersListTable(props) {
                                 </span>
                             </Col>
                             <Col xs={3} className="edit-icons" >
-                                <a href={`${match.url}/${user.id}`} className="btn btn-link">
+                                <a href={`${match.path}/user/${user.id}`} className="btn btn-link">
                                     <i className="fa fa-edit"></i>
                                 </a>
                                 <a href="#" onClick={() => console.log('delete user')} className="btn btn-link">
@@ -76,7 +82,7 @@ function UsersListTable(props) {
             <CustomModal 
                 modal={modal} 
                 toggle={toggle}>
-                 <UserForm 
+                <UserForm 
                     loading={loading} 
                     createUser={ (formData) => createUser(formData) } />
             </CustomModal>
@@ -84,7 +90,7 @@ function UsersListTable(props) {
                 <Pagination 
                     current_page={current_page}
                     last_page={last_page}
-                    setPage={(page) => getUsersList(page)}
+                    setPage={(page) => linkTo(`${path}/?page=${page}`)}
                 />
             }
           </>

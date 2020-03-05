@@ -36,4 +36,8 @@ export default defineMessages({
         id: `${scope}.UserNew`,
         defaultMessage: 'Create new user',
     },
+    UserUpdate: {
+        id: `${scope}.UserUpdate`,
+        defaultMessage: 'Update user',
+    },
 });

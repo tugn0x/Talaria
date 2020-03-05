@@ -67,7 +67,7 @@ function BasePage(props) {
                     key={'userRoutes_'+idx}
                     // path={route.path}
                     path={`${props.match.path}${route.path}`}
-                    // exact={route.exact}
+                    exact={route.exact ? route.exact : false}
                     name={route.name}
                     render={routeProps => (
                       <route.component {...props} {...routeProps} />
