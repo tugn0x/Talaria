@@ -16,7 +16,7 @@ import './style.scss'
 function SideBar(props) {
   console.log('SideBar', props)
 
-  const { auth, isLogged, history, headermenu } = props
+  // const { auth, isLogged, history, headermenu } = props
 
   const current = props.routes.filter((route)=>route.current)
   const routes = current.length ? current[0].children : [];

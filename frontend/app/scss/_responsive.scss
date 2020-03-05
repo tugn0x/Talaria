@@ -12,3 +12,18 @@
         margin-top: 0;
     }
 }
+
+@include media-breakpoint-down(xs) {
+    .table {
+        overflow-x: auto;
+        .row {
+            flex-wrap: nowrap;
+            height: auto;
+            div[class*=col-] {
+                flex: 0 0 40%;
+                max-width: none;
+            }
+            
+        }
+    }
+}

@@ -146,17 +146,19 @@ ul.list-inline {
         }
     }
     .thead {
-        background-color: $grey-light;
         margin-bottom: 1.5rem;
+        div[class*=col-]{
+            background-color: $grey-light;
+        }
     }
     .tbody {
         .row {
-            background-color: $white;
             margin-bottom: 1.5rem;
             border: 1px solid $grey-lighter;
             height: 75px;
             div[class*=col-]{ 
                 padding: 1rem;
+                background-color: $white;
                 &:first-child {
                     > * {
                         padding-left: .65rem;
