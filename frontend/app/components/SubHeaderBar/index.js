@@ -13,9 +13,10 @@ const SubHeaderBar = (props) => {
         const linkElements = document.querySelectorAll('.subheader-menu li')
         const subheaderMenu = document.querySelector('.subheader-menu');
         let totalWidth = 0
+        
         if(linkElements.length > 0 && subheaderMenu){
             linkElements.forEach(el => {
-                totalWidth += ( el.clientWidth + 40) 
+                totalWidth += ( el.clientWidth + 30) 
             })
             subheaderMenu.style.width = `${totalWidth}px`
         }

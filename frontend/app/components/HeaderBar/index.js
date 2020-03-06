@@ -104,7 +104,6 @@ function HeaderBar(props) {
         </div>
       </header>
       { headermenu && <SubHeaderBar routes={routes} /> }
-      
     </>
   );
 }

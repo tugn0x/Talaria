@@ -3,13 +3,23 @@
         margin-top: 55px;
     }
     .table-title {
-        margin-top: 6rem;
+        margin: 3rem 0 1rem
     }
 }
 
 @include media-breakpoint-down(lg) {
     .app-body {
-        margin-top: 0;
+        margin-top: 95px;
+    }
+    .app-header { 
+        z-index: 1030;
+    }
+    .app-subheader {
+        overflow-y: auto;
+        position: fixed;
+        width: 100%;
+        z-index: 1020;
+        margin-top: 55px;
     }
 }
 
