@@ -99,6 +99,11 @@ trait ApiControllerTrait
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
     }
 
+    public function create(Request $request)
+    {
+        return $this->store($request);
+    }
+
 
     public function update(Request $request, $id)
     {
