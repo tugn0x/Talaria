@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import {Switch, Route, withRouter} from 'react-router-dom';
@@ -14,10 +14,12 @@ import {Container} from "reactstrap"
 
 function SubRouteSwitch(props) {
   console.log('SubRouteSwitch',props)
+  const currRoute = props.routes.filter(route => props.match.path.includes(route.path))
+ 
   return (
     <>
             <Switch>
-              {props.routes && props.routes[0].children.map((route, idx) => {
+              {currRoute[0].children.length && currRoute[0].children.map((route, idx) => {
                 return route.component ? (
                   <Route
                     key={'userRoutes_'+idx}

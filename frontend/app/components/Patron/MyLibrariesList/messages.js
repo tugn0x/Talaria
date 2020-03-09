@@ -16,4 +16,8 @@ export default defineMessages({
     id: `${scope}.createNewLibrary`,
     defaultMessage: 'Create new library',
   },
+  editLibrary: {
+    id: `${scope}.editLibrary`,
+    defaultMessage: 'Update library',
+  },
 });

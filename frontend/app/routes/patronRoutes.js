@@ -1,4 +1,5 @@
 import MyLibrariesPage from 'containers/Patron/MyLibrariesPage/Loadable';
+import MyLibrariesListPage from 'containers/Patron/MyLibrariesListPage/Loadable';
 import ChangePassword from 'containers/User/ChangePassword/Loadable';
 import ReferencesPage from 'containers/Patron/ReferencesPage/Loadable';
 import ReferencesListPage from 'containers/Patron/ReferencesListPage/Loadable';
@@ -15,10 +16,15 @@ const patronRoutes = [
   },
   
   { path: '/searches', name: `Searches`, component: ChangePassword, header: true, },
-
   { path: '/requests', name: `Requests`, component: ChangePassword, header: true, permissions: ['can-request'] },
-
-  { path: '/my-libraries', name: `Libraries`, component: MyLibrariesPage, header: true},
+  
+  { path: '/my-libraries', name: `Libraries`, component: SubRouteSwitch, header: true,
+    children: [
+      { path: '/my-library/new', icon: "plus", name: `LibraryNew`, url: `/my-libraries/my-library/new`, component: MyLibrariesPage, sidebar: true},
+      { path: '/my-library/:id?', name: `Libraries`, component: MyLibrariesPage, },
+      { path: '/:page?', exact: true, name: `Libraries`, url: `/my-libraries`, component: MyLibrariesListPage, },
+    ]
+  },
   // { path: '/request-access', name: 'Request access', component: ChangePassword, menu: true },
 ];
 

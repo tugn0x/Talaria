@@ -29,7 +29,6 @@ function MyLibrariesPage(props) {
     }
    }, [])
 
-   
   // const my_libraries = patron.my_libraries
   
   return (

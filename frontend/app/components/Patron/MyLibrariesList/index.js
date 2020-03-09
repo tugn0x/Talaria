@@ -6,14 +6,23 @@ import {formatDate} from 'utils/formatDate'
 import ButtonPlus from 'components/Button/ButtonPlus'
 import CustomModal from 'components/Modal/Loadable'
 import CustomForm from 'components/Form/CustomForm';
+import { generatePath } from "react-router";
 import './style.scss'
 
 function MyLibrariesList(props) {
     console.log('MyLibrariesList', props)
-    const {my_libraries, match} = props
+    const {my_libraries, match, editPath} = props
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const intl = useIntl();
+
+    const editurl = (id) => {
+        return generatePath(`${editPath}`, {
+            id: id,
+        });
+    }    
+
+    
     return (
         <>
             <h3 className="table-title">{intl.formatMessage(messages.header)}</h3>
@@ -23,7 +32,7 @@ function MyLibrariesList(props) {
             />
             <div className="table my-libraries-list">
                 <Row className="thead">
-                    <Col xs={6}>
+                    <Col xs={4}>
                         <span>Titolo / Descrizione</span>
                         <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
                     </Col>
@@ -39,12 +48,16 @@ function MyLibrariesList(props) {
                         <span>Status</span>
                         <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
                     </Col>
+                    <Col xs={2}>
+                        <span>{intl.formatMessage(messages.editLibrary)}</span>
+                    </Col>
                 </Row>
                 <div className="tbody">
                     {my_libraries.length > 0 && my_libraries.map(my_library => (
                         <Row key={`my_library-${my_library.id}`}>
-                            <Col xs={6}>
-                                <a href={`${match.url}/${my_library.id}`}>
+                            {console.log(my_library.id)}
+                            <Col xs={4}>
+                                <a href={`${editurl(my_library.id)}`}>
                                     {my_library.name}
                                 </a>
                             </Col>
@@ -61,6 +74,14 @@ function MyLibrariesList(props) {
                             </Col>
                             <Col xs={2}>
                                 <div className={`status-point ${my_library.status === 0 ? 'pending' : 'success' }`}></div>
+                            </Col>
+                            <Col xs={2} className="edit-icons" >
+                                <a href={`${editurl(my_library.id)}`} className="btn btn-link">
+                                    <i className="fa fa-edit"></i>
+                                </a>
+                                <a href="#" onClick={() => console.log('delete user')} className="btn btn-link">
+                                    <i className="fa fa-trash"></i>
+                                </a>
                             </Col>
                         </Row>
                       ))
@@ -79,6 +100,17 @@ function MyLibrariesList(props) {
                     searchCustomSelect={(input) => props.searchCustomSelect(input)}
                 />
             </CustomModal>
+           {/*  {pagination && Object.keys(pagination).length > 0 &&
+                <Pagination
+                    current_page={current_page}
+                    last_page={last_page}
+                    // setPage={(page) => linkTo(`${path}/?page=${page}`)}
+
+                    setPage={(page) => linkTo(generatePath(`${props.match.path}`, {
+                        page: page
+                      }))}
+                />
+            } */}
           </>
     )
 }

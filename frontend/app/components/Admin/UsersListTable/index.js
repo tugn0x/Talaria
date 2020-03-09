@@ -102,7 +102,6 @@ function UsersListTable(props) {
                     current_page={current_page}
                     last_page={last_page}
                     // setPage={(page) => linkTo(`${path}/?page=${page}`)}
-
                     setPage={(page) => linkTo(generatePath(`${props.match.path}`, {
                         page: page
                       }))}

@@ -28,6 +28,10 @@ export default defineMessages({
         id: `${scope}.Libraries`,
         defaultMessage: 'My Libraries',
     },
+    LibraryNew: {
+        id: `${scope}.LibraryNew`,
+        defaultMessage: 'Create new library',
+    },
     UsersList: {
         id: `${scope}.UsersList`,
         defaultMessage: 'Users list',
