@@ -23,10 +23,10 @@ const UsersListPage = (props) => {
     }, [])
 
     useEffect(() => {
-        if(!isLoading && query.page) {
-            dispatch(requestUsersList(query.page))
+        if(!isLoading && match.params) {
+            dispatch(requestUsersList(match.params.page))
         }
-    }, [query.page])
+    }, [match.params])
 
 
     return (
@@ -37,6 +37,7 @@ const UsersListPage = (props) => {
             path={path}
             match={match}
             loading={isLoading}
+            editPath={'/admin/users/user/:id?'}
             createUser={ (formData) => dispatch(requestPostUser(formData, "User added!!!" )) }
         />
     )

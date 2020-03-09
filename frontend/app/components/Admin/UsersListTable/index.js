@@ -7,8 +7,8 @@ import ButtonPlus from 'components/Button/ButtonPlus'
 import CustomModal from 'components/Modal/Loadable'
 import UserForm from 'components/Admin/UserForm/Loadable'
 import Pagination from 'components/Pagination/Loadable'
-/* import { generatePath } from "react-router"; */
-import './style.scss'
+import { generatePath } from "react-router";
+// import './style.scss;
 
 function UsersListTable(props) {
     console.log('UsersListTable', props)
@@ -22,6 +22,17 @@ function UsersListTable(props) {
        // history.push(generatePath(path, { page: page }))
        history.push(path)
     };
+
+    const editurl = (id) => {
+      return generatePath(`${props.editPath}`, {
+        id: id,
+      });
+    }
+    const pageNumUrl = (id) => {
+      return generatePath(`${props.editPath}`, {
+        id: id,
+      });
+    }
 
     return (
         <>
@@ -67,7 +78,7 @@ function UsersListTable(props) {
                                 </span>
                             </Col>
                             <Col xs={3} className="edit-icons" >
-                                <a href={`${match.path}/user/${user.id}`} className="btn btn-link">
+                                <a href={`${editurl(user.id)}`} className="btn btn-link">
                                     <i className="fa fa-edit"></i>
                                 </a>
                                 <a href="#" onClick={() => console.log('delete user')} className="btn btn-link">
@@ -90,7 +101,11 @@ function UsersListTable(props) {
                 <Pagination
                     current_page={current_page}
                     last_page={last_page}
-                    setPage={(page) => linkTo(`${path}/?page=${page}`)}
+                    // setPage={(page) => linkTo(`${path}/?page=${page}`)}
+
+                    setPage={(page) => linkTo(generatePath(`${props.match.path}`, {
+                        page: page
+                      }))}
                 />
             }
           </>
