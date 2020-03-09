@@ -13,26 +13,26 @@ const UserPage = (props) => {
     const {dispatch, isLoading, admin, match} = props
     const {params} = match
     const intl = useIntl();
-    // const [isNew, setIsNew] = useState(location.pathname.includes('new'))
-    
+    const isNew = !params.id || params.id !== 'new'
+
     useEffect(() => {
-        if(params.id !== 'new' && !isLoading){
+        if(!isNew && !isLoading){
             dispatch(requestUser(params.id))
         }
-    }, [params.id]) 
+    }, [params.id])
 
     return (
         <>
-            {params.id !== 'new' &&
-                <UserForm 
+            {!isNew &&
+                <UserForm
                     updateUser={(formData) => dispatch(requestUpdateUser({...formData, id: params.id }, intl.formatMessage({ id: 'app.containers.ProfilePage.updateMessage' })))}
                     user={admin.user}
                     loading={isLoading}
                 />
             }
-            {params.id === 'new' &&
-                <UserForm 
-                    loading={isLoading} 
+            {isNew &&
+                <UserForm
+                    loading={isLoading}
                     createUser={ (formData) => dispatch(requestPostUser(formData, "User added!!!" )) } />
             }
         </>
@@ -43,7 +43,7 @@ const mapStateToProps = createStructuredSelector({
     isLoading: isAdminLoading(),
     admin: makeSelectAdmin()
 });
-  
+
 function mapDispatchToProps(dispatch) {
     return {
         dispatch,
@@ -54,5 +54,5 @@ const withConnect = connect(
     mapStateToProps,
     mapDispatchToProps,
 );
-  
+
 export default compose(withConnect)(UserPage);

@@ -15,13 +15,13 @@ const UsersListPage = (props) => {
     const {search} = location
     const intl = useIntl();
     const query = queryString.parse(search)
-    
+
     useEffect(() => {
         if(!isLoading) {
             dispatch(requestUsersList())
         }
     }, [])
-    
+
     useEffect(() => {
         if(!isLoading && query.page) {
             dispatch(requestUsersList(query.page))
@@ -30,12 +30,12 @@ const UsersListPage = (props) => {
 
 
     return (
-        <UsersListTable 
+        <UsersListTable
             usersList={admin.usersList}
-            pagination={admin.pagination} 
+            pagination={admin.pagination}
             history={history}
             path={path}
-            match={match} 
+            match={match}
             loading={isLoading}
             createUser={ (formData) => dispatch(requestPostUser(formData, "User added!!!" )) }
         />
@@ -46,7 +46,7 @@ const mapStateToProps = createStructuredSelector({
     isLoading: isAdminLoading(),
     admin: makeSelectAdmin()
 });
-  
+
 function mapDispatchToProps(dispatch) {
     return {
         dispatch,
@@ -57,5 +57,5 @@ const withConnect = connect(
     mapStateToProps,
     mapDispatchToProps,
 );
-  
+
 export default compose(withConnect)(UsersListPage);

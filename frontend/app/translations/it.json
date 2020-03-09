@@ -90,6 +90,6 @@
   "app.routes.Searches": "Ricerche",
   "app.routes.Requests": "Richieste",
   "app.routes.Libraries": "Biblioteche",
-  "app.routes.UsersList": "Lista utenti",
+  "app.routes.UsersList": "Utenti",
   "app.routes.UserNew": "Crea un nuovo utente"
 }

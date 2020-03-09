@@ -19,16 +19,18 @@ function BasePage(props) {
     return pagePath === props.location.pathname || new RegExp(`^${pagePath.replace("/", "\/")}(.*?)`).test(props.location.pathname);
   };
 
-  const mapRoutes = (routes, auth) => {
+  const mapRoutes = (routes, auth, prefix) => {
+    console.log(prefix, 'prefix')
     return filterRoutes(routes, auth).map((route)=>{
       const url = route.url ? props.match.path+route.url : props.match.path+route.path
+      console.log(url, prefix, props.match.path, route.path)
       return {
         ...route,
-        path: props.match.path+route.path,
+        path: prefix+props.match.path+route.path,
         url: url,
         component:null,
         current: isCurrentPage(url),
-        children: route.children ? mapRoutes(filterRoutes(route.children, auth)) : []
+        children: route.children ? mapRoutes(route.children, auth, route.path) : []
       }
     })
   }
@@ -42,17 +44,17 @@ function BasePage(props) {
       })
   }
 
-  const lightRoutes = mapRoutes(props.routes, props.auth)
+  const lightRoutes = mapRoutes(props.routes, props.auth, '')
 
   return (
     <>
-      <HeaderBar 
-        isLogged={props.isLogged} 
-        routes={lightRoutes} 
-        location={props.location} 
-        headermenu={props.headermenu} 
-        history={props.history} 
-        auth={props.auth} 
+      <HeaderBar
+        isLogged={props.isLogged}
+        routes={lightRoutes}
+        location={props.location}
+        headermenu={props.headermenu}
+        history={props.history}
+        auth={props.auth}
         logout={(request) => props.logout(request)}/>
       <div className="app-body">
         {props.headermenu && (

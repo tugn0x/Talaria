@@ -17,16 +17,16 @@ function UsersListTable(props) {
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const intl = useIntl();
-    
+
     const linkTo = (path) => {
        // history.push(generatePath(path, { page: page }))
        history.push(path)
     };
-    
+
     return (
         <>
             <h3 className="table-title">{intl.formatMessage(messages.header)}</h3>
-            <ButtonPlus 
+            <ButtonPlus
                 onClickHandle={toggle}
                 text={intl.formatMessage({id: 'app.routes.UserNew'})}
             />
@@ -78,16 +78,16 @@ function UsersListTable(props) {
                       ))
                     }
                 </div>
-            </div> 
-            <CustomModal 
-                modal={modal} 
+            </div>
+            <CustomModal
+                modal={modal}
                 toggle={toggle}>
-                <UserForm 
-                    loading={loading} 
+                <UserForm
+                    loading={loading}
                     createUser={ (formData) => createUser(formData) } />
             </CustomModal>
             {Object.keys(pagination).length > 0 &&
-                <Pagination 
+                <Pagination
                     current_page={current_page}
                     last_page={last_page}
                     setPage={(page) => linkTo(`${path}/?page=${page}`)}
