@@ -25,10 +25,10 @@ function SideBar(props) {
     <div className="sidebar">
       <div className="scrollbar-container sidebar-nav ps ps-container">
         <nav>
-          {routes.map((route) => (
+          {routes.filter(item => item.sidebar).map((route) => (
             <NavLink
               className="nav-link btn"
-              key={route.name} 
+              key={route.name}
               to={`${route.url ? route.url : route.path}`}
               activeClassName="current"
             >

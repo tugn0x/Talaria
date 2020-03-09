@@ -6,9 +6,9 @@ import SubRouteSwitch from 'components/SubRouteSwitch';
 const adminRoutes = [
   { path: '/users',  name: `UsersList`, component: SubRouteSwitch, header: true,
     children: [
-      { path: '/user/new', name: `UserNew`, component: UserPage },
-      { path: '/user/:id?', name: `UserUpdate`, component: UserPage },
-      { path: '/:page?', exact: true, name: `UsersList`, url: `/users/user`, component: UsersListPage, header: true },
+      { path: '/user/new', name: `UserNew`, component: UserPage,  url: `/users/user/new`, sidebar: true},
+      { path: '/user/:id?', name: `UserUpdate`, component: UserPage, },
+      { path: '/:page?', exact: true, name: `UsersList`, url: `/users/user`, component: UsersListPage, },
     ]
   },
 ];
