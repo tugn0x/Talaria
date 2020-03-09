@@ -181,11 +181,11 @@ ul.list-inline {
         }
     }
     .edit-icons {
-        display: table;
         height: 100%;
-        a {
+        a.btn {
             display: table-cell;
             vertical-align: middle;
+            height: auto;
             i:before {
                 font-size: 1.5rem;
             }

@@ -9,14 +9,16 @@ import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_ACCESS_TO_LIBRARIES, 
   REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS, 
   REQUEST_POST_REFERENCES, REQUEST_SUCCESS, 
-  REQUEST_UPDATE_REFERENCES, STOP_LOADING, REQUEST_ERROR } from './constants';
+  REQUEST_UPDATE_REFERENCES, REQUEST_GET_REFERENCE, REQUEST_GET_REFERENCE_SUCCESS,
+  STOP_LOADING, REQUEST_ERROR } from './constants';
 
 export const initialState = {
   loading: false,
   my_libraries: [],
   error: null,
   librariesList: [],
-  referencesList: []
+  referencesList: [],
+  reference: {}
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -25,9 +27,17 @@ const PatronReducer = (state = initialState, action) =>
     switch (action.type) {
       case DEFAULT_ACTION:
         break;
-      case REQUEST_UPDATE_REFERENCES:
+      case REQUEST_GET_REFERENCE:
         draft.loading = true;
         break;
+      case REQUEST_GET_REFERENCE_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.reference = action.result;
+        break;
+      case REQUEST_UPDATE_REFERENCES:
+        draft.loading = true;
+      break;
       case REQUEST_POST_REFERENCES:
         draft.loading = true;
         break;

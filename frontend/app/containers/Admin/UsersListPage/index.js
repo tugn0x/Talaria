@@ -6,7 +6,7 @@ import {useIntl} from 'react-intl';
 import UsersListTable from 'components/Admin/UsersListTable'
 import {requestUsersList, requestPostUser} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
-import queryString from 'query-string'
+// import queryString from 'query-string'
 
 const UsersListPage = (props) => {
     console.log('UsersListPage', props)
@@ -14,7 +14,7 @@ const UsersListPage = (props) => {
     const {path} = match
     const {search} = location
     const intl = useIntl();
-    const query = queryString.parse(search)
+   // const query = queryString.parse(search)
 
     useEffect(() => {
         if(!isLoading) {
@@ -23,10 +23,10 @@ const UsersListPage = (props) => {
     }, [])
 
     useEffect(() => {
-        if(!isLoading && query.page) {
-            dispatch(requestUsersList(query.page))
+        if(!isLoading && match.params) {
+            dispatch(requestUsersList(match.params.page))
         }
-    }, [query.page])
+    }, [match.params])
 
 
     return (
@@ -37,6 +37,7 @@ const UsersListPage = (props) => {
             path={path}
             match={match}
             loading={isLoading}
+            editPath={'/admin/users/user/:id?'}
             createUser={ (formData) => dispatch(requestPostUser(formData, "User added!!!" )) }
         />
     )

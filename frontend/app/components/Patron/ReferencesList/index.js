@@ -7,13 +7,20 @@ import {ReferencesForm} from 'components';
 import CustomModal from 'components/Modal/Loadable'
 import {useIntl} from 'react-intl';
 import ButtonPlus from 'components/Button/ButtonPlus'
+import { generatePath } from "react-router";
 
 const ReferencesList = (props) => {
     console.log('ReferencesList', props)
-    const {match, referencesList} = props
+    const {match, referencesList, pagination} = props
     const intl = useIntl();
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
+
+    const editurl = (id) => {
+        return generatePath(`${props.editPath}`, {
+            id: id,
+        });
+    }
 
     return (
         <>
@@ -45,7 +52,7 @@ const ReferencesList = (props) => {
                         referencesList.map(reference => (
                             <Row key={`reference-${reference.id}`}>
                                 <Col xs={4}>
-                                    <a href={`${match.url}/${reference.id}`}>
+                                    <a href={`${editurl(reference.id)}`}>
                                         {reference.pub_title}
                                     </a>
                                 </Col>
@@ -60,7 +67,7 @@ const ReferencesList = (props) => {
                                     </span>
                                 </Col>
                                 <Col xs={2} className="edit-icons" >
-                                    <a href={`${match.url}/${reference.id}`} className="btn btn-link">
+                                    <a href={`${editurl(reference.id)}`} className="btn btn-link">
                                         <i className="fa fa-edit"></i>
                                     </a>
                                     <a href="#" onClick={() => console.log('delete reference')} className="btn btn-link">
@@ -83,6 +90,15 @@ const ReferencesList = (props) => {
                     loading={props.loading} 
                     createReferences={ (formData) => props.createReferences(formData) } />
             </CustomModal>
+            {pagination && Object.keys(pagination).length > 0 &&
+                <Pagination
+                    current_page={current_page}
+                    last_page={last_page}
+                    setPage={(page) => linkTo(generatePath(`${match.path}`, {
+                        page: page
+                    }))}
+                />
+            }
         </>
     )
 }

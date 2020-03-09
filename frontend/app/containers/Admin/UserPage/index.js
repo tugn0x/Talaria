@@ -13,14 +13,14 @@ const UserPage = (props) => {
     const {dispatch, isLoading, admin, match} = props
     const {params} = match
     const intl = useIntl();
-    const isNew = !params.id || params.id !== 'new'
+    const isNew = !params.id || params.id === 'new'
 
     useEffect(() => {
         if(!isNew && !isLoading){
             dispatch(requestUser(params.id))
         }
     }, [params.id])
-
+    
     return (
         <>
             {!isNew &&

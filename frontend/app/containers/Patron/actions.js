@@ -9,11 +9,26 @@ import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_ACCESS_TO_LIBRARIES,
   REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS, 
   REQUEST_POST_REFERENCES, REQUEST_SUCCESS,
+  REQUEST_GET_REFERENCE, REQUEST_GET_REFERENCE_SUCCESS,
   REQUEST_UPDATE_REFERENCES, REQUEST_ERROR, STOP_LOADING} from "./constants";
 
 export function defaultAction() {
   return {
     type: DEFAULT_ACTION,
+  };
+}
+
+export function requestGetReference(id) {
+  return {
+    type: REQUEST_GET_REFERENCE,
+    id,
+  };
+}
+
+export function requestGetReferenceSuccess(result) {
+  return {
+    type: REQUEST_GET_REFERENCE_SUCCESS,
+    result,
   };
 }
 

@@ -157,12 +157,17 @@ export const getReferencesList = (options) => {
   return request(`${BASE_URL}/api/v1/references/my`, options)
 };
 
-export const createReferences = (options) => {
+export const createReference = (options) => {
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/references`, options)
 };
 
-export const updateReferences = (options) => {
+export const getReference = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/references/${options.id}`, options)
+};
+
+export const updateReference = (options) => {
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/references/${options.id}`, options)
 };

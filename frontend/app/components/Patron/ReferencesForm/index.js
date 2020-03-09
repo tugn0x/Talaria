@@ -9,25 +9,25 @@ import globalMessages from 'utils/globalMessages'
 
 
 const ReferencesForm = (props) => {
-    const {createReferences, currentReference, updateReferences} = props
+    const {createReference, reference, loading, updateReference} = props
     const intl = useIntl();
     
     return (
-        <Loader show={props.loading} >
+        <Loader show={loading} >
             <Row className="justify-content-center">
                 <Col md="10">
-                    {currentReference && Object.keys(currentReference).length > 0 &&
+                    {reference  && Object.keys(reference).length &&
                         <CustomForm 
-                            submitCallBack={(formData) => updateReferences(formData)} 
-                            updateFormData={currentReference}
+                            submitCallBack={(formData) => updateReference(formData)} 
+                            updateFormData={reference}
                             fields={fields} 
-                            title={`${intl.formatMessage(globalMessages.update)} ${currentReference.pub_title}`} 
+                            title={`${intl.formatMessage(globalMessages.update)}`} 
                             messages={messages}
                             submitText={intl.formatMessage(messages.updateSubmitText)}
                         /> 
                     ||
                         <CustomForm 
-                            submitCallBack={(formData) => createReferences(formData)} 
+                            submitCallBack={(formData) => createReference(formData)} 
                             fields={fields} 
                             title={intl.formatMessage(messages.header)} 
                             messages={messages}

@@ -20,10 +20,10 @@ function BasePage(props) {
   };
 
   const mapRoutes = (routes, auth, prefix) => {
-    console.log(prefix, 'prefix')
+    // console.log(prefix, 'prefix')
     return filterRoutes(routes, auth).map((route)=>{
       const url = route.url ? props.match.path+route.url : props.match.path+route.path
-      console.log(url, prefix, props.match.path, route.path)
+      // console.log(url, prefix, props.match.path, route.path)
       return {
         ...route,
         path: prefix+props.match.path+route.path,
