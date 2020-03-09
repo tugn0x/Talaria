@@ -26,15 +26,16 @@ function SideBar(props) {
       <div className="scrollbar-container sidebar-nav ps ps-container">
         <nav>
           {routes.map((route) => (
-            <NavLink
-              className="nav-link btn"
-              key={route.name} 
-              to={`${route.url ? route.url : route.path}`}
-              activeClassName="current"
-            >
-              <i className={`fa fa-${route.icon ? route.icon : ''}`}></i>
-              <FormattedMessage {...messages[route.name]}/>
-            </NavLink>
+            route.sidebar &&
+              <NavLink
+                className="nav-link btn"
+                key={route.name} 
+                to={`${route.url ? route.url : route.path}`}
+                activeClassName="current"
+              >
+                <i className={`fa fa-${route.icon ? route.icon : ''}`}></i>
+                <FormattedMessage {...messages[route.name]}/>
+              </NavLink>
            )
           )}
         </nav>
