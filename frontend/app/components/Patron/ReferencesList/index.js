@@ -59,7 +59,7 @@ const ReferencesList = (props) => {
                                         {reference.pubyear}
                                     </span>
                                 </Col>
-                                <Col xs={3} className="edit-icons" >
+                                <Col xs={2} className="edit-icons" >
                                     <a href={`${match.url}/${reference.id}`} className="btn btn-link">
                                         <i className="fa fa-edit"></i>
                                     </a>

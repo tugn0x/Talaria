@@ -34,7 +34,6 @@ function MyLibrariesPage(props) {
   
   return (
     <div className="my-libraries">
-      <h1>Libraries Page</h1>
       <MyLibrariesList 
         my_libraries={patron.my_libraries} match={props.match} 
         requestAccessToLibrary={ (formData) => dispatch(requestAccessToLibrary(formData.library_selected)) } 
