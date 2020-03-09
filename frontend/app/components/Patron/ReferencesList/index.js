@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {Row, Col} from 'reactstrap'
 import messages from './messages'
+import globalMessages from 'utils/globalMessages'
 import { FormattedMessage } from 'react-intl';
 import {ReferencesForm} from 'components';
 import CustomModal from 'components/Modal/Loadable'
@@ -8,6 +9,7 @@ import {useIntl} from 'react-intl';
 import ButtonPlus from 'components/Button/ButtonPlus'
 
 const ReferencesList = (props) => {
+    console.log('ReferencesList', props)
     const {match, referencesList} = props
     const intl = useIntl();
     const [modal, setModal] = useState(false);
@@ -15,14 +17,14 @@ const ReferencesList = (props) => {
 
     return (
         <>
+            <h3 className="table-title"><FormattedMessage {...messages.header} /></h3>
             <ButtonPlus 
                 onClickHandle={toggle}
                 text={intl.formatMessage(messages.createNewReference)}
             />
-            <h4 className="table-title"><FormattedMessage {...messages.header} /></h4>
             <div className="table referencesList">
                 <Row className="thead">
-                    <Col xs={6}>
+                    <Col xs={4}>
                         <span>Titolo / Descrizione</span>
                         <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
                     </Col>
@@ -34,12 +36,15 @@ const ReferencesList = (props) => {
                         <span>Anno di pubblicazione</span>
                         <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
                     </Col>
+                    <Col xs={2}>
+                        <span>{intl.formatMessage(globalMessages.update)}</span>
+                    </Col>
                 </Row>
                 <div className="tbody">
                     {referencesList.length > 0 &&
                         referencesList.map(reference => (
                             <Row key={`reference-${reference.id}`}>
-                                <Col xs={6}>
+                                <Col xs={4}>
                                     <a href={`${match.url}/${reference.id}`}>
                                         {reference.pub_title}
                                     </a>
@@ -54,11 +59,19 @@ const ReferencesList = (props) => {
                                         {reference.pubyear}
                                     </span>
                                 </Col>
+                                <Col xs={3} className="edit-icons" >
+                                    <a href={`${match.url}/${reference.id}`} className="btn btn-link">
+                                        <i className="fa fa-edit"></i>
+                                    </a>
+                                    <a href="#" onClick={() => console.log('delete reference')} className="btn btn-link">
+                                        <i className="fa fa-trash"></i>
+                                    </a>
+                                </Col>
                             </Row>
                         ))
                     ||
                         <h5 className="text-center">
-                            Non ci sono Referenze
+                            {intl.formatMessage(messages.ReferencesNotFound)}
                         </h5>
                     }
                 </div>

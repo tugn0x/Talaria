@@ -62,7 +62,8 @@
 
   "app.components.UsersList.header": "Lista Utenti",
 
-  "app.components.ReferencesList.createNewReference": "Nuova riferimento",
+  "app.components.ReferencesList.createNewReference": "Nuovo riferimento",
+  "app.components.ReferencesList.ReferencesNotFound": "Non ci sono riferimenti",
 
   "app.components.HeaderBar.UserAccount": "Account utente",
   "app.components.HeaderBar.ChangePassword": "Cambia Password",

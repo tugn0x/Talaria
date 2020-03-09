@@ -16,5 +16,9 @@ export default defineMessages({
     id: `${scope}.createNewReference`,
     defaultMessage: 'Create new reference',
   },
+  ReferencesNotFound: {
+    id: `${scope}.ReferencesNotFound`,
+    defaultMessage: 'References not found',
+  },
 });
 

@@ -76,6 +76,7 @@ button {
     flex: 1;
     .main {
         margin-bottom: 4rem;
+        padding-top: 2rem;
     }
 }
 
@@ -117,7 +118,7 @@ ul.list-inline {
 }
 
 .card {
-    border-radius: 0
+    border-radius: 0;
 }
 
 /// TABLE LIST ///
@@ -139,8 +140,6 @@ ul.list-inline {
                 border-right: 2px solid $grey-lighter;
             }
             &:not(.edit-icons) i {
-                /* float: right;
-                line-height: 18px; */
                 cursor: pointer;
             }
         }
@@ -157,12 +156,15 @@ ul.list-inline {
     .tbody {
         .row {
             margin-bottom: 1.5rem;
-            border: 1px solid $grey-lighter;
             height: 75px;
             div[class*=col-]{ 
                 padding: 1rem;
                 background-color: $white;
+                border-color: $grey-lighter;
+                border-width: 2px 2px 2px 0;
+                border-style: solid;
                 &:first-child {
+                    border-left: $grey-lighter 2px solid;
                     > * {
                         padding-left: .65rem;
                     }
@@ -175,6 +177,17 @@ ul.list-inline {
                     left: 0;
                     right: 0;
                 }
+            }
+        }
+    }
+    .edit-icons {
+        display: table;
+        height: 100%;
+        a {
+            display: table-cell;
+            vertical-align: middle;
+            i:before {
+                font-size: 1.5rem;
             }
         }
     }

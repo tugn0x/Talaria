@@ -1,20 +1,10 @@
 .app-subheader {
     overflow-y: auto;
-    ul {
-        margin-bottom: 0;
-        padding: 0 1rem;
-        li {
-            padding: 0.5rem 0.2rem;
-            &.current-page {
-                a {
-                    text-decoration: underline;
-                }
-            }
-            a {
-                text-transform: uppercase;
-                font-size: 0.825rem;
-                font-family: 'Arial';
-            }
+    .subheader-menu {
+        flex-wrap: nowrap;
+        padding: 0.5rem 0;
+        .current-page {
+            text-decoration: underline;
         }
     }
 }

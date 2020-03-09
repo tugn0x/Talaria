@@ -38,14 +38,12 @@ const ReferencesPage = (props) => {
     
     return (
         <>
-            <h1>References Page</h1>
             {isNew && 
                 <ReferencesForm 
                     loading={isLoading} 
                     createReferences={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } />
             ||  !isNew && match.params.id && 
                 <>
-                    <h4>Update Form</h4>
                     { currentReference && Object.keys(currentReference).length > 0 &&
                         <ReferencesForm 
                             currentReference={currentReference}
