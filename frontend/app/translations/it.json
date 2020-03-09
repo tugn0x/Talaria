@@ -86,7 +86,7 @@
   "app.components.Footer.header": "Questo l header del Footer",
 
   "app.routes.Reference": "Riferimenti",
-  "app.routes.ReferenceNew": "Nuova riferimento",
+  "app.routes.ReferenceNew": "Nuovo riferimento",
   "app.routes.Searches": "Ricerche",
   "app.routes.Requests": "Richieste",
   "app.routes.Libraries": "Biblioteche",

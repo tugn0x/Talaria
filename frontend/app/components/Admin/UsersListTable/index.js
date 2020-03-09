@@ -25,11 +25,11 @@ function UsersListTable(props) {
     
     return (
         <>
+            <h3 className="table-title">{intl.formatMessage(messages.header)}</h3>
             <ButtonPlus 
                 onClickHandle={toggle}
                 text={intl.formatMessage({id: 'app.routes.UserNew'})}
             />
-            <h4 className="table-title">{intl.formatMessage(messages.header)}</h4>
             <div className="table admin-list">
                 <Row className="thead">
                     <Col xs={3}>

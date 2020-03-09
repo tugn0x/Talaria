@@ -16,11 +16,11 @@ function MyLibrariesList(props) {
     const intl = useIntl();
     return (
         <>
+            <h3 className="table-title">{intl.formatMessage(messages.header)}</h3>
             <ButtonPlus 
                 onClickHandle={toggle}
                 text={intl.formatMessage(messages.createNewLibrary)}
             />
-            <h4 className="table-title">{intl.formatMessage(messages.header)}</h4>
             <div className="table my-libraries-list">
                 <Row className="thead">
                     <Col xs={6}>
