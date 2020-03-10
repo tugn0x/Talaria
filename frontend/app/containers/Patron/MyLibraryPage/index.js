@@ -13,9 +13,9 @@ import {useIntl} from 'react-intl';
 import {fields} from './fields';
 import messages from './messages';
 import { FormattedMessage } from 'react-intl';
-import {requestGetMyLibrary} from '../actions'
+import {requestGetLibraryList, requestAccessToLibrary, requestGetMyLibrary} from '../actions'
 import makeSelectPatron, {isPatronLoading} from '../selectors';
-import {MyLibrariesList, MyLibraryForm} from 'components';
+import {CustomForm, MyLibraryForm} from 'components';
 
 
 function MyLibraryPage(props) {
@@ -24,10 +24,12 @@ function MyLibraryPage(props) {
   const {params} = match
   const isNew = !params.id || params.id === 'new'
   const library = patron.library
-
+  const librariesList = patron.librariesList
   useEffect(() => {
-    if(!isLoading) {
+    if(!isLoading && !isNew) {
       dispatch(requestGetMyLibrary(params.id))
+    }else if(!isLoading && isNew){
+      dispatch(requestGetLibraryList())
     }
     // console.log(isLoading)
    }, [])
@@ -35,21 +37,23 @@ function MyLibraryPage(props) {
    
   return (
     <>
-      <MyLibraryForm 
-        library={library}
-        loading={isLoading}
-      />
-    {/* <div className="my-libraries">
-       <MyLibrariesList 
-        my_libraries={patron.my_libraries} match={props.match} 
-        requestAccessToLibrary={ (formData) => dispatch(requestAccessToLibrary(formData.library_selected)) } 
-        librariesList={patron.librariesList} 
-        fields={fields}
-        messages={messages} 
-        title={intl.formatMessage(messages.title)}
-        searchCustomSelect={(input) => dispatch(requestGetLibraryList(input)) }
-      /> 
-    </div> */}
+      {!isNew && 
+          <MyLibraryForm 
+            library={library}
+            loading={isLoading}
+          />
+      }
+      {isNew && 
+        <CustomForm 
+      //  requestAccessToLibrary={ (formData) => dispatch(requestAccessToLibrary(formData.library_selected))
+            submitCallBack={ (formData) =>  dispatch(requestAccessToLibrary(formData.library_selected))} 
+            librariesList={librariesList} 
+            fields={fields}
+            messages={messages} 
+           // title={props.title}
+            searchCustomSelect={(input) => dispatch(requestGetLibraryList(input)) }
+        />
+      } 
     </>
   );
 }

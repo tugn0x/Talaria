@@ -1,3 +1,5 @@
+@import '../../../scss/vendors/variables';
+
 .card-form {
     margin: 2rem 0;
 }
@@ -17,6 +19,11 @@ fieldset {
     margin-bottom: 0;
 }
 
-.form-group {
-    margin-bottom: 4rem;
+.form-groups {
+    .form-group {
+        padding: 3rem 0;
+        &:not(:last-child) {
+            border-bottom: 1px solid $grey;
+        }
+    }
 }

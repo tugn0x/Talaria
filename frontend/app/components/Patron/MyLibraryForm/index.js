@@ -21,7 +21,6 @@ const MyLibraryForm = (props) => {
                         updateFormData={library}
                         fields={fields} 
                         fieldsGroups={fieldsGroups}
-                        //   title={`${intl.formatMessage(messages.update)}`} 
                         messages={{...messages, ...globalMessages}}
                         // submitText={intl.formatMessage(messages.updateSubmitText)}
                     /> 

@@ -61,6 +61,7 @@ export function* requestAccessToLibrarySaga(action) {
   try {
     const request = yield call(requestAccessToLibrary, options);
     yield call(requestMyLibrariesSaga)
+    yield put(push("/patron/my-libraries"))
     yield call(() => toast.success('Biblioteca Aggiunta'))
   } catch(e) {
     yield put(requestError(e.message));

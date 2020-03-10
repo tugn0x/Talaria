@@ -101,6 +101,7 @@ const CustomForm = (props) => {
                 <CardBody className="p-4">
                     { title !== "" ? <h2>{title}</h2> : '' }
                     <Form onSubmit={onSubmit} noValidate>
+                        <div className="form-groups">
                             {selectFieldsGroups(fields,fieldsGroups).map((formfields) => {
                                 // const field = fields[key];
                                 return (<div key={formfields.name} className="form-group">
@@ -174,6 +175,7 @@ const CustomForm = (props) => {
                                             </Row>
                                         </div>)
                             })}
+                        </div>
                         <Button color={submitColor} disabled={isSubmitDisabled} type="submit" block>
                             {submitText}
                         </Button>
