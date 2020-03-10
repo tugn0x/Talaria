@@ -49,6 +49,14 @@ export default defineMessages({
     id: `${scope}.town`,
     defaultMessage: 'Town',
   },
+  fax: {
+    id: `${scope}.fax`,
+    defaultMessage: 'Fax',
+  },
+  url: {
+    id: `${scope}.url`,
+    defaultMessage: 'Web address',
+  },
   password_repeat: {
     id: `${scope}.password_repeat`,
     defaultMessage: 'Repeat password',

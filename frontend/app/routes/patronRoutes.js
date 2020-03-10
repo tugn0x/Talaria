@@ -1,4 +1,4 @@
-import MyLibrariesPage from 'containers/Patron/MyLibrariesPage/Loadable';
+import MyLibraryPage from 'containers/Patron/MyLibraryPage/Loadable';
 import MyLibrariesListPage from 'containers/Patron/MyLibrariesListPage/Loadable';
 import ChangePassword from 'containers/User/ChangePassword/Loadable';
 import ReferencesPage from 'containers/Patron/ReferencesPage/Loadable';
@@ -20,8 +20,8 @@ const patronRoutes = [
   
   { path: '/my-libraries', name: `Libraries`, component: SubRouteSwitch, header: true,
     children: [
-      { path: '/my-library/new', icon: "plus", name: `LibraryNew`, url: `/my-libraries/my-library/new`, component: MyLibrariesPage, sidebar: true},
-      { path: '/my-library/:id?', name: `Libraries`, component: MyLibrariesPage, },
+      { path: '/library/new', icon: "plus", name: `LibraryNew`, url: `/my-libraries/library/new`, component: MyLibraryPage, sidebar: true},
+      { path: '/library/:id?', name: `Libraries`, component: MyLibraryPage, },
       { path: '/:page?', exact: true, name: `Libraries`, url: `/my-libraries`, component: MyLibrariesListPage, },
     ]
   },

@@ -10,11 +10,13 @@ import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS, 
   REQUEST_POST_REFERENCES, REQUEST_SUCCESS, 
   REQUEST_UPDATE_REFERENCES, REQUEST_GET_REFERENCE, REQUEST_GET_REFERENCE_SUCCESS,
+  REQUEST_GET_MY_LIBRARY, REQUEST_GET_MY_LIBRARY_SUCCESS,
   STOP_LOADING, REQUEST_ERROR } from './constants';
 
 export const initialState = {
   loading: false,
   my_libraries: [],
+  library: {},
   error: null,
   librariesList: [],
   referencesList: [],
@@ -48,6 +50,14 @@ const PatronReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = initialState.error;
         draft.referencesList = action.result.data;
+        break;
+      case REQUEST_GET_MY_LIBRARY:
+        draft.loading = true;
+        break;
+      case REQUEST_GET_MY_LIBRARY_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.library = action.result;
         break;
       case REQUEST_MY_LIBRARIES:
         draft.loading = true;

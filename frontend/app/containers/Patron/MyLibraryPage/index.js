@@ -1,5 +1,5 @@
 /*
- * My Libraries Page
+ * My Library Page
  *
  * 
  *
@@ -13,27 +13,34 @@ import {useIntl} from 'react-intl';
 import {fields} from './fields';
 import messages from './messages';
 import { FormattedMessage } from 'react-intl';
-import {requestGetLibraryList, requestAccessToLibrary, requestMyLibraries} from '../actions'
+import {requestGetMyLibrary} from '../actions'
 import makeSelectPatron, {isPatronLoading} from '../selectors';
-import {MyLibrariesList} from 'components';
+import {MyLibrariesList, MyLibraryForm} from 'components';
 
 
-function MyLibrariesPage(props) {
+function MyLibraryPage(props) {
   const intl = useIntl();
-  const {isLoading, dispatch, patron} = props
-  
+  const {isLoading, dispatch, patron, match} = props
+  const {params} = match
+  const isNew = !params.id || params.id === 'new'
+  const library = patron.library
+
   useEffect(() => {
     if(!isLoading) {
-      dispatch(requestGetLibraryList())
-      dispatch(requestMyLibraries())
+      dispatch(requestGetMyLibrary(params.id))
     }
+    // console.log(isLoading)
    }, [])
 
-  // const my_libraries = patron.my_libraries
-  
+   
   return (
-    <div className="my-libraries">
-      <MyLibrariesList 
+    <>
+      <MyLibraryForm 
+        library={library}
+        loading={isLoading}
+      />
+    {/* <div className="my-libraries">
+       <MyLibrariesList 
         my_libraries={patron.my_libraries} match={props.match} 
         requestAccessToLibrary={ (formData) => dispatch(requestAccessToLibrary(formData.library_selected)) } 
         librariesList={patron.librariesList} 
@@ -41,8 +48,9 @@ function MyLibrariesPage(props) {
         messages={messages} 
         title={intl.formatMessage(messages.title)}
         searchCustomSelect={(input) => dispatch(requestGetLibraryList(input)) }
-      />
-    </div>
+      /> 
+    </div> */}
+    </>
   );
 }
 
@@ -62,4 +70,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)((MyLibrariesPage));
+export default compose(withConnect)((MyLibraryPage));

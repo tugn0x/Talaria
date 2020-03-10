@@ -15,6 +15,7 @@ import ChangePasswordForm from './Auth/ChangePasswordForm';
 
 // Patron
 import MyLibrariesList from './Patron/MyLibrariesList/Loadable';
+import MyLibraryForm from './Patron/MyLibraryForm/Loadable';
 import ReferencesForm from './Patron/ReferencesForm';
 import ReferencesList from './Patron/ReferencesList';
 
@@ -39,6 +40,7 @@ export {
   ResetPasswordForm,
   ChangePasswordForm,
   MyLibrariesList,
+  MyLibraryForm,
   ReferencesForm,
   ReferencesList,
   CustomForm,

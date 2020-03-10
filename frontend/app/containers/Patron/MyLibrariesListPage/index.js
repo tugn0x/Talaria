@@ -35,7 +35,7 @@ const MyLibrariesListPage = (props) => {
                 librariesList={patron.librariesList} 
                 fields={fields}
                 messages={messages} 
-                editPath={'/patron/my-libraries/my-library/:id?'}
+                editPath={'/patron/my-libraries/library/:id?'}
                 title={intl.formatMessage(messages.title)}
                 searchCustomSelect={(input) => dispatch(requestGetLibraryList(input)) }
             />

@@ -5,6 +5,7 @@ import {useIntl} from 'react-intl'
 import Select from 'react-select'; 
 import './style.scss'
 import {uniqBy} from 'lodash'
+import {selectFieldsGroups} from './selectFieldsGroups'
 // PROPS
 // fields
 // callback action
@@ -22,7 +23,8 @@ const CustomForm = (props) => {
         fields = {},
         searchCustomSelect = () => null,
         messages,
-        updateFormData
+        updateFormData,
+        fieldsGroups = {},
     } = props
 
 
@@ -58,6 +60,7 @@ const CustomForm = (props) => {
        setIsSubmitDisabled(false)
     }
 
+   
     /* HANDLE CHANGE Generico */
     const handleChange = (e) =>{
         const targetType = e.target.type
@@ -71,7 +74,6 @@ const CustomForm = (props) => {
         }
         setIsSubmitDisabled(false)
     }
-
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -99,76 +101,79 @@ const CustomForm = (props) => {
                 <CardBody className="p-4">
                     { title !== "" ? <h2>{title}</h2> : '' }
                     <Form onSubmit={onSubmit} noValidate>
-                        <Row>
-                            {Object.keys(fields).map(key => {
-                                const field = fields[key];
-                                return (<fieldset key={field.name} className={`${field.width ? field.width : ""} mb-3`}>
-                                            <div className="form-label">
-                                                {intl.formatMessage(messages[field.name])}
-                                            </div>
-                                            {/* <InputGroupAddon addonType="prepend">
-                                                <InputGroupText>
-                                                    {intl.formatMessage(messages[field.name])}
-                                                </InputGroupText>
-                                            </InputGroupAddon> */}
-                                            {field.type === 'checkbox' &&
-                                                (<CustomInput
-                                                    className="form-control"
-                                                    id={field.name}
-                                                    type={field.type}
-                                                    // placeholder={field.placeholder ?  intl.formatMessage({ id: field.placeholder }) : 'default placeholder' }
-                                                    name={key}
-                                                    value={formData[key] ? formData[key] : ""}
-                                                    onChange={(e) => handleChange(e)}
-                                                    required={field.required ? field.required : false}
-                                                    checked={formData[key]}
-                                                />)
-                                            ||
-                                            field.type === 'select' &&
-                                                ( <CustomInput
-                                                    className="form-control"
-                                                    id={field.name}
-                                                    type={field.type}
-                                                    placeholder={intl.formatMessage(messages[field.name])}
-                                                    name={key}
-                                                    value={formData[key] ? formData[key] : ""}
-                                                    onChange={(e) => handleChange(e)}
-                                                    required={field.required ? field.required : false}
-                                                >
-                                                { (typeof field.options === 'string') ?
-                                                  props[field.options] && props[field.options].map((opt, i) => (<option key={`${field.name}-${i}`} value={opt.id}>{opt.name}</option>)) :
-                                                    field.options.map((opt, i) => (<option key={`${field.name}-${i}`} value={opt.id}>{opt.name}</option>))
-                                                }
-
-                                                </CustomInput>)
-                                            ||
-                                            field.type === 'custom-select' &&
-                                                (<Select
-                                                    className="form-custom-select"
-                                                    type="custom-select"
-                                                    value={selectedOption}
-                                                    name={key}
-                                                    onChange={(selectedOption) => handleChangeCustomSelect(selectedOption, field.selectedOption)}
-                                                    onInputChange={(input) => handleSearchCustomSelect(input) }
-                                                    options={props[field.options]}
-                                                    required
-                                                />)
-                                            ||
-                                                (<CustomInput
-                                                    className="form-control"
-                                                    id={field.name}
-                                                    type={field.type}
-                                                    placeholder={intl.formatMessage(messages[field.name])}
-                                                    name={key}
-                                                    value={formData[key] ? formData[key] : ""}
-                                                    onChange={(e) => handleChange(e)}
-                                                    required={field.required ? field.required : false}
-                                                />)
+                            {selectFieldsGroups(fields,fieldsGroups).map((formfields) => {
+                                // const field = fields[key];
+                                return (<div key={formfields.name} className="form-group">
+                                            {formfields.name !== 'undefined' && 
+                                                <h4>{intl.formatMessage(messages[formfields.label])}</h4>
                                             }
-                                        </fieldset>
-                                    )
+                                            <Row>
+                                                {formfields.fields.map((field, i) => {
+                                                    return (
+                                                        <fieldset key={`${field.name}-${i}`} className={`${field.width ? field.width : ""} mb-3`}>
+                                                            <div className="form-label">
+                                                                {messages[field.name] && intl.formatMessage(messages[field.name])}
+                                                            </div>
+                                                            {field.type === 'checkbox' &&
+                                                                (<CustomInput
+                                                                    className="form-control"
+                                                                    id={field.name}
+                                                                    type={field.type}
+                                                                    name={field.name}
+                                                                    label={messages[field.name] && intl.formatMessage(messages[field.name])}
+                                                                    value={formData[field.name] ? formData[field.name] : ""}
+                                                                    onChange={(e) => handleChange(e)}
+                                                                    required={field.required ? field.required : false}
+                                                                    // checked={formData[field.name]}
+                                                                />)
+                                                            ||
+                                                            field.type === 'select' &&
+                                                                ( <CustomInput
+                                                                    className="form-control"
+                                                                    id={field.name}
+                                                                    type={field.type}
+                                                                    placeholder={intl.formatMessage(messages[field.name])}
+                                                                    name={field.name}
+                                                                    value={formData[field.name] ? formData[field.name] : ""}
+                                                                    onChange={(e) => handleChange(e)}
+                                                                    required={field.required ? field.required : false}
+                                                                >
+                                                                { (typeof field.options === 'string') ?
+                                                                props[field.options] && props[field.options].map((opt, i) => (<option key={`${field.name}-${i}`} value={opt.id}>{opt.name}</option>)) :
+                                                                    field.options.map((opt, i) => (<option key={`${field.name}-${i}`} value={opt.id}>{opt.name}</option>))
+                                                                }
+
+                                                                </CustomInput>)
+                                                            ||
+                                                            field.type === 'custom-select' &&
+                                                                (<Select
+                                                                    className="form-custom-select"
+                                                                    type="custom-select"
+                                                                    value={selectedOption}
+                                                                    name={field.name}
+                                                                    onChange={(selectedOption) => handleChangeCustomSelect(selectedOption, field.selectedOption)}
+                                                                    onInputChange={(input) => handleSearchCustomSelect(input) }
+                                                                    options={props[field.options]}
+                                                                    required
+                                                                />)
+                                                            ||
+                                                                (<CustomInput
+                                                                    className="form-control"
+                                                                    id={field.name}
+                                                                    type={field.type}
+                                                                    placeholder={messages[field.name] && intl.formatMessage(messages[field.name])}
+                                                                    name={field.name}
+                                                                    value={formData[field.name] ? formData[field.name] : ""}
+                                                                    onChange={(e) => handleChange(e)}
+                                                                    required={field.required ? field.required : false}
+                                                                />)
+                                                            }
+                                                        </fieldset>
+                                                    )
+                                                })}
+                                            </Row>
+                                        </div>)
                             })}
-                        </Row>
                         <Button color={submitColor} disabled={isSubmitDisabled} type="submit" block>
                             {submitText}
                         </Button>

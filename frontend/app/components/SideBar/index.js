@@ -33,7 +33,7 @@ function SideBar(props) {
               activeClassName="current"
             >
               <i className={`fa fa-${route.icon ? route.icon : ''}`}></i>
-              <FormattedMessage {...messages[route.name]}/>
+              <span><FormattedMessage {...messages[route.name]}/></span>
             </NavLink>
            )
           )}

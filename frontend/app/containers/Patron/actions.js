@@ -10,7 +10,9 @@ import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS, 
   REQUEST_POST_REFERENCES, REQUEST_SUCCESS,
   REQUEST_GET_REFERENCE, REQUEST_GET_REFERENCE_SUCCESS,
-  REQUEST_UPDATE_REFERENCES, REQUEST_ERROR, STOP_LOADING} from "./constants";
+  REQUEST_UPDATE_REFERENCES, 
+  REQUEST_GET_MY_LIBRARY, REQUEST_GET_MY_LIBRARY_SUCCESS,
+  REQUEST_ERROR, STOP_LOADING} from "./constants";
 
 export function defaultAction() {
   return {
@@ -58,6 +60,21 @@ export function requestReferencesList() {
 export function requestReferencesListSuccess(result) {
   return {
     type: REQUEST_REFERENCES_LIST_SUCCESS,
+    result
+  };
+}
+
+
+export function requestGetMyLibrary(id) {
+  return {
+    type: REQUEST_GET_MY_LIBRARY,
+    id
+  };
+}
+
+export function requestGetMyLibrarySuccess(result) {
+  return {
+    type: REQUEST_GET_MY_LIBRARY_SUCCESS,
     result
   };
 }
