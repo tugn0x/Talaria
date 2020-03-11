@@ -8,6 +8,9 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_ERROR, STOP_LOADING, REQUEST_USERS_LIST, REQUEST_USERS_LIST_SUCCESS,
   REQUEST_UPDATE_USER, REQUEST_UPDATE_USER_SUCCESS, 
   REQUEST_USER, REQUEST_USER_SUCCESS,
+  REQUEST_GET_LIBRARY, REQUEST_GET_LIBRARY_SUCCESS,
+  REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS,
+  REQUEST_UPDATE_LIBRARY, REQUEST_POST_LIBRARY,
   REQUEST_POST_USER} from "./constants";
 
 export const initialState = {
@@ -15,7 +18,9 @@ export const initialState = {
   usersList: [],
   user: [],
   error: null,
-  pagination: []
+  pagination: [],
+  librariesList: [],
+  library: []
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -55,6 +60,38 @@ const AdminReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = initialState.error;
         draft.user = action.result
+        break;
+      case REQUEST_POST_LIBRARY:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
+      case REQUEST_GET_LIBRARY:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
+      case REQUEST_GET_LIBRARY_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.library = action.result
+        break;
+      case REQUEST_UPDATE_LIBRARY:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
+      case REQUEST_GET_LIBRARIES_LIST:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
+      case REQUEST_GET_LIBRARIES_LIST_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.librariesList = action.result.data
+        /* draft.pagination = Object.keys(action.result)
+          .filter(key => !['data'].includes(key))
+          .reduce((obj, key) => {
+            obj[key] = action.result[key];
+            return obj;
+          }, {}); */
         break;
       case REQUEST_SUCCESS:
         draft.loading = false;

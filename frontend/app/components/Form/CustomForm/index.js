@@ -37,8 +37,10 @@ const CustomForm = (props) => {
             const field = fields[key]
             if(fields[key].type === 'checkbox') {
                 data = {...data, [key]: updateFormData && updateFormData[field.name] ? updateFormData[field.name]  : false }
-            }else if(fields[key].type === 'custom-select' || fields[key].type === 'select'){
+            }else if(fields[key].type === 'custom-select'){
                 data = {...data, [key]: [] }
+            }else if(fields[key].type === 'select'){
+                data = {...data, [key]: updateFormData && updateFormData[field.name]  ? updateFormData[field.name]  : fields[key].options[0].value }
             }else {
                 data = {...data, [key]: updateFormData && updateFormData[field.name]  ? updateFormData[field.name]  : '' }
             }
@@ -115,6 +117,7 @@ const CustomForm = (props) => {
                                                             <div className="form-label">
                                                                 {messages[field.name] && intl.formatMessage(messages[field.name])}
                                                             </div>
+
                                                             {field.type === 'checkbox' &&
                                                                 (<CustomInput
                                                                     className="form-control"
@@ -122,10 +125,10 @@ const CustomForm = (props) => {
                                                                     type={field.type}
                                                                     name={field.name}
                                                                     label={messages[field.name] && intl.formatMessage(messages[field.name])}
-                                                                    value={formData[field.name] ? formData[field.name] : ""}
+                                                                    // value={formData[field.name]}
                                                                     onChange={(e) => handleChange(e)}
                                                                     required={field.required ? field.required : false}
-                                                                    // checked={formData[field.name]}
+                                                                    checked={formData[field.name]}
                                                                 />)
                                                             ||
                                                             field.type === 'select' &&
@@ -135,15 +138,19 @@ const CustomForm = (props) => {
                                                                     type={field.type}
                                                                     placeholder={intl.formatMessage(messages[field.name])}
                                                                     name={field.name}
-                                                                    value={formData[field.name] ? formData[field.name] : ""}
+                                                                    value={formData[field.name]}
                                                                     onChange={(e) => handleChange(e)}
                                                                     required={field.required ? field.required : false}
                                                                 >
-                                                                { (typeof field.options === 'string') ?
-                                                                props[field.options] && props[field.options].map((opt, i) => (<option key={`${field.name}-${i}`} value={opt.id}>{opt.name}</option>)) :
-                                                                    field.options.map((opt, i) => (<option key={`${field.name}-${i}`} value={opt.id}>{opt.name}</option>))
+                                                                {   
+                                                                    (typeof field.options === 'string') ?
+                                                                    props[field.options] && props[field.options].map((opt, i) => (
+                                                                            <option key={`${field.name}-${i}`} value={opt.value}>
+                                                                                {opt.name}
+                                                                            </option>)
+                                                                        ) :
+                                                                    field.options.map((opt, i) => (<option key={`${field.name}-${i}`} value={opt.value}>{opt.name}</option>))
                                                                 }
-
                                                                 </CustomInput>)
                                                             ||
                                                             field.type === 'custom-select' &&
@@ -164,7 +171,7 @@ const CustomForm = (props) => {
                                                                     type={field.type}
                                                                     placeholder={messages[field.name] && intl.formatMessage(messages[field.name])}
                                                                     name={field.name}
-                                                                    value={formData[field.name] ? formData[field.name] : ""}
+                                                                    value={formData[field.name]}
                                                                     onChange={(e) => handleChange(e)}
                                                                     required={field.required ? field.required : false}
                                                                 />)

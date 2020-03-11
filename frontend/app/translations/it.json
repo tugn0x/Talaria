@@ -33,7 +33,7 @@
   "app.containers.MyLibrariesPage.title": "Aggiungi una biblioteca",
   "app.containers.MyLibrariesPage.librariesList": "Seleziona una biblioteca",
   "app.containers.MyLibrariesList.header": "Le mie biblioteche",
-  "app.containers.MyLibrariesList.createNewLibrary": "Nuova biblioteca",
+  "app.containers.MyLibrariesList.createNewLibrary": "Richiedi nuova biblioteca",
   "app.containers.MyLibrariesList.editLibrary": "Modifica biblioteca",
 
   "app.components.MyLibraryForm.institution_id": "ID della biblioteca",
@@ -126,8 +126,8 @@
   "app.routes.ReferenceNew": "Nuovo riferimento",
   "app.routes.Searches": "Ricerche",
   "app.routes.Requests": "Richieste",
-  "app.routes.Libraries": "Biblioteche",
-  "app.routes.LibraryNew": "Nuova biblioteca",
+  "app.routes.MyLibraries": "Le mie biblioteche",
+  "app.routes.MyLibraryNew": "Richiedi nuova biblioteca",
   "app.routes.UsersList": "Utenti",
   "app.routes.UserNew": "Nuovo utente"
 }

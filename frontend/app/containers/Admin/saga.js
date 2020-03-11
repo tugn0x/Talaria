@@ -1,15 +1,23 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_POST_USER, REQUEST_USER } from './constants';
+import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, 
+          REQUEST_POST_USER, REQUEST_USER, REQUEST_GET_LIBRARY,
+          REQUEST_GET_LIBRARIES_LIST, 
+          REQUEST_UPDATE_LIBRARY,
+          REQUEST_POST_LIBRARY} from './constants';
 import {
   requestError,
   stopLoading,
   requestSuccess,
   requestUsersListSuccess,
-  requestUserSuccess
+  requestUserSuccess,
+  requestGetLibrarySuccess,
+  requestGetLibrariesListSuccess
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
-import {getUsersList, updateUser, createUser, getUser} from 'utils/api'
+import {getUsersList, updateUser, createUser, 
+        getUser, getLibrary, getLibrariesList, updateLibrary,
+        createLibrary} from 'utils/api'
 import moment from 'moment';
 
 export function* requestUserSaga(action) {
@@ -70,6 +78,63 @@ export function* requestPostUserSaga(action) {
 }
 
 
+export function* requestPostLibrarySaga(action) {
+  const options = {
+    method: 'post',
+    body: {...action.request }
+  };
+  try {
+    const request = yield call(createLibrary, options);
+    yield call(requestGetLibrariesListSaga);
+    yield put(push("/admin/libraries"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestGetLibrarySaga(action) {
+  const options = {
+    method: 'get',
+    id: action.id
+  };
+  try {
+   const request = yield call(getLibrary, options);
+   yield put(requestGetLibrarySuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestUpdateLibrarySaga(action) {
+  const options = {
+    method: 'put',
+    body: action.request
+  };
+  try {
+    const request = yield call(updateLibrary, options);
+    yield call(requestGetLibrariesListSaga);
+    yield put(push("/admin/libraries"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestGetLibrariesListSaga(action = {}) {
+  const options = {
+    method: 'get',
+    page: action.page ? action.page : '1'
+  };
+  try {
+    const request = yield call(getLibrariesList, options);
+    yield put(requestGetLibrariesListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+
 /**
  * Root saga manages watcher lifecycle
  */
@@ -78,4 +143,8 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_UPDATE_USER, requestUpdateUserSaga);
   yield takeLatest(REQUEST_POST_USER, requestPostUserSaga);
   yield takeLatest(REQUEST_USER, requestUserSaga);
+  yield takeLatest(REQUEST_GET_LIBRARY, requestGetLibrarySaga);
+  yield takeLatest(REQUEST_GET_LIBRARIES_LIST, requestGetLibrariesListSaga);
+  yield takeLatest(REQUEST_UPDATE_LIBRARY, requestUpdateLibrarySaga);
+  yield takeLatest(REQUEST_POST_LIBRARY, requestPostLibrarySaga);
 }

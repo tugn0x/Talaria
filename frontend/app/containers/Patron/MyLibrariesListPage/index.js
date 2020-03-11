@@ -30,7 +30,8 @@ const MyLibrariesListPage = (props) => {
     return (
         <div className="my-libraries">
             <MyLibrariesList 
-                my_libraries={patron.my_libraries} match={props.match} 
+                my_libraries={patron.my_libraries} 
+                match={props.match} 
                 requestAccessToLibrary={ (formData) => dispatch(requestAccessToLibrary(formData.library_selected)) } 
                 librariesList={patron.librariesList} 
                 fields={fields}

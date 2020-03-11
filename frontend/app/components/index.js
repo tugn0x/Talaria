@@ -15,11 +15,16 @@ import ChangePasswordForm from './Auth/ChangePasswordForm';
 
 // Patron
 import MyLibrariesList from './Patron/MyLibrariesList/Loadable';
-import MyLibraryForm from './Patron/MyLibraryForm/Loadable';
+import MyLibraryForm from './Patron/MyLibraryForm';
 import ReferencesForm from './Patron/ReferencesForm';
 import ReferencesList from './Patron/ReferencesList';
 
 import Toaster from "./Toaster/Loadable"
+
+// Admin
+import LibrariesList from './Admin/LibrariesList'
+import LibraryForm from './Admin/LibraryForm'
+
 /*
 FORM STUFFS
  */
@@ -43,6 +48,8 @@ export {
   MyLibraryForm,
   ReferencesForm,
   ReferencesList,
+  LibraryForm,
+  LibrariesList,
   CustomForm,
   ErrorBox,
   Loader,

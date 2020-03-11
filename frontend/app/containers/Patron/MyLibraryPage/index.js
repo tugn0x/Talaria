@@ -25,34 +25,33 @@ function MyLibraryPage(props) {
   const isNew = !params.id || params.id === 'new'
   const library = patron.library
   const librariesList = patron.librariesList
+  
   useEffect(() => {
     if(!isLoading && !isNew) {
       dispatch(requestGetMyLibrary(params.id))
     }else if(!isLoading && isNew){
       dispatch(requestGetLibraryList())
     }
-    // console.log(isLoading)
+    // console.log(isNew)
    }, [])
 
    
   return (
     <>
       {!isNew && 
-          <MyLibraryForm 
-            library={library}
-            loading={isLoading}
-          />
-      }
-      {isNew && 
-        <CustomForm 
-      //  requestAccessToLibrary={ (formData) => dispatch(requestAccessToLibrary(formData.library_selected))
-            submitCallBack={ (formData) =>  dispatch(requestAccessToLibrary(formData.library_selected))} 
-            librariesList={librariesList} 
-            fields={fields}
-            messages={messages} 
-           // title={props.title}
-            searchCustomSelect={(input) => dispatch(requestGetLibraryList(input)) }
+        <MyLibraryForm 
+          library={library}
+          loading={isLoading}
         />
+      }
+      {isNew &&
+        <MyLibraryForm 
+          librariesList={librariesList}
+          requestAccessToLibrary={(formData) =>  dispatch(requestAccessToLibrary(formData.library_selected))}
+          fields={fields}
+          messages={messages} 
+          searchCustomSelect={(input) => dispatch(requestGetLibraryList(input))}
+        /> 
       } 
     </>
   );

@@ -202,6 +202,29 @@ export const updateUser = (options) => {
   return request(`${BASE_URL}/api/v1/users/users/${user_id}`, options)
 };
 
+export const createLibrary = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries`, options)
+};
+
+export const getLibrary = (options) => {
+  const library_id = options.id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}`, options)
+};
+
+export const updateLibrary = (options) => {
+  const library_id = options.body.id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}`, options)
+};
+
+export const getLibrariesList = (options) => {
+  const page = options.page;
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/?page=${page}`, options)
+};
+
 // export const getIllness = (options) => {
 //   options = getOption(options);
 //   return request(`${BASE_URL}/api/reports/illnesses/`, options)

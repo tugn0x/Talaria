@@ -24,13 +24,13 @@ export default defineMessages({
         id: `${scope}.Requests`,
         defaultMessage: 'My Requests',
     },
-    Libraries: {
-        id: `${scope}.Libraries`,
-        defaultMessage: 'My Libraries',
+    MyLibraries: {
+        id: `${scope}.MyLibraries`,
+        defaultMessage: 'My libraries',
     },
-    LibraryNew: {
-        id: `${scope}.LibraryNew`,
-        defaultMessage: 'Create new library',
+    MyLibraryNew: {
+        id: `${scope}.MyLibraryNew`,
+        defaultMessage: 'Request new library',
     },
     UsersList: {
         id: `${scope}.UsersList`,
@@ -43,5 +43,9 @@ export default defineMessages({
     UserUpdate: {
         id: `${scope}.UserUpdate`,
         defaultMessage: 'Update user',
+    },
+    LibraryCreateNew: {
+        id: `${scope}.LibraryCreateNew`,
+        defaultMessage: 'Register new library',
     },
 });

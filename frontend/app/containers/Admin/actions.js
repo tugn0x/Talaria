@@ -8,6 +8,10 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_ERROR, STOP_LOADING, REQUEST_USERS_LIST, REQUEST_USERS_LIST_SUCCESS, 
    REQUEST_UPDATE_USER, REQUEST_UPDATE_USER_SUCCESS,
    REQUEST_USER, REQUEST_USER_SUCCESS, 
+   REQUEST_GET_LIBRARY, REQUEST_GET_LIBRARY_SUCCESS,
+   REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS,
+   REQUEST_UPDATE_LIBRARY, /* REQUEST_UPDATE_LIBRARY_SUCCESS, */ 
+   REQUEST_POST_LIBRARY, REQUEST_POST_LIBRARY_SUCCESS, 
    REQUEST_POST_USER, REQUEST_POST_USER_SUCCESS} from "./constants";
 
 export function defaultAction() {
@@ -67,6 +71,57 @@ export function requestUpdateUserSuccess(result) {
     result
   };
 }
+
+export function requestGetLibrariesList(page) {
+  return {
+    type: REQUEST_GET_LIBRARIES_LIST,
+    page
+  };
+}
+
+export function requestGetLibrariesListSuccess(result) {
+  return {
+    type: REQUEST_GET_LIBRARIES_LIST_SUCCESS,
+    result
+  };
+}
+
+export function requestPostLibrary(request, message) {
+  return {
+    type: REQUEST_POST_LIBRARY,
+    request,
+    message
+  };
+}
+
+export function requestGetLibrary(id) {
+  return {
+    type: REQUEST_GET_LIBRARY,
+    id
+  };
+}
+
+export function requestGetLibrarySuccess(result) {
+  return {
+    type: REQUEST_GET_LIBRARY_SUCCESS,
+    result
+  };
+}
+
+export function requestUpdateLibrary(request, message) {
+  return {
+    type: REQUEST_UPDATE_LIBRARY,
+    request,
+    message
+  };
+}
+
+/* export function requestUpdateLibrarySuccess(result) {
+  return {
+    type: REQUEST_UPDATE_LIBRARY_SUCCESS,
+    result
+  };
+} */
 
 export function requestSuccess() {
   return {

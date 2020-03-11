@@ -5,19 +5,19 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.MyLibrariesList';
+export const scope = 'app.components.LibrariesList';
 
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'My Libraries',
+    defaultMessage: 'Libraries list',
   },
   createNewLibrary: {
     id: `${scope}.createNewLibrary`,
-    defaultMessage: 'Request new library',
+    defaultMessage: 'Register new library',
   },
   editLibrary: {
     id: `${scope}.editLibrary`,
-    defaultMessage: 'Update library',
+    defaultMessage: 'Edit library',
   },
 });

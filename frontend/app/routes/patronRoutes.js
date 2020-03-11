@@ -18,11 +18,11 @@ const patronRoutes = [
   { path: '/searches', name: `Searches`, component: ChangePassword, header: true, },
   { path: '/requests', name: `Requests`, component: ChangePassword, header: true, permissions: ['can-request'] },
   
-  { path: '/my-libraries', name: `Libraries`, component: SubRouteSwitch, header: true,
+  { path: '/my-libraries', name: `MyLibraries`, component: SubRouteSwitch, header: true,
     children: [
-      { path: '/library/new', icon: "plus", name: `LibraryNew`, url: `/my-libraries/library/new`, component: MyLibraryPage, sidebar: true},
+      { path: '/library/new', icon: "plus", name: `MyLibraryNew`, url: `/my-libraries/library/new`, component: MyLibraryPage, sidebar: true},
       { path: '/library/:id?', name: `Libraries`, component: MyLibraryPage, },
-      { path: '/:page?', exact: true, name: `Libraries`, url: `/my-libraries`, component: MyLibrariesListPage, },
+      { path: '/:page?', exact: true, name: `MyLibraries`, url: `/my-libraries`, component: MyLibrariesListPage, },
     ]
   },
   // { path: '/request-access', name: 'Request access', component: ChangePassword, menu: true },

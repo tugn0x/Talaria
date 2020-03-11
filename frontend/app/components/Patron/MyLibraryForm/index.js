@@ -9,24 +9,46 @@ import {useIntl} from 'react-intl';
 
 
 const MyLibraryForm = (props) => {
-    const { library, loading} = props
+    const { library, loading, librariesList} = props
     const intl = useIntl();
     
     return (
+        <>
         <Loader show={loading} >
             <Row className="justify-content-center">
                 <Col md="10">
-                    <CustomForm 
-                        submitCallBack={(formData) => null} 
-                        updateFormData={library}
-                        fields={fields} 
-                        fieldsGroups={fieldsGroups}
-                        messages={{...messages, ...globalMessages}}
-                        // submitText={intl.formatMessage(messages.updateSubmitText)}
-                    /> 
+                    {library &&
+                        <ul>
+                        {Object.keys(library).map((key) =>
+                            (
+                                library[key] &&
+                                <li><span>{key}</span> <span>{library[key]}</span></li>
+                            )
+                        )}
+                        {/* <CustomForm 
+                            submitCallBack={(formData) => null} 
+                            updateFormData={library}
+                            fields={fields} 
+                            fieldsGroups={fieldsGroups}
+                            messages={{...messages, ...globalMessages}}
+                            // submitText={intl.formatMessage(messages.updateSubmitText)}
+                        /> */}
+                        </ul>
+                    }
+                    {librariesList &&
+                        <CustomForm 
+                            submitCallBack={ (formData) =>  props.requestAccessToLibrary(formData) } 
+                            librariesList={librariesList} 
+                            fields={props.fields}
+                            messages={props.messages} 
+                            searchCustomSelect={(input) => props.searchCustomSelect(input) }
+                        />
+                    }
+                     
                 </Col> 
             </Row>
-        </Loader>
+        </Loader> 
+        </>
     )
 }
 
