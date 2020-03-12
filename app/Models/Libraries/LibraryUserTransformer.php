@@ -1,6 +1,8 @@
 <?php namespace App\Models\Libraries;
 
+use App\Models\BaseLightTransformer;
 use App\Models\Libraries\LibraryTransformer;
+use App\Models\Users\UserLightTransformer;
 use Carbon\Carbon;
 use App\Models\BaseTransformer;
 use Illuminate\Database\Eloquent\Model;
@@ -12,16 +14,23 @@ class LibraryUserTransformer extends BaseTransformer
 {
 
     protected $availableIncludes = [
-        'library'
+        'library',
+        'user',
     ];
 
     protected $defaultIncludes = [
-        'library'
+        'library',
+        'user',
     ];
 
     public function includeLibrary(Model $model)
     {
-        return $this->item($model->library, new LibraryTransformer);
+        return $this->item($model->library, new BaseLightTransformer());
+    }
+
+    public function includeUser(Model $model)
+    {
+        return $this->item($model->user, new UserLightTransformer());
     }
 
 

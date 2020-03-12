@@ -31,9 +31,10 @@ class LibraryUserController extends ApiController
     {
         $this->authorize($this->model);
         $count = $request->input('pageSize', config('api.page_size'));
-        $my_applications = $this->model->owned()->with('library')->orderBy('updated_at','desc')->paginate($count);
+//        $my_applications = $this->model->owned()->with('library')->orderBy('updated_at','desc')->paginate($count);
+        $my_applications = $this->model->owned()->orderBy('updated_at','desc')->paginate($count);
 
-        return $this->response->paginator($my_applications, new $this->transformer());
+        return $this->response->paginator($my_applications, new $this->transformer())->morph();
     }
 
     public function store(Request $request)
@@ -48,7 +49,7 @@ class LibraryUserController extends ApiController
             ]);
             return $model;
         });
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
     public function update(Request $request, $id)
@@ -61,7 +62,7 @@ class LibraryUserController extends ApiController
         if($this->broadcast && config('apinilde.broadcast'))
             broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
 
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
     }
 
 }

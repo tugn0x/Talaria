@@ -45,7 +45,7 @@ trait UserControllerTrait
             return $model;
         });
 
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
 
@@ -83,7 +83,7 @@ trait UserControllerTrait
             return $model;
         });
 
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
     /**
@@ -119,7 +119,7 @@ trait UserControllerTrait
             return $model;
         });
 
-        return $this->response->paginator($collection, new $this->transformer());
+        return $this->response->paginator($collection, new $this->transformer())->morph();
     }
 
 }

@@ -18,7 +18,6 @@ class LibraryTransformer extends BaseTransformer
 
     public function transform(Model $model)
     {
-//        dd('trasformo');
         $to_merge = [
             'test' => 'hello',
         ];

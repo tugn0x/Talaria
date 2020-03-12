@@ -27,7 +27,7 @@ class ConsortiumController extends ApiController
     {
         $items = $this->model->get();
         return response()->json($items);
-        return $this->response->collection($items, $this->transformer);
+        return $this->response->collection($items, $this->transformer)->morph();
     }
 
     /**

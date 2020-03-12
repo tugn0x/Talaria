@@ -30,7 +30,7 @@ class LibraryController extends ApiController
 //        $model->departments()->select('name', 'id')->get();
         $model->departments;
 
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
     public function departments(Request $request, $id)
@@ -72,6 +72,6 @@ class LibraryController extends ApiController
         if($this->broadcast && config('apinilde.broadcast'))
             broadcast(new ApiStoreBroadcast($model, $model->getTable(), $request->input('include')));
 
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 }

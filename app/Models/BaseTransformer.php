@@ -121,4 +121,8 @@ class BaseTransformer extends TransformerAbstract
 
         return $fields;
     }
+
+    public function transform(Model $model) {
+        return $this->toArray($model);
+    }
 }

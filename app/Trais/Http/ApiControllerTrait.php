@@ -62,7 +62,7 @@ trait ApiControllerTrait
     {
         $collection = $this->nilde->index($this->model->select('*'), $request);
 
-        return $this->response->paginator($collection, new $this->transformer());
+        return $this->response->paginator($collection, new $this->transformer())->morph();
     }
 
     /**
@@ -83,7 +83,7 @@ trait ApiControllerTrait
     {
         $model = $this->nilde->show($this->model, $request, $id);
 
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
     public function store(Request $request)
@@ -96,7 +96,7 @@ trait ApiControllerTrait
         if($this->broadcast && config('apinilde.broadcast'))
             broadcast(new ApiStoreBroadcast($model, $model->getTable(), $request->input('include')));
 
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
     }
 
     public function create(Request $request)
@@ -115,14 +115,14 @@ trait ApiControllerTrait
         if($this->broadcast && config('apinilde.broadcast'))
             broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
 
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
     public function bulkSave(Request $request)
     {
         $collection = $this->nilde->bulkSave($this->model, $request);
 
-        return $this->response->collection($collection, new $this->transformer());
+        return $this->response->collection($collection, new $this->transformer())->morph();
     }
 
     public function delete(Request $request, $id)
@@ -132,28 +132,28 @@ trait ApiControllerTrait
         if($this->broadcast && config('apinilde.broadcast'))
             broadcast(new ApiDeleteBroadcast($model->id, $model->getTable()));
 
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
     public function bulkDelete(Request $request, $ids)
     {
         $collection = $this->nilde->bulkDelete($this->model, $request, $ids);
 
-        return $this->response->collection($collection, new $this->transformer());
+        return $this->response->collection($collection, new $this->transformer())->morph();
     }
 
     public function destroy(Request $request, $id)
     {
         $model = $this->nilde->destroy($this->model, $request, $id);
 
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
     public function bulkDestroy(Request $request, $ids)
     {
         $collection = $this->nilde->bulkDestroy($this->model, $request, $ids);
 
-        return $this->response->collection($collection, new $this->transformer());
+        return $this->response->collection($collection, new $this->transformer())->morph();
     }
 
     public function restore(Request $request, $id)
@@ -163,14 +163,14 @@ trait ApiControllerTrait
         if($this->broadcast && config('apinilde.broadcast'))
             broadcast(new ApiRestoreBroadcast($model->id, $model->getTable()));
 
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
     public function bulkRestore(Request $request, $ids)
     {
         $collection = $this->nilde->bulkRestore($this->model, $request, $ids);
 
-        return $this->response->collection($collection, new $this->transformer());
+        return $this->response->collection($collection, new $this->transformer())->morph();
     }
 
     public function attach(Request $request, $id, $relation_name, $ids=null)
@@ -180,7 +180,7 @@ trait ApiControllerTrait
 
         $model = $this->nilde->attach($this->model, $request, $id, $relation_name, $ids);
 
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
     public function detach(Request $request, $id, $relation_name, $ids=null)
@@ -190,7 +190,7 @@ trait ApiControllerTrait
 
         $model = $this->nilde->detach($this->model, $request, $id, $relation_name, $ids);
 
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
     public function sync(Request $request, $id, $relation_name, $ids=null)
@@ -200,6 +200,6 @@ trait ApiControllerTrait
 
         $model = $this->nilde->sync($this->model, $request, $id, $relation_name, $ids);
 
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 }

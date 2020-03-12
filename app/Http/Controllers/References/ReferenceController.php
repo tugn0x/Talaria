@@ -27,7 +27,7 @@ class ReferenceController extends ApiController
     {
         $items = $this->model->get();
         return response()->json($items);
-        return $this->response->collection($items, $this->transformer);
+        return $this->response->collection($items, $this->transformer)->morph();
     }
 
     public function my(Request $request)
@@ -36,7 +36,7 @@ class ReferenceController extends ApiController
         $count = $request->input('pageSize', config('api.page_size'));
         $my_applications = $this->model->owned()->orderBy('updated_at','desc')->paginate($count);
 
-        return $this->response->paginator($my_applications, new $this->transformer());
+        return $this->response->paginator($my_applications, new $this->transformer())->morph();
     }
 
     public function store(Request $request)
@@ -48,7 +48,7 @@ class ReferenceController extends ApiController
 //            ]);
             return $model;
         });
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
 //    /**

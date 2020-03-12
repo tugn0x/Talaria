@@ -5,10 +5,10 @@
  */
 import produce from 'immer';
 import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
-  REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS, 
-  REQUEST_ACCESS_TO_LIBRARIES, 
-  REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS, 
-  REQUEST_POST_REFERENCES, REQUEST_SUCCESS, 
+  REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS,
+  REQUEST_ACCESS_TO_LIBRARIES,
+  REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS,
+  REQUEST_POST_REFERENCES, REQUEST_SUCCESS,
   REQUEST_UPDATE_REFERENCES, REQUEST_GET_REFERENCE, REQUEST_GET_REFERENCE_SUCCESS,
   REQUEST_GET_MY_LIBRARY, REQUEST_GET_MY_LIBRARY_SUCCESS,
   STOP_LOADING, REQUEST_ERROR } from './constants';
@@ -69,7 +69,7 @@ const PatronReducer = (state = initialState, action) =>
       case REQUEST_MY_LIBRARIES_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.my_libraries =  action.result.data.map(lib => {return { id: lib.library.id, name: lib.library.name, status: lib.status, created_at: lib.library.created_at  } } );
+        draft.my_libraries =  action.result.data.map(lib => {return { id: lib.library.data.id, name: lib.library.data.name, status: lib.status, created_at: lib.library.data.created_at  } } );
         break;
       case REQUEST_GET_LIBRARIES_LIST_SUCCESS:
         draft.loading = false;
