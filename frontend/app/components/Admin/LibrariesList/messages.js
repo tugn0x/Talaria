@@ -16,6 +16,10 @@ export default defineMessages({
     id: `${scope}.createNewLibrary`,
     defaultMessage: 'Register new library',
   },
+  LibraryCreateNew: {
+    id: `${scope}.LibraryCreateNew`,
+    defaultMessage: 'Register new library',
+  },
   editLibrary: {
     id: `${scope}.editLibrary`,
     defaultMessage: 'Edit library',
