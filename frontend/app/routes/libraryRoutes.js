@@ -1,12 +1,8 @@
-import MyLibraryPage from 'containers/Patron/MyLibraryPage/Loadable';
-import MyLibrariesListPage from 'containers/Patron/MyLibrariesListPage/Loadable';
-import ChangePassword from 'containers/User/ChangePassword/Loadable';
-import ReferencesPage from 'containers/Patron/ReferencesPage/Loadable';
-import ReferencesListPage from 'containers/Patron/ReferencesListPage/Loadable';
+import UserPage from 'containers/Library/UserPage/Loadable';
+import UsersListPage from 'containers/Library/UsersListPage/Loadable';
 import SubRouteSwitch from 'components/SubRouteSwitch';
 
-// https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
-const patronRoutes = [
+const libraryRoutes = [
   /*
   TODO: la path è /users, ma si tratta a tutti gli effetti dei library-users, cioè del collegamento tra utente Patron e Biblioteca
   la lista è GET /api/v1/libraries/{LIBRARY_ID!!}/library-users
@@ -16,23 +12,11 @@ const patronRoutes = [
    */
   { path: '/patrons', name: `LibraryUsers`, component: SubRouteSwitch, header: true, roles: ['registered'],
     children: [
-      { path: '/patron/new', icon: "plus", name: `LibraryUserNew`, url: `/patron/user/new`, component: ReferencesPage, sidebar: true},
-      { path: '/patron/:id?', name: `LibraryUserUpdate`, component: ReferencesPage, },
-      { path: '', exact: true, name: `LibraryUserPage`, component: ReferencesListPage, },
+     /*  { path: '/patron/new', icon: "plus", name: `LibraryUserNew`, url: `/patron/user/new`, component: ReferencesPage, sidebar: true}, */
+      { path: '/patron/:id?', name: `LibraryUser`, component: UserPage, },
+      { path: '', exact: true, name: `LibraryUsers`, component: UsersListPage, },
     ]
   },
-
-  // { path: '/searches', name: `Searches`, component: ChangePassword, header: true, },
-  // { path: '/requests', name: `Requests`, component: ChangePassword, header: true, permissions: ['can-request'] },
-  //
-  // { path: '/my-libraries', name: `MyLibraries`, component: SubRouteSwitch, header: true,
-  //   children: [
-  //     { path: '/library/new', icon: "plus", name: `MyLibraryNew`, url: `/my-libraries/library/new`, component: MyLibraryPage, sidebar: true},
-  //     { path: '/library/:id?', name: `Libraries`, component: MyLibraryPage, },
-  //     { path: '/:page?', exact: true, name: `MyLibraries`, url: `/my-libraries`, component: MyLibrariesListPage, },
-  //   ]
-  // },
-  // { path: '/request-access', name: 'Request access', component: ChangePassword, menu: true },
 ];
 
-export default patronRoutes;
+export default libraryRoutes;

@@ -225,6 +225,20 @@ export const getLibrariesList = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/?page=${page}`, options)
 };
 
+export const getLibraryUsersList = (options) => {
+  const page = options.page;
+  const library_id = options.library_id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users`, options)
+};
+
+export const getLibraryUser = (options) => {
+  const user_id = options.user_id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${user_id}`, options)
+};
+
+
 // export const getIllness = (options) => {
 //   options = getOption(options);
 //   return request(`${BASE_URL}/api/reports/illnesses/`, options)

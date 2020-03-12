@@ -11,7 +11,7 @@ import  { persitanceReducer } from './persistence';
 import authProviderReducer from 'containers/Auth/AuthProvider/reducer';
 import patronReducer from 'containers/Patron/reducer';
 import adminReducer from 'containers/Admin/reducer';
-
+import libraryReducer from 'containers/Library/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -24,6 +24,7 @@ export default function createReducer(injectedReducers = {}) {
     auth: authProviderReducer,
     patron: patronReducer,
     admin: adminReducer,
+    library: libraryReducer,
     ...injectedReducers,
   });
 

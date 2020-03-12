@@ -48,7 +48,7 @@ function App(props) {
         <Route path="/user" component={() => <UserPage {...authProps}/> }  />
         <Route path="/patron" component={() => <PatronPage {...authProps}/> }  />
         <Route path="/admin" component={() => <AdminPage {...authProps}/> }  />
-        <Route path="/library/:library_id" component={() => <LibraryPage {...authProps}/> }  />
+        <Route path="/library/:library_id" component={({match}) => <LibraryPage {...authProps} match={match}/> }  />
 
         <Route path="/consortium" component={() => <HomePage {...authProps}/> }  />
         <Route path="/institution" component={() => <HomePage {...authProps}/> }  />

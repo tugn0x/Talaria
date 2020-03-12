@@ -20,10 +20,11 @@ export function defaultAction() {
   };
 }
 
-export function requestUsersList(page) {
+export function requestUsersList(page, library_id) {
   return {
     type: REQUEST_USERS_LIST,
-    page
+    page,
+    library_id
   };
 }
 
@@ -35,10 +36,10 @@ export function requestUsersListSuccess(result) {
 }
 
 
-export function requestUser(id) {
+export function requestUser(user_id) {
   return {
     type: REQUEST_USER,
-    id
+    user_id
   };
 }
 

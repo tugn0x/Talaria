@@ -24,7 +24,7 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const LibraryReducer = (state = initialState, action) =>
+const libraryReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case DEFAULT_ACTION:
@@ -42,7 +42,7 @@ const LibraryReducer = (state = initialState, action) =>
           .reduce((obj, key) => {
             obj[key] = action.result[key];
             return obj;
-          }, {});
+          }, {}); 
         break;
       case REQUEST_UPDATE_USER:
         draft.loading = true;
@@ -107,4 +107,4 @@ const LibraryReducer = (state = initialState, action) =>
     }
   });
 
-export default LibraryReducer;
+export default libraryReducer;

@@ -15,7 +15,7 @@ import {
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
-import {getUsersList, updateUser, createUser,
+import {getLibraryUsersList, updateUser, createUser,
         getUser, getLibrary, getLibrariesList, updateLibrary,
         createLibrary} from 'utils/api'
 import moment from 'moment';
@@ -37,10 +37,11 @@ export function* requestUserSaga(action) {
 export function* requestUsersListSaga(action = {}) {
   const options = {
     method: 'get',
-    page: action.page ? action.page : '1'
+    page: action.page ? action.page : '1',
+    library_id: action.library_id
   };
   try {
-    const request = yield call(getUsersList, options);
+    const request = yield call(getLibraryUsersList, options);
     yield put(requestUsersListSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));

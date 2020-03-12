@@ -21,6 +21,11 @@ import ReferencesList from './Patron/ReferencesList';
 
 import Toaster from "./Toaster/Loadable"
 
+
+// Library
+import UsersList from './Library/UsersList';
+
+
 // Admin
 import LibrariesList from './Admin/LibrariesList'
 import LibraryForm from './Admin/LibraryForm'
@@ -50,6 +55,7 @@ export {
   ReferencesList,
   LibraryForm,
   LibrariesList,
+  UsersList,
   CustomForm,
   ErrorBox,
   Loader,

@@ -52,4 +52,12 @@ export default defineMessages({
         id: `${scope}.LibraryCreateNew`,
         defaultMessage: 'Register new library',
     },
+    LibraryUsers: {
+        id: `${scope}.LibraryUsers`,
+        defaultMessage: 'Library users',
+    },
+    LibraryUser: {
+        id: `${scope}.LibraryUser`,
+        defaultMessage: 'Library user',
+    },
 });
