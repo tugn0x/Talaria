@@ -6,7 +6,7 @@ import ReferencesListPage from 'containers/Patron/ReferencesListPage/Loadable';
 import SubRouteSwitch from 'components/SubRouteSwitch';
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
-const patronRoutes = [
+const libraryRoutes = [
   { path: '/references', name: `Reference`, component: SubRouteSwitch, header: true, roles: ['registered'],
     children: [
       { path: '/reference/new', icon: "plus", name: `ReferenceNew`, url: `/references/reference/new`, component: ReferencesPage, sidebar: true},
@@ -14,10 +14,10 @@ const patronRoutes = [
       { path: '/:page?', exact: true, name: `ReferenceList`, url: `/references/reference`, component: ReferencesListPage, },
     ]
   },
-  
+
   { path: '/searches', name: `Searches`, component: ChangePassword, header: true, },
   { path: '/requests', name: `Requests`, component: ChangePassword, header: true, permissions: ['can-request'] },
-  
+
   { path: '/my-libraries', name: `MyLibraries`, component: SubRouteSwitch, header: true,
     children: [
       { path: '/library/new', icon: "plus", name: `MyLibraryNew`, url: `/my-libraries/library/new`, component: MyLibraryPage, sidebar: true},
@@ -28,4 +28,4 @@ const patronRoutes = [
   // { path: '/request-access', name: 'Request access', component: ChangePassword, menu: true },
 ];
 
-export default patronRoutes;
+export default libraryRoutes;

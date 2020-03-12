@@ -36,6 +36,7 @@ Route::group([
     Route::get('', 'LibraryController@index')->name('index');
     Route::get('option-items', 'LibraryController@optionList')->name('option-items');
     Route::get('{id}', 'LibraryController@show')->name('show');
+    Route::get('{id}/departments', 'LibraryController@departments')->name('departments');
     Route::put('{id}', 'LibraryController@update')->name('update');
     Route::post('', 'LibraryController@create')->name('create');
 

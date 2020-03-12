@@ -70,7 +70,7 @@ class Library extends BaseModel
      * Accessor & relation to automatically append on model instance
      */
     protected $appends = [
-
+//        'departments'
     ];
 
     /*

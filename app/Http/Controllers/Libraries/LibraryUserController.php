@@ -41,7 +41,10 @@ class LibraryUserController extends ApiController
         $model = $this->nilde->store($this->model, $request, null, function ($model, $request) {
             $model = $model->firstOrNew([
                 'user_id' => $model->user_id,
-                'library_id' => $request->library,
+                'library_id' => $request->library_id,
+
+                'department_id' => $request->department_id,
+                'title_id' => $request->title_id,
             ]);
             return $model;
         });

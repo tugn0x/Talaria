@@ -1,7 +1,5 @@
 /**
- *
- * Asynchronously loads the component for LibrarySettings
- *
+ * Asynchronously loads the component for LibraryPage
  */
 
 import loadable from 'utils/loadable';

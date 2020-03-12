@@ -20,6 +20,7 @@ import { HeaderBar, Footer } from 'components'
 /* import GlobalStyle from 'global-styles'; */
 import {SignupPage, ForgotPassword} from "containers";
 import {makeSelectLocation} from './selectors'
+import LibraryPage from "../Library/LibraryPage";
 
 function App(props) {
   // console.log("APP", props)
@@ -45,10 +46,10 @@ function App(props) {
         {!props.isLogged && <Route component={() => <LoginPage {...authProps} tokensExistsExpired={props.tokensExistsExpired} />} />}
 
         <Route path="/user" component={() => <UserPage {...authProps}/> }  />
-
         <Route path="/patron" component={() => <PatronPage {...authProps}/> }  />
         <Route path="/admin" component={() => <AdminPage {...authProps}/> }  />
-        <Route path="/library" component={() => <HomePage {...authProps}/> }  />
+        <Route path="/library/:library_id" component={() => <LibraryPage {...authProps}/> }  />
+
         <Route path="/consortium" component={() => <HomePage {...authProps}/> }  />
         <Route path="/institution" component={() => <HomePage {...authProps}/> }  />
         <Route path="/alpe" component={() => <HomePage {...authProps}/> }  />

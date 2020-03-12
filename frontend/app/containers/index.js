@@ -23,7 +23,8 @@ import AdminPage from "./Admin/AdminPage/Loadable"
 /*
 LIBRARY STUFFS
  */
-import LibrarySettings from "./Library/LibrarySettings/Loadable"
+import LibraryPage from "./Admin/LibraryPage/Loadable"
+// import LibrarySettings from "./Library/LibrarySettings/Loadable"
 
 
 export {
@@ -42,6 +43,6 @@ export {
   UserPage,
   AdminPage,
   PatronPage,
-  LibrarySettings,
+  LibraryPage,
 }
 

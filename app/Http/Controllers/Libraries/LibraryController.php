@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Libraries;
 
+use App\Models\Libraries\DepartmentTransformer;
 use App\Models\Libraries\Library;
 use App\Models\Libraries\LibraryTransformer;
 use Illuminate\Http\Request;
@@ -21,6 +22,26 @@ class LibraryController extends ApiController
         $this->transformer = $transformer;
 
         $this->broadcast = false;
+    }
+
+    public function show(Request $request, $id)
+    {
+        $model = $this->nilde->show($this->model, $request, $id);
+//        $model->departments()->select('name', 'id')->get();
+        $model->departments;
+
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
+    }
+
+    public function departments(Request $request, $id)
+    {
+//        dd($id);
+        $departments = $this->model->findOrFail($id)->departments()->select('name', 'id')->get();
+
+        return $this->collection($departments, new DepartmentTransformer());
+//        $model = $this->nilde->show($this->model->with('departments'), $request, $id);
+//
+//        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
     }
 
 //    public function optionList(Request $request)
@@ -53,6 +74,4 @@ class LibraryController extends ApiController
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages());
     }
-
-
 }
