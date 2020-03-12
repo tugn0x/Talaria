@@ -2,6 +2,7 @@
 
 use App\Models\Libraries\Department;
 use Illuminate\Database\Seeder;
+use App\Models\Users\Title;
 
 class DepartmentsTableSeeder extends Seeder
 {
@@ -12,8 +13,18 @@ class DepartmentsTableSeeder extends Seeder
      */
     public function run()
     {
-        Department::create(['library_id'=>1,'name'=>'ISMN-BO']);
-        Department::create(['library_id'=>1,'name'=>'ISOF-BO']);
-        Department::create(['library_id'=>1,'name'=>'IMM-BO']);
+        \App\Models\Libraries\Library::get()->each(function ($library) {
+            factory(Department::class, 4)->create([
+                'library_id' => $library->id
+            ]);
+        });
+        Title::create(['name'=>'Mr']);
+        Title::create(['name'=>'Mrs']);
+        Title::create(['name'=>'Doct']);
+        Title::create(['name'=>'Prof']);
+        Title::create(['name'=>'CEO']);
+        Title::create(['name'=>'CTO']);
+        Title::create(['name'=>'Pope']);
+        Title::create(['name'=>'Bishop']);
     }
 }
