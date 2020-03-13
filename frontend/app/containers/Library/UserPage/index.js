@@ -39,7 +39,8 @@ function UserPage(props) {
    
   return (
     <>
-      {user.data &&
+    
+      {user && Object.keys(user).length &&
         <>
           <CustomForm 
             submitCallBack={(formData) => dispatch(requestUpdateUser({status: formData.status, library_id: params.library_id, user_id: params.id })) } 
