@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, 
+import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_POST_USER, REQUEST_USER, REQUEST_GET_LIBRARY,
-          REQUEST_GET_LIBRARIES_LIST, 
+          REQUEST_GET_LIBRARIES_LIST,
           REQUEST_UPDATE_LIBRARY,
           REQUEST_POST_LIBRARY} from './constants';
 import {
@@ -15,7 +15,7 @@ import {
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
-import {getUsersList, updateUser, createUser, 
+import {getUsersList, updateUser, createUser,
         getUser, getLibrary, getLibrariesList, updateLibrary,
         createLibrary} from 'utils/api'
 import moment from 'moment';

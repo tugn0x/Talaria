@@ -7,11 +7,11 @@ use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\ParamBag;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
-class LibraryTransformer extends BaseTransformer
+class InstitutionTypeTransformer extends BaseTransformer
 {
 
     protected $availableIncludes = [
-
+        'titles'
     ];
 
 
@@ -19,7 +19,7 @@ class LibraryTransformer extends BaseTransformer
     public function transform(Model $model)
     {
         $to_merge = [
-//            patronRoutes
+
         ];
         return $this->applyTransform($model, $to_merge);
     }

@@ -23,6 +23,11 @@ Route::group([
 ], function () {
 //    Route::get('/', 'LibraryController@test')->name('test');
     Route::get('consortia', 'ConsortiumController@index')->name('index');
-    Route::put('consortia/{Consortium}', 'ConsortiumController@update')->name('update');
+    Route::put('consortia/{id}', 'ConsortiumController@update')->name('update');
     Route::post('consortia', 'ConsortiumController@store')->name('store');
+
+
+    Route::get('institution-types', 'InstitutionTypeController@index')->name('index');
+    Route::put('institution-types/{id}', 'InstitutionTypeController@update')->name('update');
+    Route::post('institution-types', 'InstitutionTypeController@store')->name('store');
 });

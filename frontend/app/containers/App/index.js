@@ -43,6 +43,7 @@ function App(props) {
         <Route exact path={"/signup"}  component={() => <SignupPage {...authProps} history={history} />} />
         <Route path={"/forgot-password/:reset_token?"} component={({match}) => <ForgotPassword {...authProps} history={history} match={match} />} />
         <Route path="/idp-callback/:refresh_token" component={IdpPage} />
+
         {!props.isLogged && <Route component={() => <LoginPage {...authProps} tokensExistsExpired={props.tokensExistsExpired} />} />}
 
         <Route path="/user" component={() => <UserPage {...authProps}/> }  />

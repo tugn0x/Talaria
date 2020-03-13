@@ -6,7 +6,7 @@ import ReferencesListPage from 'containers/Patron/ReferencesListPage/Loadable';
 import SubRouteSwitch from 'components/SubRouteSwitch';
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
-const libraryRoutes = [
+const routes = [
   { path: '/references', name: `Reference`, component: SubRouteSwitch, header: true, roles: ['registered'],
     children: [
       { path: '/reference/new', icon: "plus", name: `ReferenceNew`, url: `/references/reference/new`, component: ReferencesPage, sidebar: true},
@@ -28,4 +28,4 @@ const libraryRoutes = [
   // { path: '/request-access', name: 'Request access', component: ChangePassword, menu: true },
 ];
 
-export default libraryRoutes;
+export default routes;

@@ -51,7 +51,7 @@ const mapStateToProps = createStructuredSelector({
 //   };
 // }
 const mapDispatchToProps = (dispatch) => ({
-  dispatch,
+    dispatch,
     idpSignup: (refresh_token) => dispatch(requestIdpSignup(refresh_token)),
 })
 

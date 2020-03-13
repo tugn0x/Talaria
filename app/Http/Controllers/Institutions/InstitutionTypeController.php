@@ -6,7 +6,7 @@ use App\Http\Controllers\ApiController;
 use App\Models\Institutions\Institution;
 use Illuminate\Http\Request;
 
-class InstitutionController extends ApiController
+class InstitutionTypeController extends ApiController
 {
 
 }

@@ -20,7 +20,7 @@ class ReferenceTransformer extends BaseTransformer
     {
 //        dd('trasformo');
         $to_merge = [
-            'test' => 'hello',
+//            'test' => 'hello',
         ];
         return $this->applyTransform($model, $to_merge);
     }

@@ -60,4 +60,20 @@ export default defineMessages({
         id: `${scope}.LibraryUser`,
         defaultMessage: 'Library user',
     },
+    Institutions: {
+        id: `${scope}.Institutions`,
+        defaultMessage: 'Institutions',
+    },
+    InstitutionTypeNew: {
+        id: `${scope}.InstitutionTypeNew`,
+        defaultMessage: 'New Institution Type',
+    },
+    InstitutionType: {
+        id: `${scope}.InstitutionType`,
+        defaultMessage: 'Institution Type',
+    },
+    InstitutionTypes: {
+        id: `${scope}.InstitutionTypes`,
+        defaultMessage: 'Institution Types',
+    },
 });

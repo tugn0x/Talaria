@@ -229,14 +229,14 @@ export function* refreshAuthSaga() {
 
   if(tokensExpired) {
     const authDomain = yield select(makeSelectAuth())
-    const loginOption = {
+    const refreshOption = {
       method: 'post',
       body: Object.assign(oauthOptionRefreshToken, {
         refresh_token: authDomain.oauth.refreshToken
       })
     };
     try {
-      const request = yield call(loginRefresh, loginOption);
+      const request = yield call(loginRefresh, refreshOption);
       setToken(request.access_token);
       yield put(requestLoginSuccess(request));
       yield call(defaultAuthCallsSaga);
