@@ -5,7 +5,8 @@ namespace App\Models\Users;
 use App\Models\BaseModel;
 use App\Models\References\Reference;
 
-class Label extends BaseModel
+/* This class rapresents a group of User's References (i.e. bibliography)*/
+class Group extends BaseModel
 {
     protected $fillable=[
         'name',
@@ -13,6 +14,6 @@ class Label extends BaseModel
 
     public function references()
     {
-        return $this->belongsToMany(Reference::class);
+        return $this->hasMany(Reference::class);
     }
 }

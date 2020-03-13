@@ -6,14 +6,25 @@ use App\Models\Libraries\Library;
 use App\Models\References\Reference;
 use App\Models\Users\User;
 
+/*NOTA: la patronReq è necessaria
+altrimenti non posso reinoltrare le richDD
+in questo modo l'utente ne vede 1 ma la bib ne vede N
+di cui, quelle che vengono reinoltrate hanno fw=1 e le altre hanno il parent
+impostato in modo da poter risalire
+alla principale (utile x history)
+ovviam quella conclusiva e che evaderà/inevaderà a ute
+sarà l'ultima che 
+andrà anche ad aggiornare lo stato della patron dell'utente
+Ovviamente quelle che hanno fw=1 vengono nascoste dall'interfaccia (xke' di fatto si sono concluse) ma sono visibili attraverso la history delle altre rich e ovviamente vengono contate come normali richieste
+*/
+
+/* NB: in questa classe non c'e' il user_id in quanto usiamo il campo created_by*/
 class PatronDocdelRequest extends BaseModel
 {
-
     protected $fillable = [
-        'borrowing_library_id',
+        'borrowing_library_id', //id biblioteca alla quale ho inviato la rich.
         'reference_id',
-        'user_id',
-        'insert_date', //o usiamo created_at?
+        //'user_id', //usiamo create_by
         'librarycounter', //rm_countbib: ogni biblio si vede le rich utente partire da 1 usando questo campo
         'status',
         'request_date',
@@ -42,12 +53,12 @@ class PatronDocdelRequest extends BaseModel
 
     public function docdelrequests()
     {
-        return $this->hasMany(DocdelRequest::class);
+        return $this->hasMany(DocdelRequest::class,'patron_docdel_request_id','id');
     }
 
     public function library()
     {
-        return $this->belongsTo(Library::class);
+        return $this->belongsTo(Library::class,'borrowing_library_id');
     }
 
 }

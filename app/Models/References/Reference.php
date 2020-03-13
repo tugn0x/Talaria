@@ -7,6 +7,7 @@ use App\Models\References\ReferenceObserver;
 use App\Models\Requests\DocdelRequest;
 use App\Models\Requests\PatronDocdelRequest;
 use App\Models\Users\Label;
+use App\Models\Users\Group;
 
 class Reference extends BaseModel
 {
@@ -30,7 +31,8 @@ class Reference extends BaseModel
         'publishing_place',
         'isbn',
         'sid',
-        'pmid'
+        'pmid',
+        'group_id'
     ];
 
     public function patronddrequest()
@@ -46,5 +48,10 @@ class Reference extends BaseModel
     public function labels()
     {
         return $this->belongsToMany(Label::class);
+    }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
     }
 }

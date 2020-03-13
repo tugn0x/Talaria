@@ -7,6 +7,7 @@ use App\Models\BaseModel;
 use App\Models\Institutions\Institution;
 use App\Models\Projects\Project;
 use App\Models\Country;
+use App\Models\Requests\DocdelRequest;
 use App\Models\Users\User;
 use App\Models\Requests\PatronDocdelRequest;
 
@@ -116,6 +117,22 @@ class Library extends BaseModel
 
     public function patronddrequests()
     {
-        return $this->hasMany(PatronDocdelRequest::class);
+        return $this->hasMany(PatronDocdelRequest::class,'borrowing_library_id');
+    }
+
+    public function tags()
+    {
+        return $this->hasMany(Tag::class);
+    }  
+
+
+    public function borrowingrequests()
+    {
+        return $this->hasMany(DocdelRequest::class,'borrowing_library_id');
+    }
+
+    public function lendingrequests()
+    {
+        return $this->hasMany(DocdelRequest::class,'lending_library_id');
     }
 }

@@ -85,6 +85,11 @@ class User extends UserBase
     {
         return $this->hasMany(Label::class);
     }
+    
+    public function groups()
+    {
+        return $this->hasMany(Group::class);
+    }
 
     public function patronddrequests()
     {

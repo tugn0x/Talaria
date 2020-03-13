@@ -3,8 +3,9 @@
 namespace App\Models\Requests;
 use App\Models\BaseModel;
 use App\Models\Libraries\Library;
+use App\Models\Libraries\Tag;
 use App\Models\References\Reference;
-
+/* NOTA: i campi di questa classe non sono definitivi*/
 class DocdelRequest extends BaseModel
 {
     protected $fillable=[
@@ -53,11 +54,16 @@ class DocdelRequest extends BaseModel
 
     public function borrowinglibrary()
     {
-        return $this->belongsTo(Library::class);
+        return $this->belongsTo(Library::class,'borrowing_library_id');
     }
 
     public function lendinglibrary()
     {
-        return $this->belongsTo(Library::class);
+        return $this->belongsTo(Library::class,'lending_library_id');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }
