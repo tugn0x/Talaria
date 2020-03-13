@@ -99,7 +99,7 @@
 
   "app.components.UsersList.header": "Lista Utenti",
 
-  
+
 
   "app.components.ReferencesList.createNewReference": "Nuovo riferimento",
   "app.components.ReferencesList.ReferencesNotFound": "Non ci sono riferimenti",
@@ -129,7 +129,7 @@
   "app.routes.Searches": "Ricerche",
   "app.routes.Requests": "Richieste",
   "app.routes.MyLibraries": "Le mie biblioteche",
-  "app.routes.MyLibraryNew": "Richiedi nuova biblioteca",
+  "app.routes.MyLibraryNew": "Richiedi accesso a una biblioteca",
   "app.routes.UsersList": "Utenti",
   "app.routes.UserNew": "Nuovo utente"
 }

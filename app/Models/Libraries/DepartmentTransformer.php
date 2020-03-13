@@ -19,7 +19,7 @@ class DepartmentTransformer extends BaseTransformer
     public function transform(Model $model)
     {
         $to_merge = [
-            'test' => 'hello',
+
         ];
         return $this->applyTransform($model, $to_merge);
     }

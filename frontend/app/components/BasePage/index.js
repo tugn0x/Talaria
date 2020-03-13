@@ -10,6 +10,7 @@ import messages from './messages';
 import {Switch, Route, withRouter} from 'react-router-dom';
 import {HeaderBar, SideBar} from 'components';
 import {Container} from "reactstrap"
+import { generatePath } from "react-router";
 
 
 function BasePage(props) {
@@ -20,13 +21,15 @@ function BasePage(props) {
   };
 
   const mapRoutes = (routes, auth, prefix) => {
+    console.log(props.match)
     // console.log(prefix, 'prefix')
     return filterRoutes(routes, auth).map((route)=>{
-      const url = route.url ? props.match.path+route.url : props.match.path+route.path
+      const url = route.url ? generatePath(props.match.path+route.url, props.match.params) : generatePath(props.match.path+route.path, props.match.params)
       // console.log(url, prefix, props.match.path, route.path)
       return {
         ...route,
-        path: prefix+props.match.path+route.path,
+        // path: prefix+props.match.path+route.path,
+        path: generatePath(`${prefix+props.match.path+route.path}`, props.match.params),
         url: url,
         component:null,
         current: isCurrentPage(url),

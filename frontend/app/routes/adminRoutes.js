@@ -5,7 +5,7 @@ import LibrariesListPage from 'containers/Admin/LibrariesListPage/Loadable';
 import SubRouteSwitch from 'components/SubRouteSwitch';
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
-const adminRoutes = [
+const routes = [
   { path: '/users',  name: `UsersList`, component: SubRouteSwitch, header: true,
     children: [
       { path: '/user/new', name: `UserNew`, component: UserPage,  url: `/users/user/new`, sidebar: true},
@@ -20,6 +20,13 @@ const adminRoutes = [
       { path: '/:page?', exact: true, name: `Libraries`, url: `/libraries`, component: LibrariesListPage, },
     ]
   },
+  { path: '/institutions',  name: `Institutions`, component: SubRouteSwitch, header: true,
+    children: [
+      { path: '/institutions-types/type/new', icon: 'plus', name: `InstitutionTypeNew`, component: LibraryPage,  url: `/libraries/library/new`},
+      { path: '/institutions-types/type/:id?', name: `InstitutionType`, component: LibraryPage, },
+      { path: '/institutions-types/:page?', exact: true, name: `InstitutionTypes`, url: `/institutions/institutions-types`, component: LibrariesListPage, sidebar: true},
+    ]
+  },
 ];
 
-export default adminRoutes;
+export default routes;

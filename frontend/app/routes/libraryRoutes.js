@@ -2,7 +2,7 @@ import UserPage from 'containers/Library/UserPage/Loadable';
 import UsersListPage from 'containers/Library/UsersListPage/Loadable';
 import SubRouteSwitch from 'components/SubRouteSwitch';
 
-const libraryRoutes = [
+const routes = [
   /*
   TODO: la path è /users, ma si tratta a tutti gli effetti dei library-users, cioè del collegamento tra utente Patron e Biblioteca
   la lista è GET /api/v1/libraries/{LIBRARY_ID!!}/library-users
@@ -10,7 +10,8 @@ const libraryRoutes = [
   la show è GET /api/v1/libraries/{LIBRARY_ID!!}/library-users/{library_users_id}
   l'update è PUT /api/v1/libraries/{LIBRARY_ID!!}/library-users/{library_users_id}
    */
-  { path: '/patrons', name: `LibraryUsers`, component: SubRouteSwitch, header: true, roles: ['registered'],
+  {
+    path: '/patrons', name: `LibraryUsers`, component: SubRouteSwitch, header: true, roles: ['registered'],
     children: [
      /*  { path: '/patron/new', icon: "plus", name: `LibraryUserNew`, url: `/patron/user/new`, component: ReferencesPage, sidebar: true}, */
       { path: '/patron/:id?', name: `LibraryUser`, component: UserPage, },
@@ -19,4 +20,4 @@ const libraryRoutes = [
   },
 ];
 
-export default libraryRoutes;
+export default routes;

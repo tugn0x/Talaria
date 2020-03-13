@@ -4,7 +4,7 @@ import Profile from 'containers/User/ProfilePage/Loadable';
 import ChangePassword from 'containers/User/ChangePassword/Loadable';
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
-const userRoutes = [
+const routes = [
   { path: '/user-profile', name: 'User Profile', component: Profile },
   { path: '/change-password', name: 'Change Password', component: ChangePassword },
   // { path: '/theme', exact: true, name: 'Theme', component: Colors },
@@ -48,4 +48,4 @@ const userRoutes = [
   // { path: '/users/:id', exact: true, name: 'User Details', component: User },
 ];
 
-export default userRoutes;
+export default routes;
