@@ -13,7 +13,7 @@ const UsersListPage = (props) => {
     const library_id = library.library.id
     const usersList = library.usersList
     const pagination = library.pagination
-
+    console.log(pagination)
     useEffect(() => {
         if(!isLoading && library_id) {
             dispatch(requestUsersList('1', library_id))

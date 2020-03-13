@@ -5,13 +5,13 @@ import { useIntl } from 'react-intl';
 import {formatDate} from 'utils/formatDate'
 import ButtonPlus from 'components/Button/ButtonPlus'
 import CustomModal from 'components/Modal/Loadable'
-// import {MyLibraryForm} from 'components';
+import {Pagination} from 'components';
 import { generatePath } from "react-router";
 
 
 function UsersList(props) {
     console.log('Library UsersList', props)
-    const {usersList, match, editPath} = props
+    const {usersList, match, editPath, pagination} = props
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const intl = useIntl();
@@ -97,17 +97,15 @@ function UsersList(props) {
                     searchCustomSelect={(input) => props.searchCustomSelect(input)}
                 />  
             </CustomModal> */}
-            {/*  {pagination && Object.keys(pagination).length > 0 &&
+            {pagination && pagination.total > pagination.per_page && 
                 <Pagination
-                    current_page={current_page}
-                    last_page={last_page}
-                    // setPage={(page) => linkTo(`${path}/?page=${page}`)}
-
-                    setPage={(page) => linkTo(generatePath(`${props.match.path}`, {
+                    current_page={pagination.current_page}
+                    last_page={pagination.last_page}
+                    setPage={(page) => linkTo(generatePath(`${match.path}`, {
                         page: page
                       }))}
                 />
-            } */}
+            } 
           </>
     )
 }

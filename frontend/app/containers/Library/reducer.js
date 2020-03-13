@@ -38,12 +38,7 @@ const libraryReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = initialState.error;
         draft.usersList = action.result.data
-        draft.pagination = Object.keys(action.result)
-          .filter(key => !['data'].includes(key))
-          .reduce((obj, key) => {
-            obj[key] = action.result[key];
-            return obj;
-          }, {}); 
+        draft.pagination = action.result.meta.pagination
         break;
       case REQUEST_UPDATE_USER:
         draft.loading = true;

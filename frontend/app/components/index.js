@@ -2,7 +2,7 @@ import HeaderBar from './HeaderBar';
 // import SubHeaderBar from './SubHeaderBar';
 import Footer from './Footer';
 import SideBar from './SideBar';
-
+import Pagination from './Pagination'
 /*
 USER AUTHENTICATION
  */
@@ -46,6 +46,7 @@ export {
   Toaster,
   SignupForm,
   LoginForm,
+  Pagination,
   SocialAuth,
   ForgotPasswordForm,
   ResetPasswordForm,

@@ -197,6 +197,11 @@ ul.list-inline {
     width: 25px;
     height: 25px;
     border-radius: 25px;
-    background-color: gold;
+    &.pending{
+        background-color: gold;
+    }
+    &.success{
+        background-color: green;
+    }
     margin: 0 auto;
 }
