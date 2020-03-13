@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\References;
 
 use App\Http\Controllers\ApiController;
-use App\Models\Reference;
+use App\Models\References\Reference;
 use App\Models\References\ReferenceTransformer;
 use Illuminate\Http\Request;
 

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\References;
 
+use App\Models\BaseModel;
 use App\Models\References\ReferenceObserver;
 use App\Models\Requests\DocdelRequest;
 use App\Models\Requests\PatronDocdelRequest;

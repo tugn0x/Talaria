@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Models\Institutions\InstitutionType;
 use App\Models\Libraries\Library;
 use App\Models\Libraries\LibraryUser;
-use App\Models\Reference;
+use App\Models\References\Reference;
 use App\Models\Users\User;
 use App\Policies\BasePolicy;
 use App\Policies\LibraryPolicy;
