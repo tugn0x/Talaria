@@ -23,6 +23,7 @@ class LibraryUser extends BaseModel
     protected $fillable = [
         'user_id',
         'library_id',
+        'status',
     ];
 
     protected $attributes = [
