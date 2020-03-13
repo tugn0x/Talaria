@@ -239,6 +239,13 @@ export const getLibraryUser = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${user_id}`, options)
 };
 
+export const updateLibraryUser = (options) => {
+  const user_id = options.body.user_id
+  const library_id = options.body.library_id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${user_id}`, options)
+};
+
 /*
 |        | GET|HEAD | api/v1/institutions/institution-types                   | api.v1.institutions.index                              | App\Http\Controllers\Institutions\InstitutionTypeController@index         | api,auth:api                                     |
 |        | POST     | api/v1/institutions/institution-types                   | api.v1.institutions.store                              | App\Http\Controllers\Institutions\InstitutionTypeController@store         | api,auth:api                                     |

@@ -21,7 +21,7 @@ function BasePage(props) {
   };
 
   const mapRoutes = (routes, auth, prefix) => {
-    console.log(props.match)
+    // console.log(props.match)
     // console.log(prefix, 'prefix')
     return filterRoutes(routes, auth).map((route)=>{
       const url = route.url ? generatePath(props.match.path+route.url, props.match.params) : generatePath(props.match.path+route.path, props.match.params)

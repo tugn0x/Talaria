@@ -36,6 +36,8 @@
   "app.containers.MyLibrariesList.createNewLibrary": "Richiedi nuova biblioteca",
   "app.containers.MyLibrariesList.editLibrary": "Modifica biblioteca",
 
+  "app.containers.LibraryUserPage.header": "Modifica stato utente",
+
   "app.components.MyLibraryForm.institution_id": "ID della biblioteca",
   "app.components.MyLibraryForm.subject_id": "ID della disciplina",
   "app.components.MyLibraryForm.country_id": "ID della nazione",

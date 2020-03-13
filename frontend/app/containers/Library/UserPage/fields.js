@@ -1,19 +1,15 @@
 export const fields = {
-    user_id: {
-        type: "number",
-        required: true,
-        name: "user_id",
-        width: "col-md-6"
-    },
     status: {
-        type: "select",
+        type: "switch",
         name: "status",
-        placeholder: "status",
         width: "col-md-6",
-        options: [
-            { value: 0, name: 'pending' },
-            { value: 1, name: 'success' },
-        ]
+        order: 2
     },
-    
+    name: {
+        type: "text",
+        name: "name",
+        width: "col-md-12",
+        disabled: true,
+        order: 1
+    },
 }

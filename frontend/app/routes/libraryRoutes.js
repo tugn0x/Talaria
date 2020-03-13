@@ -14,7 +14,7 @@ const routes = [
     path: '/patrons', name: `LibraryUsers`, component: SubRouteSwitch, header: true, roles: ['registered'],
     children: [
      /*  { path: '/patron/new', icon: "plus", name: `LibraryUserNew`, url: `/patron/user/new`, component: ReferencesPage, sidebar: true}, */
-      { path: '/patron/:id?', name: `LibraryUser`, component: UserPage, },
+      { path: '/patron/:id?', name: `LibraryUser`, url:'/patrons/patron',  component: UserPage, },
       { path: '', exact: true, name: `LibraryUsers`, component: UsersListPage, },
     ]
   },

@@ -21,6 +21,7 @@ export const initialState = {
   usersList: [],
   error: null,
   pagination: [],
+  user: {}
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -58,8 +59,8 @@ const libraryReducer = (state = initialState, action) =>
         break;
       case REQUEST_USER_SUCCESS:
         draft.loading = false;
-        draft.error = initialState.error;
-        draft.user = action.result
+        draft.error = action.error;
+        draft.user = action.result.data
         break;
       case REQUEST_POST_LIBRARY:
         draft.loading = true;

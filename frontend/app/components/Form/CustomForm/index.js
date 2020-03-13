@@ -3,6 +3,7 @@ import { Col, Card, CardBody, InputGroup, InputGroupAddon, InputGroupText, Custo
 import PropTypes from 'prop-types';
 import {useIntl} from 'react-intl'
 import Select from 'react-select'; 
+import { AppSwitch } from '@coreui/react'
 import './style.scss'
 import {uniqBy} from 'lodash'
 import {selectFieldsGroups} from './selectFieldsGroups'
@@ -35,7 +36,7 @@ const CustomForm = (props) => {
         let data = {}
         Object.keys(fields).map(key => {
             const field = fields[key]
-            if(fields[key].type === 'checkbox') {
+            if(fields[key].type === 'checkbox' || fields[key].type === 'switch') {
                 data = {...data, [key]: updateFormData && updateFormData[field.name] ? updateFormData[field.name]  : false }
             }else if(fields[key].type === 'custom-select'){
                 data = {...data, [key]: [] }
@@ -67,7 +68,7 @@ const CustomForm = (props) => {
     const handleChange = (e) =>{
         const targetType = e.target.type
         switch(targetType) {
-            case "checkbox":
+            case "checkbox" || "switch":
                 setFormData({ ...formData, [e.target.name]:  e.target.checked })
                 break;
             default:
@@ -165,10 +166,21 @@ const CustomForm = (props) => {
                                                                     required
                                                                 />)
                                                             ||
+                                                            field.type === 'switch' &&
+                                                                <>
+                                                                <AppSwitch className="mx-1" color="success"
+                                                                    checked={Boolean(formData[field.name])}
+                                                                    name={field.name}
+                                                                    onChange={(e) => handleChange(e)}
+                                                                    required={field.required ? field.required : false}
+                                                                />
+                                                                </>       
+                                                            ||
                                                                 (<CustomInput
                                                                     className="form-control"
                                                                     id={field.name}
                                                                     type={field.type}
+                                                                    disabled={field.disabled ? field.disabled : false}
                                                                     placeholder={messages[field.name] && intl.formatMessage(messages[field.name])}
                                                                     name={field.name}
                                                                     value={formData[field.name]}

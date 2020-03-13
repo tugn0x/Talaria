@@ -15,19 +15,21 @@ import {
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
-import {getLibraryUsersList, updateUser, createUser,
-        getUser, getLibrary, getLibrariesList, updateLibrary,
+import {getLibraryUsersList, updateLibraryUser, createUser,
+        getLibraryUser, getLibrary, getLibrariesList, updateLibrary,
         createLibrary} from 'utils/api'
 import moment from 'moment';
 
 export function* requestUserSaga(action) {
   const options = {
     method: 'get',
-    id: action.id
+    user_id: action.user_id,
+    library_id: action.library_id
   };
+  console.log(action)
   try {
-   const request = yield call(getUser, options);
-   yield put(requestUserSuccess(request));
+    const request = yield call(getLibraryUser, options);
+    yield put(requestUserSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -51,13 +53,17 @@ export function* requestUsersListSaga(action = {}) {
 export function* requestUpdateUserSaga(action) {
   const options = {
     method: 'put',
-    body: action.request
+    body: {
+      status: Number(action.request.status),
+      library_id: action.request.library_id,
+      user_id: action.request.user_id,
+    },
   };
   try {
-    const request = yield call(updateUser, options);
+    const request = yield call(updateLibraryUser, options);
     yield call(requestUsersListSaga);
-    yield put(push("/library/users"));
-    yield call(() => toast.success(action.message))
+  //  yield put(push(`/library/${action.request.library_id}/patrons`));
+   // yield call(() => toast.success(action.request.message))
   } catch(e) {
     yield put(requestError(e.message));
   }

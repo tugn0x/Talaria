@@ -36,9 +36,10 @@ export function requestUsersListSuccess(result) {
 }
 
 
-export function requestUser(user_id) {
+export function requestUser(library_id, user_id) {
   return {
     type: REQUEST_USER,
+    library_id,
     user_id
   };
 }
@@ -58,11 +59,10 @@ export function requestPostUser(request, message) {
   };
 }
 
-export function requestUpdateUser(request, message) {
+export function requestUpdateUser(request) {
   return {
     type: REQUEST_UPDATE_USER,
-    request,
-    message
+    request
   };
 }
 

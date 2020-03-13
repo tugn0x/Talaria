@@ -56,7 +56,7 @@ function UsersList(props) {
                         <Row key={`user-${user.id}`}>
                             <Col xs={4}>
                                 <a href={`${editurl(user.user_id)}`}>
-                                    {user.user_id}
+                                    {user.user.data.full_name}
                                 </a>
                             </Col>
                             <Col xs={2}>

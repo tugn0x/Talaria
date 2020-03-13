@@ -26,15 +26,11 @@ const UsersListPage = (props) => {
         }
     }, [match.params]) */
 
-    useEffect(() => {
-        console.log(usersList)
-    }, [usersList]) 
-
     return (
         <>
             <UsersList 
                 usersList={usersList}
-                editPath={`patron/:id?`}
+                editPath={`/library/${library_id}/patrons/patron/:id?`}
                 pagination={pagination}
             />
         </>
