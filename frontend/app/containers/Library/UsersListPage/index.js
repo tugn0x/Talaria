@@ -7,7 +7,7 @@ import {requestUsersList} from '../actions'
 import {UsersList} from 'components'
 
 const UsersListPage = (props) => {
-    console.log('Library UsersListPage', props)
+    console.log('UsersListPage', props)
     const {dispatch, isLoading, library} = props
     
     const library_id = library.library.id
@@ -16,7 +16,7 @@ const UsersListPage = (props) => {
 
     useEffect(() => {
         if(!isLoading && library_id) {
-            dispatch(requestUsersList(library_id))
+            dispatch(requestUsersList('1', library_id))
         }
     }, [library_id])
 
@@ -25,6 +25,10 @@ const UsersListPage = (props) => {
             dispatch(requestReferencesList(match.params.page))
         }
     }, [match.params]) */
+
+    useEffect(() => {
+        console.log(usersList)
+    }, [usersList]) 
 
     return (
         <>
