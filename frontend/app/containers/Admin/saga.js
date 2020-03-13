@@ -3,7 +3,9 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_POST_USER, REQUEST_USER, REQUEST_GET_LIBRARY,
           REQUEST_GET_LIBRARIES_LIST,
           REQUEST_UPDATE_LIBRARY,
-          REQUEST_POST_LIBRARY} from './constants';
+          REQUEST_POST_LIBRARY,
+          REQUEST_GET_INSTITUTION_TYPE_LIST,
+} from './constants';
 import {
   requestError,
   stopLoading,
@@ -11,13 +13,14 @@ import {
   requestUsersListSuccess,
   requestUserSuccess,
   requestGetLibrarySuccess,
-  requestGetLibrariesListSuccess
+  requestGetLibrariesListSuccess,
+  requestGetInstitutionTypeListSuccess,
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
 import {getUsersList, updateUser, createUser,
         getUser, getLibrary, getLibrariesList, updateLibrary,
-        createLibrary} from 'utils/api'
+        createLibrary, getInstituionTypeList} from 'utils/api'
 import moment from 'moment';
 
 export function* requestUserSaga(action) {
@@ -134,6 +137,19 @@ export function* requestGetLibrariesListSaga(action = {}) {
   }
 }
 
+export function* requestGetInstitutionTypeListSaga(action = {}) {
+  const options = {
+    method: 'get',
+    page: action.page ? action.page : '1'
+  };
+  try {
+    const request = yield call(getInstituionTypeList, options);
+    yield put(requestGetInstitutionTypeListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 
 /**
  * Root saga manages watcher lifecycle
@@ -147,4 +163,5 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_GET_LIBRARIES_LIST, requestGetLibrariesListSaga);
   yield takeLatest(REQUEST_UPDATE_LIBRARY, requestUpdateLibrarySaga);
   yield takeLatest(REQUEST_POST_LIBRARY, requestPostLibrarySaga);
+  yield takeLatest(REQUEST_GET_INSTITUTION_TYPE_LIST, requestGetInstitutionTypeListSaga);
 }

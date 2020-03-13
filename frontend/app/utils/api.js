@@ -239,6 +239,16 @@ export const getLibraryUser = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${user_id}`, options)
 };
 
+export const getInstituionTypeList = (options) => {
+  console.log('OPTIONS?')
+  console.log('OPTIONS?')
+  console.log('OPTIONS?')
+  console.log('OPTIONS?')
+  console.log('OPTIONS?')
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/institutions/institution-types`, options)
+};
+
 /*
 |        | GET|HEAD | api/v1/institutions/institution-types                   | api.v1.institutions.index                              | App\Http\Controllers\Institutions\InstitutionTypeController@index         | api,auth:api                                     |
 |        | POST     | api/v1/institutions/institution-types                   | api.v1.institutions.store                              | App\Http\Controllers\Institutions\InstitutionTypeController@store         | api,auth:api                                     |

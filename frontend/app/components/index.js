@@ -28,6 +28,7 @@ import UsersList from './Library/UsersList';
 
 // Admin
 import LibrariesList from './Admin/LibrariesList'
+import SimpleList from './Admin/SimpleList'
 import LibraryForm from './Admin/LibraryForm'
 
 /*
@@ -60,4 +61,5 @@ export {
   ErrorBox,
   Loader,
   SideBar,
+  SimpleList,
 }

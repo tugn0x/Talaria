@@ -6,12 +6,14 @@
 import produce from 'immer';
 import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_ERROR, STOP_LOADING, REQUEST_USERS_LIST, REQUEST_USERS_LIST_SUCCESS,
-  REQUEST_UPDATE_USER, REQUEST_UPDATE_USER_SUCCESS, 
+  REQUEST_UPDATE_USER, REQUEST_UPDATE_USER_SUCCESS,
   REQUEST_USER, REQUEST_USER_SUCCESS,
   REQUEST_GET_LIBRARY, REQUEST_GET_LIBRARY_SUCCESS,
   REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS,
   REQUEST_UPDATE_LIBRARY, REQUEST_POST_LIBRARY,
-  REQUEST_POST_USER} from "./constants";
+  REQUEST_POST_USER,
+  REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS, REQUEST_GET_INSTITUTION_TYPE_LIST,
+} from "./constants";
 
 export const initialState = {
   loading: false,
@@ -20,7 +22,8 @@ export const initialState = {
   error: null,
   pagination: [],
   librariesList: [],
-  library: []
+  library: [],
+  institutionTypes: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -92,6 +95,15 @@ const AdminReducer = (state = initialState, action) =>
             obj[key] = action.result[key];
             return obj;
           }, {}); */
+        break;
+      case REQUEST_GET_INSTITUTION_TYPE_LIST:
+        draft.loading = true;
+        draft.institutionTypes = [];
+        break;
+      case REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.institutionTypes = action.result.data;
         break;
       case REQUEST_SUCCESS:
         draft.loading = false;
