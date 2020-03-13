@@ -15,6 +15,7 @@ class UserLightTransformer extends BaseLightTransformer
         'id',
         'name',
         'surname',
+        'full_name',
     ];
 
 }

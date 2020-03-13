@@ -75,6 +75,12 @@ class User extends UserBase
         return $this->belongsTo(Country::class);
     }
 
+
+    public function getFullNameAttribute()
+    {
+        return $this->name . ' '. $this->surname;
+    }
+
     public function labels()
     {
         return $this->hasMany(Label::class);
