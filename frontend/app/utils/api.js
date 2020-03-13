@@ -244,6 +244,17 @@ export const updateLibraryUser = (options) => {
   const library_id = options.body.library_id
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${user_id}`, options)
+}
+
+
+export const getInstituionTypeList = (options) => {
+  console.log('OPTIONS?')
+  console.log('OPTIONS?')
+  console.log('OPTIONS?')
+  console.log('OPTIONS?')
+  console.log('OPTIONS?')
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/institutions/institution-types`, options)
 };
 
 /*

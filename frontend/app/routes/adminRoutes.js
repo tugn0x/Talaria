@@ -2,6 +2,7 @@ import UsersListPage from 'containers/Admin/UsersListPage/Loadable';
 import UserPage from 'containers/Admin/UserPage/Loadable';
 import LibraryPage from 'containers/Admin/LibraryPage/Loadable';
 import LibrariesListPage from 'containers/Admin/LibrariesListPage/Loadable';
+import InstitutionTypeListPage from 'containers/Admin/InstitutionTypeListPage/Loadable';
 import SubRouteSwitch from 'components/SubRouteSwitch';
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
@@ -24,7 +25,7 @@ const routes = [
     children: [
       { path: '/institutions-types/type/new', icon: 'plus', name: `InstitutionTypeNew`, component: LibraryPage,  url: `/libraries/library/new`},
       { path: '/institutions-types/type/:id?', name: `InstitutionType`, component: LibraryPage, },
-      { path: '/institutions-types/:page?', exact: true, name: `InstitutionTypes`, url: `/institutions/institutions-types`, component: LibrariesListPage, sidebar: true},
+      { path: '/institutions-types/:page?', exact: true, name: `InstitutionTypes`, url: `/institutions/institutions-types`, component: InstitutionTypeListPage, sidebar: true},
     ]
   },
 ];
