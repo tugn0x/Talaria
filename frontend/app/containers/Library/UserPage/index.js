@@ -39,11 +39,14 @@ function UserPage(props) {
    
   return (
     <>
-    
-      {user && Object.keys(user).length &&
+     {user && Object.keys(user).length && !isLoading &&
         <>
           <CustomForm 
-            submitCallBack={(formData) => dispatch(requestUpdateUser({status: formData.status, library_id: params.library_id, user_id: params.id })) } 
+            submitCallBack={(formData) => dispatch(requestUpdateUser({
+                status: formData.status, 
+                library_id: params.library_id, 
+                user_id: params.id,
+                message: `${intl.formatMessage(messages.statusUpdateMessage)}` })) } 
             updateFormData={{status: user.status, name: user.user.data.full_name}}
             fields={fields}
             title={intl.formatMessage(messages.header)}

@@ -61,9 +61,11 @@ export function* requestUpdateUserSaga(action) {
   };
   try {
     const request = yield call(updateLibraryUser, options);
+    yield put(push(`/library/${action.request.library_id}/patrons`));
+    // yield call(requestUpdateUserSuccess(request))
     yield call(requestUsersListSaga);
-  //  yield put(push(`/library/${action.request.library_id}/patrons`));
-   // yield call(() => toast.success(action.request.message))
+    
+   yield call(() => toast.success(action.request.message))
   } catch(e) {
     yield put(requestError(e.message));
   }

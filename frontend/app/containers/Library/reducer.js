@@ -49,6 +49,11 @@ const libraryReducer = (state = initialState, action) =>
         draft.loading = true;
         draft.error = action.error;
         break;
+      case REQUEST_UPDATE_USER_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.user = action.result.data
+        break;
       case REQUEST_POST_USER:
         draft.loading = true;
         draft.error = action.error;

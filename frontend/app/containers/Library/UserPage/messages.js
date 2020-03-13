@@ -16,6 +16,9 @@ export default defineMessages({
     id: `${scope}.status`,
     defaultMessage: 'Status',
   },
-
+  statusUpdateMessage: {
+    id: `${scope}.statusUpdateMessage`,
+    defaultMessage: 'Status updated',
+  },
 
 });
