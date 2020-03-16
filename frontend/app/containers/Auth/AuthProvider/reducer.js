@@ -144,7 +144,7 @@ const authReducer = (state = initialState, action) =>
       case REQUEST_UPDATE_PROFILE_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.user = action.result;
+        draft.user = action.result.data;
         break;
       case REQUEST_DELETE_PROFILE:
         draft.loading = true;

@@ -53,7 +53,7 @@ export function* requestUsersListSaga(action = {}) {
 export function* requestUpdateUserSaga(action) {
   const options = {
     method: 'put',
-    body: action.request
+    body: {...action.request, privacy_policy_accepted: moment().format('YYYY-MM-DD hh:mm:ss')}
   };
   try {
     const request = yield call(updateUser, options);

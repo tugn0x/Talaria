@@ -12,6 +12,7 @@ import {CustomForm} from 'components';
 import {fields} from './fields';
 
 const ProfileForm = (props) => {
+    console.log('ProfileForm', props)
     const {user, updateProfile, loading} = props
     const intl = useIntl();
     return (

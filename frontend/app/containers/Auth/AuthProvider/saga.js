@@ -25,6 +25,7 @@ import makeSelectAuth, { tokensExistsExpired, isLogged  } from './selectors';
 import { push } from 'connected-react-router';
 import { toast } from "react-toastify";
 import { login, loginRefresh, oauthOption, oauthOptionRefreshToken, signup, getProfile, getPermissions, setToken, verifySms, newToken, changePassword, forgotPassword, resetPassword, updateProfile, deleteProfile, socialOauth } from 'utils/api';
+import moment from 'moment'
 // import {socialLogin} from "../../../../fblogin/src/store/social/actions";
 
 
@@ -114,10 +115,10 @@ export function* userPermissionsSaga() {
 }
 
 export function* userProfileUpdateSaga(action) {
-
   const options = {
     method: 'PUT',
-    body: action.request
+    body: {...action.request, privacy_policy_accepted: moment().format('YYYY-MM-DD hh:mm:ss') }
+    
   };
 
   try {

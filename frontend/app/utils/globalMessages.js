@@ -81,4 +81,8 @@ export default defineMessages({
     id: `${scope}.update`,
     defaultMessage: 'Update',
   },
+  privacy_policy_accepted: {
+    id: `${scope}.privacy_policy_accepted`,
+    defaultMessage: 'Privacy Policy accepted',
+  },
 });

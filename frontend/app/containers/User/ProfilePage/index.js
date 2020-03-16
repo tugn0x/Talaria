@@ -15,6 +15,7 @@ import Loader from "components/Form/Loader";
 import {useIntl} from 'react-intl';
 
 function ProfilePage(props) {
+  console.log('ProfilePage', props)
   const intl = useIntl();
   return (
       <Loader show={props.auth.loading}>

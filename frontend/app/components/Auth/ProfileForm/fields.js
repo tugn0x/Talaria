@@ -1,45 +1,35 @@
+import moment from "moment";
+
 export const fields = {
     name: {
         type: "text",
         required: true,
         name: "name",
-        label: 'app.global.name',
-        placeholder: 'app.global.name',
+       
     },
     surname: {
         type: "text",
         required: true,
         name: "surname",
-        label: 'app.global.surname',
-        placeholder: 'app.global.surname',
+      
     },
     address: {
         type: "text",
         name: "address",
-        label: 'app.containers.UserProfile.address',
-        placeholder: 'app.containers.UserProfile.address',
-        
+       
     },
     town: {
         type: "text",
         name: "town",
-        label: 'app.containers.UserProfile.town',
-        placeholder: 'app.containers.UserProfile.town',
         
     },
     district: {
         type: "text",
         name: "district",
-        label: 'app.containers.UserProfile.district',
-        placeholder: 'app.containers.UserProfile.town',
-        
     },
     postcode: {
         type: "number",
         name: "postcode",
-        label: 'app.containers.UserProfile.postcode',
-        placeholder: 'app.containers.UserProfile.town',
-        
     },
    /*  checkbox: {
         type: "checkbox",
@@ -51,24 +41,20 @@ export const fields = {
     state: {
         type: "text",
         name: "state",
-        label: 'app.containers.UserProfile.state',
-        placeholder: 'app.containers.UserProfile.town',
-        
     },
     phone: {
         type: "number",
         name: "phone",
-        label: 'app.containers.UserProfile.phone',
-        placeholder: 'app.containers.UserProfile.town',
-        
     },
     mobile: {
         type: "number",
         name: "mobile",
-        label: 'app.containers.UserProfile.mobile',
-        placeholder: 'app.containers.UserProfile.town',
-        
     },
+   /*  privacy_policy_accepted: {
+        type: "switch",
+        name: "privacy_policy_accepted",
+        required: true,
+    }, */
     /* select: {
         type: "select",
         name: "select",
@@ -84,8 +70,5 @@ export const fields = {
         type: "email",
         required: true,
         name: "email",
-        label: 'app.global.email',
-        placeholder: 'app.global.email',
-        
     },
 }
