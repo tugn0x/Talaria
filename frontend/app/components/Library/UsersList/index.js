@@ -12,6 +12,7 @@ import { generatePath } from "react-router";
 function UsersList(props) {
     console.log('Library UsersList', props)
     const {usersList, match, editPath, pagination} = props
+    const {total_pages, current_page} = pagination
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const intl = useIntl();
@@ -99,8 +100,8 @@ function UsersList(props) {
             </CustomModal> */}
             {pagination && pagination.total > pagination.per_page && 
                 <Pagination
-                    current_page={pagination.current_page}
-                    last_page={pagination.last_page}
+                    current_page={current_page}
+                    total_pages={total_pages}
                     setPage={(page) => linkTo(generatePath(`${match.path}`, {
                         page: page
                       }))}

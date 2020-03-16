@@ -13,7 +13,7 @@ import { generatePath } from "react-router";
 function UsersListTable(props) {
     console.log('UsersListTable', props)
     const {usersList, pagination, match, loading, createUser, history, path} = props
-    const {current_page, last_page} = pagination
+    const {current_page, total_pages} = pagination
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const intl = useIntl();
@@ -100,7 +100,7 @@ function UsersListTable(props) {
             {pagination && Object.keys(pagination).length > 0 &&
                 <Pagination
                     current_page={current_page}
-                    last_page={last_page}
+                    total_pages={total_pages}
                     // setPage={(page) => linkTo(`${path}/?page=${page}`)}
                     setPage={(page) => linkTo(generatePath(`${props.match.path}`, {
                         page: page

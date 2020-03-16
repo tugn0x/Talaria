@@ -5,7 +5,7 @@ import {Link} from 'react-router'
 import './style.scss'
 
 const Pagination = (props) => {
-    const {current_page, last_page, setPage, url} = props
+    const {current_page, total_pages, setPage, url} = props
     
     return (
         <Col md={3} className="pagination">
@@ -15,11 +15,11 @@ const Pagination = (props) => {
             <Button className="step-backward" color="link" onClick={() => setPage(current_page-1)} disabled={current_page !== 1 ? false : true}>
                 <i className="fa fa-step-backward"></i>
             </Button>
-            <span>{current_page} di {last_page}</span>
-            <Button className="step-forward" color="link" onClick={() => setPage(current_page+1)} disabled={current_page !== last_page ? false : true}>
+            <span>{current_page} di {total_pages}</span>
+            <Button className="step-forward" color="link" onClick={() => setPage(current_page+1)} disabled={current_page !== total_pages ? false : true}>
                 <i className="fa fa-step-forward"></i>
             </Button>
-            <Button className="forward" color="link" onClick={() => setPage(last_page)} disabled={current_page !== last_page ? false : true}>
+            <Button className="forward" color="link" onClick={() => setPage(total_pages)} disabled={current_page !== total_pages ? false : true}>
                 <i className="fa fa-forward"></i>
             </Button>
         </Col>
@@ -29,7 +29,7 @@ const Pagination = (props) => {
 Pagination.propTypes = {
     setPage: PropTypes.func.isRequired,
     current_page: PropTypes.number.isRequired,
-    last_page: PropTypes.number.isRequired
+    total_pages: PropTypes.number.isRequired
 };
 
 export default Pagination

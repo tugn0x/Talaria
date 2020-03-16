@@ -12,6 +12,7 @@ import { generatePath } from "react-router";
 const ReferencesList = (props) => {
     console.log('ReferencesList', props)
     const {match, referencesList, pagination} = props
+    // const {total_pages, current_page} = pagination
     const intl = useIntl();
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
@@ -90,14 +91,14 @@ const ReferencesList = (props) => {
                     loading={props.loading} 
                     createReferences={ (formData) => props.createReferences(formData) } />
             </CustomModal>
-            {pagination && Object.keys(pagination).length > 0 &&
+            {/*  pagination && Object.keys(pagination).length > 0 &&
                 <Pagination
                     current_page={current_page}
-                    last_page={last_page}
+                    total_pages={total_pages}
                     setPage={(page) => linkTo(generatePath(`${match.path}`, {
                         page: page
                     }))}
-                />
+                />  */
             }
         </>
     )

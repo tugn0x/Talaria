@@ -35,7 +35,7 @@ const PatronReducer = (state = initialState, action) =>
       case REQUEST_GET_REFERENCE_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.reference = action.result;
+        draft.reference = action.result.data;
         break;
       case REQUEST_UPDATE_REFERENCES:
         draft.loading = true;
@@ -50,6 +50,7 @@ const PatronReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = initialState.error;
         draft.referencesList = action.result.data;
+        // add pagination
         break;
       case REQUEST_GET_MY_LIBRARY:
         draft.loading = true;
@@ -57,7 +58,7 @@ const PatronReducer = (state = initialState, action) =>
       case REQUEST_GET_MY_LIBRARY_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.library = action.result;
+        draft.library = action.result.data;
         break;
       case REQUEST_MY_LIBRARIES:
         draft.loading = true;

@@ -42,12 +42,13 @@ const MyLibraryForm = (props) => {
         <Loader show={loading} >
             <Row className="justify-content-center">
                 <Col md="10">
+                   
                     {library &&
                         <ul>
-                        {Object.keys(library).map((key) =>
+                        {Object.keys(library).length > 0 && Object.keys(library).map((key) =>
                             (
                                 library[key] &&
-                                <li><span>{key}</span> <span>{library[key]}</span></li>
+                                <li key={key}><span>{key}</span> <span>{library[key]}</span></li>
                             )
                         )}
                         {/* <CustomForm

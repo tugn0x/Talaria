@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 const ReferencesListPage = (props) => {
+    console.log('ReferencesListPage', props)
     const {dispatch, isLoading, match, patron} = props
     const referencesList = patron.referencesList
 
@@ -26,7 +27,7 @@ const ReferencesListPage = (props) => {
         <ReferencesList 
             match={match} 
             referencesList={referencesList} 
-            pagination={patron.pagination}
+            pagination={referencesList.pagination}
             loading={isLoading} 
             editPath={'/patron/references/reference/:id?'}
             createReferences={ (formData) => dispatch(requestPostReferences(formData, "Reference added!")) }
