@@ -58,6 +58,7 @@ class LibraryUserController extends ApiController
             $this->validate($request, $this->validate);
         $this->model = $this->filterRelations($request);
 
+        $id = $request->route()->parameters['library_user'];
         $model = $this->nilde->update($this->model, $request, $id);
 
         if($this->broadcast && config('apinilde.broadcast'))
@@ -75,8 +76,16 @@ class LibraryUserController extends ApiController
     }
 
     public function filterRelations($request) {
-        $library = $request->route()->parameters;
+        $library = $request->route()->parameters();
         return $this->model->inLibrary($library);
+    }
+
+    public function show(Request $request, $id)
+    {
+        $id = $request->route()->parameters['library_user'];
+        $model = $this->nilde->show($this->model, $request, $id);
+
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
 }
