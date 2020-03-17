@@ -76,4 +76,12 @@ export default defineMessages({
         id: `${scope}.InstitutionTypes`,
         defaultMessage: 'Institution Types',
     },
+    Projects: {
+        id: `${scope}.Projects`,
+        defaultMessage: 'Projects',
+    },
+    ProjectCreateNew: {
+        id: `${scope}.ProjectsCreateNew`,
+        defaultMessage: 'Register new project',
+    },
 });

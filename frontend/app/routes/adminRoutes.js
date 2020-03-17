@@ -3,6 +3,9 @@ import UserPage from 'containers/Admin/UserPage/Loadable';
 import LibraryPage from 'containers/Admin/LibraryPage/Loadable';
 import LibrariesListPage from 'containers/Admin/LibrariesListPage/Loadable';
 import InstitutionTypeListPage from 'containers/Admin/InstitutionTypeListPage/Loadable';
+import ProjectPage from 'containers/Admin/ProjectPage/Loadable';
+import ProjectsListPage from 'containers/Admin/ProjectsListPage/Loadable';
+
 import SubRouteSwitch from 'components/SubRouteSwitch';
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
@@ -26,6 +29,13 @@ const routes = [
       { path: '/institutions-types/type/new', icon: 'plus', name: `InstitutionTypeNew`, component: LibraryPage,  url: `/libraries/library/new`},
       { path: '/institutions-types/type/:id?', name: `InstitutionType`, component: LibraryPage, },
       { path: '/institutions-types/:page?', exact: true, name: `InstitutionTypes`, url: `/institutions/institutions-types`, component: InstitutionTypeListPage, sidebar: true},
+    ]
+  },
+  { path: '/projects',  name: `Projects`, component: SubRouteSwitch, header: true,
+    children: [
+      { path: '/project/new', icon: 'plus', name: `ProjectCreateNew`, component: ProjectPage,  url: `/projects/project/new`, sidebar: true},
+      { path: '/project/:id?', name: `Projects`, component: ProjectPage, },
+      { path: '/:page?', exact: true, name: `Projects`, url: `/projects`, component: ProjectsListPage},
     ]
   },
 ];
