@@ -70,7 +70,7 @@ function ProjectsList(props) {
                                 </span>
                             </Col>
                             <Col xs={2}>
-                                <span>{project.active}</span>
+                            <div className={`status-point ${project.active === 0 ? 'disabled' : 'success' }`}></div>
                             </Col>
                             <Col xs={3} className="edit-icons" >
                                 <a href={`${editurl(project.id)}`} className="btn btn-link">
