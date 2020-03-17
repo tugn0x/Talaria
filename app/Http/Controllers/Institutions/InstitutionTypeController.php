@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Institutions;
 use App\Http\Controllers\ApiController;
 use App\Models\Institutions\Institution;
 use App\Models\Institutions\InstitutionType;
-use App\Models\Libraries\InstitutionTypeTransformer;
+use App\Models\Institutions\InstitutionTypeTransformer;
 use Illuminate\Http\Request;
 
 class InstitutionTypeController extends ApiController
