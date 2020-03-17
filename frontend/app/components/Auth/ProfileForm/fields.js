@@ -50,11 +50,12 @@ export const fields = {
         type: "number",
         name: "mobile",
     },
-   /*  privacy_policy_accepted: {
+    privacy_policy_accepted: {
         type: "switch",
         name: "privacy_policy_accepted",
         required: true,
-    }, */
+        error: "app.global.invalid_privacy_policy_accepted"
+    }, 
     /* select: {
         type: "select",
         name: "select",

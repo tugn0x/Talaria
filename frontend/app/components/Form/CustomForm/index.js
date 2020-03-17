@@ -5,7 +5,8 @@ import {useIntl} from 'react-intl'
 import Select from 'react-select'; 
 import { AppSwitch } from '@coreui/react'
 import './style.scss'
-import {uniqBy} from 'lodash'
+// import {uniqBy} from 'lodash'
+import {ErrorBox} from 'components';
 import {selectFieldsGroups} from './selectFieldsGroups'
 // PROPS
 // fields
@@ -167,14 +168,12 @@ const CustomForm = (props) => {
                                                                 />)
                                                             ||
                                                             field.type === 'switch' &&
-                                                                <>
                                                                 <AppSwitch className="mx-1" color="success"
                                                                     checked={Boolean(formData[field.name])}
                                                                     name={field.name}
                                                                     onChange={(e) => handleChange(e)}
                                                                     required={field.required ? field.required : false}
                                                                 />
-                                                                </>       
                                                             ||
                                                                 (<CustomInput
                                                                     className="form-control"
@@ -187,6 +186,9 @@ const CustomForm = (props) => {
                                                                     onChange={(e) => handleChange(e)}
                                                                     required={field.required ? field.required : false}
                                                                 />)
+                                                            }
+                                                            {field.error && 
+                                                                <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: field.error })} />
                                                             }
                                                         </fieldset>
                                                     )

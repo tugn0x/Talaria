@@ -75,7 +75,7 @@ function UsersList(props) {
                                 <div className={`status-point ${user.status === 0 ? 'pending' : 'success' }`}></div>
                             </Col>
                             <Col xs={2} className="edit-icons" >
-                                <a href={`${editurl(user.user_id)}`} className="btn btn-link">
+                                <a href={`${editurl(user.id)}`} className="btn btn-link">
                                     <i className="fa fa-edit"></i>
                                 </a>
                                 <a href="#" onClick={() => console.log('delete user')} className="btn btn-link">
