@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Institutions\Institution;
 use App\Models\Institutions\InstitutionType;
 use App\Models\Libraries\Library;
 use App\Models\Libraries\LibraryUser;
@@ -31,6 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         Reference::class => ReferencesPolicy::class,
         User::class => BasePolicy::class,
         InstitutionType::class => BasePolicy::class,
+        Institution::class => BasePolicy::class,
     ];
 
     /**
