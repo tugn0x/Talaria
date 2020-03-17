@@ -229,4 +229,8 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_UPDATE_LIBRARY, requestUpdateLibrarySaga);
   yield takeLatest(REQUEST_POST_LIBRARY, requestPostLibrarySaga);
   yield takeLatest(REQUEST_GET_INSTITUTION_TYPE_LIST, requestGetInstitutionTypeListSaga);
+  yield takeLatest(REQUEST_GET_PROJECT, requestGetProjectSaga);
+  yield takeLatest(REQUEST_GET_PROJECTS_LIST, requestGetProjectsListSaga);
+  yield takeLatest(REQUEST_UPDATE_PROJECT, requestUpdateProjectSaga);
+  yield takeLatest(REQUEST_POST_PROJECT, requestPostProjectSaga);
 }
