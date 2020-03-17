@@ -31,7 +31,7 @@ function InstitutionPage(props) {
       if(!isLoading && !isNew) {
          // dispatch(requestGetLibrary(params.id))
       }else if(!isLoading && isNew){
-       // dispatch(requestGetInstitutionsSelectList())
+        dispatch(requestGetInstitutionsSelectList())
         dispatch(requestGetCountriesSelectList())
       }
     }, [])
@@ -52,7 +52,7 @@ function InstitutionPage(props) {
               loading={isLoading}
               institutionsListSelect={institutionsListSelect}
               countriesListSelect={countriesListSelect}
-              // searchCustomSelect={(input) => dispatch(requestGetInstitutionsSelectList(input))}
+              searchCustomSelect={(input) => dispatch(requestGetInstitutionsSelectList(input))}
             /> 
         }  
       </>
