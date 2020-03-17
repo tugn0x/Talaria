@@ -24,5 +24,7 @@ class CountryController extends ApiController
         $this->transformer = $transformer;
 
         $this->broadcast = false;
+
+        $this->nilde->disableAuthorize();
     }
 }
