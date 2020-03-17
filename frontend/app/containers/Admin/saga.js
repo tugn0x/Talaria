@@ -5,6 +5,11 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_UPDATE_LIBRARY,
           REQUEST_POST_LIBRARY,
           REQUEST_GET_INSTITUTION_TYPE_LIST,
+          REQUEST_GET_PROJECT,
+          REQUEST_GET_PROJECTS_LIST,
+          REQUEST_UPDATE_PROJECT,
+          REQUEST_POST_PROJECT,
+
 } from './constants';
 import {
   requestError,
@@ -15,6 +20,8 @@ import {
   requestGetLibrarySuccess,
   requestGetLibrariesListSuccess,
   requestGetInstitutionTypeListSuccess,
+  requestGetProjectSuccess,
+  requestGetProjectsListSuccess,
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
@@ -145,6 +152,62 @@ export function* requestGetInstitutionTypeListSaga(action = {}) {
   try {
     const request = yield call(getInstituionTypeList, options);
     yield put(requestGetInstitutionTypeListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestPostProjectSaga(action) {
+  const options = {
+    method: 'post',
+    body: {...action.request }
+  };
+  try {
+    const request = yield call(createProject, options);
+    yield call(requestGetProjectsListSaga);
+    yield put(push("/admin/projects"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestGetProjectSaga(action) {
+  const options = {
+    method: 'get',
+    id: action.id
+  };
+  try {
+   const request = yield call(getProject, options);
+   yield put(requestGetProjectSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestUpdateProjectSaga(action) {
+  const options = {
+    method: 'put',
+    body: action.request
+  };
+  try {
+    const request = yield call(updateProject, options);
+    yield call(requestGetProjectsListSaga);
+    yield put(push("/admin/projects"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestGetProjectsListSaga(action = {}) {
+  const options = {
+    method: 'get',
+    page: action.page ? action.page : '1'
+  };
+  try {
+    const request = yield call(getProjectsList, options);
+    yield put(requestGetProjectsListSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
   }

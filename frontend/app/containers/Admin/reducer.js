@@ -13,6 +13,10 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_UPDATE_LIBRARY, REQUEST_POST_LIBRARY,
   REQUEST_POST_USER,
   REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS, REQUEST_GET_INSTITUTION_TYPE_LIST,
+  REQUEST_GET_PROJECT, REQUEST_GET_PROJECT_SUCCESS,
+  REQUEST_GET_PROJECTS_LIST, REQUEST_GET_PROJECTS_LIST_SUCCESS,
+  REQUEST_UPDATE_PROJECT, REQUEST_POST_PROJECT,
+  
 } from "./constants";
 
 export const initialState = {
@@ -24,6 +28,7 @@ export const initialState = {
   librariesList: [],
   library: [],
   institutionTypes: [],
+  projects: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -111,6 +116,32 @@ const AdminReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = action.error;
         break;
+      case REQUEST_POST_PROJECT:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
+      case REQUEST_GET_PROJECT:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
+      case REQUEST_GET_PROJECT_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.project = action.result
+        break;
+      case REQUEST_UPDATE_PROJECT:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
+      case REQUEST_GET_PROJECTS_LIST:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
+      case REQUEST_GET_PROJECTS_LIST_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.projectsList = action.result.data
+        break;  
     }
   });
 

@@ -257,6 +257,29 @@ export const getInstituionTypeList = (options) => {
   return request(`${BASE_URL}/api/v1/institutions/institution-types`, options)
 };
 
+export const createProject = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/projects`, options)
+};
+
+export const getProject = (options) => {
+  const project_id = options.id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/projects/${project_id}`, options)
+};
+
+export const updateProject = (options) => {
+  const project_id = options.body.id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/projects/${project_id}`, options)
+};
+
+export const getProjectsList = (options) => {
+  const page = options.page;
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/projects/?page=${page}`, options)
+};
+
 /*
 |        | GET|HEAD | api/v1/institutions/institution-types                   | api.v1.institutions.index                              | App\Http\Controllers\Institutions\InstitutionTypeController@index         | api,auth:api                                     |
 |        | POST     | api/v1/institutions/institution-types                   | api.v1.institutions.store                              | App\Http\Controllers\Institutions\InstitutionTypeController@store         | api,auth:api                                     |
