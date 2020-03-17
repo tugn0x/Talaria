@@ -12,12 +12,13 @@ use App\Models\Users\User;
 //use Event;
 use Gate;
 use League\OAuth2\Server\AuthorizationServer;
-use function foo\func;
+use App\Trais\Http\Auth\OauthCustomProviderTrait;
 
 //use Authorizer;
 
 trait AuthControllerTrait
 {
+    use OauthCustomProviderTrait;
 
 	/**
 	 * Handle a registration request for the application.
@@ -25,7 +26,7 @@ trait AuthControllerTrait
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function postRegister(Request $request)
+	public function postRegister(Request $request, AuthorizationServer $authorizationServer)
 	{
 		$this->validate($request, [
 		    'email' => 'required|email',
@@ -41,16 +42,21 @@ trait AuthControllerTrait
 		$controller->nilde->disableAuthorize();
 		$response = $controller->store($request);
 		$controller->nilde->enableAuthorize();
-		event('auth.registered', $response->getOriginalContent());
-
-		/*
-		 * return an access_token
-		 */
-        $proxy = \Request::create(
-            'oauth/token',
-            'POST'
-        );
-        return \Route::dispatch($proxy);
+		$content = $response->getOriginalContent();
+		event('auth.registered', $content);
+//		/*
+//		 * return an access_token
+//		 */
+//        $proxy = \Request::create(
+//            'oauth/token',
+//            'POST'
+//        );
+//        return \Route::dispatch($proxy);
+        /*
+         * return an access_token
+         */
+        $oauth = $this->getOauthToken($authorizationServer, $content->id);
+        return $oauth;
 	}
 
     /*

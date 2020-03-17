@@ -12,7 +12,11 @@ Route::group([
 //    'middleware' => 'api',
     'as' => 'api.v1.auth.',
 ], function () {
-    Route::post('register', 'AuthController@postRegister')->name('register');
+    Route::group([
+        'middleware' => 'recaptcha',
+    ], function () {
+        Route::post('register', 'AuthController@postRegister')->name('register');
+    });
     Route::post('forgot-password', 'PasswordController@forgotPassword')->name('forgot-password');
     Route::post('reset-password', 'PasswordController@resetPassword')->name('reset-password');
 

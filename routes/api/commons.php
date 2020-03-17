@@ -12,5 +12,5 @@ Route::group([
 //    'middleware' => 'api',
     'as' => 'api.v1.commons.',
 ], function () {
-    Route::get('countries', 'CountryController@optionList')->name('countries.option-items');
+    Route::get('countries/option-items', 'CountryController@optionList')->name('countries.option-items');
 });
