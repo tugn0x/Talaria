@@ -28,7 +28,8 @@ export const initialState = {
   librariesList: [],
   library: [],
   institutionTypes: [],
-  projects: [],
+  project: [],
+  projectsList: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */

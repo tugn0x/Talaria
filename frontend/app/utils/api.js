@@ -248,11 +248,6 @@ export const updateLibraryUser = (options) => {
 
 
 export const getInstituionTypeList = (options) => {
-  console.log('OPTIONS?')
-  console.log('OPTIONS?')
-  console.log('OPTIONS?')
-  console.log('OPTIONS?')
-  console.log('OPTIONS?')
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/institutions/institution-types`, options)
 };

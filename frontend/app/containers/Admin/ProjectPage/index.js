@@ -15,7 +15,7 @@ import messages from './messages';
 import { FormattedMessage } from 'react-intl';
 import {requestGetProject, requestUpdateProject, requestPostProject} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
-import {CustomForm, ProjectForm} from 'components';
+import {CustomForm /*, ProjectForm*/} from 'components';
 
 
 function ProjectPage(props) {
@@ -38,6 +38,7 @@ function ProjectPage(props) {
      
     return (
       <>
+      {/*
         {!isNew && 
             <ProjectForm 
               project={project}
@@ -51,7 +52,8 @@ function ProjectPage(props) {
               loading={isLoading}
               titleNewProject={intl.formatMessage(messages.titleNewProject)}
             /> 
-        }  
+        }
+      */}  
       </>
     );
   }

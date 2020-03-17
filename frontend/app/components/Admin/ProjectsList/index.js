@@ -4,8 +4,8 @@ import messages from './messages';
 import { useIntl } from 'react-intl';
 import {formatDate} from 'utils/formatDate'
 import ButtonPlus from 'components/Button/ButtonPlus'
-import CustomModal from 'components/Modal/Loadable'
-import {ProjectForm} from 'components';
+//import CustomModal from 'components/Modal/Loadable'
+//import {ProjectForm} from 'components';
 import { generatePath } from "react-router";
 // import './style.scss'
 
@@ -85,7 +85,7 @@ function ProjectsList(props) {
                     }
                 </div>
             </div> 
-            <CustomModal 
+            {/*<CustomModal 
                 modal={modal} 
                 toggle={toggle}>
                 <ProjectForm 
@@ -93,18 +93,9 @@ function ProjectsList(props) {
                     loading={loading}
                     titleNewProject={'New Project'}
                 /> 
-            </CustomModal>  
-           {/*  {pagination && Object.keys(pagination).length > 0 &&
-                <Pagination
-                    current_page={current_page}
-                     total_pages={total_pages}
-                    // setPage={(page) => linkTo(`${path}/?page=${page}`)}
-
-                    setPage={(page) => linkTo(generatePath(`${props.match.path}`, {
-                        page: page
-                      }))}
-                />
-            } */}
+            </CustomModal> 
+            */} 
+          
           </>
     )
 }
