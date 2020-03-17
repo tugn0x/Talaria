@@ -44,7 +44,7 @@ function ProjectsList(props) {
                         <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
                     </Col>
                     <Col xs={2}>
-                        <span>Email</span>
+                        <span>Active</span>
                         <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
                     </Col>
                     <Col xs={3}>
