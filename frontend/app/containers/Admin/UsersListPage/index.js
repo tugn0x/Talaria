@@ -6,7 +6,7 @@ import {useIntl} from 'react-intl';
 import UsersListTable from 'components/Admin/UsersListTable'
 import {requestUsersList, requestPostUser} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
-// import queryString from 'query-string'
+import messages from 'utils/globalMessages';
 
 const UsersListPage = (props) => {
     console.log('UsersListPage', props)
@@ -38,7 +38,7 @@ const UsersListPage = (props) => {
             match={match}
             loading={isLoading}
             editPath={'/admin/users/user/:id?'}
-            createUser={ (formData) => dispatch(requestPostUser(formData, "User added!!!" )) }
+            createUser={ (formData) => dispatch(requestPostUser(formData, intl.formatMessage(messages.userCreateSuccess) )) }
         />
     )
 }

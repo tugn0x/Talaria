@@ -67,16 +67,13 @@ export const fields = {
         name: "mobile",
         width: "col-md-6"
     },
-    /* select: {
-        type: "select",
-        name: "select",
-        label: "app.containers.UserProfile.state",
-        placeholder: "app.containers.UserProfile.state",
-        options: [
-            { value: 'acquisto', label: 'acquisto' },
-            { value: 'donazione', label: 'donazione' },
-            { value: 'comodato', label: 'comodato' }
-        ]
-    }, */
+    privacy_policy_accepted: {
+        type: "switch",
+        name: "privacy_policy_accepted",
+        required: true,
+        width: "col-md-6"
+       // error: "app.global.invalid_privacy_policy_accepted",
+      //  defaultValue: moment().format('YYYY-MM-DD hh:mm:ss')
+    }, 
    
 }

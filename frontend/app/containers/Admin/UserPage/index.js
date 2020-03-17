@@ -6,7 +6,7 @@ import {useIntl} from 'react-intl';
 import {requestUpdateUser, requestPostUser, requestUser} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
 import UserForm from 'components/Admin/UserForm/Loadable'
-
+import messages from 'utils/globalMessages'
 
 const UserPage = (props) => {
     console.log('UserPage', props)
@@ -25,7 +25,7 @@ const UserPage = (props) => {
         <>
             {!isNew &&
                 <UserForm
-                    updateUser={(formData) => dispatch(requestUpdateUser({...formData, id: params.id }, intl.formatMessage({ id: 'app.containers.ProfilePage.updateMessage' })))}
+                    updateUser={(formData) => dispatch(requestUpdateUser({...formData, id: params.id }, intl.formatMessage(messages.userUpdateSuccess)))}
                     user={admin.user}
                     loading={isLoading}
                 />
@@ -33,7 +33,7 @@ const UserPage = (props) => {
             {isNew &&
                 <UserForm
                     loading={isLoading}
-                    createUser={ (formData) => dispatch(requestPostUser(formData, "User added!!!" )) } />
+                    createUser={ (formData) => dispatch(requestPostUser(formData, intl.formatMessage(messages.userCreateSuccess) )) } />
             }
         </>
     )

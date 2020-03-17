@@ -16,16 +16,13 @@ class Recaptcha
      */
     public function handle($request, Closure $next)
     {
-//        return $next($request);
-//        dd('PARTITO DEMOCRATICO!');
-
         $validator = \Validator::make($request->only('recaptcha'), [
             'recaptcha' => ['required', new RecaptchaV3()],
 //            'body' => 'required',
         ]);
         if ($validator->fails()) {
-            $validator->validate();
-//            throw new \Dingo\Api\Exception\ValidationHttpException($validator->errors());
+//            $validator->validate();
+            throw new \Dingo\Api\Exception\ValidationHttpException($validator->errors());
         }
 //        $request->validate([
 //            'recaptcha' => ['required', new RecaptchaV3()],

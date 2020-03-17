@@ -5,13 +5,13 @@ import { useIntl } from 'react-intl';
 import {formatDate} from 'utils/formatDate'
 import ButtonPlus from 'components/Button/ButtonPlus'
 import CustomModal from 'components/Modal/Loadable'
-import {LibraryForm} from 'components';
+// import {LibraryForm} from 'components';
 import { generatePath } from "react-router";
 // import './style.scss'
 
-function LibrariesList(props) {
-    console.log('LibrariesList', props)
-    const {librariesList, editPath, createLibrary, loading} = props
+function InstitutionsList(props) {
+    console.log('InstitutionsList', props)
+    const {institutionsList, editPath, loading, pagination} = props
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const intl = useIntl();
@@ -27,9 +27,9 @@ function LibrariesList(props) {
             <h3 className="table-title">{intl.formatMessage(messages.header)}</h3>
             <ButtonPlus 
                 onClickHandle={toggle}
-                text={intl.formatMessage(messages.createNewLibrary)}
+                text={intl.formatMessage(messages.createNewInstitution)}
             />
-            <div className="table libraries-list">
+            <div className="table institutions-list">
                 <Row className="thead">
                     <Col xs={3}>
                         <span>Titolo / Descrizione</span>
@@ -44,36 +44,36 @@ function LibrariesList(props) {
                         <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
                     </Col>
                     <Col xs={2}>
-                        <span>Email</span>
+                        <span>Institution type ID</span>
                         <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
                     </Col>
                     <Col xs={3}>
-                        <span>{intl.formatMessage(messages.editLibrary)}</span>
+                        <span>{intl.formatMessage(messages.editInstitution)}</span>
                     </Col>
                 </Row>
                 <div className="tbody">
-                    {librariesList.length > 0 && librariesList.map(library => (
-                        <Row key={`library-${library.id}`}>
+                    {institutionsList.length > 0 && institutionsList.map(institution => (
+                        <Row key={`library-${institution.id}`}>
                             <Col xs={3}>
-                                <a href={`${editurl(library.id)}`}>
-                                    {library.name}
+                                <a href={`${editurl(institution.id)}`}>
+                                    {institution.name}
                                 </a>
                             </Col>
                             <Col xs={2}>
                                 <span>
-                                    {library.id}
+                                    {institution.id}
                                 </span>
                             </Col>
                             <Col xs={2}>
                                 <span>
-                                    {formatDate(library.created_at, intl.locale)}
+                                    {formatDate(institution.created_at, intl.locale)}
                                 </span>
                             </Col>
                             <Col xs={2}>
-                                <span>{library.email}</span>
+                                <span>{institution.institution_type_id}</span>
                             </Col>
                             <Col xs={3} className="edit-icons" >
-                                <a href={`${editurl(library.id)}`} className="btn btn-link">
+                                <a href={`${editurl(institution.id)}`} className="btn btn-link">
                                     <i className="fa fa-edit"></i>
                                 </a>
                                 <a href="#" onClick={() => console.log('delete user')} className="btn btn-link">
@@ -85,7 +85,7 @@ function LibrariesList(props) {
                     }
                 </div>
             </div> 
-            <CustomModal 
+            {/* <CustomModal 
                 modal={modal} 
                 toggle={toggle}>
                 <LibraryForm 
@@ -93,7 +93,7 @@ function LibrariesList(props) {
                     loading={loading}
                     titleNewLibrary={'New Library'}
                 /> 
-            </CustomModal>  
+            </CustomModal>   */}
            {/*  {pagination && Object.keys(pagination).length > 0 &&
                 <Pagination
                     current_page={current_page}
@@ -109,4 +109,4 @@ function LibrariesList(props) {
     )
 }
 
-export default LibrariesList
+export default InstitutionsList

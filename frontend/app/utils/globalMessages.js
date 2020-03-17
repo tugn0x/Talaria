@@ -83,6 +83,22 @@ export default defineMessages({
   },
   privacy_policy_accepted: {
     id: `${scope}.privacy_policy_accepted`,
-    defaultMessage: 'Privacy Policy accepted',
+    defaultMessage: 'Privacy Policy',
+  },
+  invalid_privacy_policy_accepted: {
+    id: `${scope}.invalid_privacy_policy_accepted`,
+    defaultMessage: 'Please accept the privacy policy',
+  },
+  invalid_field: {
+    id: `${scope}.invalid_field`,
+    defaultMessage: "This field can not be empty",
+  },
+  userCreateSuccess: {
+    id: `${scope}.userCreateSuccess`,
+    defaultMessage: "User created",
+  },
+  userUpdateSuccess: {
+    id: `${scope}.userUpdateSuccess`,
+    defaultMessage: "User updated",
   },
 });

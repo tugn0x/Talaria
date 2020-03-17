@@ -13,11 +13,16 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_UPDATE_LIBRARY, /* REQUEST_UPDATE_LIBRARY_SUCCESS, */
    REQUEST_POST_LIBRARY, REQUEST_POST_LIBRARY_SUCCESS,
    REQUEST_POST_USER, REQUEST_POST_USER_SUCCESS,
-   REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS, REQUEST_GET_INSTITUTION_TYPE_LIST, 
    REQUEST_GET_PROJECT, REQUEST_GET_PROJECT_SUCCESS,
    REQUEST_GET_PROJECTS_LIST, REQUEST_GET_PROJECTS_LIST_SUCCESS,
    REQUEST_UPDATE_PROJECT, 
    REQUEST_POST_PROJECT,
+   REQUEST_GET_INSTITUTIONS_LIST, REQUEST_GET_INSTITUTIONS_LIST_SUCCESS,
+   REQUEST_GET_INSTITUTION, REQUEST_GET_INSTITUTION_SUCCESS,
+   REQUEST_GET_INSTITUTIONS_SELECT_LIST, REQUEST_GET_INSTITUTIONS_SELECT_LIST_SUCCESS,
+   REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS, REQUEST_GET_INSTITUTION_TYPE_LIST,
+   REQUEST_POST_INSTITUTION, 
+   REQUEST_GET_COUNTRIES_SELECT_LIST, REQUEST_GET_COUNTRIES_SELECT_LIST_SUCCESS
 } from "./constants";
 
 export function defaultAction() {
@@ -190,6 +195,71 @@ export function stopLoading() {
   return {
     type: STOP_LOADING,
     // request: request
+  };
+}
+
+export function requestGetInstitutionsList(page = '1') {
+  return {
+    type: REQUEST_GET_INSTITUTIONS_LIST,
+    page
+  };
+}
+
+export function requestGetInstitutionsListSuccess(result) {
+  return {
+    type: REQUEST_GET_INSTITUTIONS_LIST_SUCCESS,
+    result
+  };
+}
+
+export function requestGetInstitution(id) {
+  return {
+    type: REQUEST_GET_INSTITUTION,
+    id
+  };
+}
+
+export function requestGetInstitutionSuccess(result) {
+  return {
+    type: REQUEST_GET_INSTITUTION_SUCCESS,
+    result
+  };
+}
+
+export function requestGetInstitutionsSelectList(request) {
+  return {
+    type: REQUEST_GET_INSTITUTIONS_SELECT_LIST,
+    request
+  };
+}
+
+export function requestGetInstitutionsSelectListSuccess(result) {
+  return {
+    type: REQUEST_GET_INSTITUTIONS_SELECT_LIST_SUCCESS,
+    result
+  };
+}
+
+export function requestGetCountriesSelectList(request) {
+  return {
+    type: REQUEST_GET_COUNTRIES_SELECT_LIST,
+    request
+  };
+}
+
+export function requestGetCountriesSelectListSuccess(result) {
+  return {
+    type: REQUEST_GET_COUNTRIES_SELECT_LIST_SUCCESS,
+    result
+  };
+}
+
+export function requestPostInstitution(request) {
+  return {
+    type: REQUEST_POST_INSTITUTION,
+    request: {
+      ...request, 
+      institution_type_id: request.institution_type_id.value}
   };
 }
 

@@ -10,9 +10,11 @@ use App\Models\Users\User;
 use Carbon\Carbon;
 use Hash;
 use League\OAuth2\Server\AuthorizationServer;
+use App\Trais\Http\Auth\OauthCustomProviderTrait;
 
 class SocialAuthController extends ApiController
 {
+    use OauthCustomProviderTrait;
     /**
      * Redirect the user to the Facebook authentication page.
      *
@@ -199,31 +201,5 @@ class SocialAuthController extends ApiController
 //            'status' => 1,
 //            'password' => substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(16/strlen($x)) )),1,16),
         ];
-    }
-
-    private function getOauthToken(AuthorizationServer $authorizationServer, $id)
-    {
-        $request = (new \Zend\Diactoros\ServerRequest)->withParsedBody([
-            'grant_type' => 'nilde-password',
-            'client_id' => config('api.api_client.name'),
-            'client_secret' => config('api.api_client.secret'),
-            'user_id' => $id,
-            'scope' => '*',
-        ]);
-
-        $grant = new \App\Traits\Http\Auth\NildePasswordGrant(
-            app(\Laravel\Passport\Bridge\UserRepository::class),
-            app(\Laravel\Passport\Bridge\RefreshTokenRepository::class)
-        );
-
-        $grant->setRefreshTokenTTL(\Laravel\Passport\Passport::refreshTokensExpireIn());
-
-        $authorizationServer->enableGrantType($grant, \Laravel\Passport\Passport::tokensExpireIn());
-//
-        $response = json_decode($authorizationServer->respondToAccessTokenRequest(
-            $request, new \Zend\Diactoros\Response
-        )->getBody()->__toString(), true);
-
-        return $response;
     }
 }

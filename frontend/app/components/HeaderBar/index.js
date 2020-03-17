@@ -21,8 +21,11 @@ import './style.scss'
 
 
 function HeaderBar(props) {
+
   console.log('HeaderBar', props)
 
+  // console.log('HeaderBar', props)
+  
   const { auth, isLogged, history, headermenu, routes } = props
   
   const currentRoute = routes.filter(route => route.current).length > 0 ? routes.filter(route => route.current) : null;
@@ -40,6 +43,7 @@ function HeaderBar(props) {
   
 
   return (
+
     <>
       <header className="app-header navbar bg-grey-light px-4">
         <div className="header-container container">

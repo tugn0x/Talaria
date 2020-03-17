@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react'
-import { Col, Card, CardBody, InputGroup, InputGroupAddon, InputGroupText, CustomInput, Form, Button, Row } from 'reactstrap'
+import { Card, CardBody, CustomInput, Form, Button, Row } from 'reactstrap'
 import PropTypes from 'prop-types';
 import {useIntl} from 'react-intl'
 import Select from 'react-select'; 
 import { AppSwitch } from '@coreui/react'
 import './style.scss'
-import {uniqBy} from 'lodash'
+import {ErrorBox} from 'components';
 import {selectFieldsGroups} from './selectFieldsGroups'
+import moment from "moment";
 // PROPS
 // fields
 // callback action
@@ -58,7 +59,7 @@ const CustomForm = (props) => {
     };
 
     const handleChangeCustomSelect = (selectedOption, key) => {
-       setFormData({ [key]:  {...selectedOption} })
+       setFormData({...formData, [key]:  {...selectedOption} })
        setSelectedOption(selectedOption)
        setIsSubmitDisabled(false)
     }
@@ -67,12 +68,20 @@ const CustomForm = (props) => {
     /* HANDLE CHANGE Generico */
     const handleChange = (e) =>{
         const targetType = e.target.type
+        const targetName = e.target.name; 
+        const targetChecked = e.target.checked; 
+        const targetValue = e.target.value; 
+        console.log(targetValue)
         switch(targetType) {
-            case "checkbox" || "switch":
-                setFormData({ ...formData, [e.target.name]:  e.target.checked })
+            case "checkbox":
+                if(targetName !== 'privacy_policy_accepted'){
+                    setFormData({ ...formData, [targetName]:  targetChecked })
+                }else {
+                    setFormData({ ...formData, [targetName]: moment().format('YYYY-MM-DD hh:mm:ss')  })
+                }
                 break;
             default:
-                setFormData({ ...formData, [e.target.name]:  e.target.value   })
+                setFormData({ ...formData, [targetName]:  targetValue   })
                 break;
         }
         setIsSubmitDisabled(false)
@@ -118,7 +127,6 @@ const CustomForm = (props) => {
                                                             <div className="form-label">
                                                                 {messages[field.name] && intl.formatMessage(messages[field.name])}
                                                             </div>
-
                                                             {field.type === 'checkbox' &&
                                                                 (<CustomInput
                                                                     className="form-control"
@@ -167,14 +175,12 @@ const CustomForm = (props) => {
                                                                 />)
                                                             ||
                                                             field.type === 'switch' &&
-                                                                <>
                                                                 <AppSwitch className="mx-1" color="success"
                                                                     checked={Boolean(formData[field.name])}
                                                                     name={field.name}
                                                                     onChange={(e) => handleChange(e)}
                                                                     required={field.required ? field.required : false}
                                                                 />
-                                                                </>       
                                                             ||
                                                                 (<CustomInput
                                                                     className="form-control"
@@ -187,6 +193,9 @@ const CustomForm = (props) => {
                                                                     onChange={(e) => handleChange(e)}
                                                                     required={field.required ? field.required : false}
                                                                 />)
+                                                            }
+                                                            {field.error && 
+                                                                <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: field.error })} />
                                                             }
                                                         </fieldset>
                                                     )

@@ -59,4 +59,9 @@ class LibraryUser extends BaseModel
     {
         return $query->where('status', $status);
     }
+
+    public function scopeInLibrary($query, $library_id)
+    {
+        return $query->where('library_id', $library_id);
+    }
 }

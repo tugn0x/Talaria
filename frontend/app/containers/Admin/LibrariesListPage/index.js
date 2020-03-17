@@ -25,9 +25,6 @@ const LibrariesListPage = (props) => {
         <LibrariesList 
             librariesList={librariesList}
             loading={isLoading}
-            history={history}
-            path={path}
-            match={match}
             editPath={'/admin/libraries/library/:id?'}
             createLibrary={formData => dispatch(requestPostLibrary(formData, 'Library registered'))}
         />
