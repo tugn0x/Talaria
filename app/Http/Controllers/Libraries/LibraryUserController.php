@@ -56,6 +56,7 @@ class LibraryUserController extends ApiController
     {
         if(!empty($this->validate) )
             $this->validate($request, $this->validate);
+        $this->model = $this->filterRelations($request);
 
         $model = $this->nilde->update($this->model, $request, $id);
 
@@ -63,6 +64,19 @@ class LibraryUserController extends ApiController
             broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
+    }
+
+    public function index(Request $request)
+    {
+        $this->model = $this->filterRelations($request);
+        $collection = $this->nilde->index($this->model, $request);
+
+        return $this->response->paginator($collection, new $this->transformer())->morph();
+    }
+
+    public function filterRelations($request) {
+        $library = $request->route()->parameters;
+        return $this->model->inLibrary($library);
     }
 
 }
