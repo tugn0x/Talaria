@@ -26,9 +26,7 @@ const InstitutionTypeListPage = (props) => {
     return (
         <SimpleList
             data={institutionTypes}
-            columns={[
-              'id', 'name'
-            ]}
+            columns={['id', 'name']}
             loading={isLoading}
             history={history}
             path={path}
