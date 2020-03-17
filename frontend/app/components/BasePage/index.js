@@ -51,6 +51,7 @@ function BasePage(props) {
 
   return (
     <>
+
       <HeaderBar
         isLogged={props.isLogged}
         routes={lightRoutes}

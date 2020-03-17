@@ -17,6 +17,7 @@ import patronRoutes from "routes/patronRoutes";
 
 function PatronPage(props) {
   console.log('PatronPage', props)
+
   return (
     <>
       <BasePage {...props} routes={patronRoutes} messages={messages} headermenu={true}/>

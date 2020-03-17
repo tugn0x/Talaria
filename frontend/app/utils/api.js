@@ -246,6 +246,41 @@ export const updateLibraryUser = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${user_id}`, options)
 }
 
+export const getInstitutionsList = (options) => {
+  const page = options.page;
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/institutions/?page=${page}`, options)
+};
+
+
+export const getInstitution = (options) => {
+  const institution_id = options.id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/institutions/${institution_id}`, options)
+};
+
+/* export const updateInstitution = (options) => {
+  const institution_id = options.body.id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/institutions/${institution_id}`, options)
+}; */
+
+export const getInstitutionsSelectList = (options) => {
+  options = getOption(options);
+  const query = options.query ? options.query : "";
+  return request(`${BASE_URL}/api/v1/institutions/option-items?label=name&q=${query}`, options)
+};
+
+export const getCountriesSelectList = (options) => {
+  options = getOption(options);
+  const query = options.query ? options.query : "";
+  return request(`${BASE_URL}/api/v1/commons/countries/option-items?label=name&q=${query}`, options)
+};
+
+export const createInstitution = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/institutions`, options)
+};
 
 export const getInstituionTypeList = (options) => {
   console.log('OPTIONS?')

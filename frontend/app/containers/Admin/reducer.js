@@ -12,7 +12,13 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS,
   REQUEST_UPDATE_LIBRARY, REQUEST_POST_LIBRARY,
   REQUEST_POST_USER,
-  REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS, REQUEST_GET_INSTITUTION_TYPE_LIST,
+  REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS, 
+  REQUEST_GET_INSTITUTION_TYPE_LIST,
+  REQUEST_GET_INSTITUTIONS_LIST, 
+  REQUEST_GET_INSTITUTIONS_LIST_SUCCESS,
+  REQUEST_GET_INSTITUTION, REQUEST_GET_INSTITUTION_SUCCESS,
+  REQUEST_GET_INSTITUTIONS_SELECT_LIST, REQUEST_GET_INSTITUTIONS_SELECT_LIST_SUCCESS,
+  REQUEST_GET_COUNTRIES_SELECT_LIST, REQUEST_GET_COUNTRIES_SELECT_LIST_SUCCESS
 } from "./constants";
 
 export const initialState = {
@@ -24,6 +30,13 @@ export const initialState = {
   librariesList: [],
   library: [],
   institutionTypes: [],
+  institutionsList: {
+    pagination: [],
+    data: [],
+  },
+  institution: [],
+  institutionsListSelect: [],
+  countriesListSelect: []
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -84,13 +97,46 @@ const AdminReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = initialState.error;
         draft.librariesList = action.result.data
-        /* draft.pagination = Object.keys(action.result)
-          .filter(key => !['data'].includes(key))
-          .reduce((obj, key) => {
-            obj[key] = action.result[key];
-            return obj;
-          }, {}); */
         break;
+      case REQUEST_GET_INSTITUTION:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
+      case REQUEST_GET_INSTITUTION_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.institution = action.result
+        break;
+      case REQUEST_GET_INSTITUTIONS_LIST:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
+      case REQUEST_GET_INSTITUTIONS_LIST_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.institutionsList.data = action.result.data
+        draft.institutionsList.pagination = action.result.meta.pagination
+        break;
+      case REQUEST_GET_INSTITUTIONS_SELECT_LIST:
+        draft.loading = true;
+        draft.error = initialState.error;
+        break;
+      case REQUEST_GET_INSTITUTIONS_SELECT_LIST_SUCCESS:
+        draft.loading = false;
+        draft.error = action.error;
+        draft.institutionsListSelect = action.result.map(item => { return {value: item.id, label: item.name} } );
+        break;
+      
+      case REQUEST_GET_COUNTRIES_SELECT_LIST:
+        draft.loading = true;
+        draft.error = initialState.error;
+        break;
+      case REQUEST_GET_COUNTRIES_SELECT_LIST_SUCCESS:
+        draft.loading = false;
+        draft.error = action.error;
+        draft.countriesListSelect = action.result.map(item => { return {value: item.id, label: item.name} } );
+        break;  
+
       case REQUEST_GET_INSTITUTION_TYPE_LIST:
         draft.loading = true;
         draft.institutionTypes = [];

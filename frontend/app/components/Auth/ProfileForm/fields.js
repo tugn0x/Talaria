@@ -1,17 +1,17 @@
-import moment from "moment";
+
 
 export const fields = {
     name: {
         type: "text",
         required: true,
         name: "name",
-       
+        order: 1,
     },
     surname: {
         type: "text",
         required: true,
         name: "surname",
-      
+        order: 2,
     },
     address: {
         type: "text",
@@ -31,13 +31,6 @@ export const fields = {
         type: "number",
         name: "postcode",
     },
-   /*  checkbox: {
-        type: "checkbox",
-        name: "checkbox",
-        label: 'app.containers.UserProfile.postcode',
-        placeholder: 'app.containers.UserProfile.town',
-        checked: true,
-    },  */
     state: {
         type: "text",
         name: "state",
@@ -54,7 +47,8 @@ export const fields = {
         type: "switch",
         name: "privacy_policy_accepted",
         required: true,
-        error: "app.global.invalid_privacy_policy_accepted"
+       // error: "app.global.invalid_privacy_policy_accepted",
+      //  defaultValue: moment().format('YYYY-MM-DD hh:mm:ss')
     }, 
     /* select: {
         type: "select",
@@ -71,5 +65,7 @@ export const fields = {
         type: "email",
         required: true,
         name: "email",
+        order: 3,
+        error: "app.global.invalid_email",
     },
 }

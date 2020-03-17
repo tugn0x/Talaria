@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
-          REQUEST_POST_USER, REQUEST_USER, REQUEST_GET_LIBRARY,
+         /*  REQUEST_POST_USER, */ REQUEST_USER, REQUEST_GET_LIBRARY,
           REQUEST_GET_LIBRARIES_LIST,
           REQUEST_UPDATE_LIBRARY,
           REQUEST_POST_LIBRARY} from './constants';
@@ -18,7 +18,7 @@ import { push } from 'connected-react-router';
 import {getLibraryUsersList, updateLibraryUser, createUser,
         getLibraryUser, getLibrary, getLibrariesList, updateLibrary,
         createLibrary} from 'utils/api'
-import moment from 'moment';
+// import moment from 'moment';
 
 export function* requestUserSaga(action) {
   const options = {
@@ -71,10 +71,10 @@ export function* requestUpdateUserSaga(action) {
   }
 }
 
-export function* requestPostUserSaga(action) {
+/* export function* requestPostUserSaga(action) {
   const options = {
     method: 'post',
-    body: {...action.request, privacy_policy_accepted: moment().format('YYYY-MM-DD hh:mm:ss') }
+    body: action.request
   };
   try {
     const request = yield call(createUser, options);
@@ -84,7 +84,7 @@ export function* requestPostUserSaga(action) {
   } catch(e) {
     yield put(requestError(e.message));
   }
-}
+} */
 
 
 export function* requestPostLibrarySaga(action) {
@@ -150,7 +150,7 @@ export function* requestGetLibrariesListSaga(action = {}) {
 export default function* librarySaga() {
   yield takeLatest(REQUEST_USERS_LIST, requestUsersListSaga);
   yield takeLatest(REQUEST_UPDATE_USER, requestUpdateUserSaga);
-  yield takeLatest(REQUEST_POST_USER, requestPostUserSaga);
+  // yield takeLatest(REQUEST_POST_USER, requestPostUserSaga);
   yield takeLatest(REQUEST_USER, requestUserSaga);
   yield takeLatest(REQUEST_GET_LIBRARY, requestGetLibrarySaga);
   yield takeLatest(REQUEST_GET_LIBRARIES_LIST, requestGetLibrariesListSaga);

@@ -93,4 +93,12 @@ export default defineMessages({
     id: `${scope}.invalid_field`,
     defaultMessage: "This field can not be empty",
   },
+  userCreateSuccess: {
+    id: `${scope}.userCreateSuccess`,
+    defaultMessage: "User created",
+  },
+  userUpdateSuccess: {
+    id: `${scope}.userUpdateSuccess`,
+    defaultMessage: "User updated",
+  },
 });

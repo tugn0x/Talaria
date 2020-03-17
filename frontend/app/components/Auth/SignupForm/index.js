@@ -157,13 +157,14 @@ function SignupForm(props) {
                     <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.password_match' })} />
                   </InputGroup>
                   <InputGroup className="mb-4">
-                    <AppSwitch className="mx-1" color="primary"
+                    <AppSwitch className="mx-1" color="success"
                                value={formData.privacy_policy_accepted}
                                name='privacy_policy_accepted'
                                onChange={(e) => handlePrivacyPolicty(e)}
                                required
                                />
                     <Label check className="form-check-label" htmlFor="privacy_policy_accepted">Privacy policy</Label>
+                    <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.invalid_privacy_policy_accepted' })} />
                   </InputGroup>
                   <Button color="success" block>
                     <FormattedMessage {...messages.subtitle} />
