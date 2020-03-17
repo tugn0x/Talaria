@@ -26,7 +26,7 @@ class RecaptchaV3 implements Rule
      */
     public function passes($attribute, $value)
     {
-        return true;
+//        return true;
         // Reference: https://codeforgeek.com/google-recaptcha-v3-tutorial/
         $url = 'https://www.google.com/recaptcha/api/siteverify';
         $data = ['secret' => config('services.recaptcha.secret_key'), 'response' => $value];
