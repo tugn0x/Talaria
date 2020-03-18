@@ -56,7 +56,6 @@ class LibraryUserController extends ApiController
     {
         if(!empty($this->validate) )
             $this->validate($request, $this->validate);
-        $this->model = $this->filterRelations($request);
 
         $id = $request->route()->parameters['library_user'];
         $model = $this->nilde->update($this->model, $request, $id);
