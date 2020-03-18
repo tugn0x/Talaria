@@ -5,16 +5,16 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.components.MyLibraryForm';
+export const scope = 'app.components.LibraryForm';
 
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'My Library form',
+    defaultMessage: 'Library form',
   },
   institution_id: {
     id: `${scope}.institution_id`,
-    defaultMessage: "Library ID",
+    defaultMessage: "Institution ID",
   },
   subject_id: {
     id: `${scope}.subject_id`,

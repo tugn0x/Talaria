@@ -9,7 +9,7 @@ import {useIntl} from 'react-intl';
 
 const InstitutionForm = (props) => {
     console.log('InstitutionForm', props)
-    const { insitution, loading, createInstitution, institutionsListSelect, countriesListSelect, searches} = props
+    const { institution, updateInstitution, loading, createInstitution, searches, institutionsListSelect, countriesListSelect} = props
     const intl = useIntl();
     const formFields = Object.keys(fields).map((f)=>{
       return {...fields[f], search: f in searches ? searches[f] : null}
@@ -18,24 +18,27 @@ const InstitutionForm = (props) => {
   console.log(searches)
     return (
         <Loader show={loading} >
+            {console.log(institution)}
             <Row className="justify-content-center">
                 <Col md="10">
-                    {/* library &&
-                        <CustomForm
-                            submitCallBack={(formData) => updateLibrary(formData)}
-                            updateFormData={library}
-                            fields={fields}
+                    { institution &&
+                        <CustomForm 
+                            submitCallBack={(formData) => updateInstitution(formData)} 
+                            updateFormData={institution}
+                            fields={fields} 
+                            institution_type_id={institutionsListSelect} 
+                            country_id={countriesListSelect}
                             fieldsGroups={fieldsGroups}
-                            title={library.name}
-                            messages={{...messages, ...globalMessages}}
+                            title={institution.name}
+                            messages={messages}
                         />
-                    || */
+                    || 
                         <CustomForm
                             institution_type_id={institutionsListSelect}
                             country_id={countriesListSelect}
                             submitCallBack={(formData) => createInstitution(formData)}
                             // fields={fields}
-                            fields={formFields}
+                            fields={{...formFields}}
                             fieldsGroups={fieldsGroups}
                             title={intl.formatMessage(messages.header)}
                             messages={{...messages, ...globalMessages}}

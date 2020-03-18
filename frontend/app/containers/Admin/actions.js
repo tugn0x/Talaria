@@ -212,6 +212,14 @@ export function requestGetInstitutionsListSuccess(result) {
   };
 }
 
+export function requestUpdateInstitution(request, message) {
+  return {
+    type: UPDATE_INSTITUTION,
+    request,
+    message
+  };
+}
+
 export function requestGetInstitution(id) {
   return {
     type: REQUEST_GET_INSTITUTION,
@@ -226,14 +234,14 @@ export function requestGetInstitutionSuccess(result) {
   };
 }
 
-export function requestInstitutionTypeOptionList(request) {
+export function requestGetInstitutionTypeOptionList(request) {
   return {
     type: REQUEST_INSTITUTIONSTYPES_OPTIONLIST,
     request
   };
 }
 
-export function requestInstitutionTypeOptionListSuccess(result) {
+export function requestGetInstitutionTypeOptionListSuccess(result) {
   return {
     type: REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
     result
@@ -254,12 +262,15 @@ export function requestGetCountriesOptionListSuccess(result) {
   };
 }
 
-export function requestPostInstitution(request) {
+export function requestPostInstitution(request, message) {
   return {
     type: REQUEST_POST_INSTITUTION,
     request: {
-      ...request,
-      institution_type_id: request.institution_type_id.value}
+      ...request, 
+      institution_type_id: request.institution_type_id.value,
+      country_id: request.country_id.value
+    },
+    message
   };
 }
 

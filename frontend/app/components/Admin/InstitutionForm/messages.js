@@ -17,55 +17,51 @@ export default defineMessages({
     defaultMessage: "Institution Type ID",
   },
   country_id: {
-    id: `${scope}.country_id`,
+    id: `app.components.LibraryForm.country_id`,
     defaultMessage: 'Country ID',
   },
   vatnumber: {
-    id: `${scope}.vatnumber`,
+    id: `app.components.LibraryForm.vatnumber`,
     defaultMessage: 'PIVA',
   },
   fiscalcode: {
-    id: `${scope}.fiscalcode`,
+    id: `app.components.LibraryForm.fiscalcode`,
     defaultMessage: 'CF',
   },
   invoice_header: {
-    id: `${scope}.invoice_header`,
+    id: `app.components.LibraryForm.invoice_header`,
     defaultMessage: 'invoice_header',
   },
-  registration_date: {
-    id: `${scope}.registration_date`,
-    defaultMessage: 'Registration date',
-  },
   email_pec: {
-    id: `${scope}.email_pec`,
+    id: `app.components.LibraryForm.email_pec`,
     defaultMessage: 'email_pec',
   },
   ccu: {
-    id: `${scope}.ccu`,
+    id: `app.components.LibraryForm.ccu`,
     defaultMessage: 'ccu',
   },
   administrative: {
-    id: `${scope}.administrative`,
+    id: `app.components.LibraryForm.administrative`,
     defaultMessage: 'administrative',
   },
   administrative_email: {
-    id: `${scope}.administrative_email`,
+    id: `app.components.LibraryForm.administrative_email`,
     defaultMessage: 'administrative_email',
   },
   administrative_phone: {
-    id: `${scope}.administrative_phone`,
+    id: `app.components.LibraryForm.administrative_phone`,
     defaultMessage: 'administrative_phone',
   },
   terzo_code: {
-    id: `${scope}.terzo_code`,
+    id: `app.components.LibraryForm.terzo_code`,
     defaultMessage: 'terzo_code',
   },
   general_info: {
-    id: `${scope}.general_info`,
+    id: `app.components.LibraryForm.general_info`,
     defaultMessage: 'General info',
   },
   administrative_info: {
-    id: `${scope}.administrative_info`,
+    id: `app.components.LibraryForm.administrative_info`,
     defaultMessage: 'Administrative Info',
   },
   updateSubmitText: {

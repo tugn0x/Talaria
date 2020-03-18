@@ -21,7 +21,8 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_GET_INSTITUTIONS_LIST_SUCCESS,
   REQUEST_GET_INSTITUTION, REQUEST_GET_INSTITUTION_SUCCESS,
   REQUEST_INSTITUTIONSTYPES_OPTIONLIST, REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
-  REQUEST_GET_COUNTRIES_OPTIONLIST, REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS
+  REQUEST_GET_COUNTRIES_OPTIONLIST, REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS,
+  UPDATE_INSTITUTION
 } from "./constants";
 
 export const initialState = {
@@ -110,7 +111,11 @@ const AdminReducer = (state = initialState, action) =>
       case REQUEST_GET_INSTITUTION_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.institution = action.result
+        draft.institution = action.result.data
+        break;
+      case UPDATE_INSTITUTION:
+        draft.loading = true;
+        draft.error = action.error;
         break;
       case REQUEST_GET_INSTITUTIONS_LIST:
         draft.loading = true;

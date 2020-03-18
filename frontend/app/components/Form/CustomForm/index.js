@@ -30,7 +30,7 @@ const CustomForm = (props) => {
     } = props
 
 
-    const [selectedOption, setSelectedOption] = useState(null)
+    const [selectedOption, setSelectedOption] = useState({})
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
 
     const handleFormData = () => {
@@ -60,7 +60,7 @@ const CustomForm = (props) => {
 
     const handleChangeCustomSelect = (selectedOption, key) => {
        setFormData({...formData, [key]:  {...selectedOption} })
-       setSelectedOption(selectedOption)
+       setSelectedOption({ [key]: selectedOption })
        setIsSubmitDisabled(false)
     }
 
@@ -166,7 +166,7 @@ const CustomForm = (props) => {
                                                                 (<Select
                                                                     className="form-custom-select"
                                                                     type="custom-select"
-                                                                    value={selectedOption}
+                                                                    value={selectedOption[field.name]}
                                                                     name={field.name}
                                                                     onChange={(selectedOption) => handleChangeCustomSelect(selectedOption, field.selectedOption)}
                                                                     onInputChange={(input) => field.search ? field.search(input) : ''}

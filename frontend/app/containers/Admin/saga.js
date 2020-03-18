@@ -13,7 +13,8 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_GET_INSTITUTION,
           REQUEST_INSTITUTIONSTYPES_OPTIONLIST,
           REQUEST_POST_INSTITUTION,
-          REQUEST_GET_COUNTRIES_OPTIONLIST
+          REQUEST_GET_COUNTRIES_OPTIONLIST,
+          UPDATE_INSTITUTION
 } from './constants';
 import {
   requestError,
@@ -27,17 +28,17 @@ import {
   requestGetProjectSuccess,
   requestGetProjectsListSuccess,
   requestGetInstitutionsListSuccess,
-  requestGetInstitutionSuccess,
-  requestInstitutionTypeOptionListSuccess,
-  requestGetCountriesOptionListSuccess
+  requestGetInstitutionTypeOptionListSuccess,
+  requestGetCountriesOptionListSuccess,
+  requestGetInstitutionSuccess
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
 import {getUsersList, updateUser, createUser,
         getUser, getLibrary, getLibrariesList, updateLibrary,
         createLibrary, getInstituionTypeList, getInstitutionsList,
-        getInstitution, getInstitutionsSelectList,
-        createInstitution, getCountriesSelectList,
+        getInstitution, getInstitutionTypesOptionList,
+        createInstitution, getCountriesOptionsList,
         getProject, getProjectsList, updateProject,
         createProject} from 'utils/api'
 
@@ -201,8 +202,23 @@ export function* requestInstitutionTypeOptionListSaga(action) {
     query: action.request
   }
   try {
-    const request = yield call(getInstitutionsSelectList, options);
-    yield put(requestInstitutionTypeOptionListSuccess(request));
+    const request = yield call(getInstitutionTypesOptionList, options);
+    yield put(requestGetInstitutionTypeOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestUpdateInstitutionSaga(action) {
+  const options = {
+    method: 'put',
+    body: action.request
+  };
+  try {
+    const request = yield call(updateInstitution, options);
+    yield call(requestGetInstitutionsListSaga);
+    yield put(push("/admin/institutions"));
+    yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -214,7 +230,7 @@ export function* requestGetCountriesOptionListSaga(action) {
     query: action.request
   }
   try {
-    const request = yield call(getCountriesSelectList, options);
+    const request = yield call(getCountriesOptionsList, options);
     yield put(requestGetCountriesOptionListSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
@@ -228,9 +244,9 @@ export function* requestPostInstitutionSaga(action) {
   };
   try {
     const request = yield call(createInstitution, options);
-    // yield call(requestMyLibrariesSaga)
-   // yield put(push("/patron/my-libraries"))
-   // yield call(() => toast.success('Biblioteca Aggiunta'))
+    yield call(requestGetInstitutionsListSaga)
+    yield put(push("/admin/institutions"))
+    yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -314,4 +330,5 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_GET_INSTITUTION, requestGetInstitutionSaga);
   yield takeLatest(REQUEST_POST_INSTITUTION, requestPostInstitutionSaga);
   yield takeLatest(REQUEST_GET_COUNTRIES_OPTIONLIST, requestGetCountriesOptionListSaga);
+  yield takeLatest(UPDATE_INSTITUTION, requestUpdateInstitutionSaga);
 }
