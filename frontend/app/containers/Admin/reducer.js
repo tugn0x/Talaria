@@ -27,7 +27,10 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
 
 export const initialState = {
   loading: false,
-  usersList: [],
+  usersList: {
+    pagination: {},
+    data: [],
+  },
   user: [],
   error: null,
   pagination: [],
@@ -37,7 +40,7 @@ export const initialState = {
   project: [],
   projectsList: [],
   institutionsList: {
-    pagination: [],
+    pagination: {},
     data: [],
   },
   institution: [],
@@ -58,8 +61,8 @@ const AdminReducer = (state = initialState, action) =>
       case REQUEST_USERS_LIST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.usersList = action.result.data
-        draft.pagination = action.result.meta.pagination
+        draft.usersList.data = action.result.data
+        draft.usersList.pagination = action.result.meta.pagination
         break;
       case REQUEST_UPDATE_USER:
         draft.loading = true;

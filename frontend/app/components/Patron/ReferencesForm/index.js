@@ -13,30 +13,28 @@ const ReferencesForm = (props) => {
     const intl = useIntl();
     
     return (
-        <Loader show={loading} >
-            <Row className="justify-content-center">
-                <Col md="10">
-                    {reference  && Object.keys(reference).length &&
-                        <CustomForm 
-                            submitCallBack={(formData) => updateReference(formData)} 
-                            updateFormData={reference}
-                            fields={fields} 
-                            title={`${intl.formatMessage(globalMessages.update)}`} 
-                            messages={messages}
-                            submitText={intl.formatMessage(messages.updateSubmitText)}
-                        /> 
-                    ||
-                        <CustomForm 
-                            submitCallBack={(formData) => createReference(formData)} 
-                            fields={fields} 
-                            title={intl.formatMessage(messages.header)} 
-                            messages={messages}
-                            submitText={intl.formatMessage(messages.createSubmitText)}
-                        />
-                    }
-                </Col>
-            </Row>
-        </Loader>
+        <Row className="justify-content-center">
+            <Col md="10">
+                {reference  && 
+                    <CustomForm 
+                        submitCallBack={(formData) => updateReference(formData)} 
+                        updateFormData={reference}
+                        fields={fields} 
+                        title={`${intl.formatMessage(globalMessages.update)}`} 
+                        messages={messages}
+                        submitText={intl.formatMessage(messages.updateSubmitText)}
+                    /> 
+                ||
+                    <CustomForm 
+                        submitCallBack={(formData) => createReference(formData)} 
+                        fields={fields} 
+                        title={intl.formatMessage(messages.header)} 
+                        messages={messages}
+                        submitText={intl.formatMessage(messages.createSubmitText)}
+                    />
+                }
+            </Col>
+        </Row>
     )
 }
 

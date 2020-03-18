@@ -4,17 +4,16 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {useIntl} from 'react-intl';
 import UsersListTable from 'components/Admin/UsersListTable'
-import {requestUsersList, requestPostUser} from '../actions'
+import {requestUsersList} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
-import messages from 'utils/globalMessages';
+// import messages from 'utils/globalMessages';
 
 const UsersListPage = (props) => {
     console.log('UsersListPage', props)
-    const {dispatch, isLoading, admin, match, location, history} = props
-    const {path} = match
-    const {search} = location
+    const {dispatch, isLoading, admin, match, history} = props
+   
     const intl = useIntl();
-   // const query = queryString.parse(search)
+   
 
     useEffect(() => {
         if(!isLoading) {
@@ -31,14 +30,12 @@ const UsersListPage = (props) => {
 
     return (
         <UsersListTable
-            usersList={admin.usersList}
-            pagination={admin.pagination}
+            usersList={admin.usersList.data}
+            pagination={admin.usersList.pagination}
             history={history}
-            path={path}
             match={match}
             loading={isLoading}
             editPath={'/admin/users/user/:id?'}
-            createUser={ (formData) => dispatch(requestPostUser(formData, intl.formatMessage(messages.userCreateSuccess) )) }
         />
     )
 }

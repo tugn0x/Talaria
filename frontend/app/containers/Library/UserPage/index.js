@@ -43,9 +43,9 @@ function UserPage(props) {
         <>
           <CustomForm 
             submitCallBack={(formData) => dispatch(requestUpdateUser({
-                status: formData.status, 
+                status: Number(formData.status), 
                 library_id: params.library_id, 
-                user_id: params.id,
+                user_id: user.user_id,
                 message: `${intl.formatMessage(messages.statusUpdateMessage)}` })) } 
             updateFormData={{status: user.status, name: user.user.data.full_name}}
             fields={fields}

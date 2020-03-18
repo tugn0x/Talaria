@@ -8,27 +8,22 @@ import CustomModal from 'components/Modal/Loadable'
 import UserForm from 'components/Admin/UserForm/Loadable'
 import Pagination from 'components/Pagination/Loadable'
 import { generatePath } from "react-router";
+import UserPage from 'containers/Admin/UserPage'
 // import './style.scss;
 
 function UsersListTable(props) {
     console.log('UsersListTable', props)
-    const {usersList, pagination, match, loading, createUser, history, path} = props
+    const {usersList, pagination, match, history} = props
     const {current_page, total_pages} = pagination
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const intl = useIntl();
 
     const linkTo = (path) => {
-       // history.push(generatePath(path, { page: page }))
        history.push(path)
     };
 
     const editurl = (id) => {
-      return generatePath(`${props.editPath}`, {
-        id: id,
-      });
-    }
-    const pageNumUrl = (id) => {
       return generatePath(`${props.editPath}`, {
         id: id,
       });
@@ -93,15 +88,13 @@ function UsersListTable(props) {
             <CustomModal
                 modal={modal}
                 toggle={toggle}>
-                <UserForm
-                    loading={loading}
-                    createUser={ (formData) => createUser(formData) } />
+                <UserPage
+                    match={match} />
             </CustomModal>
-            {pagination && Object.keys(pagination).length > 0 &&
+            {Object.keys(pagination).length && 
                 <Pagination
                     current_page={current_page}
                     total_pages={total_pages}
-                    // setPage={(page) => linkTo(`${path}/?page=${page}`)}
                     setPage={(page) => linkTo(generatePath(`${props.match.path}`, {
                         page: page
                       }))}

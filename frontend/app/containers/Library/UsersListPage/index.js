@@ -11,29 +11,21 @@ const UsersListPage = (props) => {
     const {dispatch, isLoading, library} = props
     
     const library_id = library.library.id
-    const usersList = library.usersList
-    const pagination = library.pagination
-    console.log(pagination)
+    const usersList = library.usersList.data
+    const pagination = library.usersList.pagination
+    
     useEffect(() => {
         if(!isLoading && library_id) {
             dispatch(requestUsersList('1', library_id))
         }
     }, [library_id])
 
-    /*  useEffect(() => {
-        if(!isLoading && match.params) {
-            dispatch(requestReferencesList(match.params.page))
-        }
-    }, [match.params]) */
-
     return (
-        <>
-            <UsersList 
-                usersList={usersList}
-                editPath={`/library/${library_id}/patrons/patron/:id?`}
-                pagination={pagination}
-            />
-        </>
+        <UsersList 
+            usersList={usersList}
+            editPath={`/library/${library_id}/patrons/patron/:id?`}
+            pagination={pagination}
+        />
     )
 }
 

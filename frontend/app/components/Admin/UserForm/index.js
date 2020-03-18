@@ -3,15 +3,15 @@ import { Col, Row } from 'reactstrap';
 import globalMessages from 'utils/globalMessages'
 import messages from './messages'; 
 import {useIntl} from 'react-intl';
-import Loader from 'components/Form/Loader.js';
+// import Loader from 'components/Form/Loader.js';
 import {CustomForm} from 'components';
 import {fields} from './fields';
 
 const UserForm = (props) => {
-    const {user, updateUser, loading, createUser} = props
+    const {user, updateUser, createUser} = props
     const intl = useIntl();
     return (
-        <Loader show={loading} >
+        
             <Row className="justify-content-center">
                 <Col md="10">
                     {user && 
@@ -35,7 +35,7 @@ const UserForm = (props) => {
                      
                 </Col>
             </Row>
-        </Loader>
+        
     )
 }
 

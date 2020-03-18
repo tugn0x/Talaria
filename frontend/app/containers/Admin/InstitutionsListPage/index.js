@@ -25,7 +25,6 @@ const InstitutionsListPage = (props) => {
             {institutionsList.length > 0 &&
                 <InstitutionsList 
                     institutionsList={institutionsList}
-                    loading={isLoading}
                     pagination={pagination}
                     match={match}
                     editPath={'/admin/institutions/institution/:id?'}

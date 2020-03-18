@@ -134,7 +134,8 @@ export const socialOauth = (provider, options) => {
   return request(`${BASE_URL}/api/v1/auth/social/${provider}/signup`, options)
 };
 
-
+//--------- PATRON -------------//
+// MyLibrary //
 export const getMyLibraries = (options) => {
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/libraries/my`, options)
@@ -158,6 +159,7 @@ export const requestAccessToLibrary = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users`, options)
 };
 
+// Reference //
 export const getReferencesList = (options) => {
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/references/my`, options)
@@ -178,30 +180,8 @@ export const updateReference = (options) => {
   return request(`${BASE_URL}/api/v1/references/${options.id}`, options)
 };
 
-// ADMIN USERS MANAGE
-export const getUsersList = (options) => {
-  const page = options.page;
-  options = getOption(options);
-  return request(`${BASE_URL}/api/v1/users/users?page=${page}`, options)
-};
 
-export const createUser = (options) => {
-  options = getOption(options);
-  return request(`${BASE_URL}/api/v1/users/users`, options)
-};
-
-export const getUser = (options) => {
-  const user_id = options.id
-  options = getOption(options);
-  return request(`${BASE_URL}/api/v1/users/users/${user_id}`, options)
-};
-
-export const updateUser = (options) => {
-  const user_id = options.body.id
-  options = getOption(options);
-  return request(`${BASE_URL}/api/v1/users/users/${user_id}`, options)
-};
-
+// ---------- LIBRARY ---------- //
 export const createLibrary = (options) => {
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/libraries`, options)
@@ -243,9 +223,39 @@ export const updateLibraryUser = (options) => {
   const user_id = options.body.user_id
   const library_id = options.body.library_id
   options = getOption(options);
+  
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${user_id}`, options)
 }
 
+
+
+//--------- ADMIN -------------//
+// Users //
+export const getUsersList = (options) => {
+  const page = options.page;
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/users/users?page=${page}`, options)
+};
+
+export const createUser = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/users/users`, options)
+};
+
+export const getUser = (options) => {
+  const user_id = options.id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/users/users/${user_id}`, options)
+};
+
+export const updateUser = (options) => {
+  const user_id = options.body.id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/users/users/${user_id}`, options)
+};
+
+
+// Institutions //
 export const getInstitutionsList = (options) => {
   const page = options.page;
   options = getOption(options);
@@ -286,6 +296,8 @@ export const getInstituionTypeList = (options) => {
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/institutions/institution-types`, options)
 };
+
+// Projects //
 
 export const createProject = (options) => {
   options = getOption(options);

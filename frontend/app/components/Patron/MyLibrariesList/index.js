@@ -5,13 +5,14 @@ import { useIntl } from 'react-intl';
 import {formatDate} from 'utils/formatDate'
 import ButtonPlus from 'components/Button/ButtonPlus'
 import CustomModal from 'components/Modal/Loadable'
-import {MyLibraryForm} from 'components';
+import MyLibraryPage from 'containers/Patron/MyLibraryPage';
+import {Pagination} from 'components';
 import { generatePath } from "react-router";
 import './style.scss'
 
 function MyLibrariesList(props) {
     console.log('MyLibrariesList', props)
-    const {my_libraries, match, editPath} = props
+    const {my_libraries, match, editPath, pagination, history} = props
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const intl = useIntl();
@@ -21,6 +22,10 @@ function MyLibrariesList(props) {
             id: id,
         });
     }    
+
+    const linkTo = (path) => {
+        history.push(path)
+    };
 
     return (
         <>
@@ -89,25 +94,19 @@ function MyLibrariesList(props) {
             <CustomModal 
                 modal={modal} 
                 toggle={toggle}>
-                <MyLibraryForm 
-                    librariesList={props.librariesList}
-                    requestAccessToLibrary={ (formData) =>  props.requestAccessToLibrary(formData)} 
-                    fields={props.fields}
-                    messages={props.messages} 
-                    searchCustomSelect={(input) => props.searchCustomSelect(input)}
-                />  
+                <MyLibraryPage 
+                    match={match}
+                />
             </CustomModal>
-            {/*  {pagination && Object.keys(pagination).length > 0 &&
+            {Object.keys(pagination).length && 
                 <Pagination
                     current_page={current_page}
                     total_pages={total_pages}
-                    // setPage={(page) => linkTo(`${path}/?page=${page}`)}
-
                     setPage={(page) => linkTo(generatePath(`${props.match.path}`, {
                         page: page
                       }))}
                 />
-            } */}
+            } 
           </>
     )
 }

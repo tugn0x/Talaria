@@ -12,10 +12,10 @@ import { compose } from 'redux';
 import {useIntl} from 'react-intl';
 import {fields} from './fields';
 import messages from './messages';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 import {requestGetLibraryList, requestAccessToLibrary, requestGetMyLibrary} from '../actions'
 import makeSelectPatron, {isPatronLoading} from '../selectors';
-import {CustomForm, MyLibraryForm} from 'components';
+import {MyLibraryForm} from 'components';
 
 
 function MyLibraryPage(props) {
@@ -32,8 +32,7 @@ function MyLibraryPage(props) {
     }else if(!isLoading && isNew){
       dispatch(requestGetLibraryList())
     }
-    // console.log(isNew)
-   }, [])
+  }, [])
 
    
   return (
@@ -50,7 +49,7 @@ function MyLibraryPage(props) {
           requestAccessToLibrary={(formData) =>  dispatch(requestAccessToLibrary(formData.librariesList))}
           fields={fields}
           messages={messages} 
-          searches={(input) => dispatch(requestGetLibraryList(input))}
+          searches={{ librariesList: (input) => dispatch(requestGetLibraryList(input)) }}
         /> 
       } 
     </>

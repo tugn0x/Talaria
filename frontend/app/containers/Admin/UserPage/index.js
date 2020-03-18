@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -7,6 +7,7 @@ import {requestUpdateUser, requestPostUser, requestUser} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
 import UserForm from 'components/Admin/UserForm/Loadable'
 import messages from 'utils/globalMessages'
+import {Loader} from 'components'
 
 const UserPage = (props) => {
     console.log('UserPage', props)
@@ -22,20 +23,18 @@ const UserPage = (props) => {
     }, [params.id])
     
     return (
-        <>
+        <Loader show={isLoading}>
             {!isNew &&
                 <UserForm
                     updateUser={(formData) => dispatch(requestUpdateUser({...formData, id: params.id }, intl.formatMessage(messages.userUpdateSuccess)))}
                     user={admin.user}
-                    loading={isLoading}
                 />
             }
             {isNew &&
                 <UserForm
-                    loading={isLoading}
-                    createUser={ (formData) => dispatch(requestPostUser(formData, intl.formatMessage(messages.userCreateSuccess) )) } />
+                   createUser={ (formData) => dispatch(requestPostUser(formData, intl.formatMessage(messages.userCreateSuccess) )) } />
             }
-        </>
+        </Loader>
     )
 }
 

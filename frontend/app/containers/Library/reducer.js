@@ -15,12 +15,12 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
 
 export const initialState = {
   loading: false,
-  // TODO: QUESTA È L'OGGETTO CHE PRENDI DALLE API /api/v1/libraries/{LIBRARY_ID!!}
   library: {},
-  // TODO: QUESTA È LA LISTA CHE PRENDI DALLE API /api/v1/libraries/{LIBRARY_ID!!}/library-users
-  usersList: [],
+  usersList: {
+    data: [],
+    pagination: {}
+  },
   error: null,
-  pagination: [],
   user: {}
 };
 
@@ -37,8 +37,8 @@ const libraryReducer = (state = initialState, action) =>
       case REQUEST_USERS_LIST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.usersList = action.result.data
-        draft.pagination = action.result.meta.pagination
+        draft.usersList.data = action.result.data
+        draft.usersList.pagination = action.result.meta.pagination
         break;
       case REQUEST_UPDATE_USER:
         draft.loading = true;
@@ -79,7 +79,7 @@ const libraryReducer = (state = initialState, action) =>
         draft.loading = true;
         draft.error = action.error;
         break;
-      case REQUEST_GET_LIBRARIES_LIST:
+       case REQUEST_GET_LIBRARIES_LIST:
         draft.loading = true;
         draft.error = action.error;
         break;
@@ -87,13 +87,7 @@ const libraryReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = initialState.error;
         draft.librariesList = action.result.data
-        /* draft.pagination = Object.keys(action.result)
-          .filter(key => !['data'].includes(key))
-          .reduce((obj, key) => {
-            obj[key] = action.result[key];
-            return obj;
-          }, {}); */
-        break;
+        break; 
       case REQUEST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;

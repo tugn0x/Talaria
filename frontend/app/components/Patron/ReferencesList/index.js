@@ -3,16 +3,18 @@ import {Row, Col} from 'reactstrap'
 import messages from './messages'
 import globalMessages from 'utils/globalMessages'
 import { FormattedMessage } from 'react-intl';
-import {ReferencesForm} from 'components';
+import {Pagination} from 'components';
 import CustomModal from 'components/Modal/Loadable'
 import {useIntl} from 'react-intl';
 import ButtonPlus from 'components/Button/ButtonPlus'
 import { generatePath } from "react-router";
+import ReferencesPage from 'containers/Patron/ReferencesPage'
+
 
 const ReferencesList = (props) => {
     console.log('ReferencesList', props)
-    const {match, referencesList, pagination} = props
-    // const {total_pages, current_page} = pagination
+    const {match, referencesList, pagination, history} = props
+    const {total_pages, current_page} = pagination
     const intl = useIntl();
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
@@ -22,6 +24,10 @@ const ReferencesList = (props) => {
             id: id,
         });
     }
+
+    const linkTo = (path) => {
+        history.push(path)
+     };
 
     return (
         <>
@@ -87,18 +93,17 @@ const ReferencesList = (props) => {
             <CustomModal 
                 modal={modal} 
                 toggle={toggle}>
-                <ReferencesForm 
-                    loading={props.loading} 
-                    createReferences={ (formData) => props.createReferences(formData) } />
+                <ReferencesPage 
+                    match={match} />
             </CustomModal>
-            {/*  pagination && Object.keys(pagination).length > 0 &&
+            {Object.keys(pagination).length && 
                 <Pagination
                     current_page={current_page}
                     total_pages={total_pages}
                     setPage={(page) => linkTo(generatePath(`${match.path}`, {
                         page: page
                     }))}
-                />  */
+                />   
             }
         </>
     )

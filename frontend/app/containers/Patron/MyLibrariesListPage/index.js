@@ -5,40 +5,33 @@ import { compose } from 'redux';
 import {useIntl} from 'react-intl';
 import {fields} from './fields';
 import messages from './messages'; 
-import { FormattedMessage } from 'react-intl';
-import {requestGetLibraryList, requestAccessToLibrary, requestMyLibraries} from '../actions'
+import {requestGetLibraryList, requestMyLibraries} from '../actions'
 import makeSelectPatron, {isPatronLoading} from '../selectors';
 import {MyLibrariesList} from 'components';
 
 
 const MyLibrariesListPage = (props) => {
     console.log('MyLibrariesListPage', props)
-    const {dispatch, isLoading, patron, match, location, history} = props
-   // const {path} = match
-   // const {search} = location
+    const {dispatch, isLoading, patron, match} = props
     const intl = useIntl();
-   // const query = queryString.parse(search)
-
-   useEffect(() => {
+   
+    useEffect(() => {
         if(!isLoading) {
-        dispatch(requestGetLibraryList())
-        dispatch(requestMyLibraries())
+            dispatch(requestGetLibraryList())
+            dispatch(requestMyLibraries())
         }
-    
     }, [])
 
     return (
         <div className="my-libraries">
             <MyLibrariesList 
                 my_libraries={patron.my_libraries} 
-                match={props.match} 
-                requestAccessToLibrary={ (formData) => dispatch(requestAccessToLibrary(formData.library_selected)) } 
+                match={match} 
                 librariesList={patron.librariesList} 
                 fields={fields}
                 messages={messages} 
                 editPath={'/patron/my-libraries/library/:id?'}
                 title={intl.formatMessage(messages.title)}
-                searchCustomSelect={(input) => dispatch(requestGetLibraryList(input)) }
             />
         </div>
     )

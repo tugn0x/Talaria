@@ -22,7 +22,7 @@ const CustomForm = (props) => {
         submitText = "Submit",
         submitColor = "brown",
         fields = {},
-        searchCustomSelect = () => null,
+        searchCustomSelect,
         messages,
         updateFormData,
         fieldsGroups = {},
@@ -62,16 +62,10 @@ const CustomForm = (props) => {
     /* CUSTOM SELECT Handle */
     const handleSearchCustomSelect = (newValue, name) => {
         const inputValue = newValue.replace(/\W/g, '');
-        if(typeof searchCustomSelect === 'object'){
-            searchCustomSelect[name](inputValue)
-        }else {
-            searchCustomSelect(inputValue)
-        }
-        
+        searchCustomSelect[name](inputValue)
     };
 
     const handleChangeCustomSelect = (selectedOption, key) => {
-       console.log(selectedOption, key)
        setFormData({...formData, [key]:  {...selectedOption} })
        setIsSubmitDisabled(false)
     }
@@ -83,7 +77,7 @@ const CustomForm = (props) => {
         const targetName = e.target.name;
         const targetChecked = e.target.checked;
         const targetValue = e.target.value;
-        console.log(targetValue)
+        
         switch(targetType) {
             case "checkbox":
                 if(targetName !== 'privacy_policy_accepted'){
@@ -181,7 +175,7 @@ const CustomForm = (props) => {
                                                                     value={formData[field.name]}
                                                                     name={field.name}
                                                                     onChange={(selectedOption) => handleChangeCustomSelect(selectedOption, field.selectedOption)}
-                                                                    onInputChange={(input) => handleSearchCustomSelect(input, field.name)}
+                                                                    onInputChange={(input) =>  searchCustomSelect ? handleSearchCustomSelect(input, field.name) : input}
                                                                     options={props[field.options]}
                                                                     required
                                                                 />)

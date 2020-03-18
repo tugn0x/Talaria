@@ -5,7 +5,7 @@ import {Link} from 'react-router'
 import './style.scss'
 
 const Pagination = (props) => {
-    const {current_page, total_pages, setPage, url} = props
+    const {current_page, total_pages, setPage} = props
     
     return (
         total_pages > 1 && 

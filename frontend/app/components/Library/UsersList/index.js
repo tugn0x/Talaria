@@ -23,6 +23,10 @@ function UsersList(props) {
         });
     }    
 
+    const linkTo = (path) => {
+        history.push(path)
+     };
+
     return (
         <>
             <h3 className="table-title">{intl.formatMessage(messages.header)}</h3>
@@ -62,7 +66,7 @@ function UsersList(props) {
                             </Col>
                             <Col xs={2}>
                                 <span>
-                                    {user.user_id}
+                                    {user.id}
                                 </span>
                             </Col>
                             <Col xs={2}>
@@ -98,7 +102,7 @@ function UsersList(props) {
                     searchCustomSelect={(input) => props.searchCustomSelect(input)}
                 />  
             </CustomModal> */}
-            {pagination && pagination.total > pagination.per_page && 
+            {Object.keys(pagination).length && 
                 <Pagination
                     current_page={current_page}
                     total_pages={total_pages}

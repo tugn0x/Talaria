@@ -4,14 +4,14 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import makeSelectPatron, {isPatronLoading} from '../selectors';
-import {ReferencesForm, /* ReferencesList */} from 'components';
+import {ReferencesForm,Loader} from 'components';
 import {requestPostReferences,requestUpdateReferences} from '../actions'
 import messages from './messages'
 import {useIntl} from 'react-intl';
 
 
 const ReferencesPage = (props) => {
-    const {dispatch, isLoading, location, match, patron} = props
+    const {dispatch, isLoading, match, patron} = props
     const {params} = match
     const reference = patron.reference 
     const intl = useIntl();
@@ -24,19 +24,19 @@ const ReferencesPage = (props) => {
     }, [params.id])
     
     return (
-        <>
+        <Loader show={isLoading}>
             {isNew && 
                 <ReferencesForm 
-                    loading={isLoading} 
+                   //  loading={isLoading} 
                     createReference={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } />
             }
             {!isNew && 
                 <ReferencesForm 
                     reference={reference}
-                    loading={isLoading} 
+                   // loading={isLoading} 
                     updateReference={ (formData) => dispatch(requestUpdateReferences(formData, params.id, intl.formatMessage(messages.referenceUpdate))) } />
             }
-        </>
+        </Loader>
     )
 }
 

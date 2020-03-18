@@ -9,28 +9,21 @@ import { compose } from 'redux';
 const ReferencesListPage = (props) => {
     console.log('ReferencesListPage', props)
     const {dispatch, isLoading, match, patron} = props
-    const referencesList = patron.referencesList
-
+    const referencesList = patron.referencesList.data
+    const pagination = patron.referencesList.pagination
     useEffect(() => {
         if(!isLoading) {
             dispatch(requestReferencesList())
         }
     }, [])
 
-   /*  useEffect(() => {
-        if(!isLoading && match.params) {
-            dispatch(requestReferencesList(match.params.page))
-        }
-    }, [match.params]) */
-
     return (
         <ReferencesList 
             match={match} 
             referencesList={referencesList} 
-            pagination={referencesList.pagination}
-            loading={isLoading} 
+            pagination={pagination}
+            // loading={isLoading} 
             editPath={'/patron/references/reference/:id?'}
-            createReferences={ (formData) => dispatch(requestPostReferences(formData, "Reference added!")) }
         />
     )
 }

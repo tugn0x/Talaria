@@ -13,12 +13,15 @@ function InstitutionsList(props) {
     console.log('InstitutionsList', props)
     const {
         institutionsList, editPath, 
-        loading, pagination, createInstitution,
-        institutionsListSelect, countriesListSelect, match} = props
+        pagination,  match} = props
     const {current_page, total_pages} = pagination
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const intl = useIntl();
+
+    const linkTo = (path) => {
+        history.push(path)
+     };
 
     const editurl = (id) => {
         return generatePath(`${editPath}`, {
@@ -93,10 +96,10 @@ function InstitutionsList(props) {
                 modal={modal} 
                 toggle={toggle}>
                 <InstitutionPage 
-                match={match}
+                    match={match}
                 /> 
             </CustomModal>   
-            {pagination && 
+            {Object.keys(pagination).length && 
                 <Pagination
                     current_page={current_page}
                      total_pages={total_pages}

@@ -19,7 +19,10 @@ export const initialState = {
   library: {},
   error: null,
   librariesList: [],
-  referencesList: [],
+  referencesList: {
+    data: [],
+    pagination: [],
+  },
   reference: {}
 };
 
@@ -49,8 +52,8 @@ const PatronReducer = (state = initialState, action) =>
       case REQUEST_REFERENCES_LIST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.referencesList = action.result.data;
-        // add pagination
+        draft.referencesList.data = action.result.data;
+        draft.referencesList.pagination = action.result.meta.pagination
         break;
       case REQUEST_GET_MY_LIBRARY:
         draft.loading = true;

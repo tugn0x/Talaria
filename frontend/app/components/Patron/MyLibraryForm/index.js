@@ -68,7 +68,6 @@ const MyLibraryForm = (props) => {
                             fields={props.fields}
                             messages={props.messages}
                             searchCustomSelect={searches}
-                            // searchCustomSelect={(input) => props.searchCustomSelect(input) }
                         />
                     }
 

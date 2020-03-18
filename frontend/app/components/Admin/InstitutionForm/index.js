@@ -11,11 +11,6 @@ const InstitutionForm = (props) => {
     console.log('InstitutionForm', props)
     const { institution, updateInstitution, loading, createInstitution, searches, institutionsListSelect, countriesListSelect} = props
     const intl = useIntl();
-    /* const formFields = Object.keys(fields).map((f)=>{
-      return {...fields[f], search: f in searches ? searches[f] : null}
-    })
-    console.log(formFields)
-    console.log(searches) */
     return (
         <Loader show={loading} >
             <Row className="justify-content-center">
