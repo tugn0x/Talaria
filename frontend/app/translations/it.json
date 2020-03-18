@@ -43,6 +43,9 @@
 
   "app.containers.LibraryUserPage.header": "Modifica stato utente",
 
+  "app.containers.InstitutionPage.createSuccess": "Nuovo istituto creato",
+  "app.containers.InstitutionPage.updateSuccess": "Istituto aggiornato",
+
   "app.components.InstitutionsList.header": "Lista degli istituti",
   "app.components.InstitutionsList.createNewInstitution": "Registra nuovo istituto",
   "app.components.InstitutionsList.editInstitution": "Modifica istituto",
@@ -123,6 +126,8 @@
   "app.components.SignupForm.header": "Registrati",
   "app.components.SignupForm.subtitle": "Crea un profilo",
 
+  "app.components.CustomForm.select": "Seleziona",
+
   "app.components.ForgotPasswordForm.submitFormButton": "Richiedi una nuova password",
 
   "app.components.LoginForm.header": "Accedi a Nilde",
@@ -143,6 +148,7 @@
   "app.routes.UsersList": "Utenti",
   "app.routes.UserNew": "Nuovo utente",
   "app.routes.Institutions": "Istituti",
+  "app.routes.InstitutionNew": "Registra nuovo istituto",
   "app.routes.InstitutionTypeNew": "Nuovo tipo d' Istituto",
   "app.routes.InstitutionType": "Tipo d' Istituto",
   "app.routes.InstitutionTypes": "Tipi d' Istituto",

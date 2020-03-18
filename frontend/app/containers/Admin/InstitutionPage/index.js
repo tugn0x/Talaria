@@ -11,10 +11,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {useIntl} from 'react-intl';
 import messages from './messages';
-import { FormattedMessage } from 'react-intl';
-// import {requestGetLibrary, requestUpdateLibrary, requestPostLibrary} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
-import {CustomForm, InstitutionForm} from 'components';
+import {InstitutionForm} from 'components';
 import { requestGetInstitutionTypeOptionList, requestPostInstitution, 
   requestUpdateInstitution ,requestGetCountriesOptionList, requestGetInstitution } from '../actions';
 
@@ -42,21 +40,23 @@ function InstitutionPage(props) {
       <>
         {!isNew && 
             <InstitutionForm 
-              updateInstitution={ (formData) => dispatch(requestUpdateInstitution(formData, intl.formatMessage(messages.updateSuccess))) } 
+              updateInstitution={ (formData) => dispatch(requestUpdateInstitution({...formData, id: params.id}, intl.formatMessage(messages.updateSuccess))) } 
               loading={isLoading}
               institution={institution}
               institutionsListSelect={institutionsListSelect}
               countriesListSelect={countriesListSelect}
-              // searchCustomSelect={(input) => dispatch(requestGetInstitutionsSelectList(input))}
+              searches={{
+                country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
+                institution_type_id: (input) => dispatch(requestGetInstitutionTypeOptionList(input)),
+              }}
             />
         }
         { isNew &&
             <InstitutionForm
-              createInstitution={ (formData) => dispatch(requestPostInstitution(formData)) }
+              createInstitution={ (formData) => dispatch(requestPostInstitution(formData, intl.formatMessage(messages.createSuccess))) }
               loading={isLoading}
               institutionsListSelect={institutionsListSelect}
               countriesListSelect={countriesListSelect}
-              // searchCustomSelect={(input) => dispatch(requestInstitutionTypeOptionList(input))}
               searches={{
                 country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
                 institution_type_id: (input) => dispatch(requestGetInstitutionTypeOptionList(input)),

@@ -11,14 +11,13 @@ const InstitutionForm = (props) => {
     console.log('InstitutionForm', props)
     const { institution, updateInstitution, loading, createInstitution, searches, institutionsListSelect, countriesListSelect} = props
     const intl = useIntl();
-    const formFields = Object.keys(fields).map((f)=>{
+    /* const formFields = Object.keys(fields).map((f)=>{
       return {...fields[f], search: f in searches ? searches[f] : null}
     })
-  console.log(formFields)
-  console.log(searches)
+    console.log(formFields)
+    console.log(searches) */
     return (
         <Loader show={loading} >
-            {console.log(institution)}
             <Row className="justify-content-center">
                 <Col md="10">
                     { institution &&
@@ -31,15 +30,16 @@ const InstitutionForm = (props) => {
                             fieldsGroups={fieldsGroups}
                             title={institution.name}
                             messages={messages}
+                            searchCustomSelect={searches}
                         />
                     || 
                         <CustomForm
                             institution_type_id={institutionsListSelect}
                             country_id={countriesListSelect}
                             submitCallBack={(formData) => createInstitution(formData)}
-                            // fields={fields}
-                            fields={{...formFields}}
+                            fields={fields}
                             fieldsGroups={fieldsGroups}
+                            searchCustomSelect={searches}
                             title={intl.formatMessage(messages.header)}
                             messages={{...messages, ...globalMessages}}
                         />

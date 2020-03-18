@@ -21,7 +21,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_GET_INSTITUTION, REQUEST_GET_INSTITUTION_SUCCESS,
    REQUEST_INSTITUTIONSTYPES_OPTIONLIST, REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
    REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS, REQUEST_GET_INSTITUTION_TYPE_LIST,
-   REQUEST_POST_INSTITUTION,
+   REQUEST_POST_INSTITUTION, UPDATE_INSTITUTION,
    REQUEST_GET_COUNTRIES_OPTIONLIST, REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS
 } from "./constants";
 
@@ -215,7 +215,12 @@ export function requestGetInstitutionsListSuccess(result) {
 export function requestUpdateInstitution(request, message) {
   return {
     type: UPDATE_INSTITUTION,
-    request,
+    request: {
+      ...request, 
+      institution_type_id: request.institution_type_id.value,
+      country_id: request.country_id.value,
+      id: request.id
+    },
     message
   };
 }

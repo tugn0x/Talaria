@@ -9,7 +9,7 @@ import {useIntl} from 'react-intl';
 
 
 const MyLibraryForm = (props) => {
-    const { library, loading, librariesList} = props
+    const { library, loading, librariesList, searches} = props
     const intl = useIntl();
     /*
     TODO: DA FARE DOPO...
@@ -67,7 +67,8 @@ const MyLibraryForm = (props) => {
                             librariesList={librariesList}
                             fields={props.fields}
                             messages={props.messages}
-                            searchCustomSelect={(input) => props.searchCustomSelect(input) }
+                            searchCustomSelect={searches}
+                            // searchCustomSelect={(input) => props.searchCustomSelect(input) }
                         />
                     }
 

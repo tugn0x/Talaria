@@ -8,7 +8,8 @@ const Pagination = (props) => {
     const {current_page, total_pages, setPage, url} = props
     
     return (
-        <Col md={3} className="pagination">
+        total_pages > 1 && 
+        (<Col md={3} className="pagination">
             <Button className="backward" color="link" onClick={() => setPage(1)} disabled={current_page !== 1 ? false : true}>
                 <i className="fa fa-backward"></i>
             </Button>
@@ -22,7 +23,8 @@ const Pagination = (props) => {
             <Button className="forward" color="link" onClick={() => setPage(total_pages)} disabled={current_page !== total_pages ? false : true}>
                 <i className="fa fa-forward"></i>
             </Button>
-        </Col>
+        </Col>)
+        || null
     )
 }
 

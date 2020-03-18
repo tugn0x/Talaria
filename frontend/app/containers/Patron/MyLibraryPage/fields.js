@@ -4,6 +4,6 @@ export const fields = {
         name: "librariesList",
         options: "librariesList",
         required: true,
-        selectedOption: "library_selected"
+        selectedOption: "librariesList"
     }, 
 }

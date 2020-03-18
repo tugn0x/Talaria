@@ -47,10 +47,10 @@ function MyLibraryPage(props) {
       {isNew &&
         <MyLibraryForm 
           librariesList={librariesList}
-          requestAccessToLibrary={(formData) =>  dispatch(requestAccessToLibrary(formData.library_selected))}
+          requestAccessToLibrary={(formData) =>  dispatch(requestAccessToLibrary(formData.librariesList))}
           fields={fields}
           messages={messages} 
-          searchCustomSelect={(input) => dispatch(requestGetLibraryList(input))}
+          searches={(input) => dispatch(requestGetLibraryList(input))}
         /> 
       } 
     </>

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { Card, CardBody, CustomInput, Form, Button, Row } from 'reactstrap'
 import PropTypes from 'prop-types';
 import {useIntl} from 'react-intl'
+import formMessages from './messages'
 import Select from 'react-select';
 import { AppSwitch } from '@coreui/react'
 import './style.scss'
@@ -14,11 +15,9 @@ import moment from "moment";
 // classes
 
 const CustomForm = (props) => {
-
-    const intl = useIntl();
     const {
         submitCallBack = () => null,
-        title = 'Titolo del form',
+        title = 'Form',
         className = '',
         submitText = "Submit",
         submitColor = "brown",
@@ -29,22 +28,30 @@ const CustomForm = (props) => {
         fieldsGroups = {},
     } = props
 
-
-    const [selectedOption, setSelectedOption] = useState({})
+    const intl = useIntl();
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
-
+    
     const handleFormData = () => {
         let data = {}
         Object.keys(fields).map(key => {
             const field = fields[key]
             if(fields[key].type === 'checkbox' || fields[key].type === 'switch') {
+                
                 data = {...data, [key]: updateFormData && updateFormData[field.name] ? updateFormData[field.name]  : false }
+            
             }else if(fields[key].type === 'custom-select'){
-                data = {...data, [key]: [] }
+                
+                const selectedOption = updateFormData && updateFormData[field.name] ?  props[field.name].filter(option => option.value === updateFormData[field.name])[0] : {label: intl.formatMessage(formMessages.select), value: 0}
+                data = {...data, [key]: selectedOption }
+            
             }else if(fields[key].type === 'select'){
+                
                 data = {...data, [key]: updateFormData && updateFormData[field.name]  ? updateFormData[field.name]  : fields[key].options[0].value }
+            
             }else {
+                
                 data = {...data, [key]: updateFormData && updateFormData[field.name]  ? updateFormData[field.name]  : '' }
+            
             }
         })
         return data
@@ -53,14 +60,19 @@ const CustomForm = (props) => {
     const [formData, setFormData] = useState(handleFormData())
 
     /* CUSTOM SELECT Handle */
-    const handleSearchCustomSelect = (newValue) => {
+    const handleSearchCustomSelect = (newValue, name) => {
         const inputValue = newValue.replace(/\W/g, '');
-        searchCustomSelect(inputValue)
+        if(typeof searchCustomSelect === 'object'){
+            searchCustomSelect[name](inputValue)
+        }else {
+            searchCustomSelect(inputValue)
+        }
+        
     };
 
     const handleChangeCustomSelect = (selectedOption, key) => {
+       console.log(selectedOption, key)
        setFormData({...formData, [key]:  {...selectedOption} })
-       setSelectedOption({ [key]: selectedOption })
        setIsSubmitDisabled(false)
     }
 
@@ -166,10 +178,10 @@ const CustomForm = (props) => {
                                                                 (<Select
                                                                     className="form-custom-select"
                                                                     type="custom-select"
-                                                                    value={selectedOption[field.name]}
+                                                                    value={formData[field.name]}
                                                                     name={field.name}
                                                                     onChange={(selectedOption) => handleChangeCustomSelect(selectedOption, field.selectedOption)}
-                                                                    onInputChange={(input) => field.search ? field.search(input) : ''}
+                                                                    onInputChange={(input) => handleSearchCustomSelect(input, field.name)}
                                                                     options={props[field.options]}
                                                                     required
                                                                 />)

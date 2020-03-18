@@ -5,13 +5,17 @@ import { useIntl } from 'react-intl';
 import {formatDate} from 'utils/formatDate'
 import ButtonPlus from 'components/Button/ButtonPlus'
 import CustomModal from 'components/Modal/Loadable'
-// import {LibraryForm} from 'components';
+import {Pagination} from 'components';
 import { generatePath } from "react-router";
-// import './style.scss'
+import InstitutionPage from 'containers/Admin/InstitutionPage'
 
 function InstitutionsList(props) {
     console.log('InstitutionsList', props)
-    const {institutionsList, editPath, loading, pagination} = props
+    const {
+        institutionsList, editPath, 
+        loading, pagination, createInstitution,
+        institutionsListSelect, countriesListSelect, match} = props
+    const {current_page, total_pages} = pagination
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const intl = useIntl();
@@ -85,26 +89,23 @@ function InstitutionsList(props) {
                     }
                 </div>
             </div> 
-            {/* <CustomModal 
+            <CustomModal 
                 modal={modal} 
                 toggle={toggle}>
-                <LibraryForm 
-                    createLibrary={ (formData) => createLibrary(formData) } 
-                    loading={loading}
-                    titleNewLibrary={'New Library'}
+                <InstitutionPage 
+                match={match}
                 /> 
-            </CustomModal>   */}
-           {/*  {pagination && Object.keys(pagination).length > 0 &&
+            </CustomModal>   
+            {pagination && 
                 <Pagination
                     current_page={current_page}
                      total_pages={total_pages}
                     // setPage={(page) => linkTo(`${path}/?page=${page}`)}
-
                     setPage={(page) => linkTo(generatePath(`${props.match.path}`, {
                         page: page
                       }))}
                 />
-            } */}
+            } 
           </>
     )
 }

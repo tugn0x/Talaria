@@ -4,13 +4,12 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {useIntl} from 'react-intl';
 import {InstitutionsList} from 'components'
-import {requestGetInstitutionsList /* , requestPostLibrary */} from '../actions'
+import {requestGetInstitutionsList, requestPostInstitution} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
-// import queryString from 'query-string'
 
 const InstitutionsListPage = (props) => {
     console.log('InstitutionsListPage', props)
-    const {dispatch, isLoading, admin} = props
+    const {dispatch, isLoading, admin, match} = props
     const intl = useIntl();
     const institutionsList = admin.institutionsList.data
     const pagination = admin.institutionsList.pagination
@@ -28,6 +27,7 @@ const InstitutionsListPage = (props) => {
                     institutionsList={institutionsList}
                     loading={isLoading}
                     pagination={pagination}
+                    match={match}
                     editPath={'/admin/institutions/institution/:id?'}
                 /> 
             }

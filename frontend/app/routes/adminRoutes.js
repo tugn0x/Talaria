@@ -32,7 +32,7 @@ const routes = [
       { path: '/institutions-types/type/:id?', name: `InstitutionType`, component: LibraryPage, },
       { path: '/institutions-types/:page?', exact: true, name: `InstitutionTypes`, url: `/institutions/institutions-types`, component: InstitutionTypeListPage,  sidebar: true},
       { path: '/:page?', exact: true, name: `Institutions`, url: `/institutions`, component: InstitutionsListPage, },
-      { path: '/institution/new', icon: 'plus', name: `Institutions`, component: InstitutionPage,  url: `/institutions/institution/new`, sidebar: true},
+      { path: '/institution/new', icon: 'plus', name: `InstitutionNew`, component: InstitutionPage,  url: `/institutions/institution/new`, sidebar: true},
       { path: '/institution/:id?', name: `Institutions`, component: InstitutionPage, },
     ]
   },

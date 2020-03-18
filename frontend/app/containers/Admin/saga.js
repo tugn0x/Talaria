@@ -37,7 +37,7 @@ import { push } from 'connected-react-router';
 import {getUsersList, updateUser, createUser,
         getUser, getLibrary, getLibrariesList, updateLibrary,
         createLibrary, getInstituionTypeList, getInstitutionsList,
-        getInstitution, getInstitutionTypesOptionList,
+        getInstitution, updateInstitution, getInstitutionTypesOptionList,
         createInstitution, getCountriesOptionsList,
         getProject, getProjectsList, updateProject,
         createProject} from 'utils/api'
@@ -215,6 +215,7 @@ export function* requestUpdateInstitutionSaga(action) {
     body: action.request
   };
   try {
+    console.log(action)
     const request = yield call(updateInstitution, options);
     yield call(requestGetInstitutionsListSaga);
     yield put(push("/admin/institutions"));

@@ -64,6 +64,10 @@ export default defineMessages({
         id: `${scope}.Institutions`,
         defaultMessage: 'Institutions',
     },
+    InstitutionNew: {
+        id: `${scope}.InstitutionNew`,
+        defaultMessage: 'New institution',
+    },
     InstitutionTypeNew: {
         id: `${scope}.InstitutionTypeNew`,
         defaultMessage: 'New Institution Type',
