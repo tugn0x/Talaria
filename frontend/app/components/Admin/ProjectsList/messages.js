@@ -16,10 +16,6 @@ export default defineMessages({
     id: `${scope}.createNewProject`,
     defaultMessage: 'Register new project',
   },
-  ProjectCreateNew: {
-    id: `${scope}.ProjectCreateNew`,
-    defaultMessage: 'Register new project',
-  },
   editProject: {
     id: `${scope}.editProject`,
     defaultMessage: 'Edit project',

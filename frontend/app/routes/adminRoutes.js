@@ -38,7 +38,7 @@ const routes = [
   },
   { path: '/projects',  name: `Projects`, component: SubRouteSwitch, header: true,
     children: [
-      { path: '/project/new', icon: 'plus', name: `ProjectCreateNew`, component: ProjectPage,  url: `/projects/project/new`, sidebar: true},
+      { path: '/project/new', icon: 'plus', name: `ProjectNew`, component: ProjectPage,  url: `/projects/project/new`, sidebar: true},
       { path: '/project/:id?', name: `Projects`, component: ProjectPage, },
       { path: '/:page?', exact: true, name: `Projects`, url: `/projects`, component: ProjectsListPage},
     ]

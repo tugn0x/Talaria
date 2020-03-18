@@ -80,8 +80,8 @@ export default defineMessages({
         id: `${scope}.Projects`,
         defaultMessage: 'Projects',
     },
-    ProjectCreateNew: {
-        id: `${scope}.ProjectsCreateNew`,
+    ProjectNew: {
+        id: `${scope}.ProjectNew`,
         defaultMessage: 'Register new project',
     },
 });
