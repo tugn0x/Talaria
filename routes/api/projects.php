@@ -22,6 +22,7 @@ Route::group([
     'as' => 'api.v1.projects.',
 ], function () {
     Route::get('', 'ProjectController@index')->name('index');
+    Route::get('{id}', 'ProjectController@show')->name('show');
     Route::put('{id}', 'ProjectController@update')->name('update');
     Route::post('project', 'ProjectController@store')->name('store');
 
