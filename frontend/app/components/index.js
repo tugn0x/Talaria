@@ -41,6 +41,7 @@ import ErrorBox from './Form/ErrorBox'
 import Loader from './Form/Loader'
 import CustomForm from './Form/CustomForm'
 import BasePage from './BasePage'
+import InputSearch from './Form/InputSearch'
 
 export {
   HeaderBar,
@@ -65,6 +66,7 @@ export {
   InstitutionForm,
   UsersList,
   CustomForm,
+  InputSearch,
   ErrorBox,
   Loader,
   SideBar,

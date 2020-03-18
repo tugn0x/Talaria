@@ -5,9 +5,10 @@ import { useIntl } from 'react-intl';
 import {formatDate} from 'utils/formatDate'
 import ButtonPlus from 'components/Button/ButtonPlus'
 import CustomModal from 'components/Modal/Loadable'
-import {LibraryForm} from 'components';
+import {LibraryForm, InputSearch} from 'components';
 import { generatePath } from "react-router";
 // import './style.scss'
+
 
 function LibrariesList(props) {
     console.log('LibrariesList', props)
@@ -25,6 +26,7 @@ function LibrariesList(props) {
     return (
         <>
             <h3 className="table-title">{intl.formatMessage(messages.header)}</h3>
+            <InputSearch />
             <ButtonPlus 
                 onClickHandle={toggle}
                 text={intl.formatMessage(messages.createNewLibrary)}
