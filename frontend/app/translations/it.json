@@ -157,5 +157,6 @@
   "app.routes.InstitutionType": "Tipo d' Istituto",
   "app.routes.InstitutionTypes": "Tipi d' Istituto",
   "app.routes.Projects": "Progetti",
-  "app.routes.ProjectNew": "Nuovo progetto"
+  "app.routes.ProjectNew": "Nuovo progetto",
+  "app.routes.Libraries": "Biblioteche"
 }
