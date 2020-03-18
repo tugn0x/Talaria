@@ -4,6 +4,9 @@ import LibraryPage from 'containers/Admin/LibraryPage/Loadable';
 import LibrariesListPage from 'containers/Admin/LibrariesListPage/Loadable';
 import InstitutionsListPage from 'containers/Admin/InstitutionsListPage/Loadable';
 import InstitutionTypeListPage from 'containers/Admin/InstitutionTypeListPage/Loadable';
+import ProjectPage from 'containers/Admin/ProjectPage/Loadable';
+import ProjectsListPage from 'containers/Admin/ProjectsListPage/Loadable';
+
 import InstitutionPage from 'containers/Admin/InstitutionPage/Loadable';
 import SubRouteSwitch from 'components/SubRouteSwitch';
 
@@ -31,6 +34,13 @@ const routes = [
       { path: '/:page?', exact: true, name: `Institutions`, url: `/institutions`, component: InstitutionsListPage, },
       { path: '/institution/new', icon: 'plus', name: `Institutions`, component: InstitutionPage,  url: `/institutions/institution/new`, sidebar: true},
       { path: '/institution/:id?', name: `Institutions`, component: InstitutionPage, },
+    ]
+  },
+  { path: '/projects',  name: `Projects`, component: SubRouteSwitch, header: true,
+    children: [
+      { path: '/project/new', icon: 'plus', name: `ProjectNew`, component: ProjectPage,  url: `/projects/project/new`, sidebar: true},
+      { path: '/project/:id?', name: `Projects`, component: ProjectPage, },
+      { path: '/:page?', exact: true, name: `Projects`, url: `/projects`, component: ProjectsListPage},
     ]
   },
 ];

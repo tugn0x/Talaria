@@ -1,4 +1,4 @@
-<?php namespace App\Models\Institutions;
+<?php namespace App\Models\Projects;
 
 use Carbon\Carbon;
 use App\Models\BaseTransformer;
@@ -7,11 +7,11 @@ use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\ParamBag;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
-class InstitutionTypeTransformer extends BaseTransformer
+class ProjectTransformer extends BaseTransformer
 {
 
     protected $availableIncludes = [
-        'titles'
+        
     ];
 
 

@@ -5,6 +5,10 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_UPDATE_LIBRARY,
           REQUEST_POST_LIBRARY,
           REQUEST_GET_INSTITUTION_TYPE_LIST,
+          REQUEST_GET_PROJECT,
+          REQUEST_GET_PROJECTS_LIST,
+          REQUEST_UPDATE_PROJECT,
+          REQUEST_POST_PROJECT,
           REQUEST_GET_INSTITUTIONS_LIST,
           REQUEST_GET_INSTITUTION,
           REQUEST_INSTITUTIONSTYPES_OPTIONLIST,
@@ -20,6 +24,8 @@ import {
   requestGetLibrarySuccess,
   requestGetLibrariesListSuccess,
   requestGetInstitutionTypeListSuccess,
+  requestGetProjectSuccess,
+  requestGetProjectsListSuccess,
   requestGetInstitutionsListSuccess,
   requestGetInstitutionSuccess,
   requestInstitutionTypeOptionListSuccess,
@@ -31,7 +37,9 @@ import {getUsersList, updateUser, createUser,
         getUser, getLibrary, getLibrariesList, updateLibrary,
         createLibrary, getInstituionTypeList, getInstitutionsList,
         getInstitution, getInstitutionsSelectList,
-        createInstitution, getCountriesSelectList} from 'utils/api'
+        createInstitution, getCountriesSelectList,
+        getProject, getProjectsList, updateProject,
+        createProject} from 'utils/api'
 
 
 export function* requestUserSaga(action) {
@@ -228,6 +236,62 @@ export function* requestPostInstitutionSaga(action) {
   }
 }
 
+export function* requestPostProjectSaga(action) {
+  const options = {
+    method: 'post',
+    body: {...action.request }
+  };
+  try {
+    const request = yield call(createProject, options);
+    yield call(requestGetProjectsListSaga);
+    yield put(push("/admin/projects"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestGetProjectSaga(action) {
+  const options = {
+    method: 'get',
+    id: action.id
+  };
+  try {
+   const request = yield call(getProject, options);
+   yield put(requestGetProjectSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestUpdateProjectSaga(action) {
+  const options = {
+    method: 'put',
+    body: action.request
+  };
+  try {
+    const request = yield call(updateProject, options);
+    yield call(requestGetProjectsListSaga);
+    yield put(push("/admin/projects"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestGetProjectsListSaga(action = {}) {
+  const options = {
+    method: 'get',
+    page: action.page ? action.page : '1'
+  };
+  try {
+    const request = yield call(getProjectsList, options);
+    yield put(requestGetProjectsListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 /**
  * Root saga manages watcher lifecycle
  */
@@ -241,6 +305,10 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_UPDATE_LIBRARY, requestUpdateLibrarySaga);
   yield takeLatest(REQUEST_POST_LIBRARY, requestPostLibrarySaga);
   yield takeLatest(REQUEST_GET_INSTITUTION_TYPE_LIST, requestGetInstitutionTypeListSaga);
+  yield takeLatest(REQUEST_GET_PROJECT, requestGetProjectSaga);
+  yield takeLatest(REQUEST_GET_PROJECTS_LIST, requestGetProjectsListSaga);
+  yield takeLatest(REQUEST_UPDATE_PROJECT, requestUpdateProjectSaga);
+  yield takeLatest(REQUEST_POST_PROJECT, requestPostProjectSaga);
   yield takeLatest(REQUEST_GET_INSTITUTIONS_LIST, requestGetInstitutionsListSaga);
   yield takeLatest(REQUEST_INSTITUTIONSTYPES_OPTIONLIST, requestInstitutionTypeOptionListSaga);
   yield takeLatest(REQUEST_GET_INSTITUTION, requestGetInstitutionSaga);

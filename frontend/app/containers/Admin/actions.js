@@ -13,6 +13,10 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_UPDATE_LIBRARY, /* REQUEST_UPDATE_LIBRARY_SUCCESS, */
    REQUEST_POST_LIBRARY, REQUEST_POST_LIBRARY_SUCCESS,
    REQUEST_POST_USER, REQUEST_POST_USER_SUCCESS,
+   REQUEST_GET_PROJECT, REQUEST_GET_PROJECT_SUCCESS,
+   REQUEST_GET_PROJECTS_LIST, REQUEST_GET_PROJECTS_LIST_SUCCESS,
+   REQUEST_UPDATE_PROJECT, 
+   REQUEST_POST_PROJECT,
    REQUEST_GET_INSTITUTIONS_LIST, REQUEST_GET_INSTITUTIONS_LIST_SUCCESS,
    REQUEST_GET_INSTITUTION, REQUEST_GET_INSTITUTION_SUCCESS,
    REQUEST_INSTITUTIONSTYPES_OPTIONLIST, REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
@@ -117,7 +121,51 @@ export function requestGetLibrarySuccess(result) {
 
 export function requestUpdateLibrary(request, message) {
   return {
-    type: REQUEST_UPDATE_LIBRARY,
+    type: REQUEST_UPDATE_PROJECT,
+    request,
+    message
+  };
+}
+
+export function requestGetProjectsList(page) {
+  return {
+    type: REQUEST_GET_PROJECTS_LIST,
+    page
+  };
+}
+
+export function requestGetProjectsListSuccess(result) {
+  return {
+    type: REQUEST_GET_PROJECTS_LIST_SUCCESS,
+    result
+  };
+}
+
+export function requestPostProject(request, message) {
+  return {
+    type: REQUEST_POST_PROJECT,
+    request,
+    message
+  };
+}
+
+export function requestGetProject(id) {
+  return {
+    type: REQUEST_GET_PROJECT,
+    id
+  };
+}
+
+export function requestGetProjectSuccess(result) {
+  return {
+    type: REQUEST_GET_PROJECT_SUCCESS,
+    result
+  };
+}
+
+export function requestUpdateProject(request, message) {
+  return {
+    type: REQUEST_UPDATE_PROJECT,
     request,
     message
   };

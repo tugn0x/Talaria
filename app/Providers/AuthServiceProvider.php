@@ -6,6 +6,7 @@ use App\Models\Country;
 use App\Models\Institutions\Institution;
 use App\Models\Institutions\InstitutionType;
 use App\Models\Libraries\Library;
+use App\Models\Projects\Project;
 use App\Models\Libraries\LibraryUser;
 use App\Models\References\Reference;
 use App\Models\Users\User;
@@ -13,6 +14,7 @@ use App\Policies\BasePolicy;
 use App\Policies\LibraryPolicy;
 use App\Policies\LibraryUserPolicy;
 use App\Policies\ReferencesPolicy;
+use App\Policies\ProjectPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
@@ -33,6 +35,7 @@ class AuthServiceProvider extends ServiceProvider
         Reference::class => ReferencesPolicy::class,
         User::class => BasePolicy::class,
         InstitutionType::class => BasePolicy::class,
+        Project::class => BasePolicy::class,
         Institution::class => BasePolicy::class,
         Country::class => BasePolicy::class,
     ];

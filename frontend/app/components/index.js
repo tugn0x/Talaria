@@ -32,6 +32,7 @@ import SimpleList from './Admin/SimpleList'
 import LibraryForm from './Admin/LibraryForm'
 import InstitutionsList from './Admin/InstitutionsList'
 import InstitutionForm from './Admin/InstitutionForm'
+import ProjectsList from './Admin/ProjectsList'
 
 /*
 FORM STUFFS
@@ -60,6 +61,7 @@ export {
   LibraryForm,
   LibrariesList,
   InstitutionsList,
+  ProjectsList,
   InstitutionForm,
   UsersList,
   CustomForm,

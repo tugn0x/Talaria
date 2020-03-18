@@ -197,6 +197,9 @@ ul.list-inline {
     width: 25px;
     height: 25px;
     border-radius: 25px;
+    &.disabled{
+        background-color: red;
+    }
     &.pending{
         background-color: gold;
     }

@@ -1,9 +1,9 @@
-<?php namespace App\Models\Institutions;
+<?php namespace App\Models\Projects;
 
 use App\Models\BaseObserver;
 use \Auth;
 
-class InstitutionTypeObserver extends BaseObserver
+class ProjectObserver extends BaseObserver
 {
 
     protected $rules = [
