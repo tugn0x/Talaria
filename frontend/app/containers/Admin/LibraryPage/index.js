@@ -12,11 +12,9 @@ import { compose } from 'redux';
 import {useIntl} from 'react-intl';
 // import {fields} from './fields';
 import messages from './messages';
-import { FormattedMessage } from 'react-intl';
 import {requestGetLibrary, requestUpdateLibrary, requestPostLibrary} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
-import {CustomForm, LibraryForm} from 'components';
-
+import {LibraryForm, Loader} from 'components';
 
 function LibraryPage(props) {
     const intl = useIntl();
@@ -29,15 +27,12 @@ function LibraryPage(props) {
     useEffect(() => {
       if(!isLoading && !isNew) {
          dispatch(requestGetLibrary(params.id))
-      }else if(!isLoading && isNew){
-        // dispatch(requestGetLibraryList())
       }
-      // console.log(isLoading)
      }, [])
   
      
     return (
-      <>
+      <Loader show={isLoading}>
         {!isNew && 
             <LibraryForm 
               library={library}
@@ -52,7 +47,7 @@ function LibraryPage(props) {
               titleNewLibrary={intl.formatMessage(messages.titleNewLibrary)}
             /> 
         }  
-      </>
+      </Loader>
     );
   }
   

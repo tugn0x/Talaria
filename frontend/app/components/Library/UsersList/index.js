@@ -60,13 +60,13 @@ function UsersList(props) {
                     {usersList.length > 0 && usersList.map(user => (
                         <Row key={`user-${user.id}`}>
                             <Col xs={4}>
-                                <a href={`${editurl(user.user_id)}`}>
+                                <a href={`${editurl(user.id)}`}>
                                     {user.user.data.full_name}
                                 </a>
                             </Col>
                             <Col xs={2}>
                                 <span>
-                                    {user.id}
+                                    {user.user_id}
                                 </span>
                             </Col>
                             <Col xs={2}>

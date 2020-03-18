@@ -34,7 +34,10 @@ export const initialState = {
   user: [],
   error: null,
   pagination: [],
-  librariesList: [],
+  librariesList: {
+    pagination: {},
+    data: [],
+  },
   library: [],
   institutionTypes: [],
   project: [],
@@ -105,7 +108,8 @@ const AdminReducer = (state = initialState, action) =>
       case REQUEST_GET_LIBRARIES_LIST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.librariesList = action.result.data
+        draft.librariesList.data = action.result.data
+        draft.librariesList.pagination = action.result.meta.pagination
         break;
       case REQUEST_GET_INSTITUTION:
         draft.loading = true;

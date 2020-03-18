@@ -24,15 +24,18 @@ const MyLibrariesListPage = (props) => {
 
     return (
         <div className="my-libraries">
-            <MyLibrariesList 
-                my_libraries={patron.my_libraries} 
-                match={match} 
-                librariesList={patron.librariesList} 
-                fields={fields}
-                messages={messages} 
-                editPath={'/patron/my-libraries/library/:id?'}
-                title={intl.formatMessage(messages.title)}
-            />
+            {patron.my_libraries && 
+                <MyLibrariesList 
+                    my_libraries={patron.my_libraries.data}
+                    pagination={patron.my_libraries.pagination} 
+                    match={match} 
+                    librariesList={patron.librariesList} 
+                    fields={fields}
+                    messages={messages} 
+                    editPath={'/patron/my-libraries/library/:id?'}
+                    title={intl.formatMessage(messages.title)}
+                />
+            }
         </div>
     )
 }

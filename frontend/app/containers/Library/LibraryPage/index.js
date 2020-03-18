@@ -21,7 +21,7 @@ function LibraryPage(props) {
    TODO: DA QUESTA PAGINA, QUALUNQUE SIA LA SOTTO ROTTA, TU CI PASSI, QUI RIEMPI IL REDUCER library.library con l'action get library
    */
   console.log('LibraryPage', props)
-  const {library,isLoading, match, dispatch} = props;
+  const {isLoading, match, dispatch} = props;
   
   useEffect(() => {
     if(!isLoading){

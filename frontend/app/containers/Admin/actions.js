@@ -83,10 +83,11 @@ export function requestUpdateUserSuccess(result) {
   };
 }
 
-export function requestGetLibrariesList(page) {
+export function requestGetLibrariesList(page = '1', query) {
   return {
     type: REQUEST_GET_LIBRARIES_LIST,
-    page
+    page,
+    query
   };
 }
 
@@ -198,10 +199,11 @@ export function stopLoading() {
   };
 }
 
-export function requestGetInstitutionsList(page = '1') {
+export function requestGetInstitutionsList(page, query) {
   return {
     type: REQUEST_GET_INSTITUTIONS_LIST,
-    page
+    page,
+    query
   };
 }
 

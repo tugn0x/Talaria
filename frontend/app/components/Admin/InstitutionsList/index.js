@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import {formatDate} from 'utils/formatDate'
 import ButtonPlus from 'components/Button/ButtonPlus'
 import CustomModal from 'components/Modal/Loadable'
-import {Pagination} from 'components';
+import {Pagination, InputSearch} from 'components';
 import { generatePath } from "react-router";
 import InstitutionPage from 'containers/Admin/InstitutionPage'
 
@@ -13,7 +13,7 @@ function InstitutionsList(props) {
     console.log('InstitutionsList', props)
     const {
         institutionsList, editPath, 
-        pagination,  match} = props
+        pagination,  match, getSearchList} = props
     const {current_page, total_pages} = pagination
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
@@ -32,6 +32,7 @@ function InstitutionsList(props) {
     return (
         <>
             <h3 className="table-title">{intl.formatMessage(messages.header)}</h3>
+            <InputSearch submitCallback={ (query) => getSearchList(query)} />
             <ButtonPlus 
                 onClickHandle={toggle}
                 text={intl.formatMessage(messages.createNewInstitution)}

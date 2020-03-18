@@ -16,7 +16,7 @@ const UsersListPage = (props) => {
     
     useEffect(() => {
         if(!isLoading && library_id) {
-            dispatch(requestUsersList('1', library_id))
+            dispatch(requestUsersList(null, library_id))
         }
     }, [library_id])
 

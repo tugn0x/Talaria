@@ -147,7 +147,8 @@ export function* requestUpdateLibrarySaga(action) {
 export function* requestGetLibrariesListSaga(action = {}) {
   const options = {
     method: 'get',
-    page: action.page ? action.page : '1'
+    page: action.page ? action.page : '1',
+    query: action.query ? action.query : ''
   };
   try {
     const request = yield call(getLibrariesList, options);
@@ -173,7 +174,8 @@ export function* requestGetInstitutionTypeListSaga(action = {}) {
 export function* requestGetInstitutionsListSaga(action = {}) {
   const options = {
     method: 'get',
-    page: action.page ? action.page : '1'
+    page: action.page ? action.page : '1',
+    query: action.query ? action.query : ''
   };
   try {
     const request = yield call(getInstitutionsList, options);

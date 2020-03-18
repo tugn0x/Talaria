@@ -18,6 +18,7 @@ const ReferencesListPage = (props) => {
     }, [])
 
     return (
+        referencesList.length > 0 &&
         <ReferencesList 
             match={match} 
             referencesList={referencesList} 

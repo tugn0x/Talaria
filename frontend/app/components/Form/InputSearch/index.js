@@ -1,32 +1,40 @@
-import React from 'react'
+import React, {useState} from 'react'
 import messages from './messages'
-import {intl} from 'react-intl'
-import {Form, InputGroup, InputGroupAddon, Button, Input} from 'reactstrap';
+import {useIntl} from 'react-intl'
+import {Form, InputGroup, InputGroupAddon, Button, Input, Row, Col} from 'reactstrap';
+import './style.scss'
 
-
-const InputSearch = () => {
+const InputSearch = (props) => {
     
+    const {submitCallback} = props 
+
     const intl = useIntl()
-    const [query, setQuery] = ('')
+    const [query, setQuery] = useState('')
     const handleChange = (e) =>  {
         const q = e.target.value
         setQuery(q)
+        
     }
     
-    const handleSubmit = () => {
-        console.log(query)
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        submitCallback(query)
     }
     
     return (
-        <Form className="form-search" noValiadte onSubmit={handleSubmit}>
-            <InputGroup>
-                <InputGroupAddon addonType="prepend">
-                    <Button type="submit">
-                        {intl.formatMessage(messages.Button)}
-                    </Button>
-                </InputGroupAddon>
-                <Input required onChange={handleChange} type="text" name="inputSearch" id="inputSearch" />
-            </InputGroup>
+        <Form className="form-search" noValidate onSubmit={handleSubmit}>
+            <Row>
+                <Col md={6} sm={12}>
+                    <InputGroup>
+                        <InputGroupAddon addonType="append">
+                            <Button type="submit" color="brown" className="searchBtn">
+                                {intl.formatMessage(messages.Button)}
+                            </Button>
+                        </InputGroupAddon>
+                        <Input required onChange={handleChange} type="text" name="inputQuery" id="inputQuery" />
+                    </InputGroup>
+                </Col>
+            </Row>
         </Form>
     )
 }

@@ -28,6 +28,7 @@ const InstitutionsListPage = (props) => {
                     pagination={pagination}
                     match={match}
                     editPath={'/admin/institutions/institution/:id?'}
+                    getSearchList={(query) => dispatch(requestGetInstitutionsList(null, query))}
                 /> 
             }
         </>

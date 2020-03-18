@@ -5,17 +5,22 @@ import { useIntl } from 'react-intl';
 import {formatDate} from 'utils/formatDate'
 import ButtonPlus from 'components/Button/ButtonPlus'
 import CustomModal from 'components/Modal/Loadable'
-import {LibraryForm, InputSearch} from 'components';
+import {Pagination, InputSearch} from 'components';
 import { generatePath } from "react-router";
-// import './style.scss'
+import LibraryPage from 'containers/Admin/LibraryPage'
 
 
 function LibrariesList(props) {
     console.log('LibrariesList', props)
-    const {librariesList, editPath, createLibrary, loading} = props
+    const {librariesList, editPath, history, match, pagination,  getSearchList} = props
     const [modal, setModal] = useState(false);
+    const {total_pages, current_page} = pagination
     const toggle = () => setModal(!modal);
     const intl = useIntl();
+
+    const linkTo = (path) => {
+        history.push(path)
+     };
 
     const editurl = (id) => {
         return generatePath(`${editPath}`, {
@@ -26,7 +31,7 @@ function LibrariesList(props) {
     return (
         <>
             <h3 className="table-title">{intl.formatMessage(messages.header)}</h3>
-            <InputSearch />
+            <InputSearch submitCallback={ (query) => getSearchList(query)} />
             <ButtonPlus 
                 onClickHandle={toggle}
                 text={intl.formatMessage(messages.createNewLibrary)}
@@ -90,13 +95,11 @@ function LibrariesList(props) {
             <CustomModal 
                 modal={modal} 
                 toggle={toggle}>
-                <LibraryForm 
-                    createLibrary={ (formData) => createLibrary(formData) } 
-                    loading={loading}
-                    titleNewLibrary={'New Library'}
+                <LibraryPage 
+                    match={match}
                 /> 
             </CustomModal>  
-           {/*  {pagination && Object.keys(pagination).length > 0 &&
+           {Object.keys(pagination).length > 0 &&
                 <Pagination
                     current_page={current_page}
                      total_pages={total_pages}
@@ -106,7 +109,7 @@ function LibrariesList(props) {
                         page: page
                       }))}
                 />
-            } */}
+            } 
           </>
     )
 }

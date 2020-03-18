@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -10,10 +10,10 @@ import makeSelectAdmin, {isAdminLoading} from '../selectors';
 
 const LibrariesListPage = (props) => {
     console.log('LibrariesListPage', props)
-    const {dispatch, isLoading, admin, match, location, history} = props
-    const {path} = match
+    const {dispatch, isLoading, admin, match} = props
     const intl = useIntl();
-    const librariesList = admin.librariesList
+    const librariesList = admin.librariesList.data
+    const pagination = admin.librariesList.pagination
     
     useEffect(() => {
         if(!isLoading) {
@@ -24,8 +24,11 @@ const LibrariesListPage = (props) => {
     return (
         <LibrariesList 
             librariesList={librariesList}
-            loading={isLoading}
+            pagination={pagination}
+            history={history}
+            match={match}
             editPath={'/admin/libraries/library/:id?'}
+            getSearchList={(query) => dispatch(requestGetLibrariesList(null, query))}
             createLibrary={formData => dispatch(requestPostLibrary(formData, 'Library registered'))}
         />
     )

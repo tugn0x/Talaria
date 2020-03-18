@@ -12,5 +12,5 @@ export default defineMessages({
   Button: {
     id: `${scope}.Button`,
     defaultMessage: 'Search',
-  },
+  }
 });

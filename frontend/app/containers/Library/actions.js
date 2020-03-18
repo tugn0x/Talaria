@@ -66,12 +66,12 @@ export function requestUpdateUser(request) {
   };
 }
 
-export function requestUpdateUserSuccess(result) {
+/* export function requestUpdateUserSuccess(result) {
   return {
     type: REQUEST_UPDATE_USER_SUCCESS,
     result
   };
-}
+} */
 
 export function requestGetLibrariesList(page) {
   return {

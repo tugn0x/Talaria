@@ -70,7 +70,7 @@ export function* requestAccessToLibrarySaga(action) {
 
 export function* requestReferencesListSaga() {
   const options = {
-    method: 'get'
+    method: 'get',
   };
   try {
     const request = yield call(getReferencesList, options);

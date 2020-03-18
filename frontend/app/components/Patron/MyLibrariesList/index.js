@@ -13,6 +13,7 @@ import './style.scss'
 function MyLibrariesList(props) {
     console.log('MyLibrariesList', props)
     const {my_libraries, match, editPath, pagination, history} = props
+    const {current_page, total_pages} = pagination
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const intl = useIntl();

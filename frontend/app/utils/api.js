@@ -182,29 +182,6 @@ export const updateReference = (options) => {
 
 
 // ---------- LIBRARY ---------- //
-export const createLibrary = (options) => {
-  options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries`, options)
-};
-
-export const getLibrary = (options) => {
-  const library_id = options.id
-  options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/${library_id}`, options)
-};
-
-export const updateLibrary = (options) => {
-  const library_id = options.body.id
-  options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/${library_id}`, options)
-};
-
-export const getLibrariesList = (options) => {
-  const page = options.page;
-  options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/?page=${page}`, options)
-};
-
 export const getLibraryUsersList = (options) => {
   const page = options.page;
   const library_id = options.library_id
@@ -220,11 +197,11 @@ export const getLibraryUser = (options) => {
 };
 
 export const updateLibraryUser = (options) => {
-  const user_id = options.body.user_id
+  const id = options.body.id
   const library_id = options.body.library_id
   options = getOption(options);
   
-  return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${user_id}`, options)
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${id}`, options)
 }
 
 
@@ -254,12 +231,38 @@ export const updateUser = (options) => {
   return request(`${BASE_URL}/api/v1/users/users/${user_id}`, options)
 };
 
+// Libraries
+export const createLibrary = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries`, options)
+};
+
+export const getLibrary = (options) => {
+  const library_id = options.id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}`, options)
+};
+
+export const updateLibrary = (options) => {
+  const library_id = options.body.id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}`, options)
+};
+
+export const getLibrariesList = (options) => {
+  const page = options.page;
+  const query = options.query;
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/?page=${page}&q=${query}`, options)
+};
+
 
 // Institutions //
 export const getInstitutionsList = (options) => {
   const page = options.page;
+  const query = options.query;
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/institutions/?page=${page}`, options)
+  return request(`${BASE_URL}/api/v1/institutions/?page=${page}&q=${query}`, options)
 };
 
 

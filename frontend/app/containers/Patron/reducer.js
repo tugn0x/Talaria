@@ -15,7 +15,10 @@ import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
 
 export const initialState = {
   loading: false,
-  my_libraries: [],
+  my_libraries: {
+    data: [],
+    pagination: {}
+  },
   library: {},
   error: null,
   librariesList: [],
@@ -65,6 +68,7 @@ const PatronReducer = (state = initialState, action) =>
         break;
       case REQUEST_MY_LIBRARIES:
         draft.loading = true;
+        draft.error = action.error;
         break;
       case REQUEST_GET_LIBRARIES_LIST:
         draft.loading = true;
@@ -73,7 +77,8 @@ const PatronReducer = (state = initialState, action) =>
       case REQUEST_MY_LIBRARIES_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.my_libraries =  action.result.data.map(lib => {return { id: lib.library.data.id, name: lib.library.data.name, status: lib.status, created_at: lib.library.data.created_at  } } );
+        draft.my_libraries.data =  action.result.data.map(lib => {return { id: lib.library.data.id, name: lib.library.data.name, status: lib.status, created_at: lib.library.data.created_at  } } );
+        draft.my_libraries.pagination =  action.result.meta.pagination
         break;
       case REQUEST_GET_LIBRARIES_LIST_SUCCESS:
         draft.loading = false;
