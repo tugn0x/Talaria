@@ -7,9 +7,9 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_GET_INSTITUTION_TYPE_LIST,
           REQUEST_GET_INSTITUTIONS_LIST,
           REQUEST_GET_INSTITUTION,
-          REQUEST_GET_INSTITUTIONS_SELECT_LIST,
+          REQUEST_INSTITUTIONSTYPES_OPTIONLIST,
           REQUEST_POST_INSTITUTION,
-          REQUEST_GET_COUNTRIES_SELECT_LIST
+          REQUEST_GET_COUNTRIES_OPTIONLIST
 } from './constants';
 import {
   requestError,
@@ -22,15 +22,15 @@ import {
   requestGetInstitutionTypeListSuccess,
   requestGetInstitutionsListSuccess,
   requestGetInstitutionSuccess,
-  requestGetInstitutionsSelectListSuccess,
-  requestGetCountriesSelectListSuccess
+  requestInstitutionTypeOptionListSuccess,
+  requestGetCountriesOptionListSuccess
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
 import {getUsersList, updateUser, createUser,
         getUser, getLibrary, getLibrariesList, updateLibrary,
         createLibrary, getInstituionTypeList, getInstitutionsList,
-        getInstitution, getInstitutionsSelectList, 
+        getInstitution, getInstitutionsSelectList,
         createInstitution, getCountriesSelectList} from 'utils/api'
 
 
@@ -187,27 +187,27 @@ export function* requestGetInstitutionSaga(action) {
   }
 }
 
-export function* requestGetInstitutionsSelectListSaga(action) {
+export function* requestInstitutionTypeOptionListSaga(action) {
   const options = {
     method: 'get',
     query: action.request
   }
   try {
     const request = yield call(getInstitutionsSelectList, options);
-    yield put(requestGetInstitutionsSelectListSuccess(request));
+    yield put(requestInstitutionTypeOptionListSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
   }
 }
 
-export function* requestGetCountriesSelectListSaga(action) {
+export function* requestGetCountriesOptionListSaga(action) {
   const options = {
     method: 'get',
     query: action.request
   }
   try {
     const request = yield call(getCountriesSelectList, options);
-    yield put(requestGetCountriesSelectListSuccess(request));
+    yield put(requestGetCountriesOptionListSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -242,8 +242,8 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_POST_LIBRARY, requestPostLibrarySaga);
   yield takeLatest(REQUEST_GET_INSTITUTION_TYPE_LIST, requestGetInstitutionTypeListSaga);
   yield takeLatest(REQUEST_GET_INSTITUTIONS_LIST, requestGetInstitutionsListSaga);
-  yield takeLatest(REQUEST_GET_INSTITUTIONS_SELECT_LIST, requestGetInstitutionsSelectListSaga);
+  yield takeLatest(REQUEST_INSTITUTIONSTYPES_OPTIONLIST, requestInstitutionTypeOptionListSaga);
   yield takeLatest(REQUEST_GET_INSTITUTION, requestGetInstitutionSaga);
   yield takeLatest(REQUEST_POST_INSTITUTION, requestPostInstitutionSaga);
-  yield takeLatest(REQUEST_GET_COUNTRIES_SELECT_LIST, requestGetCountriesSelectListSaga);
+  yield takeLatest(REQUEST_GET_COUNTRIES_OPTIONLIST, requestGetCountriesOptionListSaga);
 }

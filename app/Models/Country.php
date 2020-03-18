@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Country extends Model
+class Country extends BaseModel
 {
-    protected $fillable = [        
-        'code',       
+    protected $userstamping = false;
+    public static function bootSoftDeletes() {}
+    protected $fillable = [
+        'code',
         'name',
     ];
 }

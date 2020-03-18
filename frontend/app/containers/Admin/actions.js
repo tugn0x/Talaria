@@ -15,10 +15,10 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_POST_USER, REQUEST_POST_USER_SUCCESS,
    REQUEST_GET_INSTITUTIONS_LIST, REQUEST_GET_INSTITUTIONS_LIST_SUCCESS,
    REQUEST_GET_INSTITUTION, REQUEST_GET_INSTITUTION_SUCCESS,
-   REQUEST_GET_INSTITUTIONS_SELECT_LIST, REQUEST_GET_INSTITUTIONS_SELECT_LIST_SUCCESS,
+   REQUEST_INSTITUTIONSTYPES_OPTIONLIST, REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
    REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS, REQUEST_GET_INSTITUTION_TYPE_LIST,
-   REQUEST_POST_INSTITUTION, 
-   REQUEST_GET_COUNTRIES_SELECT_LIST, REQUEST_GET_COUNTRIES_SELECT_LIST_SUCCESS
+   REQUEST_POST_INSTITUTION,
+   REQUEST_GET_COUNTRIES_OPTIONLIST, REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS
 } from "./constants";
 
 export function defaultAction() {
@@ -178,30 +178,30 @@ export function requestGetInstitutionSuccess(result) {
   };
 }
 
-export function requestGetInstitutionsSelectList(request) {
+export function requestInstitutionTypeOptionList(request) {
   return {
-    type: REQUEST_GET_INSTITUTIONS_SELECT_LIST,
+    type: REQUEST_INSTITUTIONSTYPES_OPTIONLIST,
     request
   };
 }
 
-export function requestGetInstitutionsSelectListSuccess(result) {
+export function requestInstitutionTypeOptionListSuccess(result) {
   return {
-    type: REQUEST_GET_INSTITUTIONS_SELECT_LIST_SUCCESS,
+    type: REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
     result
   };
 }
 
-export function requestGetCountriesSelectList(request) {
+export function requestGetCountriesOptionList(request) {
   return {
-    type: REQUEST_GET_COUNTRIES_SELECT_LIST,
+    type: REQUEST_GET_COUNTRIES_OPTIONLIST,
     request
   };
 }
 
-export function requestGetCountriesSelectListSuccess(result) {
+export function requestGetCountriesOptionListSuccess(result) {
   return {
-    type: REQUEST_GET_COUNTRIES_SELECT_LIST_SUCCESS,
+    type: REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS,
     result
   };
 }
@@ -210,7 +210,7 @@ export function requestPostInstitution(request) {
   return {
     type: REQUEST_POST_INSTITUTION,
     request: {
-      ...request, 
+      ...request,
       institution_type_id: request.institution_type_id.value}
   };
 }

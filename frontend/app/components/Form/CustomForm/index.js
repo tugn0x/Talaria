@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { Card, CardBody, CustomInput, Form, Button, Row } from 'reactstrap'
 import PropTypes from 'prop-types';
 import {useIntl} from 'react-intl'
-import Select from 'react-select'; 
+import Select from 'react-select';
 import { AppSwitch } from '@coreui/react'
 import './style.scss'
 import {ErrorBox} from 'components';
@@ -32,7 +32,7 @@ const CustomForm = (props) => {
 
     const [selectedOption, setSelectedOption] = useState(null)
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
-    
+
     const handleFormData = () => {
         let data = {}
         Object.keys(fields).map(key => {
@@ -47,10 +47,10 @@ const CustomForm = (props) => {
                 data = {...data, [key]: updateFormData && updateFormData[field.name]  ? updateFormData[field.name]  : '' }
             }
         })
-        return data 
+        return data
     }
-    
-    const [formData, setFormData] = useState(handleFormData()) 
+
+    const [formData, setFormData] = useState(handleFormData())
 
     /* CUSTOM SELECT Handle */
     const handleSearchCustomSelect = (newValue) => {
@@ -64,13 +64,13 @@ const CustomForm = (props) => {
        setIsSubmitDisabled(false)
     }
 
-   
+
     /* HANDLE CHANGE Generico */
     const handleChange = (e) =>{
         const targetType = e.target.type
-        const targetName = e.target.name; 
-        const targetChecked = e.target.checked; 
-        const targetValue = e.target.value; 
+        const targetName = e.target.name;
+        const targetChecked = e.target.checked;
+        const targetValue = e.target.value;
         console.log(targetValue)
         switch(targetType) {
             case "checkbox":
@@ -117,7 +117,7 @@ const CustomForm = (props) => {
                             {selectFieldsGroups(fields,fieldsGroups).map((formfields) => {
                                 // const field = fields[key];
                                 return (<div key={formfields.name} className="form-group">
-                                            {formfields.name !== 'undefined' && 
+                                            {formfields.name !== 'undefined' &&
                                                 <h4>{intl.formatMessage(messages[formfields.label])}</h4>
                                             }
                                             <Row>
@@ -151,7 +151,7 @@ const CustomForm = (props) => {
                                                                     onChange={(e) => handleChange(e)}
                                                                     required={field.required ? field.required : false}
                                                                 >
-                                                                {   
+                                                                {
                                                                     (typeof field.options === 'string') ?
                                                                     props[field.options] && props[field.options].map((opt, i) => (
                                                                             <option key={`${field.name}-${i}`} value={opt.value}>
@@ -169,7 +169,7 @@ const CustomForm = (props) => {
                                                                     value={selectedOption}
                                                                     name={field.name}
                                                                     onChange={(selectedOption) => handleChangeCustomSelect(selectedOption, field.selectedOption)}
-                                                                    onInputChange={(input) => handleSearchCustomSelect(input) }
+                                                                    onInputChange={(input) => field.search ? field.search(input) : ''}
                                                                     options={props[field.options]}
                                                                     required
                                                                 />)
@@ -194,7 +194,7 @@ const CustomForm = (props) => {
                                                                     required={field.required ? field.required : false}
                                                                 />)
                                                             }
-                                                            {field.error && 
+                                                            {field.error &&
                                                                 <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: field.error })} />
                                                             }
                                                         </fieldset>

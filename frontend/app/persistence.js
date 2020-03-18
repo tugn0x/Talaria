@@ -14,7 +14,7 @@ const SKIP_REFRESH = [
   REQUEST_REFRESH,
   REQUEST_LOGIN,
   REQUEST_LOGOUT,
-  REQUEST_GET_LIBRARIES_LIST
+  REQUEST_GET_LIBRARIES_LIST,
 ];
 const SYNC_PERSISTANCE_REQUEST = "persitance/SYNC_PERSISTANCE_REQUEST";
 const SYNC_PERSISTANCE_SUCCESS = "persitance/SYNC_PERSISTANCE_SUCCESS";
@@ -71,7 +71,7 @@ export const persitanceReducer = (state = initialState, action) =>
 
 export const persitanceMiddleWare = store => next => action => {
   // console.log('persitanceMiddleWare', store, next, action)
-  if(action.type.includes("REQUEST_") && !action.type.includes("SUCCESS") && !action.type.includes("ERROR") && SKIP_REFRESH.indexOf(action.type) === -1) {
+  if(action.type.includes("REQUEST_") && !action.type.includes("SUCCESS") && !action.type.includes("ERROR") && SKIP_REFRESH.indexOf(action.type) === -1 && !action.type.includes("_OPTIONLIST")) {
     store.dispatch(requestRefresh())
   }
 
