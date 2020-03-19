@@ -22,6 +22,8 @@ const ProjectsListPage = (props) => {
     }, [])
 
     return (
+        <>
+        {projectsList.length > 0 &&   
         <ProjectsList 
             projectsList={projectsList}
             pagination={pagination}
@@ -31,6 +33,8 @@ const ProjectsListPage = (props) => {
             editPath={'/admin/projects/project/:id?'}
             createProject={formData => dispatch(requestPostProject(formData, 'Project registered'))}
         />
+        }
+        </>
     )
 }
 

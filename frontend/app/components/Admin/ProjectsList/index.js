@@ -7,7 +7,7 @@ import ButtonPlus from 'components/Button/ButtonPlus'
 import CustomModal from 'components/Modal/Loadable'
 import {Pagination, InputSearch} from 'components';
 import { generatePath } from "react-router";
-
+import ProjectPage from 'containers/Admin/ProjectPage'
 
 function ProjectsList(props) {
     console.log('ProjectsList', props)
@@ -93,7 +93,9 @@ function ProjectsList(props) {
             <CustomModal 
                 modal={modal} 
                 toggle={toggle}>
-               
+                <ProjectPage 
+                    match={match}
+                />
             </CustomModal>  
             {Object.keys(pagination).length > 0 &&
                 <Pagination

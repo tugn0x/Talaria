@@ -15,7 +15,7 @@ import messages from './messages';
 import { FormattedMessage } from 'react-intl';
 import {requestGetProject, requestUpdateProject, requestPostProject} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
-import {CustomForm /*, ProjectForm*/} from 'components';
+import {ProjectForm, Loader} from 'components';
 
 
 function ProjectPage(props) {
@@ -29,17 +29,14 @@ function ProjectPage(props) {
     useEffect(() => {
       if(!isLoading && !isNew) {
          dispatch(requestGetProject(params.id))
-      }else if(!isLoading && isNew){
-        // dispatch(requestGetProjectList())
       }
       // console.log(isLoading)
      }, [])
   
      
     return (
-      <>
-      {/*
-        {!isNew && 
+    <Loader show={isLoading}>
+        { !isNew && 
             <ProjectForm 
               project={project}
               loading={isLoading}
@@ -53,8 +50,7 @@ function ProjectPage(props) {
               titleNewProject={intl.formatMessage(messages.titleNewProject)}
             /> 
         }
-      */}  
-      </>
+      </Loader>
     );
   }
   

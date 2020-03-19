@@ -188,7 +188,8 @@ const AdminReducer = (state = initialState, action) =>
       case REQUEST_GET_PROJECT_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.project = action.result
+        draft.project = action.result.data
+        
         break;
       case REQUEST_UPDATE_PROJECT:
         draft.loading = true;

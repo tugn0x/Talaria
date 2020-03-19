@@ -21,24 +21,13 @@ export const fields = {
         group: "general_info",
         
     },
-    institution_type_id: {
-        type: "custom-select",
-        required: true,
-        name: "institution_type_id",
+    active: {
+        type: "switch",
+        name: "active",
+        required: false,
         width: "col-md-6",
         group: "general_info",
-        options: "institution_type_id",
-        selectedOption: "institution_type_id"
-        
-    },
-    country_id: {
-        type: "custom-select",
-        required: true,
-        name: "country_id",
-        width: "col-md-6",
-        group: "general_info",
-        options: "country_id",
-        selectedOption: "country_id"
+       
     },
    
     /*info amministrative */
