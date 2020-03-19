@@ -3,6 +3,10 @@ import HeaderBar from './HeaderBar';
 import Footer from './Footer';
 import SideBar from './SideBar';
 import Pagination from './Pagination'
+
+import SimpleList from './SimpleList'
+import CustomModal from './Modal'
+import ButtonPlus from './Button/ButtonPlus'
 /*
 USER AUTHENTICATION
  */
@@ -28,7 +32,6 @@ import UsersList from './Library/UsersList';
 
 // Admin
 import LibrariesList from './Admin/LibrariesList'
-import SimpleList from './Admin/SimpleList'
 import LibraryForm from './Admin/LibraryForm'
 import InstitutionsList from './Admin/InstitutionsList'
 import InstitutionForm from './Admin/InstitutionForm'
@@ -66,6 +69,8 @@ export {
   InstitutionForm,
   UsersList,
   CustomForm,
+  ButtonPlus,
+  CustomModal,
   InputSearch,
   ErrorBox,
   Loader,
