@@ -3,17 +3,18 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {useIntl} from 'react-intl';
-import {LibrariesList} from 'components'
-import {requestGetLibrariesList, requestPostLibrary} from '../actions'
+import {SimpleList} from 'components'
+import messages from './messages'
+import {columns} from './columns'
+import {requestGetLibrariesList /* , requestPostLibrary */ } from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
-// import queryString from 'query-string'
+import LibraryPage from '../LibraryPage'
 
 const LibrariesListPage = (props) => {
     console.log('LibrariesListPage', props)
-    const {dispatch, isLoading, admin, match} = props
+    const {dispatch, isLoading, admin,  match, history} = props
     const intl = useIntl();
-    const librariesList = admin.librariesList.data
-    const pagination = admin.librariesList.pagination
+    const librariesList = admin.librariesList
     
     useEffect(() => {
         if(!isLoading) {
@@ -21,16 +22,27 @@ const LibrariesListPage = (props) => {
         }
     }, [])
 
+    useEffect(() => {
+        console.log('update LibrariesListPage')
+    })
+
+    
+
     return (
-        <LibrariesList 
-            librariesList={librariesList}
-            pagination={pagination}
-            history={history}
-            match={match}
-            editPath={'/admin/libraries/library/:id?'}
-            getSearchList={(query) => dispatch(requestGetLibrariesList(null, query))}
-            createLibrary={formData => dispatch(requestPostLibrary(formData, 'Library registered'))}
-        />
+        <>
+            <SimpleList 
+                data={librariesList.data}
+                columns={columns}
+                loading={isLoading}
+                pagination={librariesList.pagination}
+                history={history}
+                match={match}
+                title={intl.formatMessage(messages.header)}
+                getSearchList={(query) => dispatch(requestGetLibrariesList(null, query))}
+                editPath={'/admin/libraries/library/:id?'}
+                formNewComponent={ <LibraryPage match={match} />}
+            />
+        </>
     )
 }
 

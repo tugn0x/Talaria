@@ -3,14 +3,17 @@ import {Row, Col} from 'reactstrap';
 import messages from './messages';
 import { useIntl } from 'react-intl';
 import {formatDate} from 'utils/formatDate'
-import ButtonPlus from 'components/Button/ButtonPlus'
-import CustomModal from 'components/Modal/Loadable'
+import {CustomModal, ButtonPlus, Pagination, Loader, InputSearch} from 'components'
 import { generatePath } from "react-router";
-// import './style.scss'
+
 
 function SimpleList(props) {
     console.log('SimpleList', props)
-    const {data, columns, match, editPath, createItem, loading, formNewComponet, title} = props
+    const {data, columns, 
+          match, editPath, 
+          pagination, getSearchList, 
+          loading, formNewComponent, title} = props
+    const {total_pages, current_page} = pagination
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const intl = useIntl();
@@ -21,9 +24,16 @@ function SimpleList(props) {
         });
     }
 
+    const linkTo = (path) => {
+      history.push(path)
+    };
+
     return (
         <>
             <h3 className="table-title">{title}</h3>
+            {getSearchList &&
+              <InputSearch submitCallback={ (query) => getSearchList(query)} />
+            }
             <ButtonPlus
                 onClickHandle={toggle}
                 text={intl.formatMessage(messages.createNew)}
@@ -32,9 +42,8 @@ function SimpleList(props) {
                 <Row className="thead">
                   {
                     columns.map((item) =>
-                      <Col xs={3}>
-                        <span>{item}</span>
-                        {/*<i className="fa fa-sort"  onClick={() => console.log('sort') }></i>*/}
+                      <Col xs={item.col}>
+                        <span>{item.label}</span>
                       </Col>
                     )
                   }
@@ -42,17 +51,18 @@ function SimpleList(props) {
                     <span>{intl.formatMessage(messages.edit)}</span>
                   </Col>
                 </Row>
-                <div className="tbody">
+                <Loader show={loading}>
+                  <div className="tbody">
                     {data.length > 0 && data.map(item => (
                         <Row key={`list-${item.id}`}>
-                          {
-                            columns.map((field) =>
-                              <Col xs={3}>
-                                  {item[field]}
+                          {columns.map((field) =>
+                              <Col xs={field.col}>
+                                  <span>
+                                    {field.type !== "date" ? item[field.name] : formatDate(item[field.name], intl.locale)}
+                                  </span>
                               </Col>
                             )
                           }
-
                           <Col xs={2} className="edit-icons" >
                             <a href={`${editurl(item.id)}`} className="btn btn-link">
                               <i className="fa fa-edit"></i>
@@ -64,24 +74,23 @@ function SimpleList(props) {
                         </Row>
                       ))
                     }
-                </div>
+                  </div>
+                  {pagination && Object.keys(pagination).length > 0 &&
+                      <Pagination
+                          current_page={current_page}
+                          total_pages={total_pages}
+                          setPage={(page) => linkTo(generatePath(`${match.path}`, {
+                            page: page
+                          }))}
+                      />
+                  } 
+                </Loader>
             </div>
             <CustomModal
                 modal={modal}
                 toggle={toggle}>
-              {formNewComponet}
+                {formNewComponent}
             </CustomModal>
-           {/*  {pagination && Object.keys(pagination).length > 0 &&
-                <Pagination
-                    current_page={current_page}
-                     total_pages={total_pages}
-                    // setPage={(page) => linkTo(`${path}/?page=${page}`)}
-
-                    setPage={(page) => linkTo(generatePath(`${props.match.path}`, {
-                        page: page
-                      }))}
-                />
-            } */}
           </>
     )
 }

@@ -39,7 +39,10 @@ export const initialState = {
     data: [],
   },
   library: [],
-  institutionTypes: [],
+  institutionTypes: {
+    pagination: {},
+    data: [],
+  },
   project: [],
   projectsList: {
     pagination: {},
@@ -138,44 +141,30 @@ const AdminReducer = (state = initialState, action) =>
         draft.institutionsList.pagination = action.result.meta.pagination
         break;
       case REQUEST_INSTITUTIONSTYPES_OPTIONLIST:
-        // draft.loading = true;
-        draft.error = initialState.error;
+        draft.error = action.error;
         break;
       case REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS:
-        // draft.loading = false;
-        draft.error = action.error;
+        draft.error = initialState.error;
         draft.institutionsListSelect = action.result.map(item => { return {value: item.id, label: item.name} } );
         break;
 
       case REQUEST_GET_COUNTRIES_OPTIONLIST:
-        // draft.loading = true;
-        draft.error = initialState.error;
+        draft.error = action.error;
         break;
       case REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS:
-        // draft.loading = false;
-        draft.error = action.error;
+        draft.error = initialState.error;
         draft.countriesListSelect = action.result.map(item => { return {value: item.id, label: item.name} } );
         break;
 
       case REQUEST_GET_INSTITUTION_TYPE_LIST:
-        // draft.loading = true;
-        draft.institutionTypes = [];
+        draft.loading = true;
+        draft.error = action.error;
         break;
       case REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS:
-        // draft.loading = false;
-        draft.error = initialState.error;
-        draft.institutionTypes = action.result.data;
-        break;
-      case REQUEST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        break;
-      case STOP_LOADING:
-        draft.loading = false;
-        break;
-      case REQUEST_ERROR:
-        draft.loading = false;
-        draft.error = action.error;
+        draft.institutionTypes.data = action.result.data;
+        draft.institutionTypes.pagination = action.result.meta.pagination;
         break;
       case REQUEST_POST_PROJECT:
         draft.loading = true;
@@ -204,6 +193,17 @@ const AdminReducer = (state = initialState, action) =>
         draft.error = initialState.error;
         draft.projectsList.data = action.result.data
         draft.projectsList.pagination = action.result.meta.pagination
+        break;
+      case REQUEST_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        break;
+      case STOP_LOADING:
+        draft.loading = false;
+        break;
+      case REQUEST_ERROR:
+        draft.loading = false;
+        draft.error = action.error;
         break;
     }
   });

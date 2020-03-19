@@ -72,7 +72,7 @@ const PatronReducer = (state = initialState, action) =>
         break;
       case REQUEST_GET_LIBRARIES_LIST:
         draft.loading = true;
-        draft.error = initialState.error;
+        draft.error = action.error;
         break;
       case REQUEST_MY_LIBRARIES_SUCCESS:
         draft.loading = false;
@@ -87,7 +87,7 @@ const PatronReducer = (state = initialState, action) =>
         break;
       case REQUEST_ACCESS_TO_LIBRARIES:
         draft.loading = true;
-        draft.error = initialState.error;
+        draft.error = action.error;
         break;
       /* case REQUEST_ACCESS_TO_LIBRARIES_SUCCESS:
         draft.loading = false;

@@ -26,12 +26,19 @@ const InputSearch = (props) => {
             <Row>
                 <Col md={6} sm={12}>
                     <InputGroup>
+                        <Input 
+                            required 
+                            placeholder={intl.formatMessage(messages.placeHolder)}
+                            value={query}
+                            onChange={handleChange} 
+                            type="text" 
+                            name="inputQuery" 
+                            id="inputQuery" />
                         <InputGroupAddon addonType="append">
                             <Button type="submit" color="brown" className="searchBtn">
-                                {intl.formatMessage(messages.Button)}
+                                <i className="fa fa-search"></i>
                             </Button>
                         </InputGroupAddon>
-                        <Input required onChange={handleChange} type="text" name="inputQuery" id="inputQuery" />
                     </InputGroup>
                 </Col>
             </Row>

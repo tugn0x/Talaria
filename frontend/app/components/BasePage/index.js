@@ -49,6 +49,7 @@ function BasePage(props) {
 
   const lightRoutes = mapRoutes(props.routes, props.auth, '')
 
+  
   return (
     <>
 

@@ -28,6 +28,12 @@
     }
 }
 
+@include media-breakpoint-down(sm) { 
+    .container {
+        max-width: 660px
+    }
+}
+
 @include media-breakpoint-down(xs) {
     .table {
         overflow-x: auto;

@@ -6,14 +6,14 @@ import {useIntl} from 'react-intl';
 import {SimpleList} from 'components'
 import {requestGetInstitutionTypeList, requestPostLibrary} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
+import {columns} from './columns'
 // import queryString from 'query-string'
 import {LibraryForm} from 'components';
 import messages from "./messages";
 
 const InstitutionTypeListPage = (props) => {
     console.log('InstitutionTypeListPage', props)
-    const {dispatch, isLoading, admin, match, location, history} = props
-    const {path} = match
+    const {dispatch, isLoading, admin, match, history} = props
     const intl = useIntl();
     const institutionTypes = admin.institutionTypes
 
@@ -25,16 +25,16 @@ const InstitutionTypeListPage = (props) => {
 
     return (
         <SimpleList
-            data={institutionTypes}
-            columns={['id', 'name']}
+            data={institutionTypes.data}
+            pagination={institutionTypes.pagination}
+            /* columns={['id', 'name']} */
+            columns={columns}
             loading={isLoading}
             history={history}
-            path={path}
             match={match}
             title={intl.formatMessage(messages.header)}
             editPath={'/admin/institutions/institution-types/type/:id?'}
-
-            formNewComponet={
+            formNewComponent={
               <LibraryForm
                 createItem={formData => dispatch(requestPostLibrary(formData, 'Institution type registered'))}
                 loading={isLoading}
