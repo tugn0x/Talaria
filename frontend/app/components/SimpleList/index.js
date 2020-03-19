@@ -42,7 +42,7 @@ function SimpleList(props) {
                 <Row className="thead">
                   {
                     columns.map((item) =>
-                      <Col xs={item.col}>
+                      <Col key={item.name} xs={item.col}>
                         <span>{item.label}</span>
                       </Col>
                     )
@@ -56,7 +56,7 @@ function SimpleList(props) {
                     {data.length > 0 && data.map(item => (
                         <Row key={`list-${item.id}`}>
                           {columns.map((field) =>
-                              <Col xs={field.col}>
+                              <Col key={field.name} xs={field.col}>
                                   <span>
                                     {field.type !== "date" ? item[field.name] : formatDate(item[field.name], intl.locale)}
                                   </span>

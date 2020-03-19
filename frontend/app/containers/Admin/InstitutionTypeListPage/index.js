@@ -27,7 +27,6 @@ const InstitutionTypeListPage = (props) => {
         <SimpleList
             data={institutionTypes.data}
             pagination={institutionTypes.pagination}
-            /* columns={['id', 'name']} */
             columns={columns}
             loading={isLoading}
             history={history}

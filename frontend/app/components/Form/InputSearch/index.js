@@ -7,7 +7,6 @@ import './style.scss'
 const InputSearch = (props) => {
     
     const {submitCallback} = props 
-
     const intl = useIntl()
     const [query, setQuery] = useState('')
     const handleChange = (e) =>  {

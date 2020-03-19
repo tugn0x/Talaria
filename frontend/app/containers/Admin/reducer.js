@@ -33,7 +33,6 @@ export const initialState = {
   },
   user: [],
   error: null,
-  pagination: [],
   librariesList: {
     pagination: {},
     data: [],
