@@ -41,7 +41,10 @@ export const initialState = {
   library: [],
   institutionTypes: [],
   project: [],
-  projectsList: [],
+  projectsList: {
+    pagination: {},
+    data: [],
+  },
   institutionsList: {
     pagination: {},
     data: [],
@@ -198,7 +201,8 @@ const AdminReducer = (state = initialState, action) =>
       case REQUEST_GET_PROJECTS_LIST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.projectsList = action.result.data
+        draft.projectsList.data = action.result.data
+        draft.projectsList.pagination = action.result.meta.pagination
         break;
     }
   });
