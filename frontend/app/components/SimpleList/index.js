@@ -3,7 +3,7 @@ import {Row, Col} from 'reactstrap';
 import messages from './messages';
 import { useIntl } from 'react-intl';
 import {formatDate} from 'utils/formatDate'
-import {CustomModal, ButtonPlus, Pagination, Loader} from 'components'
+import {CustomModal, ButtonPlus, Pagination, Loader, InputSearch} from 'components'
 import { generatePath } from "react-router";
 
 
@@ -11,7 +11,7 @@ function SimpleList(props) {
     console.log('SimpleList', props)
     const {data, columns, 
           match, editPath, 
-          pagination, createItem, 
+          pagination, getSearchList, 
           loading, formNewComponent, title} = props
     const {total_pages, current_page} = pagination
     const [modal, setModal] = useState(false);
@@ -31,6 +31,9 @@ function SimpleList(props) {
     return (
         <>
             <h3 className="table-title">{title}</h3>
+            {getSearchList &&
+              <InputSearch submitCallback={ (query) => getSearchList(query)} />
+            }
             <ButtonPlus
                 onClickHandle={toggle}
                 text={intl.formatMessage(messages.createNew)}
@@ -54,7 +57,9 @@ function SimpleList(props) {
                         <Row key={`list-${item.id}`}>
                           {columns.map((field) =>
                               <Col xs={field.col}>
-                                  {item[field.name]}
+                                  <span>
+                                    {field.type !== "date" ? item[field.name] : formatDate(item[field.name], intl.locale)}
+                                  </span>
                               </Col>
                             )
                           }

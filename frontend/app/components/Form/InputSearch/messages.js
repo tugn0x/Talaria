@@ -9,8 +9,8 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.components.InputSearch';
 
 export default defineMessages({
-  Button: {
-    id: `${scope}.Button`,
+  placeHolder: {
+    id: `${scope}.placeHolder`,
     defaultMessage: 'Search',
   }
 });

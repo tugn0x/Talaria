@@ -157,12 +157,14 @@ ul.list-inline {
         .row {
             margin-bottom: 1.5rem;
             height: 75px;
+            align-items: center;
             div[class*=col-]{ 
                 padding: 1rem;
                 background-color: $white;
                 border-color: $grey-lighter;
                 border-width: 2px 2px 2px 0;
                 border-style: solid;
+                height: 100%;
                 &:first-child {
                     border-left: $grey-lighter 2px solid;
                     > * {

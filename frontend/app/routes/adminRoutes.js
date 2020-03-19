@@ -23,7 +23,7 @@ const routes = [
     children: [
       { path: '/library/new', icon: 'plus', name: `LibraryCreateNew`, component: LibraryPage,  url: `/libraries/library/new`, sidebar: true},
       { path: '/library/:id?', name: `Libraries`, component: LibraryPage, },
-      { path: '/:page?', exact: true, name: `Libraries`, url: `/libraries`, component: LibrariesListPage, },
+      { path: '/:page?', exact: true, name: `Libraries`, url: `/libraries`, component: LibrariesListPage},
     ]
   },
   { path: '/institutions',  name: `Institutions`, component: SubRouteSwitch, header: true,
