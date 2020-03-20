@@ -5,7 +5,7 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.components.InstitutionTypeListPage';
+export const scope = 'app.containers.InstitutionTypeListPage';
 
 export default defineMessages({
   header: {
@@ -14,10 +14,10 @@ export default defineMessages({
   },
   createNew: {
     id: `${scope}.createNew`,
-    defaultMessage: 'Create new',
+    defaultMessage: 'New institution type',
   },
   edit: {
     id: `${scope}.edit`,
-    defaultMessage: 'Edit',
+    defaultMessage: 'Edit institution type',
   },
 });

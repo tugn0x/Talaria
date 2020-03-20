@@ -31,10 +31,11 @@ export function defaultAction() {
   };
 }
 
-export function requestUsersList(page) {
+export function requestUsersList(page, query) {
   return {
     type: REQUEST_USERS_LIST,
-    page
+    page,
+    query
   };
 }
 
@@ -179,26 +180,6 @@ export function requestUpdateProject(request, message) {
   };
 } */
 
-export function requestSuccess() {
-  return {
-    type: REQUEST_SUCCESS,
-  };
-}
-
-export function requestError(errorMessage) {
-  return {
-    type: REQUEST_ERROR,
-    error: errorMessage
-  };
-}
-
-export function stopLoading() {
-  return {
-    type: STOP_LOADING,
-    // request: request
-  };
-}
-
 export function requestGetInstitutionsList(page, query) {
   return {
     type: REQUEST_GET_INSTITUTIONS_LIST,
@@ -292,5 +273,25 @@ export function requestGetInstitutionTypeListSuccess(result) {
   return {
     type: REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS,
     result
+  };
+}
+
+export function requestSuccess() {
+  return {
+    type: REQUEST_SUCCESS,
+  };
+}
+
+export function requestError(errorMessage) {
+  return {
+    type: REQUEST_ERROR,
+    error: errorMessage
+  };
+}
+
+export function stopLoading() {
+  return {
+    type: STOP_LOADING,
+    // request: request
   };
 }

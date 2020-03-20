@@ -60,7 +60,8 @@ export function* requestUserSaga(action) {
 export function* requestUsersListSaga(action = {}) {
   const options = {
     method: 'get',
-    page: action.page ? action.page : '1'
+    page: action.page ? action.page : '1',
+    query: action.query ? action.query : ''
   };
   try {
     const request = yield call(getUsersList, options);

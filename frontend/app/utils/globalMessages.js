@@ -21,6 +21,10 @@ export default defineMessages({
     id: `${scope}.email`,
     defaultMessage: 'Email',
   },
+  id: {
+    id: `${scope}.id`,
+    defaultMessage: 'ID',
+  },
   address: {
     id: `${scope}.address`,
     defaultMessage: 'Address',
@@ -100,5 +104,13 @@ export default defineMessages({
   userUpdateSuccess: {
     id: `${scope}.userUpdateSuccess`,
     defaultMessage: "User updated",
+  },
+  created_at: {
+    id: `${scope}.created_at`,
+    defaultMessage: "Created",
+  },
+  search: {
+    id: `${scope}.search`,
+    defaultMessage: "Search",
   },
 });

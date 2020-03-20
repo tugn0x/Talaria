@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import {Row, Col} from 'reactstrap';
-import messages from './messages';
+// import messages from './messages';
+import globalMessages from 'utils/globalMessages';
 import { useIntl } from 'react-intl';
 import {formatDate} from 'utils/formatDate'
 import {CustomModal, ButtonPlus, Pagination, Loader, InputSearch} from 'components'
@@ -9,10 +11,11 @@ import { generatePath } from "react-router";
 
 function SimpleList(props) {
     console.log('SimpleList', props)
-    const {data, columns, 
-          match, editPath, 
-          pagination, getSearchList, 
-          loading, formNewComponent, title} = props
+    const {data, columns, history,
+          match, editPath, messages,
+          pagination, searchOptions, 
+          loading, modalComponent, title} = props
+    
     const {total_pages, current_page} = pagination
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
@@ -31,8 +34,11 @@ function SimpleList(props) {
     return (
         <>
             <h3 className="table-title">{title}</h3>
-            {getSearchList &&
-              <InputSearch submitCallback={ (query) => getSearchList(query)} />
+            {searchOptions &&
+              <InputSearch 
+                submitCallback={(query) => searchOptions.getSearchList(query)}
+                searchOnChange={searchOptions.searchOnChange ? searchOptions.searchOnChange : false} 
+              />
             }
             <ButtonPlus
                 onClickHandle={toggle}
@@ -43,7 +49,7 @@ function SimpleList(props) {
                   {
                     columns.map((item) =>
                       <Col key={item.name} xs={item.col}>
-                        <span>{item.label}</span>
+                        <span>{intl.formatMessage({id: item.label})}</span>
                       </Col>
                     )
                   }
@@ -86,13 +92,21 @@ function SimpleList(props) {
                   } 
                 </Loader>
             </div>
-            <CustomModal
-                modal={modal}
-                toggle={toggle}>
-                {formNewComponent}
-            </CustomModal>
+            {modalComponent &&
+              <CustomModal
+                  modal={modal}
+                  toggle={toggle}>
+                  {modalComponent}
+              </CustomModal>  
+            }
           </>
     )
 }
+
+SimpleList.propTypes = {
+  columns: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
+  editPath: PropTypes.string.isRequired,
+};
 
 export default SimpleList

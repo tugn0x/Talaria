@@ -10,7 +10,6 @@ export const scope = 'app.components.InputSearch';
 
 export default defineMessages({
   placeHolder: {
-    id: `${scope}.placeHolder`,
-    defaultMessage: 'Search',
+    id: `app.global.search`,
   }
 });

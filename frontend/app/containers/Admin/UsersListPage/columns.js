@@ -5,19 +5,13 @@ export const columns = [
         col: 3, 
     },
     { 
-        label: 'app.global.id', 
-        name: 'id',
-        col: 1,
-    },
-    { 
-        label: 'app.global.created_at', 
-        name: 'created_at',
+        label: 'app.global.surname', 
+        name: 'surname',
         col: 3,
-        type: "date"
     },
     { 
         label: 'app.global.email', 
         name: 'email',
-        col: 3,
+        col: 4,
     }
 ]

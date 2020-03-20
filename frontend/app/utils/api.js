@@ -210,8 +210,9 @@ export const updateLibraryUser = (options) => {
 // Users //
 export const getUsersList = (options) => {
   const page = options.page;
+  const query = options.query;
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/users/users?page=${page}`, options)
+  return request(`${BASE_URL}/api/v1/users/users?page=${page}&q=${query}`, options)
 };
 
 export const createUser = (options) => {

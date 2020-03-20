@@ -1,12 +1,12 @@
 export const columns = [
     { 
-        label: 'Id', 
+        label: 'app.global.id', 
         name: 'id',
-        col: 2, 
+        col: 3, 
     },
     { 
-        label: 'Name', 
+        label: 'app.global.name', 
         name: 'name',
-        col: 8,
+        col: 7,
     }
 ]

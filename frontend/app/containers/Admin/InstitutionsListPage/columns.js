@@ -2,7 +2,7 @@ export const columns = [
     { 
         label: 'app.global.name', 
         name: 'name',
-        col: 3, 
+        col: 6, 
     },
     { 
         label: 'app.global.id', 
@@ -15,9 +15,4 @@ export const columns = [
         col: 3,
         type: "date"
     },
-    { 
-        label: 'app.global.email', 
-        name: 'email',
-        col: 3,
-    }
 ]
