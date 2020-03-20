@@ -68,7 +68,6 @@
     "@coreui/coreui": "^2.1.16",
     "@coreui/icons": "^0.4.1",
     "@coreui/react": "^2.5.4",
-    "@types/react-transition-group": "^4.2.4",
     "bootstrap": "^4.4.1",
     "chalk": "^2.4.2",
     "compression": "1.7.4",
