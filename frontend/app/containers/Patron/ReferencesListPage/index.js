@@ -1,16 +1,21 @@
 import React, {useEffect} from 'react'
-import ReferencesList from 'components/Patron/ReferencesList'
+import {useIntl} from 'react-intl'
 import makeSelectPatron, {isPatronLoading} from '../selectors';
-import {requestPostReferences, requestReferencesList} from '../actions'
+import { requestReferencesList} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import ReferencesPage from '../ReferencesPage';
+import {SimpleList} from 'components'
+import {columns} from './columns'
+import messages from './messages'
 
 const ReferencesListPage = (props) => {
     console.log('ReferencesListPage', props)
     const {dispatch, isLoading, match, patron} = props
     const referencesList = patron.referencesList.data
     const pagination = patron.referencesList.pagination
+    const intl = useIntl()
     useEffect(() => {
         if(!isLoading) {
             dispatch(requestReferencesList())
@@ -18,14 +23,23 @@ const ReferencesListPage = (props) => {
     }, [])
 
     return (
-        referencesList.length > 0 &&
-        <ReferencesList 
-            match={match} 
-            referencesList={referencesList} 
-            pagination={pagination}
-            // loading={isLoading} 
-            editPath={'/patron/references/reference/:id?'}
-        />
+            <SimpleList 
+                data={referencesList}
+                columns={columns}
+                loading={isLoading}
+                pagination={pagination}
+                history={history}
+                messages={messages}
+                match={match}
+                title={intl.formatMessage(messages.header)}
+                searchOptions={{
+                    getSearchList: (query) => dispatch(requestReferencesList(null, query)),
+                    searchOnChange: true
+                }}
+                editPath={'/patron/references/reference/:id?'}
+                modalComponent={ <ReferencesPage match={match} />}
+            />
+            
     )
 }
 

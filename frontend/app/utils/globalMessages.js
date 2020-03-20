@@ -113,4 +113,16 @@ export default defineMessages({
     id: `${scope}.search`,
     defaultMessage: "Search",
   },
+  status: {
+    id: `${scope}.status`,
+    defaultMessage: "Status",
+  },
+  author: {
+    id: `${scope}.author`,
+    defaultMessage: "Author",
+  },
+  title_description: {
+    id: `${scope}.title_description`,
+    defaultMessage: "Title / Description",
+  },
 });

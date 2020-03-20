@@ -51,9 +51,11 @@ export function requestPostReferences(request, message) {
   };
 }
 
-export function requestReferencesList() {
+export function requestReferencesList(page, query) {
   return {
     type: REQUEST_REFERENCES_LIST,
+    page,
+    query
     
   };
 }
@@ -80,9 +82,11 @@ export function requestGetMyLibrarySuccess(result) {
   };
 }
 
-export function requestMyLibraries() {
+export function requestMyLibraries(page, query) {
   return {
     type: REQUEST_MY_LIBRARIES,
+    page,
+    query
   };
 }
 

@@ -26,9 +26,11 @@ import {  getMyLibrary,
           getReference, } from 'utils/api';
 
 
-export function* requestMyLibrariesSaga() {
+export function* requestMyLibrariesSaga(action) {
   const options = {
-    method: 'get'
+    method: 'get',
+    page: action.page ? action.page : '1',
+    query: action.query ? action.query : ''
   };
   try {
     const request = yield call(getMyLibraries, options);
@@ -68,9 +70,11 @@ export function* requestAccessToLibrarySaga(action) {
   }
 }
 
-export function* requestReferencesListSaga() {
+export function* requestReferencesListSaga(action) {
   const options = {
     method: 'get',
+    page: action.page ? action.page : '1',
+    query: action.query ? action.query : ''
   };
   try {
     const request = yield call(getReferencesList, options);

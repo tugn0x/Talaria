@@ -61,14 +61,27 @@ function SimpleList(props) {
                   <div className="tbody">
                     {data.length > 0 && data.map(item => (
                         <Row key={`list-${item.id}`}>
-                          {columns.map((field) =>
-                              <Col key={field.name} xs={field.col}>
-                                  <span>
-                                    {field.type !== "date" ? item[field.name] : formatDate(item[field.name], intl.locale)}
-                                  </span>
-                              </Col>
-                            )
-                          }
+                          
+                            {columns.map((field) =>
+                               
+                                  <Col key={field.name} xs={field.col}>
+                                      <span>
+                                        {
+                                          field.type === 'date' &&
+                                            formatDate(item[field.name], intl.locale)
+                                          ||
+                                          field.type === 'status' &&
+                                            <div className={`status-point ${item.status === 0 ? 'pending' : 'success' }`}></div>
+                                          ||
+                                          item[field.name]
+                                        }
+                                        
+                                      </span>
+                                  </Col>
+                                
+                              )
+                            }
+                          
                           <Col xs={2} className="edit-icons" >
                             <a href={`${editurl(item.id)}`} className="btn btn-link">
                               <i className="fa fa-edit"></i>

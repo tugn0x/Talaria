@@ -137,8 +137,11 @@ export const socialOauth = (provider, options) => {
 //--------- PATRON -------------//
 // MyLibrary //
 export const getMyLibraries = (options) => {
+  const page = options.page;
+  const query = options.query;
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/my`, options)
+  //return request(`${BASE_URL}/api/v1/libraries/my`, options)
+  return request(`${BASE_URL}/api/v1/libraries/my?page=${page}&q=${query}`, options)
 };
 
 export const getLibraryList = (options) => {
@@ -161,8 +164,10 @@ export const requestAccessToLibrary = (options) => {
 
 // Reference //
 export const getReferencesList = (options) => {
+  const page = options.page;
+  const query = options.query;
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/references/my`, options)
+  return request(`${BASE_URL}/api/v1/references/my?page=${page}&q=${query}`, options)
 };
 
 export const createReference = (options) => {
