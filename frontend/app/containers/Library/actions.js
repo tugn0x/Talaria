@@ -20,11 +20,12 @@ export function defaultAction() {
   };
 }
 
-export function requestUsersList(page, library_id) {
+export function requestUsersList(library_id, page, query) {
   return {
     type: REQUEST_USERS_LIST,
     page,
-    library_id
+    library_id,
+    query
   };
 }
 

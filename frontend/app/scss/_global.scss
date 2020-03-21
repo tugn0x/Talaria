@@ -70,7 +70,9 @@ button {
     flex-direction: column;
 }
 
-
+.app {
+    min-height: inherit;
+}
 
 .app-body {
     flex: 1;

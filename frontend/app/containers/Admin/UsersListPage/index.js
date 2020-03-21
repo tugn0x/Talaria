@@ -32,25 +32,22 @@ const UsersListPage = (props) => {
 
 
     return (
-        <>
-            <SimpleList 
-                data={admin.usersList.data}
-                columns={columns}
-                loading={isLoading}
-                pagination={admin.usersList.pagination}
-                history={history}
-                messages={messages}
-                match={match}
-                title={intl.formatMessage(messages.header)}
-                searchOptions={{
-                    getSearchList: (query) => dispatch(requestUsersList(null, query)),
-                    searchOnChange: true
-                }}
-                editPath={'/admin/users/user/:id?'}
-                modalComponent={ <UserPage match={match} />}
-            />
-        </>
-        
+        <SimpleList 
+            data={admin.usersList.data}
+            columns={columns}
+            loading={isLoading}
+            pagination={admin.usersList.pagination}
+            history={history}
+            messages={messages}
+            match={match}
+            title={intl.formatMessage(messages.header)}
+            searchOptions={{
+                getSearchList: (query) => dispatch(requestUsersList(null, query)),
+                searchOnChange: true
+            }}
+            editPath={'/admin/users/user/:id?'}
+            modalComponent={ <UserPage match={match} />}
+        />
     )
 }
 

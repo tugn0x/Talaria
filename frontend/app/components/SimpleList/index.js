@@ -27,10 +27,11 @@ function SimpleList(props) {
         });
     }
 
+
     const linkTo = (path) => {
       history.push(path)
     };
-
+    
     return (
         <>
             <h3 className="table-title">{title}</h3>
@@ -71,14 +72,12 @@ function SimpleList(props) {
                                             formatDate(item[field.name], intl.locale)
                                           ||
                                           field.type === 'status' &&
-                                            <div className={`status-point ${item.status === 0 ? 'pending' : 'success' }`}></div>
+                                            <div className={`status-point ${item[field.name] === 0 ? 'pending' : 'success' }`}></div>
                                           ||
-                                          item[field.name]
+                                            item[field.name] 
                                         }
-                                        
                                       </span>
                                   </Col>
-                                
                               )
                             }
                           

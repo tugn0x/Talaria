@@ -40,7 +40,8 @@ export function* requestUsersListSaga(action) {
   const options = {
     method: 'get',
     page: action.page ? action.page : '1',
-    library_id: action.library_id
+    library_id: action.library_id,
+    query: action.query ? action.query : ''
   };
   console.log(action)
   try {

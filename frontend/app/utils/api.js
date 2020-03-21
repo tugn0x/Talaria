@@ -189,9 +189,10 @@ export const updateReference = (options) => {
 // ---------- LIBRARY ---------- //
 export const getLibraryUsersList = (options) => {
   const page = options.page;
+  const query = options.query;
   const library_id = options.library_id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users`, options)
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users?page=${page}&q=${query}`, options)
 };
 
 export const getLibraryUser = (options) => {
