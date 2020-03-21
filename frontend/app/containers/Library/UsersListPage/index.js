@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 
-import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {requestUsersList} from '../actions'
@@ -32,19 +31,16 @@ const UsersListPage = (props) => {
             history={history}
             messages={messages}
             match={match}
+            // title={library.library.name}
             title={intl.formatMessage(messages.header)}
             searchOptions={{
                 getSearchList: (query) => dispatch(requestUsersList(library_id, null, query))
             }}
             editPath={`/library/${library_id}/patrons/patron/:id?`}
-            modalComponent={ <UserPage match={match} />}
+            // modalComponent={ <UserPage match={match} />}
         />
     )
 }
-
-const mapStateToProps = createStructuredSelector({
-   
-});
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -53,7 +49,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const withConnect = connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps,
 );
 

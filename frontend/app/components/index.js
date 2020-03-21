@@ -7,6 +7,7 @@ import Pagination from './Pagination'
 import SimpleList from './SimpleList'
 import CustomModal from './Modal'
 import ButtonPlus from './Button/ButtonPlus'
+import ButtonBack from './Button/ButtonBack'
 /*
 USER AUTHENTICATION
  */
@@ -70,6 +71,7 @@ export {
   UsersList,
   CustomForm,
   ButtonPlus,
+  ButtonBack,
   CustomModal,
   InputSearch,
   ErrorBox,

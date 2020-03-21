@@ -151,6 +151,8 @@
   "app.components.LoginForm.signUpButton": "Registrati",
   "app.components.LoginForm.garrButton": "Accedi con Idem",
 
+  "app.components.Button.goBackText": "Torna indietro",
+
   "app.components.ForgotPasswordForm.header": "Password Dimenticata",
   "app.components.Footer.header": "Questo l header del Footer",
 

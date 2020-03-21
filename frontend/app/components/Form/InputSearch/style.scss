@@ -1,3 +1,11 @@
+form {
+    margin-bottom: 2rem;
+}
 .searchBtn {
     height: auto;
+    color: white;
+    padding: 0.3rem 1.2rem;
+    i:before {
+        font-size: 1rem;
+    }
 }

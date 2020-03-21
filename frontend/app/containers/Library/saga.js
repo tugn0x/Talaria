@@ -43,7 +43,6 @@ export function* requestUsersListSaga(action) {
     library_id: action.library_id,
     query: action.query ? action.query : ''
   };
-  console.log(action)
   try {
     const request = yield call(getLibraryUsersList, options);
     yield put(requestUsersListSuccess(request));
@@ -54,7 +53,7 @@ export function* requestUsersListSaga(action) {
 
 export function* requestUpdateUserSaga(action) {
   const library_id = action.request.library_id
-  console.log(action)
+  
   const options = {
     method: 'put',
     body: {

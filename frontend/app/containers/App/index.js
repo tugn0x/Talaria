@@ -23,7 +23,7 @@ import {makeSelectLocation} from './selectors'
 import LibraryPage from "../Library/LibraryPage";
 
 function App(props) {
-  // console.log("APP", props)
+  console.log("APP", props)
 
   useEffect(() => {
     props.dispatch(syncPersistanceRequest());
@@ -57,7 +57,7 @@ function App(props) {
         <Route exact path="/" component={(routerProps) => <HomePage {...authProps}>
           <h1 style={{color: 'green'}}>ciao</h1>
         </HomePage> }/>
-        {/*<Route component={NotFoundPage} />*/}
+        <Route component={(history) => <NotFoundPage {...authProps} /> } path="*" />
       </Switch>
       {/* <GlobalStyle /> */}
       <Footer/>

@@ -28,7 +28,7 @@ function HeaderBar(props) {
   
   const { auth, isLogged, history, headermenu, routes } = props
   
-  const currentRoute = routes.filter(route => route.current).length > 0 ? routes.filter(route => route.current) : null;
+  const currentRoute = routes && routes.filter(route => route.current).length > 0 ? routes.filter(route => route.current) : null;
   
   /* const linkTo = (path) => {
     history.push(`${path}`)

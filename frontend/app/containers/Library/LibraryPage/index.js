@@ -31,7 +31,7 @@ function LibraryPage(props) {
 
   return (
     <>
-      <BasePage {...props} routes={libraryRoutes} messages={messages} headermenu={true}/>
+      <BasePage {...props} routes={libraryRoutes} messages={messages} />
     </>
   );
 }

@@ -124,5 +124,5 @@ export default defineMessages({
   title_description: {
     id: `${scope}.title_description`,
     defaultMessage: "Title / Description",
-  },
+  }
 });

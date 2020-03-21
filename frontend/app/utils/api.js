@@ -185,7 +185,6 @@ export const updateReference = (options) => {
   return request(`${BASE_URL}/api/v1/references/${options.id}`, options)
 };
 
-
 // ---------- LIBRARY ---------- //
 export const getLibraryUsersList = (options) => {
   const page = options.page;
