@@ -39,9 +39,9 @@ function SimpleList(props) {
         <>
             {title && <h4 className="table-title">{title}</h4> }
             {subtitle && <h5 className="table-subtitle">{subtitle}</h5> }
-            {searchOptions &&
+            {searchOptions && 
               <InputSearch 
-                submitCallback={(query) => searchOptions.getSearchList(query)}
+                submitCallBack={(query) => searchOptions.getSearchList(query)}
                 searchOnChange={searchOptions.searchOnChange ? searchOptions.searchOnChange : false} 
               />
             }
@@ -51,69 +51,69 @@ function SimpleList(props) {
                   text={intl.formatMessage(messages.createNew)}
               />
             }
-           {/*  <Loader show={loading}> */}
-              <div className="table libraries-list">
-                  <Row className="thead">
-                    {columns.map((item) =>
-                      <Col key={item.name} xs={item.col}>
-                        <span>{intl.formatMessage({id: item.label})}</span>
-                      </Col>
-                    )
-                    }
-                    <Col xs={2}>
-                      <span>{intl.formatMessage(messages.edit)}</span>
+            <div className="table libraries-list">
+              <Loader show={loading}> 
+                <Row className="thead">
+                  {columns.map((item) =>
+                    <Col key={item.name} xs={item.col}>
+                      <span>{intl.formatMessage({id: item.label})}</span>
                     </Col>
-                  </Row>
-                    <div className="tbody">
-                    <TransitionGroup className="todo-list">
-                        {data.length > 0 && data.map(item => (
-                          <CSSTransition
-                            key={item.id}
-                            timeout={500}
-                            classNames="item"
-                          >
-                            <Row key={`list-${item.id}`}>
-                                {columns.map((field) =>
-                                    <Col key={field.name} xs={field.col}>
-                                        <span>
-                                          {
-                                            field.type === 'date' &&
-                                              formatDate(item[field.name], intl.locale)
-                                            ||
-                                            field.type === 'status' &&
-                                              <div className={`status-point ${item[field.name] === 0 ? 'pending' : 'success' }`}></div>
-                                            ||
-                                              item[field.name] 
-                                          }
-                                        </span>
-                                    </Col>
-                                  )
-                                }
-                              <Col xs={2} className="edit-icons" >
-                                <a href={`${editurl(item.id)}`} className="btn btn-link">
-                                  <i className="fa fa-edit"></i>
-                                </a>
-                                <a href="#" onClick={() => console.log('delete user')} className="btn btn-link">
-                                  <i className="fa fa-trash"></i>
-                                </a>
-                              </Col>
-                            </Row>
-                          </CSSTransition>
-                        ))
-                        }
-                        </TransitionGroup>
-                    </div> 
-                    {pagination && Object.keys(pagination).length > 0 &&
-                        <Pagination
-                            current_page={current_page}
-                            total_pages={total_pages}
-                            setPage={(page) => linkTo(generatePath(`${match.path}`, {
-                              page: page
-                            }))}
-                        />
-                    } 
-              </div>
-           {/*  </Loader> */}
+                  )
+                  }
+                  <Col xs={2}>
+                    <span>{intl.formatMessage(messages.edit)}</span>
+                  </Col>
+                </Row>
+                  <div className="tbody">
+                  <TransitionGroup className="todo-list">
+                      {data.length > 0 && data.map(item => (
+                        <CSSTransition
+                          key={item.id}
+                          timeout={500}
+                          classNames="item"
+                        >
+                          <Row key={`list-${item.id}`}>
+                              {columns.map((field) =>
+                                  <Col key={field.name} xs={field.col}>
+                                      <span>
+                                        {
+                                          field.type === 'date' &&
+                                            formatDate(item[field.name], intl.locale)
+                                          ||
+                                          field.type === 'status' &&
+                                            <div className={`status-point ${item[field.name] === 0 ? 'pending' : 'success' }`}></div>
+                                          ||
+                                            item[field.name] 
+                                        }
+                                      </span>
+                                  </Col>
+                                )
+                              }
+                            <Col xs={2} className="edit-icons" >
+                              <a href={`${editurl(item.id)}`} className="btn btn-link">
+                                <i className="fa fa-edit"></i>
+                              </a>
+                              <a href="#" onClick={() => console.log('delete user')} className="btn btn-link">
+                                <i className="fa fa-trash"></i>
+                              </a>
+                            </Col>
+                          </Row>
+                        </CSSTransition>
+                      ))
+                      }
+                      </TransitionGroup>
+                  </div> 
+                  {pagination && Object.keys(pagination).length > 0 &&
+                      <Pagination
+                          current_page={current_page}
+                          total_pages={total_pages}
+                          setPage={(page) => linkTo(generatePath(`${match.path}`, {
+                            page: page
+                          }))}
+                      />
+                  } 
+              </Loader> 
+            </div>
             {modalComponent &&
               <CustomModal
                   modal={modal}

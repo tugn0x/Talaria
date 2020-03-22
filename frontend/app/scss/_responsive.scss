@@ -1,17 +1,3 @@
-@include media-breakpoint-down(md) {
-    .app-subheader {
-        margin-top: 55px;
-    }
-    .table-title {
-        margin: 2rem 0 1rem
-    }
-    .sidebar {
-        nav {
-            padding-top: 1rem;
-        }
-    }
-}
-
 @include media-breakpoint-down(lg) {
     .app-body {
         margin-top: 95px;
@@ -28,9 +14,29 @@
     }
 }
 
+@include media-breakpoint-down(md) {
+    .app-subheader {
+        margin-top: 55px;
+    }
+    .table-title {
+        margin: 2rem 0 1rem
+    }
+    .sidebar {
+        nav {
+            padding-top: 1rem;
+        }
+    }
+}
+
 @include media-breakpoint-down(sm) { 
     .container {
         max-width: 660px
+    }
+    .navbar-brand {
+        > img {
+            right: 0;
+            margin: 0 auto
+        }
     }
 }
 

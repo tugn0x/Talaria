@@ -7,24 +7,25 @@ import './style.scss'
 
 const InputSearch = (props) => {
     
-    const {submitCallback, searchOnChange} = props 
+    const {submitCallBack, searchOnChange} = props 
     const intl = useIntl()
     const [query, setQuery] = useState('')
     const handleChange = (e) =>  {
         const q = e.target.value
         setQuery(q)
         if(searchOnChange){
-            submitCallback(q)
+            submitCallBack(q)
         }
     }
     
     const handleSubmit = (e) => {
         e.preventDefault()
-        submitCallback(query)
+        submitCallBack(query)
     }
     
     return (
         <Form className="form-search" noValidate onSubmit={handleSubmit}>
+            {console.log(submitCallBack)}
             <Row>
                 <Col md={6} sm={12}>
                     <InputGroup>
