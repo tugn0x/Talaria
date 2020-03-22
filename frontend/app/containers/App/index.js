@@ -16,11 +16,12 @@ import { compose } from 'redux';
 import { syncPersistanceRequest, isSync } from "../../persistence";
 import {requestLogout} from "../Auth/AuthProvider/actions";
 import {HomePage, NotFoundPage, LoginPage, IdpPage, UserPage, PatronPage, AdminPage} from 'containers';
-import { HeaderBar, Footer } from 'components'
+// import {  Footer } from 'components'
 /* import GlobalStyle from 'global-styles'; */
 import {SignupPage, ForgotPassword} from "containers";
 import {makeSelectLocation} from './selectors'
 import LibraryPage from "../Library/LibraryPage";
+
 
 function App(props) {
   console.log("APP", props)
@@ -57,10 +58,9 @@ function App(props) {
         <Route exact path="/" component={(routerProps) => <HomePage {...authProps}>
           <h1 style={{color: 'green'}}>ciao</h1>
         </HomePage> }/>
-        <Route component={(history) => <NotFoundPage {...authProps} /> } path="*" />
+        <Route component={() => <NotFoundPage {...authProps} /> } path="*" />
       </Switch>
-      {/* <GlobalStyle /> */}
-      <Footer/>
+      
     </>
   );
 }

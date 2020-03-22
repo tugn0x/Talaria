@@ -25,26 +25,21 @@ const InputSearch = (props) => {
     
     return (
         <Form className="form-search" noValidate onSubmit={handleSubmit}>
-            {console.log(submitCallBack)}
-            <Row>
-                <Col md={6} sm={12}>
-                    <InputGroup>
-                        <Input 
-                            required 
-                            placeholder={intl.formatMessage(messages.placeHolder)}
-                            value={query}
-                            onChange={handleChange} 
-                            type="text" 
-                            name="inputQuery" 
-                            id="inputQuery" />
-                        <InputGroupAddon addonType="append">
-                            <Button type="submit" color="orange" className="searchBtn">
-                                <i className="fa fa-search"></i>
-                            </Button>
-                        </InputGroupAddon>
-                    </InputGroup>
-                </Col>
-            </Row>
+            <InputGroup>
+                <Input 
+                    required 
+                    placeholder={intl.formatMessage(messages.placeHolder)}
+                    value={query}
+                    onChange={handleChange} 
+                    type="text" 
+                    name="inputQuery" 
+                    id="inputQuery" />
+                <InputGroupAddon addonType="append">
+                    <Button type="submit" color="orange" className="searchBtn">
+                        <i className="fa fa-search"></i>
+                    </Button>
+                </InputGroupAddon>
+            </InputGroup>
         </Form>
     )
 }

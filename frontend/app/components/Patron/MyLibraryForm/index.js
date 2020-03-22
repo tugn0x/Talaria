@@ -68,9 +68,8 @@ const MyLibraryForm = (props) => {
                             fields={props.fields}
                             messages={props.messages}
                             searchCustomSelect={searches}
-                        />
+                        /> 
                     }
-
                 </Col>
             </Row>
         </Loader>

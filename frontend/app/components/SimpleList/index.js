@@ -11,6 +11,7 @@ import {
   CSSTransition,
   TransitionGroup,
 } from 'react-transition-group';
+import './style.scss'
 
 function SimpleList(props) {
     console.log('SimpleList', props)
@@ -39,20 +40,26 @@ function SimpleList(props) {
         <>
             {title && <h4 className="table-title">{title}</h4> }
             {subtitle && <h5 className="table-subtitle">{subtitle}</h5> }
-            {searchOptions && 
-              <InputSearch 
-                submitCallBack={(query) => searchOptions.getSearchList(query)}
-                searchOnChange={searchOptions.searchOnChange ? searchOptions.searchOnChange : false} 
-              />
-            }
-            {modalComponent &&
-              <ButtonPlus
-                  onClickHandle={toggle}
-                  text={intl.formatMessage(messages.createNew)}
-              />
-            }
+            <Row className="align-items-center">
+              {searchOptions && 
+                <Col md={8}>
+                  <InputSearch 
+                    submitCallBack={(query) => searchOptions.getSearchList(query)}
+                    searchOnChange={searchOptions.searchOnChange ? searchOptions.searchOnChange : false} 
+                  />
+                </Col>
+              }
+              {modalComponent &&
+                <Col md={4} className="my-4">
+                <ButtonPlus
+                    onClickHandle={toggle}
+                    text={intl.formatMessage(messages.createNew)}
+                />
+                </Col>
+              }
+            </Row>
             <div className="table libraries-list">
-              <Loader show={loading}> 
+             {/*  <Loader show={loading}>  */}
                 <Row className="thead">
                   {columns.map((item) =>
                     <Col key={item.name} xs={item.col}>
@@ -64,13 +71,12 @@ function SimpleList(props) {
                     <span>{intl.formatMessage(messages.edit)}</span>
                   </Col>
                 </Row>
-                  <div className="tbody">
-                  <TransitionGroup className="todo-list">
+                  <TransitionGroup className="tbody">
                       {data.length > 0 && data.map(item => (
                         <CSSTransition
                           key={item.id}
                           timeout={500}
-                          classNames="item"
+                          classNames="fade"
                         >
                           <Row key={`list-${item.id}`}>
                               {columns.map((field) =>
@@ -102,7 +108,6 @@ function SimpleList(props) {
                       ))
                       }
                       </TransitionGroup>
-                  </div> 
                   {pagination && Object.keys(pagination).length > 0 &&
                       <Pagination
                           current_page={current_page}
@@ -112,7 +117,7 @@ function SimpleList(props) {
                           }))}
                       />
                   } 
-              </Loader> 
+              {/* </Loader>  */}
             </div>
             {modalComponent &&
               <CustomModal

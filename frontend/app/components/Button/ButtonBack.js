@@ -10,7 +10,7 @@ const ButtonBack = (props) => {
     const intl = useIntl()
 
     return (
-        <Button className="btn-back" onClick={props.history.goBack}>
+        <Button className={`${props.className && props.className} btn-back`} onClick={props.history.goBack}>
             <i className="fa fa-arrow-left" />
             <span>
                 {intl.formatMessage(messages.goBackText)}
