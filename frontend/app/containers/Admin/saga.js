@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_POST_USER, REQUEST_USER, REQUEST_GET_LIBRARY,
+          REQUEST_GET_ROLES,
           REQUEST_GET_LIBRARIES_LIST,
           REQUEST_UPDATE_LIBRARY,
           REQUEST_POST_LIBRARY,
@@ -30,12 +31,13 @@ import {
   requestGetInstitutionsListSuccess,
   requestGetInstitutionTypeOptionListSuccess,
   requestGetCountriesOptionListSuccess,
-  requestGetInstitutionSuccess
+  requestGetInstitutionSuccess,
+  requestGetRolesSuccess
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
 import {getUsersList, updateUser, createUser,
-        getUser, getLibrary, getLibrariesList, updateLibrary,
+        getRoles, getUser, getLibrary, getLibrariesList, updateLibrary,
         createLibrary, getInstituionTypeList, getInstitutionsList,
         getInstitution, updateInstitution, getInstitutionTypesOptionList,
         createInstitution, getCountriesOptionsList,
@@ -101,6 +103,17 @@ export function* requestPostUserSaga(action) {
   }
 }
 
+export function* requestGetRolesSaga() {
+  const options = {
+    method: 'get'
+  };
+  try {
+   const request = yield call(getRoles, options);
+   yield put(requestGetRolesSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
 
 export function* requestPostLibrarySaga(action) {
   const options = {
@@ -320,6 +333,7 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_UPDATE_USER, requestUpdateUserSaga);
   yield takeLatest(REQUEST_POST_USER, requestPostUserSaga);
   yield takeLatest(REQUEST_USER, requestUserSaga);
+  yield takeLatest(REQUEST_GET_ROLES, requestGetRolesSaga);
   yield takeLatest(REQUEST_GET_LIBRARY, requestGetLibrarySaga);
   yield takeLatest(REQUEST_GET_LIBRARIES_LIST, requestGetLibrariesListSaga);
   yield takeLatest(REQUEST_UPDATE_LIBRARY, requestUpdateLibrarySaga);

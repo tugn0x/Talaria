@@ -6,36 +6,40 @@ import {useIntl} from 'react-intl';
 // import Loader from 'components/Form/Loader.js';
 import {CustomForm} from 'components';
 import {fields} from './fields';
+import ResourceTable from 'components/Form/ResourceTable';
 
 const UserForm = (props) => {
-    const {user, updateUser, createUser} = props
+    const {user, updateUser, createUser, roles, resources} = props
     const intl = useIntl();
     return (
-        
-            <Row className="justify-content-center">
-                <Col md="10">
-                    {user && 
+        <Row className="justify-content-center">
+            <Col md="10">
+                {user && 
+                    <>
                         <CustomForm 
                             submitCallBack={(formData) => updateUser(formData) } 
                             fields={fields} 
                             messages={globalMessages}
                             updateFormData={user}
+                            roles={roles}
                             title={intl.formatMessage(messages.header)} 
                             submitText={intl.formatMessage(messages.subtitle)}
                         />
-                    ||
-                        <CustomForm 
-                            submitCallBack={(formData) => createUser(formData) } 
-                            fields={fields} 
-                            messages={globalMessages}
-                            title={intl.formatMessage(messages.createNewUser)} 
-                            submitText={intl.formatMessage(messages.createNewUser)}
+                        <ResourceTable 
+                            resources={resources}
                         />
-                    }
-                     
-                </Col>
-            </Row>
-        
+                    </>
+                ||
+                    <CustomForm 
+                        submitCallBack={(formData) => createUser(formData) } 
+                        fields={fields} 
+                        messages={globalMessages}
+                        title={intl.formatMessage(messages.createNewUser)} 
+                        submitText={intl.formatMessage(messages.createNewUser)}
+                    />
+                }
+            </Col>
+        </Row>
     )
 }
 

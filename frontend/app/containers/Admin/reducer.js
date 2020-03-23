@@ -12,6 +12,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS,
   REQUEST_UPDATE_LIBRARY, REQUEST_POST_LIBRARY,
   REQUEST_POST_USER,
+  REQUEST_GET_ROLES, REQUEST_GET_ROLES_SUCCESS,
   REQUEST_GET_PROJECT, REQUEST_GET_PROJECT_SUCCESS,
   REQUEST_GET_PROJECTS_LIST, REQUEST_GET_PROJECTS_LIST_SUCCESS,
   REQUEST_UPDATE_PROJECT, REQUEST_POST_PROJECT,
@@ -50,7 +51,9 @@ export const initialState = {
   },
   institution: [],
   institutionsListSelect: [],
-  countriesListSelect: []
+  countriesListSelect: [],
+  roles: [],
+  resources: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -89,6 +92,16 @@ const AdminReducer = (state = initialState, action) =>
           roles: action.result.data.roles.data,
           resources: action.result.data.resources.data,
         }
+        break;
+      case REQUEST_GET_ROLES:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
+      case REQUEST_GET_ROLES_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.roles = action.result.data.roles;
+        draft.resources = action.result.data.resources;
         break;
       case REQUEST_POST_LIBRARY:
         draft.loading = true;

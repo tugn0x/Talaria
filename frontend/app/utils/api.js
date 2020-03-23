@@ -212,7 +212,7 @@ export const updateLibraryUser = (options) => {
 
 
 //--------- ADMIN -------------//
-// Users //
+///////   Users   ////////
 export const getUsersList = (options) => {
   const page = options.page;
   const query = options.query;
@@ -235,6 +235,12 @@ export const updateUser = (options) => {
   const user_id = options.body.id
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/users/users/${user_id}?include=roles,resources`, options)
+};
+
+/// Roles and Resources ///
+export const getRoles = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/users/roles`, options)
 };
 
 // Libraries

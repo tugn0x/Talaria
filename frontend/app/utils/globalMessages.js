@@ -21,6 +21,10 @@ export default defineMessages({
     id: `${scope}.email`,
     defaultMessage: 'Email',
   },
+  roles: {
+    id: `${scope}.roles`,
+    defaultMessage: "Roles",
+  },
   id: {
     id: `${scope}.id`,
     defaultMessage: 'ID',
