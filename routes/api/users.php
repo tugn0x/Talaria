@@ -35,4 +35,5 @@ Route::group([
     Route::get('users/{user}', 'UserController@show')->name('show');
     Route::put('users/{user}', 'UserController@update')->name('update');
     Route::post('users', 'UserController@store')->name('create');
+    Route::get('roles', 'RolePermissionController@index')->name('roles-index');
 });

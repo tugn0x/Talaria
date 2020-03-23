@@ -205,7 +205,7 @@ export const updateLibraryUser = (options) => {
   const id = options.body.id
   const library_id = options.body.library_id
   options = getOption(options);
-  
+
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${id}`, options)
 }
 
@@ -228,13 +228,13 @@ export const createUser = (options) => {
 export const getUser = (options) => {
   const user_id = options.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/users/users/${user_id}`, options)
+  return request(`${BASE_URL}/api/v1/users/users/${user_id}?include=roles,resources`, options)
 };
 
 export const updateUser = (options) => {
   const user_id = options.body.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/users/users/${user_id}`, options)
+  return request(`${BASE_URL}/api/v1/users/users/${user_id}?include=roles,resources`, options)
 };
 
 // Libraries
@@ -282,7 +282,7 @@ export const updateInstitution = (options) => {
   const institution_id = options.body.id
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/institutions/${institution_id}`, options)
-}; 
+};
 
 export const getInstitutionTypesOptionList = (options) => {
   options = getOption(options);

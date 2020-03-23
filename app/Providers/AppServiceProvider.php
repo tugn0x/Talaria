@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Bouncer;
-use Carbon\Carbon;
+use Carbon\Carbon;use Illuminate\Database\Eloquent\Relations\Relation;
+
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
                 return \Faker\Factory::create('it_IT');
             });
         }
+
+        Relation::morphMap(config('nilde.morphMap'));
     }
 
     /**

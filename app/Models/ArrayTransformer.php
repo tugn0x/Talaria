@@ -8,21 +8,17 @@ use League\Fractal\ParamBag;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use League\Fractal\TransformerAbstract;
 
-class BaseLightTransformer extends TransformerAbstract
+class ArrayTransformer extends TransformerAbstract
 {
+    protected $property = 'name';
 
-
-    protected $only = [
-        'id',
-        'name',
-    ];
-
-    public function setOnly($array) {
-        $this->only = $array;
+    public function setProperty($item) {
+        $this->property = $item;
     }
 
     public function transform(Model $model) {
-        return $model->only($this->only);
+        $prop = $this->property;
+        return $model->$prop;
     }
 
 }

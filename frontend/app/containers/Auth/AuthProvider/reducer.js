@@ -88,7 +88,7 @@ const authReducer = (state = initialState, action) =>
       case REQUEST_PROFILE_SUCCESS:
           draft.loading = false;
           draft.error = initialState.error;
-          draft.user = action.result;
+          draft.user = action.result.data;
         break;
       case REQUEST_PERMISSIONS:
           draft.loading = true;

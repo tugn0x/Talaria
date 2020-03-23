@@ -84,7 +84,11 @@ const AdminReducer = (state = initialState, action) =>
       case REQUEST_USER_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.user = action.result
+        draft.user = {
+          ...action.result.data,
+          roles: action.result.data.roles.data,
+          resources: action.result.data.resources.data,
+        }
         break;
       case REQUEST_POST_LIBRARY:
         draft.loading = true;

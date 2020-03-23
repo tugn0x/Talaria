@@ -18,11 +18,20 @@ trait UserControllerTrait
             //Create relation with Roles
             if($request->has('roles'))
             {
-                $roles = (is_array($request->input('roles'))) ? $request->input('roles') : ['id' => $request->input('roles')];
-                if( $model->roles()->attach( array_unique(array_pluck($roles, 'id')) ) )
+                $roles = (is_array($request->input('roles'))) ? $request->input('roles') : [$request->input('roles')];
+                if( $model->syncRoles($roles) )
                 {
-                    $model->addInternalMessage(trans('apiclu::response.create_relation_failed', ['name' => 'Roles']), 'error');
+                    $model->addInternalMessage(trans('apiclu::response.update_relation_failed', ['name' => 'Roles']), 'error');
                 }
+            }
+            //Update relation with Roles
+            if($request->has('resources'))
+            {
+//                $resources = (is_array($request->input('resources'))) ? $request->input('resources') : [$request->input('resources')];
+//                if( $model->syncRoles($roles) )
+//                {
+//                    $model->addInternalMessage(trans('apiclu::response.update_relation_failed', ['name' => 'Roles']), 'error');
+//                }
             }
 
             //Create Meta
@@ -56,11 +65,20 @@ trait UserControllerTrait
             //Update relation with Roles
             if($request->has('roles'))
             {
-                $roles = (is_array($request->input('roles'))) ? $request->input('roles') : ['id' => $request->input('roles')];
-                if( $model->roles()->sync( array_unique(array_pluck($roles, 'id')) ) )
+                $roles = (is_array($request->input('roles'))) ? $request->input('roles') : [$request->input('roles')];
+                if( $model->syncRoles($roles) )
                 {
                     $model->addInternalMessage(trans('apiclu::response.update_relation_failed', ['name' => 'Roles']), 'error');
                 }
+            }
+            //Update relation with Roles
+            if($request->has('resources'))
+            {
+//                $resources = (is_array($request->input('resources'))) ? $request->input('resources') : [$request->input('resources')];
+//                if( $model->syncRoles($roles) )
+//                {
+//                    $model->addInternalMessage(trans('apiclu::response.update_relation_failed', ['name' => 'Roles']), 'error');
+//                }
             }
 
             //Update Meta table

@@ -14,7 +14,7 @@ trait RolesAbilitiesPermissionsTrait
     use HasRolesAndAbilities;
 
     public function isSuperAdmin() {
-        return $this->hasRole('super-admin');
+        return $this->isAn('super-admin');
     }
     public function permissions() {
         return $this->abilities()->wherePivot('forbidden', false);
@@ -44,7 +44,6 @@ trait RolesAbilitiesPermissionsTrait
         } else {
             return $query->whereIs(...$roles);
         }
-        return $query->where('votes', '>', 100);
     }
 
     /**
@@ -74,13 +73,7 @@ trait RolesAbilitiesPermissionsTrait
      */
     public function attachRole($role)
     {
-        if(is_object($role)) {
-            $role = $role->getKey();
-        }
-        if(is_array($role)) {
-            $role = $role['id'];
-        }
-        $this->assign($role);
+        $this->attachRoles($role);
     }
 
     /**
@@ -90,13 +83,7 @@ trait RolesAbilitiesPermissionsTrait
      */
     public function detachRole($role)
     {
-        if (is_object($role)) {
-            $role = $role->getKey();
-        }
-        if (is_array($role)) {
-            $role = $role['id'];
-        }
-        $this->retract($role);
+        $this->detachRoles($role);
     }
     /**
      * Attach multiple roles to a user
@@ -106,23 +93,66 @@ trait RolesAbilitiesPermissionsTrait
     public function attachRoles($roles)
     {
         $roles = $this->serializeAuthorizations($roles);
-        foreach ($roles as $role) {
-            $this->attachRole($role);
-        }
+        $this->assign($roles);
     }
     /**
      * Detach multiple roles from a user
      *
      * @param mixed $roles
      */
-    public function detachRoles($roles=null)
+    public function detachRoles($roles)
     {
         $roles = $this->serializeAuthorizations($roles);
         if (!$roles) $roles = $this->roles()->get();
+        $this->retract($roles);
+    }
+    /**
+     * Detach multiple roles from a user
+     *
+     * @param mixed $roles
+     */
+    public function syncRoles($roles=null)
+    {
+        $roles = $this->serializeAuthorizations($roles);
+        $userRoles = $this->roles->pluck('name')->toArray();
+        $toAttach = array_diff($roles, $userRoles);
+        $toDetach = array_diff($userRoles, $roles);
+        if($toAttach)
+            $this->attachRoles($toAttach);
+        if($toDetach)
+            $this->detachRoles($toDetach);
+    }
 
-        foreach ($roles as $role) {
-            $this->detachRole($role);
-        }
+    /*
+     * Scope per filtrare gli utenti in base all'abilità.
+     * Cfr.: https://github.com/JosephSilber/bouncer/wiki/Querying-Data
+     */
+    public function scopeWhereCan($query, $ability)
+    {
+        $query->where(function ($query) use ($ability) {
+            // direct
+            $query->whereHas('abilities', function ($query) use ($ability) {
+                $query->byName($ability);
+            });
+            // through roles
+            $query->orWhereHas('roles', function ($query) use ($ability) {
+                $query->whereHas('abilities', function ($query) use ($ability) {
+                    $query->byName($ability);
+                });
+            });
+        });
+    }
+
+    public function attachAbilities() {
+
+    }
+
+    public function detachAbilities() {
+
+    }
+
+    public function syncAbilities() {
+
     }
 
 //    /**
