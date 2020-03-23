@@ -18,7 +18,7 @@ function HomePage(props) {
   console.log('HomePage', props)
   return (
     <>
-      <BasePage {...props} routes={userRoutes} messages={messages} headermenu={false}/>
+      <BasePage {...props} routes={userRoutes} messages={messages}/>
     </>
   );
 }

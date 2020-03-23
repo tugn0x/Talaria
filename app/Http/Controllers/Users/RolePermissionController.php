@@ -16,7 +16,7 @@ class RolePermissionController extends \App\Http\Controllers\ApiController
         return $this->response->array([
             "data" => [
                 "roles" => $roles,
-                "abilities" => config('permissions.macro'),
+                "resources" => config('permissions.macro'),
             ]
         ]);
     }

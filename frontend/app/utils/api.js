@@ -222,7 +222,7 @@ export const getUsersList = (options) => {
 
 export const createUser = (options) => {
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/users/users`, options)
+  return request(`${BASE_URL}/api/v1/users/users?include=roles,resources`, options)
 };
 
 export const getUser = (options) => {

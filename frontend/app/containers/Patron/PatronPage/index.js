@@ -20,7 +20,7 @@ function PatronPage(props) {
 
   return (
     <>
-      <BasePage {...props} routes={patronRoutes} messages={messages} headermenu={true}/>
+      <BasePage {...props} routes={patronRoutes} messages={messages}/>
     </>
   );
 }

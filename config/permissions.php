@@ -3,7 +3,8 @@
 return [
 
     "macro" => [
-        \App\Models\Libraries\Library::class => [
+//        \App\Models\Libraries\Library::class => [
+        'libraries' => [
             //Manager
             'manage',
             //Op. Utenti
@@ -21,7 +22,8 @@ return [
             //Op. Licenze
             'manage-licenses',
         ],
-        \App\Models\Institutions\Institution::class => [
+//        \App\Models\Institutions\Institution::class => [
+        'institutions' => [
             // Manager
             'manage',
             // ManagerTech.
@@ -29,7 +31,8 @@ return [
             // Op. Licenze
             'manage-licenses',
         ],
-        \App\Models\Projects\Project::class => [
+//        \App\Models\Projects\Project::class => [
+        'projects' => [
             // Manager,
             'manage',
             // ManagerTech.
@@ -37,7 +40,8 @@ return [
             // Op. Licenze
             'manage-licenses',
         ],
-        \App\Models\Institutions\Consortium::class => [
+//        \App\Models\Institutions\Consortium::class => [
+        'consortia' => [
             // Op. Licenze
             'manage-licenses',
         ],

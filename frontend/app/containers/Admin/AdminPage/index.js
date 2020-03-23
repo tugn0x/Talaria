@@ -18,7 +18,7 @@ function AdminPage(props) {
   console.log('AdminPage', props)
   return (
     <>
-      <BasePage {...props} routes={adminRoutes} headermenu={true}/>
+      <BasePage {...props} routes={adminRoutes}/>
     </>
   );
 }
