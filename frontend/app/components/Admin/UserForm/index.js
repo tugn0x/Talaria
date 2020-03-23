@@ -6,23 +6,29 @@ import {useIntl} from 'react-intl';
 // import Loader from 'components/Form/Loader.js';
 import {CustomForm} from 'components';
 import {fields} from './fields';
+import ResourceTable from 'components/Form/ResourceTable';
 
 const UserForm = (props) => {
-    const {user, updateUser, createUser, roles} = props
+    const {user, updateUser, createUser, roles, resources} = props
     const intl = useIntl();
     return (
         <Row className="justify-content-center">
             <Col md="10">
                 {user && 
-                    <CustomForm 
-                        submitCallBack={(formData) => updateUser(formData) } 
-                        fields={fields} 
-                        messages={globalMessages}
-                        updateFormData={user}
-                        roles={roles}
-                        title={intl.formatMessage(messages.header)} 
-                        submitText={intl.formatMessage(messages.subtitle)}
-                    />
+                    <>
+                        <CustomForm 
+                            submitCallBack={(formData) => updateUser(formData) } 
+                            fields={fields} 
+                            messages={globalMessages}
+                            updateFormData={user}
+                            roles={roles}
+                            title={intl.formatMessage(messages.header)} 
+                            submitText={intl.formatMessage(messages.subtitle)}
+                        />
+                        <ResourceTable 
+                            resources={resources}
+                        />
+                    </>
                 ||
                     <CustomForm 
                         submitCallBack={(formData) => createUser(formData) } 
