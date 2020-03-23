@@ -74,4 +74,31 @@ class LibraryController extends ApiController
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
+
+
+    public function update(Request $request, $id)
+    {
+        if(!empty($this->validate) )
+            $this->validate($request, $this->validate);
+
+        $model = $this->nilde->update($this->model, $request, $id, function($model, $request)
+        {
+
+//            //Update relation with Granted_permissions
+            if($request->has('granted_permissions'))
+            {
+                $granted_permissions = (is_array($request->input('granted_permissions'))) ? $request->input('granted_permissions') : [$request->input('granted_permissions')];
+                if( $model->setPermissionOnObject($granted_permissions) )
+                {
+                    $model->addInternalMessage(trans('apiclu::response.update_relation_failed', ['name' => 'Granted_permissions']), 'error');
+                }
+            }
+            return $model;
+        });
+
+        if($this->broadcast && config('apinilde.broadcast'))
+            broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
+
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
+    }
 }

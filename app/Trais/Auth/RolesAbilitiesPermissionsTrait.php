@@ -143,6 +143,28 @@ trait RolesAbilitiesPermissionsTrait
         });
     }
 
+    public function scopeHasAbilitiesOn($query, $class, $id=null)
+    {
+        $query->whereHas('abilities', function ($query) use ($class, $id) {
+            $query->where([
+                'abilities.entity_id' => $id,
+                'abilities.entity_type' => $class,
+            ]);
+        });
+    }
+
+    public function object_abilities($class, $id=null)
+    {
+        return $this->abilities()->where([
+            'abilities.entity_id' => $id,
+            'abilities.entity_type' => $class,
+        ])
+        ->select('name')
+        ->get()
+        ->pluck('name')
+        ->toArray();
+    }
+
     public function attachAbilities() {
 
     }
@@ -154,6 +176,35 @@ trait RolesAbilitiesPermissionsTrait
     public function syncAbilities() {
 
     }
+
+//    public function syncMacroAbilities($resources) {
+//        $abilities = [];
+//        foreach(config('nilde.morphmap') as $alias => $class) {
+//            $resources = $this->permissions()
+//                ->select('abilities.entity_id','abilities.entity_type','abilities.name')
+//                ->where('abilities.entity_type', $class)
+//                ->whereNotNull('abilities.entity_id')
+//                ->distinct()
+//                ->get();
+//        }
+//        foreach ($resources as $class => $items) {
+//            $class = config('nilde.morphmap.'.$class);
+//            $abilities[$class] = [];
+//            foreach ($items as $item) {
+//                foreach ($item['permissions'] as $permission) {
+//                    $abilities[] = [
+//                        'entity_id' => $item['permissions']['id'],
+//                        'entity_type' => $class,
+//                        'name' => $permission,
+//                    ];
+//                }
+//            }
+//        }
+////        $macro = config('permissions.macro');
+////        foreach ($macro as $key=>$class) {
+////
+////        }
+//    }
 
 //    /**
 //     * Check if user has a permission by its name.
