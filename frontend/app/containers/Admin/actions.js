@@ -13,6 +13,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_UPDATE_LIBRARY, /* REQUEST_UPDATE_LIBRARY_SUCCESS, */
    REQUEST_POST_LIBRARY, REQUEST_POST_LIBRARY_SUCCESS,
    REQUEST_POST_USER, REQUEST_POST_USER_SUCCESS,
+   REQUEST_GET_ROLES, REQUEST_GET_ROLES_SUCCESS,
    REQUEST_GET_PROJECT, REQUEST_GET_PROJECT_SUCCESS,
    REQUEST_GET_PROJECTS_LIST, REQUEST_GET_PROJECTS_LIST_SUCCESS,
    REQUEST_UPDATE_PROJECT, 
@@ -80,6 +81,19 @@ export function requestUpdateUser(request, message) {
 export function requestUpdateUserSuccess(result) {
   return {
     type: REQUEST_UPDATE_USER_SUCCESS,
+    result
+  };
+}
+
+export function requestGetRoles() {
+  return {
+    type: REQUEST_GET_ROLES,
+  };
+}
+
+export function requestGetRolesSuccess(result) {
+  return {
+    type: REQUEST_GET_ROLES_SUCCESS,
     result
   };
 }

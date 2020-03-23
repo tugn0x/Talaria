@@ -35,23 +35,29 @@ const CustomForm = (props) => {
         let data = {}
         Object.keys(fields).map(key => {
             const field = fields[key]
-            if(fields[key].type === 'checkbox' || fields[key].type === 'switch') {
+            if(fields[key].list){
                 
-                data = {...data, [key]: updateFormData && updateFormData[field.name] ? updateFormData[field.name]  : false }
+                data = {...data, [key]: updateFormData && updateFormData[field.name] ? [...updateFormData[field.name]]  : [] }   
             
-            }else if(fields[key].type === 'custom-select'){
+            } else{
+                if(fields[key].type === 'checkbox' || fields[key].type === 'switch') {
                 
-                const selectedOption = updateFormData && updateFormData[field.name] ?  props[field.name].filter(option => option.value === updateFormData[field.name])[0] : {label: intl.formatMessage(formMessages.select), value: 0}
-                data = {...data, [key]: selectedOption }
-            
-            }else if(fields[key].type === 'select'){
+                    data = {...data, [key]: updateFormData && updateFormData[field.name] ? updateFormData[field.name]  : false }
                 
-                data = {...data, [key]: updateFormData && updateFormData[field.name]  ? updateFormData[field.name]  : fields[key].options[0].value }
-            
-            }else {
+                }else if(fields[key].type === 'custom-select'){
+                    
+                    const selectedOption = updateFormData && updateFormData[field.name] ?  props[field.name].filter(option => option.value === updateFormData[field.name])[0] : {label: intl.formatMessage(formMessages.select), value: 0}
+                    data = {...data, [key]: selectedOption }
                 
-                data = {...data, [key]: updateFormData && updateFormData[field.name]  ? updateFormData[field.name]  : '' }
-            
+                }else if(fields[key].type === 'select'){
+                    
+                    data = {...data, [key]: updateFormData && updateFormData[field.name]  ? updateFormData[field.name]  : fields[key].options[0].value }
+                
+                }else {
+                    
+                    data = {...data, [key]: updateFormData && updateFormData[field.name]  ? updateFormData[field.name]  : '' }
+                
+                }
             }
         })
         return data
@@ -77,19 +83,38 @@ const CustomForm = (props) => {
         const targetName = e.target.name;
         const targetChecked = e.target.checked;
         const targetValue = e.target.value;
-        
-        switch(targetType) {
-            case "checkbox":
-                if(targetName !== 'privacy_policy_accepted'){
-                    setFormData({ ...formData, [targetName]:  targetChecked })
-                }else {
-                    setFormData({ ...formData, [targetName]: moment().format('YYYY-MM-DD hh:mm:ss')  })
-                }
+        const targetID = e.target.id;
+
+        if(typeof formData[targetName] === 'object'){
+            switch(targetChecked){
+                case true:
+                    setFormData({ 
+                        ...formData, 
+                        [targetName]:  [...formData[targetName], targetID]   
+                    })    
                 break;
-            default:
-                setFormData({ ...formData, [targetName]:  targetValue   })
+                case false:
+                    setFormData({ 
+                        ...formData, 
+                        [targetName]:  formData[targetName].filter(name => name !== targetID )
+                    })
                 break;
+            }
+        } else {
+            switch(targetType) {
+                case "checkbox":
+                    if(targetName !== 'privacy_policy_accepted'){
+                        setFormData({ ...formData, [targetName]:  targetChecked })
+                    }else {
+                        setFormData({ ...formData, [targetName]: moment().format('YYYY-MM-DD hh:mm:ss')  })
+                    }
+                    break;
+                default:
+                    setFormData({ ...formData, [targetName]:  targetValue   })
+                    break;
+            }
         }
+
         setIsSubmitDisabled(false)
     }
 
@@ -113,6 +138,10 @@ const CustomForm = (props) => {
        }
     }, [updateFormData])
 
+    /* useEffect(() => {
+        console.log(formData)
+     }) */
+
     return (
         Object.keys(fields).length &&
             (<Card className="card-form">
@@ -134,12 +163,29 @@ const CustomForm = (props) => {
                                                                 {messages[field.name] && intl.formatMessage(messages[field.name])}
                                                             </div>
                                                             {field.type === 'checkbox' &&
-                                                                (<CustomInput
+                                                                (field.list &&
+                                                                    <Row className="">
+                                                                        {props[field.name].map(name => 
+                                                                            <CustomInput
+                                                                                key={name}
+                                                                                className="col-sm-4"
+                                                                                id={name}
+                                                                                type={field.type}
+                                                                                name={field.name}
+                                                                                label={name}
+                                                                                // value={formData[field.name]}
+                                                                                onChange={(e) => handleChange(e)}
+                                                                                checked={formData[field.name].includes(name)}
+                                                                            />
+                                                                        )}
+                                                                    </Row>
+                                                                ||
+                                                                <CustomInput
                                                                     className="form-control"
                                                                     id={field.name}
                                                                     type={field.type}
                                                                     name={field.name}
-                                                                    label={messages[field.name] && intl.formatMessage(messages[field.name])}
+                                                                    label={field.label && messages[field.name] && intl.formatMessage(messages[field.name])}
                                                                     // value={formData[field.name]}
                                                                     onChange={(e) => handleChange(e)}
                                                                     required={field.required ? field.required : false}
