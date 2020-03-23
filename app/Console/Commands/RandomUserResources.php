@@ -41,7 +41,7 @@ class RandomUserResources extends Command
         $macro = config('permissions.macro');
         User::get()->each(function ($user) use ($macro) {
             foreach ($macro as $model => $permissions) {
-                $model = config('nilde.morphmap'.$model);
+                $model = config('nilde.morphmap.'.$model);
                 print_r($model . "\n");
                 $count = $model::count();
                 print_r('CUNT ' . $count . "\n");
