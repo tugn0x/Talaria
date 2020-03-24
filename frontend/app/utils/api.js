@@ -252,7 +252,7 @@ export const createLibrary = (options) => {
 export const getLibrary = (options) => {
   const library_id = options.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/${library_id}`, options)
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}?include=granted_permissions`, options)
 };
 
 export const updateLibrary = (options) => {

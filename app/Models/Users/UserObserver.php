@@ -92,6 +92,11 @@ class UserObserver extends BaseObserver
             unset($model->password_confirmation);
         }
 
+//        if($model->isDirty('name') || $model->isDirty('surname'))
+//        {
+            $model->full_name = $model->name.' '.$model->surname;
+//        }
+
         return $parent_saving;
     }
 

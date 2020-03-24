@@ -114,7 +114,8 @@ const AdminReducer = (state = initialState, action) =>
       case REQUEST_GET_LIBRARY_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.library = action.result
+        draft.library = action.result.data
+        draft.library.granted_permissions = action.result.data.granted_permissions.data
         break;
       case REQUEST_UPDATE_LIBRARY:
         draft.loading = true;
