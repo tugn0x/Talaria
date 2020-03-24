@@ -4,37 +4,30 @@ import {CustomInput, Row} from 'reactstrap'
 const ListCheckBox = (props) => {
     const {data, type, handleChange, selectedData} = props
     
-    const [formData, setFormData] = useState()
+    const [formData, setFormData] = useState(selectedData)
 
     const handleFormData = (e) => {
         if(e.target.checked){
             setFormData([...formData, e.target.name ])
+            handleChange([...formData, e.target.name])
         }else{
             setFormData(formData.filter(name => name !== e.target.name))
+            handleChange(formData.filter(name => name !== e.target.name))
         }
+        
       // console.log(e.target.value)
     }
     
     useEffect(() => {
-        setFormData(selectedData ? selectedData : [])
+       setFormData(selectedData ? selectedData : [])
     }, [selectedData])
 
-
-    useEffect(() => {
-        if(selectedData !== formData){
-            handleChange(formData)
-        }
-    }, [formData])
-
-    /* useEffect(() => {
-        console.log(data)
-        console.log(formData)
-    }) */
+    
 
     return (
         <>
            <Row className="">
-                {formData && data.map(name => 
+                {selectedData && data.map(name => 
                     type === 'checkbox' &&
                     <CustomInput
                         key={name}
@@ -43,9 +36,9 @@ const ListCheckBox = (props) => {
                         type={type}
                         name={name}
                         label={name}
-                       // value={formData}
+                       // value={name}
                         onChange={(e) => handleFormData(e)}
-                        checked={formData.length && formData.includes(name)}
+                        checked={!formData.length && selectedData.length ? selectedData.includes(name) : formData.includes(name) }
                     />   
                 ) }
             </Row> 

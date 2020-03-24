@@ -1,9 +1,15 @@
-.resources-list {
+.table {
     ul {
         padding: 0;
         li {
-            margin-bottom: 10px;
-            padding-bottom: 10px;
+            margin-right: 10px;
+            display: inline-block;
+            /* &:not(:last-child) {
+                &:after {
+                    content: ",";
+                    postion
+                }
+            } */
         }
     }
 }

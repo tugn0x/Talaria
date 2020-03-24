@@ -142,11 +142,12 @@ const CustomForm = (props) => {
                                                                 {messages[field.name] && intl.formatMessage(messages[field.name])}
                                                             </div>
                                                             {field.list &&
-                                                                (<ListCheckBox
+                                                                (updateFormData && updateFormData[field.name] &&
+                                                                <ListCheckBox
                                                                     type={field.type}
                                                                     data={props[field.name]}
-                                                                    selectedData={updateFormData && updateFormData[field.name]}
-                                                                    handleChange={(value) => { setFormData({ ...formData, [field.name]:  value   });  setIsSubmitDisabled(false) }}
+                                                                    selectedData={updateFormData[field.name]}
+                                                                    handleChange={(value) => { setFormData({ ...formData, [field.name]: value   });  setIsSubmitDisabled(false) }}
                                                                 />)
                                                                 ||
                                                                 (field.type === 'checkbox' &&
@@ -217,7 +218,6 @@ const CustomForm = (props) => {
                                                                         onChange={(e) => handleChange(e)}
                                                                         required={field.required ? field.required : false}
                                                                     />)
-
                                                                 )
                                                             }
                                                             {field.error &&
@@ -229,9 +229,8 @@ const CustomForm = (props) => {
                                             </Row>
                                         </div>)
                             })}
-                            {props.children}
+                        {props.children}
                         </div>
-                      {props.children}
                         <Button color={submitColor} disabled={isSubmitDisabled} type="submit" block>
                             {submitText}
                         </Button>

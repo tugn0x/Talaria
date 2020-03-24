@@ -36,14 +36,14 @@ const UserPage = (props) => {
                     updateUser={(formData) => dispatch(requestUpdateUser({...formData, id: params.id }, intl.formatMessage(messages.userUpdateSuccess)))}
                     user={admin.user}
                     roles={admin.roles}
-                    resources={admin.resources}
+                    userResources={admin.user.resources}
                 />
             }
             {isNew &&
                 <UserForm
                    createUser={ (formData) => dispatch(requestPostUser(formData, intl.formatMessage(messages.userCreateSuccess) )) } 
                    roles={admin.roles}
-                   resources={admin.resources}
+                   // resources={admin.resources}
                 />  
             }
         </Loader>

@@ -11,7 +11,7 @@ import {
   CSSTransition,
   TransitionGroup,
 } from 'react-transition-group';
-import './style.scss'
+
 
 function SimpleList(props) {
     console.log('SimpleList', props)

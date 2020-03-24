@@ -3,34 +3,31 @@ import {Table, Row, Col} from 'reactstrap'
 import './style.scss'
 
 const ResourceTable = (props) => {
-    const {resources} = props
+    console.log('ResourceTable', props)
+    const {resource, head} = props
     return (
         <>
-        <h3>Resources</h3>
-        <Table responsive className="resources-list">
-            <thead>
-                <tr>
-                {Object.keys(resources).length && Object.keys(resources).map((resource, i) =>
-                    <td key={`${resource}-${i}`}>
-                       <span>{[resource]}</span> 
-                    </td>
+        <h4>{head}</h4>
+        <div className="table user-resources-list">
+            <div className="tbody">
+                {resource.map((res, i) =>
+                    <Row key={`${res}-${i}`}>
+                        <Col xs={6}>
+                            <span>{res.resource.name}</span>
+                        </Col>
+                        <Col xs={6}>
+                            <ul>
+                                {res.permissions.map((permission, i) => 
+                                    <li key={`${permission}-${i}`}>
+                                        <span>{permission}</span>
+                                    </li>
+                                )}
+                            </ul>
+                        </Col>
+                    </Row>
                 )}
-                </tr>
-            </thead>
-            <tbody>
-                <tr>    
-                {Object.keys(resources).length && Object.keys(resources).map((resource, i) =>
-                    <td key={`${resource}-${i}`}>
-                        <ul>
-                            {resources[resource].map((permission, i) => 
-                                <li key={`${permission}-${i}`}>{permission}</li>
-                            )}
-                        </ul>
-                    </td>    
-                )}
-                </tr>
-            </tbody>
-        </Table>
+            </div>
+        </div>
         </>
     )
 }

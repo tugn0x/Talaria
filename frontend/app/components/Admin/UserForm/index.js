@@ -9,7 +9,8 @@ import {fields} from './fields';
 import ResourceTable from 'components/Form/ResourceTable';
 
 const UserForm = (props) => {
-    const {user, updateUser, createUser, roles, resources} = props
+    console.log('UserForm', props)
+    const {user, updateUser, createUser, roles, userResources} = props
     const intl = useIntl();
     return (
         <Row className="justify-content-center">
@@ -25,11 +26,17 @@ const UserForm = (props) => {
                             title={intl.formatMessage(messages.header)} 
                             submitText={intl.formatMessage(messages.subtitle)}
                         >
-                            {/* <ResourceTable 
-                                resources={resources}
-                            /> */}
+                            {userResources && 
+                            Object.keys(userResources).length && 
+                            Object.keys(userResources).map((resource, i) => (
+                                <ResourceTable 
+                                    key={`${resource}-${i}`}
+                                    resource={userResources[resource]}
+                                    head={resource}
+                                />
+                            ))
+                            }
                         </CustomForm>
-                        
                     </>
                 ||
                     <CustomForm 
