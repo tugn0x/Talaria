@@ -1,4 +1,4 @@
-
+import moment from "moment";
 export const fields = {
     name: {
         type: "text",
@@ -63,9 +63,9 @@ export const fields = {
         type: "switch",
         name: "privacy_policy_accepted",
         required: true,
-        width: "col-sm-6"
+        width: "col-sm-6",
        // error: "app.global.invalid_privacy_policy_accepted",
-      //  defaultValue: moment().format('YYYY-MM-DD hh:mm:ss')
-    }, 
-   
+       value: moment().format('YYYY-MM-DD hh:mm:ss')
+    },
+
 }

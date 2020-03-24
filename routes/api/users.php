@@ -31,6 +31,7 @@ Route::group([
     'middleware' => ['api','auth:api',],
     'as' => 'api.v1.users.',
 ], function () {
+    Route::get('option-items', 'UserController@optionList')->name('option-items');
     Route::get('users', 'UserController@index')->name('index');
     Route::get('users/{user}', 'UserController@show')->name('show');
     Route::put('users/{user}', 'UserController@update')->name('update');

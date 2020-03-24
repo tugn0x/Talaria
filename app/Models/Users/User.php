@@ -29,6 +29,7 @@ class User extends UserBase
         'email',
         'password',
         'password_confirmation',
+        'full_name',
 
         'address',
         'country_id',
@@ -76,16 +77,16 @@ class User extends UserBase
     }
 
 
-    public function getFullNameAttribute()
-    {
-        return $this->name . ' '. $this->surname;
-    }
+//    public function getFullNameAttribute()
+//    {
+//        return $this->name . ' '. $this->surname;
+//    }
 
     public function labels()
     {
         return $this->hasMany(Label::class);
     }
-    
+
     public function groups()
     {
         return $this->hasMany(Group::class);
