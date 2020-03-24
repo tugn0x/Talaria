@@ -8,7 +8,6 @@ import { AppSwitch } from '@coreui/react'
 import './style.scss'
 import {ErrorBox} from 'components';
 import {selectFieldsGroups} from './selectFieldsGroups'
-import moment from "moment";
 import ListCheckBox from '../ListCheckBox'
 // PROPS
 // fields
@@ -31,31 +30,31 @@ const CustomForm = (props) => {
 
     const intl = useIntl();
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
-    
+
     const handleFormData = () => {
         let data = {}
         Object.keys(fields).map(key => {
             const field = fields[key]
-            
+
                 if(fields[key].type === 'checkbox' || fields[key].type === 'switch') {
-                
+
                     data = {...data, [key]: updateFormData && updateFormData[field.name] ? updateFormData[field.name]  : false }
-                
+
                 }else if(fields[key].type === 'custom-select'){
-                    
+
                     const selectedOption = updateFormData && updateFormData[field.name] ?  props[field.name].filter(option => option.value === updateFormData[field.name])[0] : {label: intl.formatMessage(formMessages.select), value: 0}
                     data = {...data, [key]: selectedOption }
-                
+
                 }else if(fields[key].type === 'select'){
-                    
+
                     data = {...data, [key]: updateFormData && updateFormData[field.name]  ? updateFormData[field.name]  : fields[key].options[0].value }
-                
+
                 }else {
-                    
+
                     data = {...data, [key]: updateFormData && updateFormData[field.name]  ? updateFormData[field.name]  : '' }
-                
+
                 }
-        
+
         })
         return data
     }
@@ -80,20 +79,21 @@ const CustomForm = (props) => {
         const targetName = e.target.name;
         const targetChecked = e.target.checked;
         const targetValue = e.target.value;
-        
+
         switch(targetType) {
             case "checkbox":
-                if(targetName !== 'privacy_policy_accepted'){
-                    setFormData({ ...formData, [targetName]:  targetChecked })
-                }else {
-                    setFormData({ ...formData, [targetName]: moment().format('YYYY-MM-DD hh:mm:ss')  })
-                }
-                break;
+              setFormData({ ...formData, [targetName]: targetChecked ? targetValue : targetChecked})
+                // if(targetName !== 'privacy_policy_accepted'){
+                //     setFormData({ ...formData, [targetName]:  targetChecked })
+                // }else {
+                //     setFormData({ ...formData, [targetName]: moment().format('YYYY-MM-DD hh:mm:ss')  })
+                // }
+                // break;
             default:
                 setFormData({ ...formData, [targetName]:  targetValue   })
                 break;
         }
-       
+
         setIsSubmitDisabled(false)
     }
 
@@ -141,19 +141,20 @@ const CustomForm = (props) => {
                                                             <div className="form-label">
                                                                 {messages[field.name] && intl.formatMessage(messages[field.name])}
                                                             </div>
-                                                            {field.list && 
-                                                                (<ListCheckBox 
+                                                            {field.list &&
+                                                                (<ListCheckBox
                                                                     type={field.type}
                                                                     data={props[field.name]}
                                                                     selectedData={updateFormData[field.name]}
                                                                     handleChange={(value) => { setFormData({ ...formData, [field.name]:  value   });  setIsSubmitDisabled(false) }}
                                                                 />)
                                                                 ||
-                                                                (field.type === 'checkbox' &&       
+                                                                (field.type === 'checkbox' &&
                                                                     (
                                                                     <CustomInput
                                                                         className="form-control"
                                                                         id={field.name}
+                                                                        value={formData[field.name] ? formData[field.name] : field.value ? field.value : true}
                                                                         type={field.type}
                                                                         name={field.name}
                                                                         label={field.label && messages[field.name] && intl.formatMessage(messages[field.name])}
@@ -216,10 +217,9 @@ const CustomForm = (props) => {
                                                                         onChange={(e) => handleChange(e)}
                                                                         required={field.required ? field.required : false}
                                                                     />)
-                                                                
+
                                                                 )
                                                             }
-                                                            
                                                             {field.error &&
                                                                 <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: field.error })} />
                                                             }
@@ -230,6 +230,7 @@ const CustomForm = (props) => {
                                         </div>)
                             })}
                         </div>
+                      {props.children}
                         <Button color={submitColor} disabled={isSubmitDisabled} type="submit" block>
                             {submitText}
                         </Button>
