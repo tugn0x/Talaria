@@ -8,7 +8,7 @@ import SimpleForm from 'components/SimpleForm'
 
 const InstitutionForm = (props) => {
     console.log('InstitutionForm', props)
-    const { institution, updateInstitution, loading, createInstitution, searches, institutionsListSelect, countriesListSelect} = props
+    const { institution, updateInstitution, loading, createInstitution, searches, institutionsOptionList, countriesOptionList} = props
     const intl = useIntl();
     return (
         <SimpleForm loading={loading}>
@@ -17,8 +17,8 @@ const InstitutionForm = (props) => {
                     submitCallBack={(formData) => updateInstitution(formData)} 
                     updateFormData={institution}
                     fields={fields} 
-                    institution_type_id={institutionsListSelect} 
-                    country_id={countriesListSelect}
+                    institution_type_id={institutionsOptionList} 
+                    country_id={countriesOptionList}
                     fieldsGroups={fieldsGroups}
                     title={institution.name}
                     messages={messages}
@@ -26,8 +26,8 @@ const InstitutionForm = (props) => {
                 />
             || 
                 <CustomForm
-                    institution_type_id={institutionsListSelect}
-                    country_id={countriesListSelect}
+                    institution_type_id={institutionsOptionList}
+                    country_id={countriesOptionList}
                     submitCallBack={(formData) => createInstitution(formData)}
                     fields={fields}
                     fieldsGroups={fieldsGroups}

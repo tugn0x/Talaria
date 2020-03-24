@@ -24,15 +24,18 @@ const UserForm = (props) => {
                             roles={roles}
                             title={intl.formatMessage(messages.header)} 
                             submitText={intl.formatMessage(messages.subtitle)}
-                        />
-                        <ResourceTable 
-                            resources={resources}
-                        />
+                        >
+                            {/* <ResourceTable 
+                                resources={resources}
+                            /> */}
+                        </CustomForm>
+                        
                     </>
                 ||
                     <CustomForm 
                         submitCallBack={(formData) => createUser(formData) } 
                         fields={fields} 
+                        roles={roles}
                         messages={globalMessages}
                         title={intl.formatMessage(messages.createNewUser)} 
                         submitText={intl.formatMessage(messages.createNewUser)}

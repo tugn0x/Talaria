@@ -145,7 +145,7 @@ const CustomForm = (props) => {
                                                                 (<ListCheckBox 
                                                                     type={field.type}
                                                                     data={props[field.name]}
-                                                                    selectedData={updateFormData[field.name]}
+                                                                    selectedData={updateFormData && updateFormData[field.name]}
                                                                     handleChange={(value) => { setFormData({ ...formData, [field.name]:  value   });  setIsSubmitDisabled(false) }}
                                                                 />)
                                                                 ||
@@ -229,6 +229,7 @@ const CustomForm = (props) => {
                                             </Row>
                                         </div>)
                             })}
+                            {props.children}
                         </div>
                         <Button color={submitColor} disabled={isSubmitDisabled} type="submit" block>
                             {submitText}

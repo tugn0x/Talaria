@@ -50,8 +50,8 @@ export const initialState = {
     data: [],
   },
   institution: [],
-  institutionsListSelect: [],
-  countriesListSelect: [],
+  institutionsOptionList: [],
+  countriesOptionList: [],
   roles: [],
   resources: [],
 };
@@ -158,7 +158,7 @@ const AdminReducer = (state = initialState, action) =>
         break;
       case REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS:
         draft.error = initialState.error;
-        draft.institutionsListSelect = action.result.map(item => { return {value: item.id, label: item.name} } );
+        draft.institutionsOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break;
 
       case REQUEST_GET_COUNTRIES_OPTIONLIST:
@@ -166,7 +166,7 @@ const AdminReducer = (state = initialState, action) =>
         break;
       case REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS:
         draft.error = initialState.error;
-        draft.countriesListSelect = action.result.map(item => { return {value: item.id, label: item.name} } );
+        draft.countriesOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break;
 
       case REQUEST_GET_INSTITUTION_TYPE_LIST:
