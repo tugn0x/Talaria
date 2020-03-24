@@ -8,7 +8,8 @@ import Loader from 'components/Form/Loader.js';
 import {useIntl} from 'react-intl';
 
 const LibraryForm = (props) => {
-    const { library, loading, updateLibrary, createLibrary, titleNewLibrary} = props
+    console.log('LibraryForm', props)
+    const { library, loading, updateLibrary, createLibrary, titleNewLibrary, resources} = props
     const intl = useIntl();
     
     return (
@@ -23,11 +24,15 @@ const LibraryForm = (props) => {
                             fieldsGroups={fieldsGroups}
                             title={library.name}
                             messages={{...messages, ...globalMessages}}
+                            granted_permissions={library.granted_permissions}
+                            resources={resources}
                         />
                     ||
                         <CustomForm 
                             submitCallBack={(formData) => createLibrary(formData)} 
-                            fields={fields} 
+                            fields={fields}
+                            resources={resources}
+                            // granted_permissions={library.granted_permissions} 
                             fieldsGroups={fieldsGroups}
                             title={titleNewLibrary}
                             messages={{...messages, ...globalMessages}}

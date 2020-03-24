@@ -137,7 +137,7 @@ export function requestGetLibrarySuccess(result) {
 
 export function requestUpdateLibrary(request, message) {
   return {
-    type: REQUEST_UPDATE_PROJECT,
+    type: REQUEST_UPDATE_LIBRARY,
     request,
     message
   };

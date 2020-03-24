@@ -9,6 +9,8 @@ import './style.scss'
 import {ErrorBox} from 'components';
 import {selectFieldsGroups} from './selectFieldsGroups'
 import ListCheckBox from '../ListCheckBox'
+import GrantedPermissions from '../GrantedPermissions'
+import {uniqBy} from 'lodash'
 // PROPS
 // fields
 // callback action
@@ -83,17 +85,10 @@ const CustomForm = (props) => {
         switch(targetType) {
             case "checkbox":
               setFormData({ ...formData, [targetName]: targetChecked ? targetValue : targetChecked})
-                // if(targetName !== 'privacy_policy_accepted'){
-                //     setFormData({ ...formData, [targetName]:  targetChecked })
-                // }else {
-                //     setFormData({ ...formData, [targetName]: moment().format('YYYY-MM-DD hh:mm:ss')  })
-                // }
-                // break;
             default:
                 setFormData({ ...formData, [targetName]:  targetValue   })
                 break;
         }
-        console.log(targetValue, targetChecked)
         setIsSubmitDisabled(false)
     }
 
@@ -206,6 +201,18 @@ const CustomForm = (props) => {
                                                                         onChange={(e) => handleChange(e)}
                                                                         required={field.required ? field.required : false}
                                                                     />
+                                                                ||
+                                                                field.type === 'granted_permissions' &&
+                                                                     (
+                                                                        <GrantedPermissions 
+                                                                            usersData={props[field.name] }
+                                                                            sendData={(value) => { 
+                                                                                setFormData({...formData, [field.name]:  value  }), 
+                                                                                setIsSubmitDisabled(false) 
+                                                                            }}
+                                                                            resources={props.resources && props.resources}
+                                                                        /> 
+                                                                     )       
                                                                 ||
                                                                     (<CustomInput
                                                                         className="form-control"
