@@ -16,14 +16,20 @@ const ListCheckBox = (props) => {
     }
     
     useEffect(() => {
-        setFormData(selectedData)
+        setFormData(selectedData ? selectedData : [])
     }, [selectedData])
+
 
     useEffect(() => {
         if(selectedData !== formData){
             handleChange(formData)
         }
     }, [formData])
+
+    /* useEffect(() => {
+        console.log(data)
+        console.log(formData)
+    }) */
 
     return (
         <>
