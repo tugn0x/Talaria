@@ -93,7 +93,7 @@ const CustomForm = (props) => {
                 setFormData({ ...formData, [targetName]:  targetValue   })
                 break;
         }
-
+        console.log(targetValue, targetChecked)
         setIsSubmitDisabled(false)
     }
 
@@ -142,11 +142,10 @@ const CustomForm = (props) => {
                                                                 {messages[field.name] && intl.formatMessage(messages[field.name])}
                                                             </div>
                                                             {field.list &&
-                                                                (updateFormData && updateFormData[field.name] &&
-                                                                <ListCheckBox
+                                                                (<ListCheckBox
                                                                     type={field.type}
                                                                     data={props[field.name]}
-                                                                    selectedData={updateFormData[field.name]}
+                                                                    selectedData={updateFormData && updateFormData[field.name] && !formData[field.name] ? updateFormData[field.name] : formData[field.name] ? formData[field.name] : []}
                                                                     handleChange={(value) => { setFormData({ ...formData, [field.name]: value   });  setIsSubmitDisabled(false) }}
                                                                 />)
                                                                 ||
@@ -155,7 +154,6 @@ const CustomForm = (props) => {
                                                                     <CustomInput
                                                                         className="form-control"
                                                                         id={field.name}
-                                                                        value={formData[field.name] ? formData[field.name] : field.value ? field.value : true}
                                                                         type={field.type}
                                                                         name={field.name}
                                                                         label={field.label && messages[field.name] && intl.formatMessage(messages[field.name])}
@@ -163,7 +161,8 @@ const CustomForm = (props) => {
                                                                         onChange={(e) => handleChange(e)}
                                                                         required={field.required ? field.required : false}
                                                                         checked={formData[field.name]}
-                                                                    />)
+                                                                    />
+                                                                    )
                                                                 ||
                                                                 field.type === 'select' &&
                                                                 ( <CustomInput
@@ -203,6 +202,7 @@ const CustomForm = (props) => {
                                                                     <AppSwitch className="mx-1" color="success"
                                                                         checked={Boolean(formData[field.name])}
                                                                         name={field.name}
+                                                                        value={updateFormData && updateFormData[field.name] ? updateFormData[field.name] : field.value ? field.value : true}
                                                                         onChange={(e) => handleChange(e)}
                                                                         required={field.required ? field.required : false}
                                                                     />

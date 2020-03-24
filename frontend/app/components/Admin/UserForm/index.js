@@ -27,7 +27,7 @@ const UserForm = (props) => {
                             submitText={intl.formatMessage(messages.subtitle)}
                         >
                             {userResources && 
-                            Object.keys(userResources).length && 
+                            Object.keys(userResources).length > 0 && 
                             Object.keys(userResources).map((resource, i) => (
                                 <ResourceTable 
                                     key={`${resource}-${i}`}
