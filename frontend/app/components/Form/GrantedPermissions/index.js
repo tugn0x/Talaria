@@ -1,46 +1,37 @@
 import React, {useState, useEffect} from 'react';
 import {Row, Col, CustomInput} from 'reactstrap'
 import './style.scss'
+import {uniq} from 'lodash'
 
 const GrantedPermissions = (props) => {
     console.log('GrantedPermissions', props)
     const {usersData, resources, sendData} = props
     
-    const [formData, setFormData] = useState()
-    let outputData = []
+    //const [formData, setFormData] = useState()
+    
     const handleChange = (e, index) => {
+        let newData = usersData
         if(e.target.checked){
-            outputData = formData.map((elem) => {
-                if(elem.user_id === Number(e.target.value)){
-                    elem.permissions.push(e.target.name)
-                }
-                return elem
-            })
+            newData[index].permissions = uniq([...newData[index].permissions, e.target.name])
         }else {
-            outputData = formData.map((elem) => {
-                if(elem.user_id === Number(e.target.value)){
-                    elem.permissions=elem.permissions.filter(perm => perm !== e.target.name)
-                }
-                return elem
-            })
+            newData[index].permissions = newData[index].permissions.filter(perm => perm !== e.target.name)
         }
-        sendData(outputData)     
-        // setFormData(outputData)     
-        console.log(outputData)
+        // console.log(usersData)
+        sendData(newData)
     }
 
-    useEffect(() => {
-      // console.log(formData)
-    },[formData])
+    /* useEffect(() => {
+      console.log(formData)
+    },[formData]) */
 
-    useEffect(() => {
+   /*  useEffect(() => {
         setFormData( usersData)
-    },[usersData])
+    },[usersData])  */
 
     return (
         <div className="user-permissions-list">
             <div className="tbody">
-            {formData && formData.length > 0 && formData.map((user,index) => (  
+            {usersData && usersData.length > 0 && usersData.map((user,index) => (  
                <Row key={`${user.user_id}-${index}`}>
                     <Col sm={4} xs={12}>
                         <span>{user.full_name}</span> 

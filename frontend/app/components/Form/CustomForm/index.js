@@ -207,7 +207,8 @@ const CustomForm = (props) => {
                                                                         <GrantedPermissions 
                                                                             usersData={props[field.name] }
                                                                             sendData={(value) => { 
-                                                                                setFormData({...formData, [field.name]:  value  }), 
+                                                                                console.log(value)
+                                                                                setFormData( { ...formData, [field.name]:  value  } ); 
                                                                                 setIsSubmitDisabled(false) 
                                                                             }}
                                                                             resources={props.resources && props.resources}
