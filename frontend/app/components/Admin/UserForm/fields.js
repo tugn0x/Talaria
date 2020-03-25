@@ -54,9 +54,8 @@ export const fields = {
         width: "col-sm-6"
     },
     roles: {
-        type: "checkbox",
+        type: "list-checkbox",
         name: "roles",
-        list: true,
         width: "col-sm-12",
     },
     privacy_policy_accepted: {

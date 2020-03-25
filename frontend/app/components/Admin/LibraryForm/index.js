@@ -9,20 +9,22 @@ import {useIntl} from 'react-intl';
 
 const LibraryForm = (props) => {
     console.log('LibraryForm', props)
-    const { library, loading, updateLibrary, createLibrary, titleNewLibrary, resources} = props
+    const { library, usersOptionList, searches, loading, updateLibrary, createLibrary, titleNewLibrary, resources} = props
     const intl = useIntl();
     
     return (
-        <Loader show={loading} >
+       /*  <Loader show={loading} > */
             <Row className="justify-content-center">
                 <Col md="10">
-                    {library &&
+                    {library && 
                         <CustomForm 
                             submitCallBack={(formData) => updateLibrary(formData)} 
                             updateFormData={library}
                             fields={fields} 
                             fieldsGroups={fieldsGroups}
                             title={library.name}
+                            usersOptionList={usersOptionList}
+                            searchCustomSelect={searches} 
                             messages={{...messages, ...globalMessages}}
                             granted_permissions={library.granted_permissions}
                             resources={resources}
@@ -32,15 +34,17 @@ const LibraryForm = (props) => {
                             submitCallBack={(formData) => createLibrary(formData)} 
                             fields={fields}
                             resources={resources}
-                            // granted_permissions={library.granted_permissions} 
+                            usersOptionList={usersOptionList}
+                            searchCustomSelect={searches} 
                             fieldsGroups={fieldsGroups}
                             title={titleNewLibrary}
+                            granted_permissions={[]}
                             messages={{...messages, ...globalMessages}}
                         />
                     }
                 </Col> 
             </Row>
-        </Loader>
+        /* </Loader> */
     )
 }
 

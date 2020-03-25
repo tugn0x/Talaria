@@ -237,6 +237,12 @@ export const updateUser = (options) => {
   return request(`${BASE_URL}/api/v1/users/users/${user_id}?include=roles,resources`, options)
 };
 
+export const getUsersOptionsList = (options) => {
+  options = getOption(options);
+  const query = options.query;
+  return request(`${BASE_URL}/api/v1/users/option-items?label=full_name&q=${query}`, options)
+};
+
 /// Roles and Resources ///
 export const getRoles = (options) => {
   options = getOption(options);

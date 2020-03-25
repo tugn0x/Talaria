@@ -8,6 +8,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_ERROR, STOP_LOADING, REQUEST_USERS_LIST, REQUEST_USERS_LIST_SUCCESS,
    REQUEST_UPDATE_USER, REQUEST_UPDATE_USER_SUCCESS,
    REQUEST_USER, REQUEST_USER_SUCCESS,
+   REQUEST_USERS_OPTIONLIST, REQUEST_USERS_OPTIONLIST_SUCCESS,
    REQUEST_GET_LIBRARY, REQUEST_GET_LIBRARY_SUCCESS,
    REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS,
    REQUEST_UPDATE_LIBRARY, /* REQUEST_UPDATE_LIBRARY_SUCCESS, */
@@ -94,6 +95,20 @@ export function requestGetRoles() {
 export function requestGetRolesSuccess(result) {
   return {
     type: REQUEST_GET_ROLES_SUCCESS,
+    result
+  };
+}
+
+export function requestUsersOptionList(request) {
+  return {
+    type: REQUEST_USERS_OPTIONLIST,
+    request
+  };
+}
+
+export function requestUsersOptionListSuccess(result) {
+  return {
+    type: REQUEST_USERS_OPTIONLIST_SUCCESS,
     result
   };
 }

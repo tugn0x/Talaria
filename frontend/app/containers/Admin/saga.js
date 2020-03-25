@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_POST_USER, REQUEST_USER, REQUEST_GET_LIBRARY,
+          REQUEST_USERS_OPTIONLIST,
           REQUEST_GET_ROLES,
           REQUEST_GET_LIBRARIES_LIST,
           REQUEST_UPDATE_LIBRARY,
@@ -23,6 +24,7 @@ import {
   requestSuccess,
   requestUsersListSuccess,
   requestUserSuccess,
+  requestUsersOptionListSuccess,
   requestGetLibrarySuccess,
   requestGetLibrariesListSuccess,
   requestGetInstitutionTypeListSuccess,
@@ -36,7 +38,7 @@ import {
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
-import {getUsersList, updateUser, createUser,
+import {getUsersList, updateUser, createUser, getUsersOptionsList,
         getRoles, getUser, getLibrary, getLibrariesList, updateLibrary,
         createLibrary, getInstituionTypeList, getInstitutionsList,
         getInstitution, updateInstitution, getInstitutionTypesOptionList,
@@ -103,6 +105,19 @@ export function* requestPostUserSaga(action) {
   }
 }
 
+export function* requestUsersOptionListSaga(action) {
+  const options = {
+    method: 'get',
+    query: action.request ? action.request : ""
+  }
+  try {
+    const request = yield call(getUsersOptionsList, options);
+    yield put(requestUsersOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 export function* requestGetRolesSaga() {
   const options = {
     method: 'get'
@@ -116,6 +131,7 @@ export function* requestGetRolesSaga() {
 }
 
 export function* requestPostLibrarySaga(action) {
+  console.log(action)
   const options = {
     method: 'post',
     body: {...action.request }
@@ -333,6 +349,7 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_UPDATE_USER, requestUpdateUserSaga);
   yield takeLatest(REQUEST_POST_USER, requestPostUserSaga);
   yield takeLatest(REQUEST_USER, requestUserSaga);
+  yield takeLatest(REQUEST_USERS_OPTIONLIST, requestUsersOptionListSaga);
   yield takeLatest(REQUEST_GET_ROLES, requestGetRolesSaga);
   yield takeLatest(REQUEST_GET_LIBRARY, requestGetLibrarySaga);
   yield takeLatest(REQUEST_GET_LIBRARIES_LIST, requestGetLibrariesListSaga);

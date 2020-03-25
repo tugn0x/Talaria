@@ -7,6 +7,7 @@ import produce from 'immer';
 import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_ERROR, STOP_LOADING, REQUEST_USERS_LIST, REQUEST_USERS_LIST_SUCCESS,
   REQUEST_UPDATE_USER, REQUEST_UPDATE_USER_SUCCESS,
+  REQUEST_USERS_OPTIONLIST, REQUEST_USERS_OPTIONLIST_SUCCESS,
   REQUEST_USER, REQUEST_USER_SUCCESS,
   REQUEST_GET_LIBRARY, REQUEST_GET_LIBRARY_SUCCESS,
   REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS,
@@ -32,6 +33,7 @@ export const initialState = {
     pagination: {},
     data: [],
   },
+  usersOptionList: [],
   user: [],
   error: null,
   librariesList: {
@@ -92,6 +94,13 @@ const AdminReducer = (state = initialState, action) =>
           roles: action.result.data.roles.data,
           resources: action.result.data.resources.data,
         }
+        break;
+      case REQUEST_USERS_OPTIONLIST:
+        draft.error = action.error;
+        break;
+      case REQUEST_USERS_OPTIONLIST_SUCCESS:
+        draft.error = initialState.error;
+        draft.usersOptionList = action.result.map(item => { return {value: item.id, label: item.full_name} } );
         break;
       case REQUEST_GET_ROLES:
         draft.loading = true;
@@ -161,7 +170,6 @@ const AdminReducer = (state = initialState, action) =>
         draft.error = initialState.error;
         draft.institutionsOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break;
-
       case REQUEST_GET_COUNTRIES_OPTIONLIST:
         draft.error = action.error;
         break;

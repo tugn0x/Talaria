@@ -37,6 +37,8 @@ export const fields = {
         type: "granted_permissions",
         name: "granted_permissions",
         width: "col-sm-12",
+        options: "usersOptionList",
+        order: 1,
         group: "granted_permissions",
     },
     institution_id: {
@@ -190,7 +192,7 @@ export const fields = {
     },
     ill_user_cost: {
         type: "date",
-        name: "susp_date_end",
+        name: "ill_user_cost",
         width: "col-sm-6"
     },
     status: {

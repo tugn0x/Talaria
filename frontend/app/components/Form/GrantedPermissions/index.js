@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {Row, Col, CustomInput} from 'reactstrap'
+import Select from 'react-select';
 import './style.scss'
 import {uniq} from 'lodash'
 
 const GrantedPermissions = (props) => {
     console.log('GrantedPermissions', props)
-    const {usersData, resources, sendData} = props
+    const {usersData,usersOptionList, searchCustomSelect, resources, sendData} = props
     
-    //const [formData, setFormData] = useState()
+    // const [formData, setFormData] = useState()
     
     const handleChange = (e, index) => {
         let newData = usersData
@@ -20,43 +21,69 @@ const GrantedPermissions = (props) => {
         sendData(newData)
     }
 
+    const handleChangeOptionList = (option) => {
+        const newData = usersData.unshift({
+            user_id: option.value,
+            full_name: option.label,
+            permissions: []
+        });
+        sendData(newData) 
+    }
+
+    const handleSearchOptionList = (newValue, name) => {
+        const inputValue = newValue.replace(/\W/g, '');
+        inputValue !== "" && searchCustomSelect[name](inputValue)
+    };
+
     /* useEffect(() => {
       console.log(formData)
     },[formData]) */
 
    /*  useEffect(() => {
         setFormData( usersData)
-    },[usersData])  */
+    },[usersData])   */
 
     return (
-        <div className="user-permissions-list">
-            <div className="tbody">
-            {usersData && usersData.length > 0 && usersData.map((user,index) => (  
-               <Row key={`${user.user_id}-${index}`}>
-                    <Col sm={4} xs={12}>
-                        <span>{user.full_name}</span> 
-                    </Col>
-                    <Col sm={8} xs={12}>
-                        {resources.map(name => 
-                            <CustomInput
-                                key={`${name}-${user.user_id}`}
-                                className="col-sm-4"
-                                id={`${name}-${user.user_id}`}
-                                type="checkbox"
-                                name={name}
-                                label={name}
-                                value={user.user_id}
-                                onChange={(e) => handleChange(e, index)}
-                                checked={user.permissions && user.permissions.includes(name) ? true : false}
-                            />   
-                        ) }
-                    </Col>
-                </Row>
-            ))
-            
-            }
+        <>
+            <Select
+                className="form-custom-select"
+                type="custom-select"
+                // value={formData[field.name]}
+                name="usersOptionList"
+                onChange={(option) => handleChangeOptionList(option)}
+                onInputChange={(input) =>  searchCustomSelect ? handleSearchOptionList(input, "usersOptionList") : input}
+                options={usersOptionList}
+                required
+            />
+            <div className="user-permissions-list">
+                <div className="tbody">
+                {usersData && usersData.length > 0 && usersData.map((user,index) => (  
+                <Row key={`${user.user_id}-${index}`}>
+                        <Col sm={4} xs={12}>
+                            <span>{user.full_name}</span> 
+                        </Col>
+                        <Col sm={8} xs={12}>
+                            {resources.map(name => 
+                                <CustomInput
+                                    key={`${name}-${user.user_id}`}
+                                    className="col-sm-4"
+                                    id={`${name}-${user.user_id}`}
+                                    type="checkbox"
+                                    name={name}
+                                    label={name}
+                                    value={user.user_id}
+                                    onChange={(e) => handleChange(e, index)}
+                                    checked={user.permissions && user.permissions.includes(name) ? true : false}
+                                />   
+                            ) }
+                        </Col>
+                    </Row>
+                ))
+                
+                }
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 

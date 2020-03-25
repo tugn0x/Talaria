@@ -10,7 +10,7 @@ import {ErrorBox} from 'components';
 import {selectFieldsGroups} from './selectFieldsGroups'
 import ListCheckBox from '../ListCheckBox'
 import GrantedPermissions from '../GrantedPermissions'
-import {uniqBy} from 'lodash'
+
 // PROPS
 // fields
 // callback action
@@ -136,15 +136,15 @@ const CustomForm = (props) => {
                                                             <div className="form-label">
                                                                 {messages[field.name] && intl.formatMessage(messages[field.name])}
                                                             </div>
-                                                            {field.list &&
-                                                                (<ListCheckBox
-                                                                    type={field.type}
-                                                                    data={props[field.name]}
-                                                                    selectedData={updateFormData && updateFormData[field.name] && !formData[field.name] ? updateFormData[field.name] : formData[field.name] ? formData[field.name] : []}
-                                                                    handleChange={(value) => { setFormData({ ...formData, [field.name]: value   });  setIsSubmitDisabled(false) }}
-                                                                />)
+                                                                {field.type === 'list-checkbox' &&
+                                                                    (<ListCheckBox
+                                                                        type="checkbox"
+                                                                        data={props[field.name]}
+                                                                        selectedData={updateFormData && updateFormData[field.name] && !formData[field.name] ? updateFormData[field.name] : formData[field.name] ? formData[field.name] : []}
+                                                                        handleChange={(value) => { setFormData({ ...formData, [field.name]: value   });  setIsSubmitDisabled(false) }}
+                                                                    />)
                                                                 ||
-                                                                (field.type === 'checkbox' &&
+                                                                field.type === 'checkbox' &&
                                                                     (
                                                                     <CustomInput
                                                                         className="form-control"
@@ -205,12 +205,13 @@ const CustomForm = (props) => {
                                                                 field.type === 'granted_permissions' &&
                                                                      (
                                                                         <GrantedPermissions 
-                                                                            usersData={props[field.name] }
+                                                                            usersData={props[field.name]}
                                                                             sendData={(value) => { 
-                                                                                console.log(value)
                                                                                 setFormData( { ...formData, [field.name]:  value  } ); 
                                                                                 setIsSubmitDisabled(false) 
                                                                             }}
+                                                                            searchCustomSelect={searchCustomSelect}
+                                                                            usersOptionList={props[field.options]}
                                                                             resources={props.resources && props.resources}
                                                                         /> 
                                                                      )       
@@ -226,8 +227,8 @@ const CustomForm = (props) => {
                                                                         onChange={(e) => handleChange(e)}
                                                                         required={field.required ? field.required : false}
                                                                     />)
-                                                                )
-                                                            }
+                                                                }
+                                                            
                                                             {field.error &&
                                                                 <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: field.error })} />
                                                             }
