@@ -45,7 +45,7 @@ function UserPage(props) {
               library_id: params.library_id, 
               id: params.id,
               message: `${intl.formatMessage(messages.statusUpdateMessage)}` })) } 
-          updateFormData={{status: user.status, name: user.user.data.full_name}}
+          requestData={{status: user.status, name: user.user.data.full_name}}
           fields={fields}
           title={intl.formatMessage(messages.header)}
           messages={messages}

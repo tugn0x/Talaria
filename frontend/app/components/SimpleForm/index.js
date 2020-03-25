@@ -12,10 +12,8 @@ const SimpleForm = (props) => {
     const {loading} = props
     return (
         <Loader show={loading} >
-            
-                    <ButtonBack className="float-left" />
-                    <div className="clearfix"></div>
-               
+            <ButtonBack className="float-left" />
+            <div className="clearfix"></div>
             <Row className="justify-content-center">
                 <Col md="10">
                     {props.children}

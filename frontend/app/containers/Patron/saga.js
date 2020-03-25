@@ -29,8 +29,8 @@ import {  getMyLibrary,
 export function* requestMyLibrariesSaga(action) {
   const options = {
     method: 'get',
-    page: action.page ? action.page : '1',
-    query: action.query ? action.query : ''
+    page: action && action.page ? action.page : '1',
+    query: action && action.query ? action.query : ''
   };
   try {
     const request = yield call(getMyLibraries, options);

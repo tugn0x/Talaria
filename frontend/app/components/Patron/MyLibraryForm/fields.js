@@ -204,8 +204,8 @@ export const fields = {
         placeholder: "status",
         width: "col-md-6",
         options: [
-            { id: 'pending', name: 'pending' },
-            { id: 'success', name: 'success' },
+            { value: 'pending', label: 'pending' },
+            { value: 'success', label: 'success' },
         ]
     },
     nilde: {

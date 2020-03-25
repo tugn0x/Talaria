@@ -38,6 +38,7 @@ export const fields = {
         name: "granted_permissions",
         width: "col-sm-12",
         options: "usersOptionList",
+        searchOptionList: true,
         order: 1,
         group: "granted_permissions",
     },
@@ -196,14 +197,14 @@ export const fields = {
         width: "col-sm-6"
     },
     status: {
-        type: "select",
+        type: "custom-select",
         name: "status",
-        placeholder: "status",
+        label: "status",
         width: "col-sm-6",
         options: [
-            { value: 0, name: 'disabilitata' },
-            { value: 1, name: 'abilitata' },
-            { value: 2, name: 'in rinnovo' },
+            { value: 0, label: 'disabilitata' },
+            { value: 1, label: 'abilitata' },
+            { value: 2, label: 'in rinnovo' },
         ]
     },
     nilde: {

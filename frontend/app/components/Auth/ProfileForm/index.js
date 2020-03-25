@@ -24,7 +24,7 @@ const ProfileForm = (props) => {
                        // user={user}  
                         fields={fields} 
                         messages={globalMessages}
-                        updateFormData={user}
+                        requestData={user}
                         title={intl.formatMessage(messages.header)} 
                         submitText={intl.formatMessage(messages.subtitle)}
                         /> 

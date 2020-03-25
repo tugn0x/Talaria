@@ -43,6 +43,7 @@ const UserPage = (props) => {
                 <UserForm
                    createUser={ (formData) => dispatch(requestPostUser(formData, intl.formatMessage(messages.userCreateSuccess) )) } 
                    roles={admin.roles}
+                   loading={isLoading}
                    // resources={admin.resources}
                 />  
             }

@@ -213,4 +213,23 @@ ul.list-inline {
     margin: 0 auto;
 }
 
+.custom-control-input:checked ~ .custom-control-label::before {
+    border-color: $brown;
+    background-color: $brown;
+}
 
+.option-list > [class*=control] {
+    background-color: transparent;
+    border-radius: 0;
+    border: 1px solid #e4e7ea;
+    color: #5c6873;
+    font-size: .875rem;
+}
+
+/* .switch-success .switch-input:checked+.switch-slider {
+    background-color: $orange;
+    border-color: $orange;
+    &:before {
+        border-color: $orange;
+    }
+} */

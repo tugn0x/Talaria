@@ -112,7 +112,6 @@ export function requestGetLibraryListSuccess(result) {
 }
 
 export function requestAccessToLibrary(request) {
-  console.log(request)
   return {
     type: REQUEST_ACCESS_TO_LIBRARIES,
     request: {library_id: request.value}

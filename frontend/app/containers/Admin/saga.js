@@ -231,7 +231,7 @@ export function* requestGetInstitutionSaga(action) {
 export function* requestInstitutionTypeOptionListSaga(action) {
   const options = {
     method: 'get',
-    query: action.request
+    query: action.request ? action.request : ""
   }
   try {
     const request = yield call(getInstitutionTypesOptionList, options);

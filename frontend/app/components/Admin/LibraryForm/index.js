@@ -6,6 +6,7 @@ import globalMessages from 'utils/globalMessages';
 import messages from './messages';
 import Loader from 'components/Form/Loader.js';
 import {useIntl} from 'react-intl';
+import SimpleForm from 'components/SimpleForm'
 
 const LibraryForm = (props) => {
     console.log('LibraryForm', props)
@@ -13,18 +14,16 @@ const LibraryForm = (props) => {
     const intl = useIntl();
     
     return (
-       /*  <Loader show={loading} > */
-            <Row className="justify-content-center">
-                <Col md="10">
+            <SimpleForm loading={loading}>
                     {library && 
                         <CustomForm 
                             submitCallBack={(formData) => updateLibrary(formData)} 
-                            updateFormData={library}
+                            requestData={library}
                             fields={fields} 
                             fieldsGroups={fieldsGroups}
                             title={library.name}
                             usersOptionList={usersOptionList}
-                            searchCustomSelect={searches} 
+                            searchOptionList={searches} 
                             messages={{...messages, ...globalMessages}}
                             granted_permissions={library.granted_permissions}
                             resources={resources}
@@ -35,16 +34,14 @@ const LibraryForm = (props) => {
                             fields={fields}
                             resources={resources}
                             usersOptionList={usersOptionList}
-                            searchCustomSelect={searches} 
+                            searchOptionList={searches} 
                             fieldsGroups={fieldsGroups}
                             title={titleNewLibrary}
                             granted_permissions={[]}
                             messages={{...messages, ...globalMessages}}
                         />
                     }
-                </Col> 
-            </Row>
-        /* </Loader> */
+            </SimpleForm>
     )
 }
 

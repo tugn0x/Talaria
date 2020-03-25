@@ -6,7 +6,7 @@ import {uniq} from 'lodash'
 
 const GrantedPermissions = (props) => {
     console.log('GrantedPermissions', props)
-    const {usersData,usersOptionList, searchCustomSelect, resources, sendData} = props
+    const {usersData,usersOptionList, searchOptionList, resources, sendData} = props
     
     // const [formData, setFormData] = useState()
     
@@ -21,23 +21,23 @@ const GrantedPermissions = (props) => {
         sendData(newData)
     }
 
-    const handleChangeOptionList = (option) => {
-        const newData = usersData.unshift({
-            user_id: option.value,
-            full_name: option.label,
+    const handleChangeOptionList = (input) => {
+        const newData = [{
+            user_id: input.value,
+            full_name: input.label,
             permissions: []
-        });
+        }, ...usersData];
         sendData(newData) 
     }
 
     const handleSearchOptionList = (newValue, name) => {
         const inputValue = newValue.replace(/\W/g, '');
-        inputValue !== "" && searchCustomSelect[name](inputValue)
+        searchOptionList[name](inputValue)
     };
 
-    /* useEffect(() => {
-      console.log(formData)
-    },[formData]) */
+  /*   useEffect(() => {
+      console.log(usersData)
+    },[usersData]) */
 
    /*  useEffect(() => {
         setFormData( usersData)
@@ -46,16 +46,16 @@ const GrantedPermissions = (props) => {
     return (
         <>
             <Select
-                className="form-custom-select"
+                className="option-list"
                 type="custom-select"
                 // value={formData[field.name]}
                 name="usersOptionList"
-                onChange={(option) => handleChangeOptionList(option)}
-                onInputChange={(input) =>  searchCustomSelect ? handleSearchOptionList(input, "usersOptionList") : input}
+                onChange={(input) => handleChangeOptionList(input)}
+                onInputChange={(input) =>  searchOptionList ? handleSearchOptionList(input, "usersOptionList") : input}
                 options={usersOptionList}
                 required
             />
-            <div className="user-permissions-list">
+            <div className="users-permissions-list">
                 <div className="tbody">
                 {usersData && usersData.length > 0 && usersData.map((user,index) => (  
                 <Row key={`${user.user_id}-${index}`}>
@@ -63,10 +63,11 @@ const GrantedPermissions = (props) => {
                             <span>{user.full_name}</span> 
                         </Col>
                         <Col sm={8} xs={12}>
-                            {resources.map(name => 
+                            <Row>
+                            {resources && resources.length > 0 && resources.map(name => 
                                 <CustomInput
                                     key={`${name}-${user.user_id}`}
-                                    className="col-sm-4"
+                                    className="col-sm-6 col-lg-4"
                                     id={`${name}-${user.user_id}`}
                                     type="checkbox"
                                     name={name}
@@ -76,6 +77,7 @@ const GrantedPermissions = (props) => {
                                     checked={user.permissions && user.permissions.includes(name) ? true : false}
                                 />   
                             ) }
+                            </Row>
                         </Col>
                     </Row>
                 ))

@@ -45,20 +45,15 @@ const MyLibraryForm = (props) => {
                    
                     {library &&
                         <ul>
-                        {Object.keys(library).length > 0 && Object.keys(library).map((key) =>
-                            (
-                                library[key] &&
-                                <li key={key}><span>{key}</span> <span>{library[key]}</span></li>
-                            )
-                        )}
-                        {/* <CustomForm
-                            submitCallBack={(formData) => null}
-                            updateFormData={library}
-                            fields={fields}
-                            fieldsGroups={fieldsGroups}
-                            messages={{...messages, ...globalMessages}}
-                            // submitText={intl.formatMessage(messages.updateSubmitText)}
-                        /> */}
+                            <li><span>{library.name}</span></li> 
+                            {/* <CustomForm
+                                submitCallBack={(formData) => null}
+                                requestData={library}
+                                fields={fields}
+                                fieldsGroups={fieldsGroups}
+                                messages={{...messages, ...globalMessages}}
+                                // submitText={intl.formatMessage(messages.updateSubmitText)}
+                            /> */}
                         </ul>
                     }
                     {librariesList &&
@@ -67,7 +62,7 @@ const MyLibraryForm = (props) => {
                             librariesList={librariesList}
                             fields={props.fields}
                             messages={props.messages}
-                            searchCustomSelect={searches}
+                            searchOptionList={searches}
                         /> 
                     }
                 </Col>

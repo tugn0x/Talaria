@@ -3,14 +3,16 @@ import { Card, CardBody, CustomInput, Form, Button, Row } from 'reactstrap'
 import PropTypes from 'prop-types';
 import {useIntl} from 'react-intl'
 import formMessages from './messages'
-import Select from 'react-select';
-import { AppSwitch } from '@coreui/react'
-import './style.scss'
 import {ErrorBox} from 'components';
 import {selectFieldsGroups} from './selectFieldsGroups'
 import ListCheckBox from '../ListCheckBox'
 import GrantedPermissions from '../GrantedPermissions'
-
+import InputField from '../InputField'
+import Switch from '../Switch'
+import OptionList from '../OptionList'
+import Select from '../Select'
+import CheckBox from '../CheckBox'
+import './style.scss'
 // PROPS
 // fields
 // callback action
@@ -24,73 +26,26 @@ const CustomForm = (props) => {
         submitText = "Submit",
         submitColor = "brown",
         fields = {},
-        searchCustomSelect,
+        searchOptionList,
         messages,
-        updateFormData,
+        requestData,
         fieldsGroups = {},
     } = props
 
     const intl = useIntl();
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
+    const [formData, setFormData] = useState({})
 
-    const handleFormData = () => {
-        let data = {}
-        Object.keys(fields).map(key => {
-            const field = fields[key]
-
-                if(fields[key].type === 'checkbox' || fields[key].type === 'switch') {
-
-                    data = {...data, [key]: updateFormData && updateFormData[field.name] ? updateFormData[field.name]  : false }
-
-                }else if(fields[key].type === 'custom-select'){
-
-                    const selectedOption = updateFormData && updateFormData[field.name] ?  props[field.name].filter(option => option.value === updateFormData[field.name])[0] : {label: intl.formatMessage(formMessages.select), value: 0}
-                    data = {...data, [key]: selectedOption }
-
-                }else if(fields[key].type === 'select'){
-
-                    data = {...data, [key]: updateFormData && updateFormData[field.name]  ? updateFormData[field.name]  : fields[key].options[0].value }
-
-                }else {
-
-                    data = {...data, [key]: updateFormData && updateFormData[field.name]  ? updateFormData[field.name]  : '' }
-
-                }
-
-        })
-        return data
-    }
-
-    const [formData, setFormData] = useState(handleFormData())
-
-    /* CUSTOM SELECT Handle */
-    const handleSearchCustomSelect = (newValue, name) => {
-        const inputValue = newValue.replace(/\W/g, '');
-        searchCustomSelect[name](inputValue)
-    };
-
-    const handleChangeCustomSelect = (selectedOption, key) => {
-       setFormData({...formData, [key]:  {...selectedOption} })
-       setIsSubmitDisabled(false)
-    }
-
-
+    
     /* HANDLE CHANGE Generico */
-    const handleChange = (e) =>{
-        const targetType = e.target.type
-        const targetName = e.target.name;
-        const targetChecked = e.target.checked;
-        const targetValue = e.target.value;
-
-        switch(targetType) {
-            case "checkbox":
-              setFormData({ ...formData, [targetName]: targetChecked ? targetValue : targetChecked})
-            default:
-                setFormData({ ...formData, [targetName]:  targetValue   })
-                break;
-        }
+    const handleChange = (value, field_name) =>{
+        setFormData({ ...formData, [field_name]: value   });  
         setIsSubmitDisabled(false)
-    }
+        console.log(value)
+        console.log(field_name)
+    } 
+
+    
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -106,15 +61,6 @@ const CustomForm = (props) => {
         return
     }
 
-    useEffect(() => {
-       if(updateFormData){
-            setFormData(handleFormData())
-       }
-    }, [updateFormData])
-
-    /* useEffect(() => {
-        console.log(formData)
-     }) */
 
     return (
         Object.keys(fields).length &&
@@ -137,98 +83,64 @@ const CustomForm = (props) => {
                                                                 {messages[field.name] && intl.formatMessage(messages[field.name])}
                                                             </div>
                                                                 {field.type === 'list-checkbox' &&
-                                                                    (<ListCheckBox
+                                                                    <ListCheckBox
                                                                         type="checkbox"
                                                                         data={props[field.name]}
-                                                                        selectedData={updateFormData && updateFormData[field.name] && !formData[field.name] ? updateFormData[field.name] : formData[field.name] ? formData[field.name] : []}
-                                                                        handleChange={(value) => { setFormData({ ...formData, [field.name]: value   });  setIsSubmitDisabled(false) }}
-                                                                    />)
+                                                                        selectedData={requestData && requestData[field.name] && !formData[field.name] ? requestData[field.name] : formData[field.name] ? formData[field.name] : []}
+                                                                        handleChange={(value) => handleChange(value, field.name)}
+                                                                    />
                                                                 ||
                                                                 field.type === 'checkbox' &&
-                                                                    (
-                                                                    <CustomInput
-                                                                        className="form-control"
-                                                                        id={field.name}
-                                                                        type={field.type}
-                                                                        name={field.name}
-                                                                        label={field.label && messages[field.name] && intl.formatMessage(messages[field.name])}
-                                                                        // value={formData[field.name]}
-                                                                        onChange={(e) => handleChange(e)}
-                                                                        required={field.required ? field.required : false}
-                                                                        checked={formData[field.name]}
-                                                                    />
-                                                                    )
-                                                                ||
-                                                                field.type === 'select' &&
-                                                                ( <CustomInput
-                                                                    className="form-control"
-                                                                    id={field.name}
-                                                                    type={field.type}
-                                                                    placeholder={intl.formatMessage(messages[field.name])}
-                                                                    name={field.name}
-                                                                    value={formData[field.name]}
-                                                                    onChange={(e) => handleChange(e)}
-                                                                    required={field.required ? field.required : false}
-                                                                >
-                                                                {
-                                                                    (typeof field.options === 'string') ?
-                                                                    props[field.options] && props[field.options].map((opt, i) => (
-                                                                            <option key={`${field.name}-${i}`} value={opt.value}>
-                                                                                {opt.name}
-                                                                            </option>)
-                                                                        ) :
-                                                                    field.options.map((opt, i) => (<option key={`${field.name}-${i}`} value={opt.value}>{opt.name}</option>))
-                                                                }
-                                                                </CustomInput>)
+                                                                    <>
+                                                                    <CheckBox 
+                                                                        field={field}
+                                                                        label={field.label && field.label}
+                                                                        data={!formData[field.name] && requestData && requestData[field.name] ? requestData[field.name] : formData[field.name]}
+                                                                        handleChange={(value) => handleChange(value, field.name)}
+                                                                    />   
+                                                                    </>
                                                                 ||
                                                                 field.type === 'custom-select' &&
-                                                                    (<Select
-                                                                        className="form-custom-select"
-                                                                        type="custom-select"
-                                                                        value={formData[field.name]}
-                                                                        name={field.name}
-                                                                        onChange={(selectedOption) => handleChangeCustomSelect(selectedOption, field.selectedOption)}
-                                                                        onInputChange={(input) =>  searchCustomSelect ? handleSearchCustomSelect(input, field.name) : input}
-                                                                        options={props[field.options]}
-                                                                        required
-                                                                    />)
+                                                                   <>
+                                                                   <OptionList 
+                                                                        field={field}
+                                                                        selectedData={
+                                                                            !formData[field.name] && requestData && requestData[field.name] ? props[field.name].filter(opt => opt.value === requestData[field.name])[0] :
+                                                                            formData[field.name] ? formData[field.name] :
+                                                                            {label: intl.formatMessage(formMessages.select), value: 0}
+                                                                        }
+                                                                        options={props[field.name] ? props[field.name] : field.options}
+                                                                        searchOptionList={field.search ? searchOptionList : {} }
+                                                                        handleChange={(value) => handleChange(value, field.name)}
+                                                                    /> 
+                                                                    </>
                                                                 ||
                                                                 field.type === 'switch' &&
-                                                                    <AppSwitch className="mx-1" color="success"
-                                                                        checked={Boolean(formData[field.name])}
-                                                                        name={field.name}
-                                                                        value={updateFormData && updateFormData[field.name] ? updateFormData[field.name] : field.value ? field.value : true}
-                                                                        onChange={(e) => handleChange(e)}
-                                                                        required={field.required ? field.required : false}
+                                                                    <Switch 
+                                                                        field={field}
+                                                                        data={!formData[field.name] && requestData && requestData[field.name] ? requestData[field.name] : formData[field.name]}
+                                                                        label={messages[field.name]}
+                                                                        handleChange={(value) => handleChange(value, field.name)}
                                                                     />
                                                                 ||
                                                                 field.type === 'granted_permissions' &&
-                                                                     (
-                                                                        <GrantedPermissions 
-                                                                            usersData={props[field.name]}
-                                                                            sendData={(value) => { 
-                                                                                setFormData( { ...formData, [field.name]:  value  } ); 
-                                                                                setIsSubmitDisabled(false) 
-                                                                            }}
-                                                                            searchCustomSelect={searchCustomSelect}
-                                                                            usersOptionList={props[field.options]}
-                                                                            resources={props.resources && props.resources}
-                                                                        /> 
-                                                                     )       
+                                                                    <GrantedPermissions 
+                                                                        usersData={!formData[field.name] && props[field.name] ? props[field.name] : formData[field.name]}
+                                                                        sendData={(value) => handleChange(value, field.name)}
+                                                                        searchOptionList={searchOptionList}
+                                                                        usersOptionList={props[field.options]}
+                                                                        resources={props.resources && props.resources}
+                                                                    /> 
                                                                 ||
-                                                                    (<CustomInput
-                                                                        className="form-control"
-                                                                        id={field.name}
-                                                                        type={field.type}
-                                                                        disabled={field.disabled ? field.disabled : false}
-                                                                        placeholder={messages[field.name] && intl.formatMessage(messages[field.name])}
-                                                                        name={field.name}
-                                                                        value={formData[field.name]}
-                                                                        onChange={(e) => handleChange(e)}
-                                                                        required={field.required ? field.required : false}
-                                                                    />)
+                                                                    <>  
+                                                                        <InputField 
+                                                                            field={field}
+                                                                            label={messages[field.name] ? messages[field.name] : ""}
+                                                                            data={!formData[field.name] && requestData && requestData[field.name] ? requestData[field.name] : formData[field.name]}
+                                                                            handleChange={(value) => handleChange(value, field.name)}
+                                                                        />  
+                                                                    </>
                                                                 }
-                                                            
                                                             {field.error &&
                                                                 <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: field.error })} />
                                                             }

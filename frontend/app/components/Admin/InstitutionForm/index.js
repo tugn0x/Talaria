@@ -15,14 +15,14 @@ const InstitutionForm = (props) => {
             { institution &&
                 <CustomForm 
                     submitCallBack={(formData) => updateInstitution(formData)} 
-                    updateFormData={institution}
+                    requestData={institution}
                     fields={fields} 
                     institution_type_id={institutionsOptionList} 
                     country_id={countriesOptionList}
                     fieldsGroups={fieldsGroups}
                     title={institution.name}
                     messages={messages}
-                    searchCustomSelect={searches}
+                    searchOptionList={searches}
                 />
             || 
                 <CustomForm
@@ -31,7 +31,7 @@ const InstitutionForm = (props) => {
                     submitCallBack={(formData) => createInstitution(formData)}
                     fields={fields}
                     fieldsGroups={fieldsGroups}
-                    searchCustomSelect={searches}
+                    searchOptionList={searches}
                     title={intl.formatMessage(messages.header)}
                     messages={{...messages, ...globalMessages}}
                 />
