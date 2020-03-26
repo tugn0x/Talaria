@@ -95,7 +95,7 @@ const libraryReducer = (state = initialState, action) =>
       case REQUEST_GET_LIBRARIES_LIST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.librariesList = action.result.data
+        draft.libraryOptionList = action.result.data
         break; 
       case REQUEST_SUCCESS:
         draft.loading = false;

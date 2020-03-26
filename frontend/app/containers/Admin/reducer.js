@@ -36,7 +36,7 @@ export const initialState = {
   usersOptionList: [],
   user: [],
   error: null,
-  librariesList: {
+  libraryOptionList: {
     pagination: {},
     data: [],
   },
@@ -140,8 +140,8 @@ const AdminReducer = (state = initialState, action) =>
       case REQUEST_GET_LIBRARIES_LIST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.librariesList.data = action.result.data
-        draft.librariesList.pagination = action.result.meta.pagination
+        draft.libraryOptionList.data = action.result.data
+        draft.libraryOptionList.pagination = action.result.meta.pagination
         break;
       case REQUEST_GET_INSTITUTION:
         draft.loading = true;

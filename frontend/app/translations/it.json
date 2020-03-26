@@ -43,7 +43,7 @@
   "app.containers.ReferencePage.referenceUpdate": "Riferimento aggiornata",
 
   "app.containers.MyLibrariesPage.title": "Aggiungi una biblioteca",
-  "app.containers.MyLibrariesPage.librariesList": "Seleziona una biblioteca",
+  "app.containers.MyLibrariesPage.library_id": "Seleziona una biblioteca",
   "app.containers.MyLibrariesListPage.header": "Le mie biblioteche",
   "app.containers.MyLibrariesList.createNew": "Richiedi nuova biblioteca",
   "app.containers.MyLibrariesList.edit": "Modifica biblioteca",

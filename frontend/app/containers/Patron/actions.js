@@ -5,7 +5,7 @@
  */
 
 import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
-  REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS, 
+  REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_GET_LIBRARY_OPTIONLIST_SUCCESS, 
   REQUEST_ACCESS_TO_LIBRARIES,
   REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS, 
   REQUEST_POST_REFERENCES, REQUEST_SUCCESS,
@@ -97,24 +97,25 @@ export function requestMyLibrariesSuccess(result) {
   };
 }
 
-export function requestGetLibraryList(request) {
+export function requestLibraryOptionList(request) {
   return {
-    type: REQUEST_GET_LIBRARIES_LIST,
+    type: REQUEST_GET_LIBRARY_OPTIONLIST,
     request
   };
 }
 
-export function requestGetLibraryListSuccess(result) {
+export function requestLibraryOptionListSuccess(result) {
   return {
-    type: REQUEST_GET_LIBRARIES_LIST_SUCCESS,
+    type: REQUEST_GET_LIBRARY_OPTIONLIST_SUCCESS,
     result
   };
 }
 
 export function requestAccessToLibrary(request) {
+  
   return {
     type: REQUEST_ACCESS_TO_LIBRARIES,
-    request: {library_id: request.value}
+    request: {library_id: request}
   };
 }
 

@@ -1,9 +1,9 @@
 export const fields = {
-    librariesList: {
+    library_id: {
         type: "custom-select",
-        name: "librariesList",
-        options: "librariesList",
+        name: "library_id",
+        options: "library_id",
         required: true,
-        selectedOption: "librariesList"
+        // selectedOption: "libraryOptionList"
     }, 
 }

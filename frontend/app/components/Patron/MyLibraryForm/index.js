@@ -9,7 +9,7 @@ import {useIntl} from 'react-intl';
 
 
 const MyLibraryForm = (props) => {
-    const { library, loading, librariesList, searches} = props
+    const { library, loading, libraryOptionList, searches} = props
     const intl = useIntl();
     /*
     TODO: DA FARE DOPO...
@@ -56,10 +56,10 @@ const MyLibraryForm = (props) => {
                             /> */}
                         </ul>
                     }
-                    {librariesList &&
+                    {libraryOptionList &&
                         <CustomForm
                             submitCallBack={ (formData) =>  props.requestAccessToLibrary(formData) }
-                            librariesList={librariesList}
+                            library_id={libraryOptionList}
                             fields={props.fields}
                             messages={props.messages}
                             searchOptionList={searches}

@@ -5,7 +5,7 @@
  */
 import produce from 'immer';
 import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
-  REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS,
+  REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_GET_LIBRARY_OPTIONLIST_SUCCESS,
   REQUEST_ACCESS_TO_LIBRARIES,
   REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS,
   REQUEST_POST_REFERENCES, REQUEST_SUCCESS,
@@ -21,7 +21,7 @@ export const initialState = {
   },
   library: {},
   error: null,
-  librariesList: [],
+  libraryOptionList: [],
   referencesList: {
     data: [],
     pagination: [],
@@ -70,7 +70,7 @@ const PatronReducer = (state = initialState, action) =>
         draft.loading = true;
         draft.error = action.error;
         break;
-      case REQUEST_GET_LIBRARIES_LIST:
+      case REQUEST_GET_LIBRARY_OPTIONLIST:
         draft.loading = true;
         draft.error = action.error;
         break;
@@ -80,10 +80,10 @@ const PatronReducer = (state = initialState, action) =>
         draft.my_libraries.data =  action.result.data.map(lib => {return { id: lib.library.data.id, name: lib.library.data.name, status: lib.status, created_at: lib.library.data.created_at  } } );
         draft.my_libraries.pagination =  action.result.meta.pagination
         break;
-      case REQUEST_GET_LIBRARIES_LIST_SUCCESS:
+      case REQUEST_GET_LIBRARY_OPTIONLIST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.librariesList = action.result.map(item => { return {value: item.id, label: item.name} } );
+        draft.libraryOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break;
       case REQUEST_ACCESS_TO_LIBRARIES:
         draft.loading = true;
@@ -92,7 +92,7 @@ const PatronReducer = (state = initialState, action) =>
       /* case REQUEST_ACCESS_TO_LIBRARIES_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        // draft.librariesList = action.result.map(item => { return {value: item.id, label: item.name} } );
+        // draft.libraryOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break; */
       case REQUEST_SUCCESS:
         draft.loading = false;

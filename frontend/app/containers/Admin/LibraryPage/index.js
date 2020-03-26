@@ -23,7 +23,7 @@ function LibraryPage(props) {
     const {params} = match
     const isNew = !params.id || params.id === 'new'
     const library = admin.library
-    // const librariesList = patron.librariesList
+    // const libraryOptionList = patron.libraryOptionList
     
     useEffect(() => {
       if(!isLoading && !isNew) {

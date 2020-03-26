@@ -8,16 +8,16 @@ const Switch = (props) => {
     const intl = useIntl()
     
     const onChange = (e) => {
-        const value = e.target.checked ? e.target.value : e.target.checked
+        const value = e.target.checked && e.target.value !== '' ? e.target.value : e.target.checked
         handleChange(value)
     }
-
+    
     return (
 
         <AppSwitch className="mx-1" color="success"
             checked={data ? Boolean(data) : false}
             name={field.name}
-            value={data  ? data : field.value ? field.value : true}
+            value={field.value ? field.value : ''}
             onChange={(e) => onChange(e)}
             required={field.required ? field.required : false}
         />

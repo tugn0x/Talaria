@@ -144,7 +144,7 @@ export const getMyLibraries = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/my?page=${page}&q=${query}`, options)
 };
 
-export const getLibraryList = (options) => {
+export const getLibraryOptionList = (options) => {
   options = getOption(options);
   const query = options.query ? options.query : "";
   return request(`${BASE_URL}/api/v1/libraries/option-items?label=name&q=${query}`, options)
@@ -157,7 +157,7 @@ export const getMyLibrary = (options) => {
 };
 
 export const requestAccessToLibrary = (options) => {
-  const library_id = options.body.library_id
+  const library_id = options.library_id
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users`, options)
 };

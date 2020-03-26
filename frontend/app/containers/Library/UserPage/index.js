@@ -27,7 +27,7 @@ function UserPage(props) {
   const isLoading = library.loading
   const isNew = !params.id || params.id === 'new'
   const user = library.user
-  /* const librariesList = patron.librariesList */
+  /* const libraryOptionList = patron.libraryOptionList */
   
   useEffect(() => {
     if(!isLoading && !isNew && Object.keys(user).length === 0) {
@@ -41,7 +41,7 @@ function UserPage(props) {
      {user && Object.keys(user).length && !isLoading &&
         <CustomForm 
           submitCallBack={(formData) => dispatch(requestUpdateUser({
-              status: Number(formData.status), 
+              status: formData.status, 
               library_id: params.library_id, 
               id: params.id,
               message: `${intl.formatMessage(messages.statusUpdateMessage)}` })) } 

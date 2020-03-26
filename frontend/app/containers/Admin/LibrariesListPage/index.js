@@ -14,7 +14,7 @@ const LibrariesListPage = (props) => {
     console.log('LibrariesListPage', props)
     const {dispatch, isLoading, admin,  match, history} = props
     const intl = useIntl();
-    const librariesList = admin.librariesList
+    const libraryOptionList = admin.libraryOptionList
     
     useEffect(() => {
         if(!isLoading) {
@@ -27,10 +27,10 @@ const LibrariesListPage = (props) => {
     return (
         <>
             <SimpleList 
-                data={librariesList.data}
+                data={libraryOptionList.data}
                 columns={columns}
                 loading={isLoading}
-                pagination={librariesList.pagination}
+                pagination={libraryOptionList.pagination}
                 history={history}
                 messages={messages}
                 match={match}
