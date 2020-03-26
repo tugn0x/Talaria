@@ -731,6 +731,24 @@ class Dispatcher extends BaseController
         return $model;
     }
 
+    public function syncGrantedPermissions($model, $request)
+    {
+//        if($this->haveToAuthorize)
+//            $this->authorize($model);
+
+        if($request->has('granted_permissions'))
+        {
+            $granted_permissions = (is_array($request->input('granted_permissions'))) ? $request->input('granted_permissions') : [$request->input('granted_permissions')];
+            if( $model->setPermissionOnObject($granted_permissions) )
+            {
+                $model->addInternalMessage(trans('apiclu::response.update_relation_failed', ['name' => 'Granted_permissions']), 'error');
+            }
+        }
+
+        event($model->getTable() . '.granted_permissions', [ $model ]);
+        return $model;
+    }
+
     public function disableAuthorize()
     {
         $this->haveToAuthorize = false;
