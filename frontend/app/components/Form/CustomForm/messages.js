@@ -13,4 +13,7 @@ export default defineMessages({
     id: `${scope}.select`,
     defaultMessage: 'Select',
   },
+  invalid_field: {
+    id: `app.global.invalid_field`,
+  }
 });

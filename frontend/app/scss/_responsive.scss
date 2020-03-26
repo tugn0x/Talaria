@@ -48,7 +48,7 @@
 
 @include media-breakpoint-down(xs) {
     .table {
-        .tbody {overflow-x: auto;}
+        overflow-x: auto;
         .row {
             flex-wrap: nowrap;
             height: auto;

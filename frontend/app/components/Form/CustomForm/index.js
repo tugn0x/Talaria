@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Card, CardBody, CustomInput, Form, Button, Row } from 'reactstrap'
+import { Card, CardBody, Form, Button, Row } from 'reactstrap'
 import PropTypes from 'prop-types';
 import {useIntl} from 'react-intl'
 import formMessages from './messages'
@@ -10,7 +10,6 @@ import GrantedPermissions from '../GrantedPermissions'
 import InputField from '../InputField'
 import Switch from '../Switch'
 import OptionList from '../OptionList'
-import Select from '../Select'
 import CheckBox from '../CheckBox'
 import './style.scss'
 // PROPS
@@ -46,15 +45,25 @@ const CustomForm = (props) => {
     } 
 
     
-
+    
     const onSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
         form.classList.add('was-validated');
         if (form.checkValidity() === false) {
             console.log("Dont Send Form")
+            // Ci sono ERRORI nella VALIDAZIONE!
+            // Scroll sul campo che non e' stato fillato
+            const errorTarget = document.querySelectorAll('.was-validated .form-control:invalid')[0]
+            const errorTargetTop = errorTarget.offsetParent.offsetTop + 95;
+            window.scrollTo({
+                top: errorTargetTop,
+                behavior: "smooth"
+            }); 
+            
             return
         } else {
+            // Tutto ok invia Form!
             submitCallBack(formData)
             console.log("Send Form", formData)
         }
@@ -132,7 +141,7 @@ const CustomForm = (props) => {
                                                                         resources={props.resources && props.resources}
                                                                     /> 
                                                                 ||
-                                                                    <>  
+                                                                    <>  {/*  TEXT, TEXTAREA, NUMBER  */}
                                                                         <InputField 
                                                                             field={field}
                                                                             label={messages[field.name] ? messages[field.name] : ""}
@@ -141,9 +150,7 @@ const CustomForm = (props) => {
                                                                         />  
                                                                     </>
                                                                 }
-                                                            {field.error &&
-                                                                <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: field.error })} />
-                                                            }
+                                                                <ErrorBox className="invalid-feedback" error={ field.error ?  intl.formatMessage({ id: field.error }) : intl.formatMessage(formMessages.invalid_field)} />
                                                         </fieldset>
                                                     )
                                                 })}

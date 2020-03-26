@@ -80,7 +80,7 @@ function HeaderBar(props) {
                       {
                         auth.permissions.resources && "libraries" in auth.permissions.resources && (<>
                           <DropdownItem header tag="div" className="text-center"><strong><FormattedMessage {...messages.Libraries} /></strong></DropdownItem>
-                            {auth.permissions.resources.libraries.map((item) => <DropdownItem><i className="fa fa-book"></i> {item.resource.name}</DropdownItem>)}
+                            {auth.permissions.resources.libraries.map((item) => <DropdownItem key={item.resource.id}><i className="fa fa-book"></i> {item.resource.name}</DropdownItem>)}
                           <DropdownItem divider />
                         </>)
                       }
