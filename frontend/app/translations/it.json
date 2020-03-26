@@ -1,6 +1,7 @@
 {
   "app.global.name": "Nome",
   "app.global.email": "Email",
+  "app.global.id": "ID",
   "app.global.surname": "Cognome",
   "app.global.password_repeat": "Ripeti la Password",
   "app.global.password_match": "Le password devono corrispondere",
@@ -10,6 +11,7 @@
   "app.global.invalid_privacy_policy_accepted": "Accetta la privacy policy",
   "app.global.invalid_field": "Il campo non puo' essere vuoto",
   "app.global.update": "Aggiorna",
+  "app.global.search": "Cerca",
   "app.global.address": "Indirizzo",
   "app.global.district": "Provincia",
   "app.global.mobile": "Cellulare",
@@ -19,9 +21,14 @@
   "app.global.fax": "Fax",
   "app.global.postcode": "Codice Postale",
   "app.global.town": "Citta'",
+  "app.global.status": "Stato",
   "app.global.privacy_policy_accepted": "Privacy policy",
   "app.global.userCreateSuccess": "Utente creato",
   "app.global.userUpdateSuccess": "Utente aggiornato",
+  "app.global.title_description": "Titolo / Descrizione",
+  "app.global.created_at": "Aggiunto il",
+  "app.global.author": "Autore",
+  "app.global.pubyear": "Anno di pubblicazione",
   "app.containers.HomePage.header": "ITALIANO HOMEPAGE CONTAINER",
   "app.containers.UserPage.header": "ITALIANO UserPage CONTAINER",
   "app.containers.ChangePassword.updateMessage": "Password modificata",
@@ -37,9 +44,13 @@
 
   "app.containers.MyLibrariesPage.title": "Aggiungi una biblioteca",
   "app.containers.MyLibrariesPage.librariesList": "Seleziona una biblioteca",
-  "app.containers.MyLibrariesList.header": "Le mie biblioteche",
-  "app.containers.MyLibrariesList.createNewLibrary": "Richiedi nuova biblioteca",
-  "app.containers.MyLibrariesList.editLibrary": "Modifica biblioteca",
+  "app.containers.MyLibrariesListPage.header": "Le mie biblioteche",
+  "app.containers.MyLibrariesList.createNew": "Richiedi nuova biblioteca",
+  "app.containers.MyLibrariesList.edit": "Modifica biblioteca",
+
+  "app.containers.LibrariesListPage.header": "Biblioteche",
+  "app.containers.LibrariesListPage.createNew": "Richiedi nuova biblioteca",
+  "app.containers.LibrariesListPage.edit": "Modifica biblioteca",
 
   "app.containers.LibraryUserPage.header": "Modifica stato utente",
 
@@ -153,6 +164,8 @@
   "app.components.LoginForm.forgot": "Ho dimenticato i dati di accesso",
   "app.components.LoginForm.signUpButton": "Registrati",
   "app.components.LoginForm.garrButton": "Accedi con Idem",
+
+  "app.components.Button.goBackText": "Torna indietro",
 
   "app.components.ForgotPasswordForm.header": "Password Dimenticata",
   "app.components.Footer.header": "Questo l header del Footer",

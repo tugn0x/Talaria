@@ -160,7 +160,7 @@ trait AuthControllerTrait
 	{
 		$user = Auth::user();
 		event('auth.me', $request);
-		return $this->response->item($user, new UserTransformer());
+		return $this->response->item($user, new UserTransformer())->morph();
 	}
 
 	/**

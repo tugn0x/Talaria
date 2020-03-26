@@ -12,7 +12,8 @@ import { compose } from 'redux';
 import {useIntl} from 'react-intl';
 // import {fields} from './fields';
 import messages from './messages';
-import {requestGetLibrary, requestUpdateLibrary, requestPostLibrary} from '../actions'
+import {requestGetLibrary, requestUpdateLibrary, 
+        requestPostLibrary, requestGetRoles, requestUsersOptionList} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
 import {LibraryForm, Loader} from 'components';
 
@@ -28,6 +29,10 @@ function LibraryPage(props) {
       if(!isLoading && !isNew) {
          dispatch(requestGetLibrary(params.id))
       }
+      if(!isLoading){
+        dispatch(requestGetRoles())
+        dispatch(requestUsersOptionList())
+      }
      }, [])
   
      
@@ -37,6 +42,9 @@ function LibraryPage(props) {
             <LibraryForm 
               library={library}
               loading={isLoading}
+              usersOptionList={admin.usersOptionList}
+              searches={{ usersOptionList: (input) => dispatch(requestUsersOptionList(input)) }}
+              resources={admin.resources.libraries}
               updateLibrary={(formData) => dispatch(requestUpdateLibrary({...formData, id: params.id}, intl.formatMessage(messages.updateMessage)))}
             /> 
         }
@@ -44,6 +52,9 @@ function LibraryPage(props) {
             <LibraryForm 
               createLibrary={ (formData) => dispatch(requestPostLibrary(formData, intl.formatMessage(messages.createMessage))) } 
               loading={isLoading}
+              usersOptionList={admin.usersOptionList}
+              searches={{ usersOptionList: (input) => dispatch(requestUsersOptionList(input)) }}
+              resources={admin.resources.libraries}
               titleNewLibrary={intl.formatMessage(messages.titleNewLibrary)}
             /> 
         }  

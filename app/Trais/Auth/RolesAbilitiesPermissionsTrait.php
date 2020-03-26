@@ -14,7 +14,7 @@ trait RolesAbilitiesPermissionsTrait
     use HasRolesAndAbilities;
 
     public function isSuperAdmin() {
-        return $this->hasRole('super-admin');
+        return $this->isAn('super-admin');
     }
     public function permissions() {
         return $this->abilities()->wherePivot('forbidden', false);
@@ -44,7 +44,6 @@ trait RolesAbilitiesPermissionsTrait
         } else {
             return $query->whereIs(...$roles);
         }
-        return $query->where('votes', '>', 100);
     }
 
     /**
@@ -74,13 +73,7 @@ trait RolesAbilitiesPermissionsTrait
      */
     public function attachRole($role)
     {
-        if(is_object($role)) {
-            $role = $role->getKey();
-        }
-        if(is_array($role)) {
-            $role = $role['id'];
-        }
-        $this->assign($role);
+        $this->attachRoles($role);
     }
 
     /**
@@ -90,13 +83,7 @@ trait RolesAbilitiesPermissionsTrait
      */
     public function detachRole($role)
     {
-        if (is_object($role)) {
-            $role = $role->getKey();
-        }
-        if (is_array($role)) {
-            $role = $role['id'];
-        }
-        $this->retract($role);
+        $this->detachRoles($role);
     }
     /**
      * Attach multiple roles to a user
@@ -106,24 +93,118 @@ trait RolesAbilitiesPermissionsTrait
     public function attachRoles($roles)
     {
         $roles = $this->serializeAuthorizations($roles);
-        foreach ($roles as $role) {
-            $this->attachRole($role);
-        }
+        $this->assign($roles);
     }
     /**
      * Detach multiple roles from a user
      *
      * @param mixed $roles
      */
-    public function detachRoles($roles=null)
+    public function detachRoles($roles)
     {
         $roles = $this->serializeAuthorizations($roles);
         if (!$roles) $roles = $this->roles()->get();
-
-        foreach ($roles as $role) {
-            $this->detachRole($role);
-        }
+        $this->retract($roles);
     }
+    /**
+     * Detach multiple roles from a user
+     *
+     * @param mixed $roles
+     */
+    public function syncRoles($roles=null)
+    {
+        $roles = $this->serializeAuthorizations($roles);
+        $userRoles = $this->roles->pluck('name')->toArray();
+        $toAttach = array_diff($roles, $userRoles);
+        $toDetach = array_diff($userRoles, $roles);
+        if($toAttach)
+            $this->attachRoles($toAttach);
+        if($toDetach)
+            $this->detachRoles($toDetach);
+    }
+
+    /*
+     * Scope per filtrare gli utenti in base all'abilità.
+     * Cfr.: https://github.com/JosephSilber/bouncer/wiki/Querying-Data
+     */
+    public function scopeWhereCan($query, $ability)
+    {
+        $query->where(function ($query) use ($ability) {
+            // direct
+            $query->whereHas('abilities', function ($query) use ($ability) {
+                $query->byName($ability);
+            });
+            // through roles
+            $query->orWhereHas('roles', function ($query) use ($ability) {
+                $query->whereHas('abilities', function ($query) use ($ability) {
+                    $query->byName($ability);
+                });
+            });
+        });
+    }
+
+    public function scopeHasAbilitiesOn($query, $class, $id=null)
+    {
+        $query->whereHas('abilities', function ($query) use ($class, $id) {
+            $query->where([
+                'abilities.entity_id' => $id,
+                'abilities.entity_type' => $class,
+            ]);
+        });
+    }
+
+    public function object_abilities($class, $id=null)
+    {
+        return $this->abilities()->where([
+            'abilities.entity_id' => $id,
+            'abilities.entity_type' => $class,
+        ])
+        ->select('name')
+        ->get()
+        ->pluck('name')
+        ->toArray();
+    }
+
+    public function attachAbilities() {
+
+    }
+
+    public function detachAbilities() {
+
+    }
+
+    public function syncAbilities() {
+
+    }
+
+//    public function syncMacroAbilities($resources) {
+//        $abilities = [];
+//        foreach(config('nilde.morphmap') as $alias => $class) {
+//            $resources = $this->permissions()
+//                ->select('abilities.entity_id','abilities.entity_type','abilities.name')
+//                ->where('abilities.entity_type', $class)
+//                ->whereNotNull('abilities.entity_id')
+//                ->distinct()
+//                ->get();
+//        }
+//        foreach ($resources as $class => $items) {
+//            $class = config('nilde.morphmap.'.$class);
+//            $abilities[$class] = [];
+//            foreach ($items as $item) {
+//                foreach ($item['permissions'] as $permission) {
+//                    $abilities[] = [
+//                        'entity_id' => $item['permissions']['id'],
+//                        'entity_type' => $class,
+//                        'name' => $permission,
+//                    ];
+//                }
+//            }
+//        }
+////        $macro = config('permissions.macro');
+////        foreach ($macro as $key=>$class) {
+////
+////        }
+//    }
 
 //    /**
 //     * Check if user has a permission by its name.

@@ -10,9 +10,11 @@ use App\Models\Country;
 use App\Models\Requests\DocdelRequest;
 use App\Models\Users\User;
 use App\Models\Requests\PatronDocdelRequest;
+use App\Traits\Model\ModelPermissionsTrait;
 
 class Library extends BaseModel
 {
+    use ModelPermissionsTrait;
     protected static $observerClass = LibraryObserver::class;
 
 
@@ -123,7 +125,7 @@ class Library extends BaseModel
     public function tags()
     {
         return $this->hasMany(Tag::class);
-    }  
+    }
 
 
     public function borrowingrequests()

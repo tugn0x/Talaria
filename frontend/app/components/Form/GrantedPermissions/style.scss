@@ -1,0 +1,25 @@
+@import '../../../scss/variables';
+
+.users-permissions-list {
+    max-height: 500px;
+    overflow-y: auto;
+    .tbody {
+        padding: 0 1rem;
+        > .row {
+            background: $grey-lighter;
+            border-top: 1px solid $grey-light;
+            border-bottom: 1px solid $grey-light;
+        }
+    }
+    .row {
+        align-items: center;
+        &:not(:first-child){
+            margin-top: 2rem;
+        }
+        &:not(:last-child){
+            margin-bottom: 2rem;
+        }
+        
+    }
+    
+}

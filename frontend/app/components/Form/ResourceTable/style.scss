@@ -1,0 +1,15 @@
+.table {
+    ul {
+        padding: 0;
+        li {
+            margin-right: 10px;
+            display: inline-block;
+            /* &:not(:last-child) {
+                &:after {
+                    content: ",";
+                    postion
+                }
+            } */
+        }
+    }
+}

@@ -1,22 +1,22 @@
 export const columns = [
     { 
-        label: 'Name', 
+        label: 'app.global.name', 
         name: 'name',
         col: 3, 
     },
     { 
-        label: 'Id', 
+        label: 'app.global.id', 
         name: 'id',
         col: 1,
     },
     { 
-        label: 'Aggiunta il', 
+        label: 'app.global.created_at', 
         name: 'created_at',
         col: 3,
         type: "date"
     },
     { 
-        label: 'Email', 
+        label: 'app.global.email', 
         name: 'email',
         col: 3,
     }

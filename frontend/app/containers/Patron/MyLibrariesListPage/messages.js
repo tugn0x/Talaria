@@ -1,20 +1,23 @@
 /*
- * HomePage Messages
+ * MyLibrariesListPage Messages
  *
  * This contains all the text for the HomePage container.
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.MyLibrariesPage';
+export const scope = 'app.containers.MyLibrariesListPage';
 
 export default defineMessages({
-  title: {
-    id: `${scope}.title`,
-    defaultMessage: 'Add a new library',
+  header: {
+    id: `${scope}.header`,
+    defaultMessage: 'My Libraries list',
   },
-  librariesList: {
-    id: `${scope}.librariesList`,
-    defaultMessage: 'Select library',
+  createNew: {
+    id: `${scope}.createNew`,
+    defaultMessage: 'Request new library',
   },
-  
+  edit: {
+    id: `${scope}.edit`,
+    defaultMessage: 'Edit library',
+  },
 });

@@ -16,14 +16,15 @@ import { compose } from 'redux';
 import { syncPersistanceRequest, isSync } from "../../persistence";
 import {requestLogout} from "../Auth/AuthProvider/actions";
 import {HomePage, NotFoundPage, LoginPage, IdpPage, UserPage, PatronPage, AdminPage} from 'containers';
-import { HeaderBar, Footer } from 'components'
+// import {  Footer } from 'components'
 /* import GlobalStyle from 'global-styles'; */
 import {SignupPage, ForgotPassword} from "containers";
 import {makeSelectLocation} from './selectors'
 import LibraryPage from "../Library/LibraryPage";
 
+
 function App(props) {
-  // console.log("APP", props)
+  console.log("APP", props)
 
   useEffect(() => {
     props.dispatch(syncPersistanceRequest());
@@ -47,20 +48,19 @@ function App(props) {
         {!props.isLogged && <Route component={() => <LoginPage {...authProps} tokensExistsExpired={props.tokensExistsExpired} />} />}
 
         <Route path="/user" component={() => <UserPage {...authProps}/> }  />
-        <Route path="/patron" component={() => <PatronPage {...authProps}/> }  />
-        <Route path="/admin" component={() => <AdminPage {...authProps}/> }  />
-        <Route path="/library/:library_id" component={({match}) => <LibraryPage {...authProps} match={match}/> }  />
+        <Route path="/patron" component={() => <PatronPage {...authProps} headermenu={true}/> }  />
+        <Route path="/admin" component={() => <AdminPage {...authProps} headermenu={true}  /> }  />
+        <Route path="/library/:library_id" component={({match}) => <LibraryPage {...authProps} match={match} headermenu={true} /> }  />
 
-        <Route path="/consortium" component={() => <HomePage {...authProps}/> }  />
-        <Route path="/institution" component={() => <HomePage {...authProps}/> }  />
+        <Route path="/consortium" component={() => <HomePage {...authProps} headermenu={true}/> }  />
+        <Route path="/institution" component={() => <HomePage {...authProps} headermenu={true}/> } />
         <Route path="/alpe" component={() => <HomePage {...authProps}/> }  />
         <Route exact path="/" component={(routerProps) => <HomePage {...authProps}>
           <h1 style={{color: 'green'}}>ciao</h1>
         </HomePage> }/>
-        {/*<Route component={NotFoundPage} />*/}
+        <Route component={() => <NotFoundPage {...authProps} /> } path="*" />
       </Switch>
-      {/* <GlobalStyle /> */}
-      <Footer/>
+
     </>
   );
 }

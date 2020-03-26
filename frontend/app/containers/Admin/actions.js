@@ -8,11 +8,13 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_ERROR, STOP_LOADING, REQUEST_USERS_LIST, REQUEST_USERS_LIST_SUCCESS,
    REQUEST_UPDATE_USER, REQUEST_UPDATE_USER_SUCCESS,
    REQUEST_USER, REQUEST_USER_SUCCESS,
+   REQUEST_USERS_OPTIONLIST, REQUEST_USERS_OPTIONLIST_SUCCESS,
    REQUEST_GET_LIBRARY, REQUEST_GET_LIBRARY_SUCCESS,
    REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS,
    REQUEST_UPDATE_LIBRARY, /* REQUEST_UPDATE_LIBRARY_SUCCESS, */
    REQUEST_POST_LIBRARY, REQUEST_POST_LIBRARY_SUCCESS,
    REQUEST_POST_USER, REQUEST_POST_USER_SUCCESS,
+   REQUEST_GET_ROLES, REQUEST_GET_ROLES_SUCCESS,
    REQUEST_GET_PROJECT, REQUEST_GET_PROJECT_SUCCESS,
    REQUEST_GET_PROJECTS_LIST, REQUEST_GET_PROJECTS_LIST_SUCCESS,
    REQUEST_UPDATE_PROJECT, 
@@ -31,10 +33,11 @@ export function defaultAction() {
   };
 }
 
-export function requestUsersList(page) {
+export function requestUsersList(page, query) {
   return {
     type: REQUEST_USERS_LIST,
-    page
+    page,
+    query
   };
 }
 
@@ -83,6 +86,33 @@ export function requestUpdateUserSuccess(result) {
   };
 }
 
+export function requestGetRoles() {
+  return {
+    type: REQUEST_GET_ROLES,
+  };
+}
+
+export function requestGetRolesSuccess(result) {
+  return {
+    type: REQUEST_GET_ROLES_SUCCESS,
+    result
+  };
+}
+
+export function requestUsersOptionList(request) {
+  return {
+    type: REQUEST_USERS_OPTIONLIST,
+    request
+  };
+}
+
+export function requestUsersOptionListSuccess(result) {
+  return {
+    type: REQUEST_USERS_OPTIONLIST_SUCCESS,
+    result
+  };
+}
+
 export function requestGetLibrariesList(page = '1', query) {
   return {
     type: REQUEST_GET_LIBRARIES_LIST,
@@ -122,7 +152,7 @@ export function requestGetLibrarySuccess(result) {
 
 export function requestUpdateLibrary(request, message) {
   return {
-    type: REQUEST_UPDATE_PROJECT,
+    type: REQUEST_UPDATE_LIBRARY,
     request,
     message
   };
@@ -178,26 +208,6 @@ export function requestUpdateProject(request, message) {
     result
   };
 } */
-
-export function requestSuccess() {
-  return {
-    type: REQUEST_SUCCESS,
-  };
-}
-
-export function requestError(errorMessage) {
-  return {
-    type: REQUEST_ERROR,
-    error: errorMessage
-  };
-}
-
-export function stopLoading() {
-  return {
-    type: STOP_LOADING,
-    // request: request
-  };
-}
 
 export function requestGetInstitutionsList(page, query) {
   return {
@@ -292,5 +302,25 @@ export function requestGetInstitutionTypeListSuccess(result) {
   return {
     type: REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS,
     result
+  };
+}
+
+export function requestSuccess() {
+  return {
+    type: REQUEST_SUCCESS,
+  };
+}
+
+export function requestError(errorMessage) {
+  return {
+    type: REQUEST_ERROR,
+    error: errorMessage
+  };
+}
+
+export function stopLoading() {
+  return {
+    type: STOP_LOADING,
+    // request: request
   };
 }

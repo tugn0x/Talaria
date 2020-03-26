@@ -18,7 +18,7 @@ const ReferencesForm = (props) => {
                 {reference  && 
                     <CustomForm 
                         submitCallBack={(formData) => updateReference(formData)} 
-                        updateFormData={reference}
+                        requestData={reference}
                         fields={fields} 
                         title={`${intl.formatMessage(globalMessages.update)}`} 
                         messages={messages}

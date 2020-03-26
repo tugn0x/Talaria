@@ -6,6 +6,7 @@ html,body {
     font-weight: 400;
     font-size: 16px;
     color: $grey;
+    
 }
 
 p, label {
@@ -70,13 +71,19 @@ button {
     flex-direction: column;
 }
 
-
+.app {
+    min-height: inherit;
+}
 
 .app-body {
     flex: 1;
+    min-height: 100vh;
     .main {
         margin-bottom: 4rem;
         /* padding-top: 2rem; */
+        > .container {
+            margin-top: 4rem;
+        }
     }
 }
 
@@ -121,11 +128,6 @@ ul.list-inline {
     border-radius: 0;
 }
 
-/// TABLE LIST ///
-
-.table-title {
-    margin-top: 6rem;
-}
 
 .table {
     .row {
@@ -210,3 +212,24 @@ ul.list-inline {
     }
     margin: 0 auto;
 }
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    border-color: $brown;
+    background-color: $brown;
+}
+
+.option-list > [class*=control] {
+    background-color: transparent;
+    border-radius: 0;
+    border: 1px solid #e4e7ea;
+    color: #5c6873;
+    font-size: .875rem;
+}
+
+/* .switch-success .switch-input:checked+.switch-slider {
+    background-color: $orange;
+    border-color: $orange;
+    &:before {
+        border-color: $orange;
+    }
+} */

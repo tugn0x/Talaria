@@ -137,8 +137,11 @@ export const socialOauth = (provider, options) => {
 //--------- PATRON -------------//
 // MyLibrary //
 export const getMyLibraries = (options) => {
+  const page = options.page;
+  const query = options.query;
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/my`, options)
+  //return request(`${BASE_URL}/api/v1/libraries/my`, options)
+  return request(`${BASE_URL}/api/v1/libraries/my?page=${page}&q=${query}`, options)
 };
 
 export const getLibraryList = (options) => {
@@ -161,8 +164,10 @@ export const requestAccessToLibrary = (options) => {
 
 // Reference //
 export const getReferencesList = (options) => {
+  const page = options.page;
+  const query = options.query;
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/references/my`, options)
+  return request(`${BASE_URL}/api/v1/references/my?page=${page}&q=${query}`, options)
 };
 
 export const createReference = (options) => {
@@ -180,13 +185,13 @@ export const updateReference = (options) => {
   return request(`${BASE_URL}/api/v1/references/${options.id}`, options)
 };
 
-
 // ---------- LIBRARY ---------- //
 export const getLibraryUsersList = (options) => {
   const page = options.page;
+  const query = options.query;
   const library_id = options.library_id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users`, options)
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users?page=${page}&q=${query}`, options)
 };
 
 export const getLibraryUser = (options) => {
@@ -200,35 +205,48 @@ export const updateLibraryUser = (options) => {
   const id = options.body.id
   const library_id = options.body.library_id
   options = getOption(options);
-  
+
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${id}`, options)
 }
 
 
 
 //--------- ADMIN -------------//
-// Users //
+///////   Users   ////////
 export const getUsersList = (options) => {
   const page = options.page;
+  const query = options.query;
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/users/users?page=${page}`, options)
+  return request(`${BASE_URL}/api/v1/users/users?page=${page}&q=${query}`, options)
 };
 
 export const createUser = (options) => {
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/users/users`, options)
+  return request(`${BASE_URL}/api/v1/users/users?include=roles,resources`, options)
 };
 
 export const getUser = (options) => {
   const user_id = options.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/users/users/${user_id}`, options)
+  return request(`${BASE_URL}/api/v1/users/users/${user_id}?include=roles,resources`, options)
 };
 
 export const updateUser = (options) => {
   const user_id = options.body.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/users/users/${user_id}`, options)
+  return request(`${BASE_URL}/api/v1/users/users/${user_id}?include=roles,resources`, options)
+};
+
+export const getUsersOptionsList = (options) => {
+  options = getOption(options);
+  const query = options.query;
+  return request(`${BASE_URL}/api/v1/users/option-items?label=full_name&q=${query}`, options)
+};
+
+/// Roles and Resources ///
+export const getRoles = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/users/roles`, options)
 };
 
 // Libraries
@@ -240,7 +258,7 @@ export const createLibrary = (options) => {
 export const getLibrary = (options) => {
   const library_id = options.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/${library_id}`, options)
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}?include=granted_permissions`, options)
 };
 
 export const updateLibrary = (options) => {
@@ -276,11 +294,11 @@ export const updateInstitution = (options) => {
   const institution_id = options.body.id
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/institutions/${institution_id}`, options)
-}; 
+};
 
 export const getInstitutionTypesOptionList = (options) => {
   options = getOption(options);
-  const query = options.query ? options.query : "";
+  const query = options.query;
   return request(`${BASE_URL}/api/v1/institutions/option-items?label=name&q=${query}`, options)
 };
 

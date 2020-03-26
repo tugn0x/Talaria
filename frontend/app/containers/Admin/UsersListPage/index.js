@@ -3,10 +3,13 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {useIntl} from 'react-intl';
-import UsersListTable from 'components/Admin/UsersListTable'
+// import UsersListTable from 'components/Admin/UsersListTable'
 import {requestUsersList} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
-// import messages from 'utils/globalMessages';
+import messages from './messages';
+import {columns} from './columns'
+import {SimpleList} from 'components'
+import UserPage from '../UserPage'
 
 const UsersListPage = (props) => {
     console.log('UsersListPage', props)
@@ -29,13 +32,21 @@ const UsersListPage = (props) => {
 
 
     return (
-        <UsersListTable
-            usersList={admin.usersList.data}
+        <SimpleList 
+            data={admin.usersList.data}
+            columns={columns}
+            loading={isLoading}
             pagination={admin.usersList.pagination}
             history={history}
+            messages={messages}
             match={match}
-            loading={isLoading}
+            title={intl.formatMessage(messages.header)}
+            searchOptions={{
+                getSearchList: (query) => dispatch(requestUsersList(null, query)),
+                searchOnChange: true
+            }}
             editPath={'/admin/users/user/:id?'}
+            modalComponent={ <UserPage match={match} />}
         />
     )
 }

@@ -37,7 +37,16 @@ const libraryReducer = (state = initialState, action) =>
       case REQUEST_USERS_LIST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.usersList.data = action.result.data
+        draft.usersList.data = action.result.data.map(data => {
+          return {
+              ...data.created_at, 
+              library_name: data.library.data.name,
+              user_name: data.user.data.full_name,
+              id: data.id,
+              user_id: data.user.data.id,
+              status: data.status
+            }
+        })
         draft.usersList.pagination = action.result.meta.pagination
         break;
       case REQUEST_UPDATE_USER:

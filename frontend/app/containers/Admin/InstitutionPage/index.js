@@ -23,8 +23,8 @@ function InstitutionPage(props) {
     const {params} = match
     const isNew = !params.id || params.id === 'new'
     const institution = admin.institution
-    const institutionsListSelect = admin.institutionsListSelect
-    const countriesListSelect = admin.countriesListSelect
+    const institutionsOptionList = admin.institutionsOptionList
+    const countriesOptionList = admin.countriesOptionList
     useEffect(() => {
       if(!isLoading){
         dispatch(requestGetInstitutionTypeOptionList())
@@ -43,8 +43,8 @@ function InstitutionPage(props) {
               updateInstitution={ (formData) => dispatch(requestUpdateInstitution({...formData, id: params.id}, intl.formatMessage(messages.updateSuccess))) } 
               loading={isLoading}
               institution={institution}
-              institutionsListSelect={institutionsListSelect}
-              countriesListSelect={countriesListSelect}
+              institutionsOptionList={institutionsOptionList}
+              countriesOptionList={countriesOptionList}
               searches={{
                 country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
                 institution_type_id: (input) => dispatch(requestGetInstitutionTypeOptionList(input)),
@@ -55,8 +55,8 @@ function InstitutionPage(props) {
             <InstitutionForm
               createInstitution={ (formData) => dispatch(requestPostInstitution(formData, intl.formatMessage(messages.createSuccess))) }
               loading={isLoading}
-              institutionsListSelect={institutionsListSelect}
-              countriesListSelect={countriesListSelect}
+              institutionsOptionList={institutionsOptionList}
+              countriesOptionList={countriesOptionList}
               searches={{
                 country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
                 institution_type_id: (input) => dispatch(requestGetInstitutionTypeOptionList(input)),

@@ -5,14 +5,16 @@ namespace App\Models\Institutions;
 use App\Models\BaseModel;
 use App\Models\Libraries\Library;
 use App\Models\Country;
+use App\Traits\Model\ModelPermissionsTrait;
 
 class Institution extends BaseModel
 {
+    use ModelPermissionsTrait;
     protected $fillable = [
         'name',
         'institution_type_id',
         'country_id',
-        
+
         /*info amministrative */
         'vatnumber',
         'fiscalcode',

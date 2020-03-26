@@ -22,7 +22,7 @@ function LibraryPage(props) {
    */
   console.log('LibraryPage', props)
   const {isLoading, match, dispatch} = props;
-  
+
   useEffect(() => {
     if(!isLoading){
       dispatch(requestGetLibrary(match.params.library_id))
@@ -31,7 +31,7 @@ function LibraryPage(props) {
 
   return (
     <>
-      <BasePage {...props} routes={libraryRoutes} messages={messages} headermenu={true}/>
+      <BasePage {...props} routes={libraryRoutes} messages={messages} />
     </>
   );
 }

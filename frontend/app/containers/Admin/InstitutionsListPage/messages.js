@@ -1,23 +1,23 @@
 /*
- * InstitutionsList Messages
+ * LibrariesListPage Messages
  *
  * This contains all the text for the HomePage container.
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.components.InstitutionsList';
+export const scope = 'app.containers.InstitutionsListPage';
 
 export default defineMessages({
   header: {
     id: `${scope}.header`,
     defaultMessage: 'Institutions list',
   },
-  createNewInstitution: {
-    id: `${scope}.createNewInstitution`,
+  createNew: {
+    id: `${scope}.createNew`,
     defaultMessage: 'Register new institution',
   },
-  editInstitution: {
-    id: `${scope}.editInstitution`,
+  edit: {
+    id: `${scope}.edit`,
     defaultMessage: 'Edit institution',
   },
 });

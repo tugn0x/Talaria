@@ -1,12 +1,11 @@
 /*
- * User Page
+ * Library User Page
  *
  * 
  *
  */
 
 import React, {useEffect} from 'react';
-import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {useIntl} from 'react-intl';
@@ -40,19 +39,17 @@ function UserPage(props) {
   return (
     <>
      {user && Object.keys(user).length && !isLoading &&
-        <>
-          <CustomForm 
-            submitCallBack={(formData) => dispatch(requestUpdateUser({
-                status: Number(formData.status), 
-                library_id: params.library_id, 
-                id: params.id,
-                message: `${intl.formatMessage(messages.statusUpdateMessage)}` })) } 
-            updateFormData={{status: user.status, name: user.user.data.full_name}}
-            fields={fields}
-            title={intl.formatMessage(messages.header)}
-            messages={messages}
-          />
-        </>
+        <CustomForm 
+          submitCallBack={(formData) => dispatch(requestUpdateUser({
+              status: Number(formData.status), 
+              library_id: params.library_id, 
+              id: params.id,
+              message: `${intl.formatMessage(messages.statusUpdateMessage)}` })) } 
+          requestData={{status: user.status, name: user.user.data.full_name}}
+          fields={fields}
+          title={intl.formatMessage(messages.header)}
+          messages={messages}
+        />
       }
       {/* !isNew && 
         <MyLibraryForm 
@@ -64,11 +61,6 @@ function UserPage(props) {
   );
 }
 
-const mapStateToProps = createStructuredSelector({
-  /*isLibraryLoading: isLibraryLoading(),
-   patron: makeSelectPatron() */
-});
-
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
@@ -76,7 +68,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const withConnect = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 );
 

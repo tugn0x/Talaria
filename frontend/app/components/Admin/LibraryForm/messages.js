@@ -148,6 +148,10 @@ export default defineMessages({
     id: `${scope}.administrative_info`,
     defaultMessage: 'Administrative Info',
   },
+  granted_permissions: {
+    id: `${scope}.granted_permissions`,
+    defaultMessage: 'Users permissions',
+  },
   updateSubmitText: {
     id: `${scope}.updateSubmitText`,
     defaultMessage: 'Update Reference',

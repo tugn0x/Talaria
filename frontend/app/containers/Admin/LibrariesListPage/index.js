@@ -22,10 +22,6 @@ const LibrariesListPage = (props) => {
         }
     }, [])
 
-    useEffect(() => {
-        console.log('update LibrariesListPage')
-    })
-
     
 
     return (
@@ -36,11 +32,15 @@ const LibrariesListPage = (props) => {
                 loading={isLoading}
                 pagination={librariesList.pagination}
                 history={history}
+                messages={messages}
                 match={match}
                 title={intl.formatMessage(messages.header)}
-                getSearchList={(query) => dispatch(requestGetLibrariesList(null, query))}
+                searchOptions={{
+                    getSearchList: (query) => dispatch(requestGetLibrariesList(null, query)),
+                    searchOnChange: true
+                }}
                 editPath={'/admin/libraries/library/:id?'}
-                formNewComponent={ <LibraryPage match={match} />}
+                modalComponent={ <LibraryPage match={match} />}
             />
         </>
     )

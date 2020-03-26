@@ -1,6 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_POST_USER, REQUEST_USER, REQUEST_GET_LIBRARY,
+          REQUEST_USERS_OPTIONLIST,
+          REQUEST_GET_ROLES,
           REQUEST_GET_LIBRARIES_LIST,
           REQUEST_UPDATE_LIBRARY,
           REQUEST_POST_LIBRARY,
@@ -22,6 +24,7 @@ import {
   requestSuccess,
   requestUsersListSuccess,
   requestUserSuccess,
+  requestUsersOptionListSuccess,
   requestGetLibrarySuccess,
   requestGetLibrariesListSuccess,
   requestGetInstitutionTypeListSuccess,
@@ -30,12 +33,13 @@ import {
   requestGetInstitutionsListSuccess,
   requestGetInstitutionTypeOptionListSuccess,
   requestGetCountriesOptionListSuccess,
-  requestGetInstitutionSuccess
+  requestGetInstitutionSuccess,
+  requestGetRolesSuccess
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
-import {getUsersList, updateUser, createUser,
-        getUser, getLibrary, getLibrariesList, updateLibrary,
+import {getUsersList, updateUser, createUser, getUsersOptionsList,
+        getRoles, getUser, getLibrary, getLibrariesList, updateLibrary,
         createLibrary, getInstituionTypeList, getInstitutionsList,
         getInstitution, updateInstitution, getInstitutionTypesOptionList,
         createInstitution, getCountriesOptionsList,
@@ -60,7 +64,8 @@ export function* requestUserSaga(action) {
 export function* requestUsersListSaga(action = {}) {
   const options = {
     method: 'get',
-    page: action.page ? action.page : '1'
+    page: action.page ? action.page : '1',
+    query: action.query ? action.query : ''
   };
   try {
     const request = yield call(getUsersList, options);
@@ -100,8 +105,33 @@ export function* requestPostUserSaga(action) {
   }
 }
 
+export function* requestUsersOptionListSaga(action) {
+  const options = {
+    method: 'get',
+    query: action.request ? action.request : ""
+  }
+  try {
+    const request = yield call(getUsersOptionsList, options);
+    yield put(requestUsersOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestGetRolesSaga() {
+  const options = {
+    method: 'get'
+  };
+  try {
+   const request = yield call(getRoles, options);
+   yield put(requestGetRolesSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
 
 export function* requestPostLibrarySaga(action) {
+  console.log(action)
   const options = {
     method: 'post',
     body: {...action.request }
@@ -201,7 +231,7 @@ export function* requestGetInstitutionSaga(action) {
 export function* requestInstitutionTypeOptionListSaga(action) {
   const options = {
     method: 'get',
-    query: action.request
+    query: action.request ? action.request : ""
   }
   try {
     const request = yield call(getInstitutionTypesOptionList, options);
@@ -319,6 +349,8 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_UPDATE_USER, requestUpdateUserSaga);
   yield takeLatest(REQUEST_POST_USER, requestPostUserSaga);
   yield takeLatest(REQUEST_USER, requestUserSaga);
+  yield takeLatest(REQUEST_USERS_OPTIONLIST, requestUsersOptionListSaga);
+  yield takeLatest(REQUEST_GET_ROLES, requestGetRolesSaga);
   yield takeLatest(REQUEST_GET_LIBRARY, requestGetLibrarySaga);
   yield takeLatest(REQUEST_GET_LIBRARIES_LIST, requestGetLibrariesListSaga);
   yield takeLatest(REQUEST_UPDATE_LIBRARY, requestUpdateLibrarySaga);

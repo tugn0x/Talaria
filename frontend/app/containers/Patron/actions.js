@@ -51,9 +51,11 @@ export function requestPostReferences(request, message) {
   };
 }
 
-export function requestReferencesList() {
+export function requestReferencesList(page, query) {
   return {
     type: REQUEST_REFERENCES_LIST,
+    page,
+    query
     
   };
 }
@@ -80,9 +82,11 @@ export function requestGetMyLibrarySuccess(result) {
   };
 }
 
-export function requestMyLibraries() {
+export function requestMyLibraries(page, query) {
   return {
     type: REQUEST_MY_LIBRARIES,
+    page,
+    query
   };
 }
 
@@ -108,7 +112,6 @@ export function requestGetLibraryListSuccess(result) {
 }
 
 export function requestAccessToLibrary(request) {
-  console.log(request)
   return {
     type: REQUEST_ACCESS_TO_LIBRARIES,
     request: {library_id: request.value}

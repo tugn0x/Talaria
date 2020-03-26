@@ -7,13 +7,21 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-
+import {ButtonBack, BasePage} from 'components'
 import messages from './messages';
+import {Container} from 'reactstrap'
 
-export default function NotFound() {
+export default function NotFound(props) {
+  console.log("NotFound", props)
+  
   return (
-    <h1>
-      <FormattedMessage {...messages.header} />
-    </h1>
+    <BasePage {...props}>
+      <Container>
+        <h1>
+          <FormattedMessage {...messages.header} />
+        </h1>
+        <ButtonBack />
+      </Container>
+    </BasePage> 
   );
 }

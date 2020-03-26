@@ -5,7 +5,7 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.components.LibrariesListPage';
+export const scope = 'app.containers.LibrariesListPage';
 
 export default defineMessages({
   header: {
@@ -14,10 +14,10 @@ export default defineMessages({
   },
   createNew: {
     id: `${scope}.createNew`,
-    defaultMessage: 'Create new',
+    defaultMessage: 'Register new library',
   },
   edit: {
     id: `${scope}.edit`,
-    defaultMessage: 'Edit',
+    defaultMessage: 'Edit library',
   },
 });

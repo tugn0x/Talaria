@@ -27,14 +27,17 @@ const InstitutionTypeListPage = (props) => {
         <SimpleList
             data={institutionTypes.data}
             pagination={institutionTypes.pagination}
-            /* columns={['id', 'name']} */
             columns={columns}
             loading={isLoading}
             history={history}
             match={match}
+            messages={messages}
             title={intl.formatMessage(messages.header)}
             editPath={'/admin/institutions/institution-types/type/:id?'}
-            formNewComponent={
+            searchOptions={{
+                getSearchList: (query) => dispatch(requestGetLibrariesList(null, query)),
+            }}
+            modalComponent={
               <LibraryForm
                 createItem={formData => dispatch(requestPostLibrary(formData, 'Institution type registered'))}
                 loading={isLoading}

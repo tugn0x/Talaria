@@ -1,11 +1,14 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {useIntl} from 'react-intl';
-import {InstitutionsList} from 'components'
-import {requestGetInstitutionsList, requestPostInstitution} from '../actions'
+import {requestGetInstitutionsList} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
+import messages from './messages'
+import {columns} from './columns'
+import {SimpleList} from 'components'
+import InstitutionPage from '../InstitutionPage'
 
 const InstitutionsListPage = (props) => {
     console.log('InstitutionsListPage', props)
@@ -21,17 +24,24 @@ const InstitutionsListPage = (props) => {
     }, [])
 
     return (
-        <>
-            {institutionsList.length > 0 &&
-                <InstitutionsList 
-                    institutionsList={institutionsList}
-                    pagination={pagination}
-                    match={match}
-                    editPath={'/admin/institutions/institution/:id?'}
-                    getSearchList={(query) => dispatch(requestGetInstitutionsList(null, query))}
-                /> 
-            }
-        </>
+        
+            <SimpleList 
+                data={institutionsList}
+                columns={columns}
+                loading={isLoading}
+                pagination={pagination}
+                history={history}
+                messages={messages}
+                match={match}
+                title={intl.formatMessage(messages.header)}
+                searchOptions={{
+                    getSearchList: (query) => dispatch(requestGetInstitutionsList(null, query)),
+                    searchOnChange: true
+                }}
+                editPath={'/admin/institutions/institution/:id?'}
+                modalComponent={ <InstitutionPage match={match} />}
+            />
+            
     )
 }
 

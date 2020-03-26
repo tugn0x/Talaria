@@ -7,11 +7,13 @@ import produce from 'immer';
 import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_ERROR, STOP_LOADING, REQUEST_USERS_LIST, REQUEST_USERS_LIST_SUCCESS,
   REQUEST_UPDATE_USER, REQUEST_UPDATE_USER_SUCCESS,
+  REQUEST_USERS_OPTIONLIST, REQUEST_USERS_OPTIONLIST_SUCCESS,
   REQUEST_USER, REQUEST_USER_SUCCESS,
   REQUEST_GET_LIBRARY, REQUEST_GET_LIBRARY_SUCCESS,
   REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS,
   REQUEST_UPDATE_LIBRARY, REQUEST_POST_LIBRARY,
   REQUEST_POST_USER,
+  REQUEST_GET_ROLES, REQUEST_GET_ROLES_SUCCESS,
   REQUEST_GET_PROJECT, REQUEST_GET_PROJECT_SUCCESS,
   REQUEST_GET_PROJECTS_LIST, REQUEST_GET_PROJECTS_LIST_SUCCESS,
   REQUEST_UPDATE_PROJECT, REQUEST_POST_PROJECT,
@@ -31,9 +33,9 @@ export const initialState = {
     pagination: {},
     data: [],
   },
+  usersOptionList: [],
   user: [],
   error: null,
-  pagination: [],
   librariesList: {
     pagination: {},
     data: [],
@@ -53,8 +55,10 @@ export const initialState = {
     data: [],
   },
   institution: [],
-  institutionsListSelect: [],
-  countriesListSelect: []
+  institutionsOptionList: [],
+  countriesOptionList: [],
+  roles: [],
+  resources: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -88,7 +92,28 @@ const AdminReducer = (state = initialState, action) =>
       case REQUEST_USER_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.user = action.result
+        draft.user = {
+          ...action.result.data,
+          roles: action.result.data.roles.data,
+          resources: action.result.data.resources.data,
+        }
+        break;
+      case REQUEST_USERS_OPTIONLIST:
+        draft.error = action.error;
+        break;
+      case REQUEST_USERS_OPTIONLIST_SUCCESS:
+        draft.error = initialState.error;
+        draft.usersOptionList = action.result.map(item => { return {value: item.id, label: item.full_name} } );
+        break;
+      case REQUEST_GET_ROLES:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
+      case REQUEST_GET_ROLES_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.roles = action.result.data.roles;
+        draft.resources = action.result.data.resources;
         break;
       case REQUEST_POST_LIBRARY:
         draft.loading = true;
@@ -101,7 +126,8 @@ const AdminReducer = (state = initialState, action) =>
       case REQUEST_GET_LIBRARY_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.library = action.result
+        draft.library = action.result.data
+        draft.library.granted_permissions = action.result.data.granted_permissions.data
         break;
       case REQUEST_UPDATE_LIBRARY:
         draft.loading = true;
@@ -145,15 +171,14 @@ const AdminReducer = (state = initialState, action) =>
         break;
       case REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS:
         draft.error = initialState.error;
-        draft.institutionsListSelect = action.result.map(item => { return {value: item.id, label: item.name} } );
+        draft.institutionsOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break;
-
       case REQUEST_GET_COUNTRIES_OPTIONLIST:
         draft.error = action.error;
         break;
       case REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS:
         draft.error = initialState.error;
-        draft.countriesListSelect = action.result.map(item => { return {value: item.id, label: item.name} } );
+        draft.countriesOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break;
 
       case REQUEST_GET_INSTITUTION_TYPE_LIST:
