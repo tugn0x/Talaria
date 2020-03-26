@@ -28,7 +28,7 @@ export const fields = {
         width: "col-md-6",
         group: "general_info",
         options: "institution_type_id",
-        selectedOption: "institution_type_id"
+       // selectedOption: "institution_type_id"
         
     },
     country_id: {
@@ -38,7 +38,7 @@ export const fields = {
         width: "col-md-6",
         group: "general_info",
         options: "country_id",
-        selectedOption: "country_id"
+     //   selectedOption: "country_id"
     },
    
     /*info amministrative */

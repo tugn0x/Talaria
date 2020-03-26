@@ -287,7 +287,7 @@ export const getInstitutionsList = (options) => {
 export const getInstitution = (options) => {
   const institution_id = options.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/institutions/${institution_id}`, options)
+  return request(`${BASE_URL}/api/v1/institutions/${institution_id}/?include=granted_permissions`, options)
 };
 
 export const updateInstitution = (options) => {
