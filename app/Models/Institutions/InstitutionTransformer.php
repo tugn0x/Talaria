@@ -1,5 +1,6 @@
 <?php namespace App\Models\Institutions;
 
+use App\Models\BaseLightTransformer;
 use Carbon\Carbon;
 use App\Models\BaseTransformer;
 use Illuminate\Database\Eloquent\Model;
@@ -10,10 +11,22 @@ use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 class InstitutionTransformer extends BaseTransformer
 {
 
-//    protected $availableIncludes = [
-//        'titles'
-//    ];
+    protected $availableIncludes = [
+        'granted_permissions',
+    ];
 
+    protected $defaultIncludes = [
+        'granted_permissions',
+    ];
+
+    public function includeGrantedPermissions(Model $model)
+    {
+        $transf = new BaseLightTransformer();
+        $transf->setCallback(function ($model) {
+            return $model->user_with_permissions();
+        });
+        return $this->item($model, $transf);
+    }
 
 
     public function transform(Model $model)
