@@ -733,8 +733,8 @@ class Dispatcher extends BaseController
 
     public function syncGrantedPermissions($model, $request)
     {
-        if($this->haveToAuthorize)
-            $this->authorize($model);
+//        if($this->haveToAuthorize)
+//            $this->authorize($model);
 
         if($request->has('granted_permissions'))
         {
