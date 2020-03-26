@@ -148,6 +148,7 @@ const AdminReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = initialState.error;
         draft.institution = action.result.data
+        draft.institution.granted_permissions = action.result.data.granted_permissions.data
         break;
       case UPDATE_INSTITUTION:
         draft.loading = true;

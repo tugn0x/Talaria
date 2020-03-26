@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {Row, Col, CustomInput} from 'reactstrap'
 import Select from 'react-select';
+import ButtonClose from 'components/Button/ButtonClose'
 import './style.scss'
 import {uniq} from 'lodash'
 
@@ -35,6 +36,10 @@ const GrantedPermissions = (props) => {
         searchOptionList[name](inputValue)
     };
 
+    const removeUserFromList = (user_id) => {
+        sendData(usersData.filter(user => user.user_id !== user_id)) 
+    }
+
   /*   useEffect(() => {
       console.log(usersData)
     },[usersData]) */
@@ -58,7 +63,10 @@ const GrantedPermissions = (props) => {
             <div className="users-permissions-list">
                 <div className="tbody">
                 {usersData && usersData.length > 0 && usersData.map((user,index) => (  
-                <Row key={`${user.user_id}-${index}`}>
+                <Row key={`${user.user_id}-${index}`} className="position-relative">
+                        <ButtonClose 
+                            handleClick={() => removeUserFromList(user.user_id)}
+                        />
                         <Col sm={4} xs={12}>
                             <span>{user.full_name}</span> 
                         </Col>
@@ -75,7 +83,7 @@ const GrantedPermissions = (props) => {
                                     value={user.user_id}
                                     onChange={(e) => handleChange(e, index)}
                                     checked={user.permissions && user.permissions.includes(name) ? true : false}
-                                />   
+                                />
                             ) }
                             </Row>
                         </Col>

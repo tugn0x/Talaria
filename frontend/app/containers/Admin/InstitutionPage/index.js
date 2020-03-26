@@ -14,7 +14,8 @@ import messages from './messages';
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
 import {InstitutionForm} from 'components';
 import { requestGetInstitutionTypeOptionList, requestPostInstitution, 
-  requestUpdateInstitution ,requestGetCountriesOptionList, requestGetInstitution } from '../actions';
+  requestUsersOptionList, requestUpdateInstitution , requestGetRoles,
+  requestGetCountriesOptionList, requestGetInstitution } from '../actions';
 
 
 function InstitutionPage(props) {
@@ -29,6 +30,8 @@ function InstitutionPage(props) {
       if(!isLoading){
         dispatch(requestGetInstitutionTypeOptionList())
         dispatch(requestGetCountriesOptionList())
+        dispatch(requestUsersOptionList())
+        dispatch(requestGetRoles())
       }
       if(!isLoading && !isNew) {
          dispatch(requestGetInstitution(params.id))
@@ -45,9 +48,12 @@ function InstitutionPage(props) {
               institution={institution}
               institutionsOptionList={institutionsOptionList}
               countriesOptionList={countriesOptionList}
+              usersOptionList={admin.usersOptionList}
+              resources={admin.resources.institutions}
               searches={{
                 country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
                 institution_type_id: (input) => dispatch(requestGetInstitutionTypeOptionList(input)),
+                usersOptionList: (input) => dispatch(requestUsersOptionList(input))
               }}
             />
         }
@@ -57,9 +63,12 @@ function InstitutionPage(props) {
               loading={isLoading}
               institutionsOptionList={institutionsOptionList}
               countriesOptionList={countriesOptionList}
+              usersOptionList={admin.usersOptionList}
+              resources={admin.resources.institutions}
               searches={{
                 country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
                 institution_type_id: (input) => dispatch(requestGetInstitutionTypeOptionList(input)),
+                usersOptionList: (input) => dispatch(requestUsersOptionList(input))
               }}
             />
         }

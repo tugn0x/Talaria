@@ -40,8 +40,6 @@ const CustomForm = (props) => {
     const handleChange = (value, field_name) =>{
         setFormData({ ...formData, [field_name]: value   });  
         setIsSubmitDisabled(false)
-        console.log(value)
-        console.log(field_name)
     } 
 
     
@@ -64,8 +62,12 @@ const CustomForm = (props) => {
             return
         } else {
             // Tutto ok invia Form!
-            submitCallBack(formData)
-            console.log("Send Form", formData)
+            let dataToSend = {}
+             Object.keys(formData).map(key => (
+                formData[key].value ? dataToSend[key] = formData[key].value : dataToSend[key] = formData[key]
+            ))
+            submitCallBack(dataToSend)
+            console.log("Send Form", dataToSend)
         }
         return
     }

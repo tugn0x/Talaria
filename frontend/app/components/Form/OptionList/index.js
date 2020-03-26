@@ -18,8 +18,8 @@ const OptionList = (props) => {
     };
 
     return (
-        <>
-            <Select
+        selectedData &&
+            (<Select
                 className="option-list"
                 type="custom-select"
                 value={selectedData}
@@ -28,8 +28,7 @@ const OptionList = (props) => {
                 onInputChange={(input) =>  searchOptionList && !isEmpty(searchOptionList) ? handleSearchOptionList(input, field.options) : input}
                 options={options}
                 required={field.required ? field.required : false}
-            />
-        </>
+            />) || null
     )
 }
 

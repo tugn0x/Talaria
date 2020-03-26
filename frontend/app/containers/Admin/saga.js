@@ -247,7 +247,7 @@ export function* requestUpdateInstitutionSaga(action) {
     body: action.request
   };
   try {
-    console.log(action)
+    // console.log(action)
     const request = yield call(updateInstitution, options);
     yield call(requestGetInstitutionsListSaga);
     yield put(push("/admin/institutions"));

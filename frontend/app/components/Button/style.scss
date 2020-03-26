@@ -1,6 +1,6 @@
 @import '../../scss/vendors/variables';
 
-.btn-plus, .btn-back {
+.btn-plus, .btn-back, .btn-close {
     display: block;
     padding: 0.45rem;
     background: none;
@@ -27,6 +27,21 @@
             color: white;
         }
         text-decoration: none;
+    }
+}
+
+.btn-close {
+    position: absolute;
+    top: 2px;
+    right: 6px;
+    z-index: 500;
+    height: auto;
+    padding: 0.1rem;
+    i {
+        &:before {
+            font-size: 1rem;
+            padding-right: 0;
+        }
     }
 }
 
