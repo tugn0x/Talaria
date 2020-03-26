@@ -230,7 +230,7 @@ export const fields = {
         group: "administrative_info"
     },
     fiscalcode: {
-        type: "number",
+        type: "text",
         name: "fiscalcode",
         width: "col-sm-6",
         group: "administrative_info"
@@ -249,7 +249,7 @@ export const fields = {
         
     },
     ccu: {
-        type: "number",
+        type: "text",
         name: "ccu",
         width: "col-sm-6",
         group: "administrative_info"
@@ -274,7 +274,7 @@ export const fields = {
         group: "administrative_info"
     },
     terzo_code: {
-        type: "number",
+        type: "text",
         name: "terzo_code",
         width: "col-sm-6",
         group: "administrative_info"

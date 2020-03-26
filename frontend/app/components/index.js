@@ -37,6 +37,7 @@ import LibraryForm from './Admin/LibraryForm'
 // import InstitutionsList from './Admin/InstitutionsList'
 import InstitutionForm from './Admin/InstitutionForm'
 import ProjectsList from './Admin/ProjectsList'
+import ProjectForm from './Admin/ProjectForm'
 
 /*
 FORM STUFFS
@@ -67,6 +68,7 @@ export {
 //  LibrariesList,
 //  InstitutionsList,
   ProjectsList,
+  ProjectForm,
   InstitutionForm,
 //  UsersList,
   CustomForm,

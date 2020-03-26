@@ -4,17 +4,22 @@ import messages from './messages';
 import { useIntl } from 'react-intl';
 import {formatDate} from 'utils/formatDate'
 import ButtonPlus from 'components/Button/ButtonPlus'
-//import CustomModal from 'components/Modal/Loadable'
-//import {ProjectForm} from 'components';
+import CustomModal from 'components/Modal/Loadable'
+import {Pagination, InputSearch} from 'components';
 import { generatePath } from "react-router";
-// import './style.scss'
+import ProjectPage from 'containers/Admin/ProjectPage'
 
 function ProjectsList(props) {
     console.log('ProjectsList', props)
-    const {projectsList, match, editPath, createProject, loading} = props
+    const {projectsList, editPath, history, match, pagination} = props
     const [modal, setModal] = useState(false);
+    const {total_pages, current_page} = pagination
     const toggle = () => setModal(!modal);
     const intl = useIntl();
+
+    const linkTo = (path) => {
+        history.push(path)
+     };
 
     const editurl = (id) => {
         return generatePath(`${editPath}`, {
@@ -85,17 +90,25 @@ function ProjectsList(props) {
                     }
                 </div>
             </div> 
-            {/*<CustomModal 
+            <CustomModal 
                 modal={modal} 
                 toggle={toggle}>
-                <ProjectForm 
-                    createProject={ (formData) => createProject(formData) } 
-                    loading={loading}
-                    titleNewProject={'New Project'}
-                /> 
-            </CustomModal> 
-            */} 
-          
+                <ProjectPage 
+                    match={match}
+                />
+            </CustomModal>  
+            {Object.keys(pagination).length > 0 &&
+                <Pagination
+                    current_page={current_page}
+                     total_pages={total_pages}
+                    // setPage={(page) => linkTo(`${path}/?page=${page}`)}
+
+                    setPage={(page) => linkTo(generatePath(`${props.match.path}`, {
+                        page: page
+                      }))}
+                />
+            } 
+
           </>
     )
 }

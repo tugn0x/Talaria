@@ -158,7 +158,7 @@ export function requestUpdateLibrary(request, message) {
   };
 }
 
-export function requestGetProjectsList(page) {
+export function requestGetProjectsList(page='1') {
   return {
     type: REQUEST_GET_PROJECTS_LIST,
     page

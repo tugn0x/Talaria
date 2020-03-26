@@ -10,10 +10,10 @@ import makeSelectAdmin, {isAdminLoading} from '../selectors';
 
 const ProjectsListPage = (props) => {
     console.log('ProjectsListPage', props)
-    const {dispatch, isLoading, admin, match, location, history} = props
-    const {path} = match
+    const {dispatch, isLoading, admin, match} = props
     const intl = useIntl();
-    const projectsList = admin.projectsList
+    const projectsList = admin.projectsList.data
+    const pagination = admin.projectsList.pagination
     
     useEffect(() => {
         if(!isLoading) {
@@ -22,15 +22,19 @@ const ProjectsListPage = (props) => {
     }, [])
 
     return (
+        <>
+        {projectsList.length > 0 &&   
         <ProjectsList 
             projectsList={projectsList}
+            pagination={pagination}
             loading={isLoading}
             history={history}
-            path={path}
             match={match}
             editPath={'/admin/projects/project/:id?'}
             createProject={formData => dispatch(requestPostProject(formData, 'Project registered'))}
         />
+        }
+        </>
     )
 }
 
