@@ -15,9 +15,6 @@
 }
 
 @include media-breakpoint-down(md) {
-    body.sidebar-show {
-        overflow-y: hidden;
-    }
     .app-subheader {
         margin-top: 55px;
     }
@@ -44,12 +41,15 @@
             margin: 0 auto
         }
     }
-   /*  .sidebar-show .main {
+    /*  .sidebar-show .main {
         position: relative
     } */
 }
 
 @include media-breakpoint-down(xs) {
+    body.sidebar-show {
+        overflow-y: hidden;
+    }
     .table {
         overflow-x: auto;
         .row {
