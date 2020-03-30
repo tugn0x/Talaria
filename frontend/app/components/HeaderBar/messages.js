@@ -25,9 +25,21 @@ export default defineMessages({
     id: `${scope}.ChangePassword`,
     defaultMessage: 'Change Password',
   },
-  Libraries: {
-    id: `${scope}.Libraries`,
+  libraries: {
+    id: `${scope}.libraries`,
     defaultMessage: 'Libraries',
+  },
+  institutions: {
+    id: `${scope}.institutions`,
+    defaultMessage: 'Institutions',
+  },
+  projects: {
+    id: `${scope}.projects`,
+    defaultMessage: 'Projects',
+  },
+  consortia: {
+    id: `${scope}.consortia`,
+    defaultMessage: 'Consortia',
   },
   Logout: {
     id: `${scope}.Logout`,

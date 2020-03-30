@@ -18,6 +18,7 @@ import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/reac
 import logo from 'images/logo_home.gif'
 import logomini from 'images/logo.png'
 import './style.scss'
+import ResourceMenu from "./ResourcesMenu";
 
 
 function HeaderBar(props) {
@@ -25,11 +26,11 @@ function HeaderBar(props) {
   console.log('HeaderBar', props)
 
   // console.log('HeaderBar', props)
-  
+
   const { auth, isLogged, history, headermenu, routes } = props
-  
+
   const currentRoute = routes && routes.filter(route => route.current).length > 0 ? routes.filter(route => route.current) : null;
-  
+
   /* const linkTo = (path) => {
     history.push(`${path}`)
   }; */
@@ -40,15 +41,15 @@ function HeaderBar(props) {
     */
     return pagePath === props.location.pathname || new RegExp(`^\/${pagePath.replace("/", "\/")}(.*?)`).test(props.location.pathname);
   };
-  
+
 
   return (
 
     <>
       <header className="app-header navbar bg-grey-light px-4">
         <div className="header-container container">
-          { isLogged && headermenu && 
-            currentRoute && currentRoute[0].children.length > 0 && 
+          { isLogged && headermenu &&
+            currentRoute && currentRoute[0].children.length > 0 &&
             <AppSidebarToggler  display="xs"/>
           }
           <AppNavbarBrand
@@ -78,11 +79,19 @@ function HeaderBar(props) {
                   isLogged && (
                     <>
                       {
-                        auth.permissions.resources && "libraries" in auth.permissions.resources && (<>
-                          <DropdownItem header tag="div" className="text-center"><strong><FormattedMessage {...messages.Libraries} /></strong></DropdownItem>
-                            {auth.permissions.resources.libraries.map((item) => <DropdownItem key={item.resource.id}><i className="fa fa-book"></i> {item.resource.name}</DropdownItem>)}
-                          <DropdownItem divider />
-                        </>)
+                        auth.permissions.resources && "libraries" in auth.permissions.resources && (<ResourceMenu resources={auth.permissions.resources}></ResourceMenu>)
+                        // auth.permissions.resources && "libraries" in auth.permissions.resources && (<>
+                        //   <DropdownItem header tag="div" className="text-center"><strong><FormattedMessage {...messages.Libraries} /></strong></DropdownItem>
+                        //   {auth.permissions.resources.libraries.map((item) =>
+                        //       <NavLink to={`/library/${item.resource.id}`}
+                        //                key={item.resource.id}
+                        //                className="dropdown-item btn"
+                        //                 activeClassName="current">
+                        //         <i className="fa fa-book"></i> {item.resource.name}
+                        //       </NavLink>
+                        //   )}
+                        //   <DropdownItem divider />
+                        // </>)
                       }
                     <DropdownItem header tag="div" className="text-center"><FormattedMessage {...messages.UserAccount} /></DropdownItem>
                     {/*<DropdownItem onClick={() => linkTo("/patron/my-libraries")}><i className="fa fa-user"></i><span>Patron</span></DropdownItem>*/}
