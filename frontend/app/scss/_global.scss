@@ -226,6 +226,19 @@ ul.list-inline {
     font-size: .875rem;
 }
 
+.icon-img {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 150px;
+    height: 150px;
+    &.libraries {
+        @include libraries_icon
+    }
+    &.institutions {
+        @include institutions_icon
+    }
+}
+
 /* .switch-success .switch-input:checked+.switch-slider {
     background-color: $orange;
     border-color: $orange;

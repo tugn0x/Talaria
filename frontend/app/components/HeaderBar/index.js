@@ -93,20 +93,24 @@ function HeaderBar(props) {
                         //   <DropdownItem divider />
                         // </>)
                       }
-                    <DropdownItem header tag="div" className="text-center"><FormattedMessage {...messages.UserAccount} /></DropdownItem>
-                    {/*<DropdownItem onClick={() => linkTo("/patron/my-libraries")}><i className="fa fa-user"></i><span>Patron</span></DropdownItem>*/}
-                      <NavLink to="/user/user-profile" className="dropdown-item btn" activeClassName="current">
-                        <i className="fa fa-user"></i>
-                        <span><FormattedMessage {...messages.Profile} /></span>
-                      </NavLink>
-                      <NavLink to="/user/change-password" className="dropdown-item btn" activeClassName="current">
-                        <i className="fa fa-lock"></i>
-                        <span><FormattedMessage {...messages.ChangePassword} /></span>
-                      </NavLink>
-                      <NavLink to="#" onClick={e => props.logout(e)} className="dropdown-item btn" activeClassName="current">
-                        <i className="fa fa-lock"></i>
-                        <span><FormattedMessage {...messages.Logout} /></span>
-                      </NavLink>
+                    <div className="account">
+                      <DropdownItem header tag="div" className="text-center">
+                        <FormattedMessage {...messages.UserAccount} />
+                      </DropdownItem>
+                      {/*<DropdownItem onClick={() => linkTo("/patron/my-libraries")}><i className="fa fa-user"></i><span>Patron</span></DropdownItem>*/}
+                        <NavLink to="/user/user-profile" className="dropdown-item btn" activeClassName="current">
+                          <i className="fa fa-user"></i>
+                          <span><FormattedMessage {...messages.Profile} /></span>
+                        </NavLink>
+                        <NavLink to="/user/change-password" className="dropdown-item btn" activeClassName="current">
+                          <i className="fa fa-lock"></i>
+                          <span><FormattedMessage {...messages.ChangePassword} /></span>
+                        </NavLink>
+                        <NavLink to="#" onClick={e => props.logout(e)} className="dropdown-item btn" activeClassName="current">
+                          <i className="fa fa-sign-out"></i>
+                          <span><FormattedMessage {...messages.Logout} /></span>
+                        </NavLink>
+                      </div>
                     </>
                   )
                 }

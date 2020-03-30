@@ -107,6 +107,7 @@
     "redux": "4.0.1",
     "redux-saga": "1.0.2",
     "reselect": "4.0.0",
+    "resolve-url-loader": "^3.1.1",
     "sanitize.css": "8.0.0",
     "sass-loader": "^8.0.0",
     "simple-line-icons": "^2.4.1",

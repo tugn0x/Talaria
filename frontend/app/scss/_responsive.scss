@@ -41,6 +41,10 @@
             margin: 0 auto
         }
     }
+    .dropdown-menu { 
+        max-width: calc(100vw - 40px);
+        left: 25px !important;
+    }
     /*  .sidebar-show .main {
         position: relative
     } */

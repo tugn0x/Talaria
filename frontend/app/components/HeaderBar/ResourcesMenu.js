@@ -15,17 +15,19 @@ function ResourceMenu(props) {
 
   return (
     types.map((resource) => (
-      <div key={resource}>
-        <DropdownItem header tag="div" className="text-center"><strong><FormattedMessage {...messages[resource]} /></strong></DropdownItem>
+      <div key={resource} className="resources-menu">
+        <DropdownItem header tag="div" className="text-center">
+          <div className={`icon-img ${resource} float-left`}></div>
+          <FormattedMessage {...messages[resource]} />
+        </DropdownItem>
         {resources[resource].map((item) =>
           <NavLink to={`${resourcesMap[resource]}${item.resource.id}`}
                    key={item.resource.id}
                    className="dropdown-item btn"
                    activeClassName="current">
-            <i className="fa fa-book"></i> {item.resource.name}
+            {item.resource.name}
           </NavLink>
         )}
-        <DropdownItem divider />
       </div>
     ))
   )
