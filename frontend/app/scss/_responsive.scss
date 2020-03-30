@@ -29,6 +29,9 @@
             padding-top: 1rem;
         }
     }
+    .main .login-form .card {
+        padding: 0
+    }
 }
 
 @include media-breakpoint-down(sm) { 
