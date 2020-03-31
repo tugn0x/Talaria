@@ -19,7 +19,7 @@ import logo from 'images/logo_home.gif'
 import logomini from 'images/logo.png'
 import './style.scss'
 import ResourceMenu from "./ResourcesMenu";
-
+import subStringer from 'utils/subStringer'
 
 function HeaderBar(props) {
 
@@ -68,7 +68,9 @@ function HeaderBar(props) {
                 { isLogged && (
                     <>
                       <i className="fa fa-2x fa-user d-table-cell"></i>
-                      <span className="user-name d-none d-md-table-cell align-middle px-3">{auth.user.name}</span>
+                      <span className="user-name d-none d-md-table-cell align-middle px-3">
+                        {subStringer(auth.user.name, 10)}
+                      </span>
                       <i className="fa fa-2x fa-sort-down d-table-cell align-middle"></i>
                     </>
                   )

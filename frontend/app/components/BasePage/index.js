@@ -9,11 +9,12 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import {Switch, Route, withRouter} from 'react-router-dom';
 import {HeaderBar, SideBar, Footer} from 'components';
-import {Container} from "reactstrap"
+import {Container, Button} from "reactstrap"
 import { generatePath } from "react-router";
 import {
   CSSTransition,
 } from 'react-transition-group';
+import ButtonToTop from 'components/Button/ButtonToTop'
 
 function BasePage(props) {
   console.log('BasePage',props)
@@ -58,6 +59,7 @@ function BasePage(props) {
     }
   }
 
+
   React.useEffect(() => {
     setMounted(true)
   },[])
@@ -100,6 +102,7 @@ function BasePage(props) {
             </main>
           </div>
           <Footer/>
+          <ButtonToTop />
         </>
       </CSSTransition>
     </>

@@ -11,7 +11,7 @@ import {
   CSSTransition,
   TransitionGroup,
 } from 'react-transition-group';
-
+import subStringer from 'utils/subStringer'
 
 function SimpleList(props) {
     console.log('SimpleList', props)
@@ -89,7 +89,7 @@ function SimpleList(props) {
                                           field.type === 'status' &&
                                             <div className={`status-point ${item[field.name] === 0 ? 'pending' : 'success' }`}></div>
                                           ||
-                                            item[field.name] 
+                                            subStringer(item[field.name], 30) 
                                         }
                                       </span>
                                   </Col>

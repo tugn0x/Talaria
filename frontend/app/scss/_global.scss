@@ -186,10 +186,19 @@ ul.list-inline {
     }
     .edit-icons {
         height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
         a.btn {
-            display: table-cell;
-            vertical-align: middle;
-            height: auto;
+            display: table;
+            padding: 0;
+            &:hover {
+                text-decoration: none;
+            }
+            i {
+                display: table-cell;
+                vertical-align: middle;
+            }
             i:before {
                 font-size: 1.5rem;
             }

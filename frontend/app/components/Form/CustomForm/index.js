@@ -12,6 +12,7 @@ import Switch from '../Switch'
 import OptionList from '../OptionList'
 import CheckBox from '../CheckBox'
 import './style.scss'
+import scrollTo from 'utils/scrollTo';
 // PROPS
 // fields
 // callback action
@@ -53,11 +54,7 @@ const CustomForm = (props) => {
             // Ci sono ERRORI nella VALIDAZIONE!
             // Scroll sul campo che non e' stato fillato
             const errorTarget = document.querySelectorAll('.was-validated .form-control:invalid')[0]
-            const errorTargetTop = errorTarget.offsetParent.offsetTop + 95;
-            window.scrollTo({
-                top: errorTargetTop,
-                behavior: "smooth"
-            }); 
+            scrollTo(errorTarget.offsetParent, true)
             
             return
         } else {
