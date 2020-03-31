@@ -5,27 +5,29 @@ import './style.scss'
 
 const ButtonToTop = () => {
     const [isVisible, setIsVisible] = React.useState(false)
-    const element = document.querySelector('.modal') === null ? window : document.querySelector('.modal')
+   // const window = document.querySelector('.modal') === null ? window : document.querySelector('.modal')
     
     function setButtonVisible() {
-        if(Math.floor(element.scrollY) > 900){
+        if(Math.floor(window.scrollY) > 900){
             setIsVisible(true)
         }else{
             setIsVisible(false)
         } 
-        console.log(element)
+      //  console.log(window)
     }
     
     React.useEffect(() => {
-        element.addEventListener('scroll', setButtonVisible)
+        window.addEventListener('scroll', setButtonVisible)
+        
         return () => {
-            element.removeEventListener('scroll', setButtonVisible())
+            window.removeEventListener('scroll', setButtonVisible())
         }
+        
     }, [])
 
     return (
         isVisible &&
-        <Button className="btn-to-top" onClick={() => scrollTo(element)}>
+        <Button className="btn-to-top" onClick={() => scrollTo(window)}>
             <i className="fa fa-arrow-up"></i>
         </Button>
         || null

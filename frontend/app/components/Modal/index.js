@@ -1,6 +1,5 @@
 import React from 'react'
 import {Modal, ModalHeader, ModalBody} from 'reactstrap'
-import ButtonToTop from 'components/Button/ButtonToTop'
 
 const CustomModal = (props) => {
     const {modal, toggle} = props
@@ -11,7 +10,6 @@ const CustomModal = (props) => {
             <ModalBody>
                 {props.children}
             </ModalBody>
-            <ButtonToTop />
         </Modal>
     )
 }
