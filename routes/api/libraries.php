@@ -21,6 +21,18 @@ Route::group([
     'as' => 'api.v1.libraries.',
 ], function () {
 
+    /*
+     * SUBJECTS
+     */
+    Route::group([
+        'as' => 'api.v1.libraries.subjects.',
+    ], function () {
+        Route::get('subjects/option-items', 'SubjectController@optionList')->name('subjects.option-items');
+    });
+
+    /*
+     * LIBRARY USERS
+     */
     Route::group([
         'as' => 'api.v1.libraries.library-users.',
     ], function () {
@@ -33,6 +45,7 @@ Route::group([
     });
 
 
+    Route::post('public', 'LibraryController@publicCreate')->name('public-create');
     Route::get('', 'LibraryController@index')->name('index');
     Route::get('option-items', 'LibraryController@optionList')->name('option-items');
     Route::get('{id}', 'LibraryController@show')->name('show');

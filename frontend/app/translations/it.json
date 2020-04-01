@@ -61,7 +61,7 @@
   "app.components.InstitutionsList.createNewInstitution": "Registra nuovo istituto",
   "app.components.InstitutionsList.editInstitution": "Modifica istituto",
 
-  "app.components.LibraryForm.institution_id": "ID della biblioteca",
+  "app.components.LibraryForm.institution_id": "ID istituzione",
   "app.components.LibraryForm.subject_id": "ID della disciplina",
   "app.components.LibraryForm.country_id": "ID della nazione",
   "app.components.LibraryForm.opac": "Url dell' opac",

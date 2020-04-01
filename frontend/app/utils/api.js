@@ -162,6 +162,12 @@ export const requestAccessToLibrary = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users`, options)
 };
 
+export const getLibrariesSubjects = (options) => {
+  options = getOption(options);
+  const query = options.query;
+  return request(`${BASE_URL}l/api/v1/libraries/subjects/option-items?label=name&q=${query}`, options)
+};
+
 // Reference //
 export const getReferencesList = (options) => {
   const page = options.page;
@@ -252,19 +258,19 @@ export const getRoles = (options) => {
 // Libraries
 export const createLibrary = (options) => {
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries`, options)
+  return request(`${BASE_URL}/api/v1/libraries?include=granted_permissions,institution,country,departments`, options)
 };
 
 export const getLibrary = (options) => {
   const library_id = options.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/${library_id}?include=granted_permissions`, options)
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}?include=granted_permissions,institution,country,departments`, options)
 };
 
 export const updateLibrary = (options) => {
   const library_id = options.body.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/${library_id}`, options)
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}?include=granted_permissions,institution,country,departments`, options)
 };
 
 export const getLibrariesList = (options) => {
