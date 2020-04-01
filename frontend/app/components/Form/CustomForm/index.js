@@ -110,12 +110,13 @@ const CustomForm = (props) => {
                                                                 ||
                                                                 field.type === 'custom-select' &&
                                                                    <>
+                                                                   
+                                                                   
                                                                    <OptionList 
                                                                         field={field}
                                                                         selectedData={
                                                                             !formData[field.name] && requestData && requestData[field.name] ? props[field.name].filter(opt => opt.value === requestData[field.name])[0] :
-                                                                            formData[field.name] ? formData[field.name] :
-                                                                            {label: intl.formatMessage(formMessages.select), value: 0}
+                                                                            formData[field.name] 
                                                                         }
                                                                         options={props[field.name] ? props[field.name] : field.options}
                                                                         searchOptionList={field.search ? searchOptionList : {} }

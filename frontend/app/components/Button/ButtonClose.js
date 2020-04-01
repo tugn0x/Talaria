@@ -13,7 +13,7 @@ const ButtonClose = (props) => {
 }
 
 
-ButtonClose.PropTypes = {
+ButtonClose.propTypes = {
     handleClick: PropTypes.func.isRequired,
 }
 

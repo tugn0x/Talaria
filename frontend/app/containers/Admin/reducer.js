@@ -24,6 +24,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_GET_INSTITUTION, REQUEST_GET_INSTITUTION_SUCCESS,
   REQUEST_INSTITUTIONSTYPES_OPTIONLIST, REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
   REQUEST_GET_COUNTRIES_OPTIONLIST, REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS,
+  REQUEST_LIBRARYSUBJECT_OPTIONLIST, REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS,
   UPDATE_INSTITUTION
 } from "./constants";
 
@@ -57,6 +58,7 @@ export const initialState = {
   institution: [],
   institutionsOptionList: [],
   countriesOptionList: [],
+  librarySubjectOptionList: [],
   roles: [],
   resources: [],
 };
@@ -181,7 +183,13 @@ const AdminReducer = (state = initialState, action) =>
         draft.error = initialState.error;
         draft.countriesOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break;
-
+      case REQUEST_LIBRARYSUBJECT_OPTIONLIST:
+        draft.error = action.error;
+        break;
+      case REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS:
+        draft.error = initialState.error;
+        draft.librarySubjectOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
+        break;
       case REQUEST_GET_INSTITUTION_TYPE_LIST:
         draft.loading = true;
         draft.error = action.error;

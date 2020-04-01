@@ -24,7 +24,8 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_INSTITUTIONSTYPES_OPTIONLIST, REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
    REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS, REQUEST_GET_INSTITUTION_TYPE_LIST,
    REQUEST_POST_INSTITUTION, UPDATE_INSTITUTION,
-   REQUEST_GET_COUNTRIES_OPTIONLIST, REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS
+   REQUEST_GET_COUNTRIES_OPTIONLIST, REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS,
+   REQUEST_LIBRARYSUBJECT_OPTIONLIST, REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS
 } from "./constants";
 
 export function defaultAction() {
@@ -264,6 +265,20 @@ export function requestGetInstitutionTypeOptionList(request) {
 export function requestGetInstitutionTypeOptionListSuccess(result) {
   return {
     type: REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
+    result
+  };
+}
+
+export function requestLibrarySubjectOptionList(request) {
+  return {
+    type: REQUEST_LIBRARYSUBJECT_OPTIONLIST,
+    request
+  };
+}
+
+export function requestLibrarySubjectOptionListSuccess(result) {
+  return {
+    type: REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS,
     result
   };
 }

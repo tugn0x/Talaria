@@ -43,28 +43,32 @@ export const fields = {
         group: "granted_permissions",
     },
     institution_id: {
-        type: "number",
+        type: "custom-select",
         required: true,
         name: "institution_id",
         width: "col-sm-6",
         group: "general_info",
-        defaultValue: 1,
+        options: "institution_id",
         order: 3,
+        // selectedOption: "institution_type_id"
+        
     },
     subject_id: {
-        type: "number",
+        type: "custom-select",
         required: true,
         name: "subject_id",
         width: "col-sm-6",
         group: "general_info",
+        options: "subject_id",
         order: 4,
     },
     country_id: {
-        type: "number",
+        type: "custom-select",
         required: true,
         name: "country_id",
-        width: "col-sm-6",
+        width: "col-md-6",
         group: "general_info",
+        options: "country_id",
         order: 5,
     },
     address: {

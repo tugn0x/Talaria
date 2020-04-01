@@ -10,37 +10,31 @@ import SimpleForm from 'components/SimpleForm'
 
 const LibraryForm = (props) => {
     console.log('LibraryForm', props)
-    const { library, usersOptionList, searches, loading, updateLibrary, createLibrary, titleNewLibrary, resources} = props
+    const { library, usersOptionList, 
+            searches, loading, updateLibrary, 
+            createLibrary, titleNewLibrary, resources,
+            submitFormAction, institutionsOptionList, 
+            countriesOptionList, librarySubjectOptionList} = props
    // const intl = useIntl();
     
     return (
             <SimpleForm loading={loading}>
-                    {library && 
-                        <CustomForm 
-                            submitCallBack={(formData) => updateLibrary(formData)} 
-                            requestData={library}
-                            fields={fields} 
-                            fieldsGroups={fieldsGroups}
-                            title={library.name}
-                            usersOptionList={usersOptionList}
-                            searchOptionList={searches} 
-                            messages={{...messages, ...globalMessages}}
-                            granted_permissions={library.granted_permissions}
-                            resources={resources}
-                        />
-                    ||
-                        <CustomForm 
-                            submitCallBack={(formData) => createLibrary(formData)} 
-                            fields={fields}
-                            resources={resources}
-                            usersOptionList={usersOptionList}
-                            searchOptionList={searches} 
-                            fieldsGroups={fieldsGroups}
-                            title={titleNewLibrary}
-                            granted_permissions={[]}
-                            messages={{...messages, ...globalMessages}}
-                        />
-                    }
+                <CustomForm 
+                    submitCallBack={(formData) => submitFormAction(formData)} 
+                    requestData={library ? library : null}
+                    fields={fields} 
+                    fieldsGroups={fieldsGroups}
+                    title={library.name}
+                    usersOptionList={usersOptionList}
+                    institution_id={institutionsOptionList} 
+                    country_id={countriesOptionList}
+                    subject_id={librarySubjectOptionList}
+                    searchOptionList={searches} 
+                    messages={{...messages, ...globalMessages}}
+                    granted_permissions={
+                        library ? library.granted_permissions : [] }
+                    resources={resources}
+                />
             </SimpleForm>
     )
 }

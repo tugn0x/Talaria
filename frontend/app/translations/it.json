@@ -61,7 +61,7 @@
   "app.components.InstitutionsList.createNewInstitution": "Registra nuovo istituto",
   "app.components.InstitutionsList.editInstitution": "Modifica istituto",
 
-  "app.components.LibraryForm.institution_id": "ID istituzione",
+  "app.components.LibraryForm.institution_id": "ID istituto",
   "app.components.LibraryForm.subject_id": "ID della disciplina",
   "app.components.LibraryForm.country_id": "ID della nazione",
   "app.components.LibraryForm.opac": "Url dell' opac",
@@ -94,6 +94,7 @@
   "app.components.LibraryForm.terzo_code": "terzo_code",
   "app.components.LibraryForm.general_info": "Informazioni generali",
   "app.components.LibraryForm.administrative_info": "Informazioni amministrative",
+  "app.components.LibraryForm.granted_permissions": "Permessi utenti",
   "app.components.InstitutionForm.header": "Form istituto",
 
   "app.components.ReferencesForm.header": "Form Riferimenti",
