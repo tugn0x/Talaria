@@ -38,15 +38,18 @@ class LibraryTransformer extends BaseTransformer
     }
     public function includeInstitution(Model $model)
     {
-        return $this->item($model->institution, new InstitutionTransformer());
+        if($model->institution)
+            return $this->item($model->institution, new InstitutionTransformer());
     }
     public function includeCountry(Model $model)
     {
-        return $this->item($model->country, new BaseLightTransformer());
+        if($model->country)
+            return $this->item($model->country, new BaseLightTransformer());
     }
     public function includeSubject(Model $model)
     {
-        return $this->item($model->subject, new BaseLightTransformer());
+        if($model->subject)
+            return $this->item($model->subject, new BaseLightTransformer());
     }
 
 
