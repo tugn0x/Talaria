@@ -128,5 +128,13 @@ export default defineMessages({
   title_description: {
     id: `${scope}.title_description`,
     defaultMessage: "Title / Description",
+  },
+  continue: {
+    id: `${scope}.continue`,
+    defaultMessage: "Next Step",
+  },
+  submit: {
+    id: `${scope}.submit`,
+    defaultMessage: "Submit",
   }
 });

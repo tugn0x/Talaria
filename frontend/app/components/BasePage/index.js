@@ -101,7 +101,7 @@ function BasePage(props) {
               </Container>
             </main>
           </div>
-          <Footer/>
+          <Footer  isLogged={props.isLogged} />
           <ButtonToTop />
         </>
       </CSSTransition>

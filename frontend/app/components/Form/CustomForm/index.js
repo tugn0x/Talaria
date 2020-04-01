@@ -19,6 +19,7 @@ import scrollTo from 'utils/scrollTo';
 // classes
 
 const CustomForm = (props) => {
+    console.log('CustomForm', props)
     const {
         submitCallBack = () => null,
         title = 'Form',
@@ -30,6 +31,7 @@ const CustomForm = (props) => {
         messages,
         requestData,
         fieldsGroups = {},
+        onChangeData,
     } = props
 
     const intl = useIntl();
@@ -39,11 +41,11 @@ const CustomForm = (props) => {
     
     /* HANDLE CHANGE Generico */
     const handleChange = (value, field_name) =>{
-        setFormData({ ...formData, [field_name]: value   });  
+        setFormData({ ...formData, [field_name]: value   });
         setIsSubmitDisabled(false)
+        props.onChangeData && props.onChangeData(field_name, value)  
     } 
 
-    
     
     const onSubmit = (e) => {
         e.preventDefault();
@@ -64,6 +66,7 @@ const CustomForm = (props) => {
                 formData[key].value ? dataToSend[key] = formData[key].value : dataToSend[key] = formData[key]
             ))
             submitCallBack(dataToSend)
+            form.classList.remove('was-validated');
             console.log("Send Form", dataToSend)
         }
         return
@@ -80,7 +83,7 @@ const CustomForm = (props) => {
                             {selectFieldsGroups(fields,fieldsGroups).map((fieldsGroup) => {
                                 // const field = fields[key];
                                 return (<div key={fieldsGroup.name} className="form-group">
-                                            {fieldsGroup.name !== 'undefined' &&
+                                            {fieldsGroup.name !== 'undefined' && fieldsGroup.label &&
                                                 <h4>{intl.formatMessage(messages[fieldsGroup.label])}</h4>
                                             }
                                             <Row>

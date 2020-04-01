@@ -62,7 +62,6 @@ function LibraryPage(props) {
                 : (formData) => dispatch(requestPostLibrary(formData, intl.formatMessage(messages.createMessage)))
               }
           /> 
-        
       </Loader>
     );
   }

@@ -15,7 +15,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { syncPersistanceRequest, isSync } from "../../persistence";
 import {requestLogout} from "../Auth/AuthProvider/actions";
-import {HomePage, NotFoundPage, LoginPage, IdpPage, UserPage, PatronPage, AdminPage} from 'containers';
+import {HomePage, NotFoundPage, LoginPage, IdpPage, UserPage, PatronPage, AdminPage, RegisterLibraryPage} from 'containers';
 // import {  Footer } from 'components'
 /* import GlobalStyle from 'global-styles'; */
 import {SignupPage, ForgotPassword} from "containers";
@@ -51,6 +51,8 @@ function App(props) {
         <Route path="/patron" component={() => <PatronPage {...authProps} headermenu={true}/> }  />
         <Route path="/admin" component={() => <AdminPage {...authProps} headermenu={true}  /> }  />
         <Route path="/library/:library_id" component={({match}) => <LibraryPage {...authProps} match={match} headermenu={true} /> }  />
+
+        <Route path="/register-library" component={() => <RegisterLibraryPage {...authProps}/> }  />
 
         <Route path="/consortium" component={() => <HomePage {...authProps} headermenu={true}/> }  />
         <Route path="/institution" component={() => <HomePage {...authProps} headermenu={true}/> } />

@@ -13,4 +13,7 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'This is the Footer component!',
   },
+  registerNewLibrary: {
+    id: `app.containers.RegisterNewLibrary.link`,
+  },
 });

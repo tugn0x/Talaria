@@ -19,7 +19,7 @@ import SignupPage from "./Auth/SignupPage/Loadable"
 import UserPage from "./User/UserPage/Loadable"
 import PatronPage from "./Patron/PatronPage/Loadable"
 import AdminPage from "./Admin/AdminPage/Loadable"
-
+import RegisterLibraryPage from './RegisterLibrary'
 /*
 LIBRARY STUFFS
  */
@@ -44,5 +44,6 @@ export {
   AdminPage,
   PatronPage,
   LibraryPage,
+  RegisterLibraryPage
 }
 
