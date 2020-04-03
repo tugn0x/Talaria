@@ -17,7 +17,8 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_POST_INSTITUTION,
           REQUEST_GET_COUNTRIES_OPTIONLIST,
           UPDATE_INSTITUTION,
-          REQUEST_LIBRARYSUBJECT_OPTIONLIST
+          REQUEST_LIBRARYSUBJECT_OPTIONLIST,
+          REQUEST_POST_PUBLIC_LIBRARY
 } from './constants';
 import {
   requestError,
@@ -46,7 +47,7 @@ import {getUsersList, updateUser, createUser, getUsersOptionsList,
         getInstitution, updateInstitution, getInstitutionTypesOptionList,
         createInstitution, getCountriesOptionsList,
         getProject, getProjectsList, updateProject,
-        createProject, getLibrariesSubjects} from 'utils/api'
+        createProject, getLibrariesSubjects,createPublicLibrary} from 'utils/api'
 
 
 export function* requestUserSaga(action) {
@@ -142,6 +143,21 @@ export function* requestPostLibrarySaga(action) {
     const request = yield call(createLibrary, options);
     yield call(requestGetLibrariesListSaga);
     yield put(push("/admin/libraries"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestPostPublicLibrarySaga(action) {
+  const options = {
+    method: 'post',
+    body: {...action.request }
+  };
+  try {
+    const request = yield call(createPublicLibrary, options);
+    // yield call(requestGetLibrariesListSaga);
+    yield put(push("/"));
     yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
@@ -370,6 +386,7 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_GET_LIBRARIES_LIST, requestGetLibrariesListSaga);
   yield takeLatest(REQUEST_UPDATE_LIBRARY, requestUpdateLibrarySaga);
   yield takeLatest(REQUEST_POST_LIBRARY, requestPostLibrarySaga);
+  yield takeLatest(REQUEST_POST_PUBLIC_LIBRARY, requestPostPublicLibrarySaga);
   yield takeLatest(REQUEST_GET_INSTITUTION_TYPE_LIST, requestGetInstitutionTypeListSaga);
   yield takeLatest(REQUEST_GET_PROJECT, requestGetProjectSaga);
   yield takeLatest(REQUEST_GET_PROJECTS_LIST, requestGetProjectsListSaga);

@@ -14,6 +14,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_UPDATE_LIBRARY, /* REQUEST_UPDATE_LIBRARY_SUCCESS, */
    REQUEST_POST_LIBRARY, REQUEST_POST_LIBRARY_SUCCESS,
    REQUEST_POST_USER, REQUEST_POST_USER_SUCCESS,
+   REQUEST_POST_PUBLIC_LIBRARY, REQUEST_POST_PUBLIC_LIBRARY_SUCCESS,
    REQUEST_GET_ROLES, REQUEST_GET_ROLES_SUCCESS,
    REQUEST_GET_PROJECT, REQUEST_GET_PROJECT_SUCCESS,
    REQUEST_GET_PROJECTS_LIST, REQUEST_GET_PROJECTS_LIST_SUCCESS,
@@ -132,6 +133,14 @@ export function requestGetLibrariesListSuccess(result) {
 export function requestPostLibrary(request, message) {
   return {
     type: REQUEST_POST_LIBRARY,
+    request,
+    message
+  };
+}
+
+export function requestPostPublicLibrary(request, message) {
+  return {
+    type: REQUEST_POST_PUBLIC_LIBRARY,
     request,
     message
   };

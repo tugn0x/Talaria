@@ -23,7 +23,6 @@ const CustomForm = (props) => {
     const {
         submitCallBack = () => null,
         title = 'Form',
-        className = '',
         submitText = "Submit",
         submitColor = "brown",
         fields = {},
@@ -31,11 +30,10 @@ const CustomForm = (props) => {
         messages,
         requestData,
         fieldsGroups = {},
-        onChangeData,
     } = props
 
     const intl = useIntl();
-    const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState(props.getValidation ? false : true)
     const [formData, setFormData] = useState({})
 
     
@@ -43,7 +41,9 @@ const CustomForm = (props) => {
     const handleChange = (value, field_name) =>{
         setFormData({ ...formData, [field_name]: value   });
         setIsSubmitDisabled(false)
-        props.onChangeData && props.onChangeData(field_name, value)  
+        // props per il wizard form registra biblioteca pubblica
+        props.onChangeData && props.onChangeData(field_name, value) 
+        props.getValidation &&  props.getValidation(document.querySelector('form').checkValidity()) 
     } 
 
     
@@ -58,7 +58,7 @@ const CustomForm = (props) => {
             const errorTarget = document.querySelectorAll('.was-validated .form-control:invalid')[0]
             scrollTo(errorTarget.offsetParent, true)
             
-            return
+            // return
         } else {
             // Tutto ok invia Form!
             let dataToSend = {}
@@ -66,19 +66,18 @@ const CustomForm = (props) => {
                 formData[key].value ? dataToSend[key] = formData[key].value : dataToSend[key] = formData[key]
             ))
             submitCallBack(dataToSend)
-            form.classList.remove('was-validated');
             console.log("Send Form", dataToSend)
         }
+       
         return
     }
-
 
     return (
         Object.keys(fields).length &&
             (<Card className="card-form">
                 <CardBody className="p-4">
                     { title !== "" ? <h2>{title}</h2> : '' }
-                    <Form onSubmit={onSubmit} noValidate>
+                    <Form onSubmit={onSubmit} noValidate className={props.className}>
                         <div className="form-groups">
                             {selectFieldsGroups(fields,fieldsGroups).map((fieldsGroup) => {
                                 // const field = fields[key];
@@ -113,8 +112,6 @@ const CustomForm = (props) => {
                                                                 ||
                                                                 field.type === 'custom-select' &&
                                                                    <>
-                                                                   
-                                                                   
                                                                    <OptionList 
                                                                         field={field}
                                                                         selectedData={

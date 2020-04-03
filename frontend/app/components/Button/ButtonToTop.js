@@ -13,7 +13,7 @@ const ButtonToTop = () => {
         }else{
             setIsVisible(false)
         } 
-      //  console.log(window)
+      // console.log(window)
     }
     
     React.useEffect(() => {
@@ -21,7 +21,7 @@ const ButtonToTop = () => {
         
         return () => {
             window.removeEventListener('scroll', setButtonVisible())
-        }
+        } 
         
     }, [])
 

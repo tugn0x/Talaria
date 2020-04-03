@@ -7,63 +7,82 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {institutionsOptionListSelector,
     countriesOptionListSelector, librarySubjectOptionListSelector } from './selectors';
-// import messages from './messages'
-import {fields, totalSteps} from './fields'
+import messages from './messages'
+import {fields, totalSteps, setNewSteps} from './fields'
 import { requestGetInstitutionTypeOptionList, requestGetCountriesOptionList,
-    requestLibrarySubjectOptionList } from "containers/Admin/actions"
+    requestLibrarySubjectOptionList, requestPostPublicLibrary } from "containers/Admin/actions"
 import './style.scss'
+import {Button,Row, Col} from 'reactstrap'
+import {useIntl} from 'react-intl'
 
 const RegisterLibrary = (props) => {
     console.log('RegisterLibrary', props)
+    const intl = useIntl()
     const {dispatch} = props
     const [data, setData] = useState({})
-    const [step, setStep] = useState(1)
-    const [currFields, setCurrFields] = useState({})
-    // const [ifNextStep, setIfNextStep] = useState({})
+    let [currentStep, setCurrentStep] = useState(1)
+    const [currentFields, setCurrentFields] = useState({})
+    const [steps, setSteps] = useState(setNewSteps)
 
+    // Fai le chiamate per le option list
     useEffect(() => {
         dispatch(requestGetInstitutionTypeOptionList())
         dispatch(requestGetCountriesOptionList())
         dispatch(requestLibrarySubjectOptionList())
     },[])
 
+    // Filtra i CAMPI / Fields da mostrare a seconda dello step in cui ti trovi
     useEffect(() => {
         let Fields = {}
         Object.keys(fields)
-            .filter(key => fields[key].group === `step_${step}` )
+            .filter(key => fields[key].group === `step_${currentStep}` )
             .map(key =>  Fields = {[key]: fields[key], ...Fields})
-        setCurrFields(Fields)
-    }, [step])
+        setCurrentFields(Fields)
+    }, [currentStep])
 
-    const onChangeStep = (formData, step) => {
+    
+    // Cambia Step
+    const onChangeStep = (formData, newStep) => {
         setData({...data, ...formData})
-        setStep(step)
-       
+        setCurrentStep(parseInt(newStep))
+        setSteps({...steps, [parseInt(newStep)]: {active: true} })
     }
 
+    // Aggiorna dati nei campi *handle change*
     const onChangeData = (field_name, value) => {
-        data[field_name] = value
-        setData(data)
+        // data[field_name] = value
+        setData({...data, [field_name]: value})
     }
 
-  /*   useEffect(() => {
-        
-    }, []) */
+    // Check validation on change input
+    const checkValidation = (validation) => {
+        if(!validation){
+            let objSteps = {}
+            Object.keys(steps).map(key => {
+                objSteps = {...objSteps, [key]: {active: key > currentStep ?  false : true } }
+            })
+            setSteps(objSteps)
+        }  
+    }
+
 
     return (
         <BasePage {...props}>
             <Header 
-                step={step} 
+                step={currentStep} 
                 totalSteps={totalSteps}
-                changeStep={(step) => onChangeStep({}, step) }/>
-            {Object.keys(currFields).length > 0 &&
-                <WizardNewLibrary 
+                steps={steps}
+                changeStep={(newStep) => onChangeStep({}, newStep) }/> 
+            {Object.keys(currentFields).length > 0 && 
+             currentStep <= totalSteps - 1 &&
+                (<WizardNewLibrary 
                     totalSteps={totalSteps}
-                    step={step}
-                    changeStep={(formData, step) => onChangeStep(formData, step) }
+                    step={currentStep}
+                    changeStep={(formData, newStep) => onChangeStep(formData, newStep) }
                     formData={data ? data : {}}
                     onChangeData={(field_name, value) => onChangeData(field_name, value)}
-                    fields={currFields}
+                    getValidation={(validation) => checkValidation(validation)}
+                    fields={currentFields}
                     institutionsOptionList={props.institutionsOptionList}
                     countriesOptionList={props.countriesOptionList}
                     librarySubjectOptionList={props.librarySubjectOptionList}
@@ -72,7 +91,24 @@ const RegisterLibrary = (props) => {
                         country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
                         subject_id: (input) => dispatch(requestLibrarySubjectOptionList(input)) 
                     }}
-                />
+                />)}
+            
+            {currentStep === totalSteps && 
+                <>
+                    {Object.keys(data).map(key => 
+                        <Row key={key}>
+                            <Col sm={6}>
+                                {key}
+                            </Col>
+                            <Col sm={6}>
+                                {data[key]}
+                            </Col>
+                        </Row>
+                    )}
+                    <Button color="brown" onClick={() => dispatch(requestPostPublicLibrary(data, intl.formatMessage(messages.createMessage)))}>
+                        Submit 
+                    </Button>
+                </>
             }
         </BasePage>
     )

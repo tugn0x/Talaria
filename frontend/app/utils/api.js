@@ -215,6 +215,11 @@ export const updateLibraryUser = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${id}`, options)
 }
 
+/// POST PUBLIC LIBRARY
+export const createPublicLibrary = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/public?include=granted_permissions,institution,country,departments`, options)
+};
 
 
 //--------- ADMIN -------------//

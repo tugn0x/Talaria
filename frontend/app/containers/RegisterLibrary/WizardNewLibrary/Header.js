@@ -1,35 +1,44 @@
 import React, { useState, useEffect } from 'react'
 import {Button} from 'reactstrap'
 const Header = (props) => {
+    console.log("Header Wizard", props)
     // const [disabled, setDisabled] = useState(false)
+   /*  const [visited, setVisited] = useState(() => {
+            let vis = []
+            for(let i = 1; i <= props.totalSteps; i++){
+                vis.push(i === 1 ? true : false)
+            }
+            return vis
+        }
+    ) */
+    
+   /*  useEffect(() => {
+        if(props.validation){
+            visited[props.step - 1] = true
+        }else {
+            visited[props.step] = false
+        }
+    }, [props.step, props.validation])  */
 
-    /* useEffect(() => {
-        setDisabled(() => {
-            props.
-        })
-    },[props.step]) */
+    useEffect(() => {
+       // console.log(visited)
+     
+    }) 
 
     return (
         <div className="header-wizard">
             <div>
-                <Button 
-                    className={props.step === 1 ? 'active' : ''}
-                    onClick={() => props.changeStep(1)}
-                >
-                    Step 1
-                </Button>
-                <Button 
-                    className={props.step === 2 ? 'active' : ''}
-                    onClick={() => props.changeStep(2)}
-                >
-                    Step 2
-                </Button>
-                <Button 
-                    className={props.step === 3 ? 'active' : ''}
-                    onClick={() => props.changeStep(3)}
-                >
-                    Step 3
-                </Button>
+                {Object.keys(props.steps).map((key) => 
+                    <Button 
+                        key={key}
+                        className={props.step === Number(key) ? 'active' : ''}
+                        onClick={() => props.changeStep(key)}
+                        disabled={key === 1 ? false : !props.steps[key].active}
+                    >
+                        Step {key}
+                        {/* console.log(key) */}
+                    </Button> 
+                )}
             </div>
         </div>
     )

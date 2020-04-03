@@ -2,6 +2,7 @@ import React  from 'react'
 // import {useIntl} from 'react-intl'
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import {Input} from 'reactstrap'
 import {isEmpty} from 'lodash'
 import {useIntl} from 'react-intl'
 import formMessages from '../CustomForm/messages'
@@ -21,16 +22,28 @@ const OptionList = (props) => {
 
     return (
        // selectedData &&
+            <>
             <Select
-                className="option-list"
+                className={`option-list ${selectedData ? '' : 'danger'}`}
                 type="custom-select"
                 value={selectedData ? selectedData : {label: intl.formatMessage(formMessages.select), value: 0}}
                 name={field.name}
                 onChange={(option) => handleChangeOptionList(option)}
                 onInputChange={(input) =>  searchOptionList && !isEmpty(searchOptionList) ? handleSearchOptionList(input, field.options) : input}
                 options={options}
-                required={field.required ? field.required : false}
-            /> // || null
+            /> 
+            <Input 
+                type="text"
+                value={selectedData}
+                style={{
+                    opacity: 0,
+                    width: "100%",
+                    height: 0,
+                    position: "absolute"
+                  }}
+                onChange={() => null}
+                required={field.required ? field.required : false} />
+            </>
     )
 }
 

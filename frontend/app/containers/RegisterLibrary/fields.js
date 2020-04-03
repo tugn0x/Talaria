@@ -16,7 +16,15 @@
     },
 }; */
 
-export const totalSteps = 3;
+export const totalSteps = 4;
+export const setNewSteps = () => {
+    let objectSteps = {}
+    for(let i = 1; i <= totalSteps; i++){
+        objectSteps[i] =  { active: i===1 ? true : false }
+    }
+    return objectSteps
+}
+
 
 export const fields = {
     name: {
@@ -110,6 +118,7 @@ export const fields = {
         label: 'app.global.phone',
         placeholder: 'app.global.phone',
         group: "step_2",
+        required: true,
         width: "col-sm-6"
     },
     fax: {
