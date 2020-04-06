@@ -26,16 +26,16 @@ export default defineMessages({
     defaultMessage: 'Change Password',
   },
   libraries: {
-    id: `${scope}.libraries`,
-    defaultMessage: 'Libraries',
+    id: `app.routes.Libraries`,
+    // defaultMessage: 'Libraries',
   },
   institutions: {
-    id: `${scope}.institutions`,
-    defaultMessage: 'Institutions',
+    id: `app.routes.Institutions`,
+    // defaultMessage: 'Institutions',
   },
   projects: {
-    id: `${scope}.projects`,
-    defaultMessage: 'Projects',
+    id: `app.routes.Projects`,
+   // defaultMessage: 'Projects',
   },
   consortia: {
     id: `${scope}.consortia`,

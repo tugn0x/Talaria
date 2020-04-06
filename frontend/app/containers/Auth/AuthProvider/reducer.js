@@ -34,11 +34,11 @@ const authReducer = (state = initialState, action) =>
   produce(state, ( draft ) => {
     switch (action.type) {
       case REQUEST_LOGIN:
-          draft.loading = true;
+       //   draft.loading = true;
           draft.error = initialState.error;
         break;
       case REQUEST_LOGIN_SUCCESS:
-          draft.loading = false;
+       //   draft.loading = false;
           draft.error = initialState.error;
           draft.oauth.token = action.result.access_token;
           draft.oauth.refreshToken = action.result.refresh_token;
