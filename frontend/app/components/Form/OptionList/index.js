@@ -34,14 +34,14 @@ const OptionList = (props) => {
             /> 
             <Input 
                 type="text"
-                value={selectedData}
+                value={selectedData || ''}
                 style={{
                     opacity: 0,
                     width: "100%",
                     height: 0,
                     position: "absolute"
                   }}
-                onChange={() => null}
+              //  onChange={(e) => e.target.value = selectedData}
                 required={field.required ? field.required : false} />
             </>
     )

@@ -103,7 +103,7 @@ import './style.scss'
                           <Button
                             type="submit"
                             color="grey"
-                            className="px-4 fullWidth"
+                            className="px-4"
                             // onClick={(e) => submitChange(e)}
                             disabled={props.auth.loading || formData.password === '' || formData.username === ''}
                           >

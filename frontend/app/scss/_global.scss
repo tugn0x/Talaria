@@ -32,7 +32,7 @@ a {
 .btn {
     border-radius: 0;
     height: 45px;
-    max-width: 350px;
+    max-width: 250px;
     margin: 0 auto;
 }
 
@@ -113,6 +113,12 @@ form {
                 border: 1px solid $danger;
             }
         }
+        .option-list {
+            &.danger {
+                border: 1px solid #f86c6b;
+            }
+            border: 1px solid #4dbd74;
+        }
     }
 }
 
@@ -128,6 +134,12 @@ ul.list-inline {
     border-radius: 0;
 }
 
+
+.btn {
+    &:focus {
+        box-shadow: 0 0 0;
+    }
+}
 
 .table {
     .row {
@@ -227,12 +239,18 @@ ul.list-inline {
     background-color: $brown;
 }
 
-.option-list > [class*=control] {
-    background-color: transparent;
-    border-radius: 0;
-    border: 1px solid #e4e7ea;
-    color: #5c6873;
-    font-size: .875rem;
+
+.option-list {
+    > [class*=control] {
+        background-color: transparent;
+        border-radius: 0;
+        border: 1px solid #e4e7ea;
+        color: #5c6873;
+        font-size: .875rem;
+        [class*=-singleValue] {
+            color: #5c6873;
+        }
+    }
 }
 
 .icon-img {

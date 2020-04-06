@@ -56,6 +56,10 @@
   
   "app.containers.RegisterNewLibrary.header": "Registra una nuova biblioteca pubblica",
   "app.containers.RegisterNewLibrary.link": "Registra nuova biblioteca",
+  "app.containers.RegisterNewLibrary.step_1": "Inserisci informazioni generali",
+  "app.containers.RegisterNewLibrary.step_2": "Inserisci informazioni generali 2",
+  "app.containers.RegisterNewLibrary.step_3": "Inserisci informazioni amministrative",
+  "app.containers.RegisterNewLibrary.step_4": "Riepilogo",
 
   "app.containers.LibraryUserPage.header": "Modifica stato utente",
 

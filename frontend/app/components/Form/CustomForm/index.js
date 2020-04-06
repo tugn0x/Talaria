@@ -28,7 +28,7 @@ const CustomForm = (props) => {
         fields = {},
         searchOptionList,
         messages,
-        requestData,
+        // requestData,
         fieldsGroups = {},
     } = props
 
@@ -73,10 +73,10 @@ const CustomForm = (props) => {
     }
 
     return (
-        Object.keys(fields).length &&
+        Object.keys(fields).length > 0 &&
             (<Card className="card-form">
                 <CardBody className="p-4">
-                    { title !== "" ? <h2>{title}</h2> : '' }
+                    { title !== "" ? <h3>{title}</h3> : '' }
                     <Form onSubmit={onSubmit} noValidate className={props.className}>
                         <div className="form-groups">
                             {selectFieldsGroups(fields,fieldsGroups).map((fieldsGroup) => {
@@ -96,7 +96,7 @@ const CustomForm = (props) => {
                                                                     <ListCheckBox
                                                                         type="checkbox"
                                                                         data={props[field.name]}
-                                                                        selectedData={requestData && requestData[field.name] && !formData[field.name] ? requestData[field.name] : formData[field.name] ? formData[field.name] : []}
+                                                                        selectedData={props.requestData && props.requestData[field.name] && !formData[field.name] ? props.requestData[field.name] : formData[field.name] ? formData[field.name] : []}
                                                                         handleChange={(value) => handleChange(value, field.name)}
                                                                     />
                                                                 ||
@@ -105,7 +105,7 @@ const CustomForm = (props) => {
                                                                     <CheckBox 
                                                                         field={field}
                                                                         label={field.label && field.label}
-                                                                        data={!formData[field.name] && requestData && requestData[field.name] ? requestData[field.name] : formData[field.name]}
+                                                                        data={!formData[field.name] && props.requestData && props.requestData[field.name] ? props.requestData[field.name] : formData[field.name]}
                                                                         handleChange={(value) => handleChange(value, field.name)}
                                                                     />   
                                                                     </>
@@ -115,7 +115,7 @@ const CustomForm = (props) => {
                                                                    <OptionList 
                                                                         field={field}
                                                                         selectedData={
-                                                                            !formData[field.name] && requestData && requestData[field.name] ? props[field.name].filter(opt => opt.value === requestData[field.name])[0] :
+                                                                            !formData[field.name] && props.requestData && props.requestData[field.name] ? props[field.name].filter(opt => opt.value === props.requestData[field.name])[0] :
                                                                             formData[field.name] 
                                                                         }
                                                                         options={props[field.name] ? props[field.name] : field.options}
@@ -127,7 +127,7 @@ const CustomForm = (props) => {
                                                                 field.type === 'switch' &&
                                                                     <Switch 
                                                                         field={field}
-                                                                        data={!formData[field.name] && requestData && requestData[field.name] ? requestData[field.name] : formData[field.name]}
+                                                                        data={!formData[field.name] && props.requestData && props.requestData[field.name] ? props.requestData[field.name] : formData[field.name]}
                                                                         label={messages[field.name]}
                                                                         handleChange={(value) => handleChange(value, field.name)}
                                                                     />
@@ -145,7 +145,7 @@ const CustomForm = (props) => {
                                                                         <InputField 
                                                                             field={field}
                                                                             label={messages[field.name] ? messages[field.name] : ""}
-                                                                            data={!formData[field.name] && requestData && requestData[field.name] ? requestData[field.name] : formData[field.name]}
+                                                                            data={!formData[field.name] && props.requestData && props.requestData[field.name] ? props.requestData[field.name] : formData[field.name]}
                                                                             handleChange={(value) => handleChange(value, field.name)}
                                                                         />  
                                                                     </>

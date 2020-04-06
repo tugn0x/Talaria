@@ -29,6 +29,10 @@ export default defineMessages({
     id: `${scope}.step_3`,
     defaultMessage: `Insert library's administrative data`,
   },
+  step_4: {
+    id: `${scope}.step_4`,
+    defaultMessage: `Summary`,
+  },
   createMessage: {
     id: `${scope}.createMessage`,
     defaultMessage: `Public Library created`,
