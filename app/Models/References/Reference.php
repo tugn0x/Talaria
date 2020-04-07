@@ -32,7 +32,8 @@ class Reference extends BaseModel
         'isbn',
         'sid',
         'pmid',
-        'group_id'
+        'group_id',
+        'status',
     ];
 
     public function patronddrequest()

@@ -28,16 +28,25 @@ class PatronDocdelRequest extends BaseModel
         'librarycounter', //rm_countbib: ogni biblio si vede le rich utente partire da 1 usando questo campo
         'status',
         'request_date',
+        'cancel_request_date', //data rich. cancellazione
+        'cancel_date', //data accettaz. cancellazione
         'fullfill_date',
         'cost_policy', //Politica di Accettazione Costi: 0=Non accetta nessun costo; 1=Accetta qualunque costo; 2=Vuole essere informato
         'forlibrary_note', //note ute->bib
         'fromlibrary_note', //note bib->ute
-        'deleted' //rm_cancella:  Richiesta di cancellazione per ordine DD: 0=NonRichiesta, 1=Richiesta
-        /*'filename', */ //lo mettiamo anche qui x file dato all'utente (se licenza lo consente)?
+        'archived', //rich archiviata o no
+        
+        // TODO definire prima il model Desk + DeliveryService + InstitutionDesk relation 
+        //delivery_service_id', //servizio di consegna della biblioteca
 
+        // DA VALUTARE
+        // filename  //lo mettiamo anche qui x file dato all'utente (se licenza lo consente)?
         //	rm_tempo_consegna_ut  	Tempo totale di consegna: rm_dataeva-rm_datarichie
         // 	rm_tempo_iniziolav 	 	Tempo per la presa in gestionde da parte della bib: dd_datarichie-rm_datarichie
         // 	rm_tempo_finelav        Tempo per la consegna del doc ricevuto da parte della bib: rm_dataeva-dd_dataeva
+
+        
+        
     ];
 
 
