@@ -16,7 +16,9 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_INSTITUTIONSTYPES_OPTIONLIST,
           REQUEST_POST_INSTITUTION,
           REQUEST_GET_COUNTRIES_OPTIONLIST,
-          UPDATE_INSTITUTION
+          UPDATE_INSTITUTION,
+          REQUEST_LIBRARYSUBJECT_OPTIONLIST,
+          REQUEST_POST_PUBLIC_LIBRARY
 } from './constants';
 import {
   requestError,
@@ -34,7 +36,8 @@ import {
   requestGetInstitutionTypeOptionListSuccess,
   requestGetCountriesOptionListSuccess,
   requestGetInstitutionSuccess,
-  requestGetRolesSuccess
+  requestGetRolesSuccess,
+  requestLibrarySubjectOptionListSuccess
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
@@ -44,7 +47,7 @@ import {getUsersList, updateUser, createUser, getUsersOptionsList,
         getInstitution, updateInstitution, getInstitutionTypesOptionList,
         createInstitution, getCountriesOptionsList,
         getProject, getProjectsList, updateProject,
-        createProject} from 'utils/api'
+        createProject, getLibrariesSubjects,createPublicLibrary} from 'utils/api'
 
 
 export function* requestUserSaga(action) {
@@ -140,6 +143,21 @@ export function* requestPostLibrarySaga(action) {
     const request = yield call(createLibrary, options);
     yield call(requestGetLibrariesListSaga);
     yield put(push("/admin/libraries"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestPostPublicLibrarySaga(action) {
+  const options = {
+    method: 'post',
+    body: {...action.request }
+  };
+  try {
+    const request = yield call(createPublicLibrary, options);
+    // yield call(requestGetLibrariesListSaga);
+    yield put(push("/"));
     yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
@@ -247,7 +265,7 @@ export function* requestUpdateInstitutionSaga(action) {
     body: action.request
   };
   try {
-    console.log(action)
+    // console.log(action)
     const request = yield call(updateInstitution, options);
     yield call(requestGetInstitutionsListSaga);
     yield put(push("/admin/institutions"));
@@ -265,6 +283,19 @@ export function* requestGetCountriesOptionListSaga(action) {
   try {
     const request = yield call(getCountriesOptionsList, options);
     yield put(requestGetCountriesOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestLibrarySubjectOptionListSaga(action) {
+  const options = {
+    method: 'get',
+    query: action.request ? action.request : ""
+  }
+  try {
+    const request = yield call(getLibrariesSubjects, options);
+    yield put(requestLibrarySubjectOptionListSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -355,6 +386,7 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_GET_LIBRARIES_LIST, requestGetLibrariesListSaga);
   yield takeLatest(REQUEST_UPDATE_LIBRARY, requestUpdateLibrarySaga);
   yield takeLatest(REQUEST_POST_LIBRARY, requestPostLibrarySaga);
+  yield takeLatest(REQUEST_POST_PUBLIC_LIBRARY, requestPostPublicLibrarySaga);
   yield takeLatest(REQUEST_GET_INSTITUTION_TYPE_LIST, requestGetInstitutionTypeListSaga);
   yield takeLatest(REQUEST_GET_PROJECT, requestGetProjectSaga);
   yield takeLatest(REQUEST_GET_PROJECTS_LIST, requestGetProjectsListSaga);
@@ -362,6 +394,7 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_POST_PROJECT, requestPostProjectSaga);
   yield takeLatest(REQUEST_GET_INSTITUTIONS_LIST, requestGetInstitutionsListSaga);
   yield takeLatest(REQUEST_INSTITUTIONSTYPES_OPTIONLIST, requestInstitutionTypeOptionListSaga);
+  yield takeLatest(REQUEST_LIBRARYSUBJECT_OPTIONLIST, requestLibrarySubjectOptionListSaga);
   yield takeLatest(REQUEST_GET_INSTITUTION, requestGetInstitutionSaga);
   yield takeLatest(REQUEST_POST_INSTITUTION, requestPostInstitutionSaga);
   yield takeLatest(REQUEST_GET_COUNTRIES_OPTIONLIST, requestGetCountriesOptionListSaga);

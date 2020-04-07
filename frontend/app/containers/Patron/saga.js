@@ -1,5 +1,5 @@
 import { call, put, select, takeLatest, fork, take  } from 'redux-saga/effects';
-import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARIES_LIST, REQUEST_ACCESS_TO_LIBRARIES, REQUEST_REFERENCES_LIST,
+import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO_LIBRARIES, REQUEST_REFERENCES_LIST,
   REQUEST_POST_REFERENCES, REQUEST_UPDATE_REFERENCES, 
   REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE } from './constants';
 import {
@@ -8,8 +8,8 @@ import {
   requestSuccess,
   requestMyLibrariesSuccess,
   requestGetMyLibrarySuccess,
-  requestGetLibraryList,
-  requestGetLibraryListSuccess,
+  /* requestGetLibraryList, */
+  requestLibraryOptionListSuccess,
   requestReferencesListSuccess,
   requestReferencesList,
   requestGetReferenceSuccess,
@@ -18,7 +18,7 @@ import { push } from 'connected-react-router';
 import { toast } from "react-toastify";
 import {  getMyLibrary,
           getMyLibraries,
-          getLibraryList,
+          getLibraryOptionList,
           requestAccessToLibrary,
           getReferencesList,
           createReference,
@@ -40,14 +40,14 @@ export function* requestMyLibrariesSaga(action) {
   }
 }
 
-export function* requestGetLibraryListSaga(action) {
+export function* requestLibraryOptionListSaga(action) {
   const options = {
     method: 'get',
     query: action.request
   }
   try {
-    const request = yield call(getLibraryList, options);
-    yield put(requestGetLibraryListSuccess(request));
+    const request = yield call(getLibraryOptionList, options);
+    yield put(requestLibraryOptionListSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -56,9 +56,7 @@ export function* requestGetLibraryListSaga(action) {
 export function* requestAccessToLibrarySaga(action) {
   const options = {
     method: 'post',
-    body: {
-      library_id: action.request.library_id
-    }
+    body: action.request
   };
   try {
     const request = yield call(requestAccessToLibrary, options);
@@ -150,7 +148,7 @@ export function* requestGetMyLibrarySaga(action) {
  */
 export default function* patronSaga() {
   yield takeLatest(REQUEST_MY_LIBRARIES, requestMyLibrariesSaga);
-  yield takeLatest(REQUEST_GET_LIBRARIES_LIST, requestGetLibraryListSaga);
+  yield takeLatest(REQUEST_GET_LIBRARY_OPTIONLIST, requestLibraryOptionListSaga);
   yield takeLatest(REQUEST_GET_MY_LIBRARY, requestGetMyLibrarySaga);
   yield takeLatest(REQUEST_ACCESS_TO_LIBRARIES, requestAccessToLibrarySaga);
   yield takeLatest(REQUEST_REFERENCES_LIST, requestReferencesListSaga);

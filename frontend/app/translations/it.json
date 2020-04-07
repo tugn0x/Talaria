@@ -29,6 +29,8 @@
   "app.global.created_at": "Aggiunto il",
   "app.global.author": "Autore",
   "app.global.pubyear": "Anno di pubblicazione",
+  "app.global.continue": "Continua",
+  "app.global.submit": "Invia",
   "app.containers.HomePage.header": "ITALIANO HOMEPAGE CONTAINER",
   "app.containers.UserPage.header": "ITALIANO UserPage CONTAINER",
   "app.containers.ChangePassword.updateMessage": "Password modificata",
@@ -43,7 +45,7 @@
   "app.containers.ReferencePage.referenceUpdate": "Riferimento aggiornata",
 
   "app.containers.MyLibrariesPage.title": "Aggiungi una biblioteca",
-  "app.containers.MyLibrariesPage.librariesList": "Seleziona una biblioteca",
+  "app.containers.MyLibrariesPage.library_id": "Seleziona una biblioteca",
   "app.containers.MyLibrariesListPage.header": "Le mie biblioteche",
   "app.containers.MyLibrariesList.createNew": "Richiedi nuova biblioteca",
   "app.containers.MyLibrariesList.edit": "Modifica biblioteca",
@@ -51,6 +53,13 @@
   "app.containers.LibrariesListPage.header": "Biblioteche",
   "app.containers.LibrariesListPage.createNew": "Richiedi nuova biblioteca",
   "app.containers.LibrariesListPage.edit": "Modifica biblioteca",
+  
+  "app.containers.RegisterNewLibrary.header": "Registra una nuova biblioteca pubblica",
+  "app.containers.RegisterNewLibrary.link": "Registra nuova biblioteca",
+  "app.containers.RegisterNewLibrary.step_1": "Inserisci informazioni generali",
+  "app.containers.RegisterNewLibrary.step_2": "Inserisci informazioni generali 2",
+  "app.containers.RegisterNewLibrary.step_3": "Inserisci informazioni amministrative",
+  "app.containers.RegisterNewLibrary.step_4": "Riepilogo",
 
   "app.containers.LibraryUserPage.header": "Modifica stato utente",
 
@@ -61,7 +70,7 @@
   "app.components.InstitutionsList.createNewInstitution": "Registra nuovo istituto",
   "app.components.InstitutionsList.editInstitution": "Modifica istituto",
 
-  "app.components.LibraryForm.institution_id": "ID della biblioteca",
+  "app.components.LibraryForm.institution_id": "ID istituto",
   "app.components.LibraryForm.subject_id": "ID della disciplina",
   "app.components.LibraryForm.country_id": "ID della nazione",
   "app.components.LibraryForm.opac": "Url dell' opac",
@@ -94,6 +103,7 @@
   "app.components.LibraryForm.terzo_code": "terzo_code",
   "app.components.LibraryForm.general_info": "Informazioni generali",
   "app.components.LibraryForm.administrative_info": "Informazioni amministrative",
+  "app.components.LibraryForm.granted_permissions": "Permessi utenti",
   "app.components.InstitutionForm.header": "Form istituto",
 
   "app.components.ReferencesForm.header": "Form Riferimenti",

@@ -6,5 +6,5 @@ return [
         'institutions' => 'App\Models\Institutions\Institution',
         'projects' => 'App\Models\Projects\Project',
         'consortia' => 'App\Models\Institutions\Consortium',
-    ]
+    ],
 ];

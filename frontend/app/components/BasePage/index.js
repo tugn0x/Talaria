@@ -5,8 +5,6 @@
  */
 
 import React, { useEffect } from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 import {Switch, Route, withRouter} from 'react-router-dom';
 import {HeaderBar, SideBar, Footer} from 'components';
 import {Container} from "reactstrap"
@@ -14,6 +12,8 @@ import { generatePath } from "react-router";
 import {
   CSSTransition,
 } from 'react-transition-group';
+import ButtonToTop from 'components/Button/ButtonToTop'
+
 
 function BasePage(props) {
   console.log('BasePage',props)
@@ -58,6 +58,7 @@ function BasePage(props) {
     }
   }
 
+
   React.useEffect(() => {
     setMounted(true)
   },[])
@@ -72,9 +73,9 @@ function BasePage(props) {
         history={props.history}
         auth={props.auth}
         logout={(request) => props.logout(request)}/>
-      <CSSTransition classNames="fade" timeout={500} in={mounted}>
+      <CSSTransition classNames="fade" unmountOnExit timeout={300} in={mounted} >
         <>
-          <div className="app-body" onClick={() => closeSideBar()}>
+          <div className="app-body" onClick={closeSideBar}>
             {props.headermenu && (
               <SideBar routes={lightRoutes} location={props.location}/>
             )}
@@ -99,7 +100,8 @@ function BasePage(props) {
               </Container>
             </main>
           </div>
-          <Footer/>
+          <Footer  isLogged={props.isLogged} />
+          <ButtonToTop />
         </>
       </CSSTransition>
     </>

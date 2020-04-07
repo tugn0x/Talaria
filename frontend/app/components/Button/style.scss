@@ -1,6 +1,6 @@
 @import '../../scss/vendors/variables';
 
-.btn-plus, .btn-back {
+.btn-plus, .btn-back, .btn-close {
     display: block;
     padding: 0.45rem;
     background: none;
@@ -27,6 +27,37 @@
             color: white;
         }
         text-decoration: none;
+    }
+}
+
+.btn-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    height: auto;
+    opacity: 0.6;
+    z-index: 1200;
+    &:hover {
+        opacity: 1;
+    }
+    i:before{
+        padding: 0;
+        font-size: 1.5rem;
+    }
+}
+
+.btn-close {
+    position: absolute;
+    top: 2px;
+    right: 6px;
+    z-index: 500;
+    height: auto;
+    padding: 0.1rem;
+    i {
+        &:before {
+            font-size: 1rem;
+            padding-right: 0;
+        }
     }
 }
 

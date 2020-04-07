@@ -12,8 +12,9 @@ import { compose } from 'redux';
 import {useIntl} from 'react-intl';
 // import {fields} from './fields';
 import messages from './messages';
-import {requestGetLibrary, requestUpdateLibrary, 
-        requestPostLibrary, requestGetRoles, requestUsersOptionList} from '../actions'
+import { requestGetInstitutionTypeOptionList, requestGetLibrary, 
+        requestUpdateLibrary, requestPostLibrary, requestGetRoles, 
+        requestUsersOptionList, requestGetCountriesOptionList, requestLibrarySubjectOptionList} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
 import {LibraryForm, Loader} from 'components';
 
@@ -23,7 +24,7 @@ function LibraryPage(props) {
     const {params} = match
     const isNew = !params.id || params.id === 'new'
     const library = admin.library
-    // const librariesList = patron.librariesList
+    // const libraryOptionList = patron.libraryOptionList
     
     useEffect(() => {
       if(!isLoading && !isNew) {
@@ -32,32 +33,35 @@ function LibraryPage(props) {
       if(!isLoading){
         dispatch(requestGetRoles())
         dispatch(requestUsersOptionList())
+        dispatch(requestGetInstitutionTypeOptionList())
+        dispatch(requestGetCountriesOptionList())
+        dispatch(requestLibrarySubjectOptionList())
       }
      }, [])
   
      
     return (
       <Loader show={isLoading}>
-        {!isNew && 
-            <LibraryForm 
-              library={library}
-              loading={isLoading}
-              usersOptionList={admin.usersOptionList}
-              searches={{ usersOptionList: (input) => dispatch(requestUsersOptionList(input)) }}
-              resources={admin.resources.libraries}
-              updateLibrary={(formData) => dispatch(requestUpdateLibrary({...formData, id: params.id}, intl.formatMessage(messages.updateMessage)))}
-            /> 
-        }
-        { isNew && 
-            <LibraryForm 
-              createLibrary={ (formData) => dispatch(requestPostLibrary(formData, intl.formatMessage(messages.createMessage))) } 
-              loading={isLoading}
-              usersOptionList={admin.usersOptionList}
-              searches={{ usersOptionList: (input) => dispatch(requestUsersOptionList(input)) }}
-              resources={admin.resources.libraries}
-              titleNewLibrary={intl.formatMessage(messages.titleNewLibrary)}
-            /> 
-        }  
+          <LibraryForm 
+            library={!isNew ? library : null}
+            loading={isLoading}
+            usersOptionList={admin.usersOptionList}
+            institutionsOptionList={admin.institutionsOptionList}
+            countriesOptionList={admin.countriesOptionList}
+            librarySubjectOptionList={admin.librarySubjectOptionList}
+            searches={{ 
+              usersOptionList: (input) => dispatch(requestUsersOptionList(input)),
+              institution_type_id: (input) => dispatch(requestGetInstitutionTypeOptionList(input)), 
+              country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
+              subject_id: (input) => dispatch(requestLibrarySubjectOptionList(input)) 
+            }}
+            resources={admin.resources.libraries}
+            titleNewLibrary={isNew ? intl.formatMessage(messages.titleNewLibrary) : ""}
+            submitFormAction={
+                !isNew ? (formData) => dispatch(requestUpdateLibrary({...formData, id: params.id}, intl.formatMessage(messages.updateMessage)))
+                : (formData) => dispatch(requestPostLibrary(formData, intl.formatMessage(messages.createMessage)))
+              }
+          /> 
       </Loader>
     );
   }

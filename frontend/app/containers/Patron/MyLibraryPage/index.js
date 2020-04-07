@@ -13,7 +13,7 @@ import {useIntl} from 'react-intl';
 import {fields} from './fields';
 import messages from './messages';
 // import { FormattedMessage } from 'react-intl';
-import {requestGetLibraryList, requestAccessToLibrary, requestGetMyLibrary} from '../actions'
+import {requestLibraryOptionList, requestAccessToLibrary, requestGetMyLibrary} from '../actions'
 import makeSelectPatron, {isPatronLoading} from '../selectors';
 import {MyLibraryForm} from 'components';
 
@@ -24,13 +24,13 @@ function MyLibraryPage(props) {
   const {params} = match
   const isNew = !params.id || params.id === 'new'
   const library = patron.library
-  const librariesList = patron.librariesList
+  const libraryOptionList = patron.libraryOptionList
   
   useEffect(() => {
     if(!isLoading && !isNew) {
       dispatch(requestGetMyLibrary(params.id))
     }else if(!isLoading && isNew){
-      dispatch(requestGetLibraryList())
+      dispatch(requestLibraryOptionList())
     }
   }, [])
 
@@ -45,11 +45,11 @@ function MyLibraryPage(props) {
       }
       {isNew &&
         <MyLibraryForm 
-          librariesList={librariesList}
-          requestAccessToLibrary={(formData) =>  dispatch(requestAccessToLibrary(formData.librariesList))}
+          libraryOptionList={libraryOptionList}
+          requestAccessToLibrary={(formData) =>  dispatch(requestAccessToLibrary(formData.library_id))}
           fields={fields}
           messages={messages} 
-          searches={{ librariesList: (input) => dispatch(requestGetLibraryList(input)) }}
+          searches={{ library_id: (input) => dispatch(requestLibraryOptionList(input)) }}
         /> 
       } 
     </>

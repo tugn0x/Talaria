@@ -38,7 +38,7 @@ const authReducer = (state = initialState, action) =>
           draft.error = initialState.error;
         break;
       case REQUEST_LOGIN_SUCCESS:
-          draft.loading = false;
+        //  draft.loading = false;
           draft.error = initialState.error;
           draft.oauth.token = action.result.access_token;
           draft.oauth.refreshToken = action.result.refresh_token;
@@ -82,16 +82,16 @@ const authReducer = (state = initialState, action) =>
           draft.oauth.expire_at = moment().add((action.result.expires_in - (60 * 30)), 'seconds').unix();
         break;
       case REQUEST_PROFILE:
-          draft.loading = true;
+      //    draft.loading = true;
           draft.error = initialState.error;
         break;
       case REQUEST_PROFILE_SUCCESS:
-          draft.loading = false;
+      //    draft.loading = false;
           draft.error = initialState.error;
           draft.user = action.result.data;
         break;
       case REQUEST_PERMISSIONS:
-          draft.loading = true;
+      //    draft.loading = true;
           draft.error = initialState.error;
         break;
       case REQUEST_PERMISSIONS_SUCCESS:

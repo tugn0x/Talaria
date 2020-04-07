@@ -14,6 +14,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_UPDATE_LIBRARY, /* REQUEST_UPDATE_LIBRARY_SUCCESS, */
    REQUEST_POST_LIBRARY, REQUEST_POST_LIBRARY_SUCCESS,
    REQUEST_POST_USER, REQUEST_POST_USER_SUCCESS,
+   REQUEST_POST_PUBLIC_LIBRARY, REQUEST_POST_PUBLIC_LIBRARY_SUCCESS,
    REQUEST_GET_ROLES, REQUEST_GET_ROLES_SUCCESS,
    REQUEST_GET_PROJECT, REQUEST_GET_PROJECT_SUCCESS,
    REQUEST_GET_PROJECTS_LIST, REQUEST_GET_PROJECTS_LIST_SUCCESS,
@@ -24,7 +25,8 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_INSTITUTIONSTYPES_OPTIONLIST, REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
    REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS, REQUEST_GET_INSTITUTION_TYPE_LIST,
    REQUEST_POST_INSTITUTION, UPDATE_INSTITUTION,
-   REQUEST_GET_COUNTRIES_OPTIONLIST, REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS
+   REQUEST_GET_COUNTRIES_OPTIONLIST, REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS,
+   REQUEST_LIBRARYSUBJECT_OPTIONLIST, REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS
 } from "./constants";
 
 export function defaultAction() {
@@ -136,6 +138,14 @@ export function requestPostLibrary(request, message) {
   };
 }
 
+export function requestPostPublicLibrary(request, message) {
+  return {
+    type: REQUEST_POST_PUBLIC_LIBRARY,
+    request,
+    message
+  };
+}
+
 export function requestGetLibrary(id) {
   return {
     type: REQUEST_GET_LIBRARY,
@@ -227,12 +237,7 @@ export function requestGetInstitutionsListSuccess(result) {
 export function requestUpdateInstitution(request, message) {
   return {
     type: UPDATE_INSTITUTION,
-    request: {
-      ...request, 
-      institution_type_id: request.institution_type_id.value,
-      country_id: request.country_id.value,
-      id: request.id
-    },
+    request,
     message
   };
 }
@@ -241,6 +246,14 @@ export function requestGetInstitution(id) {
   return {
     type: REQUEST_GET_INSTITUTION,
     id
+  };
+}
+
+export function requestPostInstitution(request, message) {
+  return {
+    type: REQUEST_POST_INSTITUTION,
+    request,
+    message
   };
 }
 
@@ -265,6 +278,20 @@ export function requestGetInstitutionTypeOptionListSuccess(result) {
   };
 }
 
+export function requestLibrarySubjectOptionList(request) {
+  return {
+    type: REQUEST_LIBRARYSUBJECT_OPTIONLIST,
+    request
+  };
+}
+
+export function requestLibrarySubjectOptionListSuccess(result) {
+  return {
+    type: REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS,
+    result
+  };
+}
+
 export function requestGetCountriesOptionList(request) {
   return {
     type: REQUEST_GET_COUNTRIES_OPTIONLIST,
@@ -276,18 +303,6 @@ export function requestGetCountriesOptionListSuccess(result) {
   return {
     type: REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS,
     result
-  };
-}
-
-export function requestPostInstitution(request, message) {
-  return {
-    type: REQUEST_POST_INSTITUTION,
-    request: {
-      ...request, 
-      institution_type_id: request.institution_type_id.value,
-      country_id: request.country_id.value
-    },
-    message
   };
 }
 

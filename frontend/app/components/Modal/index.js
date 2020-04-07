@@ -1,7 +1,6 @@
 import React from 'react'
 import {Modal, ModalHeader, ModalBody} from 'reactstrap'
 
-
 const CustomModal = (props) => {
     const {modal, toggle} = props
     

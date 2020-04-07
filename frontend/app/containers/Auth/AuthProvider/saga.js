@@ -20,7 +20,7 @@ import {
   socialLoginRequest,
   requestIdpSignup, requestPermissions,
 } from './actions';
-import {requestMyLibraries} from 'containers/Patron/actions'
+// import {requestMyLibraries} from 'containers/Patron/actions'
 import makeSelectAuth, { tokensExistsExpired, isLogged  } from './selectors';
 import { push } from 'connected-react-router';
 import { toast } from "react-toastify";
@@ -33,7 +33,7 @@ export function* defaultAuthCallsSaga() {
   // console.log('defaultAuthCallsSaga')
   yield call(userProfileSaga);
   yield call(userPermissionsSaga);
-  yield put(requestMyLibraries())
+  // yield put(requestMyLibraries())
 }
 // Individual exports for testing
 export function* loginAuthSaga(action) {
@@ -51,7 +51,7 @@ export function* loginAuthSaga(action) {
     setToken(request.access_token);
     yield put(requestLoginSuccess(request));
     yield call(defaultAuthCallsSaga);
-    yield put(push("/"));
+   // yield put(push("/"));
   } catch(e) {
     yield put(requestError(e.message));
   }

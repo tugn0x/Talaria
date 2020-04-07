@@ -69,6 +69,34 @@ class Library extends BaseModel
          'terzo_code', /*codice in SIGLA, SOLO gli amminiistrativi lo possono vedere/modificare*/
     ];
 
+    protected $public_fields = [
+        'name',
+        'email',
+        'institution_id',
+        'subject_id',
+        'country_id', //nazione/Paese (IT,US...)
+
+        'address', //indirizzo completo
+        'town', //citta
+        'district', //provincia
+        'postcode', //cap
+        'state', //Regione o Stato (EmiliaRomagna, Illinois
+        'phone',
+        'fax',
+        'url',
+        'opac',
+        /*info amministrative */
+        'vatnumber',
+        'fiscalcode',
+        'invoice_header',
+        'email_pec',
+        'ccu',
+        'administrative',
+        'administrative_email',
+        'administrative_phone',
+        'terzo_code', /*codice in SIGLA, SOLO gli amminiistrativi lo possono vedere/modificare*/
+    ];
+
     /*
      * Accessor & relation to automatically append on model instance
      */
@@ -80,7 +108,8 @@ class Library extends BaseModel
      * Default attributes
      */
     protected $attributes = [
-      'name' => ''
+      'name' => '',
+      'status' => 0
     ];
 
     protected $casts = [
@@ -136,5 +165,10 @@ class Library extends BaseModel
     public function lendingrequests()
     {
         return $this->hasMany(DocdelRequest::class,'lending_library_id');
+    }
+
+    public function getPublicFields()
+    {
+        return $this->public_fields;
     }
 }

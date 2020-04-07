@@ -1,20 +1,30 @@
-export const fieldsGroups = {
-    general_info: {
-        name: 'general_info',
+/* export const fieldsGroups = {
+    step_1: {
+        name: 'step_1',
         order: 0,
         label: 'general_info'
     },
-    granted_permissions: {
-        name: 'granted_permissions',
+    step_2: {
+        name: 'step_2',
         order: 1,
-        label: 'granted_permissions'
+        label: 'general_info'
     },
-    administrative_info: {
-        name: 'administrative_info',
+    step_3: {
+        name: 'step_3',
         order: 2,
         label: 'administrative_info'
     },
-};
+}; */
+
+export const totalSteps = 4;
+export const setNewSteps = () => {
+    let objectSteps = {}
+    for(let i = 1; i <= totalSteps; i++){
+        objectSteps[i] =  { active: i===1 ? true : false }
+    }
+    return objectSteps
+}
+
 
 export const fields = {
     name: {
@@ -22,7 +32,7 @@ export const fields = {
         required: true,
         name: "name",
         width: "col-sm-6",
-        group: "general_info",
+        group: "step_1",
         order: 1,
     },
     email: {
@@ -30,24 +40,15 @@ export const fields = {
         required: true,
         name: "email",
         width: "col-sm-6",
-        group: "general_info",
+        group: "step_1",
         order: 2,
-    },
-    granted_permissions: {
-        type: "granted_permissions",
-        name: "granted_permissions",
-        width: "col-sm-12",
-        options: "usersOptionList",
-        searchOptionList: true,
-        order: 1,
-        group: "granted_permissions",
     },
     institution_id: {
         type: "custom-select",
         required: true,
         name: "institution_id",
         width: "col-sm-6",
-        group: "general_info",
+        group: "step_1",
         options: "institution_id",
         order: 3,
         // selectedOption: "institution_type_id"
@@ -58,7 +59,7 @@ export const fields = {
         required: true,
         name: "subject_id",
         width: "col-sm-6",
-        group: "general_info",
+        group: "step_1",
         options: "subject_id",
         order: 4,
     },
@@ -67,7 +68,7 @@ export const fields = {
         required: true,
         name: "country_id",
         width: "col-md-6",
-        group: "general_info",
+        group: "step_1",
         options: "country_id",
         order: 5,
     },
@@ -76,6 +77,7 @@ export const fields = {
         name: "address",
         label: 'app.global.address',
         placeholder: 'app.global.address',
+        group: "step_2",
         width: "col-sm-6"
     },
     town: {
@@ -83,6 +85,7 @@ export const fields = {
         name: "town",
         label: 'app.global.town',
         placeholder: 'app.global.town',
+        group: "step_2",
         width: "col-sm-6"
     },
     district: {
@@ -90,6 +93,7 @@ export const fields = {
         name: "district",
         label: 'app.global.district',
         placeholder: 'app.global.district',
+        group: "step_2",
         width: "col-sm-6"
     },
     postcode: {
@@ -97,6 +101,7 @@ export const fields = {
         name: "postcode",
         label: 'app.global.postcode',
         placeholder: 'app.global.postcode',
+        group: "step_2",
         width: "col-sm-6"
     },
     state: {
@@ -104,6 +109,7 @@ export const fields = {
         name: "state",
         label: 'app.global.state',
         placeholder: 'app.global.state',
+        group: "step_2",
         width: "col-sm-6"
     },
     phone: {
@@ -111,6 +117,8 @@ export const fields = {
         name: "phone",
         label: 'app.global.phone',
         placeholder: 'app.global.phone',
+        group: "step_2",
+        required: true,
         width: "col-sm-6"
     },
     fax: {
@@ -118,169 +126,77 @@ export const fields = {
         name: "fax",
         label: 'app.global.fax',
         placeholder: 'app.global.fax',
+        group: "step_2",
         width: "col-sm-6"
     },
     url: {
         type: "text",
         name: "url",
+        group: "step_2",
         width: "col-sm-6"
     },
+    
+    /*info amministrative */
     opac: {
         type: "text",
         name: "opac",
+        group: "step_3",
         width: "col-sm-6"
     },
-    isil_code: {
-        type: "number",
-        name: "isil_code",
-        width: "col-sm-6"
-    },
-    dd_email: {
-        type: "email",
-        name: "dd_email",
-        width: "col-sm-6"
-    },
-    ill_email: {
-        type: "email",
-        name: "ill_email",
-        width: "col-sm-6"
-    },
-    dd_phone: {
-        type: "number",
-        name: "dd_phone",
-        width: "col-sm-6"
-    },
-    ill_phone: {
-        type: "text",
-        name: "ill_phone",
-        width: "col-sm-6"
-    },
-    dd_supply_conditions: {
-        type: "textarea",
-        name: "dd_supply_conditions",
-        width: "col-sm-6"
-    },
-    dd_imbalance: {
-        type: "text",
-        name: "dd_imbalance",
-        width: "col-sm-6"
-    },
-    dd_cost: {
-        type: "number",
-        name: "dd_cost",
-        width: "col-sm-6"
-    },
-    dd_user_cost: {
-        type: "number",
-        name: "dd_user_cost",
-        width: "col-sm-6"
-    },
-    susp_date_start: {
-        type: "date",
-        name: "susp_date_start",
-        width: "col-sm-6"
-    },
-    susp_date_end: {
-        type: "date",
-        name: "susp_date_end",
-        width: "col-sm-6"
-    },
-    susp_notice_days: {
-        type: "number",
-        name: "susp_notice_days",
-        width: "col-sm-6"
-    },
-    ill_cost: {
-        type: "number",
-        name: "ill_cost",
-        width: "col-sm-6"
-    },
-    ill_user_cost: {
-        type: "date",
-        name: "ill_user_cost",
-        width: "col-sm-6"
-    },
-    status: {
-        type: "custom-select",
-        name: "status",
-        label: "status",
-        width: "col-sm-6",
-        options: [
-            { value: 0, label: 'disabilitata' },
-            { value: 1, label: 'abilitata' },
-            { value: 2, label: 'in rinnovo' },
-        ]
-    },
-    nilde: {
-        type: "checkbox",
-        name: "nilde",
-        width: "col-sm-6",
-    },
-    rank: {
-        type: "text",
-        name: "rank",
-        width: "col-sm-6"
-    },
-    registration_date: {
-        type: "date",
-        name: "registration_date",
-        width: "col-sm-6"
-    },
-    /*info amministrative */
     vatnumber: {
         type: "number",
         name: "vatnumber",
         width: "col-sm-6",
-        group: "administrative_info"
+        group: "step_3",
     },
     fiscalcode: {
         type: "text",
         name: "fiscalcode",
         width: "col-sm-6",
-        group: "administrative_info"
+        group: "step_3",
     },
     invoice_header: {
         type: "text",
         name: "invoice_header",
         width: "col-sm-6",
-        group: "administrative_info"
+        group: "step_3",
     },
     email_pec: {
         type: "email",
         name: "email_pec",
         width: "col-sm-6",
-        group: "administrative_info",
+        group: "step_3",
         
     },
     ccu: {
         type: "text",
         name: "ccu",
         width: "col-sm-6",
-        group: "administrative_info"
+        group: "step_3",
     },
     administrative: {
         type: "text",
         name: "administrative",
         width: "col-sm-6",
-        group: "administrative_info"
+        group: "step_3",
     },
     administrative_email: {
         type: "email",
         name: "administrative_email",
         width: "col-sm-6",
-        group: "administrative_info",
+        group: "step_3",
         
     },
     administrative_phone: {
         type: "number",
         name: "administrative_phone",
         width: "col-sm-6",
-        group: "administrative_info"
+        group: "step_3",
     },
     terzo_code: {
         type: "text",
         name: "terzo_code",
         width: "col-sm-6",
-        group: "administrative_info"
+        group: "step_3",
     },
 }

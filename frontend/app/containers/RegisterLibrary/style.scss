@@ -1,0 +1,85 @@
+@import '../../scss/variables';
+
+/* button {
+    &.active {
+        color: red
+    }
+} */
+
+.wizard-form {
+    button{
+        max-width: 150px;
+        height: 40px;
+        float: left;
+    }
+}
+
+$circleWidth: 40px;
+
+.navigation-wizard {
+    margin-bottom: 80px;
+    div[class*='col-'] {
+        position: relative;
+        &:not(:last-child):after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            left: 50%;
+            height: 1px;
+            top: 26px;
+            background: $grey-lighter;
+        }
+    }
+    button {
+        width: 100% !important;
+        opacity: 0.8;
+        &.active {
+            opacity: 1;
+            p {
+                text-decoration: underline;
+            }
+        }
+        .circle {
+            border-radius: $circleWidth;
+            width: $circleWidth;
+            height: $circleWidth;
+            background-color: #A6525533;
+            margin: 0 auto;
+            &:before {
+                content: "\25CF";
+                font-size: 1.5rem;
+                color: $orange;
+                position: relative;
+                z-index: 100;
+            }
+        }
+        p {
+            font-size: 0.85rem;
+            color: $grey;
+            line-height: 12px;
+        }
+        &.disabled {
+            .circle {
+                background-color: transparent;
+            }
+            p {
+                font-size: 0.85rem;
+                color: $grey;
+            }
+        }
+    }
+}
+
+.summary-wizard {
+    .row {
+        padding: 2rem 0;
+        border-bottom: 1px solid $grey;
+        &:first-child {
+            border-top: 1px solid $grey;
+        }
+        
+    }
+    .btn {
+        margin-top: 40px;
+    }
+}

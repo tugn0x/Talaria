@@ -1,6 +1,7 @@
 <?php namespace App\Models\Libraries;
 
 use App\Models\BaseLightTransformer;
+use App\Models\Institutions\InstitutionTransformer;
 use Carbon\Carbon;
 use App\Models\BaseTransformer;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,10 @@ class LibraryTransformer extends BaseTransformer
 
     protected $availableIncludes = [
         'granted_permissions',
+        'departments',
+        'institution',
+        'country',
+        'subject',
     ];
 
     protected $defaultIncludes = [
@@ -27,30 +32,24 @@ class LibraryTransformer extends BaseTransformer
         });
         return $this->item($model, $transf);
     }
-
-    public function includeAbilities(Model $model)
+    public function includeDepartments(Model $model)
     {
-        $transf = new BaseLightTransformer();
-        $transf->setOnly([
-            'id',
-            'name',
-            'entity_id',
-            'entity_type',
-        ]);
-        return $this->collection(collect($model->abilities), $transf);
+        return $this->collection($model->departments, new DepartmentTransformer());
     }
-
-    public function includePermissions(Model $model)
+    public function includeInstitution(Model $model)
     {
-        $transf = new BaseLightTransformer();
-        $transf->setOnly([
-            'id',
-            'name',
-            'entity_id',
-            'entity_type',
-            'ability_id',
-        ]);
-        return $this->collection(collect($model->permissions), $transf);
+        if($model->institution)
+            return $this->item($model->institution, new InstitutionTransformer());
+    }
+    public function includeCountry(Model $model)
+    {
+        if($model->country)
+            return $this->item($model->country, new BaseLightTransformer());
+    }
+    public function includeSubject(Model $model)
+    {
+        if($model->subject)
+            return $this->item($model->subject, new BaseLightTransformer());
     }
 
 
@@ -63,4 +62,29 @@ class LibraryTransformer extends BaseTransformer
         return $this->applyTransform($model, $to_merge);
     }
 
+
+//    public function includeAbilities(Model $model)
+//    {
+//        $transf = new BaseLightTransformer();
+//        $transf->setOnly([
+//            'id',
+//            'name',
+//            'entity_id',
+//            'entity_type',
+//        ]);
+//        return $this->collection(collect($model->abilities), $transf);
+//    }
+
+//    public function includePermissions(Model $model)
+//    {
+//        $transf = new BaseLightTransformer();
+//        $transf->setOnly([
+//            'id',
+//            'name',
+//            'entity_id',
+//            'entity_type',
+//            'ability_id',
+//        ]);
+//        return $this->collection(collect($model->permissions), $transf);
+//    }
 }

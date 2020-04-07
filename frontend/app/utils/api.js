@@ -144,7 +144,7 @@ export const getMyLibraries = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/my?page=${page}&q=${query}`, options)
 };
 
-export const getLibraryList = (options) => {
+export const getLibraryOptionList = (options) => {
   options = getOption(options);
   const query = options.query ? options.query : "";
   return request(`${BASE_URL}/api/v1/libraries/option-items?label=name&q=${query}`, options)
@@ -157,9 +157,15 @@ export const getMyLibrary = (options) => {
 };
 
 export const requestAccessToLibrary = (options) => {
-  const library_id = options.body.library_id
+  const library_id = options.library_id
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users`, options)
+};
+
+export const getLibrariesSubjects = (options) => {
+  options = getOption(options);
+  const query = options.query;
+  return request(`${BASE_URL}/api/v1/libraries/subjects/option-items?label=name&q=${query}`, options)
 };
 
 // Reference //
@@ -209,6 +215,11 @@ export const updateLibraryUser = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${id}`, options)
 }
 
+/// POST PUBLIC LIBRARY
+export const createPublicLibrary = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/public?include=granted_permissions,institution,country,departments`, options)
+};
 
 
 //--------- ADMIN -------------//
@@ -252,7 +263,7 @@ export const getRoles = (options) => {
 // Libraries
 export const createLibrary = (options) => {
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries`, options)
+  return request(`${BASE_URL}/api/v1/libraries?include=granted_permissions,institution,country,departments`, options)
 };
 
 export const getLibrary = (options) => {
@@ -264,7 +275,7 @@ export const getLibrary = (options) => {
 export const updateLibrary = (options) => {
   const library_id = options.body.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/${library_id}`, options)
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}?include=granted_permissions,institution,country,departments`, options)
 };
 
 export const getLibrariesList = (options) => {
@@ -287,7 +298,7 @@ export const getInstitutionsList = (options) => {
 export const getInstitution = (options) => {
   const institution_id = options.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/institutions/${institution_id}`, options)
+  return request(`${BASE_URL}/api/v1/institutions/${institution_id}/?include=granted_permissions`, options)
 };
 
 export const updateInstitution = (options) => {

@@ -11,10 +11,8 @@ export default function Loader(props) {
   return (
   <>
    {props.show && (
-    <div className="app flex-row align-items-center">
-      <Container>
-        <Spinner color="brown"></Spinner>
-      </Container>
+    <div className="app loader flex-row align-items-center">
+      <Spinner color="brown"></Spinner>
     </div>
    )}
    {!props.show && props.children}
