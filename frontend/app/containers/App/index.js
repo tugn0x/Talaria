@@ -39,7 +39,7 @@ function App(props) {
 
 
   return (
-    <>
+    !props.auth.loading && 
       <Switch>
         <Route exact path={"/signup"}  component={() => <SignupPage {...authProps} history={history} />} />
         <Route path={"/forgot-password/:reset_token?"} component={({match}) => <ForgotPassword {...authProps} history={history} match={match} />} />
@@ -57,13 +57,9 @@ function App(props) {
         <Route path="/consortium" component={() => <HomePage {...authProps} headermenu={true}/> }  />
         <Route path="/institution" component={() => <HomePage {...authProps} headermenu={true}/> } />
         <Route path="/alpe" component={() => <HomePage {...authProps}/> }  />
-        <Route exact path="/" component={(routerProps) => <HomePage {...authProps}>
-          <h1 style={{color: 'green'}}>ciao</h1>
-        </HomePage> }/>
+        <Route exact path="/" component={(routerProps) => <HomePage {...authProps} />}/>
         <Route component={() => <NotFoundPage {...authProps} /> } path="*" />
       </Switch>
-
-    </>
   );
 }
 

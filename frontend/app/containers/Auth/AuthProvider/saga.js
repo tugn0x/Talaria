@@ -51,7 +51,7 @@ export function* loginAuthSaga(action) {
     setToken(request.access_token);
     yield put(requestLoginSuccess(request));
     yield call(defaultAuthCallsSaga);
-    yield put(push("/"));
+   // yield put(push("/"));
   } catch(e) {
     yield put(requestError(e.message));
   }

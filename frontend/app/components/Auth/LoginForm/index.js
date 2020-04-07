@@ -61,7 +61,7 @@ import './style.scss'
   return (
         <div className="login-form">
           <Row className="justify-content-center">
-            <Col md="6">
+            <Col md="6" sm="8">
               <CardGroup>
                 <Card>
                   <CardBody>
