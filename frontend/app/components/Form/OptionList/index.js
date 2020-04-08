@@ -41,7 +41,7 @@ const OptionList = (props) => {
                     height: 0,
                     position: "absolute"
                   }}
-              //  onChange={(e) => e.target.value = selectedData}
+                onChange={(e) => null}
                 required={field.required ? field.required : false} />
             </>
     )

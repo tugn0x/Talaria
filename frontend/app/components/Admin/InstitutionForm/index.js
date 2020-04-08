@@ -8,42 +8,26 @@ import SimpleForm from 'components/SimpleForm'
 
 const InstitutionForm = (props) => {
     console.log('InstitutionForm', props)
-    const { institution,resources,  usersOptionList, updateInstitution, loading, createInstitution, searches, institutionsOptionList, countriesOptionList} = props
+    const { institution,resources,  usersOptionList, submitFormAction, loading, searches, institutionsTypesOptionList, countriesOptionList} = props
     const intl = useIntl();
+    // console.log(intl.formatMessage(messages.header))
     return (
         <SimpleForm loading={loading}>
-            { institution &&
-                <CustomForm 
-                    submitCallBack={(formData) => updateInstitution(formData)} 
-                    requestData={institution}
-                    fields={fields} 
-                    fieldsGroups={fieldsGroups}
-                    institution_type_id={institutionsOptionList} 
-                    country_id={countriesOptionList}
-                    usersOptionList={usersOptionList}
-                    resources={resources}
-                    granted_permissions={institution.granted_permissions}
-                    title={institution.name}
-                    messages={messages}
-                    searchOptionList={searches}
-                />
-            || 
-                <CustomForm
-                    institution_type_id={institutionsOptionList}
-                    country_id={countriesOptionList}
-                    submitCallBack={(formData) => createInstitution(formData)}
-                    fields={fields}
-                    fieldsGroups={fieldsGroups}
-                    searchOptionList={searches}
-                    usersOptionList={usersOptionList}
-                    resources={resources}
-                    granted_permissions={[]}
-                    title={intl.formatMessage(messages.header)}
-                    messages={{...messages, ...globalMessages}}
-                />
-            }
+            <CustomForm 
+                submitCallBack={(formData) => submitFormAction(formData)}  
+                requestData={institution ? institution : null}
+                fields={fields} 
+                fieldsGroups={fieldsGroups}
+                institution_type_id={institutionsTypesOptionList} 
+                country_id={countriesOptionList}
+                usersOptionList={usersOptionList}
+                resources={resources}
+                granted_permissions={institution.granted_permissions}
+                title={institution && institution.name ? institution.name : intl.formatMessage(messages.header)}
+                messages={{...messages, ...globalMessages}}
+                searchOptionList={searches}
+            />
         </SimpleForm>
-        
     )
 }
 

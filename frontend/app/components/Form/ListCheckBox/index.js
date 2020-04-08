@@ -21,7 +21,7 @@ const ListCheckBox = (props) => {
 
     return (
         <>
-           <Row className="">
+           <div className="d-flex flex-wrap">
                 {formData && data.map(name => 
                     type === 'checkbox' &&
                     <CustomInput
@@ -35,7 +35,7 @@ const ListCheckBox = (props) => {
                         checked={formData.includes(name)}
                     />   
                 ) }
-            </Row> 
+            </div> 
         </>
     )
 }

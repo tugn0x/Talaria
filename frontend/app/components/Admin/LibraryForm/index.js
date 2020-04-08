@@ -25,7 +25,7 @@ const LibraryForm = (props) => {
                     requestData={library ? library : null}
                     fields={fields} 
                     fieldsGroups={fieldsGroups}
-                    title={library ? library.name : intl.formatMessage(messages.header)}
+                    title={library && library.name ? library.name : intl.formatMessage(messages.header)}
                     usersOptionList={usersOptionList}
                     institution_id={institutionsOptionList} 
                     country_id={countriesOptionList}

@@ -10,7 +10,7 @@ import wizardMessages from './messages'
 import globalMessages from 'utils/globalMessages';
 import messages from 'components/Admin/LibraryForm/messages';
 import {fields, totalSteps, setNewSteps} from './fields'
-import { requestGetInstitutionTypeOptionList, requestGetCountriesOptionList,
+import { requestGetInstitutionsOptionList, requestGetCountriesOptionList,
     requestLibrarySubjectOptionList, requestPostPublicLibrary } from "containers/Admin/actions"
 import './style.scss'
 import {Button,Row, Col} from 'reactstrap'
@@ -28,7 +28,7 @@ const RegisterLibrary = (props) => {
 
     // Fai le chiamate per le option list
     useEffect(() => {
-        dispatch(requestGetInstitutionTypeOptionList())
+        dispatch(requestGetInstitutionsOptionList())
         dispatch(requestGetCountriesOptionList())
         dispatch(requestLibrarySubjectOptionList())
     },[])
@@ -91,7 +91,7 @@ const RegisterLibrary = (props) => {
                     country_id={props.countriesOptionList}
                     subject_id={props.librarySubjectOptionList}
                     searchOptionList={{ 
-                        institution_type_id: (input) => dispatch(requestGetInstitutionTypeOptionList(input)), 
+                        institution_type_id: (input) => dispatch(requestGetInstitutionsOptionList(input)), 
                         country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
                         subject_id: (input) => dispatch(requestLibrarySubjectOptionList(input)) 
                     }}

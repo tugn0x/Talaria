@@ -12,7 +12,7 @@ import { compose } from 'redux';
 import {useIntl} from 'react-intl';
 // import {fields} from './fields';
 import messages from './messages';
-import { requestGetInstitutionTypeOptionList, requestGetLibrary, 
+import { requestGetInstitutionsOptionList, requestGetLibrary, 
         requestUpdateLibrary, requestPostLibrary, requestGetRoles, 
         requestUsersOptionList, requestGetCountriesOptionList, requestLibrarySubjectOptionList} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
@@ -33,7 +33,7 @@ function LibraryPage(props) {
       if(!isLoading){
         dispatch(requestGetRoles())
         dispatch(requestUsersOptionList())
-        dispatch(requestGetInstitutionTypeOptionList())
+        dispatch(requestGetInstitutionsOptionList())
         dispatch(requestGetCountriesOptionList())
         dispatch(requestLibrarySubjectOptionList())
       }
@@ -51,7 +51,7 @@ function LibraryPage(props) {
             librarySubjectOptionList={admin.librarySubjectOptionList}
             searches={{ 
               usersOptionList: (input) => dispatch(requestUsersOptionList(input)),
-              institution_type_id: (input) => dispatch(requestGetInstitutionTypeOptionList(input)), 
+              institution_type_id: (input) => dispatch(requestGetInstitutionsOptionList(input)), 
               country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
               subject_id: (input) => dispatch(requestLibrarySubjectOptionList(input)) 
             }}

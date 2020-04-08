@@ -310,6 +310,12 @@ export const updateInstitution = (options) => {
 export const getInstitutionTypesOptionList = (options) => {
   options = getOption(options);
   const query = options.query;
+  return request(`${BASE_URL}/api/v1/institutions/institution-types/option-items?label=name&q=${query}`, options)
+};
+
+export const getInstitutionsOptionList = (options) => {
+  options = getOption(options);
+  const query = options.query;
   return request(`${BASE_URL}/api/v1/institutions/option-items?label=name&q=${query}`, options)
 };
 

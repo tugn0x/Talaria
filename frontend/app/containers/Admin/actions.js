@@ -21,6 +21,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_UPDATE_PROJECT, 
    REQUEST_POST_PROJECT,
    REQUEST_GET_INSTITUTIONS_LIST, REQUEST_GET_INSTITUTIONS_LIST_SUCCESS,
+   REQUEST_GET_INSTITUTIONS_OPTIONLIST, REQUEST_GET_INSTITUTIONS_OPTIONLIST_SUCCESS,
    REQUEST_GET_INSTITUTION, REQUEST_GET_INSTITUTION_SUCCESS,
    REQUEST_INSTITUTIONSTYPES_OPTIONLIST, REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
    REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS, REQUEST_GET_INSTITUTION_TYPE_LIST,
@@ -264,6 +265,21 @@ export function requestGetInstitutionSuccess(result) {
   };
 }
 
+
+export function requestGetInstitutionsOptionList(request) {
+  return {
+    type: REQUEST_GET_INSTITUTIONS_OPTIONLIST,
+    request
+  };
+}
+
+export function requestGetInstitutionsOptionListSuccess(result) {
+  return {
+    type: REQUEST_GET_INSTITUTIONS_OPTIONLIST_SUCCESS,
+    result
+  };
+}
+
 export function requestGetInstitutionTypeOptionList(request) {
   return {
     type: REQUEST_INSTITUTIONSTYPES_OPTIONLIST,
@@ -277,6 +293,8 @@ export function requestGetInstitutionTypeOptionListSuccess(result) {
     result
   };
 }
+
+
 
 export function requestLibrarySubjectOptionList(request) {
   return {

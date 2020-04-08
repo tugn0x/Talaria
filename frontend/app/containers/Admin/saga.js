@@ -13,6 +13,7 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_POST_PROJECT,
           REQUEST_GET_INSTITUTIONS_LIST,
           REQUEST_GET_INSTITUTION,
+          REQUEST_GET_INSTITUTIONS_OPTIONLIST,
           REQUEST_INSTITUTIONSTYPES_OPTIONLIST,
           REQUEST_POST_INSTITUTION,
           REQUEST_GET_COUNTRIES_OPTIONLIST,
@@ -34,6 +35,7 @@ import {
   requestGetProjectsListSuccess,
   requestGetInstitutionsListSuccess,
   requestGetInstitutionTypeOptionListSuccess,
+  requestGetInstitutionsOptionListSuccess,
   requestGetCountriesOptionListSuccess,
   requestGetInstitutionSuccess,
   requestGetRolesSuccess,
@@ -45,6 +47,7 @@ import {getUsersList, updateUser, createUser, getUsersOptionsList,
         getRoles, getUser, getLibrary, getLibrariesList, updateLibrary,
         createLibrary, getInstituionTypeList, getInstitutionsList,
         getInstitution, updateInstitution, getInstitutionTypesOptionList,
+        getInstitutionsOptionList,
         createInstitution, getCountriesOptionsList,
         getProject, getProjectsList, updateProject,
         createProject, getLibrariesSubjects,createPublicLibrary} from 'utils/api'
@@ -246,6 +249,19 @@ export function* requestGetInstitutionSaga(action) {
   }
 }
 
+export function* requestInstitutionsOptionListSaga(action) {
+  const options = {
+    method: 'get',
+    query: action.request ? action.request : ""
+  }
+  try {
+    const request = yield call(getInstitutionsOptionList, options);
+    yield put(requestGetInstitutionsOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 export function* requestInstitutionTypeOptionListSaga(action) {
   const options = {
     method: 'get',
@@ -394,6 +410,7 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_POST_PROJECT, requestPostProjectSaga);
   yield takeLatest(REQUEST_GET_INSTITUTIONS_LIST, requestGetInstitutionsListSaga);
   yield takeLatest(REQUEST_INSTITUTIONSTYPES_OPTIONLIST, requestInstitutionTypeOptionListSaga);
+  yield takeLatest(REQUEST_GET_INSTITUTIONS_OPTIONLIST, requestInstitutionsOptionListSaga);
   yield takeLatest(REQUEST_LIBRARYSUBJECT_OPTIONLIST, requestLibrarySubjectOptionListSaga);
   yield takeLatest(REQUEST_GET_INSTITUTION, requestGetInstitutionSaga);
   yield takeLatest(REQUEST_POST_INSTITUTION, requestPostInstitutionSaga);

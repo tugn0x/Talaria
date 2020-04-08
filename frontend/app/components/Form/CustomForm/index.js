@@ -13,6 +13,7 @@ import OptionList from '../OptionList'
 import CheckBox from '../CheckBox'
 import './style.scss'
 import scrollTo from 'utils/scrollTo';
+import {withRouter} from 'react-router-dom'
 // PROPS
 // fields
 // callback action
@@ -28,6 +29,7 @@ const CustomForm = (props) => {
         fields = {},
         searchOptionList,
         messages,
+        cancelButton= true,
         // requestData,
         fieldsGroups = {},
     } = props
@@ -62,6 +64,7 @@ const CustomForm = (props) => {
         } else {
             // Tutto ok invia Form!
             let dataToSend = {}
+            // Nel caso ci siano option list, allora restituisci solo l id / value del risultato
              Object.keys(formData).map(key => (
                 formData[key].value ? dataToSend[key] = formData[key].value : dataToSend[key] = formData[key]
             ))
@@ -76,7 +79,7 @@ const CustomForm = (props) => {
         Object.keys(fields).length > 0 &&
             (<Card className="card-form">
                 <CardBody className="p-4">
-                    { title !== "" ? <h3>{title}</h3> : '' }
+                    { <h3>{title}</h3>  }
                     <Form onSubmit={onSubmit} noValidate className={props.className}>
                         <div className="form-groups">
                             {selectFieldsGroups(fields,fieldsGroups).map((fieldsGroup) => {
@@ -159,9 +162,16 @@ const CustomForm = (props) => {
                             })}
                         {props.children}
                         </div>
-                        <Button color={submitColor} disabled={isSubmitDisabled} type="submit" block>
-                            {submitText}
-                        </Button>
+                        <div className="d-flex justify-content-between">
+                            <Button color={submitColor} disabled={isSubmitDisabled} type="submit" block>
+                                {submitText}
+                            </Button>
+                            {cancelButton && 
+                                <Button color="secondary" onClick={() => props.history.goBack() } >
+                                Annulla
+                                </Button> 
+                            }
+                        </div>
                     </Form>
                 </CardBody>
             </Card>)
@@ -173,4 +183,4 @@ CustomForm.propTypes = {
     fields: PropTypes.object.isRequired
 };
 
-export default CustomForm
+export default withRouter(CustomForm)
