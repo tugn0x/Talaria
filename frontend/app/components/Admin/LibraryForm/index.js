@@ -5,7 +5,8 @@ import {fields,fieldsGroups} from './fields';
 import globalMessages from 'utils/globalMessages';
 import messages from './messages';
 /* import Loader from 'components/Form/Loader.js';
-import {useIntl} from 'react-intl'; */
+*/
+import {useIntl} from 'react-intl';
 import SimpleForm from 'components/SimpleForm'
 
 const LibraryForm = (props) => {
@@ -15,7 +16,7 @@ const LibraryForm = (props) => {
             createLibrary, titleNewLibrary, resources,
             submitFormAction, institutionsOptionList, 
             countriesOptionList, librarySubjectOptionList} = props
-   // const intl = useIntl();
+    const intl = useIntl();
     
     return (
             <SimpleForm loading={loading}>
@@ -24,7 +25,7 @@ const LibraryForm = (props) => {
                     requestData={library ? library : null}
                     fields={fields} 
                     fieldsGroups={fieldsGroups}
-                    title={library.name}
+                    title={library ? library.name : intl.formatMessage(messages.header)}
                     usersOptionList={usersOptionList}
                     institution_id={institutionsOptionList} 
                     country_id={countriesOptionList}

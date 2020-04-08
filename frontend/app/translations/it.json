@@ -105,6 +105,7 @@
   "app.components.LibraryForm.administrative_info": "Informazioni amministrative",
   "app.components.LibraryForm.granted_permissions": "Permessi utenti",
   "app.components.InstitutionForm.header": "Form istituto",
+  "app.components.LibraryForm.header": "Registrazione biblioteca",
 
   "app.components.ReferencesForm.header": "Form Riferimenti",
   "app.components.ReferencesForm.pubyear": "Anno di pubblicazione",
