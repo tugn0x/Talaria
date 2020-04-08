@@ -30,6 +30,7 @@ Route::group([
     Route::get('institution-types', 'InstitutionTypeController@index')->name('index');
     Route::put('institution-types/{id}', 'InstitutionTypeController@update')->name('update');
     Route::post('institution-types', 'InstitutionTypeController@store')->name('store');
+    Route::get('institution-types/option-items', 'InstitutionTypeController@optionList')->name('institution-types.option-items');
 
     Route::get('', 'InstitutionController@index')->name('index');
     Route::post('', 'InstitutionController@create')->name('create');
