@@ -27,7 +27,7 @@ Route::group([
     Route::group([
         'as' => 'api.v1.libraries.subjects.',
     ], function () {
-        Route::get('', 'SubjectController@index')->name('index');
+        Route::get('subjects', 'SubjectController@index')->name('index');
         Route::get('subjects/option-items', 'SubjectController@optionList')->name('subjects.option-items');
     });
 
