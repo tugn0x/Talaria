@@ -136,5 +136,9 @@ export default defineMessages({
   submit: {
     id: `${scope}.submit`,
     defaultMessage: "Submit",
+  },
+  cancel: {
+    id: `${scope}.cancel`,
+    defaultMessage: "Cancel",
   }
 });

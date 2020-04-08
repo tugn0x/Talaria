@@ -168,7 +168,7 @@ const CustomForm = (props) => {
                             </Button>
                             {cancelButton && 
                                 <Button color="secondary" onClick={() => props.history.goBack() } >
-                                Annulla
+                                    {intl.formatMessage(formMessages.cancel)}
                                 </Button> 
                             }
                         </div>

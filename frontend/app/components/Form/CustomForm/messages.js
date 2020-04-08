@@ -15,5 +15,8 @@ export default defineMessages({
   },
   invalid_field: {
     id: `app.global.invalid_field`,
+  },
+  cancel: {
+    id: `app.global.cancel`,
   }
 });
