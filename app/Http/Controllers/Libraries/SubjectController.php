@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Libraries;
 
 use App\Models\BaseLightTransformer;
-use App\Models\Libraries\DepartmentTransformer;
-use App\Models\Libraries\Library;
-use App\Models\Libraries\LibraryTransformer;
+use App\Models\Libraries\Subject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use App\Models\Libraries\SubjectTransformer;
 
 class SubjectController extends ApiController
 {
@@ -16,7 +15,7 @@ class SubjectController extends ApiController
      *
      * @return void
      */
-    public function __construct(Library $model, BaseLightTransformer $transformer)
+    public function __construct(Subject $model, SubjectTransformer $transformer)
     {
         $this->model = $model;
 

@@ -8,6 +8,7 @@ use App\Models\Institutions\InstitutionType;
 use App\Models\Libraries\Library;
 use App\Models\Projects\Project;
 use App\Models\Libraries\LibraryUser;
+use App\Models\Libraries\Subject;
 use App\Models\References\Reference;
 use App\Models\Users\User;
 use App\Policies\BasePolicy;
@@ -38,6 +39,7 @@ class AuthServiceProvider extends ServiceProvider
         Project::class => BasePolicy::class,
         Institution::class => BasePolicy::class,
         Country::class => BasePolicy::class,
+        Subject::class => BasePolicy::class,
     ];
 
     /**
