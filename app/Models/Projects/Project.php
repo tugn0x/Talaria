@@ -4,9 +4,12 @@ namespace App\Models\Projects;
 
 use App\Models\BaseModel;
 use App\Models\Libraries\Library;
+use App\Traits\Model\ModelPermissionsTrait;
 
 class Project extends BaseModel
 {
+    use ModelPermissionsTrait;
+
     protected $fillable = [
         'name',
         'active',
