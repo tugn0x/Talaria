@@ -264,6 +264,9 @@ ul.list-inline {
     &.institutions {
         @include institutions_icon
     }
+    &.projects {
+        @include projects_icon
+    }
 }
 
 /* .switch-success .switch-input:checked+.switch-slider {

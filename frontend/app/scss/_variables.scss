@@ -26,9 +26,13 @@ $theme-colors: (
 
 $libraries_icon: '../images/libraries.svg';
 $institutions_icon: '../images/institutions.svg';
+$projects_icon: '../images/projects.svg';
 @mixin libraries_icon {
   background-image: url($libraries_icon);
 }
 @mixin institutions_icon {
   background-image: url($institutions_icon);
+}
+@mixin projects_icon {
+  background-image: url($projects_icon);
 }
