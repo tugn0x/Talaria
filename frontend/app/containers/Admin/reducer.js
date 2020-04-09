@@ -161,7 +161,6 @@ const AdminReducer = (state = initialState, action) =>
         draft.loading = true;
         draft.error = action.error;
         break;
-      
       case REQUEST_GET_INSTITUTIONS_OPTIONLIST:
         draft.error = action.error;
         break;
@@ -169,7 +168,6 @@ const AdminReducer = (state = initialState, action) =>
         draft.error = initialState.error;
         draft.institutionsOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break;
-      
       case REQUEST_GET_INSTITUTIONS_LIST:
         draft.loading = true;
         draft.error = action.error;
@@ -223,7 +221,7 @@ const AdminReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = initialState.error;
         draft.project = action.result.data
-        
+        draft.project.granted_permissions = action.result.data.granted_permissions.data
         break;
       case REQUEST_UPDATE_PROJECT:
         draft.loading = true;

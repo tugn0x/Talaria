@@ -29,6 +29,15 @@ export const fields = {
         group: "general_info",
        
     },
+    granted_permissions: {
+        type: "granted_permissions",
+        name: "granted_permissions",
+        width: "col-sm-12",
+        options: "usersOptionList",
+        searchOptionList: true,
+        // order: 1,
+        // group: "granted_permissions",
+    },
    
     /*info amministrative */
     vatnumber: {

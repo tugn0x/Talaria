@@ -16,6 +16,10 @@ export default defineMessages({
     id: `app.components.ProjectForm.active`,
     defaultMessage: 'Active',
   },
+  granted_permissions: {
+    id: `${scope}.granted_permissions`,
+    defaultMessage: 'Users permissions',
+  },
   vatnumber: {
     id: `app.components.ProjectForm.vatnumber`,
     defaultMessage: 'PIVA',

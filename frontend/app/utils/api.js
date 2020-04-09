@@ -298,13 +298,13 @@ export const getInstitutionsList = (options) => {
 export const getInstitution = (options) => {
   const institution_id = options.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/institutions/${institution_id}/?include=granted_permissions`, options)
+  return request(`${BASE_URL}/api/v1/institutions/${institution_id}?include=granted_permissions`, options)
 };
 
 export const updateInstitution = (options) => {
   const institution_id = options.body.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/institutions/${institution_id}`, options)
+  return request(`${BASE_URL}/api/v1/institutions/${institution_id}?include=granted_permissions`, options)
 };
 
 export const getInstitutionTypesOptionList = (options) => {
@@ -327,7 +327,7 @@ export const getCountriesOptionsList = (options) => {
 
 export const createInstitution = (options) => {
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/institutions`, options)
+  return request(`${BASE_URL}/api/v1/institutions?include=granted_permissions`, options)
 };
 
 export const getInstituionTypeList = (options) => {
@@ -339,19 +339,19 @@ export const getInstituionTypeList = (options) => {
 
 export const createProject = (options) => {
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/projects`, options)
+  return request(`${BASE_URL}/api/v1/projects?include=granted_permissions`, options)
 };
 
 export const getProject = (options) => {
   const project_id = options.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/projects/${project_id}`, options)
+  return request(`${BASE_URL}/api/v1/projects/${project_id}?include=granted_permissions`, options)
 };
 
 export const updateProject = (options) => {
   const project_id = options.body.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/projects/${project_id}`, options)
+  return request(`${BASE_URL}/api/v1/projects/${project_id}?include=granted_permissions`, options)
 };
 
 export const getProjectsList = (options) => {
@@ -359,6 +359,12 @@ export const getProjectsList = (options) => {
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/projects/?page=${page}`, options)
 };
+export const getProjectsOptionList = (options) => {
+  options = getOption(options);
+  const query = options.query;
+  return request(`${BASE_URL}/api/v1/projects/option-items?label=name&q=${query}`, options)
+};
+
 
 /*
 |        | GET|HEAD | api/v1/institutions/institution-types                   | api.v1.institutions.index                              | App\Http\Controllers\Institutions\InstitutionTypeController@index         | api,auth:api                                     |

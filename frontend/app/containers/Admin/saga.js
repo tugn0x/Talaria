@@ -9,6 +9,7 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_GET_INSTITUTION_TYPE_LIST,
           REQUEST_GET_PROJECT,
           REQUEST_GET_PROJECTS_LIST,
+          REQUEST_GET_PROJECTS_OPTIONLIST,
           REQUEST_UPDATE_PROJECT,
           REQUEST_POST_PROJECT,
           REQUEST_GET_INSTITUTIONS_LIST,
@@ -33,6 +34,7 @@ import {
   requestGetInstitutionTypeListSuccess,
   requestGetProjectSuccess,
   requestGetProjectsListSuccess,
+  requestGetProjectsOptionListSuccess,
   requestGetInstitutionsListSuccess,
   requestGetInstitutionTypeOptionListSuccess,
   requestGetInstitutionsOptionListSuccess,
@@ -49,7 +51,7 @@ import {getUsersList, updateUser, createUser, getUsersOptionsList,
         getInstitution, updateInstitution, getInstitutionTypesOptionList,
         getInstitutionsOptionList,
         createInstitution, getCountriesOptionsList,
-        getProject, getProjectsList, updateProject,
+        getProject, getProjectsList, updateProject,getProjectsOptionList,
         createProject, getLibrariesSubjects,createPublicLibrary} from 'utils/api'
 
 
@@ -388,6 +390,19 @@ export function* requestGetProjectsListSaga(action = {}) {
   }
 }
 
+export function* requestProjectsOptionListSaga(action) {
+  const options = {
+    method: 'get',
+    query: action.request ? action.request : ""
+  }
+  try {
+    const request = yield call(getProjectsOptionList, options);
+    yield put(requestGetProjectsOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 /**
  * Root saga manages watcher lifecycle
  */
@@ -406,6 +421,7 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_GET_INSTITUTION_TYPE_LIST, requestGetInstitutionTypeListSaga);
   yield takeLatest(REQUEST_GET_PROJECT, requestGetProjectSaga);
   yield takeLatest(REQUEST_GET_PROJECTS_LIST, requestGetProjectsListSaga);
+  yield takeLatest(REQUEST_GET_PROJECTS_OPTIONLIST, requestProjectsOptionListSaga);
   yield takeLatest(REQUEST_UPDATE_PROJECT, requestUpdateProjectSaga);
   yield takeLatest(REQUEST_POST_PROJECT, requestPostProjectSaga);
   yield takeLatest(REQUEST_GET_INSTITUTIONS_LIST, requestGetInstitutionsListSaga);

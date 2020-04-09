@@ -20,6 +20,10 @@ export default defineMessages({
     id: `app.components.LibraryForm.country_id`,
     defaultMessage: 'Country ID',
   },
+  granted_permissions: {
+    id: `${scope}.granted_permissions`,
+    defaultMessage: 'Users permissions',
+  },
   vatnumber: {
     id: `app.components.LibraryForm.vatnumber`,
     defaultMessage: 'PIVA',

@@ -13,9 +13,11 @@ import {useIntl} from 'react-intl';
 // import {fields} from './fields';
 import messages from './messages';
 import { FormattedMessage } from 'react-intl';
-import {requestGetProject, requestUpdateProject, requestPostProject} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
 import {ProjectForm, Loader} from 'components';
+import { requestGetProject, requestUpdateProject, requestPostProject, 
+  requestUsersOptionList, requestGetRoles } from '../actions';
+
 
 
 function ProjectPage(props) {
@@ -24,11 +26,14 @@ function ProjectPage(props) {
     const {params} = match
     const isNew = !params.id || params.id === 'new'
     const project = admin.project
-    // const projectsList = patron.projectsList
     
     useEffect(() => {
       if(!isLoading && !isNew) {
-         dispatch(requestGetProject(params.id))
+        dispatch(requestGetProject(params.id))
+     }
+     if(!isLoading){
+        dispatch(requestGetRoles())
+        dispatch(requestUsersOptionList())
       }
       // console.log(isLoading)
      }, [])
@@ -36,22 +41,23 @@ function ProjectPage(props) {
      
     return (
     <Loader show={isLoading}>
-        { !isNew && 
-            <ProjectForm 
-              project={project}
-              loading={isLoading}
-              updateProject={(formData) => dispatch(requestUpdateProject({...formData, id: params.id}, intl.formatMessage(messages.updateMessage)))}
-            /> 
+      <ProjectForm 
+      project={!isNew ? project : null}
+      loading={isLoading}
+      usersOptionList={admin.usersOptionList}
+      searches={{ 
+        usersOptionList: (input) => dispatch(requestUsersOptionList(input)),
+      }}
+      resources={admin.resources.projects}
+      titleNewProject={isNew ? intl.formatMessage(messages.titleNewProject) : ""}
+      submitFormAction={
+          !isNew ? (formData) => dispatch(requestUpdateProject({...formData, id: params.id}, intl.formatMessage(messages.updateMessage)))
+          : (formData) => dispatch(requestPostProject(formData, intl.formatMessage(messages.createMessage)))
         }
-        { isNew && 
-            <ProjectForm 
-              createProject={ (formData) => dispatch(requestPostProject(formData, intl.formatMessage(messages.createMessage))) } 
-              loading={isLoading}
-              titleNewProject={intl.formatMessage(messages.titleNewProject)}
-            /> 
-        }
-      </Loader>
-    );
+    />
+    </Loader>
+
+    )
   }
   
   const mapStateToProps = createStructuredSelector({

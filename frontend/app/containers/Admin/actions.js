@@ -18,6 +18,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_GET_ROLES, REQUEST_GET_ROLES_SUCCESS,
    REQUEST_GET_PROJECT, REQUEST_GET_PROJECT_SUCCESS,
    REQUEST_GET_PROJECTS_LIST, REQUEST_GET_PROJECTS_LIST_SUCCESS,
+   REQUEST_GET_PROJECS_OPTIONLIST, REQUEST_GET_PROJECTS_OPTIONLIST_SUCCESS,
    REQUEST_UPDATE_PROJECT, 
    REQUEST_POST_PROJECT,
    REQUEST_GET_INSTITUTIONS_LIST, REQUEST_GET_INSTITUTIONS_LIST_SUCCESS,
@@ -210,6 +211,20 @@ export function requestUpdateProject(request, message) {
     type: REQUEST_UPDATE_PROJECT,
     request,
     message
+  };
+}
+
+export function requestGetProjectsOptionList(request) {
+  return {
+    type: REQUEST_GET_PROJECTS_OPTIONLIST,
+    request
+  };
+}
+
+export function requestGetProjectsOptionListSuccess(result) {
+  return {
+    type: REQUEST_GET_PROJECTS_OPTIONLIST_SUCCESS,
+    result
   };
 }
 

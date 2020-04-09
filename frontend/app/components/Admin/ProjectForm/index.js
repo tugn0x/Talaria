@@ -1,41 +1,33 @@
 import React from 'react';
-import {Row, Col} from 'reactstrap';
 import {CustomForm} from 'components';
 import {fields,fieldsGroups} from './fields';
 import globalMessages from 'utils/globalMessages';
 import messages from './messages';
-import Loader from 'components/Form/Loader.js';
 import {useIntl} from 'react-intl';
+import SimpleForm from 'components/SimpleForm'
 
 const ProjectForm = (props) => {
-    const { project, loading, updateProject, createProject, titleNewProject} = props
+    console.log('ProjectForm', props)
+
+    const { project, resources,usersOptionList, submitFormAction, loading, searches} = props
     const intl = useIntl();
     
+    
     return (
-        <Loader show={loading} >
-            <Row className="justify-content-center">
-                <Col md="10">
-                    {project &&
-                        <CustomForm 
-                            submitCallBack={(formData) => updateProject(formData)} 
-                            updateFormData={project}
-                            fields={fields} 
-                            fieldsGroups={fieldsGroups}
-                            title={project.name}
-                            messages={{...messages, ...globalMessages}}
-                        />
-                    ||
-                        <CustomForm 
-                            submitCallBack={(formData) => createProject(formData)} 
-                            fields={fields} 
-                            fieldsGroups={fieldsGroups}
-                            title={titleNewProject}
-                            messages={{...messages, ...globalMessages}}
-                        />
-                    }
-                </Col> 
-            </Row>
-        </Loader>
+        <SimpleForm loading={loading}>
+        <CustomForm 
+            submitCallBack={(formData) => submitFormAction(formData)}  
+            requestData={project ? project : null}
+            fields={fields} 
+            fieldsGroups={fieldsGroups}
+            usersOptionList={usersOptionList}
+            resources={resources}
+            granted_permissions={project? project.granted_permissions:[]}
+            title={project && project.name ? project.name : intl.formatMessage(messages.header)}
+            messages={{...messages, ...globalMessages}}
+            searchOptionList={searches}
+        />
+    </SimpleForm>
     )
 }
 
