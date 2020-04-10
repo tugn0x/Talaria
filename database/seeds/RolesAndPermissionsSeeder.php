@@ -108,7 +108,7 @@ class RolesAndPermissionsSeeder extends Seeder
 //                'Query'
             ],
             'BY_MODEL' => [
-                Library::class => [
+                \App\Models\Libraries\Library::class => [
                     'show',
 //                    'create',
                     'update',
