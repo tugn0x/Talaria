@@ -120,7 +120,7 @@ class RolesAndPermissionsSeeder extends Seeder
                     'update',
                     'delete',
                 ],
-                \App\Models\Libraries\Institute::class => [
+                \App\Models\Institutions\Institution::class => [
                     'show',
                     'create',
                     'update',
@@ -128,6 +128,23 @@ class RolesAndPermissionsSeeder extends Seeder
                 ]
             ],
         ],
+        'Accountant Nilde' => [
+            'GENERIC' => [
+//                'Query'
+            ],
+            'BY_MODEL' => [
+                \App\Models\Libraries\Library::class => [
+                    'show',
+                ],
+                \App\Models\Institutions\Institution::class => [
+                    'show',
+                ],
+                \App\Models\Projects\Project::class => [
+                    'show',
+                ]
+            ],
+        ],
+
 //
 //        'Lybrary Operator' => [
 //            'GENERIC' => [
