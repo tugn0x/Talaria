@@ -11,7 +11,7 @@ const routes = [
   l'update è PUT /api/v1/libraries/{LIBRARY_ID!!}/library-users/{library_users_id}
    */
   {
-    path: '/patrons', name: `LibraryUsers`, component: SubRouteSwitch, header: true, roles: ['registered'],
+    path: '/patrons', name: `LibraryUsers`, component: SubRouteSwitch, header: true, permissions: ['manage','manage-users'], resource: {type: 'libraries', key: 'library_id',},
     children: [
      /*  { path: '/patron/new', icon: "plus", name: `LibraryUserNew`, url: `/patron/user/new`, component: ReferencesPage, sidebar: true}, */
       { path: '/patron/:id?',  name: `LibraryUser`, url:'/patrons/patron',  component: UserPage, },

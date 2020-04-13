@@ -41,6 +41,10 @@ export default defineMessages({
     id: `${scope}.consortia`,
     defaultMessage: 'Consortia',
   },
+  admin: {
+    id: `${scope}.admin`,
+    defaultMessage: 'Administration',
+  },
   Logout: {
     id: `${scope}.Logout`,
     defaultMessage: 'Logout',

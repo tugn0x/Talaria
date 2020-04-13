@@ -130,17 +130,13 @@ class Dispatcher extends BaseController
 
     public function show(Model $model, Request $request, $id=null, callable $onShowed=null)
     {
+        $model = $id ? $model->findOrFail($id) : $model;
 
         if($this->haveToAuthorize)
         {
             $this->authorize($model);
-            if (Gate::denies('showOthers', $model))
-            {
-                $model = $model->indexPolicyDenies();
-            }
         }
 
-        $model = $id ? $model->findOrFail($id) : $model;
 
         if( $onShowed )
             $model = call_user_func_array($onShowed, [$model, $request]);
@@ -195,17 +191,12 @@ class Dispatcher extends BaseController
 
     public function update(Model $model, Request $request, $id=null, callable $onUpdated=null, callable $onUpdate=null)
     {
+        $model = $id ? $model->findOrFail($id) : $model;
 
         if($this->haveToAuthorize)
         {
             $this->authorize($model);
-            if (Gate::denies('updateOthers', $model))
-            {
-                $model = $model->updatePolicyDenies();
-            }
         }
-
-        $model = $id ? $model->findOrFail($id) : $model;
 
         if($this->verifyUpdateTime && $request->get('updated_at'))
         {
@@ -252,17 +243,12 @@ class Dispatcher extends BaseController
 
     public function delete(Model $model, Request $request, $id=null, callable $onDeleted=null, callable $onDelete=null)
     {
+        $model = $id ? $model->findOrFail($id) : $model;
 
         if($this->haveToAuthorize)
         {
             $this->authorize($model);
-            if (Gate::denies('deleteOthers', $model))
-            {
-                $model = $model->updatePolicyDenies();
-            }
         }
-
-        $model = $id ? $model->findOrFail($id) : $model;
 
         event($model->getTable() . '.delete', $model);
 
@@ -474,16 +460,12 @@ class Dispatcher extends BaseController
      */
     public function attach(Model $model, Request $request, $id, $relation_name, $ids=null, callable $onAttach=null, callable $onAttached=null)
     {
+        $model = $id ? $model->findOrFail($id) : $model;
+
         if($this->haveToAuthorize)
         {
             $this->authorize($model);
-            if (Gate::denies('attachOthers', $model))
-            {
-                $model->attachPolicyDenies();
-            }
         }
-
-        $model = $id ? $model->findOrFail($id) : $model;
 
         /*
          * $onAttach Callback
@@ -572,13 +554,11 @@ class Dispatcher extends BaseController
 
     public function detach(Model $model, Request $request, $id, $relation_name, $ids=null, callable $onDetach=null, callable $onDetached=null)
     {
+        $model = $id ? $model->findOrFail($id) : $model;
+
         if($this->haveToAuthorize)
         {
             $this->authorize($model);
-            if (Gate::denies('detachOthers', $model))
-            {
-                $model->attachPolicyDenies();
-            }
         }
 
         $model = $id ? $model->findOrFail($id) : $model;
@@ -668,14 +648,11 @@ class Dispatcher extends BaseController
 
     public function sync(Model $model, Request $request, $id, $relation_name, $ids=null, callable $onSync=null, callable $onSynced=null)
     {
+        $model = $id ? $model->findOrFail($id) : $model;
 
         if($this->haveToAuthorize)
         {
             $this->authorize($model);
-            if (Gate::denies('syncOthers', $model))
-            {
-                $model->attachPolicyDenies();
-            }
         }
 
         $model = $id ? $model->findOrFail($id) : $model;

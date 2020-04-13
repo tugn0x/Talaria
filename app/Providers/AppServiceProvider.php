@@ -44,7 +44,8 @@ class AppServiceProvider extends ServiceProvider
         /*
          * Permissions
          */
-        $bouncer = Bouncer::ownedVia(\App\Models\Info::class, 'created_by');
+        Bouncer::ownedVia(\App\Models\Info::class, 'created_by');
+//        Bouncer::runAfterPolicies(false);
         /*
          * Time locale
          */

@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
          /*  REQUEST_POST_USER, */ REQUEST_USER, REQUEST_GET_LIBRARY,
           REQUEST_GET_LIBRARIES_LIST,
@@ -53,7 +53,7 @@ export function* requestUsersListSaga(action) {
 
 export function* requestUpdateUserSaga(action) {
   const library_id = action.request.library_id
-  
+
   const options = {
     method: 'put',
     body: {
@@ -62,7 +62,7 @@ export function* requestUpdateUserSaga(action) {
       id: action.request.id,
     },
   };
-  
+
   try {
     const request = yield call(updateLibraryUser, options);
     yield put(requestUsersList(null, library_id));
@@ -154,7 +154,7 @@ export default function* librarySaga() {
   yield takeLatest(REQUEST_UPDATE_USER, requestUpdateUserSaga);
   // yield takeLatest(REQUEST_POST_USER, requestPostUserSaga);
   yield takeLatest(REQUEST_USER, requestUserSaga);
-  yield takeLatest(REQUEST_GET_LIBRARY, requestGetLibrarySaga);
+  yield takeEvery(REQUEST_GET_LIBRARY, requestGetLibrarySaga);
   yield takeLatest(REQUEST_GET_LIBRARIES_LIST, requestGetLibrariesListSaga);
   yield takeLatest(REQUEST_UPDATE_LIBRARY, requestUpdateLibrarySaga);
   yield takeLatest(REQUEST_POST_LIBRARY, requestPostLibrarySaga);

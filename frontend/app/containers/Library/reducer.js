@@ -39,7 +39,7 @@ const libraryReducer = (state = initialState, action) =>
         draft.error = initialState.error;
         draft.usersList.data = action.result.data.map(data => {
           return {
-              ...data.created_at, 
+              ...data.created_at,
               library_name: data.library.data.name,
               user_name: data.user.data.full_name,
               id: data.id,
@@ -82,7 +82,7 @@ const libraryReducer = (state = initialState, action) =>
       case REQUEST_GET_LIBRARY_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.library = action.result.data   
+        draft.library = action.result.data
         break;
       case REQUEST_UPDATE_LIBRARY:
         draft.loading = true;
@@ -96,7 +96,7 @@ const libraryReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = initialState.error;
         draft.libraryOptionList = action.result.data
-        break; 
+        break;
       case REQUEST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;

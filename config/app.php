@@ -168,6 +168,7 @@ return [
          */
         Dingo\Api\Provider\LaravelServiceProvider::class,
         \Dingo\Api\Provider\DingoServiceProvider::class,
+        \Silber\Bouncer\BouncerServiceProvider::class,
 
         /*
          * Application Service Providers...

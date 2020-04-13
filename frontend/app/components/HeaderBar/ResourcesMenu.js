@@ -8,7 +8,7 @@ import resourcesMap from 'routes/resources'
 
 function ResourceMenu(props) {
 
-  console.log('ResourceMenu', props);
+  // console.log('ResourceMenu', props);
   const {resources} = props;
   const types = Object.keys(resources);
 

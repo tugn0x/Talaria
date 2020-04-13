@@ -20,6 +20,7 @@ import logomini from 'images/logo.png'
 import './style.scss'
 import ResourceMenu from "./ResourcesMenu";
 import subStringer from 'utils/subStringer'
+import {checkRole} from 'utils/permissions'
 
 function HeaderBar(props) {
 
@@ -80,20 +81,21 @@ function HeaderBar(props) {
                 {
                   isLogged && (
                     <>
+                    {checkRole(auth, "super-admin") && (
+                      <div className="resources-menu">
+                        <DropdownItem header tag="div" className="text-center">
+                          <div className={`icon-img admin float-left`}></div>
+                          <FormattedMessage {...messages.admin} />
+                        </DropdownItem>
+                          <NavLink to={`/admin`}
+                                   className="dropdown-item btn"
+                                   activeClassName="current">
+                            Nilde Admin
+                          </NavLink>
+                      </div>
+                    )}
                       {
                         auth.permissions.resources && "libraries" in auth.permissions.resources && (<ResourceMenu resources={auth.permissions.resources}></ResourceMenu>)
-                        // auth.permissions.resources && "libraries" in auth.permissions.resources && (<>
-                        //   <DropdownItem header tag="div" className="text-center"><strong><FormattedMessage {...messages.Libraries} /></strong></DropdownItem>
-                        //   {auth.permissions.resources.libraries.map((item) =>
-                        //       <NavLink to={`/library/${item.resource.id}`}
-                        //                key={item.resource.id}
-                        //                className="dropdown-item btn"
-                        //                 activeClassName="current">
-                        //         <i className="fa fa-book"></i> {item.resource.name}
-                        //       </NavLink>
-                        //   )}
-                        //   <DropdownItem divider />
-                        // </>)
                       }
                     <div className="account">
                       <DropdownItem header tag="div" className="text-center">

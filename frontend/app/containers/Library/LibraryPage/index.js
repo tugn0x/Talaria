@@ -5,7 +5,7 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import {createStructuredSelector} from "reselect";
@@ -15,23 +15,28 @@ import { connect } from 'react-redux';
 import {BasePage} from "components";
 import libraryRoutes from "routes/libraryRoutes";
 import {requestGetLibrary} from '../actions'
+import {getAuthResource} from "utils/permissions";
 
 function LibraryPage(props) {
-  /*
-   TODO: DA QUESTA PAGINA, QUALUNQUE SIA LA SOTTO ROTTA, TU CI PASSI, QUI RIEMPI IL REDUCER library.library con l'action get library
-   */
   console.log('LibraryPage', props)
   const {isLoading, match, dispatch} = props;
+
+  const resource = getAuthResource(props.auth, {
+    type: 'libraries',
+    id: match.params.library_id,
+  })
+  console.log(resource)
 
   useEffect(() => {
     if(!isLoading){
       dispatch(requestGetLibrary(match.params.library_id))
     }
-  }, [])
+  }, [match.params.library_id])
+
 
   return (
     <>
-      <BasePage {...props} routes={libraryRoutes} messages={messages} />
+      <BasePage {...props} routes={libraryRoutes} messages={messages} resource={resource}/>
     </>
   );
 }

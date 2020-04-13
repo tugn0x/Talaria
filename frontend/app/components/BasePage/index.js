@@ -13,6 +13,7 @@ import {
   CSSTransition,
 } from 'react-transition-group';
 import ButtonToTop from 'components/Button/ButtonToTop'
+import {checkRoutePermission} from 'utils/permissions'
 
 
 function BasePage(props) {
@@ -22,10 +23,10 @@ function BasePage(props) {
     return pagePath === props.location.pathname || new RegExp(`^${pagePath.replace("/", "\/")}(.*?)`).test(props.location.pathname);
   };
 
-  const mapRoutes = (routes, auth, prefix) => {
+  const mapRoutes = (routes, auth, resource, prefix) => {
     // console.log(props.match)
     // console.log(prefix, 'prefix')
-    return filterRoutes(routes, auth).map((route)=>{
+    return filterRoutes(routes, auth, resource).map((route)=>{
       const url = route.url ? generatePath(props.match.path+route.url, props.match.params) : generatePath(props.match.path+route.path, props.match.params)
       // console.log(url, prefix, props.match.path, route.path)
       return {
@@ -35,21 +36,20 @@ function BasePage(props) {
         url: url,
         component:null,
         current: isCurrentPage(url),
-        children: route.children ? mapRoutes(route.children, auth, route.path) : []
+        children: route.children ? mapRoutes(route.children, auth, resource, route.path) : []
       }
     })
   }
 
-  const filterRoutes = (routes, auth) => {
+  const filterRoutes = (routes, auth, resource) => {
     return routes.filter((route)=>{
-        /*
-        TODO: ADDING ROLES & PERMISSION CHECK
-         */
+      // console.log(checkRoutePermission(auth, route, resource))
+      return checkRoutePermission(auth, route, resource)
         return true;
       })
   }
 
-  const lightRoutes = props.routes && mapRoutes(props.routes, props.auth, '')
+  const lightRoutes = props.routes && mapRoutes(props.routes, props.auth, props.resource, '')
 
   const closeSideBar = () => {
     const body = document.querySelector('body')
@@ -62,7 +62,7 @@ function BasePage(props) {
   React.useEffect(() => {
     setMounted(true)
   },[])
-  
+
   return (
     <>
       <HeaderBar

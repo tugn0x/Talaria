@@ -7,7 +7,7 @@
 
 import React from 'react';
 import messages from './messages';
-/* 
+/*
 import { FormattedMessage } from 'react-intl';
 import {createStructuredSelector} from "reselect";
 import {compose} from "redux";
@@ -20,11 +20,7 @@ function HomePage(props) {
   return (
     <>
       <BasePage {...props} routes={userRoutes} messages={messages} >
-       <h1 style={{color: 'green'}}>ciao</h1>
-       <h1 style={{color: 'green'}}>ciao</h1>
-       <h1 style={{color: 'green'}}>ciao</h1>
-       <h1 style={{color: 'green'}}>ciao</h1>
-       <h1 style={{color: 'green'}}>ciao</h1>
+       <h1 style={{color: 'green'}}>TODO: homepage</h1>
       </BasePage>
     </>
   );
