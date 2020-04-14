@@ -2,6 +2,7 @@
   "app.global.name": "Nome",
   "app.global.email": "Email",
   "app.global.id": "ID",
+  "app.global.user_id": "ID Utente",
   "app.global.surname": "Cognome",
   "app.global.password_repeat": "Ripeti la Password",
   "app.global.password_match": "Le password devono corrispondere",

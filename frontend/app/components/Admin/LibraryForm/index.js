@@ -12,8 +12,7 @@ import SimpleForm from 'components/SimpleForm'
 const LibraryForm = (props) => {
     console.log('LibraryForm', props)
     const { library, usersOptionList, 
-            searches, loading, updateLibrary, 
-            createLibrary, titleNewLibrary, resources,
+            searches, loading, resources,
             submitFormAction, institutionsOptionList, 
             countriesOptionList, librarySubjectOptionList} = props
     const intl = useIntl();

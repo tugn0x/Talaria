@@ -7,7 +7,6 @@ import {useIntl} from 'react-intl';
 import messages from 'containers/Admin/UsersListPage/messages'
 import {columns} from './columns'
 import {SimpleList} from 'components'
-import UserPage from '../UserPage'
 
 const UsersListPage = (props) => {
     console.log('UsersListPage', props)

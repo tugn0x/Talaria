@@ -5,8 +5,8 @@ export const columns = [
         col: 3, 
     },
     { 
-        label: 'app.global.id', 
-        name: 'id',
+        label: 'app.global.user_id', 
+        name: 'user_id',
         col: 3,
     },
     { 

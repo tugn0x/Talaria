@@ -29,6 +29,10 @@ export default defineMessages({
     id: `${scope}.id`,
     defaultMessage: 'ID',
   },
+  user_id: {
+    id: `${scope}.user_id`,
+    defaultMessage: 'User Id',
+  },
   address: {
     id: `${scope}.address`,
     defaultMessage: 'Address',
