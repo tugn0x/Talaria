@@ -65,14 +65,14 @@
 
   "app.containers.LibraryUserPage.header": "Modifica stato utente",
 
-  "app.containers.InstitutionPage.createSuccess": "Nuovo istituto creato",
-  "app.containers.InstitutionPage.updateSuccess": "Istituto aggiornato",
+  "app.containers.InstitutionPage.createSuccess": "Nuovo ente creato",
+  "app.containers.InstitutionPage.updateSuccess": "Ente aggiornato",
 
-  "app.components.InstitutionsList.header": "Lista degli istituti",
-  "app.components.InstitutionsList.createNewInstitution": "Registra nuovo istituto",
-  "app.components.InstitutionsList.editInstitution": "Modifica istituto",
+  "app.components.InstitutionsList.header": "Lista degli enti",
+  "app.components.InstitutionsList.createNewInstitution": "Registra nuovo ente",
+  "app.components.InstitutionsList.editInstitution": "Modifica ente",
 
-  "app.components.LibraryForm.institution_id": "ID istituto",
+  "app.components.LibraryForm.institution_id": "ID ente",
   "app.components.LibraryForm.subject_id": "ID della disciplina",
   "app.components.LibraryForm.country_id": "ID della nazione",
   "app.components.LibraryForm.opac": "Url dell' opac",
@@ -106,7 +106,7 @@
   "app.components.LibraryForm.general_info": "Informazioni generali",
   "app.components.LibraryForm.administrative_info": "Informazioni amministrative",
   "app.components.LibraryForm.granted_permissions": "Permessi utenti",
-  "app.components.InstitutionForm.header": "Form istituto",
+  "app.components.InstitutionForm.header": "Form ente",
   "app.components.LibraryForm.header": "Registrazione biblioteca",
 
   "app.components.ReferencesForm.header": "Form Riferimenti",
@@ -191,11 +191,11 @@
   "app.routes.MyLibraryNew": "Richiedi accesso a una biblioteca",
   "app.routes.UsersList": "Utenti",
   "app.routes.UserNew": "Nuovo utente",
-  "app.routes.Institutions": "Istituti",
-  "app.routes.InstitutionNew": "Registra nuovo istituto",
-  "app.routes.InstitutionTypeNew": "Nuovo tipo d' Istituto",
-  "app.routes.InstitutionType": "Tipo d' Istituto",
-  "app.routes.InstitutionTypes": "Tipi d' Istituto",
+  "app.routes.Institutions": "Enti",
+  "app.routes.InstitutionNew": "Registra nuovo ente",
+  "app.routes.InstitutionTypeNew": "Nuovo tipo di ente",
+  "app.routes.InstitutionType": "Tipo di ente",
+  "app.routes.InstitutionTypes": "Tipi di ente",
   "app.routes.Projects": "Progetti",
   "app.routes.ProjectNew": "Nuovo progetto",
   "app.routes.Libraries": "Biblioteche"
