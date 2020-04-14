@@ -49,6 +49,7 @@ services:
       - redis
     volumes:
       - ./:/application
+      - ./docker/backend/php.ini:/usr/local/etc/php/php.ini
 #      - /home/halphass/Scaricati:/application/dump
     user: "${UID}"
     restart: always
