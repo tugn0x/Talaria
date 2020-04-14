@@ -53,6 +53,12 @@ export const fields = {
         name: "mobile",
         width: "col-sm-6"
     },
+    status: {
+        type: "switch",
+        name: "status",
+        width: "col-sm-6",
+        // error: "app.global.invalid_privacy_policy_accepted",
+    },
     roles: {
         type: "list-checkbox",
         name: "roles",
