@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "783cad63e0d9885bc6833b21d9dde126",
+    "content-hash": "9d5da527c17261d9d8ad55872937383e",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1393,7 +1393,6 @@
                     "email": "jakub.onderka@gmail.com"
                 }
             ],
-            "abandoned": "php-parallel-lint/php-console-color",
             "time": "2018-09-29T17:23:10+00:00"
         },
         {
@@ -1440,7 +1439,6 @@
                 }
             ],
             "description": "Highlight PHP code in terminal",
-            "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
         },
         {
@@ -2111,7 +2109,6 @@
                 "markdown",
                 "table"
             ],
-            "abandoned": "league/commonmark",
             "time": "2019-09-26T13:28:33+00:00"
         },
         {
@@ -3848,31 +3845,31 @@
         },
         {
             "name": "silber/bouncer",
-            "version": "v1.0.0-rc.8",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JosephSilber/bouncer.git",
-                "reference": "c716ee07f9568e9774b6934314620bc9d9d1d65a"
+                "reference": "3c166b87fa55d37dc4f784aee51131e7ed059d79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JosephSilber/bouncer/zipball/c716ee07f9568e9774b6934314620bc9d9d1d65a",
-                "reference": "c716ee07f9568e9774b6934314620bc9d9d1d65a",
+                "url": "https://api.github.com/repos/JosephSilber/bouncer/zipball/3c166b87fa55d37dc4f784aee51131e7ed059d79",
+                "reference": "3c166b87fa55d37dc4f784aee51131e7ed059d79",
                 "shasum": ""
             },
             "require": {
-                "illuminate/auth": "^6.0|^7.0",
-                "illuminate/cache": "^6.0|^7.0",
-                "illuminate/container": "^6.0|^7.0",
-                "illuminate/contracts": "^6.0|^7.0",
-                "illuminate/database": "^6.0|^7.0",
-                "php": "^7.2"
+                "illuminate/auth": "5.1.20 - 5.8|^6.0",
+                "illuminate/cache": "5.1.20 - 5.8|^6.0",
+                "illuminate/container": "5.1.20 - 5.8|^6.0",
+                "illuminate/contracts": "5.1.20 - 5.8|^6.0",
+                "illuminate/database": "5.1.20 - 5.8|^6.0"
             },
             "require-dev": {
-                "illuminate/console": "^6.0|^7.0",
-                "illuminate/events": "^6.0|^7.0",
+                "illuminate/console": "5.1.20 - 5.8|^6.0",
+                "illuminate/events": "5.1.20 - 5.8|^6.0",
                 "larapack/dd": "^1.1",
-                "phpunit/phpunit": "^8.0"
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "^4.8.35"
             },
             "suggest": {
                 "illuminate/console": "Allows running the bouncer:clean artisan command",
@@ -3914,7 +3911,7 @@
                 "permissions",
                 "roles"
             ],
-            "time": "2020-03-31T15:14:45+00:00"
+            "time": "2020-01-03T05:43:00+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -7422,7 +7419,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "silber/bouncer": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
