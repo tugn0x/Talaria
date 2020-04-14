@@ -7,11 +7,11 @@ export function checkPermissions(user, permissions, resource) {
   return permissions.map(i => resource.permissions.includes(i)).filter(i => i===true).length > 0
 }
 export function checkRole(auth, roles) {
-  console.log('checkRole', auth.permissions.roles, roles)
-  if(user.status !== 1) {
+  console.log('checkRole', auth.permissions, roles)
+  if(auth.user.status !== 1) {
     return false;
   }
-  if(user.permissions.roles.includes("super-admin")) {
+  if(auth.permissions.roles.includes("super-admin")) {
     return true;
   }
   roles = typeof roles === 'string' ? [roles] : roles
