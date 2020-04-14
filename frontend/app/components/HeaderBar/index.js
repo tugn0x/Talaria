@@ -95,7 +95,7 @@ function HeaderBar(props) {
                       </div>
                     )}
                       {
-                        auth.permissions.resources && "libraries" in auth.permissions.resources && (<ResourceMenu resources={auth.permissions.resources}></ResourceMenu>)
+                        auth.permissions.resources && (<ResourceMenu resources={auth.permissions.resources}></ResourceMenu>)
                       }
                     <div className="account">
                       <DropdownItem header tag="div" className="text-center">

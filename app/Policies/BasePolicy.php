@@ -29,7 +29,7 @@ class BasePolicy
             throw new \Symfony\Component\HttpKernel\Exception\HttpException('Function Permission Must Be Defined in App\Policies::check for '.$function);
 
         return $this->canManage($user, $model);
-        return false;
+//        return false;
     }
 //
     protected function checkOthers(User $user, Model $model, $function=NULL)
