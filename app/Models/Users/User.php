@@ -42,6 +42,7 @@ class User extends UserBase
         'preflang',
         'registration_date',
         'privacy_policy_accepted',
+        'status',
     ];
 
     /**

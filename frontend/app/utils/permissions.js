@@ -25,9 +25,9 @@ export function checkRoutePermission(auth, route, resource) {
   }
   if(route.roles && route.permissions)
   {
-    return checkPermissions(auth.user, route.permissions, resource) && checkRole(auth.user, route.roles)
+    return checkPermissions(auth, route.permissions, resource) && checkRole(auth, route.roles)
   }
-  return (route.roles && checkRole(auth.user, route.roles) || (route.permissions && checkPermissions(auth.user, route.permissions, resource)))
+  return (route.roles && checkRole(auth, route.roles) || (route.permissions && checkPermissions(auth, route.permissions, resource)))
 
 }
 

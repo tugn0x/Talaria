@@ -99,6 +99,12 @@ trait UserControllerTrait
             }
 
             return $model;
+        }, function($model, $request)
+        {
+            /*
+             * TODO: set not directly fillable fields
+             */
+            return $model;
         });
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
