@@ -12,6 +12,12 @@ export const columns = [
     { 
         label: 'app.global.email', 
         name: 'email',
-        col: 4,
+        col: 3,
+    },
+    {
+        label: 'app.global.status',
+        name: 'status',
+        type:'status',
+        col: 1,
     }
 ]

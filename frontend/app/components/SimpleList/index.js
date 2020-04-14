@@ -87,7 +87,7 @@ function SimpleList(props) {
                                             formatDate(item[field.name], intl.locale)
                                           ||
                                           field.type === 'status' &&
-                                            <div className={`status-point ${item[field.name] === 0 ? 'pending' : 'success' }`}></div>
+                                            <div className={`status-point ${item[field.name] === 0 ? 'disabled' : 'success' }`}></div>
                                           ||
                                             subStringer(item[field.name], 30) 
                                         }
