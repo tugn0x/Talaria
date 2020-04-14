@@ -90,7 +90,7 @@ export function* requestUpdateUserSaga(action) {
   };
   try {
     const request = yield call(updateUser, options);
-    yield call(requestUsersListSaga);
+    yield put(requestSuccess());
     yield put(push("/admin/users"));
     yield call(() => toast.success(action.message))
   } catch(e) {

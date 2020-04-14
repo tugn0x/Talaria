@@ -30,24 +30,15 @@ const UserPage = (props) => {
 
     
     return (
-        <Loader show={isLoading}>
-            {!isNew &&
-                <UserForm
-                    updateUser={(formData) => dispatch(requestUpdateUser({...formData, id: params.id }, intl.formatMessage(messages.userUpdateSuccess)))}
-                    user={admin.user}
-                    roles={admin.roles}
-                    userResources={admin.user.resources}
-                />
-            }
-            {isNew &&
-                <UserForm
-                   createUser={ (formData) => dispatch(requestPostUser(formData, intl.formatMessage(messages.userCreateSuccess) )) } 
-                   roles={admin.roles}
-                   loading={isLoading}
-                   // resources={admin.resources}
-                />  
-            }
-        </Loader>
+        <UserForm
+            submitFormAction={
+            !isNew ? (formData) => dispatch(requestUpdateUser({...formData, id: params.id}, intl.formatMessage(messages.userUpdateSuccess)))
+            : (formData) => dispatch(requestPostUser(formData, intl.formatMessage(messages.userCreateSuccess)))}
+            user={!isNew && admin.user}
+            userResources={!isNew && admin.user.resources}
+            roles={admin.roles}
+            loading={isLoading}
+        />
     )
 }
 

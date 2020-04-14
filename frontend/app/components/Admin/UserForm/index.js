@@ -11,43 +11,30 @@ import SimpleForm from 'components/SimpleForm'
 
 const UserForm = (props) => {
     console.log('UserForm', props)
-    const {user, updateUser, createUser, loading, roles, userResources} = props
+    const {user, loading, roles, submitFormAction, userResources} = props
     const intl = useIntl();
     return (
         <SimpleForm loading={loading}>
-                {user && 
-                    <>
-                        <CustomForm 
-                            submitCallBack={(formData) => updateUser(formData) } 
-                            fields={fields} 
-                            messages={globalMessages}
-                            requestData={user}
-                            roles={roles}
-                            title={intl.formatMessage(messages.header)} 
-                            submitText={intl.formatMessage(messages.subtitle)}
-                        >
-                            {userResources && 
-                            Object.keys(userResources).length > 0 && 
-                            Object.keys(userResources).map((resource, i) => (
-                                <ResourceTable 
-                                    key={`${resource}-${i}`}
-                                    resource={userResources[resource]}
-                                    head={resource}
-                                />
-                            ))
-                            }
-                        </CustomForm>
-                    </>
-                ||
-                    <CustomForm 
-                        submitCallBack={(formData) => createUser(formData) } 
-                        fields={fields}
-                        roles={roles}
-                        messages={globalMessages}
-                        title={intl.formatMessage(messages.createNewUser)} 
-                        submitText={intl.formatMessage(messages.createNewUser)}
+            <CustomForm 
+                submitCallBack={(formData) => submitFormAction(formData)}  
+                fields={fields} 
+                messages={globalMessages}
+                requestData={user ? user : null}
+                roles={roles}
+                title={user ? user.name : intl.formatMessage(messages.header)} 
+                submitText={user ? intl.formatMessage(messages.subtitle) : intl.formatMessage(messages.createNewUser)}
+            >
+                {userResources && 
+                Object.keys(userResources).length > 0 && 
+                Object.keys(userResources).map((resource, i) => (
+                    <ResourceTable 
+                        key={`${resource}-${i}`}
+                        resource={userResources[resource]}
+                        head={resource}
                     />
+                ))
                 }
+            </CustomForm>
           </SimpleForm>  
     )
 }

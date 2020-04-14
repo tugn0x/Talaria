@@ -16,19 +16,12 @@ const UsersListPage = (props) => {
     const {dispatch, isLoading, admin, match, history} = props
    
     const intl = useIntl();
-   
-
+    
     useEffect(() => {
         if(!isLoading) {
-            dispatch(requestUsersList())
+           dispatch(requestUsersList());
         }
     }, [])
-
-    useEffect(() => {
-        if(!isLoading && match.params) {
-            dispatch(requestUsersList(match.params.page))
-        }
-    }, [match.params])
 
 
     return (
