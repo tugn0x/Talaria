@@ -19,9 +19,9 @@ const routes = [
     ]
   },
   {
-    path: '/manage', name: `ManageLibrary`, header: true, component: SubRouteSwitch, permissions: ['manage','manage-users'], resource: {type: 'libraries', key: 'library_id',},
+    path: '/manage', name: `MyLibrary`, header: true, component: SubRouteSwitch, permissions: ['manage','manage-users'], resource: {type: 'libraries', key: 'library_id',},
     children: [
-      { path: '', exact: true, name: `ManageLibrary`, component: ManageLibraryPage },
+      { path: '', exact: true, name: `MyLibrary`, component: ManageLibraryPage },
      ]
   },
 ];
