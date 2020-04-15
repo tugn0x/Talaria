@@ -234,6 +234,16 @@ ul.list-inline {
     margin: 0 auto;
 }
 
+.preferred-star {
+    font-size: 1.5em;
+    &.preferred{ 
+        color:orange
+    }
+    &.notpreferred{ 
+        color:gray;
+    }
+}
+
 .custom-control-input:checked ~ .custom-control-label::before {
     border-color: $brown;
     background-color: $brown;

@@ -89,6 +89,9 @@ function SimpleList(props) {
                                           field.type === 'status' &&
                                             <div className={`status-point ${item[field.name] === 0 ? 'disabled' : 'success' }`}></div>
                                           ||
+                                          field.type === 'preferred' &&
+                                            <i className={`fa fa-star preferred-star ${item[field.name] === 0 ? 'notpreferred' : 'preferred' }`}></i>
+                                          ||
                                             subStringer(item[field.name], 30) 
                                         }
                                       </span>
