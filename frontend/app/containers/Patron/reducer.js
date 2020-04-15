@@ -77,7 +77,20 @@ const PatronReducer = (state = initialState, action) =>
       case REQUEST_MY_LIBRARIES_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.my_libraries.data =  action.result.data.map(lib => {return { id: lib.library.data.id, name: lib.library.data.name, status: lib.status, created_at: lib.library.data.created_at  } } );
+        draft.my_libraries.data =  action.result.data.map(lib => {
+          return { 
+            id: lib.library.data.id, 
+            name: lib.library.data.name, 
+            status: lib.status, 
+            user_referent: lib.user_referent,
+            user_mat: lib.user_mat,
+            user_service_phone: lib.user_service_phone,
+            user_service_email: lib.user_service_email,
+            preferred: lib.preferred,
+            label:lib.label,
+            created_at: lib.library.data.created_at  
+          } 
+        });
         draft.my_libraries.pagination =  action.result.meta.pagination
         break;
       case REQUEST_GET_LIBRARY_OPTIONLIST_SUCCESS:
