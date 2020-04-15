@@ -1,7 +1,7 @@
 import UserPage from 'containers/Library/UserPage/Loadable';
 import UsersListPage from 'containers/Library/UsersListPage/Loadable';
 import SubRouteSwitch from 'components/SubRouteSwitch';
-
+import LibraryPage from 'containers/Library/LibraryPage'
 const routes = [
   /*
   TODO: la path è /users, ma si tratta a tutti gli effetti dei library-users, cioè del collegamento tra utente Patron e Biblioteca
@@ -17,6 +17,9 @@ const routes = [
       { path: '/patron/:id?',  name: `LibraryUser`, url:'/patrons/patron',  component: UserPage, },
       { path: '', exact: true, name: `LibraryUsers`, component: UsersListPage, },
     ]
+  },
+  {
+    path: '/manage', name: `ManageLibrary`, header: true, component: LibraryPage, permissions: ['manage','manage-users'], resource: {type: 'libraries', key: 'library_id',},
   },
 ];
 

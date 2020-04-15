@@ -26,17 +26,18 @@ function LibraryPage(props) {
     id: match.params.library_id,
   })
   console.log(resource)
-
+  
+  
   useEffect(() => {
     if(!isLoading){
       dispatch(requestGetLibrary(match.params.library_id))
     }
-  }, [match.params.library_id])
+  }, [match.params.library_id]) 
 
 
   return (
     <>
-      <BasePage {...props} routes={libraryRoutes} messages={messages} resource={resource}/>
+      <BasePage {...props} routes={libraryRoutes} messages={messages} resource={resource}/> 
     </>
   );
 }

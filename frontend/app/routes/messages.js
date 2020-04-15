@@ -100,4 +100,8 @@ export default defineMessages({
         id: `${scope}.MyProject`,
         defaultMessage: 'My Project',
     },
+    ManageLibrary: {
+        id: `${scope}.ManageLibrary`,
+        defaultMessage: 'Manage library',
+    },
 });
