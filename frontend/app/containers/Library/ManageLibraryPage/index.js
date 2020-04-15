@@ -22,13 +22,13 @@ function ManageLibraryPage(props) {
     const intl = useIntl();
     const {isLoading, dispatch, admin, match} = props
     const {params} = match
-    const isNew = !params.id || params.id === 'new'
+    const isNew = !params.library_id || params.library_id === 'new'
     const library = admin.library
     // const libraryOptionList = patron.libraryOptionList
     
     useEffect(() => {
       if(!isLoading && !isNew) {
-         dispatch(requestGetLibrary(params.id))
+         dispatch(requestGetLibrary(params.library_id))
       }
       if(!isLoading){
         dispatch(requestGetRoles())
@@ -58,7 +58,7 @@ function ManageLibraryPage(props) {
             resources={admin.resources.libraries}
             titleNewLibrary={isNew ? intl.formatMessage(messages.titleNewLibrary) : ""}
             submitFormAction={
-                !isNew ? (formData) => dispatch(requestUpdateLibrary({...formData, id: params.id}, intl.formatMessage(messages.updateMessage)))
+                !isNew ? (formData) => dispatch(requestUpdateLibrary({...formData, id: params.library_id}, intl.formatMessage(messages.updateMessage)))
                 : (formData) => dispatch(requestPostLibrary(formData, intl.formatMessage(messages.createMessage)))
               }
           /> 
