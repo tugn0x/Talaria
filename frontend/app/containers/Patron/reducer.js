@@ -82,6 +82,8 @@ const PatronReducer = (state = initialState, action) =>
             id: lib.library.data.id, 
             name: lib.library.data.name, 
             status: lib.status, 
+            department_id:lib.department_id,
+            title_id:lib.title_id,
             user_referent: lib.user_referent,
             user_mat: lib.user_mat,
             user_service_phone: lib.user_service_phone,

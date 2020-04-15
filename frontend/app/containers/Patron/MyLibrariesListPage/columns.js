@@ -9,6 +9,16 @@ export const columns = [
         name: 'name',
         col: 1, 
     },
+    { 
+        label: 'app.global.department', 
+        name: 'department_id',
+        col: 1, 
+    },
+    { 
+        label: 'app.global.title', 
+        name: 'title_id',
+        col: 1, 
+    },
     /*{ 
         label: 'app.global.id', 
         name: 'id',
