@@ -88,4 +88,16 @@ export default defineMessages({
         id: `${scope}.ProjectNew`,
         defaultMessage: 'Register new project',
     },
+    MyLibrary: {
+        id: `${scope}.MyLibrary`,
+        defaultMessage: 'My Library',
+    },
+    MyInstitution: {
+        id: `${scope}.MyInstitution`,
+        defaultMessage: 'My Institution',
+    },
+    MyProject: {
+        id: `${scope}.MyProject`,
+        defaultMessage: 'My Project',
+    },
 });

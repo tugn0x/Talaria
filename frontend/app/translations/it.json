@@ -49,11 +49,13 @@
   "app.containers.MyLibrariesPage.title": "Aggiungi una biblioteca",
   "app.containers.MyLibrariesPage.library_id": "Seleziona una biblioteca",
   "app.containers.MyLibrariesListPage.header": "Le mie biblioteche",
-  "app.containers.MyLibrariesList.createNew": "Richiedi nuova biblioteca",
+  "app.containers.MyLibrariesList.createNew": "Aggiungi biblioteca",
   "app.containers.MyLibrariesList.edit": "Modifica biblioteca",
+  "app.containers.MyLibrariesListPage.createNew": "Aggiungi biblioteca",
+  "app.containers.MyLibrariesListPage.edit": "Modifica biblioteca",
 
   "app.containers.LibrariesListPage.header": "Biblioteche",
-  "app.containers.LibrariesListPage.createNew": "Richiedi nuova biblioteca",
+  "app.containers.LibrariesListPage.createNew": "Registra nuova biblioteca",
   "app.containers.LibrariesListPage.edit": "Modifica biblioteca",
   
   "app.containers.RegisterNewLibrary.header": "Registra una nuova biblioteca pubblica",
@@ -188,7 +190,9 @@
   "app.routes.Searches": "Ricerche",
   "app.routes.Requests": "Richieste",
   "app.routes.MyLibraries": "Le mie biblioteche",
-  "app.routes.MyLibraryNew": "Richiedi accesso a una biblioteca",
+  "app.routes.MyLibraryNew": "Aggiungi biblioteca",
+  "app.routes.MyLibrary": "La mia biblioteca",
+  "app.routes.LibraryUsers": "I miei utenti",
   "app.routes.UsersList": "Utenti",
   "app.routes.UserNew": "Nuovo utente",
   "app.routes.Institutions": "Enti",
@@ -196,7 +200,9 @@
   "app.routes.InstitutionTypeNew": "Nuovo tipo di ente",
   "app.routes.InstitutionType": "Tipo di ente",
   "app.routes.InstitutionTypes": "Tipi di ente",
+  "app.routes.MyInstitution": "Il mio ente",
   "app.routes.Projects": "Progetti",
+  "app.routes.MyProject": "Il mio progetto",
   "app.routes.ProjectNew": "Nuovo progetto",
   "app.routes.Libraries": "Biblioteche"
 }

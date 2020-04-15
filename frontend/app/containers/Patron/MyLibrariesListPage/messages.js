@@ -10,14 +10,14 @@ export const scope = 'app.containers.MyLibrariesListPage';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'My Libraries list',
+    defaultMessage: 'My Libraries',
   },
   createNew: {
     id: `${scope}.createNew`,
-    defaultMessage: 'Request new library',
+    defaultMessage: 'Add library',
   },
   edit: {
     id: `${scope}.edit`,
-    defaultMessage: 'Edit library',
+    defaultMessage: 'Change library',
   },
 });
