@@ -24,6 +24,12 @@ class LibraryUser extends BaseModel
         'user_id',
         'library_id',
         'status',
+        'user_referent',
+        'user_mat',
+        'user_service_phone',
+        'user_service_email',
+        'preferred',
+        'label'
     ];
 
     protected $attributes = [
