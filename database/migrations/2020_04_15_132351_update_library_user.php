@@ -19,7 +19,7 @@ class UpdateLibraryUser extends Migration
             $table->string('user_mat',20)->nullable()->before('status');
             $table->string('user_service_phone')->nullable()->before('status');
             $table->string('user_service_email')->nullable()->before('status');
-            $table->boolean('preferred')->nullable()->before('status');
+            $table->boolean('preferred')->nullable()->default(false)->before('status');
             $table->string('label',20)->nullable()->before('status');
             
         });
