@@ -94,7 +94,6 @@ class Library extends BaseModel
         'administrative',
         'administrative_email',
         'administrative_phone',
-        'terzo_code', /*codice in SIGLA, SOLO gli amminiistrativi lo possono vedere/modificare*/
     ];
 
     /*

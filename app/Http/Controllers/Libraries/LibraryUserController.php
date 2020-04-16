@@ -46,6 +46,7 @@ class LibraryUserController extends ApiController
 
                 'department_id' => $request->department_id,
                 'title_id' => $request->title_id,
+                'status'=> config("constants.patron_status.pending")
             ]);
             return $model;
         });

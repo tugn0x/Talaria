@@ -84,6 +84,8 @@ class LibraryController extends ApiController
 
         $model = $model->fill($new_model);
 
+        $model->status=config("constants.library_status.new");
+
         $model->save();
 
         //If create fails
