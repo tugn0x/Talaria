@@ -35,6 +35,25 @@ function SimpleList(props) {
     const linkTo = (path) => {
       history.push(path)
     };
+
+    const statusClass = (status) => {
+      switch (status)
+      {
+        case 0: return 'disabled'; break;
+        case 1: return 'success'; break;
+        case 2: return 'pending'; break;
+      }
+      return status;
+    }
+    const preferredStarClass = (pref) => {
+      switch (pref)
+      {
+        case 0: return 'notpreferred'; break;
+        case 1: return 'preferred'; break;
+        
+      }
+      return pref;
+    }
     
     return (
         <>
@@ -87,10 +106,10 @@ function SimpleList(props) {
                                             formatDate(item[field.name], intl.locale)
                                           ||
                                           field.type === 'status' &&
-                                            <div className={`status-point ${item[field.name] === 0 ? 'disabled' : 'success' }`}></div>
+                                            <div className={`status-point ${statusClass(item[field.name])}`}></div>
                                           ||
                                           field.type === 'preferred' &&
-                                            <i className={`fa fa-star preferred-star ${item[field.name] === 0 ? 'notpreferred' : 'preferred' }`}></i>
+                                            <i className={`fa fa-star preferred-star ${preferredStarClass(item[field.name])} }`}></i>
                                           ||
                                             subStringer(item[field.name], 30) 
                                         }
