@@ -3,6 +3,9 @@ export function checkPermissions(user, permissions, resource) {
   if(checkRole(user, "super-admin")) {
     return true;
   }
+  if(!resource) {
+    return true;
+  }
   permissions = typeof permissions === 'string' ? [permissions] : permissions;
   return permissions.map(i => resource.permissions.includes(i)).filter(i => i===true).length > 0
 }
