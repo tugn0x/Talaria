@@ -24,12 +24,12 @@ export const columns = [
         name: 'id',
         col: 2,
     },*/
-    { 
+    /*{ 
         label: 'app.global.created_at', 
         name: 'created_at',
         col: 1,
         type: 'date'
-    },
+    },*/
     { 
         label: 'app.containers.MyLibrariesListPage.user_referent', 
         name: 'user_referent',
