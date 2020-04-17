@@ -82,14 +82,16 @@ const PatronReducer = (state = initialState, action) =>
             id: lib.library.data.id, 
             name: lib.library.data.name, 
             status: lib.status, 
-            department_id:lib.department_id,
-            title_id:lib.title_id,
+            department_id: lib.department_id,
+            department_name: lib.department? lib.department.data.name:'',
+            title_id: lib.title_id,
+            title_name: lib.title? lib.title.data.name:'',
             user_referent: lib.user_referent,
             user_mat: lib.user_mat,
             user_service_phone: lib.user_service_phone,
             user_service_email: lib.user_service_email,
             preferred: lib.preferred,
-            label:lib.label,
+            label: lib.label,
             created_at: lib.library.data.created_at  
           } 
         });

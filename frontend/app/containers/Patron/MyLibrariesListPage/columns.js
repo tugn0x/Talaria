@@ -11,12 +11,12 @@ export const columns = [
     },
     { 
         label: 'app.global.department', 
-        name: 'department_id',
+        name: 'department_name',
         col: 1, 
     },
     { 
         label: 'app.global.title', 
-        name: 'title_id',
+        name: 'title_name',
         col: 1, 
     },
     /*{ 
