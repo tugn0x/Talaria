@@ -6,12 +6,14 @@ export const fields = {
         disabled: true,
         order: 1
     },
+    /* questa dovrebbe essere un dropdown con i valori presi dai dipartimenti della biblio*/
     department_id: { 
         type: "text",
         name: 'department_id',
         width: "col-md-12",
         order: 2, 
     },
+    /* questa dovrebbe essere un dropdown con i valori presi dalle qualifiche dell'ente della biblio*/
     title_id: { 
         type: "text",
         name: 'title_id',
@@ -37,17 +39,24 @@ export const fields = {
         order: 6, 
     },
     user_service_email: { 
-        type: "text",
+        type: "email",
         name: 'user_service_email',
         width: "col-md-12",
         order: 7, 
     },
     status: {
-        type: "switch",
+        /*type: "number",
+        name: 'status',
+        width: "col-md-12",
+        */
+        type: "custom-select",
         name: "status",
         width: "col-md-6",
-        order: 8
-    },
-    
-
+        options: [
+            { value: 2, label: 'pending' },
+            { value: 1, label: 'enabled' },
+            { value: 0, label: 'disabled' },
+        ],
+        order: 8, 
+    }
 }

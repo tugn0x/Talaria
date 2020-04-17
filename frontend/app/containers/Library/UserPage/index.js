@@ -35,8 +35,8 @@ function UserPage(props) {
     }
    }, [isLoading])
 
-   
   return (
+    
     <>
      {user && Object.keys(user).length && !isLoading &&
         <CustomForm 
@@ -45,7 +45,17 @@ function UserPage(props) {
               library_id: params.library_id, 
               id: params.id,
               message: `${intl.formatMessage(messages.statusUpdateMessage)}` })) } 
-          requestData={{status: user.status, name: user.user.data.full_name}}
+          requestData={{
+            /* TODO: trovare il modo di far sceglere il dipartiment/title da una dropdown + gestire status */
+            status: user.status.value, 
+            name: user.user.data.full_name, 
+            department_id: user.department.data.name,
+            title_id: user.title.data.name, 
+            user_referent: user.user_referent,
+            user_mat:user.user_mat,
+            user_service_phone:user.user_service_phone,
+            user_service_email:user.user_service_email
+          }}
           fields={fields}
           title={intl.formatMessage(messages.header)}
           messages={messages}
