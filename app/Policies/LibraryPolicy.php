@@ -23,4 +23,9 @@ class LibraryPolicy extends BasePolicy
     {
         return $this->canManage($user, $model);
     }
+
+    public function optionList(User $user, Model $model)
+    {
+        return true;
+    }
 }
