@@ -1,0 +1,48 @@
+@import '../../scss/variables';
+
+.notification.navbar-nav {
+    .fa-bell {
+        font-size: 1.5rem;
+        position: relative;
+        span {
+            font-size: 0.8rem;
+            font-family: $font-family-base;
+            position: absolute;
+            top: -5px;
+            right: -11px;
+            background: $brown;
+            border-radius: 18px;
+            width: 18px;
+            height: 18px;
+            line-height: 18px;
+            color: white;
+        }
+    }
+    .item {
+        width: 100%;
+        cursor: pointer;
+        > * {
+            vertical-align: middle;
+            display: table-cell;
+        }
+        > span {
+            width: 80%;
+        }
+        .fa-close:before {
+            float: right;
+        }
+       
+    }
+    .items-menu {
+        max-height: 300px;
+        width: 250px;
+        > div:not(.dropdown-header) {
+            height: 50px;
+            line-height: 12px;
+        }
+    }
+    .app.loader{
+        min-height: auto;
+        margin-top: -30px;
+    }
+}

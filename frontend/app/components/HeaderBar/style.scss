@@ -8,42 +8,50 @@
     }
 }
 
-.app-header .dropdown-menu {
-    background-color: $white;
-    border: 1px solid #44444426;
-    border-radius: 0;
-    top: 8px !important;
-    box-shadow: 0px 3px 6px #00000029;
-    -webkit-box-shadow: 0px 3px 6px #00000029;
-    -moz-box-shadow: 0px 3px 6px #00000029;
-    max-height: 90vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-    line-height: 30px;
-    .dropdown-header {
-        background-color: transparent;
-        color: $grey;
-        font-size: 1rem;
-        border-top: 1px solid #c8ced3;
-        font-weight: 700;
+.app-header {
+    .account-nav {
+        margin-left: 60%;
     }
-    .dropdown-item {
-        border: none;
-        &:focus, &:active, &:hover, &.current {
-            background-color: $orange;
-            color: white;
-            .fa:before{
+    .dropdown-menu {
+        background-color: $white;
+        border: 1px solid #44444426;
+        border-radius: 0;
+        top: 8px !important;
+        box-shadow: 0px 3px 6px #00000029;
+        -webkit-box-shadow: 0px 3px 6px #00000029;
+        -moz-box-shadow: 0px 3px 6px #00000029;
+        max-height: 90vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        line-height: 30px;
+        .dropdown-header {
+            background-color: transparent;
+            color: $grey;
+            font-size: 1rem;
+            border-top: 1px solid #c8ced3;
+            font-weight: 700;
+        }
+        .dropdown-item {
+            border: none;
+            &:focus, &:active, &:hover, &.current {
+                background-color: $orange;
                 color: white;
+                .fa:before{
+                    color: white;
+                }
+            }
+        }
+        .account {
+            .fa {
+                &:before {
+                    font-size: 20px;
+                    color: $grey;
+                }
             }
         }
     }
-    .account {
-        .fa {
-            &:before {
-                font-size: 20px;
-                color: $grey;
-            }
-        }
+    .nav-item {
+        min-width: 32px;
     }
 }
 
@@ -70,5 +78,14 @@
         left: 0;
         margin: auto;
 
+    }
+}
+
+
+@include media-breakpoint-down(sm) { 
+    .app-header {
+        .account-nav {
+            margin-left: 80%;
+        }
     }
 }

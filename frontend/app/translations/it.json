@@ -119,6 +119,8 @@
   "app.components.InstitutionForm.header": "Form ente",
   "app.components.LibraryForm.header": "Registrazione biblioteca",
 
+  "app.components.Notification.header": "Notifiche",
+
   "app.components.ReferencesForm.header": "Form Riferimenti",
   "app.components.ReferencesForm.pubyear": "Anno di pubblicazione",
   "app.components.ReferencesForm.material_type": "Tipo materiale",

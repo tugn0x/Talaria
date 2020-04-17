@@ -12,7 +12,6 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { Link, NavLink } from 'react-router-dom';
 import { DropdownItem, DropdownMenu, DropdownToggle, Nav, UncontrolledDropdown, Badge, NavItem } from 'reactstrap';
-import PropTypes from 'prop-types';
 import SubHeaderBar from 'components/SubHeaderBar'
 import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from 'images/logo_home.gif'
@@ -21,6 +20,7 @@ import './style.scss'
 import ResourceMenu from "./ResourcesMenu";
 import subStringer from 'utils/subStringer'
 import {checkRole} from 'utils/permissions'
+import Notification from '../Notification'
 
 function HeaderBar(props) {
 
@@ -58,7 +58,7 @@ function HeaderBar(props) {
             minimized={{ src: logomini, width: 30, height: 30, alt: 'Nilde Logo' }}
             href={'/'}
           />
-          <Nav className="ml-auto" navbar>
+          <Nav className="account-nav" navbar>
             {
               !isLogged && (<NavItem>
                 <Link to="/login" className="nav-link">Login</Link>
@@ -122,6 +122,7 @@ function HeaderBar(props) {
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
+          {isLogged && <Notification /> }
         </div>
       </header>
       { headermenu && <SubHeaderBar routes={routes} /> }

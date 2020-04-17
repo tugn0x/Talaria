@@ -29,6 +29,7 @@
     .main .login-form .card {
         padding: 0
     }
+  
 }
 
 @include media-breakpoint-down(sm) { 
@@ -45,9 +46,6 @@
         max-width: calc(100vw - 40px);
         left: 25px !important;
     }
-    /*  .sidebar-show .main {
-        position: relative
-    } */
 }
 
 @include media-breakpoint-down(xs) {
