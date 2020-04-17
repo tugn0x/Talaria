@@ -28,7 +28,7 @@ const Notification = (props) => {
     }
 
     useEffect(() => {
-        !isLoading && dispatch(requestGetLibrariesList())
+      //  !isLoading && dispatch(requestGetLibrariesList())
     }, [])
 
     useEffect(() => {
@@ -36,7 +36,7 @@ const Notification = (props) => {
             setNotification(state => [...state, ...admin.libraryOptionList.data])
         }
     }, [admin.libraryOptionList])
-
+//
     
 
     return (
@@ -58,7 +58,7 @@ const Notification = (props) => {
                         </DropdownItem>
                     )
                 )}
-                 <Loader show={isLoading}></Loader>
+                <Loader show={isLoading}></Loader>
             </DropdownMenu>   
         </UncontrolledDropdown>
         </Nav>
