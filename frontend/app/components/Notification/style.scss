@@ -1,3 +1,4 @@
+@import '../../scss/vendors/variables';
 @import '../../scss/variables';
 
 .notification.navbar-nav {
@@ -44,5 +45,13 @@
     .app.loader{
         min-height: auto;
         margin-top: -30px;
+    }
+}
+
+@include media-breakpoint-down(xs) { 
+    .notification.navbar-nav {
+        .fa-bell {
+            font-size: 1.3rem;
+        }
     }
 }

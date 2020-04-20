@@ -46,12 +46,6 @@
         max-width: calc(100vw - 40px);
         left: 25px !important;
     }
-}
-
-@include media-breakpoint-down(xs) {
-    body.sidebar-show {
-        overflow-y: hidden;
-    }
     .table {
         overflow-x: auto;
         .row {
@@ -62,6 +56,12 @@
                 max-width: none;
             }
         }
+    }
+}
+
+@include media-breakpoint-down(xs) {
+    body.sidebar-show {
+        overflow-y: hidden;
     }
     .users-permissions-list {
         .custom-control {

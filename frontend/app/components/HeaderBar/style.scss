@@ -82,10 +82,37 @@
 }
 
 
-@include media-breakpoint-down(sm) { 
+@include media-breakpoint-down(md) { 
+    .app-header {
+        padding: 0 !important;
+        .account-nav {
+            margin-left: 70%;
+        }
+    }
+}
+
+
+@include media-breakpoint-down(xs) { 
     .app-header {
         .account-nav {
-            margin-left: 80%;
+            margin-left: 0;
+            i {
+                font-size: 1.6rem;
+            }
+            .fa-sort-down {
+                right: -2px;
+            }
+        }
+        .navbar-toggler {
+            position: static;
+        }
+        .navbar-brand {
+            position: static;
+            margin-left: 0;
+            width: 100px;
+            img {
+                left: -90px;
+            }
         }
     }
 }
