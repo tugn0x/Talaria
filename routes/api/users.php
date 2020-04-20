@@ -46,5 +46,6 @@ Route::group([
     'as' => 'api.v1.notifications.',
 ], function () {
     Route::get('', 'NotificationController@index')->name('index');
+    Route::put('mark_all_as_read', 'NotificationController@markAllAsRead')->name('mark_all_as_read');
     Route::get('{id}', 'NotificationController@show')->name('show');
 });

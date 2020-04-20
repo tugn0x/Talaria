@@ -36,7 +36,10 @@ class DatabaseNotificationTransformer extends BaseTransformer
     public function includeObject(Model $model)
     {
         if($model->object)
-            return $this->item($model, new $model->object_type.'Transformer');
+        {
+            $transformer_class = $model->object_type.'Transformer';
+            return $this->item($model, new $transformer_class);
+        }
     }
 
 
@@ -44,7 +47,7 @@ class DatabaseNotificationTransformer extends BaseTransformer
     public function transform(Model $model)
     {
         $to_merge = [
-//            'test' => 'hello',
+            'read' => $model->read,
         ];
         return $this->applyTransform($model, $to_merge);
     }

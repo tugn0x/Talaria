@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Broadcasting\DatabaseChannel;
 use Illuminate\Support\ServiceProvider;
 use Bouncer;
 use Carbon\Carbon;
@@ -32,7 +33,12 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
-        Relation::morphMap(config('nilde.morphMap'));
+        Relation::morphmap(config('nilde.morphmap'));
+
+        $this->app->bind(
+            Illuminate\Notifications\Channels\DatabaseChannel::class,
+            DatabaseChannel::class
+        );
     }
 
     /**

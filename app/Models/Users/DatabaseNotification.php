@@ -76,4 +76,9 @@ class DatabaseNotification extends BaseDatabaseNotification
     {
         return $this->markAsUnread();
     }
+
+    public function getReadAttribute()
+    {
+        return is_null($this->read_at);
+    }
 }
