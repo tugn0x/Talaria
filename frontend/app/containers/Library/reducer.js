@@ -16,6 +16,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
 export const initialState = {
   loading: false,
   library: {},
+  departmentOptionList: [],
   usersList: {
     data: [],
     pagination: {}
@@ -91,6 +92,9 @@ const libraryReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = initialState.error;
         draft.library = action.result.data
+        draft.departmentOptionList = action.result.data.departments.map(dep => {
+            return {value: dep.id, label: dep.name}
+        })
         break;
       case REQUEST_UPDATE_LIBRARY:
         draft.loading = true;

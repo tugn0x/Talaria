@@ -62,12 +62,12 @@ const CustomForm = (props) => {
             
             // return
         } else {
-            // Tutto ok invia Form!
             let dataToSend = {}
             // Nel caso ci siano option list, allora restituisci solo l id / value del risultato
-             Object.keys(formData).map(key => (
-                formData[key].value ? dataToSend[key] = formData[key].value : dataToSend[key] = formData[key]
-            ))
+             Object.keys(formData).map(key => {
+                dataToSend[key] = formData[key].value !== 'undefined' ?  formData[key].value : formData[key]
+             })
+            // Tutto ok invia Form!
             submitCallBack(dataToSend)
             console.log("Send Form", dataToSend)
         }
@@ -118,8 +118,14 @@ const CustomForm = (props) => {
                                                                    <OptionList 
                                                                         field={field}
                                                                         selectedData={
-                                                                            !formData[field.name] && props.requestData && props.requestData[field.name] ? props[field.name].filter(opt => opt.value === props.requestData[field.name])[0] :
-                                                                            formData[field.name] 
+                                                                            !formData[field.name] && // formData gestisce il cambio del valore del campo da parte dell utente
+                                                                            props.requestData && 
+                                                                            props.requestData[field.name] && // props.requestData e' il valore che viene dal db
+                                                                            props[field.name] ? // props[field.name] e' invece la lista delle opzioni possibili
+                                                                            props[field.name].filter(opt => opt.value === props.requestData[field.name])[0] : // filtriamo per mostrare il valore precedentemte assegnato che viene dal db requestData
+                                                                            !formData[field.name] ? // non ci sono ancora interazioni da parte dell utente
+                                                                            field.options.filter(opt => opt.value === props.requestData[field.name])[0] : // pero' non ci sono liste provenienti dal db props[field.name]. Quindi filtriamo una lista statica che diamo nei fields.js
+                                                                            formData[field.name]   // nel caso di interazioni allora mostraiamo il valore appena scelto dall utente
                                                                         }
                                                                         options={props[field.name] ? props[field.name] : field.options}
                                                                         searchOptionList={field.search ? searchOptionList : {} }

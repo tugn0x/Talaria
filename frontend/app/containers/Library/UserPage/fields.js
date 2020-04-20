@@ -8,9 +8,10 @@ export const fields = {
     },
     /* questa dovrebbe essere un dropdown con i valori presi dai dipartimenti della biblio*/
     department_id: { 
-        type: "text",
+        type: "custom-select",
         name: 'department_id',
         width: "col-md-12",
+        options: 'department_id',
         order: 2, 
     },
     /* questa dovrebbe essere un dropdown con i valori presi dalle qualifiche dell'ente della biblio*/
