@@ -16,18 +16,14 @@ class Recaptcha
      */
     public function handle($request, Closure $next)
     {
-        $validator = \Validator::make($request->only('recaptcha'), [
-            'recaptcha' => ['required', new RecaptchaV3()],
-//            'body' => 'required',
-        ]);
-        if ($validator->fails()) {
-//            $validator->validate();
-            throw new \Dingo\Api\Exception\ValidationHttpException($validator->errors());
+        if($request->getClientIp() !== '127.0.0.1') {
+            $validator = \Validator::make($request->only('recaptcha'), [
+                'recaptcha' => ['required', new RecaptchaV3()],
+            ]);
+            if ($validator->fails()) {
+                throw new \Dingo\Api\Exception\ValidationHttpException($validator->errors());
+            }
         }
-//        $request->validate([
-//            'recaptcha' => ['required', new RecaptchaV3()],
-//]       );
-
         return $next($request);
     }
 }

@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Bouncer;
-use Carbon\Carbon;use Illuminate\Database\Eloquent\Relations\Relation;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 
 
@@ -50,5 +51,11 @@ class AppServiceProvider extends ServiceProvider
          * Time locale
          */
         Carbon::setLocale('it');
+
+        /*
+         * Adding relation morphmap aliases
+         */
+        Relation::morphMap(config('nilde.morphmap'));
+
     }
 }

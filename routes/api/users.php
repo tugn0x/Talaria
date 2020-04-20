@@ -38,3 +38,13 @@ Route::group([
     Route::post('users', 'UserController@store')->name('create');
     Route::get('roles', 'RolePermissionController@index')->name('roles-index');
 });
+
+Route::group([
+    'namespace' => 'Users',
+    'prefix' => 'notifications',
+    'middleware' => ['api','auth:api',],
+    'as' => 'api.v1.notifications.',
+], function () {
+    Route::get('', 'NotificationController@index')->name('index');
+    Route::get('{id}', 'NotificationController@show')->name('show');
+});

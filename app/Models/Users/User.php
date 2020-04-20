@@ -3,10 +3,11 @@
 namespace App\Models\Users;
 
 use App\Models\Libraries\LibraryUser;
-use App\Models\Libraries\UserObserver;
+use App\Models\Users\UserObserver;
 use App\Notifications\Account\ResetPassword;
 use App\Traits\Auth\RolesAbilitiesPermissionsTrait;
 use App\Traits\Model\ModelTrait;
+use App\Models\Users\DatabaseNotificationObserver;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
@@ -130,5 +131,14 @@ class User extends UserBase
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPassword($token, $this->email));
+    }
+    /**
+     * Get the entity's notifications.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function notifications()
+    {
+        return $this->morphMany(DatabaseNotification::class, 'notifiable')->orderBy('created_at', 'desc');
     }
 }

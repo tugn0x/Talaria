@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Mail\Message;
 use Mockery\Generator\StringManipulation\Pass\Pass;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 trait PasswordControllerTrait {
 //    use SendsPasswordResetEmails, ResetsPasswords;
@@ -90,7 +91,8 @@ trait PasswordControllerTrait {
                     'grant_type',
                     'password',
                     'username',
-                    'email'
+                    'email',
+                    'recaptcha',
                 ]);
                 $login_request['username'] = $login_request['email'];
                 $proxy = \Request::create(
