@@ -23,6 +23,8 @@ class LibraryUser extends BaseModel
     protected $fillable = [
         'user_id',
         'library_id',
+        'department_id',
+        'title_id',
         'status',
         'user_referent',
         'user_mat',
