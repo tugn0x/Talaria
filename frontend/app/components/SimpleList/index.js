@@ -90,14 +90,14 @@ function SimpleList(props) {
                     <span>{intl.formatMessage(messages.edit)}</span>
                   </Col>
                 </Row>
-                  <TransitionGroup className="tbody">
-                      {data.length > 0 && data.map(item => (
+                <TransitionGroup className="tbody">
+                        {data.length > 0 && data.map(item => (
                         <CSSTransition
                           key={item.id}
                           timeout={500}
                           classNames="fade"
                         >
-                          <Row key={`list-${item.id}`}>
+                          <Row>
                               {columns.map((field) =>
                                   <Col key={field.name} xs={field.col}>
                                       <span>
