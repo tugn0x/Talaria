@@ -45,14 +45,11 @@ export const fields = {
         order: 7, 
     },
     status: {
-        /*type: "number",
-        name: 'status',
-        width: "col-md-12",
-        */
         type: "custom-select",
         name: "status",
         width: "col-md-6",
         options: [
+            /* NOTA: mi piacerebbe prendere queste stinghe da app.global.PatronStatus.xxx (definite in it.json) */
             { value: 2, label: 'pending' },
             { value: 1, label: 'enabled' },
             { value: 0, label: 'disabled' },
@@ -60,3 +57,5 @@ export const fields = {
         order: 8, 
     }
 }
+    
+     
