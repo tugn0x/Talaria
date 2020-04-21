@@ -29,7 +29,7 @@ class LibraryController extends ApiController
     {
         $model = $this->nilde->show($this->model, $request, $id);
 //        $model->departments()->select('name', 'id')->get();
-        $model->departments;
+        //$model->departments;
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }

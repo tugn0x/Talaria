@@ -2,7 +2,7 @@
 
 use App\Models\BaseLightTransformer;
 use App\Models\Institutions\InstitutionTransformer;
-use App\Models\Users\TitleLightTransformer;
+use App\Models\Users\TitleTransformer;
 use Carbon\Carbon;
 use App\Models\BaseTransformer;
 use Illuminate\Database\Eloquent\Model;
@@ -40,7 +40,7 @@ class LibraryTransformer extends BaseTransformer
     }
     public function includeTitles(Model $model)
     {
-        return $this->collection($model->titles, new TitleLightTransformer());
+        return $this->collection($model->titles, new TitleTransformer());
     }
     public function includeInstitution(Model $model)
     {
