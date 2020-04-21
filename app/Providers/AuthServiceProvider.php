@@ -14,6 +14,7 @@ use App\Models\Users\User;
 use App\Policies\BasePolicy;
 use App\Policies\LibraryPolicy;
 use App\Policies\LibraryUserPolicy;
+use App\Policies\ListBasePolicy;
 use App\Policies\ReferencesPolicy;
 use App\Policies\ProjectPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -35,11 +36,11 @@ class AuthServiceProvider extends ServiceProvider
         LibraryUser::class => LibraryUserPolicy::class,
         Reference::class => ReferencesPolicy::class,
         User::class => BasePolicy::class,
-        InstitutionType::class => BasePolicy::class,
-        Project::class => BasePolicy::class,
-        Institution::class => BasePolicy::class,
-        Country::class => BasePolicy::class,
-        Subject::class => BasePolicy::class,
+        InstitutionType::class => ListBasePolicy::class,
+        Project::class => ListBasePolicy::class,
+        Institution::class => ListBasePolicy::class,
+        Country::class => ListBasePolicy::class,
+        Subject::class => ListBasePolicy::class,
     ];
 
     /**
