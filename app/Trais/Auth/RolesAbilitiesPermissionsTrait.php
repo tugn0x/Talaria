@@ -153,6 +153,14 @@ trait RolesAbilitiesPermissionsTrait
         });
     }
 
+    public function isAbleOn($model)
+    {
+        return $this->abilities()->where([
+                'abilities.entity_id' => $model->getKey(),
+                'abilities.entity_type' => get_class($model),
+            ])->count() > 0;
+    }
+
     public function object_abilities($class, $id=null)
     {
         return $this->abilities()->where([
