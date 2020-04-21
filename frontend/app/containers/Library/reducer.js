@@ -17,6 +17,7 @@ export const initialState = {
   loading: false,
   library: {},
   departmentOptionList: [],
+  titleOptionList: [],
   usersList: {
     data: [],
     pagination: {}
@@ -91,10 +92,13 @@ const libraryReducer = (state = initialState, action) =>
       case REQUEST_GET_LIBRARY_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
-        draft.library = action.result.data
-        draft.departmentOptionList = action.result.data.departments.map(dep => {
+        draft.library = action.result.data;
+        draft.departmentOptionList = action.result.data.departments? action.result.data.departments.data.map(dep => {
             return {value: dep.id, label: dep.name}
-        })
+        }):[]
+        draft.titleOptionList = action.result.data.titles? action.result.data.titles.data.map(tit => {
+          return {value: tit.id, label: tit.name}
+        }):[]
         break;
       case REQUEST_UPDATE_LIBRARY:
         draft.loading = true;

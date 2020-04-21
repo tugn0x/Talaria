@@ -6,7 +6,6 @@ export const fields = {
         disabled: true,
         order: 1
     },
-    /* questa dovrebbe essere un dropdown con i valori presi dai dipartimenti della biblio*/
     department_id: { 
         type: "custom-select",
         name: 'department_id',
@@ -14,11 +13,11 @@ export const fields = {
         options: 'department_id',
         order: 2, 
     },
-    /* questa dovrebbe essere un dropdown con i valori presi dalle qualifiche dell'ente della biblio*/
     title_id: { 
-        type: "text",
+        type: "custom-select",
         name: 'title_id',
         width: "col-md-12",
+        options: 'title_id',
         order: 3, 
     },
     user_referent: { 

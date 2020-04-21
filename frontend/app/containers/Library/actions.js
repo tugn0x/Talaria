@@ -96,10 +96,11 @@ export function requestPostLibrary(request, message) {
   };
 }
 
-export function requestGetLibrary(id) {
+export function requestGetLibrary(id,includes) {
   return {
     type: REQUEST_GET_LIBRARY,
-    id
+    id,
+    includes
   };
 }
 

@@ -30,7 +30,7 @@ function LibraryPage(props) {
   
   useEffect(() => {
     if(!isLoading){
-      dispatch(requestGetLibrary(match.params.library_id))
+      dispatch(requestGetLibrary(match.params.library_id,'titles,departments'))
     }
   }, [match.params.library_id]) 
 
