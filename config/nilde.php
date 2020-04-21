@@ -7,6 +7,6 @@ return [
         'projects'      => 'App\Models\Projects\Project',
         'consortia'     => 'App\Models\Institutions\Consortium',
 
-        'users'         => 'App\Models\Users\User',
+//        'users'         => 'App\Models\Users\User',
     ],
 ];
