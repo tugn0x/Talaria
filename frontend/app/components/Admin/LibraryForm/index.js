@@ -19,7 +19,7 @@ const LibraryForm = (props) => {
     
     return (
             <SimpleForm loading={loading}>
-                <CustomForm 
+                 <CustomForm 
                     submitCallBack={(formData) => submitFormAction(formData)} 
                     requestData={library ? library : null}
                     fields={fields} 
@@ -34,7 +34,7 @@ const LibraryForm = (props) => {
                     granted_permissions={
                         library ? library.granted_permissions : [] }
                     resources={resources}
-                />
+                /> 
             </SimpleForm>
     )
 }
