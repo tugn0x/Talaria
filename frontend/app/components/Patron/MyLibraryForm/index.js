@@ -9,8 +9,16 @@ import {useIntl} from 'react-intl';
 
 
 const MyLibraryForm = (props) => {
+    console.log("MyLibraryForm", props)
     const { library, loading, libraryOptionList, searches} = props
     const intl = useIntl();
+
+     // Aggiorna dati nei campi *handle change*
+     const onChangeData = (field_name, value) => {
+        if(field_name=="library_id")
+            console.log("LIBRARYYYY CHANGEEE");
+    }
+
     /*
     TODO: DA FARE DOPO...
     TODO: aggiungere title_id e department_id alla request.
@@ -63,6 +71,7 @@ const MyLibraryForm = (props) => {
                             fields={props.fields}
                             messages={props.messages}
                             searchOptionList={searches}
+                            onChangeData={(field_name, value) => onChangeData(field_name, value)}
                         /> 
                     }
                 </Col>

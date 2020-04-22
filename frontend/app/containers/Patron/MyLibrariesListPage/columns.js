@@ -1,5 +1,11 @@
 export const columns = [
     { 
+        label: 'app.global.preferred', 
+        name: 'preferred',
+        col: 1,
+        type: 'preferred'
+    },
+    { 
         label: 'app.global.label', 
         name: 'label',
         col: 1, 
@@ -23,12 +29,6 @@ export const columns = [
         label: 'app.global.id', 
         name: 'id',
         col: 2,
-    },*/
-    /*{ 
-        label: 'app.global.created_at', 
-        name: 'created_at',
-        col: 1,
-        type: 'date'
     },*/
     { 
         label: 'app.containers.MyLibrariesListPage.user_referent', 
@@ -55,16 +55,17 @@ export const columns = [
         type: 'string'
     },
     { 
+        label: 'app.global.created_at', 
+        name: 'created_at',
+        col: 1,
+        type: 'date'
+    },
+    { 
         label: 'app.global.status', 
         name: 'status',
         col: 1,
         type: 'status'
     },
-    { 
-        label: 'app.global.preferred', 
-        name: 'preferred',
-        col: 1,
-        type: 'preferred'
-    },
+    
     
 ]
