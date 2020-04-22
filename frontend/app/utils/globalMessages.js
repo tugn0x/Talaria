@@ -144,5 +144,17 @@ export default defineMessages({
   cancel: {
     id: `${scope}.cancel`,
     defaultMessage: "Cancel",
-  }
+  },
+  pending: {
+    id: `${scope}.pending`,
+    defaultMessage: "Pending",
+  },
+  enabled: {
+    id: `${scope}.enabled`,
+    defaultMessage: "Enabled",
+  },
+  disabled: {
+    id: `${scope}.disabled`,
+    defaultMessage: "Disabled",
+  } 
 });

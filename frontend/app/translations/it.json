@@ -40,16 +40,16 @@
   "app.global.department": "Dipartimento/Istituto",
   "app.global.title": "Qualifica",
   "app.global.label": "Etichetta",
+  "app.global.pending": "In attesa",
+  "app.global.enabled": "Abilitato",
+  "app.global.disabled": "Disabilitato",
+
   "app.containers.HomePage.header": "ITALIANO HOMEPAGE CONTAINER",
   "app.containers.UserPage.header": "ITALIANO UserPage CONTAINER",
   "app.containers.ChangePassword.updateMessage": "Password modificata",
   "app.containers.ResetPassword.updateMessage": "Password aggiornata",
   "app.containers.ProfilePage.updateMessage": "Profilo aggiornato",
   "app.containers.NotFoundPage.header": "",
-
-  "app.global.PatronStatus.pending": "In attesa",
-  "app.global.PatronStatus.enabled": "Abilitato",
-  "app.global.PatronStatus.disabled": "Disabilitato",
 
   "app.containers.UserProfile.header": "Profilo utente",
   "app.containers.UserProfile.subtitle": "Aggiorna il profilo",
@@ -139,6 +139,7 @@
   "app.components.LibraryForm.header": "Registrazione biblioteca",
 
   "app.components.Notification.header": "Notifiche",
+  "app.components.Notification.mark_all_as_read": "Segna tutte come lette",
 
   "app.components.ReferencesForm.header": "Form Riferimenti",
   "app.components.ReferencesForm.pubyear": "Anno di pubblicazione",

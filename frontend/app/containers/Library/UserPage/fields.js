@@ -50,9 +50,11 @@ export const fields = {
         width: "col-md-6",
         options: [
             /* NOTA: mi piacerebbe prendere queste stinghe da app.global.PatronStatus.xxx (definite in it.json) */
-            { value: 2, label: 'pending' },
-            { value: 1, label: 'enabled' },
-            { value: 0, label: 'disabled' },
+            /* se scrivi la label con una app.global.variabile verra' tradotta, sempre che app.global.variabile esista nelle traduzioni */ 
+            /* altrimenti legge la label come stringa */
+            { value: 2, label: 'app.global.pending' },
+            { value: 1, label: 'app.global.enabled' },
+            { value: 0, label: 'app.global.disabled' },
         ],
         order: 8, 
     }

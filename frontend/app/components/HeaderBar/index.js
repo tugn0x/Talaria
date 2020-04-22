@@ -48,81 +48,88 @@ function HeaderBar(props) {
 
     <>
       <header className="app-header navbar bg-grey-light px-4">
-        <div className="header-container container">
-          { isLogged && headermenu &&
-            currentRoute && currentRoute[0].children.length > 0 &&
-            <AppSidebarToggler  display="xs"/>
-          }
-          <AppNavbarBrand
-            full={{ src: logo, width: 89, height: 25, alt: 'Nilde Logo' }}
-            minimized={{ src: logomini, width: 30, height: 30, alt: 'Nilde Logo' }}
-            href={'/'}
-          />
-          <Nav className="account-nav" navbar>
-            {
-              !isLogged && (<NavItem>
-                <Link to="/login" className="nav-link">Login</Link>
-              </NavItem>)
+      <div className="container">
+        <div className="header-container row">
+          <div className="header-left-col">
+            { isLogged && headermenu &&
+              currentRoute && currentRoute[0].children.length > 0 &&
+              <AppSidebarToggler  display="xs"/>
             }
-            <UncontrolledDropdown nav direction="down">
-              <DropdownToggle nav>
-                { isLogged && (
-                    <>
-                      <i className="fa fa-2x fa-user d-table-cell"></i>
-                      <span className="user-name d-none d-md-table-cell align-middle px-3">
-                        {subStringer(auth.user.name, 10)}
-                      </span>
-                      <i className="fa fa-2x fa-sort-down d-table-cell align-middle"></i>
-                    </>
-                  )
-                }
-              </DropdownToggle>
-              <DropdownMenu right>
-                {
-                  isLogged && (
-                    <>
-                    {checkRole(auth, "super-admin") && (
-                      <div className="resources-menu">
+            <AppNavbarBrand
+              full={{ src: logo, width: 89, height: 25, alt: 'Nilde Logo' }}
+              minimized={{ src: logomini, width: 30, height: 30, alt: 'Nilde Logo' }}
+              href={'/'}
+              className="col-md-7"
+            />
+          </div>
+          <div className="header-right-col">
+            <Nav className="account-nav" navbar>
+              {
+                !isLogged && (<NavItem>
+                  <Link to="/login" className="nav-link">Login</Link>
+                </NavItem>)
+              }
+              <UncontrolledDropdown nav direction="down">
+                <DropdownToggle nav>
+                  { isLogged && (
+                      <>
+                        <i className="fa fa-2x fa-user d-table-cell"></i>
+                        <span className="user-name d-none d-md-table-cell align-middle px-3">
+                          {subStringer(auth.user.name, 10)}
+                        </span>
+                        <i className="fa fa-2x fa-sort-down d-table-cell align-middle"></i>
+                      </>
+                    )
+                  }
+                </DropdownToggle>
+                <DropdownMenu right>
+                  {
+                    isLogged && (
+                      <>
+                      {checkRole(auth, "super-admin") && (
+                        <div className="resources-menu">
+                          <DropdownItem header tag="div" className="text-center">
+                            <div className={`icon-img admin float-left`}></div>
+                            <FormattedMessage {...messages.admin} />
+                          </DropdownItem>
+                            <NavLink to={`/admin`}
+                                    className="dropdown-item btn"
+                                    activeClassName="current">
+                              Nilde Admin
+                            </NavLink>
+                        </div>
+                      )}
+                        {
+                          auth.permissions.resources && (<ResourceMenu resources={auth.permissions.resources}></ResourceMenu>)
+                        }
+                      <div className="account">
                         <DropdownItem header tag="div" className="text-center">
-                          <div className={`icon-img admin float-left`}></div>
-                          <FormattedMessage {...messages.admin} />
+                          <FormattedMessage {...messages.UserAccount} />
                         </DropdownItem>
-                          <NavLink to={`/admin`}
-                                   className="dropdown-item btn"
-                                   activeClassName="current">
-                            Nilde Admin
+                        {/*<DropdownItem onClick={() => linkTo("/patron/my-libraries")}><i className="fa fa-user"></i><span>Patron</span></DropdownItem>*/}
+                          <NavLink to="/user/user-profile" className="dropdown-item btn" activeClassName="current">
+                            <i className="fa fa-user"></i>
+                            <span><FormattedMessage {...messages.Profile} /></span>
                           </NavLink>
-                      </div>
-                    )}
-                      {
-                        auth.permissions.resources && (<ResourceMenu resources={auth.permissions.resources}></ResourceMenu>)
-                      }
-                    <div className="account">
-                      <DropdownItem header tag="div" className="text-center">
-                        <FormattedMessage {...messages.UserAccount} />
-                      </DropdownItem>
-                      {/*<DropdownItem onClick={() => linkTo("/patron/my-libraries")}><i className="fa fa-user"></i><span>Patron</span></DropdownItem>*/}
-                        <NavLink to="/user/user-profile" className="dropdown-item btn" activeClassName="current">
-                          <i className="fa fa-user"></i>
-                          <span><FormattedMessage {...messages.Profile} /></span>
-                        </NavLink>
-                        <NavLink to="/user/change-password" className="dropdown-item btn" activeClassName="current">
-                          <i className="fa fa-lock"></i>
-                          <span><FormattedMessage {...messages.ChangePassword} /></span>
-                        </NavLink>
-                        <NavLink to="#" onClick={e => props.logout(e)} className="dropdown-item btn" activeClassName="current">
-                          <i className="fa fa-sign-out"></i>
-                          <span><FormattedMessage {...messages.Logout} /></span>
-                        </NavLink>
-                      </div>
-                    </>
-                  )
-                }
+                          <NavLink to="/user/change-password" className="dropdown-item btn" activeClassName="current">
+                            <i className="fa fa-lock"></i>
+                            <span><FormattedMessage {...messages.ChangePassword} /></span>
+                          </NavLink>
+                          <NavLink to="#" onClick={e => props.logout(e)} className="dropdown-item btn" activeClassName="current">
+                            <i className="fa fa-sign-out"></i>
+                            <span><FormattedMessage {...messages.Logout} /></span>
+                          </NavLink>
+                        </div>
+                      </>
+                    )
+                  }
 
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </Nav>
-          {isLogged && <Notification /> }
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            </Nav>
+            {isLogged && <Notification /> }
+          </div>
+          </div>
         </div>
       </header>
       { headermenu && <SubHeaderBar routes={routes} /> }

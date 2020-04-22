@@ -40,7 +40,7 @@ const Notification = (props) => {
             setNotification(state => [...state, ...props.notifications.data])
             setUnreaded_total(state => state+props.notifications.unreaded_total)
         }
-    }, [props.notifications])
+    }, [props.notifications.data])
 //
     return (
         <Nav className="notification" navbar>
@@ -54,9 +54,11 @@ const Notification = (props) => {
             </DropdownToggle>
             <DropdownMenu right onScroll={lazyLoad} className="items-menu">
                 <DropdownItem header tag="div" className="text-center">
-                    {intl.formatMessage(messages.header)}
+                    <div>{intl.formatMessage(messages.header)}</div>
                     <div>
-                        <a href="#" onClick={() => dispatch(upadteNotificationsAsRead())}>Mark all as read</a>
+                        <a href="#" onClick={() => dispatch(upadteNotificationsAsRead())}>
+                            {intl.formatMessage(messages.mark_all_as_read)}
+                        </a>
                     </div>
                 </DropdownItem>
                 {notification.map(notify => (
@@ -66,7 +68,7 @@ const Notification = (props) => {
                             onClick={() => console.log('click notification')} 
                             className={`item btn ${notify.read ? 'read' : ''}`}>
                             <div>
-                                <h5>{notify.data.title}</h5>
+                                <h6>{notify.data.title}</h6>
                                 <span>{subStringer(notify.data.message, 20)}</span>
                             </div>
                             <i className="fa fa-close"></i>
