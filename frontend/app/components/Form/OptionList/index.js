@@ -10,23 +10,23 @@ import formMessages from '../CustomForm/messages'
 const translateOptions = (options, intl) => {
     if(options && Array.isArray(options)){
         let objReturn = []
-        objReturn = options.map(opt => {
+        objReturn = options.length > 0 ? options.map(opt => {
             if(opt.label.includes('app.global')){
                 return { value: opt.value, label: intl.formatMessage({id: opt.label}) } 
             }else {
                 return opt
             }
-        })
+        }) : []
         return objReturn
-    }else {
+    }else{
         let objReturn = {}
-        if(options && options.label.includes('app.global')){
+        if(options &&  options.label && options.label.includes('app.global')){
             objReturn = { value: options.value, label: intl.formatMessage({id: options.label}) } 
         }else {
             objReturn = options
         }
         return objReturn
-    }  
+    } 
 }
 
 const OptionList = (props) => {
@@ -48,7 +48,7 @@ const OptionList = (props) => {
 
     useEffect(() => {
         translateOptions(options, intl)
-    }, [options]) */
+    }, [options])  */
     
     return (
        // selectedData &&
@@ -80,6 +80,7 @@ const OptionList = (props) => {
 OptionList.propTypes = {
     handleChange: PropTypes.func.isRequired,
     searchOptionList: PropTypes.object.isRequired,
+    options: PropTypes.array.isRequired || PropTypes.object.isRequired,
     // selectedData: PropTypes.object.isRequired,
     field: PropTypes.object.isRequired,
 };

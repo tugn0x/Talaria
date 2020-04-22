@@ -121,15 +121,24 @@ const CustomForm = (props) => {
                                                                         selectedData={
                                                                             !formData[field.name] && // formData gestisce il cambio del valore del campo da parte dell utente
                                                                             props.requestData && 
-                                                                            props.requestData[field.name] && // props.requestData e' il valore che viene dal db
+                                                                            props.requestData[field.name] && // props.requestData e' il valore che viene dal db. Preselezionato
                                                                             props[field.name] ? // props[field.name] e' invece la lista delle opzioni possibili
                                                                             props[field.name].filter(opt => opt.value === props.requestData[field.name])[0] : // filtriamo per mostrare il valore precedentemte assegnato che viene dal db requestData
                                                                             !formData[field.name] && // non ci sono ancora interazioni da parte dell utente
-                                                                            !props[field.name]  ? // non ci sono props e quindi una opzione preselezionata
+                                                                            !props[field.name] &&
+                                                                            typeof field.options === 'object' ? // non ci sono props e quindi una opzione preselezionata
                                                                             field.options.filter(opt => opt.value === props.requestData[field.name])[0] : // pero' non ci sono liste provenienti dal db props[field.name]. Quindi filtriamo una lista statica che diamo nei fields.js
                                                                             formData[field.name]   // nel caso di interazioni allora mostraiamo il valore appena scelto dall utente
                                                                         }
-                                                                        options={props[field.name] ? props[field.name] : field.options}
+                                                                        options={
+                                                                            props[field.name] &&
+                                                                            field.options === field.name ?
+                                                                            props[field.name] :
+                                                                            !props[field.name] &&
+                                                                            field.options === field.name ?
+                                                                            [] :
+                                                                            field.options
+                                                                        }
                                                                         searchOptionList={field.search ? searchOptionList : {} }
                                                                         handleChange={(value) => handleChange(value, field.name)}
                                                                     />  

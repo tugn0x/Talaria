@@ -59,6 +59,7 @@
 
   "app.containers.MyLibrariesPage.title": "Aggiungi una biblioteca",
   "app.containers.MyLibrariesPage.library_id": "Seleziona una biblioteca",
+  "app.containers.MyLibrariesPage.department_id": "Seleziona un dipartimento",
   "app.containers.MyLibrariesListPage.header": "Le mie biblioteche",
   "app.containers.MyLibrariesList.createNew": "Aggiungi biblioteca",
   "app.containers.MyLibrariesList.edit": "Modifica biblioteca",

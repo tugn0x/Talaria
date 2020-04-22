@@ -40,10 +40,10 @@ export function* requestMyLibrariesSaga(action) {
   }
 }
 
-export function* requestLibraryOptionListSaga(action) {
+export function* requestLibraryOptionListSaga(action = {}) {
   const options = {
     method: 'get',
-    query: action.request
+    query: action.query ?  action.query : ""
   }
   try {
     const request = yield call(getLibraryOptionList, options);
@@ -57,6 +57,7 @@ export function* requestAccessToLibrarySaga(action) {
   const options = {
     method: 'post',
     body: action.request
+    
   };
   try {
     const request = yield call(requestAccessToLibrary, options);

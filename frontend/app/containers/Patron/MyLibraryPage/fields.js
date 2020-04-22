@@ -3,16 +3,17 @@ export const fields = {
         type: "custom-select",
         name: "library_id",
         options: "library_id",
+        width: "col-md-12",
         required: true,
         // selectedOption: "libraryOptionList"
     }, 
-   department_id: { 
+    department_id: { 
         type: "custom-select",
         name: 'department_id',
         width: "col-md-12",
         options: 'department_id',
-        order: 2, 
-    },
+       // order: 2, 
+    },  
     /*
     title_id: { 
         type: "custom-select",

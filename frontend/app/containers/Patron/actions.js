@@ -97,10 +97,10 @@ export function requestMyLibrariesSuccess(result) {
   };
 }
 
-export function requestLibraryOptionList(request) {
+export function requestLibraryOptionList(query) {
   return {
     type: REQUEST_GET_LIBRARY_OPTIONLIST,
-    request
+    query
   };
 }
 

@@ -65,14 +65,17 @@ const MyLibraryForm = (props) => {
                         </ul>
                     }
                     {libraryOptionList &&
-                        <CustomForm
-                            submitCallBack={ (formData) =>  props.requestAccessToLibrary(formData) }
-                            library_id={libraryOptionList}
-                            fields={props.fields}
-                            messages={props.messages}
-                            searchOptionList={searches}
-                            onChangeData={(field_name, value) => onChangeData(field_name, value)}
-                        /> 
+                        <>
+                            <CustomForm
+                                submitCallBack={ (formData) =>  props.requestAccessToLibrary(formData) }
+                                library_id={libraryOptionList}
+                                // department_id={departmentOptionList}
+                                fields={props.fields}
+                                messages={props.messages}
+                                searchOptionList={searches}
+                                //onChangeData={(field_name, value) => onChangeData(field_name, value)}
+                            /> 
+                        </> 
                     }
                 </Col>
             </Row>

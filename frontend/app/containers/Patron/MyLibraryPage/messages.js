@@ -15,5 +15,9 @@ export default defineMessages({
   library_id: {
     id: `${scope}.library_id`,
     defaultMessage: 'Select library',
+  },
+  department_id: {
+    id: `${scope}.department_id`,
+    defaultMessage: 'Select a department',
   }
 });
