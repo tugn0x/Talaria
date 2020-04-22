@@ -18,5 +18,10 @@ export default defineMessages({
   },
   cancel: {
     id: `app.global.cancel`,
+    defaultMessage: 'Cancel',
+  },
+  submit: {
+    id: 'app.global.submit',
+    defaultMessage: 'Submit',
   }
 });
