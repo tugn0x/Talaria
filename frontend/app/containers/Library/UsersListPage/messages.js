@@ -1,26 +1,38 @@
 /*
- * Library UserPage Messages
+ * Library UserListPage Messages
  *
- * This contains all the text for the LibraryPage container.
+ * This contains all the text for the Library UserListPage container.
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.LibraryUserPage';
+export const scope = 'app.containers.LibraryUsersListPage';
 
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Edit user status',
+    defaultMessage: 'Users list',
   },
   name: {
     id: 'app.global.name',
     defaultMessage: 'Nome',
   },
+  created_at: { 
+    id: 'app.global.created_at', 
+    defaultMessage: 'created_at',
+  },
   department_id: {
     id: 'app.global.department',
     defaultMessage: 'Department',
   },
+  department_name: {
+    id: 'app.global.department',
+    defaultMessage: 'Department',
+  },
   title_id: {
+    id: 'app.global.title',
+    defaultMessage: 'Title',
+  },
+  title_name: {
     id: 'app.global.title',
     defaultMessage: 'Title',
   },
@@ -48,5 +60,12 @@ export default defineMessages({
     id: `${scope}.statusUpdateMessage`,
     defaultMessage: 'Status updated',
   },
-
+  createNew: {
+    id: `${scope}.createNew`,
+    defaultMessage: 'Add user',
+  },
+  edit: {
+    id: `${scope}.edit`,
+    defaultMessage: 'Edit',
+  },
 });

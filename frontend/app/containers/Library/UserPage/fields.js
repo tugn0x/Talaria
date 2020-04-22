@@ -6,7 +6,6 @@ export const fields = {
         disabled: true,
         order: 1
     },
-    /* questa dovrebbe essere un dropdown con i valori presi dai dipartimenti della biblio*/
     department_id: { 
         type: "custom-select",
         name: 'department_id',
@@ -14,11 +13,11 @@ export const fields = {
         options: 'department_id',
         order: 2, 
     },
-    /* questa dovrebbe essere un dropdown con i valori presi dalle qualifiche dell'ente della biblio*/
     title_id: { 
-        type: "text",
+        type: "custom-select",
         name: 'title_id',
         width: "col-md-12",
+        options: 'title_id',
         order: 3, 
     },
     user_referent: { 
@@ -46,14 +45,11 @@ export const fields = {
         order: 7, 
     },
     status: {
-        /*type: "number",
-        name: 'status',
-        width: "col-md-12",
-        */
         type: "custom-select",
         name: "status",
         width: "col-md-6",
         options: [
+            /* NOTA: mi piacerebbe prendere queste stinghe da app.global.PatronStatus.xxx (definite in it.json) */
             { value: 2, label: 'pending' },
             { value: 1, label: 'enabled' },
             { value: 0, label: 'disabled' },
@@ -61,3 +57,5 @@ export const fields = {
         order: 8, 
     }
 }
+    
+     

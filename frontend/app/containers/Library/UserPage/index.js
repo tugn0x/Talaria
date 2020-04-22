@@ -46,11 +46,10 @@ function UserPage(props) {
               id: params.id,
               message: `${intl.formatMessage(messages.statusUpdateMessage)}` })) } 
           requestData={{
-            /* TODO: trovare il modo di far sceglere il dipartiment/title da una dropdown + gestire status */
             status: user.status, 
             name: user.user.data.full_name, 
             department_id: user.department_id,
-            title_id: user.title.data.name, 
+            title_id: user.title_id, 
             user_referent: user.user_referent,
             user_mat:user.user_mat,
             user_service_phone:user.user_service_phone,
@@ -59,6 +58,7 @@ function UserPage(props) {
           // qui si carica la lista della option list. Se vuoi una lista che venga dal back.
           // E nei fields.js in options: del campo metti lo stesso nome della prop quindi department_id
           department_id={library.departmentOptionList} 
+          title_id={library.titleOptionList} 
           fields={fields}
           title={intl.formatMessage(messages.header)}
           messages={messages}

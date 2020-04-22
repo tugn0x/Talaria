@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {requestUsersList} from '../actions'
 import {useIntl} from 'react-intl';
-import messages from 'containers/Admin/UsersListPage/messages'
+import messages from './messages';
 import {columns} from './columns'
 import {SimpleList} from 'components'
 

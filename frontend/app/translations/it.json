@@ -34,6 +34,8 @@
   "app.global.continue": "Continua",
   "app.global.cancel": "Annulla",
   "app.global.submit": "Invia",
+  "app.global.edit": "Modifica",
+  "app.global.save": "Salva",
   "app.global.library": "Biblioteca",
   "app.global.department": "Dipartimento/Istituto",
   "app.global.title": "Qualifica",
@@ -44,6 +46,10 @@
   "app.containers.ResetPassword.updateMessage": "Password aggiornata",
   "app.containers.ProfilePage.updateMessage": "Profilo aggiornato",
   "app.containers.NotFoundPage.header": "",
+
+  "app.global.PatronStatus.pending": "In attesa",
+  "app.global.PatronStatus.enabled": "Abilitato",
+  "app.global.PatronStatus.disabled": "Disabilitato",
 
   "app.containers.UserProfile.header": "Profilo utente",
   "app.containers.UserProfile.subtitle": "Aggiorna il profilo",
@@ -74,6 +80,19 @@
   "app.containers.RegisterNewLibrary.step_4": "Riepilogo",
 
   "app.containers.LibraryUserPage.header": "Modifica stato utente",
+  "app.containers.LibraryUserPage.user_referent": "Referente",
+  "app.containers.LibraryUserPage.user_mat": "Matricola/Tessera",
+  "app.containers.LibraryUserPage.user_service_phone": "Telefono servizio",
+  "app.containers.LibraryUserPage.user_service_email": "Email servizio",
+
+  "app.containers.LibraryUsersListPage.header": "I miei utenti",
+  "app.containers.LibraryUsersListPage.user_referent": "Referente",
+  "app.containers.LibraryUsersListPage.user_mat": "Matricola/Tessera",
+  "app.containers.LibraryUsersListPage.user_service_phone": "Telefono servizio",
+  "app.containers.LibraryUsersListPage.user_service_email": "Email servizio",
+  "app.containers.LibraryUsersListPage.createNew": "Aggiungi utente",
+  "app.containers.LibraryUsersListPage.edit": "Modifica utente",
+
 
   "app.containers.InstitutionPage.createSuccess": "Nuovo ente creato",
   "app.containers.InstitutionPage.updateSuccess": "Ente aggiornato",
