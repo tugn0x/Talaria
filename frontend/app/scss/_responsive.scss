@@ -4,6 +4,8 @@
     }
     .app-header { 
         z-index: 1030;
+        position: fixed;
+        width: 100%;
     }
     .app-subheader {
         overflow-y: auto;
