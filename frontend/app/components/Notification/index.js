@@ -47,7 +47,9 @@ const Notification = (props) => {
         <UncontrolledDropdown nav direction="down">
             <DropdownToggle nav>
                 <i className="fa fa-bell d-table-cell">
+                    {unreaded_total !== 0 &&
                     <span className="count">{unreaded_total}</span>
+                    }
                 </i>
             </DropdownToggle>
             <DropdownMenu right onScroll={lazyLoad} className="items-menu">
