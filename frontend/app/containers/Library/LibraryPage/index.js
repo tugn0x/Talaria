@@ -25,8 +25,6 @@ function LibraryPage(props) {
     type: 'libraries',
     id: match.params.library_id,
   })
-  console.log(resource)
-  
   
   useEffect(() => {
     if(!isLoading){

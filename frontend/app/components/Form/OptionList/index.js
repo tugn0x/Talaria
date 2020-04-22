@@ -1,4 +1,4 @@
-import React  from 'react'
+import React, { useEffect, useState }  from 'react'
 // import {useIntl} from 'react-intl'
 import PropTypes from 'prop-types';
 import Select from 'react-select';
@@ -6,6 +6,28 @@ import {Input} from 'reactstrap'
 import {isEmpty} from 'lodash'
 import {useIntl} from 'react-intl'
 import formMessages from '../CustomForm/messages'
+
+const translateOptions = (options, intl) => {
+    if(options && Array.isArray(options)){
+        let objReturn = []
+        objReturn = options.map(opt => {
+            if(opt.label.includes('app.global')){
+                return { value: opt.value, label: intl.formatMessage({id: opt.label}) } 
+            }else {
+                return opt
+            }
+        })
+        return objReturn
+    }else {
+        let objReturn = {}
+        if(options && options.label.includes('app.global')){
+            objReturn = { value: options.value, label: intl.formatMessage({id: options.label}) } 
+        }else {
+            objReturn = options
+        }
+        return objReturn
+    }  
+}
 
 const OptionList = (props) => {
     const {field, label, selectedData, options, searchOptionList, handleChange} = props
@@ -20,17 +42,25 @@ const OptionList = (props) => {
         searchOptionList[name](inputValue)
     };
 
+   /*  useEffect(() => {
+        translateOptions(selectedData, intl)
+    }, [selectedData])
+
+    useEffect(() => {
+        translateOptions(options, intl)
+    }, [options]) */
+    
     return (
        // selectedData &&
             <>
             <Select
                 className={`option-list ${selectedData ? '' : 'danger'}`}
                 type="custom-select"
-                value={selectedData ? selectedData : {label: intl.formatMessage(formMessages.select), value: 0}}
+                value={selectedData ? translateOptions(selectedData, intl) : {label: intl.formatMessage(formMessages.select), value: 0}}
                 name={field.name}
                 onChange={(option) => handleChangeOptionList(option)}
                 onInputChange={(input) =>  searchOptionList && !isEmpty(searchOptionList) ? handleSearchOptionList(input, field.options) : input}
-                options={options}
+                options={translateOptions(options, intl)}
             /> 
             <Input 
                 type="text"

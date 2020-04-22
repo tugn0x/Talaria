@@ -50,9 +50,9 @@ export const fields = {
         width: "col-md-6",
         options: [
             /* NOTA: mi piacerebbe prendere queste stinghe da app.global.PatronStatus.xxx (definite in it.json) */
-            { value: 2, label: 'pending' },
-            { value: 1, label: 'enabled' },
-            { value: 0, label: 'disabled' },
+            { value: 2, label: 'app.global.pending' },
+            { value: 1, label: 'app.global.enabled' },
+            { value: 0, label: 'app.global.disabled' },
         ],
         order: 8, 
     }
