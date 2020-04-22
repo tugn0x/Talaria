@@ -2,7 +2,8 @@ import { call, put, takeLatest  } from 'redux-saga/effects';
 import { REQUEST_GET_NOTIFICATION_LIST, MARK_ALL_AS_READ } from './constants';
 import {
   requestNotificationsSuccess,
-  
+  requestSuccess,
+  requestError
 } from './actions';
 
 import { getNotifications, updateNotificationsAsRead} from 'utils/api';
@@ -27,7 +28,8 @@ export function* requestNotificationsSaga(action = {}) {
     };
     try {
       const request = yield call(updateNotificationsAsRead, options);
-      yield call(requestNotificationsSaga);
+     // yield call(requestNotificationsSaga);
+     yield put(requestSuccess())
     } catch(e) {
       yield put(requestError(e.message));
     }

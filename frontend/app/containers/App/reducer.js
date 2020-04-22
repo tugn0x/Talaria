@@ -1,7 +1,8 @@
 import produce from 'immer';
 // import moment from "moment";
 import { REQUEST_GET_NOTIFICATION_LIST, REQUEST_GET_NOTIFICATION_LIST_SUCCESS,
-    MARK_ALL_AS_READ} from './constants';
+    MARK_ALL_AS_READ, 
+    REQUEST_SUCCESS} from './constants';
 export const initialState = {
     loading: false,
     notifications: {
@@ -31,6 +32,10 @@ produce(state, ( draft ) => {
        draft.loading = true;
        draft.notifications.error = action.error;
        break;
+    case REQUEST_SUCCESS:
+      draft.loading = false;
+      draft.notifications.error = initialState.error;
+      break;
   }
 })
 
