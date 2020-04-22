@@ -28,6 +28,14 @@ const isLogged = () =>
     substate => (substate.user /*&& substate.user.is_verified*/ && substate.oauth && substate.oauth.token && substate.oauth.expire_at && substate.oauth.expire_at > moment().unix()) ? true : false,
   );
 
+const isAuthLoading = () =>
+  createSelector(
+    selectAuthDomain,
+    substate => substate.loading
+  );
+
+
+
 const tokensExistsExpired = () =>
   createSelector(
     selectAuthDomain,
@@ -35,4 +43,4 @@ const tokensExistsExpired = () =>
   );
 
 export default makeSelectAuth;
-export { selectAuthDomain, isLogged, tokensExistsExpired };
+export { selectAuthDomain, isLogged, tokensExistsExpired, isAuthLoading };

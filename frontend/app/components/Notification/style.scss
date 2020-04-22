@@ -22,12 +22,18 @@
     .item {
         width: 100%;
         cursor: pointer;
+        max-width: inherit;
         > * {
             vertical-align: middle;
             display: table-cell;
         }
         > span {
             width: 80%;
+        }
+        .fa-close {
+            position: absolute;
+            right: 0;
+            top: 17px
         }
         .fa-close:before {
             float: right;
@@ -36,15 +42,21 @@
     }
     .items-menu {
         max-height: 300px;
-        width: 250px;
+        width: 350px;
         > div:not(.dropdown-header) {
             height: 50px;
-            line-height: 12px;
+            line-height: 0;
+            margin-left: 0;
         }
     }
     .app.loader{
         min-height: auto;
         margin-top: -30px;
+    }
+    .dropdown-header {
+        a {
+            font-size: 12px;
+        }
     }
 }
 

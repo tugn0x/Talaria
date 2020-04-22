@@ -33,7 +33,6 @@ export function* defaultAuthCallsSaga() {
   // console.log('defaultAuthCallsSaga')
   yield call(userProfileSaga);
   yield call(userPermissionsSaga);
-  // yield put(requestMyLibraries())
 }
 // Individual exports for testing
 export function* loginAuthSaga(action) {
@@ -99,6 +98,7 @@ export function* userProfileSaga() {
     yield call(logoutAuthSaga);
   }
 }
+
 
 export function* userPermissionsSaga() {
   const options = {

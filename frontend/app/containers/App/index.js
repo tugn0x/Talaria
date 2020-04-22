@@ -36,8 +36,6 @@ function App(props) {
     logout: (request) => props.dispatch(requestLogout(request))
   }
 
-
-
   return (
     !props.auth.loading && 
       <Switch>

@@ -12,6 +12,7 @@ import authProviderReducer from 'containers/Auth/AuthProvider/reducer';
 import patronReducer from 'containers/Patron/reducer';
 import adminReducer from 'containers/Admin/reducer';
 import libraryReducer from 'containers/Library/reducer';
+import appReducer from 'containers/App/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -25,6 +26,7 @@ export default function createReducer(injectedReducers = {}) {
     patron: patronReducer,
     admin: adminReducer,
     library: libraryReducer,
+    app: appReducer,
     ...injectedReducers,
   });
 

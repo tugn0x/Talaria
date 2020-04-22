@@ -3,17 +3,21 @@ import { Nav, DropdownItem, DropdownMenu, DropdownToggle,UncontrolledDropdown} f
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {requestGetLibrariesList} from 'containers/Admin/actions'
-import makeSelectAdmin, {isAdminLoading} from 'containers/Admin/selectors';
+import {requestNotifications, upadteNotificationsAsRead} from 'containers/App/actions'
+import makeSelectApp, {makeSelectNotifications } from 'containers/App/selectors';
 import {Loader} from 'components'
 import messages from './messages'
+import subStringer from 'utils/subStringer'
 import {useIntl} from 'react-intl'
 import './style.scss'
 
 const Notification = (props) => {
-    const {dispatch, isLoading, admin} = props
+    const {dispatch} = props
     const [notification, setNotification] = useState([])
-    const page = admin.libraryOptionList.pagination
+    const [unreaded_total, setUnreaded_total] = useState(0)
+    const page = props.notifications.pagination
+    const loading = props.notifications.loading
+    //const unreaded_total = props.notifications.unreaded_total
     const intl = useIntl()
     const lazyLoad = (event) => {
         const menuTop = event.target.scrollTop
@@ -23,42 +27,51 @@ const Notification = (props) => {
         const currPage = page ? page.current_page : 1
         const totalPages = page ? page.total_pages : 1
         if(menuTop >= totalItemsHeight - menuHeight && totalPages > currPage ){
-            !isLoading && dispatch(requestGetLibrariesList(currPage+1))
+            !props.app.loading && dispatch(requestNotifications(currPage+1))
         } 
     }
 
     useEffect(() => {
-      //  !isLoading && dispatch(requestGetLibrariesList())
+      !props.app.loading && dispatch(requestNotifications())
     }, [])
 
     useEffect(() => {
-        if(admin.libraryOptionList.data.length > 0){
-            setNotification(state => [...state, ...admin.libraryOptionList.data])
+        if(props.notifications.data.length > 0){
+            setNotification(state => [...state, ...props.notifications.data])
+            setUnreaded_total(state => state+props.notifications.unreaded_total)
         }
-    }, [admin.libraryOptionList])
+    }, [props.notifications])
 //
-    
-
     return (
         <Nav className="notification" navbar>
         <UncontrolledDropdown nav direction="down">
             <DropdownToggle nav>
                 <i className="fa fa-bell d-table-cell">
-                    <span className="count">2</span>
+                    <span className="count">{unreaded_total}</span>
                 </i>
             </DropdownToggle>
             <DropdownMenu right onScroll={lazyLoad} className="items-menu">
                 <DropdownItem header tag="div" className="text-center">
                     {intl.formatMessage(messages.header)}
+                    <div>
+                        <a href="#" onClick={() => dispatch(upadteNotificationsAsRead())}>Mark all as read</a>
+                    </div>
                 </DropdownItem>
-                {notification.map(lib => (
-                        <DropdownItem tag="div" key={lib.id} onClick={() => console.log('click notification')} className="d-table item btn">
-                            <span>{lib.name}</span>
+                {notification.map(notify => (
+                        <DropdownItem 
+                            tag="div" 
+                            key={notify.id} 
+                            onClick={() => console.log('click notification')} 
+                            className={`item btn ${notify.read ? 'read' : ''}`}>
+                            <div>
+                                <h5>{notify.data.title}</h5>
+                                <span>{subStringer(notify.data.message, 20)}</span>
+                            </div>
                             <i className="fa fa-close"></i>
                         </DropdownItem>
                     )
                 )}
-                <Loader show={isLoading}></Loader>
+                <Loader show={loading}></Loader>
             </DropdownMenu>   
         </UncontrolledDropdown>
         </Nav>
@@ -66,9 +79,9 @@ const Notification = (props) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-    isLoading: isAdminLoading(),
-    admin: makeSelectAdmin()
-});
+    app: makeSelectApp(),
+    notifications: makeSelectNotifications()
+  });
 
 function mapDispatchToProps(dispatch) {
     return {

@@ -114,6 +114,25 @@ export const getProfile = (options) => {
   return request(`${BASE_URL}/api/v1/auth/me`, options)
 };
 
+
+export const getNotifications = (options) => {
+  const page = options.page;
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/notifications?page=${page}`, options)
+};
+
+export const getNotification = (options) => {
+  const id = options.id;
+  const setToRead = options.setToRead;
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/notifications/${id}?setToRead=${setToRead}`, options)
+};
+
+export const updateNotificationsAsRead = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/notifications/mark_all_as_read`, options)
+};
+
 export const getPermissions = (options) => {
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/auth/permissions`, options)
