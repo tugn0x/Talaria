@@ -24,7 +24,7 @@ const CustomForm = (props) => {
     const {
         submitCallBack = () => null,
         title = 'Form',
-        submitText = "Submit",
+        //submitText = "Submit",
         submitColor = "brown",
         fields = {},
         searchOptionList,
@@ -172,7 +172,7 @@ const CustomForm = (props) => {
                         </div>
                         <div className="d-flex justify-content-between">
                             <Button color={submitColor} disabled={isSubmitDisabled} type="submit" block>
-                                {submitText}
+                            {intl.formatMessage(formMessages.submit)}
                             </Button>
                             {cancelButton && 
                                 <Button color="secondary" onClick={() => props.history.goBack() } >
