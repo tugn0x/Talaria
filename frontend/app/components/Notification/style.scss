@@ -43,10 +43,24 @@
     .items-menu {
         max-height: 300px;
         width: 350px;
+        top: 12px !important;
         > div:not(.dropdown-header) {
             height: 50px;
             line-height: 0;
             margin-left: 0;
+        }
+        .dropdown-header {
+            display: table;
+            width: 100%;
+            > div {
+                display: table-cell;
+                &:first-child {
+                    float: left;
+                }
+                &:last-child {
+                    float: right;
+                }
+            }
         }
     }
     .app.loader{
@@ -58,6 +72,14 @@
             font-size: 12px;
         }
     }
+}
+
+@include media-breakpoint-down(md) { 
+  /*   .notification.navbar-nav {
+        .items-menu {
+            top: 15px !important;
+        }
+    } */
 }
 
 @include media-breakpoint-down(xs) { 

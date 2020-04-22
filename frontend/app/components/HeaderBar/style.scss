@@ -9,9 +9,6 @@
 }
 
 .app-header {
-    .account-nav {
-        margin-left: 60%;
-    }
     .dropdown-menu {
         background-color: $white;
         border: 1px solid #44444426;
@@ -50,9 +47,41 @@
             }
         }
     }
+    .header-container {
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
     .nav-item {
         min-width: 32px;
     }
+    .navbar-brand {
+        position: static;
+        display: block;
+        margin: 0;
+        left: 0;
+        > img {
+            margin-top: 14px;
+        }
+    }
+    .header-left-col {
+        display: flex;
+        align-items: center;
+        .navbar-toggler-icon {
+            display: block;
+            width: auto;
+            
+        }
+    }
+    .header-right-col {
+        display: flex;
+        align-items: center;
+        .account-nav {
+            padding-right: 25px;
+        }
+        
+    }
+    
 }
 
 .resources-menu {
@@ -62,40 +91,34 @@
     }
 }
 
-.navbar-toggler {
-    position: absolute;
-    left: 1rem;
-}
-
-.navbar-toggler-icon {
-    display: block;
-}
-
-.navbar-brand {
-    position: relative;
-    > img {
-        position: absolute;
-        left: 0;
-        margin: auto;
-
+@include media-breakpoint-up(md) { 
+    .app-header {
+        padding: 0 !important;
+        .navbar-brand {
+            position: absolute;
+            right: 0;
+            margin: 0 auto;
+        }
     }
 }
-
 
 @include media-breakpoint-down(md) { 
     .app-header {
         padding: 0 !important;
-        .account-nav {
-            margin-left: 70%;
-        }
     }
 }
+
+
+/* @include media-breakpoint-down(sm) { 
+    
+} */
+
+
 
 
 @include media-breakpoint-down(xs) { 
     .app-header {
         .account-nav {
-            margin-left: 0;
             i {
                 font-size: 1.6rem;
             }
@@ -106,13 +129,14 @@
         .navbar-toggler {
             position: static;
         }
-        .navbar-brand {
-            position: static;
-            margin-left: 0;
-            width: 100px;
-            img {
-                left: -90px;
-            }
-        }
     }
 }
+
+/* @media (max-width: 400px) { 
+    .app-header {
+        .navbar-brand {
+          //  flex: 2;
+            //   margin-left: 25%;
+        }
+    }
+} */

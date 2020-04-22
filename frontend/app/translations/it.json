@@ -139,6 +139,7 @@
   "app.components.LibraryForm.header": "Registrazione biblioteca",
 
   "app.components.Notification.header": "Notifiche",
+  "app.components.Notification.mark_all_as_read": "Segna tutte come lette",
 
   "app.components.ReferencesForm.header": "Form Riferimenti",
   "app.components.ReferencesForm.pubyear": "Anno di pubblicazione",
