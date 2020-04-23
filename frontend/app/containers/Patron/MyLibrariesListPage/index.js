@@ -37,7 +37,7 @@ const MyLibrariesListPage = (props) => {
                 searchOnChange: true
             }}
             editPath={'/patron/my-libraries/library/:id?'}
-            modalComponent={ <MyLibraryPage match={match} />}
+            modalComponent={ <MyLibraryPage match={match}/>}
         />
     )
 }

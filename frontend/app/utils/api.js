@@ -172,7 +172,7 @@ export const getLibraryOptionList = (options) => {
 export const getMyLibrary = (options) => {
   const library_id = options.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/${library_id}`, options)
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}?include=departments,titles`, options)
 };
 
 export const requestAccessToLibrary = (options) => {

@@ -79,7 +79,7 @@ const PatronReducer = (state = initialState, action) =>
         draft.error = initialState.error;
         draft.my_libraries.data =  action.result.data.map(lib => {
           return { 
-            id: lib.library.data.id, 
+            id: lib.id, 
             name: lib.library.data.name, 
             status: lib.status, 
             department_id: lib.department_id,
