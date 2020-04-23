@@ -118,7 +118,7 @@ const CustomForm = (props) => {
                                                                    <>
                                                                     <OptionList 
                                                                         field={field}
-                                                                        selectedData={
+                                                                        selectedOption={
                                                                             !formData[field.name] && // formData gestisce il cambio del valore del campo da parte dell utente
                                                                             props.requestData && 
                                                                             props.requestData[field.name] && // props.requestData e' il valore che viene dal db. Preselezionato

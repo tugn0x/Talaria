@@ -9,7 +9,7 @@ import React, {useEffect} from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {useIntl} from 'react-intl';
+// import {useIntl} from 'react-intl';
 import {fields} from './fields';
 import messages from './messages';
 // import { FormattedMessage } from 'react-intl';
@@ -19,7 +19,8 @@ import {MyLibraryForm} from 'components';
 
 
 function MyLibraryPage(props) {
-  const intl = useIntl();
+  console.log('MyLibraryPage', props)
+  // const intl = useIntl();
   const {isLoading, dispatch, patron, match} = props
   const {params} = match
   const isNew = !params.id || params.id === 'new'
