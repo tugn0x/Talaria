@@ -5,6 +5,7 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_GET_ROLES,
           REQUEST_GET_LIBRARIES_LIST,
           REQUEST_UPDATE_LIBRARY,
+          REQUEST_DELETE_LIBRARY,
           REQUEST_POST_LIBRARY,
           REQUEST_GET_INSTITUTION_TYPE_LIST,
           REQUEST_GET_PROJECT,
@@ -46,7 +47,7 @@ import {
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
 import {getUsersList, updateUser, createUser, getUsersOptionsList,
-        getRoles, getUser, getLibrary, getLibrariesList, updateLibrary,
+        getRoles, getUser, getLibrary, getLibrariesList, updateLibrary,deleteLibrary,
         createLibrary, getInstituionTypeList, getInstitutionsList,
         getInstitution, updateInstitution, getInstitutionTypesOptionList,
         getInstitutionsOptionList,
@@ -206,6 +207,21 @@ export function* requestGetLibrariesListSaga(action = {}) {
   try {
     const request = yield call(getLibrariesList, options);
     yield put(requestGetLibrariesListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestDeleteLibrarySaga(action) {
+  const options = {
+    method: 'delete',
+    id: action.id
+  };
+  try {
+    const request = yield call(deleteLibrary, options);
+    yield call(requestGetLibrariesListSaga);
+    yield put(push("/admin/libraries"));
+    yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -415,6 +431,7 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_GET_ROLES, requestGetRolesSaga);
   yield takeLatest(REQUEST_GET_LIBRARY, requestGetLibrarySaga);
   yield takeLatest(REQUEST_GET_LIBRARIES_LIST, requestGetLibrariesListSaga);
+  yield takeLatest(REQUEST_DELETE_LIBRARY, requestDeleteLibrarySaga);
   yield takeLatest(REQUEST_UPDATE_LIBRARY, requestUpdateLibrarySaga);
   yield takeLatest(REQUEST_POST_LIBRARY, requestPostLibrarySaga);
   yield takeLatest(REQUEST_POST_PUBLIC_LIBRARY, requestPostPublicLibrarySaga);

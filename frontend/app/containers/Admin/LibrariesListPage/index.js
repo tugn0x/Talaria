@@ -6,9 +6,11 @@ import {useIntl} from 'react-intl';
 import {SimpleList} from 'components'
 import messages from './messages'
 import {columns} from './columns'
-import {requestGetLibrariesList /* , requestPostLibrary */ } from '../actions'
+import {requestGetLibrariesList,deleteLibrary /* , requestPostLibrary */ } from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
 import LibraryPage from '../LibraryPage'
+import confirm from "reactstrap-confirm";
+
 
 const LibrariesListPage = (props) => {
     console.log('LibrariesListPage', props)
@@ -21,6 +23,17 @@ const LibrariesListPage = (props) => {
             dispatch(requestGetLibrariesList())
         }
     }, [])
+
+    async function deleteCallback (id) {
+        let conf = await confirm({
+            title: intl.formatMessage(messages.confirm),
+            message: intl.formatMessage(messages.askDeleteMessage),
+            confirmText: intl.formatMessage(messages.yes),
+            cancelText: intl.formatMessage(messages.no)
+        }); //
+        if(conf)
+            dispatch(deleteLibrary(id,intl.formatMessage(messages.deletedMessage)))
+    }
 
     
 
@@ -40,6 +53,7 @@ const LibrariesListPage = (props) => {
                     searchOnChange: true
                 }}
                 editPath={'/admin/libraries/library/:id?'}
+                deleteCallback={deleteCallback}
                 modalComponent={ <LibraryPage match={match} />}
             />
         </>

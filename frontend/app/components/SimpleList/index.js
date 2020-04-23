@@ -18,7 +18,7 @@ function SimpleList(props) {
     const {data, columns, history,
           match, editPath, messages,
           pagination, searchOptions, 
-          loading, modalComponent, title, subtitle} = props
+          loading, modalComponent, title, subtitle,deleteCallback} = props
     
     const {total_pages, current_page} = pagination
     const [modal, setModal] = useState(false);
@@ -121,7 +121,7 @@ function SimpleList(props) {
                               <a href={`${editurl(item.id)}`} className="btn btn-link">
                                 <i className="fa fa-edit"></i>
                               </a>
-                              <a href="#" onClick={() => console.log('delete user')} className="btn btn-link">
+                              <a href="#" onClick={() => deleteCallback(item.id)} className="btn btn-link">
                                 <i className="fa fa-trash"></i>
                               </a>
                             </Col>
