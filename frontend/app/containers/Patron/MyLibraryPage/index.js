@@ -9,7 +9,7 @@ import React, {useEffect} from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-// import {useIntl} from 'react-intl';
+import {useIntl} from 'react-intl';
 import {fields} from './fields';
 import messages from './messages';
 // import { FormattedMessage } from 'react-intl';
@@ -21,7 +21,8 @@ import {requestUser} from '../../Library/actions';
 
 function MyLibraryPage(props) {
   console.log('MyLibraryPage', props)
-  // const intl = useIntl();
+  
+  const intl = useIntl();
   const {isLoading, dispatch, patron, match} = props
   const {params} = match
   const isNew = !params.id || params.id === 'new'
@@ -31,15 +32,14 @@ function MyLibraryPage(props) {
   //NB: in params c'e' l'id della relazione library_users
   useEffect(() => {
     if(!isLoading && !isNew) {
-
-      if(patron.status!==1) 
-        fields.preferred.disabled=true; //disattivo la modifica del preferito se lo stato nn è attivo
-      
+ 
         //dispatch(requestGetMyLibrary(params.id))
         dispatch(requestUser(library.id, params.id))
-      
-      //TODO chimare getLibraryUser(bib_id,user_id) x ottenere dati della associazione dell'utente alla biblio selezionata
-      //e disattivare fields["preferred"] se status!=1
+        
+        /* questa non funziona!!
+        if(patron.status!==1) 
+          fields.preferred.disabled=true; //disattivo la modifica del preferito se lo stato nn è attivo
+        */
     }/*else if(!isLoading && isNew){
       dispatch(requestLibraryOptionList())
     }*/
@@ -47,10 +47,9 @@ function MyLibraryPage(props) {
 
    
   return (
-    
-    <>
-    {console.log("FIELD:",fields)}
+     <>
     {patron && Object.keys(patron).length && !isLoading &&
+        
         <CustomForm 
           submitCallBack={(formData) => dispatch(requestUpdateUser({
               ...formData, 
