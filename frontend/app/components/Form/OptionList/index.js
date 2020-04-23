@@ -30,7 +30,7 @@ const translateOptions = (options, intl) => {
 }
 
 const OptionList = (props) => {
-    const {field, label, selectedData, options, searchOptionList, handleChange} = props
+    const {field, label, selectedOption, options, searchOptionList, handleChange} = props
     const intl = useIntl()
     
     const handleChangeOptionList = (option) => {
@@ -43,20 +43,20 @@ const OptionList = (props) => {
     };
 
    /*  useEffect(() => {
-        translateOptions(selectedData, intl)
-    }, [selectedData])
+        translateOptions(selectedOption, intl)
+    }, [selectedOption])
 
     useEffect(() => {
         translateOptions(options, intl)
     }, [options])  */
     
     return (
-       // selectedData &&
+       // selectedOption &&
             <>
             <Select
-                className={`option-list ${selectedData ? '' : 'danger'}`}
+                className={`option-list ${selectedOption ? '' : 'danger'}`}
                 type="custom-select"
-                value={selectedData ? translateOptions(selectedData, intl) : {label: intl.formatMessage(formMessages.select), value: 0}}
+                value={selectedOption ? translateOptions(selectedOption, intl) : {label: intl.formatMessage(formMessages.select), value: 0}}
                 name={field.name}
                 onChange={(option) => handleChangeOptionList(option)}
                 onInputChange={(input) =>  searchOptionList && !isEmpty(searchOptionList) ? handleSearchOptionList(input, field.options) : input}
@@ -64,7 +64,7 @@ const OptionList = (props) => {
             /> 
             <Input 
                 type="text"
-                value={selectedData || ''}
+                value={selectedOption || ''}
                 style={{
                     opacity: 0,
                     width: "100%",
@@ -81,7 +81,7 @@ OptionList.propTypes = {
     handleChange: PropTypes.func.isRequired,
     searchOptionList: PropTypes.object.isRequired,
     options: PropTypes.array.isRequired || PropTypes.object.isRequired,
-    // selectedData: PropTypes.object.isRequired,
+    // selectedOption: PropTypes.object.isRequired,
     field: PropTypes.object.isRequired,
 };
 
