@@ -121,9 +121,10 @@ function SimpleList(props) {
                               <a href={`${editurl(item.id)}`} className="btn btn-link">
                                 <i className="fa fa-edit"></i>
                               </a>
-                              <a href="#" onClick={() => deleteCallback(item.id)} className="btn btn-link">
+
+                              {deleteCallback && <a href="#" onClick={() => deleteCallback(item.id)} className="btn btn-link">
                                 <i className="fa fa-trash"></i>
-                              </a>
+                              </a>}
                             </Col>
                           </Row>
                         </CSSTransition>
