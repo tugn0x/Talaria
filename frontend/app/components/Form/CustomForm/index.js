@@ -147,6 +147,7 @@ const CustomForm = (props) => {
                                                                 field.type === 'switch' &&
                                                                     <Switch 
                                                                         field={field}
+                                                                        disabled={field.disabled ? field.disabled : false}
                                                                         data={!formData[field.name] && props.requestData && props.requestData[field.name] ? props.requestData[field.name] : formData[field.name]}
                                                                         label={messages[field.name]}
                                                                         handleChange={(value) => handleChange(value, field.name)}

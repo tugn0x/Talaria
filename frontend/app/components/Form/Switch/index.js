@@ -16,6 +16,7 @@ const Switch = (props) => {
 
         <AppSwitch className="mx-1" color="success"
             checked={data ? Boolean(data) : false}
+            disabled={field.disabled ? field.disabled : false}
             name={field.name}
             value={field.value ? field.value : ''}
             onChange={(e) => onChange(e)}
