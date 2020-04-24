@@ -10,6 +10,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_USERS_OPTIONLIST, REQUEST_USERS_OPTIONLIST_SUCCESS,
   REQUEST_USER, REQUEST_USER_SUCCESS,
   REQUEST_GET_LIBRARY, REQUEST_GET_LIBRARY_SUCCESS,
+  REQUEST_DELETE_LIBRARY,
   REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS,
   REQUEST_UPDATE_LIBRARY, REQUEST_POST_LIBRARY,
   REQUEST_POST_USER,
@@ -127,6 +128,10 @@ const AdminReducer = (state = initialState, action) =>
         draft.loading = true;
         draft.error = action.error;
         break;
+      case REQUEST_DELETE_LIBRARY:
+          draft.loading = true;
+          draft.error = action.error;
+          break;  
       case REQUEST_GET_LIBRARY_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;

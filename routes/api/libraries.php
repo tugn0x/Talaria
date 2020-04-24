@@ -53,6 +53,7 @@ Route::group([
     Route::get('{id}/departments', 'LibraryController@departments')->name('departments');
     Route::put('{id}', 'LibraryController@update')->name('update');
     Route::post('', 'LibraryController@create')->name('create');
+    Route::delete('{id}', 'LibraryController@delete')->name('delete'); //soft delete
 
 
 

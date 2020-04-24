@@ -300,6 +300,13 @@ export const updateLibrary = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}?include=granted_permissions,institution,country,departments`, options)
 };
 
+export const deleteLibrary = (options) => {
+  const library_id = options.id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}`, options)
+};
+
+
 export const getLibrariesList = (options) => {
   const page = options.page;
   const query = options.query;
