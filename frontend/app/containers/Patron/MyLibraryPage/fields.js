@@ -65,4 +65,18 @@ export const fieldsIsNew = {
         width: "col-md-12",
         options: 'library_id',
     },
+    department_id: { 
+        type: "custom-select",
+        name: 'department_id',
+        width: "col-md-12",
+        options: 'department_id',
+        hidden: true,
+    },  
+    title_id: { 
+        type: "custom-select",
+        name: 'title_id',
+        width: "col-md-12",
+        options: 'title_id',
+        hidden: true,
+    },
 }
