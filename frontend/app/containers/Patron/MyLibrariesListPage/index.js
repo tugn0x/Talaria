@@ -21,7 +21,7 @@ const MyLibrariesListPage = (props) => {
             dispatch(requestMyLibraries())
         }
     }, [])
-
+   
     return (
         <SimpleList 
             data={patron.my_libraries.data}
@@ -36,7 +36,13 @@ const MyLibrariesListPage = (props) => {
                 getSearchList: (query) => dispatch(requestMyLibraries(null, query)),
                 searchOnChange: true
             }}
-            editPath={'/patron/my-libraries/library/:id?'}
+            // editPath={`/patron/my-libraries/library/:id?`}
+            editPath={
+                {
+                    url: `/patron/:library_id?/my-libraries/library/:id?`,
+                    params: ['library_id', 'id']
+                }
+            } 
             modalComponent={ <MyLibraryPage match={match}/>}
         />
     )

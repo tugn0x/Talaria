@@ -57,3 +57,12 @@ export const fields = {
         order: 9, 
     },
 }
+
+export const fieldsIsNew = { 
+   library_id: { 
+        type: "custom-select",
+        name: 'library_id',
+        width: "col-md-12",
+        options: 'library_id',
+    },
+}

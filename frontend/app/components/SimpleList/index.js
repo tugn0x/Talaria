@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Row, Col} from 'reactstrap';
 // import messages from './messages';
@@ -25,13 +25,34 @@ function SimpleList(props) {
     const toggle = () => setModal(!modal);
     const intl = useIntl();
 
-    const editurl = (id) => {
+   /*  const editurl = (id) => {
         return generatePath(`${editPath}`, {
-            id: id,
+            id
         });
-    }
+    }  */
 
-
+    // editurl genera l url per il bottone edit (si possono passare piu parametri)
+    // usando la Prop editPath. 
+    // editPath puo essere una stringa (passi solo l url e il parametro sara' solo l id)
+    // editPath puo' essere un oggetto, dove passi url e parametri
+    const editurl = (item) => {
+      if(!item){
+        return
+      }
+      let ParamsObj = {}
+      if(typeof editPath === 'object'){
+        editPath.params &&
+        Array.isArray(editPath.params) ? 
+        editPath.params.map((param,i) =>  {
+          ParamsObj = {...ParamsObj, [param]: item[param]}
+        }) : console.warn('editPath with params must be an array')
+      }else {
+        ParamsObj = {id: item.id}
+      }
+      const url = editPath.url ? editPath.url : editPath
+      return generatePath(url, ParamsObj)
+    } 
+    
     const linkTo = (path) => {
       history.push(path)
     };
@@ -118,7 +139,7 @@ function SimpleList(props) {
                                 )
                               }
                             <Col xs={2} className="edit-icons" >
-                              <a href={`${editurl(item.id)}`} className="btn btn-link">
+                              <a href={`${editurl(item)}`} className="btn btn-link">
                                 <i className="fa fa-edit"></i>
                               </a>
                               <a href="#" onClick={() => console.log('delete user')} className="btn btn-link">
@@ -155,7 +176,8 @@ function SimpleList(props) {
 SimpleList.propTypes = {
   columns: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired,
-  editPath: PropTypes.string.isRequired,
+  editPath: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };
+
 
 export default SimpleList
