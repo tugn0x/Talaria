@@ -71,6 +71,7 @@ function SimpleList(props) {
       {
         case 0: return 'notpreferred'; break;
         case 1: return 'preferred'; break; 
+        default: return 'notpreferred'; break;
       }
       return pref;
     }
