@@ -70,10 +70,18 @@ function SimpleList(props) {
       switch (pref)
       {
         case 0: return 'notpreferred'; break;
-        case 1: return 'preferred'; break;
-        
+        case 1: return 'preferred'; break; 
       }
       return pref;
+    }
+
+    const checkIcon = (chk) => {
+      switch (chk)
+      {
+        case 1: return 'check'; break;
+        case 0: return 'ban'; break; 
+      }
+      return chk;
     }
     
     return (
@@ -129,6 +137,9 @@ function SimpleList(props) {
                                           field.type === 'status' &&
                                             <div className={`status-point ${statusClass(item[field.name])}`}></div>
                                           ||
+                                          field.type === 'check' &&
+                                            <i className={`fa fa-${checkIcon(item[field.name])} }`}></i>
+                                            ||
                                           field.type === 'preferred' &&
                                             <i className={`fa fa-star preferred-star ${preferredStarClass(item[field.name])} }`}></i>
                                           ||

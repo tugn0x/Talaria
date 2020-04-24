@@ -11,6 +11,7 @@
   "app.global.invalid_email": "Inserisci un indirizzo email valida",
   "app.global.invalid_privacy_policy_accepted": "Accetta la privacy policy",
   "app.global.invalid_field": "Il campo non puo' essere vuoto",
+  "app.global.inNilde": "In NILDE",
   "app.global.update": "Aggiorna",
   "app.global.search": "Cerca",
   "app.global.address": "Indirizzo",
