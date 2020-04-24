@@ -39,7 +39,7 @@ function MyLibraryPage(props) {
   useEffect(() => {
     if(!isNew) {
       dispatch(requestUser(params.library_id, params.id))
-      dispatch(requestGetLibrary(params.library_id,('departments')))
+      dispatch(requestGetLibrary(params.library_id,('departments,titles')))
       //TODO chimare getLibraryUser(bib_id,user_id) x ottenere dati della associazione dell'utente alla biblio selezionata
       //e disattivare fields["preferred"] se status!=1
     }else if(isNew){
@@ -48,6 +48,7 @@ function MyLibraryPage(props) {
   }, [])
 
   useEffect(() => {
+    //disabilito la possibilità di modificare il preferred se status!=1
     Object.keys(patron).length > 0 && patron.status!==1 ? fields.preferred.disabled = true : null
   }, [patron])
 

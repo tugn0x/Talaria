@@ -219,6 +219,7 @@ export const getLibraryUsersList = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users?page=${page}&q=${query}`, options)
 };
 
+//NB: user_id in realtà è l'id della relazione library_user
 export const getLibraryUser = (options) => {
   const user_id = options.user_id
   const library_id = options.library_id
@@ -226,6 +227,7 @@ export const getLibraryUser = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${user_id}`, options)
 };
 
+//NB: id in realtà è l'id della relazione library_user
 export const updateLibraryUser = (options) => {
   const id = options.body.id
   const library_id = options.body.library_id
