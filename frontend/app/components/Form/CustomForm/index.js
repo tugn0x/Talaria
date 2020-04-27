@@ -92,7 +92,7 @@ const CustomForm = (props) => {
                                             <Row>
                                                 {fieldsGroup.fields.map((field, i) => {
                                                     return (
-                                                        <fieldset key={`${field.name}-${i}`} className={`${field.width ? field.width : ""} mb-3`}>
+                                                        <fieldset hidden={field.hidden}  key={`${field.name}-${i}`} className={`${field.width ? field.width : ""} mb-3`}>
                                                             <div className="form-label">
                                                                 {messages[field.name] && intl.formatMessage(messages[field.name])}
                                                             </div>
