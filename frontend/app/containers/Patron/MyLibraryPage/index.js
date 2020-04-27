@@ -12,12 +12,10 @@ import { compose } from 'redux';
  import {useIntl} from 'react-intl';
 import {fields, fieldsIsNew} from './fields';
 import messages from './messages';
-// import { FormattedMessage } from 'react-intl';
-import {requestLibraryOptionList, requestAccessToLibrary, requestGetMyLibrary} from '../actions'
 import makeSelectLibrary from 'containers/Library/selectors';
-import {MyLibraryForm} from 'components';
 import { CustomForm } from 'components';
-import {requestUser, requestGetLibrary, requestGetLibrariesList} from 'containers/Library/actions';
+import {requestUser,requestGetLibrary, requestGetLibrariesList} from 'containers/Library/actions';
+import {requestAccessToLibrary,requestUpdateAccessToLibrary} from '../actions';
 
 function MyLibraryPage(props) {
   console.log('MyLibraryPage', props)
@@ -33,9 +31,24 @@ function MyLibraryPage(props) {
   
 
   const handleChangeData = (field_name, value) => {
-    //console.log("HANDLECHANGE:",value)
     if(field_name==="library_id" && value)
-      dispatch(requestGetLibrary(value.value,('departments,titles')))      
+    { 
+      dispatch(requestGetLibrary(value.value,('departments,titles')))
+      if(isNew)
+      {
+        //Faccio comparire le tendine di selezione Department_id e Title_id
+        fieldsIsNew.department_id.hidden=false;
+
+        //if (library.departments.length>0)
+        //fieldsIsNew.department_id.required=true;
+
+        fieldsIsNew.title_id.hidden=false;
+        //if (library.titles.length>0)
+        //fieldsIsNew.title_id.required=true;    
+      
+      }
+    }
+
     
   }
 
@@ -58,11 +71,12 @@ function MyLibraryPage(props) {
     <>
       {!isNew &&
           <CustomForm 
-            submitCallBack={(formData) => dispatch(requestUpdateUser({
+            submitCallBack={(formData) => dispatch(requestUpdateAccessToLibrary({
                 ...formData, 
                 library_id: params.library_id, 
                 id: params.id,
-                message: `${intl.formatMessage(messages.statusUpdateMessage)}` })) } 
+                message: `${intl.formatMessage(messages.libraryUpdateMessage)}` })
+                ) } 
             requestData={{ 
               name: library.name, 
               label: patron.label,
@@ -82,7 +96,8 @@ function MyLibraryPage(props) {
           /> 
       }{isNew && 
           <CustomForm 
-            submitCallBack={() => null}
+            submitCallBack={(formData) => dispatch(requestAccessToLibrary(
+            formData,intl.formatMessage(messages.libraryCreateMessage)))} 
             fields={fieldsIsNew}
             department_id={departmentOptionList} 
             title_id={titleOptionList} 

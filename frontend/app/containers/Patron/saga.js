@@ -1,5 +1,5 @@
 import { call, put, select, takeLatest, fork, take  } from 'redux-saga/effects';
-import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO_LIBRARIES, REQUEST_REFERENCES_LIST,
+import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO_LIBRARIES,REQUEST_UPDATE_ACCESS_TO_LIBRARIES,  REQUEST_REFERENCES_LIST,
   REQUEST_POST_REFERENCES, REQUEST_UPDATE_REFERENCES, 
   REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE } from './constants';
 import {
@@ -20,6 +20,7 @@ import {  getMyLibrary,
           getMyLibraries,
           getLibraryOptionList,
           requestAccessToLibrary,
+          updateAccessToLibrary,
           getReferencesList,
           createReference,
           updateReference,
@@ -56,14 +57,31 @@ export function* requestLibraryOptionListSaga(action = {}) {
 export function* requestAccessToLibrarySaga(action) {
   const options = {
     method: 'post',
-    body: action.request
-    
+    body: action.request,
+    library_id: action.request.library_id
   };
   try {
     const request = yield call(requestAccessToLibrary, options);
-    yield call(requestMyLibrariesSaga)
+    yield call(requestMyLibrariesSaga);
     yield put(push("/patron/my-libraries"))
-    yield call(() => toast.success('Biblioteca Aggiunta'))
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestUpdateAccessToLibrarySaga(action) {
+  const options = {
+    method: 'put',
+    body: action.request,
+    id: action.request.id,
+    library_id: action.request.library_id
+  };
+  try {
+    const request = yield call(updateAccessToLibrary, options);
+    yield call(requestMyLibrariesSaga);
+    yield put(push("/patron/my-libraries"));
+    yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -152,6 +170,7 @@ export default function* patronSaga() {
   yield takeLatest(REQUEST_GET_LIBRARY_OPTIONLIST, requestLibraryOptionListSaga);
   yield takeLatest(REQUEST_GET_MY_LIBRARY, requestGetMyLibrarySaga);
   yield takeLatest(REQUEST_ACCESS_TO_LIBRARIES, requestAccessToLibrarySaga);
+  yield takeLatest(REQUEST_UPDATE_ACCESS_TO_LIBRARIES,requestUpdateAccessToLibrarySaga);
   yield takeLatest(REQUEST_REFERENCES_LIST, requestReferencesListSaga);
   yield takeLatest(REQUEST_POST_REFERENCES, requestPostReferencesSaga);
   yield takeLatest(REQUEST_UPDATE_REFERENCES, requestUpdateReferenceSaga);

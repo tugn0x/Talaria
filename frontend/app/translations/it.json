@@ -72,6 +72,9 @@
   "app.containers.MyLibrariesPage.user_mat": "Matricola/Tessera",
   "app.containers.MyLibrariesPage.user_service_phone": "Telefono servizio",
   "app.containers.MyLibrariesPage.user_service_email": "Email servizio",
+  "app.containers.MyLibrariesPage.updateMessage": "Biblioteca aggiornata con successo",
+  "app.containers.MyLibrariesPage.createMessage": "Biblioteca aggiunta con successo",
+
   "app.containers.MyLibrariesListPage.header": "Le mie biblioteche",
   "app.containers.MyLibrariesList.createNew": "Aggiungi biblioteca",
   "app.containers.MyLibrariesList.edit": "Modifica biblioteca",

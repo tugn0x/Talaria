@@ -180,6 +180,13 @@ export const requestAccessToLibrary = (options) => {
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users`, options)
 };
+export const updateAccessToLibrary = (options) => {
+  const library_id = options.library_id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${options.id}`, options)
+};
+
+
 
 export const getLibrariesSubjects = (options) => {
   options = getOption(options);

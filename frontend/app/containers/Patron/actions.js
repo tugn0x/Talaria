@@ -7,6 +7,7 @@
 import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_GET_LIBRARY_OPTIONLIST_SUCCESS, 
   REQUEST_ACCESS_TO_LIBRARIES,
+  REQUEST_UPDATE_ACCESS_TO_LIBRARIES,
   REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS, 
   REQUEST_POST_REFERENCES, REQUEST_SUCCESS,
   REQUEST_GET_REFERENCE, REQUEST_GET_REFERENCE_SUCCESS,
@@ -111,11 +112,21 @@ export function requestLibraryOptionListSuccess(result) {
   };
 }
 
-export function requestAccessToLibrary(request) {
+export function requestUpdateAccessToLibrary(request) {
+  return {
+    type: REQUEST_UPDATE_ACCESS_TO_LIBRARIES,
+    request,
+    message: request.message
+  };
+}
+
+
+export function requestAccessToLibrary(request,message) {
   
   return {
     type: REQUEST_ACCESS_TO_LIBRARIES,
-    request: {library_id: request}
+    request,
+    message
   };
 }
 

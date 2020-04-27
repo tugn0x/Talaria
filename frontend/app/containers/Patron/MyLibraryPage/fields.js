@@ -23,7 +23,8 @@ export const fields = {
         name: 'department_id',
         width: "col-md-12",
         options: 'department_id',
-        order: 4
+        order: 4,
+        required: false,
     },  
     title_id: { 
         type: "custom-select",
@@ -31,6 +32,7 @@ export const fields = {
         width: "col-md-12",
         options: 'title_id',
         order: 5, 
+        required: false,
     },
     user_referent: { 
         type: "text",
@@ -71,6 +73,7 @@ export const fieldsIsNew = {
         width: "col-md-12",
         options: 'department_id',
         hidden: true,
+        required: false,
     },  
     title_id: { 
         type: "custom-select",
@@ -78,5 +81,31 @@ export const fieldsIsNew = {
         width: "col-md-12",
         options: 'title_id',
         hidden: true,
+        required: false,
+    },
+    label: {
+        type: "text",
+        name: "label",
+        width: "col-md-12",
+    },
+    user_referent: { 
+        type: "text",
+        name: 'user_referent',
+        width: "col-md-12",
+    },
+    user_mat: { 
+        type: "text",
+        name: 'user_mat',
+        width: "col-md-12",
+    },
+    user_service_phone: { 
+        type: "text",
+        name: 'user_service_phone',
+        width: "col-md-12",
+    },
+    user_service_email: { 
+        type: "email",
+        name: 'user_service_email',
+        width: "col-md-12",
     },
 }

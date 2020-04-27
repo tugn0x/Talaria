@@ -60,9 +60,13 @@ export default defineMessages({
     id: 'app.global.status',
     defaultMessage: 'Status',
   },
-  statusUpdateMessage: {
-    id: `${scope}.statusUpdateMessage`,
-    defaultMessage: 'Status updated',
+  libraryUpdateMessage: {
+    id: `${scope}.updateMessage`,
+    defaultMessage: 'Library updated',
+  },
+  libraryCreateMessage: {
+    id: `${scope}.createMessage`,
+    defaultMessage: 'Library added',
   },
 
 });
