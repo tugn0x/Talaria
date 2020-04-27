@@ -33,15 +33,16 @@ function MyLibraryPage(props) {
   
 
   const handleChangeData = (field_name, value) => {
-    console.log(field_name, value)
+    //console.log("HANDLECHANGE:",value)
+    if(field_name==="library_id" && value)
+      dispatch(requestGetLibrary(value.value,('departments,titles')))      
+    
   }
 
   useEffect(() => {
     if(!isNew) {
       dispatch(requestUser(params.library_id, params.id))
-      dispatch(requestGetLibrary(params.library_id,('departments,titles')))
-      //TODO chimare getLibraryUser(bib_id,user_id) x ottenere dati della associazione dell'utente alla biblio selezionata
-      //e disattivare fields["preferred"] se status!=1
+      dispatch(requestGetLibrary(params.library_id,('departments,titles')))      
     }else if(isNew){
       dispatch(requestGetLibrariesList())
     }
@@ -83,6 +84,8 @@ function MyLibraryPage(props) {
           <CustomForm 
             submitCallBack={() => null}
             fields={fieldsIsNew}
+            department_id={departmentOptionList} 
+            title_id={titleOptionList} 
             title={intl.formatMessage(messages.header)}
             messages={messages}
             library_id={libraryOptionList}
