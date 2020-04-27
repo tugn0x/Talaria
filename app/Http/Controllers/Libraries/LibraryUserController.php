@@ -40,14 +40,8 @@ class LibraryUserController extends ApiController
     public function store(Request $request)
     {
         $model = $this->nilde->store($this->model, $request, null, function ($model, $request) {
-            $model = $model->firstOrNew([
-                'user_id' => $model->user_id,
-                'library_id' => $request->library_id,
-
-                'department_id' => $request->department_id,
-                'title_id' => $request->title_id,
-                'status'=> config("constants.patron_status.pending")
-            ]);
+            //ogni nuova rich va messa in attesa
+            $model->status=config("constants.patron_status.pending");
             return $model;
         });
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
