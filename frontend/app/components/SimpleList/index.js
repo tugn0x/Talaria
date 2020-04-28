@@ -52,6 +52,33 @@ function SimpleList(props) {
       const url = editPath.url ? editPath.url : editPath
       return generatePath(url, ParamsObj)
     } 
+
+    //sulla falsariga dell'editPath :)
+    //NB: se cb è una normale funzione allora la chiamo pasando item.id
+    //altrimenti se è un oggetto deve essere della forma {callback: funz, params: [array di param name]}
+    //e in questo caso chiamero' funz passandogli un oggetto con i valori presi dai campi (indicati nell'array) dellitem 
+    const getDeleteParamsAndCall = (cb, item) => {
+
+      if(!item){
+        return
+      }
+      let ParamsObj = {}
+      if(typeof cb === 'object'){
+        cb.params &&
+        Array.isArray(cb.params) ? 
+        cb.params.map((paramname,i) =>  {
+          ParamsObj = {...ParamsObj, [paramname]: item[paramname]}
+        }) : console.warn('callback with params must be an array')
+
+      }else {
+        ParamsObj = {id: item.id}
+        return cb(ParamsObj)
+      }
+      return cb.callback(ParamsObj);
+
+      
+    }
+
     
     const linkTo = (path) => {
       history.push(path)
@@ -155,7 +182,7 @@ function SimpleList(props) {
                                 <i className="fa fa-edit"></i>
                               </a>
 
-                              {deleteCallback && <a href="#" onClick={() => deleteCallback(item.id)} className="btn btn-link">
+                              {deleteCallback && <a href="#" onClick={() => getDeleteParamsAndCall(deleteCallback,item)} className="btn btn-link">
                                 <i className="fa fa-trash"></i>
                               </a>}
                             </Col>
