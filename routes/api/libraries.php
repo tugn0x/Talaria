@@ -43,7 +43,7 @@ Route::group([
         Route::get('{library}/library-users', 'LibraryUserController@index')->name('index');
         Route::put('{library}/library-users/{library_user}', 'LibraryUserController@update')->name('update');
         Route::get('{library}/library-users/{library_user}', 'LibraryUserController@show')->name('show');
-        Route::delete('{library}/library-users/{library_user}', 'LibraryUserController@customdelete')->name('customdelete'); //hard delete
+        Route::delete('{library}/library-users/{library_user}', 'LibraryUserController@delete')->name('delete'); //hard delete
     });
 
 

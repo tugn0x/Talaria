@@ -5,11 +5,12 @@ import { compose } from 'redux';
 import {useIntl} from 'react-intl';
 // import {fields} from './fields';
 import messages from './messages'; 
-import {requestMyLibraries} from '../actions'
+import {requestMyLibraries,requestDeleteAccessToLibrary} from '../actions'
 import makeSelectPatron, {isPatronLoading} from '../selectors';
 import MyLibraryPage from '../MyLibraryPage';
 import {SimpleList} from 'components'
 import {columns} from './columns'
+import confirm from 'reactstrap-confirm'
 
 const MyLibrariesListPage = (props) => {
     console.log('MyLibrariesListPage', props)
@@ -21,6 +22,17 @@ const MyLibrariesListPage = (props) => {
             dispatch(requestMyLibraries())
         }
     }, [])
+
+    async function deleteCallback (params) {
+        let conf = await confirm({
+            title: intl.formatMessage(messages.confirm),
+            message: intl.formatMessage(messages.askDeleteMessage),
+            confirmText: intl.formatMessage(messages.yes),
+            cancelText: intl.formatMessage(messages.no)
+        }); //
+        if(conf)
+            dispatch(requestDeleteAccessToLibrary(params.id,params.library_id,intl.formatMessage(messages.deletedMessage)))
+    }
    
     return (
         <SimpleList 
@@ -43,6 +55,7 @@ const MyLibrariesListPage = (props) => {
                     params: ['library_id', 'id']
                 }
             } 
+            deleteCallback={ {callback: deleteCallback, params: ['library_id', 'id'] } }
             modalComponent={ <MyLibraryPage match={match}/>}
         />
     )

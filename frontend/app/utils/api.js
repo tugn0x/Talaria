@@ -186,6 +186,16 @@ export const updateAccessToLibrary = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${options.id}`, options)
 };
 
+//NB: id in realtà è l'id della relazione library_user
+export const deleteAccessToLibrary = (options) => {
+  const id = options.body.id
+  const library_id = options.body.library_id
+  options = getOption(options);
+
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${id}`, options)
+}
+
+
 
 
 export const getLibrariesSubjects = (options) => {

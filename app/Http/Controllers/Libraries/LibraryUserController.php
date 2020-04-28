@@ -82,11 +82,17 @@ class LibraryUserController extends ApiController
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
-    //Overrides default method because we don't need $library to delete library_user item
-    public function customdelete(Request $request, $library,$library_user)
+    // ApiControllerTrait@delete override
+    // because we use only library_user id to delete it instead of library_id
+    public function delete(Request $request, $id)
     {
-        //ignore $library param
-        return parent::delete($request,$library_user);
+        $id = $request->route()->parameters['library_user'];
+        $model = $this->nilde->delete($this->model, $request, $id);
+
+        if($this->broadcast && config('apinilde.broadcast'))
+            broadcast(new ApiDeleteBroadcast($model->id, $model->getTable()));
+
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
 }

@@ -22,7 +22,7 @@ const UsersListPage = (props) => {
         }
     }, [library_id])
 
-    async function deleteCallback (id) {
+    async function deleteCallback (params) {
         let conf = await confirm({
             title: intl.formatMessage(messages.confirm),
             message: intl.formatMessage(messages.askDeleteMessage),
@@ -30,7 +30,9 @@ const UsersListPage = (props) => {
             cancelText: intl.formatMessage(messages.no)
         }); //
         if(conf)
-            dispatch(requestDeleteUser(id,library_id,intl.formatMessage(messages.deletedMessage)))
+        //NB: in questo caso la library_id lo prendo da questo componente e non dalla SimpleList
+        //percheè in tabella non viene visualizzato l'id 
+            dispatch(requestDeleteUser(params.id,library_id,intl.formatMessage(messages.deletedMessage)))
     }
 
     return (
@@ -48,7 +50,7 @@ const UsersListPage = (props) => {
                 getSearchList: (query) => dispatch(requestUsersList(library_id, null, query))
             }}
             editPath={`/library/${library_id}/patrons/patron/:id?`}
-            deleteCallback={deleteCallback}
+            deleteCallback={ deleteCallback }
             // modalComponent={ <UserPage match={match} />}
         />
     )

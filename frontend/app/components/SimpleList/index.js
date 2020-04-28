@@ -35,6 +35,7 @@ function SimpleList(props) {
     // usando la Prop editPath. 
     // editPath puo essere una stringa (passi solo l url e il parametro sara' solo l id)
     // editPath puo' essere un oggetto, dove passi url e parametri
+    //NB: i param possono essere letti da item solo se sono presenti come colonne!
     const editurl = (item) => {
       if(!item){
         return
@@ -57,6 +58,7 @@ function SimpleList(props) {
     //NB: se cb è una normale funzione allora la chiamo pasando item.id
     //altrimenti se è un oggetto deve essere della forma {callback: funz, params: [array di param name]}
     //e in questo caso chiamero' funz passandogli un oggetto con i valori presi dai campi (indicati nell'array) dellitem 
+    //NB: i param possono essere letti da item solo se sono presenti come colonne!
     const getDeleteParamsAndCall = (cb, item) => {
 
       if(!item){
