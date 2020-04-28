@@ -56,7 +56,7 @@ class LibraryUserTransformer extends BaseTransformer
     public function toArray(Model $model)
     {
         $to_merge = [
-            'test' => 'hello user',
+        
         ];
         return $this->applyTransform($model, $to_merge);
     }

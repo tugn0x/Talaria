@@ -243,6 +243,15 @@ export const updateLibraryUser = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${id}`, options)
 }
 
+//NB: id in realtà è l'id della relazione library_user
+export const deleteLibraryUser = (options) => {
+  const id = options.body.id
+  const library_id = options.body.library_id
+  options = getOption(options);
+
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${id}`, options)
+}
+
 /// POST PUBLIC LIBRARY
 export const createPublicLibrary = (options) => {
   options = getOption(options);

@@ -82,4 +82,11 @@ class LibraryUserController extends ApiController
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
+    //Overrides default method because we don't need $library to delete library_user item
+    public function customdelete(Request $request, $library,$library_user)
+    {
+        //ignore $library param
+        return parent::delete($request,$library_user);
+    }
+
 }

@@ -10,6 +10,7 @@ export const REQUEST_USERS_LIST_SUCCESS = 'app/Library/REQUEST_USERS_LIST_SUCCES
 export const REQUEST_USER = 'app/Library/REQUEST_USER';
 export const REQUEST_USER_SUCCESS = 'app/Library/REQUEST_USER_SUCCESS';
 export const REQUEST_UPDATE_USER = 'app/Library/REQUEST_UPDATE_USER';
+export const REQUEST_DELETE_USER = 'app/Library/REQUEST_DELETE_USER';
 export const REQUEST_UPDATE_USER_SUCCESS = 'app/Library/REQUEST_UPDATE_USER_SUCCESS';
 
 export const REQUEST_POST_USER = 'app/Library/REQUEST_POST_USER';

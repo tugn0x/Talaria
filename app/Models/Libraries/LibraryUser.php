@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 //class LibraryUser extends Pivot
 class LibraryUser extends BaseModel
 {
-
+    protected $forceDeleting=true; //overrides softdelete => force delete!  
     protected $userstamping = false;
     public static function bootSoftDeletes() {}
     protected static $observerClass = LibraryUserObserver::class;

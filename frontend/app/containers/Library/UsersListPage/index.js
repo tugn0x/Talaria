@@ -2,11 +2,12 @@ import React, {useEffect} from 'react'
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {requestUsersList} from '../actions'
+import {requestUsersList, requestDeleteUser} from '../actions'
 import {useIntl} from 'react-intl';
 import messages from './messages';
-import {columns} from './columns'
-import {SimpleList} from 'components'
+import {columns} from './columns';
+import {SimpleList} from 'components';
+import confirm from "reactstrap-confirm";
 
 const UsersListPage = (props) => {
     console.log('UsersListPage', props)
@@ -20,6 +21,17 @@ const UsersListPage = (props) => {
             dispatch(requestUsersList(library_id))
         }
     }, [library_id])
+
+    async function deleteCallback (id) {
+        let conf = await confirm({
+            title: intl.formatMessage(messages.confirm),
+            message: intl.formatMessage(messages.askDeleteMessage),
+            confirmText: intl.formatMessage(messages.yes),
+            cancelText: intl.formatMessage(messages.no)
+        }); //
+        if(conf)
+            dispatch(requestDeleteUser(id,library_id,intl.formatMessage(messages.deletedMessage)))
+    }
 
     return (
         <SimpleList 
@@ -36,6 +48,7 @@ const UsersListPage = (props) => {
                 getSearchList: (query) => dispatch(requestUsersList(library_id, null, query))
             }}
             editPath={`/library/${library_id}/patrons/patron/:id?`}
+            deleteCallback={deleteCallback}
             // modalComponent={ <UserPage match={match} />}
         />
     )

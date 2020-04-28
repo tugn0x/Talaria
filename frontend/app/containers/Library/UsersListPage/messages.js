@@ -68,4 +68,24 @@ export default defineMessages({
     id: `${scope}.edit`,
     defaultMessage: 'Edit',
   },
+  confirm:{
+    id: 'app.global.confirm',
+    defaultMessage: 'Confirm',
+  },
+  askDeleteMessage:{
+    id: 'app.global.deleteMessage',
+    defaultMessage: 'Delete this item?',
+  },
+  deletedMessage:{
+    id: 'app.global.deletedMessage',
+    defaultMessage: 'Item deleted',
+  },
+  yes:{
+    id: 'app.global.yes',
+    defaultMessage: 'Yes',
+  },
+  no:{
+    id: 'app.global.no',
+    defaultMessage: 'No',
+  },
 });

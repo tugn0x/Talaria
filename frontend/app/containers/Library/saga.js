@@ -1,5 +1,5 @@
 import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
-import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
+import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
          /*  REQUEST_POST_USER, */ REQUEST_USER, REQUEST_GET_LIBRARY,
           REQUEST_GET_LIBRARIES_LIST,
           REQUEST_UPDATE_LIBRARY,
@@ -16,7 +16,7 @@ import {
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
-import {getLibraryUsersList, updateLibraryUser, createUser,
+import {getLibraryUsersList, updateLibraryUser, deleteLibraryUser, createUser,
         getLibraryUser, getLibrary, getLibrariesList, updateLibrary,
         createLibrary} from 'utils/api'
 // import moment from 'moment';
@@ -75,6 +75,26 @@ export function* requestUpdateUserSaga(action) {
     yield put(requestSuccess());
     yield put(push(`/library/${library_id}/patrons`));
     yield call(() => toast.success(action.request.message)) 
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestDeleteUserSaga(action) {
+  
+  const options = {
+    method: 'delete',
+    body: {
+      library_id:action.library_id,
+      id: action.id,
+    },
+  };
+
+  try {
+    const request = yield call(deleteLibraryUser, options);
+    yield call(requestUsersListSaga(action.library_id));
+    yield put(push(`/library/${action.library_id}/patrons`));
+    yield call(() => toast.success(action.message)) 
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -161,6 +181,7 @@ export function* requestGetLibrariesListSaga(action = {}) {
 export default function* librarySaga() {
   yield takeLatest(REQUEST_USERS_LIST, requestUsersListSaga);
   yield takeLatest(REQUEST_UPDATE_USER, requestUpdateUserSaga);
+  yield takeLatest(REQUEST_DELETE_USER, requestDeleteUserSaga);
   // yield takeLatest(REQUEST_POST_USER, requestPostUserSaga);
   yield takeLatest(REQUEST_USER, requestUserSaga);
   yield takeEvery(REQUEST_GET_LIBRARY, requestGetLibrarySaga);
