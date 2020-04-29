@@ -24,7 +24,7 @@ export const fields = {
         width: "col-md-12",
         options: 'department_id',
         order: 4,
-        required: false,
+        required: true,
     },  
     title_id: { 
         type: "custom-select",
@@ -32,7 +32,7 @@ export const fields = {
         width: "col-md-12",
         options: 'title_id',
         order: 5, 
-        required: false,
+        required: true,
     },
     user_referent: { 
         type: "text",

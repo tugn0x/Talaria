@@ -57,9 +57,6 @@ const OptionList = (props) => {
             false
             return required
         })
-        console.log(options)
-        console.log(field)
-        console.log(isRequired)
     }, [options, field])  
     
     return (
