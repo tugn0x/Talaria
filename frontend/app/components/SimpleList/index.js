@@ -31,54 +31,63 @@ function SimpleList(props) {
         });
     }  */
 
-    // editurl genera l url per il bottone edit (si possono passare piu parametri)
-    // usando la Prop editPath. 
-    // editPath puo essere una stringa (passi solo l url e il parametro sara' solo l id)
-    // editPath puo' essere un oggetto, dove passi url e parametri
-    //NB: i param possono essere letti da item solo se sono presenti come colonne!
-    const editurl = (item) => {
+    //passandogli un oggetto che specifica i params
+    //li estrae (tramite chiave) dall'item passato
+    //ritorna l'oggetto con i params richiesti valorizzati dai valori dell'item
+    //se non viene passato un oggetto (quindi non vengono specificati parametri), 
+    //estrae dall'item solo l'id
+    const filterItemFieldByObjectParams = (obj,item) => {
       if(!item){
         return
       }
       let ParamsObj = {}
-      if(typeof editPath === 'object'){
-        editPath.params &&
-        Array.isArray(editPath.params) ? 
-        editPath.params.map((param,i) =>  {
+      if(typeof obj === 'object'){
+        obj.params &&
+        Array.isArray(obj.params) ? 
+        obj.params.map((param,i) =>  {
           ParamsObj = {...ParamsObj, [param]: item[param]}
-        }) : console.warn('editPath with params must be an array')
+        }) : console.warn('obj with params must be an array')
       }else {
         ParamsObj = {id: item.id}
       }
-      const url = editPath.url ? editPath.url : editPath
-      return generatePath(url, ParamsObj)
+
+      return ParamsObj;
+      
+
+    }
+
+
+    // editurl genera l url per il bottone edit (si possono passare piu parametri)
+    // usando la Prop editPath. 
+    // editPath puo essere una stringa (passi solo l url e il parametro sara' solo l id)
+    // editPath puo' essere un oggetto, dove passi url e parametri
+    //NB: al momento i param possono essere letti da item solo se sono presenti come colonne!
+    const editurl = (item) => {
+      let ParamsObj = {}
+
+      ParamsObj=filterItemFieldByObjectParams(editPath,item);
+      if(ParamsObj)
+      {
+        const url = editPath.url ? editPath.url : editPath
+        return generatePath(url, ParamsObj)
+      }
+      return
     } 
 
     //sulla falsariga dell'editPath :)
     //NB: se cb è una normale funzione allora la chiamo pasando item.id
     //altrimenti se è un oggetto deve essere della forma {callback: funz, params: [array di param name]}
     //e in questo caso chiamero' funz passandogli un oggetto con i valori presi dai campi (indicati nell'array) dellitem 
-    //NB: i param possono essere letti da item solo se sono presenti come colonne!
     const getDeleteParamsAndCall = (cb, item) => {
-
-      if(!item){
-        return
-      }
-      let ParamsObj = {}
-      if(typeof cb === 'object'){
-        cb.params &&
-        Array.isArray(cb.params) ? 
-        cb.params.map((paramname,i) =>  {
-          ParamsObj = {...ParamsObj, [paramname]: item[paramname]}
-        }) : console.warn('callback with params must be an array')
-
-      }else {
-        ParamsObj = {id: item.id}
-        return cb(ParamsObj)
-      }
-      return cb.callback(ParamsObj);
-
-      
+      let ParamsObj={}
+     ParamsObj=filterItemFieldByObjectParams(cb,item);
+     if(ParamsObj)
+     {
+        if(cb.callback)
+          cb.callback(ParamsObj);  
+        else cb(ParamsObj);  
+     }
+     return
     }
 
     
