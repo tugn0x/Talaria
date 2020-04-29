@@ -5,6 +5,11 @@ export const columns = [
         col: 2, 
     },
     { 
+        label: 'app.global.status', 
+        name: 'status',
+        col: 1, 
+    },
+    { 
         label: 'app.global.id', 
         name: 'id',
         col: 1,

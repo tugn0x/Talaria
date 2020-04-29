@@ -20,6 +20,14 @@ class LibraryObserver extends BaseObserver
 //        });
     }
 
+    public function creating($model)
+    {
+         //ogni nuova biblio va messa in stato=new
+         $model->status=config("constants.library_status.new");
+         return parent::creating($model);
+    }
+
+
     public function saving($model)
     {
         return parent::saving($model);
@@ -33,7 +41,11 @@ class LibraryObserver extends BaseObserver
     }
 
     public function deleting($model)
-    {
+    {   
+        //non posso eliminare una biblio attiva
+        if(in_array($model->status,[config("constants.library_status.enabled"),config("constants.library_status.renewing"),config("constants.library_status.enabled_wait_fax")]))
+            return false;
+        
         return parent::deleting($model);
     }
 

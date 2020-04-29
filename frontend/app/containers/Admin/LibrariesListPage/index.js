@@ -24,7 +24,7 @@ const LibrariesListPage = (props) => {
         }
     }, [])
 
-    async function deleteCallback (id) {
+    async function deleteCallback (params) {
         let conf = await confirm({
             title: intl.formatMessage(messages.confirm),
             message: intl.formatMessage(messages.askDeleteMessage),
@@ -32,7 +32,7 @@ const LibrariesListPage = (props) => {
             cancelText: intl.formatMessage(messages.no)
         }); //
         if(conf)
-            dispatch(deleteLibrary(id,intl.formatMessage(messages.deletedMessage)))
+            dispatch(deleteLibrary(params.id,intl.formatMessage(messages.deletedMessage)))
     }
 
     
