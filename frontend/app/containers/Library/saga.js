@@ -81,7 +81,6 @@ export function* requestUpdateUserSaga(action) {
 }
 
 export function* requestDeleteUserSaga(action) {
-  
   const options = {
     method: 'delete',
     body: {
@@ -92,8 +91,7 @@ export function* requestDeleteUserSaga(action) {
 
   try {
     const request = yield call(deleteLibraryUser, options);
-    yield call(requestUsersListSaga(action.library_id));
-    yield put(push(`/library/${action.library_id}/patrons`));
+    yield call(requestUsersListSaga, {library_id: action.library_id});
     yield call(() => toast.success(action.message)) 
   } catch(e) {
     yield put(requestError(e.message));
