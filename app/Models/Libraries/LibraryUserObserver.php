@@ -22,12 +22,45 @@ class LibraryUserObserver extends BaseObserver
 //        });
     }
 
+    public function creating($model)
+    {
+         //ogni nuova rich va messa in attesa
+         $model->status=config("constants.patron_status.pending");
+         return parent::creating($model);
+    }
+
+    public function created($model)
+    {
+        /* send mail+notif to library */
+    }
+
     public function saving($model)
     {
         if(!$model->user_id) {
             $model->user_id = auth()->user()->id;
         }
-        return parent::saving($model);
+
+        if(parent::saving($model))
+        {
+            //Sto aggiornando lo stato dell'utente x la biblioteca
+            if($model->isDirty() && $model->isDirty("status"))
+            {
+                //lo sto disabilitando
+                if($model->status==config("constants.patron_status.disabled"))
+                {
+                    /* 1. remove role "patron" if he has no other active libraries
+                    2. send mail+notify to user to let him know it was disabled */
+                }
+                //lo sto abilitando
+                else if($model->status==config("constants.patron_status.enabled"))
+                {
+                    /* 1. add role "patron" if he has not
+                    2. send mail+notify to user to let him know it was enabled */
+                }
+
+            }
+        }
+        return true;
 
     }
 

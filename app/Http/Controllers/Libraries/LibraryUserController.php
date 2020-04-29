@@ -37,16 +37,6 @@ class LibraryUserController extends ApiController
         return $this->response->paginator($my_applications, new $this->transformer())->morph();
     }
 
-    public function store(Request $request)
-    {
-        $model = $this->nilde->store($this->model, $request, null, function ($model, $request) {
-            //ogni nuova rich va messa in attesa
-            $model->status=config("constants.patron_status.pending");
-            return $model;
-        });
-        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
-    }
-
     public function update(Request $request, $id)
     {
         if(!empty($this->validate) )
