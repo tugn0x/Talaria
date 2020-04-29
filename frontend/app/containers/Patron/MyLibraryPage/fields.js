@@ -73,7 +73,7 @@ export const fieldsIsNew = {
         width: "col-md-12",
         options: 'department_id',
         hidden: true,
-        required: false,
+        required: true, 
     },  
     title_id: { 
         type: "custom-select",
@@ -81,7 +81,7 @@ export const fieldsIsNew = {
         width: "col-md-12",
         options: 'title_id',
         hidden: true,
-        required: false,
+        required: true,
     },
     label: {
         type: "text",
