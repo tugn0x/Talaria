@@ -66,13 +66,13 @@ export const fieldsIsNew = {
         name: 'library_id',
         width: "col-md-12",
         options: 'library_id',
+        required: true,
     },
     department_id: { 
         type: "custom-select",
         name: 'department_id',
         width: "col-md-12",
         options: 'department_id',
-        hidden: true,
         required: true, 
     },  
     title_id: { 
@@ -80,7 +80,6 @@ export const fieldsIsNew = {
         name: 'title_id',
         width: "col-md-12",
         options: 'title_id',
-        hidden: true,
         required: true,
     },
     label: {

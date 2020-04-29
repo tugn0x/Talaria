@@ -32,24 +32,25 @@ function MyLibraryPage(props) {
 
   const handleChangeData = (field_name, value) => {
     if(field_name==="library_id" && value)
-    { 
       dispatch(requestGetLibrary(value.value,('departments,titles')))
-      if(isNew)
-      {
-        //Faccio comparire le tendine di selezione Department_id e Title_id
-        fieldsIsNew.department_id.hidden=false;
+    //NOTA: le tendine dipartimenti e titles dovrebbero essere REQUIRED solo se sono piene
+    //Stiamo valutando come implementarlo xke' al momento anche se si modifica il fields.x.required
+    //al volo, non viene renderizzato nuovamente il componente, inoltre
+    //le tendine sono generate usando un plugin quindi non è immediato modificarne il required
+    //tramite DOM JS vanilla  
+    /*if(isNew)
+    {
+      //Faccio comparire le tendine di selezione Department_id e Title_id
+      fieldsIsNew.department_id.hidden=false;
 
-        //if (library.departments.length>0)
-        //fieldsIsNew.department_id.required=true;
+      //if (library.departments.length>0)
+      //fieldsIsNew.department_id.required=true;
 
-        fieldsIsNew.title_id.hidden=false;
-        //if (library.titles.length>0)
-        //fieldsIsNew.title_id.required=true;    
-      
-      }
-    }
-
+      fieldsIsNew.title_id.hidden=false;
+      //if (library.titles.length>0)
+      //fieldsIsNew.title_id.required=true;    
     
+    }*/
   }
 
   useEffect(() => {
@@ -66,6 +67,11 @@ function MyLibraryPage(props) {
     Object.keys(patron).length > 0 && patron.status!==1 ? fields.preferred.disabled = true : null
   }, [patron])
 
+  
+  /*useEffect(() => {
+    //console.log("DIP",document.getElementsByName('department_id'));
+    //getElById([name=department_id).required=true
+  }, [library])*/
 
   return (
     <>
