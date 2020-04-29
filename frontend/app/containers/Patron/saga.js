@@ -84,7 +84,7 @@ export function* requestDeleteAccessToLibrarySaga(action) {
   try {
     const request = yield call(deleteAccessToLibrary, options);
     yield call(requestMyLibrariesSaga);
-    yield call(() => toast.error(action.message)) 
+    yield call(() => toast.success(action.message)) 
   } catch(e) {
     yield put(requestError(e.message));
   }
