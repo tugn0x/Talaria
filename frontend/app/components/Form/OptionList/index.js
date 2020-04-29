@@ -31,6 +31,7 @@ const translateOptions = (options, intl) => {
 
 const OptionList = (props) => {
     const {field, label, selectedOption, options, searchOptionList, handleChange} = props
+    const [isRequired, setIsRequired] = useState(false)
     const intl = useIntl()
     
     const handleChangeOptionList = (option) => {
@@ -45,16 +46,24 @@ const OptionList = (props) => {
    /*  useEffect(() => {
         translateOptions(selectedOption, intl)
     }, [selectedOption])
-
+*/
     useEffect(() => {
-        translateOptions(options, intl)
-    }, [options])  */
+        setIsRequired(() => {
+           const required = options.length < 0 ?
+            false :
+            field.required && 
+            options.length > 0 ?
+            true :
+            false
+            return required
+        })
+    }, [options, field])  
     
     return (
        // selectedOption &&
             <>
             <Select
-                className={`option-list ${selectedOption ? '' : 'danger'}`}
+                className={`option-list ${!isRequired || selectedOption ? '' : 'danger'}`}
                 type="custom-select"
                 value={selectedOption ? translateOptions(selectedOption, intl) : {label: intl.formatMessage(formMessages.select), value: 0}}
                 name={field.name}
@@ -62,7 +71,7 @@ const OptionList = (props) => {
                 onInputChange={(input) =>  searchOptionList && !isEmpty(searchOptionList) ? handleSearchOptionList(input, field.options) : input}
                 options={translateOptions(options, intl)}
             /> 
-            <Input 
+           <Input 
                 type="text"
                 value={selectedOption || ''}
                 style={{
@@ -72,7 +81,7 @@ const OptionList = (props) => {
                     position: "absolute"
                   }}
                 onChange={(e) => null}
-                required={field.required ? field.required : false} />
+                required={isRequired} /> 
             </>
     )
 }
