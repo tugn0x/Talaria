@@ -111,15 +111,21 @@ class User extends UserBase
 
         //in questo modo ottengo anche i model di depatment/title!
         //ci accedo come $myuser2->libraries->first()->pivot->department
-        return $this->belongsToMany(Library::class)
+        /*return $this->belongsToMany(Library::class)
             ->using(LibraryUser::class)
             ->withPivot('department_id','title_id')
             ->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps
+        */
+        return $this->belongsToMany('App\Models\Libraries\Library','library_user')->withPivot('department_id','title_id','status')
+        ->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps;
     }
 
-    public function user_libraries()
+    /* elenco sue biblio attive con dip e titles*/
+    public function active_libraries()
     {
-        return $this->belongsToMany(LibraryUser::class);
+        return $this->belongsToMany('App\Models\Libraries\Library','library_user')->withPivot('department_id','title_id','status')
+        ->wherePivot('status',config('constants.patron_status.enabled'))
+        ->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps;
     }
 
     /**
