@@ -150,8 +150,8 @@ export function* requestUpdateLibrarySaga(action) {
   };
   try {
     const request = yield call(updateLibrary, options);
-    yield call(requestGetLibrariesListSaga);
-    yield put(push("/library/libraries"));
+   // yield call(requestGetLibrariesListSaga);
+    yield put(push("/library/"+action.request.id));
     yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));

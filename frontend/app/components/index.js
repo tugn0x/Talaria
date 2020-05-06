@@ -20,7 +20,6 @@ import ChangePasswordForm from './Auth/ChangePasswordForm';
 
 // Patron
 // import MyLibrariesList from './Patron/MyLibrariesList/Loadable';
-import MyLibraryForm from './Patron/MyLibraryForm';
 import ReferencesForm from './Patron/ReferencesForm';
 // import ReferencesList from './Patron/ReferencesList';
 
@@ -29,6 +28,7 @@ import Toaster from "./Toaster/Loadable"
 
 // Library
 // import UsersList from './Library/UsersList';
+import MyLibraryForm from './Library/MyLibraryForm';
 
 
 // Admin

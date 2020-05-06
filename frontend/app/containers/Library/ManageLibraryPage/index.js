@@ -10,17 +10,20 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {useIntl} from 'react-intl';
-// import {fields} from './fields';
 import messages from './messages';
-import { requestGetInstitutionsOptionList, requestGetLibrary, 
-        requestUpdateLibrary, requestPostLibrary, requestGetRoles, 
+import { requestGetInstitutionsOptionList, requestGetLibrary,
+         requestPostLibrary, requestGetRoles, 
         requestUsersOptionList, requestGetCountriesOptionList, requestLibrarySubjectOptionList} from 'containers/Admin/actions'
-import makeSelectAdmin, {isAdminLoading} from 'containers/Admin/selectors';
-import {LibraryForm, Loader} from 'components';
+import {requestUpdateLibrary} from '../actions';        
+
+import {isAdminLoading, makeSelectAdmin} from '../selectors';
+import {MyLibraryForm, Loader} from 'components';
+
+//NB sto usando reducer/saga/action dell'ADMIN !
 
 function ManageLibraryPage(props) {
     const intl = useIntl();
-    const {isLoading, dispatch, admin, match} = props
+    const {isLoading, dispatch, admin,match} = props
     const {params} = match
     const isNew = !params.library_id || params.library_id === 'new'
     const library = admin.library
@@ -28,7 +31,7 @@ function ManageLibraryPage(props) {
     
     useEffect(() => {
       if(!isLoading && !isNew) {
-         dispatch(requestGetLibrary(params.library_id))
+        dispatch(requestGetLibrary(params.library_id))
       }
       if(!isLoading){
         dispatch(requestGetRoles())
@@ -42,7 +45,7 @@ function ManageLibraryPage(props) {
      
     return (
       <Loader show={isLoading}>
-          <LibraryForm 
+          <MyLibraryForm 
             library={!isNew ? library : null}
             loading={isLoading}
             usersOptionList={admin.usersOptionList}
@@ -66,6 +69,7 @@ function ManageLibraryPage(props) {
     );
   }
   
+   
   const mapStateToProps = createStructuredSelector({
     isLoading: isAdminLoading(),
     admin: makeSelectAdmin()
