@@ -32,6 +32,16 @@ Route::group([
     });
 
     /*
+     * CATALOGS
+     */
+    Route::group([
+        'as' => 'api.v1.libraries.catalogs.',
+    ], function () {
+        Route::get('catalogs', 'CatalogController@index')->name('index');
+        Route::get('catalogs/option-items', 'CatalogController@optionList')->name('catalogs.option-items');
+    });
+
+    /*
      * LIBRARY USERS
      */
     Route::group([
