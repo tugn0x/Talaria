@@ -123,6 +123,6 @@ class BaseTransformer extends TransformerAbstract
     }
 
     public function transform(Model $model) {
-        return $this->toArray($model);
+        return $model->toArray();
     }
 }
