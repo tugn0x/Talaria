@@ -20,6 +20,7 @@ class LibraryTransformer extends BaseTransformer
         'titles',
         'country',
         'subject',
+        'catalogs'
     ];
 
     protected $defaultIncludes = [
@@ -56,6 +57,11 @@ class LibraryTransformer extends BaseTransformer
     {
         if($model->subject)
             return $this->item($model->subject, new BaseLightTransformer());
+    }
+
+    public function includeCatalogs(Model $model)
+    {
+        return $this->collection($model->catalogs, new BaseLightTransformer());
     }
 
 

@@ -56,6 +56,18 @@ Route::group([
         Route::delete('{library}/library-users/{library_user}', 'LibraryUserController@delete')->name('delete'); //hard delete
     });
 
+    /* LIBRARY CATALOGS */
+    Route::group([
+        'as' => 'api.v1.libraries.library-catalogs.',
+    ], function () {
+        Route::post('{library}/library-catalogs', 'CatalogLibraryController@store')->name('store');
+
+        Route::get('{library}/library-catalogs', 'CatalogLibraryController@index')->name('index');
+        Route::put('{library}/library-catalogs/{library_catalog}', 'CatalogLibraryController@update')->name('update');
+        Route::get('{library}/library-catalogs/{library_catalog}', 'CatalogLibraryController@show')->name('show');
+        Route::delete('{library}/library-catalogs/{library_catalog}', 'CatalogLibraryController@delete')->name('delete'); //hard delete
+    });
+
 
     Route::post('public', 'LibraryController@publicCreate')->name('public-create');
     Route::get('', 'LibraryController@index')->name('index');

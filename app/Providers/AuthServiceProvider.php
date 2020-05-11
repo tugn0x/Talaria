@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Country;
 use App\Models\Institutions\Institution;
 use App\Models\Institutions\InstitutionType;
+use App\Models\Libraries\CatalogLibrary;
 use App\Models\Libraries\Library;
 use App\Models\Projects\Project;
 use App\Models\Libraries\LibraryUser;
@@ -14,6 +15,7 @@ use App\Models\Users\User;
 use App\Policies\BasePolicy;
 use App\Policies\LibraryPolicy;
 use App\Policies\LibraryUserPolicy;
+use App\Policies\CatalogLibraryPolicy;
 use App\Policies\ListBasePolicy;
 use App\Policies\ReferencesPolicy;
 use App\Policies\ProjectPolicy;
@@ -34,6 +36,7 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Model' => 'App\Policies\ModelPolicy',
         Library::class => LibraryPolicy::class,
         LibraryUser::class => LibraryUserPolicy::class,
+        CatalogLibrary::class => CatalogLibraryPolicy::class,
         Reference::class => ReferencesPolicy::class,
         User::class => BasePolicy::class,
         InstitutionType::class => ListBasePolicy::class,

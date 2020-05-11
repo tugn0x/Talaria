@@ -161,6 +161,11 @@ class Library extends BaseModel
         return $this->hasMany(Tag::class);
     }
 
+    public function catalogs()
+    {
+        return $this->belongsToMany(Catalog::class);
+    }
+
 
     public function borrowingrequests()
     {

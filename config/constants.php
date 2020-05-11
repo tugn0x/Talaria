@@ -25,6 +25,11 @@ return [
     'project_status' => [
         'enabled'=>1,
         'disabled'=>0
-    ]
+    ],
+    'catalog_status' => [
+        'pending'=>2, //NOTA: nel nilde5 questo è 0
+        'enabled'=>1,
+        'disabled'=>0 //NOTA: nel nilde5 questo è 2
+    ],
 
 ];

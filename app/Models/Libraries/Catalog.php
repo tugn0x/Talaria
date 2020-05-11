@@ -17,4 +17,9 @@ class Catalog extends BaseModel
         'active'
     ];
 
+    public function libraries()
+    {
+        return $this->belongsToMany(Library::class);
+    }
+
 }
