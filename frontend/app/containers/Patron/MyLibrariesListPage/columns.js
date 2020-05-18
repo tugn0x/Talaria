@@ -9,7 +9,7 @@ export const columns = [
         label: 'app.global.library', /*'app.global.label'*/
         name: 'label',
         col: 1, 
-        toolltipField: 'name',
+        tooltipField: 'name',
     },
     /*{ 
         label: 'app.global.library', 
