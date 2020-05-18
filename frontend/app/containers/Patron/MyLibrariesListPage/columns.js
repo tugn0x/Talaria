@@ -6,15 +6,16 @@ export const columns = [
         type: 'preferred'
     },
     { 
-        label: 'app.global.label', 
+        label: 'app.global.library', /*'app.global.label'*/
         name: 'label',
         col: 1, 
+        toolltipField: 'name',
     },
-    { 
+    /*{ 
         label: 'app.global.library', 
         name: 'name',
         col: 1, 
-    },
+    },*/
     { 
         label: 'app.global.department', 
         name: 'department_name',
