@@ -182,7 +182,13 @@ function SimpleList(props) {
                                           field.type === 'preferred' &&
                                             <i className={`fa fa-star preferred-star ${preferredStarClass(item[field.name])} }`}></i>
                                           ||
-                                            subStringer(item[field.name], 30) 
+                                          field.toolltipField && 
+                                            <a href="#" data-toggle="tooltip" title={`${item[field.altField]}`}> 
+                                              {subStringer(item[field.name], 30)}
+                                            </a>
+                                          || 
+                                          !field.toolltipField &&   
+                                          subStringer(item[field.name], 30)
                                         }
                                       </span>
                                   </Col>
