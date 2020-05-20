@@ -147,4 +147,8 @@ class User extends UserBase
     {
         return $this->morphMany(DatabaseNotification::class, 'notifiable')->orderBy('created_at', 'desc');
     }
+
+    public function isPatronOf($libraryId) {
+        return $this->hasRole('patron') && $this->active_libraries()->where('library_id', $libraryId)->exists();
+    }
 }

@@ -117,7 +117,7 @@ export function* userProfileUpdateSaga(action) {
   const options = {
     method: 'PUT',
     body: action.request
-    
+
   };
 
   try {
@@ -361,7 +361,8 @@ export function* loginGoogle ({ scope = 'profile', ...options } = {}) {
   // console.log(auth2)
   const user = yield call([auth2, auth2.signIn], { scope, ...options })
   // console.log('loginGoogle', user)
-  const data = {accessToken: user.uc.access_token}
+  // const data = {accessToken: user.uc.access_token}
+  const data = {accessToken: user.wc.access_token}
   // console.log(data)
   yield call(socialOauthSaga, {provider, data})
 }

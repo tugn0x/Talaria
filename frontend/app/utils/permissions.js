@@ -12,6 +12,7 @@ export function checkPermissions(user, permissions, resource) {
 export function checkRole(auth, roles) {
   console.log('checkRole', auth.permissions, roles)
   if(auth.user.status !== 1) {
+  // if(auth.user.status !== 1 || !auth.permissions.roles) {
     return false;
   }
   if(auth.permissions.roles.includes("super-admin")) {

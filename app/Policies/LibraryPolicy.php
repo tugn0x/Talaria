@@ -21,7 +21,7 @@ class LibraryPolicy extends BasePolicy
 
     public function show(User $user, Model $model)
     {
-        return $this->canManage($user, $model) || $user->isAbleOn($model);
+        return $this->canManage($user, $model) || $user->isAbleOn($model) || $user->isPatronOf($model->id);
     }
 
     public function optionList(User $user, Model $model)
