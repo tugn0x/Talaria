@@ -19,6 +19,7 @@ use App\Policies\CatalogLibraryPolicy;
 use App\Policies\ListBasePolicy;
 use App\Policies\ReferencesPolicy;
 use App\Policies\ProjectPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
@@ -38,7 +39,7 @@ class AuthServiceProvider extends ServiceProvider
         LibraryUser::class => LibraryUserPolicy::class,
         CatalogLibrary::class => CatalogLibraryPolicy::class,
         Reference::class => ReferencesPolicy::class,
-        User::class => BasePolicy::class,
+        User::class => UserPolicy::class,
         InstitutionType::class => ListBasePolicy::class,
         Project::class => ListBasePolicy::class,
         Institution::class => ListBasePolicy::class,

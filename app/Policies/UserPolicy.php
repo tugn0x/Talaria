@@ -4,10 +4,11 @@ namespace App\Policies;
 
 use App\Policies\BasePolicy;
 use App\Models\Users\User;
+use App\Models\Libraries\Library;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Database\Eloquent\Model;
 
-class LibraryPolicy extends BasePolicy
+class UserPolicy extends BasePolicy
 {
     /**
      * Create a new policy instance.
@@ -19,14 +20,15 @@ class LibraryPolicy extends BasePolicy
         //
     }
 
-    public function show(User $user, Model $model)
-    {
-        //return $this->canManage($user, $model) || $user->isAbleOn($model) || $user->isPatronOf($model->id);
-        return true; //chiunque puo' vedere i dati della biblio
-    }
-
     public function optionList(User $user, Model $model)
     {
-        return true;
+      //chiunque sia manager di una biblioteca puo' visualizzare elenco utenti di nilde
+      //dd($user->getAbilities());
+     foreach($user->getAbilities() as $abil)
+     {
+         if($abil->name=="manage" && $abil->entity_type=='App\Models\Libraries\Library')
+         return true;
+     }
+     return false;
     }
 }
