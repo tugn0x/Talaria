@@ -23,7 +23,6 @@ class UserPolicy extends BasePolicy
     public function optionList(User $user, Model $model)
     {
       //chiunque sia manager di una biblioteca puo' visualizzare elenco utenti di nilde
-      //dd($user->getAbilities());
      foreach($user->getAbilities() as $abil)
      {
          if($abil->name=="manage" && $abil->entity_type=='App\Models\Libraries\Library')
