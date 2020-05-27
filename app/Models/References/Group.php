@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Models\Users;
+namespace App\Models\References;
 
 use App\Models\BaseModel;
-use App\Models\References\Reference;
 
 /* This class rapresents a group of User's References (i.e. bibliography)*/
 class Group extends BaseModel
@@ -14,6 +13,6 @@ class Group extends BaseModel
 
     public function references()
     {
-        return $this->hasMany(Reference::class);
+        return $this->belongsToMany(Reference::class);
     }
 }

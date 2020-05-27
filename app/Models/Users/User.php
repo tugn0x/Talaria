@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 use App\Models\Country;
 use App\Models\Libraries\Library;
+use App\Models\References\Group;
 use App\Models\Requests\PatronDocdelRequest;
 
 class User extends UserBase
