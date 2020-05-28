@@ -17,6 +17,7 @@ class ReferenceTransformer extends BaseTransformer
     ];
 
     protected $defaultIncludes = [
+        'labels',
         'groups'
     ];
 
