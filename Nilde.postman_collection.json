@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "879970e5-d62d-4265-9607-921544d34267",
+		"_postman_id": "3d94f33b-9de9-4751-b273-08581052a992",
 		"name": "Nilde",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -89,7 +89,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"grant_type\": \"password\",\n  \"client_id\": \"1\",\n  \"client_secret\": \"bK3vrACDLE4WM7smEPvPT5X5XUdn8DfMHDnjGHrB\",\n  \"username\": \"alessandro.tugnoli@gmail.com\",\n  \"password\": \"nilde\"\n}"
+							"raw": "{\n  \"grant_type\": \"password\",\n  \"client_id\": \"1\",\n  \"client_secret\": \"bK3vrACDLE4WM7smEPvPT5X5XUdn8DfMHDnjGHrB\",\n  \"username\": \"alessandro.tugnoli@gmail.com\",\n  \"password\": \"nildenilde\"\n}"
 						},
 						"url": {
 							"raw": "{{urlbase}}/oauth/token",
@@ -144,18 +144,40 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/libraries?access_token={{bearer}}",
+					"raw": "{{url}}/libraries/1",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"libraries"
+						"libraries",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Projects",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/projects/",
+					"host": [
+						"{{url}}"
 					],
-					"query": [
-						{
-							"key": "access_token",
-							"value": "{{bearer}}"
-						}
+					"path": [
+						"projects",
+						""
 					]
 				}
 			},
@@ -243,6 +265,471 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Subjects",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/libraries/subjects/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"libraries",
+						"subjects",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IntitutionTypes",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/institutions/institution-types/option-items?label=name",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"institutions",
+						"institution-types",
+						"option-items"
+					],
+					"query": [
+						{
+							"key": "label",
+							"value": "name"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Roles",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/users/roles",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Roles and resources",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/users/users/2?include=roles,resources",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"users",
+						"2"
+					],
+					"query": [
+						{
+							"key": "include",
+							"value": "roles,resources"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Institution with permissions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/institutions/3?include=granted_permissions",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"institutions",
+						"3"
+					],
+					"query": [
+						{
+							"key": "include",
+							"value": "granted_permissions"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Project with permissions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/projects/1?include=granted_permissions",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"projects",
+						"1"
+					],
+					"query": [
+						{
+							"key": "include",
+							"value": "granted_permissions"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Permissions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/auth/permissions",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"permissions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Me with roles",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/auth/me?include=roles",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"me"
+					],
+					"query": [
+						{
+							"key": "include",
+							"value": "roles"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEL Library",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/libraries/4",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"libraries",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEL LibraryUser",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/libraries/3/library-users/17",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"libraries",
+						"3",
+						"library-users",
+						"17"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Catalogs",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/libraries/catalogs",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"libraries",
+						"catalogs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Library Catalogs",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/libraries/1/library-catalogs",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"libraries",
+						"1",
+						"library-catalogs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User References",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/references",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"references"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Single Reference with group and label",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/references/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"references",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Groups ",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/groups",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Labels",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/labels",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"labels"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -269,19 +756,19 @@
 	],
 	"variable": [
 		{
-			"id": "2d1d1447-699c-411a-bc46-40a97f1ee7e5",
+			"id": "11da141f-2716-4169-afc0-794c191e7deb",
 			"key": "url",
-			"value": "http://api.nilde.local",
+			"value": "http://api.nilde.local/api/v1/",
 			"type": "string"
 		},
 		{
-			"id": "d9df099e-d536-4a41-b863-44341710e86a",
+			"id": "91554e16-2ba7-4ed6-8b49-3a0191b61383",
 			"key": "urlbase",
 			"value": "http://api.nilde.local",
 			"type": "string"
 		},
 		{
-			"id": "7d297dec-46ec-43e4-b677-2e26f22d0c8e",
+			"id": "501043ae-772b-4e5b-ae0c-df855c1f84fc",
 			"key": "bearer",
 			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImExYjEyZmU4M2IwZmNjYjI4ZDJmY2Q3ZDkwZWQxZWE2ZTRhZDBmYzNhMmMwZmQyZTA1ODI3YzQ3ODNjNTdhNWJmMzE5MGVhMjU0ZjMwYmY1In0.eyJhdWQiOiIxIiwianRpIjoiYTFiMTJmZTgzYjBmY2NiMjhkMmZjZDdkOTBlZDFlYTZlNGFkMGZjM2EyYzBmZDJlMDU4MjdjNDc4M2M1N2E1YmYzMTkwZWEyNTRmMzBiZjUiLCJpYXQiOjE1NjA1MDIzMDksIm5iZiI6MTU2MDUwMjMwOSwiZXhwIjoxNTYwNTg4NzA5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.PJ5hheq3c3aZY4O-lb1edWqrSno5gUrqq4-9RL3UqpqnsSTCv4ArZiPyRFCURRMv-P_voAONkEOOm0Yhox0CGlmR9NIsUDipZ7UJJHQcfkdmTNz9nGoJFVyHdNq3jrGTijQMplIjCdH8RzFWj6JMkbQkPMcl-8Co1oioIY4Ew-yaLYqhj2g95ZKjFg7VDchScFxsp0iqKp0L1Y65rEngrBW4SG_c79PBVa7R1nR0RkGtE2uMtYBva9EKJAEB9S4pPCZve874zdBtQhTOS1dyh5PIR2cDrqGLNSJyUxOt_Q5euRcpCHs8zu703WZkfOqNVPxIMX8IKlBPDWZuKMsIeU6TWe4OPIjvi3I0fvgIqQYe-8dY0t5ynTw574XHxI9CSPLB6LoEhPzC465BJDe7sGLznS8Xrc1xz5j5JeDZsx78eurWx17dlDaMZUj-31iTL1V7xJSZU7QZWBoEKs4bUyRofPZnSaAQ9YYG6edGInDnHW9eV4vnf5sbYsrSHKZM61xu5YiACiaY_H1An0bXipZDniVvcfdqFubq83fENJgds7_Ay8XTk_JatoWjvpAHGmZO7k0obr49Tr_ZjD6o2_o7LEszZ0cAjGUhi5wHqLo71tgHVBdYak3pYehbcvFPa3oYA6Ci2eHTsT2FHAnruMbOaVZh4wpObwRxPmdnKzk",
 			"type": "string"
