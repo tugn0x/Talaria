@@ -99,6 +99,19 @@ function HeaderBar(props) {
                             </NavLink>
                         </div>
                       )}
+                      {
+                        <div className="resources-menu">
+                          <DropdownItem header tag="div" className="text-center">
+                            <div className={`icon-img patron float-left`}></div>
+                            <FormattedMessage {...messages.patron} />
+                          </DropdownItem>
+                            <NavLink to={`/patron`}
+                                    className="dropdown-item btn"
+                                    activeClassName="current">
+                              Patron main page
+                            </NavLink>
+                        </div>
+                      }
                         {
                           auth.permissions.resources && (<ResourceMenu resources={auth.permissions.resources}></ResourceMenu>)
                         }

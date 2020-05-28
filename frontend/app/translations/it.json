@@ -212,6 +212,8 @@
   "app.components.HeaderBar.Profile": "Profilo",
   "app.components.HeaderBar.Libraries": "Biblioteche",
   "app.components.HeaderBar.Logout": "Esci",
+  "app.components.HeaderBar.Admin": "Admin",
+  "app.components.HeaderBar.Patron": "Patron",
 
   "app.components.SignupForm.header": "Registrati",
   "app.components.SignupForm.subtitle": "Crea un profilo",
@@ -231,6 +233,7 @@
   "app.components.ForgotPasswordForm.header": "Password Dimenticata",
   "app.components.Footer.header": "Questo l header del Footer",
 
+  "app.routes.Bibliography": "Bibliografia",
   "app.routes.Reference": "Riferimenti",
   "app.routes.ReferenceNew": "Nuovo riferimento",
   "app.routes.Searches": "Ricerche",

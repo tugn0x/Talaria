@@ -8,6 +8,10 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.routes';
 
 export default defineMessages({
+    Bibliography: {
+        id: `${scope}.Bibliography`,
+        defaultMessage: 'My Bibliography',
+    },
     Reference: {
         id: `${scope}.Reference`,
         defaultMessage: 'My References',

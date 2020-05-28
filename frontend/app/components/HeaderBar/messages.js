@@ -45,6 +45,10 @@ export default defineMessages({
     id: `${scope}.admin`,
     defaultMessage: 'Administration',
   },
+  patron: {
+    id: `${scope}.patron`,
+    defaultMessage: 'Patron',
+  },
   Logout: {
     id: `${scope}.Logout`,
     defaultMessage: 'Logout',

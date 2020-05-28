@@ -7,7 +7,7 @@ import SubRouteSwitch from 'components/SubRouteSwitch';
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
-  { path: '/references', name: `Reference`, component: SubRouteSwitch, header: true, roles: ['registered'],
+  { path: '/references', name: `Bibliography`, component: SubRouteSwitch, header: true, roles: ['registered'],
     children: [
       { path: '/reference/new', icon: "plus", name: `ReferenceNew`, url: `/references/reference/new`, component: ReferencesPage, sidebar: true},
       { path: '/reference/:id?', name: `ReferenceUpdate`, component: ReferencesPage, },
@@ -15,7 +15,7 @@ const routes = [
     ]
   },
 
-  { path: '/searches', name: `Searches`, component: ChangePassword, header: true, },
+//  { path: '/searches', name: `Searches`, component: ChangePassword, header: true, },
   { path: '/requests', name: `Requests`, component: ChangePassword, header: true, permissions: ['can-request'] },
 
   { path: '/:library_id?/my-libraries', name: `MyLibraries`, component: SubRouteSwitch, header: true,
