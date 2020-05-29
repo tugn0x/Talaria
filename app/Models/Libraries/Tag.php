@@ -22,4 +22,9 @@ class Tag extends BaseModel
     {
         return $this->belongsToMany(DocdelRequest::class);
     }
+
+    public function scopeInLibrary($query, $library_id)
+    {
+        return $query->where('library_id',$library_id);
+    }
 }

@@ -10,6 +10,7 @@ use App\Models\Libraries\Library;
 use App\Models\Projects\Project;
 use App\Models\Libraries\LibraryUser;
 use App\Models\Libraries\Subject;
+use App\Models\Libraries\Tag;
 use App\Models\References\Reference;
 use App\Models\Users\User;
 use App\Policies\BasePolicy;
@@ -38,6 +39,7 @@ class AuthServiceProvider extends ServiceProvider
         Library::class => LibraryPolicy::class,
         LibraryUser::class => LibraryUserPolicy::class,
         CatalogLibrary::class => CatalogLibraryPolicy::class,
+        Tag::class => BasePolicy::class,
         Reference::class => ReferencesPolicy::class,
         User::class => UserPolicy::class,
         InstitutionType::class => ListBasePolicy::class,

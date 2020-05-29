@@ -68,6 +68,15 @@ Route::group([
         Route::delete('{library}/library-catalogs/{library_catalog}', 'CatalogLibraryController@delete')->name('delete'); //hard delete
     });
 
+    Route::group([
+        'as' => 'api.v1.libraries.library-tags.',
+    ], function () {
+        Route::get('{library}/tags', 'TagController@index')->name('index');
+        Route::get('{library}/tags/{tag_id}', 'TagController@show')->name('show');
+        Route::put('{library}/tags/{tag_id}', 'TagController@update')->name('update');
+        Route::post('{library}/tags', 'TagController@store')->name('create');
+    });
+
 
     Route::post('public', 'LibraryController@publicCreate')->name('public-create');
     Route::get('', 'LibraryController@index')->name('index');
