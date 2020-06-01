@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Policies;
+
+use App\Policies\BasePolicy;
+use App\Models\Users\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Database\Eloquent\Model;
+
+class DeliveryPolicy extends BasePolicy
+{
+    /**
+     * Create a new policy instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
+  
+    public function storeOthers(User $user, Model $model)
+    {
+        return false;
+    }
+
+    public function create(User $user, Model $model)
+    {
+        return $this->canManage($user,$model);
+        
+    }
+
+    public function show(User $user, Model $model)
+    {
+        return $this->canManage($user, $model);
+    }
+
+
+    public function update(User $user, Model $model)
+    {
+        return $this->canManage($user, $model);
+    }
+
+    public function canManage(User $user, Model $model)
+    {
+        //solo la biblio puo' creare i suoi Delivery
+        //quindi verifico che l'utente sia manager della biblio per la quale si sta inserendo un Delivery
+        //oppure è il manager del Delivery stesso
+        return $user->can('manage', $model->library)||$user->can('manage', $model);
+    }
+
+    public function optionList(User $user, Model $model)
+    {
+        return true;
+    }
+}

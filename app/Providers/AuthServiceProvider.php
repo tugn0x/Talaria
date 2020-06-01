@@ -10,16 +10,17 @@ use App\Models\Libraries\Library;
 use App\Models\Projects\Project;
 use App\Models\Libraries\LibraryUser;
 use App\Models\Libraries\Subject;
+use App\Models\Libraries\Delivery;
 use App\Models\Libraries\Tag;
 use App\Models\References\Reference;
 use App\Models\Users\User;
 use App\Policies\BasePolicy;
 use App\Policies\LibraryPolicy;
+use App\Policies\DeliveryPolicy;
 use App\Policies\LibraryUserPolicy;
 use App\Policies\CatalogLibraryPolicy;
 use App\Policies\ListBasePolicy;
 use App\Policies\ReferencesPolicy;
-use App\Policies\ProjectPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -38,6 +39,7 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Model' => 'App\Policies\ModelPolicy',
         Library::class => LibraryPolicy::class,
         LibraryUser::class => LibraryUserPolicy::class,
+        Delivery::class => DeliveryPolicy::class,
         CatalogLibrary::class => CatalogLibraryPolicy::class,
         Tag::class => BasePolicy::class,
         Reference::class => ReferencesPolicy::class,
