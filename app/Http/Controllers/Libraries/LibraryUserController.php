@@ -29,12 +29,26 @@ class LibraryUserController extends ApiController
 
     public function my(Request $request)
     {
-        $this->authorize($this->model);
         $count = $request->input('pageSize', config('api.page_size'));
 //        $my_applications = $this->model->owned()->with('library')->orderBy('updated_at','desc')->paginate($count);
         $my_applications = $this->model->owned()->orderBy('updated_at','desc')->paginate($count);
 
         return $this->response->paginator($my_applications, new $this->transformer())->morph();
+    }
+
+    public function store(Request $request)
+    {
+        if( !empty($this->validate) )
+            $this->validate($request, $this->validate);
+
+        $model = $this->nilde->store($this->model, $request, null, function ($model, $request) {
+
+        });
+
+        if($this->broadcast && config('apinilde.broadcast'))
+            broadcast(new ApiStoreBroadcast($model, $model->getTable(), $request->input('include')));
+
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
     }
 
     public function update(Request $request, $id)

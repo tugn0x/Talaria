@@ -29,4 +29,9 @@ class LibraryPolicy extends BasePolicy
     {
         return true;
     }
+
+    public function manageUsers(User $user, Model $model)
+    {
+        return $this->canManage($user, $model);
+    }
 }

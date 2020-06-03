@@ -36,8 +36,17 @@ class LibraryUserObserver extends BaseObserver
 
     public function saving($model)
     {
-        if(!$model->user_id) {
-            $model->user_id = auth()->user()->id;
+        if(auth() && auth()->user()) {
+            $user = auth()->user();
+            $library = Library::find($model->library_id);
+            if(!$user->can('manage-users', $library)) {
+                if($model->isDirty("status")) {
+                    unset($model->status);
+                }
+                if(!$model->user_id) {
+                    $model->user_id = auth()->user()->id;
+                }
+            }
         }
 
         if(parent::saving($model)) //sto salvando e la validazione non ha dato problemi
@@ -61,7 +70,7 @@ class LibraryUserObserver extends BaseObserver
                     $u=$model->user;
                     if($u->active_libraries->count()==0)
                         $u->assign('patron');
-                    /*2. send mail+notify to user to let him know it was enabled */    
+                    /*2. send mail+notify to user to let him know it was enabled */
                 }
 
             }
