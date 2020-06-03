@@ -19,11 +19,6 @@ class LibraryUserPolicy extends BasePolicy
         //
     }
 
-    public function storeOthers(User $user, Model $model)
-    {
-        return false;
-    }
-
     public function create(User $user, Model $model)
     {
         return true;

@@ -18,16 +18,11 @@ class DeliveryPolicy extends BasePolicy
     {
         //
     }
-  
-    public function storeOthers(User $user, Model $model)
-    {
-        return false;
-    }
 
     public function create(User $user, Model $model)
     {
         return $this->canManage($user,$model);
-        
+
     }
 
     public function show(User $user, Model $model)

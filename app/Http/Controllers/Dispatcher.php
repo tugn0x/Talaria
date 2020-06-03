@@ -33,10 +33,6 @@ class Dispatcher extends BaseController
         if($this->haveToAuthorize)
         {
             $this->authorize($collection->getModel());
-            if (Gate::denies('indexOthers', $collection->getModel()))
-            {
-                $collection = $collection->indexPolicyDenies();
-            }
         }
 
         $includeIds = $request->input('includeIds');
@@ -150,12 +146,6 @@ class Dispatcher extends BaseController
         if($this->haveToAuthorize)
         {
             $this->authorize($model);
-            if (!Gate::denies('storeOthers', $model) && $request->input('user_id'))
-            {
-                $model->user_id = $request->input('user_id');
-            } elseif (Schema::hasColumn($model->getTable(), 'user_id')) {
-                $model->user_id = auth()->user()->id;
-            }
         }
 
         event($model->getTable() . '.store', $model);

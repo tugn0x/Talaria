@@ -31,18 +31,6 @@ class BasePolicy
         return $this->canManage($user, $model);
 //        return false;
     }
-//
-    protected function checkOthers(User $user, Model $model, $function=NULL)
-    {
-        if(is_null($function))
-            throw new \Symfony\Component\HttpKernel\Exception\HttpException('Function Permission Must Be Defined in App\Policies::check for '.$function);
-
-        if($user->can($function.'-others', $model))
-        {
-            return true;
-        }
-        return false;
-    }
 
     public function viewAny(User $user, Model $model)
     {
@@ -59,18 +47,9 @@ class BasePolicy
         return $this->check($user,$model,__FUNCTION__);
     }
 
-    public function indexOthers(User $user, Model $model)
-    {
-        return $this->checkOthers($user,$model,'index');
-    }
-
     public function show(User $user, Model $model)
     {
         return $this->check($user,$model,__FUNCTION__);
-    }
-    public function showOthers(User $user, Model $model)
-    {
-        return $this->checkOthers($user,$model,'show');
     }
 
     public function store(User $user, Model $model)
@@ -78,19 +57,9 @@ class BasePolicy
         return $this->check($user,$model,__FUNCTION__);
     }
 
-    public function storeOthers(User $user, Model $model)
-    {
-        return $this->checkOthers($user,$model,'store');
-    }
-
     public function update(User $user, Model $model)
     {
         return $this->check($user,$model,__FUNCTION__);
-    }
-
-    public function updateOthers(User $user, Model $model)
-    {
-        return $this->checkOthers($user,$model,'update');
     }
 
     public function delete(User $user, Model $model)
@@ -98,27 +67,12 @@ class BasePolicy
         return $this->check($user,$model,__FUNCTION__);
     }
 
-    public function deleteOthers(User $user, Model $model)
-    {
-        return $this->checkOthers($user,$model,'delete');
-    }
-
     public function restore(User $user, Model $model)
     {
         return $this->check($user,$model,__FUNCTION__);
     }
 
-    public function restoreOthers(User $user, Model $model)
-    {
-        return $this->checkOthers($user,$model,'restore');
-    }
-
     public function destroy(User $user, Model $model)
-    {
-        return false;
-    }
-
-    public function destroyOthers(User $user, Model $model)
     {
         return false;
     }
