@@ -30,4 +30,12 @@ class UserPolicy extends BasePolicy
      }
      return false;
     }
+
+//    public function viewName(User $user, Model $model) {
+//        return true;
+//    }
+
+    public function viewRoles(User $user, Model $model) {
+        return $user->id === $model->id;
+    }
 }

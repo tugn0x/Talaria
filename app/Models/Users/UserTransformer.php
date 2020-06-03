@@ -14,6 +14,11 @@ use Silber\Bouncer\Database\Ability;
 class UserTransformer extends BaseTransformer
 {
 
+    protected $policy = [
+//        'view-name' => ['name'],
+        'view-roles' => ['roles']
+    ];
+
     protected $availableIncludes = [
         'roles',
         'resources',
