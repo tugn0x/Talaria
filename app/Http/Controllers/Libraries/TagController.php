@@ -43,6 +43,14 @@ class TagController extends ApiController
          return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
      }
 
+     public function show(Request $request, $id)
+     {
+         $id = $request->route()->parameters['tag_id'];
+         $model = $this->nilde->show($this->model, $request, $id);
+ 
+         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
+     }
+
     public function filterRelations($request) {
         $library = $request->route()->parameters();
         return $this->model->inLibrary($library);

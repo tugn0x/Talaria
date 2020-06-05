@@ -18,16 +18,31 @@ class DeliveryController extends ApiController
 
         $this->broadcast = false;
 
-       // $this->nilde->disableAuthorize();
     }
 
-    public function index(Request $request)
+    /*public function index(Request $request)
     {
         $this->model = $this->filterRelations($request);
         $items = $this->model->get();
         return response()->json($items);
         //$collection = $this->nilde->index($this->model, $request);
         //return $this->response->paginator($collection, new $this->transformer())->morph();
+    }*/
+
+    public function index(Request $request)
+    {
+        $this->model = $this->filterRelations($request);
+        $collection = $this->nilde->index($this->model, $request);
+
+        return $this->response->paginator($collection, new $this->transformer())->morph();
+    }
+
+    public function show(Request $request, $id)
+    {
+        $id = $request->route()->parameters['delivery_id'];
+        $model = $this->nilde->show($this->model, $request, $id);
+
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
     public function update(Request $request, $id)
@@ -64,6 +79,18 @@ class DeliveryController extends ApiController
             ]);
             return $model;
         });
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
+    }
+     // ApiControllerTrait@delete override
+    // because we use only delivery_id id to delete it instead of library_id
+    public function delete(Request $request, $id)
+    {
+        $id = $request->route()->parameters['delivery_id'];
+        $model = $this->nilde->delete($this->model, $request, $id);
+
+        if($this->broadcast && config('apinilde.broadcast'))
+            broadcast(new ApiDeleteBroadcast($model->id, $model->getTable()));
+
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 }

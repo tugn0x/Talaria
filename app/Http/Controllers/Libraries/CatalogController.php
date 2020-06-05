@@ -17,6 +17,5 @@ class CatalogController extends ApiController
 
         $this->broadcast = false;
 
-        $this->nilde->disableAuthorize();
     }
 }

@@ -14,6 +14,7 @@ use App\Models\Libraries\Delivery;
 use App\Models\Libraries\Tag;
 use App\Models\References\Reference;
 use App\Models\Users\User;
+use App\Models\Libraries\Catalog;
 use App\Policies\BasePolicy;
 use App\Policies\LibraryPolicy;
 use App\Policies\DeliveryPolicy;
@@ -39,16 +40,20 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Model' => 'App\Policies\ModelPolicy',
         Library::class => LibraryPolicy::class,
         LibraryUser::class => LibraryUserPolicy::class,
-        Delivery::class => DeliveryPolicy::class,
         CatalogLibrary::class => CatalogLibraryPolicy::class,
         Tag::class => BasePolicy::class,
         Reference::class => ReferencesPolicy::class,
         User::class => UserPolicy::class,
+        
+        // OK
+        Delivery::class => DeliveryPolicy::class,
+        Institution::class => ListBasePolicy::class,
         InstitutionType::class => ListBasePolicy::class,
         Project::class => ListBasePolicy::class,
         Institution::class => ListBasePolicy::class,
         Country::class => ListBasePolicy::class,
         Subject::class => ListBasePolicy::class,
+        Catalog::class => ListBasePolicy::class,
     ];
 
     /**

@@ -41,11 +41,6 @@ class DeliveryPolicy extends BasePolicy
         //solo la biblio puo' creare i suoi Delivery
         //quindi verifico che l'utente sia manager della biblio per la quale si sta inserendo un Delivery
         //oppure è il manager del Delivery stesso
-        return $user->can('manage', $model->library)||$user->can('manage', $model);
-    }
-
-    public function optionList(User $user, Model $model)
-    {
-        return true;
+        return $user->can('manage', $model->library)||$user->can('delivery', $model);
     }
 }
