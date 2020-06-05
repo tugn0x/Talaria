@@ -32,6 +32,31 @@ Route::group([
     Route::post('institution-types', 'InstitutionTypeController@store')->name('store');
     Route::get('institution-types/option-items', 'InstitutionTypeController@optionList')->name('institution-types.option-items');
 
+
+     /*
+     * DESKS
+     */
+    Route::group([
+        'as' => 'api.v1.institutions.desks.',
+    ], function () {
+        Route::get('desks/option-items', 'DeskController@optionList')->name('desks.option-items');
+    });
+
+
+
+    /* INSTITUTION DESKS */
+    Route::group([
+        'as' => 'api.v1.institutions.institution-desks.',
+    ], function () {
+        Route::post('{institution}/desks', 'DeskInstitutionController@store')->name('store');
+        Route::get('{institution}/desks', 'DeskInstitutionController@index')->name('index');
+        Route::put('{institution}/desks/{desk_institution}', 'DeskInstitutionController@update')->name('update');
+        Route::get('{institution}/desks/{desk_institution}', 'DeskInstitutionController@show')->name('show');
+        Route::delete('{institution}/desks/{desk_institution}', 'DeskInstitutionController@delete')->name('delete'); //hard delete
+    });
+
+
+
     Route::get('', 'InstitutionController@index')->name('index');
     Route::post('', 'InstitutionController@create')->name('create');
     Route::get('option-items', 'InstitutionController@optionList')->name('option-items');

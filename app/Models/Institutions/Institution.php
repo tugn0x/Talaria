@@ -46,4 +46,9 @@ class Institution extends BaseModel
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function desks()
+    {
+        return $this->belongsToMany(Desk::class);
+    }
 }

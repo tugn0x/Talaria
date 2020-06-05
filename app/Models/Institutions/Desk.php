@@ -32,5 +32,8 @@ class Desk extends Model
         return $this->morphOne('App\Models\Libraries\Delivery', 'deliveryable');
     }
 
-    //TODO valutare se la relazione con Institutions è 1-N o N-N (nel caso creare il model della rel e modificare migration)
+    public function institutions()
+    {
+        return $this->belongsToMany(Institution::class);
+    }
 }

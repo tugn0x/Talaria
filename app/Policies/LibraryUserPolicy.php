@@ -44,6 +44,9 @@ class LibraryUserPolicy extends BasePolicy
 
     public function canManage(User $user, Model $model)
     {
+        //se esiste l'ability "manage-users" sul db per la biblio del model -> ok
+        //altrimenti viene chiamato manageUsers della LibraryPolicy che non fa altro che verificare se è un manager
+        //in questo modo sia manage che manage-users sono abilitati!
         return $user->can('manage-users', $model->library);
     }
 }
