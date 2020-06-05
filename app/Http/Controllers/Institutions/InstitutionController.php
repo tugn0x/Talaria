@@ -17,7 +17,7 @@ class InstitutionController extends ApiController
 
         $this->broadcast = false;
 
-        $this->nilde->disableAuthorize();
+        //$this->nilde->disableAuthorize();
     }
 
     public function store(Request $request)
