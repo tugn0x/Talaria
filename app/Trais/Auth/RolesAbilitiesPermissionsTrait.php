@@ -11,7 +11,7 @@ use Illuminate\Support\Arr;
 
 trait RolesAbilitiesPermissionsTrait
 {
-    use HasRolesAndAbilities;
+    use HasRolesAndAbilities; //usa bouncer per il check delle ability/ruoli
 
     public function isSuperAdmin() {
         return $this->isAn('super-admin');
