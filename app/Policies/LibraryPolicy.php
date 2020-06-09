@@ -25,6 +25,12 @@ class LibraryPolicy extends BasePolicy
         return true; //chiunque puo' vedere i dati della biblio
     }
 
+    //chiunque puo' vedere le biblio
+    public function index(User $user, Model $model)
+    {
+        return true;
+    }
+
     public function optionList(User $user, Model $model)
     {
         return true;

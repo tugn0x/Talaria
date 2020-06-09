@@ -25,7 +25,7 @@ class LibraryController extends ApiController
 
         $this->broadcast = false;
     }
-
+    
     public function show(Request $request, $id)
     {
         $model = $this->nilde->show($this->model, $request, $id);

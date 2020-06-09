@@ -33,6 +33,12 @@ class LibraryUserPolicy extends BasePolicy
 
     }
 
+     //ritorno true perchè tanto nella index filtro sempre restituendo gli utenti della biblio
+     public function index(User $user, Model $model)
+     {
+         return true;
+     }
+
 
     public function update(User $user, Model $model)
     {

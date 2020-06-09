@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 use App\Models\Libraries\LibraryUserTransformer;
 use App\Models\Libraries\LibraryUser;
+use Illuminate\Support\Facades\Auth;
 
 class LibraryUserController extends ApiController
 {
@@ -41,9 +42,7 @@ class LibraryUserController extends ApiController
         if( !empty($this->validate) )
             $this->validate($request, $this->validate);
 
-        $model = $this->nilde->store($this->model, $request, null, function ($model, $request) {
-
-        });
+        $model = $this->nilde->store($this->model, $request);
 
         if($this->broadcast && config('apinilde.broadcast'))
             broadcast(new ApiStoreBroadcast($model, $model->getTable(), $request->input('include')));
@@ -65,12 +64,29 @@ class LibraryUserController extends ApiController
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
     }
 
-    public function index(Request $request)
+    /*public function index(Request $request)
     {
         $this->model = $this->filterRelations($request);
         $collection = $this->nilde->index($this->model, $request);
 
         return $this->response->paginator($collection, new $this->transformer())->morph();
+    }*/
+
+    //Solo il manager della biblio (o degli utenti) puo' vedere i suoi utenti
+    public function index(Request $request)
+    {
+        $l=Library::find($request->route()->parameters['library']);
+        $u=Auth::user();
+        if($u->can('manage-users',$l))
+        {
+            $this->model = $this->filterRelations($request);
+            $collection = $this->nilde->index($this->model, $request);
+
+            return $this->response->paginator($collection, new $this->transformer())->morph();
+        }
+        else
+            $this->response->errorUnauthorized(trans('apinilde::auth.unauthorized'));
+
     }
 
     public function filterRelations($request) {
