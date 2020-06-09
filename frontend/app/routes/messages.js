@@ -128,4 +128,8 @@ export default defineMessages({
         id: `${scope}.Pickup`,
         defaultMessage: 'Pickup',
     },
+    LibraryServices: {
+        id: `${scope}.LibraryServices`,
+        defaultMessage: 'Servizi',
+    },
 });

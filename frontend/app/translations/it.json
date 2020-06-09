@@ -245,6 +245,7 @@
   "app.routes.Lending": "Lending",
   "app.routes.Delivery": "Consegna",
   "app.routes.Pickup": "Pickup",
+  "app.routes.LibraryServices": "Servizi",
   "app.routes.LibraryUsers": "I miei utenti",
   "app.routes.LibraryDepartments": "Dipartimenti",
   "app.routes.UsersList": "Utenti",
