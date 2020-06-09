@@ -28,6 +28,7 @@ Route::group([
         'as' => 'api.v1.libraries.subjects.',
     ], function () {
         Route::get('subjects/option-items', 'SubjectController@optionList')->name('subjects.option-items');
+        //Route::get('subjects', 'SubjectController@index')->name('index');
     });
 
     /*
@@ -37,6 +38,8 @@ Route::group([
         'as' => 'api.v1.libraries.catalogs.',
     ], function () {
         Route::get('catalogs/option-items', 'CatalogController@optionList')->name('catalogs.option-items');
+        //Route::get('catalogs', 'CatalogController@index')->name('index');
+       
     });
 
     /*

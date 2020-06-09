@@ -6,7 +6,6 @@ use App\Models\BaseModel;
 use App\Models\References\ReferenceObserver;
 use App\Models\Requests\DocdelRequest;
 use App\Models\Requests\PatronDocdelRequest;
-use App\Models\Users\Label;
 
 class Reference extends BaseModel
 {

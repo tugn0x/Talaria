@@ -599,7 +599,7 @@
 			"response": []
 		},
 		{
-			"name": "Library Catalogs",
+			"name": "Institution Desk",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -613,14 +613,15 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/libraries/1/library-catalogs",
+					"raw": "{{url}}/institutions/3/desks/",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"libraries",
-						"1",
-						"library-catalogs"
+						"institutions",
+						"3",
+						"desks",
+						""
 					]
 				}
 			},
@@ -694,11 +695,12 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/groups",
+					"raw": "{{url}}/references/groups",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
+						"references",
 						"groups"
 					]
 				}
@@ -720,11 +722,12 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/labels",
+					"raw": "{{url}}/references/labels",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
+						"references",
 						"labels"
 					]
 				}
@@ -898,6 +901,67 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "My References",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/references/my",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"references",
+						"my"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Desks",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/institutions/desks/option-items?value=name",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"institutions",
+						"desks",
+						"option-items"
+					],
+					"query": [
+						{
+							"key": "value",
+							"value": "name"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -924,21 +988,27 @@
 	],
 	"variable": [
 		{
-			"id": "2e521d48-d6f5-49ae-9293-c7ea22defe80",
+			"id": "edf62756-19e1-47b8-918d-6ad6b895e10a",
 			"key": "url",
 			"value": "http://api.nilde.local/api/v1/",
 			"type": "string"
 		},
 		{
-			"id": "bd6f8587-52d7-4fb4-b4ed-cbfa172106f7",
+			"id": "9e024cc2-926e-402d-a52c-77c3e057a2ff",
 			"key": "urlbase",
 			"value": "http://api.nilde.local",
 			"type": "string"
 		},
 		{
-			"id": "5b73df54-f61f-47e6-b900-fd16944d216c",
-			"key": "bearer",
+			"id": "36100d14-202c-40f4-8d6d-e6f85efe97df",
+			"key": "bearer_admin",
 			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImExYjEyZmU4M2IwZmNjYjI4ZDJmY2Q3ZDkwZWQxZWE2ZTRhZDBmYzNhMmMwZmQyZTA1ODI3YzQ3ODNjNTdhNWJmMzE5MGVhMjU0ZjMwYmY1In0.eyJhdWQiOiIxIiwianRpIjoiYTFiMTJmZTgzYjBmY2NiMjhkMmZjZDdkOTBlZDFlYTZlNGFkMGZjM2EyYzBmZDJlMDU4MjdjNDc4M2M1N2E1YmYzMTkwZWEyNTRmMzBiZjUiLCJpYXQiOjE1NjA1MDIzMDksIm5iZiI6MTU2MDUwMjMwOSwiZXhwIjoxNTYwNTg4NzA5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.PJ5hheq3c3aZY4O-lb1edWqrSno5gUrqq4-9RL3UqpqnsSTCv4ArZiPyRFCURRMv-P_voAONkEOOm0Yhox0CGlmR9NIsUDipZ7UJJHQcfkdmTNz9nGoJFVyHdNq3jrGTijQMplIjCdH8RzFWj6JMkbQkPMcl-8Co1oioIY4Ew-yaLYqhj2g95ZKjFg7VDchScFxsp0iqKp0L1Y65rEngrBW4SG_c79PBVa7R1nR0RkGtE2uMtYBva9EKJAEB9S4pPCZve874zdBtQhTOS1dyh5PIR2cDrqGLNSJyUxOt_Q5euRcpCHs8zu703WZkfOqNVPxIMX8IKlBPDWZuKMsIeU6TWe4OPIjvi3I0fvgIqQYe-8dY0t5ynTw574XHxI9CSPLB6LoEhPzC465BJDe7sGLznS8Xrc1xz5j5JeDZsx78eurWx17dlDaMZUj-31iTL1V7xJSZU7QZWBoEKs4bUyRofPZnSaAQ9YYG6edGInDnHW9eV4vnf5sbYsrSHKZM61xu5YiACiaY_H1An0bXipZDniVvcfdqFubq83fENJgds7_Ay8XTk_JatoWjvpAHGmZO7k0obr49Tr_ZjD6o2_o7LEszZ0cAjGUhi5wHqLo71tgHVBdYak3pYehbcvFPa3oYA6Ci2eHTsT2FHAnruMbOaVZh4wpObwRxPmdnKzk",
+			"type": "string"
+		},
+		{
+			"id": "a42781b5-6203-41f4-9208-ab34c082d0cd",
+			"key": "bearer",
+			"value": "",
 			"type": "string"
 		}
 	],

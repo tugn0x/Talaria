@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers\References;
 
 use App\Http\Controllers\ApiController;
 use App\Models\BaseLightTransformer;
-use App\Models\Users\Label;
+use App\Models\References\Label;
 use App\Models\References\Reference;
 use App\Models\References\ReferenceTransformer;
 use Illuminate\Http\Request;
@@ -27,19 +27,18 @@ class LabelController extends ApiController
      */
     public function index(Request $request)
     {
-        $items = $this->model->get();
-        return response()->json($items);
-        return $this->response->collection($items, $this->transformer)->morph();
+        $collection = $this->nilde->index($this->model->owned(), $request);
+        return $this->response->paginator($collection, new $this->transformer())->morph();
     }
 
-    public function my(Request $request)
+   /* public function my(Request $request)
     {
         $this->authorize($this->model);
         $count = $request->input('pageSize', config('api.page_size'));
         $my_applications = $this->model->owned()->orderBy('updated_at','desc')->paginate($count);
 
         return $this->response->paginator($my_applications, new $this->transformer())->morph();
-    }
+    }*/
 
     public function store(Request $request)
     {
