@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Institutions;
 use App\Http\Controllers\ApiController;
 use App\Models\Institutions\DeskInstitution;
 use App\Models\Institutions\DeskInstitutionTransformer;
+use App\Models\Institutions\Institution;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DeskInstitutionController extends ApiController
 {
@@ -36,6 +38,24 @@ class DeskInstitutionController extends ApiController
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
     }
+
+    //solo il manager dell'istituto puo' vedere i suoi desk
+    /* AL MOMENTO NON USATA perchè i desk sono pubblici, l'ho creata solo x provare a filtrare
+    public function index(Request $request)
+    {
+        $is=Institution::find($request->route()->parameters['institution']);
+        $u=Auth::user();
+        if($u->can('manage',$is))
+        {
+            $this->model = $this->filterRelations($request);
+            $collection = $this->nilde->index($this->model, $request);
+
+            return $this->response->paginator($collection, new $this->transformer())->morph();
+        }
+        else
+            $this->response->errorUnauthorized(trans('apinilde::auth.unauthorized'));
+
+    }*/
 
     public function index(Request $request)
     {

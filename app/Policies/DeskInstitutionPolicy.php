@@ -24,6 +24,12 @@ class DeskInstitutionPolicy extends BasePolicy
         return true;
     }
 
+     //ritorno true perchè tanto nella index filtro sempre
+     public function index(User $user, Model $model)
+     {
+         return true;
+     }
+
     public function show(User $user, Model $model)
     {
         //il manager dell'istituzione puo' vedere i suoi desk

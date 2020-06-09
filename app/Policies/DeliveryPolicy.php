@@ -19,6 +19,12 @@ class DeliveryPolicy extends BasePolicy
         //
     }
 
+    //ritorno true perchè tanto nella index filtro sempre x biblio
+    public function index(User $user, Model $model)
+    {
+        return true;
+    }
+
     public function create(User $user, Model $model)
     {
         return $this->canManage($user,$model);

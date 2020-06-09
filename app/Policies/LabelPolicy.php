@@ -24,6 +24,7 @@ class LabelPolicy extends BasePolicy
         return true;
     }
 
+    //ritorno true perchè tanto nella index filtro sempre x owner
     public function index(User $user, Model $model)
     {
         return true;
@@ -45,8 +46,8 @@ class LabelPolicy extends BasePolicy
         return $model->isOwner($user->id);
     }
 
-    public function viewAny(User $user, Model $model)
+    /*public function viewAny(User $user, Model $model)
     {
         return $this->index($user,$model);
-    }
+    }*/
 }
