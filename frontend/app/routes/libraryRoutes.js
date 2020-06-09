@@ -21,12 +21,14 @@ const routes = [
     path: '/borrowing', name: `Borrowing`, header: true, component: SubRouteSwitch, permissions: ['manage','borrow'], resource: {type: 'libraries', key: 'library_id',},
     children: [
       { path: '', exact: true, name: `MyLibrary`, component: ManageLibraryPage },
+      { path: '/archive', name: `BorrowingArchive`, component: ManageLibraryPage,url: '/borrowing/archive',sidebar: true  },
      ]
   },
   { /* TODO */
     path: '/lending', name: `Lending`, header: true, component: SubRouteSwitch, permissions: ['manage','lend'], resource: {type: 'libraries', key: 'library_id',},
     children: [
       { path: '', exact: true, name: `MyLibrary`, component: ManageLibraryPage },
+      { path: '/archive', name: `LendingArchive`, component: ManageLibraryPage,url: '/lending/archive',sidebar: true  },
      ]
   },
   { /* TODO */
@@ -34,6 +36,7 @@ const routes = [
     children: [
       { path: '', exact: true, name: `Delivery`, component: UsersListPage },
       { path: '/pickup', name: `Pickup`, component: UsersListPage,url: '/delivery/pickup',sidebar: true },
+      { path: '/archive', name: `DeliveryArchive`, component: ManageLibraryPage,url: '/delivery/archive',sidebar: true  },
      ]
   },
   {

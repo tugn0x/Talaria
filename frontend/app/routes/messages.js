@@ -128,6 +128,18 @@ export default defineMessages({
         id: `${scope}.Pickup`,
         defaultMessage: 'Pickup',
     },
+    BorrowingArchive: {
+        id: `${scope}.BorrowingArchive`,
+        defaultMessage: 'BorrowingArchive',
+    },
+    LendingArchive: {
+        id: `${scope}.LendingArchive`,
+        defaultMessage: 'LendingArchive',
+    },
+    DeliveryArchive: {
+        id: `${scope}.DeliveryArchive`,
+        defaultMessage: 'DeliveryArchive',
+    },
     LibraryServices: {
         id: `${scope}.LibraryServices`,
         defaultMessage: 'Servizi',
