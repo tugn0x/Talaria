@@ -16,7 +16,7 @@ class DeliveryTransformer extends BaseTransformer
 
     protected $defaultIncludes = [
         'granted_permissions',
-        //'deliveryable', ????
+        'deliveryable',
     ];
 
     public function includeGrantedPermissions(Model $model)
@@ -27,6 +27,12 @@ class DeliveryTransformer extends BaseTransformer
         });
         return $this->item($model, $transf);
     }
+
+    public function includeDeliveryable(Model $model)
+    {
+        return $this->item($model->deliveryable, new BaseLightTransformer());
+    }
+
 
 
     public function includeLibrary(Model $model)
