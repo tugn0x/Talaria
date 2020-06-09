@@ -60,6 +60,10 @@ export default defineMessages({
         id: `${scope}.LibraryUsers`,
         defaultMessage: 'Library users',
     },
+    LibraryDepartments: {
+        id: `${scope}.LibraryDepartments`,
+        defaultMessage: 'Library departments',
+    },
     LibraryUser: {
         id: `${scope}.LibraryUser`,
         defaultMessage: 'Library user',
@@ -107,5 +111,21 @@ export default defineMessages({
     ManageLibrary: {
         id: `${scope}.ManageLibrary`,
         defaultMessage: 'Manage library',
+    },
+    Borrowing: {
+        id: `${scope}.Borrowing`,
+        defaultMessage: 'Borrowing',
+    },
+    Lending: {
+        id: `${scope}.Lending`,
+        defaultMessage: 'Lending',
+    },
+    Delivery: {
+        id: `${scope}.Delivery`,
+        defaultMessage: 'Delivery',
+    },
+    Pickup: {
+        id: `${scope}.Pickup`,
+        defaultMessage: 'Pickup',
     },
 });
