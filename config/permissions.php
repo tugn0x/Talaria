@@ -13,14 +13,16 @@ return [
             'borrow',
             //Op. Lend
             'lend',
-            //Op. Consegna
-            'deliver',
             //Op. ILL Borr
             'ill-borrow',
             //Op. ILL Lend
             'ill-lend',
             //Op. Licenze
             'manage-licenses',
+        ],
+        'delivery' => [
+              //Op. Consegna
+              'deliver',
         ],
 //        \App\Models\Institutions\Institution::class => [
         'institutions' => [
