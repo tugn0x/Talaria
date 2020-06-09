@@ -16,7 +16,8 @@ trait OwnerTrait
     public function isOwner($user_id=null)
     {
         $user_id = $user_id ?: Auth::user()->id;
-        return (bool) ($this->$this->getOwnerFiled() == $user_id);
+        $of = $this->getOwnerFiled();
+        return (bool) ($this->$of == $user_id);
     }
 
     /*

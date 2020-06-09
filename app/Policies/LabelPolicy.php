@@ -18,8 +18,13 @@ class LabelPolicy extends BasePolicy
     {
         //
     }
-   
+
     public function create(User $user, Model $model)
+    {
+        return true;
+    }
+
+    public function index(User $user, Model $model)
     {
         return true;
     }
@@ -38,5 +43,10 @@ class LabelPolicy extends BasePolicy
     public function canManage(User $user, Model $model)
     {
         return $model->isOwner($user->id);
+    }
+
+    public function viewAny(User $user, Model $model)
+    {
+        return $this->index($user,$model);
     }
 }

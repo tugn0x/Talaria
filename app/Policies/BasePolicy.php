@@ -34,7 +34,7 @@ class BasePolicy
 
     public function viewAny(User $user, Model $model)
     {
-        return $this->check($user,$model,__FUNCTION__);
+        return $this->index($user,$model);
     }
 
     public function optionList(User $user, Model $model)
