@@ -11,7 +11,7 @@ const routes = [
     children: [
       { path: '/reference/new', icon: "plus", name: `ReferenceNew`, url: `/references/reference/new`, component: ReferencesPage, sidebar: true},
       { path: '/reference/:id?', name: `ReferenceUpdate`, component: ReferencesPage, },
-      { path: '/:page?', exact: true, name: `ReferenceList`, url: `/references/reference`, component: ReferencesListPage, },
+      { path: '/:page?', exact: true, name: `ReferenceList`, url: `/references`, component: ReferencesListPage,sidebar: true },
     ]
   },
 

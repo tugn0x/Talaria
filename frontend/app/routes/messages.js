@@ -12,13 +12,17 @@ export default defineMessages({
         id: `${scope}.Bibliography`,
         defaultMessage: 'My Bibliography',
     },
+    ReferenceList: {
+        id: `${scope}.ReferenceList`,
+        defaultMessage: 'Reference list',
+    },
     Reference: {
         id: `${scope}.Reference`,
         defaultMessage: 'My References',
     },
     ReferenceNew: {
         id: `${scope}.ReferenceNew`,
-        defaultMessage: 'Create new reference',
+        defaultMessage: 'Nuovo riferimento',
     },
     Searches: {
         id: `${scope}.Searches`,

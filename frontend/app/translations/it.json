@@ -235,6 +235,7 @@
 
   "app.routes.Bibliography": "Bibliografia",
   "app.routes.Reference": "Riferimenti",
+  "app.routes.ReferenceList": "Riferimenti",
   "app.routes.ReferenceNew": "Nuovo riferimento",
   "app.routes.Searches": "Ricerche",
   "app.routes.Requests": "Richieste",
