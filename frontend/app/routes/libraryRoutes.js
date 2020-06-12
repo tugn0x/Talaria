@@ -35,7 +35,7 @@ const routes = [
     path: '/delivery', name: `Delivery`, header: true, component: SubRouteSwitch, permissions: ['manage','deliver'], resource: {type: 'libraries', key: 'library_id',},
     children: [
       { path: '', exact: true, name: `Delivery`, component: UsersListPage },
-      { path: '/pickup', name: `Pickup`, component: UsersListPage,url: '/delivery/pickup', permissions: ['manage','borrow'],sidebar: true },
+      { path: '/pickup', name: `Pickup`, component: UsersListPage,url: '/delivery/pickup', permissions: ['manage'],sidebar: true },
       { path: '/archive', name: `DeliveryArchive`, component: ManageLibraryPage,url: '/delivery/archive',sidebar: true  },
      ]
   },
