@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 use App\Models\Country;
+use App\Models\Libraries\Delivery;
 use App\Models\Libraries\Library;
 use App\Models\References\Group;
 use App\Models\Requests\PatronDocdelRequest;
@@ -152,4 +153,10 @@ class User extends UserBase
     public function isPatronOf($libraryId) {
         return $this->hasRole('patron') && $this->active_libraries()->where('library_id', $libraryId)->exists();
     }
+
+     //I PdC gestiti dall'utente
+     public function deliveries()
+     {
+         return $this->belongsToMany('App\Models\Libraries\Delivery','delivery_user')->withTimestamps(); 
+     }
 }

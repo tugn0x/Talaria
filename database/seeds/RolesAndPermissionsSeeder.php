@@ -49,16 +49,14 @@ class RolesAndPermissionsSeeder extends Seeder
             'borrow',
             //Op. Lend
             'lend',
+            //Op. Consegna
+            'deliver',
             //Op. ILL Borr
             'ill-borrow',
             //Op. ILL Lend
             'ill-lend',
             //Op. Licenze
             'manage-licenses',
-        ],
-        \App\Models\Libraries\Delivery::class => [  
-                //Op. Consegna
-                'deliver',
         ],
       \App\Models\Institutions\Institution::class => [
             // Manager
