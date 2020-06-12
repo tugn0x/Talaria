@@ -11,7 +11,7 @@ const routes = [
   l'update è PUT /api/v1/libraries/{LIBRARY_ID!!}/library-users/{library_users_id}
    */
   {
-    path: '/manage', name: `MyLibrary`, header: true, component: SubRouteSwitch, permissions: ['manage','manage-users'], resource: {type: 'libraries', key: 'library_id',},
+    path: '/manage', name: `MyLibrary`, header: true, component: SubRouteSwitch, permissions: ['manage'], resource: {type: 'libraries', key: 'library_id',},
     children: [
       { path: '', exact: true, name: `MyLibrary`, component: ManageLibraryPage },
       { path: '/services', name: `LibraryServices`, component: ManageLibraryPage,url: '/manage/services',sidebar: true  },
@@ -35,7 +35,7 @@ const routes = [
     path: '/delivery', name: `Delivery`, header: true, component: SubRouteSwitch, permissions: ['manage','deliver'], resource: {type: 'libraries', key: 'library_id',},
     children: [
       { path: '', exact: true, name: `Delivery`, component: UsersListPage },
-      { path: '/pickup', name: `Pickup`, component: UsersListPage,url: '/delivery/pickup',sidebar: true },
+      { path: '/pickup', name: `Pickup`, component: UsersListPage,url: '/delivery/pickup', permissions: ['manage','borrow'],sidebar: true },
       { path: '/archive', name: `DeliveryArchive`, component: ManageLibraryPage,url: '/delivery/archive',sidebar: true  },
      ]
   },
@@ -46,7 +46,7 @@ const routes = [
       { path: '/patron/:id?',  name: `LibraryUser`, url:'/patrons/patron',  component: UserPage, },
       { path: '', exact: true, name: `LibraryUsers`, component: UsersListPage, },
     /* TODO */
-      { path: '/departmens',  name: `LibraryDepartments`, component: UsersListPage,url: '/patrons/departments',sidebar: true  },
+      { path: '/departmens',  name: `LibraryDepartments`, component: UsersListPage,url: '/patrons/departments',permissions: ['manage'],sidebar: true  },
     ]
   },
 ];
