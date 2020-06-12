@@ -2,6 +2,7 @@
 
 use App\Models\BaseLightTransformer;
 use App\Models\BaseTransformer;
+use App\Models\Users\UserLightTransformer;
 use Illuminate\Database\Eloquent\Model;
 
 class DeliveryTransformer extends BaseTransformer
@@ -12,6 +13,7 @@ class DeliveryTransformer extends BaseTransformer
     protected $availableIncludes = [
         'granted_permissions',
         'library',
+        'users',
     ];
 
     protected $defaultIncludes = [
@@ -31,6 +33,11 @@ class DeliveryTransformer extends BaseTransformer
     public function includeDeliveryable(Model $model)
     {
         return $this->item($model->deliveryable, new BaseLightTransformer());
+    }
+
+    public function includeUsers(Model $model)
+    {
+        return $this->collection($model->users, new UserLightTransformer());
     }
 
 
