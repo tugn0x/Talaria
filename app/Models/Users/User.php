@@ -154,7 +154,7 @@ class User extends UserBase
         return $this->hasRole('patron') && $this->active_libraries()->where('library_id', $libraryId)->exists();
     }
 
-     //I PdC gestiti dall'utente
+     //I PdC gestiti dall'utente (non filtrati per biblioteca)
      public function deliveries()
      {
          return $this->belongsToMany('App\Models\Libraries\Delivery','delivery_user')->withTimestamps(); 

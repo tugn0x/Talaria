@@ -7,6 +7,7 @@ use App\Models\BaseTransformer;
 use App\Models\Libraries\Delivery;
 use App\Models\Libraries\DeliveryTransformer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DeliveryController extends ApiController
 {
@@ -43,6 +44,21 @@ class DeliveryController extends ApiController
         $model = $this->nilde->show($this->model, $request, $id);
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
+    }
+
+     //i miei Delivery della biblioteca x cui sto operando
+    //NB: non mi serve definire la policy perchè tanto è filtrata x owner
+    public function my(Request $request)
+    {
+        $this->model = $this->filterRelations($request);
+        $count = $request->input('pageSize', config('api.page_size'));
+
+        $my_applications = $this->model
+        ->join('delivery_user', 'deliveries.id', '=', 'delivery_user.delivery_id')
+        ->where('delivery_user.user_id',Auth::user()->id)
+        ->select('deliveries.*')
+        ->paginate($count);
+        return $this->response->paginator($my_applications, new $this->transformer())->morph();
     }
 
     public function update(Request $request, $id)
