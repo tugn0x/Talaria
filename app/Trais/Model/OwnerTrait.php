@@ -5,7 +5,7 @@ trait OwnerTrait
 {
     protected $ownerField = 'created_by'; // ex user_id
 
-    public function getOwnerFiled() {
+    public function getOwnerField() {
         return $this->ownerField;
     }
     /*
@@ -16,7 +16,7 @@ trait OwnerTrait
     public function isOwner($user_id=null)
     {
         $user_id = $user_id ?: Auth::user()->id;
-        $of = $this->getOwnerFiled();
+        $of = $this->getOwnerField();
         return (bool) ($this->$of == $user_id);
     }
 
@@ -25,7 +25,7 @@ trait OwnerTrait
      */
     public function scopeOwned($query, $user_id=null)
     {
-        return $query->where($this->getOwnerFiled(), $user_id ?: Auth::user()->id);
+        return $query->where($this->getOwnerField(), $user_id ?: Auth::user()->id);
     }
 
     /*
@@ -33,7 +33,7 @@ trait OwnerTrait
      */
     public function scopeIndexPolicyDenies($query)
     {
-        if(\Schema::hasColumn($this->getTable(), $this->getOwnerFiled()))
+        if(\Schema::hasColumn($this->getTable(), $this->getOwnerField()))
             return $query->owned();
         /*
          * else return query with impossible condition

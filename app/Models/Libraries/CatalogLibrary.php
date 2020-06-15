@@ -21,7 +21,7 @@ class CatalogLibrary extends BaseModel
         'status',
     ];
 
-    /*public function getOwnerFiled()
+    /*public function getOwnerField()
     {
         return 'library_id';
     }*/

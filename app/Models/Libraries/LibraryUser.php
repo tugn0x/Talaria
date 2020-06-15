@@ -38,7 +38,7 @@ class LibraryUser extends BaseModel
         'status' => 0
     ];
 
-    public function getOwnerFiled()
+    public function getOwnerField()
     {
         return 'user_id';
     }

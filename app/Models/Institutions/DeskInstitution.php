@@ -22,7 +22,7 @@ class DeskInstitution extends BaseModel
     protected $attributes = [
     ];
 
-    public function getOwnerFiled()
+    public function getOwnerField()
     {
         return 'institution_id';
     }
