@@ -24,12 +24,12 @@ class DeskInstitutionTransformer extends BaseTransformer
 
     public function includeInstitution(Model $model)
     {
-        return $this->item($model->institution, new BaseLightTransformer());
+        return $this->item($model->institution, new BaseTransformer());
     }
 
     public function includeDesk(Model $model)
     {
-        return $this->item($model->desk, new BaseLightTransformer());
+        return $this->item($model->desk, new BaseTransformer());
     }
 
 
