@@ -139,7 +139,7 @@ trait ModelTrait
     public function owner()
     {
 //        return $this->belongsTo('App\Models\User\User', 'user_id');
-        return $this->belongsTo('App\Models\User\User', 'created_by');
+        return $this->belongsTo('App\Models\Users\User', 'created_by');
     }
 
 
