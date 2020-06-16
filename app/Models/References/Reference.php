@@ -33,14 +33,14 @@ class Reference extends BaseModel
         'status',
     ];
 
-    public function patronddrequest()
+    public function patronddrequests()
     {
-        return $this->hasOne(PatronDocdelRequest::class);
+        return $this->hasMany(PatronDocdelRequest::class,'reference_id');
     }
 
-    public function libraryddrequest()
+    public function libraryddrequests()
     {
-        return $this->hasMany(DocdelRequest::class);
+        return $this->hasMany(DocdelRequest::class,'reference_id');
     }
 
     public function labels()

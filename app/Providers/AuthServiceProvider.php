@@ -23,6 +23,7 @@ use App\Models\References\GroupReference;
 use App\Models\Libraries\Catalog;
 use App\Models\References\LabelReference;
 use App\Models\References\LabelReferenceTransformer;
+use App\Models\Requests\PatronDocdelRequest;
 use App\Policies\BasePolicy;
 use App\Policies\LibraryPolicy;
 use App\Policies\DeliveryPolicy;
@@ -35,6 +36,7 @@ use App\Policies\GroupPolicy;
 use App\Policies\GroupReferencePolicy;
 use App\Policies\LabelPolicy;
 use App\Policies\LabelReferencePolicy;
+use App\Policies\PatronDocdelRequestPolicy;
 use App\Policies\UserPolicy;
 use App\Policies\TagPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -58,6 +60,7 @@ class AuthServiceProvider extends ServiceProvider
         GroupReference::class => GroupReferencePolicy::class,
         Label::class => LabelPolicy::class,
         LabelReference::class => LabelReferencePolicy::class,
+        PatronDocdelRequest::class=>PatronDocdelRequestPolicy::class,
         DeskInstitution::class=>DeskInstitutionPolicy::class,
         Delivery::class => DeliveryPolicy::class,
         Library::class => LibraryPolicy::class,

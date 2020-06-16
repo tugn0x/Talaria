@@ -2,6 +2,7 @@
 
 namespace App\Models\Requests;
 use App\Models\BaseModel;
+use App\Models\Libraries\Delivery;
 use App\Models\Libraries\Library;
 use App\Models\References\Reference;
 use App\Models\Users\User;
@@ -35,9 +36,8 @@ class PatronDocdelRequest extends BaseModel
         'forlibrary_note', //note ute->bib
         'fromlibrary_note', //note bib->ute
         'archived', //rich archiviata o no
+        'delivery_id', //Punto di Consegna (scelto tra uno di quelli della Biblio)
         
-        // TODO definire prima il model Desk + DeliveryService + InstitutionDesk relation 
-        //delivery_service_id', //servizio di consegna della biblioteca
 
         // DA VALUTARE
         // filename  //lo mettiamo anche qui x file dato all'utente (se licenza lo consente)?
@@ -68,6 +68,16 @@ class PatronDocdelRequest extends BaseModel
     public function library()
     {
         return $this->belongsTo(Library::class,'borrowing_library_id');
+    }
+
+    public function delivery()
+    {
+        return $this->belongsTo(Delivery::class,'delivery_id');
+    }
+
+    public function scopeInReference($query, $reference_id)
+    {
+        return $query->where('reference_id', $reference_id);
     }
 
 }
