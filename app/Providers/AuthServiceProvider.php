@@ -19,7 +19,10 @@ use App\Models\References\Reference;
 use App\Models\Users\User;
 use App\Models\References\Label;
 use App\Models\References\Group;
+use App\Models\References\GroupReference;
 use App\Models\Libraries\Catalog;
+use App\Models\References\LabelReference;
+use App\Models\References\LabelReferenceTransformer;
 use App\Policies\BasePolicy;
 use App\Policies\LibraryPolicy;
 use App\Policies\DeliveryPolicy;
@@ -29,7 +32,9 @@ use App\Policies\CatalogLibraryPolicy;
 use App\Policies\ListBasePolicy;
 use App\Policies\ReferencesPolicy;
 use App\Policies\GroupPolicy;
+use App\Policies\GroupReferencePolicy;
 use App\Policies\LabelPolicy;
+use App\Policies\LabelReferencePolicy;
 use App\Policies\UserPolicy;
 use App\Policies\TagPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -50,7 +55,9 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         Desk::class => ListBasePolicy::class,
         Group::class => GroupPolicy::class,
+        GroupReference::class => GroupReferencePolicy::class,
         Label::class => LabelPolicy::class,
+        LabelReference::class => LabelReferencePolicy::class,
         DeskInstitution::class=>DeskInstitutionPolicy::class,
         Delivery::class => DeliveryPolicy::class,
         Library::class => LibraryPolicy::class,

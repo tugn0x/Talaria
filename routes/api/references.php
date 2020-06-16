@@ -32,6 +32,19 @@ Route::group([
         Route::post('labels', 'LabelController@store')->name('create');
     });
 
+    /*
+     * REFERENCE LABELS
+     */
+    Route::group([
+        'as' => 'api.v1.references.reference-labels.',
+    ], function () {
+        Route::post('{reference}/reference-labels', 'LabelReferenceController@store')->name('store');
+        Route::get('{reference}/reference-labels', 'LabelReferenceController@index')->name('index');
+        Route::put('{reference}/reference-labels/{label_reference}', 'LabelReferenceController@update')->name('update');
+        Route::get('{reference}/reference-labels/{label_reference}', 'LabelReferenceController@show')->name('show');
+        Route::delete('{reference}/reference-labels/{label_reference}', 'LabelReferenceController@delete')->name('delete'); //hard delete
+    });
+
     /* GROUPS */
     Route::group([
         'as' => 'api.v1.references.groups.',
@@ -42,6 +55,20 @@ Route::group([
         Route::put('groups/{id}', 'GroupController@update')->name('update');
         Route::post('groups', 'GroupController@store')->name('create');
     });
+
+    /*
+     * REFERENCE GROUPS
+     */
+    Route::group([
+        'as' => 'api.v1.references.reference-groups.',
+    ], function () {
+        Route::post('{reference}/reference-groups', 'GroupReferenceController@store')->name('store');
+        Route::get('{reference}/reference-groups', 'GroupReferenceController@index')->name('index');
+        Route::put('{reference}/reference-groups/{group_reference}', 'GroupReferenceController@update')->name('update');
+        Route::get('{reference}/reference-groups/{group_reference}', 'GroupReferenceController@show')->name('show');
+        Route::delete('{reference}/reference-groups/{group_reference}', 'GroupReferenceController@delete')->name('delete'); //hard delete
+    });
+
     
     
 
