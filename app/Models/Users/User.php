@@ -15,6 +15,8 @@ use App\Models\Country;
 use App\Models\Libraries\Delivery;
 use App\Models\Libraries\Library;
 use App\Models\References\Group;
+use App\Models\References\Label;
+use App\Models\References\Reference;
 use App\Models\Requests\PatronDocdelRequest;
 
 class User extends UserBase
@@ -88,17 +90,22 @@ class User extends UserBase
 
     public function labels()
     {
-        return $this->hasMany(Label::class);
+        return $this->hasMany(Label::class,'created_by');
     }
 
     public function groups()
     {
-        return $this->hasMany(Group::class);
+        return $this->hasMany(Group::class,'created_by');
+    }
+
+    public function references()
+    {
+        return $this->hasMany(Reference::class,'created_by');
     }
 
     public function patronddrequests()
     {
-        return $this->hasMany(PatronDocdelRequest::class);
+        return $this->hasMany(PatronDocdelRequest::class,'created_by');
     }
 
     public function oauth_social_providers()

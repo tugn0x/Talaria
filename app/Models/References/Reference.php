@@ -52,4 +52,9 @@ class Reference extends BaseModel
     {
         return $this->belongsToMany(Group::class);
     }
+
+    public function user()
+    {
+        return $this->owner();
+    }
 }
