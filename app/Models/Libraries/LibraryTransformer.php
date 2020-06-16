@@ -25,6 +25,9 @@ class LibraryTransformer extends BaseTransformer
 
     protected $defaultIncludes = [
         'granted_permissions',
+        'institution',
+        'country',
+        'subject',
     ];
 
     public function includeGrantedPermissions(Model $model)
