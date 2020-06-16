@@ -32,6 +32,9 @@ class InstitutionTypeObserver extends BaseObserver
 
     public function deleting($model)
     {
+        //non posso eliminare un tipo associato a istituzioni
+        if($model->institutions->count()>0) return false;
+
         return parent::deleting($model);
     }
 
