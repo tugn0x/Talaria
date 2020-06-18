@@ -16,6 +16,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+/*
+NOTA x ALE: 
+nei controller posso chiamare $this->authorize($model)
+che non fa altro che chiamare la AuthorizesRequests::authorize($ability, $arguments)
+dove se $ability non è una stringa (ma un model ad es.), allora va a prendere il nome della funzione chiamata nel controller!
+(es: se dalla route chiamo index del controlle dove vado a eseguire $this->authorize($this->model), in pratica
+viene chimato app(Gate::class)->authorize("index", $this->model) ... che chiamaerà la policy ...
+
+Quindi in pratica se da controller@index chiamo authorize($model) in pratica sto chiamando authorize("index",$model)
+*/     
+
 trait ApiControllerTrait
 {
     use AuthorizesRequests,
