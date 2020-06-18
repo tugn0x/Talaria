@@ -8,9 +8,25 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.routes';
 
 export default defineMessages({
+    Stats: {
+        id: `${scope}.Stats`,
+        defaultMessage: 'Stats',
+    },
+    Licenses: {
+        id: `${scope}.Licenses`,
+        defaultMessage: 'Licenses',
+    },
     Bibliography: {
         id: `${scope}.Bibliography`,
         defaultMessage: 'My Bibliography',
+    },
+    Labels: {
+        id: `${scope}.Labels`,
+        defaultMessage: 'Labels',
+    },
+    Categories: {
+        id: `${scope}.Categories`,
+        defaultMessage: 'Categories',
     },
     ReferenceList: {
         id: `${scope}.ReferenceList`,
@@ -31,6 +47,10 @@ export default defineMessages({
     Requests: {
         id: `${scope}.Requests`,
         defaultMessage: 'My Requests',
+    },
+    Archive: {
+        id: `${scope}.Archive`,
+        defaultMessage: 'Archive',
     },
     Libraries: {
         id: `${scope}.Libraries`,

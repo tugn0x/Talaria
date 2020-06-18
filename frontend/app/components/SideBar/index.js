@@ -20,12 +20,19 @@ function SideBar(props) {
 
   const current = props.routes.filter((route)=>route.current)
   const routes = current.length ? current[0].children : [];
-
+  
+ /*NB: per le route con sidebar: true, posso definire anche order: che mi da la posizione nel menu laterale*/
   return routes && routes.length > 0 ? (
     <div className="sidebar">
       <div className="scrollbar-container sidebar-nav ps ps-container">
         <nav>
-          {routes.filter(item => item.sidebar).map((route) => (
+          {routes.filter(item => item.sidebar)
+          .sort(function (a, b) {
+            if(a.order && b.order)
+              return a.order - b.order;
+            return 0;  
+          })
+          .map((route) => (
             <NavLink
               className="nav-link btn"
               key={route.name}
