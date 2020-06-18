@@ -19,7 +19,7 @@ const routes = [
   },
 
 //  { path: '/searches', name: `Searches`, component: ChangePassword, header: true, },
-  { path: '/requests', name: `Requests`, component: SubRouteSwitch, header: true, permissions: ['can-request'], 
+  { path: '/requests', name: `Requests`, component: SubRouteSwitch, header: true, permissions: ['patron'], 
     children: [
       { path: '/archive', exact:true, name: `Archive`, component: Fake,url: `/requests/archive`, sidebar: true, order: 2},
       { path: '/:page?', name: `Requests`, component: Fake,url: `/requests`, sidebar: true, order: 1},
