@@ -4,7 +4,8 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const dotenv = require('dotenv').config({path: __dirname + '/../.env'}).parsed;
+//const dotenv = require('dotenv').config({path: __dirname + '/../.env'}).parsed;
+const dotenv = require('dotenv').config({path: __dirname + '/../../../.env'}).parsed;
 const environment = {
   ...process.env,
   ...dotenv
