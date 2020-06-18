@@ -277,6 +277,9 @@ ul.list-inline {
     &.projects {
         @include projects_icon
     }
+    &.patron {
+        @include patron_icon
+    }
 }
 
 /* .switch-success .switch-input:checked+.switch-slider {
