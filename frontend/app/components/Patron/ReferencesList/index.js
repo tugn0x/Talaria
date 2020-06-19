@@ -9,6 +9,7 @@ import {useIntl} from 'react-intl';
 import ButtonPlus from 'components/Button/ButtonPlus'
 import { generatePath } from "react-router";
 import ReferencesPage from 'containers/Patron/ReferencesPage'
+import { NavLink } from 'react-router-dom';
 
 
 const ReferencesList = (props) => {
@@ -32,7 +33,7 @@ const ReferencesList = (props) => {
     return (
         <>
             <h3 className="table-title"><FormattedMessage {...messages.header} /></h3>
-            <ButtonPlus 
+            <ButtonPlus
                 onClickHandle={toggle}
                 text={intl.formatMessage(messages.createNewReference)}
             />
@@ -59,9 +60,9 @@ const ReferencesList = (props) => {
                         referencesList.map(reference => (
                             <Row key={`reference-${reference.id}`}>
                                 <Col xs={4}>
-                                    <a href={`${editurl(reference.id)}`}>
+                                    <NavLink to={`${editurl(reference.id)}`} key={reference.id}>
                                         {reference.pub_title}
-                                    </a>
+                                    </NavLink>
                                 </Col>
                                 <Col xs={3}>
                                     <span>
@@ -74,7 +75,7 @@ const ReferencesList = (props) => {
                                     </span>
                                 </Col>
                                 <Col xs={2} className="edit-icons" >
-                                    <a href={`${editurl(reference.id)}`} className="btn btn-link">
+                                    <NavLink to={`${editurl(reference.id)}`} key={reference.id} className="btn btn-link">
                                         <i className="fa fa-edit"></i>
                                     </a>
                                     <a href="#" onClick={() => console.log('delete reference')} className="btn btn-link">
@@ -89,21 +90,21 @@ const ReferencesList = (props) => {
                         </h5>
                     }
                 </div>
-            </div> 
-            <CustomModal 
-                modal={modal} 
+            </div>
+            <CustomModal
+                modal={modal}
                 toggle={toggle}>
-                <ReferencesPage 
+                <ReferencesPage
                     match={match} />
             </CustomModal>
-            {Object.keys(pagination).length && 
+            {Object.keys(pagination).length &&
                 <Pagination
                     current_page={current_page}
                     total_pages={total_pages}
                     setPage={(page) => linkTo(generatePath(`${match.path}`, {
                         page: page
                     }))}
-                />   
+                />
             }
         </>
     )

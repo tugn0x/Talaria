@@ -8,6 +8,7 @@ import CustomModal from 'components/Modal/Loadable'
 import {Pagination, InputSearch} from 'components';
 import { generatePath } from "react-router";
 import ProjectPage from 'containers/Admin/ProjectPage'
+import { NavLink } from 'react-router-dom';
 
 function ProjectsList(props) {
     console.log('ProjectsList', props)
@@ -25,12 +26,12 @@ function ProjectsList(props) {
         return generatePath(`${editPath}`, {
             id: id,
         });
-    }    
+    }
 
     return (
         <>
             <h3 className="table-title">{intl.formatMessage(messages.header)}</h3>
-            <ButtonPlus 
+            <ButtonPlus
                 onClickHandle={toggle}
                 text={intl.formatMessage(messages.createNewProject)}
             />
@@ -60,9 +61,9 @@ function ProjectsList(props) {
                     {projectsList.length > 0 && projectsList.map(project => (
                         <Row key={`project-${project.id}`}>
                             <Col xs={3}>
-                                <a href={`${editurl(project.id)}`}>
+                                <NavLink to={`${editurl(project.id)}`} key={project.id}>
                                     {project.name}
-                                </a>
+                                </NavLink>
                             </Col>
                             <Col xs={2}>
                                 <span>
@@ -78,9 +79,9 @@ function ProjectsList(props) {
                             <div className={`status-point ${project.active === 0 ? 'disabled' : 'success' }`}></div>
                             </Col>
                             <Col xs={3} className="edit-icons" >
-                                <a href={`${editurl(project.id)}`} className="btn btn-link">
+                                <NavLink to={`${editurl(project.id)}`} key={project.id} className="btn btn-link">
                                     <i className="fa fa-edit"></i>
-                                </a>
+                                </NavLink>
                                 <a href="#" onClick={() => console.log('delete project')} className="btn btn-link">
                                     <i className="fa fa-trash"></i>
                                 </a>
@@ -89,14 +90,14 @@ function ProjectsList(props) {
                       ))
                     }
                 </div>
-            </div> 
-            <CustomModal 
-                modal={modal} 
+            </div>
+            <CustomModal
+                modal={modal}
                 toggle={toggle}>
-                <ProjectPage 
+                <ProjectPage
                     match={match}
                 />
-            </CustomModal>  
+            </CustomModal>
             {Object.keys(pagination).length > 0 &&
                 <Pagination
                     current_page={current_page}
@@ -107,7 +108,7 @@ function ProjectsList(props) {
                         page: page
                       }))}
                 />
-            } 
+            }
 
           </>
     )

@@ -12,14 +12,16 @@ import {
   TransitionGroup,
 } from 'react-transition-group';
 import subStringer from 'utils/subStringer'
+import { NavLink } from 'react-router-dom';
+
 
 function SimpleList(props) {
     console.log('SimpleList', props)
     const {data, columns, history,
           match, editPath, messages,
-          pagination, searchOptions, 
+          pagination, searchOptions,
           loading, modalComponent, title, subtitle,deleteCallback} = props
-    
+
     const {total_pages, current_page} = pagination
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
@@ -34,7 +36,7 @@ function SimpleList(props) {
     //passandogli un oggetto che specifica i params
     //li estrae (tramite chiave) dall'item passato
     //ritorna l'oggetto con i params richiesti valorizzati dai valori dell'item
-    //se non viene passato un oggetto (quindi non vengono specificati parametri), 
+    //se non viene passato un oggetto (quindi non vengono specificati parametri),
     //estrae dall'item solo l'id
     const filterItemFieldByObjectParams = (obj,item) => {
       if(!item){
@@ -43,7 +45,7 @@ function SimpleList(props) {
       let ParamsObj = {}
       if(typeof obj === 'object'){
         obj.params &&
-        Array.isArray(obj.params) ? 
+        Array.isArray(obj.params) ?
         obj.params.map((param,i) =>  {
           ParamsObj = {...ParamsObj, [param]: item[param]}
         }) : console.warn('obj with params must be an array')
@@ -52,13 +54,13 @@ function SimpleList(props) {
       }
 
       return ParamsObj;
-      
+
 
     }
 
 
     // editurl genera l url per il bottone edit (si possono passare piu parametri)
-    // usando la Prop editPath. 
+    // usando la Prop editPath.
     // editPath puo essere una stringa (passi solo l url e il parametro sara' solo l id)
     // editPath puo' essere un oggetto, dove passi url e parametri
     //NB: al momento i param possono essere letti da item solo se sono presenti come colonne!
@@ -72,25 +74,25 @@ function SimpleList(props) {
         return generatePath(url, ParamsObj)
       }
       return
-    } 
+    }
 
     //sulla falsariga dell'editPath :)
     //NB: se cb è una normale funzione allora la chiamo pasando item.id
     //altrimenti se è un oggetto deve essere della forma {callback: funz, params: [array di param name]}
-    //e in questo caso chiamero' funz passandogli un oggetto con i valori presi dai campi (indicati nell'array) dellitem 
+    //e in questo caso chiamero' funz passandogli un oggetto con i valori presi dai campi (indicati nell'array) dellitem
     const getDeleteParamsAndCall = (cb, item) => {
       let ParamsObj={}
      ParamsObj=filterItemFieldByObjectParams(cb,item);
      if(ParamsObj)
      {
         if(cb.callback)
-          cb.callback(ParamsObj);  
-        else cb(ParamsObj);  
+          cb.callback(ParamsObj);
+        else cb(ParamsObj);
      }
      return
     }
 
-    
+
     const linkTo = (path) => {
       history.push(path)
     };
@@ -108,7 +110,7 @@ function SimpleList(props) {
       switch (pref)
       {
         case 0: return 'notpreferred'; break;
-        case 1: return 'preferred'; break; 
+        case 1: return 'preferred'; break;
         default: return 'notpreferred'; break;
       }
       return pref;
@@ -118,21 +120,21 @@ function SimpleList(props) {
       switch (chk)
       {
         case 1: return 'check'; break;
-        case 0: return 'ban'; break; 
+        case 0: return 'ban'; break;
       }
       return chk;
     }
-    
+
     return (
         <>
             {title && <h4 className="table-title">{title}</h4> }
             {subtitle && <h5 className="table-subtitle">{subtitle}</h5> }
             <Row className="align-items-center">
-              {searchOptions && 
+              {searchOptions &&
                 <Col md={8}>
-                  <InputSearch 
+                  <InputSearch
                     submitCallBack={(query) => searchOptions.getSearchList(query)}
-                    searchOnChange={searchOptions.searchOnChange ? searchOptions.searchOnChange : false} 
+                    searchOnChange={searchOptions.searchOnChange ? searchOptions.searchOnChange : false}
                   />
                 </Col>
               }
@@ -182,12 +184,12 @@ function SimpleList(props) {
                                           field.type === 'preferred' &&
                                             <i className={`fa fa-star preferred-star ${preferredStarClass(item[field.name])} }`}></i>
                                           ||
-                                          field.tooltipField && 
-                                            <a href="#" data-toggle="tooltip" title={`${item[field.tooltipField]}`}> 
+                                          field.tooltipField &&
+                                            <a href="#" data-toggle="tooltip" title={`${item[field.tooltipField]}`}>
                                               {subStringer(item[field.name], 30)}
                                             </a>
-                                          || 
-                                          !field.tooltipField &&   
+                                          ||
+                                          !field.tooltipField &&
                                           subStringer(item[field.name], 30)
                                         }
                                       </span>
@@ -195,9 +197,9 @@ function SimpleList(props) {
                                 )
                               }
                             <Col xs={2} className="edit-icons" >
-                              <a href={`${editurl(item)}`} className="btn btn-link">
+                              <NavLink to={`${editurl(item)}`} key={item} className="btn btn-link">
                                 <i className="fa fa-edit"></i>
-                              </a>
+                              </NavLink>
 
                               {deleteCallback && <a href="#" onClick={() => getDeleteParamsAndCall(deleteCallback,item)} className="btn btn-link">
                                 <i className="fa fa-trash"></i>
@@ -216,7 +218,7 @@ function SimpleList(props) {
                             page: page
                           }))}
                       />
-                  } 
+                  }
               {/* </Loader>  */}
             </div>
             {modalComponent &&
@@ -224,7 +226,7 @@ function SimpleList(props) {
                   modal={modal}
                   toggle={toggle}>
                   {modalComponent}
-              </CustomModal>  
+              </CustomModal>
             }
           </>
     )

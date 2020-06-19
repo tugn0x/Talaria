@@ -24,7 +24,7 @@ import {
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { withGoogleReCaptcha } from "react-google-recaptcha-v3"
-import { Link as RouterLink, withRouter } from "react-router-dom";
+import { Link as RouterLink, withRouter, NavLink } from "react-router-dom";
 // import GarrImg from '../../../images/idem.svg'
 import {SocialAuth} from "../..";
 import './style.scss'
@@ -111,9 +111,9 @@ import './style.scss'
                           </Button>
                         </Col>
                         <Col xs="12">
-                            <a href='/forgot-password' className="px-0 text-grey">
+                            <NavLink to='/forgot-password' key='/forgot-password' className="px-0 text-grey">
                               <FormattedMessage {...messages.forgot} />
-                            </a>
+                            </NavLink>
                         </Col>
                       </Row>
                     </Form>
