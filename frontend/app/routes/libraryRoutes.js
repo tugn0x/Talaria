@@ -15,14 +15,14 @@ const routes = [
   {
     path: '/manage', name: `MyLibrary`, header: true, component: SubRouteSwitch, permissions: ['manage'], resource: {type: 'libraries', key: 'library_id',},
     children: [
-      { path: '', exact: true, name: `Profile`, component: ManageLibraryPage,permissions: ['manage'], sidebar: true, order:1},
+      { path: '', exact: true, name: `Profile`, component: ManageLibraryPage,url: '/manage',permissions: ['manage'], sidebar: true, order:1},
       // vari pezzi dei dati della biblio (dati servizio, dati anag, ...)
-      { path: '/service', name: `Service`, component: Fake,url: '/manage/service',permissions: ['manage'],sidebar: true, order:2  },
+      { path: '/service',exact: true, name: `Service`, component: Fake,url: '/manage/service',permissions: ['manage'],sidebar: true, order:2  },
       { path: '/linkingservices', name: `LinkingServices`, component: Fake,url: '/manage/linkingservices',permissions: ['manage'],sidebar: true, order:2  },
       { path: '/labels', exact: true, name: `Labels`, url: '/manage/labels', component: Fake,permissions: ['manage','borrow','lend','deliver'],sidebar: true, order:3 },
       { path: '/operators', name: `Operators`, component: Fake,url: '/manage/catalogs', permissions: ['manage'],sidebar: true, order:5 },
-      { path: '/departments',  name: `Departments`, component: Fake,url: '/patrons/departments',permissions: ['manage','manage-users'],sidebar: true, order:4  },
-      { path: '/pickup', name: `Pickup`, component: Fake,url: '/delivery/pickup', permissions: ['manage'],sidebar: true, order:5 },
+      { path: '/departments',  name: `Departments`, component: Fake,url: '/manage/departments',permissions: ['manage','manage-users'],sidebar: true, order:4  },
+      { path: '/pickup', name: `Pickup`, component: Fake,url: '/manage/pickup', permissions: ['manage'],sidebar: true, order:5 },
       { path: '/catalogs', name: `Catalogs`, component: Fake,url: '/manage/catalogs', permissions: ['manage'],sidebar: true, order:5 },
       { path: '/protocols', name: `Protocols`, component: Fake,url: '/manage/protocols', permissions: ['manage'],sidebar: true, order:5 },
       
