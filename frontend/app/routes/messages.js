@@ -48,10 +48,6 @@ export default defineMessages({
         id: `${scope}.Requests`,
         defaultMessage: 'My Requests',
     },
-    Archive: {
-        id: `${scope}.Archive`,
-        defaultMessage: 'Archive',
-    },
     Libraries: {
         id: `${scope}.Libraries`,
         defaultMessage: 'Libraries',
@@ -84,9 +80,9 @@ export default defineMessages({
         id: `${scope}.LibraryUsers`,
         defaultMessage: 'Library users',
     },
-    LibraryDepartments: {
-        id: `${scope}.LibraryDepartments`,
-        defaultMessage: 'Library departments',
+    Departments: {
+        id: `${scope}.Departments`,
+        defaultMessage: 'Departments',
     },
     LibraryUser: {
         id: `${scope}.LibraryUser`,
@@ -132,13 +128,17 @@ export default defineMessages({
         id: `${scope}.MyProject`,
         defaultMessage: 'My Project',
     },
-    ManageLibrary: {
-        id: `${scope}.ManageLibrary`,
-        defaultMessage: 'Manage library',
-    },
     Borrowing: {
         id: `${scope}.Borrowing`,
         defaultMessage: 'Borrowing',
+    },
+    Profile: {
+        id: `${scope}.Profile`,
+        defaultMessage: 'Profile',
+    },
+    Service: {
+        id: `${scope}.Service`,
+        defaultMessage: 'Service',
     },
     Lending: {
         id: `${scope}.Lending`,
@@ -152,20 +152,29 @@ export default defineMessages({
         id: `${scope}.Pickup`,
         defaultMessage: 'Pickup',
     },
-    BorrowingArchive: {
-        id: `${scope}.BorrowingArchive`,
-        defaultMessage: 'BorrowingArchive',
+    Operators: {
+        id: `${scope}.Operators`,
+        defaultMessage: 'Operators',
     },
-    LendingArchive: {
-        id: `${scope}.LendingArchive`,
-        defaultMessage: 'LendingArchive',
+    Protocols: {
+        id: `${scope}.Protocols`,
+        defaultMessage: 'Protocols',
     },
-    DeliveryArchive: {
-        id: `${scope}.DeliveryArchive`,
-        defaultMessage: 'DeliveryArchive',
+    Catalogs: {
+        id: `${scope}.Catalogs`,
+        defaultMessage: 'Catalogs',
     },
-    LibraryServices: {
-        id: `${scope}.LibraryServices`,
-        defaultMessage: 'Servizi',
+    PendingRequests: {
+        id: `${scope}.PendingRequestss`,
+        defaultMessage: 'Pending requests',
+    },
+    
+    ArchivedRequests: {
+        id: `${scope}.ArchivedRequestss`,
+        defaultMessage: 'Archive',
+    },
+    LinkingServices: {
+        id: `${scope}.LinkingServices`,
+        defaultMessage: 'Servizi di Linking',
     },
 });

@@ -15,32 +15,40 @@ const routes = [
   {
     path: '/manage', name: `MyLibrary`, header: true, component: SubRouteSwitch, permissions: ['manage'], resource: {type: 'libraries', key: 'library_id',},
     children: [
-      { path: '', exact: true, name: `MyLibrary`, component: ManageLibraryPage, sidebar: true, order:1},
-      { path: '/services', name: `LibraryServices`, component: Fake,url: '/manage/services',sidebar: true, order:2  },
+      { path: '', exact: true, name: `Profile`, component: ManageLibraryPage,permissions: ['manage'], sidebar: true, order:1},
+      // vari pezzi dei dati della biblio (dati servizio, dati anag, ...)
+      { path: '/service', name: `Service`, component: Fake,url: '/manage/service',permissions: ['manage'],sidebar: true, order:2  },
+      { path: '/linkingservices', name: `LinkingServices`, component: Fake,url: '/manage/linkingservices',permissions: ['manage'],sidebar: true, order:2  },
+      { path: '/labels', exact: true, name: `Labels`, url: '/manage/labels', component: Fake,permissions: ['manage','borrow','lend','deliver'],sidebar: true, order:3 },
+      { path: '/operators', name: `Operators`, component: Fake,url: '/manage/catalogs', permissions: ['manage'],sidebar: true, order:5 },
+      { path: '/departments',  name: `Departments`, component: Fake,url: '/patrons/departments',permissions: ['manage','manage-users'],sidebar: true, order:4  },
+      { path: '/pickup', name: `Pickup`, component: Fake,url: '/delivery/pickup', permissions: ['manage'],sidebar: true, order:5 },
+      { path: '/catalogs', name: `Catalogs`, component: Fake,url: '/manage/catalogs', permissions: ['manage'],sidebar: true, order:5 },
+      { path: '/protocols', name: `Protocols`, component: Fake,url: '/manage/protocols', permissions: ['manage'],sidebar: true, order:5 },
+      
      ]
   },
-  { /* TODO */
+  { 
     path: '/borrowing', name: `Borrowing`, header: true, component: SubRouteSwitch, permissions: ['manage','borrow'], resource: {type: 'libraries', key: 'library_id',},
     children: [
-      { path: '', exact: true, name: `Borrowing`, component: Fake,sidebar: true, order:1 },
-      { path: '/archive', name: `BorrowingArchive`, component: Fake,url: '/borrowing/archive',sidebar: true, order:2  },
-      { path: '/labels', exact: true, name: `Labels`, url: '/borrowing/labels', component: Fake,sidebar: true, order:3 },
+      { path: '', exact: true, name: `PendingRequests`, component: Fake,sidebar: true, order:1 },
+      { path: '/archive', name: `ArchivedRequests`, component: Fake,url: '/borrowing/archive',sidebar: true, order:2  },
+      
      ]
   },
-  { /* TODO */
+  { 
     path: '/lending', name: `Lending`, header: true, component: SubRouteSwitch, permissions: ['manage','lend'], resource: {type: 'libraries', key: 'library_id',},
     children: [
-      { path: '', exact: true, name: `Lending`, component: Fake,sidebar: true, order:1 },
-      { path: '/archive', name: `LendingArchive`, component: Fake,url: '/lending/archive',sidebar: true, order:2  },
-      { path: '/labels', exact: true, name: `Labels`, url: '/lending/labels', component: Fake,sidebar: true, order:3 },
+      { path: '', exact: true, name: `PendingRequests`, component: Fake,sidebar: true, order:1 },
+      { path: '/archive', name: `ArchivedRequests`, component: Fake,url: '/lending/archive',sidebar: true, order:2  },
+      
      ]
   },
-  { /* TODO */
+  {
     path: '/delivery', name: `Delivery`, header: true, component: SubRouteSwitch, permissions: ['manage','deliver'], resource: {type: 'libraries', key: 'library_id',},
     children: [
-      { path: '', exact: true, name: `Delivery`, component: Fake,sidebar: true, order:1 },
-      { path: '/archive', name: `DeliveryArchive`, component: Fake,url: '/delivery/archive',sidebar: true, order:2  },
-      { path: '/pickup', name: `Pickup`, component: Fake,url: '/delivery/pickup', permissions: ['manage'],sidebar: true, order:3 },
+      { path: '', exact: true, name: `PendingRequests`, component: Fake,sidebar: true, order:1 },
+      { path: '/archive', name: `ArchivedRequests`, component: Fake,url: '/delivery/archive',sidebar: true, order:2  },
      ]
   },
   {
@@ -49,8 +57,6 @@ const routes = [
      /*  { path: '/patron/new', icon: "plus", name: `LibraryUserNew`, url: `/patron/user/new`, component: ReferencesPage, sidebar: true}, */
       { path: '/patron/:id?',  name: `LibraryUser`, url:'/patrons/patron',  component: UserPage},
       { path: '', exact: true, name: `LibraryUsers`, component: UsersListPage, sidebar: true, order:1},
-      /* TODO */
-      { path: '/departmens',  name: `LibraryDepartments`, component: Fake,url: '/patrons/departments',permissions: ['manage','manage-users'],sidebar: true, order:2  },
     ]
   },
   {
