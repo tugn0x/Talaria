@@ -72,6 +72,8 @@ Route::group([
     
     
 
+    //NOTA: ho previsto un filtro per labelId e groupId
+    //my?labelId=xxx&groupId=xxx
     Route::get('my', 'ReferenceController@my')->name('my');
     Route::get('option-items', 'ReferenceController@optionList')->name('option-items');
     

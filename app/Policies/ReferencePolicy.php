@@ -7,7 +7,7 @@ use App\Models\Users\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Database\Eloquent\Model;
 
-class ReferencesPolicy extends BasePolicy
+class ReferencePolicy extends BasePolicy
 {
     /**
      * Create a new policy instance.
@@ -18,6 +18,12 @@ class ReferencesPolicy extends BasePolicy
     {
         //
     }
+
+    public function index(User $user, Model $model)
+    {
+        return true;
+    }
+
     public function my(User $user, Model $model)
     {
         return true;

@@ -31,6 +31,7 @@ class Reference extends BaseModel
         'sid',
         'pmid',
         'status',
+        'note'
     ];
 
     public function patronddrequests()
@@ -56,5 +57,17 @@ class Reference extends BaseModel
     public function user()
     {
         return $this->owner();
+    }
+
+    public function scopeByLabel($query, $labelId){
+        return $query->whereHas('labels', function($q) use ($labelId){
+            $q->where('labels.id', $labelId);
+        });
+    }
+
+    public function scopeByGroup($query, $groupId){
+        return $query->whereHas('groups', function($q) use ($groupId){
+            $q->where('groups.id', $groupId);
+        });
     }
 }

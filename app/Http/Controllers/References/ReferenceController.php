@@ -18,26 +18,21 @@ class ReferenceController extends ApiController
         $this->broadcast = false;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
-        $items = $this->model->get();
-        return response()->json($items);
-        return $this->response->collection($items, $this->transformer)->morph();
-    }
-
     public function my(Request $request)
     {
-        $this->authorize($this->model);
-        $count = $request->input('pageSize', config('api.page_size'));
-        $my_applications = $this->model->owned()->orderBy('updated_at','desc')->paginate($count);
+        $model=$this->model->owned();
+        if($request->input("labelId"))
+            $model=$model->byLabel($request->input("labelId"));
+        
+        if($request->input("groupId"))
+            $model=$model->byGroup($request->input("groupId"));
+        
+        $collection = $this->nilde->index($model, $request);
 
-        return $this->response->paginator($my_applications, new $this->transformer())->morph();
+        return $this->response->paginator($collection, new $this->transformer())->morph();
     }
+
+
 
     public function store(Request $request)
     {

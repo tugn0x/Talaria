@@ -31,7 +31,7 @@ use App\Policies\LibraryUserPolicy;
 use App\Policies\DeskInstitutionPolicy;
 use App\Policies\CatalogLibraryPolicy;
 use App\Policies\ListBasePolicy;
-use App\Policies\ReferencesPolicy;
+use App\Policies\ReferencePolicy;
 use App\Policies\GroupPolicy;
 use App\Policies\GroupReferencePolicy;
 use App\Policies\LabelPolicy;
@@ -66,7 +66,7 @@ class AuthServiceProvider extends ServiceProvider
         Library::class => LibraryPolicy::class,
         LibraryUser::class => LibraryUserPolicy::class,
         CatalogLibrary::class => CatalogLibraryPolicy::class,
-        Reference::class => ReferencesPolicy::class,
+        Reference::class => ReferencePolicy::class,
         Institution::class => ListBasePolicy::class,
         InstitutionType::class => ListBasePolicy::class,
         Project::class => ListBasePolicy::class,
