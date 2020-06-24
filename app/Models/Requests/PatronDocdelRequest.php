@@ -40,6 +40,10 @@ class PatronDocdelRequest extends BaseModel
         
 
         // DA VALUTARE
+        //- Gestire stato "evaso via file all'utente" + permettere download file (se la lic lo consente)
+        //  e prevedere la possibilità di accedere al pdf tramite visualizzatore PDF.js o altro inibendo download/print in base a licenza
+        //  Ha senso prevedere un campo file? o basta una variabile evaso_via_file=true x consentire l'accesso al file?
+
         // filename  //lo mettiamo anche qui x file dato all'utente (se licenza lo consente)?
         //	rm_tempo_consegna_ut  	Tempo totale di consegna: rm_dataeva-rm_datarichie
         // 	rm_tempo_iniziolav 	 	Tempo per la presa in gestionde da parte della bib: dd_datarichie-rm_datarichie

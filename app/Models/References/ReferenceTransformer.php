@@ -13,7 +13,8 @@ class ReferenceTransformer extends BaseTransformer
 
     protected $availableIncludes = [
         'labels',
-        'groups'
+        'groups',
+        'patronddrequests'
     ];
 
     protected $defaultIncludes = [
@@ -27,7 +28,7 @@ class ReferenceTransformer extends BaseTransformer
     {
 //        dd('trasformo');
         $to_merge = [
-//            'test' => 'hello',
+//            'patronddrequests_count'=>$model->patronddrequests()->count()
         ];
         return $this->applyTransform($model, $to_merge);
     }
@@ -35,6 +36,11 @@ class ReferenceTransformer extends BaseTransformer
     public function includeLabels(Model $model)
     {
         return $this->collection($model->labels, new BaseLightTransformer());
+    }
+
+    public function includePatronddrequests(Model $model)
+    {
+        return $this->collection($model->patronddrequests, new BaseLightTransformer());
     }
 
     public function includeGroups(Model $model)
