@@ -77,8 +77,8 @@ Route::group([
     Route::get('my', 'ReferenceController@my')->name('my');
    // Route::get('option-items', 'ReferenceController@optionList')->name('option-items');
     
-    //Le richieste associate a un riferimento
-    Route::get('{id}/requests', '\App\Http\Controllers\Requests\PatronDocdelRequestController@index')->name('requests');
+    //Le richieste (PatronDDRequest)associate a un riferimento
+    Route::get('{id}/patronrequests', '\App\Http\Controllers\Requests\PatronDocdelRequestController@index')->name('patronrequests');
     
     Route::get('{id}', 'ReferenceController@show')->name('show');
     Route::put('{id}', 'ReferenceController@update')->name('update');
