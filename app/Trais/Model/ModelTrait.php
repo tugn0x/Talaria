@@ -21,6 +21,8 @@ trait ModelTrait
 
     protected static $stringIdentifies = 'name';
 
+    protected $simpleSearchField="name"; //default field for SimpleSearch on collection
+
     protected $internalMessagesAttributes = ['internal_messages_error', 'internal_messages_info'];
 
     protected $tmp = array();
@@ -244,6 +246,6 @@ trait ModelTrait
     {
         $q = trim($q);
 
-        return $query->where('name', 'like', '%'. $q .'%');
+        return $query->where($this->simpleSearchField, 'like', '%'. $q .'%');
     }
 }

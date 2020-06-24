@@ -11,6 +11,8 @@ class Reference extends BaseModel
 {
     protected static $observerClass = ReferenceObserver::class;
 
+    protected $simpleSearchField="pub_title";
+
     protected $fillable = [
         'material_type',
         'pub_title',
