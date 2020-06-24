@@ -61,15 +61,15 @@ class Reference extends BaseModel
         return $this->owner();
     }
 
-    public function scopeByLabel($query, $labelId){
-        return $query->whereHas('labels', function($q) use ($labelId){
-            $q->where('labels.id', $labelId);
+    public function scopeByLabel($query, $labelIds){
+        return $query->whereHas('labels', function($q) use ($labelIds){
+            $q->whereIn('labels.id', explode(',',$labelIds));
         });
     }
 
-    public function scopeByGroup($query, $groupId){
-        return $query->whereHas('groups', function($q) use ($groupId){
-            $q->where('groups.id', $groupId);
+    public function scopeByGroup($query, $groupIds){
+        return $query->whereHas('groups', function($q) use ($groupIds){
+            $q->whereIn('groups.id', explode(',',$groupIds));
         });
     }
 }

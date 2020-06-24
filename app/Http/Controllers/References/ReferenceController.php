@@ -21,11 +21,11 @@ class ReferenceController extends ApiController
     public function my(Request $request)
     {
         $model=$this->model->owned();
-        if($request->input("labelId"))
-            $model=$model->byLabel($request->input("labelId"));
+        if($request->input("labelIds"))
+            $model=$model->byLabel($request->input("labelIds"));
         
-        if($request->input("groupId"))
-            $model=$model->byGroup($request->input("groupId"));
+        if($request->input("groupIds"))
+            $model=$model->byGroup($request->input("groupIds"));
         
         $collection = $this->nilde->index($model, $request);
 
