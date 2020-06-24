@@ -41,11 +41,15 @@ class PatronDocdelRequestController extends ApiController
 
     public function my(Request $request)
     {
-        $this->authorize($this->model);
-        $count = $request->input('pageSize', config('api.page_size'));
-        $my_applications = $this->model->owned()->orderBy('updated_at','desc')->paginate($count);
-
-        return $this->response->paginator($my_applications, new $this->transformer())->morph();
+       $model=$this->model->owned();
+        if($request->input("labelIds"))
+            $model=$model->byLabel($request->input("labelIds"));
+        
+        if($request->input("groupIds"))
+            $model=$model->byGroup($request->input("groupIds"));
+        
+        $collection = $this->nilde->index($model, $request);
+        return $this->response->paginator($collection, new $this->transformer())->morph();
     }
 
     public function store(Request $request)

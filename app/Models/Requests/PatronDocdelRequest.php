@@ -84,4 +84,28 @@ class PatronDocdelRequest extends BaseModel
         return $query->where('reference_id', $reference_id);
     }
 
+    public function scopeByLabel($query, $labelIds){
+        return 
+        $query->whereHas('reference', function ($q) use ($labelIds) {
+            return $q->whereHas('labels', function($q2) use ($labelIds){
+                $arr=explode(',',$labelIds);
+                if(sizeof($arr)>0)
+                    $q2->whereIn('labels.id', $arr);
+            });    
+        });
+    }
+
+    public function scopeByGroup($query, $groupIds){
+        return 
+        $query->whereHas('reference', function ($q) use ($groupIds) {
+            return $q->whereHas('groups', function($q2) use ($groupIds){
+                $arr=explode(',',$groupIds);
+                if(sizeof($arr)>0)
+                    $q2->whereIn('groups.id', $arr);
+            });
+        });
+                    
+    }
+
+
 }
