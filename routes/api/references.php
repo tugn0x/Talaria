@@ -73,7 +73,7 @@ Route::group([
     
 
     //NOTA: ho previsto un filtro per labelId e groupId
-    //my?labelId=xxx&groupId=xxx
+    //my?labelIds=1,4&groupId=5,7,8&q=nature
     Route::get('my', 'ReferenceController@my')->name('my');
     Route::get('option-items', 'ReferenceController@optionList')->name('option-items');
     
