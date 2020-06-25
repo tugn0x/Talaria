@@ -31,5 +31,16 @@ return [
         'enabled'=>1,
         'disabled'=>0 //NOTA: nel nilde5 questo è 2
     ],
+    'patronddrequest_status' =>[
+        'requested'=>20,
+        'userAskCancel'=>31,
+        'canceled'=>32,
+        'waitingForCost'=>21,
+        'costAccepted'=>22,
+        'costNotAccepted'=>23,
+        'readyToDelivery'=>39,
+        'fulfilled'=>40,
+        'notFulfilled'=>50
+    ]
 
 ];

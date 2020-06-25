@@ -20,6 +20,13 @@ class PatronDocdelRequestObserver extends BaseObserver
 //        });
     }
 
+    public function creating($model)
+    {
+         //quando salvo va messa in richiesta
+         $model->status=config("constants.patronddrequest_status.requested");
+         return parent::creating($model);
+    }
+
     public function saving($model)
     {
         return parent::saving($model);

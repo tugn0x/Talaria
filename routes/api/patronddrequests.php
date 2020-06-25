@@ -21,7 +21,7 @@ Route::group([
     'as' => 'api.v1.patronrequests.',
 ], function () {
     //NOTA: ho previsto un filtro per labelId e groupId del riferimento della richiesta
-    //my?labelIds=1,4&groupId=5,7,8
+    //my?labelIds=1,4&groupIds=5,7,8
     Route::get('my', 'PatronDocdelRequestController@my')->name('my');
     //Route::get('', 'PatronDocdelRequestController@index')->name('index');
     //Route::get('option-items', 'ReferenceController@optionList')->name('option-items');
