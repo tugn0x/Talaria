@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\References;
 
 use App\Http\Controllers\ApiController;
+use App\Models\References\Group;
+use App\Models\References\Label;
 use App\Models\References\Reference;
 use App\Models\References\ReferenceTransformer;
 use Illuminate\Http\Request;
@@ -21,10 +23,10 @@ class ReferenceController extends ApiController
     public function my(Request $request)
     {
         $model=$this->model->owned();
-        if($request->input("labelIds"))
+        if($request->has("labelIds"))
             $model=$model->byLabel($request->input("labelIds"));
         
-        if($request->input("groupIds"))
+        if($request->has("groupIds"))
             $model=$model->byGroup($request->input("groupIds"));
         
         $collection = $this->nilde->index($model, $request);
@@ -44,6 +46,43 @@ class ReferenceController extends ApiController
             return $model;
         });
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
+    }
+
+    /* Mi aspetto un JSON con { references: [id,id,id], field1: val, field2:val ... labelIds:[id,id,id],groupIds:[id,id,id] }*/
+    public function updateSelected(Request $request)
+    {
+        if($request->has("references"))
+        {
+            $ids=$request->input("references");
+            if(sizeof($ids)>0)
+            {
+               //aggiorno i campi del riferimento (nel caso mi venissero passati)
+               Reference::whereIn('id', $ids)->update($request->except(["references","labelIds","groupIds"]));
+
+               foreach($ids as $rifid) 
+               {
+                    $rif=Reference::find($rifid);
+
+                    $this->authorize("update",$rif);
+                    
+                    //aggiorno manualmente labels
+                    if($request->has("labelIds"))
+                    {    
+                        $lids=$request->input("labelIds");
+                      
+                        //uso il syncWithoutDetaching in modo da aggingere evitando i doppioni
+                        $rif->labels()->syncWithoutDetaching($lids);    
+                    }
+
+                    if($request->has("groupIds"))
+                    {    
+                        $gids=$request->input("groupIds");
+                      
+                        $rif->groups()->syncWithoutDetaching($gids);    
+                    }
+               } 
+            }
+        }
     }
 
 //    /**

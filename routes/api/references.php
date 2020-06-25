@@ -73,15 +73,20 @@ Route::group([
     
 
     //NOTA: ho previsto un filtro per labelId e groupId
-    //my?labelIds=1,4&groupId=5,7,8&q=nature
+    //my?labelIds=1,4&groupIds=5,7,8&q=nature
     Route::get('my', 'ReferenceController@my')->name('my');
-   // Route::get('option-items', 'ReferenceController@optionList')->name('option-items');
     
+    //aggiorno in massa i riferimenti selezionati (devo passargli un json con id dei riferimenti, i campi da aggiornare
+    //ed eventualmente array label/group da applicare)
+    Route::put('updateSelected', 'ReferenceController@updateSelected')->name('updateSelected');
+
     //Le richieste (PatronDDRequest)associate a un riferimento
     Route::get('{id}/patronrequests', '\App\Http\Controllers\Requests\PatronDocdelRequestController@index')->name('patronrequests');
     
     Route::get('{id}', 'ReferenceController@show')->name('show');
     Route::put('{id}', 'ReferenceController@update')->name('update');
     Route::post('', 'ReferenceController@store')->name('create');
+    Route::delete('{id}', 'ReferenceController@delete')->name('delete');
+    
 });
 
