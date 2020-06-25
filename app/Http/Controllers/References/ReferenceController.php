@@ -83,6 +83,9 @@ class ReferenceController extends ApiController
                } 
             }
         }
+        $model=Reference::whereIn('id', $ids);
+        $collection = $this->nilde->index($model, $request);
+        return $this->response->paginator($collection, new $this->transformer())->morph();
     }
 
 //    /**
