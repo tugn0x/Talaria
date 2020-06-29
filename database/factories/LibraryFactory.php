@@ -5,8 +5,12 @@
 use App\Models\Libraries\Library;
 use Faker\Generator as Faker;
 
-$factory->define(\App\Models\Libraries\Department::class, function (Faker $faker) {
+$factory->define(Library::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->streetName,
+        'email' => $faker->unique()->safeEmail,
+        'institution_id' => 1,
+        'subject_id'=>1,
+        'country_id'=>1,
     ];
 });
