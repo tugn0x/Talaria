@@ -77,7 +77,7 @@ const ReferencesList = (props) => {
                                 <Col xs={2} className="edit-icons" >
                                     <NavLink to={`${editurl(reference.id)}`} key={reference.id} className="btn btn-link">
                                         <i className="fa fa-edit"></i>
-                                    </a>
+                                    </NavLink>
                                     <a href="#" onClick={() => console.log('delete reference')} className="btn btn-link">
                                         <i className="fa fa-trash"></i>
                                     </a>
