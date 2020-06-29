@@ -28,7 +28,7 @@ function HeaderBar(props) {
 
   // console.log('HeaderBar', props)
 
-  const { auth, isLogged, history, headermenu, routes } = props
+  const { auth, isLogged, history, headermenu, routes, isMobile } = props
 
   const currentRoute = routes && routes.filter(route => route.current).length > 0 ? routes.filter(route => route.current) : null;
 
@@ -51,7 +51,7 @@ function HeaderBar(props) {
       <div className="container">
         <div className="header-container row">
           <div className="header-left-col">
-            { isLogged && headermenu &&
+            { isLogged && headermenu && isMobile &&
               currentRoute && currentRoute[0].children.length > 0 &&
               <AppSidebarToggler  display="xs"/>
             }
