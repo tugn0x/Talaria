@@ -33,7 +33,8 @@ class Reference extends BaseModel
         'sid',
         'pmid',
         'status',
-        'note'
+        'note',
+        //'oa', Gestione copia OA
     ];
 
     public function patronddrequests()
