@@ -3,28 +3,24 @@ import {Row, Col} from 'reactstrap'
 import messages from './messages'
 import globalMessages from 'utils/globalMessages'
 import { FormattedMessage } from 'react-intl';
-import {Pagination} from 'components';
+import {Pagination, InputSearch} from 'components';
 import CustomModal from 'components/Modal/Loadable'
 import {useIntl} from 'react-intl';
 import ButtonPlus from 'components/Button/ButtonPlus'
 import { generatePath } from "react-router";
 import ReferencesPage from 'containers/Patron/ReferencesPage'
 import { NavLink } from 'react-router-dom';
-
+import ReferenceItem from '../ReferenceItem';
 
 const ReferencesList = (props) => {
     console.log('ReferencesList', props)
-    const {match, referencesList, pagination, history} = props
+    const {match, data, pagination, history, searchOptions} = props
     const {total_pages, current_page} = pagination
     const intl = useIntl();
-    const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal);
+    /*  const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal); */
 
-    const editurl = (id) => {
-        return generatePath(`${props.editPath}`, {
-            id: id,
-        });
-    }
+   
 
     const linkTo = (path) => {
         history.push(path)
@@ -32,57 +28,42 @@ const ReferencesList = (props) => {
 
     return (
         <>
-            <h3 className="table-title"><FormattedMessage {...messages.header} /></h3>
-            <ButtonPlus
+            <h3 className="table-title text-center"><FormattedMessage {...messages.header} /></h3>
+           {/*  <ButtonPlus
                 onClickHandle={toggle}
                 text={intl.formatMessage(messages.createNewReference)}
-            />
-            <div className="table referencesList">
-                <Row className="thead">
-                    <Col xs={4}>
-                        <span>Titolo / Descrizione</span>
-                        <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
+            /> */}
+            <div className="search-filter-bar">
+                <Row>
+                    <Col md="4">
+                        {searchOptions &&
+                            <InputSearch
+                                submitCallBack={(query) => searchOptions.getSearchList(query)}
+                                searchOnChange={searchOptions.searchOnChange ? searchOptions.searchOnChange : false}
+                            />
+                        }
                     </Col>
-                    <Col xs={3}>
-                        <span>Autore</span>
-                        <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
-                    </Col>
-                    <Col xs={3}>
-                        <span>Anno di pubblicazione</span>
-                        <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
-                    </Col>
-                    <Col xs={2}>
-                        <span>{intl.formatMessage(globalMessages.update)}</span>
-                    </Col>
+                    <Col md="3">Categorie</Col>
+                    <Col md="3">Etichette</Col>
+                    <Col md="2">Cancella tutto</Col>
                 </Row>
-                <div className="tbody">
-                    {referencesList.length > 0 &&
-                        referencesList.map(reference => (
-                            <Row key={`reference-${reference.id}`}>
-                                <Col xs={4}>
-                                    <NavLink to={`${editurl(reference.id)}`} key={reference.id}>
-                                        {reference.pub_title}
-                                    </NavLink>
-                                </Col>
-                                <Col xs={3}>
-                                    <span>
-                                        {reference.first_author}
-                                    </span>
-                                </Col>
-                                <Col xs={3}>
-                                    <span>
-                                        {reference.pubyear}
-                                    </span>
-                                </Col>
-                                <Col xs={2} className="edit-icons" >
-                                    <NavLink to={`${editurl(reference.id)}`} key={reference.id} className="btn btn-link">
-                                        <i className="fa fa-edit"></i>
-                                    </NavLink>
-                                    <a href="#" onClick={() => console.log('delete reference')} className="btn btn-link">
-                                        <i className="fa fa-trash"></i>
-                                    </a>
-                                </Col>
-                            </Row>
+                <Row>
+                    <Col md={12}>Filter Results</Col>
+                </Row>
+            </div>
+            
+            <div className="list-wrapper">
+                <div className="list-head">
+                    List Header
+                </div>
+                <div className="list-body">
+                    {data.length > 0 &&
+                        data.map(ref => (
+                            <ReferenceItem 
+                                key={`reference-${ref.id}`}
+                                data={ref}
+                                editPath={props.editPath}
+                            />
                         ))
                     ||
                         <h5 className="text-center">
@@ -91,12 +72,12 @@ const ReferencesList = (props) => {
                     }
                 </div>
             </div>
-            <CustomModal
+           {/*  <CustomModal
                 modal={modal}
                 toggle={toggle}>
                 <ReferencesPage
                     match={match} />
-            </CustomModal>
+            </CustomModal> */}
             {Object.keys(pagination).length &&
                 <Pagination
                     current_page={current_page}

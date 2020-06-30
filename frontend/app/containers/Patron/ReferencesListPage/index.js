@@ -6,7 +6,8 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import ReferencesPage from '../ReferencesPage';
-import {SimpleList} from 'components'
+/* import {SimpleList} from 'components' */
+import ReferencesList from 'components/Patron/ReferencesList';
 import {columns} from './columns'
 import messages from './messages'
 
@@ -23,7 +24,7 @@ const ReferencesListPage = (props) => {
     }, [])
 
     return (
-            <SimpleList 
+            <ReferencesList 
                 data={referencesList}
                 columns={columns}
                 loading={isLoading}

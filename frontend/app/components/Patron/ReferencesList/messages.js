@@ -10,7 +10,7 @@ export const scope = 'app.components.ReferencesList';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'References list',
+    defaultMessage: 'References',
   },
   createNewReference: {
     id: `${scope}.createNewReference`,

@@ -186,6 +186,7 @@
 
   "app.components.UsersList.header": "Lista Utenti",
 
+  "app.components.ReferencesList.header": "Riferimenti",
   "app.components.ReferencesList.createNewReference": "Nuovo riferimento",
   "app.components.ReferencesList.ReferencesNotFound": "Non ci sono riferimenti",
 

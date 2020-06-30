@@ -59,6 +59,16 @@ const OptionList = (props) => {
         })
     }, [options, field])  
     
+
+     /* const CustomOption = ({isSelected, innerProps, isDisabled, label }) =>
+    {   
+        return !isDisabled ? (
+            <div {...innerProps}>
+                <input type="checkbox" readOnly checked={isSelected} id={label} name={label}/>
+                <label>{label}</label>
+            </div>
+        ) : null;
+    }  */
     return (
        // selectedOption &&
             <>
@@ -70,6 +80,11 @@ const OptionList = (props) => {
                 onChange={(option) => handleChangeOptionList(option)}
                 onInputChange={(input) =>  searchOptionList && !isEmpty(searchOptionList) ? handleSearchOptionList(input, field.options) : input}
                 options={translateOptions(options, intl)}
+                /* closeMenuOnSelect={false}
+                components={{ Option: CustomOption }} 
+                isMulti
+                hideSelectedOptions={false}
+                multiValueRemove  */
             /> 
            <Input 
                 type="text"

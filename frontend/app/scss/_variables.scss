@@ -7,15 +7,15 @@ $font-family-base: 'Archivo', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantare
 
 
 // COLORS
-$theme_color: #A65255;
-$white: #F5F5F5;
-$grey-lighter: #EBE3DD;
-$grey-light: #D6CBC3;
-$grey: #444444;
+$theme_color: #DF6D43;
+$white: #F8F8F8;
+$grey-light: #EBE2DF;
+$grey-lighter: #F5F5F5;
+$grey: #3B3D40;
 $grey-nav-link: #73818f;
 $grey-nav-link-hover: #2f353a;
-$orange: #DF8969;
-$brown: #A65255;
+$orange: $theme_color;
+$brown: #AB725F;
 $theme-colors: (
   "brown": $brown,
   "grey": $grey,
