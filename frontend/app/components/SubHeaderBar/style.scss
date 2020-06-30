@@ -1,10 +1,21 @@
+@import '../../scss/vendors/variables';
 .app-subheader {
     overflow-y: auto;
     .subheader-menu {
         flex-wrap: nowrap;
         padding: 0.5rem 0;
+        div:not(.current-page){
+            a:hover {
+                color: $theme_color;
+                text-decoration: none;
+            }
+        }
         .current-page {
-            text-decoration: underline;
+            a {
+                text-decoration: none;
+                color: $theme_color;
+            }
+            
         }
     }
 }
