@@ -31,10 +31,10 @@ const ReferenceItem = (props) => {
             </Col> 
             <Col sm={8} className="info">
                 <p><span className="pub_title">{data.pub_title}</span> <span className="part_title">{data.part_title}</span></p>
-                <p className="authors">
-                   {data.first_author && <><span class="first_author">Autore</span> {data.first_author}</>} 
-                   <span className="pubyear">Anno</span> {data.pubyear}
-                </p>
+                <div className="authors">
+                   {data.first_author && <span class="first_author">Autore <span>{data.first_author}</span></span>} 
+                   <span className="pubyear">Anno <span>{data.pubyear}</span></span>
+                </div>
                 {data.labels.data && <span className="labels">
                     {data.labels.data.map(label => <span>{label.name}</span>)}
                 </span>}

@@ -1,4 +1,35 @@
 .reference-row {
+    margin: 10px 0 10px 0;
+    border-bottom: 1px dotted lightgray;
+    .info .pub_title {
+
+    }
+    .info .part_title {
+        font-style: italic;
+    }
+    .info .authors span
+    {
+        font-weight: normal;
+        padding-right: 0px;
+    }
+    
+    .info .authors > span
+    {
+        font-weight: bold;
+        padding-right: 10px;
+    }
+    
+    
+    
+    .labels span {
+        color: #9D67A3;
+        padding: 0 5px 0 0;
+    }
+    .groups span {
+        color: #73A6CC;
+        padding: 0 5px 0 0;
+    }
+
     .select-checkbox {
         i {
             font-size: 1.5rem;
@@ -9,3 +40,4 @@
         font-size: 1rem;
     }
 }
+
