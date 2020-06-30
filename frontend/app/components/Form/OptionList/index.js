@@ -60,43 +60,30 @@ const OptionList = (props) => {
     }, [options, field])  
     
 
-     /* const CustomOption = ({isSelected, innerProps, isDisabled, label }) =>
-    {   
-        return !isDisabled ? (
-            <div {...innerProps}>
-                <input type="checkbox" readOnly checked={isSelected} id={label} name={label}/>
-                <label>{label}</label>
-            </div>
-        ) : null;
-    }  */
+      
     return (
        // selectedOption &&
             <>
-            <Select
-                className={`option-list ${!isRequired || selectedOption ? '' : 'danger'}`}
-                type="custom-select"
-                value={selectedOption ? translateOptions(selectedOption, intl) : {label: intl.formatMessage(formMessages.select), value: 0}}
-                name={field.name}
-                onChange={(option) => handleChangeOptionList(option)}
-                onInputChange={(input) =>  searchOptionList && !isEmpty(searchOptionList) ? handleSearchOptionList(input, field.options) : input}
-                options={translateOptions(options, intl)}
-                /* closeMenuOnSelect={false}
-                components={{ Option: CustomOption }} 
-                isMulti
-                hideSelectedOptions={false}
-                multiValueRemove  */
-            /> 
-           <Input 
-                type="text"
-                value={selectedOption || ''}
-                style={{
-                    opacity: 0,
-                    width: "100%",
-                    height: 0,
-                    position: "absolute"
-                  }}
-                onChange={(e) => null}
-                required={isRequired} /> 
+                <Select
+                    className={`option-list ${!isRequired || selectedOption ? '' : 'danger'}`}
+                    type="custom-select"
+                    value={selectedOption ? translateOptions(selectedOption, intl) : {label: intl.formatMessage(formMessages.select), value: 0}}
+                    name={field.name}
+                    onChange={(option) => handleChangeOptionList(option)}
+                    onInputChange={(input) =>  searchOptionList && !isEmpty(searchOptionList) ? handleSearchOptionList(input, field.options) : input}
+                    options={translateOptions(options, intl)}
+                /> 
+                <Input 
+                        type="text"
+                        value={selectedOption || ''}
+                        style={{
+                            opacity: 0,
+                            width: "100%",
+                            height: 0,
+                            position: "absolute"
+                        }}
+                        onChange={(e) => null}
+                        required={isRequired} /> 
             </>
     )
 }

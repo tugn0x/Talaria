@@ -21,9 +21,7 @@ function BasePage(props) {
   const [mounted, setMounted] = React.useState(false)
   const windowSize = useGetWindowSize()
   const isCurrentPage = (pagePath) => {
-    // console.log(props.location.pathname)
-    // return props.location.pathname.includes(pagePath)
-     return pagePath === props.location.pathname || new RegExp(`^${pagePath.replace("/", "\/")}(.*?)`).test(props.location.pathname);
+    return pagePath === props.location.pathname || new RegExp(`^${pagePath.replace("/", "\/")}(.*?)`).test(props.location.pathname);
   };
 
   const mapRoutes = (routes, auth, resource, prefix) => {
@@ -31,13 +29,13 @@ function BasePage(props) {
     // console.log(prefix, 'prefix')
     return filterRoutes(routes, auth, resource).map((route)=>{
       const url = route.url ? generatePath(props.match.path+route.url, props.match.params) : generatePath(props.match.path+route.path, props.match.params)
-      console.log(url)  
+      
       return {
         ...route,
         path: generatePath(`${prefix+props.match.path+route.path}`, props.match.params),
         url: url,
         component:null,
-        current: isCurrentPage(url),
+        current:  isCurrentPage(url),
         children: route.children ? mapRoutes(route.children, auth, resource, route.path) : []
       }
     })
@@ -50,7 +48,7 @@ function BasePage(props) {
   }
 
   const lightRoutes = props.routes && mapRoutes(props.routes, props.auth, props.resource, '')
-
+  
   const closeSideBar = () => {
     const body = document.querySelector('body')
     if(body.classList.contains('sidebar-show')){

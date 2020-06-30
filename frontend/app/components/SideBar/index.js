@@ -32,17 +32,19 @@ function SideBar(props) {
               return a.order - b.order;
             return 0;  
           })
-          .map((route) => (
-            <NavLink
+          .map((route) => {
+            console.log(route)
+            return <NavLink
               className="nav-link btn"
               key={route.name}
+              exact
               to={`${route.url ? route.url : route.path}`}
               activeClassName="current"
             >
               <i className={`fa fa-${route.icon ? route.icon : ''}`}></i>
               <span><FormattedMessage {...messages[route.name]}/></span>
             </NavLink>
-           )
+          }
           )}
         </nav>
       </div>

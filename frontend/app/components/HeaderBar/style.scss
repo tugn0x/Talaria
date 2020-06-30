@@ -1,12 +1,5 @@
 @import '../../scss/vendors/variables';
 
-.dropdown {
-    .fa-sort-down {
-        position: absolute;
-        top: -6px;
-        right: -15px;
-    }
-}
 
 .app-header {
     .dropdown-menu {
@@ -54,6 +47,21 @@
     }
     .nav-item {
         min-width: 32px;
+        .nav-link {
+            color: $theme_color;
+            span, .fa-sort-down {
+                color: $grey;
+            }
+            .fa-sort-down {
+                font-size: 1rem;
+                position: absolute;
+                top: -1px;
+                right: -5px;
+            }
+            .fa-user {
+                font-size: 1.5rem;
+            }
+        }
     }
     .navbar-brand {
         position: static;
