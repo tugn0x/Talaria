@@ -31,6 +31,15 @@ class LabelController extends ApiController
         return $this->response->paginator($collection, new $this->transformer())->morph();
     }
 
+    public function optionList(Request $request)
+    {   
+        $collection = $this->nilde->optionList($this->model, $request,function ($model,$request){
+            return $model->owned();
+        });
+
+        return $this->response->array($collection->toArray());
+    }
+
    /* public function my(Request $request)
     {
         $this->authorize($this->model);

@@ -29,6 +29,11 @@ class GroupPolicy extends BasePolicy
         return true;
     }
 
+    public function optionList(User $user, Model $model)
+    {
+        return true;
+    }
+
     public function show(User $user, Model $model)
     {
         return $this->canManage($user,$model);
