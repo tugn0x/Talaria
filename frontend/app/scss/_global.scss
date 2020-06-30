@@ -282,6 +282,32 @@ ul.list-inline {
     }
 }
 
+.reference-row{
+    margin: 10px 0 10px 0;
+    border-bottom: 1px dotted lightgray;
+    .info .pub_title {
+
+    }
+    .info .part_title {
+        font-style: italic;
+    }
+    .info .pubyear,
+    .info .first_author
+     {
+        font-weight: bold;
+    }
+    
+    
+    .labels span {
+        color: #9D67A3;
+        padding: 0 5px 0 0;
+    }
+    .groups span {
+        color: #73A6CC;
+        padding: 0 5px 0 0;
+    }
+}
+
 /* .switch-success .switch-input:checked+.switch-slider {
     background-color: $orange;
     border-color: $orange;

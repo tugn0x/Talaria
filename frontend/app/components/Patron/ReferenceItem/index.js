@@ -30,17 +30,18 @@ const ReferenceItem = (props) => {
                 <i className={`fa ${matTypeIcon(data.material_type)}`}></i>
             </Col> 
             <Col sm={8} className="info">
-                <p>{data.pub_title}</p>
+                <p><span className="pub_title">{data.pub_title}</span> <span className="part_title">{data.part_title}</span></p>
                 <p className="authors">
-                   <span>Autore</span> {data.first_author} <span>Anno</span> {data.pubyear}
+                   {data.first_author && <><span class="first_author">Autore</span> {data.first_author}</>} 
+                   <span className="pubyear">Anno</span> {data.pubyear}
                 </p>
-                {data.labels.data && <div className="labels">
+                {data.labels.data && <span className="labels">
                     {data.labels.data.map(label => <span>{label.name}</span>)}
-                </div>}
+                </span>}
                 
-                {data.groups.data && <div className="groups">
+                {data.groups.data && <span className="groups">
                     {data.groups.data.map(grp => <span>{grp.name}</span>)}
-                </div>}
+                </span>}
             </Col>
             <Col sm={2} className="icons align-self-center">
                 Icons
