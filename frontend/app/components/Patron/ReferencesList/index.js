@@ -11,6 +11,7 @@ import { generatePath } from "react-router";
 import ReferencesPage from 'containers/Patron/ReferencesPage'
 import { NavLink } from 'react-router-dom';
 import ReferenceItem from '../ReferenceItem';
+import './style.scss';
 
 const ReferencesList = (props) => {
     console.log('ReferencesList', props)
@@ -53,9 +54,26 @@ const ReferencesList = (props) => {
             </div>
             
             <div className="list-wrapper">
-                <div className="list-head">
-                    List Header
-                </div>
+                <Row className="list-head">
+                    <Col sm={10} className="select-checkbox">
+                        <input type="checkbox" />
+                        {<NavLink to='#'  className="btn btn-link">
+                            <i className="fa fa-2x fa-print"></i>
+                        </NavLink>}
+                        {<NavLink to='#'  className="btn btn-link">
+                            <i className="fa fa-2x fa-download"></i>
+                        </NavLink>}
+                        {<NavLink to='#'  className="btn btn-link">
+                            <i className="fa fa-2x fa-tag"></i>
+                        </NavLink>}
+                        {<NavLink to='#'  className="btn btn-link">
+                            <i className="fa fa-2x fa-folder"></i>
+                        </NavLink>}
+                    </Col>
+                    <Col sm={2} className="select-counter">
+                        0 di {data.length}
+                    </Col>
+                </Row>
                 <div className="list-body">
                     {data.length > 0 &&
                         data.map(ref => (
