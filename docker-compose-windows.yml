@@ -48,7 +48,7 @@ services:
       - .env
     depends_on:
       - mysql
-#      - redis
+    #      - redis
     volumes:
       - ./:/application
     #      - /home/halphass/Scaricati:/application/dump
@@ -67,7 +67,7 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     volumes:
-#      - ./docker/data/db-data:/var/lib/mysql
+      #      - ./docker/data/db-data:/var/lib/mysql
       - db-data:/var/lib/mysql
     restart: always
 
@@ -100,8 +100,10 @@ services:
     build: ./frontend
     volumes:
       - ./frontend:/usr/src/app
+      - node-modules:/usr/src/app/node_modules
       - ./.env:/usr/src/.env
     command: npm start
+#    command: node --stack-size=3000 /usr/local/bin/npm install
     expose:
       - 3000
     restart: always
@@ -119,4 +121,5 @@ networks:
         - subnet: "10.0.9.0/24"
 
 volumes:
-  dbdata:
+  db-data:
+  node-modules:
