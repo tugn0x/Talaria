@@ -21,7 +21,8 @@ import ChangePasswordForm from './Auth/ChangePasswordForm';
 // Patron
 // import MyLibrariesList from './Patron/MyLibrariesList/Loadable';
 import ReferencesForm from './Patron/ReferencesForm';
-// import ReferencesList from './Patron/ReferencesList';
+import ReferencesList from './Patron/ReferencesList';
+import ReferenceItem from './Patron/ReferenceItem';
 
 import Toaster from "./Toaster/Loadable"
 
@@ -63,7 +64,8 @@ export {
  // MyLibrariesList,
   MyLibraryForm,
   ReferencesForm,
- // ReferencesList,
+  ReferencesList,
+  ReferenceItem,
   LibraryForm,
 //  LibrariesList,
 //  InstitutionsList,
