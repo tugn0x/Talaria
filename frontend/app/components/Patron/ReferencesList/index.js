@@ -17,7 +17,7 @@ import './style.scss';
 
 const ReferencesList = (props) => {
     console.log('ReferencesList', props)
-    const {match, data, pagination, history, searchOptions, labelsOptionList} = props
+    const {match, data, pagination, history, searchOptions, labelsOptionList, groupsOptionList} = props
     const {total_pages, current_page} = pagination
     const intl = useIntl();
     /*  const [modal, setModal] = useState(false);
@@ -73,9 +73,11 @@ const ReferencesList = (props) => {
                             />
                         }
                     </Col>
-                    <Col md="3">Categorie</Col>
                     <Col md="3">
-                    { labelsOptionList.length > 0 && <FilterSelect type={"labels"} options={labelsOptionList} /> }
+                        { groupsOptionList.length > 0 && <FilterSelect type={"groups"} options={groupsOptionList} /> }
+                    </Col>
+                    <Col md="3">
+                        { labelsOptionList.length > 0 && <FilterSelect type={"labels"} options={labelsOptionList} /> }
                     </Col>
                     <Col md="2">Cancella tutto</Col>
                 </Row>
