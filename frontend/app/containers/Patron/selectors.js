@@ -19,5 +19,17 @@ createSelector(
   substate => (substate.loading)
 );
 
+const labelsOptionListSelector = () => 
+createSelector(
+  selectPatronDomain,
+  substate => (substate.labelsOptionList)
+);
+
+const groupsOptionListSelector = () => 
+createSelector(
+  selectPatronDomain,
+  substate => (substate.groupsOptionList)
+);
+
 export default makeSelectPatron;
-export {  isPatronLoading };
+export {  isPatronLoading,labelsOptionListSelector,groupsOptionListSelector };

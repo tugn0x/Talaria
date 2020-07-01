@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {useIntl} from 'react-intl'
-import makeSelectPatron, {isPatronLoading} from '../selectors';
-import { requestReferencesList} from '../actions'
+import makeSelectPatron, {isPatronLoading,groupsOptionListSelector,labelsOptionListSelector} from '../selectors';
+import { requestReferencesList,requestLabelsOptionList,requestGroupsOptionList} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -17,10 +17,15 @@ const ReferencesListPage = (props) => {
     const referencesList = patron.referencesList.data
     const pagination = patron.referencesList.pagination
     const intl = useIntl()
+    //const labelsOptionList=patron.labelsOptionList
+    //const groupsOptionList=patron.groupsOptionList
     useEffect(() => {
         if(!isLoading) {
             dispatch(requestReferencesList())
+            dispatch(requestLabelsOptionList())
+            dispatch(requestGroupsOptionList())
         }
+        
     }, [])
 
     return (
@@ -46,7 +51,9 @@ const ReferencesListPage = (props) => {
 
 const mapStateToProps = createStructuredSelector({
     isLoading: isPatronLoading(),
-    patron: makeSelectPatron()
+    patron: makeSelectPatron(),
+    labelsOptionList: labelsOptionListSelector(),
+    groupsOptionList: groupsOptionListSelector()
 });
 
 function mapDispatchToProps(dispatch) {

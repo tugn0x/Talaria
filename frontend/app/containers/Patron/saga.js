@@ -1,7 +1,8 @@
 import { call, put, select, takeLatest, fork, take  } from 'redux-saga/effects';
 import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO_LIBRARIES,REQUEST_UPDATE_ACCESS_TO_LIBRARIES,REQUEST_DELETE_ACCESS_TO_LIBRARIES,  REQUEST_REFERENCES_LIST,
   REQUEST_POST_REFERENCES, REQUEST_UPDATE_REFERENCES, 
-  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE } from './constants';
+  REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST,
+  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE} from './constants';
 import {
   requestError,
   stopLoading,
@@ -10,6 +11,8 @@ import {
   requestGetMyLibrarySuccess,
   /* requestGetLibraryList, */
   requestLibraryOptionListSuccess,
+  requestLabelsOptionListSuccess,
+  requestGroupsOptionListSuccess,
   requestReferencesListSuccess,
   requestReferencesList,
   requestGetReferenceSuccess,
@@ -25,7 +28,9 @@ import {  getMyLibrary,
           getReferencesList,
           createReference,
           updateReference,
-          getReference, } from 'utils/api';
+          getReference, 
+          getLabelsOptionList,
+          getGroupsOptionList,} from 'utils/api';
 
 
 export function* requestMyLibrariesSaga(action) {
@@ -50,6 +55,30 @@ export function* requestLibraryOptionListSaga(action = {}) {
   try {
     const request = yield call(getLibraryOptionList, options);
     yield put(requestLibraryOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestLabelsOptionListSaga(action = {}) {
+  const options = {
+    method: 'get',
+  }
+  try {
+    const request = yield call(getLabelsOptionList, options);
+    yield put(requestLabelsOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestGroupsOptionListSaga(action = {}) {
+  const options = {
+    method: 'get',
+  }
+  try {
+    const request = yield call(getGroupsOptionList, options);
+    yield put(requestGroupsOptionListSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -188,6 +217,8 @@ export function* requestGetMyLibrarySaga(action) {
 export default function* patronSaga() {
   yield takeLatest(REQUEST_MY_LIBRARIES, requestMyLibrariesSaga);
   yield takeLatest(REQUEST_GET_LIBRARY_OPTIONLIST, requestLibraryOptionListSaga);
+  yield takeLatest(REQUEST_GET_LABELS_OPTIONLIST, requestLabelsOptionListSaga);
+  yield takeLatest(REQUEST_GET_GROUPS_OPTIONLIST, requestGroupsOptionListSaga);
   yield takeLatest(REQUEST_GET_MY_LIBRARY, requestGetMyLibrarySaga);
   yield takeLatest(REQUEST_ACCESS_TO_LIBRARIES, requestAccessToLibrarySaga);
   yield takeLatest(REQUEST_UPDATE_ACCESS_TO_LIBRARIES,requestUpdateAccessToLibrarySaga);

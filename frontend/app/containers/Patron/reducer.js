@@ -12,6 +12,8 @@ import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_POST_REFERENCES, REQUEST_SUCCESS,
   REQUEST_UPDATE_REFERENCES, REQUEST_GET_REFERENCE, REQUEST_GET_REFERENCE_SUCCESS,
   REQUEST_GET_MY_LIBRARY, REQUEST_GET_MY_LIBRARY_SUCCESS,
+  REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_LABELS_OPTIONLIST_SUCCESS,
+  REQUEST_GET_GROUPS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST_SUCCESS,
   STOP_LOADING, REQUEST_ERROR } from './constants';
 
 export const initialState = {
@@ -23,6 +25,8 @@ export const initialState = {
   library: {},
   error: null,
   libraryOptionList: [],
+  labelsOptionList:[],
+  groupsOptionList:[],
   referencesList: {
     data: [],
     pagination: [],
@@ -75,6 +79,14 @@ const PatronReducer = (state = initialState, action) =>
         draft.loading = true;
         draft.error = action.error;
         break;
+      case REQUEST_GET_LABELS_OPTIONLIST:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
+      case REQUEST_GET_GROUPS_OPTIONLIST:
+        draft.loading = true;
+        draft.error = action.error;
+        break;    
       case REQUEST_MY_LIBRARIES_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
@@ -104,6 +116,16 @@ const PatronReducer = (state = initialState, action) =>
         draft.error = initialState.error;
         draft.libraryOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break;
+      case REQUEST_GET_LABELS_OPTIONLIST_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.labelsOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
+        break;
+      case REQUEST_GET_GROUPS_OPTIONLIST_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.groupsOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
+        break;    
       case REQUEST_ACCESS_TO_LIBRARIES:
         draft.loading = true;
         draft.error = action.error;

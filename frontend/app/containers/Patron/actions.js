@@ -13,6 +13,8 @@ import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_GET_REFERENCE, REQUEST_GET_REFERENCE_SUCCESS,
   REQUEST_UPDATE_REFERENCES, 
   REQUEST_GET_MY_LIBRARY, REQUEST_GET_MY_LIBRARY_SUCCESS,
+  REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_LABELS_OPTIONLIST_SUCCESS,
+  REQUEST_GET_GROUPS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST_SUCCESS,
   REQUEST_ERROR, STOP_LOADING} from "./constants";
 
 export function defaultAction() {
@@ -138,6 +140,35 @@ export function requestDeleteAccessToLibrary(id,library_id,message) {
     message
   };
 }
+
+export function requestLabelsOptionList(query) {
+  return {
+    type: REQUEST_GET_LABELS_OPTIONLIST,
+    query
+  };
+}
+
+export function requestLabelsOptionListSuccess(result) {
+  return {
+    type: REQUEST_GET_LABELS_OPTIONLIST_SUCCESS,
+    result
+  };
+}
+
+export function requestGroupsOptionList(query) {
+  return {
+    type: REQUEST_GET_GROUPS_OPTIONLIST,
+    query
+  };
+}
+
+export function requestGroupsOptionListSuccess(result) {
+  return {
+    type: REQUEST_GET_GROUPS_OPTIONLIST_SUCCESS,
+    result
+  };
+}
+
 
 /* export function requestAccessToLibrarySuccess(result) {
   return {
