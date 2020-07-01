@@ -169,6 +169,16 @@ export const getLibraryOptionList = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/option-items?label=name&q=${query}`, options)
 };
 
+export const getLabelsOptionList = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/references/labels/option-items?label=name`, options)
+};
+
+export const getGroupsOptionList = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/references/groups/option-items?label=name`, options)
+};
+
 export const getMyLibrary = (options) => {
   const library_id = options.id
   options = getOption(options);
