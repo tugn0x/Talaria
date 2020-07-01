@@ -20,6 +20,8 @@
         input[type=text] {
             border: 1px solid $labels-border;
             border-radius: 4px;
+            height: 30px;
+            width: 100%;
         }
         .dropdown-menu { 
             border: none;
@@ -34,10 +36,31 @@
         background: none;
         border-radius: 0;
         border: none;
+        position: relative;
+        i.fa-search {
+            position: absolute;
+            /* display: table-cell; */
+            height: 100%;
+            width: 20px;
+            right: 22px;
+            font-size: 1.2rem;
+            top: 14px;
+            vertical-align: middle;
+        }
+        
     }
     .dropdown-menu {
         width: 100.2%;
         left: -0.1% !important;
         top: -2px;
+        .filter-item {
+            display: flex;
+            align-items: center;
+            padding-left: 15px;
+            margin: 15px 0;
+            label {
+                margin: 0;
+            }
+        }
     }
 }

@@ -17,8 +17,8 @@ const ReferencesListPage = (props) => {
     const referencesList = patron.referencesList.data
     const pagination = patron.referencesList.pagination
     const intl = useIntl()
-    //const labelsOptionList=patron.labelsOptionList
-    //const groupsOptionList=patron.groupsOptionList
+    const labelsOptionList = patron.labelsOptionList
+    const groupsOptionList = patron.groupsOptionList
     useEffect(() => {
         if(!isLoading) {
             dispatch(requestReferencesList())
@@ -36,6 +36,8 @@ const ReferencesListPage = (props) => {
                 pagination={pagination}
                 history={history}
                 messages={messages}
+                labelsOptionList={labelsOptionList}
+                groupsOptionList={groupsOptionList}
                 match={match}
                 title={intl.formatMessage(messages.header)}
                 searchOptions={{
