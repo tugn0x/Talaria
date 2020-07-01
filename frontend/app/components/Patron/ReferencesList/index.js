@@ -84,16 +84,16 @@ const ReferencesList = (props) => {
                 <Row className="list-head">
                     <Col sm={10} className="select-checkbox">
                         <input type="checkbox" onChange={(e)=>toggleAllCheckbox(e)}/>
-                        {<NavLink to='#'  className="btn btn-link">
+                        {<NavLink to='#'  className="btn btn-link" disabled={selectedReferences.length==0} >
                             <i className="fa fa-2x fa-print"></i>
                         </NavLink>}
-                        {<NavLink to='#'  className="btn btn-link">
+                        {<NavLink to='#'  className="btn btn-link" disabled={selectedReferences.length==0} >
                             <i className="fa fa-2x fa-download"></i>
                         </NavLink>}
-                        {<NavLink to='#'  className="btn btn-link">
+                        {<NavLink to='#'  className="btn btn-link" disabled={selectedReferences.length==0} >
                             <i className="fa fa-2x fa-tag"></i>
                         </NavLink>}
-                        {<NavLink to='#'  className="btn btn-link">
+                        {<NavLink to='#'  className="btn btn-link" disabled={selectedReferences.length==0}>
                             <i className="fa fa-2x fa-folder"></i>
                         </NavLink>}
                     </Col>
