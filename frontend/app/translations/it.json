@@ -63,6 +63,10 @@
   "app.containers.ReferencePage.referenceAdded": "Riferimento aggiunta",
   "app.containers.ReferencePage.referenceUpdate": "Riferimento aggiornata",
 
+
+  "app.containers.ReferencesListPage.labels": "Etichette",
+  "app.containers.ReferencesListPage.groups": "Categorie",
+
   "app.containers.MyLibrariesPage.header": "La mia biblioteca",
   "app.containers.MyLibrariesPage.title": "Aggiungi una biblioteca",
   "app.containers.MyLibrariesPage.library_id": "Seleziona una biblioteca",

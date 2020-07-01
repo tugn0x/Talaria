@@ -1,0 +1,43 @@
+@import '../../../scss/vendors/variables';
+
+.filter-select {
+    
+    > button {
+        background: none;
+        border: none;
+        max-width: 100%;
+        width: 100%;
+        font-size: 1rem;
+    }
+    &.labels {
+        background-color: $labels-color;
+        border: 1px solid $labels-border;
+        border-radius: 4px;
+        &.show {
+            border-bottom-color: transparent;
+            border-radius:  4px 4px 0 0;
+        }
+        input[type=text] {
+            border: 1px solid $labels-border;
+            border-radius: 4px;
+        }
+        .dropdown-menu { 
+            border: none;
+            border: 1px solid $labels-border;
+            &.show {
+                border-top: none;
+                border-radius: 0 0 4px 4px;
+            }
+        }
+    }
+    .dropdown-header {
+        background: none;
+        border-radius: 0;
+        border: none;
+    }
+    .dropdown-menu {
+        width: 100.2%;
+        left: -0.1% !important;
+        top: -2px;
+    }
+}

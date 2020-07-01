@@ -1,16 +1,18 @@
 import React, {useState} from 'react'
 import {Row, Col} from 'reactstrap'
 import messages from './messages'
-import globalMessages from 'utils/globalMessages'
+// import globalMessages from 'utils/globalMessages'
 import { FormattedMessage } from 'react-intl';
 import {Pagination, InputSearch} from 'components';
-import CustomModal from 'components/Modal/Loadable'
+// import CustomModal from 'components/Modal/Loadable'
 import {useIntl} from 'react-intl';
-import ButtonPlus from 'components/Button/ButtonPlus'
+// import ButtonPlus from 'components/Button/ButtonPlus'
 import { generatePath } from "react-router";
-import ReferencesPage from 'containers/Patron/ReferencesPage'
+// import ReferencesPage from 'containers/Patron/ReferencesPage'
 import { NavLink } from 'react-router-dom';
 import ReferenceItem from '../ReferenceItem';
+import FilterSelect from '../FilterSelect';
+
 import './style.scss';
 
 const ReferencesList = (props) => {
@@ -45,7 +47,9 @@ const ReferencesList = (props) => {
                         }
                     </Col>
                     <Col md="3">Categorie</Col>
-                    <Col md="3">Etichette</Col>
+                    <Col md="3">
+                        <FilterSelect type={"labels"} />
+                    </Col>
                     <Col md="2">Cancella tutto</Col>
                 </Row>
                 <Row>

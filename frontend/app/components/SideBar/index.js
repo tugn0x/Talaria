@@ -33,7 +33,6 @@ function SideBar(props) {
             return 0;  
           })
           .map((route) => {
-            console.log(route)
             return <NavLink
               className="nav-link btn"
               key={route.name}

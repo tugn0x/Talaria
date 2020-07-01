@@ -20,4 +20,12 @@ export default defineMessages({
     id: `${scope}.edit`,
     defaultMessage: 'Edit reference',
   },
+  labels: {
+    id: `${scope}.labels`,
+    defaultMessage: 'Labels',
+  },
+  groups: {
+    id: `${scope}.groups`,
+    defaultMessage: 'Categories',
+  },
 });

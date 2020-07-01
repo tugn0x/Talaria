@@ -46,7 +46,7 @@ const ReferenceItem = (props) => {
             <Col sm={7} className="info">
                 <p><span className="pub_title">{data.pub_title}</span> <span className="part_title">{data.part_title}</span></p>
                 <div className="authors">
-                   {data.first_author && <span class="first_author">Autore <span>{data.first_author}</span></span>} 
+                   {data.first_author && <span className="first_author">Autore <span>{data.first_author}</span></span>} 
                    <span className="pubyear">Anno <span>{data.pubyear}</span></span>
                 </div>
                 {data.labels.data && <span className="labels">
@@ -62,7 +62,7 @@ const ReferenceItem = (props) => {
                     <i className="fa fa-2x fa-share"></i>
                 </NavLink>}
                 {data.oa==1 && <NavLink to={`${oaurl(data.id)}`} className="btn btn-link">
-                    <i class="fa fa-2x fa-github"></i>
+                    <i className="fa fa-2x fa-github"></i>
                 </NavLink>}
                 {<NavLink to={`${editurl(data.id)}`}  className="btn btn-link">
                     <i className="fa fa-2x fa-edit"></i>
