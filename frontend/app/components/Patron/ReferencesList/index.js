@@ -23,7 +23,7 @@ const ReferencesList = (props) => {
     /*  const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal); */
 
-    const [selectedReferences,setSelectedReferences]=useState([]);
+    const [selectedReferences, setSelectedReferences] = useState([]);
 
 
     const linkTo = (path) => {
@@ -35,25 +35,26 @@ const ReferencesList = (props) => {
     }
 
     const toggleReference = (e) => {
-        let newList = selectedReferences
         
+        let newList = selectedReferences
+
         let pos=newList.indexOf(e.target.value);
         if(e.target.checked)
         {
             //add to array
-            if(pos==-1)
+            if(pos === -1)
                 newList.push(e.target.value)
             
         }
         else if(!e.target.checked)
         {
             //remove from array
-            if(pos>=0)
+            if(pos !== -1)
                 newList.splice(pos, 1);
             
         }
-
-        setSelectedReferences(newList);
+        
+        setSelectedReferences(() => [...newList]); 
     }
 
     return (
@@ -90,20 +91,21 @@ const ReferencesList = (props) => {
                 <Row className="list-head">
                     <Col sm={10} className="select-checkbox">
                         <input type="checkbox" onChange={(e)=>toggleAllCheckbox(e)}/>
-                        {<NavLink to='#'  className="btn btn-link" disabled={selectedReferences.length==0} >
+                        {<NavLink to='#'  className="btn btn-link" disabled={selectedReferences.length===0} >
                             <i className="fa fa-2x fa-print"></i>
                         </NavLink>}
-                        {<NavLink to='#'  className="btn btn-link" disabled={selectedReferences.length==0} >
+                        {<NavLink to='#'  className="btn btn-link" disabled={selectedReferences.length===0} >
                             <i className="fa fa-2x fa-download"></i>
                         </NavLink>}
-                        {<NavLink to='#'  className="btn btn-link" disabled={selectedReferences.length==0} >
+                        {<NavLink to='#'  className="btn btn-link" disabled={selectedReferences.length===0} >
                             <i className="fa fa-2x fa-tag"></i>
                         </NavLink>}
-                        {<NavLink to='#'  className="btn btn-link" disabled={selectedReferences.length==0}>
+                        {<NavLink to='#'  className="btn btn-link" disabled={selectedReferences.length===0}>
                             <i className="fa fa-2x fa-folder"></i>
                         </NavLink>}
                     </Col>
                     <Col sm={2} className="select-counter">
+                        {console.log(selectedReferences.length)}
                     {selectedReferences.length} di {data.length}
                     </Col>
                 </Row>
