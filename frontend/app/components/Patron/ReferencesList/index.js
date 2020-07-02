@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Row, Col} from 'reactstrap'
 import messages from './messages'
 // import globalMessages from 'utils/globalMessages'
@@ -24,37 +24,42 @@ const ReferencesList = (props) => {
     const toggle = () => setModal(!modal); */
 
     const [selectedReferences, setSelectedReferences] = useState([]);
+    const [disableToolbar,setDisableToolbar]=useState(false);
+    
+    useEffect(() => {
+        setSelectedReferences(data.map (rif => (
+            {id: rif.id, checked: false}
+        )))
+    }, [data])
 
+    useEffect(() => {
+        setDisableToolbar(selectedReferences.filter(el=>el.checked===true).length===0)
+    }, [selectedReferences])
 
     const linkTo = (path) => {
         history.push(path)
      };
 
+    
     const toggleAllCheckbox = (e) => {
-        console.log("TOGGLE ALL", e)
+        
+        const chk=e.target.checked
+        setSelectedReferences((state) => state.map (rif => (
+            {id: rif.id, checked: chk}
+        )))
+        
     }
 
     const toggleReference = (e) => {
-        
-        let newList = selectedReferences
+        const val=Number(e.target.value)
 
-        let pos=newList.indexOf(e.target.value);
-        if(e.target.checked)
-        {
-            //add to array
-            if(pos === -1)
-                newList.push(e.target.value)
+        setSelectedReferences( (state) => state.map (rif => {
+            if(rif.id === val)
+                rif.checked=!rif.checked
             
-        }
-        else if(!e.target.checked)
-        {
-            //remove from array
-            if(pos !== -1)
-                newList.splice(pos, 1);
-            
-        }
-        
-        setSelectedReferences(() => [...newList]); 
+            return rif;
+            }
+        ))
     }
 
     return (
@@ -83,7 +88,7 @@ const ReferencesList = (props) => {
                     <Col md="2">Cancella tutto</Col>
                 </Row>
                 <Row>
-                    <Col md={12}>Filter Results</Col>
+                    <Col md={12}>Filtri attivi</Col>
                 </Row>
             </div>
             
@@ -91,22 +96,21 @@ const ReferencesList = (props) => {
                 <Row className="list-head">
                     <Col sm={10} className="select-checkbox">
                         <input type="checkbox" onChange={(e)=>toggleAllCheckbox(e)}/>
-                        {<NavLink to='#'  className="btn btn-link" disabled={selectedReferences.length===0} >
+                        {<NavLink to='#'  className="btn btn-link" disabled={disableToolbar} >
                             <i className="fa fa-2x fa-print"></i>
                         </NavLink>}
-                        {<NavLink to='#'  className="btn btn-link" disabled={selectedReferences.length===0} >
+                        {<NavLink to='#'  className="btn btn-link" disabled={disableToolbar} >
                             <i className="fa fa-2x fa-download"></i>
                         </NavLink>}
-                        {<NavLink to='#'  className="btn btn-link" disabled={selectedReferences.length===0} >
+                        {<NavLink to='#'  className="btn btn-link" disabled={disableToolbar} >
                             <i className="fa fa-2x fa-tag"></i>
                         </NavLink>}
-                        {<NavLink to='#'  className="btn btn-link" disabled={selectedReferences.length===0}>
+                        {<NavLink to='#'  className="btn btn-link" disabled={disableToolbar}>
                             <i className="fa fa-2x fa-folder"></i>
                         </NavLink>}
                     </Col>
                     <Col sm={2} className="select-counter">
-                        {console.log(selectedReferences.length)}
-                    {selectedReferences.length} di {data.length}
+                    {selectedReferences.filter(el=>el.checked===true).length} di {data.length}
                     </Col>
                 </Row>
                 <div className="list-body">
@@ -117,7 +121,10 @@ const ReferencesList = (props) => {
                                 data={ref}
                                 editPath={props.editPath}
                                 toggleSelection={toggleReference}
+                                checked={selectedReferences.length>0 && selectedReferences.filter(el=>el.id===ref.id)[0].checked}
                             />
+                            
+                            
                         ))
                     ||
                         <h5 className="text-center">

@@ -5,7 +5,7 @@ import { generatePath } from "react-router";
 import './style.scss';
 
 const ReferenceItem = (props) => {
-    const {data, editPath,toggleSelection} = props
+    const {data, editPath,toggleSelection,checked} = props
     
     const editurl = (id) => {
         return generatePath(`${editPath}`, {
@@ -40,7 +40,7 @@ const ReferenceItem = (props) => {
     return ( 
         <Row className="reference-row justify-content-between">
             <Col sm={2} className="select-checkbox">
-                <input type="checkbox" onChange={(e)=>toggleSelection(e)} value={data.id}/>
+                <input type="checkbox" onChange={(e)=>toggleSelection(e)} value={data.id} checked={checked}/>
                 <i className={`fa ${matTypeIcon(data.material_type)}`}></i>
             </Col> 
             <Col sm={7} className="info">
