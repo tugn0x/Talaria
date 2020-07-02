@@ -11,11 +11,11 @@ export const scope = 'app.containers.RegisterNewLibrary';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Register new public library',
+    defaultMessage: 'Register public library',
   },
   link: {
     id: `${scope}.link`,
-    defaultMessage: 'Register new library',
+    defaultMessage: 'Register library',
   },
   step_1: {
     id: `${scope}.step_1`,

@@ -9,7 +9,8 @@ const ReferenceItem = (props) => {
     
     const editurl = (id) => {
         return generatePath(`${editPath}`, {
-            id: id,
+            id,
+            edit: "edit"
         });
     }
 
@@ -26,12 +27,12 @@ const ReferenceItem = (props) => {
     //TODO
     const oaurl=(id) => {
         return generatePath(`${editPath}`, {
-            id: id,
+            id,
         });
     }
     const requesturl=(id) => {
         return generatePath(`${editPath}`, {
-            id: id,
+            id
         });
     }
 
@@ -44,7 +45,9 @@ const ReferenceItem = (props) => {
                 <i className={`fa ${matTypeIcon(data.material_type)}`}></i>
             </Col> 
             <Col sm={7} className="info">
-                <p><span className="pub_title">{data.pub_title}</span> <span className="part_title">{data.part_title}</span></p>
+                <NavLink to={`${requesturl(data.id)}`}>
+                    <p><span className="pub_title">{data.pub_title}</span> <span className="part_title">{data.part_title}</span></p>
+                </NavLink>
                 <div className="authors">
                    {data.first_author && <span className="first_author">Autore <span>{data.first_author}</span></span>} 
                    <span className="pubyear">Anno <span>{data.pubyear}</span></span>

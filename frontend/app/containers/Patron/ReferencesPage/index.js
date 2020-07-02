@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import makeSelectPatron, {isPatronLoading} from '../selectors';
 import {ReferencesForm,Loader} from 'components';
+import ReferenceDetail from 'components/Patron/ReferenceDetail';
 import {requestPostReferences,requestUpdateReferences} from '../actions'
 import messages from './messages'
 import {useIntl} from 'react-intl';
@@ -16,7 +17,7 @@ const ReferencesPage = (props) => {
     const reference = patron.reference 
     const intl = useIntl();
     const isNew = !params.id || params.id === 'new'
-
+  
     useEffect(() => {
         if(!isNew && !isLoading){
            dispatch(requestGetReference(params.id))
@@ -28,13 +29,21 @@ const ReferencesPage = (props) => {
             {isNew && 
                 <ReferencesForm 
                    //  loading={isLoading} 
+                    messages={messages}
                     createReference={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } />
             }
             {!isNew && 
-                <ReferencesForm 
-                    reference={reference}
-                   // loading={isLoading} 
-                    updateReference={ (formData) => dispatch(requestUpdateReferences(formData, params.id, intl.formatMessage(messages.referenceUpdate))) } />
+                params.edit &&
+                    <ReferencesForm 
+                        messages={messages}
+                        reference={reference}
+                        // loading={isLoading} 
+                        updateReference={ (formData) => dispatch(requestUpdateReferences(formData, params.id, intl.formatMessage(messages.referenceUpdate))) } />
+                ||
+                    <ReferenceDetail 
+                        messages={messages}
+                        reference={reference} 
+                    />
             }
         </Loader>
     )
