@@ -95,19 +95,21 @@ const ReferencesList = (props) => {
             <div className="list-wrapper">
                 <Row className="list-head">
                     <Col sm={10} className="select-checkbox">
-                        <input type="checkbox" onChange={(e)=>toggleAllCheckbox(e)}/>
-                        {<NavLink to='#'  className="btn btn-link" disabled={disableToolbar} >
-                            <i className="fa fa-2x fa-print"></i>
-                        </NavLink>}
-                        {<NavLink to='#'  className="btn btn-link" disabled={disableToolbar} >
-                            <i className="fa fa-2x fa-download"></i>
-                        </NavLink>}
-                        {<NavLink to='#'  className="btn btn-link" disabled={disableToolbar} >
-                            <i className="fa fa-2x fa-tag"></i>
-                        </NavLink>}
-                        {<NavLink to='#'  className="btn btn-link" disabled={disableToolbar}>
-                            <i className="fa fa-2x fa-folder"></i>
-                        </NavLink>}
+                        <div class="features-icons" >
+                            <input type="checkbox" onChange={(e)=>toggleAllCheckbox(e)}/>
+                            {<NavLink to='#'  className="btn btn-link" disabled={disableToolbar} >
+                                <i className="fa fa-2x fa-print"></i>
+                            </NavLink>}
+                            {<NavLink to='#'  className="btn btn-link" disabled={disableToolbar} >
+                                <i className="fa fa-2x fa-download"></i>
+                            </NavLink>}
+                            {<NavLink to='#'  className="btn btn-link" disabled={disableToolbar} >
+                                <i className="fa fa-2x fa-tag"></i>
+                            </NavLink>}
+                            {<NavLink to='#'  className="btn btn-link" disabled={disableToolbar}>
+                                <i className="fa fa-2x fa-folder"></i>
+                            </NavLink>}
+                        </div>
                     </Col>
                     <Col sm={2} className="select-counter">
                     {selectedReferences.filter(el=>el.checked===true).length} di {data.length}
