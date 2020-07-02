@@ -1,0 +1,32 @@
+@import '../../../scss/variables';
+
+.detail.reference {
+    .header {
+        display: flex;
+        align-items: center;    
+    }
+    .title-section {
+        flex: 1;
+    }
+    .features-icons {
+        background-color: $grey-lighter;
+        margin: 2rem 0 1rem 0;
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        width: 100%;
+        .btn {
+            height: auto;
+            margin: 0;
+            i {
+                color: $orange;
+                font-size: 1.5rem;
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+    .card-body {
+        padding: 6.7rem;
+    }
+}

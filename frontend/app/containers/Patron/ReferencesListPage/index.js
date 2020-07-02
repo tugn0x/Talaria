@@ -44,7 +44,7 @@ const ReferencesListPage = (props) => {
                     getSearchList: (query) => dispatch(requestReferencesList(null, query)),
                     searchOnChange: true
                 }}
-                editPath={'/patron/references/reference/:id?'}
+                editPath={'/patron/references/reference/:id?/:edit?'}
                 modalComponent={ <ReferencesPage match={match} />}
             />
             

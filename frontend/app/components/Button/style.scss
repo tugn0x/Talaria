@@ -5,6 +5,8 @@
     padding: 0.45rem;
     background: none;
     border: none;
+    color: $orange;
+    margin: 0;
     &:active, &:focus {
         border: none;
         box-shadow: 0 0 0;
@@ -22,10 +24,10 @@
         }
     }
     &:hover {
-        background-color: $orange;
-        span, i:before {
+       // background-color: $orange;
+        /* span, i:before {
             color: white;
-        }
+        } */
         text-decoration: none;
     }
 }

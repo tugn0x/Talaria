@@ -2,14 +2,14 @@ import React, {useEffect} from 'react'
 import {CustomForm} from 'components';
 import {fields} from './fields';
 import {Row, Col} from 'reactstrap'
-import messages from './messages';
-import Loader from 'components/Form/Loader.js';
+// import messages from './messages';
+// import Loader from 'components/Form/Loader.js';
 import {useIntl} from 'react-intl';
 import globalMessages from 'utils/globalMessages'
 
 
 const ReferencesForm = (props) => {
-    const {createReference, reference, loading, updateReference} = props
+    const {createReference, reference, updateReference, messages} = props
     const intl = useIntl();
     
     return (

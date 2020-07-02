@@ -14,7 +14,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { DropdownItem, DropdownMenu, DropdownToggle, Nav, UncontrolledDropdown, Badge, NavItem } from 'reactstrap';
 import SubHeaderBar from 'components/SubHeaderBar'
 import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
-import logo from 'images/logo_home.gif'
+import logo from 'images/logo-nilde.png'
 import logomini from 'images/logo.png'
 import './style.scss'
 import ResourceMenu from "./ResourcesMenu";

@@ -1,0 +1,37 @@
+@import '../../scss/variables';
+
+footer.app-footer {
+    background: $grey-light;
+    padding: 1rem 0 1.5rem;
+    .top {
+        width: 100%;
+        a {
+            color: #444444;
+            &:not(:last-child) {
+                margin-right: 2rem;
+            }
+        }
+        margin-bottom: 1.6rem;
+    }
+    .lang-change {
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid white;
+        
+    }
+    .footer-menu {
+        padding-top: 0.5rem;
+    }
+    .bottom {
+        > * {
+            &:not(:last-child) {
+                margin-right: 2rem;
+            } 
+        }
+        p {
+            margin: 0;
+        }
+    }
+    .copyright {
+        font-size: 11px;
+    }
+}
