@@ -217,9 +217,13 @@ export const getLibrariesSubjects = (options) => {
 // Reference //
 export const getReferencesList = (options) => {
   const page = options.page;
-  const query = options.query;
+  const params = options.query;
+  const qstringpar="";
+  if(params && params.query && params.query!="") qstringpar+="&q="+params.query;
+  if(params && params.labelIds && params.labelIds.length>0) qstringpar+="&labelIds=["+params.labelIds.join(',')+"]";
+  if(params && params.groupIds && params.groupIds.length>0) qstringpar+="&groupIds=["+params.groupIds.join(',')+"]";
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/references/my?page=${page}&q=${query}`, options)
+  return request(`${BASE_URL}/api/v1/references/my?page=${page}${qstringpar}`, options)
 };
 
 export const createReference = (options) => {

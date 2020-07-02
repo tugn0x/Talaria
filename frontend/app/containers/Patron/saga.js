@@ -140,7 +140,7 @@ export function* requestReferencesListSaga(action) {
   const options = {
     method: 'get',
     page: action.page ? action.page : '1',
-    query: action.query ? action.query : ''
+    query: action.query ? action.query : null
   };
   try {
     const request = yield call(getReferencesList, options);

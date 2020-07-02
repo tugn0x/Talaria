@@ -25,6 +25,14 @@ const ReferencesList = (props) => {
 
     const [selectedReferences, setSelectedReferences] = useState([]);
     const [disableToolbar,setDisableToolbar]=useState(false);
+
+    const [multiFilter, setMultiFilter] = useState(
+        {
+            query: '',
+            labelIds:[],
+            groupIds:[]
+        }
+    );
     
     useEffect(() => {
         setSelectedReferences(data.map (rif => (
@@ -35,6 +43,10 @@ const ReferencesList = (props) => {
     useEffect(() => {
         setDisableToolbar(selectedReferences.filter(el=>el.checked===true).length===0)
     }, [selectedReferences])
+
+    useEffect( ()=> {
+        searchOptions.getSearchList(multiFilter)
+    }, [multiFilter])
 
     const linkTo = (path) => {
         history.push(path)
@@ -74,16 +86,32 @@ const ReferencesList = (props) => {
                     <Col md="4">
                         {searchOptions &&
                             <InputSearch
-                                submitCallBack={(query) => searchOptions.getSearchList(query)}
+                                submitCallBack={(query) => { 
+                                    setMultiFilter( state => ({
+                                        query:query,
+                                        labelIds:state.labelIds,
+                                        groupIds:state.groupIds,
+                                    }) )
+                                    //searchOptions.getSearchList(query,[],[])
+                                } 
+                                }
                                 searchOnChange={searchOptions.searchOnChange ? searchOptions.searchOnChange : false}
                             />
                         }
                     </Col>
                     <Col md="3">
-                        { groupsOptionList.length > 0 && <FilterSelect type={"groups"} options={groupsOptionList} /> }
+                        { groupsOptionList.length > 0 && <FilterSelect type={"groups"} options={groupsOptionList} submitCallBack={(groupIds) => setMultiFilter( state => ({
+                                        query:state.query,
+                                        labelIds:state.labelIds,
+                                        groupIds:groupIds
+                                    }) ) } /> }
                     </Col>
                     <Col md="3">
-                        { labelsOptionList.length > 0 && <FilterSelect type={"labels"} options={labelsOptionList} /> }
+                        { labelsOptionList.length > 0 && <FilterSelect type={"labels"} options={labelsOptionList} submitCallBack={(labelIds) => setMultiFilter( state => ({
+                                        query:state.query,
+                                        labelIds:labelIds,
+                                        groupIds:state.groupIds
+                        }) ) } /> }
                     </Col>
                     <Col md="2">Cancella tutto</Col>
                 </Row>
@@ -92,23 +120,25 @@ const ReferencesList = (props) => {
                 </Row>
             </div>
             
-            <div className="list-wrapper">
+            <div className="referenceList list-wrapper">
                 <Row className="list-head">
                     <Col sm={10} className="select-checkbox">
-                        <div class="features-icons" >
+                        <div className="features-icons" >
                             <input type="checkbox" onChange={(e)=>toggleAllCheckbox(e)}/>
-                            {<NavLink to='#'  className="btn btn-link" disabled={disableToolbar} >
+                            {!disableToolbar && <>
+                            {<NavLink to='#'  className="btn btn-link" >
                                 <i className="fa fa-2x fa-print"></i>
                             </NavLink>}
-                            {<NavLink to='#'  className="btn btn-link" disabled={disableToolbar} >
+                            {<NavLink to='#'  className="btn btn-link">
                                 <i className="fa fa-2x fa-download"></i>
                             </NavLink>}
-                            {<NavLink to='#'  className="btn btn-link" disabled={disableToolbar} >
+                            {<NavLink to='#'  className="btn btn-link">
                                 <i className="fa fa-2x fa-tag"></i>
                             </NavLink>}
-                            {<NavLink to='#'  className="btn btn-link" disabled={disableToolbar}>
+                            {<NavLink to='#'  className="btn btn-link">
                                 <i className="fa fa-2x fa-folder"></i>
                             </NavLink>}
+                            </>}
                         </div>
                     </Col>
                     <Col sm={2} className="select-counter">

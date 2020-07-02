@@ -26,6 +26,7 @@ const FilterSelect = props => {
     const onCheckBox = (itemValue) => {
         setData(state => handleCheckBox(state, itemValue)) 
         setDefaultData(state => handleCheckBox(state, itemValue)) 
+        props.submitCallBack(options)
     }
 
     useEffect(() => {

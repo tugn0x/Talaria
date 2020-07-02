@@ -287,6 +287,26 @@ ul.list-inline {
         @include patron_icon
     }
 }
+
+.reference .features-icons,
+.referenceList .features-icons
+ {
+    background-color: $grey-lighter;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    .btn {
+        height: auto;
+        margin: 0;
+        i {
+            color: $orange;
+            font-size: 1.5rem;
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
 /* .switch-success .switch-input:checked+.switch-slider {
     background-color: $orange;
     border-color: $orange;
