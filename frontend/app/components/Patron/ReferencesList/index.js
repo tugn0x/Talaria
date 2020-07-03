@@ -46,7 +46,7 @@ const ReferencesList = (props) => {
 
     useEffect( ()=> {
         console.log("USE EFFECT:", multiFilter)
-        //searchOptions.getSearchList(multiFilter)
+        searchOptions.getSearchList(multiFilter)
     }, [multiFilter])
 
     const linkTo = (path) => {
