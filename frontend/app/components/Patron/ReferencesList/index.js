@@ -54,6 +54,17 @@ const ReferencesList = (props) => {
      };
 
     
+    const handleCancelFilter = (e) => {
+        console.log("Reset Filter");
+        setMultiFilter( state => (
+        {
+            query: '',
+            labelIds:[],
+            groupIds:[]
+        }))
+    }
+
+    
     const toggleAllCheckbox = (e) => {
         
         const chk=e.target.checked
@@ -114,7 +125,7 @@ const ReferencesList = (props) => {
                                         groupIds:state.groupIds
                         }) ) } /> }
                     </Col>
-                    <Col md="2">Cancella tutto</Col>
+                    <Col md="2">{<a href="#" onClick={(e) => handleCancelFilter(e)} className="btn btn-link">Cancella tutto</a> }</Col>
                 </Row>
                 <Row>
                     <Col md={12}>
