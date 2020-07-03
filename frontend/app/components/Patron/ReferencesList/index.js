@@ -75,10 +75,7 @@ const ReferencesList = (props) => {
     }
 
     const toggleReference = (id) => {
-        setSelectedReferences(state => {
-            console.log(handleIds([...state], id))
-            return handleIds([...state], id)
-        })
+        setSelectedReferences(state => ( handleIds([...state], id)))
     }
 
     return (
