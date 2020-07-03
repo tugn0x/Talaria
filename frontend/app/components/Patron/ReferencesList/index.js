@@ -26,7 +26,7 @@ const ReferencesList = (props) => {
     const [selectedReferences, setSelectedReferences] = useState([]);
     const [disableToolbar,setDisableToolbar]=useState(false);
 
-    const [multiFilter, setMultiFilter] = useState(
+    const [multiFilter, setMultiFilter ] = useState(
         {
             query: '',
             labelIds:[],
@@ -49,12 +49,24 @@ const ReferencesList = (props) => {
     }, [selectedReferences])
 
     useEffect( ()=> {
+        console.log("USE EFFECT:", multiFilter)
         searchOptions.getSearchList(multiFilter)
     }, [multiFilter])
 
     const linkTo = (path) => {
         history.push(path)
      };
+
+    
+    const handleCancelFilter = (e) => {
+        console.log("Reset Filter");
+        setMultiFilter( state => (
+        {
+            query: '',
+            labelIds:[],
+            groupIds:[]
+        }))
+    }
 
     
     const toggleAllCheckbox = (e) => {
@@ -118,10 +130,28 @@ const ReferencesList = (props) => {
                                     groupIds: state.groupIds
                         }) ) } /> }
                     </Col>
-                    <Col md="2">Cancella tutto</Col>
+                    <Col md="2">{<a href="#" onClick={(e) => handleCancelFilter(e)} className="btn btn-link">Cancella tutto</a> }</Col>
                 </Row>
                 <Row>
-                    <Col md={12}>Filtri attivi</Col>
+                    <Col md={12}>
+                    { labelsOptionList && multiFilter.labelIds && multiFilter.labelIds.length>0 &&
+                     <ul className="activeFilter">    
+                      {multiFilter.labelIds.map( el => 
+                         <li key={el.value} className="labelFilter">{el.label}</li>
+                        ) 
+                      }
+                      </ul>
+                    }
+                    { groupsOptionList && multiFilter.groupIds && multiFilter.groupIds.length>0 &&
+                     <ul className="activeFilter">    
+                      {multiFilter.groupIds.map( el => {
+                        <li key={el.value} className="groupFilter">{el.label}</li>
+                        }) 
+                      /*groupsOptionList.filter( (listItem) => {Number(listItem.value)===Number(el.value)} )[0].label */
+                      }
+                      </ul>
+                    }
+                    </Col>
                 </Row>
             </div>
             

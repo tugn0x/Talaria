@@ -10,3 +10,27 @@
     justify-content: flex-end;
     align-items: center;
 }
+
+.activeFilter {
+    list-style: none;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    .labelFilter
+    {
+        padding:5px;
+        border-radius: 5px;
+        background-color: $labels-color;
+        margin-right:5px;
+    }
+
+    .groupFilter
+    {
+        padding:5px;
+        border-radius: 5px;
+        background-color: $groups-color;
+        margin-right:5px;
+    }
+}
