@@ -41,6 +41,8 @@ return [
         'readyToDelivery'=>39,
         'fulfilled'=>40,
         'notFulfilled'=>50
-    ]
+    ],
+    'reference_material_type' => ['article'=>1,'book'=>2,'thesis'=>3],
+    
 
 ];
