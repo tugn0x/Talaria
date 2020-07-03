@@ -41,7 +41,7 @@ class ReferenceTransformer extends BaseTransformer
 
     public function includePatronddrequests(Model $model)
     {
-        return $this->collection($model->patronddrequests, new BaseLightTransformer());
+        return $this->collection($model->patronddrequests, new BaseTransformer());
     }
 
     public function includeGroups(Model $model)
