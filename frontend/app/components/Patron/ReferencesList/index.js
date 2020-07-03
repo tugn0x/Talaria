@@ -134,7 +134,7 @@ const ReferencesList = (props) => {
                     { groupsOptionList && multiFilter.groupIds && multiFilter.groupIds.length>0 &&
                      <ul id="groupsActiveFilter" className="filtersList">    
                       {multiFilter.groupIds.map( el => 
-                        <li key={el.value} className="groupFilter">{groupsOptionList.filter( (listItem) => (listItem.value===el))[0].label}</li>
+                        el.value && <li key={el.value} className="groupFilter">{groupsOptionList.filter( (listItem) => (listItem.value===el))[0].label}</li>
                         ) 
                       }
                       </ul>
@@ -142,7 +142,7 @@ const ReferencesList = (props) => {
                     { labelsOptionList && multiFilter.labelIds && multiFilter.labelIds.length>0 &&
                      <ul id="labelsActiveFilter" className="filtersList">    
                       {multiFilter.labelIds.map( el => 
-                         <li key={el.value} className="labelFilter">{labelsOptionList.filter( (listItem) => (listItem.value===el))[0].label}</li>
+                         el.value && <li key={el.value} className="labelFilter">{labelsOptionList.filter( (listItem) => (listItem.value===el))[0].label}</li>
                         ) 
                       }
                       </ul>
