@@ -6,35 +6,21 @@ import {useIntl} from 'react-intl';
 import './style.scss';
 
 const FilterSelect = props => {
-    const {type} = props
-    const options = props.options.map(opt => ({...opt, checked: false}))
-    const [defaultData, setDefaultData] = useState(options)
+    const {type, submitCallBack, selectedIds} = props
+    const options = props.options.map(opt => {
+        return {...opt, checked: selectedIds.includes(opt) ? true : false}
+    })
     const [data, setData] = useState(options)
     const [query, setQuery] = useState("")
     const intl = useIntl();
     
-    const handleCheckBox = (options, itemValue) => {
-        return options.map(item => {
-            if(item.value === itemValue){
-                return {...item, checked: item.checked ? !item.checked : true }
-            }else {
-                return {...item}
-            }
-        })
-    }
-
-    const onCheckBox = (itemValue) => {
-        setData(state => handleCheckBox(state, itemValue)) 
-        setDefaultData(state => handleCheckBox(state, itemValue)) 
-        props.submitCallBack(options)
-    }
-
+    
     useEffect(() => {
         if(query !== ""){
             const regex = new RegExp(query, "i")
             setData(state =>  state.filter(item => regex.test(item.label) ))
         }else {
-            setData(defaultData)
+            setData(options)
         }
     }, [query])
 
@@ -53,7 +39,7 @@ const FilterSelect = props => {
                 </DropdownItem>
                 {data.length > 0 && data.map(item => (
                     <div className="filter-item" key={item.value}>
-                        <input type="checkbox" onChange={(e) => onCheckBox(item.value)} checked={item.checked ? item.checked : false}  id={item.label} />
+                        <input type="checkbox" onChange={() => submitCallBack(item.value)}  checked={selectedIds.includes(item.value) ? true : false}   id={item.label} />
                         <label htmlFor={item.label}>{item.label}</label>
                     </div>
                 ))}

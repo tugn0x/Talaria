@@ -33,15 +33,19 @@ const ReferencesList = (props) => {
             groupIds:[]
         }
     );
+
+    const handleIds = (ids, id) => {
+        if(ids.includes(id)){
+            const index = ids.findIndex(el => el === id);
+            ids.splice(index, 1)
+            return ids
+        }else {
+            return [...ids, id]
+        }
+    }
     
     useEffect(() => {
-        setSelectedReferences(data.map (rif => (
-            {id: rif.id, checked: false}
-        )))
-    }, [data])
-
-    useEffect(() => {
-        setDisableToolbar(selectedReferences.filter(el=>el.checked===true).length===0)
+       setDisableToolbar(selectedReferences.length == 0)
     }, [selectedReferences])
 
     useEffect( ()=> {
@@ -54,24 +58,15 @@ const ReferencesList = (props) => {
 
     
     const toggleAllCheckbox = (e) => {
-        
         const chk=e.target.checked
-        setSelectedReferences((state) => state.map (rif => (
-            {id: rif.id, checked: chk}
-        )))
-        
+        setSelectedReferences( chk ? [...data.map(rif => rif.id )] : [])
     }
 
-    const toggleReference = (e) => {
-        const val=Number(e.target.value)
-
-        setSelectedReferences( (state) => state.map (rif => {
-            if(rif.id === val)
-                rif.checked=!rif.checked
-            
-            return rif;
-            }
-        ))
+    const toggleReference = (id) => {
+        setSelectedReferences(state => {
+            console.log(handleIds([...state], id))
+            return handleIds([...state], id)
+        })
     }
 
     return (
@@ -92,7 +87,6 @@ const ReferencesList = (props) => {
                                         labelIds:state.labelIds,
                                         groupIds:state.groupIds,
                                     }) )
-                                    //searchOptions.getSearchList(query,[],[])
                                 } 
                                 }
                                 searchOnChange={searchOptions.searchOnChange ? searchOptions.searchOnChange : false}
@@ -100,17 +94,28 @@ const ReferencesList = (props) => {
                         }
                     </Col>
                     <Col md="3">
-                        { groupsOptionList.length > 0 && <FilterSelect type={"groups"} options={groupsOptionList} submitCallBack={(groupIds) => setMultiFilter( state => ({
-                                        query:state.query,
-                                        labelIds:state.labelIds,
-                                        groupIds:groupIds
-                                    }) ) } /> }
+                        { groupsOptionList.length > 0 && 
+                            <FilterSelect 
+                                type={"groups"} 
+                                options={groupsOptionList} 
+                                selectedIds={multiFilter.groupIds}
+                                submitCallBack={(groupId) => setMultiFilter( state => ({
+                                    query: state.query,
+                                    labelIds: state.labelIds,
+                                    groupIds:handleIds(state.groupIds, groupId)
+                                }) ) } /> } 
                     </Col>
                     <Col md="3">
-                        { labelsOptionList.length > 0 && <FilterSelect type={"labels"} options={labelsOptionList} submitCallBack={(labelIds) => setMultiFilter( state => ({
-                                        query:state.query,
-                                        labelIds:labelIds,
-                                        groupIds:state.groupIds
+                        
+                        { labelsOptionList.length > 0 && 
+                            <FilterSelect 
+                                type={"labels"} 
+                                options={labelsOptionList} 
+                                selectedIds={multiFilter.labelIds}
+                                submitCallBack={(labelId) => setMultiFilter( state => ({
+                                    query: state.query,
+                                    labelIds: handleIds(state.labelIds, labelId),
+                                    groupIds: state.groupIds
                         }) ) } /> }
                     </Col>
                     <Col md="2">Cancella tutto</Col>
@@ -142,7 +147,7 @@ const ReferencesList = (props) => {
                         </div>
                     </Col>
                     <Col sm={2} className="select-counter">
-                    {selectedReferences.filter(el=>el.checked===true).length} di {data.length}
+                     {selectedReferences.length} di {data.length} 
                     </Col>
                 </Row>
                 <div className="list-body">
@@ -152,8 +157,9 @@ const ReferencesList = (props) => {
                                 key={`reference-${ref.id}`}
                                 data={ref}
                                 editPath={props.editPath}
-                                toggleSelection={toggleReference}
-                                checked={selectedReferences.length>0 && selectedReferences.filter(el=>el.id===ref.id)[0].checked}
+                                toggleSelection={() => toggleReference(ref.id)}
+                                // checked={selectedReferences.length>0 && selectedReferences.includes(ref.id) ? true : false}
+                                 checked={selectedReferences.includes(ref.id)}
                             />
                             
                             

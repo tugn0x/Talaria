@@ -41,7 +41,10 @@ const ReferencesListPage = (props) => {
                 match={match}
                 title={intl.formatMessage(messages.header)}
                 searchOptions={{
-                    getSearchList: (searchFilter) => {console.log("SEARCH: ",searchFilter); dispatch(requestReferencesList(null, searchFilter))},
+                    getSearchList: (searchFilter) => {
+                        console.log("SEARCH: ",searchFilter); 
+                        dispatch(requestReferencesList(null, searchFilter))
+                    },
                     searchOnChange: true
                 }}
                 editPath={'/patron/references/reference/:id?/:edit?'}

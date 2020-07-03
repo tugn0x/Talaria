@@ -41,7 +41,7 @@ const ReferenceItem = (props) => {
     return ( 
         <Row className="reference-row justify-content-between">
             <Col sm={2} className="select-checkbox">
-                <input type="checkbox" onChange={(e)=>toggleSelection(e)} value={data.id} checked={checked}/>
+                <input type="checkbox" onChange={toggleSelection} value={data.id} checked={checked}/>
                 <i className={`fa ${matTypeIcon(data.material_type)}`}></i>
             </Col> 
             <Col sm={7} className="info">
