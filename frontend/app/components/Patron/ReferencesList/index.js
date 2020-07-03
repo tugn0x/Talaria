@@ -130,21 +130,20 @@ const ReferencesList = (props) => {
                     <Col md="2">{<a href="#" onClick={(e) => handleCancelFilter(e)} className="btn btn-link">Cancella tutto</a> }</Col>
                 </Row>
                 <Row>
-                    <Col md={12}>
-                    { labelsOptionList && multiFilter.labelIds && multiFilter.labelIds.length>0 &&
-                     <ul className="activeFilter">    
-                      {multiFilter.labelIds.map( el => 
-                         <li key={el.value} className="labelFilter">{el.label}</li>
+                    <Col md={12} className="activeFilters">
+                    { groupsOptionList && multiFilter.groupIds && multiFilter.groupIds.length>0 &&
+                     <ul id="groupsActiveFilter" className="filtersList">    
+                      {multiFilter.groupIds.map( el => 
+                        <li key={el.value} className="groupFilter">{groupsOptionList.filter( (listItem) => (listItem.value===el))[0].label}</li>
                         ) 
                       }
                       </ul>
                     }
-                    { groupsOptionList && multiFilter.groupIds && multiFilter.groupIds.length>0 &&
-                     <ul className="activeFilter">    
-                      {multiFilter.groupIds.map( el => {
-                        <li key={el.value} className="groupFilter">{el.label}</li>
-                        }) 
-                      /*groupsOptionList.filter( (listItem) => {Number(listItem.value)===Number(el.value)} )[0].label */
+                    { labelsOptionList && multiFilter.labelIds && multiFilter.labelIds.length>0 &&
+                     <ul id="labelsActiveFilter" className="filtersList">    
+                      {multiFilter.labelIds.map( el => 
+                         <li key={el.value} className="labelFilter">{labelsOptionList.filter( (listItem) => (listItem.value===el))[0].label}</li>
+                        ) 
                       }
                       </ul>
                     }
