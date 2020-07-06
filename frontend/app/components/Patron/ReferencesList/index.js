@@ -134,7 +134,7 @@ const ReferencesList = (props) => {
                     { groupsOptionList && multiFilter.groupIds && multiFilter.groupIds.length>0 &&
                      <ul id="groupsActiveFilter" className="filtersList">    
                       {multiFilter.groupIds.map( el => 
-                        <li key={el} className="groupFilter">{groupsOptionList.filter( (listItem) => (listItem.value===el))[0].label}</li>
+                        <li key={el} className="groupFilter">{groupsOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fa fa-remove"  onClick={() => console.log('remove group') }></i></li>
                         ) 
                       }
                       </ul>
@@ -142,7 +142,7 @@ const ReferencesList = (props) => {
                     { labelsOptionList && multiFilter.labelIds && multiFilter.labelIds.length>0 &&
                      <ul id="labelsActiveFilter" className="filtersList">    
                       {multiFilter.labelIds.map( el => 
-                         <li key={el} className="labelFilter">{labelsOptionList.filter( (listItem) => (listItem.value===el))[0].label}</li>
+                         <li key={el} className="labelFilter">{labelsOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fa fa-remove"  onClick={() => console.log('remove label') }></i></li>
                         ) 
                       }
                       </ul>
