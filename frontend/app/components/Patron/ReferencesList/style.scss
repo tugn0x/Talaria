@@ -38,6 +38,10 @@
             border-radius: 5px;
             background-color: $labels-color;
             margin-right:5px;
+
+            i.fa {
+                cursor: pointer;
+            }
         }
     
         .groupFilter
@@ -46,6 +50,10 @@
             border-radius: 5px;
             background-color: $groups-color;
             margin-right:5px;
+
+            i.fa {
+                cursor: pointer;
+            }
         }
     }
 }

@@ -68,6 +68,22 @@ const ReferencesList = (props) => {
         }))
     }
 
+    const toggleGroupFilter = (groupId) => {
+        setMultiFilter( state => ({
+            query: state.query,
+            labelIds: state.labelIds,
+            groupIds:handleIds(state.groupIds, groupId)
+        }))
+    }
+
+    const toggleLabelFilter = (labelId) => {
+        setMultiFilter( state => ({
+            query: state.query,
+            labelIds: handleIds(state.labelIds, labelId),
+            groupIds: state.groupIds 
+        }))
+    };
+
     
     const toggleAllCheckbox = (e) => {
         const chk=e.target.checked
@@ -134,7 +150,7 @@ const ReferencesList = (props) => {
                     { groupsOptionList && multiFilter.groupIds && multiFilter.groupIds.length>0 &&
                      <ul id="groupsActiveFilter" className="filtersList">    
                       {multiFilter.groupIds.map( el => 
-                        <li key={el} className="groupFilter">{groupsOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fa fa-remove"  onClick={() => console.log('remove group') }></i></li>
+                        <li key={el} className="groupFilter">{groupsOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fa fa-remove"  onClick={() => toggleGroupFilter(el) }></i></li>
                         ) 
                       }
                       </ul>
@@ -142,7 +158,7 @@ const ReferencesList = (props) => {
                     { labelsOptionList && multiFilter.labelIds && multiFilter.labelIds.length>0 &&
                      <ul id="labelsActiveFilter" className="filtersList">    
                       {multiFilter.labelIds.map( el => 
-                         <li key={el} className="labelFilter">{labelsOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fa fa-remove"  onClick={() => console.log('remove label') }></i></li>
+                         <li key={el} className="labelFilter">{labelsOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fa fa-remove"  onClick={() => toggleLabelFilter(el) }></i></li>
                         ) 
                       }
                       </ul>
