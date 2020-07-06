@@ -38,7 +38,7 @@ class GroupReferenceController extends ApiController
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
     }
 
-    public function update(Request $request, $id)
+    /*public function update(Request $request, $id)
     {
         if(!empty($this->validate) )
             $this->validate($request, $this->validate);
@@ -50,7 +50,7 @@ class GroupReferenceController extends ApiController
             broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
-    }
+    }*/
 
     public function index(Request $request)
     {
@@ -73,24 +73,29 @@ class GroupReferenceController extends ApiController
         return $this->model->inReference($ref);
     }
 
-    public function show(Request $request, $id)
+   /* public function show(Request $request, $id)
     {
         $id = $request->route()->parameters['group_reference'];
         $model = $this->nilde->show($this->model, $request, $id);
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
-    }
+    }*/
+
 
     // ApiControllerTrait@delete override
-    public function delete(Request $request, $id)
+        public function delete(Request $request, $id)
     {
-        $id = $request->route()->parameters['group_reference'];
-        $model = $this->nilde->delete($this->model, $request, $id);
+        $ref = $request->route()->parameters['reference'];    
+        $group = $request->route()->parameters['group'];
+        $model=$this->model->InReference($ref)->InGroup($group)->first();
+
+        $model = $this->nilde->delete($model, $request);
 
         if($this->broadcast && config('apinilde.broadcast'))
             broadcast(new ApiDeleteBroadcast($model->id, $model->getTable()));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
+
 
 }

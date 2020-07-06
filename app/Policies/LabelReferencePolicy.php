@@ -43,6 +43,6 @@ class LabelReferencePolicy extends BasePolicy
 
     public function canManage(User $user, Model $model)
     {
-        return ($model->reference->owner()->id==$user->id);
+        return ($model->reference->user()->first()->id==$user->id);
     }
 }

@@ -38,19 +38,22 @@ class LabelReferenceController extends ApiController
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
     }
 
-    public function update(Request $request, $id)
+  /*  public function update(Request $request, $id)
     {
         if(!empty($this->validate) )
             $this->validate($request, $this->validate);
 
-        $id = $request->route()->parameters['label_reference'];
-        $model = $this->nilde->update($this->model, $request, $id);
+        $ref = $request->route()->parameters['reference'];    
+        $label = $request->route()->parameters['label'];
+        $model=$this->model->InReference($ref)->InLabel($label);
+
+        $model = $this->nilde->update($model, $request);
 
         if($this->broadcast && config('apinilde.broadcast'))
             broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
-    }
+    }*/
 
     public function index(Request $request)
     {
@@ -73,19 +76,22 @@ class LabelReferenceController extends ApiController
         return $this->model->inReference($ref);
     }
 
-    public function show(Request $request, $id)
+    /*public function show(Request $request, $id)
     {
         $id = $request->route()->parameters['label_reference'];
         $model = $this->nilde->show($this->model, $request, $id);
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
-    }
+    }*/
 
     // ApiControllerTrait@delete override
     public function delete(Request $request, $id)
     {
-        $id = $request->route()->parameters['label_reference'];
-        $model = $this->nilde->delete($this->model, $request, $id);
+        $ref = $request->route()->parameters['reference'];    
+        $label = $request->route()->parameters['label'];
+        $model=$this->model->InReference($ref)->InLabel($label)->first();
+
+        $model = $this->nilde->delete($model, $request);
 
         if($this->broadcast && config('apinilde.broadcast'))
             broadcast(new ApiDeleteBroadcast($model->id, $model->getTable()));

@@ -37,4 +37,9 @@ class LabelReference extends BaseModel
     {
         return $query->where('reference_id', $reference_id);
     }
+
+    public function scopeInLabel($query, $label_id)
+    {
+        return $query->where('label_id', $label_id);
+    }
 }

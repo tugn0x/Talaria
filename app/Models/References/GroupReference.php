@@ -37,4 +37,10 @@ class GroupReference extends BaseModel
     {
         return $query->where('reference_id', $reference_id);
     }
+
+    
+    public function scopeInGroup($query, $group_id)
+    {
+        return $query->where('group_id', $group_id);
+    }
 }
