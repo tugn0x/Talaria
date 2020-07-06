@@ -48,7 +48,7 @@ class ReferenceController extends ApiController
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
-    /* Mi aspetto un JSON con { references: [id,id,id], field1: val, field2:val ... labelIds:[id,id,id],groupIds:[id,id,id] }*/
+    /* Mi aspetto un JSON con { references: [id,id,id], field1: val, field2:val ... labelIds:[id,id,id,'newlabel'],groupIds:[id,id,id,'newgroup'] }*/
     public function updateSelected(Request $request)
     {
         if($request->has("references"))
@@ -69,6 +69,17 @@ class ReferenceController extends ApiController
                     if($request->has("labelIds"))
                     {    
                         $lids=$request->input("labelIds");
+                        $i=0;
+                        foreach($lids as $lid)
+                        {
+                            if(is_string($lid))
+                            {
+                                $l=Label::firstOrCreate(['name'=>$lid]);
+                                if($l)
+                                    $lids[$i]=$l->id; //sostituisco la stringa con l'ID appena ottenuto creando la nuova etichetta
+                            }
+                            $i++;
+                        }
                       
                         //uso il syncWithoutDetaching in modo da aggingere evitando i doppioni
                         $rif->labels()->syncWithoutDetaching($lids);    
@@ -77,13 +88,27 @@ class ReferenceController extends ApiController
                     if($request->has("groupIds"))
                     {    
                         $gids=$request->input("groupIds");
+                        $i=0;
+                        foreach($gids as $gid)
+                        {
+                            if(is_string($gid))
+                            {
+                                $g=Group::firstOrCreate(['name'=>$gid]);
+                                if($g)
+                                    $gids[$i]=$g->id; //sostituisco la stringa con l'ID appena ottenuto creando nuovo gruppo
+                            }
+                            $i++;
+                        }
                       
                         $rif->groups()->syncWithoutDetaching($gids);    
                     }
                } 
             }
+            $model=Reference::whereIn('id', $ids);
         }
-        $model=Reference::whereIn('id', $ids);
+        else $model=$this->model->owned();
+        
+            
         $collection = $this->nilde->index($model, $request);
         return $this->response->paginator($collection, new $this->transformer())->morph();
     }
