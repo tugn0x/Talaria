@@ -1,7 +1,10 @@
+@import '../../scss/variables';
+
 .pagination {
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
+    
     button {
         margin: 0 15px 0 0;
         &.step-backward, &.backward {
@@ -11,4 +14,13 @@
             margin-right: 0
         }
     }
+
+    .perPageDropdown {
+        display:inline;
+
+        button {
+            color: $orange;
+        }
+    }
+
 }

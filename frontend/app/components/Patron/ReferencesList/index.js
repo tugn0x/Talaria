@@ -18,7 +18,7 @@ import './style.scss';
 const ReferencesList = (props) => {
     console.log('ReferencesList', props)
     const {match, data, pagination, history, searchOptions, labelsOptionList, groupsOptionList,removeLabelFromReference,removeGroupFromReference} = props
-    const {total_pages, current_page} = pagination
+    const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     /*  const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal); */
@@ -220,6 +220,9 @@ const ReferencesList = (props) => {
             </CustomModal> */}
             {Object.keys(pagination).length &&
                 <Pagination
+                    total={total}
+                    count={count}
+                    per_page={per_page}
                     current_page={current_page}
                     total_pages={total_pages}
                     setPage={(page) => linkTo(generatePath(`${match.path}`, {
