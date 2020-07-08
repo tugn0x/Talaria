@@ -1,9 +1,9 @@
-@import '../../scss/vendors/variables';
-
-.sidebar .nav-link {
+@import '../../scss/variables';
+.sidebar .nav-link,
+.sidebar-menu .nav-link  {
     padding: .75rem 0.5rem;
     &:hover, &.current {
-        background: $orange;
+        background-color: $dark-bk;
     }
     i:before {
         padding-right: 10px;
