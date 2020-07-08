@@ -6,6 +6,67 @@ $font-family-base: 'Archivo', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantare
   'Arial', sans-serif;
 
 
+//New colors
+
+$main-menu: #FFFFFF;
+
+$light-bk: #F8F8F8;
+
+$dark-bk: #EBE2DF;
+
+$tools-menu: #F1F1F1;
+
+$box-color: #F5F5F5;
+$box-border: #EBE3DD;
+
+$dark-text: #3B3D40;
+$alternative-text: #AB725F;
+$form-text: #6C717A;
+
+$line: #AB725F;
+
+$active: #DF6D43;
+
+$labels-color: #DAD0EE;
+$labels-border: #8A4991;
+
+$groups-color: #C9E3F8;
+$groups-border: #5892BF;
+
+$consegnato: #50C950;
+$cancellato: #FF6565;
+$attesa:#FBAE2B;
+
+
+
+// Typography
+
+.large		{ font-size: 37px; line-height: 1.3; }
+.big 			{ font-size: 20px; line-height: 1.3; }
+.normal		{ font-size: 14px; line-height: 1.3; }
+.small    { font-size: 12px; line-height: 1.3; }
+
+
+
+//Button
+
+.button{
+  display: inline-block;
+  color:#fff;
+  padding: 15px 30px;
+  font-weight:normal;
+  text-shadow: none;
+  text-decoration:none;
+  background: $active;
+  border-radius: 4px; //da usare in tutti i form select ecc.
+  &:hover{
+    background: $dark-text; 
+    color:#fff;
+    text-decoration: none;}
+}
+
+/*----------------*/
+
 // COLORS
 $theme_color: #DF6D43;
 $white: #F8F8F8;
