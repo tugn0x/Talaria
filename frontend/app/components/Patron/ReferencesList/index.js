@@ -172,16 +172,16 @@ const ReferencesList = (props) => {
                             <input type="checkbox" onChange={(e)=>toggleAllCheckbox(e)}/>
                             {!disableToolbar && <>
                             {<NavLink to='#'  className="btn btn-link" >
-                                <i className="fa fa-2x fa-print"></i>
+                                <i className="fa fa-print"></i>
                             </NavLink>}
                             {<NavLink to='#'  className="btn btn-link">
-                                <i className="fa fa-2x fa-download"></i>
+                                <i className="fa fa-download"></i>
                             </NavLink>}
                             {<NavLink to='#'  className="btn btn-link">
-                                <i className="fa fa-2x fa-tag"></i>
+                                <span className="icon-tag-plus"></span>
                             </NavLink>}
                             {<NavLink to='#'  className="btn btn-link">
-                                <i className="fa fa-2x fa-folder"></i>
+                                <i className="fa fa-folder"></i>
                             </NavLink>}
                             </>}
                         </div>

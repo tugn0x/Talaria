@@ -60,16 +60,16 @@ const ReferenceItem = (props) => {
             </Col>
             <Col sm={3} className="icons align-self-center">
                 {<NavLink to={`${requesturl(data.id)}`}  className="btn btn-link">
-                    <i className="fa fa-2x fa-share"></i>
+                    <i className="fa fa-share"></i>
                 </NavLink>}
                 {data.oa==1 && <NavLink to={`${oaurl(data.id)}`} className="btn btn-link">
-                    <i className="fa fa-2x fa-github"></i>
+                    <span className="icon-oa"></span>
                 </NavLink>}
                 {<NavLink to={`${editurl(data.id)}`}  className="btn btn-link">
-                    <i className="fa fa-2x fa-edit"></i>
+                    <i className="fa fa-edit"></i>
                 </NavLink>}
                 {<a href="#" onClick={() => console.log('delete reference')} className="btn btn-link">
-                    <i className="fa fa-2x fa-trash"></i>
+                    <i className="fa fa-trash"></i>
                 </a> }
             </Col> 
         </Row>

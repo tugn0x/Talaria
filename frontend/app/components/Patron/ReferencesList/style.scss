@@ -1,10 +1,10 @@
 @import '../../../scss/variables';
 
-.referenceList {
-    .icons a {
+.features-icons span {
+        font-size:1.5em;
         color: $orange;
-    }
 }
+
 .list-head{
     margin: 10px 0 10px 0;
     background-color: $grey-lighter;
