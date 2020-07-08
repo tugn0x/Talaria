@@ -14,6 +14,7 @@ import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_GET_MY_LIBRARY, REQUEST_GET_MY_LIBRARY_SUCCESS,
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_LABELS_OPTIONLIST_SUCCESS,
   REQUEST_GET_GROUPS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST_SUCCESS,
+  REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,
   STOP_LOADING, REQUEST_ERROR } from './constants';
 
 export const initialState = {
@@ -126,6 +127,14 @@ const PatronReducer = (state = initialState, action) =>
         draft.error = initialState.error;
         draft.groupsOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break;    
+      case REQUEST_REMOVE_REFERENCE_LABEL:
+        draft.loading = false;
+        draft.error = action.error;
+        break;
+      case REQUEST_REMOVE_REFERENCE_GROUP:
+        draft.loading = false;
+        draft.error = action.error;
+        break;
       case REQUEST_ACCESS_TO_LIBRARIES:
         draft.loading = true;
         draft.error = action.error;

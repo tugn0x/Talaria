@@ -17,7 +17,7 @@ import './style.scss';
 
 const ReferencesList = (props) => {
     console.log('ReferencesList', props)
-    const {match, data, pagination, history, searchOptions, labelsOptionList, groupsOptionList} = props
+    const {match, data, pagination, history, searchOptions, labelsOptionList, groupsOptionList,removeLabelFromReference,removeGroupFromReference} = props
     const {total_pages, current_page} = pagination
     const intl = useIntl();
     /*  const [modal, setModal] = useState(false);
@@ -49,7 +49,6 @@ const ReferencesList = (props) => {
     }, [selectedReferences])
 
     useEffect( ()=> {
-        console.log("USE EFFECT:", multiFilter)
         searchOptions.getSearchList(multiFilter)
     }, [multiFilter])
 
@@ -59,7 +58,6 @@ const ReferencesList = (props) => {
 
     
     const handleCancelFilter = (e) => {
-        console.log("Reset Filter");
         setMultiFilter( state => (
         {
             query: '',
@@ -200,8 +198,9 @@ const ReferencesList = (props) => {
                                 data={ref}
                                 editPath={props.editPath}
                                 toggleSelection={() => toggleReference(ref.id)}
-                                // checked={selectedReferences.length>0 && selectedReferences.includes(ref.id) ? true : false}
-                                 checked={selectedReferences.includes(ref.id)}
+                                removeLabel={(labelId) => removeLabelFromReference(ref.id,labelId)}
+                                removeGroup={(groupId) => removeGroupFromReference(ref.id,groupId)}
+                                checked={selectedReferences.includes(ref.id)}
                             />
                             
                             

@@ -2,7 +2,7 @@ import { call, put, select, takeLatest, fork, take  } from 'redux-saga/effects';
 import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO_LIBRARIES,REQUEST_UPDATE_ACCESS_TO_LIBRARIES,REQUEST_DELETE_ACCESS_TO_LIBRARIES,  REQUEST_REFERENCES_LIST,
   REQUEST_POST_REFERENCES, REQUEST_UPDATE_REFERENCES, 
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST,
-  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE} from './constants';
+  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP} from './constants';
 import {
   requestError,
   stopLoading,
@@ -30,7 +30,10 @@ import {  getMyLibrary,
           updateReference,
           getReference, 
           getLabelsOptionList,
-          getGroupsOptionList,} from 'utils/api';
+          getGroupsOptionList,
+          removeReferenceLabel,
+          removeReferenceGroup,
+        } from 'utils/api';
 
 
 export function* requestMyLibrariesSaga(action) {
@@ -79,6 +82,38 @@ export function* requestGroupsOptionListSaga(action = {}) {
   try {
     const request = yield call(getGroupsOptionList, options);
     yield put(requestGroupsOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestRemoveReferenceLabelSaga(action) {
+  const options = {
+    method: 'delete',
+    id: action.id,
+    labelId: action.labelId,
+  };
+  try {
+    const request = yield call(removeReferenceLabel, options);
+    yield put(requestReferencesList())
+    yield put(push("/patron/references"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestRemoveReferenceGroupSaga(action) {
+  const options = {
+    method: 'delete',
+    id: action.id,
+    groupId: action.groupId,
+  };
+  try {
+    const request = yield call(removeReferenceGroup, options);
+    yield put(requestReferencesList())
+    yield put(push("/patron/references"));
+    yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -227,5 +262,7 @@ export default function* patronSaga() {
   yield takeLatest(REQUEST_POST_REFERENCES, requestPostReferencesSaga);
   yield takeLatest(REQUEST_UPDATE_REFERENCES, requestUpdateReferenceSaga);
   yield takeLatest(REQUEST_GET_REFERENCE, requestGetReferenceSaga);
+  yield takeLatest(REQUEST_REMOVE_REFERENCE_LABEL,requestRemoveReferenceLabelSaga);
+  yield takeLatest(REQUEST_REMOVE_REFERENCE_GROUP,requestRemoveReferenceGroupSaga);
 }
 

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {useIntl} from 'react-intl'
 import makeSelectPatron, {isPatronLoading,groupsOptionListSelector,labelsOptionListSelector} from '../selectors';
-import { requestReferencesList,requestLabelsOptionList,requestGroupsOptionList} from '../actions'
+import { requestReferencesList,requestLabelsOptionList,requestGroupsOptionList,requestRemoveReferenceLabel,requestRemoveReferenceGroup} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -10,6 +10,7 @@ import ReferencesPage from '../ReferencesPage';
 import ReferencesList from 'components/Patron/ReferencesList';
 import {columns} from './columns'
 import messages from './messages'
+import confirm from "reactstrap-confirm";
 
 const ReferencesListPage = (props) => {
     console.log('ReferencesListPage', props)
@@ -28,6 +29,30 @@ const ReferencesListPage = (props) => {
         
     }, [])
 
+    async function removeLabelFromReference (id,labelId) {
+       //console.log("DISPATCH removeLabelFromReference",id,labelId);
+        let conf = await confirm({
+            title: intl.formatMessage(messages.confirm),
+            message: intl.formatMessage(messages.askRemoveLabelMessage),
+            confirmText: intl.formatMessage(messages.yes),
+            cancelText: intl.formatMessage(messages.no)
+        }); //
+        if(conf)
+            dispatch(requestRemoveReferenceLabel(id,labelId,intl.formatMessage(messages.removedMessage)))
+    }
+
+    async function removeGroupFromReference (id,groupId) {
+        //console.log("DISPATCH removeGroupFromReference",id,groupId);
+        let conf = await confirm({
+            title: intl.formatMessage(messages.confirm),
+            message: intl.formatMessage(messages.askRemoveGroupMessage),
+            confirmText: intl.formatMessage(messages.yes),
+            cancelText: intl.formatMessage(messages.no)
+        }); //
+         if(conf)
+             dispatch(requestRemoveReferenceGroup(id,groupId,intl.formatMessage(messages.removedMessage)))
+     }
+
     return (
             <ReferencesList 
                 data={referencesList}
@@ -42,12 +67,13 @@ const ReferencesListPage = (props) => {
                 title={intl.formatMessage(messages.header)}
                 searchOptions={{
                     getSearchList: (searchFilter) => {
-                        console.log("SEARCH: ",searchFilter); 
                         dispatch(requestReferencesList(null, searchFilter))
                     },
                     searchOnChange: true
                 }}
                 editPath={'/patron/references/reference/:id?/:edit?'}
+                removeLabelFromReference={removeLabelFromReference}
+                removeGroupFromReference={removeGroupFromReference}
                 modalComponent={ <ReferencesPage match={match} />}
             />
             

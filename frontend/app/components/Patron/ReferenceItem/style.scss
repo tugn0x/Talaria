@@ -24,10 +24,18 @@
     .labels span {
         color: #9D67A3;
         padding: 0 12px 0 0;
+
+        i.fa {
+            cursor: pointer;
+        }
     }
     .groups span {
         color: #73A6CC;
         padding: 0 12px 0 0;
+
+        i.fa {
+            cursor: pointer;
+        }
     }
 
     .select-checkbox {

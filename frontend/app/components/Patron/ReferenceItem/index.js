@@ -5,7 +5,7 @@ import { generatePath } from "react-router";
 import './style.scss';
 
 const ReferenceItem = (props) => {
-    const {data, editPath,toggleSelection,checked} = props
+    const {data, editPath,toggleSelection,checked,removeLabel,removeGroup} = props
     
     const editurl = (id) => {
         return generatePath(`${editPath}`, {
@@ -36,8 +36,6 @@ const ReferenceItem = (props) => {
         });
     }
 
-
-    
     return ( 
         <Row className="reference-row justify-content-between">
             <Col sm={2} className="select-checkbox">
@@ -53,11 +51,11 @@ const ReferenceItem = (props) => {
                    <span className="pubyear">Anno <span>{data.pubyear}</span></span>
                 </div>
                 {data.labels.data && <span className="labels">
-                    {data.labels.data.map(label => <span key={label.id}>{label.name} <i className="fa fa-remove"  onClick={() => console.log('remove label from reference') }></i></span>)}
+                    {data.labels.data.map(label => <span key={label.id}>{label.name} <i className="fa fa-remove"  onClick={() => removeLabel(label.id)}></i></span>)}
                 </span>}
                 
                 {data.groups.data && <span className="groups">
-                    {data.groups.data.map(grp => <span key={grp.id}>{grp.name} <i className="fa fa-remove"  onClick={() => console.log('remove group from reference') }></i></span>)}
+                    {data.groups.data.map(grp => <span key={grp.id}>{grp.name} <i className="fa fa-remove"  onClick={() => removeGroup(grp.id) }></i></span>)}
                 </span>}
             </Col>
             <Col sm={3} className="icons align-self-center">

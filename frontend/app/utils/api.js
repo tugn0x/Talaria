@@ -241,6 +241,21 @@ export const updateReference = (options) => {
   return request(`${BASE_URL}/api/v1/references/${options.id}`, options)
 };
 
+export const removeReferenceLabel = (options) => {
+  const id = options.id
+  const lid = options.labelId
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/references/${id}/labels/${lid}`, options)
+};
+
+export const removeReferenceGroup = (options) => {
+  const id = options.id
+  const gid = options.groupId
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/references/${id}/groups/${gid}`, options)
+};
+
+
 // ---------- LIBRARY ---------- //
 export const getLibraryUsersList = (options) => {
   const page = options.page;

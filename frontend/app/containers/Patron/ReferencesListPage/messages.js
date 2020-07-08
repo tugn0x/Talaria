@@ -28,4 +28,28 @@ export default defineMessages({
     id: `${scope}.groups`,
     defaultMessage: 'Categories',
   },
+  confirm:{
+    id: 'app.global.confirm',
+    defaultMessage: 'Confirm',
+  },
+  askRemoveLabelMessage:{
+    id: 'app.global.removeLabelMessage',
+    defaultMessage: 'Remove this label from this reference?',
+  },
+  askRemoveGroupMessage:{
+    id: 'app.global.removeGroupMessage',
+    defaultMessage: 'Remove this category from this reference?',
+  },
+  removedMessage:{
+    id: 'app.global.removedMessage',
+    defaultMessage: 'Successfully removed',
+  },
+  yes:{
+    id: 'app.global.yes',
+    defaultMessage: 'Yes',
+  },
+  no:{
+    id: 'app.global.no',
+    defaultMessage: 'No',
+  },
 });
