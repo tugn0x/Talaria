@@ -39,19 +39,19 @@ function ProjectsList(props) {
                 <Row className="thead">
                     <Col xs={3}>
                         <span>Titolo / Descrizione</span>
-                        <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
+                        <i className="fas fa-sort"  onClick={() => console.log('sort') }></i>
                     </Col>
                     <Col xs={2}>
                         <span>ID</span>
-                        <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
+                        <i className="fas fa-sort"  onClick={() => console.log('sort') }></i>
                     </Col>
                     <Col xs={2}>
                         <span>Aggiunta il</span>
-                        <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
+                        <i className="fas fa-sort"  onClick={() => console.log('sort') }></i>
                     </Col>
                     <Col xs={2}>
                         <span>Active</span>
-                        <i className="fa fa-sort"  onClick={() => console.log('sort') }></i>
+                        <i className="fas fa-sort"  onClick={() => console.log('sort') }></i>
                     </Col>
                     <Col xs={3}>
                         <span>{intl.formatMessage(messages.editProject)}</span>
@@ -80,10 +80,10 @@ function ProjectsList(props) {
                             </Col>
                             <Col xs={3} className="edit-icons" >
                                 <NavLink to={`${editurl(project.id)}`} key={project.id} className="btn btn-link">
-                                    <i className="fa fa-edit"></i>
+                                    <i className="fas fa-edit"></i>
                                 </NavLink>
                                 <a href="#" onClick={() => console.log('delete project')} className="btn btn-link">
-                                    <i className="fa fa-trash"></i>
+                                    <i className="fas fa-trash"></i>
                                 </a>
                             </Col>
                         </Row>

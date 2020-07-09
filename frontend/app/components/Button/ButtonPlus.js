@@ -7,7 +7,7 @@ const ButtonPlus = (props) => {
     const {text, onClickHandle} = props
     return (
         <Button className="float-right btn-plus" onClick={onClickHandle}>
-            <i className="fa fa-plus"></i>
+            <i className="fas fa-plus"></i>
             <span>
                 {text}
             </span>

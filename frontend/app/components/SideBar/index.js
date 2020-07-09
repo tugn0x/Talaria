@@ -40,7 +40,7 @@ function SideBar(props) {
               to={`${route.url ? route.url : route.path}`}
               activeClassName="current"
             >
-              <i className={`fa fa-${route.icon ? route.icon : ''}`}></i>
+              <i className={`fas fa-${route.icon ? route.icon : ''}`}></i>
               <span><FormattedMessage {...messages[route.name]}/></span>
             </NavLink>
           }

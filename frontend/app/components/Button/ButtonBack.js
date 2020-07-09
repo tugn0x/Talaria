@@ -11,7 +11,7 @@ const ButtonBack = (props) => {
 
     return (
         <Button className={`${props.className && props.className} btn-back`} onClick={()=>props.history.goBack()}>
-            <i className="fa fa-arrow-left" />
+            <i className="fas fa-arrow-left" />
             <span>
                 {intl.formatMessage(messages.goBackText)}
             </span>

@@ -73,11 +73,11 @@ function HeaderBar(props) {
                 <DropdownToggle nav>
                   { isLogged && (
                       <>
-                        <i className="fa fa-2x fa-user d-table-cell"></i>
+                        <i className="fas fa-2x fa-user d-table-cell"></i>
                         <span className="user-name d-none d-md-table-cell align-middle px-3">
                           {subStringer(auth.user.name, 10)}
                         </span>
-                        <i className="fa fa-2x fa-sort-down d-table-cell align-middle"></i>
+                        <i className="fas fa-2x fa-sort-down d-table-cell align-middle"></i>
                       </>
                     )
                   }
@@ -119,17 +119,17 @@ function HeaderBar(props) {
                         <DropdownItem header tag="div" className="text-center">
                           <FormattedMessage {...messages.UserAccount} />
                         </DropdownItem>
-                        {/*<DropdownItem onClick={() => linkTo("/patron/my-libraries")}><i className="fa fa-user"></i><span>Patron</span></DropdownItem>*/}
+                        {/*<DropdownItem onClick={() => linkTo("/patron/my-libraries")}><i className="fas fa-user"></i><span>Patron</span></DropdownItem>*/}
                           <NavLink to="/user/user-profile" className="dropdown-item btn" activeClassName="current">
-                            <i className="fa fa-user"></i>
+                            <i className="fas fa-user"></i>
                             <span><FormattedMessage {...messages.Profile} /></span>
                           </NavLink>
                           <NavLink to="/user/change-password" className="dropdown-item btn" activeClassName="current">
-                            <i className="fa fa-lock"></i>
+                            <i className="fas fa-lock"></i>
                             <span><FormattedMessage {...messages.ChangePassword} /></span>
                           </NavLink>
                           <NavLink to="#" onClick={e => props.logout(e)} className="dropdown-item btn" activeClassName="current">
-                            <i className="fa fa-sign-out"></i>
+                            <i className="fas fa-sign-out"></i>
                             <span><FormattedMessage {...messages.Logout} /></span>
                           </NavLink>
                         </div>

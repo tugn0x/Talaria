@@ -17,16 +17,16 @@ const ReferenceDetail = props => {
             </div>
             <div className="features-icons">
                 <NavLink to='#' className="btn btn-link">
-                    <i className="fa fa-print"></i>
+                    <i className="fas fa-print"></i>
                 </NavLink>
                 <NavLink to='#' className="btn btn-link">
-                    <i className="fa fa-download"></i>
+                    <i className="fas fa-file-export"></i>
                 </NavLink>
                 <NavLink to='#' className="btn btn-link">
-                    <i className="fa fa-tag"></i>
+                    <span className="icon-tag-plus"></span>
                 </NavLink>
                 <NavLink to='#' className="btn btn-link">
-                    <i className="fa fa-folder"></i>
+                    <i className="fas fa-folder-plus"></i>
                 </NavLink>
             </div>
             <Card className="detail-body">

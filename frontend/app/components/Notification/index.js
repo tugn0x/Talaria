@@ -46,7 +46,7 @@ const Notification = (props) => {
         <Nav className="notification" navbar>
         <UncontrolledDropdown nav direction="down">
             <DropdownToggle nav>
-                <i className="fa fa-bell d-table-cell">
+                <i className="fas fa-bell d-table-cell">
                     {unreaded_total !== 0 &&
                     <span className="count">{unreaded_total}</span>
                     }
@@ -71,7 +71,7 @@ const Notification = (props) => {
                                 <h6>{notify.data.title}</h6>
                                 <span>{subStringer(notify.data.message, 20)}</span>
                             </div>
-                            <i className="fa fa-close"></i>
+                            <i className="fas fa-close"></i>
                         </DropdownItem>
                     )
                 )}

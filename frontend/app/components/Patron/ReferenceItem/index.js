@@ -17,7 +17,7 @@ const ReferenceItem = (props) => {
     const matTypeIcon = (mat) => {
         switch (mat)
         {
-          case 1: return 'fa-file-text-o'; break;
+          case 1: return 'fa-newspaper'; break;
           case 2: return 'fa-book'; break;
           case 3: return 'fa-graduation-cap'; break;
         }
@@ -40,7 +40,7 @@ const ReferenceItem = (props) => {
         <Row className="reference-row justify-content-between">
             <Col sm={2} className="select-checkbox">
                 <input type="checkbox" onChange={toggleSelection} value={data.id} checked={checked}/>
-                <i className={`fa ${matTypeIcon(data.material_type)}`}></i>
+                <i className={`fas ${matTypeIcon(data.material_type)}`}></i>
             </Col> 
             <Col sm={7} className="info">
                 <NavLink to={`${requesturl(data.id)}`}>
@@ -51,25 +51,25 @@ const ReferenceItem = (props) => {
                    <span className="pubyear">Anno <span>{data.pubyear}</span></span>
                 </div>
                 {data.labels.data && <span className="labels">
-                    {data.labels.data.map(label => <span key={label.id}>{label.name} <i className="fa fa-remove"  onClick={() => removeLabel(label.id)}></i></span>)}
+                    {data.labels.data.map(label => <span key={label.id}>{label.name} <i className="fas fa-times"  onClick={() => removeLabel(label.id)}></i></span>)}
                 </span>}
                 
                 {data.groups.data && <span className="groups">
-                    {data.groups.data.map(grp => <span key={grp.id}>{grp.name} <i className="fa fa-remove"  onClick={() => removeGroup(grp.id) }></i></span>)}
+                    {data.groups.data.map(grp => <span key={grp.id}>{grp.name} <i className="fas fa-times"  onClick={() => removeGroup(grp.id) }></i></span>)}
                 </span>}
             </Col>
             <Col sm={3} className="icons align-self-center">
                 {<NavLink to={`${requesturl(data.id)}`}  className="btn btn-link">
-                    <i className="fa fa-share"></i>
+                    <i className="fas fa-share"></i>
                 </NavLink>}
                 {data.oa==1 && <NavLink to={`${oaurl(data.id)}`} className="btn btn-link">
                     <span className="icon-oa"></span>
                 </NavLink>}
                 {<NavLink to={`${editurl(data.id)}`}  className="btn btn-link">
-                    <i className="fa fa-edit"></i>
+                    <i className="fas fa-edit"></i>
                 </NavLink>}
                 {<a href="#" onClick={() => console.log('delete reference')} className="btn btn-link">
-                    <i className="fa fa-trash"></i>
+                    <i className="fas fa-trash"></i>
                 </a> }
             </Col> 
         </Row>

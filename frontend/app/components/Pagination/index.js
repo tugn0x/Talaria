@@ -32,17 +32,17 @@ const Pagination = (props) => {
                 </Dropdown>
             </span>
             <Button className="backward" color="link" onClick={() => setPage(1)} disabled={current_page !== 1 ? false : true}>
-                <i className="fa fa-backward"></i>
+                <i className="fas fa-backward"></i>
             </Button>
             <Button className="step-backward" color="link" onClick={() => setPage(current_page-1)} disabled={current_page !== 1 ? false : true}>
-                <i className="fa fa-step-backward"></i>
+                <i className="fas fa-step-backward"></i>
             </Button>
             <span>{(current_page-1)*per_page+1}-{(current_page-1)*per_page+count} di {total}</span>
             <Button className="step-forward" color="link" onClick={() => setPage(current_page+1)} disabled={current_page !== total_pages ? false : true}>
-                <i className="fa fa-step-forward"></i>
+                <i className="fas fa-step-forward"></i>
             </Button>
             <Button className="forward" color="link" onClick={() => setPage(total_pages)} disabled={current_page !== total_pages ? false : true}>
-                <i className="fa fa-forward"></i>
+                <i className="fas fa-forward"></i>
             </Button>
         </Col>)
         || null

@@ -37,7 +37,7 @@ function Footer(props) {
           {props.isLogged && 
             <>
               <NavLink to="/register-library" activeClassName="current">
-                {/* <i className="fa fa-book"></i> */}
+                {/* <i className="fas fa-book"></i> */}
                 <span><FormattedMessage {...messages.registerNewLibrary} /></span>
               </NavLink>
               <NavLink to="#" activeClassName="current">

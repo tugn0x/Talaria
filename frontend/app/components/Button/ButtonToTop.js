@@ -28,7 +28,7 @@ const ButtonToTop = () => {
     return (
         isVisible &&
         <Button className="btn-to-top" onClick={() => scrollTo(window)}>
-            <i className="fa fa-arrow-up"></i>
+            <i className="fas fa-arrow-up"></i>
         </Button>
         || null
     )
