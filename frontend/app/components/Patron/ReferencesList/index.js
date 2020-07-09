@@ -17,7 +17,7 @@ import './style.scss';
 
 const ReferencesList = (props) => {
     console.log('ReferencesList', props)
-    const {match, data, pagination, history, searchOptions, labelsOptionList, groupsOptionList,removeLabelFromReference,removeGroupFromReference} = props
+    const {match, data, pagination, history, searchOptions, labelsOptionList, groupsOptionList,removeLabelFromReference,removeGroupFromReference,applyLabels,applyGroups} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     /*  const [modal, setModal] = useState(false);
@@ -177,10 +177,10 @@ const ReferencesList = (props) => {
                             {<NavLink to='#'  className="btn btn-link">
                                 <i className="fas fa-file-export"></i>
                             </NavLink>}
-                            {<NavLink to='#'  className="btn btn-link">
+                            {<NavLink to="#" onClick={applyLabels}  className="btn btn-link">
                                 <span className="icon-tag-plus"></span>
                             </NavLink>}
-                            {<NavLink to='#'  className="btn btn-link">
+                            {<NavLink to="#" onClick={applyGroups} className="btn btn-link">
                                 <i className="fas fa-folder-plus"></i>
                             </NavLink>}
                             </>}

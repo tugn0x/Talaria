@@ -53,6 +53,20 @@ const ReferencesListPage = (props) => {
              dispatch(requestRemoveReferenceGroup(id,groupId,intl.formatMessage(messages.removedMessage)))
      }
 
+     const applyLabelsToReferences = (labelIds,refIds) => {
+         //Dati di test per provare la API
+         let TESTlabelIds= [7,5,"ciaoooo"];
+         let TESTrefIds=[48,46,44];
+         console.log("ApplyLabelsToReferences:", TESTlabelIds,TESTrefIds);
+     }
+
+     const applyGroupsToReferences = (groupIds,refIds) => {
+         //Dati di test per provare la API
+         let TESTgroupIds= [14,15,"testgroup"];
+         let TESTrefIds=[48,46,44];
+        console.log("ApplyLabelsToReferences:", TESTgroupIds,TESTrefIds);
+    }
+
     return (
             <ReferencesList 
                 data={referencesList}
@@ -74,6 +88,8 @@ const ReferencesListPage = (props) => {
                 editPath={'/patron/references/reference/:id?/:edit?'}
                 removeLabelFromReference={removeLabelFromReference}
                 removeGroupFromReference={removeGroupFromReference}
+                applyLabels={applyLabelsToReferences}
+                applyGroups={applyGroupsToReferences}
                 modalComponent={ <ReferencesPage match={match} />}
             />
             
