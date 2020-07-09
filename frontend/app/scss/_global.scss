@@ -307,6 +307,12 @@ ul.list-inline {
         }
     }
 }
+
+//classe da usare per icone da visualizzare senza link
+.simple_icon
+{
+    color: $alternative-text;
+}
 /* .switch-success .switch-input:checked+.switch-slider {
     background-color: $orange;
     border-color: $orange;

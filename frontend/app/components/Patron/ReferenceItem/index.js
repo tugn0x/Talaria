@@ -40,7 +40,7 @@ const ReferenceItem = (props) => {
         <Row className="reference-row justify-content-between">
             <Col sm={2} className="select-checkbox">
                 <input type="checkbox" onChange={toggleSelection} value={data.id} checked={checked}/>
-                <i className={`fas ${matTypeIcon(data.material_type)}`}></i>
+                <i className={`simple_icon fas ${matTypeIcon(data.material_type)}`}></i>
             </Col> 
             <Col sm={7} className="info">
                 <NavLink to={`${requesturl(data.id)}`}>
