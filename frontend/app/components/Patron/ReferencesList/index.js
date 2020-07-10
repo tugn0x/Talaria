@@ -25,6 +25,7 @@ const ReferencesList = (props) => {
 
     const [selectedReferences, setSelectedReferences] = useState([]);
     const [disableToolbar,setDisableToolbar]=useState(false);
+    const [disableCancelFilter,setDisableCancelFilter]=useState(true);
 
     const [multiFilter, setMultiFilter ] = useState(
         {
@@ -50,6 +51,10 @@ const ReferencesList = (props) => {
 
     useEffect( ()=> {
         searchOptions.getSearchList(multiFilter)
+        console.log("FILTER:",multiFilter);
+        if(multiFilter.query != "" || (multiFilter.labelIds && multiFilter.labelIds.length>0) || (multiFilter.groupIds && multiFilter.groupIds.length>0) )
+            setDisableCancelFilter(false);
+        else setDisableCancelFilter(true);            
     }, [multiFilter])
 
     const linkTo = (path) => {
@@ -141,7 +146,7 @@ const ReferencesList = (props) => {
                                     groupIds: state.groupIds
                         }) ) } /> }
                     </Col>
-                    <Col md="2">{<a href="#" onClick={(e) => handleCancelFilter(e)} className="btn btn-link">Cancella tutto</a> }</Col>
+                    <Col md="2">{!disableCancelFilter && <a href="#" onClick={(e) => handleCancelFilter(e)} className="btn btn-link">Cancella tutto</a> }</Col>
                 </Row>
                 <Row>
                     <Col md={12} className="activeFilters">
