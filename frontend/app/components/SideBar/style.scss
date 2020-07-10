@@ -5,6 +5,10 @@
     &:hover, &.current {
         background-color: $dark-bk;
     }
+    i {
+        color: $orange;
+    }
+    
     i:before {
         padding-right: 10px;
     }
