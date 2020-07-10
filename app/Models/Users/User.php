@@ -125,14 +125,14 @@ class User extends UserBase
             ->withPivot('department_id','title_id')
             ->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps
         */
-        return $this->belongsToMany('App\Models\Libraries\Library','library_user')->withPivot('department_id','title_id','status')
+        return $this->belongsToMany('App\Models\Libraries\Library','library_user')->withPivot('department_id','title_id','label','status')
         ->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps;
     }
 
     /* elenco sue biblio attive con dip e titles*/
     public function active_libraries()
     {
-        return $this->belongsToMany('App\Models\Libraries\Library','library_user')->withPivot('department_id','title_id','status')
+        return $this->belongsToMany('App\Models\Libraries\Library','library_user')->withPivot('department_id','title_id','label','status')
         ->wherePivot('status',config('constants.patron_status.enabled'))
         ->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps;
     }
