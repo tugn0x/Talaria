@@ -17,9 +17,9 @@ const ReferenceItem = (props) => {
     const matTypeIcon = (mat) => {
         switch (mat)
         {
-          case 1: return 'fa-newspaper'; break;
-          case 2: return 'fa-book'; break;
-          case 3: return 'fa-graduation-cap'; break;
+          case 1: return 'simple_icon fas fa-newspaper'; break;
+          case 2: return 'simple_icon fas fa-book'; break;
+          case 3: return 'simple_icon icon-diploma'; break;
         }
         return mat;
       }
@@ -40,7 +40,7 @@ const ReferenceItem = (props) => {
         <Row className="reference-row justify-content-between">
             <Col sm={2} className="select-checkbox">
                 <input type="checkbox" onChange={toggleSelection} value={data.id} checked={checked}/>
-                <i className={`simple_icon fas ${matTypeIcon(data.material_type)}`}></i>
+                <i className={`${matTypeIcon(data.material_type)}`}></i>
             </Col> 
             <Col sm={7} className="info">
                 <NavLink to={`${requesturl(data.id)}`}>
@@ -63,7 +63,7 @@ const ReferenceItem = (props) => {
                     <i className="fas fa-share"></i>
                 </NavLink>}
                 {data.oa==1 && <NavLink to={`${oaurl(data.id)}`} className="btn btn-link">
-                    <span className="icon-oa"></span>
+                    <i className="icon-oa"></i>
                 </NavLink>}
                 {<NavLink to={`${editurl(data.id)}`}  className="btn btn-link">
                     <i className="fas fa-edit"></i>
