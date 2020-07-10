@@ -26,6 +26,15 @@ class LibraryUserObserver extends BaseObserver
     {
          //ogni nuova rich va messa in attesa
          $model->status=config("constants.patron_status.pending");
+         if(auth() && auth()->user()) {
+            $user = auth()->user();
+            $library = Library::find($model->library_id);
+            if(!$user->can('manage-users', $library)) { //non sono il manager della biblio ma sono il patron che sta aggiungendo una biblio
+                if(!$model->user_id) {
+                    $model->user_id = auth()->user()->id;
+                }
+            }
+        }
          return parent::creating($model);
     }
 
