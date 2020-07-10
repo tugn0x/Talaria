@@ -51,7 +51,6 @@ const ReferencesList = (props) => {
 
     useEffect( ()=> {
         searchOptions.getSearchList(multiFilter)
-        console.log("FILTER:",multiFilter);
         if(multiFilter.query != "" || (multiFilter.labelIds && multiFilter.labelIds.length>0) || (multiFilter.groupIds && multiFilter.groupIds.length>0) )
             setDisableCancelFilter(false);
         else setDisableCancelFilter(true);            
