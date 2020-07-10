@@ -84,6 +84,11 @@ class PatronDocdelRequest extends BaseModel
         return $query->where('reference_id', $reference_id);
     }
 
+    public function scopeIsArchived($query, $archived)
+    {
+        return $query->where('archived', $archived);
+    }
+
     public function scopeByLabel($query, $labelIds){
         return 
         $query->whereHas('reference', function ($q) use ($labelIds) {

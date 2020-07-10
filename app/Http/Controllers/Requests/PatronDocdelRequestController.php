@@ -48,6 +48,9 @@ class PatronDocdelRequestController extends ApiController
         if($request->input("groupIds"))
             $model=$model->byGroup($request->input("groupIds"));
         
+        if($request->input("archived"))
+            $model=$model->isArchived($request->input("archived"));    
+        
         $collection = $this->nilde->index($model, $request);
         return $this->response->paginator($collection, new $this->transformer())->morph();
     }
