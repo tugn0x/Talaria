@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {useIntl} from 'react-intl'
 import makeSelectPatron, {isPatronLoading,groupsOptionListSelector,labelsOptionListSelector} from '../selectors';
-import { requestReferencesList,requestLabelsOptionList,requestGroupsOptionList,requestRemoveReferenceLabel,requestRemoveReferenceGroup} from '../actions'
+import { requestReferencesList,requestLabelsOptionList,requestGroupsOptionList,requestRemoveReferenceLabel,requestRemoveReferenceGroup,requestApplyLabelsToReferences,requestApplyGroupsToReferences} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -55,16 +55,16 @@ const ReferencesListPage = (props) => {
 
      const applyLabelsToReferences = (labelIds,refIds) => {
          //Dati di test per provare la API
-         let TESTlabelIds= [7,5,"ciaoooo"];
+         let TESTlabelIds= [7,5,'ciaoooo'];
          let TESTrefIds=[48,46,44];
-         console.log("ApplyLabelsToReferences:", TESTlabelIds,TESTrefIds);
+         dispatch(requestApplyLabelsToReferences(TESTrefIds,TESTlabelIds,intl.formatMessage(messages.addedMessage)))
      }
 
      const applyGroupsToReferences = (groupIds,refIds) => {
          //Dati di test per provare la API
-         let TESTgroupIds= [14,15,"testgroup"];
+         let TESTgroupIds= [14,15,'testgroup'];
          let TESTrefIds=[48,46,44];
-        console.log("ApplyLabelsToReferences:", TESTgroupIds,TESTrefIds);
+        dispatch(requestApplyGroupsToReferences(TESTrefIds,TESTgroupIds,intl.formatMessage(messages.addedMessage)))
     }
 
     return (

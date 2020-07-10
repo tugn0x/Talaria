@@ -16,6 +16,7 @@ import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_LABELS_OPTIONLIST_SUCCESS,
   REQUEST_GET_GROUPS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST_SUCCESS,
   REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,
+  REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,
   REQUEST_ERROR, STOP_LOADING} from "./constants";
 
 export function defaultAction() {
@@ -184,6 +185,24 @@ export function requestRemoveReferenceGroup(id,groupId,message) {
     type: REQUEST_REMOVE_REFERENCE_GROUP,
     id,
     groupId,
+    message
+  };
+}
+
+export function requestApplyLabelsToReferences(refIds,labelIds,message) {
+  return {
+    type: REQUEST_APPLY_LABELS_TO_REFERENCES,
+    refIds,
+    labelIds,
+    message
+  };
+}
+
+export function requestApplyGroupsToReferences(refIds,groupIds,message) {
+  return {
+    type: REQUEST_APPLY_GROUPS_TO_REFERENCES,
+    refIds,
+    groupIds,
     message
   };
 }

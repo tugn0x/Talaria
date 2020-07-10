@@ -44,6 +44,10 @@ export default defineMessages({
     id: 'app.global.removedMessage',
     defaultMessage: 'Successfully removed',
   },
+  addedMessage:{
+    id: 'app.global.addedMessage',
+    defaultMessage: 'Successfully added',
+  },
   yes:{
     id: 'app.global.yes',
     defaultMessage: 'Yes',

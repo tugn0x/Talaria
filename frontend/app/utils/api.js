@@ -255,6 +255,17 @@ export const removeReferenceGroup = (options) => {
   return request(`${BASE_URL}/api/v1/references/${id}/groups/${gid}`, options)
 };
 
+export const requestApplyLabelsToReferences = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/references/updateSelected`, options)
+};
+
+export const requestApplyGroupsToReferences = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/references/updateSelected`, options)
+};
+
+
 
 // ---------- LIBRARY ---------- //
 export const getLibraryUsersList = (options) => {

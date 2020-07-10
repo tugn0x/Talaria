@@ -2,7 +2,7 @@ import { call, put, select, takeLatest, fork, take  } from 'redux-saga/effects';
 import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO_LIBRARIES,REQUEST_UPDATE_ACCESS_TO_LIBRARIES,REQUEST_DELETE_ACCESS_TO_LIBRARIES,  REQUEST_REFERENCES_LIST,
   REQUEST_POST_REFERENCES, REQUEST_UPDATE_REFERENCES, 
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST,
-  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP} from './constants';
+  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES} from './constants';
 import {
   requestError,
   stopLoading,
@@ -33,6 +33,8 @@ import {  getMyLibrary,
           getGroupsOptionList,
           removeReferenceLabel,
           removeReferenceGroup,
+          requestApplyLabelsToReferences,
+          requestApplyGroupsToReferences,
         } from 'utils/api';
 
 
@@ -118,6 +120,45 @@ export function* requestRemoveReferenceGroupSaga(action) {
     yield put(requestError(e.message));
   }
 }
+
+
+export function* requestApplyLabelsToReferencesSaga(action) {
+  const options = {
+    method: 'put',
+    body: {
+      references: action.refIds,
+      labelIds: action.labelIds,
+    }
+  };
+  console.log("SAGA REQUESTAPPLYLABELS:",action)
+  try {
+    const request = yield call(requestApplyLabelsToReferences, options);
+    yield put(requestReferencesList())
+    yield put(push("/patron/references"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestApplyGroupsToReferencesSaga(action) {
+  const options = {
+    method: 'put',
+    body: {
+      references: action.refIds,
+      groupIds: action.groupIds,
+    }
+  };
+  try {
+    const request = yield call(requestApplyGroupsToReferences, options);
+    yield put(requestReferencesList())
+    yield put(push("/patron/references"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 
 export function* requestAccessToLibrarySaga(action) {
   const options = {
@@ -264,5 +305,7 @@ export default function* patronSaga() {
   yield takeLatest(REQUEST_GET_REFERENCE, requestGetReferenceSaga);
   yield takeLatest(REQUEST_REMOVE_REFERENCE_LABEL,requestRemoveReferenceLabelSaga);
   yield takeLatest(REQUEST_REMOVE_REFERENCE_GROUP,requestRemoveReferenceGroupSaga);
+  yield takeLatest(REQUEST_APPLY_LABELS_TO_REFERENCES,requestApplyLabelsToReferencesSaga);
+  yield takeLatest(REQUEST_APPLY_GROUPS_TO_REFERENCES,requestApplyGroupsToReferencesSaga);
 }
 
