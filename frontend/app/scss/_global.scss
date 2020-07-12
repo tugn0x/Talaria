@@ -296,14 +296,53 @@ ul.list-inline {
     display: inline-flex;
     align-items: center;
     width: 100%;
+    .dropdown {
+        &.show {
+            .btn {
+                background: $dark-bk;
+            }
+        }
+        p, label {
+            font-size: 1rem;
+        }
+        
+        .dropdown-menu {
+            padding: 15px;
+            background: $dark-bk;
+        }
+        .dropdown-header {
+            background: none;
+            padding: 0;
+            border: none;
+            position: relative;
+            input {
+                height: 30px;
+                border-radius: 5px;
+                border-color: transparent;
+            }
+            i {
+                position: absolute;
+                right: 5px;
+                bottom: 7px;
+                font-size: 16px;
+                color: $dark-text;
+            }
+        }
+    }
     .btn {
-        height: auto;
+        width: 40px;
+        height: 40px;
         margin: 0;
+        border-radius: 20px;
+        display: table;
+        &:hover,&:active, &:focus {
+            text-decoration: none;
+        }
         i {
             color: $orange;
             font-size: 1.5rem;
-            width: 20px;
-            height: 20px;
+            display: table-cell;
+            vertical-align: middle;
         }
     }
 }

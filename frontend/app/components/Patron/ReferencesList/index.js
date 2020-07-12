@@ -12,6 +12,7 @@ import { generatePath } from "react-router";
 import { NavLink } from 'react-router-dom';
 import ReferenceItem from '../ReferenceItem';
 import FilterSelect from '../FilterSelect';
+import ApplyLabGroup from '../ApplyLabGroup';
 
 import './style.scss';
 
@@ -186,12 +187,19 @@ const ReferencesList = (props) => {
                             {<NavLink to='#'  className="btn btn-link">
                                 <i className="fas fa-file-export"></i>
                             </NavLink>}
-                            {<NavLink to="#" onClick={applyLabels}  className="btn btn-link">
-                                <span className="icon-tag-plus"></span>
-                            </NavLink>}
-                            {<NavLink to="#" onClick={applyGroups} className="btn btn-link">
+                            <ApplyLabGroup 
+                                type="labels"
+                                submitCallBack={(ids) => applyLabels(ids, selectedReferences)}
+                                options={labelsOptionList} 
+                            />
+                            <ApplyLabGroup 
+                                type="groups"
+                                submitCallBack={(ids) => applyGroups(ids, selectedReferences)}
+                                options={groupsOptionList} 
+                            />
+                            {/* <NavLink to="#" onClick={applyGroups} className="btn btn-link">
                                 <i className="fas fa-folder-plus"></i>
-                            </NavLink>}
+                            </NavLink> */}
                             </>}
                         </div>
                     </Col>

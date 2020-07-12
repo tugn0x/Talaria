@@ -57,14 +57,14 @@ const ReferencesListPage = (props) => {
          //Dati di test per provare la API
          let TESTlabelIds= [7,5,'ciaoooo'];
          let TESTrefIds=[48,46,44];
-         dispatch(requestApplyLabelsToReferences(TESTrefIds,TESTlabelIds,intl.formatMessage(messages.addedMessage)))
+        dispatch(requestApplyLabelsToReferences([labelIds],refIds,intl.formatMessage(messages.addedMessage)))
      }
 
      const applyGroupsToReferences = (groupIds,refIds) => {
          //Dati di test per provare la API
          let TESTgroupIds= [14,15,'testgroup'];
          let TESTrefIds=[48,46,44];
-        dispatch(requestApplyGroupsToReferences(TESTrefIds,TESTgroupIds,intl.formatMessage(messages.addedMessage)))
+        dispatch(requestApplyGroupsToReferences([groupIds],refIds,intl.formatMessage(messages.addedMessage)))
     }
 
     return (

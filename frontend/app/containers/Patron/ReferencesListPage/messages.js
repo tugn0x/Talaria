@@ -24,9 +24,17 @@ export default defineMessages({
     id: `${scope}.labels`,
     defaultMessage: 'Labels',
   },
+  labelAs: {
+    id: `${scope}.labelAs`,
+    defaultMessage: 'Label as',
+  },
   groups: {
     id: `${scope}.groups`,
     defaultMessage: 'Categories',
+  },
+  groupAs: {
+    id: `${scope}.groupAs`,
+    defaultMessage: 'Group as',
   },
   confirm:{
     id: 'app.global.confirm',
