@@ -20,5 +20,8 @@ export default defineMessages({
     id: `${scope}.ReferencesNotFound`,
     defaultMessage: 'References not found',
   },
+  ResetAll: {
+    id: `app.global.resetAll`,
+  },
 });
 

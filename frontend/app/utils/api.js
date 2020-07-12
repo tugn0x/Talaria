@@ -216,7 +216,7 @@ export const getLibrariesSubjects = (options) => {
 
 // Reference //
 export const getReferencesList = (options) => {
-  const page = options.page;
+  const page = options.page ? options.page : "1";
   const params = options.query;
   let qstringpar="";
   if(params && params.query && params.query!="") qstringpar+="&q="+params.query;

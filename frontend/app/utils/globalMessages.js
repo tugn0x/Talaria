@@ -145,6 +145,10 @@ export default defineMessages({
     id: `${scope}.cancel`,
     defaultMessage: "Cancel",
   },
+  resetAll: {
+    id: `${scope}.resetAll`,
+    defaultMessage: "Reset all filters",
+  },
   pending: {
     id: `${scope}.pending`,
     defaultMessage: "Pending",

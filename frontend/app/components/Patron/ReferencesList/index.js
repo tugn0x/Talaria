@@ -20,6 +20,7 @@ const ReferencesList = (props) => {
     const {match, data, pagination, history, searchOptions, labelsOptionList, groupsOptionList,removeLabelFromReference,removeGroupFromReference,applyLabels,applyGroups} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
+    const [mounted, setMounted] = useState(false)
     /*  const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal); */
 
@@ -44,13 +45,17 @@ const ReferencesList = (props) => {
             return [...ids, id]
         }
     }
+
+    useEffect(() => {
+        setMounted(true)
+     }, [])
     
     useEffect(() => {
        setDisableToolbar(selectedReferences.length == 0)
     }, [selectedReferences])
 
     useEffect( ()=> {
-        searchOptions.getSearchList(multiFilter)
+        mounted ? searchOptions.getSearchList(multiFilter) : null
         if(multiFilter.query != "" || (multiFilter.labelIds && multiFilter.labelIds.length>0) || (multiFilter.groupIds && multiFilter.groupIds.length>0) )
             setDisableCancelFilter(false);
         else setDisableCancelFilter(true);            
@@ -61,13 +66,12 @@ const ReferencesList = (props) => {
      };
 
     
-    const handleCancelFilter = (e) => {
-        setMultiFilter( state => (
-        {
+    const handleCancelFilter = () => {
+        setMultiFilter({
             query: '',
             labelIds:[],
             groupIds:[]
-        }))
+        })
     }
 
     const toggleGroupFilter = (groupId) => {
@@ -116,6 +120,7 @@ const ReferencesList = (props) => {
                                     }) )
                                 } 
                                 }
+                                query={multiFilter.query}
                                 searchOnChange={searchOptions.searchOnChange ? searchOptions.searchOnChange : false}
                             />
                         }
@@ -145,7 +150,7 @@ const ReferencesList = (props) => {
                                     groupIds: state.groupIds
                         }) ) } /> }
                     </Col>
-                    <Col md="2">{!disableCancelFilter && <a href="#" onClick={(e) => handleCancelFilter(e)} className="btn btn-link">Cancella tutto</a> }</Col>
+                    <Col md="2">{!disableCancelFilter && <a href="#" onClick={handleCancelFilter} className="btn btn-link"><FormattedMessage {...messages.ResetAll} /></a> }</Col>
                 </Row>
                 <Row>
                     <Col md={12} className="activeFilters">
@@ -202,8 +207,8 @@ const ReferencesList = (props) => {
                                 data={ref}
                                 editPath={props.editPath}
                                 toggleSelection={() => toggleReference(ref.id)}
-                                removeLabel={(labelId) => removeLabelFromReference(ref.id,labelId)}
-                                removeGroup={(groupId) => removeGroupFromReference(ref.id,groupId)}
+                                removeLabel={(labelId) => removeLabelFromReference(ref.id,labelId, multiFilter)}
+                                removeGroup={(groupId) => removeGroupFromReference(ref.id,groupId, multiFilter)}
                                 checked={selectedReferences.includes(ref.id)}
                             />
                             

@@ -97,8 +97,8 @@ export function* requestRemoveReferenceLabelSaga(action) {
   };
   try {
     const request = yield call(removeReferenceLabel, options);
-    yield put(requestReferencesList())
-    yield put(push("/patron/references"));
+    yield put(requestReferencesList(null, action.filter))
+   // yield put(push("/patron/references"));
     yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
@@ -109,12 +109,12 @@ export function* requestRemoveReferenceGroupSaga(action) {
   const options = {
     method: 'delete',
     id: action.id,
-    groupId: action.groupId,
+    groupId: action.groupId
   };
   try {
     const request = yield call(removeReferenceGroup, options);
-    yield put(requestReferencesList())
-    yield put(push("/patron/references"));
+    yield put(requestReferencesList(null, action.filter))
+   // yield put(push("/patron/references"));
     yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));

@@ -171,21 +171,23 @@ export function requestGroupsOptionListSuccess(result) {
   };
 }
 
-export function requestRemoveReferenceLabel(id,labelId,message) {
+export function requestRemoveReferenceLabel(id,labelId,message, filter) {
   return {
     type: REQUEST_REMOVE_REFERENCE_LABEL,
     id,
     labelId,
-    message
+    message,
+    filter
   };
 }
 
-export function requestRemoveReferenceGroup(id,groupId,message) {
+export function requestRemoveReferenceGroup(id,groupId,message, filter) {
   return {
     type: REQUEST_REMOVE_REFERENCE_GROUP,
     id,
     groupId,
-    message
+    message,
+    filter
   };
 }
 

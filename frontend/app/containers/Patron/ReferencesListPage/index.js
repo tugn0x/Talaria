@@ -29,7 +29,7 @@ const ReferencesListPage = (props) => {
         
     }, [])
 
-    async function removeLabelFromReference (id,labelId) {
+    async function removeLabelFromReference (id,labelId, filter) {
        //console.log("DISPATCH removeLabelFromReference",id,labelId);
         let conf = await confirm({
             title: intl.formatMessage(messages.confirm),
@@ -38,10 +38,10 @@ const ReferencesListPage = (props) => {
             cancelText: intl.formatMessage(messages.no)
         }); //
         if(conf)
-            dispatch(requestRemoveReferenceLabel(id,labelId,intl.formatMessage(messages.removedMessage)))
+            dispatch(requestRemoveReferenceLabel(id,labelId,intl.formatMessage(messages.removedMessage), filter))
     }
 
-    async function removeGroupFromReference (id,groupId) {
+    async function removeGroupFromReference (id,groupId, filter) {
         //console.log("DISPATCH removeGroupFromReference",id,groupId);
         let conf = await confirm({
             title: intl.formatMessage(messages.confirm),
@@ -50,7 +50,7 @@ const ReferencesListPage = (props) => {
             cancelText: intl.formatMessage(messages.no)
         }); //
          if(conf)
-             dispatch(requestRemoveReferenceGroup(id,groupId,intl.formatMessage(messages.removedMessage)))
+             dispatch(requestRemoveReferenceGroup(id,groupId,intl.formatMessage(messages.removedMessage), filter))
      }
 
      const applyLabelsToReferences = (labelIds,refIds) => {

@@ -9,13 +9,14 @@ const InputSearch = (props) => {
     
     const {submitCallBack, searchOnChange} = props 
     const intl = useIntl()
+    
     const [query, setQuery] = useState('')
     const handleChange = (e) =>  {
         const q = e.target.value
         setQuery(q)
         if(searchOnChange){
             submitCallBack(q)
-        }
+        } 
     }
     
     const handleSubmit = (e) => {
@@ -29,7 +30,7 @@ const InputSearch = (props) => {
                 <Input 
                     required 
                     placeholder={intl.formatMessage(messages.placeHolder)}
-                    value={query}
+                    value={props.query}
                     onChange={handleChange} 
                     type="text" 
                     name="inputQuery" 
