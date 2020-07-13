@@ -101,6 +101,8 @@ const ReferencesList = (props) => {
         setSelectedReferences(state => ( handleIds([...state], id)))
     }
 
+    var disableToolbarClass = disableToolbar? 'disabled':'';
+
     return (
         <>
             <h1 className="section-title large"><FormattedMessage {...messages.header} /></h1>
@@ -180,27 +182,29 @@ const ReferencesList = (props) => {
                     <Col sm={10} className="select-checkbox">
                         <div className="features-icons" >
                             <input type="checkbox" onChange={(e)=>toggleAllCheckbox(e)}/>
-                            {!disableToolbar && <>
-                            {<NavLink to='#'  className="btn btn-link" >
+                            
+                            {<NavLink to='#'  className={`btn btn-link ${disableToolbarClass} `}>
                                 <i className="fas fa-print"></i>
                             </NavLink>}
-                            {<NavLink to='#'  className="btn btn-link">
+                            {<NavLink to='#'  className={`btn btn-link ${disableToolbarClass} `}>
                                 <i className="fas fa-file-export"></i>
                             </NavLink>}
                             <ApplyLabGroup 
                                 type="labels"
+                                disabled={disableToolbar}
                                 submitCallBack={(ids) => applyLabels(ids, selectedReferences)}
                                 options={labelsOptionList} 
                             />
                             <ApplyLabGroup 
                                 type="groups"
+                                disabled={disableToolbar}
                                 submitCallBack={(ids) => applyGroups(ids, selectedReferences)}
                                 options={groupsOptionList} 
                             />
                             {/* <NavLink to="#" onClick={applyGroups} className="btn btn-link">
                                 <i className="fas fa-folder-plus"></i>
                             </NavLink> */}
-                            </>}
+                            
                         </div>
                     </Col>
                     <Col sm={2} className="select-counter">
