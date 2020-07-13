@@ -18,7 +18,7 @@ import './style.scss';
 
 const ReferencesList = (props) => {
     console.log('ReferencesList', props)
-    const {match, data, pagination, history, searchOptions, labelsOptionList, groupsOptionList,removeLabelFromReference,removeGroupFromReference,applyLabels,applyGroups} = props
+    const { data, pagination, searchOptions, labelsOptionList, groupsOptionList,removeLabelFromReference,removeGroupFromReference,applyLabels,applyGroups} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)
@@ -56,15 +56,15 @@ const ReferencesList = (props) => {
     }, [selectedReferences])
 
     useEffect( ()=> {
-        mounted ? searchOptions.getSearchList(multiFilter) : null
+        mounted ? searchOptions.getSearchList(current_page, per_page, multiFilter ) : null
         if(multiFilter.query != "" || (multiFilter.labelIds && multiFilter.labelIds.length>0) || (multiFilter.groupIds && multiFilter.groupIds.length>0) )
             setDisableCancelFilter(false);
         else setDisableCancelFilter(true);            
     }, [multiFilter])
 
-    const linkTo = (path) => {
+    /* const linkTo = (path) => {
         history.push(path)
-     };
+     }; */
 
     
     const handleCancelFilter = () => {
@@ -242,9 +242,7 @@ const ReferencesList = (props) => {
                     per_page={per_page}
                     current_page={current_page}
                     total_pages={total_pages}
-                    setPage={(page) => linkTo(generatePath(`${match.path}`, {
-                        page: page
-                    }))}
+                    linkToPage={(page, pagesize) => searchOptions.getSearchList(page,pagesize, multiFilter )}
                 />
             }
         </>

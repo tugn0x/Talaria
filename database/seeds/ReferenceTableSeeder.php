@@ -15,7 +15,7 @@ class ReferenceTableSeeder extends Seeder
         \App\Models\Users\User::get()->each(function ($u) {
             if($u->status==1)
             {
-                factory(\App\Models\References\Reference::class,5)->create([
+                factory(\App\Models\References\Reference::class,20)->create([
                     'created_by'=>$u->id,
                     'updated_by'=>$u->id,
                 ]);

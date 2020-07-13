@@ -14,7 +14,7 @@ const routes = [
       { path: '/labels', icon: "tags", exact: true, name: `Labels`, url: '/references/labels', component: Fake,sidebar: true, order:3 },
       { path: '/categories', icon: "folder",exact: true, name: `Categories`, url: '/references/categories', component: Fake,sidebar: true , order:4},
       { path: '/reference/:id?/:edit?', name: `ReferenceUpdate`, component: ReferencesPage},
-      { path: '/:page?', name: `ReferenceList`, url: '/references', component: ReferencesListPage,sidebar: true, order:2 },
+      { path: '/', name: `ReferenceList`, url: '/references', component: ReferencesListPage,sidebar: true, order:2 },
     ]
   },
 

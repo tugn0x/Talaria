@@ -90,7 +90,7 @@
     }
     .dropdown-menu {
         width: calc(100% + 2px);
-        left: 1px !important;
+        left: -1px !important;
         top: -3px !important;
         padding: 0 15px;
         /* @include media-breakpoint-down(sm) { 

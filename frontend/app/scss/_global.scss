@@ -84,10 +84,11 @@ button {
     flex: 1;
     min-height: 100vh;
     .main {
-        margin-bottom: 4rem;
+        // margin-bottom: 4rem;
         /* padding-top: 2rem; */
         > .container {
             margin-top: 8rem;
+            margin-bottom: 8rem;
         }
     }
 }
@@ -309,6 +310,15 @@ ul.list-inline {
         @include patron_icon
     }
 }
+
+.dropdown.show>.btn-secondary.dropdown-toggle, 
+.dropdown.show>.btn-secondary.dropdown-toggle:focus,
+.dropdown.show>.btn-secondary.dropdown-toggle:active{
+    box-shadow: 0 0 0;
+    background-color: transparent;
+    border: none;
+}
+
 
 .reference .features-icons,
 .referenceList .features-icons

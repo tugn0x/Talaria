@@ -56,12 +56,12 @@ export function requestPostReferences(request, message) {
   };
 }
 
-export function requestReferencesList(page, query) {
+export function requestReferencesList(page, pageSize, query) {
   return {
     type: REQUEST_REFERENCES_LIST,
     page,
-    query
-    
+    query,
+    pageSize
   };
 }
 

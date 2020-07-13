@@ -1,7 +1,7 @@
 @import '../../scss/variables';
 
 .pagination {
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     margin: 0 auto;
     
@@ -17,10 +17,15 @@
 
     .perPageDropdown {
         display:inline;
-
         button {
             color: $orange;
         }
+        .dropdown-menu {
+            max-height: 100px;
+            overflow-y: scroll;
+            top: -15px !important;
+        }
+        
     }
 
 }

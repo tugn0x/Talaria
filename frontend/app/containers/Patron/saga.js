@@ -216,9 +216,11 @@ export function* requestReferencesListSaga(action) {
   const options = {
     method: 'get',
     page: action.page ? action.page : '1',
-    query: action.query ? action.query : null
+    query: action.query ? action.query : null,
+    pageSize: action.pageSize ? action.pageSize : null
   };
   try {
+   console.log(action)
     const request = yield call(getReferencesList, options);
     yield put(requestReferencesListSuccess(request));
   } catch(e) {

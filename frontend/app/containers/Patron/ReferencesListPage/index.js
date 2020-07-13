@@ -14,20 +14,22 @@ import confirm from "reactstrap-confirm";
 
 const ReferencesListPage = (props) => {
     console.log('ReferencesListPage', props)
-    const {dispatch, isLoading, match, patron} = props
+    const {dispatch, isLoading, match, patron, history} = props
     const referencesList = patron.referencesList.data
     const pagination = patron.referencesList.pagination
     const intl = useIntl()
     const labelsOptionList = patron.labelsOptionList
     const groupsOptionList = patron.groupsOptionList
+
     useEffect(() => {
         if(!isLoading) {
             dispatch(requestReferencesList())
             dispatch(requestLabelsOptionList())
             dispatch(requestGroupsOptionList())
         }
-        
     }, [])
+
+
 
     async function removeLabelFromReference (id,labelId, filter) {
        //console.log("DISPATCH removeLabelFromReference",id,labelId);
@@ -57,14 +59,14 @@ const ReferencesListPage = (props) => {
          //Dati di test per provare la API
          let TESTlabelIds= [7,5,'ciaoooo'];
          let TESTrefIds=[48,46,44];
-        dispatch(requestApplyLabelsToReferences([labelIds],refIds,intl.formatMessage(messages.addedMessage)))
+        dispatch(requestApplyLabelsToReferences(refIds,[labelIds],intl.formatMessage(messages.addedMessage)))
      }
 
      const applyGroupsToReferences = (groupIds,refIds) => {
          //Dati di test per provare la API
          let TESTgroupIds= [14,15,'testgroup'];
          let TESTrefIds=[48,46,44];
-        dispatch(requestApplyGroupsToReferences([groupIds],refIds,intl.formatMessage(messages.addedMessage)))
+        dispatch(requestApplyGroupsToReferences(refIds,[groupIds],intl.formatMessage(messages.addedMessage)))
     }
 
     return (
@@ -80,8 +82,9 @@ const ReferencesListPage = (props) => {
                 match={match}
                 title={intl.formatMessage(messages.header)}
                 searchOptions={{
-                    getSearchList: (searchFilter) => {
-                        dispatch(requestReferencesList(null, searchFilter))
+                    getSearchList: (page, pageSize, searchFilter ) => {
+                        history.push(match.path)
+                        dispatch(requestReferencesList(page, pageSize, searchFilter))
                     },
                     searchOnChange: true
                 }}
@@ -90,7 +93,7 @@ const ReferencesListPage = (props) => {
                 removeGroupFromReference={removeGroupFromReference}
                 applyLabels={applyLabelsToReferences}
                 applyGroups={applyGroupsToReferences}
-                modalComponent={ <ReferencesPage match={match} />}
+                // modalComponent={ <ReferencesPage match={match} />}
             />
             
     )
