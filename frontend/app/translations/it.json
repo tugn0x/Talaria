@@ -197,6 +197,7 @@
   "app.components.ReferencesList.header": "Riferimenti",
   "app.components.ReferencesList.createNewReference": "Nuovo riferimento",
   "app.components.ReferencesList.ReferencesNotFound": "Non ci sono riferimenti",
+  "app.components.ReferencesList.ReferenceSelected": "Selezionati",
 
   "app.components.ProjectsList.header": "Lista progetti",
   "app.components.ProjectsList.createNewProject": "Nuovo progetto",

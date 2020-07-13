@@ -6,12 +6,11 @@ import {useIntl} from 'react-intl';
 // import './style.scss';
 
 const ApplyLabGroup = props => {
+    console.log('ApplyLabGroup', props)
     const {type, submitCallBack, options, disabled} = props
-    // const options = props.options
     const [data, setData] = useState(options)
     const [query, setQuery] = useState("")
     const intl = useIntl();
-    
     
     useEffect(() => {
         if(query !== ""){
@@ -26,7 +25,7 @@ const ApplyLabGroup = props => {
 
     return (
         <UncontrolledDropdown className={`apply ${type}`} direction="down">
-            <DropdownToggle color="link" disabled={disabled}>
+            <DropdownToggle color="default" disabled={disabled}>
                 {type === 'labels' ? <i className="icon-tag-plus"></i> :  <i className="fas fa-folder-plus"></i>}
             </DropdownToggle>
             <DropdownMenu center="true">

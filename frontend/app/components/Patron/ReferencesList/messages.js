@@ -23,5 +23,9 @@ export default defineMessages({
   ResetAll: {
     id: `app.global.resetAll`,
   },
+  ReferenceSelected: {
+    id: `${scope}.ReferenceSelected`,
+    defaultMessage: 'Selected',
+  },
 });
 

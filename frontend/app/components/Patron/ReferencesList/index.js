@@ -179,7 +179,7 @@ const ReferencesList = (props) => {
             
             <div className="referenceList list-wrapper">
                 <Row className="list-head">
-                    <Col sm={10} className="select-checkbox">
+                    <div className="select-checkbox">
                         <div className="features-icons" >
                             <input type="checkbox" onChange={(e)=>toggleAllCheckbox(e)}/>
                             
@@ -189,27 +189,31 @@ const ReferencesList = (props) => {
                             {<NavLink to='#'  className={`btn btn-link ${disableToolbarClass} `}>
                                 <i className="fas fa-file-export"></i>
                             </NavLink>}
-                            <ApplyLabGroup 
-                                type="labels"
-                                disabled={disableToolbar}
-                                submitCallBack={(ids) => applyLabels(ids, selectedReferences)}
-                                options={labelsOptionList} 
-                            />
-                            <ApplyLabGroup 
-                                type="groups"
-                                disabled={disableToolbar}
-                                submitCallBack={(ids) => applyGroups(ids, selectedReferences)}
-                                options={groupsOptionList} 
-                            />
+                            {labelsOptionList.length > 0 && 
+                                <ApplyLabGroup 
+                                    type="labels"
+                                    disabled={disableToolbar}
+                                    submitCallBack={(ids) => applyLabels(ids, selectedReferences)}
+                                    options={labelsOptionList} 
+                                />
+                            }
+                            {groupsOptionList.length > 0 &&
+                                <ApplyLabGroup 
+                                    type="groups"
+                                    disabled={disableToolbar}
+                                    submitCallBack={(ids) => applyGroups(ids, selectedReferences)}
+                                    options={groupsOptionList} 
+                                />
+                            }
                             {/* <NavLink to="#" onClick={applyGroups} className="btn btn-link">
                                 <i className="fas fa-folder-plus"></i>
                             </NavLink> */}
                             
                         </div>
-                    </Col>
-                    <Col sm={2} className="select-counter">
-                        {selectedReferences.length} di {data.length} 
-                    </Col>
+                    </div>
+                    <div className="select-counter">
+                        <FormattedMessage {...messages.ReferenceSelected} /> {selectedReferences.length} di {data.length} 
+                    </div>
                 </Row>
                 <div className="list-body">
                     {data.length > 0 &&
