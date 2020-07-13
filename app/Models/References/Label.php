@@ -6,6 +6,10 @@ use App\Models\BaseModel;
 
 class Label extends BaseModel
 {
+    protected $forceDeleting=true; //overrides softdelete => force delete!  
+    protected $userstamping = false;
+    public static function bootSoftDeletes() {}
+    
     protected $fillable=[
         'name',
     ];
