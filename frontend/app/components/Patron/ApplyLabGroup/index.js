@@ -27,7 +27,6 @@ const ApplyLabGroup = props => {
     return (
         <UncontrolledDropdown className={`apply ${type}`} direction="down">
             <DropdownToggle color="link">
-                {/* <span>{intl.formatMessage(messages[type])}</span> */}
                 {type === 'labels' ? <i className="icon-tag-plus"></i> :  <i className="fas fa-folder-plus"></i>}
             </DropdownToggle>
             <DropdownMenu center="true">

@@ -103,14 +103,14 @@ const ReferencesList = (props) => {
 
     return (
         <>
-            <h3 className="table-title text-center"><FormattedMessage {...messages.header} /></h3>
-           {/*  <ButtonPlus
+            <h1 className="section-title large"><FormattedMessage {...messages.header} /></h1>
+            {/* <ButtonPlus
                 onClickHandle={toggle}
                 text={intl.formatMessage(messages.createNewReference)}
             /> */}
             <div className="search-filter-bar">
                 <Row>
-                    <Col md="4">
+                    <Col md={4}>
                         {searchOptions &&
                             <InputSearch
                                 submitCallBack={(query) => { 
@@ -126,7 +126,7 @@ const ReferencesList = (props) => {
                             />
                         }
                     </Col>
-                    <Col md="3">
+                    <Col md={3}>
                         { groupsOptionList.length > 0 && 
                             <FilterSelect 
                                 type={"groups"} 
@@ -138,7 +138,7 @@ const ReferencesList = (props) => {
                                     groupIds:handleIds(state.groupIds, groupId)
                                 }) ) } /> } 
                     </Col>
-                    <Col md="3">
+                    <Col md={3}>
                         
                         { labelsOptionList.length > 0 && 
                             <FilterSelect 
@@ -151,7 +151,7 @@ const ReferencesList = (props) => {
                                     groupIds: state.groupIds
                         }) ) } /> }
                     </Col>
-                    <Col md="2">{!disableCancelFilter && <a href="#" onClick={handleCancelFilter} className="btn btn-link"><FormattedMessage {...messages.ResetAll} /></a> }</Col>
+                    <Col md={2}>{!disableCancelFilter && <a href="#" onClick={handleCancelFilter} className="btn btn-link active"><FormattedMessage {...messages.ResetAll} /></a> }</Col>
                 </Row>
                 <Row>
                     <Col md={12} className="activeFilters">

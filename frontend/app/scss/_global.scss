@@ -87,7 +87,7 @@ button {
         margin-bottom: 4rem;
         /* padding-top: 2rem; */
         > .container {
-            margin-top: 4rem;
+            margin-top: 8rem;
         }
     }
 }
@@ -127,6 +127,19 @@ form {
     }
 }
 
+input[type=text] {
+    padding: 9px;
+    color: $form-text;
+    font-size: $font-size-normal;
+}
+
+
+.active {
+    color: $active;
+    &:hover {
+        color: $active;
+    }
+}
 
 ul.list-inline {
     li {
@@ -147,7 +160,7 @@ ul.list-inline {
     }
 }
 
-.table {
+/* .table {
     .row {
         margin: 0;
         width: 100%;
@@ -222,6 +235,15 @@ ul.list-inline {
             }
         }
     }
+} */
+
+.section-title {
+    font-weight: 700;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: -5rem;
 }
 
 .status-point {
@@ -291,7 +313,6 @@ ul.list-inline {
 .reference .features-icons,
 .referenceList .features-icons
  {
-    background-color: $grey-lighter;
     height: 40px;
     display: inline-flex;
     align-items: center;

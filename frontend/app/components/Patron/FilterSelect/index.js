@@ -35,7 +35,7 @@ const FilterSelect = props => {
             <DropdownMenu center="true">
                 <DropdownItem header>
                     <input type="text" name="filter-search" onChange={(e) => setQuery(e.target.value)} value={query} />
-                    <i className="fas fa-search" />    
+                    {/* <i className="fas fa-search" />   */}  
                 </DropdownItem>
                 {data.length > 0 && data.map(item => (
                     <div className="filter-item" key={item.value}>

@@ -1,15 +1,34 @@
 @import '../../scss/variables';
 .sidebar .nav-link,
 .sidebar-menu .nav-link  {
-    padding: .75rem 0.5rem;
+    max-height: 40px;
+    padding: 0.571rem 0.5rem;
+    height: auto;
+    text-align: left;
+    span {
+        font-size: $font-size-normal;
+        padding-left: 10px;
+    }
     &:hover, &.current {
         background-color: $dark-bk;
     }
     i {
         color: $orange;
+        &:before {
+            font-size: 18px;
+        }
+        &.fa-plus {
+            font-size: 20px;
+            &:before {
+                border-radius: 15px;
+                background: $orange;
+                color: white;
+                padding: 3px 5px;
+                font-size: inherit;
+            }
+        }
+        
     }
     
-    i:before {
-        padding-right: 10px;
-    }
+    
 }

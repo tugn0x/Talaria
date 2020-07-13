@@ -1,8 +1,20 @@
-.searchBtn {
-    height: auto;
-    color: white;
-    padding: 0.3rem 1.2rem;
-    i:before {
-        font-size: 1rem;
+@import '../../../scss/variables';
+
+.form-search {
+    height: $heightInput;
+    // max-width: 256px;
+    input {
+        border-radius: 4px 0 0 4px;
+        color: #6D727B;
+    }
+    .searchBtn {
+        color: white;
+        width: 40px;
+        height: 100%;
+        padding: 0;
+        border-radius: 0 4px 4px 0;
+        i:before {
+            font-size: 1.3rem;
+        }
     }
 }

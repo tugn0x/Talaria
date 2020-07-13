@@ -86,14 +86,14 @@ function BasePage(props) {
               <Container>
                 <Row>
                   {windowSize === 'desktop' && 
-                      <Col md={2}>
+                      <Col md={3}>
                         <SideBar 
                           windowSize={windowSize} 
                           routes={lightRoutes} 
                           location={props.location}/>
                       </Col>
                   }
-                  <Col md={windowSize === 'desktop' ? 10 : 12}> 
+                  <Col md={windowSize === 'desktop' ? 9 : 12}> 
                     <Switch>
                       {props.routes && props.routes.map((route, idx) => {
                         return route.component ? (

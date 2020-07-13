@@ -3,13 +3,22 @@
 .filter-select {
     border: 1px solid black;
     border-radius: 4px;
-    
+   // max-width: 160px;
+    height: $heightInput;
     > button {
         background: none;
         border: none;
         max-width: 100%;
         width: 100%;
         font-size: 1rem;
+        height: auto;
+        &:hover, &:focus, &:active {
+            background-color: transparent;
+        }
+        span {
+            font-size: $font-size-normal;
+            color: $dark-text;
+        }
     }
 
     &.show {
@@ -19,7 +28,7 @@
     input[type=text] {
         border: 1px solid black;
         border-radius: 4px;
-        height: 30px;
+        height: $heightInput;
         width: 100%;
     }
     .dropdown-menu { 
@@ -30,11 +39,11 @@
             border-radius: 0 0 4px 4px;
         }
     }
-
+    
     &.labels {
         background-color: $labels-color;
         border-color: $labels-border;
-        > button:hover {
+        &:hover {
             background-color: $labels-color;
         }
         input[type=text] {
@@ -42,20 +51,22 @@
         }
         .dropdown-menu { 
             border-color:  $labels-border;
+            background-color: $labels-color;
         }
     }
 
     &.groups {
         background-color: $groups-color;
         border-color: $groups-border;
-        > button:hover {
+        &:hover {
             background-color: $groups-color;
-        }
+        } 
         input[type=text] {
             border-color: $groups-border;
         }
         .dropdown-menu { 
             border-color:  $groups-border;
+            background-color: $groups-color;
         }
     }
     
@@ -64,6 +75,7 @@
         border-radius: 0;
         border: none;
         position: relative;
+        padding: 5px 0;
         i.fa-search {
             position: absolute;
             /* display: table-cell; */
@@ -77,16 +89,20 @@
         
     }
     .dropdown-menu {
-        width: 100.2%;
-        left: -0.1% !important;
-        top: -2px;
+        width: calc(100% + 2px);
+        left: 1px !important;
+        top: -3px !important;
+        padding: 0 15px;
+        /* @include media-breakpoint-down(sm) { 
+            left: 1px !important;
+        } */
+        
         .filter-item {
             display: flex;
             align-items: center;
-            padding-left: 15px;
             margin: 15px 0;
             label {
-                margin: 0;
+                margin: 0 0 0 5px;
             }
         }
     }
