@@ -208,7 +208,7 @@ const ReferencesList = (props) => {
                         </div>
                     </Col>
                     <Col sm={2} className="select-counter">
-                     {selectedReferences.length} di {data.length} 
+                        {selectedReferences.length} di {data.length} 
                     </Col>
                 </Row>
                 <div className="list-body">

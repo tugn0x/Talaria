@@ -1,8 +1,14 @@
 @import '../../../scss/variables';
 
-.features-icons span {
+.features-icons {
+    span {
         font-size:1.5em;
         color: $orange;
+    }
+    >input[type=checkbox]{
+        margin-right: 10px;
+    }
+    
 }
 
 .list-head{
