@@ -3,8 +3,8 @@ import { Nav, DropdownItem, DropdownMenu, DropdownToggle,UncontrolledDropdown} f
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {requestNotifications, upadteNotificationsAsRead} from 'containers/App/actions'
-import makeSelectApp, {makeSelectNotifications } from 'containers/App/selectors';
+import {requestNotifications, upadteNotificationsAsRead, clearNotifications} from 'containers/App/actions'
+import makeSelectApp from 'containers/App/selectors';
 import {Loader} from 'components'
 import messages from './messages'
 import subStringer from 'utils/subStringer'
@@ -12,12 +12,13 @@ import {useIntl} from 'react-intl'
 import './style.scss'
 
 const Notification = (props) => {
+    // console.log('Notification', props)
     const {dispatch} = props
     const [notification, setNotification] = useState([])
     const [unreaded_total, setUnreaded_total] = useState(0)
-    const page = props.notifications.pagination
-    const loading = props.notifications.loading
-    //const unreaded_total = props.notifications.unreaded_total
+    const page = props.app.notifications.pagination
+    const loading = props.app.loading
+   
     const intl = useIntl()
     const lazyLoad = (event) => {
         const menuTop = event.target.scrollTop
@@ -27,20 +28,27 @@ const Notification = (props) => {
         const currPage = page ? page.current_page : 1
         const totalPages = page ? page.total_pages : 1
         if(menuTop >= totalItemsHeight - menuHeight && totalPages > currPage ){
-            !props.app.loading && dispatch(requestNotifications(currPage+1))
+            !loading && dispatch(requestNotifications(currPage+1))
         } 
     }
 
     useEffect(() => {
-      !props.app.loading && dispatch(requestNotifications())
+        !loading && dispatch(requestNotifications())
+      
+        return () => {
+          dispatch(clearNotifications())
+        } 
+      
     }, [])
 
     useEffect(() => {
-        if(props.notifications.data.length > 0){
-            setNotification(state => [...state, ...props.notifications.data])
-            setUnreaded_total(state => state+props.notifications.unreaded_total)
+        if(props.app.notifications.data.length > 0){
+            setNotification(state => [...state, ...props.app.notifications.data])
+            setUnreaded_total(state => state+props.app.notifications.unreaded_total)
+        }else{
+            setNotification([])
         }
-    }, [props.notifications.data])
+    }, [props.app.notifications.data])
 //
     return (
         <Nav className="notification" navbar>
@@ -61,7 +69,7 @@ const Notification = (props) => {
                         </a>
                     </div>
                 </DropdownItem>
-                {notification.map(notify => (
+                {notification && notification.map((notify, index) => (
                         <DropdownItem 
                             tag="div" 
                             key={notify.id} 
@@ -84,7 +92,7 @@ const Notification = (props) => {
 
 const mapStateToProps = createStructuredSelector({
     app: makeSelectApp(),
-    notifications: makeSelectNotifications()
+    // notifications: makeSelectNotifications()
   });
 
 function mapDispatchToProps(dispatch) {

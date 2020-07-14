@@ -1,16 +1,16 @@
 import { REQUEST_GET_NOTIFICATION_LIST, REQUEST_GET_NOTIFICATION_LIST_SUCCESS,
   REQUEST_GET_NOTIFICATION, REQUEST_GET_NOTIFICATION_SUCCESS, MARK_ALL_AS_READ,
-  REQUEST_ERROR, REQUEST_SUCCESS
+  REQUEST_ERROR, REQUEST_SUCCESS, REQUEST_CLEAR_NOTIFICATION_LIST
 } from './constants';
 
 
-export function requestNotifications(page = "") {
+ export function requestNotifications(page = "") {
     return {
       type: REQUEST_GET_NOTIFICATION_LIST,
       page
     };
   }
-  
+
   export function requestNotificationsSuccess(result) {
     return {
       type: REQUEST_GET_NOTIFICATION_LIST_SUCCESS,
@@ -18,6 +18,11 @@ export function requestNotifications(page = "") {
     };
   }
 
+  export function clearNotifications() {
+    return {
+      type: REQUEST_CLEAR_NOTIFICATION_LIST
+    };
+  }
 
   export function requestNotification(id, setToRead) {
     return {

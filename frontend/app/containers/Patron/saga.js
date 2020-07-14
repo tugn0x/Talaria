@@ -134,7 +134,9 @@ export function* requestApplyLabelsToReferencesSaga(action) {
   try {
     const request = yield call(requestApplyLabelsToReferences, options);
     yield put(requestReferencesList())
-    yield put(push("/patron/references"));
+    if(action.labelIds.some(labelId => typeof labelId === 'string' )){
+      yield call(requestLabelsOptionListSaga)
+    }
     yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
@@ -152,7 +154,9 @@ export function* requestApplyGroupsToReferencesSaga(action) {
   try {
     const request = yield call(requestApplyGroupsToReferences, options);
     yield put(requestReferencesList())
-    yield put(push("/patron/references"));
+    if(action.groupIds.some(groupId => typeof groupId === 'string' )){
+      yield call(requestGroupsOptionListSaga)
+    }
     yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));

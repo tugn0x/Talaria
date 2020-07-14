@@ -2,7 +2,7 @@ import produce from 'immer';
 // import moment from "moment";
 import { REQUEST_GET_NOTIFICATION_LIST, REQUEST_GET_NOTIFICATION_LIST_SUCCESS,
     MARK_ALL_AS_READ, 
-    REQUEST_SUCCESS} from './constants';
+    REQUEST_SUCCESS, REQUEST_CLEAR_NOTIFICATION_LIST} from './constants';
 export const initialState = {
     loading: false,
     notifications: {
@@ -28,8 +28,15 @@ produce(state, ( draft ) => {
        draft.notifications.pagination = action.result.meta.pagination;
        draft.notifications.unreaded_total = action.result.meta.unreaded_total;
      break;
+    case REQUEST_CLEAR_NOTIFICATION_LIST:
+     // draft.loading = true;
+      draft.error = action.error;
+      draft.notifications.data = initialState.notifications.data;
+      draft.notifications.pagination = initialState.notifications.pagination;
+      draft.notifications.unreaded_total = initialState.notifications.unreaded_total;
+    break;
     case MARK_ALL_AS_READ:
-       draft.loading = true;
+      // draft.loading = true;
        draft.notifications.error = action.error;
        break;
     case REQUEST_SUCCESS:
