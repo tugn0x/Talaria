@@ -30,7 +30,6 @@ const ReferencesListPage = (props) => {
     }, [])
 
 
-
     async function removeLabelFromReference (id,labelId, filter) {
        //console.log("DISPATCH removeLabelFromReference",id,labelId);
         let conf = await confirm({
@@ -56,20 +55,22 @@ const ReferencesListPage = (props) => {
      }
 
      const applyLabelsToReferences = (labelIds,refIds) => {
-         //Dati di test per provare la API
+        //Dati di test per provare la API
         /*  let TESTlabelIds= [7,5,'ciaoooo'];
          let TESTrefIds=[48,46,44]; */
         dispatch(requestApplyLabelsToReferences(refIds,[labelIds],intl.formatMessage(messages.addedMessage)))
      }
 
      const applyGroupsToReferences = (groupIds,refIds) => {
-         //Dati di test per provare la API
+        //Dati di test per provare la API
         /*  let TESTgroupIds= [14,15,'testgroup'];
          let TESTrefIds=[48,46,44]; */
         dispatch(requestApplyGroupsToReferences(refIds,[groupIds],intl.formatMessage(messages.addedMessage)))
     }
 
     return (
+        <>
+        
             <ReferencesList 
                 data={referencesList}
                 columns={columns}
@@ -95,7 +96,7 @@ const ReferencesListPage = (props) => {
                 applyGroups={applyGroupsToReferences}
                 // modalComponent={ <ReferencesPage match={match} />}
             />
-            
+          </>  
     )
 }
 

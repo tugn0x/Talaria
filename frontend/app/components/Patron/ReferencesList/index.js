@@ -7,7 +7,7 @@ import {Pagination, InputSearch} from 'components';
 // import CustomModal from 'components/Modal/Loadable'
 import {useIntl} from 'react-intl';
 // import ButtonPlus from 'components/Button/ButtonPlus'
-import { generatePath } from "react-router";
+// import { generatePath } from "react-router";
 // import ReferencesPage from 'containers/Patron/ReferencesPage'
 import { NavLink } from 'react-router-dom';
 import ReferenceItem from '../ReferenceItem';
@@ -141,7 +141,7 @@ const ReferencesList = (props) => {
                                 }) ) } /> } 
                     </Col>
                     <Col md={3}>
-                        
+                 
                         { labelsOptionList.length > 0 && 
                             <FilterSelect 
                                 type={"labels"} 
@@ -182,7 +182,6 @@ const ReferencesList = (props) => {
                     <div className="select-checkbox">
                         <div className="features-icons" >
                             <input type="checkbox" onChange={(e)=>toggleAllCheckbox(e)}/>
-                            
                             {<NavLink to='#'  className={`btn btn-link ${disableToolbarClass} `}>
                                 <i className="fas fa-print"></i>
                             </NavLink>}
@@ -191,7 +190,7 @@ const ReferencesList = (props) => {
                             </NavLink>}
                             {labelsOptionList.length > 0 && 
                                 <ApplyLabGroup 
-                                    type="labels"
+                                    type="label"
                                     disabled={disableToolbar}
                                     submitCallBack={(ids) => applyLabels(ids, selectedReferences)}
                                     options={labelsOptionList} 
@@ -199,7 +198,7 @@ const ReferencesList = (props) => {
                             }
                             {groupsOptionList.length > 0 &&
                                 <ApplyLabGroup 
-                                    type="groups"
+                                    type="group"
                                     disabled={disableToolbar}
                                     submitCallBack={(ids) => applyGroups(ids, selectedReferences)}
                                     options={groupsOptionList} 

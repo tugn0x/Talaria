@@ -36,6 +36,10 @@ export default defineMessages({
     id: `${scope}.groupAs`,
     defaultMessage: 'Group as',
   },
+  createNewLabel: {
+    id: `${scope}.createNewLabel`,
+    defaultMessage: '(Create new)',
+  },
   confirm:{
     id: 'app.global.confirm',
     defaultMessage: 'Confirm',

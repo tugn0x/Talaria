@@ -69,6 +69,7 @@
   "app.containers.ReferencesListPage.labelAs": "Etichetta come",
   "app.containers.ReferencesListPage.groups": "Categorie",
   "app.containers.ReferencesListPage.groupAs": "Raggruppa come",
+  "app.containers.ReferencesListPage.createNewLabel": "(Crea nuova)",
 
   "app.containers.MyLibrariesPage.header": "La mia biblioteca",
   "app.containers.MyLibrariesPage.title": "Aggiungi una biblioteca",
@@ -198,6 +199,7 @@
   "app.components.ReferencesList.createNewReference": "Nuovo riferimento",
   "app.components.ReferencesList.ReferencesNotFound": "Non ci sono riferimenti",
   "app.components.ReferencesList.ReferenceSelected": "Selezionati",
+  
 
   "app.components.ProjectsList.header": "Lista progetti",
   "app.components.ProjectsList.createNewProject": "Nuovo progetto",

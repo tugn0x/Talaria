@@ -340,6 +340,8 @@ ul.list-inline {
         .dropdown-menu {
             padding: 15px;
             background: $dark-bk;
+            border: 1px solid $line;
+            width: 178px;
         }
         .dropdown-header {
             background: none;
@@ -350,6 +352,8 @@ ul.list-inline {
                 height: 30px;
                 border-radius: 5px;
                 border-color: transparent;
+                padding: 9px 22px 9px 9px;
+                width: 100%;
             }
             i {
                 position: absolute;

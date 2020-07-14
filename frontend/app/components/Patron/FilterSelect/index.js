@@ -10,10 +10,13 @@ const FilterSelect = props => {
     const options = props.options.map(opt => {
         return {...opt, checked: selectedIds.includes(opt) ? true : false}
     })
-    const [data, setData] = useState(options)
+    const [data, setData] = useState([])
     const [query, setQuery] = useState("")
     const intl = useIntl();
     
+    useEffect(() => {
+        setData(options)
+    }, [props.options])
     
     useEffect(() => {
         if(query !== ""){
@@ -27,6 +30,9 @@ const FilterSelect = props => {
     
 
     return (
+        <>
+           { console.log('props.options', props.options)}
+           { console.log('data', data)}
         <UncontrolledDropdown className={`filter-select ${type}`} direction="down">
             <DropdownToggle className="d-flex justify-content-between align-items-center">
                 <span>{intl.formatMessage(messages[type])}</span>
@@ -45,6 +51,7 @@ const FilterSelect = props => {
                 ))}
             </DropdownMenu>
         </UncontrolledDropdown>
+        </>
     );
 };
 
