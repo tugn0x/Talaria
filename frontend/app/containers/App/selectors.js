@@ -7,12 +7,12 @@ const makeSelectApp = () =>
     selectAppDomain,
     substate => substate,
   );
-const makeSelectNotifications = () =>
+/* const makeSelectNotifications = () =>
   createSelector(
     selectAppDomain,
     substate => substate.notifications,
-);
+);  */
 
 export default makeSelectApp;
 
-export { makeSelectNotifications };
+ // export { makeSelectNotifications };
