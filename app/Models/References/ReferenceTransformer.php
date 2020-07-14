@@ -3,6 +3,7 @@
 use App\Models\BaseLightTransformer;
 use Carbon\Carbon;
 use App\Models\BaseTransformer;
+use App\Models\Requests\PatronDocdelRequestTransformer;
 use Illuminate\Database\Eloquent\Model;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\ParamBag;
@@ -28,8 +29,7 @@ class ReferenceTransformer extends BaseTransformer
     {
 //        dd('trasformo');
         $to_merge = [
-              'oa'=>random_int(0,1)
-//            'patronddrequests_count'=>$model->patronddrequests()->count()
+              'oa'=>random_int(0,1),
         ];
         return $this->applyTransform($model, $to_merge);
     }
@@ -41,7 +41,7 @@ class ReferenceTransformer extends BaseTransformer
 
     public function includePatronddrequests(Model $model)
     {
-        return $this->collection($model->patronddrequests, new BaseTransformer());
+        return $this->collection($model->patronddrequests, new PatronDocdelRequestTransformer());
     }
 
     public function includeGroups(Model $model)

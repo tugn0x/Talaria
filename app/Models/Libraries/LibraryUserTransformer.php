@@ -60,5 +60,4 @@ class LibraryUserTransformer extends BaseTransformer
         ];
         return $this->applyTransform($model, $to_merge);
     }
-
 }

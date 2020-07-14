@@ -53,6 +53,8 @@ class PatronDocdelRequest extends BaseModel
         
     ];
 
+    protected $constantFields=['status'];
+
 
     public function reference()
     {
