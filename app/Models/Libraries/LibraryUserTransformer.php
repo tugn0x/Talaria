@@ -60,4 +60,12 @@ class LibraryUserTransformer extends BaseTransformer
         ];
         return $this->applyTransform($model, $to_merge);
     }
+
+    public function transform(Model $model)
+    {
+        $to_merge = [
+//            patronRoutes
+        ];
+        return $this->applyTransform($model, $to_merge);
+    }
 }
