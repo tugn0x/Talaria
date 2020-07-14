@@ -8,7 +8,7 @@ use App\Models\BaseModel;
 class Group extends BaseModel
 {
     protected $forceDeleting=true; //overrides softdelete => force delete!  
-    protected $userstamping = false;
+    protected $userstamping = true;
     public static function bootSoftDeletes() {}
     
     protected $fillable=[
