@@ -141,7 +141,6 @@ const ReferencesList = (props) => {
                                 }) ) } /> } 
                     </Col>
                     <Col md={3}>
-                 
                         { labelsOptionList.length > 0 && 
                             <FilterSelect 
                                 type={"labels"} 
