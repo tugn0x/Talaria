@@ -36,6 +36,33 @@ class BaseTransformer extends TransformerAbstract
         return $this->policy;
     }
 
+    //Genera chiavi del tipo field_key per ogni campo definito nell'array $constantFields del model
+    //prendendo il valore dalla constant definita in config/constants.php  chiamata "constants.NOMEMODELLO.NOMECAMPO" in base al valore del campo
+    public function mapFieldsConstant($model) {
+
+        $array=[];
+        $cfarray=$model->getConstantFields();
+        
+        if(isset($cfarray) && sizeof($cfarray)>0)
+        {
+            foreach($cfarray as $f){
+                $fieldsConst=config("constants.".strtolower(class_basename($model))."_".$f);
+                
+                if($fieldsConst)
+                {
+                    $key=array_search($model->$f,$fieldsConst);
+                    if($key)
+                    {
+                        $a=array($f."_key"=>$key);
+                        $array=array_merge($array,$a);
+                    }
+                }
+            }
+            
+        }
+        return $array;
+    }
+
     protected function applyPolicy(Model $model, $to_merge)
     {
         if($this->disallow_policy !== true)
@@ -115,6 +142,8 @@ class BaseTransformer extends TransformerAbstract
 
     public function applyTransform(Model $model, $to_merge=[])
     {
+        $to_merge=array_merge($this->mapFieldsConstant($model),$to_merge);
+
         $fields = $this->applyPolicy($model, $to_merge);
 
 //        $fields = $this->applyDateFormat($model, $fields);

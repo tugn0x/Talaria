@@ -17,7 +17,7 @@ return [
 	    'disabled_wontpaid' => 23,
 	    'disabled'=> 100, //disabled by NILDE manager/admin
     ],
-    'patron_status' => [
+    'libraryuser_status' => [
         'pending'=>2, //NOTA: nel nilde5 questo è 0
         'enabled'=>1,
         'disabled'=>0 //NOTA: nel nilde5 questo è 2
@@ -31,7 +31,7 @@ return [
         'enabled'=>1,
         'disabled'=>0 //NOTA: nel nilde5 questo è 2
     ],
-    'patronddrequest_status' =>[
+    'patrondocdelrequest_status' =>[
         'requested'=>20,
         'userAskCancel'=>31,
         'canceled'=>32,
@@ -39,8 +39,9 @@ return [
         'costAccepted'=>22,
         'costNotAccepted'=>23,
         'readyToDelivery'=>39,
-        'fulfilled'=>40,
-        'notFulfilled'=>50
+        'received'=>40,
+        'fileReceived'=>41,
+        'notReceived'=>50
     ],
     'reference_material_type' => ['article'=>1,'book'=>2,'thesis'=>3],
     
