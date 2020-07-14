@@ -133,7 +133,7 @@ class User extends UserBase
     public function active_libraries()
     {
         return $this->belongsToMany('App\Models\Libraries\Library','library_user')->withPivot('department_id','title_id','label','status')
-        ->wherePivot('status',config('constants.patron_status.enabled'))
+        ->wherePivot('status',config('constants.libraryuser_status.enabled'))
         ->withTimestamps(); //assieme alla biblioteca prendo anche dipartimento e title e timestamps;
     }
 
