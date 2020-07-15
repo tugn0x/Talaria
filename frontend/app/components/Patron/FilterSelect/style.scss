@@ -96,7 +96,8 @@
         /* @include media-breakpoint-down(sm) { 
             left: 1px !important;
         } */
-        
+        max-height: 250px;
+        overflow-y: auto;
         .filter-item {
             display: flex;
             align-items: center;

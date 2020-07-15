@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from 'react'
-import {Row, Col} from 'reactstrap'
+import {Row, Col, Button} from 'reactstrap'
 import messages from './messages'
 // import globalMessages from 'utils/globalMessages'
 import { FormattedMessage } from 'react-intl';
 import {Pagination, InputSearch} from 'components';
+import Loader from 'components/Form/Loader';
 // import CustomModal from 'components/Modal/Loadable'
 import {useIntl} from 'react-intl';
 // import ButtonPlus from 'components/Button/ButtonPlus'
 // import { generatePath } from "react-router";
 // import ReferencesPage from 'containers/Patron/ReferencesPage'
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import ReferenceItem from '../ReferenceItem';
 import FilterSelect from '../FilterSelect';
 import ApplyLabGroup from '../ApplyLabGroup';
@@ -18,7 +19,7 @@ import './style.scss';
 
 const ReferencesList = (props) => {
     console.log('ReferencesList', props)
-    const { data, pagination, searchOptions, labelsOptionList, groupsOptionList,removeLabelFromReference,removeGroupFromReference,applyLabels,applyGroups} = props
+    const { loading, data, pagination, searchOptions, labelsOptionList, groupsOptionList,removeLabelFromReference,removeGroupFromReference,applyLabels,applyGroups} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)
@@ -104,6 +105,7 @@ const ReferencesList = (props) => {
     var disableToolbarClass = disableToolbar? 'disabled':'';
 
     return (
+        mounted &&
         <>
             <h1 className="section-title large"><FormattedMessage {...messages.header} /></h1>
             {/* <ButtonPlus
@@ -129,20 +131,18 @@ const ReferencesList = (props) => {
                         }
                     </Col>
                     <Col md={3}>
-                        { groupsOptionList.length > 0 && 
-                            <FilterSelect 
-                                type={"groups"} 
-                                options={groupsOptionList} 
-                                selectedIds={multiFilter.groupIds}
-                                submitCallBack={(groupId) => setMultiFilter( state => ({
-                                    query: state.query,
-                                    labelIds: state.labelIds,
-                                    groupIds:handleIds(state.groupIds, groupId)
-                                }) ) } /> } 
+                        <FilterSelect 
+                            type={"groups"} 
+                            options={groupsOptionList} 
+                            selectedIds={multiFilter.groupIds}
+                            submitCallBack={(groupId) => setMultiFilter( state => ({
+                                query: state.query,
+                                labelIds: state.labelIds,
+                                groupIds:handleIds(state.groupIds, groupId)
+                            }) ) } /> 
                     </Col>
                     <Col md={3}>
-                        { labelsOptionList.length > 0 && 
-                            <FilterSelect 
+                        <FilterSelect 
                                 type={"labels"} 
                                 options={labelsOptionList} 
                                 selectedIds={multiFilter.labelIds}
@@ -150,7 +150,7 @@ const ReferencesList = (props) => {
                                     query: state.query,
                                     labelIds: handleIds(state.labelIds, labelId),
                                     groupIds: state.groupIds
-                        }) ) } /> }
+                        }) ) } /> 
                     </Col>
                     <Col md={2}>{!disableCancelFilter && <a href="#" onClick={handleCancelFilter} className="btn btn-link active"><FormattedMessage {...messages.ResetAll} /></a> }</Col>
                 </Row>
@@ -181,28 +181,25 @@ const ReferencesList = (props) => {
                     <div className="select-checkbox">
                         <div className="features-icons" >
                             <input type="checkbox" onChange={(e)=>toggleAllCheckbox(e)}/>
-                            {<NavLink to='#'  className={`btn btn-link ${disableToolbarClass} `}>
+                            {<Button disabled={disableToolbarClass} color="default">
                                 <i className="fas fa-print"></i>
-                            </NavLink>}
-                            {<NavLink to='#'  className={`btn btn-link ${disableToolbarClass} `}>
+                            </Button>}
+                            {<Button disabled={disableToolbarClass} color="default">
                                 <i className="fas fa-file-export"></i>
-                            </NavLink>}
-                            {labelsOptionList.length > 0 && 
-                                <ApplyLabGroup 
-                                    type="label"
-                                    disabled={disableToolbar}
-                                    submitCallBack={(ids) => applyLabels(ids, selectedReferences)}
-                                    options={labelsOptionList} 
-                                />
-                            }
-                            {groupsOptionList.length > 0 &&
-                                <ApplyLabGroup 
-                                    type="group"
-                                    disabled={disableToolbar}
-                                    submitCallBack={(ids) => applyGroups(ids, selectedReferences)}
-                                    options={groupsOptionList} 
-                                />
-                            }
+                            </Button>}
+                            <ApplyLabGroup 
+                                type="label"
+                                disabled={disableToolbar}
+                                submitCallBack={(ids) => applyLabels(ids, selectedReferences)}
+                                options={labelsOptionList} 
+                            />
+                            <ApplyLabGroup 
+                                type="group"
+                                disabled={disableToolbar}
+                                submitCallBack={(ids) => applyGroups(ids, selectedReferences)}
+                                options={groupsOptionList} 
+                            />
+                            
                             {/* <NavLink to="#" onClick={applyGroups} className="btn btn-link">
                                 <i className="fas fa-folder-plus"></i>
                             </NavLink> */}
@@ -213,27 +210,29 @@ const ReferencesList = (props) => {
                         <FormattedMessage {...messages.ReferenceSelected} /> {selectedReferences.length} di {data.length} 
                     </div>
                 </Row>
-                <div className="list-body">
-                    {data.length > 0 &&
-                        data.map(ref => (
-                            <ReferenceItem 
-                                key={`reference-${ref.id}`}
-                                data={ref}
-                                editPath={props.editPath}
-                                toggleSelection={() => toggleReference(ref.id)}
-                                removeLabel={(labelId) => removeLabelFromReference(ref.id,labelId, multiFilter)}
-                                removeGroup={(groupId) => removeGroupFromReference(ref.id,groupId, multiFilter)}
-                                checked={selectedReferences.includes(ref.id)}
-                            />
-                            
-                            
-                        ))
-                    ||
-                        <h5 className="text-center">
-                            {intl.formatMessage(messages.ReferencesNotFound)}
-                        </h5>
-                    }
-                </div>
+                <Loader show={loading}>
+                    <div className="list-body">
+                        {data.length > 0 &&
+                            data.map(ref => (
+                                <ReferenceItem 
+                                    key={`reference-${ref.id}`}
+                                    data={ref}
+                                    editPath={props.editPath}
+                                    toggleSelection={() => toggleReference(ref.id)}
+                                    removeLabel={(labelId) => removeLabelFromReference(ref.id,labelId, multiFilter)}
+                                    removeGroup={(groupId) => removeGroupFromReference(ref.id,groupId, multiFilter)}
+                                    checked={selectedReferences.includes(ref.id)}
+                                />
+                                
+                                
+                            ))
+                        ||
+                            <h5 className="text-center">
+                                {intl.formatMessage(messages.ReferencesNotFound)}
+                            </h5>
+                        }
+                    </div>
+                </Loader>
             </div>
            {/*  <CustomModal
                 modal={modal}
@@ -251,7 +250,9 @@ const ReferencesList = (props) => {
                     linkToPage={(page, pagesize) => searchOptions.getSearchList(page,pagesize, multiFilter )}
                 />
             }
-        </>
+            </>
+        
+       
     )
 }
 
