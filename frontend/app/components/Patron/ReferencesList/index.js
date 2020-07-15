@@ -181,10 +181,10 @@ const ReferencesList = (props) => {
                     <div className="select-checkbox">
                         <div className="features-icons" >
                             <input type="checkbox" onChange={(e)=>toggleAllCheckbox(e)}/>
-                            {<Button disabled={disableToolbarClass} color="default">
+                            {<Button disabled={disableToolbar} color="default">
                                 <i className="fas fa-print"></i>
                             </Button>}
-                            {<Button disabled={disableToolbarClass} color="default">
+                            {<Button disabled={disableToolbar} color="default">
                                 <i className="fas fa-file-export"></i>
                             </Button>}
                             <ApplyLabGroup 
