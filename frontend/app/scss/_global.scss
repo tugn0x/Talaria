@@ -132,6 +132,9 @@ input[type=text] {
     padding: 9px;
     color: $form-text;
     font-size: $font-size-normal;
+    border: 4px;
+    max-height: $heightInput;
+    border: 1px solid $dark-bk;
 }
 
 
@@ -159,6 +162,11 @@ ul.list-inline {
     &:focus {
         box-shadow: 0 0 0;
     }
+}
+
+.list-row {
+    padding: 20px 0 30px 0;
+    border-bottom: 1px dotted lightgray;
 }
 
 /* .table {

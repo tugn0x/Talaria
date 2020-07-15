@@ -174,6 +174,13 @@ export const getLabelsOptionList = (options) => {
   return request(`${BASE_URL}/api/v1/references/labels/option-items?label=name`, options)
 };
 
+export const updateLabel = (options) => {
+  const label_id = options.label_id
+ // const label_value = options.body.name
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/references/labels/${label_id}`, options)
+};
+
 export const getGroupsOptionList = (options) => {
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/references/groups/option-items?label=name`, options)

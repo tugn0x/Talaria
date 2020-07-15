@@ -2,6 +2,7 @@ import { call, put, select, takeLatest, fork, take  } from 'redux-saga/effects';
 import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO_LIBRARIES,REQUEST_UPDATE_ACCESS_TO_LIBRARIES,REQUEST_DELETE_ACCESS_TO_LIBRARIES,  REQUEST_REFERENCES_LIST,
   REQUEST_POST_REFERENCES, REQUEST_UPDATE_REFERENCES, 
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST,
+  REQUEST_UPDATE_LABEL,
   REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES} from './constants';
 import {
   requestError,
@@ -28,6 +29,7 @@ import {  getMyLibrary,
           getReferencesList,
           createReference,
           updateReference,
+          updateLabel,
           getReference, 
           getLabelsOptionList,
           getGroupsOptionList,
@@ -121,6 +123,24 @@ export function* requestRemoveReferenceGroupSaga(action) {
   }
 }
 
+export function* requestUpdateLabelSaga(action) {
+  const options = {
+    method: 'put',
+    label_id: action.label_id,
+    body: {
+      name: action.label_value
+    }
+    
+  };
+  try {
+    const request = yield call(updateLabel, options);
+    yield call(requestLabelsOptionListSaga);
+   
+   // yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
 
 export function* requestApplyLabelsToReferencesSaga(action) {
   const options = {
@@ -303,6 +323,7 @@ export default function* patronSaga() {
   yield takeLatest(REQUEST_GET_GROUPS_OPTIONLIST, requestGroupsOptionListSaga);
   yield takeLatest(REQUEST_GET_MY_LIBRARY, requestGetMyLibrarySaga);
   yield takeLatest(REQUEST_ACCESS_TO_LIBRARIES, requestAccessToLibrarySaga);
+  yield takeLatest(REQUEST_UPDATE_LABEL, requestUpdateLabelSaga);
   yield takeLatest(REQUEST_UPDATE_ACCESS_TO_LIBRARIES,requestUpdateAccessToLibrarySaga);
   yield takeLatest(REQUEST_DELETE_ACCESS_TO_LIBRARIES,requestDeleteAccessToLibrarySaga);
   yield takeLatest(REQUEST_REFERENCES_LIST, requestReferencesListSaga);

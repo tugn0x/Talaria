@@ -14,6 +14,7 @@ import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_GET_MY_LIBRARY, REQUEST_GET_MY_LIBRARY_SUCCESS,
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_LABELS_OPTIONLIST_SUCCESS,
   REQUEST_GET_GROUPS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST_SUCCESS,
+  REQUEST_UPDATE_LABEL,
   //REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,
   STOP_LOADING, REQUEST_ERROR } from './constants';
 
@@ -142,7 +143,9 @@ const PatronReducer = (state = initialState, action) =>
       case REQUEST_UPDATE_ACCESS_TO_LIBRARIES:
           draft.loading = false;
           break;  
-
+      case REQUEST_UPDATE_LABEL:
+        draft.loading = true;
+        break;
       /* case REQUEST_ACCESS_TO_LIBRARIES_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;
