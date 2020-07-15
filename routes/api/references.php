@@ -29,6 +29,7 @@ Route::group([
         Route::get('labels/option-items', 'LabelController@optionList')->name('option-items');
         Route::get('labels/{id}', 'LabelController@show')->name('show');
         Route::put('labels/{id}', 'LabelController@update')->name('update');
+        Route::delete('labels/{id}', 'LabelController@delete')->name('delete');
         Route::post('labels', 'LabelController@store')->name('create');
     });
 
@@ -53,6 +54,7 @@ Route::group([
         Route::get('groups/option-items', 'GroupController@optionList')->name('option-items');
         Route::get('groups/{id}', 'GroupController@show')->name('show');
         Route::put('groups/{id}', 'GroupController@update')->name('update');
+        Route::delete('groups/{id}', 'GroupController@update')->name('delete');
         Route::post('groups', 'GroupController@store')->name('create');
     });
 

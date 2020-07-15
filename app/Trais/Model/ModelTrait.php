@@ -23,6 +23,8 @@ trait ModelTrait
 
     protected $simpleSearchField="name"; //default field for SimpleSearch on collection
 
+    protected $constantFields=[]; //array di campi i cui valori sono definiti come costanti in config/constants.php
+
     protected $internalMessagesAttributes = ['internal_messages_error', 'internal_messages_info'];
 
     protected $tmp = array();
@@ -45,6 +47,10 @@ trait ModelTrait
     /*
      * Helpers
      */
+
+    public function getConstantFields() {
+        return $this->constantFields;
+    }
 
     public function getTmp()
     {

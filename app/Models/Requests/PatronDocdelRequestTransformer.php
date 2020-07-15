@@ -50,9 +50,7 @@ class PatronDocdelRequestTransformer extends BaseTransformer
 
     public function transform(Model $model)
     {
-//        dd('trasformo');
         $to_merge = [
-//            'test' => 'hello',
         ];
         return $this->applyTransform($model, $to_merge);
     }

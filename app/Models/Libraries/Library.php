@@ -96,6 +96,8 @@ class Library extends BaseModel
         'administrative_phone',
     ];
 
+    protected $constantFields=['status'];
+
     /*
      * Accessor & relation to automatically append on model instance
      */

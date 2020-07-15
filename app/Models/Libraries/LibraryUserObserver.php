@@ -25,7 +25,7 @@ class LibraryUserObserver extends BaseObserver
     public function creating($model)
     {
          //ogni nuova rich va messa in attesa
-         $model->status=config("constants.patron_status.pending");
+         $model->status=config("constants.libraryuser_status.pending");
          if(auth() && auth()->user()) {
             $user = auth()->user();
             $library = Library::find($model->library_id);
@@ -64,7 +64,7 @@ class LibraryUserObserver extends BaseObserver
             if($model->isDirty() && $model->isDirty("status"))
             {
                 //lo sto disabilitando
-                if($model->status==config("constants.patron_status.disabled"))
+                if($model->status==config("constants.libraryuser_status.disabled"))
                 {
                     /*1. remove role "patron" if he has no other active libraries*/
                     $u=$model->user;
@@ -73,7 +73,7 @@ class LibraryUserObserver extends BaseObserver
                     /* 2. send mail+notify to user to let him know it was disabled */
                 }
                 //lo sto abilitando
-                else if($model->status==config("constants.patron_status.enabled"))
+                else if($model->status==config("constants.libraryuser_status.enabled"))
                 {
                     /* 1. add role "patron" if he has not */
                     $u=$model->user;

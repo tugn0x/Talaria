@@ -38,6 +38,8 @@ class LibraryUser extends BaseModel
         'status' => 0
     ];
 
+    protected $constantFields=['status'];
+
     public function getOwnerField()
     {
         return 'user_id';

@@ -37,6 +37,8 @@ class Reference extends BaseModel
         //'oa', Gestione copia OA
     ];
 
+    protected $constantFields=['material_type'];
+
     public function patronddrequests()
     {
         return $this->hasMany(PatronDocdelRequest::class,'reference_id');
