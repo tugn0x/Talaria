@@ -132,7 +132,7 @@ input[type=text] {
     padding: 9px;
     color: $form-text;
     font-size: $font-size-normal;
-    border: 4px;
+    border-radius: 4px;
     max-height: $heightInput;
     border: 1px solid $dark-bk;
 }

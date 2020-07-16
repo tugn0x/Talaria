@@ -13,7 +13,7 @@ import {useIntl} from 'react-intl';
 // import { NavLink } from 'react-router-dom';
 import ReferenceItem from '../ReferenceItem';
 import FilterSelect from '../FilterSelect';
-import ApplyLabGroup from '../ApplyLabGroup';
+import ApplyReferencesTag from '../ApplyReferencesTag';
 
 import './style.scss';
 
@@ -187,13 +187,13 @@ const ReferencesList = (props) => {
                             {<Button disabled={disableToolbar} color="default">
                                 <i className="fas fa-file-export"></i>
                             </Button>}
-                            <ApplyLabGroup 
+                            <ApplyReferencesTag 
                                 type="label"
                                 disabled={disableToolbar}
                                 submitCallBack={(ids) => applyLabels(ids, selectedReferences)}
                                 options={labelsOptionList} 
                             />
-                            <ApplyLabGroup 
+                            <ApplyReferencesTag 
                                 type="group"
                                 disabled={disableToolbar}
                                 submitCallBack={(ids) => applyGroups(ids, selectedReferences)}
