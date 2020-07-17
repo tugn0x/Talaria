@@ -16,7 +16,7 @@ const routes = [
       { path: '/new', exact: true, icon: "plus", name: `ReferenceNew`, url: `/references/new`, component: ReferencesPage, sidebar: true, order:1},
       { path: '/labels', icon: "tags", exact: true, name: `Labels`, url: '/references/labels', component: ReferencesLabels, sidebar: true, order:3 },
       { path: '/categories', icon: "folder",exact: true, name: `Categories`, url: '/references/categories', component: ReferencesGroups, sidebar: true , order:4},
-      { path: '/', exact: true, name: `ReferenceList`, url: `/references`, component: ReferencesListPage,sidebar: true, order:2 },
+      { path: '/', icon: "book", exact: true, name: `ReferenceList`, url: `/references`, component: ReferencesListPage,sidebar: true, order:2 },
       { path: '/:id?/:edit?', exact: true, name: `ReferenceUpdate`, component: ReferencesPage},
     ]
   },
@@ -24,8 +24,8 @@ const routes = [
 //  { path: '/searches', name: `Searches`, component: ChangePassword, header: true, },
   { path: '/requests', name: `Requests`, component: SubRouteSwitch, header: true, permissions: ['patron'], 
     children: [
-      { path: '/archive', exact:true, name: `ArchivedRequests`, component: Fake,url: `/requests/archive`, sidebar: true, order: 2},
-      { path: '/', name: `PendingRequests`, component: RequestsListPage,url: `/requests`, sidebar: true, order: 1},
+      { path: '/archive', icon: "hdd", exact:true, name: `ArchivedRequests`, component: Fake,url: `/requests/archive`, sidebar: true, order: 2},
+      { path: '/', icon: "share", name: `PendingRequests`, component: RequestsListPage,url: `/requests`, sidebar: true, order: 1},
       
     ]
   },
