@@ -69,12 +69,16 @@ const RequestItem = (props) => {
             </Col>
             
             <Col sm={2} className="icons align-self-center">
+            {!data.archived && 
+            <>
                 {canArchive(data) && <NavLink to="#" className="btn btn-link">
                     <i className="fas fa-hdd"></i>
                 </NavLink>}
                 {canDelete(data) && <a href="#" onClick={() => console.log('delete request')} className="btn btn-link">
                     <i className="fas fa-trash"></i>
                 </a> }
+            </>
+            }
             </Col> 
         </Row>
         
