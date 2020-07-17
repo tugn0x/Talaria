@@ -181,7 +181,6 @@ export const createLabel = (options) => {
 
 export const updateLabel = (options) => {
   const label_id = options.label_id
- // const label_value = options.body.name
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/references/labels/${label_id}`, options)
 };
@@ -190,6 +189,23 @@ export const deleteLabel = (options) => {
   const label_id = options.label_id
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/references/labels/${label_id}`, options)
+};
+
+export const createGroup = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/references/groups`, options)
+};
+
+export const updateGroup = (options) => {
+  const group_id = options.group_id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/references/groups/${group_id}`, options)
+};
+
+export const deleteGroup = (options) => {
+  const group_id = options.group_id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/references/groups/${group_id}`, options)
 };
 
 export const getGroupsOptionList = (options) => {

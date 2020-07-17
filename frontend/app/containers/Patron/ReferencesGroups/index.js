@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {requestLabelsOptionList, requestPostLabel, requestUpdateLabel, requestRemoveLabel} from '../actions'
+import {requestGroupsOptionList, requestPostGroup, requestUpdateGroup, requestRemoveGroup} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {Row, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Button} from 'reactstrap'
-import {labelsOptionListSelector, isPatronLoading} from '../selectors';
+import {groupsOptionListSelector, isPatronLoading} from '../selectors';
 import ReferencesTag from 'components/Patron/ReferencesTag';
 import messages from './messages';
 import Loader from 'components/Form/Loader';
@@ -12,20 +12,20 @@ import {useIntl} from 'react-intl';
 // import './style.scss';
 
 
-const ReferencesLabels = props => {
-    // console.log('ReferencesLabels', props)
-    const {dispatch, labelsOptionList, loading} = props;
-    const [newLabelName, setNewLabelName] = useState("");
+const ReferencesGroups = props => {
+    // console.log('ReferencesGroups', props)
+    const {dispatch, groupsOptionList, loading} = props;
+    const [newGroupName, setNewGroupName] = useState("");
     const [toggleInput, setToggleInput] = useState(false)
     const intl = useIntl();
 
     useEffect(() => {
-        dispatch(requestLabelsOptionList())
+        dispatch(requestGroupsOptionList())
     }, [])
 
     const handleChange = (e) => {
-        const newLabel = e.target.value;
-        setNewLabelName(newLabel)
+        const newGroup = e.target.value;
+        setNewGroupName(newGroup)
     }
 
     const handleKeyPress = (e) => {
@@ -34,52 +34,52 @@ const ReferencesLabels = props => {
         }
     }
 
-    const updateItem = (label_id, name) => {
-        dispatch(requestUpdateLabel(label_id, name, intl.formatMessage(messages.labelUpdateMessage)))
+    const updateItem = (group_id, name) => {
+        dispatch(requestUpdateGroup(group_id, name, intl.formatMessage(messages.groupUpdateMessage)))
     }
     
     const saveItem = () => {
-        dispatch(requestPostLabel(newLabelName, intl.formatMessage(messages.labelCreateMessage)))
-        setNewLabelName("")
+        dispatch(requestPostGroup(newGroupName, intl.formatMessage(messages.groupCreateMessage)))
+        setNewGroupName("")
         setToggleInput(state => !state)
     }
 
-    const removeItem = (label_id) => {
+    const removeItem = (group_id) => {
         // console.log(intl.formatMessage(messages.labelRemoveMessage))
-        dispatch(requestRemoveLabel(label_id, intl.formatMessage(messages.labelRemoveMessage) ))
+        dispatch(requestRemoveGroup(group_id, intl.formatMessage(messages.groupRemoveMessage) ))
     } 
 
     return (
-        <div className="ReferencesLabels tags-list">
-            <h1 className="section-title large">{intl.formatMessage(messages.labels)}</h1>
+        <div className="ReferencesGroups tags-list">
+            <h1 className="section-title large">{intl.formatMessage(messages.groups)}</h1>
             <Dropdown direction="right" isOpen={toggleInput} toggle={() => setToggleInput(state => !state)}>
                 <DropdownToggle color="icon">
-                    <i className="icon-tag-plus"></i>
+                    <i className="fas fa-folder-plus"></i>
                 </DropdownToggle>
                 <DropdownMenu>
                     <DropdownItem header tag="div">
                         <Row className="align-items-center justify-content-around">
                             <input 
                                 type="text" 
-                                placeholder={intl.formatMessage(messages.labelCreateNew)}
+                                placeholder={intl.formatMessage(messages.groupCreateNew)}
                                 name="tag-add" 
                                 onChange={(e) => handleChange(e)} 
                                 onKeyPress={(e) => handleKeyPress(e)}
-                                value={newLabelName} />
+                                value={newGroupName} />
                             <Button color="icon" onClick={saveItem}>
-                                <i className="fas fa-save"></i>
-                            </Button>
+                                <i className="fas fa-save"></i>    
+                            </Button>    
                         </Row>
                     </DropdownItem>
                 </DropdownMenu>
             </Dropdown>
             <Loader show={loading}>
-                {labelsOptionList.length > 0 && labelsOptionList.map((label, i) => (
+                {groupsOptionList.length > 0 && groupsOptionList.map(group => (
                         <ReferencesTag 
-                            key={`${label.label}-${label.value}`}
-                            data={label}
-                            updateItem={(label_id, name) => updateItem(label_id, name)}
-                            removeItem={(label_id)=> removeItem(label_id)}
+                            key={`${group.label}-${group.value}`}
+                            data={group}
+                            updateItem={(group_id, name) => updateItem(group_id, name)}
+                            removeItem={(group_id)=> removeItem(group_id)}
                             loading={loading}
                         />
                     ))}
@@ -91,7 +91,7 @@ const ReferencesLabels = props => {
 
 
 const mapStateToProps = createStructuredSelector({
-    labelsOptionList: labelsOptionListSelector(),
+    groupsOptionList: groupsOptionListSelector(),
     loading: isPatronLoading()
 });
   
@@ -106,4 +106,4 @@ const withConnect = connect(
     mapDispatchToProps,
 );
 
-export default compose(withConnect)(ReferencesLabels);
+export default compose(withConnect)(ReferencesGroups);

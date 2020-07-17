@@ -15,6 +15,9 @@ import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_POST_LABEL,
   REQUEST_UPDATE_LABEL,
   REQUEST_REMOVE_LABEL,
+  REQUEST_POST_GROUP,
+  REQUEST_UPDATE_GROUP,
+  REQUEST_REMOVE_GROUP,
   REQUEST_GET_MY_LIBRARY, REQUEST_GET_MY_LIBRARY_SUCCESS,
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_LABELS_OPTIONLIST_SUCCESS,
   REQUEST_GET_GROUPS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST_SUCCESS,
@@ -177,6 +180,32 @@ export function requestRemoveLabel(label_id, message) {
     message
   };
 }
+
+export function requestPostGroup( group_name, message) {
+  return {
+    type: REQUEST_POST_GROUP,
+    group_name,
+    message
+  };
+}
+
+export function requestUpdateGroup(group_id, group_value, message) {
+  return {
+    type: REQUEST_UPDATE_GROUP,
+    group_id,
+    group_value,
+    message
+  };
+}
+
+export function requestRemoveGroup(group_id, message) {
+  return {
+    type: REQUEST_REMOVE_GROUP,
+    group_id,
+    message
+  };
+}
+
 
 export function requestLabelsOptionListSuccess(result) {
   return {

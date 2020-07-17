@@ -29,7 +29,7 @@ const ApplyReferencesTag = props => {
 
     return (
         <UncontrolledDropdown className={`apply ${type}`} direction="down">
-            <DropdownToggle color="default" disabled={disabled}>
+            <DropdownToggle color="icon" disabled={disabled}>
                 {type === 'label' ? <i className="icon-tag-plus"></i> :  <i className="fas fa-folder-plus"></i>}
             </DropdownToggle>
             <DropdownMenu center="true">

@@ -76,6 +76,11 @@
   "app.containers.ReferencesLabels.labelCreateMessage": "Etichetta creata con successo",
   "app.containers.ReferencesLabels.labelCreateNew": "Crea nuova etichetta",
 
+  "app.containers.ReferencesGroups.groupRemoveMessage": "Categoria eliminata con successo",
+  "app.containers.ReferencesGroups.groupUpdateMessage": "Categoria aggiornata con successo",
+  "app.containers.ReferencesGroups.groupCreateMessage": "Categoria creata con successo",
+  "app.containers.ReferencesGroups.groupCreateNew": "Crea nuova categoria",
+
   "app.containers.MyLibrariesPage.header": "La mia biblioteca",
   "app.containers.MyLibrariesPage.title": "Aggiungi una biblioteca",
   "app.containers.MyLibrariesPage.library_id": "Seleziona una biblioteca",
