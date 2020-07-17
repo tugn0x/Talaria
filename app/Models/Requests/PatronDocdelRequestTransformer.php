@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use App\Models\BaseTransformer;
 use App\Models\Libraries\DeliveryTransformer;
 use App\Models\Libraries\LibraryTransformer;
+use App\Models\Libraries\LibraryUser;
 use App\Models\References\ReferenceTransformer;
 use Illuminate\Database\Eloquent\Model;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
@@ -18,11 +19,15 @@ class PatronDocdelRequestTransformer extends BaseTransformer
         'reference',
         'library',
         'delivery',
-        'docdelrequests'
+        'docdelrequests',
+        'libray_label'
     ];
 
     protected $defaultIncludes = [
-        'reference'
+        'reference',
+        'library',
+        'delivery',
+        'library_label'
     ];
 
     public function includeReference(Model $model)
@@ -34,13 +39,23 @@ class PatronDocdelRequestTransformer extends BaseTransformer
     public function includeLibrary(Model $model)
     {
         if($model->library)
-            return $this->item($model->library, new LibraryTransformer());
+            return $this->item($model->library, new BaseLightTransformer());
+    }
+
+    public function includeLibraryLabel(Model $model)
+    {
+        if($model->user)
+        {
+            $lu=LibraryUser::where('library_id','=',$model->library->id)->where('user_id','=',$model->user->id)->firstOrFail();
+            return $this->item($lu, new BaseTransformer());
+        }
+
     }
 
     public function includeDelivery(Model $model)
     {
         if($model->delivery)
-            return $this->item($model->deliery, new DeliveryTransformer());
+            return $this->item($model->deliery, new BaseLightTransformer());
     }
 
     public function includeDocdelRequests(Model $model)
