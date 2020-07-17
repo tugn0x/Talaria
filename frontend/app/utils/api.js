@@ -274,6 +274,19 @@ export const requestApplyGroupsToReferences = (options) => {
   return request(`${BASE_URL}/api/v1/references/updateSelected`, options)
 };
 
+// ---------- PATRON REQUEST -----//
+export const getRequestsList = (options) => {
+  const page = options.page;
+  const params = options.query;
+  const pageSize = options.pageSize;
+  let qstringpar="";
+  if(params && params.query && params.query!="") qstringpar+="&q="+params.query;
+  if(pageSize) qstringpar+="&pageSize="+pageSize;
+  if(params && params.labelIds && params.labelIds.length>0) qstringpar+="&labelIds="+params.labelIds.join(',')+"";
+  if(params && params.groupIds && params.groupIds.length>0) qstringpar+="&groupIds="+params.groupIds.join(',')+"";
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/patronrequests/my?page=${page}${qstringpar}`, options)
+};
 
 
 // ---------- LIBRARY ---------- //

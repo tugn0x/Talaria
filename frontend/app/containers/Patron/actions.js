@@ -9,6 +9,7 @@ import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_ACCESS_TO_LIBRARIES,REQUEST_DELETE_ACCESS_TO_LIBRARIES,
   REQUEST_UPDATE_ACCESS_TO_LIBRARIES,
   REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS, 
+  REQUEST_REQUESTS_LIST, REQUEST_REQUESTS_LIST_SUCCESS, 
   REQUEST_POST_REFERENCES, REQUEST_SUCCESS,
   REQUEST_GET_REFERENCE, REQUEST_GET_REFERENCE_SUCCESS,
   REQUEST_UPDATE_REFERENCES, 
@@ -69,6 +70,22 @@ export function requestReferencesList(page, pageSize, query) {
 export function requestReferencesListSuccess(result) {
   return {
     type: REQUEST_REFERENCES_LIST_SUCCESS,
+    result
+  };
+}
+
+export function requestRequestsList(page, pageSize, query) {
+  return {
+    type: REQUEST_REQUESTS_LIST,
+    page,
+    query,
+    pageSize
+  };
+}
+
+export function requestRequestsListSuccess(result) {
+  return {
+    type: REQUEST_REQUESTS_LIST_SUCCESS,
     result
   };
 }

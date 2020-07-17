@@ -3,6 +3,7 @@ import MyLibrariesListPage from 'containers/Patron/MyLibrariesListPage/Loadable'
 // import ChangePassword from 'containers/User/ChangePassword/Loadable';
 import ReferencesPage from 'containers/Patron/ReferencesPage/Loadable';
 import ReferencesListPage from 'containers/Patron/ReferencesListPage/Loadable';
+import RequestsListPage from 'containers/Patron/RequestsListPage/Loadable';
 import SubRouteSwitch from 'components/SubRouteSwitch';
 import Fake from 'components/Fake';
 import ReferencesLabels from 'containers/Patron/ReferencesLabels';
@@ -23,7 +24,7 @@ const routes = [
   { path: '/requests', name: `Requests`, component: SubRouteSwitch, header: true, permissions: ['patron'], 
     children: [
       { path: '/archive', exact:true, name: `ArchivedRequests`, component: Fake,url: `/requests/archive`, sidebar: true, order: 2},
-      { path: '/:page?', name: `PendingRequests`, component: Fake,url: `/requests`, sidebar: true, order: 1},
+      { path: '/', name: `PendingRequests`, component: RequestsListPage,url: `/requests`, sidebar: true, order: 1},
       
     ]
   },

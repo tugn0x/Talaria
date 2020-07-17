@@ -40,6 +40,10 @@ export default defineMessages({
         id: `${scope}.ReferenceNew`,
         defaultMessage: 'Nuovo riferimento',
     },
+    RequestNew: {
+        id: `${scope}.RequestNew`,
+        defaultMessage: 'Nuova richiesta',
+    },
     Searches: {
         id: `${scope}.Searches`,
         defaultMessage: 'My Searches',
@@ -165,12 +169,11 @@ export default defineMessages({
         defaultMessage: 'Catalogs',
     },
     PendingRequests: {
-        id: `${scope}.PendingRequestss`,
+        id: `${scope}.PendingRequests`,
         defaultMessage: 'Pending requests',
     },
-    
     ArchivedRequests: {
-        id: `${scope}.ArchivedRequestss`,
+        id: `${scope}.ArchivedRequests`,
         defaultMessage: 'Archive',
     },
     LinkingServices: {

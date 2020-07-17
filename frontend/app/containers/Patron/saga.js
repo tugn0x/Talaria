@@ -3,7 +3,7 @@ import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO
   REQUEST_POST_REFERENCES, REQUEST_UPDATE_REFERENCES, 
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST,
   REQUEST_UPDATE_LABEL,
-  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES} from './constants';
+  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,REQUEST_REQUESTS_LIST} from './constants';
 import {
   requestError,
   stopLoading,
@@ -16,6 +16,8 @@ import {
   requestGroupsOptionListSuccess,
   requestReferencesListSuccess,
   requestReferencesList,
+  requestRequestsListSuccess,
+  requestRequestsList,
   requestGetReferenceSuccess,
 } from './actions';
 import { push } from 'connected-react-router';
@@ -27,6 +29,7 @@ import {  getMyLibrary,
           deleteAccessToLibrary,
           updateAccessToLibrary,
           getReferencesList,
+          getRequestsList,
           createReference,
           updateReference,
           updateLabel,
@@ -252,6 +255,22 @@ export function* requestReferencesListSaga(action) {
   }
 }
 
+export function* requestRequestsListSaga(action) {
+  const options = {
+    method: 'get',
+    page: action.page ? action.page : '1',
+    query: action.query ? action.query : null,
+    pageSize: action.pageSize ? action.pageSize : null
+  };
+  try {
+   console.log(action)
+    const request = yield call(getRequestsList, options);
+    yield put(requestRequestsListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 export function* requestPostReferencesSaga(action) {
   const options = {
     method: 'post',
@@ -334,5 +353,6 @@ export default function* patronSaga() {
   yield takeLatest(REQUEST_REMOVE_REFERENCE_GROUP,requestRemoveReferenceGroupSaga);
   yield takeLatest(REQUEST_APPLY_LABELS_TO_REFERENCES,requestApplyLabelsToReferencesSaga);
   yield takeLatest(REQUEST_APPLY_GROUPS_TO_REFERENCES,requestApplyGroupsToReferencesSaga);
+  yield takeLatest(REQUEST_REQUESTS_LIST, requestRequestsListSaga);
 }
 

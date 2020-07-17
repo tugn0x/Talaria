@@ -5,39 +5,35 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.ReferencesListPage';
+export const scope = 'app.containers.RequestsListPage';
 
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'References list',
-  },
-  createNew: {
-    id: `${scope}.createNew`,
-    defaultMessage: 'New reference',
+    defaultMessage: 'Pending requests',
   },
   edit: {
     id: `${scope}.edit`,
-    defaultMessage: 'Edit reference',
+    defaultMessage: 'Edit request',
   },
   labels: {
-    id: `${scope}.labels`,
+    id: 'app.containers.ReferencesListPage.labels',
     defaultMessage: 'Labels',
   },
   labelAs: {
-    id: `${scope}.labelAs`,
+    id: 'app.containers.ReferencesListPage.labelAs',
     defaultMessage: 'Label as',
   },
   groups: {
-    id: `${scope}.groups`,
+    id: 'app.containers.ReferencesListPage.groups',
     defaultMessage: 'Categories',
   },
   groupAs: {
-    id: `${scope}.groupAs`,
+    id: 'app.containers.ReferencesListPage.groupAs',
     defaultMessage: 'Group as',
   },
   createNewLabel: {
-    id: `${scope}.createNewLabel`,
+    id: 'app.containers.ReferencesListPage.createNewLabel',
     defaultMessage: '(Create new)',
   },
   confirm:{
@@ -45,11 +41,11 @@ export default defineMessages({
     defaultMessage: 'Confirm',
   },
   askRemoveLabelMessage:{
-    id: `${scope}.removeLabelMessage`,
+    id: 'app.containers.ReferencesListPage.removeLabelMessage',
     defaultMessage: 'Remove this label from this reference?',
   },
   askRemoveGroupMessage:{
-    id: `${scope}.removeGroupMessage`,
+    id: 'app.containers.ReferencesListPage.removeGroupMessage',
     defaultMessage: 'Remove this category from this reference?',
   },
   removedMessage:{

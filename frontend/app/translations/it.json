@@ -64,12 +64,16 @@
   "app.containers.ReferencePage.referenceAdded": "Riferimento aggiunta",
   "app.containers.ReferencePage.referenceUpdate": "Riferimento aggiornata",
 
-
+  "app.containers.ReferencesListPage.header": "Riferimenti",
   "app.containers.ReferencesListPage.labels": "Etichette",
   "app.containers.ReferencesListPage.labelAs": "Etichetta come",
   "app.containers.ReferencesListPage.groups": "Categorie",
   "app.containers.ReferencesListPage.groupAs": "Raggruppa come",
   "app.containers.ReferencesListPage.createNewLabel": "(Crea nuova)",
+  "app.containers.ReferencesListPage.removeLabelMessage":"Remove this label from this reference?",
+  "app.containers.ReferencesListPage.removeGroupMessage":"Remove this category from this reference?",
+
+  "app.containers.RequestsListPage.header": "Richieste",
 
   "app.containers.MyLibrariesPage.header": "La mia biblioteca",
   "app.containers.MyLibrariesPage.title": "Aggiungi una biblioteca",
@@ -200,6 +204,10 @@
   "app.components.ReferencesList.ReferencesNotFound": "Non ci sono riferimenti",
   "app.components.ReferencesList.ReferenceSelected": "Selezionati",
   
+  "app.components.RequestsList.header": "Richieste in corso",
+  "app.components.RequestsList.RequestsNotFound": "Non ci sono richieste in corso",
+  "app.components.RequestsList.RequestSelected": "Selezionati",
+  
 
   "app.components.ProjectsList.header": "Lista progetti",
   "app.components.ProjectsList.createNewProject": "Nuovo progetto",
@@ -248,7 +256,10 @@
   "app.routes.Bibliography": "Bibliografia",
   "app.routes.Reference": "Riferimenti",
   "app.routes.ReferenceList": "Riferimenti",
+  "app.routes.PendingRequests": "Richieste in corso",
+  "app.routes.ArchivedRequests": "Archivio",
   "app.routes.ReferenceNew": "Nuovo riferimento",
+  "app.routes.RequestNew": "Nuova richiesta",
   "app.routes.Searches": "Ricerche",
   "app.routes.Requests": "Richieste",
   "app.routes.MyLibraries": "Le mie biblioteche",
