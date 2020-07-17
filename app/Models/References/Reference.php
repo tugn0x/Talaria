@@ -44,6 +44,15 @@ class Reference extends BaseModel
         return $this->hasMany(PatronDocdelRequest::class,'reference_id');
     }
 
+    public function activepatronddrequests()
+    {
+        return $this->patronddrequests()
+        ->where("status",'<>',config("constants.patrondocdelrequest_status.received"))
+        ->where("status",'<>',config("constants.patrondocdelrequest_status.fileReceived"))
+        ->where("status",'<>',config("constants.patrondocdelrequest_status.notReceived"))
+        ->where("status",'<>',config("constants.patrondocdelrequest_status.canceled"))->count();
+    }
+
     public function libraryddrequests()
     {
         return $this->hasMany(DocdelRequest::class,'reference_id');

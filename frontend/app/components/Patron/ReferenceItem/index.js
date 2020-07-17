@@ -36,6 +36,11 @@ const ReferenceItem = (props) => {
         });
     }
 
+    const canEdit = (data) => {
+        if(data.active_patronrequests==0) return true;
+        return false;
+    }
+
     return ( 
         <Row className="list-row justify-content-between">
             <Col sm={2} className="select-checkbox">
@@ -59,16 +64,16 @@ const ReferenceItem = (props) => {
                 </span>}
             </Col>
             <Col sm={3} className="icons align-self-center">
-                {<NavLink to={`${requesturl(data.id)}`}  className="btn btn-icon">
+                {canEdit(data) && <NavLink to={`${requesturl(data.id)}`}  className="btn btn-icon">
                     <i className="fas fa-share"></i>
                 </NavLink>}
                 {data.oa==1 && <NavLink to={`${oaurl(data.id)}`} className="btn btn-icon">
                     <i className="icon-oa"></i>
                 </NavLink>}
-                {<NavLink to={`${editurl(data.id)}`}  className="btn btn-icon">
+                {canEdit(data) && <NavLink to={`${editurl(data.id)}`}  className="btn btn-icon">
                     <i className="fas fa-edit"></i>
                 </NavLink>}
-                {<Button color="icon" onClick={() => console.log('delete reference')}>
+                {canEdit(data) && <Button color="icon" onClick={() => console.log('delete reference')}>
                     <i className="fas fa-trash"></i>
                 </Button> }
             </Col> 

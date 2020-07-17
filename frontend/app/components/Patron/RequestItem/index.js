@@ -10,13 +10,7 @@ const RequestItem = (props) => {
     const {data, editPath,toggleSelection,checked} = props
     const intl = useIntl();
         
-    const editurl = (id) => {
-        return generatePath(`${editPath}`, {
-            id,
-            edit: "edit"
-        });
-    }
-
+    
     const matTypeIcon = (mat) => {
         switch (mat)
         {
@@ -35,6 +29,16 @@ const RequestItem = (props) => {
         return generatePath(`${editPath}`, {
             id
         });
+    }
+
+    const canArchive = (data) => {
+        if(data.status_key=="canceled" || data.status_key=="received"|| data.status_key=="fileReceived" || data.status_key=="notReceived") return true;
+        return false;
+    }
+
+    const canDelete = (data) => {
+        if(data.status_key!="canceled") return true;
+        return false;
     }
 
     return ( 
@@ -62,10 +66,10 @@ const RequestItem = (props) => {
             </Col>
             
             <Col sm={2} className="icons align-self-center">
-                {<NavLink to={`${editurl(data.id)}`}  className="btn btn-link">
-                    <i className="fas fa-edit"></i>
+                {canArchive(data) && <NavLink to="#" className="btn btn-link">
+                    <i className="fas fa-hdd"></i>
                 </NavLink>}
-                {<a href="#" onClick={() => console.log('delete reference')} className="btn btn-link">
+                {canDelete(data) && <a href="#" onClick={() => console.log('delete request')} className="btn btn-link">
                     <i className="fas fa-trash"></i>
                 </a> }
             </Col> 

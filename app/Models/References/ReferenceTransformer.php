@@ -30,6 +30,7 @@ class ReferenceTransformer extends BaseTransformer
 //        dd('trasformo');
         $to_merge = [
               'oa'=>random_int(0,1),
+              'active_patronrequests'=>$model->activepatronddrequests()
         ];
         return $this->applyTransform($model, $to_merge);
     }
