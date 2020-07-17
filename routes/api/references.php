@@ -54,7 +54,7 @@ Route::group([
         Route::get('groups/option-items', 'GroupController@optionList')->name('option-items');
         Route::get('groups/{id}', 'GroupController@show')->name('show');
         Route::put('groups/{id}', 'GroupController@update')->name('update');
-        Route::delete('groups/{id}', 'GroupController@update')->name('delete');
+        Route::delete('groups/{id}', 'GroupController@delete')->name('delete');
         Route::post('groups', 'GroupController@store')->name('create');
     });
 
