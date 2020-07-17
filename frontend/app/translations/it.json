@@ -285,5 +285,7 @@
   "app.routes.Projects": "Progetti",
   "app.routes.MyProject": "Il mio progetto",
   "app.routes.ProjectNew": "Nuovo progetto",
+  "app.routes.Labels": "Etichette",
+  "app.routes.Categories": "Categorie",
   "app.routes.Libraries": "Biblioteche"
 }
