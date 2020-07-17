@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Row, Col} from 'reactstrap';
+import React from 'react';
+import {Row, Col, Button} from 'reactstrap';
 import {NavLink } from 'react-router-dom';
 import { generatePath } from "react-router";
 import './style.scss';
@@ -59,18 +59,18 @@ const ReferenceItem = (props) => {
                 </span>}
             </Col>
             <Col sm={3} className="icons align-self-center">
-                {<NavLink to={`${requesturl(data.id)}`}  className="btn btn-link">
+                {<NavLink to={`${requesturl(data.id)}`}  className="btn btn-icon">
                     <i className="fas fa-share"></i>
                 </NavLink>}
-                {data.oa==1 && <NavLink to={`${oaurl(data.id)}`} className="btn btn-link">
+                {data.oa==1 && <NavLink to={`${oaurl(data.id)}`} className="btn btn-icon">
                     <i className="icon-oa"></i>
                 </NavLink>}
-                {<NavLink to={`${editurl(data.id)}`}  className="btn btn-link">
+                {<NavLink to={`${editurl(data.id)}`}  className="btn btn-icon">
                     <i className="fas fa-edit"></i>
                 </NavLink>}
-                {<a href="#" onClick={() => console.log('delete reference')} className="btn btn-link">
+                {<Button color="icon" onClick={() => console.log('delete reference')}>
                     <i className="fas fa-trash"></i>
-                </a> }
+                </Button> }
             </Col> 
         </Row>
     )

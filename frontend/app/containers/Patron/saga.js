@@ -2,7 +2,8 @@ import { call, put, select, takeLatest, fork, take  } from 'redux-saga/effects';
 import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO_LIBRARIES,REQUEST_UPDATE_ACCESS_TO_LIBRARIES,REQUEST_DELETE_ACCESS_TO_LIBRARIES,  REQUEST_REFERENCES_LIST,
   REQUEST_POST_REFERENCES, REQUEST_UPDATE_REFERENCES, 
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST,
-  REQUEST_UPDATE_LABEL,
+  REQUEST_UPDATE_LABEL, REQUEST_REMOVE_LABEL, REQUEST_POST_LABEL,
+  REQUEST_POST_GROUP, REQUEST_REMOVE_GROUP, REQUEST_UPDATE_GROUP,
   REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,REQUEST_REQUESTS_LIST} from './constants';
 import {
   requestError,
@@ -33,6 +34,11 @@ import {  getMyLibrary,
           createReference,
           updateReference,
           updateLabel,
+          createLabel,
+          deleteLabel,
+          createGroup,
+          updateGroup,
+          deleteGroup,
           getReference, 
           getLabelsOptionList,
           getGroupsOptionList,
@@ -126,6 +132,22 @@ export function* requestRemoveReferenceGroupSaga(action) {
   }
 }
 
+export function* requestPostLabelSaga(action) {
+  const options = {
+    method: 'post',
+    body: {
+      name: action.label_name
+    }
+  };
+  try {
+    const request = yield call(createLabel, options);
+    yield call(requestLabelsOptionListSaga);
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 export function* requestUpdateLabelSaga(action) {
   const options = {
     method: 'put',
@@ -138,8 +160,69 @@ export function* requestUpdateLabelSaga(action) {
   try {
     const request = yield call(updateLabel, options);
     yield call(requestLabelsOptionListSaga);
-   
-   // yield call(() => toast.success(action.message))
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestRemoveLabelSaga(action) {
+  const options = {
+    method: 'delete', 
+    label_id: action.label_id,
+  };
+  try {
+    const request = yield call(deleteLabel, options);
+    yield call(requestLabelsOptionListSaga);
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+
+export function* requestPostGroupSaga(action) {
+  const options = {
+    method: 'post',
+    body: {
+      name: action.group_name
+    }
+  };
+  try {
+    const request = yield call(createGroup, options);
+    yield call(requestGroupsOptionListSaga);
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestUpdateGroupSaga(action) {
+  const options = {
+    method: 'put',
+    group_id: action.group_id,
+    body: {
+      name: action.group_value
+    }
+  };
+  try {
+    const request = yield call(updateGroup, options);
+    yield call(requestGroupsOptionListSaga);
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestRemoveGroupSaga(action) {
+  const options = {
+    method: 'delete', 
+    group_id: action.group_id,
+  };
+  try {
+    const request = yield call(deleteGroup, options);
+    yield call(requestGroupsOptionListSaga);
+    yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -343,6 +426,11 @@ export default function* patronSaga() {
   yield takeLatest(REQUEST_GET_MY_LIBRARY, requestGetMyLibrarySaga);
   yield takeLatest(REQUEST_ACCESS_TO_LIBRARIES, requestAccessToLibrarySaga);
   yield takeLatest(REQUEST_UPDATE_LABEL, requestUpdateLabelSaga);
+  yield takeLatest(REQUEST_POST_LABEL, requestPostLabelSaga);
+  yield takeLatest(REQUEST_REMOVE_LABEL, requestRemoveLabelSaga);
+  yield takeLatest(REQUEST_POST_GROUP, requestPostGroupSaga);
+  yield takeLatest(REQUEST_UPDATE_GROUP, requestUpdateGroupSaga);
+  yield takeLatest(REQUEST_REMOVE_GROUP, requestRemoveGroupSaga);
   yield takeLatest(REQUEST_UPDATE_ACCESS_TO_LIBRARIES,requestUpdateAccessToLibrarySaga);
   yield takeLatest(REQUEST_DELETE_ACCESS_TO_LIBRARIES,requestDeleteAccessToLibrarySaga);
   yield takeLatest(REQUEST_REFERENCES_LIST, requestReferencesListSaga);

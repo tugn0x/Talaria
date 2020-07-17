@@ -26,13 +26,14 @@ const ReferencesPage = (props) => {
     
     return (
         <Loader show={isLoading}>
-            {isNew && 
+            {isNew && (
                 <ReferencesForm 
                    //  loading={isLoading} 
                     messages={messages}
                     createReference={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } />
+                )
             }
-            {!isNew && 
+            {!isNew && ( 
                 params.edit &&
                     <ReferencesForm 
                         messages={messages}
@@ -44,6 +45,7 @@ const ReferencesPage = (props) => {
                         messages={messages}
                         reference={reference} 
                     />
+                )
             }
         </Loader>
     )

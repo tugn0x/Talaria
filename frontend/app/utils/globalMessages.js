@@ -160,5 +160,9 @@ export default defineMessages({
   disabled: {
     id: `${scope}.disabled`,
     defaultMessage: "Disabled",
+  },
+  label: {
+    id: `${scope}.label`,
+    defaultMessage: "Label",
   } 
 });

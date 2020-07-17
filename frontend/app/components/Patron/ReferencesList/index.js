@@ -13,7 +13,7 @@ import {useIntl} from 'react-intl';
 // import { NavLink } from 'react-router-dom';
 import ReferenceItem from '../ReferenceItem';
 import FilterSelect from '../FilterSelect';
-import ApplyLabGroup from '../ApplyLabGroup';
+import ApplyReferencesTag from '../ApplyReferencesTag';
 
 import './style.scss';
 
@@ -181,19 +181,19 @@ const ReferencesList = (props) => {
                     <div className="select-checkbox">
                         <div className="features-icons" >
                             <input type="checkbox" onChange={(e)=>toggleAllCheckbox(e)}/>
-                            {<Button disabled={disableToolbar} color="default">
+                            {<Button disabled={disableToolbar} color="icon">
                                 <i className="fas fa-print"></i>
                             </Button>}
-                            {<Button disabled={disableToolbar} color="default">
+                            {<Button disabled={disableToolbar} color="icon">
                                 <i className="fas fa-file-export"></i>
                             </Button>}
-                            <ApplyLabGroup 
+                            <ApplyReferencesTag 
                                 type="label"
                                 disabled={disableToolbar}
                                 submitCallBack={(ids) => applyLabels(ids, selectedReferences)}
                                 options={labelsOptionList} 
                             />
-                            <ApplyLabGroup 
+                            <ApplyReferencesTag 
                                 type="group"
                                 disabled={disableToolbar}
                                 submitCallBack={(ids) => applyGroups(ids, selectedReferences)}

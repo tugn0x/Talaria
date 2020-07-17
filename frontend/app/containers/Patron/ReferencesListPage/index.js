@@ -1,7 +1,10 @@
 import React, {useEffect} from 'react'
 import {useIntl} from 'react-intl'
 import makeSelectPatron, {isPatronLoading,groupsOptionListSelector,labelsOptionListSelector} from '../selectors';
-import { requestReferencesList,requestLabelsOptionList,requestGroupsOptionList,requestRemoveReferenceLabel,requestRemoveReferenceGroup,requestApplyLabelsToReferences,requestApplyGroupsToReferences} from '../actions'
+import { requestReferencesList,requestLabelsOptionList,
+        requestGroupsOptionList,requestRemoveReferenceLabel,
+        requestRemoveReferenceGroup,requestApplyLabelsToReferences,
+        requestApplyGroupsToReferences} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -89,7 +92,7 @@ const ReferencesListPage = (props) => {
                     },
                     searchOnChange: true
                 }}
-                editPath={'/patron/references/reference/:id?/:edit?'}
+                editPath={'/patron/references/:id?/:edit?'}
                 removeLabelFromReference={removeLabelFromReference}
                 removeGroupFromReference={removeGroupFromReference}
                 applyLabels={applyLabelsToReferences}

@@ -69,9 +69,18 @@
   "app.containers.ReferencesListPage.labelAs": "Etichetta come",
   "app.containers.ReferencesListPage.groups": "Categorie",
   "app.containers.ReferencesListPage.groupAs": "Raggruppa come",
-  "app.containers.ReferencesListPage.createNewLabel": "(Crea nuova)",
   "app.containers.ReferencesListPage.removeLabelMessage":"Remove this label from this reference?",
   "app.containers.ReferencesListPage.removeGroupMessage":"Remove this category from this reference?",
+  "app.containers.ReferencesListPage.createNewLabel": "Crea nuova",
+  "app.containers.ReferencesLabels.labelRemoveMessage": "Etichetta eliminata con successo",
+  "app.containers.ReferencesLabels.labelUpdateMessage": "Etichetta aggiornata con successo",
+  "app.containers.ReferencesLabels.labelCreateMessage": "Etichetta creata con successo",
+  "app.containers.ReferencesLabels.labelCreateNew": "Crea nuova etichetta",
+
+  "app.containers.ReferencesGroups.groupRemoveMessage": "Categoria eliminata con successo",
+  "app.containers.ReferencesGroups.groupUpdateMessage": "Categoria aggiornata con successo",
+  "app.containers.ReferencesGroups.groupCreateMessage": "Categoria creata con successo",
+  "app.containers.ReferencesGroups.groupCreateNew": "Crea nuova categoria",
 
   "app.containers.RequestsListPage.header": "Richieste",
 
@@ -286,5 +295,7 @@
   "app.routes.Projects": "Progetti",
   "app.routes.MyProject": "Il mio progetto",
   "app.routes.ProjectNew": "Nuovo progetto",
+  "app.routes.Labels": "Etichette",
+  "app.routes.Categories": "Categorie",
   "app.routes.Libraries": "Biblioteche"
 }

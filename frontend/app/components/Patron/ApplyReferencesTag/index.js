@@ -5,8 +5,8 @@ import messages from 'containers/Patron/ReferencesListPage/messages'
 import {useIntl} from 'react-intl';
 import './style.scss';
 
-const ApplyLabGroup = props => {
-    console.log('ApplyLabGroup', props)
+const ApplyReferencesTag = props => {
+    console.log('ApplyReferencesTag', props)
     const {type, submitCallBack, options, disabled} = props
     const [data, setData] = useState(options)
     const [query, setQuery] = useState("")
@@ -29,7 +29,7 @@ const ApplyLabGroup = props => {
 
     return (
         <UncontrolledDropdown className={`apply ${type}`} direction="down">
-            <DropdownToggle color="default" disabled={disabled}>
+            <DropdownToggle color="icon" disabled={disabled}>
                 {type === 'label' ? <i className="icon-tag-plus"></i> :  <i className="fas fa-folder-plus"></i>}
             </DropdownToggle>
             <DropdownMenu center="true">
@@ -57,9 +57,9 @@ const ApplyLabGroup = props => {
     );
 };
 
-ApplyLabGroup.propTypes = {
+ApplyReferencesTag.propTypes = {
     type: PropTypes.string,
     options: PropTypes.array
 };
 
-export default ApplyLabGroup;
+export default ApplyReferencesTag;
