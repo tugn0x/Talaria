@@ -2,6 +2,10 @@
 
 .list-row {
     .info {
+        span {
+            padding-right: 3px;
+        }
+
         p {
             margin: 0;
         }
@@ -23,6 +27,15 @@
                 font-weight: normal;
                 padding-right: 0px;
             }
+        } 
+
+        .libraryLabel >span:first-child,
+        .delivery >span:first-child,
+        .requestDate >span:first-child,
+        .fullfillDate >span:first-child
+        {
+            color: #B48372;
+            padding-right: 5px;
         } 
         
     }
@@ -83,20 +96,17 @@
             }
 
             
-            &.notReceived{
+            &.notReceived,
+            &.canceled {
                 background-color: red;
             }
             
-            &.readyToDelivery{
+            &.readyToDelivery,
+            &.waitingForCost,
+            &.costAccepted,
+            &.costNotAccepted{
                 background-color: #FBB133;
             }
-
-            /*'userAskCancel'=>31,
-            canceled=>32
-            'waitingForCost'=>21,
-            'costAccepted'=>22,
-            'costNotAccepted'=>23,*/
-
     }
 }
 
