@@ -24,11 +24,8 @@ const ReferencesTag = props => {
     }
 
     return (
-        <Row className="list-row justify-content-between">
-            {/* <Col sm={2} className="select-checkbox">
-                <input type="checkbox" onChange={() => null}  value={data.id} checked={checked}  />
-            </Col>  */}
-            <Col xs={8} className="info align-self-center m-0">
+        <Row className="list-row py-2  justify-content-between">
+            <Col xs={10} className="info align-self-center m-0">
 
                 {tag.isEdit && 
                     <>
@@ -44,13 +41,14 @@ const ReferencesTag = props => {
                     <h4 className="m-0">{tag.name}</h4>
                 }
             </Col>
-            <Col xs={4} className="icons align-self-center">
+            <Col xs={2} className="icons align-self-center">
                 <Button className={`${tag.isEdit ? 'active' : null}`} onClick={() => setTag(state => ({...state, isEdit: !state.isEdit}))} color="default">
                     <i className="fas fa-edit"></i>
                 </Button>
-                {<Button onClick={() => removeItem(tag.id)} color="default">
+                <Button onClick={() => removeItem(tag.id)} color="default">
                     <i className="fas fa-trash"></i>
-                </Button> }
+                </Button>
+                
             </Col> 
         </Row>
     );

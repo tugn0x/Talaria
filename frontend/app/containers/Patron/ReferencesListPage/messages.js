@@ -38,7 +38,7 @@ export default defineMessages({
   },
   createNewLabel: {
     id: `${scope}.createNewLabel`,
-    defaultMessage: '(Create new)',
+    defaultMessage: 'Create new',
   },
   confirm:{
     id: 'app.global.confirm',

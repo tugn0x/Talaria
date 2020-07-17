@@ -162,7 +162,7 @@ export function* requestUpdateLabelSaga(action) {
 
 export function* requestRemoveLabelSaga(action) {
   const options = {
-    // method: 'delete', 
+    method: 'delete', 
     label_id: action.label_id,
   };
   try {

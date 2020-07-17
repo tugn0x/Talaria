@@ -3,7 +3,7 @@ import {requestLabelsOptionList, requestPostLabel, requestUpdateLabel, requestRe
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {Row,Col, Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap'
+import {Row, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap'
 import {labelsOptionListSelector, isPatronLoading} from '../selectors';
 import ReferencesTag from 'components/Patron/ReferencesTag';
 import messages from './messages';
@@ -28,6 +28,12 @@ const ReferencesLabels = props => {
         setNewLabelName(newLabel)
     }
 
+    const handleKeyPress = (e) => {
+        if(e.key === "Enter"){
+            saveItem() 
+        }
+    }
+
     const updateItem = (label_id, name) => {
         dispatch(requestUpdateLabel(label_id, name, intl.formatMessage(messages.labelUpdateMessage)))
     }
@@ -44,31 +50,38 @@ const ReferencesLabels = props => {
     } 
 
     return (
-        <div className="ReferencesLabels">
-            <h1 className="section-title large">Labels</h1>
+        <div className="ReferencesLabels tags-list">
+            <h1 className="section-title large">{intl.formatMessage(messages.labels)}</h1>
             <Dropdown direction="right" isOpen={toggleInput} toggle={() => setToggleInput(state => !state)}>
                 <DropdownToggle color="default">
                     <i className="icon-tag-plus"></i>
                 </DropdownToggle>
                 <DropdownMenu>
                     <DropdownItem header tag="div">
-                        <h4>Crea nuova etichetta</h4>
                         <Row className="align-items-center justify-content-around">
-                            <input type="text" name="tag-add" onChange={(e) => handleChange(e)} value={newLabelName} />
+                            <input 
+                                type="text" 
+                                placeholder={intl.formatMessage(messages.labelCreateNew)}
+                                name="tag-add" 
+                                onChange={(e) => handleChange(e)} 
+                                onKeyPress={(e) => handleKeyPress(e)}
+                                value={newLabelName} />
                             <i className="fas fa-save" onClick={saveItem}></i>
                         </Row>
                     </DropdownItem>
                 </DropdownMenu>
             </Dropdown>
-           {labelsOptionList.length > 0 && labelsOptionList.map((label, i) => (
-                <ReferencesTag 
-                    key={`${label.label}-${label.value}`}
-                    data={label}
-                    updateItem={(label_id, name) => updateItem(label_id, name)}
-                    removeItem={(label_id)=> removeItem(label_id)}
-                    loading={loading}
-                />
-            ))}
+            <Loader show={loading}>
+                {labelsOptionList.length > 0 && labelsOptionList.map((label, i) => (
+                        <ReferencesTag 
+                            key={`${label.label}-${label.value}`}
+                            data={label}
+                            updateItem={(label_id, name) => updateItem(label_id, name)}
+                            removeItem={(label_id)=> removeItem(label_id)}
+                            loading={loading}
+                        />
+                    ))}
+            </Loader>
         </div>
     );
 };
