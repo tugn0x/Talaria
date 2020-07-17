@@ -160,7 +160,7 @@ const RequestsList = (props) => {
                 </Row>
             </div>
             
-            <div className="referenceList list-wrapper">
+            <div className="requestList list-wrapper">
                 <Row className="list-head">
                     <div className="select-checkbox">
                         <div className="features-icons" >

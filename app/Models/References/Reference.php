@@ -50,7 +50,8 @@ class Reference extends BaseModel
         ->where("status",'<>',config("constants.patrondocdelrequest_status.received"))
         ->where("status",'<>',config("constants.patrondocdelrequest_status.fileReceived"))
         ->where("status",'<>',config("constants.patrondocdelrequest_status.notReceived"))
-        ->where("status",'<>',config("constants.patrondocdelrequest_status.canceled"))->count();
+        ->where("status",'<>',config("constants.patrondocdelrequest_status.canceled"))
+        ->count();
     }
 
     public function libraryddrequests()

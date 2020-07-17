@@ -37,9 +37,19 @@ const ReferenceItem = (props) => {
     }
 
     const canEdit = (data) => {
+        if(data.patronrequests==0) return true;
+        return false;
+    }
+
+    const canRequest = (data) => {
         if(data.active_patronrequests==0) return true;
         return false;
     }
+
+    const canDelete = (data) => {
+        return canRequest(data);
+    }
+
 
     return ( 
         <Row className="list-row justify-content-between">
@@ -64,7 +74,7 @@ const ReferenceItem = (props) => {
                 </span>}
             </Col>
             <Col sm={3} className="icons align-self-center">
-                {canEdit(data) && <NavLink to={`${requesturl(data.id)}`}  className="btn btn-icon">
+                {canRequest(data) && <NavLink to={`${requesturl(data.id)}`}  className="btn btn-icon">
                     <i className="fas fa-share"></i>
                 </NavLink>}
                 {data.oa==1 && <NavLink to={`${oaurl(data.id)}`} className="btn btn-icon">
@@ -73,7 +83,7 @@ const ReferenceItem = (props) => {
                 {canEdit(data) && <NavLink to={`${editurl(data.id)}`}  className="btn btn-icon">
                     <i className="fas fa-edit"></i>
                 </NavLink>}
-                {canEdit(data) && <Button color="icon" onClick={() => console.log('delete reference')}>
+                {canDelete(data) && <Button color="icon" onClick={() => console.log('delete reference')}>
                     <i className="fas fa-trash"></i>
                 </Button> }
             </Col> 
