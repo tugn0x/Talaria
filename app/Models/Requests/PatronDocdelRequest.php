@@ -53,6 +53,8 @@ class PatronDocdelRequest extends BaseModel
         
     ];
 
+    protected $simpleSearchField="pub_title"; //ricerca sul riferimento
+
     protected $constantFields=['status'];
 
 
@@ -112,6 +114,16 @@ class PatronDocdelRequest extends BaseModel
             });
         });
                     
+    }
+
+    //override del ModelTrait::scopeSimpleSearch
+    //in modo da cercare sul riferimento!
+    public function scopeSimpleSearch($query, $q)
+    {
+        $text = trim($q);
+        return $query->whereHas('reference', function ($query2) use ($text) {
+                $query2->where($this->simpleSearchField, 'like', '%'. $text .'%');
+        });
     }
 
 
