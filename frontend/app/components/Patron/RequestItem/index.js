@@ -45,7 +45,7 @@ const RequestItem = (props) => {
         <Row className="list-row justify-content-between">
             <Col sm={3} className="select-checkbox">
                 <input type="checkbox" onChange={toggleSelection} value={data.id} checked={checked}/>
-                <span className={statusIcon(data.status_key)}></span> {data.status_key} <i className={matTypeIcon(data.reference.data.material_type)}></i>
+                <span className={statusIcon(data.status_key)}></span> {intl.formatMessage(messages[data.status_key])} <i className={matTypeIcon(data.reference.data.material_type)}></i>
             </Col>
             <Col sm={7} className="info">
                 <NavLink to={`${requesturl(data.id)}`}>
