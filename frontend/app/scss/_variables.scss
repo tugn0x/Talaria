@@ -95,7 +95,7 @@ $theme-colors: (
   "grey-lighter": $grey-lighter,
   "active": $active,
 );
-
+/*
 $libraries_icon: '../images/libraries.svg';
 $institutions_icon: '../images/institutions.svg';
 $projects_icon: '../images/projects.svg';
@@ -111,4 +111,4 @@ $patron_icon: '../images/patron.svg';
 }
 @mixin patron_icon {
   background-image: url($patron_icon);
-}
+}*/

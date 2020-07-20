@@ -12,12 +12,27 @@ function ResourceMenu(props) {
   const {resources} = props;
   const types = Object.keys(resources);
 
+  const iconType = (res) => {
+    let cl = ""
+    
+    switch (res) {
+      case 'institutions': cl='fas fa-building';  break;
+      case 'libraries': cl='fas fa-landmark'; break;
+      case 'projects': cl='fas fa-project-diagram'; break;
+      case 'consortium': cl='icon icon-consorzio'; break;
+      
+      default: cl='';
+    }
+    cl+=" float-left"; /*icon-img*/
+    return cl;
+  }
+
 
   return (
     types.map((resource) => (
       <div key={resource} className="resources-menu">
         <DropdownItem header tag="div" className="text-center">
-          <div className={`icon-img ${resource} float-left`}></div>
+          <i className={`${iconType(resource)}`}></i>
           <FormattedMessage {...messages[resource]} />
         </DropdownItem>
         {resources[resource].map((item) =>

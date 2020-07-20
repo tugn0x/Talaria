@@ -89,7 +89,7 @@ function HeaderBar(props) {
                       {checkRole(auth, "super-admin") && (
                         <div className="resources-menu">
                           <DropdownItem header tag="div" className="text-center">
-                            <div className={`icon-img admin float-left`}></div>
+                            <i className={`fas fa-cog float-left`}></i>
                             <FormattedMessage {...messages.admin} />
                           </DropdownItem>
                             <NavLink to={`/admin`}
@@ -102,7 +102,7 @@ function HeaderBar(props) {
                       {
                         <div className="resources-menu">
                           <DropdownItem header tag="div" className="text-center">
-                            <div className={`icon-img patron float-left`}></div>
+                          <i className={`fas fa-book-reader float-left`}></i>
                             <FormattedMessage {...messages.patron} />
                           </DropdownItem>
                             <NavLink to={`/patron`}

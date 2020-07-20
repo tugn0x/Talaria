@@ -321,24 +321,13 @@ ul.list-inline {
     }
 }
 
-.icon-img {
+/*.icon-img {
     background-repeat: no-repeat;
     background-size: 100%;
     width: 150px;
     height: 150px;
-    &.libraries {
-        @include libraries_icon
-    }
-    &.institutions {
-        @include institutions_icon
-    }
-    &.projects {
-        @include projects_icon
-    }
-    &.patron {
-        @include patron_icon
-    }
-}
+    color: $orange;
+}*/
 
 .dropdown {
     &.show {
