@@ -90,7 +90,7 @@ class PatronDocdelRequest extends BaseModel
 
     public function scopeIsArchived($query, $archived)
     {
-        return $query->where('archived', $archived);
+        return $query->where('archived','=',$archived);
     }
 
     public function scopeByLabel($query, $labelIds){
