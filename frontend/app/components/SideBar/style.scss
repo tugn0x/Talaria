@@ -14,16 +14,17 @@
     }
     i {
         color: $orange;
+        width: 30px;
         &:before {
             font-size: 18px;
         }
         &.fa-plus {
-            font-size: 20px;
+            font-size: 16px;
             &:before {
                 border-radius: 15px;
                 background: $orange;
                 color: white;
-                padding: 3px 5px;
+                padding: 3px 4px;
                 font-size: inherit;
             }
         }

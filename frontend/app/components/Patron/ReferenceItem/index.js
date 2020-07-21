@@ -2,6 +2,7 @@ import React from 'react';
 import {Row, Col, Button} from 'reactstrap';
 import {NavLink } from 'react-router-dom';
 import { generatePath } from "react-router";
+import CustomCheckBox from 'components/Form/CustomCheckBox';
 import './style.scss';
 
 const ReferenceItem = (props) => {
@@ -54,7 +55,10 @@ const ReferenceItem = (props) => {
     return ( 
         <Row className="list-row justify-content-between">
             <Col sm={2} className="select-checkbox">
-                <input type="checkbox" onChange={toggleSelection} value={data.id} checked={checked}/>
+                <CustomCheckBox 
+                    handleChange={toggleSelection}
+                    checked={checked}
+                />
                 <i className={`${matTypeIcon(data.material_type)}`}></i>
             </Col> 
             <Col sm={7} className="info">
@@ -65,6 +69,7 @@ const ReferenceItem = (props) => {
                    {data.first_author && <span className="first_author">Autore <span>{data.first_author}</span></span>} 
                    <span className="pubyear">Anno <span>{data.pubyear}</span></span>
                 </div>
+                
                 {data.labels.data && <span className="labels">
                     {data.labels.data.map(label => <span key={label.id}>{label.name} <i className="fas fa-times"  onClick={() => removeLabel(label.id)}></i></span>)}
                 </span>}
@@ -72,6 +77,7 @@ const ReferenceItem = (props) => {
                 {data.groups.data && <span className="groups">
                     {data.groups.data.map(grp => <span key={grp.id}>{grp.name} <i className="fas fa-times"  onClick={() => removeGroup(grp.id) }></i></span>)}
                 </span>}
+                
             </Col>
             <Col sm={3} className="icons align-self-center">
                 {canRequest(data) && <NavLink to={`${requesturl(data.id)}`}  className="btn btn-icon">
@@ -83,9 +89,9 @@ const ReferenceItem = (props) => {
                 {canEdit(data) && <NavLink to={`${editurl(data.id)}`}  className="btn btn-icon">
                     <i className="fas fa-edit"></i>
                 </NavLink>}
-                {canDelete(data) && <Button color="icon" onClick={() => console.log('delete reference')}>
+                {canDelete(data) && <a href="#" className="btn btn-icon" onClick={() => console.log('delete reference')}>
                     <i className="fas fa-trash"></i>
-                </Button> }
+                </a> }
             </Col> 
         </Row>
     )

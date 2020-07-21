@@ -4,7 +4,7 @@
     justify-content: flex-end;
     align-items: center;
     margin: 0 auto;
-    
+    background-color: $tools-menu;
     button {
         margin: 0 15px 0 0;
         &.step-backward, &.backward {
@@ -12,6 +12,10 @@
         }
         &:last-child {
             margin-right: 0
+        }
+        &.disabled, &:disabled {
+            color: $dark-text;
+            opacity: 1;
         }
     }
 

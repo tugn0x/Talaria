@@ -8,13 +8,13 @@
     .apply-item {
         display: flex;
         align-items: center;
-        margin: .5rem 0;
+        margin: 1rem 0;
         &:last-child {
             margin-bottom: 0;
         }
         label {
             margin: 0;
-            padding-left: 0.7rem;
+            padding: 0;
         }
     }
     .create-new {

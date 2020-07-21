@@ -67,7 +67,7 @@ function Footer(props) {
           }
           </div>
         </div>
-        <div className="bottom d-flex align-items-center">
+        <div className="bottom d-flex align-items-end">
           <img src={logoCNR1} alt="CNR" />
           <img src={logoCNR2} alt="CNR Library" />
           <p className="copyright">Nilde &copy; 2020</p>

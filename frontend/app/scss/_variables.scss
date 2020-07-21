@@ -71,7 +71,6 @@ $heightInput: 32px;
 
 // COLORS
 $theme_color: #DF6D43;
-$white: #F8F8F8;
 $grey-light: #EBE2DF;
 $grey-lighter: #F5F5F5;
 $grey: #3B3D40;
@@ -94,6 +93,9 @@ $theme-colors: (
   "grey-light": $grey-light,
   "grey-lighter": $grey-lighter,
   "active": $active,
+  "white": $main-menu,
+  "dark-bk": $dark-bk,
+  "dark-text": $dark-text
 );
 /*
 $libraries_icon: '../images/libraries.svg';
