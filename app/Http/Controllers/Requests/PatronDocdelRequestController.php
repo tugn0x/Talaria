@@ -42,8 +42,12 @@ class PatronDocdelRequestController extends ApiController
     public function my(Request $request)
     {
         $model=$this->model->owned();
-        if($request->input("archived"))
-            $model=$model->isArchived($request->input("archived"));   
+        if($request->has("archived"))
+        {
+            $arc=$request->input("archived");
+            $arc+=0; //force to be integer
+            $model=$model->Archived($arc);   
+        }
         
         if($request->input("labelIds"))
             $model=$model->byLabel($request->input("labelIds"));

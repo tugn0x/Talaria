@@ -483,7 +483,7 @@
 			"response": []
 		},
 		{
-			"name": "Me with roles",
+			"name": "Me with roles and res",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -497,7 +497,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/auth/me?include=roles",
+					"raw": "{{url}}/auth/me?include=roles,resources",
 					"host": [
 						"{{url}}"
 					],
@@ -508,7 +508,7 @@
 					"query": [
 						{
 							"key": "include",
-							"value": "roles"
+							"value": "roles,resources"
 						}
 					]
 				}
@@ -763,43 +763,6 @@
 			"response": []
 		},
 		{
-			"name": "Store Library Tags",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept",
-						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{bearer}}"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"name\": \"TAG xx\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{url}}/libraries/1/tags",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"libraries",
-						"1",
-						"tags"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Update Library Tags",
 			"request": {
 				"method": "PUT",
@@ -903,9 +866,9 @@
 			"response": []
 		},
 		{
-			"name": "My References",
+			"name": "Store Library Tags",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Accept",
@@ -916,14 +879,24 @@
 						"value": "Bearer {{bearer}}"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"TAG xx\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{url}}/references/my",
+					"raw": "{{url}}/libraries/1/tags",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"references",
-						"my"
+						"libraries",
+						"1",
+						"tags"
 					]
 				}
 			},
@@ -962,6 +935,194 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "My References",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/references/my?labelIds=1,33&groupIds=122,4,5,5,5",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"references",
+						"my"
+					],
+					"query": [
+						{
+							"key": "labelIds",
+							"value": "1,33"
+						},
+						{
+							"key": "groupIds",
+							"value": "122,4,5,5,5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upate selected References",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"references\": [5,3],\n    \"labelIds\":[3,5],\n    \"pubyear\": 1997\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/references/updateSelected",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"references",
+						"updateSelected"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Reference Label",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjJmNWY2OGY4OGRhMjM2MjNjYWUyMTE0MmM4MjE2YzdmMTlkMjI1OGZlN2FlZDZlNjI3NTU2MWYzNDhhZDgwN2E1ZTM1MjFhN2UyMjAzNzY0In0.eyJhdWQiOiIxIiwianRpIjoiMmY1ZjY4Zjg4ZGEyMzYyM2NhZTIxMTQyYzgyMTZjN2YxOWQyMjU4ZmU3YWVkNmU2Mjc1NTYxZjM0OGFkODA3YTVlMzUyMWE3ZTIyMDM3NjQiLCJpYXQiOjE1OTQwNDMxOTAsIm5iZiI6MTU5NDA0MzE5MCwiZXhwIjoxNTk0MTI5NTg5LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.PxsSx8KlHrydUc7icV4mtQY_34NP0TsRgcdGoD7jAKT8TfL7dCXVCo1cd6j2x64y9ukMMJXGcuVBqqJJGR100ME8iEW4HddWze4q7TEUGAgKw5-NQEGzbxMYvgGtnbqfV1lHDuUV0VRAN4iGApthDU7S8hF0lxsojVJ-hlDfI0b_sJki3tUavu1kivaBsFUguW9C-ji68eWWFDbYpTlHhSR2MUiQsDkM3BW9omGsLVG3ETKeIUtbsvVlO2a9lgOrPB-ZuPG1-pYrDzfFWcQGawtnN1-kcqP861l3zFj4qis4Krn7Yz8an3q-fr9RAYCNhMlkE6HpP6UM2PXuZW4WS_HYPduAiL1r7bxTRA4apK5e19YIVukR0H_YdoPd0JZ3bzJHt0Rqm3QVxfGBqttm9mejr97Eqzav_CaaEtD-L_WjVrXHE0LkuXemO_NheV8HdLAqfpeWJuo7FNt4VNtQUpnSQBf87wXLs5v3_lp7xt4ZiSXiQzV5wuHRIYuuttcOyUlw-8fTGcjYyT6Q_5wyn7TqGycbUM5A9h3GCUa1a6SyeNOvP47t11R4N0mbNHbef7K6zXpzZjQhHyD-5mlw-DrojRoHLn1u3RFSMJ0fHhlCAJTWOfNgBh6TTwxAkfqfTQklUQxojXVud_tvUUkN8gxMn4TC7bV7SEt8qKcEOyU"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/references/3/labels/7",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"references",
+						"3",
+						"labels",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Reference Group",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjJmNWY2OGY4OGRhMjM2MjNjYWUyMTE0MmM4MjE2YzdmMTlkMjI1OGZlN2FlZDZlNjI3NTU2MWYzNDhhZDgwN2E1ZTM1MjFhN2UyMjAzNzY0In0.eyJhdWQiOiIxIiwianRpIjoiMmY1ZjY4Zjg4ZGEyMzYyM2NhZTIxMTQyYzgyMTZjN2YxOWQyMjU4ZmU3YWVkNmU2Mjc1NTYxZjM0OGFkODA3YTVlMzUyMWE3ZTIyMDM3NjQiLCJpYXQiOjE1OTQwNDMxOTAsIm5iZiI6MTU5NDA0MzE5MCwiZXhwIjoxNTk0MTI5NTg5LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.PxsSx8KlHrydUc7icV4mtQY_34NP0TsRgcdGoD7jAKT8TfL7dCXVCo1cd6j2x64y9ukMMJXGcuVBqqJJGR100ME8iEW4HddWze4q7TEUGAgKw5-NQEGzbxMYvgGtnbqfV1lHDuUV0VRAN4iGApthDU7S8hF0lxsojVJ-hlDfI0b_sJki3tUavu1kivaBsFUguW9C-ji68eWWFDbYpTlHhSR2MUiQsDkM3BW9omGsLVG3ETKeIUtbsvVlO2a9lgOrPB-ZuPG1-pYrDzfFWcQGawtnN1-kcqP861l3zFj4qis4Krn7Yz8an3q-fr9RAYCNhMlkE6HpP6UM2PXuZW4WS_HYPduAiL1r7bxTRA4apK5e19YIVukR0H_YdoPd0JZ3bzJHt0Rqm3QVxfGBqttm9mejr97Eqzav_CaaEtD-L_WjVrXHE0LkuXemO_NheV8HdLAqfpeWJuo7FNt4VNtQUpnSQBf87wXLs5v3_lp7xt4ZiSXiQzV5wuHRIYuuttcOyUlw-8fTGcjYyT6Q_5wyn7TqGycbUM5A9h3GCUa1a6SyeNOvP47t11R4N0mbNHbef7K6zXpzZjQhHyD-5mlw-DrojRoHLn1u3RFSMJ0fHhlCAJTWOfNgBh6TTwxAkfqfTQklUQxojXVud_tvUUkN8gxMn4TC7bV7SEt8qKcEOyU"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/references/5/groups/4",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"references",
+						"5",
+						"groups",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "My Patron DD Requests",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImZkMjUyNDYzMDdhNmZjNWU1MzllY2MxNmVhMDdiMWNlMGVlMTA1OTMxZDYzNjgwNTAyN2YxZGY4N2Y5YThiYmJkZjI5MGFlYzFkZTAyOGRlIn0.eyJhdWQiOiIxIiwianRpIjoiZmQyNTI0NjMwN2E2ZmM1ZTUzOWVjYzE2ZWEwN2IxY2UwZWUxMDU5MzFkNjM2ODA1MDI3ZjFkZjg3ZjlhOGJiYmRmMjkwYWVjMWRlMDI4ZGUiLCJpYXQiOjE1OTUzMzQ2MTgsIm5iZiI6MTU5NTMzNDYxOCwiZXhwIjoxNTk1NDIxMDE4LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.Dcd_ZpX3HBmxKH-4rc-cmluhOCIT9J_HWSxdxt7IoMZAYAhHHux56Xuk8aII1C-zFlmrqi-MmYiHiYBgrkKh5PQghbQnx9Ffz_EUAA8DF62KyXnnfwHOKjhN9XFX3xcava-MFVl_Feo1ESC4IWsTEt1KXpkoDsYvMIM1RDLziiB7K3lt23ASnFySg4vv0LKEKhgUgatkEiZa2P7sd-8-U7LaXajrutfEMBjkCE99ZNFTojXcRtCh20vx8Nn96zQMgzZ-Iq-1CXBjhAQtMz4k0lbEi4oYsTO6svmm2PGJa_XUdwHv9skm53SIZE4a1QPvDJkxFL9RjrWmoee00DccgDIX08-MYLeDNo7fWmEM-vZUsZxSnY5ZONsNoBr-wEPMrpha2_7PuaG9ZXxy1JWYdVfG8yLxqVs5wtMdWUmZx3V6W7za9q_wj9kF6GJkKaVh83K8PfdsmkUCOVj_3iccGTMFzuDd4iawJQCpMmusA7J7fAZYVjoqvNo6XENcKeiJufLvX8nKdwb8KRN0unjepS26SdNqPa4JL_DZ3pwQs9VzwUUAckmQRU3ulpTUh7DWpxoYWjI7vL1wa7JdavHQCGprK1tHzjDCT5ELkP3RsaFsjcl3iVal9Ak76w7gSHVFW2svpB50bEc-rKH8uoL7MZJMI3TlLgqSGV_0YzExzww"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/patronrequests/my",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"patronrequests",
+						"my"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -988,28 +1149,29 @@
 	],
 	"variable": [
 		{
-			"id": "edf62756-19e1-47b8-918d-6ad6b895e10a",
+			"id": "565c0830-c6a7-45dc-9713-1a18060f5cc0",
 			"key": "url",
-			"value": "http://api.nilde.local/api/v1/",
-			"type": "string"
+			"value": "http://api.nilde.local/api/v1/"
 		},
 		{
-			"id": "9e024cc2-926e-402d-a52c-77c3e057a2ff",
+			"id": "0831633e-644d-40d3-ad22-5ba3660ab946",
 			"key": "urlbase",
-			"value": "http://api.nilde.local",
-			"type": "string"
+			"value": "http://api.nilde.local"
 		},
 		{
-			"id": "36100d14-202c-40f4-8d6d-e6f85efe97df",
+			"id": "4fb9563c-4bf1-4a5c-92d2-6427991b7955",
 			"key": "bearer_admin",
-			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImExYjEyZmU4M2IwZmNjYjI4ZDJmY2Q3ZDkwZWQxZWE2ZTRhZDBmYzNhMmMwZmQyZTA1ODI3YzQ3ODNjNTdhNWJmMzE5MGVhMjU0ZjMwYmY1In0.eyJhdWQiOiIxIiwianRpIjoiYTFiMTJmZTgzYjBmY2NiMjhkMmZjZDdkOTBlZDFlYTZlNGFkMGZjM2EyYzBmZDJlMDU4MjdjNDc4M2M1N2E1YmYzMTkwZWEyNTRmMzBiZjUiLCJpYXQiOjE1NjA1MDIzMDksIm5iZiI6MTU2MDUwMjMwOSwiZXhwIjoxNTYwNTg4NzA5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.PJ5hheq3c3aZY4O-lb1edWqrSno5gUrqq4-9RL3UqpqnsSTCv4ArZiPyRFCURRMv-P_voAONkEOOm0Yhox0CGlmR9NIsUDipZ7UJJHQcfkdmTNz9nGoJFVyHdNq3jrGTijQMplIjCdH8RzFWj6JMkbQkPMcl-8Co1oioIY4Ew-yaLYqhj2g95ZKjFg7VDchScFxsp0iqKp0L1Y65rEngrBW4SG_c79PBVa7R1nR0RkGtE2uMtYBva9EKJAEB9S4pPCZve874zdBtQhTOS1dyh5PIR2cDrqGLNSJyUxOt_Q5euRcpCHs8zu703WZkfOqNVPxIMX8IKlBPDWZuKMsIeU6TWe4OPIjvi3I0fvgIqQYe-8dY0t5ynTw574XHxI9CSPLB6LoEhPzC465BJDe7sGLznS8Xrc1xz5j5JeDZsx78eurWx17dlDaMZUj-31iTL1V7xJSZU7QZWBoEKs4bUyRofPZnSaAQ9YYG6edGInDnHW9eV4vnf5sbYsrSHKZM61xu5YiACiaY_H1An0bXipZDniVvcfdqFubq83fENJgds7_Ay8XTk_JatoWjvpAHGmZO7k0obr49Tr_ZjD6o2_o7LEszZ0cAjGUhi5wHqLo71tgHVBdYak3pYehbcvFPa3oYA6Ci2eHTsT2FHAnruMbOaVZh4wpObwRxPmdnKzk",
-			"type": "string"
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImExYjEyZmU4M2IwZmNjYjI4ZDJmY2Q3ZDkwZWQxZWE2ZTRhZDBmYzNhMmMwZmQyZTA1ODI3YzQ3ODNjNTdhNWJmMzE5MGVhMjU0ZjMwYmY1In0.eyJhdWQiOiIxIiwianRpIjoiYTFiMTJmZTgzYjBmY2NiMjhkMmZjZDdkOTBlZDFlYTZlNGFkMGZjM2EyYzBmZDJlMDU4MjdjNDc4M2M1N2E1YmYzMTkwZWEyNTRmMzBiZjUiLCJpYXQiOjE1NjA1MDIzMDksIm5iZiI6MTU2MDUwMjMwOSwiZXhwIjoxNTYwNTg4NzA5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.PJ5hheq3c3aZY4O-lb1edWqrSno5gUrqq4-9RL3UqpqnsSTCv4ArZiPyRFCURRMv-P_voAONkEOOm0Yhox0CGlmR9NIsUDipZ7UJJHQcfkdmTNz9nGoJFVyHdNq3jrGTijQMplIjCdH8RzFWj6JMkbQkPMcl-8Co1oioIY4Ew-yaLYqhj2g95ZKjFg7VDchScFxsp0iqKp0L1Y65rEngrBW4SG_c79PBVa7R1nR0RkGtE2uMtYBva9EKJAEB9S4pPCZve874zdBtQhTOS1dyh5PIR2cDrqGLNSJyUxOt_Q5euRcpCHs8zu703WZkfOqNVPxIMX8IKlBPDWZuKMsIeU6TWe4OPIjvi3I0fvgIqQYe-8dY0t5ynTw574XHxI9CSPLB6LoEhPzC465BJDe7sGLznS8Xrc1xz5j5JeDZsx78eurWx17dlDaMZUj-31iTL1V7xJSZU7QZWBoEKs4bUyRofPZnSaAQ9YYG6edGInDnHW9eV4vnf5sbYsrSHKZM61xu5YiACiaY_H1An0bXipZDniVvcfdqFubq83fENJgds7_Ay8XTk_JatoWjvpAHGmZO7k0obr49Tr_ZjD6o2_o7LEszZ0cAjGUhi5wHqLo71tgHVBdYak3pYehbcvFPa3oYA6Ci2eHTsT2FHAnruMbOaVZh4wpObwRxPmdnKzk"
 		},
 		{
-			"id": "a42781b5-6203-41f4-9208-ab34c082d0cd",
+			"id": "426e5395-fc2a-4136-b1e6-b7573e7cb843",
 			"key": "bearer",
-			"value": "",
-			"type": "string"
+			"value": ""
+		},
+		{
+			"id": "f0355307-f002-4568-9d3f-434cddda6759",
+			"key": "bearer2",
+			"value": ""
 		}
 	],
 	"protocolProfileBehavior": []
