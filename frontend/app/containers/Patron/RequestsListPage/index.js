@@ -13,6 +13,7 @@ import confirm from "reactstrap-confirm";
 const RequestsListPage = (props) => {
     console.log('RequestsListPage', props)
     const {dispatch, isLoading, match, patron, history} = props
+    const archive=props.match.path.includes("archive")?1:0;
     const requestsList = patron.requestsList.data
     const pagination = patron.requestsList.pagination
     const intl = useIntl()
@@ -21,7 +22,7 @@ const RequestsListPage = (props) => {
 
     useEffect(() => {
         if(!isLoading) {
-            dispatch(requestRequestsList())
+            dispatch(requestRequestsList(null,null,{archived: archive}))
             dispatch(requestLabelsOptionList())
             dispatch(requestGroupsOptionList())
         }
@@ -74,7 +75,7 @@ const RequestsListPage = (props) => {
                 searchOptions={{
                     getSearchList: (page, pageSize, searchFilter ) => {
                         history.push(match.path)
-                        dispatch(requestRequestsList(page, pageSize, searchFilter))
+                        dispatch(requestRequestsList(page, pageSize, {...searchFilter,archived:archive}))
                     },
                     searchOnChange: true
                 }}
