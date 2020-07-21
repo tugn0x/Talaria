@@ -31,8 +31,8 @@ const FilterSelect = props => {
 
     return (
         <>
-           { console.log('props.options', props.options)}
-           { console.log('data', data)}
+           {/* console.log('props.options', props.options) */}
+           {/* console.log('data', data)*/}
         <UncontrolledDropdown className={`filter-select ${type}`} direction="down">
             <DropdownToggle className="d-flex justify-content-between align-items-center">
                 <span>{intl.formatMessage(messages[type])}</span>
