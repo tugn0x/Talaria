@@ -19,7 +19,7 @@ const RequestsList = (props) => {
     /*  const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal); */
 
-    const [selectedRequests, setSelectedReferences] = useState([]);
+    const [selectedRequests, setSelectedRequests] = useState([]);
     const [disableToolbar,setDisableToolbar]=useState(false);
     const [disableCancelFilter,setDisableCancelFilter]=useState(true);
 
@@ -83,14 +83,12 @@ const RequestsList = (props) => {
     
     const toggleAllCheckbox = (e) => {
         const chk=e.target.checked
-        setSelectedReferences( chk ? [...data.map(rif => rif.id )] : [])
+        setSelectedRequests( chk ? [...data.map(rif => rif.id )] : [])
     }
 
-    const toggleReference = (id) => {
-        setSelectedReferences(state => ( handleIds([...state], id)))
+    const toggleRequests = (id) => {
+        setSelectedRequests(state => ( handleIds([...state], id)))
     }
-
-    var disableToolbarClass = disableToolbar? 'disabled':'';
 
     return (
         mounted &&

@@ -1,0 +1,15 @@
+@import '../../../scss/variables';
+
+.detail.request {
+    .header {
+        display: flex;
+        align-items: center;   
+        margin: 10px 0 10px 0; 
+    }
+    .title-section {
+        flex: 1;
+    }
+    .card-body {
+        padding: 6.7rem;
+    }
+}

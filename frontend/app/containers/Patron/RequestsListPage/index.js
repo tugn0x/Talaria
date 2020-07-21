@@ -5,7 +5,6 @@ import { requestRequestsList,requestLabelsOptionList,requestGroupsOptionList,req
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-//import RequestsPage from '../RequestsPage';
 import RequestsList from 'components/Patron/RequestsList';
 import messages from './messages'
 import confirm from "reactstrap-confirm";
@@ -79,12 +78,11 @@ const RequestsListPage = (props) => {
                     },
                     searchOnChange: true
                 }}
-                editPath={'/patron/requests/request/:id?/:edit?'}
+                editPath={'/patron/requests/:id?/:edit?'}
                 removeLabelFromReference={removeLabelFromReference}
                 removeGroupFromReference={removeGroupFromReference}
                 applyLabels={applyLabelsToReferences}
                 applyGroups={applyGroupsToReferences}
-                // modalComponent={ <ReferencesPage match={match} />}
             />
           </>  
     )

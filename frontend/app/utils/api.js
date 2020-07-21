@@ -319,6 +319,11 @@ export const getRequestsList = (options) => {
   return request(`${BASE_URL}/api/v1/patronrequests/my?page=${page}${qstringpar}`, options)
 };
 
+export const getPatronRequest = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/patronrequests/${options.id}`, options)
+};
+
 
 // ---------- LIBRARY ---------- //
 export const getLibraryUsersList = (options) => {

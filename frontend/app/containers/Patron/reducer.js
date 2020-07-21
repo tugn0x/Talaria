@@ -10,6 +10,7 @@ import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_UPDATE_ACCESS_TO_LIBRARIES,
   REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS,
   REQUEST_REQUESTS_LIST, REQUEST_REQUESTS_LIST_SUCCESS,
+  REQUEST_GET_REQUEST, REQUEST_GET_REQUEST_SUCCESS,
   REQUEST_POST_REFERENCES, REQUEST_SUCCESS,
   REQUEST_UPDATE_REFERENCES, REQUEST_GET_REFERENCE, REQUEST_GET_REFERENCE_SUCCESS,
   REQUEST_GET_MY_LIBRARY, REQUEST_GET_MY_LIBRARY_SUCCESS,
@@ -41,7 +42,8 @@ export const initialState = {
     data: [],
     pagination: [],
   },
-  reference: {}
+  reference: {},
+  patronrequest: {}
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -57,7 +59,7 @@ const PatronReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = initialState.error;
         draft.reference = action.result.data;
-        break;
+        break;  
       case REQUEST_UPDATE_REFERENCES:
         draft.loading = true;
       break;
@@ -81,7 +83,15 @@ const PatronReducer = (state = initialState, action) =>
         draft.error = initialState.error;
         draft.requestsList.data = action.result.data;
         draft.requestsList.pagination = action.result.meta.pagination
-        break;  
+        break; 
+      case REQUEST_GET_REQUEST:
+          draft.loading = true;
+          break;
+      case REQUEST_GET_REQUEST_SUCCESS:
+          draft.loading = false;
+          draft.error = initialState.error;
+          draft.patronrequest = action.result.data;
+          break;   
       case REQUEST_GET_MY_LIBRARY:
         draft.loading = true;
         break;
