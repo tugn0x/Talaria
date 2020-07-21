@@ -23,7 +23,7 @@ function ResourceMenu(props) {
       
       default: cl='';
     }
-    cl+=" float-left"; /*icon-img*/
+    cl+=" resource-icon float-left"; 
     return cl;
   }
 
