@@ -21,8 +21,7 @@ CustomCheckBox.propTypes = {
     handleChange: PropTypes.func.isRequired,
     label: PropTypes.string,
     checked: PropTypes.bool,
-   // id: PropTypes.string || PropTypes.number,
-   // value: PropTypes.string || PropTypes.number,
+  
 };
 
 export default CustomCheckBox;

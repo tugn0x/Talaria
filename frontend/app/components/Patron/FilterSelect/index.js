@@ -47,7 +47,7 @@ const FilterSelect = props => {
                         <CustomCheckBox 
                             label={item.label}
                             handleChange={() => submitCallBack(item.value)}
-                            checked={selectedIds.includes(item.value) ? true : false}
+                            checked={selectedIds.includes(item.value)}
                         />
                     </div>
                 ))}

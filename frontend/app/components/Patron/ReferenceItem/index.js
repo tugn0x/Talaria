@@ -55,7 +55,6 @@ const ReferenceItem = (props) => {
     return ( 
         <Row className="list-row justify-content-between">
             <Col sm={2} className="select-checkbox">
-                {console.log(checked)}
                 <CustomCheckBox 
                     handleChange={toggleSelection}
                     checked={checked}

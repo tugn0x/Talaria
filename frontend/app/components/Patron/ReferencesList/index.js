@@ -109,15 +109,6 @@ const ReferencesList = (props) => {
         mounted &&
         <>
             <h1 className="section-title large"><FormattedMessage {...messages.header} /></h1>
-            {/* <ButtonPlus
-                onClickHandle={toggle}
-                text={intl.formatMessage(messages.createNewReference)}
-            /> */}
-            {console.log('selectedReferences',selectedReferences)}
-            {console.log('selectedReferences',selectedReferences)}
-            {console.log('selectedReferences',selectedReferences)}
-            {console.log('selectedReferences',selectedReferences)}
-            {console.log('selectedReferences',selectedReferences)}
             <div className="search-filter-bar">
                 <Row>
                     <Col sm={4}>
