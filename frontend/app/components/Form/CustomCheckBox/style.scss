@@ -1,0 +1,65 @@
+@import '../../../scss/variables';
+
+.checkbox-input {
+    display: inline-flex;
+    /* justify-content: flex-start; */
+    position: relative;
+    align-items: center;
+    margin-bottom: 2px;
+    cursor: pointer;
+    font-size: 1rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    .label {
+        margin: 0;
+        padding-left: 1rem;
+        line-height: 1;
+    }
+    input[type=checkbox] {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+        &:checked {
+            ~ .checkmark {
+                background-color: $form-text;
+                &:after {
+                    display: block;
+                }
+            }
+        }
+    }
+    .checkmark {
+        /* position: absolute;
+        top: 2px;
+        left: 0; */
+        position: relative;
+        height: 15px;
+        width: 15px;
+        padding: 0 6px;
+        border: 1px solid #95989A;
+        border-radius: 4px;
+        background-color: transparent;
+        &:after {
+            content: "";
+            position: absolute;
+            display: none;
+            border: solid white;
+            border-width: 0 2px 3px 0;
+            left: 4px;
+            top: 1px;
+            width: 5px;
+            height: 8px;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+    }
+    &:hover input ~ .checkmark {
+        background-color: #ccc;
+    } 
+     
+}

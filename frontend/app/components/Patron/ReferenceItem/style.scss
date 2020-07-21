@@ -12,51 +12,28 @@
             font-style: italic;
         }
         .authors {
-            padding-bottom: 12px;
             > span
             {
                 font-weight: bold;
                 padding-right: 10px;
+                span
+                {
+                    font-weight: normal;
+                    padding-right: 0px;
+                }
             }
-            span
-            {
-                font-weight: normal;
-                padding-right: 0px;
-            }
+            
         } 
         
+        
     }
-     
-    .icons {
-        padding-right: 0;
-        i {
-            font-size:1.5em;
-            color: $orange;
-        }
-    }    
     
-    
-    .labels span {
-        color: #9D67A3;
-        padding: 0 12px 0 0;
-
-        i.fa {
-            cursor: pointer;
-        }
-    }
-    .groups span {
-        color: #73A6CC;
-        padding: 0 12px 0 0;
-
-        i.fa {
-            cursor: pointer;
-        }
-    }
+   
 
     .select-checkbox {
         i {
             font-size: 1.5rem;
-            padding-left: 20px;
+            padding-left: 18px;
         }
     }
     p {

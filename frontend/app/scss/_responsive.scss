@@ -1,6 +1,6 @@
 @include media-breakpoint-down(lg) {
     .app-body {
-        margin-top: 95px;
+        margin-top: 90px;
     }
     .app-header { 
         z-index: 1030;
@@ -31,18 +31,27 @@
     .main .login-form .card {
         padding: 0
     }
-  
+    
 }
 
 @include media-breakpoint-down(sm) { 
+    .app-body {
+        .main {
+            > .container {
+                margin-top: 1.428rem;
+                > .row > div[class*=col-] {
+                    padding-top: 0;
+                }
+            }
+        }
+    }
+    .section-title.large {
+        font-size: 1.2857rem;
+        position: static;
+        margin-bottom: 1.428rem;
+    }
     .container {
         max-width: 660px
-    }
-    .navbar-brand {
-        > img {
-          // right: 0;
-          //  margin: 0 auto
-        }
     }
     .dropdown-menu { 
         max-width: calc(100vw - 40px);
@@ -59,6 +68,24 @@
             }
         }
     }
+    .search-filter-bar .activeFilters {
+        .filtersList {
+            margin-top: 0;
+        }
+    }
+    .list-head {
+        margin-top: 1rem;
+    }
+    
+    .search-filter-bar {
+        div[class*=col-] {
+            margin-bottom: 1.714rem;
+            &:last-child {
+                text-align: center;  
+                margin: 0;  
+            }
+        }
+    }
 }
 
 @include media-breakpoint-down(xs) {
@@ -68,6 +95,12 @@
     .users-permissions-list {
         .custom-control {
             padding-left: 2.5rem
+        }
+    }
+    .list-body {
+        .info {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
         }
     }
 }

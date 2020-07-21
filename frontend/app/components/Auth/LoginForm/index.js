@@ -119,17 +119,17 @@ import './style.scss'
                     </Form>
                   </CardBody>
                   <SocialAuth loginFacebook={props.loginFacebook} loginGoogle={props.loginGoogle}/>
-                  <Link className="linkButton" to="/signup">
-                    <Button
+                  <NavLink className="btn-cta" to="/signup">
+                    {/* <Button
                       color="brown"
                       className="signUpButton"
                       active
                       tabIndex={-1}
                       onClick={() => linkTo("signup")}
-                    >
+                    > */}
                       <FormattedMessage {...messages.signUpButton} />
-                    </Button>
-                  </Link>
+                    {/* </Button> */}
+                  </NavLink>
                 </Card>
                 {/* <Card className="text-white bg-primary py-5 d-md-down-none">
                   <CardBody className="text-center">

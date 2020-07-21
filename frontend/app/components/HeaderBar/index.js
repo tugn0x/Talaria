@@ -47,16 +47,20 @@ function HeaderBar(props) {
   return (
 
     <>
-      <header className="app-header navbar bg-grey-light px-4">
+      <header className="app-header navbar bg-grey-white px-4">
       <div className="container">
         <div className="header-container row">
           <div className="header-left-col">
             { isLogged && headermenu && isMobile &&
               currentRoute && currentRoute[0].children.length > 0 &&
-              <AppSidebarToggler  display="xs"/>
+              <AppSidebarToggler display="xs">
+                <span></span>
+                <span></span>
+                <span></span>
+              </AppSidebarToggler>
             }
             <AppNavbarBrand
-              full={{ src: logo, width: 89, height: 25, alt: 'Nilde Logo' }}
+              full={{ src: logo, alt: 'Nilde Logo' }}
               minimized={{ src: logomini, width: 30, height: 30, alt: 'Nilde Logo' }}
               href={'/'}
               className="col-md-7"

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {UncontrolledDropdown, Button, DropdownToggle, DropdownMenu, DropdownItem, InputGroup, InputGroupAddon, Input} from 'reactstrap'
 import messages from 'containers/Patron/ReferencesListPage/messages'
 import {useIntl} from 'react-intl';
+import CustomCheckBox from 'components/Form/CustomCheckBox';
 import './style.scss';
 
 const ApplyReferencesTag = props => {
@@ -32,7 +33,7 @@ const ApplyReferencesTag = props => {
             <DropdownToggle color="icon" disabled={disabled}>
                 {type === 'label' ? <i className="icon-tag-plus"></i> :  <i className="fas fa-folder-plus"></i>}
             </DropdownToggle>
-            <DropdownMenu center="true">
+            <DropdownMenu center="true" className="rounded">
                 <DropdownItem header>
                     {type === 'label' ? 
                         <p>{intl.formatMessage(messages.labelAs)}</p>
@@ -42,8 +43,16 @@ const ApplyReferencesTag = props => {
                 </DropdownItem>
                 {data.length > 0 && data.map(item => (
                     <div className="apply-item" key={`apply-${type}-${item.label.toLowerCase()}`}>
-                        <input id={`apply-${type}-${item.label.toLowerCase()}`} type="checkbox" onChange={() => submitCallBack(item.value)}  /* checked={selectedIds.includes(item.value) ? true : false} */  />
-                        <label htmlFor={`apply-${type}-${item.label.toLowerCase()}`}>{item.label}</label>
+                        {/*     <input 
+                                id={`apply-${type}-${item.label.toLowerCase()}`} 
+                                type="checkbox" 
+                                onChange={() => submitCallBack(item.value)}  
+                            />
+                            <label htmlFor={`apply-${type}-${item.label.toLowerCase()}`}>{item.label}</label> */}
+                        <CustomCheckBox 
+                            handleChange={() => submitCallBack(item.value)}
+                            label={item.label}
+                        />
                     </div>
                 ))}
                 {query.length > 0 &&

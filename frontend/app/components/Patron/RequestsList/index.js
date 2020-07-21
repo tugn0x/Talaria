@@ -98,7 +98,7 @@ const RequestsList = (props) => {
             <h1 className="section-title large"><FormattedMessage {...messages.header} /></h1>
             <div className="search-filter-bar">
                 <Row>
-                    <Col md={4}>
+                    <Col sm={4}>
                         {searchOptions &&
                             <InputSearch
                                 submitCallBack={(query) => { 
@@ -114,7 +114,7 @@ const RequestsList = (props) => {
                             />
                         }
                     </Col>
-                    <Col md={3}>
+                    <Col sm={3}>
                         <FilterSelect 
                             type={"groups"} 
                             options={groupsOptionList} 
@@ -125,7 +125,7 @@ const RequestsList = (props) => {
                                 groupIds:handleIds(state.groupIds, groupId)
                             }) ) } /> 
                     </Col>
-                    <Col md={3}>
+                    <Col sm={3}>
                         <FilterSelect 
                                 type={"labels"} 
                                 options={labelsOptionList} 
@@ -136,7 +136,7 @@ const RequestsList = (props) => {
                                     groupIds: state.groupIds
                         }) ) } /> 
                     </Col>
-                    <Col md={2}>{!disableCancelFilter && <a href="#" onClick={handleCancelFilter} className="btn btn-link active"><FormattedMessage {...messages.ResetAll} /></a> }</Col>
+                    <Col sm={2}>{!disableCancelFilter && <a href="#" onClick={handleCancelFilter} className="btn btn-link active"><FormattedMessage {...messages.ResetAll} /></a> }</Col>
                 </Row>
                 <Row>
                     <Col md={12} className="activeFilters">

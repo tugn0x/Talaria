@@ -14,6 +14,7 @@ import {useIntl} from 'react-intl';
 import ReferenceItem from '../ReferenceItem';
 import FilterSelect from '../FilterSelect';
 import ApplyReferencesTag from '../ApplyReferencesTag';
+import CustomCheckBox from 'components/Form/CustomCheckBox';
 
 import './style.scss';
 
@@ -112,9 +113,14 @@ const ReferencesList = (props) => {
                 onClickHandle={toggle}
                 text={intl.formatMessage(messages.createNewReference)}
             /> */}
+            {console.log('selectedReferences',selectedReferences)}
+            {console.log('selectedReferences',selectedReferences)}
+            {console.log('selectedReferences',selectedReferences)}
+            {console.log('selectedReferences',selectedReferences)}
+            {console.log('selectedReferences',selectedReferences)}
             <div className="search-filter-bar">
                 <Row>
-                    <Col md={4}>
+                    <Col sm={4}>
                         {searchOptions &&
                             <InputSearch
                                 submitCallBack={(query) => { 
@@ -130,7 +136,7 @@ const ReferencesList = (props) => {
                             />
                         }
                     </Col>
-                    <Col md={3}>
+                    <Col sm={3}>
                         <FilterSelect 
                             type={"groups"} 
                             options={groupsOptionList} 
@@ -141,7 +147,7 @@ const ReferencesList = (props) => {
                                 groupIds:handleIds(state.groupIds, groupId)
                             }) ) } /> 
                     </Col>
-                    <Col md={3}>
+                    <Col sm={3}>
                         <FilterSelect 
                                 type={"labels"} 
                                 options={labelsOptionList} 
@@ -152,7 +158,7 @@ const ReferencesList = (props) => {
                                     groupIds: state.groupIds
                         }) ) } /> 
                     </Col>
-                    <Col md={2}>{!disableCancelFilter && <a href="#" onClick={handleCancelFilter} className="btn btn-link active"><FormattedMessage {...messages.ResetAll} /></a> }</Col>
+                    <Col sm={2}>{!disableCancelFilter && <a href="#" onClick={handleCancelFilter} className="btn btn-link active"><FormattedMessage {...messages.ResetAll} /></a> }</Col>
                 </Row>
                 <Row>
                     <Col md={12} className="activeFilters">
@@ -180,8 +186,8 @@ const ReferencesList = (props) => {
                 <Row className="list-head">
                     <div className="select-checkbox">
                         <div className="features-icons" >
-                            <input type="checkbox" onChange={(e)=>toggleAllCheckbox(e)}/>
-                            {<Button disabled={disableToolbar} color="icon">
+                            <CustomCheckBox handleChange={(e)=>toggleAllCheckbox(e)} />
+                            {<Button disabled={disableToolbar} color="icon" className="ml-2">
                                 <i className="fas fa-print"></i>
                             </Button>}
                             {<Button disabled={disableToolbar} color="icon">
@@ -199,11 +205,6 @@ const ReferencesList = (props) => {
                                 submitCallBack={(ids) => applyGroups(ids, selectedReferences)}
                                 options={groupsOptionList} 
                             />
-                            
-                            {/* <NavLink to="#" onClick={applyGroups} className="btn btn-link">
-                                <i className="fas fa-folder-plus"></i>
-                            </NavLink> */}
-                            
                         </div>
                     </div>
                     <div className="select-counter">
@@ -234,12 +235,6 @@ const ReferencesList = (props) => {
                     </div>
                 </Loader>
             </div>
-           {/*  <CustomModal
-                modal={modal}
-                toggle={toggle}>
-                <ReferencesPage
-                    match={match} />
-            </CustomModal> */}
             {Object.keys(pagination).length &&
                 <Pagination
                     total={total}

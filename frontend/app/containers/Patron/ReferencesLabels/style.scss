@@ -10,21 +10,6 @@
     input[name=tag-add] {
         width: 80%;
     }
-    .list-row {
-        .btn {
-            width: 40px;
-            height: 40px;
-            margin: 0;
-            border-radius: 20px;
-            &:hover,&:active, &:focus {
-                text-decoration: none;
-            }
-            &.active, &:active {
-                background: $dark-bk;
-            }
-        }
-        
-    }
     .info {
         height: 40px;
         display: table;
