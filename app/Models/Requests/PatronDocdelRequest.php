@@ -88,7 +88,7 @@ class PatronDocdelRequest extends BaseModel
         return $query->where('reference_id', $reference_id);
     }
 
-    public function scopeIsArchived($query, $archived)
+    public function scopeArchived($query, $archived)
     {
         return $query->where('archived','=',$archived);
     }
