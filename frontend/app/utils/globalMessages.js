@@ -168,5 +168,13 @@ export default defineMessages({
   label: {
     id: `${scope}.label`,
     defaultMessage: "Label",
-  } 
+  } ,
+  yes:{
+    id: `${scope}.yes`,
+    defaultMessage: 'Yes',
+  },
+  no:{
+    id: `${scope}.no`,
+    defaultMessage: 'No',
+  },
 });
