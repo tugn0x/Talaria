@@ -37,7 +37,7 @@ const RequestItem = (props) => {
     }
 
     const canDelete = (data) => {
-        if(data.status_key!="canceled") return true;
+        if(! (data.status_key=="canceled" || data.status_key=="received"|| data.status_key=="fileReceived" || data.status_key=="notReceived" ) ) return true;
         return false;
     }
 
