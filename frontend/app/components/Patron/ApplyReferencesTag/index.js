@@ -43,12 +43,6 @@ const ApplyReferencesTag = props => {
                 </DropdownItem>
                 {data.length > 0 && data.map(item => (
                     <div className="apply-item" key={`apply-${type}-${item.label.toLowerCase()}`}>
-                        {/*     <input 
-                                id={`apply-${type}-${item.label.toLowerCase()}`} 
-                                type="checkbox" 
-                                onChange={() => submitCallBack(item.value)}  
-                            />
-                            <label htmlFor={`apply-${type}-${item.label.toLowerCase()}`}>{item.label}</label> */}
                         <CustomCheckBox 
                             handleChange={() => submitCallBack(item.value)}
                             label={item.label}
@@ -57,7 +51,7 @@ const ApplyReferencesTag = props => {
                 ))}
                 {query.length > 0 &&
                 <div className="create-new">
-                    <span>{query}</span>
+                    <span>"{query}"</span>
                     <span className="action-btn" onClick={() => submitCallBack(query)}>{intl.formatMessage(messages.createNewLabel)}</span>
                 </div>
                 }

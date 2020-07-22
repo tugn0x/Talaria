@@ -95,8 +95,16 @@ $theme-colors: (
   "active": $active,
   "white": $main-menu,
   "dark-bk": $dark-bk,
-  "dark-text": $dark-text
+  "dark-text": $dark-text,
+  "alternative": $alternative-text
 );
+
+/* Biblioteca  = fas fa-landmark
+Progetti = fas  fa-project-diagram
+Patron = fas fa-book-reader
+Enti= fas fa-building
+Administrator= fas fa-cog */
+
 /*
 $libraries_icon: '../images/libraries.svg';
 $institutions_icon: '../images/institutions.svg';

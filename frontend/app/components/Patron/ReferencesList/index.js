@@ -111,7 +111,7 @@ const ReferencesList = (props) => {
             <h1 className="section-title large"><FormattedMessage {...messages.header} /></h1>
             <div className="search-filter-bar">
                 <Row>
-                    <Col sm={4}>
+                    <Col md={4} sm={12}>
                         {searchOptions &&
                             <InputSearch
                                 submitCallBack={(query) => { 
@@ -127,7 +127,7 @@ const ReferencesList = (props) => {
                             />
                         }
                     </Col>
-                    <Col sm={3}>
+                    <Col md={3} sm={5}>
                         <FilterSelect 
                             type={"groups"} 
                             options={groupsOptionList} 
@@ -138,7 +138,7 @@ const ReferencesList = (props) => {
                                 groupIds:handleIds(state.groupIds, groupId)
                             }) ) } /> 
                     </Col>
-                    <Col sm={3}>
+                    <Col md={3} sm={5}>
                         <FilterSelect 
                                 type={"labels"} 
                                 options={labelsOptionList} 

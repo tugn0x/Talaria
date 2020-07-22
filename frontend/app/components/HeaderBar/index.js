@@ -21,6 +21,7 @@ import ResourceMenu from "./ResourcesMenu";
 import subStringer from 'utils/subStringer'
 import {checkRole} from 'utils/permissions'
 import Notification from '../Notification'
+import {Col, Row} from 'reactstrap';
 
 function HeaderBar(props) {
 
@@ -92,50 +93,57 @@ function HeaderBar(props) {
                       <>
                       {checkRole(auth, "super-admin") && (
                         <div className="resources-menu">
-                          <DropdownItem header tag="div" className="text-center">
-                            <i className={`fas fa-cog resource-icon float-left`}></i>
-                            <FormattedMessage {...messages.admin} />
-                          </DropdownItem>
-                            <NavLink to={`/admin`}
-                                    className="dropdown-item btn"
-                                    activeClassName="current">
-                              Nilde Admin
-                            </NavLink>
+                          <Row className="head item">
+                              <i className={`fas fa-cog`}></i>
+                              <span><FormattedMessage {...messages.admin} /></span>
+                          </Row>
+                          <Row className="item">
+                              <NavLink to={`/admin`} activeClassName="current">
+                                Nilde Admin
+                              </NavLink>    
+                          </Row>
                         </div>
                       )}
                       {
                         <div className="resources-menu">
-                          <DropdownItem header tag="div" className="text-center">
-                          <i className={`fas fa-book-reader resource-icon float-left`}></i>
-                            <FormattedMessage {...messages.patron} />
-                          </DropdownItem>
-                            <NavLink to={`/patron`}
-                                    className="dropdown-item btn"
-                                    activeClassName="current">
-                              Patron main page
-                            </NavLink>
+                          <Row className="head item">
+                              <i className={`fas fa-book-reader`}></i>
+                              <span><FormattedMessage {...messages.patron} /></span>
+                          </Row>
+                          <Row className="item">
+                              <NavLink to={`/patron`} activeClassName="current">
+                                Patron main page
+                              </NavLink>    
+                          </Row>
                         </div>
                       }
                         {
-                          auth.permissions.resources && (<ResourceMenu resources={auth.permissions.resources}></ResourceMenu>)
+                          auth.permissions.resources && (<ResourceMenu resources={auth.permissions.resources} />)
                         }
                       <div className="account">
-                        <DropdownItem header tag="div" className="text-center">
+                        {/*<DropdownItem header tag="div" className="text-center">
                           <FormattedMessage {...messages.UserAccount} />
                         </DropdownItem>
-                        {/*<DropdownItem onClick={() => linkTo("/patron/my-libraries")}><i className="fas fa-user"></i><span>Patron</span></DropdownItem>*/}
-                          <NavLink to="/user/user-profile" className="dropdown-item btn" activeClassName="current">
-                            <i className="fas fa-user"></i>
-                            <span><FormattedMessage {...messages.Profile} /></span>
-                          </NavLink>
-                          <NavLink to="/user/change-password" className="dropdown-item btn" activeClassName="current">
-                            <i className="fas fa-lock"></i>
-                            <span><FormattedMessage {...messages.ChangePassword} /></span>
-                          </NavLink>
-                          <NavLink to="#" onClick={e => props.logout(e)} className="dropdown-item btn" activeClassName="current">
-                            <i className="fas fa-sign-out"></i>
-                            <span><FormattedMessage {...messages.Logout} /></span>
-                          </NavLink>
+                        <DropdownItem onClick={() => linkTo("/patron/my-libraries")}><i className="fas fa-user"></i><span>Patron</span></DropdownItem>*/}
+                          <Row className="head item">
+                              <i className="fas fa-user"></i>
+                              <span><FormattedMessage {...messages.Profile} /></span> 
+                          </Row>
+                          <Row className="item">
+                            <NavLink to="/user/user-profile" activeClassName="current">
+                              <span><FormattedMessage {...messages.Profile} /></span>  
+                            </NavLink>
+                          </Row>
+                          <Row className="item">
+                            <NavLink to="/user/change-password" activeClassName="current">
+                              <span><FormattedMessage {...messages.ChangePassword} /></span>
+                            </NavLink>
+                          </Row>
+                          <Row className="item">
+                            <NavLink to="#" onClick={e => props.logout(e)} activeClassName="current">
+                                <span><FormattedMessage {...messages.Logout} /></span>
+                            </NavLink>  
+                          </Row>
                         </div>
                       </>
                     )
