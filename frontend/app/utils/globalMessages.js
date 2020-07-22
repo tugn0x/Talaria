@@ -145,6 +145,10 @@ export default defineMessages({
     id: `${scope}.cancel`,
     defaultMessage: "Cancel",
   },
+  confirm:{
+    id: `${scope}.confirm`,
+    defaultMessage: 'Confirm',
+  },
   resetAll: {
     id: `${scope}.resetAll`,
     defaultMessage: "Reset all filters",
