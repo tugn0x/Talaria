@@ -9,9 +9,13 @@ const RequestDetail = props => {
     console.log('RequestDetail', props)
     const {patronrequest, messages,referenceMessages} = props
     
+
     const intl = useIntl()
     return (
         <div className="detail request">
+            {
+                Object.keys(patronrequest).length>0 && 
+            <>
             <div className="header">
                 <ButtonBack className="detail-back" />
                 <h3 className="title-section">{intl.formatMessage(messages.headerDetail)}</h3>
@@ -72,7 +76,7 @@ const RequestDetail = props => {
                         </Col>
                     </Row>
                 </CardBody>
-            </Card>
+            </Card></>}
         </div>
     );
 };
