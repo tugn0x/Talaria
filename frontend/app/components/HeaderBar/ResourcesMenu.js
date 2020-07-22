@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.scss'
-import {DropdownItem} from "reactstrap";
+import {Row} from "reactstrap";
 import messages from './messages';
 import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
@@ -23,7 +23,7 @@ function ResourceMenu(props) {
       
       default: cl='';
     }
-    cl+=" resource-icon float-left"; 
+    
     return cl;
   }
 
@@ -31,17 +31,18 @@ function ResourceMenu(props) {
   return (
     types.map((resource) => (
       <div key={resource} className="resources-menu">
-        <DropdownItem header tag="div" className="text-center">
-          <i className={`${iconType(resource)}`}></i>
-          <FormattedMessage {...messages[resource]} />
-        </DropdownItem>
+         <Row className="head item">
+            <i className={`${iconType(resource)}`}></i>
+            <span><FormattedMessage {...messages[resource]} /></span>
+        </Row>
         {resources[resource].map((item) =>
-          <NavLink to={`${resourcesMap[resource]}${item.resource.id}`}
-                   key={item.resource.id}
-                   className="dropdown-item btn"
-                   activeClassName="current">
-            {item.resource.name}
-          </NavLink>
+          <Row className="item">
+              <NavLink to={`${resourcesMap[resource]}${item.resource.id}`}
+                    key={item.resource.id}
+                    activeClassName="current">
+              {item.resource.name}
+            </NavLink>   
+          </Row>
         )}
       </div>
     ))
