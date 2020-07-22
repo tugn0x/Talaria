@@ -2,11 +2,12 @@
 
 namespace App\Models\Institutions;
 
+use App\Models\BaseModel;
 use App\Models\Country;
 use App\Traits\Model\ModelPermissionsTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class Desk extends Model
+class Desk extends BaseModel
 {
     use ModelPermissionsTrait;
     

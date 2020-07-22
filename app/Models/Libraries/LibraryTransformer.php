@@ -12,6 +12,9 @@ use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 class LibraryTransformer extends BaseTransformer
 {
+    protected $policy = [
+        'manage' => ['granted_permissions']
+    ];
 
     protected $availableIncludes = [
         'granted_permissions',

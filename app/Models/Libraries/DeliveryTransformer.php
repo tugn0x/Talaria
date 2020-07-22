@@ -2,14 +2,17 @@
 
 use App\Models\BaseLightTransformer;
 use App\Models\BaseTransformer;
+use App\Models\Institutions\DeskTransformer;
 use App\Models\Users\UserLightTransformer;
 use Illuminate\Database\Eloquent\Model;
 
 class DeliveryTransformer extends BaseTransformer
 {
+    protected $policy = [
+        'manage' => ['granted_permissions']
+    ];
 
-    //TODO Come includo l'oggetto "morphed" (che puo' essere un Desk o una Library) ?
-    //
+
     protected $availableIncludes = [
         'granted_permissions',
         'library',
@@ -30,9 +33,24 @@ class DeliveryTransformer extends BaseTransformer
         return $this->item($model, $transf);
     }
 
+    //Ritorna il trasformer corretto in base al tipo dell'oggetto "morphed" (che puo' essere un Desk o una Library) 
+    public function getPoliTransformer($deliveryable)
+    {   
+        $transformer=new BaseLightTransformer();
+        switch (get_class($deliveryable)) {
+            case 'App\Models\Libraries\Library':
+                $transformer = new LibraryTransformer();
+                break;
+            case 'App\Models\Institutions\Desk':
+                $transformer = new DeskTransformer();
+                break;
+        }
+        return $transformer;
+    }
+
     public function includeDeliveryable(Model $model)
     {
-        return $this->item($model->deliveryable, new BaseLightTransformer());
+        return $this->item($model->deliveryable, $this->getPoliTransformer($model->deliveryable));
     }
 
     public function includeUsers(Model $model)

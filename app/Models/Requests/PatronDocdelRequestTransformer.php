@@ -39,7 +39,7 @@ class PatronDocdelRequestTransformer extends BaseTransformer
     public function includeLibrary(Model $model)
     {
         if($model->library)
-            return $this->item($model->library, new BaseLightTransformer());
+            return $this->item($model->library, new LibraryTransformer());
     }
 
     public function includeLibraryLabel(Model $model)
@@ -55,7 +55,7 @@ class PatronDocdelRequestTransformer extends BaseTransformer
     public function includeDelivery(Model $model)
     {
         if($model->delivery)
-            return $this->item($model->deliery, new BaseLightTransformer());
+            return $this->item($model->delivery, new DeliveryTransformer());
     }
 
     public function includeDocdelRequests(Model $model)
