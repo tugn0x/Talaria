@@ -4,6 +4,7 @@
 use App\Models\Users\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,14 +18,19 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+    $mail=$faker->unique()->safeEmail;
+    $pw='$2y$10$ODDNBWsHlR93q64TiaJm3Orlbjc21SZAs6/W4LxkX6DTbrZ9aQ4K2'; //Hash::make('password');
+    echo "User: $mail  Pass: 'password' \n";
     return [
         'name' => $faker->name,
         'surname' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
+        'email' => $mail,
         'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'password_confirmation' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'password' =>  $pw,
+        'password_confirmation' => $pw,
         'remember_token' => Str::random(10),
         'privacy_policy_accepted' => now(),
+        'status'=>1,
+        'country_id'=>1,
     ];
 });

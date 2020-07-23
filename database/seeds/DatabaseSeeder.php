@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
          $this->call(LabelTableSeeder::class);
          $this->call(GroupTableSeeder::class);
          $this->call(ReferenceTableSeeder::class);
+         $this->call(BibliografySeeder::class);
          
          
          
