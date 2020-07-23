@@ -496,14 +496,19 @@ ul.list-inline {
     }
 }
 
-.detail .features-icons,
-.referenceList .features-icons,
-.requestList .features-icons
+.features-icons
  {
     height: 40px;
     display: inline-flex;
     align-items: center;
     width: 100%;
+    .btn-icon {
+        display: table;
+        i, span {
+            display: table-cell;
+        }
+    }
+    
     .dropdown {
         p, label {
             font-size: 1rem;

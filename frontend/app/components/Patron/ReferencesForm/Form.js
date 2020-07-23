@@ -68,15 +68,15 @@ const Form = (props) => {
                 <div className="d-flex align-items-center justify-content-center">
                     <RadioButton 
                         label={intl.formatMessage(messages.article)} 
-                        handleChange={(e) =>  e.target.checked ? handleChange("article", 'material_type_key') : null}
+                        handleChange={(e) =>  e.target.checked ? handleChange(0, 'material_type') : null}
                     />
                     <RadioButton 
                         label={intl.formatMessage(messages.book)} 
-                        handleChange={(e) =>  e.target.checked ? handleChange("book", 'material_type_key') : null}
+                        handleChange={(e) =>  e.target.checked ? handleChange(1, 'material_type') : null}
                     />
                     <RadioButton 
                         label={intl.formatMessage(messages.texts)} 
-                        handleChange={(e) =>  e.target.checked ? handleChange("texts", 'material_type_key') : null}
+                        handleChange={(e) =>  e.target.checked ? handleChange(2, 'material_type') : null}
                     />
                 </div>
                 <h3 className="mt-4">{intl.formatMessage(messages.titleAuthorsHead)}</h3>
