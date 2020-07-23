@@ -116,7 +116,7 @@ button[type=button] {
 }
 
 #app {
-    background-color: $light;
+    background-color: $light-bk;
     min-height: 100%;
     min-width: 100%;
     display: flex;
@@ -160,8 +160,9 @@ button[type=button] {
 .btn-cta {
     display: inline-block;
     color:#fff;
-    padding: 15px 30px;
+    padding: 8px 30px;
     font-weight:normal;
+    font-size: 1.428rem;
     text-shadow: none;
     text-decoration:none;
     background: $active;
@@ -196,9 +197,24 @@ form {
             border: 1px solid #4dbd74;
         }
     }
+    label {
+        color: $alternative-text;
+    }
+    h3 {
+        font-weight: normal;
+        text-align: center;
+    }
+    .card {
+        margin-bottom: 3rem;
+
+    }
+    button[type=submit].btn-cta {
+        display: table;
+        margin: 5rem auto 0 auto;
+    }
 }
 
-input[type=text] {
+input[type=text], textarea {
     padding: 9px;
     color: $form-text;
     font-size: $font-size-normal;
@@ -207,6 +223,10 @@ input[type=text] {
     border: 1px solid $dark-bk;
 }
 
+
+textarea {
+    max-height: 86px;
+}
 
 .active {
     color: $active;
@@ -225,6 +245,8 @@ ul.list-inline {
 .card {
     border-radius: 4px;
     border-color: $grey-light;
+    background-color: $box-color;
+    padding: 1.5rem 6.785rem;
 }
 
 /* .table {

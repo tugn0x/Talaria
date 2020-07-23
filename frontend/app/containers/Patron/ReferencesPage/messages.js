@@ -10,7 +10,7 @@ export const scope = 'app.containers.ReferencePage';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'References form',
+    defaultMessage: 'Enter a new reference',
   },
   headerDetail: {
     id: `${scope}.headerDetail`,
@@ -30,7 +30,7 @@ export default defineMessages({
   },
   pubyear: {
     id: `${scope}.pubyear`,
-    defaultMessage: 'Pubblication year',
+    defaultMessage: 'Year',
   },
   page_start: {
     id: `${scope}.page_start`,
@@ -43,6 +43,10 @@ export default defineMessages({
   abstract: {
     id: `${scope}.abstract`,
     defaultMessage: 'Abstract',
+  },
+  note: {
+    id: `${scope}.note`,
+    defaultMessage: 'Note',
   },
   pub_title: {
     id: `${scope}.pub_title`,
@@ -70,11 +74,11 @@ export default defineMessages({
   },
   doi: {
     id: `${scope}.doi`,
-    defaultMessage: 'Doi',
+    defaultMessage: 'DOI',
   },
   issn: {
     id: `${scope}.issn`,
-    defaultMessage: 'Issn',
+    defaultMessage: 'ISSN',
   },
   publisher: {
     id: `${scope}.publisher`,
@@ -90,11 +94,11 @@ export default defineMessages({
   },
   sid: {
     id: `${scope}.sid`,
-    defaultMessage: 'Sid',
+    defaultMessage: 'SID',
   },
   pmid: {
     id: `${scope}.pmid`,
-    defaultMessage: 'Pmid',
+    defaultMessage: 'PMID',
   },
   updateSubmitText: {
     id: `${scope}.updateSubmitText`,
@@ -103,5 +107,41 @@ export default defineMessages({
   createSubmitText: {
     id: `${scope}.createSubmitText`,
     defaultMessage: 'Create Reference',
+  },
+  texts: {
+    id: `${scope}.texts`,
+    defaultMessage: 'Texts',
+  },
+  article: {
+    id: `${scope}.article`,
+    defaultMessage: 'Article',
+  },
+  book: {
+    id: `${scope}.book`,
+    defaultMessage: 'Book',
+  },
+  titleAuthorsHead: {
+    id: `${scope}.titleAuthorsHead`,
+    defaultMessage: 'Title and authors',
+  },
+  journalLabel: {
+    id: `${scope}.journalLabel`,
+    defaultMessage: 'Journal title',
+  },
+  articleLabel: {
+    id: `${scope}.articleLabel`,
+    defaultMessage: 'Article title',
+  },
+  authorsLabel: {
+    id: `${scope}.authorsLabel`,
+    defaultMessage: 'Authors(s)',
+  },
+  dateInstitutionPlaceHead: {
+    id: `${scope}.dateInstitutionPlaceHead`,
+    defaultMessage: 'Date institution and place',
+  },
+  identificationHead: {
+    id: `${scope}.identificationHead`,
+    defaultMessage: 'Identification',
   },
 });
