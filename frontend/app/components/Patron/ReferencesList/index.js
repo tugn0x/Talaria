@@ -108,7 +108,9 @@ const ReferencesList = (props) => {
     return (
         mounted &&
         <>
-            <h1 className="section-title large"><FormattedMessage {...messages.header} /></h1>
+            <div className="section-title">
+                <h1 className="large"><FormattedMessage {...messages.header} /></h1>
+            </div>
             <div className="search-filter-bar">
                 <Row>
                     <Col md={4} sm={12}>
