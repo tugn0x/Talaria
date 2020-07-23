@@ -73,6 +73,10 @@ export default defineMessages({
     id: `${scope}.password_repeat`,
     defaultMessage: 'Repeat password',
   },
+  invalid_field: {
+    id: `${scope}.invalid_name`,
+    defaultMessage: 'This field is mandatory',
+  },
   invalid_name: {
     id: `${scope}.invalid_name`,
     defaultMessage: 'Please choose a username',
@@ -139,7 +143,7 @@ export default defineMessages({
   },
   submit: {
     id: `${scope}.submit`,
-    defaultMessage: "Submit",
+    defaultMessage: "Save",
   },
   cancel: {
     id: `${scope}.cancel`,

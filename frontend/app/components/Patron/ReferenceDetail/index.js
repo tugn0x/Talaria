@@ -10,27 +10,27 @@ const ReferenceDetail = props => {
     const {reference, messages} = props
     const intl = useIntl()
     return (
-        <div className="detail reference">
-            <div className="header">
+        <div className="detail">
+            <div className="section-title">
                 <ButtonBack className="detail-back" />
-                <h3 className="title-section">{intl.formatMessage(messages.headerDetail)}</h3>
+                <h1 className="large">{intl.formatMessage(messages.headerDetail)}</h1>
             </div>
-            <div className="features-icons">
-                <NavLink to='#' className="btn btn-link">
-                    <i className="fas fa-print"></i>
-                </NavLink>
-                <NavLink to='#' className="btn btn-link">
-                    <i className="fas fa-file-export"></i>
-                </NavLink>
-                <NavLink to='#' className="btn btn-link">
-                    <span className="icon-tag-plus"></span>
-                </NavLink>
-                <NavLink to='#' className="btn btn-link">
-                    <i className="fas fa-folder-plus"></i>
-                </NavLink>
-            </div>
-            <Card className="detail-body">
-                <CardBody>
+            <div className="reference">
+                <div className="list-head features-icons">
+                    <NavLink to='#' className="btn btn-icon">
+                        <i className="fas fa-print"></i>
+                    </NavLink>
+                    <NavLink to='#' className="btn btn-icon">
+                        <i className="fas fa-file-export"></i>
+                    </NavLink>
+                    <NavLink to='#' className="btn btn-icon">
+                        <span className="icon-tag-plus"></span>
+                    </NavLink>
+                    <NavLink to='#' className="btn btn-icon">
+                        <i className="fas fa-folder-plus"></i>
+                    </NavLink>
+                </div>
+                <Card className="detail-body">
                     <Row>
                         <Col sm={12}>
                             <p className="text-brown">{intl.formatMessage(messages.pub_title)}</p>
@@ -70,8 +70,8 @@ const ReferenceDetail = props => {
                             <p>{reference.part_title}</p>
                         </Col>
                     </Row>
-                </CardBody>
-            </Card>
+                </Card>
+            </div>
         </div>
     );
 };

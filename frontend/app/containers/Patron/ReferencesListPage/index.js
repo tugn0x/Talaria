@@ -8,7 +8,7 @@ import { requestReferencesList,requestLabelsOptionList,
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import ReferencesPage from '../ReferencesPage';
+// import ReferencesPage from '../ReferencesPage';
 /* import {SimpleList} from 'components' */
 import ReferencesList from 'components/Patron/ReferencesList';
 import {columns} from './columns'

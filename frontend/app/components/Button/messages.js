@@ -11,6 +11,6 @@ export const scope = 'app.components.Button';
 export default defineMessages({
     goBackText: {
         id: `${scope}.goBackText`,
-        defaultMessage: 'Go back',
+        defaultMessage: 'Back',
     },
 })

@@ -58,6 +58,10 @@ h3.title-section {
     }
 }
 
+.btn [class^="icon-"] {
+    margin-top: 0;
+}
+
 button[type=button] {
     outline: none;
 }
@@ -69,16 +73,19 @@ button[type=button] {
     margin: 0;
     border-radius: 20px;
     display: inline-block;
-    vertical-align: sub;
+    /* vertical-align: sub; */
     &:hover,&:active, &:focus {
         text-decoration: none;
     }
     &.active, &:active {
         background: $dark-bk;
     }
-    i {
+    i, span {
         color: $orange;
         font-size: 1.5rem;
+        margin-top: 0;
+        display: inline-block;
+        vertical-align: middle;
         /* display: table-cell;
         vertical-align: middle; */
     }
@@ -109,7 +116,7 @@ button[type=button] {
 }
 
 #app {
-    background-color: $light;
+    background-color: $light-bk;
     min-height: 100%;
     min-width: 100%;
     display: flex;
@@ -153,8 +160,9 @@ button[type=button] {
 .btn-cta {
     display: inline-block;
     color:#fff;
-    padding: 15px 30px;
+    padding: 8px 30px;
     font-weight:normal;
+    font-size: 1.428rem;
     text-shadow: none;
     text-decoration:none;
     background: $active;
@@ -189,9 +197,24 @@ form {
             border: 1px solid #4dbd74;
         }
     }
+    label {
+        color: $alternative-text;
+    }
+    h3 {
+        font-weight: normal;
+        text-align: center;
+    }
+    .card {
+        margin-bottom: 3rem;
+
+    }
+    button[type=submit].btn-cta {
+        display: table;
+        margin: 5rem auto 0 auto;
+    }
 }
 
-input[type=text] {
+input[type=text], textarea {
     padding: 9px;
     color: $form-text;
     font-size: $font-size-normal;
@@ -200,6 +223,10 @@ input[type=text] {
     border: 1px solid $dark-bk;
 }
 
+
+textarea {
+    max-height: 86px;
+}
 
 .active {
     color: $active;
@@ -218,6 +245,8 @@ ul.list-inline {
 .card {
     border-radius: 4px;
     border-color: $grey-light;
+    background-color: $box-color;
+    padding: 1.5rem 6.785rem;
 }
 
 /* .table {
@@ -337,15 +366,21 @@ ul.list-inline {
 }
 
 
-//////
+// PAGE TITLE SECTION
 
 .section-title {
-    font-weight: 700;
-    text-align: center;
+    h1 {
+        font-weight: 700;
+        text-align: center;
+        flex: 1;
+    }
+    padding: 0 15px;
     position: absolute;
     right: 0;
     left: 0;
-    top: -5rem;
+    top: -4rem;
+    display: flex;
+    align-items: center;
 }
 
 .status-point {
@@ -401,6 +436,8 @@ ul.list-inline {
     color: $orange;
 }*/
 
+// DROPDOWN Generico
+
 .dropdown {
     .dropdown-menu {
         box-shadow: 0 3px 6px #00000029;
@@ -452,14 +489,26 @@ ul.list-inline {
   
 }
 
-.reference .features-icons,
-.referenceList .features-icons,
-.requestList .features-icons
+.detail {
+    .list-head {
+        justify-content: flex-start;
+        margin-top: 0;
+    }
+}
+
+.features-icons
  {
     height: 40px;
     display: inline-flex;
     align-items: center;
     width: 100%;
+    .btn-icon {
+        display: table;
+        i, span {
+            display: table-cell;
+        }
+    }
+    
     .dropdown {
         p, label {
             font-size: 1rem;
@@ -493,6 +542,53 @@ ul.list-inline {
         }
     }
    
+}
+
+
+// MODALE di CONFERMA
+
+.modal-dialog {
+    .modal-content {
+        border: 4px;
+        background-color: $box-color;
+    }
+    
+    .modal-header {
+        position: static;
+        margin: 10px 0 0 0;
+        .close {
+            margin-top: -2rem;
+        }
+    }
+    
+    .modal-title {
+        text-align: center;
+        width: 100%;
+        font-size: 1.6rem;
+    }
+    
+    .modal-footer {
+        .btn {
+            color:#fff;
+            padding: 10px 30px;
+            font-weight:normal;
+            font-size: 1.428rem;
+            text-shadow: none;
+            text-decoration:none;
+            background: $form-text;
+            border-radius: 4px; //da usare in tutti i form select ecc.
+            &:hover{
+                text-decoration: none
+            }
+            &.btn-primary {
+                background: $active;
+                &:hover{
+                    background: $dark-text; 
+                    color:#fff;
+                }
+            }
+        }
+    }
 }
 
 
