@@ -14,7 +14,6 @@ import ReferencesList from 'components/Patron/ReferencesList';
 import {columns} from './columns'
 import messages from './messages'
 import confirm from "reactstrap-confirm";
-import 'scss/_modal.scss';
 
 const ReferencesListPage = (props) => {
     console.log('ReferencesListPage', props)
