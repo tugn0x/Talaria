@@ -212,6 +212,9 @@ form {
         display: table;
         margin: 5rem auto 0 auto;
     }
+    .form-group:last-child {
+        margin: 0;
+    }
 }
 
 input[type=text], textarea {
