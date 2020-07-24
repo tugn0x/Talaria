@@ -1,9 +1,12 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import './style.scss';
 
 const Toaster = (props) => {
+    console.log("TOAST", props)
+    console.log("TOAST", props)
+    console.log("TOAST", props)
     return  (
         <ToastContainer
             position="top-right"
@@ -12,8 +15,7 @@ const Toaster = (props) => {
             closeOnClick={true}
             draggable={false}
             rtl={false}
-            newestOnTop={true}
-            // autoClose={2000}
+            autoClose={2000}
         />
     )
 }

@@ -168,6 +168,7 @@ export function* requestUpdateLabelSaga(action) {
   }
 }
 
+
 export function* requestRemoveLabelSaga(action) {
   const options = {
     method: 'delete', 
