@@ -1,15 +1,6 @@
 @import '../../../scss/variables';
 
 .ReferencesLabels {
-    i {
-        color: $orange;
-        font-size: 1.5rem;
-        display: table-cell;
-        vertical-align: middle;
-    }
-    input[name=tag-add] {
-        width: 80%;
-    }
     .info {
         height: 40px;
         display: table;
@@ -19,7 +10,7 @@
         }
     }
     
-    .dropdown {
+    /* .dropdown {
         &.show {
             > .btn {
                 background: $dark-bk;
@@ -42,7 +33,7 @@
     }
     .dropdown-header {
         font-size: inherit;
-    }
+    } */
    /*  .dropdown-menu {
         left: 0 !important;
     }

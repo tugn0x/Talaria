@@ -3,45 +3,30 @@ import {requestLabelsOptionList, requestPostLabel, requestUpdateLabel, requestRe
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {Row, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Button} from 'reactstrap'
 import {labelsOptionListSelector, isPatronLoading} from '../selectors';
 import ReferencesTag from 'components/Patron/ReferencesTag';
 import messages from './messages';
 import Loader from 'components/Form/Loader';
 import {useIntl} from 'react-intl';
-// import './style.scss';
-
+import InputSearch from 'components/Form/InputSearch';
 
 const ReferencesLabels = props => {
     // console.log('ReferencesLabels', props)
     const {dispatch, labelsOptionList, loading} = props;
-    const [newLabelName, setNewLabelName] = useState("");
-    const [toggleInput, setToggleInput] = useState(false)
+    
     const intl = useIntl();
 
     useEffect(() => {
         dispatch(requestLabelsOptionList())
     }, [])
 
-    const handleChange = (e) => {
-        const newLabel = e.target.value;
-        setNewLabelName(newLabel)
-    }
-
-    const handleKeyPress = (e) => {
-        if(e.key === "Enter"){
-            saveItem() 
-        }
-    }
-
     const updateItem = (label_id, name) => {
         dispatch(requestUpdateLabel(label_id, name, intl.formatMessage(messages.labelUpdateMessage)))
     }
     
-    const saveItem = () => {
-        dispatch(requestPostLabel(newLabelName, intl.formatMessage(messages.labelCreateMessage)))
-        setNewLabelName("")
-        setToggleInput(state => !state)
+    const saveItem = (query) => {
+        dispatch(requestPostLabel(query, intl.formatMessage(messages.labelCreateMessage)))
+        
     }
 
     const removeItem = (label_id) => {
@@ -50,29 +35,18 @@ const ReferencesLabels = props => {
     } 
 
     return (
+        <>
+        <div className="section-title">
+            <h1 className="large">{intl.formatMessage(messages.labels)}</h1>
+        </div>
         <div className="ReferencesLabels tags-list">
-            <h1 className="section-title large">{intl.formatMessage(messages.labels)}</h1>
-            <Dropdown direction="right" isOpen={toggleInput} toggle={() => setToggleInput(state => !state)}>
-                <DropdownToggle color="icon">
-                    <i className="icon-tag-plus"></i>
-                </DropdownToggle>
-                <DropdownMenu>
-                    <DropdownItem header tag="div">
-                        <Row className="align-items-center justify-content-around">
-                            <input 
-                                type="text" 
-                                placeholder={intl.formatMessage(messages.labelCreateNew)}
-                                name="tag-add" 
-                                onChange={(e) => handleChange(e)} 
-                                onKeyPress={(e) => handleKeyPress(e)}
-                                value={newLabelName} />
-                            <Button color="icon" onClick={saveItem}>
-                                <i className="fas fa-save"></i>
-                            </Button>
-                        </Row>
-                    </DropdownItem>
-                </DropdownMenu>
-            </Dropdown>
+            <InputSearch
+                icon="fas fa-save"
+                placeholder={intl.formatMessage(messages.labelCreateNew)}
+                submitCallBack={saveItem}
+                className="w-50 mb-5"
+            />
+              
             <Loader show={loading}>
                 {labelsOptionList.length > 0 && labelsOptionList.map((label, i) => (
                         <ReferencesTag 
@@ -85,6 +59,7 @@ const ReferencesLabels = props => {
                     ))}
             </Loader>
         </div>
+        </>
     );
 };
 
