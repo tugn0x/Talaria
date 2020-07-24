@@ -30,7 +30,7 @@ const InputSearch = (props) => {
                 <Input 
                     required 
                     placeholder={intl.formatMessage(messages.placeHolder)}
-                    value={props.query}
+                    value={props.query ? props.query : query}
                     onChange={handleChange} 
                     type="text" 
                     name="inputQuery" 
