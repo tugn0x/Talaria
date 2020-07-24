@@ -1,14 +1,16 @@
-import React, {useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import {CustomForm} from 'components';
 import {fields} from './fields';
 // import messages from './messages';
 // import Loader from 'components/Form/Loader.js';
 import {useIntl} from 'react-intl';
-import globalMessages from 'utils/globalMessages'
+import formMessages from './messages';
 import Form from './Form';
+import PreForm from './PreForm';
 
 const ReferencesForm = (props) => {
     const {createReference, reference, updateReference, messages} = props
+    const [goToForm, setGoToForm] = useState(false);
     const intl = useIntl();
     
     return (
@@ -18,15 +20,24 @@ const ReferencesForm = (props) => {
                         submitCallBack={(formData) => updateReference(formData)} 
                         requestData={reference}
                         fields={fields} 
-                        title={`${intl.formatMessage(globalMessages.update)}`} 
+                        title={`${intl.formatMessage({id: 'app.global.update'})}`} 
                         messages={messages}
                         submitText={intl.formatMessage(messages.updateSubmitText)}
                     /> 
                 ||
-                    <Form 
-                        messages={messages} 
-                        submitCallBack={(formData) => createReference(formData)}
-                    />
+                    <>
+                        {!goToForm && 
+                            <PreForm 
+                                goToForm={setGoToForm}
+                                messages={formMessages}
+                            />
+                        ||
+                            <Form 
+                                messages={messages} 
+                                submitCallBack={(formData) => createReference(formData)}
+                            />
+                        }
+                    </>
                 }
         </>
     )

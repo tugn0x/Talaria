@@ -210,6 +210,12 @@
   "app.containers.ReferencePage.updateSubmitText": "Aggiorna riferimento",
   "app.containers.ReferencePage.createSubmitText": "Crea una riferimento",
 
+  "app.components.ReferenceForm.header": "Nuovo Riferimento",
+  "app.components.ReferenceForm.bodySearch": "Cerca un riferimento inserendo DOI, PMI o ISBN",
+  "app.components.ReferenceForm.goToForm": "Oppure inserisci i dati manualmente",
+  "app.components.ReferenceForm.goToFormButton": "Vai al form",
+  "app.components.ReferenceForm.inputPlaceHolder": "Es: 10.1002/hlca.19740570315",
+
   "app.components.UserForm.header": "Form aggiorna utente",
   "app.components.UserForm.subtitle": "Aggiorna utente",
   "app.components.UserForm.editUser": "Modifica utente",

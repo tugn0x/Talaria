@@ -1,13 +1,12 @@
 import React, {useState} from 'react'
-import messages from './messages'
 import {useIntl} from 'react-intl'
 import PropTypes from 'prop-types'
-import {Form, InputGroup, InputGroupAddon, Button, Input, Row, Col} from 'reactstrap';
+import {Form, InputGroup, InputGroupAddon, Button, Input} from 'reactstrap';
 import './style.scss'
 
 const InputSearch = (props) => {
     
-    const {submitCallBack, searchOnChange} = props 
+    const {submitCallBack, searchOnChange, className, placeholder, icon} = props 
     const intl = useIntl()
     
     const [query, setQuery] = useState('')
@@ -15,29 +14,31 @@ const InputSearch = (props) => {
         const q = e.target.value
         setQuery(q)
         if(searchOnChange){
-            submitCallBack(q)
+            submitCallBack(q);
+            setQuery('');
         } 
     }
     
     const handleSubmit = (e) => {
         e.preventDefault()
         submitCallBack(query)
+        setQuery('')
     }
     
     return (
-        <Form className="form-search" noValidate onSubmit={handleSubmit}>
+        <Form className={`form-search ${className ? className : ''}`} noValidate onSubmit={handleSubmit}>
             <InputGroup>
                 <Input 
                     required 
-                    placeholder={intl.formatMessage(messages.placeHolder)}
-                    value={props.query}
+                    placeholder={placeholder ? placeholder : intl.formatMessage({id: 'app.global.search'})}
+                    value={props.query ? props.query : query}
                     onChange={handleChange} 
                     type="text" 
                     name="inputQuery" 
                     id="inputQuery" />
                 <InputGroupAddon addonType="append">
                     <Button type="submit" color="orange" className="searchBtn">
-                        <i className="fas fa-search"></i>
+                        <i className={`${icon ? icon : 'fas fa-search'}`}></i>
                     </Button>
                 </InputGroupAddon>
             </InputGroup>
@@ -47,6 +48,9 @@ const InputSearch = (props) => {
 
 InputSearch.propTypes = {
     submitCallBack: PropTypes.func.isRequired,
+    className: PropTypes.string,
+    placeholder: PropTypes.string,
+    icon: PropTypes.string,
 };
 
 export default InputSearch

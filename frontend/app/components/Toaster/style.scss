@@ -1,0 +1,30 @@
+// @import url('node_modules/@fortawesome/fontawesome-free/scss/_icons.scss');
+// Toaster 
+.Toastify__toast-container {
+    width: 87%;
+    top: 29px;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    line-height: 1;
+    .Toastify__toast {
+        border-radius: 4px;
+    }
+    .Toastify__close-button, .Toastify__toast-body {
+        font-size: 20px;
+        opacity: 1;
+    }
+    .Toastify__toast-body {
+        display: flex;
+        align-items: center;
+       /*  font-family: "Font Awesome 5 Free"; */
+        &:before {
+            content: "\2713";
+            font-size: 45px;
+            margin-right: 1rem;
+            display: inline-block;
+            color: white;
+        }
+    } 
+    
+}

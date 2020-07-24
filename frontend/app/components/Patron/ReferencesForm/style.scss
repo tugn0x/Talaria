@@ -1,0 +1,16 @@
+.reference-form{
+    h3:nth-of-type(1) {
+        margin-top: 5rem;
+    }
+    .radio-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        .invalid-feedback {
+            position: absolute;
+            text-align: center !important;
+            bottom: -15px;
+        }
+    }
+}

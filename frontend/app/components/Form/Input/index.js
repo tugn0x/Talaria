@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Label, Input as InputField} from 'reactstrap';
 import ErrorBox from 'components/Form/ErrorBox';
 import {useIntl} from 'react-intl';
+import { prototype } from 'fontfaceobserver';
 
 const Input = ({label, handleChange, type, required, input}) => {
     
@@ -36,7 +37,11 @@ const Input = ({label, handleChange, type, required, input}) => {
 };
 
 Input.propTypes = {
-    
+    label: PropTypes.string.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    type: PropTypes.string,
+    input: PropTypes.string,
+    required: PropTypes.bool,
 };
 
 export default Input;

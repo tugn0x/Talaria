@@ -4,7 +4,7 @@ import "./style.scss";
 
 const RadioButton = props => {
     
-    const {handleChange, checked, label} = props;
+    const {handleChange, checked, label, required} = props;
     // const [checkedRadio, setCheckedRadio] = React.useState(checked ? checked);
 
 
@@ -16,6 +16,8 @@ const RadioButton = props => {
                 onChange={(e) => handleChange(e)}  
                 checked={checked}   
                 name="radio"
+                className="form-control"
+                required={required ? required : false}
                 />
             <span className="checkmark"></span>
             {label ? <span className="label text-dark-text">{label}</span> : null}
@@ -24,7 +26,10 @@ const RadioButton = props => {
 };
 
 RadioButton.propTypes = {
-    
+    label: PropTypes.string.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    checked: PropTypes.bool,
+    required: PropTypes.bool,
 };
 
 export default RadioButton;

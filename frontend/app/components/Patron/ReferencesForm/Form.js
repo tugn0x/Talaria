@@ -4,6 +4,8 @@ import {useIntl} from 'react-intl';
 import RadioButton from 'components/Form/RadioButton';
 import scrollTo from 'utils/scrollTo';
 import Input from 'components/Form/Input';
+import ErrorBox from 'components/Form/ErrorBox';
+import './style.scss';
 
 const Form = (props) => {
     const {reference, messages, submitCallBack} = props;
@@ -64,8 +66,8 @@ const Form = (props) => {
                     }
                 </h1>
             </div>
-            <FormContainer onSubmit={onSubmit}  className="" noValidate>
-                <div className="d-flex align-items-center justify-content-center">
+            <FormContainer onSubmit={onSubmit}  className="reference-form" noValidate>
+                <FormGroup className="radio-buttons">
                     <RadioButton 
                         label={intl.formatMessage(messages.article)} 
                         handleChange={(e) =>  e.target.checked ? handleChange(0, 'material_type') : null}
@@ -73,18 +75,32 @@ const Form = (props) => {
                     <RadioButton 
                         label={intl.formatMessage(messages.book)} 
                         handleChange={(e) =>  e.target.checked ? handleChange(1, 'material_type') : null}
+                        
                     />
                     <RadioButton 
                         label={intl.formatMessage(messages.texts)} 
                         handleChange={(e) =>  e.target.checked ? handleChange(2, 'material_type') : null}
+                        
                     />
-                </div>
-                <h3 className="mt-4">{intl.formatMessage(messages.titleAuthorsHead)}</h3>
+                    <input className="form-control" type="radio" name="radio" hidden required />
+                     <ErrorBox 
+                        className="invalid-feedback" 
+                        error={  intl.formatMessage({ id: 'app.global.invalid_field' })}
+                    /> 
+                </FormGroup>
+                <h3>{intl.formatMessage(messages.titleAuthorsHead)}</h3>
                 <Card>
                     <FormGroup >
                         <Input 
                             label={intl.formatMessage(messages.journalLabel)}
                             handleChange={(value) => handleChange(value, 'pub_title')}
+                            required={true}
+                        />
+                    </FormGroup>
+                    <FormGroup >
+                        <Input 
+                            label="Part Title"
+                            handleChange={(value) => handleChange(value, 'part_title')}
                             required={true}
                         />
                     </FormGroup>
