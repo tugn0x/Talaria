@@ -5,13 +5,13 @@ html,body {
     font-family: $font-family-base;
     font-weight: 400;
     font-size: 14px;
-    color: $grey;
+    color: $dark-text;
     
 }
 
 p, label {
     line-height: 1.5em;
-    color: $grey;
+    color: $dark-text;
 }
 
 ul {
@@ -21,10 +21,10 @@ ul {
 }
 
 a {
-    color: $grey;
+    color: $dark-text;
     &:hover {
         text-decoration: underline;
-        color: $grey;
+        color: $dark-text;
     }
 }
 
@@ -39,23 +39,31 @@ h3.title-section {
     height: 45px;
     max-width: 250px;
     margin: 0 auto;
-    background-color: transparent;
+    /* background-color: transparent; */
     border: none;
-    color: $dark-text;
+    /* color: $dark-text; */
     &:focus {
         outline: none;
         box-shadow: 0 0 0;
     }
-    &:hover {
+   /* &:hover {
         background-color: transparent;
         color: inherit;
     }
-    &.disabled, &:disabled {
+     &.disabled, &:disabled {
         color: $grey-nav-link;
         opacity: 0.5;
         background-color: transparent;
         border: none;
-    }
+    } */
+}
+
+.btn-facebook {
+    background-color: $facebook;
+}
+
+.btn-google-plus {
+    background-color: $google-plus;
 }
 
 .btn [class^="icon-"] {
@@ -115,6 +123,24 @@ button[type=button] {
     }
 }
 
+.btn-cta {
+    display: block;
+    color:#fff;
+    padding: 8px 30px;
+    font-weight:normal;
+    font-size: 1.428rem;
+    text-shadow: none;
+    text-align: center;
+    text-decoration:none;
+    background: $active;
+    border-radius: 4px; //da usare in tutti i form select ecc.
+    &:hover{
+        background: $dark-text; 
+        color:#fff;
+        text-decoration: none
+    }
+}
+
 #app {
     background-color: $light-bk;
     min-height: 100%;
@@ -151,28 +177,6 @@ button[type=button] {
     border-radius: 4px !important;
 }
 
-/* .linkButton {
-    &:hover {
-        text-decoration: none;
-    }
-} */
-
-.btn-cta {
-    display: inline-block;
-    color:#fff;
-    padding: 8px 30px;
-    font-weight:normal;
-    font-size: 1.428rem;
-    text-shadow: none;
-    text-decoration:none;
-    background: $active;
-    border-radius: 4px; //da usare in tutti i form select ecc.
-    &:hover{
-        background: $dark-text; 
-        color:#fff;
-        text-decoration: none
-    }
-}
 
 .grecaptcha-badge {
     display: none !important;
@@ -217,18 +221,18 @@ form {
     }
 }
 
-input[type=text], textarea {
+input[type=text], input[type=email], input[type=password], textarea {
     padding: 9px;
     color: $form-text;
     font-size: $font-size-normal;
     border-radius: 4px;
-    max-height: $heightInput;
+    height: $heightInput;
     border: 1px solid $dark-bk;
 }
 
 
 textarea {
-    max-height: 86px;
+    height: 86px;
 }
 
 .active {
@@ -334,6 +338,10 @@ ul.list-inline {
     padding: 1.857rem 0;
     border-bottom: 1px solid $dark-bk;
     margin: 0;
+    > * {
+        padding-left: 0;
+        padding-right: 0;
+    }
     &:last-child {
         border: none;
     }

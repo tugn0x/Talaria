@@ -10,10 +10,10 @@ export default function Index(props) {
     <CardFooter className="p-4">
       <Row>
         <Col xs="12">
-          <Button className="btn-facebook mb-1" block onClick={props.loginFacebook}><span>Facebook</span></Button>
+          <Button color="facebook" className="mb-1" block onClick={props.loginFacebook}><span>Facebook</span></Button>
         </Col>
         <Col xs="12">
-          <Button className="btn-google-plus mb-1" block onClick={props.loginGoogle}><span>Google</span></Button>
+          <Button color="google-plus" className="mb-1" block onClick={props.loginGoogle}><span>Google</span></Button>
         </Col>
         <Col xs="12">
           <a className="btn-garr-container" href="https://devnilde.bo.cnr.it/Shibboleth.sso/Login?target=https://devnilde.bo.cnr.it/shibb/shiblogin.php">
