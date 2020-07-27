@@ -19,6 +19,7 @@ const routes = [
       { path: '/categories', icon: "folder",exact: true, name: `Categories`, url: '/references/categories', component: ReferencesGroups, sidebar: true , order:4},
       { path: '/', icon: "icon-riferimenti", exact: true, name: `ReferenceList`, url: `/references`, component: ReferencesListPage,sidebar: true, order:2 },
       { path: '/:id?/:edit?', exact: true, name: `ReferenceUpdate`, component: ReferencesPage},
+      //{ path: '/:id?/:request', exact: true, name: `ReferenceRequest`, component: ReferencesPage},
     ]
   },
 
