@@ -45,6 +45,11 @@ class ReferencePolicy extends BasePolicy
         return $model->isOwner($user->id);
     }
 
+    public function delete(User $user, Model $model)
+    {
+        return $model->isOwner($user->id);
+    }
+
     public function canManage(User $user, Model $model)
     {
         return $user->can('manage', $model);
