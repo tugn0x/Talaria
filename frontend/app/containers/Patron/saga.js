@@ -4,7 +4,7 @@ import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST,
   REQUEST_UPDATE_LABEL, REQUEST_REMOVE_LABEL, REQUEST_POST_LABEL,
   REQUEST_POST_GROUP, REQUEST_REMOVE_GROUP, REQUEST_UPDATE_GROUP,
-  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,REQUEST_REQUESTS_LIST,REQUEST_GET_REQUEST} from './constants';
+  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,REQUEST_REQUESTS_LIST,REQUEST_GET_REQUEST,REQUEST_DELETE_REFERENCE} from './constants';
 import {
   requestError,
   stopLoading,
@@ -41,6 +41,7 @@ import {  getMyLibrary,
           updateGroup,
           deleteGroup,
           getReference, 
+          deleteReference,
           getPatronRequest, 
           getLabelsOptionList,
           getGroupsOptionList,
@@ -133,6 +134,21 @@ export function* requestRemoveReferenceGroupSaga(action) {
     yield put(requestError(e.message));
   }
 }
+export function* requestDeleteReferenceSaga(action) {
+  const options = {
+    method: 'delete',
+    id: action.id,
+  };
+  try {
+    const request = yield call(deleteReference, options);
+    yield put(requestReferencesList(null, null, action.filter))
+   // yield put(push("/patron/references"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 
 export function* requestPostLabelSaga(action) {
   const options = {
@@ -454,6 +470,7 @@ export default function* patronSaga() {
   yield takeLatest(REQUEST_POST_REFERENCES, requestPostReferencesSaga);
   yield takeLatest(REQUEST_UPDATE_REFERENCES, requestUpdateReferenceSaga);
   yield takeLatest(REQUEST_GET_REFERENCE, requestGetReferenceSaga);
+  yield takeLatest(REQUEST_DELETE_REFERENCE,requestDeleteReferenceSaga);
   yield takeLatest(REQUEST_REMOVE_REFERENCE_LABEL,requestRemoveReferenceLabelSaga);
   yield takeLatest(REQUEST_REMOVE_REFERENCE_GROUP,requestRemoveReferenceGroupSaga);
   yield takeLatest(REQUEST_APPLY_LABELS_TO_REFERENCES,requestApplyLabelsToReferencesSaga);

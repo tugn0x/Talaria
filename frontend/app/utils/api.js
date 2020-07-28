@@ -301,6 +301,13 @@ export const requestApplyGroupsToReferences = (options) => {
   return request(`${BASE_URL}/api/v1/references/updateSelected`, options)
 };
 
+export const deleteReference = (options) => {
+  const id = options.id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/references/${id}`, options)
+};
+
+
 // ---------- PATRON REQUEST -----//
 export const getRequestsList = (options) => {
   const page = options.page;

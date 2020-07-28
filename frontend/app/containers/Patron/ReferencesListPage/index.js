@@ -4,7 +4,8 @@ import makeSelectPatron, {isPatronLoading,groupsOptionListSelector,labelsOptionL
 import { requestReferencesList,requestLabelsOptionList,
         requestGroupsOptionList,requestRemoveReferenceLabel,
         requestRemoveReferenceGroup,requestApplyLabelsToReferences,
-        requestApplyGroupsToReferences} from '../actions'
+        requestApplyGroupsToReferences,
+        requestDeleteReference} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -71,6 +72,18 @@ const ReferencesListPage = (props) => {
         dispatch(requestApplyGroupsToReferences(refIds,[groupIds],intl.formatMessage(messages.addedMessage)))
     }
 
+    async function deleteReference (id,filter) {
+        console.log("DISPATCH deleteReference",id);
+         let conf = await confirm({
+             title: intl.formatMessage(messages.confirm),
+             message: intl.formatMessage(messages.askDeleteReferenceMessage),
+             confirmText: intl.formatMessage(messages.yes),
+             cancelText: intl.formatMessage(messages.no)
+         }); //
+         if(conf)
+             dispatch(requestDeleteReference(id,intl.formatMessage(messages.removedMessage),filter))
+     }
+
     return (
         <>
         
@@ -95,6 +108,7 @@ const ReferencesListPage = (props) => {
                 editPath={'/patron/references/:id?/:edit?'}
                 removeLabelFromReference={removeLabelFromReference}
                 removeGroupFromReference={removeGroupFromReference}
+                deleteReference={deleteReference}
                 applyLabels={applyLabelsToReferences}
                 applyGroups={applyGroupsToReferences}
                 // modalComponent={ <ReferencesPage match={match} />}

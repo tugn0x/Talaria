@@ -6,7 +6,7 @@ import CustomCheckBox from 'components/Form/CustomCheckBox';
 import './style.scss';
 
 const ReferenceItem = (props) => {
-    const {data, editPath,toggleSelection,checked,removeLabel,removeGroup} = props
+    const {data, editPath,toggleSelection,checked,removeLabel,removeGroup,deleteReference} = props
     
     const editurl = (id) => {
         return generatePath(`${editPath}`, {
@@ -89,7 +89,7 @@ const ReferenceItem = (props) => {
                 {canEdit(data) && <NavLink to={`${editurl(data.id)}`}  className="btn btn-icon">
                     <i className="fas fa-edit"></i>
                 </NavLink>}
-                {canDelete(data) && <a href="#" className="btn btn-icon" onClick={() => console.log('delete reference')}>
+                {canDelete(data) && <a href="#" className="btn btn-icon"  onClick={() => deleteReference(data.id) }>
                     <i className="fas fa-trash"></i>
                 </a> }
             </Col> 
