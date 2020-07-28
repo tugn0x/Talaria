@@ -79,11 +79,7 @@ const RequestsListPage = (props) => {
                     searchOnChange: true
                 }}
                 editPath={'/patron/requests/:id?/:edit?'}
-                removeLabelFromReference={removeLabelFromReference}
-                removeGroupFromReference={removeGroupFromReference}
-                applyLabels={applyLabelsToReferences}
-                applyGroups={applyGroupsToReferences}
-            />
+             />
           </>  
     )
 }

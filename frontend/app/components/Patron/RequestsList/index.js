@@ -12,7 +12,7 @@ import './style.scss';
 
 const RequestsList = (props) => {
     console.log('RequestsList', props)
-    const { loading, data, pagination, searchOptions, labelsOptionList, groupsOptionList,removeLabelFromReference,removeGroupFromReference,applyLabels,applyGroups} = props
+    const { loading, data, pagination, searchOptions, labelsOptionList, groupsOptionList} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)

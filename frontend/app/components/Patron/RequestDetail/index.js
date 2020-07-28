@@ -33,7 +33,6 @@ const RequestDetail = props => {
                 </NavLink>
             </div>
             <Card className="detail-body">      
-                <div>TODO AGGIUNGERE etichette/gruppi del riferimento</div>      
                 <CardBody>
                     <CardTitle>Dati Richiesta</CardTitle>
                     <Row><Col sm={12}>
@@ -56,6 +55,25 @@ const RequestDetail = props => {
                     Note per la biblioteca: {patronrequest.forlibrary_note}
                     Note dalla biblioteca: {patronrequest.fromlibrary_note}
                     </Col>
+                    </Row>
+                    <Row>
+                        <Col sm={12}>
+                        {patronrequest.reference.data.groups && 
+                        <ul id="referenceGroups" className="referenceGroups">    
+                            {patronrequest.reference.data.groups.data.map( el => 
+                                <li key={el.id} className="referenceGroup">{el.name}</li>
+                                ) 
+                            }
+                        </ul>
+                        }
+                        {patronrequest.reference.data.labels && 
+                        <ul id="referenceLabels" className="referenceLabels">    
+                            {patronrequest.reference.data.labels.data.map( el => 
+                                <li key={el.id} className="referenceLabel">{el.name}</li>
+                                ) 
+                            }
+                        </ul>}
+                       </Col>
                     </Row>
                     <Row>
                         <Col sm={12}>

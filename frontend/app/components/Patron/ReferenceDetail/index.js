@@ -31,6 +31,25 @@ const ReferenceDetail = props => {
                     </NavLink>
                 </div>
                 <Card className="detail-body">
+                <Row>
+                        <Col sm={12}>
+                        {reference.groups && 
+                        <ul id="referenceGroups" className="referenceGroups">    
+                            {reference.groups.data.map( el => 
+                                <li key={el.id} className="referenceGroup">{el.name}</li>
+                                ) 
+                            }
+                        </ul>
+                        }
+                        {reference.labels && 
+                        <ul id="referenceLabels" className="referenceLabels">    
+                            {reference.labels.data.map( el => 
+                                <li key={el.id} className="referenceLabel">{el.name}</li>
+                                ) 
+                            }
+                        </ul>}
+                       </Col>
+                    </Row>
                     <Row>
                         <Col sm={12}>
                             <p className="text-brown">{intl.formatMessage(messages.pub_title)}</p>
