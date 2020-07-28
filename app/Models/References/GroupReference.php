@@ -25,7 +25,7 @@ class GroupReference extends BaseModel
 
     public function reference()
     {
-        return $this->belongsTo(Reference::class,"reference_id");
+        return $this->belongsTo(Reference::class,"reference_id")->withTrashed();
     }
 
     public function group()

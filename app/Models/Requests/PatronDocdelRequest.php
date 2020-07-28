@@ -60,7 +60,7 @@ class PatronDocdelRequest extends BaseModel
 
     public function reference()
     {
-        return $this->belongsTo(Reference::class);
+        return $this->belongsTo(Reference::class)->withTrashed();
     }
 
     public function user()
