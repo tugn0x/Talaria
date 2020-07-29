@@ -137,10 +137,10 @@ const RequestDetail = props => {
                     <Row>
                         <Col sm={12}>
                             <div>
-                                <span>Punto di ritiro: {patronrequest.delivery.data.name}</span>
-                                <span>Email: {patronrequest.delivery.data.email}</span>
-                                <span>Phone: {patronrequest.delivery.data.phone}</span>
-                                <span>Opening hours: {patronrequest.delivery.data.email}</span>
+                            {patronrequest.delivery.data.name && <span>Punto di ritiro: {patronrequest.delivery.data.name}</span>}
+                            {patronrequest.delivery.data.email &&<span>Email: {patronrequest.delivery.data.email}</span>}
+                            {patronrequest.delivery.data.phone && <span>Phone: {patronrequest.delivery.data.phone}</span>}
+                            {patronrequest.delivery.data.openinghours && <span>Opening hours: {patronrequest.delivery.data.openinghours}</span>}
                             </div>
                             {patronrequest.delivery.data.deliveryable && 
                             <div>
