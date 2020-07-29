@@ -17,6 +17,12 @@ const ReferenceDetail = props => {
             </div>
             <div className="reference">
                 <div className="list-head features-icons">
+                <NavLink to='#'  className="btn btn-icon">
+                        <i className="fas fa-share"></i>
+                    </NavLink>
+                    <NavLink to='#' className="btn btn-icon">
+                        <i className="icon-oa"></i>
+                    </NavLink>
                     <NavLink to='#' className="btn btn-icon">
                         <i className="fas fa-print"></i>
                     </NavLink>
@@ -28,6 +34,12 @@ const ReferenceDetail = props => {
                     </NavLink>
                     <NavLink to='#' className="btn btn-icon">
                         <i className="fas fa-folder-plus"></i>
+                    </NavLink>
+                    <NavLink to='#'  className="btn btn-icon">
+                        <i className="fas fa-edit"></i>
+                    </NavLink>
+                    <NavLink to='#'  className="btn btn-icon">
+                        <i className="fas fa-trash"></i>
                     </NavLink>
                 </div>
                 <Card className="detail-body">
