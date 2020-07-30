@@ -13,7 +13,10 @@ const ReferenceRequest = props => {
         <div className="detail">
             <div className="section-title">
                 <ButtonBack className="detail-back" />
-                <h1 className="large">RICHIEDIIII {intl.formatMessage(messages.headerDetail)}</h1>
+                <h1 className="large">{intl.formatMessage(messages.headerRequest)}</h1>
+            </div>
+            <div>
+                * check richieste già effettuate o in corso
             </div>
             <div className="reference">
                 <Card className="detail-body">
@@ -76,6 +79,9 @@ const ReferenceRequest = props => {
                         </Col>
                     </Row>
                 </Card>
+            </div>
+            <div>
+                * scelta biblio, scelta pickup, costo => richiedi
             </div>
         </div>
     );

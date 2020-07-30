@@ -16,6 +16,10 @@ export default defineMessages({
     id: `${scope}.headerDetail`,
     defaultMessage: 'Reference Detail',
   },
+  headerRequest: {
+    id: `${scope}.headerRequest`,
+    defaultMessage: 'Reference Request',
+  },
   referenceAdded: {
     id: `${scope}.referenceAdded`,
     defaultMessage: 'Reference added',
