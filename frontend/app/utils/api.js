@@ -269,7 +269,7 @@ export const createReference = (options) => {
 
 export const getReference = (options) => {
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/references/${options.id}`, options)
+  return request(`${BASE_URL}/api/v1/references/${options.id}?include=patronddrequests`, options)
 };
 
 export const updateReference = (options) => {
