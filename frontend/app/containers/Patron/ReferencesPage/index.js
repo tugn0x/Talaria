@@ -34,12 +34,17 @@ const ReferencesPage = (props) => {
                 )
             }
             {!isNew && ( 
-                params.edit &&
+                params.op && params.op=="edit" &&
                     <ReferencesForm 
                         messages={messages}
                         reference={reference}
                         // loading={isLoading} 
                         updateReference={ (formData) => dispatch(requestUpdateReferences(formData, params.id, intl.formatMessage(messages.referenceUpdate))) } />
+                ||
+                params.op && params.op=="request" &&
+                    <div>
+                        RICHIEDIIII
+                    </div>
                 ||
                     <ReferenceDetail 
                         messages={messages}
