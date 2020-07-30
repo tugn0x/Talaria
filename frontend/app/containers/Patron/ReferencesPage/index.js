@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import makeSelectPatron, {isPatronLoading} from '../selectors';
 import {ReferencesForm,Loader} from 'components';
 import ReferenceDetail from 'components/Patron/ReferenceDetail';
+import ReferenceRequest from 'components/Patron/ReferenceRequest';
 import {requestPostReferences,requestUpdateReferences} from '../actions'
 import messages from './messages'
 import {useIntl} from 'react-intl';
@@ -42,9 +43,10 @@ const ReferencesPage = (props) => {
                         updateReference={ (formData) => dispatch(requestUpdateReferences(formData, params.id, intl.formatMessage(messages.referenceUpdate))) } />
                 ||
                 params.op && params.op=="request" &&
-                    <div>
-                        RICHIEDIIII
-                    </div>
+                <ReferenceRequest
+                    messages={messages}
+                    reference={reference} 
+                />
                 ||
                     <ReferenceDetail 
                         messages={messages}
