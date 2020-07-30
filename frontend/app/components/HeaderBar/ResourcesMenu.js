@@ -36,7 +36,7 @@ function ResourceMenu(props) {
             <span><FormattedMessage {...messages[resource]} /></span>
         </Row>
         {resources[resource].map((item) =>
-          <Row className="item">
+          <Row key={item.resource.id}className="item">
               <NavLink to={`${resourcesMap[resource]}${item.resource.id}`}
                     key={item.resource.id}
                     activeClassName="current">
