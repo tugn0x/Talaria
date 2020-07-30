@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, CardBody, Row, Col} from 'reactstrap';
 import {useIntl} from 'react-intl';
-import {NavLink} from 'react-router-dom'
+import ReferenceIcons from '../ReferenceIcons';
 import ButtonBack from 'components/Button/ButtonBack';
 import './style.scss';
 
@@ -17,30 +17,10 @@ const ReferenceDetail = props => {
             </div>
             <div className="reference">
                 <div className="list-head features-icons">
-                <NavLink to='#'  className="btn btn-icon">
-                        <i className="fas fa-share"></i>
-                    </NavLink>
-                    <NavLink to='#' className="btn btn-icon">
-                        <i className="icon-oa"></i>
-                    </NavLink>
-                    <NavLink to='#' className="btn btn-icon">
-                        <i className="fas fa-print"></i>
-                    </NavLink>
-                    <NavLink to='#' className="btn btn-icon">
-                        <i className="fas fa-file-export"></i>
-                    </NavLink>
-                    <NavLink to='#' className="btn btn-icon">
-                        <span className="icon-tag-plus"></span>
-                    </NavLink>
-                    <NavLink to='#' className="btn btn-icon">
-                        <i className="fas fa-folder-plus"></i>
-                    </NavLink>
-                    <NavLink to='#'  className="btn btn-icon">
-                        <i className="fas fa-edit"></i>
-                    </NavLink>
-                    <NavLink to='#'  className="btn btn-icon">
-                        <i className="fas fa-trash"></i>
-                    </NavLink>
+                <ReferenceIcons 
+                    data={reference}
+                    icons={['request','oa','edit','print','export']}
+                />
                 </div>
                 <Card className="detail-body">
                 <Row>

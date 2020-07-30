@@ -105,7 +105,7 @@ const ReferencesListPage = (props) => {
                     },
                     searchOnChange: true
                 }}
-                editPath={'/patron/references/:id?/:edit?'}
+                //editPath={'/patron/references/:id?/:edit?'}
                 removeLabelFromReference={removeLabelFromReference}
                 removeGroupFromReference={removeGroupFromReference}
                 deleteReference={deleteReference}

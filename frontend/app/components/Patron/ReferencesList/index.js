@@ -211,7 +211,7 @@ const ReferencesList = (props) => {
                                 <ReferenceItem 
                                     key={`reference-${ref.id}`}
                                     data={ref}
-                                    editPath={props.editPath}
+                                    //editPath={props.editPath}
                                     toggleSelection={() => toggleReference(ref.id)}
                                     removeLabel={(labelId) => removeLabelFromReference(ref.id,labelId, multiFilter)}
                                     removeGroup={(groupId) => removeGroupFromReference(ref.id,groupId, multiFilter)}
