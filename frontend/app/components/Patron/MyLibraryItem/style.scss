@@ -1,0 +1,16 @@
+.my-libraries-item {
+    .fa-star, .status-block {
+        display: inline-block;
+        
+    }
+    .status-block { 
+        vertical-align: middle;
+        p {
+            margin: 0;
+            padding: 0;
+        }
+    }
+    .fa-star {
+        vertical-align: top;
+    }
+}

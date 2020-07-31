@@ -103,7 +103,7 @@ const ReferencesList = (props) => {
         setSelectedReferences(state => ( handleIds([...state], id)))
     }
 
-    var disableToolbarClass = disableToolbar? 'disabled':'';
+    // var disableToolbarClass = disableToolbar? 'disabled':'';
 
     return (
         mounted &&

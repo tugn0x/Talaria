@@ -335,7 +335,9 @@ export function* requestUpdateAccessToLibrarySaga(action) {
     const request = yield call(updateAccessToLibrary, options);
     yield call(requestMyLibrariesSaga);
     yield put(push("/patron/my-libraries"));
-    yield call(() => toast.success(action.message))
+    if(action.message){
+      yield call(() => toast.success(action.message))
+    }
   } catch(e) {
     yield put(requestError(e.message));
   }

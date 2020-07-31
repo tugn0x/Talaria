@@ -5,11 +5,12 @@ import { compose } from 'redux';
 import {useIntl} from 'react-intl';
 // import {fields} from './fields';
 import messages from './messages'; 
-import {requestMyLibraries,requestDeleteAccessToLibrary} from '../actions'
+import {requestMyLibraries,requestDeleteAccessToLibrary, requestUpdateAccessToLibrary} from '../actions'
 import makeSelectPatron, {isPatronLoading} from '../selectors';
-import MyLibraryPage from '../MyLibraryPage';
-import {SimpleList} from 'components'
-import {columns} from './columns'
+/* import MyLibraryPage from '../MyLibraryPage';
+import {SimpleList} from 'components' */
+import MyLibrariesList from 'components/Patron/MyLibrariesList';
+// import {columns} from './columns'
 import confirm from 'reactstrap-confirm'
 
 const MyLibrariesListPage = (props) => {
@@ -24,6 +25,9 @@ const MyLibrariesListPage = (props) => {
     }, [])
 
     async function deleteCallback (params) {
+        console.log('deleteCallback')
+        console.log('deleteCallback')
+        console.log('deleteCallback')
         let conf = await confirm({
             title: intl.formatMessage(messages.confirm),
             message: intl.formatMessage(messages.askDeleteMessage),
@@ -35,7 +39,21 @@ const MyLibrariesListPage = (props) => {
     }
    
     return (
-        <SimpleList 
+        <>
+            <MyLibrariesList 
+                data={patron.my_libraries.data}
+                loading={isLoading}
+                pagination={patron.my_libraries.pagination}
+                messages={messages}
+                editPath={`/patron/:library_id?/my-libraries/library/:id?` }
+                setFavorite={(fav, library_id, id) =>  dispatch(requestUpdateAccessToLibrary({
+                    ...fav, 
+                    library_id, 
+                    id })
+                )}
+                deleteCallback={(library_id, id) => deleteCallback({library_id: library_id, id: id})}  
+            />
+        {/*  <SimpleList 
             data={patron.my_libraries.data}
             columns={columns}
             loading={isLoading}
@@ -49,15 +67,11 @@ const MyLibrariesListPage = (props) => {
                 searchOnChange: true
             }}
             // editPath={`/patron/my-libraries/library/:id?`}
-            editPath={
-                {
-                    url: `/patron/:library_id?/my-libraries/library/:id?`,
-                    params: ['library_id', 'id']
-                }
-            } 
+            editPath={`/patron/:library_id?/my-libraries/library/:id?` } 
             deleteCallback={ {callback: deleteCallback, params: ['library_id', 'id'] } }
             modalComponent={ <MyLibraryPage match={match}/>}
-        />
+        />  */}
+        </>
     )
 }
 
