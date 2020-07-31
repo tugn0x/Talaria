@@ -8,7 +8,7 @@
         top: 15px !important;
         max-height: 90vh;
         line-height: 30px;
-        min-width: 200px;
+        min-width: 220px;
         .dropdown-header, .dropdown-item {
             /* display: flex;
             align-items: center;
@@ -111,7 +111,7 @@
         }
         .item {
             line-height: 3.2;
-            height: 40px; 
+            min-height: 40px; 
             border-bottom: 1px solid $dark-bk;
               
             &.head {
@@ -124,7 +124,8 @@
             a {
                 display: block;
                 width: 100%;
-                padding-left: 48px;
+                line-height: 1.3;
+                padding: 8px 8px 8px 48px;
                 &.current {
                     background-color: $active;
                     color: white;
