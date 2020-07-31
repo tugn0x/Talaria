@@ -33,9 +33,14 @@ class DeliveryController extends ApiController
     public function index(Request $request)
     {
         $this->model = $this->filterRelations($request);
-        $collection = $this->nilde->index($this->model, $request);
+        $items = $this->model->get();
+        
+        return $this->response->collection($items, new $this->transformer())->morph();
 
-        return $this->response->paginator($collection, new $this->transformer())->morph();
+        //col paginatore
+        //$collection = $this->nilde->index($this->model, $request);
+        //return $this->response->paginator($collection, new $this->transformer())->morph();
+
     }
 
     public function show(Request $request, $id)

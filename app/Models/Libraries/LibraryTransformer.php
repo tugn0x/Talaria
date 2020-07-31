@@ -23,7 +23,8 @@ class LibraryTransformer extends BaseTransformer
         'titles',
         'country',
         'subject',
-        'catalogs'
+        'catalogs',
+        'deliveries'
     ];
 
     protected $defaultIncludes = [
@@ -68,6 +69,12 @@ class LibraryTransformer extends BaseTransformer
     public function includeCatalogs(Model $model)
     {
         return $this->collection($model->catalogs, new BaseLightTransformer());
+    }
+
+    public function includeDeliveries(Model $model)
+    {
+        if($model->deliveries)
+            return $this->collection($model->deliveries, new DeliveryTransformer());
     }
 
 
