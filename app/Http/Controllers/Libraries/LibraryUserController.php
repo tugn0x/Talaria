@@ -37,6 +37,16 @@ class LibraryUserController extends ApiController
         return $this->response->paginator($my_applications, new $this->transformer())->morph();
     }
 
+    //Elenco biblio attive e ordinate per preferito
+    public function myactiveList(Request $request)
+    {   
+        $collection = $this->nilde->optionList($this->model, $request,function ($model,$request){
+            return $model->owned()->InStatus(config('constants.libraryuser_status.enabled'))->orderBy('preferred','desc');
+        });
+
+        return $this->response->array($collection->toArray());
+    }
+
     public function store(Request $request)
     {
         if( !empty($this->validate) )
