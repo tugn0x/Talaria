@@ -19,7 +19,7 @@ const ReferenceDetail = props => {
                 <div className="list-head features-icons">
                 <ReferenceIcons 
                     data={reference}
-                    icons={['request','oa','edit','print','export']}
+                    icons={['request','oa','edit','print','export','delete']}
                 />
                 </div>
                 <Card className="detail-body">
