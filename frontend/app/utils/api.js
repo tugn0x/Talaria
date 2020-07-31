@@ -331,6 +331,11 @@ export const getPatronRequest = (options) => {
   return request(`${BASE_URL}/api/v1/patronrequests/${options.id}`, options)
 };
 
+export const createPatronRequest = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/patronrequests`, options)
+};
+
 
 // ---------- LIBRARY ---------- //
 export const getLibraryUsersList = (options) => {
