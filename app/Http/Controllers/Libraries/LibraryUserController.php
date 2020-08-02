@@ -41,7 +41,7 @@ class LibraryUserController extends ApiController
     public function myactiveList(Request $request)
     {   
         $collection = $this->nilde->optionList($this->model, $request,function ($model,$request){
-            return $model->owned()->InStatus(config('constants.libraryuser_status.enabled'))->orderBy('preferred','desc');
+            return $model->owned()->InStatus(config('constants.libraryuser_status.enabled'))->join("libraries","library_user.library_id","=","libraries.id")->select("libraries.id","libraries.name")->orderBy('preferred','desc');
         });
 
         return $this->response->array($collection->toArray());
