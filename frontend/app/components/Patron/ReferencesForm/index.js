@@ -9,34 +9,33 @@ import Form from './Form';
 import PreForm from './PreForm';
 
 const ReferencesForm = (props) => {
-    const {createReference, reference, updateReference, messages} = props
+    const {createReference, reference, updateReference, messages, labelsOptionList, applyLabels} = props
     const [goToForm, setGoToForm] = useState(false);
     const intl = useIntl();
     
     return (
         <>
                 {reference  && 
-                    <CustomForm 
-                        submitCallBack={(formData) => updateReference(formData)} 
-                        requestData={reference}
-                        fields={fields} 
-                        title={`${intl.formatMessage({id: 'app.global.update'})}`} 
-                        messages={messages}
-                        submitText={intl.formatMessage(messages.updateSubmitText)}
-                    /> 
+                    <Form 
+                        messages={messages} 
+                        submitCallBack={(formData) => updateReference(formData)}
+                        labelsOptionList={labelsOptionList}
+                        applyLabels={applyLabels}
+                        reference={reference}
+                    />
                 ||
                     <>
-                        {!goToForm && 
-                            <PreForm 
-                                goToForm={setGoToForm}
-                                messages={formMessages}
-                            />
-                        ||
-                            <Form 
-                                messages={messages} 
-                                submitCallBack={(formData) => createReference(formData)}
-                            />
-                        }
+                    {!goToForm && 
+                        <PreForm 
+                            goToForm={setGoToForm}
+                            messages={formMessages}
+                        />
+                    ||
+                        <Form 
+                            messages={messages} 
+                            submitCallBack={(formData) => createReference(formData)}
+                        />
+                    }
                     </>
                 }
         </>

@@ -60,10 +60,10 @@ const RequestItem = (props) => {
                 {data.request_date && <span className="requestDate"><span>Data richiesta</span> <span>{data.request_date}</span></span>}
                 {data.fullfill_date && <span className="fullfillDate"><span>Data evasione</span> <span>{data.fullfill_date}</span></span>}
                 
-                {data.reference.data.labels.data && <span className="labels">
+                {data.reference.data.labels.data && <span className="labels-row">
                     {data.reference.data.labels.data.map(label => <span key={label.id}>{label.name}</span>)}
                 </span>}
-                {data.reference.data.groups.data && <span className="groups">
+                {data.reference.data.groups.data && <span className="groups-row">
                     {data.reference.data.groups.data.map(grp => <span key={grp.id}>{grp.name}</span>)}
                 </span>}
                 
