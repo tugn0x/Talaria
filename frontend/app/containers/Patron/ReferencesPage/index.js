@@ -7,7 +7,7 @@ import makeSelectPatron, {isPatronLoading} from '../selectors';
 import {ReferencesForm,Loader} from 'components';
 import ReferenceDetail from 'components/Patron/ReferenceDetail';
 import ReferenceRequest from 'components/Patron/ReferenceRequest';
-import {requestPostReferences,requestUpdateReferences} from '../actions'
+import {requestPostReferences,requestUpdateReferences,requestMyActiveLibrariesOptionList} from '../actions'
 import messages from './messages'
 import {useIntl} from 'react-intl';
 
@@ -18,12 +18,23 @@ const ReferencesPage = (props) => {
     const reference = patron.reference 
     const intl = useIntl();
     const isNew = !params.id || params.id === 'new'
+    const isRequest = !params.id && params.op=="request"
   
     useEffect(() => {
         if(!isNew && !isLoading){
            dispatch(requestGetReference(params.id))
         }
     }, [params.id])
+
+    useEffect(() => {
+       // if(isRequest && !isLoading){
+           dispatch(requestMyActiveLibrariesOptionList())
+           /*
+            + dispatch della api /libraries/{id}/deliveries/
+            */
+       // }
+    }, [/*isRequest*/])
+    
     
     return (
         <Loader show={isLoading}>

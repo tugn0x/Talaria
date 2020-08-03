@@ -6,6 +6,7 @@
 import produce from 'immer';
 import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_GET_LIBRARY_OPTIONLIST_SUCCESS,
+  REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST,REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST_SUCCESS,
   REQUEST_ACCESS_TO_LIBRARIES,
   REQUEST_UPDATE_ACCESS_TO_LIBRARIES,
   REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS,
@@ -104,6 +105,9 @@ const PatronReducer = (state = initialState, action) =>
         draft.loading = true;
         draft.error = action.error;
         break;
+      case REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST:
+        draft.loading=true;
+        draft.error=action.error;
       case REQUEST_GET_LIBRARY_OPTIONLIST:
         draft.loading = true;
         draft.error = action.error;
@@ -140,6 +144,11 @@ const PatronReducer = (state = initialState, action) =>
         });
         draft.my_libraries.pagination =  action.result.meta.pagination
         break;
+      case REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST_SUCCESS:
+          draft.loading = false;
+          draft.error = initialState.error;
+          draft.libraryOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
+          break;  
       case REQUEST_GET_LIBRARY_OPTIONLIST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;

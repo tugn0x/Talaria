@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardBody, Row, Col} from 'reactstrap';
+import {Button, Card, CardBody, Row, Col} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import ReferenceIcons from '../ReferenceIcons';
 import ButtonBack from 'components/Button/ButtonBack';
@@ -80,9 +80,19 @@ const ReferenceRequest = props => {
                     </Row>
                 </Card>
             </div>
-            <div>
-                * scelta biblio, scelta pickup, costo => richiedi
+            <div className="library">
+                <Card className="detail-body">
+                <Row>
+                        <Col sm={6}>Library</Col>
+                        <Col sm={6}>Pickup</Col>
+                </Row>
+                <p>Service note and cost</p>
+                <p>Cost Policy ...</p>
+                </Card>
             </div>
+            <Button type="submit" className="btn-cta">
+                    {intl.formatMessage({id: 'app.global.submit'})}
+            </Button>
         </div>
     );
 };

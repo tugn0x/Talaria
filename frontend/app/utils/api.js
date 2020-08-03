@@ -163,6 +163,13 @@ export const getMyLibraries = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/my?page=${page}&q=${query}`, options)
 };
 
+export const getMyActiveLibrariesOptionList = (options) => {
+  //const page = options.page;
+  //const query = options.query;
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/myactive`, options)
+};
+
 export const getLibraryOptionList = (options) => {
   options = getOption(options);
   const query = options.query ? options.query : "";

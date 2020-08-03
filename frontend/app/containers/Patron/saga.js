@@ -1,5 +1,6 @@
 import { call, put, select, takeLatest, fork, take  } from 'redux-saga/effects';
 import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO_LIBRARIES,REQUEST_UPDATE_ACCESS_TO_LIBRARIES,REQUEST_DELETE_ACCESS_TO_LIBRARIES,  REQUEST_REFERENCES_LIST,
+  REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST,
   REQUEST_POST_REFERENCES, REQUEST_UPDATE_REFERENCES, 
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST,
   REQUEST_UPDATE_LABEL, REQUEST_REMOVE_LABEL, REQUEST_POST_LABEL,
@@ -10,6 +11,7 @@ import {
   stopLoading,
   requestSuccess,
   requestMyLibrariesSuccess,
+  requestMyActiveLibrariesOptionListSuccess,
   requestGetMyLibrarySuccess,
   /* requestGetLibraryList, */
   requestLibraryOptionListSuccess,
@@ -26,6 +28,7 @@ import { push } from 'connected-react-router';
 import { toast } from "react-toastify";
 import {  getMyLibrary,
           getMyLibraries,
+          getMyActiveLibrariesOptionList,
           getLibraryOptionList,
           requestAccessToLibrary,
           deleteAccessToLibrary,
@@ -65,6 +68,21 @@ export function* requestMyLibrariesSaga(action) {
     yield put(requestError(e.message));
   }
 }
+
+export function* requestMyActiveLibrariesOptionListSaga(action) {
+  const options = {
+    method: 'get',
+    //page: action && action.page ? action.page : '1',
+    //query: action && action.query ? action.query : ''
+  };
+  try {
+    const request = yield call(getMyActiveLibrariesOptionList, options);
+    yield put(requestMyActiveLibrariesOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 
 export function* requestLibraryOptionListSaga(action = {}) {
   const options = {
@@ -455,6 +473,7 @@ export function* requestGetMyLibrarySaga(action) {
  */
 export default function* patronSaga() {
   yield takeLatest(REQUEST_MY_LIBRARIES, requestMyLibrariesSaga);
+  yield takeLatest(REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST,requestMyActiveLibrariesOptionListSaga);
   yield takeLatest(REQUEST_GET_LIBRARY_OPTIONLIST, requestLibraryOptionListSaga);
   yield takeLatest(REQUEST_GET_LABELS_OPTIONLIST, requestLabelsOptionListSaga);
   yield takeLatest(REQUEST_GET_GROUPS_OPTIONLIST, requestGroupsOptionListSaga);

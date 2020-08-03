@@ -5,6 +5,7 @@
  */
 
 import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
+  REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST,REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST_SUCCESS,
   REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_GET_LIBRARY_OPTIONLIST_SUCCESS, 
   REQUEST_ACCESS_TO_LIBRARIES,REQUEST_DELETE_ACCESS_TO_LIBRARIES,
   REQUEST_UPDATE_ACCESS_TO_LIBRARIES,
@@ -137,6 +138,19 @@ export function requestMyLibraries(page, query) {
 export function requestMyLibrariesSuccess(result) {
   return {
     type: REQUEST_MY_LIBRARIES_SUCCESS,
+    result
+  };
+}
+
+export function requestMyActiveLibrariesOptionList() {
+  return {
+    type: REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST
+  };
+}
+
+export function requestMyActiveLibrariesOptionListSuccess(result) {
+  return {
+    type: REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST_SUCCESS,
     result
   };
 }
