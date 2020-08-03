@@ -12,9 +12,6 @@ const MyLibrariesList = props => {
             <div className="section-title">
                 <h1 className="large"><FormattedMessage {...messages.header} /></h1>
             </div>  
-            {console.log('preferred', preferred)}
-            {console.log('preferred', preferred)}
-            {console.log('preferred', preferred)}
             <div className="myLibrariesList list-wrapper">
                 <Loader show={loading}>
                     <div className="list-body">

@@ -281,12 +281,13 @@ export function requestRemoveReferenceGroup(id,groupId,message, filter) {
   };
 }
 
-export function requestApplyLabelsToReferences(refIds,labelIds,message) {
+export function requestApplyLabelsToReferences(refIds,labelIds,message, edit = false) {
   return {
     type: REQUEST_APPLY_LABELS_TO_REFERENCES,
     refIds,
     labelIds,
-    message
+    message,
+    edit
   };
 }
 

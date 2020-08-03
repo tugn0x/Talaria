@@ -1,9 +1,10 @@
 import React from 'react';
 import {NavLink } from 'react-router-dom';
 import { generatePath } from "react-router";
+import ApplyReferencesTag from '../ApplyReferencesTag';
 
 const ReferenceIcons = (props) => {
-    const {data,deleteReference,icons} = props
+    const {data,deleteReference,icons, labelsOptionList, selectedReferences, applyLabels} = props
 
     const referenceUrl='/patron/references/:id?/:op?';
     
@@ -62,9 +63,13 @@ const ReferenceIcons = (props) => {
                 {visibleIcon('export') && <a className="btn btn-icon" onClick={() => console.log("export") }>
                     <i className="fas fa-file-export"></i>
                 </a>}
-                {visibleIcon('assignLabel') && <a className="btn btn-icon" onClick={() => console.log("assignLabel") }>
-                    <span className="icon-tag-plus"></span>
-                </a>}
+                { visibleIcon('assignLabel') &&  
+                    <ApplyReferencesTag
+                        type="label"
+                        submitCallBack={(ids) => applyLabels(ids, selectedReferences)}
+                        options={labelsOptionList} 
+                    /> 
+                }
                 {visibleIcon('assignGroup') && <a className="btn btn-icon" onClick={() => console.log("assignGroup") }>
                     <i className="fas fa-folder-plus"></i>
                 </a>}

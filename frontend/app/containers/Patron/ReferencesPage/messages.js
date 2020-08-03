@@ -112,9 +112,9 @@ export default defineMessages({
     id: `${scope}.createSubmitText`,
     defaultMessage: 'Create Reference',
   },
-  texts: {
-    id: `${scope}.texts`,
-    defaultMessage: 'Texts',
+  thesis: {
+    id: `${scope}.thesis`,
+    defaultMessage: 'Thesis',
   },
   article: {
     id: `${scope}.article`,
@@ -123,6 +123,10 @@ export default defineMessages({
   book: {
     id: `${scope}.book`,
     defaultMessage: 'Book',
+  },
+  chapter: {
+    id: `${scope}.chapter`,
+    defaultMessage: 'Chapter',
   },
   titleAuthorsHead: {
     id: `${scope}.titleAuthorsHead`,

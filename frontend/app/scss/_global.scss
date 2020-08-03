@@ -216,9 +216,9 @@ form {
         display: table;
         margin: 5rem auto 0 auto;
     }
-    .form-group:last-child {
+    /* .form-group:last-child {
         margin: 0;
-    }
+    } */
 }
 
 input[type=text], input[type=email], input[type=password], textarea {
@@ -350,19 +350,20 @@ ul.list-inline {
         align-items: center;
         justify-content: flex-end;
     }
-    .labels span {
-        color: $labels-border;
-        padding: 0 12px 0 0;
-        i.fa {
-            cursor: pointer;
-        }
+}
+
+.labels-row span {
+    color: $labels-border;
+    padding: 0 12px 0 0;
+    i.fa {
+        cursor: pointer;
     }
-    .groups span {
-        color: $groups-border;
-        padding: 0 12px 0 0;
-        i.fa {
-            cursor: pointer;
-        }
+}
+.groups-row span {
+    color: $groups-border;
+    padding: 0 12px 0 0;
+    i.fa {
+        cursor: pointer;
     }
 }
 

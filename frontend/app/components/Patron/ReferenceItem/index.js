@@ -45,11 +45,11 @@ const ReferenceItem = (props) => {
                    <span className="pubyear">Anno <span>{data.pubyear}</span></span>
                 </div>
                 
-                {data.labels.data && <span className="labels">
+                {data.labels.data && <span className="labels-row">
                     {data.labels.data.map(label => <span key={label.id}>{label.name} <i className="fas fa-times"  onClick={() => removeLabel(label.id)}></i></span>)}
                 </span>}
                 
-                {data.groups.data && <span className="groups">
+                {data.groups.data && <span className="groups-row">
                     {data.groups.data.map(grp => <span key={grp.id}>{grp.name} <i className="fas fa-times"  onClick={() => removeGroup(grp.id) }></i></span>)}
                 </span>}
                 

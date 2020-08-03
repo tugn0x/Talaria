@@ -258,11 +258,13 @@ export function* requestApplyLabelsToReferencesSaga(action) {
  // console.log("SAGA REQUESTAPPLYLABELS:",action)
   try {
     const request = yield call(requestApplyLabelsToReferences, options);
-    yield put(requestReferencesList())
+    // se sei nella pagina del singolo riferimento non ricarichi la lista ma la pagina del singolo rif
+    !action.edit ? yield put(requestReferencesList()) : yield call(requestGetReferenceSaga, {id: action.refIds.join()})
+    // Callback dopo il Crea nuova etichetta
     if(action.labelIds.some(labelId => typeof labelId === 'string' )){
       yield call(requestLabelsOptionListSaga)
     }
-    yield call(() => toast.success(action.message))
+    yield call(() => toast.success(action.message)) 
   } catch(e) {
     yield put(requestError(e.message));
   }
