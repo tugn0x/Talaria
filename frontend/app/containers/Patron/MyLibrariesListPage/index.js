@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -15,7 +15,9 @@ import confirm from 'reactstrap-confirm'
 
 const MyLibrariesListPage = (props) => {
     console.log('MyLibrariesListPage', props)
-    const {dispatch, isLoading, patron, match} = props
+    const {dispatch, isLoading, patron, match} = props;
+    const librariesList = patron.my_libraries.data;
+    const [preferred, setPreferred] = useState(null);
     const intl = useIntl();
    
     useEffect(() => {
@@ -24,10 +26,29 @@ const MyLibrariesListPage = (props) => {
         }
     }, [])
 
+    useEffect(() => {
+        librariesList.length > 0 ? checkPreferred() : null
+    }, [librariesList])
+
+    const checkPreferred = () => {
+        librariesList.some(lib => {
+            if(lib.preferred === 1){
+                setPreferred(lib.id)
+            }
+        })
+    }
+
+    const onSetPreferred = (id) => {
+        return
+        /* librariesList.map(lib => {
+            lib.id === id  && !isLoading 
+            ?  dispatch(requestUpdateAccessToLibrary({ preferred: 1, library_id: lib.library_id, id })) 
+            : dispatch(requestUpdateAccessToLibrary({ preferred: 0, library_id: lib.library_id, id })) 
+                
+        }) */
+    }
+ 
     async function deleteCallback (params) {
-        console.log('deleteCallback')
-        console.log('deleteCallback')
-        console.log('deleteCallback')
         let conf = await confirm({
             title: intl.formatMessage(messages.confirm),
             message: intl.formatMessage(messages.askDeleteMessage),
@@ -41,16 +62,14 @@ const MyLibrariesListPage = (props) => {
     return (
         <>
             <MyLibrariesList 
-                data={patron.my_libraries.data}
+                data={librariesList}
                 loading={isLoading}
                 pagination={patron.my_libraries.pagination}
                 messages={messages}
                 editPath={`/patron/:library_id?/my-libraries/library/:id?` }
-                setFavorite={(fav, library_id, id) =>  dispatch(requestUpdateAccessToLibrary({
-                    ...fav, 
-                    library_id, 
-                    id })
-                )}
+               // setPreferred={(library_id, id) => handleSetPreferred(library_id, id)}
+                preferred={preferred}
+                setPreferred={(id) => onSetPreferred(id)} 
                 deleteCallback={(library_id, id) => deleteCallback({library_id: library_id, id: id})}  
             />
         {/*  <SimpleList 

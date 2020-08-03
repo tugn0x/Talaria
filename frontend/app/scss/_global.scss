@@ -421,6 +421,10 @@ ul.list-inline {
     }
 }
 
+.tooltip-inner {
+    font-size: 0.875rem;
+}
+
 .custom-control-input:checked ~ .custom-control-label::before {
     border-color: $brown;
     background-color: $brown;

@@ -5,13 +5,16 @@ import MyLibraryItem from '../MyLibraryItem';
 import { FormattedMessage } from 'react-intl';
 
 const MyLibrariesList = props => {
-    const { loading, data, pagination, messages, setFavorite, deleteCallback } = props
+    const { loading, data, pagination, messages,preferred, setPreferred, deleteCallback } = props
     
     return (
         <>
             <div className="section-title">
                 <h1 className="large"><FormattedMessage {...messages.header} /></h1>
             </div>  
+            {console.log('preferred', preferred)}
+            {console.log('preferred', preferred)}
+            {console.log('preferred', preferred)}
             <div className="myLibrariesList list-wrapper">
                 <Loader show={loading}>
                     <div className="list-body">
@@ -21,7 +24,8 @@ const MyLibrariesList = props => {
                                     key={`my-library-${lib.id}`}
                                     data={lib}
                                     editPath={props.editPath}
-                                    setFavorite={() => setFavorite({preferred: !lib.preferred}, lib.library_id, lib.id)}
+                                    setPreferred={() => setPreferred(lib.id)}
+                                    preferred={preferred}
                                     deleteCallback={() => deleteCallback(lib.library_id, lib.id)}
                                     //editPath={props.editPath}
                                     /* toggleSelection={() => toggleReference(ref.id)}

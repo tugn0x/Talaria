@@ -1,13 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {Row, Col, Button} from 'reactstrap';
+import {Tooltip, Row, Col, Button} from 'reactstrap';
 import { generatePath } from "react-router";
+
 import './style.scss';
 
 const MyLibraryItem = props => {
     console.log('MyLibraryItem', props);
-    const {data, editPath, setFavorite, deleteCallBack} = props;
-   // const [favoriteStar, setFavoriteStar] = useState(data.preferred);
+    const {data, editPath, setPreferred, preferred,  deleteCallback} = props;
+   // const [favoriteStar, setPreferredStar] = useState(data.preferred);
+    const [tooltipOpen, setTooltipOpen] = useState(false);
+    const toggle = () => setTooltipOpen(!tooltipOpen); 
+    
     const editurl = (library_id, id) => {
         return generatePath(`${editPath}`, {
             library_id,
@@ -25,11 +29,11 @@ const MyLibraryItem = props => {
         return status;
     }
 
-    const favouriteStarClass = (pref) => {
+    const preferredStarClass = (pref) => {
         switch (pref)
         {
-          case 0: return 'notpreferred'; break;
-          case 1: return 'preferred'; break;
+          case false: return 'notpreferred'; break;
+          case true: return 'preferred'; break;
           default: return 'notpreferred'; break;
         }
         return pref;
@@ -39,8 +43,9 @@ const MyLibraryItem = props => {
     return (
         <Row className="list-row my-libraries-item justify-content-between">
             <Col sm={3} className="">
-                <i onClick={setFavorite} 
-                    className={`fas fa-star preferred-star ${favouriteStarClass(data.preferred)}`}></i>
+                <Button onClick={setPreferred} color="default" disabled={data.status === 1 ? false : true}>
+                    <i className={`fas fa-star preferred-star ${preferredStarClass(data.id===preferred)}`}></i>
+                </Button>
                 <div className="status-block">
                     <div className={`status-point ${statusClass(data.status)}`}></div>
                     {data.created_at && <p>{data.created_at}</p>}
@@ -49,7 +54,10 @@ const MyLibraryItem = props => {
             </Col>
             <Col sm={2} className="info">
                 <p className="font-weight-bold">Etichetta </p>
-                <p>{data.label}</p>
+                <a href="#" id="toolTipLabel" onClick={toggle} className="active">{data.label}</a>
+                <Tooltip placement="right" isOpen={tooltipOpen} target="toolTipLabel"  toggle={toggle}>
+                    {data.name}
+                </Tooltip>
             </Col>
             <Col sm={5} className="info">
                 {data.department_name && <div><span className="font-weight-bold">Dipartimento </span><span>{data.department_name}</span></div>}
@@ -62,9 +70,9 @@ const MyLibraryItem = props => {
                 <a href={`${editurl(data.library_id, data.id)}`} className="btn btn-icon">
                     <i className="fas fa-edit"></i>
                 </a>
-                <Button color="icon" onClick={deleteCallBack}>
+                <a href="#"  className="btn btn-icon" onClick={deleteCallback}>
                     <i className="fas fa-trash"></i>
-                </Button>
+                </a>
             </Col>  
         </Row>
     );
