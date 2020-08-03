@@ -4,9 +4,6 @@ import "react-toastify/dist/ReactToastify.css";
 import './style.scss';
 
 const Toaster = (props) => {
-    console.log("TOAST", props)
-    console.log("TOAST", props)
-    console.log("TOAST", props)
     return  (
         <ToastContainer
             position="top-right"
