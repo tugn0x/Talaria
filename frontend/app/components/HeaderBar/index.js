@@ -112,7 +112,7 @@ function HeaderBar(props) {
                           </Row>
                           <Row className="item">
                               <NavLink to={`/patron`} activeClassName="current">
-                                Patron main page Patron main page
+                                Patron main page 
                               </NavLink>    
                           </Row>
                         </div>
