@@ -189,4 +189,9 @@ class Library extends BaseModel
     {
         return $this->morphOne('App\Models\Libraries\Delivery', 'deliveryable');
     }
+
+    //Tutti i PdC della biblioteca
+    public function deliveries() {
+        return $this->hasMany(Delivery::class);
+    }
 }

@@ -40,6 +40,10 @@ class LabelPolicy extends BasePolicy
         return $this->canManage($user,$model);
     }
 
+    public function delete(User $user, Model $model)
+    {
+        return $model->isOwner($user->id);
+    }
 
     public function update(User $user, Model $model)
     {

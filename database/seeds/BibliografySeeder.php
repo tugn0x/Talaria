@@ -1,8 +1,11 @@
 <?php
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+// creo un utente con ruolo di patron (quindi abilitato x una biblioteca)
+// con 5 riferimenti di cui 2 in richiesta        
 class BibliografySeeder extends Seeder
 {
     /**
@@ -12,8 +15,7 @@ class BibliografySeeder extends Seeder
      */
     public function run()
     {
-        // creo un utente con ruolo di patron (quindi abilitato x una biblioteca)
-        // con 5 riferimenti di cui 2 in richiesta
+        Model::unguard(); //altrienti non setta la passw perchè è unfillable
         factory(\App\Models\Users\User::class, 1)->create()
         ->each(function ($user) {
             $library1=App\Models\Libraries\Library::find(1);
@@ -40,9 +42,6 @@ class BibliografySeeder extends Seeder
             });
 
         });
-        
-        
-        
-        
+        Model::reguard();
     }
 }

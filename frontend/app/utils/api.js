@@ -269,7 +269,7 @@ export const createReference = (options) => {
 
 export const getReference = (options) => {
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/references/${options.id}`, options)
+  return request(`${BASE_URL}/api/v1/references/${options.id}?include=patronddrequests`, options)
 };
 
 export const updateReference = (options) => {
@@ -301,6 +301,13 @@ export const requestApplyGroupsToReferences = (options) => {
   return request(`${BASE_URL}/api/v1/references/updateSelected`, options)
 };
 
+export const deleteReference = (options) => {
+  const id = options.id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/references/${id}`, options)
+};
+
+
 // ---------- PATRON REQUEST -----//
 export const getRequestsList = (options) => {
   const page = options.page;
@@ -322,6 +329,11 @@ export const getRequestsList = (options) => {
 export const getPatronRequest = (options) => {
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/patronrequests/${options.id}`, options)
+};
+
+export const createPatronRequest = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/patronrequests`, options)
 };
 
 

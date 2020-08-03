@@ -48,38 +48,37 @@
     p {
         font-size: 1rem;
     }
-
-    .statusIcon{
-            height: 25px;
-            width: 25px;
-            border-radius: 50%;
-            display: inline-block;
-            border:1px solid;
-            border-color: #B48372;
-
-            &.requested
-            {
-                background-color: transparent;    
-            }
-
-            &.received,
-            &.fileReceived
-            {
-                background-color: green;
-            }
-
-            
-            &.notReceived,
-            &.canceled {
-                background-color: red;
-            }
-            
-            &.readyToDelivery,
-            &.waitingForCost,
-            &.costAccepted,
-            &.costNotAccepted{
-                background-color: #FBB133;
-            }
-    }
 }
 
+.statusIcon{
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+    border:1px solid;
+    border-color: #B48372;
+
+    &.requested
+    {
+        background-color: transparent;    
+    }
+
+    &.received,
+    &.fileReceived
+    {
+        background-color: green;
+    }
+
+    
+    &.notReceived,
+    &.canceled {
+        background-color: red;
+    }
+    
+    &.readyToDelivery,
+    &.waitingForCost,
+    &.costAccepted,
+    &.costNotAccepted{
+        background-color: #FBB133;
+    }
+}

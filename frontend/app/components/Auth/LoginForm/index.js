@@ -71,7 +71,7 @@ import './style.scss'
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
-                            <i className="icon-user"></i>
+                            <i className="fas fa-user"></i>
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
@@ -86,7 +86,7 @@ import './style.scss'
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
-                            <i className="icon-lock"></i>
+                            <i className="fas fa-lock"></i>
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
@@ -102,16 +102,16 @@ import './style.scss'
                         <Col xs="12">
                           <Button
                             type="submit"
-                            color="grey"
-                            className="px-4"
+                            color="cta"
+                            className="m-auto"
                             // onClick={(e) => submitChange(e)}
                             disabled={props.auth.loading || formData.password === '' || formData.username === ''}
                           >
                             <FormattedMessage {...messages.loginButton} />
                           </Button>
                         </Col>
-                        <Col xs="12">
-                            <NavLink to='/forgot-password' key='/forgot-password' className="px-0 text-grey">
+                        <Col xs="12" className="text-center pt-3">
+                            <NavLink to='/forgot-password' key='/forgot-password' className="text-dark-text">
                               <FormattedMessage {...messages.forgot} />
                             </NavLink>
                         </Col>
@@ -119,7 +119,7 @@ import './style.scss'
                     </Form>
                   </CardBody>
                   <SocialAuth loginFacebook={props.loginFacebook} loginGoogle={props.loginGoogle}/>
-                  <NavLink className="btn-cta" to="/signup">
+                  <NavLink className="btn-cta register-button" to="/signup">
                     {/* <Button
                       color="brown"
                       className="signUpButton"

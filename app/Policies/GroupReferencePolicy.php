@@ -34,6 +34,11 @@ class GroupReferencePolicy extends BasePolicy
          return true;
      }
 
+     public function delete(User $user, Model $model)
+    {
+        return $this->canManage($user,$model);
+    }
+
 
     public function update(User $user, Model $model)
     {

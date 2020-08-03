@@ -24,7 +24,8 @@ function MyLibraryPage(props) {
   const {params} = match
   const isNew = !params.id || params.id === 'new'
   const library = props.library.library
-  const patron = props.library.user
+  const patron = props.library.user;
+  const user_id = props.auth.user.id;
   const departmentOptionList = props.library.departmentOptionList 
   const titleOptionList = props.library.titleOptionList
   const libraryOptionList = props.library.libraryOptionList && props.library.libraryOptionList.map(lib =>  {return {value: lib.id, label: lib.name}})
@@ -103,7 +104,7 @@ function MyLibraryPage(props) {
       }{isNew && 
           <CustomForm 
             submitCallBack={(formData) => dispatch(requestAccessToLibrary(
-            formData,intl.formatMessage(messages.libraryCreateMessage)))} 
+            {...formData, user_id},intl.formatMessage(messages.libraryCreateMessage)))} 
             fields={fieldsIsNew}
             department_id={departmentOptionList} 
             title_id={titleOptionList} 
@@ -118,7 +119,6 @@ function MyLibraryPage(props) {
 }
 
 const mapStateToProps = createStructuredSelector({
-   
   library: makeSelectLibrary()
 });
 

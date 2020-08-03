@@ -20,7 +20,7 @@ import './style.scss';
 
 const ReferencesList = (props) => {
     console.log('ReferencesList', props)
-    const { loading, data, pagination, searchOptions, labelsOptionList, groupsOptionList,removeLabelFromReference,removeGroupFromReference,applyLabels,applyGroups} = props
+    const { loading, data, pagination, searchOptions, labelsOptionList, groupsOptionList,removeLabelFromReference,removeGroupFromReference,applyLabels,applyGroups,deleteReference} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)
@@ -103,7 +103,7 @@ const ReferencesList = (props) => {
         setSelectedReferences(state => ( handleIds([...state], id)))
     }
 
-    var disableToolbarClass = disableToolbar? 'disabled':'';
+    // var disableToolbarClass = disableToolbar? 'disabled':'';
 
     return (
         mounted &&
@@ -211,10 +211,11 @@ const ReferencesList = (props) => {
                                 <ReferenceItem 
                                     key={`reference-${ref.id}`}
                                     data={ref}
-                                    editPath={props.editPath}
+                                    //editPath={props.editPath}
                                     toggleSelection={() => toggleReference(ref.id)}
                                     removeLabel={(labelId) => removeLabelFromReference(ref.id,labelId, multiFilter)}
                                     removeGroup={(groupId) => removeGroupFromReference(ref.id,groupId, multiFilter)}
+                                    deleteReference={() => deleteReference(ref.id,multiFilter)}
                                     checked={selectedReferences.includes(ref.id)}
                                 />
                                 

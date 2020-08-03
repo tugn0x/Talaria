@@ -22,6 +22,10 @@ class ReferenceObserver extends BaseObserver
 
     public function saving($model)
     {
+         //non posso modificare un rif che è attualmente in richiesta o che è stato richiesto
+         if($model->patronddrequests()->count()>0)
+            return false; 
+    
         return parent::saving($model);
 
     }
@@ -34,6 +38,10 @@ class ReferenceObserver extends BaseObserver
 
     public function deleting($model)
     {
+        //non posso eliminare un rif che è attualmente in richiesta
+        if($model->activepatronddrequests()->count()>0)
+            return false; 
+
         return parent::deleting($model);
     }
 

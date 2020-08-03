@@ -52,6 +52,10 @@ export default defineMessages({
     id: `${scope}.removeGroupMessage`,
     defaultMessage: 'Remove this category from this reference?',
   },
+  askDeleteReferenceMessage:{
+    id: `${scope}.deleteReferenceMessage`,
+    defaultMessage: 'Delete this reference?',
+  },
   removedMessage:{
     id: 'app.global.removedMessage',
     defaultMessage: 'Successfully removed',

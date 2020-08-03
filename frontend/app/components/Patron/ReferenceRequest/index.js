@@ -5,23 +5,20 @@ import ReferenceIcons from '../ReferenceIcons';
 import ButtonBack from 'components/Button/ButtonBack';
 import './style.scss';
 
-const ReferenceDetail = props => {
-    console.log('ReferenceDetail', props)
+const ReferenceRequest = props => {
+    console.log('ReferenceRequest', props)
     const {reference, messages} = props
     const intl = useIntl()
     return (
         <div className="detail">
             <div className="section-title">
                 <ButtonBack className="detail-back" />
-                <h1 className="large">{intl.formatMessage(messages.headerDetail)}</h1>
+                <h1 className="large">{intl.formatMessage(messages.headerRequest)}</h1>
+            </div>
+            <div>
+                * check richieste già effettuate o in corso
             </div>
             <div className="reference">
-                <div className="list-head features-icons">
-                <ReferenceIcons 
-                    data={reference}
-                    icons={['request','oa','edit','print','export','delete']}
-                />
-                </div>
                 <Card className="detail-body">
                 <Row>
                         <Col sm={12}>
@@ -83,8 +80,11 @@ const ReferenceDetail = props => {
                     </Row>
                 </Card>
             </div>
+            <div>
+                * scelta biblio, scelta pickup, costo => richiedi
+            </div>
         </div>
     );
 };
 
-export default ReferenceDetail;
+export default ReferenceRequest;

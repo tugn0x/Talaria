@@ -55,15 +55,15 @@ const RequestItem = (props) => {
                    {data.reference.data.first_author && <span className="first_author">Autore <span>{data.reference.data.first_author}</span></span>} 
                    <span className="pubyear">Anno <span>{data.reference.data.pubyear}</span></span>
                 </div>
-                {data.library && <span className="libraryLabel"><span>Biblioteca</span> <span><a title={data.library.data.name}>{data.library_label.data.label}</a></span></span> }
-                {data.delivery && <span className="delivery"><span>Delivery</span> <span>{data.delivery.data.name}></span></span>}
+                {data.library && <span className="libraryLabel"><span>Biblioteca</span> <span>{data.library_label.data.label} <a title={data.library.data.name}><i className="fas fa-info-circle"></i></a></span></span> }
+                {data.delivery && <span className="delivery"><span>Delivery</span> <span>{data.delivery.data.name}</span></span>}
                 {data.request_date && <span className="requestDate"><span>Data richiesta</span> <span>{data.request_date}</span></span>}
                 {data.fullfill_date && <span className="fullfillDate"><span>Data evasione</span> <span>{data.fullfill_date}</span></span>}
                 
-                {data.reference.data.labels.data && <span className="labels">
+                {data.reference.data.labels.data && <span className="labels-row">
                     {data.reference.data.labels.data.map(label => <span key={label.id}>{label.name}</span>)}
                 </span>}
-                {data.reference.data.groups.data && <span className="groups">
+                {data.reference.data.groups.data && <span className="groups-row">
                     {data.reference.data.groups.data.map(grp => <span key={grp.id}>{grp.name}</span>)}
                 </span>}
                 

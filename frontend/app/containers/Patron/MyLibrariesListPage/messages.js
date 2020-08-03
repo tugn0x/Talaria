@@ -32,6 +32,10 @@ export default defineMessages({
     id: 'app.global.deletedMessage',
     defaultMessage: 'Item deleted',
   },
+  librariesNotFound:{
+    id: `${scope}.librariesNotFound`,
+    defaultMessage: 'No libraries found',
+  },
   yes:{
     id: 'app.global.yes',
     defaultMessage: 'Yes',

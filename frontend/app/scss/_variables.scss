@@ -71,6 +71,8 @@ $heightInput: 32px;
 /*----------------*/
 
 // COLORS
+
+/* Refactor - da eliminare - Inizio */
 $theme_color: #DF6D43;
 $grey-light: #EBE2DF;
 $grey-lighter: #F5F5F5;
@@ -80,12 +82,16 @@ $brown: #AB725F;
 $grey-nav-link: #73818f;
 $grey-nav-link-hover: #2f353a;
 $orange: $theme_color;
+/* Fine Refactor */
 
 $labels-color: #DAD0EE;
 $labels-border: #8A4991;
 
 $groups-color: #C9E3F8;
 $groups-border: #73A6CC;
+
+$facebook: #3b5998;
+$google-plus: #DD4B39;
 
 $theme-colors: (
   "brown": $brown,
@@ -97,7 +103,7 @@ $theme-colors: (
   "white": $main-menu,
   "dark-bk": $dark-bk,
   "dark-text": $dark-text,
-  "alternative": $alternative-text
+  "alternative": $alternative-text,
 );
 
 /* Biblioteca  = fas fa-landmark
