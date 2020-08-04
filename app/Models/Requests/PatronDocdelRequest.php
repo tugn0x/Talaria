@@ -20,6 +20,9 @@ Ovviamente quelle che hanno fw=1 vengono nascoste dall'interfaccia (xke' di fatt
 */
 
 /* NB: in questa classe non c'e' il user_id in quanto usiamo il campo created_by*/
+
+//NOTA 5/8/2020: al momento non viene gestita l'accettazione della cancellaz richiesta da parte della biblio
+//quindi l'utente richiede cancellazione e si ferma li (viene chiamata API e agg. lo stato con date)
 class PatronDocdelRequest extends BaseModel
 {
     protected $fillable = [
@@ -27,7 +30,7 @@ class PatronDocdelRequest extends BaseModel
         'reference_id',
         //'user_id', //usiamo create_by
         'librarycounter', //rm_countbib: ogni biblio si vede le rich utente partire da 1 usando questo campo
-        'status',
+        //'status',  //status NON deve essere fillable perchè lo gestisco tramite StatusProvider
         'request_date',
         'cancel_request_date', //data rich. cancellazione
         'cancel_date', //data accettaz. cancellazione
@@ -54,8 +57,6 @@ class PatronDocdelRequest extends BaseModel
     ];
 
     protected $simpleSearchField="pub_title"; //ricerca sul riferimento
-
-    protected $constantFields=['status'];
 
 
     public function reference()

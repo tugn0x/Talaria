@@ -10,7 +10,7 @@ $factory->define(PatronDocdelRequest::class, function (Faker $faker) {
     return [
         'borrowing_library_id'=>null,
         'reference_id'=>null,
-        'status'=>20, //requested
+        'status'=>'requested',
         'request_date'=>$faker->dateTime(),
         'archived'=>0,
         'delivery_id'=>null,   

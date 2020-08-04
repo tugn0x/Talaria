@@ -28,7 +28,5 @@ Route::group([
     Route::get('{id}', 'PatronDocdelRequestController@show')->name('show');
     Route::put('{id}', 'PatronDocdelRequestController@update')->name('update');
     Route::post('', 'PatronDocdelRequestController@store')->name('create');
-    
-    //questa delete in realtà deve scatenare la cancel sulla DDRequest alla biblio!
-    //Route::post('', 'PatronDocdelRequestController@delete')->name('delete');
+    Route::put('{id}/changestatus', 'PatronDocdelRequestController@changeStatus')->name('changeStatus');
 });
