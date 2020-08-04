@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Card, CardBody, Row, Col} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import ReferenceIcons from '../ReferenceIcons';
-import ButtonBack from 'components/Button/ButtonBack';
+import SectionTitle from 'components/SectionTitle';
 import './style.scss';
 
 const ReferenceRequest = props => {
@@ -11,10 +11,10 @@ const ReferenceRequest = props => {
     const intl = useIntl()
     return (
         <div className="detail">
-            <div className="section-title">
-                <ButtonBack className="detail-back" />
-                <h1 className="large">{intl.formatMessage(messages.headerRequest)}</h1>
-            </div>
+            <SectionTitle 
+                title={messages.headerRequest}
+                back={true}
+            />
             <div>
                 * check richieste già effettuate o in corso
             </div>

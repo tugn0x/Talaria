@@ -7,7 +7,7 @@ import Loader from 'components/Form/Loader';
 import {useIntl} from 'react-intl';
 import RequestItem from '../RequestItem';
 import FilterSelect from '../FilterSelect';
-
+import SectionTitle from 'components/SectionTitle';
 import './style.scss';
 
 const RequestsList = (props) => {
@@ -93,7 +93,9 @@ const RequestsList = (props) => {
     return (
         mounted &&
         <>
-            <h1 className="section-title large"><FormattedMessage {...messages.header} /></h1>
+            <SectionTitle 
+                title={messages.header}
+            />
             <div className="search-filter-bar">
                 <Row>
                     <Col sm={4}>

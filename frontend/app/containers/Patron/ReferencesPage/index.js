@@ -14,6 +14,7 @@ import {requestPostReferences,requestUpdateReferences,
         requestRemoveReferenceGroup, requestDeleteReference} from '../actions'
 import messages from './messages';
 import confirm from "reactstrap-confirm";
+import SectionTitle from 'components/SectionTitle';
 import {useIntl} from 'react-intl';
 
 
@@ -98,10 +99,16 @@ const ReferencesPage = (props) => {
                         reference={reference} 
                     />
                 ||
-                    <ReferenceDetail 
-                        messages={messages}
-                        reference={reference} 
-                    />
+                    <div className="detail">
+                        <SectionTitle 
+                            back={true}
+                            title={messages.headerDetail}
+                        />
+                        <ReferenceDetail 
+                            messages={messages}
+                            reference={reference} 
+                        />
+                    </div>
                 )
             }
         </Loader>

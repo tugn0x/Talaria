@@ -7,6 +7,7 @@ import Input from 'components/Form/Input';
 import ErrorBox from 'components/Form/ErrorBox';
 import ApplyReferencesTag from '../ApplyReferencesTag';
 import {requiredConditions} from './requiredConditions';
+import SectionTitle from 'components/SectionTitle';
 import './style.scss';
 
 
@@ -64,11 +65,9 @@ const FormCreate = (props) => {
 
     return (
         <>
-            <div className="section-title">
-                <h1 className="large">
-                    {intl.formatMessage(messages.header)}
-                </h1>
-            </div>
+            <SectionTitle 
+                title={messages.header}
+            />
             <FormContainer onSubmit={onSubmit}  className="reference-form" noValidate>
                 <FormGroup className="radio-buttons">
                     <RadioButton 

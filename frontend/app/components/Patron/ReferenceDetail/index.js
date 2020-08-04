@@ -1,58 +1,31 @@
 import React from 'react';
-import {Card, CardBody, Row, Col} from 'reactstrap';
+import {Card, Row, Col} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import ReferenceIcons from '../ReferenceIcons';
-import ButtonBack from 'components/Button/ButtonBack';
-import './style.scss';
 
 const ReferenceDetail = props => {
     console.log('ReferenceDetail', props)
-    const {reference, messages} = props
+    const {reference, messages, icons} = props
     const intl = useIntl()
     return (
-        <div className="detail">
-            <div className="section-title">
-                <ButtonBack className="detail-back" />
-                <h1 className="large">{intl.formatMessage(messages.headerDetail)}</h1>
-            </div>
-            <div className="reference">
+        <>
                 <div className="list-head features-icons">
-                <ReferenceIcons 
-                    data={reference}
-                    icons={['request','oa','edit','print','export','delete']}
-                />
+                    <ReferenceIcons 
+                        data={reference}
+                        icons={icons ? icons : ['request','oa','edit','print','export']}
+                    />
                 </div>
                 <Card className="detail-body">
-                <Row>
-                        <Col sm={12}>
-                        {reference.groups && 
-                        <ul id="referenceGroups" className="referenceGroups">    
-                            {reference.groups.data.map( el => 
-                                <li key={el.id} className="referenceGroup">{el.name}</li>
-                                ) 
-                            }
-                        </ul>
-                        }
-                        {reference.labels && 
-                        <ul id="referenceLabels" className="referenceLabels">    
-                            {reference.labels.data.map( el => 
-                                <li key={el.id} className="referenceLabel">{el.name}</li>
-                                ) 
-                            }
-                        </ul>}
-                       </Col>
-                    </Row>
                     <Row>
                         <Col sm={12}>
                             <p className="text-brown">{intl.formatMessage(messages.pub_title)}</p>
                             <p>{reference.pub_title}</p>
                         </Col>
                     </Row>
-                    
-                    <Row className="my-5">
+                    <Row>
                         <Col sm={3}>
                             <p className="text-brown">{intl.formatMessage(messages.material_type)}</p>
-                            <p>{reference.material_type}</p>
+                            <p>{reference.material_type_key}</p>
                         </Col>
                     
                         <Col sm={3}>
@@ -76,14 +49,42 @@ const ReferenceDetail = props => {
                             <p>{reference.first_author}</p>
                         </Col>
                     
-                        <Col sm={2}>
+                        <Col sm={6}>
                             <p className="text-brown">{intl.formatMessage(messages.part_title)}</p>
                             <p>{reference.part_title}</p>
                         </Col>
                     </Row>
+                    <Row>
+                        <Col sm={5}>
+                            {reference.labels && 
+                                <>
+                                    <p className="text-brown">{intl.formatMessage({id: "app.routes.Labels"})}</p>  
+                                    <ul>    
+                                        {reference.labels.data.map( el => 
+                                            <li key={el.id}>{el.name}</li>
+                                            ) 
+                                        }
+                                    </ul>
+                                </>
+                            }
+                        </Col>
+                        <Col sm={5}>
+                            {reference.groups && 
+                                <>
+                                    <p className="text-brown">{intl.formatMessage({id: "app.routes.Categories"})}</p>  
+                                    <ul>    
+                                        {reference.groups.data.map( el => 
+                                            <li key={el.id}>{el.name}</li>
+                                            ) 
+                                        }
+                                    </ul>
+                                </>
+                            }
+                        </Col>
+                    </Row>
                 </Card>
-            </div>
-        </div>
+            
+        </>
     );
 };
 

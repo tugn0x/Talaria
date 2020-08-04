@@ -7,6 +7,7 @@ import Input from 'components/Form/Input';
 import ErrorBox from 'components/Form/ErrorBox';
 import ReferenceIcons from '../ReferenceIcons';
 import {requiredConditions} from './requiredConditions';
+import SectionTitle from 'components/SectionTitle';
 import './style.scss';
 
 
@@ -57,11 +58,9 @@ const FormEdit = (props) => {
 
     return (
         <>
-            <div className="section-title">
-                <h1 className="large">
-                    {intl.formatMessage(messages.headerDetail)}
-                </h1>
-            </div>
+            <SectionTitle 
+                title={messages.headerDetail}
+            />
             <FormContainer onSubmit={onSubmit}  className="reference-form" noValidate>
                 <FormGroup className="radio-buttons">
                     <RadioButton 

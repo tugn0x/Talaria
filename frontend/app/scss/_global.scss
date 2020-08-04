@@ -28,11 +28,11 @@ a {
     }
 }
 
-h3.title-section {
+/* h3.title-section {
     font-size: 2.642rem;
     text-align: center;
     font-weight: 700;
-}
+} */
 
 .btn {
     border-radius: 0;
@@ -166,6 +166,12 @@ button[type=button] {
                 padding-top: 3.571rem;
             }
         }
+        &.login-main {
+            > .container {
+                margin-top: 1rem;
+               
+            }
+        }
     }
 }
 
@@ -254,6 +260,23 @@ ul.list-inline {
     border-color: $grey-light;
     background-color: $box-color;
     padding: 1.5rem 6.785rem;
+}
+
+// Detail Teaser / Blok
+.detail {
+    .card-body {
+        padding: 6.7rem;
+    }
+    p {
+        margin: 0;
+    }
+    ul {
+        padding: 0;
+        margin: 0;
+    }
+    .row {
+        margin: 2rem 0;
+    }
 }
 
 /* .table {
@@ -378,23 +401,6 @@ ul.list-inline {
     padding: 0 15px;
 }
 
-
-// PAGE TITLE SECTION
-
-.section-title {
-    h1 {
-        font-weight: 700;
-        text-align: center;
-        flex: 1;
-    }
-    padding: 0 15px;
-    position: absolute;
-    right: 0;
-    left: 0;
-    top: -4rem;
-    display: flex;
-    align-items: center;
-}
 
 .status-point {
     width: 20px;

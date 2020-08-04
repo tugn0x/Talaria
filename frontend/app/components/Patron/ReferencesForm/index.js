@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import {CustomForm} from 'components';
-import {fields} from './fields';
+/* import {CustomForm} from 'components';
+import {fields} from './fields'; */
 // import messages from './messages';
 // import Loader from 'components/Form/Loader.js';
-import {useIntl} from 'react-intl';
+// import {useIntl} from 'react-intl';
 import formMessages from './messages';
 import FormEdit from './FormEdit';
 import FormCreate from './FormCreate';
@@ -14,7 +14,7 @@ const ReferencesForm = (props) => {
             labelsOptionList, applyLabels, groupsOptionList, 
             applyGroups, removeLabel, removeGroup, deleteReference} = props
     const [goToForm, setGoToForm] = useState(false);
-    const intl = useIntl();
+    
     
     return (
         <>
@@ -52,13 +52,5 @@ const ReferencesForm = (props) => {
     )
 }
 
-/* 
-<CustomForm 
-    submitCallBack={(formData) => createReference(formData)} 
-    fields={fields} 
-    title={intl.formatMessage(messages.header)} 
-    messages={messages}
-    submitText={intl.formatMessage(messages.createSubmitText)}
-/> */
 
 export default ReferencesForm

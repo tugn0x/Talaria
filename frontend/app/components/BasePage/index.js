@@ -82,7 +82,7 @@ function BasePage(props) {
                 routes={lightRoutes} 
                 location={props.location}/>
             )}
-            <main className="main">
+            <main className={`${!props.isLogged ? "main login-main" : "main"}`}>
               <Container>
                 <Row>
                   {windowSize === 'desktop' && 
