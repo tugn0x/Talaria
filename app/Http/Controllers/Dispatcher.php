@@ -199,10 +199,14 @@ class Dispatcher extends BaseController
         event($model->getTable() . '.update', $model);
 
         $fillable = $model->getFillable();
+        /* BUG: con questo codice non pulisce i campi passati come null/vuoti
         $new_model = array_filter($request->only($fillable), function($val)
         {
             return !is_null($val);
-        });
+        });*/
+        //FIX: in questo modo prendo solo i campi fillable indipendentemente che mi sia passato un null/empty
+        $new_model = $request->only($fillable);
+
 
         /*
          * fill the model with attributes
