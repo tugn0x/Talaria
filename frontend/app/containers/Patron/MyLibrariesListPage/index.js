@@ -3,14 +3,10 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {useIntl} from 'react-intl';
-// import {fields} from './fields';
 import messages from './messages'; 
 import {requestMyLibraries,requestDeleteAccessToLibrary, requestUpdateAccessToLibrary} from '../actions'
 import makeSelectPatron, {isPatronLoading} from '../selectors';
-/* import MyLibraryPage from '../MyLibraryPage';
-import {SimpleList} from 'components' */
 import MyLibrariesList from 'components/Patron/MyLibrariesList';
-// import {columns} from './columns'
 import confirm from 'reactstrap-confirm'
 
 const MyLibrariesListPage = (props) => {

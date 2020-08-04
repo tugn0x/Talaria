@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {Tooltip, Row, Col, Button} from 'reactstrap';
+import {UncontrolledTooltip, Row, Col, Button} from 'reactstrap';
 import { generatePath } from "react-router";
 
 import './style.scss';
@@ -9,8 +9,8 @@ const MyLibraryItem = props => {
     console.log('MyLibraryItem', props);
     const {data, editPath, setPreferred, preferred,  deleteCallback} = props;
    // const [favoriteStar, setPreferredStar] = useState(data.preferred);
-    const [tooltipOpen, setTooltipOpen] = useState(false);
-    const toggle = () => setTooltipOpen(!tooltipOpen); 
+    // const [tooltipOpen, setTooltipOpen] = useState(false);
+    // const toggle = () => setTooltipOpen(!tooltipOpen); 
     
     const editurl = (library_id, id) => {
         return generatePath(`${editPath}`, {
@@ -54,10 +54,10 @@ const MyLibraryItem = props => {
             </Col>
             <Col sm={2} className="info">
                 <p className="font-weight-bold">Etichetta </p>
-                <a href="#" id="toolTipLabel" onClick={toggle} className="active">{data.label}</a>
-                <Tooltip placement="right" isOpen={tooltipOpen} target="toolTipLabel"  toggle={toggle}>
+                <a href="#" id={`tooltip-${data.id}`} className="active">{data.label}</a>
+                <UncontrolledTooltip placement="right" trigger="click"  target={`tooltip-${data.id}`}>
                     {data.name}
-                </Tooltip>
+                </UncontrolledTooltip>
             </Col>
             <Col sm={5} className="info">
                 {data.department_name && <div><span className="font-weight-bold">Dipartimento </span><span>{data.department_name}</span></div>}
