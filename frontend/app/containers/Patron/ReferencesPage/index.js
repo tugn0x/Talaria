@@ -25,7 +25,7 @@ const ReferencesPage = (props) => {
     const reference = patron.reference 
     const intl = useIntl();
     const isNew = !params.id || params.id === 'new'
-    const isRequest = !params.id && params.op=="request"
+    const isRequest = params.id && params.op=="request"
     const labelsOptionList = patron.labelsOptionList;
     const groupsOptionList = patron.groupsOptionList;
 
@@ -41,13 +41,13 @@ const ReferencesPage = (props) => {
     }, [params.id])
 
     useEffect(() => {
-       // if(isRequest && !isLoading){
+       if(isRequest && !isLoading){
            dispatch(requestMyActiveLibrariesOptionList())
            /*
             + dispatch della api /libraries/{id}/deliveries/
             */
-       // }
-    }, [/*isRequest*/])
+       }
+    }, [isRequest])
 
     async function deleteReference (id) {
         let conf = await confirm({
@@ -93,7 +93,7 @@ const ReferencesPage = (props) => {
                         removeGroup={(id, groupId) => dispatch(requestRemoveReferenceGroup(id,groupId,'removeGroup'))}
                         updateReference={ (formData) => dispatch(requestUpdateReferences(formData, params.id, intl.formatMessage(messages.referenceUpdate))) } />
                 ||
-                params.op && params.op=="request" &&
+                !isNew && isRequest &&
                     <ReferenceRequest
                         messages={messages}
                         reference={reference} 
