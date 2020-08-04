@@ -21,28 +21,13 @@ const FormCreate = (props) => {
     const intl = useIntl();
    
     const handleChange = (value, field_name) =>{
-        if(field_name === 'labels'){
-            setFormData(state => ({ ...formData, labelIds: state.labelIds ? [...state.labelIds, value] : [value] }));
-        } else if(field_name === 'groups'){
-            setFormData(state => ({ ...formData, groupIds: state.groupIds ? [...state.groupIds, value] : [value] }));
-        }
-        else {
-            setFormData({ ...formData, [field_name]: value});
-        }
+        setFormData({ ...formData, [field_name]: value});
         isSubmitDisabled && setIsSubmitDisabled(false)
     } 
 
-    const removeLabel = id => {
-        setFormData(state => ({...state, labelIds: [...state.labelIds.filter(labelId => labelId !== id)] }))
-    }
-
-    const removeGroup = id => {
-        setFormData(state => ({...state, groupIds: [...state.groupIds.filter(groupId => groupId !== id)] }))
-    }
-
-    useEffect(() => {
+   useEffect(() => {
         setRequiredFields(() => requiredConditions(formData));
-        console.log(formData)
+        
      }, [formData])
 
 
@@ -93,36 +78,6 @@ const FormCreate = (props) => {
                         error={  intl.formatMessage({ id: 'app.global.invalid_field' })}
                     /> 
                 </FormGroup>
-                
-                <Row className="list-head">
-                    <div className="features-icons">
-                        <ApplyReferencesTag
-                            type="label"
-                            submitCallBack={(id) => handleChange(id, 'labels')}
-                            options={labelsOptionList} 
-                        />
-                        <ApplyReferencesTag
-                            type="group"
-                            submitCallBack={(id) => handleChange(id, 'groups')}
-                            options={groupsOptionList} 
-                        /> 
-                    </div>
-                </Row>
-                
-                {formData.labelIds && 
-                    <div className="labels-row">
-                        { labelsOptionList.filter(labelOption => formData.labelIds.includes(labelOption.value)).map(label => (
-                            <span key={label.value}>{label.label}<i className="fas fa-times"  onClick={() => removeLabel(label.value)}></i></span>
-                        )) }
-                    </div>
-                } 
-                {formData.groupIds && 
-                    <div className="groups-row">
-                        { groupsOptionList.filter(groupOption => formData.groupIds.includes(groupOption.value)).map(group => (
-                            <span key={group.value}>{group.label}<i className="fas fa-times"  onClick={() => removeGroup(group.value)}></i></span>
-                        )) }
-                    </div>
-                } 
                 <h3>{intl.formatMessage(messages.titleAuthorsHead)}</h3>
                 <Card>
                     <FormGroup >

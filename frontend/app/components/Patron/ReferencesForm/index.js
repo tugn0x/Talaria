@@ -42,8 +42,6 @@ const ReferencesForm = (props) => {
                             <FormCreate 
                                 messages={messages} 
                                 submitCallBack={(formData) => createReference(formData)}
-                                labelsOptionList={labelsOptionList}
-                                groupsOptionList={groupsOptionList}
                             />
                         }
                     </>
