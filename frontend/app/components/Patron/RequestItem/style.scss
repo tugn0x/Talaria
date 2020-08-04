@@ -2,32 +2,6 @@
 
 .list-row {
     .info {
-        span {
-            padding-right: 3px;
-        }
-
-        p {
-            margin: 0;
-        }
-        .pub_title {
-
-        }
-        .part_title {
-            font-style: italic;
-        }
-        .authors {
-            > span
-            {
-                font-weight: bold;
-                padding-right: 10px;
-                span
-                {
-                    font-weight: normal;
-                    padding-right: 0px;
-                }
-            }
-        } 
-
         .libraryLabel >span:first-child,
         .delivery >span:first-child,
         .requestDate >span:first-child,
@@ -38,26 +12,21 @@
         } 
         
     }
-     
-    .select-checkbox {
-        i {
-            font-size: 1.5rem;
-            padding-left: 38px;
-        }
-    }
-    p {
-        font-size: 1rem;
-    }
 }
 
-.statusIcon{
-    height: 25px;
-    width: 25px;
+.status-text {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.status-icon{
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
     display: inline-block;
     border:1px solid;
     border-color: #B48372;
-
+    margin: 0 .5rem;
     &.requested
     {
         background-color: transparent;    

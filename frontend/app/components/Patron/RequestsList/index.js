@@ -8,6 +8,7 @@ import {useIntl} from 'react-intl';
 import RequestItem from '../RequestItem';
 import FilterSelect from '../FilterSelect';
 import SectionTitle from 'components/SectionTitle';
+import CustomCheckBox from 'components/Form/CustomCheckBox';
 import './style.scss';
 
 const RequestsList = (props) => {
@@ -164,7 +165,7 @@ const RequestsList = (props) => {
                 <Row className="list-head">
                     <div className="select-checkbox">
                         <div className="features-icons" >
-                            <input type="checkbox" onChange={(e)=>toggleAllCheckbox(e)}/>
+                            <CustomCheckBox handleChange={(e)=>toggleAllCheckbox(e)} />
                             {<Button disabled={disableToolbar} color="icon">
                                 <i className="fas fa-print"></i>
                             </Button>}

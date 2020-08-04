@@ -365,6 +365,40 @@ ul.list-inline {
         padding-left: 0;
         padding-right: 0;
     }
+    .info {
+        p {
+            margin: 0;
+        }
+        .pub_title {
+
+        }
+        .part_title {
+            font-style: italic;
+        }
+        .authors {
+            > span
+            {
+                font-weight: bold;
+                padding-right: 10px;
+                span
+                {
+                    font-weight: normal;
+                    padding-right: 0px;
+                }
+            }
+            
+        } 
+    }
+    
+    .select-checkbox {
+        i {
+            font-size: 1.5rem;
+            padding-left: 18px;
+        }
+    }
+    p {
+        font-size: 1rem;
+    }
     &:last-child {
         border: none;
     }

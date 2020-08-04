@@ -4,7 +4,6 @@ import {NavLink } from 'react-router-dom';
 import { generatePath } from "react-router";
 import ReferenceIcons from '../ReferenceIcons';
 import CustomCheckBox from 'components/Form/CustomCheckBox';
-import './style.scss';
 
 const ReferenceItem = (props) => {
     const {data,toggleSelection,checked,removeLabel,removeGroup,deleteReference} = props

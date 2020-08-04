@@ -46,9 +46,6 @@
             }
         }
         .section-title {
-            h1.large {
-                font-size: 1.2857rem;
-            }
             position: static;
             margin-bottom: 1.428rem;
         }
@@ -98,6 +95,13 @@
 }
 
 @include media-breakpoint-down(xs) {
+    .app-body {
+        .section-title {
+            h1.large {
+                font-size: 1.2857rem;
+            }
+        }
+    }
     body.sidebar-show {
         overflow-y: hidden;
     }
