@@ -9,6 +9,7 @@ import messages from './messages';
 import Loader from 'components/Form/Loader';
 import {useIntl} from 'react-intl';
 import InputSearch from 'components/Form/InputSearch';
+import SectionTitle from 'components/SectionTitle';
 
 const ReferencesLabels = props => {
     // console.log('ReferencesLabels', props)
@@ -36,9 +37,9 @@ const ReferencesLabels = props => {
 
     return (
         <>
-        <div className="section-title">
-            <h1 className="large">{intl.formatMessage(messages.labels)}</h1>
-        </div>
+        <SectionTitle 
+            title={messages.labels}
+        />
         <div className="ReferencesLabels tags-list">
             <InputSearch
                 icon="fas fa-save"

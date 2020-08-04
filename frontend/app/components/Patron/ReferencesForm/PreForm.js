@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Card, Button} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import InputSearch from 'components/Form/InputSearch';
+import SectionTitle from 'components/SectionTitle';
 
 const PreForm = ({goToForm, messages}) => {
     
@@ -10,11 +11,9 @@ const PreForm = ({goToForm, messages}) => {
 
     return (
         <>
-            <div className="section-title">
-                <h1 className="large">
-                    {intl.formatMessage(messages.header)}
-                </h1>
-            </div>
+            <SectionTitle 
+                title={messages.header}
+            />
             <Card className="pb-5">
                 <p className="big text-center pt-4">{intl.formatMessage(messages.bodySearch)}</p>
                 <InputSearch

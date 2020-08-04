@@ -9,6 +9,7 @@ import messages from './messages';
 import Loader from 'components/Form/Loader';
 import {useIntl} from 'react-intl';
 import InputSearch from 'components/Form/InputSearch';
+import SectionTitle from 'components/SectionTitle';
 // import './style.scss';
 
 
@@ -37,9 +38,9 @@ const ReferencesGroups = props => {
 
     return (
         <>
-        <div className="section-title">
-            <h1 className="large">{intl.formatMessage(messages.groups)}</h1>
-        </div>
+        <SectionTitle 
+            title={messages.groups}
+        />
         <div className="ReferencesGroups tags-list">
             <InputSearch
                 icon="fas fa-save"

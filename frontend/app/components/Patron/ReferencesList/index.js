@@ -15,7 +15,7 @@ import ReferenceItem from '../ReferenceItem';
 import FilterSelect from '../FilterSelect';
 import ApplyReferencesTag from '../ApplyReferencesTag';
 import CustomCheckBox from 'components/Form/CustomCheckBox';
-
+import SectionTitle from 'components/SectionTitle';
 import './style.scss';
 
 const ReferencesList = (props) => {
@@ -108,9 +108,9 @@ const ReferencesList = (props) => {
     return (
         mounted &&
         <>
-            <div className="section-title">
-                <h1 className="large"><FormattedMessage {...messages.header} /></h1>
-            </div>
+            <SectionTitle 
+                title={messages.header}
+            />
             <div className="search-filter-bar">
                 <Row>
                     <Col md={4} sm={12}>

@@ -45,14 +45,15 @@
                 }
             }
         }
-    }
-    .section-title {
-        h1.large {
-            font-size: 1.2857rem;
+        .section-title {
+            h1.large {
+                font-size: 1.2857rem;
+            }
+            position: static;
+            margin-bottom: 1.428rem;
         }
-        position: static;
-        margin-bottom: 1.428rem;
     }
+    
     .container {
         max-width: 660px
     }

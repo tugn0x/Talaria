@@ -4,7 +4,7 @@ import { generatePath } from "react-router";
 import ApplyReferencesTag from '../ApplyReferencesTag';
 
 const ReferenceIcons = (props) => {
-    const {data,deleteReference,icons, labelsOptionList, selectedReferences, applyLabels} = props
+    const {data,deleteReference,icons, labelsOptionList, groupsOptionList , applyGroups, applyLabels, selectedReferences} = props
 
     const referenceUrl='/patron/references/:id?/:op?';
     
@@ -66,13 +66,17 @@ const ReferenceIcons = (props) => {
                 { visibleIcon('assignLabel') &&  
                     <ApplyReferencesTag
                         type="label"
-                        submitCallBack={(ids) => applyLabels(ids, selectedReferences)}
+                        submitCallBack={(id) => applyLabels(id, selectedReferences)}
                         options={labelsOptionList} 
                     /> 
                 }
-                {visibleIcon('assignGroup') && <a className="btn btn-icon" onClick={() => console.log("assignGroup") }>
-                    <i className="fas fa-folder-plus"></i>
-                </a>}
+                {visibleIcon('assignGroup') && 
+                    <ApplyReferencesTag
+                        type="group"
+                        submitCallBack={(ids) => applyGroups(ids, selectedReferences)}
+                        options={groupsOptionList} 
+                    /> 
+                }
                 {canEdit(data) && visibleIcon('edit') && <NavLink to={`${editurl(data.id)}`}  className="btn btn-icon">
                     <i className="fas fa-edit"></i>
                 </NavLink>}

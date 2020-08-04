@@ -131,8 +131,7 @@ export function* requestRemoveReferenceLabelSaga(action) {
   };
   try {
     const request = yield call(removeReferenceLabel, options);
-    yield put(requestReferencesList(null, null, action.filter))
-   // yield put(push("/patron/references"));
+    !action.filter ? yield call(requestGetReferenceSaga, {id: action.id}) : yield put(requestReferencesList(null, null, action.filter))
     yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
@@ -147,7 +146,7 @@ export function* requestRemoveReferenceGroupSaga(action) {
   };
   try {
     const request = yield call(removeReferenceGroup, options);
-    yield put(requestReferencesList(null, null, action.filter))
+    !action.filter ? yield call(requestGetReferenceSaga, {id: action.id}) : yield put(requestReferencesList(null, null, action.filter))
    // yield put(push("/patron/references"));
     yield call(() => toast.success(action.message))
   } catch(e) {
@@ -161,8 +160,7 @@ export function* requestDeleteReferenceSaga(action) {
   };
   try {
     const request = yield call(deleteReference, options);
-    yield put(requestReferencesList(null, null, action.filter))
-   // yield put(push("/patron/references"));
+    !action.filter ? yield put(push("/patron/references")) : yield put(requestReferencesList(null, null, action.filter))
     yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
@@ -275,11 +273,11 @@ export function* requestApplyLabelsToReferencesSaga(action) {
       labelIds: action.labelIds,
     }
   };
- // console.log("SAGA REQUESTAPPLYLABELS:",action)
+ 
   try {
     const request = yield call(requestApplyLabelsToReferences, options);
     // se sei nella pagina del singolo riferimento non ricarichi la lista ma la pagina del singolo rif
-    !action.edit ? yield put(requestReferencesList()) : yield call(requestGetReferenceSaga, {id: action.refIds.join()})
+    !action.refreshRef ? yield put(requestReferencesList()) : yield call(requestGetReferenceSaga, {id: action.refIds.join()})
     // Callback dopo il Crea nuova etichetta
     if(action.labelIds.some(labelId => typeof labelId === 'string' )){
       yield call(requestLabelsOptionListSaga)
@@ -300,7 +298,9 @@ export function* requestApplyGroupsToReferencesSaga(action) {
   };
   try {
     const request = yield call(requestApplyGroupsToReferences, options);
-    yield put(requestReferencesList())
+    // se sei nella pagina del singolo riferimento non ricarichi la lista ma la pagina del singolo rif
+    !action.refreshRef ? yield put(requestReferencesList()) : yield call(requestGetReferenceSaga, {id: action.refIds.join()})
+    // Callback dopo il Crea nuova etichetta
     if(action.groupIds.some(groupId => typeof groupId === 'string' )){
       yield call(requestGroupsOptionListSaga)
     }

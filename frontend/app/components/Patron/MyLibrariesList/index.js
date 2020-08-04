@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import Loader from 'components/Form/Loader';
 import MyLibraryItem from '../MyLibraryItem';
 import { FormattedMessage } from 'react-intl';
+import SectionTitle from 'components/SectionTitle';
 
 const MyLibrariesList = props => {
     const { loading, data, pagination, messages,preferred, setPreferred, deleteCallback } = props
     
     return (
         <>
-            <div className="section-title">
-                <h1 className="large"><FormattedMessage {...messages.header} /></h1>
-            </div>  
+            <SectionTitle 
+                title={messages.header}
+            />
             <div className="myLibrariesList list-wrapper">
                 <Loader show={loading}>
                     <div className="list-body">
