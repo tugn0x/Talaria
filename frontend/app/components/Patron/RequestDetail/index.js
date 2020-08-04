@@ -10,8 +10,8 @@ const RequestDetail = props => {
     console.log('RequestDetail', props)
     const {patronrequest, messages,referenceMessages} = props
     
-    const statusIcon = (status_key) => {
-        return "statusIcon " + status_key
+    const statusIcon = (status) => {
+        return "statusIcon " + status
     }
 
     const intl = useIntl()
@@ -36,7 +36,7 @@ const RequestDetail = props => {
                 <CardBody>
                     <CardTitle>Dati Richiesta</CardTitle>
                     <Row><Col sm={12}>
-                        <span className={statusIcon(patronrequest.status_key)}></span> {intl.formatMessage(messages[patronrequest.status_key])}  
+                        <span className={statusIcon(patronrequest.status)}></span> {intl.formatMessage(messages[patronrequest.status])}  
                         Archiviata: {patronrequest.archived}
                     </Col>                        
                     </Row>

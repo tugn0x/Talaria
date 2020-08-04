@@ -7,7 +7,7 @@ import messages from './messages'
 import './style.scss';
 
 const RequestItem = (props) => {
-    const {data, editPath,toggleSelection,checked} = props
+    const {data, editPath,toggleSelection,checked,archiveRequest,askCancelRequest} = props
     const intl = useIntl();
         
     
@@ -21,8 +21,8 @@ const RequestItem = (props) => {
         return mat;
       }
     
-      const statusIcon = (status_key) => {
-          return "statusIcon " + status_key
+      const statusIcon = (status) => {
+          return "statusIcon " + status
       }
     
     const requesturl=(id) => {
@@ -32,12 +32,12 @@ const RequestItem = (props) => {
     }
 
     const canArchive = (data) => {
-        if(data.status_key=="canceled" || data.status_key=="received"|| data.status_key=="fileReceived" || data.status_key=="notReceived") return true;
+        if(data.status=="canceled" || data.status=="received"|| data.status=="fileReceived" || data.status=="notReceived") return true;
         return false;
     }
 
     const canDelete = (data) => {
-        if(! (data.status_key=="canceled" || data.status_key=="received"|| data.status_key=="fileReceived" || data.status_key=="notReceived" ) ) return true;
+        if(! (data.status=="canceled" || data.status=="received"|| data.status=="fileReceived" || data.status=="notReceived" || data.status=="userAskCancel" ) ) return true;
         return false;
     }
 
@@ -45,7 +45,7 @@ const RequestItem = (props) => {
         <Row className="list-row justify-content-between">
             <Col sm={3} className="select-checkbox">
                 <input type="checkbox" onChange={toggleSelection} value={data.id} checked={checked}/>
-                <span className={statusIcon(data.status_key)}></span> {intl.formatMessage(messages[data.status_key])} <i className={matTypeIcon(data.reference.data.material_type)}></i>
+                <span className={statusIcon(data.status)}></span> {intl.formatMessage(messages[data.status])} <i className={matTypeIcon(data.reference.data.material_type)}></i>
             </Col>
             <Col sm={7} className="info">
                 <NavLink to={`${requesturl(data.id)}`}>
@@ -72,10 +72,10 @@ const RequestItem = (props) => {
             <Col sm={2} className="icons align-self-center">
             {!data.archived && 
             <>
-                {canArchive(data) && <NavLink to="#" className="btn btn-icon">
+                {canArchive(data) && <a href="#" onClick={() => archiveRequest(data.id)} className="btn btn-icon">
                     <i className="fas fa-hdd"></i>
-                </NavLink>}
-                {canDelete(data) && <a href="#" onClick={() => console.log('delete request')} className="btn btn-icon">
+                </a>}
+                {canDelete(data) && <a href="#" onClick={() => askCancelRequest(data.id)} className="btn btn-icon">
                     <i className="fas fa-trash"></i>
                 </a> }
             </>

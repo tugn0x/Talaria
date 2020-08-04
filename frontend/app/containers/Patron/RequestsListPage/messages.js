@@ -56,6 +56,22 @@ export default defineMessages({
     id: 'app.global.addedMessage',
     defaultMessage: 'Successfully added',
   },
+  askArchiveRequestMessage:{
+    id: `${scope}.askArchiveRequestMessage`,
+    defaultMessage: 'Archive this request?',
+  },
+  archivedMessage:{
+    id: 'app.global.archivedMessage',
+    defaultMessage: 'Successfully archived',
+  },
+  askCancelRequestMessage:{
+    id: `${scope}.askCancelRequestMessage`,
+    defaultMessage: 'Cancel this request?',
+  },
+  canceledMessage:{
+    id: 'app.global.canceledMessage',
+    defaultMessage: 'Successfully canceled',
+  },
   yes:{
     id: 'app.global.yes',
     defaultMessage: 'Yes',

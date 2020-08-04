@@ -12,6 +12,8 @@ import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS, 
   REQUEST_REQUESTS_LIST, REQUEST_REQUESTS_LIST_SUCCESS,
   REQUEST_GET_REQUEST, REQUEST_GET_REQUEST_SUCCESS, 
+  REQUEST_UPDATE_REQUEST,REQUEST_ARCHIVE_REQUEST,
+  REQUEST_CHANGE_STATUS_REQUEST,
   REQUEST_POST_REFERENCES, REQUEST_SUCCESS,
   REQUEST_GET_REFERENCE, REQUEST_GET_REFERENCE_SUCCESS,
   REQUEST_UPDATE_REFERENCES, 
@@ -102,6 +104,34 @@ export function requestGetRequest(id) {
   return {
     type: REQUEST_GET_REQUEST,
     id,
+  };
+}
+
+export function requestUpdateRequest(request, id, message) {
+  return {
+    type: REQUEST_UPDATE_REQUEST,
+    request,
+    id,
+    message
+  };
+}
+
+export function requestArchiveRequest(id, message,filter) {
+  return {
+    type: REQUEST_ARCHIVE_REQUEST,
+    id,
+    message,
+    filter
+  };
+}
+
+export function requestChangeStatusRequest(id,status, message,filter) {
+  return {
+    type: REQUEST_CHANGE_STATUS_REQUEST,
+    id,
+    status,
+    message,
+    filter
   };
 }
 
