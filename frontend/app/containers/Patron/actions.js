@@ -295,22 +295,23 @@ export function requestRemoveReferenceGroup(id,groupId,message, filter) {
   };
 }
 
-export function requestApplyLabelsToReferences(refIds,labelIds,message, edit = false) {
+export function requestApplyLabelsToReferences(refIds,labelIds,message, refreshRef = false) {
   return {
     type: REQUEST_APPLY_LABELS_TO_REFERENCES,
     refIds,
     labelIds,
     message,
-    edit
+    refreshRef
   };
 }
 
-export function requestApplyGroupsToReferences(refIds,groupIds,message) {
+export function requestApplyGroupsToReferences(refIds,groupIds,message,  refreshRef = false) {
   return {
     type: REQUEST_APPLY_GROUPS_TO_REFERENCES,
     refIds,
     groupIds,
-    message
+    message,
+    refreshRef
   };
 }
 

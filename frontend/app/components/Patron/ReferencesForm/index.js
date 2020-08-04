@@ -5,37 +5,47 @@ import {fields} from './fields';
 // import Loader from 'components/Form/Loader.js';
 import {useIntl} from 'react-intl';
 import formMessages from './messages';
-import Form from './Form';
+import FormEdit from './FormEdit';
+import FormCreate from './FormCreate';
 import PreForm from './PreForm';
 
 const ReferencesForm = (props) => {
-    const {createReference, reference, updateReference, messages, labelsOptionList, applyLabels} = props
+    const {createReference, reference, updateReference, messages, 
+            labelsOptionList, applyLabels, groupsOptionList, 
+            applyGroups, removeLabel, removeGroup, deleteReference} = props
     const [goToForm, setGoToForm] = useState(false);
     const intl = useIntl();
     
     return (
         <>
                 {reference  && 
-                    <Form 
+                    <FormEdit 
                         messages={messages} 
                         submitCallBack={(formData) => updateReference(formData)}
                         labelsOptionList={labelsOptionList}
+                        groupsOptionList={groupsOptionList}
                         applyLabels={applyLabels}
+                        applyGroups={applyGroups}
+                        removeLabel={removeLabel}
+                        removeGroup={removeGroup}
                         reference={reference}
+                        deleteReference={deleteReference}
                     />
                 ||
                     <>
-                    {!goToForm && 
-                        <PreForm 
-                            goToForm={setGoToForm}
-                            messages={formMessages}
-                        />
-                    ||
-                        <Form 
-                            messages={messages} 
-                            submitCallBack={(formData) => createReference(formData)}
-                        />
-                    }
+                        {!goToForm && 
+                            <PreForm 
+                                goToForm={setGoToForm}
+                                messages={formMessages}
+                            />
+                        ||
+                            <FormCreate 
+                                messages={messages} 
+                                submitCallBack={(formData) => createReference(formData)}
+                                labelsOptionList={labelsOptionList}
+                                groupsOptionList={groupsOptionList}
+                            />
+                        }
                     </>
                 }
         </>

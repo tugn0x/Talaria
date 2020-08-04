@@ -5,37 +5,45 @@ import RadioButton from 'components/Form/RadioButton';
 import scrollTo from 'utils/scrollTo';
 import Input from 'components/Form/Input';
 import ErrorBox from 'components/Form/ErrorBox';
-import ReferenceIcons from '../ReferenceIcons';
+import ApplyReferencesTag from '../ApplyReferencesTag';
 import {requiredConditions} from './requiredConditions';
 import './style.scss';
 
-const Form = (props) => {
-    console.log('Form Reference', props)
-    const {reference, messages, submitCallBack, applyLabels, labelsOptionList} = props;
+
+const FormCreate = (props) => {
+    console.log('FormCreate Reference', props)
+    const {reference, messages, submitCallBack, labelsOptionList, groupsOptionList} = props;
     const [formData, setFormData] = useState({material_type: 1, pubyear: "", first_author: "", volume: "", page_start: ""})
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
     const [requiredFields, setRequiredFields] = useState(true)
    
     const intl = useIntl();
    
-
     const handleChange = (value, field_name) =>{
-        setFormData({ ...formData, [field_name]: value});
+        if(field_name === 'labels'){
+            setFormData(state => ({ ...formData, labelIds: state.labelIds ? [...state.labelIds, value] : [value] }));
+        } else if(field_name === 'groups'){
+            setFormData(state => ({ ...formData, groupIds: state.groupIds ? [...state.groupIds, value] : [value] }));
+        }
+        else {
+            setFormData({ ...formData, [field_name]: value});
+        }
         isSubmitDisabled && setIsSubmitDisabled(false)
     } 
 
+    const removeLabel = id => {
+        setFormData(state => ({...state, labelIds: [...state.labelIds.filter(labelId => labelId !== id)] }))
+    }
+
+    const removeGroup = id => {
+        setFormData(state => ({...state, groupIds: [...state.groupIds.filter(groupId => groupId !== id)] }))
+    }
+
     useEffect(() => {
         setRequiredFields(() => requiredConditions(formData));
-        console.log(requiredConditions(formData))
-    }, [formData])
+        console.log(formData)
+     }, [formData])
 
-    useEffect(() => {
-        if(reference && Object.keys(reference.length > 0)){
-            setFormData({...formData, ...reference})
-        }
-    },[reference])
-
-  
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -58,11 +66,7 @@ const Form = (props) => {
         <>
             <div className="section-title">
                 <h1 className="large">
-                    {reference && 
-                        intl.formatMessage(messages.headerDetail)
-                    ||
-                        intl.formatMessage(messages.header)
-                    }
+                    {intl.formatMessage(messages.header)}
                 </h1>
             </div>
             <FormContainer onSubmit={onSubmit}  className="reference-form" noValidate>
@@ -90,25 +94,36 @@ const Form = (props) => {
                         error={  intl.formatMessage({ id: 'app.global.invalid_field' })}
                     /> 
                 </FormGroup>
-                {reference &&
-                    <Row className="list-head">
-                        <div className="features-icons">
-                            <ReferenceIcons 
-                                data={reference ? reference : {}}
-                                icons={['assignLabel']}
-                                labelsOptionList={labelsOptionList}
-                                applyLabels={applyLabels}
-                                selectedReferences={[reference ? reference.id : null]}
-                                // deleteReference={deleteReference}
-                            />
-                        </div>
-                    </Row>
-                }
-                {reference && reference.labels && Object.keys(reference.labels.data).length > 0 &&
-                    <div className="labels-row">
-                        {reference.labels.data.map(label => <span key={label.id}>{label.name} <i className="fas fa-times"  onClick={() => null}></i></span>)}
+                
+                <Row className="list-head">
+                    <div className="features-icons">
+                        <ApplyReferencesTag
+                            type="label"
+                            submitCallBack={(id) => handleChange(id, 'labels')}
+                            options={labelsOptionList} 
+                        />
+                        <ApplyReferencesTag
+                            type="group"
+                            submitCallBack={(id) => handleChange(id, 'groups')}
+                            options={groupsOptionList} 
+                        /> 
                     </div>
-                }
+                </Row>
+                
+                {formData.labelIds && 
+                    <div className="labels-row">
+                        { labelsOptionList.filter(labelOption => formData.labelIds.includes(labelOption.value)).map(label => (
+                            <span key={label.value}>{label.label}<i className="fas fa-times"  onClick={() => removeLabel(label.value)}></i></span>
+                        )) }
+                    </div>
+                } 
+                {formData.groupIds && 
+                    <div className="groups-row">
+                        { groupsOptionList.filter(groupOption => formData.groupIds.includes(groupOption.value)).map(group => (
+                            <span key={group.value}>{group.label}<i className="fas fa-times"  onClick={() => removeGroup(group.value)}></i></span>
+                        )) }
+                    </div>
+                } 
                 <h3>{intl.formatMessage(messages.titleAuthorsHead)}</h3>
                 <Card>
                     <FormGroup >
@@ -116,14 +131,12 @@ const Form = (props) => {
                             label={formData.material_type === 1 ? intl.formatMessage(messages.journalLabel) : formData.material_type === 2 ? intl.formatMessage(messages.book) : intl.formatMessage(messages.thesis)}
                             handleChange={(value) => handleChange(value, 'pub_title')}
                             required={true}
-                            input={reference ? reference.pub_title : ""}
                         />
                     </FormGroup>
                     <FormGroup>
                         <Input 
                             label={formData.material_type === 1 ? intl.formatMessage(messages.articleLabel) : formData.material_type === 2 ? intl.formatMessage(messages.chapter) : intl.formatMessage(messages.articleLabel)}
                             handleChange={(value) => handleChange(value, 'part_title')}
-                            input={reference ? reference.part_title : ""}
                             required={true}
                         />
                     </FormGroup>
@@ -131,7 +144,6 @@ const Form = (props) => {
                         <Input 
                             label={intl.formatMessage(messages.authorsLabel)}
                             handleChange={(value) => handleChange(value, 'first_author')}
-                            input={reference  ? reference.first_author : ""}
                             required={requiredFields}
                         />
                     </FormGroup>
@@ -146,7 +158,6 @@ const Form = (props) => {
                                 label={intl.formatMessage(messages.pubyear)}
                                 type="number"
                                 handleChange={(value) => handleChange(value, 'pubyear')}
-                                input={reference ? reference.pubyear : ""}
                                 required={requiredFields}
                             />
                         </FormGroup>
@@ -155,7 +166,6 @@ const Form = (props) => {
                                 label={intl.formatMessage(messages.volume)}
                                 type="number"
                                 handleChange={(value) => handleChange(value, 'volume')}
-                                input={reference ? reference.volume : ""}
                                 required={requiredFields}
                             />
                         </FormGroup>
@@ -164,7 +174,6 @@ const Form = (props) => {
                                 label={intl.formatMessage(messages.page_start)}
                                 type="number"
                                 handleChange={(value) => handleChange(value, 'page_start')}
-                                input={reference ? reference.page_start : ""}
                                 required={requiredFields}
                             />
                         </FormGroup>
@@ -173,8 +182,6 @@ const Form = (props) => {
                                 label={intl.formatMessage(messages.page_end)}
                                 type="number"
                                 handleChange={(value) => handleChange(value, 'page_end')}
-                                input={reference ? reference.page_end : ""}
-                                // required={true}
                             />
                         </FormGroup>
                     </Row>
@@ -183,16 +190,12 @@ const Form = (props) => {
                             <Input 
                                 label={intl.formatMessage(messages.publisher)}
                                 handleChange={(value) => handleChange(value, 'publisher')}
-                                input={reference ? reference.publisher : ""}
-                                // required={true}
                             />
                         </FormGroup>
                         <FormGroup className="col-md-4">
                             <Input 
                                 label={intl.formatMessage(messages.publishing_place)}
                                 handleChange={(value) => handleChange(value, 'publishing_place')}
-                                input={reference  ? reference.publishing_place : ""}
-                                // required={true}
                             />
                         </FormGroup>
                     </Row>
@@ -204,16 +207,12 @@ const Form = (props) => {
                             <Input 
                                 label={formData.material_type === 2 ? intl.formatMessage(messages.isbn) : intl.formatMessage(messages.issn)}
                                 handleChange={(value) => handleChange(value, `${formData.material_type === 2 ? "isbn" : "issn"}`)}
-                                input={formData.material_type === 2 &&  reference ? reference.isbn : reference ? reference.issn : ""}
-                               // required={true}
                             />
                         </FormGroup>
                         <FormGroup className="col-md-3">
                             <Input 
                                 label={intl.formatMessage(messages.doi)}
                                 handleChange={(value) => handleChange(value, 'doi')}
-                                input={reference ? reference.doi : ""}
-                                // required={true}
                             />
                         </FormGroup>
                         {formData.material_type !== 2 &&
@@ -221,8 +220,6 @@ const Form = (props) => {
                                 <Input 
                                     label={intl.formatMessage(messages.pmid)}
                                     handleChange={(value) => handleChange(value, 'pmid')}
-                                    input={reference ? reference.pmid : ""}
-                                   // required={true}
                                 />
                             </FormGroup>
                         }
@@ -232,8 +229,6 @@ const Form = (props) => {
                             <Input 
                                 label={intl.formatMessage(messages.sid)}
                                 handleChange={(value) => handleChange(value, 'sid')}
-                                input={reference ? reference.sid : ""}
-                                // required={true}
                             />
                         </FormGroup>
                     </Row>
@@ -242,7 +237,6 @@ const Form = (props) => {
                 <Card>
                     <Input 
                         handleChange={(value) => handleChange(value, 'abstract')}
-                        input={reference ? reference.abstract : ""}
                         type="textarea"
                     />
                     
@@ -251,7 +245,6 @@ const Form = (props) => {
                 <Card>
                     <Input 
                         handleChange={(value) => handleChange(value, 'note')}
-                        input={reference ? reference.note : ""}
                         type="textarea"
                     />
                 </Card>
@@ -263,4 +256,4 @@ const Form = (props) => {
     );
 };
 
-export default Form;
+export default FormCreate;

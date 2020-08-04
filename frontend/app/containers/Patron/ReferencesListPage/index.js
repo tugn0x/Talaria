@@ -12,7 +12,7 @@ import { compose } from 'redux';
 // import ReferencesPage from '../ReferencesPage';
 /* import {SimpleList} from 'components' */
 import ReferencesList from 'components/Patron/ReferencesList';
-import {columns} from './columns'
+
 import messages from './messages'
 import confirm from "reactstrap-confirm";
 
@@ -89,7 +89,7 @@ const ReferencesListPage = (props) => {
         
             <ReferencesList 
                 data={referencesList}
-                columns={columns}
+               // columns={columns}
                 loading={isLoading}
                 pagination={pagination}
                 history={history}

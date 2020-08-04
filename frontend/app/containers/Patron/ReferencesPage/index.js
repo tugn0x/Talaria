@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {requestGetReference} from '../actions'
+import {requestGetReference, requestRemoveLabel} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -7,8 +7,13 @@ import makeSelectPatron, {isPatronLoading} from '../selectors';
 import {ReferencesForm,Loader} from 'components';
 import ReferenceDetail from 'components/Patron/ReferenceDetail';
 import ReferenceRequest from 'components/Patron/ReferenceRequest';
-import {requestPostReferences,requestUpdateReferences,requestMyActiveLibrariesOptionList, requestLabelsOptionList, requestApplyLabelsToReferences} from '../actions'
-import messages from './messages'
+import {requestPostReferences,requestUpdateReferences,
+        requestMyActiveLibrariesOptionList, requestLabelsOptionList, 
+        requestGroupsOptionList, requestApplyLabelsToReferences, 
+        requestApplyGroupsToReferences, requestRemoveReferenceLabel,
+        requestRemoveReferenceGroup, requestDeleteReference} from '../actions'
+import messages from './messages';
+import confirm from "reactstrap-confirm";
 import {useIntl} from 'react-intl';
 
 
@@ -21,12 +26,17 @@ const ReferencesPage = (props) => {
     const isNew = !params.id || params.id === 'new'
     const isRequest = !params.id && params.op=="request"
     const labelsOptionList = patron.labelsOptionList;
-    // const groupsOptionList = patron.groupsOptionList
+    const groupsOptionList = patron.groupsOptionList;
+
     useEffect(() => {
         if(!isNew && !isLoading){
-           dispatch(requestGetReference(params.id))
-           dispatch(requestLabelsOptionList())
+           dispatch(requestGetReference(params.id));
         }
+        if(!isLoading){
+            dispatch(requestLabelsOptionList());
+            dispatch(requestGroupsOptionList());
+        }
+        
     }, [params.id])
 
     useEffect(() => {
@@ -37,18 +47,35 @@ const ReferencesPage = (props) => {
             */
        // }
     }, [/*isRequest*/])
+
+    async function deleteReference (id) {
+        let conf = await confirm({
+             title: intl.formatMessage({id: 'app.global.confirm'}),
+             // message: intl.formatMessage(messages.askRemoveLabelMessage),
+             message: "Remove Reference",
+             confirmText: intl.formatMessage({id: 'app.global.yes'}),
+             cancelText: intl.formatMessage({id: 'app.global.no'})
+         }); //
+         if(conf)
+             dispatch(requestDeleteReference(id,intl.formatMessage({id: 'app.global.removedMessage'})))
+     }
     
     const applyLabelsToReferences = (labelIds,refIds) => {
         dispatch(requestApplyLabelsToReferences(refIds,[labelIds],'etichetta applicata', true))
+     }
+    const applyGroupsToReferences = (labelIds,refIds) => {
+        dispatch(requestApplyGroupsToReferences(refIds,[labelIds],'etichetta applicata', true))
      }
     
     return (
         <Loader show={isLoading}>
             {isNew && (
                 <ReferencesForm 
-                   //  loading={isLoading} 
                     messages={messages}
-                    createReference={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } />
+                    createReference={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } 
+                    labelsOptionList={labelsOptionList}
+                    groupsOptionList={groupsOptionList}
+                />
                 )
             }
             {!isNew && ( 
@@ -57,7 +84,12 @@ const ReferencesPage = (props) => {
                         messages={messages}
                         reference={reference}
                         labelsOptionList={labelsOptionList}
+                        groupsOptionList={groupsOptionList}
                         applyLabels={applyLabelsToReferences}
+                        applyGroups={applyGroupsToReferences}
+                        deleteReference={(id) => deleteReference(id)}
+                        removeLabel={(id, labelId) => dispatch(requestRemoveReferenceLabel(id,labelId, 'removeLabel' ))}
+                        removeGroup={(id, groupId) => dispatch(requestRemoveReferenceGroup(id,groupId,'removeGroup'))}
                         updateReference={ (formData) => dispatch(requestUpdateReferences(formData, params.id, intl.formatMessage(messages.referenceUpdate))) } />
                 ||
                 params.op && params.op=="request" &&
