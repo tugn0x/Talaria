@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {Card, Form as FormContainer, FormGroup, Button, Row} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import RadioButton from 'components/Form/RadioButton';
@@ -6,17 +6,18 @@ import scrollTo from 'utils/scrollTo';
 import Input from 'components/Form/Input';
 import ErrorBox from 'components/Form/ErrorBox';
 import ReferenceIcons from '../ReferenceIcons';
+import {requiredConditions} from './requiredConditions';
 import './style.scss';
 
 const Form = (props) => {
     console.log('Form Reference', props)
     const {reference, messages, submitCallBack, applyLabels, labelsOptionList} = props;
-    const [formData, setFormData] = useState({material_type: 1})
+    const [formData, setFormData] = useState({material_type: 1, pubyear: "", first_author: "", volume: "", page_start: ""})
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
-    const [requiredFields, setRequiredFields] = useState({
-        pubyear: false, page_start: false, first_author: false, volume: false })
-   // const [formData.material_type, setMaterialType] = useState(1);
+    const [requiredFields, setRequiredFields] = useState(true)
+   
     const intl = useIntl();
+   
 
     const handleChange = (value, field_name) =>{
         setFormData({ ...formData, [field_name]: value});
@@ -24,50 +25,17 @@ const Form = (props) => {
     } 
 
     useEffect(() => {
-        /* if(formData.first_author === "" && formData.pubyear === ""){ 
-            setRequiredFields(state => ({...state, pubyear: true, first_author: true}))
-        }
-        else if(formData.page_start === "" && formData.pubyear === ""){ 
-            setRequiredFields(state => ({...state, pubyear: true, page_start: true}))
-        } */ 
-        
-
-        /* if(formData.volume !== ""){
-            if(formData.first_author === ""){
-                setRequiredFields(state => ({...state, first_author: true}))
-            }
-            else if(formData.page_start === ""){
-                setRequiredFields(state => ({...state, page_start: true}))
-            }
-        }else {
-            setRequiredFields(state => ({...state, volume: true}))
-        } */
-       
-        
+        setRequiredFields(() => requiredConditions(formData));
+        console.log(requiredConditions(formData))
     }, [formData])
 
     useEffect(() => {
         if(reference && Object.keys(reference.length > 0)){
-            setFormData({...formData, material_type: reference.material_type} )
-          //  setFormData({...formData, ...reference})
-          //  setMaterialType(reference.material_type)
+            setFormData({...formData, ...reference})
         }
-        //console.log(reference)
     },[reference])
 
-    const setRequired = (field) => {
-        /* let required = false
-        switch(field) {
-            case 'pubyear':
-                formData[field] === "" && formData.page_start !== ""  
-                ? required = true 
-                : formData[field] === "" && formData.first_author !== "" 
-                ? required = true 
-                : required = false 
-            break;
-        }
-        return required; */
-    }
+  
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -80,14 +48,8 @@ const Form = (props) => {
             
             return
         } else {
-            let dataToSend = {}
-            // Nel caso ci siano option list, allora restituisci solo l id / value del risultato
-            /* Object.keys(formData).map(key => {
-                 dataToSend[key] = typeof formData[key] === 'object' && formData[key].hasOwnProperty('value') ?  formData[key].value : formData[key]
-                
-            }) */ 
             // Tutto ok invia Form!
-          //  submitCallBack(formData)
+            submitCallBack(formData)
             console.log("Send Form", formData)
         }
     }
@@ -170,7 +132,7 @@ const Form = (props) => {
                             label={intl.formatMessage(messages.authorsLabel)}
                             handleChange={(value) => handleChange(value, 'first_author')}
                             input={reference  ? reference.first_author : ""}
-                            required={requiredFields.first_author}
+                            required={requiredFields}
                         />
                     </FormGroup>
                     <FormGroup >
@@ -180,13 +142,12 @@ const Form = (props) => {
                 <Card>
                     <Row>
                         <FormGroup className="col-md-2">
-                        {console.log(requiredFields.pubyear)}
                             <Input 
                                 label={intl.formatMessage(messages.pubyear)}
                                 type="number"
                                 handleChange={(value) => handleChange(value, 'pubyear')}
                                 input={reference ? reference.pubyear : ""}
-                                required={requiredFields.pubyear}
+                                required={requiredFields}
                             />
                         </FormGroup>
                         <FormGroup className="col-md-2">
@@ -195,7 +156,7 @@ const Form = (props) => {
                                 type="number"
                                 handleChange={(value) => handleChange(value, 'volume')}
                                 input={reference ? reference.volume : ""}
-                                required={requiredFields.volume}
+                                required={requiredFields}
                             />
                         </FormGroup>
                         <FormGroup className="col-md-2">
@@ -204,7 +165,7 @@ const Form = (props) => {
                                 type="number"
                                 handleChange={(value) => handleChange(value, 'page_start')}
                                 input={reference ? reference.page_start : ""}
-                                required={requiredFields.page_start}
+                                required={requiredFields}
                             />
                         </FormGroup>
                         <FormGroup className="col-md-2">
@@ -244,7 +205,7 @@ const Form = (props) => {
                                 label={formData.material_type === 2 ? intl.formatMessage(messages.isbn) : intl.formatMessage(messages.issn)}
                                 handleChange={(value) => handleChange(value, `${formData.material_type === 2 ? "isbn" : "issn"}`)}
                                 input={formData.material_type === 2 &&  reference ? reference.isbn : reference ? reference.issn : ""}
-                                required={true}
+                               // required={true}
                             />
                         </FormGroup>
                         <FormGroup className="col-md-3">
