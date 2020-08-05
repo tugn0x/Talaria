@@ -9,13 +9,11 @@ const ReferenceDetail = props => {
     const intl = useIntl()
     return (
         <>
-                <div className="list-head features-icons">
-                    <ReferenceIcons 
+                <ReferenceIcons 
                         data={reference}
                         icons={icons ? icons : ['request','oa','edit','print','export','delete']}
                         deleteReference={deleteReference}
-                    />
-                </div>
+                />
                 <Card className="detail-body">
                     <Row>
                         <Col sm={3}>

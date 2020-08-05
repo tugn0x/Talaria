@@ -44,12 +44,13 @@ const ReferenceIcons = (props) => {
     }
 
     const visibleIcon = (icon) => {
-        return icons.indexOf(icon)>=0;
+        return icons && icons.indexOf(icon)>=0;
     }
 
 
     return ( 
-        <>
+        icons && icons.length>0 && 
+        <div className="list-head features-icons">
                 {canRequest(data) && visibleIcon('request') && <NavLink to={`${requesturl(data.id)}`}  className="btn btn-icon">
                     <i className="fas fa-share"></i>
                 </NavLink>}
@@ -84,7 +85,7 @@ const ReferenceIcons = (props) => {
                     <i className="fas fa-trash"></i>
                 </a> }
         
-        </>
+        </div>
     )
 }
 
