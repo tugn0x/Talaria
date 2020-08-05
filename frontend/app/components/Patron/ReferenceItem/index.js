@@ -41,7 +41,7 @@ const ReferenceItem = (props) => {
                 </NavLink>
                 <div className="authors">
                    {data.first_author && <span className="first_author">Autore <span>{data.first_author}</span></span>} 
-                   <span className="pubyear">Anno <span>{data.pubyear}</span></span>
+                   {data.pubyear && <span className="pubyear">Anno <span>{data.pubyear}</span></span>}
                 </div>
                 
                 {data.labels.data && <span className="labels-row">

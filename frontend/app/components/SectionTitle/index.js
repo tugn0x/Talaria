@@ -15,7 +15,10 @@ const SectionTitle = ({back, title}) => {
 };
 
 SectionTitle.propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object
+      ]).isRequired,
     back: PropTypes.bool,
 };
 

@@ -1,31 +1,31 @@
 export const requiredConditions = (formData) => {
+    const pubyear = formData.pubyear === null ? "" : formData.pubyear;
+    const page_start = formData.page_start === null ? "" : formData.page_start;
+    const first_author = formData.first_author === null ? "" : formData.first_author;
+    const volume = formData.volume === null ? "" : formData.volume;
     let required = true;
     
-    if(formData.pubyear !== "" ){
-        if(formData.page_start === "" && formData.first_author === "" && formData.volume === ""){
+    if(pubyear !== "" &&  volume === ""){
+        if(page_start === "" && first_author === ""){
             required = true;
-        }else if(formData.page_start !== "" || formData.first_author !== "" && formData.volume === ""){
+        }else if(page_start !== "" || first_author !== ""){
             required = false;
         }
-    }else {
-        if(formData.volume === ""){
+    }else if(pubyear === "" &&  volume === "") {
+        required = true
+    }else if(pubyear === "" &&  volume !== "") {
+        if(page_start === "" && first_author === ""){
             required = true;
-        }else if(formData.page_start !== "" || formData.first_author !== ""){
+        }else if(page_start !== "" || first_author !== ""){
+            required = false;
+        }
+    }else if(pubyear !== "" &&  volume !== "") {
+        if(page_start === "" && first_author === ""){
+            required = true;
+        }else if(page_start !== "" || first_author !== ""){
             required = false;
         }
     }
-    if(formData.volume !== ""){
-        if(formData.page_start === "" && formData.first_author === "" && formData.pubyear === ""){
-            required = true;
-        }else if(formData.page_start !== "" || formData.first_author !== ""){
-            required = false;
-        }
-    }else {
-        if(formData.pubyear === ""){
-            required = true;
-        }else if(formData.page_start !== "" || formData.first_author !== "" && formData.pubyear !== ""){
-            required = false;
-        }
-    }  
+    
     return required
 }

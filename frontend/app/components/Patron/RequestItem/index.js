@@ -62,12 +62,10 @@ const RequestItem = (props) => {
                    {data.reference.data.first_author && <span className="first_author">Autore <span>{data.reference.data.first_author}</span></span>} 
                    <span className="pubyear">Anno <span>{data.reference.data.pubyear}</span></span>
                 </div>
-                {data.library && <span className="libraryLabel">
+                {data.library && <span className="libraryLabel pr-3">
                     <span>Biblioteca</span> 
                     <span>{data.library_label.data.label} 
-                        <a href="#" id={`tooltip-${data.library.data.id}`}>
-                            <i className="fas fa-info-circle"></i>
-                        </a>
+                        <i id={`tooltip-${data.library.data.id}`} className="fas fa-info-circle"></i>
                     </span>
                     <UncontrolledTooltip placement="right" trigger="click"  target={`tooltip-${data.library.data.id}`}>
                         {data.library.data.name}

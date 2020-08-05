@@ -5,19 +5,27 @@ import RadioButton from 'components/Form/RadioButton';
 import scrollTo from 'utils/scrollTo';
 import Input from 'components/Form/Input';
 import ErrorBox from 'components/Form/ErrorBox';
-import ApplyReferencesTag from '../ApplyReferencesTag';
+import ReferenceIcons from '../ReferenceIcons';
 import {requiredConditions} from './requiredConditions';
 import SectionTitle from 'components/SectionTitle';
 import './style.scss';
 
 
-const FormCreate = (props) => {
-    console.log('FormCreate Reference', props)
-    const {reference, messages, submitCallBack, labelsOptionList, groupsOptionList} = props;
-    const [formData, setFormData] = useState({material_type: 1, pubyear: "", first_author: "", volume: "", page_start: ""})
+const FormContent = (props) => {
+    console.log('FormEdit Reference', props)
+    const {reference, messages, submitCallBack, 
+            applyLabels, labelsOptionList, applyGroups, groupsOptionList,
+            removeLabel, removeGroup, deleteReference} = props;
+    const [formData, setFormData] = useState(() => {
+        if(reference){
+            return {material_type: 1}
+        }else {
+            return {material_type: 1, pubyear: "", first_author: "", volume: "", page_start: ""}
+        }
+    })
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
     const [requiredFields, setRequiredFields] = useState(true)
-   
+    const [formClasses, setFormClasses] = useState(["reference-form"])
     const intl = useIntl();
    
     const handleChange = (value, field_name) =>{
@@ -25,16 +33,21 @@ const FormCreate = (props) => {
         isSubmitDisabled && setIsSubmitDisabled(false)
     } 
 
-   useEffect(() => {
-        setRequiredFields(() => requiredConditions(formData));
-        
-     }, [formData])
+    useEffect(() => {
+       setRequiredFields(() => requiredConditions(formData));
+    }, [formData])
 
+    useEffect(() => {
+        reference && Object.keys(reference.length > 0) ?  setFormData({...formData, ...reference}) : null
+    },[reference])
+
+    useEffect(() => {
+        setFormClasses(state => [...state, 'was-validated'])
+    },[]) 
 
     const onSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
-        form.classList.add('was-validated');
         if (form.checkValidity() === false) {
             console.log("Dont Send Form")
             const errorTarget = document.querySelectorAll('.was-validated .form-control:invalid')[0]
@@ -51,9 +64,9 @@ const FormCreate = (props) => {
     return (
         <>
             <SectionTitle 
-                title={messages.header}
+                title={messages.headerDetail}
             />
-            <FormContainer onSubmit={onSubmit}  className="reference-form" noValidate>
+            <FormContainer onSubmit={onSubmit} className={formClasses.join(" ")} noValidate>
                 <FormGroup className="radio-buttons">
                     <RadioButton 
                         label={intl.formatMessage(messages.article)} 
@@ -78,6 +91,34 @@ const FormCreate = (props) => {
                         error={  intl.formatMessage({ id: 'app.global.invalid_field' })}
                     /> 
                 </FormGroup>
+                {reference &&
+                    <>
+                        <Row className="list-head">
+                            <div className="features-icons">
+                                <ReferenceIcons 
+                                    data={formData}
+                                    icons={['assignLabel', 'assignGroup', 'delete']}
+                                    labelsOptionList={labelsOptionList}
+                                    applyLabels={applyLabels}
+                                    groupsOptionList={groupsOptionList}
+                                    applyGroups={applyGroups}
+                                    selectedReferences={[formData.id]}
+                                    deleteReference={deleteReference}
+                                />
+                            </div>
+                        </Row>
+                        {formData.labels && Object.keys(formData.labels.data).length > 0 &&
+                            <div className="labels-row">
+                                {formData.labels.data.map(label => <span key={label.id}>{label.name} <i className="fas fa-times"  onClick={() => removeLabel(reference.id, label.id )}></i></span>)}
+                            </div>
+                        }
+                        {formData.groups && Object.keys(formData.groups.data).length > 0 &&
+                            <div className="groups-row">
+                                {formData.groups.data.map(group => <span key={group.id}>{group.name} <i className="fas fa-times"  onClick={() => removeGroup(reference.id, group.id)}></i></span>)}
+                            </div>
+                        }
+                    </>
+                }
                 <h3>{intl.formatMessage(messages.titleAuthorsHead)}</h3>
                 <Card>
                     <FormGroup >
@@ -85,12 +126,14 @@ const FormCreate = (props) => {
                             label={formData.material_type === 1 ? intl.formatMessage(messages.journalLabel) : formData.material_type === 2 ? intl.formatMessage(messages.book) : intl.formatMessage(messages.thesis)}
                             handleChange={(value) => handleChange(value, 'pub_title')}
                             required={true}
+                            input={formData.pub_title ? formData.pub_title : ""}
                         />
                     </FormGroup>
                     <FormGroup>
                         <Input 
                             label={formData.material_type === 1 ? intl.formatMessage(messages.articleLabel) : formData.material_type === 2 ? intl.formatMessage(messages.chapter) : intl.formatMessage(messages.articleLabel)}
                             handleChange={(value) => handleChange(value, 'part_title')}
+                            input={formData.part_title ? formData.part_title : ""}
                             required={true}
                         />
                     </FormGroup>
@@ -98,6 +141,7 @@ const FormCreate = (props) => {
                         <Input 
                             label={intl.formatMessage(messages.authorsLabel)}
                             handleChange={(value) => handleChange(value, 'first_author')}
+                            input={formData.first_author  ? formData.first_author : ""}
                             required={requiredFields}
                         />
                     </FormGroup>
@@ -107,35 +151,39 @@ const FormCreate = (props) => {
                 <h3>{intl.formatMessage(messages.dateInstitutionPlaceHead)}</h3>
                 <Card>
                     <Row>
-                        <FormGroup className="col-md-2">
+                        <FormGroup className="col-md-3 col-lg-2">
                             <Input 
                                 label={intl.formatMessage(messages.pubyear)}
                                 type="number"
                                 handleChange={(value) => handleChange(value, 'pubyear')}
+                                input={formData.pubyear ? formData.pubyear : ""}
                                 required={requiredFields}
                             />
                         </FormGroup>
-                        <FormGroup className="col-md-2">
+                        <FormGroup className="col-md-3 col-lg-2">
                             <Input 
                                 label={intl.formatMessage(messages.volume)}
                                 type="number"
                                 handleChange={(value) => handleChange(value, 'volume')}
+                                input={formData.volume ? formData.volume : ""}
                                 required={requiredFields}
                             />
                         </FormGroup>
-                        <FormGroup className="col-md-2">
+                        <FormGroup className="col-md-3 col-lg-2">
                             <Input 
                                 label={intl.formatMessage(messages.page_start)}
                                 type="number"
                                 handleChange={(value) => handleChange(value, 'page_start')}
+                                input={formData.page_start ? formData.page_start : ""}
                                 required={requiredFields}
                             />
                         </FormGroup>
-                        <FormGroup className="col-md-2">
+                        <FormGroup className="col-md-3 col-lg-2">
                             <Input 
                                 label={intl.formatMessage(messages.page_end)}
                                 type="number"
                                 handleChange={(value) => handleChange(value, 'page_end')}
+                                input={formData.page_end ? formData.page_end : ""}
                             />
                         </FormGroup>
                     </Row>
@@ -144,12 +192,14 @@ const FormCreate = (props) => {
                             <Input 
                                 label={intl.formatMessage(messages.publisher)}
                                 handleChange={(value) => handleChange(value, 'publisher')}
+                                input={formData.publisher ? formData.publisher : ""}
                             />
                         </FormGroup>
                         <FormGroup className="col-md-4">
                             <Input 
                                 label={intl.formatMessage(messages.publishing_place)}
                                 handleChange={(value) => handleChange(value, 'publishing_place')}
+                                input={formData.publishing_place  ? formData.publishing_place : ""}
                             />
                         </FormGroup>
                     </Row>
@@ -158,15 +208,26 @@ const FormCreate = (props) => {
                 <Card>
                     <Row>
                         <FormGroup className="col-md-3">
-                            <Input 
-                                label={formData.material_type === 2 ? intl.formatMessage(messages.isbn) : intl.formatMessage(messages.issn)}
-                                handleChange={(value) => handleChange(value, `${formData.material_type === 2 ? "isbn" : "issn"}`)}
-                            />
+                            {formData.material_type === 2 && 
+                                <Input 
+                                    label={intl.formatMessage(messages.isbn)}
+                                    handleChange={(value) => handleChange(value, "isbn")}
+                                    input={formData.isbn ? formData.isbn  : ""}
+                                />
+                            ||
+                                <Input 
+                                    label={intl.formatMessage(messages.issn)}
+                                    handleChange={(value) => handleChange(value, "issn")}
+                                    input={formData.issn ? formData.issn : ""}
+                                />
+                            }
+                            
                         </FormGroup>
                         <FormGroup className="col-md-3">
                             <Input 
                                 label={intl.formatMessage(messages.doi)}
                                 handleChange={(value) => handleChange(value, 'doi')}
+                                input={formData.doi ? formData.doi : ""}
                             />
                         </FormGroup>
                         {formData.material_type !== 2 &&
@@ -174,6 +235,7 @@ const FormCreate = (props) => {
                                 <Input 
                                     label={intl.formatMessage(messages.pmid)}
                                     handleChange={(value) => handleChange(value, 'pmid')}
+                                    input={formData.pmid ? formData.pmid : ""}
                                 />
                             </FormGroup>
                         }
@@ -183,6 +245,7 @@ const FormCreate = (props) => {
                             <Input 
                                 label={intl.formatMessage(messages.sid)}
                                 handleChange={(value) => handleChange(value, 'sid')}
+                                input={formData.sid ? formData.sid : ""}
                             />
                         </FormGroup>
                     </Row>
@@ -191,6 +254,7 @@ const FormCreate = (props) => {
                 <Card>
                     <Input 
                         handleChange={(value) => handleChange(value, 'abstract')}
+                        input={formData.abstract ? formData.abstract : ""}
                         type="textarea"
                     />
                     
@@ -199,6 +263,7 @@ const FormCreate = (props) => {
                 <Card>
                     <Input 
                         handleChange={(value) => handleChange(value, 'note')}
+                        input={formData.note ? formData.note : ""}
                         type="textarea"
                     />
                 </Card>
@@ -210,4 +275,4 @@ const FormCreate = (props) => {
     );
 };
 
-export default FormCreate;
+export default FormContent;

@@ -5,8 +5,7 @@ import {fields} from './fields'; */
 // import Loader from 'components/Form/Loader.js';
 // import {useIntl} from 'react-intl';
 import formMessages from './messages';
-import FormEdit from './FormEdit';
-import FormCreate from './FormCreate';
+import FormContent from './FormContent';
 import PreForm from './PreForm';
 
 const ReferencesForm = (props) => {
@@ -19,7 +18,7 @@ const ReferencesForm = (props) => {
     return (
         <>
                 {reference  && 
-                    <FormEdit 
+                    <FormContent 
                         messages={messages} 
                         submitCallBack={(formData) => updateReference(formData)}
                         labelsOptionList={labelsOptionList}
@@ -39,7 +38,7 @@ const ReferencesForm = (props) => {
                                 messages={formMessages}
                             />
                         ||
-                            <FormCreate 
+                            <FormContent 
                                 messages={messages} 
                                 submitCallBack={(formData) => createReference(formData)}
                             />
