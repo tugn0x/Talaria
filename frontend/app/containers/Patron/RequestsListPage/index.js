@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {useIntl} from 'react-intl'
 import makeSelectPatron, {isPatronLoading,groupsOptionListSelector,labelsOptionListSelector} from '../selectors';
-import { requestRequestsList,requestLabelsOptionList,requestGroupsOptionList,requestRemoveReferenceLabel,requestRemoveReferenceGroup,requestApplyLabelsToReferences,requestApplyGroupsToReferences} from '../actions'
+import { requestRequestsList,requestLabelsOptionList,requestGroupsOptionList,requestRemoveReferenceLabel,requestRemoveReferenceGroup,requestApplyLabelsToReferences,requestApplyGroupsToReferences,requestArchiveRequest,requestChangeStatusRequest} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -28,7 +28,7 @@ const RequestsListPage = (props) => {
     }, [])
 
 
-    async function removeLabelFromReference (id,labelId, filter) {
+   /* async function removeLabelFromReference (id,labelId, filter) {
         let conf = await confirm({
             title: intl.formatMessage(messages.confirm),
             message: intl.formatMessage(messages.askRemoveLabelMessage),
@@ -56,7 +56,32 @@ const RequestsListPage = (props) => {
 
      const applyGroupsToReferences = (groupIds,refIds) => {
         dispatch(requestApplyGroupsToReferences(refIds,[groupIds],intl.formatMessage(messages.addedMessage)))
-    }
+    }*/
+
+    async function archiveRequest (id,filter) {
+        console.log("DISPATCH archiveRequest",id);
+         let conf = await confirm({
+             title: intl.formatMessage(messages.confirm),
+             message: intl.formatMessage(messages.askArchiveRequestMessage),
+             confirmText: intl.formatMessage(messages.yes),
+             cancelText: intl.formatMessage(messages.no)
+         }); //
+         if(conf)
+             dispatch(requestArchiveRequest(id,intl.formatMessage(messages.archivedMessage),filter))
+     }
+
+     async function askCancelRequest (id,filter) {
+        console.log("DISPATCH askCancelRequest",id);
+         let conf = await confirm({
+             title: intl.formatMessage(messages.confirm),
+             message: intl.formatMessage(messages.askCancelRequestMessage),
+             confirmText: intl.formatMessage(messages.yes),
+             cancelText: intl.formatMessage(messages.no)
+         }); //
+         if(conf)
+             dispatch(requestChangeStatusRequest(id,'userAskCancel',intl.formatMessage(messages.canceledMessage),filter))
+     } 
+
 
     return (
         <>
@@ -79,6 +104,8 @@ const RequestsListPage = (props) => {
                     searchOnChange: true
                 }}
                 editPath={'/patron/requests/:id?/:edit?'}
+                archiveRequest={archiveRequest}
+                askCancelRequest={askCancelRequest}
              />
           </>  
     )

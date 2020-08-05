@@ -343,6 +343,18 @@ export const createPatronRequest = (options) => {
   return request(`${BASE_URL}/api/v1/patronrequests`, options)
 };
 
+export const updatePatronRequest = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/patronrequests/${options.id}`, options)
+};
+
+export const changeStatusPatronRequest = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/patronrequests/${options.id}/changestatus`, options)
+};
+
+
+
 
 // ---------- LIBRARY ---------- //
 export const getLibraryUsersList = (options) => {

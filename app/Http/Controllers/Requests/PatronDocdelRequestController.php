@@ -7,6 +7,8 @@ use App\Models\References\Reference;
 use App\Models\References\ReferenceTransformer;
 use App\Models\Requests\PatronDocdelRequest;
 use App\Models\Requests\PatronDocdelRequestTransformer;
+use App\Resolvers\StatusResolver;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PatronDocdelRequestController extends ApiController
@@ -73,4 +75,30 @@ class PatronDocdelRequestController extends ApiController
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
+    public function changeStatus(Request $request,$id)
+    {
+       // $this->authorize($this->model);
+        $model = $this->model->findOrFail($id);
+
+        if($request->input("status"))
+        {
+            $sr=new StatusResolver($model);
+            
+            $newstatus=$request->input("status");
+
+            $others=[];
+
+            switch ($newstatus)
+            {
+                case 'userAskCancel': $others=['cancel_request_date'=>Carbon::now()]; break;
+                case 'canceled': $others=['cancel_date'=>Carbon::now()]; break;
+                case 'received':
+                case 'notReceived':
+                case 'fileReceived': $others=['fullfill_date'=>Carbon::now()]; break;    
+            }
+
+            $sr->changeStatus($newstatus,$others);
+        }
+        return $this->response->item($model, new $this->transformer())->morph();
+    }
 }

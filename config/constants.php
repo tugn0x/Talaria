@@ -31,7 +31,7 @@ return [
         'enabled'=>1,
         'disabled'=>0 //NOTA: nel nilde5 questo è 2
     ],
-    'patrondocdelrequest_status' =>[
+   /* 'patrondocdelrequest_status' =>[
         'requested'=>20,
         'userAskCancel'=>31,
         'canceled'=>32,
@@ -42,7 +42,7 @@ return [
         'received'=>40,
         'fileReceived'=>41,
         'notReceived'=>50
-    ],
+    ],*/
     'reference_material_type' => ['article'=>1,'book'=>2,'thesis'=>3],
     
 

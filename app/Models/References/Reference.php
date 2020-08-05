@@ -47,10 +47,10 @@ class Reference extends BaseModel
     public function activepatronddrequests()
     {
         return $this->patronddrequests()
-        ->where("status",'<>',config("constants.patrondocdelrequest_status.received"))
-        ->where("status",'<>',config("constants.patrondocdelrequest_status.fileReceived"))
-        ->where("status",'<>',config("constants.patrondocdelrequest_status.notReceived"))
-        ->where("status",'<>',config("constants.patrondocdelrequest_status.canceled"));
+        ->where("status",'<>','received')
+        ->where("status",'<>','fileReceived')
+        ->where("status",'<>','notReceived')
+        ->where("status",'<>','canceled');
     }
 
     public function libraryddrequests()

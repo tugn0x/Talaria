@@ -2,6 +2,7 @@
 
 use App\Models\BaseObserver;
 use \Auth;
+use Carbon\Carbon;
 
 class PatronDocdelRequestObserver extends BaseObserver
 {
@@ -23,7 +24,8 @@ class PatronDocdelRequestObserver extends BaseObserver
     public function creating($model)
     {
          //quando salvo va messa in richiesta
-         $model->status=config("constants.patrondocdelrequest_status.requested");
+         $model->status='requested';
+         $model->request_date=Carbon::now();
          return parent::creating($model);
     }
 
