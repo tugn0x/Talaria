@@ -7,7 +7,7 @@ const ReferenceDetail = props => {
     console.log('ReferenceDetail', props)
     const {reference, messages, icons,deleteReference} = props
     const intl = useIntl()
-    console.log("ICON",icons)
+
     return (
         <>  {!(icons && icons.length==0) && 
                 <div className="list-head features-icons">
