@@ -107,6 +107,7 @@ const ReferencesPage = (props) => {
                         <ReferenceDetail 
                             messages={messages}
                             reference={reference} 
+                            deleteReference={(id) => deleteReference(id)}
                         />
                     </div>
                 )

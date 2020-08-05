@@ -5,14 +5,15 @@ import ReferenceIcons from '../ReferenceIcons';
 
 const ReferenceDetail = props => {
     console.log('ReferenceDetail', props)
-    const {reference, messages, icons} = props
+    const {reference, messages, icons,deleteReference} = props
     const intl = useIntl()
     return (
         <>
                 <div className="list-head features-icons">
                     <ReferenceIcons 
                         data={reference}
-                        icons={icons ? icons : ['request','oa','edit','print','export']}
+                        icons={icons ? icons : ['request','oa','edit','print','export','delete']}
+                        deleteReference={deleteReference}
                     />
                 </div>
                 <Card className="detail-body">

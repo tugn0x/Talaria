@@ -63,14 +63,14 @@ const ReferenceIcons = (props) => {
                 {visibleIcon('export') && <a className="btn btn-icon" onClick={() => console.log("export") }>
                     <i className="fas fa-file-export"></i>
                 </a>}
-                { visibleIcon('assignLabel') &&  
+                { visibleIcon('assignLabel') && applyLabels &&  
                     <ApplyReferencesTag
                         type="label"
                         submitCallBack={(id) => applyLabels(id, selectedReferences)}
                         options={labelsOptionList} 
                     /> 
                 }
-                {visibleIcon('assignGroup') && 
+                {visibleIcon('assignGroup') && applyGroups &&
                     <ApplyReferencesTag
                         type="group"
                         submitCallBack={(ids) => applyGroups(ids, selectedReferences)}
@@ -80,7 +80,7 @@ const ReferenceIcons = (props) => {
                 {canEdit(data) && visibleIcon('edit') && <NavLink to={`${editurl(data.id)}`}  className="btn btn-icon">
                     <i className="fas fa-edit"></i>
                 </NavLink>}
-                {canDelete(data) && visibleIcon('delete') && <a href="#" className="btn btn-icon"  onClick={() => deleteReference(data.id) }>
+                {canDelete(data) && visibleIcon('delete') && deleteReference && <a href="#" className="btn btn-icon"  onClick={() => deleteReference(data.id) }>
                     <i className="fas fa-trash"></i>
                 </a> }
         
