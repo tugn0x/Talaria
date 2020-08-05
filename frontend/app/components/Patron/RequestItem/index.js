@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Row, Col} from 'reactstrap';
+import {UncontrolledTooltip, Row, Col} from 'reactstrap';
 import {NavLink } from 'react-router-dom';
 import { generatePath } from "react-router";
 import {useIntl} from 'react-intl';
@@ -55,7 +55,11 @@ const RequestItem = (props) => {
                    {data.reference.data.first_author && <span className="first_author">Autore <span>{data.reference.data.first_author}</span></span>} 
                    <span className="pubyear">Anno <span>{data.reference.data.pubyear}</span></span>
                 </div>
-                {data.library && <span className="libraryLabel"><span>Biblioteca</span> <span>{data.library_label.data.label} <a title={data.library.data.name}><i className="fas fa-info-circle"></i></a></span></span> }
+                {data.library && <span className="libraryLabel"><span>Biblioteca</span> <span>{data.library_label.data.label} <a href="#" id={`tooltip-${data.library.data.id}`}><i className="fas fa-info-circle"></i></a></span>
+                    <UncontrolledTooltip placement="right" trigger="click"  target={`tooltip-${data.library.data.id}`}>
+                    {data.library.data.name}
+                    </UncontrolledTooltip>
+                </span> }
                 {data.delivery && <span className="delivery"><span>Delivery</span> <span>{data.delivery.data.name}</span></span>}
                 {data.request_date && <span className="requestDate"><span>Data richiesta</span> <span>{data.request_date}</span></span>}
                 {data.fullfill_date && <span className="fullfillDate"><span>Data evasione</span> <span>{data.fullfill_date}</span></span>}
