@@ -64,12 +64,12 @@ const RequestItem = (props) => {
                 </div>
                 {data.library && <span className="libraryLabel pr-3">
                     <span>Biblioteca</span> 
-                    <span>{data.library_label.data.label} 
-                        <i id={`tooltip-${data.library.data.id}`} className="fas fa-info-circle"></i>
-                    </span>
-                    <UncontrolledTooltip placement="right" trigger="click"  target={`tooltip-${data.library.data.id}`}>
+                    <span>
+                    <a href="#" id={`tooltip-${data.id}-${data.library.data.id}`} className="active">{data.library_label.data.label}</a> 
+                    <UncontrolledTooltip placement="right" target={`tooltip-${data.id}-${data.library.data.id}`}>
                         {data.library.data.name}
                     </UncontrolledTooltip>
+                    </span>
                 </span> }
                 {data.delivery && <span className="delivery"><span>Delivery</span> <span>{data.delivery.data.name}</span></span>}
                 {data.request_date && <span className="requestDate"><span>Data richiesta</span> <span>{formatDate(data.request_date, 'it')}</span></span>}

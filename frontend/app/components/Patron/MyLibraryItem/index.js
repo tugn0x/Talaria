@@ -55,7 +55,7 @@ const MyLibraryItem = props => {
             <Col sm={2} className="info">
                 <p className="font-weight-bold">Etichetta </p>
                 <a href="#" id={`tooltip-${data.id}`} className="active">{data.label}</a>
-                <UncontrolledTooltip placement="right" trigger="click"  target={`tooltip-${data.id}`}>
+                <UncontrolledTooltip placement="right" target={`tooltip-${data.id}`}>
                     {data.name}
                 </UncontrolledTooltip>
             </Col>
