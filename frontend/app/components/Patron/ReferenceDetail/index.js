@@ -18,20 +18,45 @@ const ReferenceDetail = props => {
                 </div>
                 <Card className="detail-body">
                     <Row>
+                        <Col sm={3}>
+                            <p className="text-brown">{intl.formatMessage(messages.material_type)}</p>
+                            <p>{reference.material_type_key && intl.formatMessage(messages[reference.material_type_key])}</p>
+                        </Col>
+                    </Row>
+                    <Row>
                         <Col sm={12}>
                             <p className="text-brown">{intl.formatMessage(messages.pub_title)}</p>
                             <p>{reference.pub_title}</p>
                         </Col>
                     </Row>
                     <Row>
-                        <Col sm={3}>
-                            <p className="text-brown">{intl.formatMessage(messages.material_type)}</p>
-                            <p>{reference.material_type_key}</p>
-                        </Col>
-                    
-                        <Col sm={3}>
+                    <Col sm={12}>
+                            <p className="text-brown">{intl.formatMessage(messages.part_title)}</p>
+                            <p>{reference.part_title}</p>
+                    </Col>
+                    </Row>
+                    <Row>
+                    <Col sm={2}>
                             <p className="text-brown">{intl.formatMessage(messages.pubyear)}</p>
                             <p>{reference.pubyear}</p>
+                        </Col>
+                    <Col sm={3}>
+                            <p className="text-brown">{intl.formatMessage(messages.first_author)}</p>
+                            <p>{reference.first_author}</p>
+                        </Col>
+                    <Col sm={4}>
+                        <p className="text-brown">{intl.formatMessage(messages.last_author)}</p>
+                        <p>{reference.last_author}</p>
+                    </Col>    
+                    </Row>
+                    <Row>
+                        <Col sm={4}>
+                            <p className="text-brown">{intl.formatMessage(messages.publisher)}</p>
+                            <p>{reference.publisher}</p>
+                        </Col>
+                        <Col sm={4}>
+                            <p className="text-brown">{intl.formatMessage(messages.publishing_place)}</p>
+                            <p>{reference.publishing_place}</p>
                         </Col>
                     </Row>
                     <Row>
@@ -39,21 +64,29 @@ const ReferenceDetail = props => {
                             <p className="text-brown">{intl.formatMessage(messages.volume)}</p>
                             <p>{reference.volume}</p>
                         </Col>
-                    
                         <Col sm={2}>
-                            <p className="text-brown">{intl.formatMessage(messages.page_start)}</p>
-                            <p>{reference.page_start}</p>
+                            <p className="text-brown">{intl.formatMessage(messages.issue)}</p>
+                            <p>{reference.issue}</p>
                         </Col>
-                    
                         <Col sm={2}>
-                            <p className="text-brown">{intl.formatMessage(messages.first_author)}</p>
-                            <p>{reference.first_author}</p>
+                            <p className="text-brown">{intl.formatMessage(messages.pages)}</p>
+                            <p>{reference.page_start}-{reference.page_end}</p>
                         </Col>
-                    
-                        <Col sm={6}>
-                            <p className="text-brown">{intl.formatMessage(messages.part_title)}</p>
-                            <p>{reference.part_title}</p>
+                    </Row>
+                    <Row>
+                        <Col sm={2}>
+                            <p className="text-brown">{intl.formatMessage(messages.issn)}</p>
+                            <p>{reference.issn}</p>
                         </Col>
+                        <Col sm={2}>
+                            <p className="text-brown">{intl.formatMessage(messages.isbn)}</p>
+                            <p>{reference.isbn}</p>
+                        </Col>
+                        <Col sm={2}>
+                            <p className="text-brown">{intl.formatMessage(messages.doi)}</p>
+                            <p>{reference.doi}</p>
+                        </Col>
+
                     </Row>
                     <Row>
                         <Col sm={5}>

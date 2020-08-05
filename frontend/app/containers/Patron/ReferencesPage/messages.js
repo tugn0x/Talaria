@@ -44,6 +44,10 @@ export default defineMessages({
     id: `${scope}.page_end`,
     defaultMessage: 'Page ends',
   },
+  pages: {
+    id: `${scope}.pages`,
+    defaultMessage: 'Pages',
+  },
   abstract: {
     id: `${scope}.abstract`,
     defaultMessage: 'Abstract',
@@ -94,7 +98,7 @@ export default defineMessages({
   },
   isbn: {
     id: `${scope}.isbn`,
-    defaultMessage: 'Isbn',
+    defaultMessage: 'ISBN',
   },
   sid: {
     id: `${scope}.sid`,
