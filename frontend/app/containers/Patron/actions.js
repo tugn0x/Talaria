@@ -23,6 +23,8 @@ import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_POST_GROUP,
   REQUEST_UPDATE_GROUP,
   REQUEST_REMOVE_GROUP,
+  REQUEST_GET_LIBRARY_DELIVERIES,
+  REQUEST_GET_LIBRARY_DELIVERIES_SUCCESS,
   REQUEST_GET_MY_LIBRARY, REQUEST_GET_MY_LIBRARY_SUCCESS,
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_LABELS_OPTIONLIST_SUCCESS,
   REQUEST_GET_GROUPS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST_SUCCESS,
@@ -225,6 +227,23 @@ export function requestDeleteAccessToLibrary(id,library_id,message) {
     message
   };
 }
+
+export function requestGetLibraryDeliveries(id) {
+  return {
+    type: REQUEST_GET_LIBRARY_DELIVERIES,
+    id,
+  };
+}
+
+export function requestGetLibraryDeliveriesSuccess(result) {
+  return {
+    type: REQUEST_GET_LIBRARY_DELIVERIES_SUCCESS,
+    result,
+  };
+}
+
+
+
 
 export function requestLabelsOptionList(query) {
   return {

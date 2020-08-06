@@ -1,14 +1,26 @@
-import React from 'react';
-import {Button, Card, CardBody, Row, Col} from 'reactstrap';
+import React, { useState } from 'react';
+import {Button, Card, CardBody, Row, Col,Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
 import {useIntl} from 'react-intl';
-import ReferenceIcons from '../ReferenceIcons';
+import ReferenceDetail from '../ReferenceDetail'
 import SectionTitle from 'components/SectionTitle';
 import './style.scss';
 
 const ReferenceRequest = props => {
     console.log('ReferenceRequest', props)
-    const {reference, messages} = props
+    const {reference, messages,libraryOptionList,deliveryOptionList,libraryOnChange} = props
+    const [libdropdownOpen,setLibdropdownOpen] = useState(false);
+    const [deliverydropdownOpen,setPickupdropdownOpen] = useState(false);
+    const [selectedPickup,setSelectedPickup]=useState(null);
+
+    const libdropdownToggle= () => setLibdropdownOpen(prevState => !prevState);
+    const deliverydropdownToggle= () => setPickupdropdownOpen(prevState => !prevState);
+    
     const intl = useIntl()
+
+    const showPickupDetails = (pick) => {
+        setSelectedPickup(pick)
+     }
+
     return (
         <div className="detail">
             <SectionTitle 
@@ -20,71 +32,59 @@ const ReferenceRequest = props => {
             </div>
             <div className="reference">
                 <Card className="detail-body">
-                <Row>
-                        <Col sm={12}>
-                        {reference.groups && 
-                        <ul id="referenceGroups" className="referenceGroups">    
-                            {reference.groups.data.map( el => 
-                                <li key={el.id} className="referenceGroup">{el.name}</li>
-                                ) 
-                            }
-                        </ul>
-                        }
-                        {reference.labels && 
-                        <ul id="referenceLabels" className="referenceLabels">    
-                            {reference.labels.data.map( el => 
-                                <li key={el.id} className="referenceLabel">{el.name}</li>
-                                ) 
-                            }
-                        </ul>}
-                       </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={12}>
-                            <p className="text-brown">{intl.formatMessage(messages.pub_title)}</p>
-                            <p>{reference.pub_title}</p>
-                        </Col>
-                    </Row>
-                    
-                    <Row className="my-5">
-                        <Col sm={3}>
-                            <p className="text-brown">{intl.formatMessage(messages.material_type)}</p>
-                            <p>{reference.material_type}</p>
-                        </Col>
-                    
-                        <Col sm={3}>
-                            <p className="text-brown">{intl.formatMessage(messages.pubyear)}</p>
-                            <p>{reference.pubyear}</p>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={2}>
-                            <p className="text-brown">{intl.formatMessage(messages.volume)}</p>
-                            <p>{reference.volume}</p>
-                        </Col>
-                    
-                        <Col sm={2}>
-                            <p className="text-brown">{intl.formatMessage(messages.page_start)}</p>
-                            <p>{reference.page_start}</p>
-                        </Col>
-                    
-                        <Col sm={2}>
-                            <p className="text-brown">{intl.formatMessage(messages.first_author)}</p>
-                            <p>{reference.first_author}</p>
-                        </Col>
-                    
-                        <Col sm={2}>
-                            <p className="text-brown">{intl.formatMessage(messages.part_title)}</p>
-                            <p>{reference.part_title}</p>
-                        </Col>
-                    </Row>
+                <ReferenceDetail 
+                            messages={messages}
+                            reference={reference} 
+                            icons={[]}
+                />
                 </Card>
             </div>
             <div className="library">
                 <Card className="detail-body">
                 <Row>
-                        <Col sm={6}>Library</Col>
-                        <Col sm={6}>Pickup</Col>
+                        <Col sm={4}>
+                        {libraryOptionList && <Dropdown id="libraryDropDown" isOpen={libdropdownOpen} toggle={libdropdownToggle}>
+                            <DropdownToggle caret className="dropdown-toggle">
+                                Select Library
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                {libraryOptionList && libraryOptionList.map ( (lib) => 
+                                        <DropdownItem key={lib.value} onClick={ () => libraryOnChange(lib.value)}>{lib.name} ({lib.label})</DropdownItem>
+                                )}
+                            </DropdownMenu>
+                            </Dropdown>}
+                        </Col>
+                        <Col sm={4}>
+                        {deliveryOptionList && deliveryOptionList.length>0 && <Dropdown id="deliveryDropDown" isOpen={deliverydropdownOpen} toggle={deliverydropdownToggle}>
+                            <DropdownToggle caret className="dropdown-toggle">
+                                Select Pickup
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                {deliveryOptionList && deliveryOptionList.map ( (pick) => 
+                                        <DropdownItem key={pick.id} onClick={ () => showPickupDetails(pick)}>{pick.name}</DropdownItem>
+                                )}
+                            </DropdownMenu>
+                            </Dropdown>}
+                        </Col>
+                        <Col sm={4}>
+                            {selectedPickup && 
+                            <div className="PickupDetail">
+                                {selectedPickup.name && <span>Punto di ritiro: {selectedPickup.name}</span>}
+                                {selectedPickup.email &&<span>Email: {selectedPickup.email}</span>}
+                                {selectedPickup.phone && <span>Phone: {selectedPickup.phone}</span>}
+                                {selectedPickup.openinghours && <span>Opening hours: {selectedPickup.openinghours}</span>}
+                            
+                                {selectedPickup.deliveryable && 
+                                <div>
+                                    {selectedPickup.deliveryable.data.address && <span>Indirizzo: {selectedPickup.deliveryable.data.address}</span>}
+                                    {selectedPickup.deliveryable.data.town && <span>Città: {selectedPickup.deliveryable.data.town}</span>}
+                                    {selectedPickup.deliveryable.data.district && <span>Regione: {selectedPickup.deliveryable.data.district}</span>}
+                                    {selectedPickup.deliveryable.data.postcode && <span>PostCode: {selectedPickup.deliveryable.data.postcode}</span>}
+                                    {selectedPickup.deliveryable.data.state && <span>PostCode: {selectedPickup.deliveryable.data.state}</span>}
+                                </div>
+                                } 
+                            </div>}
+                        </Col>
                 </Row>
                 <p>Service note and cost</p>
                 <p>Cost Policy ...</p>

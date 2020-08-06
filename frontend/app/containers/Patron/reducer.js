@@ -7,6 +7,7 @@ import produce from 'immer';
 import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_GET_LIBRARY_OPTIONLIST_SUCCESS,
   REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST,REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST_SUCCESS,
+  REQUEST_GET_LIBRARY_DELIVERIES,REQUEST_GET_LIBRARY_DELIVERIES_SUCCESS,
   REQUEST_ACCESS_TO_LIBRARIES,
   REQUEST_UPDATE_ACCESS_TO_LIBRARIES,
   REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS,
@@ -33,6 +34,7 @@ export const initialState = {
   library: {},
   error: null,
   libraryOptionList: [],
+  deliveryOptionList: [],
   labelsOptionList:[],
   groupsOptionList:[],
   referencesList: {
@@ -105,6 +107,10 @@ const PatronReducer = (state = initialState, action) =>
         draft.loading = true;
         draft.error = action.error;
         break;
+      case REQUEST_GET_LIBRARY_DELIVERIES:
+          draft.loading = true;
+          draft.error = action.error;
+          break;  
       case REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST:
         draft.loading=true;
         draft.error=action.error;
@@ -147,8 +153,14 @@ const PatronReducer = (state = initialState, action) =>
       case REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST_SUCCESS:
           draft.loading = false;
           draft.error = initialState.error;
-          draft.libraryOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
+          draft.libraryOptionList = action.result.map(item => { return {value: item.id, label: item.label, name:item.name} } );
           break;  
+      case REQUEST_GET_LIBRARY_DELIVERIES_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.deliveryOptionList = action.result.data;
+      break;
+
       case REQUEST_GET_LIBRARY_OPTIONLIST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;

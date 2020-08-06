@@ -471,6 +471,12 @@ export const getLibrariesList = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/?page=${page}&q=${query}`, options)
 };
 
+export const getLibraryDeliveries = (options) => {
+  const library_id = options.id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/deliveries`, options)
+};
+
 
 // Institutions //
 export const getInstitutionsList = (options) => {

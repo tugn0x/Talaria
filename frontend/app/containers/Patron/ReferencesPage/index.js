@@ -11,7 +11,7 @@ import {requestPostReferences,requestUpdateReferences,
         requestMyActiveLibrariesOptionList, requestLabelsOptionList, 
         requestGroupsOptionList, requestApplyLabelsToReferences, 
         requestApplyGroupsToReferences, requestRemoveReferenceLabel,
-        requestRemoveReferenceGroup, requestDeleteReference} from '../actions'
+        requestRemoveReferenceGroup, requestDeleteReference,requestGetLibraryDeliveries} from '../actions'
 import messages from './messages';
 import confirm from "reactstrap-confirm";
 import SectionTitle from 'components/SectionTitle';
@@ -28,6 +28,11 @@ const ReferencesPage = (props) => {
     const isRequest = params.id && params.op=="request"
     const labelsOptionList = patron.labelsOptionList;
     const groupsOptionList = patron.groupsOptionList;
+    const libraryOptionList= patron.libraryOptionList;
+    const deliveryOptionList= patron.deliveryOptionList;
+
+    const [selectedLibrary,setSelectedLibrary] = useState(null);
+    const [selectedPickup,setSelectedPickup] = useState(null);
 
     useEffect(() => {
         if(!isNew && !isLoading){
@@ -41,12 +46,8 @@ const ReferencesPage = (props) => {
     }, [params.id])
 
     useEffect(() => {
-       if(isRequest && !isLoading){
+       if(isRequest && !isLoading)
            dispatch(requestMyActiveLibrariesOptionList())
-           /*
-            + dispatch della api /libraries/{id}/deliveries/
-            */
-       }
     }, [isRequest])
 
     async function deleteReference (id) {
@@ -67,6 +68,16 @@ const ReferencesPage = (props) => {
     const applyGroupsToReferences = (labelIds,refIds) => {
         dispatch(requestApplyGroupsToReferences(refIds,[labelIds],'etichetta applicata', true))
      }
+
+     const libraryOnChange = (code) => {
+        setSelectedLibrary(code);
+     }
+     
+    useEffect(() => {
+        if(isRequest &&!isLoading)
+           dispatch(requestGetLibraryDeliveries(selectedLibrary));
+    }, [selectedLibrary])
+ 
     
     return (
         <Loader show={isLoading}>
@@ -97,6 +108,9 @@ const ReferencesPage = (props) => {
                     <ReferenceRequest
                         messages={messages}
                         reference={reference} 
+                        libraryOptionList={libraryOptionList}
+                        deliveryOptionList={deliveryOptionList}
+                        libraryOnChange={libraryOnChange}
                     />
                 ||
                     <div className="detail">
