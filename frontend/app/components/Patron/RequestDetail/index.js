@@ -2,9 +2,11 @@ import React from 'react';
 import {Card, CardBody, CardTitle, Row, Col} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import {NavLink} from 'react-router-dom'
+import ReferenceDetail from '../ReferenceDetail';
 import ButtonBack from 'components/Button/ButtonBack';
 import './style.scss';
 import '../RequestItem/style.scss';
+import refmessages from '../../../containers/Patron/ReferencesPage/messages';
 
 const RequestDetail = props => {
     console.log('RequestDetail', props)
@@ -56,64 +58,17 @@ const RequestDetail = props => {
                     Note dalla biblioteca: {patronrequest.fromlibrary_note}
                     </Col>
                     </Row>
-                    <Row>
-                        <Col sm={12}>
-                        {patronrequest.reference.data.groups && 
-                        <ul id="referenceGroups" className="referenceGroups">    
-                            {patronrequest.reference.data.groups.data.map( el => 
-                                <li key={el.id} className="referenceGroup">{el.name}</li>
-                                ) 
-                            }
-                        </ul>
-                        }
-                        {patronrequest.reference.data.labels && 
-                        <ul id="referenceLabels" className="referenceLabels">    
-                            {patronrequest.reference.data.labels.data.map( el => 
-                                <li key={el.id} className="referenceLabel">{el.name}</li>
-                                ) 
-                            }
-                        </ul>}
-                       </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={12}>
-                            <p className="text-brown">{intl.formatMessage(referenceMessages.pub_title)}</p>
-                            <p>{patronrequest.reference.data.pub_title}</p>
-                        </Col>
-                    </Row>
-                    <Row className="my-5">
-                        <Col sm={3}>
-                            <p className="text-brown">{intl.formatMessage(referenceMessages.material_type)}</p>
-                            <p>{patronrequest.reference.data.material_type}</p>
-                        </Col>
-                    
-                        <Col sm={3}>
-                            <p className="text-brown">{intl.formatMessage(referenceMessages.pubyear)}</p>
-                            <p>{patronrequest.reference.data.pubyear}</p>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={2}>
-                            <p className="text-brown">{intl.formatMessage(referenceMessages.volume)}</p>
-                            <p>{patronrequest.reference.data.volume}</p>
-                        </Col>
-                    
-                        <Col sm={2}>
-                            <p className="text-brown">{intl.formatMessage(referenceMessages.page_start)}</p>
-                            <p>{patronrequest.reference.data.page_start}</p>
-                        </Col>
-                    
-                        <Col sm={2}>
-                            <p className="text-brown">{intl.formatMessage(referenceMessages.first_author)}</p>
-                            <p>{patronrequest.reference.data.first_author}</p>
-                        </Col>
-                    
-                        <Col sm={2}>
-                            <p className="text-brown">{intl.formatMessage(referenceMessages.part_title)}</p>
-                            <p>{patronrequest.reference.data.part_title}</p>
-                        </Col>
-                    </Row>
                 </CardBody>
+            </Card>
+            <Card className="reference">
+                <CardBody>
+                    <CardTitle>Reference</CardTitle>
+                    <ReferenceDetail 
+                        messages={refmessages}
+                        reference={patronrequest.reference.data} 
+                        icons={[]}
+                    />
+                    </CardBody>
             </Card>
             <Card className="detail-library">
                 <CardBody>

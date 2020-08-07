@@ -31,8 +31,8 @@ const ReferencesPage = (props) => {
     const libraryOptionList= patron.libraryOptionList;
     const deliveryOptionList= patron.deliveryOptionList;
 
-    const [selectedLibrary,setSelectedLibrary] = useState(null);
-    const [selectedPickup,setSelectedPickup] = useState(null);
+    const [selectedLibrary,setSelectedLibrary] = useState('');
+    const [selectedDelivery,setSelectedDelivery] = useState('');
 
     useEffect(() => {
         if(!isNew && !isLoading){
@@ -69,12 +69,21 @@ const ReferencesPage = (props) => {
         dispatch(requestApplyGroupsToReferences(refIds,[labelIds],'etichetta applicata', true))
      }
 
-     const libraryOnChange = (code) => {
-        setSelectedLibrary(code);
+     const libraryOnChange = (lib_id) => {
+        setSelectedLibrary(lib_id);
+     }
+
+     const deliveryOnChange = (delivery_id) => {
+        setSelectedDelivery(delivery_id);
+     }
+
+     const submitReferenceRequest = (evt) => {
+         console.log("SUBMIT REQUEST!!");
+         evt.preventDefault()
      }
      
     useEffect(() => {
-        if(isRequest &&!isLoading)
+        if(isRequest && !isLoading && selectedLibrary)
            dispatch(requestGetLibraryDeliveries(selectedLibrary));
     }, [selectedLibrary])
  
@@ -111,6 +120,10 @@ const ReferencesPage = (props) => {
                         libraryOptionList={libraryOptionList}
                         deliveryOptionList={deliveryOptionList}
                         libraryOnChange={libraryOnChange}
+                        selectedLibrary={selectedLibrary}
+                        selectedDelivery={selectedDelivery}
+                        deliveryOnChange={deliveryOnChange}
+                        onSubmitRequest={submitReferenceRequest}
                     />
                 ||
                     <div className="detail">
