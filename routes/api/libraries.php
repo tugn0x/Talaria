@@ -49,7 +49,7 @@ Route::group([
         'as' => 'api.v1.libraries.library-users.',
     ], function () {
         Route::get('my', 'LibraryUserController@my')->name('my'); //le biblio dell'utente
-        Route::get('myactive', 'LibraryUserController@myactiveList')->name('myactivelist'); //le biblio ATTIVE dell'utente da usare in una tendina
+        Route::get('myactive', 'LibraryUserController@myactive')->name('myactivelist'); //le biblio ATTIVE dell'utente da usare in una tendina
         Route::post('{library}/library-users', 'LibraryUserController@store')->name('store');
 
         Route::get('{library}/library-users', 'LibraryUserController@index')->name('index');

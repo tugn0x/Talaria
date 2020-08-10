@@ -38,13 +38,14 @@ class LibraryUserController extends ApiController
     }
 
     //Elenco biblio attive e ordinate per preferito
-    public function myactiveList(Request $request)
+    public function myactive(Request $request)
     {   
-        $collection = $this->nilde->optionList($this->model, $request,function ($model,$request){
-            return $model->owned()->InStatus(config('constants.libraryuser_status.enabled'))->join("libraries","library_user.library_id","=","libraries.id")->select("libraries.id","library_user.label","libraries.name")->orderBy('preferred','desc');
-        });
-
-        return $this->response->array($collection->toArray());
+        // $collection = $this->nilde->optionList($this->model, $request,function ($model,$request){           
+        //   return $model->owned()->InStatus(config('constants.libraryuser_status.enabled'))->orderBy('preferred','desc');
+        //});
+        //return $this->response->array($collection->toArray());
+        $collection=$this->model->owned()->InStatus(config('constants.libraryuser_status.enabled'))->orderBy('preferred','desc')->get();
+        return $this->response->collection($collection, new $this->transformer())->morph();
     }
 
     public function store(Request $request)

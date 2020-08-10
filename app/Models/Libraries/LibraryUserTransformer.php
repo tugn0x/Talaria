@@ -31,12 +31,20 @@ class LibraryUserTransformer extends BaseTransformer
 
     public function includeLibrary(Model $model)
     {
-        return $this->item($model->library, new BaseLightTransformer());
+        if($model->library)
+        {
+            $tr=new BaseLightTransformer();
+            $tr->setOnly(['id','name','dd_user_cost','ill_user_cost']);
+            return $this->item($model->library, $tr);
+        }
+        return null;
     }
 
     public function includeUser(Model $model)
     {
-        return $this->item($model->user, new UserLightTransformer());
+        if($model->user)
+            return $this->item($model->user, new UserLightTransformer());
+        return null;
     }
 
     public function includeDepartment(Model $model)
