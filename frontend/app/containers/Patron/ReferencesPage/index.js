@@ -31,8 +31,8 @@ const ReferencesPage = (props) => {
     const libraryOptionList= patron.libraryOptionList;
     const deliveryOptionList= patron.deliveryOptionList;
 
-    const [selectedLibrary,setSelectedLibrary] = useState('');
-    const [selectedDelivery,setSelectedDelivery] = useState('');
+    const [selectedLibrary,setSelectedLibrary] = useState(null);
+    const [selectedDelivery,setSelectedDelivery] = useState(null);
 
     useEffect(() => {
         if(!isNew && !isLoading){
@@ -69,12 +69,12 @@ const ReferencesPage = (props) => {
         dispatch(requestApplyGroupsToReferences(refIds,[labelIds],'etichetta applicata', true))
      }
 
-     const libraryOnChange = (lib_id) => {
-        setSelectedLibrary(lib_id);
+     const libraryOnChange = (lib) => {
+        setSelectedLibrary(lib);
      }
 
-     const deliveryOnChange = (delivery_id) => {
-        setSelectedDelivery(delivery_id);
+     const deliveryOnChange = (delivery) => {
+        setSelectedDelivery(delivery);
      }
 
      const submitReferenceRequest = (evt) => {
@@ -84,7 +84,7 @@ const ReferencesPage = (props) => {
      
     useEffect(() => {
         if(isRequest && !isLoading && selectedLibrary)
-           dispatch(requestGetLibraryDeliveries(selectedLibrary));
+           dispatch(requestGetLibraryDeliveries(selectedLibrary.id));
     }, [selectedLibrary])
  
     
@@ -113,7 +113,7 @@ const ReferencesPage = (props) => {
                         removeGroup={(id, groupId) => dispatch(requestRemoveReferenceGroup(id,groupId,'removeGroup'))}
                         updateReference={ (formData) => dispatch(requestUpdateReferences(formData, params.id, intl.formatMessage(messages.referenceUpdate))) } />
                 ||
-                !isNew && isRequest &&
+                isRequest &&
                     <ReferenceRequest
                         messages={messages}
                         reference={reference} 

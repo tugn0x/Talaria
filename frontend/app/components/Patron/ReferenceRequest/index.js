@@ -12,22 +12,24 @@ const ReferenceRequest = props => {
     
     const intl = useIntl()
 
-    const [deliveryDetail,setDeliveryDetail]=useState(null);
-
     const showPickupDetails = (evt) => {
-        evt.preventDefault();
+       evt.preventDefault();
        let p=null;
         if(evt.target.value!='')
             p=deliveryOptionList.find(x => x.id == evt.target.value );
         
-        setDeliveryDetail(p);
-       deliveryOnChange(evt.target.value) 
+       deliveryOnChange(p) 
      }
+
+    
 
      const handleChangeLibrary = (evt) => {
         evt.preventDefault();
-       // setSelectedLibrary(evt.target.value)
-        libraryOnChange(evt.target.value)  
+        let l=null;
+        if(evt.target.value!='')
+            l=libraryOptionList.find(x => x.library_id == evt.target.value).library.data;
+       
+        libraryOnChange(l)  
      }
 
 
@@ -53,17 +55,21 @@ const ReferenceRequest = props => {
                 <Row>
                         <Col sm={6}>
                             {libraryOptionList && <><span className="text-brown">Library:</span> 
-                            <select id="libraryOptionList" value={selectedLibrary} onChange={ (e) => handleChangeLibrary(e)}>
+                            <select id="libraryOptionList" value={selectedLibrary?selectedLibrary.id:''} onChange={ (e) => handleChangeLibrary(e)}>
                                 <option value='' key=''>Select</option>
                                 {libraryOptionList && libraryOptionList.map ( (lib) => 
-                                        <option value={lib.value} key={lib.value}>{lib.label}</option>
+                                        <option value={lib.library_id} key={lib.library_id}>{lib.label}</option>
                                 )}
                             </select></>}   
+                            {selectedLibrary && <div className="libraryDetail">
+                                Name: {selectedLibrary.name}
+                                Cost: {selectedLibrary.dd_user_cost} €
+                            </div>}
                         </Col>
                         <Col sm={6}>
                             {deliveryOptionList && deliveryOptionList.length>0 && 
                             <><span className="text-brown">Pickup:</span> 
-                            <select id="deliveryOptionList" value={selectedDelivery} onChange={ (e) => showPickupDetails(e)}>
+                            <select id="deliveryOptionList" value={selectedDelivery?selectedDelivery.id:''} onChange={ (e) => showPickupDetails(e)}>
                                 <option value='' key=''>Select</option>
                                 {deliveryOptionList && deliveryOptionList.map ( (pick) => 
                                         <option value={pick.id} key={pick.id}>{pick.name}</option>
@@ -72,25 +78,23 @@ const ReferenceRequest = props => {
                             {selectedDelivery && 
                             <div className="PickupDetail">
                                 <span className="text-brown">Detail:</span><br/>
-                                {deliveryDetail.name && <span>Punto di ritiro: {deliveryDetail.name}</span>}
-                                {deliveryDetail.email &&<span>Email: {deliveryDetail.email}</span>}
-                                {deliveryDetail.phone && <span>Phone: {deliveryDetail.phone}</span>}
-                                {deliveryDetail.openinghours && <span>Opening hours: {deliveryDetail.openinghours}</span>}
+                                {selectedDelivery.name && <span>Punto di ritiro: {selectedDelivery.name}</span>}
+                                {selectedDelivery.email &&<span>Email: {selectedDelivery.email}</span>}
+                                {selectedDelivery.phone && <span>Phone: {selectedDelivery.phone}</span>}
+                                {selectedDelivery.openinghours && <span>Opening hours: {selectedDelivery.openinghours}</span>}
                             
-                                {deliveryDetail.deliveryable && 
+                                {selectedDelivery.deliveryable && 
                                 <div>
-                                    {deliveryDetail.deliveryable.data.address && <span>Indirizzo: {deliveryDetail.deliveryable.data.address}</span>}
-                                    {deliveryDetail.deliveryable.data.town && <span>Città: {deliveryDetail.deliveryable.data.town}</span>}
-                                    {deliveryDetail.deliveryable.data.district && <span>Regione: {deliveryDetail.deliveryable.data.district}</span>}
-                                    {deliveryDetail.deliveryable.data.postcode && <span>PostCode: {deliveryDetail.deliveryable.data.postcode}</span>}
-                                    {deliveryDetail.deliveryable.data.state && <span>PostCode: {deliveryDetail.deliveryable.data.state}</span>}
+                                    {selectedDelivery.deliveryable.data.address && <span>Indirizzo: {selectedDelivery.deliveryable.data.address}</span>}
+                                    {selectedDelivery.deliveryable.data.town && <span>Città: {selectedDelivery.deliveryable.data.town}</span>}
+                                    {selectedDelivery.deliveryable.data.district && <span>Regione: {selectedDelivery.deliveryable.data.district}</span>}
+                                    {selectedDelivery.deliveryable.data.postcode && <span>PostCode: {selectedDelivery.deliveryable.data.postcode}</span>}
+                                    {selectedDelivery.deliveryable.data.state && <span>PostCode: {selectedDelivery.deliveryable.data.state}</span>}
                                 </div>
                                 } 
                             </div>}
                         </Col>
                 </Row>
-                <p>Service note and cost</p>
-                <p>Cost Policy ...</p>
                 </Card>
                 <Button type="submit" className="btn-cta">
                     {intl.formatMessage({id: 'app.global.submit'})}

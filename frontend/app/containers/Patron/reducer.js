@@ -153,7 +153,7 @@ const PatronReducer = (state = initialState, action) =>
       case REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST_SUCCESS:
           draft.loading = false;
           draft.error = initialState.error;
-          draft.libraryOptionList = action.result.map(item => { return {value: item.id, label: item.label, name:item.name} } );
+          draft.libraryOptionList = action.result.data //.map(item => { return {value: item.library_id, label: item.label, name:item.library.data.name,dd_user_cost:item.library.data.dd_user_cost} } );
           break;  
       case REQUEST_GET_LIBRARY_DELIVERIES_SUCCESS:
         draft.loading = false;

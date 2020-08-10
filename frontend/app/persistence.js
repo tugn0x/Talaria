@@ -8,6 +8,7 @@ import { setToken } from 'utils/api';
 // import { isMobileOrTablet } from 'utils/mobileDetector';
 import { REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_LOGIN_SUCCESS, REQUEST_LOGOUT_SUCCESS, REQUEST_REFRESH_SUCCESS, REQUEST_SIGNUP_SUCCESS, REQUEST_PROFILE_SUCCESS, REQUEST_PERMISSIONS_SUCCESS, REQUEST_REFRESH, REQUEST_UPDATE_PROFILE_SUCCESS } from 'containers/Auth/AuthProvider/constants';
 import {REQUEST_GET_LIBRARIES_LIST} from "./containers/Admin/constants";
+import {REQUEST_GET_LIBRARY_DELIVERIES} from './containers/Patron/constants';
 // import { REQUEST_ILLNESS, REQUEST_PERCEPTION } from 'containers/SubmitPage/constants';
 
 const SKIP_REFRESH = [
@@ -15,6 +16,7 @@ const SKIP_REFRESH = [
   REQUEST_LOGIN,
   REQUEST_LOGOUT,
   REQUEST_GET_LIBRARIES_LIST,
+  REQUEST_GET_LIBRARY_DELIVERIES,
 ];
 const SYNC_PERSISTANCE_REQUEST = "persitance/SYNC_PERSISTANCE_REQUEST";
 const SYNC_PERSISTANCE_SUCCESS = "persitance/SYNC_PERSISTANCE_SUCCESS";
