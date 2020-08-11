@@ -25,6 +25,10 @@ Ovviamente quelle che hanno fw=1 vengono nascoste dall'interfaccia (xke' di fatt
 //quindi l'utente richiede cancellazione e si ferma li (viene chiamata API e agg. lo stato con date)
 class PatronDocdelRequest extends BaseModel
 {
+    protected $attributes = [
+        'status' => 'requested'
+    ];
+    
     protected $fillable = [
         'borrowing_library_id', //id biblioteca alla quale ho inviato la rich.
         'reference_id',
