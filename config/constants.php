@@ -44,6 +44,10 @@ return [
         'notReceived'=>50
     ],*/
     'reference_material_type' => ['article'=>1,'book'=>2,'thesis'=>3],
-    
+    'patrondocdelrequest_cost_policy' => [
+        'deny'=>0,
+        'accept'=>1,
+        'inform'=>2 
+    ],
 
 ];

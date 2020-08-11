@@ -5,7 +5,7 @@ import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST,
   REQUEST_UPDATE_LABEL, REQUEST_REMOVE_LABEL, REQUEST_POST_LABEL,
   REQUEST_POST_GROUP, REQUEST_REMOVE_GROUP, REQUEST_UPDATE_GROUP,
-  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,REQUEST_REQUESTS_LIST,REQUEST_GET_REQUEST,REQUEST_DELETE_REFERENCE, REQUEST_GET_LIBRARY_DELIVERIES} from './constants';
+  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,REQUEST_REQUESTS_LIST,REQUEST_GET_REQUEST,REQUEST_DELETE_REFERENCE, REQUEST_GET_LIBRARY_DELIVERIES, REQUEST_POST_REQUEST} from './constants';
 import {
   requestError,
   stopLoading,
@@ -56,6 +56,7 @@ import {  getMyLibrary,
           requestApplyLabelsToReferences,
           requestApplyGroupsToReferences,
           getLibraryDeliveries,
+          createPatronRequest
         } from 'utils/api';
 
 
@@ -474,6 +475,22 @@ export function* requestChangeStatusRequestSaga(action) {
   }
 }
 
+export function* requestPostRequestSaga(action) {
+  const options = {
+    method: 'post',
+    body: action.request
+  };
+  try {
+    const request = yield call(createPatronRequest, options);
+    yield put(requestRequestsList(null, null, action.filter))
+    yield put(push("/patron/requests"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+
 export function* requestPostReferencesSaga(action) {
   const options = {
     method: 'post',
@@ -567,6 +584,7 @@ export default function* patronSaga() {
   yield takeLatest(REQUEST_GET_REQUEST, requestGetRequestSaga);
   yield takeLatest(REQUEST_UPDATE_REQUEST,requestUpdateRequestSaga);
   yield takeLatest(REQUEST_ARCHIVE_REQUEST,requestArchiveRequestSaga);
+  yield takeLatest(REQUEST_POST_REQUEST, requestPostRequestSaga);
   yield takeLatest(REQUEST_CHANGE_STATUS_REQUEST,requestChangeStatusRequestSaga);
   yield takeLatest(REQUEST_GET_LIBRARY_DELIVERIES,requestLibraryDeliveriesOptionListSaga);
 }

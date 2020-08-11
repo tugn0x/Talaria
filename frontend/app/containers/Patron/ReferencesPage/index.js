@@ -11,7 +11,7 @@ import {requestPostReferences,requestUpdateReferences,
         requestMyActiveLibrariesOptionList, requestLabelsOptionList, 
         requestGroupsOptionList, requestApplyLabelsToReferences, 
         requestApplyGroupsToReferences, requestRemoveReferenceLabel,
-        requestRemoveReferenceGroup, requestDeleteReference,requestGetLibraryDeliveries} from '../actions'
+        requestRemoveReferenceGroup, requestDeleteReference,requestGetLibraryDeliveries,requestPostRequest} from '../actions'
 import messages from './messages';
 import confirm from "reactstrap-confirm";
 import SectionTitle from 'components/SectionTitle';
@@ -30,9 +30,6 @@ const ReferencesPage = (props) => {
     const groupsOptionList = patron.groupsOptionList;
     const libraryOptionList= patron.libraryOptionList;
     const deliveryOptionList= patron.deliveryOptionList;
-
-    const [selectedLibrary,setSelectedLibrary] = useState(null);
-    const [selectedDelivery,setSelectedDelivery] = useState(null);
 
     useEffect(() => {
         if(!isNew && !isLoading){
@@ -70,23 +67,15 @@ const ReferencesPage = (props) => {
      }
 
      const libraryOnChange = (lib) => {
-        setSelectedLibrary(lib);
+        dispatch(requestGetLibraryDeliveries(lib.id));
      }
 
-     const deliveryOnChange = (delivery) => {
-        setSelectedDelivery(delivery);
+    
+     const submitReferenceRequest = (data) => {
+         console.log("SUBMIT REQUEST!!",data);
+         dispatch(requestPostRequest(data,"Request added"))
      }
-
-     const submitReferenceRequest = (evt) => {
-         console.log("SUBMIT REQUEST!!");
-         evt.preventDefault()
-     }
-     
-    useEffect(() => {
-        if(isRequest && !isLoading && selectedLibrary)
-           dispatch(requestGetLibraryDeliveries(selectedLibrary.id));
-    }, [selectedLibrary])
- 
+    
     
     return (
         <Loader show={isLoading}>
@@ -120,10 +109,7 @@ const ReferencesPage = (props) => {
                         libraryOptionList={libraryOptionList}
                         deliveryOptionList={deliveryOptionList}
                         libraryOnChange={libraryOnChange}
-                        selectedLibrary={selectedLibrary}
-                        selectedDelivery={selectedDelivery}
-                        deliveryOnChange={deliveryOnChange}
-                        onSubmitRequest={submitReferenceRequest}
+                        submitCallBack={submitReferenceRequest}
                     />
                 ||
                     <div className="detail">

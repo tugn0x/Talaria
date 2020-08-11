@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {Button, Card, CardBody, Row, Col} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import ReferenceDetail from '../ReferenceDetail'
@@ -7,30 +7,90 @@ import './style.scss';
 
 const ReferenceRequest = props => {
     console.log('ReferenceRequest', props)
-    const {reference, messages,selectedLibrary,libraryOptionList,selectedDelivery,deliveryOptionList,libraryOnChange,deliveryOnChange,onSubmitRequest} = props
+    const {reference, messages,libraryOptionList,deliveryOptionList,libraryOnChange,submitCallBack} = props
 
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
+    const [formData, setFormData] = useState({
+        'delivery': {},
+        'library':{},
+        'reference': {},
+        'cost_policy': '2'
+    })
+
+
+    useEffect(() => {
+        handleChange(reference,'reference')
+     }, [reference])
+ 
     
     const intl = useIntl()
 
     const showPickupDetails = (evt) => {
        evt.preventDefault();
-       let p=null;
+       let p={};
         if(evt.target.value!='')
             p=deliveryOptionList.find(x => x.id == evt.target.value );
-        
-       deliveryOnChange(p) 
+       
+       handleChange(p,'delivery');     
      }
 
     
 
      const handleChangeLibrary = (evt) => {
         evt.preventDefault();
-        let l=null;
+        let l={};
         if(evt.target.value!='')
             l=libraryOptionList.find(x => x.library_id == evt.target.value).library.data;
        
-        libraryOnChange(l)  
+        handleChange(l,'library');
+        libraryOnChange(l)     
+        
      }
+
+     useEffect(() => {
+        console.log("FORMDATA:", formData)
+        setIsSubmitDisabled(!(formData.library && formData.library.id && formData.delivery && formData.delivery.id))
+     }, [formData])
+ 
+
+
+    
+    /* HANDLE CHANGE Generico */
+    const handleChange = (value, field_name) =>{
+        console.log("handlechange FORMDATA:",field_name,value)
+        setFormData({ ...formData, [field_name]: value   }); 
+    } 
+
+    
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        form.classList.add('was-validated');
+        
+        if (form.checkValidity() === false) {
+            console.log("Dont Send Form")
+            // Ci sono ERRORI nella VALIDAZIONE!
+            // Scroll sul campo che non e' stato fillato
+            const errorTarget = document.querySelectorAll('.was-validated .form-control:invalid')[0]
+            scrollTo(errorTarget.offsetParent, true)
+            alert("ERRORRRR");
+            // return
+        } else {
+            let dataToSend = {
+                'borrowing_library_id': formData.library.id,
+                'delivery_id':formData.delivery.id,
+                'reference_id':formData.reference.id,
+                'cost_policy':parseInt(formData.cost_policy),
+                'forlibrary_note':formData.forlibrary_note
+            }
+
+            // Tutto ok invia Form!
+            submitCallBack(dataToSend)
+            console.log("Send Form", dataToSend)
+        }
+       
+        return
+    }
 
 
     return (
@@ -49,59 +109,71 @@ const ReferenceRequest = props => {
                             icons={[]}
                 />
             </div>
+            <form onSubmit={onSubmit} noValidate className="">
             <div className="library">
-                <form onSubmit={onSubmitRequest}>
                 <Card className="detail-body">
                 <Row>
                         <Col sm={6}>
                             {libraryOptionList && <><span className="text-brown">Library:</span> 
-                            <select id="libraryOptionList" value={selectedLibrary?selectedLibrary.id:''} onChange={ (e) => handleChangeLibrary(e)}>
+                                <select id="libraryOptionList" required value={formData.library?formData.library.id:''/*selectedLibrary?selectedLibrary.id:''*/} onChange={ (e) => handleChangeLibrary(e)}>
                                 <option value='' key=''>Select</option>
                                 {libraryOptionList && libraryOptionList.map ( (lib) => 
                                         <option value={lib.library_id} key={lib.library_id}>{lib.label}</option>
                                 )}
                             </select></>}   
-                            {selectedLibrary && <div className="libraryDetail">
-                                Name: {selectedLibrary.name}
-                                Cost: {selectedLibrary.dd_user_cost} €
+                            {formData.library.id && <div className="libraryDetail">
+                                Name: {formData.library.name} <br/>
+                                Cost: {formData.library.dd_user_cost} € <br/>
+                                Altri costi (FN):<select id="cost_policy" value={formData["cost_policy"]} onChange={ (evt) => handleChange(evt.target.value,'cost_policy')}>
+                                    <option value="0">Rifiuto ogni costo</option>
+                                    <option value="1">Accetto ogni costo</option>
+                                    <option value="2">Voglio essere informato</option>
+                                </select><br/>
+                                Note per la biblioteca
+                                <textarea id="forlibrary_note" value={formData["forlibrary_note"]} onChange={ (evt) => handleChange(evt.target.value,'forlibrary_note')}></textarea>
+
                             </div>}
                         </Col>
                         <Col sm={6}>
                             {deliveryOptionList && deliveryOptionList.length>0 && 
                             <><span className="text-brown">Pickup:</span> 
-                            <select id="deliveryOptionList" value={selectedDelivery?selectedDelivery.id:''} onChange={ (e) => showPickupDetails(e)}>
+                            <select id="deliveryOptionList" required value={formData.delivery?formData.delivery.id:''} onChange={ (e) => showPickupDetails(e)}>
                                 <option value='' key=''>Select</option>
                                 {deliveryOptionList && deliveryOptionList.map ( (pick) => 
                                         <option value={pick.id} key={pick.id}>{pick.name}</option>
                                 )}
                             </select></>}
-                            {selectedDelivery && 
+                            {formData.delivery.id && 
                             <div className="PickupDetail">
                                 <span className="text-brown">Detail:</span><br/>
-                                {selectedDelivery.name && <span>Punto di ritiro: {selectedDelivery.name}</span>}
-                                {selectedDelivery.email &&<span>Email: {selectedDelivery.email}</span>}
-                                {selectedDelivery.phone && <span>Phone: {selectedDelivery.phone}</span>}
-                                {selectedDelivery.openinghours && <span>Opening hours: {selectedDelivery.openinghours}</span>}
+                                {formData.delivery.name && <span>Punto di ritiro: {formData.delivery.name}</span>}
+                                {formData.delivery.email &&<span>Email: {formData.delivery.email}</span>}
+                                {formData.delivery.phone && <span>Phone: {formData.delivery.phone}</span>}
+                                {formData.delivery.openinghours && <span>Opening hours: {formData.delivery.openinghours}</span>}
                             
-                                {selectedDelivery.deliveryable && 
+                                {formData.delivery.deliveryable && 
                                 <div>
-                                    {selectedDelivery.deliveryable.data.address && <span>Indirizzo: {selectedDelivery.deliveryable.data.address}</span>}
-                                    {selectedDelivery.deliveryable.data.town && <span>Città: {selectedDelivery.deliveryable.data.town}</span>}
-                                    {selectedDelivery.deliveryable.data.district && <span>Regione: {selectedDelivery.deliveryable.data.district}</span>}
-                                    {selectedDelivery.deliveryable.data.postcode && <span>PostCode: {selectedDelivery.deliveryable.data.postcode}</span>}
-                                    {selectedDelivery.deliveryable.data.state && <span>PostCode: {selectedDelivery.deliveryable.data.state}</span>}
+                                    {formData.delivery.deliveryable.data.address && <span>Indirizzo: {formData.delivery.deliveryable.data.address}</span>}
+                                    {formData.delivery.deliveryable.data.town && <span>Città: {formData.delivery.deliveryable.data.town}</span>}
+                                    {formData.delivery.deliveryable.data.district && <span>Regione: {formData.delivery.deliveryable.data.district}</span>}
+                                    {formData.delivery.deliveryable.data.postcode && <span>PostCode: {formData.delivery.deliveryable.data.postcode}</span>}
+                                    {formData.delivery.deliveryable.data.state && <span>PostCode: {formData.delivery.deliveryable.data.state}</span>}
                                 </div>
                                 } 
                             </div>}
                         </Col>
                 </Row>
                 </Card>
-                <Button type="submit" className="btn-cta">
+                <div className="d-flex justify-content-between">
+                <Button type="submit" disabled={isSubmitDisabled}>
                     {intl.formatMessage({id: 'app.global.submit'})}
                 </Button>
-                </form>
+                <Button color="secondary" onClick={() => props.history.goBack() } >
+                    {intl.formatMessage({id: 'app.global.cancel'})}
+                </Button> 
+                </div>
             </div>
-           
+            </form>
         </div>
     );
 };

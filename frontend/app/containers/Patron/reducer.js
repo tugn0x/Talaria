@@ -13,6 +13,7 @@ import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_REFERENCES_LIST, REQUEST_REFERENCES_LIST_SUCCESS,
   REQUEST_REQUESTS_LIST, REQUEST_REQUESTS_LIST_SUCCESS,
   REQUEST_GET_REQUEST, REQUEST_GET_REQUEST_SUCCESS,
+  REQUEST_POST_REQUEST,
   REQUEST_POST_REFERENCES, REQUEST_SUCCESS,
   REQUEST_UPDATE_REFERENCES, REQUEST_GET_REFERENCE, REQUEST_GET_REFERENCE_SUCCESS,
   REQUEST_GET_MY_LIBRARY, REQUEST_GET_MY_LIBRARY_SUCCESS,
@@ -94,7 +95,10 @@ const PatronReducer = (state = initialState, action) =>
           draft.loading = false;
           draft.error = initialState.error;
           draft.patronrequest = action.result.data;
-          break;   
+          break;
+      case REQUEST_POST_REQUEST:
+            draft.loading = true;
+            break;       
       case REQUEST_GET_MY_LIBRARY:
         draft.loading = true;
         break;
@@ -108,7 +112,7 @@ const PatronReducer = (state = initialState, action) =>
         draft.error = action.error;
         break;
       case REQUEST_GET_LIBRARY_DELIVERIES:
-          draft.loading = true;
+          draft.loading = false;
           draft.error = action.error;
           break;  
       case REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST:
