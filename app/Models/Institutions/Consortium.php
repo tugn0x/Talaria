@@ -3,9 +3,11 @@
 namespace App\Models\Institutions;
 
 use App\Models\BaseModel;
+use App\Traits\Model\ModelPermissionsTrait;
 
 class Consortium extends BaseModel
 {
+    use ModelPermissionsTrait;
     /*
      * Fillable attributes
      */

@@ -10,6 +10,9 @@ class Project extends BaseModel
 {
     use ModelPermissionsTrait;
 
+    protected static $observerClass=ProjectObserver::class;
+
+
     protected $fillable = [
         'name',
         'active',

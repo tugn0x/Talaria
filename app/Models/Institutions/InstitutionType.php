@@ -7,9 +7,13 @@ use App\Models\Users\Title;
 
 class InstitutionType extends BaseModel
 {
+    protected static $observerClass=InstitutionTypeObserver::class;
+
+
     protected $fillable = [
         'name'
     ];
+
 
     public function institutions()
     {

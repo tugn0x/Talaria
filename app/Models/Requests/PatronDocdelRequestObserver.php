@@ -9,9 +9,9 @@ class PatronDocdelRequestObserver extends BaseObserver
 {
 
     protected $rules = [
-//        'email' => 'required|email',
-//        'name' => 'required',
-//        'user_id' => 'required|integer|exists:users,id',
+        'borrowing_library_id' => 'required|integer|exists:libraries,id',
+        'reference_id' => 'required|integer|exists:references,id',
+        'delivery_id' => 'required|integer|exists:deliveries,id',
     ];
 
 

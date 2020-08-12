@@ -60,6 +60,8 @@ class PatronDocdelRequest extends BaseModel
         
     ];
 
+    protected static $observerClass=PatronDocdelRequestObserver::class;
+
     protected $simpleSearchField="pub_title"; //ricerca sul riferimento
 
 

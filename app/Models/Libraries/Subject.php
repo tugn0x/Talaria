@@ -7,8 +7,6 @@ use App\Traits\Model\ModelPermissionsTrait;
 
 class Subject extends BaseModel
 {
-    use ModelPermissionsTrait;
-
     protected $fillable = [
         'name'
     ];

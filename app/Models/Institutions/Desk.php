@@ -4,13 +4,10 @@ namespace App\Models\Institutions;
 
 use App\Models\BaseModel;
 use App\Models\Country;
-use App\Traits\Model\ModelPermissionsTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Desk extends BaseModel
-{
-    use ModelPermissionsTrait;
-    
+{  
     protected $fillable = [
         'name',
         'country_id', //nazione/Paese (IT,US...)
