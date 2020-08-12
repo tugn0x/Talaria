@@ -73,7 +73,6 @@ const ReferencesPage = (props) => {
 
     
      const submitReferenceRequest = (data) => {
-         console.log("SUBMIT REQUEST!!",data);
          dispatch(requestPostRequest(data,"Request added"))
      }
 
@@ -100,7 +99,7 @@ const ReferencesPage = (props) => {
             }
             {!isNew && ( 
                 params.op && params.op=="edit" &&
-                    canEdit(reference) && <ReferencesForm 
+                    (canEdit(reference) && <ReferencesForm 
                         messages={messages}
                         reference={reference}
                         labelsOptionList={labelsOptionList}
@@ -113,7 +112,7 @@ const ReferencesPage = (props) => {
                         updateReference={ (formData) => dispatch(requestUpdateReferences(formData, params.id, intl.formatMessage(messages.referenceUpdate))) } 
                         />
                         || 
-                        <ErrorMsg message="ERROR: can't edit this reference"/>
+                        <ErrorMsg message="ERROR: can't edit this reference"/>)
                 ||
                 isRequest &&
                     (canRequest(reference) && <ReferenceRequest
