@@ -52,6 +52,7 @@
     
     &.readyToDelivery,
     &.waitingForCost,
+    &.userAskCancel,
     &.costAccepted,
     &.costNotAccepted{
         background-color: #FBB133;

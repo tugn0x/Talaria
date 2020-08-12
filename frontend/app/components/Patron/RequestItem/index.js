@@ -23,7 +23,7 @@ const RequestItem = (props) => {
         return mat;
       }
     
-      const statusIcon = (status_key) => {
+      const statusIcon = (status) => {
           return "status-icon " + status
       }
     
