@@ -26,6 +26,22 @@ const RequestItem = (props) => {
       const statusIcon = (status) => {
           return "status-icon " + status
       }
+
+      const requestDate = (data) => {
+        let date="";
+        switch (data.status)
+        {
+            case "userAskCancel": date = data.cancel_request_date; break;
+            case "canceled": date= data.cancel_date; break;
+            case "requested": date= data.request_date; break;
+            case "received":
+            case "fileReceived": 
+            case "notReceived":  date=data.fullfill_date; break;
+            default: return "";
+        }
+        
+        return <span className="request-date">{date}</span>;
+      }
     
     const requesturl=(id) => {
         return generatePath(`${editPath}`, {
@@ -51,7 +67,9 @@ const RequestItem = (props) => {
                     checked={checked}
                 />
                 <span className={statusIcon(data.status)}></span> 
-                <span className="status-text">{intl.formatMessage(messages[data.status])}</span>
+                <span className="status-text">{intl.formatMessage(messages[data.status])}
+                </span>
+                {requestDate(data)}
                 <i className={matTypeIcon(data.reference.data.material_type)}></i>
             </Col>
             <Col sm={7} className="info">
@@ -81,6 +99,7 @@ const RequestItem = (props) => {
                 {data.reference.data.groups.data && <span className="groups-row">
                     {data.reference.data.groups.data.map(grp => <span key={grp.id}>{grp.name}</span>)}
                 </span>}
+                
                 
             </Col>
             
