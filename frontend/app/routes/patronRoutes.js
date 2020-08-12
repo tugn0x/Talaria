@@ -35,7 +35,7 @@ const routes = [
     children: [
       { path: '/library/new', icon: "plus", name: `MyLibraryNew`, url: `/my-libraries/library/new`, component: MyLibraryPage, sidebar: true, order: 1},
       { path: '/library/:id?', name: `Libraries`, component: MyLibraryPage, },
-      { path: '/:page?', exact: true, name: `MyLibraries`, url: `/my-libraries`, component: MyLibrariesListPage, sidebar: true,order: 2},
+      { path: '/:page?', icon: "landmark", exact: true, name: `MyLibraries`, url: `/my-libraries`, component: MyLibrariesListPage, sidebar: true,order: 2},
     ]
   },
   // { path: '/request-access', name: 'Request access', component: ChangePassword, menu: true },
