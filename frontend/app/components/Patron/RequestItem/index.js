@@ -63,10 +63,10 @@ const RequestItem = (props) => {
     return ( 
         <Row className="list-row justify-content-between">
             <Col sm={3} className="select-checkbox">
-                <CustomCheckBox 
+                {toggleSelection && <CustomCheckBox 
                     handleChange={toggleSelection}
                     checked={checked}
-                />
+                />}
                 <span className={statusIcon(data.status)}></span> 
                 <span className="status-text">{intl.formatMessage(messages[data.status])}
                 </span>
@@ -107,10 +107,10 @@ const RequestItem = (props) => {
             <Col sm={2} className="icons align-self-center">
             {!data.archived && 
             <>
-                {canArchive(data) && <a href="#" onClick={() => archiveRequest(data.id)} className="btn btn-icon">
+                {archiveRequest && canArchive(data) && <a href="#" onClick={() => archiveRequest(data.id)} className="btn btn-icon">
                     <i className="fas fa-hdd"></i>
                 </a>}
-                {canDelete(data) && <a href="#" onClick={() => askCancelRequest(data.id)} className="btn btn-icon">
+                {askCancelRequest && canDelete(data) && <a href="#" onClick={() => askCancelRequest(data.id)} className="btn btn-icon">
                     <i className="fas fa-trash"></i>
                 </a> }
             </>
