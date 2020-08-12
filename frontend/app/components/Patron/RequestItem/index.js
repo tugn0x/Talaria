@@ -16,9 +16,10 @@ const RequestItem = (props) => {
     const matTypeIcon = (mat) => {
         switch (mat)
         {
-          case 1: return 'simple_icon fas fa-newspaper'; break;
+          case 1: return 'simple_icon fas fa-file'; break;
           case 2: return 'simple_icon fas fa-book'; break;
-          case 3: return 'simple_icon icon-diploma'; break;
+          /*case 3: return 'simple_icon icon-diploma'; break;*/
+          case 3: return 'simple_icon fas fa-scroll'; break;
         }
         return mat;
       }
