@@ -482,7 +482,7 @@ export function* requestPostRequestSaga(action) {
   };
   try {
     const request = yield call(createPatronRequest, options);
-    yield put(requestRequestsList(null, null, action.filter))
+    yield put(requestRequestsList())
     yield put(push("/patron/requests"));
     yield call(() => toast.success(action.message))
   } catch(e) {
