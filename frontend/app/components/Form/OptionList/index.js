@@ -11,7 +11,7 @@ const translateOptions = (options, intl) => {
     if(options && Array.isArray(options)){
         let objReturn = []
         objReturn = options.length > 0 ? options.map(opt => {
-            if(opt.label.includes('app.global')){
+            if(opt.label && opt.label.includes('app.global')){
                 return { value: opt.value, label: intl.formatMessage({id: opt.label}) } 
             }else {
                 return opt
