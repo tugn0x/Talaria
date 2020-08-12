@@ -4,6 +4,7 @@ import {useIntl} from 'react-intl';
 import ReferenceDetail from '../ReferenceDetail'
 import SectionTitle from 'components/SectionTitle';
 import './style.scss';
+import RequestItem from '../RequestItem';
 
 const ReferenceRequest = props => {
     console.log('ReferenceRequest', props)
@@ -99,8 +100,14 @@ const ReferenceRequest = props => {
                 title={messages.headerRequest}
                 back={true}
             />
-            <div>
-                * check richieste già effettuate o in corso
+            <div className="previusRequests">
+                Precedenti richieste:<br/>
+                {reference.patronddrequests.data && reference.patronddrequests.data.map ( (req) =>
+                    <RequestItem 
+                        data={req} 
+                        editPath={'/patron/requests/:id?/:edit?'}
+                    />  
+                )}
             </div>
             <div className="reference">
                 <ReferenceDetail 
