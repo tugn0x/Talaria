@@ -16,6 +16,7 @@ import messages from './messages';
 import confirm from "reactstrap-confirm";
 import SectionTitle from 'components/SectionTitle';
 import {useIntl} from 'react-intl';
+import ErrorMsg from '../../../components/ErrorMsg';
 
 
 const ReferencesPage = (props) => {
@@ -75,6 +76,15 @@ const ReferencesPage = (props) => {
          console.log("SUBMIT REQUEST!!",data);
          dispatch(requestPostRequest(data,"Request added"))
      }
+
+     const canRequest = (ref) => {
+        return (ref.active_patronrequests==0)
+     }
+
+     
+     const canEdit = (ref) => {
+        return (ref.patronrequests==0)
+    }
     
     
     return (
@@ -90,7 +100,7 @@ const ReferencesPage = (props) => {
             }
             {!isNew && ( 
                 params.op && params.op=="edit" &&
-                    <ReferencesForm 
+                    canEdit(reference) && <ReferencesForm 
                         messages={messages}
                         reference={reference}
                         labelsOptionList={labelsOptionList}
@@ -100,17 +110,21 @@ const ReferencesPage = (props) => {
                         deleteReference={(id) => deleteReference(id)}
                         removeLabel={(id, labelId) => dispatch(requestRemoveReferenceLabel(id,labelId, 'removeLabel' ))}
                         removeGroup={(id, groupId) => dispatch(requestRemoveReferenceGroup(id,groupId,'removeGroup'))}
-                        updateReference={ (formData) => dispatch(requestUpdateReferences(formData, params.id, intl.formatMessage(messages.referenceUpdate))) } />
+                        updateReference={ (formData) => dispatch(requestUpdateReferences(formData, params.id, intl.formatMessage(messages.referenceUpdate))) } 
+                        />
+                        || 
+                        <ErrorMsg message="ERROR: can't edit this reference"/>
                 ||
                 isRequest &&
-                    <ReferenceRequest
+                    (canRequest(reference) && <ReferenceRequest
                         messages={messages}
                         reference={reference} 
                         libraryOptionList={libraryOptionList}
                         deliveryOptionList={deliveryOptionList}
                         libraryOnChange={libraryOnChange}
                         submitCallBack={submitReferenceRequest}
-                    />
+                    /> || 
+                    <ErrorMsg message="ERROR: can't request this reference"/>)
                 ||
                     <div className="detail">
                         <SectionTitle 
