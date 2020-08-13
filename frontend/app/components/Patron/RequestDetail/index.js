@@ -7,14 +7,11 @@ import ButtonBack from 'components/Button/ButtonBack';
 import './style.scss';
 import '../RequestItem/style.scss';
 import refmessages from '../../../containers/Patron/ReferencesPage/messages';
+import RequestStatus from '../RequestStatus';
 
 const RequestDetail = props => {
     console.log('RequestDetail', props)
-    const {patronrequest, messages,referenceMessages} = props
-    
-    const statusIcon = (status) => {
-        return "statusIcon " + status
-    }
+    const {patronrequest, messages,acceptCost,denyCost} = props
 
     const intl = useIntl()
     return (
@@ -37,10 +34,12 @@ const RequestDetail = props => {
             <Card className="detail-body">      
                 <CardBody>
                     <CardTitle>Dati Richiesta</CardTitle>
-                    <Row><Col sm={12}>
-                        <span className={statusIcon(patronrequest.status)}></span> {intl.formatMessage(messages[patronrequest.status])}  
-                        Archiviata: {patronrequest.archived}
-                    </Col>                        
+                    <Row>
+                        <RequestStatus 
+                            patronrequest={patronrequest}
+                            acceptCost={acceptCost}
+                            denyCost={denyCost}
+                        />
                     </Row>
                     <Row><Col sm={12}>
                         Richiesto il {patronrequest.request_date}

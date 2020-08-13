@@ -68,6 +68,14 @@ export default defineMessages({
     id: `${scope}.costNotAccepted`,
     defaultMessage: 'Cost not accepted',
   },
+  costAcceptedMessage: {
+    id: `${scope}.costAcceptedMessage`,
+    defaultMessage: 'Cost accepted',
+  },
+  costNotAcceptedMessage: {
+    id: `${scope}.costNotAcceptedMessage`,
+    defaultMessage: 'Cost not accepted',
+  },
   readyToDelivery: {
     id: `${scope}.readyToDelivery`,
     defaultMessage: 'Ready to delivery',

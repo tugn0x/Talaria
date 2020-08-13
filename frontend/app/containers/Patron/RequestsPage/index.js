@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {requestGetRequest} from '../actions'
+import {requestGetRequest, requestChangeStatusRequest} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -25,6 +25,16 @@ const RequestsPage = (props) => {
            dispatch(requestGetRequest(params.id))
         }
     }, [params.id])
+
+    const acceptCost = () => {
+        console.log("Accept Cost!!");
+        dispatch(requestChangeStatusRequest(params.id,'costAccepted',intl.formatMessage(messages.costAcceptedMessage),null/*filter*/))
+    }
+
+    const denyCost = () => {
+        console.log("Deny Cost!!");
+        dispatch(requestChangeStatusRequest(params.id,'costNotAccepted',intl.formatMessage(messages.costNotAcceptedMessage),null/*filter*/))
+    }
     
     return (
         <Loader show={isLoading}>
@@ -47,6 +57,8 @@ const RequestsPage = (props) => {
                         messages={messages}
                         referenceMessages={referenceMessages}
                         patronrequest={patronrequest} 
+                        acceptCost={acceptCost}
+                        denyCost={denyCost}
                     />
                 /*)*/
             }

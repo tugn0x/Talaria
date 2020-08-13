@@ -50,6 +50,8 @@
   "app.global.deleteMessage": "Eliminare questo item?",
   "app.global.deletedMessage": "Item eliminato con successo",
   "app.global.confirm": "Conferma",
+  "app.global.accept": "Accetta",
+  "app.global.deny": "Nega",
 
   "app.containers.HomePage.header": "ITALIANO HOMEPAGE CONTAINER",
   "app.containers.UserPage.header": "ITALIANO UserPage CONTAINER",

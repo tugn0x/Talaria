@@ -35,6 +35,12 @@ const RequestItem = (props) => {
             case "userAskCancel": date = data.cancel_request_date; break;
             case "canceled": date= data.cancel_date; break;
             case "requested": date= data.request_date; break;
+
+            case "costAccepted": 
+            case "costNotAccepted": date= data.answer_cost_date; break;
+            
+            case "readyToDelivery":  date=data.delivery_ready_date; break;
+            
             case "received":
             case "fileReceived": 
             case "notReceived":  date=data.fullfill_date; break;
@@ -56,7 +62,7 @@ const RequestItem = (props) => {
     }
 
     const canDelete = (data) => {
-        if(! (data.status=="canceled" || data.status=="received"|| data.status=="fileReceived" || data.status=="notReceived" || data.status=="userAskCancel" ) ) return true;
+        if(! (data.status=="canceled" || data.status=="received"|| data.status=="fileReceived" || data.status=="notReceived" || data.status=="userAskCancel"|| data.status=="waitingForCost" ) ) return true;
         return false;
     }
 
