@@ -26,7 +26,7 @@ Ovviamente quelle che hanno fw=1 vengono nascoste dall'interfaccia (xke' di fatt
 class PatronDocdelRequest extends BaseModel
 {
     protected $attributes = [
-        'status' => 'requested'
+        'status' => 'requested',
     ];
     
     protected $fillable = [
@@ -39,7 +39,10 @@ class PatronDocdelRequest extends BaseModel
         'cancel_request_date', //data rich. cancellazione
         'cancel_date', //data accettaz. cancellazione
         'fullfill_date',
+        'delivery_ready_date', //data articolo disponibile al ritiro
         'cost_policy', //Politica di Accettazione Costi: 0=Non accetta nessun costo; 1=Accetta qualunque costo; 2=Vuole essere informato
+        'answer_cost_date', //data accettaz/rifiuto costo
+        'cost', //costo FN
         'forlibrary_note', //note ute->bib
         'fromlibrary_note', //note bib->ute
         'archived', //rich archiviata o no
