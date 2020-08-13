@@ -91,7 +91,16 @@ class PatronDocdelRequestController extends ApiController
             switch ($newstatus)
             {
                 case 'userAskCancel': $others=['cancel_request_date'=>Carbon::now()]; break;
+                
                 case 'canceled': $others=['cancel_date'=>Carbon::now()]; break;
+                
+                case "waitingForCost": $others=['cost'=>$request->input("cost")]; break;
+                
+                case "costAccepted": 
+                case "costNotAccepted": $others=['answer_cost_date'=>Carbon::now()]; break;
+                
+                case "readyToDelivery": $others=['delivery_ready_date'=>Carbon::now()]; break;
+                
                 case 'received':
                 case 'notReceived':
                 case 'fileReceived': $others=['fullfill_date'=>Carbon::now()]; break;    

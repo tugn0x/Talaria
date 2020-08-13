@@ -12,12 +12,12 @@ return [
                         //scatenandolo, forse dovrei mettere tra i ruoli anche manager 
                         //ma poi come lo verifico???
                         'role'  =>  ['patron'],
-                        'next_statuses'  =>  ['userAskCancel','canceled','received','notReceived','fileReceived'],
+                        'next_statuses'  =>  ['userAskCancel','canceled','received','waitingForCost','notReceived','fileReceived','readyToDelivery'],
                         'constraints'   =>  ['isOwner'],
                     ],
                     'userAskCancel'	=> [
                         'role'  =>  ['patron'],
-                        'next_statuses'  =>  ['Canceled'],
+                        'next_statuses'  =>  ['Canceled','received','waitingForCost','notReceived','fileReceived','readyToDelivery'],
                         'constraints'   =>  ['isOwner'],
                     ],
                     'canceled'	=> [
@@ -28,7 +28,39 @@ return [
                             'Model'=>'owner',
                         ]
                     ],
-
+                    'waitingForCost' => [
+                        'role'  =>  ['patron'],
+                        'next_statuses'  =>  ['costAccepted','costNotAccepted'],
+                        'constraints'   =>  ['isOwner'],
+                        'notify'    =>  [
+                            'Model'=>'owner',
+                        ]
+                    ],
+                    'costAccepted' => [
+                        'role'  =>  ['patron'],
+                        'next_statuses'  =>  ['userAskCancel','canceled','received','fileReceived','notReceived','readyToDelivery'],
+                        'constraints'   =>  ['isOwner'],
+                        'notify'    =>  [
+                            'Model'=>'owner',
+                        ]
+                    ],
+                    'costNotAccepted' => [
+                        'role'  =>  ['patron'],
+                        'next_statuses'  =>  ['userAskCancel','canceled','received','fileReceived','notReceived','readyToDelivery'],
+                        'constraints'   =>  ['isOwner'],
+                        'notify'    =>  [
+                            'Model'=>'owner',
+                        ]
+                    ],
+                    'readyToDelivery'	=> [
+                        'role'  =>  ['patron'],
+                        'next_statuses'  =>  ['userAskCancel','canceled','received','notReceived'],
+                        'constraints'   =>  ['isOwner'],
+                        'notify'    =>  [
+                            'Model'=>'owner',
+                        ],
+                        /*'jobs' => [classe del job da eseguire]*/
+                    ],
                     'received'	=> [
                         'role'  =>  ['patron'],
                         'next_statuses'  =>  [],
