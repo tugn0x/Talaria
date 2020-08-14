@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
          $this->call(SubjectsTableSeeder::class);
          $this->call(CountriesTableSeeder::class);
          $this->call(CatalogsTableSeeder::class);
-
          $this->call(InstitutionTypesTableSeeder::class);
          $this->call(InstitutionsTableSeeder::class);         
          $this->call(LibrariesTableSeeder::class);                
@@ -29,8 +28,6 @@ class DatabaseSeeder extends Seeder
          $this->call(GroupTableSeeder::class);
          $this->call(ReferenceTableSeeder::class);
          $this->call(BibliografySeeder::class);
-         
-         
-         
+         $this->call(LibraryDeliverySeeder::class);         
     }
 }
