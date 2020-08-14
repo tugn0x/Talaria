@@ -5,7 +5,7 @@ import { generatePath } from "react-router";
 import {useIntl} from 'react-intl';
 import messages from './messages';
 import CustomCheckBox from 'components/Form/CustomCheckBox';
-import {formatDate} from 'utils/dates';
+import {formatDate,formatDateTime} from 'utils/dates';
 import './style.scss';
 
 const RequestItem = (props) => {
@@ -47,7 +47,7 @@ const RequestItem = (props) => {
             default: return "";
         }
         
-        return <span className="request-date">{date}</span>;
+        return <span className="request-date">{formatDateTime(date,'it')}</span>;
       }
     
     const requesturl=(id) => {
@@ -73,11 +73,11 @@ const RequestItem = (props) => {
                     handleChange={toggleSelection}
                     checked={checked}
                 />}
+                <i className={matTypeIcon(data.reference.data.material_type)}></i>
                 <span className={statusIcon(data.status)}></span> 
                 <span className="status-text">{intl.formatMessage(messages[data.status])}
                 </span>
                 {requestDate(data)}
-                <i className={matTypeIcon(data.reference.data.material_type)}></i>
             </Col>
             <Col sm={7} className="info">
                 <NavLink to={`${requesturl(data.id)}`}>
@@ -97,8 +97,7 @@ const RequestItem = (props) => {
                     </span>
                 </span> }
                 {data.delivery && <span className="delivery"><span>Delivery</span> <span>{data.delivery.data.name}</span></span>}
-                {data.request_date && <span className="requestDate"><span>Data richiesta</span> <span>{formatDate(data.request_date, 'it')}</span></span>}
-                {data.fullfill_date && <span className="fullfillDate"><span>Data evasione</span> <span>{formatDate(data.fullfill_date, 'it')}</span></span>}
+                {data.request_date && <span className="requestDate"><span>Data richiesta</span> <span>{formatDateTime(data.request_date, 'it')}</span></span>}
                 
                 {data.reference.data.labels.data && <span className="labels-row">
                     {data.reference.data.labels.data.map(label => <span key={label.id}>{label.name}</span>)}
