@@ -98,14 +98,14 @@ const RequestItem = (props) => {
                 </span> }
                 {data.delivery && <span className="delivery"><span>Delivery</span> <span>{data.delivery.data.name}</span></span>}
                 {data.request_date && <span className="requestDate"><span>Data richiesta</span> <span>{formatDateTime(data.request_date, 'it')}</span></span>}
-                
+                <div>
                 {data.reference.data.labels.data && <span className="labels-row">
                     {data.reference.data.labels.data.map(label => <span key={label.id}>{label.name}</span>)}
                 </span>}
                 {data.reference.data.groups.data && <span className="groups-row">
                     {data.reference.data.groups.data.map(grp => <span key={grp.id}>{grp.name}</span>)}
                 </span>}
-                
+                </div>
                 
             </Col>
             
