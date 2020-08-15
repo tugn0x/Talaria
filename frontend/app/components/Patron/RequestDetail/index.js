@@ -8,6 +8,7 @@ import './style.scss';
 import '../RequestItem/style.scss';
 import refmessages from '../../../containers/Patron/ReferencesPage/messages';
 import RequestStatus from '../RequestStatus';
+import SectionTitle from 'components/SectionTitle';
 
 const RequestDetail = props => {
     console.log('RequestDetail', props)
@@ -35,11 +36,13 @@ const RequestDetail = props => {
                 <CardBody>
                     <CardTitle>Dati Richiesta</CardTitle>
                     <Row>
+                        <Col sm={12}>
                         <RequestStatus 
                             patronrequest={patronrequest}
                             acceptCost={acceptCost}
                             denyCost={denyCost}
                         />
+                        </Col>
                     </Row>
                     <Row><Col sm={12}>
                         Richiesto il {patronrequest.request_date}
@@ -59,16 +62,11 @@ const RequestDetail = props => {
                     </Row>
                 </CardBody>
             </Card>
-            <Card className="reference">
-                <CardBody>
-                    <CardTitle>Reference</CardTitle>
-                    <ReferenceDetail 
-                        messages={refmessages}
-                        reference={patronrequest.reference.data} 
-                        icons={[]}
-                    />
-                    </CardBody>
-            </Card>
+            <ReferenceDetail 
+                messages={refmessages}
+                reference={patronrequest.reference.data} 
+                icons={[]}
+            />
             <Card className="detail-library">
                 <CardBody>
                     <CardTitle>Biblioteca</CardTitle>

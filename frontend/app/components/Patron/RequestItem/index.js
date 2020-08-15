@@ -28,7 +28,7 @@ const RequestItem = (props) => {
           return "status-icon " + status
       }
 
-      const requestDate = (data) => {
+      const statusDate = (data) => {
         let date="";
         switch (data.status)
         {
@@ -47,7 +47,7 @@ const RequestItem = (props) => {
             default: return "";
         }
         
-        return <span className="request-date">{formatDateTime(date,'it')}</span>;
+        return <span className="status-date">{formatDateTime(date,'it')}</span>;
       }
     
     const requesturl=(id) => {
@@ -77,7 +77,7 @@ const RequestItem = (props) => {
                 <span className={statusIcon(data.status)}></span> 
                 <span className="status-text">{intl.formatMessage(messages[data.status])}
                 </span>
-                {requestDate(data)}
+                {statusDate(data)}
             </Col>
             <Col sm={7} className="info">
                 <NavLink to={`${requesturl(data.id)}`}>
