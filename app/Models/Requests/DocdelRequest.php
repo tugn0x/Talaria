@@ -20,20 +20,20 @@ class DocdelRequest extends BaseModel
         'on_cost', //dd_costofn
         'accept_cost_status', //Stato accettazione utente dopo richiesta: 1=Biblio richiede accettazione, 2=Ute accetta, 3=Ute non accetta
         'accept_cost_date', //quando ha accettato/rifiutato il costo
-        'fulfill_date', //dd_dataeva
-        'fulfill_protnr', //dd_nproteva
-        'fulfill_location', //dd_collocazione (ricavata da ACNP)
-        'fulfill_note', //dd_note_richforni
+        'fullfill_date', //dd_dataeva
+        'fullfill_protnr', //dd_nproteva
+        'fullfill_location', //dd_collocazione (ricavata da ACNP)
+        'fullfill_note', //dd_note_richforni
         'status', //dd_stato_borr
-        'fulfill_type',    //tipo evasione
-        'notfulfill_type', //tipo inevasione
+        'fullfill_type',    //tipo evasione
+        'notfullfill_type', //tipo inevasione
         'archived', //archived si/no
         'filename',
         'file_status', //Stato del file se inviato in NILDE: 0-non disponibile; 1-disponibile; 2-disponibile con HC
         'file_download', // 	Indicatore di avvenuta stampa del file se inviato in NILDE: 0-Non Stampato; 1-Stampato
         'cancel_request_date', //data richiesta annullamento
         'cancel_date', //data accettazione richiesta annullamento
-        'fulfill_inventorynr', //dd_ninventario_forni
+        'fullfill_inventorynr', //dd_ninventario_forni
         'note', //dd_note_interne
         'trash_date', //data cestinamento
         'trash_type', //tipo cestinamento (trash o trashHC)
