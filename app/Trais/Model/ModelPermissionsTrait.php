@@ -35,12 +35,35 @@ trait ModelPermissionsTrait
     public function setPermissionOnObject($granted_permissions)
     {
         $resource = $this;
-        $user_with_permissions = Arr::pluck($granted_permissions, 'user_id');
-        $this->user_permissions()->whereNotIn('id', $user_with_permissions)->get()->each(function ($user) use ($resource) {
-            foreach ($user->object_abilities(self::class, $resource->id) as $ability) {
+        $permission_collection = collect($granted_permissions);
+        /*
+         * Remove revoked abilities
+         */
+        $this->user_permissions()->get()->each(function ($user) use ($resource, $permission_collection) {
+            /*
+             * Get user updated permissions
+             */
+            $user_current_permissions = $permission_collection->firstWhere('user_id',$user->id);
+            /*
+             * Get previous granted permissions
+             */
+            $previous_abilities = $user->object_abilities(self::class, $resource->id);
+            /*
+             * Diff $user_current_permissions (if exists) with $previous_abilities
+             */
+            $permissions_to_remove = $user_current_permissions ?
+                array_diff($previous_abilities, $user_current_permissions['permissions']) :
+                $previous_abilities;
+            /*
+             * Remove abilities
+             */
+            foreach ($permissions_to_remove as $ability) {
                 $user->disallow($ability, $resource);
             }
         });
+        /*
+         * Grant abilities
+         */
         foreach ($granted_permissions as $resources_to_grant) {
             foreach ($resources_to_grant['permissions'] as $permission)
             {
