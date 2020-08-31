@@ -42,8 +42,17 @@ class RouteServiceProvider extends ServiceProvider
             $this->mapDingoApiRoutes();
 
             $this->mapWebRoutes();
+            
+        $this->mapIso18626Routes();    
 
         //
+    }
+
+    protected function mapIso18626Routes()
+    {
+        Route::middleware('iso18626')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/iso18626.php'));
     }
 
     /**

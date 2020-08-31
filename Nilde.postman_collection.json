@@ -1123,6 +1123,185 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Delete Reference",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjVhZTE2ODkyMTU2MWNhMDIwZDBjOWYzYzQwY2UyZmQ4NjY1M2E0ZDZhM2U1NTkyN2JhNTc1NmFiZjQwYmViYmIzZDJlZGQyN2QyN2RmNDBlIn0.eyJhdWQiOiIxIiwianRpIjoiNWFlMTY4OTIxNTYxY2EwMjBkMGM5ZjNjNDBjZTJmZDg2NjUzYTRkNmEzZTU1OTI3YmE1NzU2YWJmNDBiZWJiYjNkMmVkZDI3ZDI3ZGY0MGUiLCJpYXQiOjE1OTU5NzA2NDEsIm5iZiI6MTU5NTk3MDY0MSwiZXhwIjoxNTk2MDU3MDQxLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.NpE-FAGJOoVa3DEF7WqQvQyyP7BTq7UlDwRXuRck10x01alUNLWgYQttVz3ZwphDTnvf_U2gX6qXEqt05LirKZo3Djq1O9MemdD-8tryQZGj5c1D-lrpmqzX9waaaT1RDMDSy3nRNnb0Yv5KLGq_03wrJc4mYFAZXfxAl5wp5t4kqYDjwXKSswUF7wM678cJYV6Wm-CW9fEsCfQeK-iVsnb3NMtLRO6KDJiWo-yYfDI2swbIOaJLTwctBK4Z2KTF7oGzy98ZKbn24_LVXTjJa1gLQBWFJbOE4zof1X9YelTFsJMEesnVXMNb7cOmkV7rnFxTQnn3VXBRrMbEgPS06dYCBc0yE250pqbnRlts1RK6eaaxL72PEvhf4eRce18JG8EzYTtImKzsCzk1UlCccqg4W9VAK4FHCWjdwpplfT8rdn4rW_Z_qfQuTAZ8ELscQekpC2YPS8Cqr5adu2IifRxrI4UljDcD3AbjoycxsSTdPUBhYxIvt_x453dCSNzj3CMAASXqfg_wJIb0atmdbXZRZDMrLEYlStXq0kweXcFowSD09f1LRq9k5ZfqWBgQ17QOINM8Kvw7GHlApTElPuYYJ9ThHCLYaDbx1tubTplXiFUDeX1RMn-QLgaBPGfc37dPMX2nNEimuWS9LaxbDJvjr08sbOr2QQEBA5FgBtc"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/references/3",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"references",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PatronDDRequest Change Status",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjYyM2M0NTU3MjFjNGU4ZGYzZTg0ZDBjOGE2OWIwYjg1MTc0ODVjMTgwN2Y2OTc0ZDQwMzVlNGNjZGZmZjY4MGQxOTc3NjA4MGMyNDJkYzEwIn0.eyJhdWQiOiIxIiwianRpIjoiNjIzYzQ1NTcyMWM0ZThkZjNlODRkMGM4YTY5YjBiODUxNzQ4NWMxODA3ZjY5NzRkNDAzNWU0Y2NkZmZmNjgwZDE5Nzc2MDgwYzI0MmRjMTAiLCJpYXQiOjE1OTY0MDU3NjEsIm5iZiI6MTU5NjQwNTc2MSwiZXhwIjoxNTk2NDkyMTYxLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.PMadXg_MU7k6vqt9VqT4ocBxze6JJh-lW5CQF9ePuGyny_49Oyk-e5EFl6YvB8x0VW-ylnGy3wQi1Cd_smryrvWCbsCtALX-_ww4qGhe_I9kDBgIiM_QXHBWC3xoH_ufBoIYVJ2HbxNfnVszJunxBTaSKuoobsS0b4QMWb95lHkYLWz8Vfhu__frN9lkaFy84AeAOrGNPX98l46NWAzazOaw528OaT_YcRyCiB8twepAVJiP0xF4_HtTSfWpgKeAaCla8EkBSdskyqEZtXmMdz7g3yBWIPCoWDHEdmOImFDHAQSL-Eynlxq7N6Gjx02119xvbaHQy047HDY6JDEQ3CQ1ww-XAKiUJab_Xe4u2FVsdILRPes1EPEIln5rQGMwp3JoBDdolh_2_tJjsCfrxw4MEPtWMoaX7Q-8rO8IuAiodImOwxrk-rWk6L5Mat2LZAX8Z5_dS5U5TgY37_7XrEcnDuKUztKuFMuS0S44oKJdkf7M-OVpqbKLxase-UpxVbX41Vurp288mRtArIPubDtDVv5XFZoPi8KsWBx0dab8uPewm-EVopZA-pdo6lIc_oVklb8qxhBH8_TVVwb8mbKAcJ3uQXmvmRV2M1ggo2649ACHBAhIOI4B5tLegdRaf6yXef02nARKQa8Nb6723geVes1w0PaREo7ZgIoXv-g"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"userAskCancel\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/patronrequests/1/changestatus",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"patronrequests",
+						"1",
+						"changestatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PatronDDRequest Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjYyM2M0NTU3MjFjNGU4ZGYzZTg0ZDBjOGE2OWIwYjg1MTc0ODVjMTgwN2Y2OTc0ZDQwMzVlNGNjZGZmZjY4MGQxOTc3NjA4MGMyNDJkYzEwIn0.eyJhdWQiOiIxIiwianRpIjoiNjIzYzQ1NTcyMWM0ZThkZjNlODRkMGM4YTY5YjBiODUxNzQ4NWMxODA3ZjY5NzRkNDAzNWU0Y2NkZmZmNjgwZDE5Nzc2MDgwYzI0MmRjMTAiLCJpYXQiOjE1OTY0MDU3NjEsIm5iZiI6MTU5NjQwNTc2MSwiZXhwIjoxNTk2NDkyMTYxLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.PMadXg_MU7k6vqt9VqT4ocBxze6JJh-lW5CQF9ePuGyny_49Oyk-e5EFl6YvB8x0VW-ylnGy3wQi1Cd_smryrvWCbsCtALX-_ww4qGhe_I9kDBgIiM_QXHBWC3xoH_ufBoIYVJ2HbxNfnVszJunxBTaSKuoobsS0b4QMWb95lHkYLWz8Vfhu__frN9lkaFy84AeAOrGNPX98l46NWAzazOaw528OaT_YcRyCiB8twepAVJiP0xF4_HtTSfWpgKeAaCla8EkBSdskyqEZtXmMdz7g3yBWIPCoWDHEdmOImFDHAQSL-Eynlxq7N6Gjx02119xvbaHQy047HDY6JDEQ3CQ1ww-XAKiUJab_Xe4u2FVsdILRPes1EPEIln5rQGMwp3JoBDdolh_2_tJjsCfrxw4MEPtWMoaX7Q-8rO8IuAiodImOwxrk-rWk6L5Mat2LZAX8Z5_dS5U5TgY37_7XrEcnDuKUztKuFMuS0S44oKJdkf7M-OVpqbKLxase-UpxVbX41Vurp288mRtArIPubDtDVv5XFZoPi8KsWBx0dab8uPewm-EVopZA-pdo6lIc_oVklb8qxhBH8_TVVwb8mbKAcJ3uQXmvmRV2M1ggo2649ACHBAhIOI4B5tLegdRaf6yXef02nARKQa8Nb6723geVes1w0PaREo7ZgIoXv-g"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"archived\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/patronrequests/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"patronrequests",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ISO18626 Request",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/xml"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ISO18626Message ill:version=\"1.0\" xmlns=\"http://illtransactions.org/2013/iso18626\" xmlns:ill=\"http://illtransactions.org/2013/iso18626\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://illtransactions.org/2013/iso18626 http://illtransactions.org/schemas/ISO-18626-v1_2.xsd\">\n    <request>\n\t\t<header>\n\t\t\t<supplyingAgencyId>\n\t\t\t\t<agencyIdType>ISIL</agencyIdType>\n\t\t\t\t<agencyIdValue>DK-710100</agencyIdValue>\n\t\t\t</supplyingAgencyId>\n\t\t\t<requestingAgencyId>\n\t\t\t\t<agencyIdType>ISIL</agencyIdType>\n\t\t\t\t<agencyIdValue>DK-820010</agencyIdValue>\n\t\t\t</requestingAgencyId>\n            <multipleItemRequestId>49837539</multipleItemRequestId>\n          <timestamp>2014-03-17T09:30:47.0Z</timestamp>\n          <requestingAgencyRequestId>49837539</requestingAgencyRequestId>\n\t\t</header>\n\t\t<bibliographicInfo>\n\t\t\t<supplierUniqueRecordId>27345786</supplierUniqueRecordId>\n            <title>Nature photonics</title>\n            <titleOfComponent>articolo preso da ISO18626</titleOfComponent>\n            <volume>11</volume>\n            <issue>3</issue>\n\t\t</bibliographicInfo>\n        <publicationInfo>\n              <publicationDate>2018-05-02 18:32:22</publicationDate>\n              <!--<publicationType>Article</publicationType>-->\n        </publicationInfo>\n\t\t<serviceInfo>\n\t\t\t<requestType>New</requestType>\n            <requestSubType>PatronRequest</requestSubType>\n            <serviceType>Copy</serviceType>\n\t\t</serviceInfo>\n\t</request>\n</ISO18626Message>"
+				},
+				"url": {
+					"raw": "{{urlbase}}/iso18626",
+					"host": [
+						"{{urlbase}}"
+					],
+					"path": [
+						"iso18626"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ISO18626 RequestingAgencyMessage",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ISO18626Message ill:version=\"1.0\" xmlns=\"http://illtransactions.org/2013/iso18626\" xmlns:ill=\"http://illtransactions.org/2013/iso18626\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://illtransactions.org/2013/iso18626 http://illtransactions.org/schemas/ISO-18626-v1_2.xsd\">\n    <requestingAgencyMessage>\n\t\t<header>\n\t\t\t<supplyingAgencyId>\n\t\t\t\t<agencyIdType>ISIL</agencyIdType>\n\t\t\t\t<agencyIdValue>DK-710100</agencyIdValue>\n\t\t\t</supplyingAgencyId>\n\t\t\t<requestingAgencyId>\n\t\t\t\t<agencyIdType>ISIL</agencyIdType>\n\t\t\t\t<agencyIdValue>DK-820010</agencyIdValue>\n\t\t\t</requestingAgencyId>\n            <multipleItemRequestId>49837539</multipleItemRequestId>\n          <timestamp>2014-03-17T09:30:47.0Z</timestamp>\n          <requestingAgencyRequestId>49837539</requestingAgencyRequestId>\n\t\t</header>\n\t\t<action>StatusRequest</action>\n\t</requestingAgencyMessage>\n</ISO18626Message>"
+				},
+				"url": {
+					"raw": "{{urlbase}}/iso18626",
+					"host": [
+						"{{urlbase}}"
+					],
+					"path": [
+						"iso18626"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -1149,27 +1328,27 @@
 	],
 	"variable": [
 		{
-			"id": "565c0830-c6a7-45dc-9713-1a18060f5cc0",
+			"id": "fb1c4a2b-c13a-45be-a8f1-7000c11c7f5c",
 			"key": "url",
 			"value": "http://api.nilde.local/api/v1/"
 		},
 		{
-			"id": "0831633e-644d-40d3-ad22-5ba3660ab946",
+			"id": "0d1bf7f2-9385-4683-b6a6-30cad8357976",
 			"key": "urlbase",
 			"value": "http://api.nilde.local"
 		},
 		{
-			"id": "4fb9563c-4bf1-4a5c-92d2-6427991b7955",
+			"id": "b8bda595-3ef3-4fdb-acba-64b212460c92",
 			"key": "bearer_admin",
 			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImExYjEyZmU4M2IwZmNjYjI4ZDJmY2Q3ZDkwZWQxZWE2ZTRhZDBmYzNhMmMwZmQyZTA1ODI3YzQ3ODNjNTdhNWJmMzE5MGVhMjU0ZjMwYmY1In0.eyJhdWQiOiIxIiwianRpIjoiYTFiMTJmZTgzYjBmY2NiMjhkMmZjZDdkOTBlZDFlYTZlNGFkMGZjM2EyYzBmZDJlMDU4MjdjNDc4M2M1N2E1YmYzMTkwZWEyNTRmMzBiZjUiLCJpYXQiOjE1NjA1MDIzMDksIm5iZiI6MTU2MDUwMjMwOSwiZXhwIjoxNTYwNTg4NzA5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.PJ5hheq3c3aZY4O-lb1edWqrSno5gUrqq4-9RL3UqpqnsSTCv4ArZiPyRFCURRMv-P_voAONkEOOm0Yhox0CGlmR9NIsUDipZ7UJJHQcfkdmTNz9nGoJFVyHdNq3jrGTijQMplIjCdH8RzFWj6JMkbQkPMcl-8Co1oioIY4Ew-yaLYqhj2g95ZKjFg7VDchScFxsp0iqKp0L1Y65rEngrBW4SG_c79PBVa7R1nR0RkGtE2uMtYBva9EKJAEB9S4pPCZve874zdBtQhTOS1dyh5PIR2cDrqGLNSJyUxOt_Q5euRcpCHs8zu703WZkfOqNVPxIMX8IKlBPDWZuKMsIeU6TWe4OPIjvi3I0fvgIqQYe-8dY0t5ynTw574XHxI9CSPLB6LoEhPzC465BJDe7sGLznS8Xrc1xz5j5JeDZsx78eurWx17dlDaMZUj-31iTL1V7xJSZU7QZWBoEKs4bUyRofPZnSaAQ9YYG6edGInDnHW9eV4vnf5sbYsrSHKZM61xu5YiACiaY_H1An0bXipZDniVvcfdqFubq83fENJgds7_Ay8XTk_JatoWjvpAHGmZO7k0obr49Tr_ZjD6o2_o7LEszZ0cAjGUhi5wHqLo71tgHVBdYak3pYehbcvFPa3oYA6Ci2eHTsT2FHAnruMbOaVZh4wpObwRxPmdnKzk"
 		},
 		{
-			"id": "426e5395-fc2a-4136-b1e6-b7573e7cb843",
+			"id": "2f291ab7-6d2e-46ff-b5eb-03439376d01b",
 			"key": "bearer",
 			"value": ""
 		},
 		{
-			"id": "f0355307-f002-4568-9d3f-434cddda6759",
+			"id": "63dacdf1-866a-43f3-b145-8e6318652da5",
 			"key": "bearer2",
 			"value": ""
 		}

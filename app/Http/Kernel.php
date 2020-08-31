@@ -48,6 +48,11 @@ class Kernel extends HttpKernel
             'bindings',
         ],
 
+       'iso18626' => [
+            'throttle:60,1',
+            'iso_18626'
+        ],
+
 //        // Convenience group containing the auth middleware for Passport and
 //        // Dingo so that the custom 'App\Providers\PassportDingoAuthProvider'
 //        // can bridge the auth systems:
@@ -77,6 +82,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'get_parameter_access_token' => \App\Http\Middleware\AccessToken::class,
         'recaptcha' => \App\Http\Middleware\Recaptcha::class,
+        'iso_18626' => \App\Http\Middleware\ISO18626::class,
     ];
 
     /**

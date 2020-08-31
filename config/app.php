@@ -182,6 +182,9 @@ return [
         \App\Providers\ApiServiceProvider::class,
 //        App\Providers\DingoServiceProvider::class,
 
+        //al momento DISATTIVATO perche' uso solo il controller e middleware
+        //\App\Providers\ISO18626ServiceProvider::class,
+
     ],
 
     /*
