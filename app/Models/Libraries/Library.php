@@ -114,7 +114,7 @@ class Library extends BaseModel
     ];
 
     protected $casts = [
-      'name' => 'json'
+      //'name' => 'json'
     ];
 
     public function institution()
