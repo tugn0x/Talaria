@@ -123,6 +123,24 @@ button[type=button] {
     }
 }
 
+.btn-cancel {
+    display: block;
+    color:#fff;
+    padding: 8px 30px;
+    font-weight:normal;
+    font-size: 1.428rem;
+    text-shadow: none;
+    text-align: center;
+    text-decoration:none;
+    background: $dark-text;
+    border-radius: 4px; //da usare in tutti i form select ecc.
+    &:hover{
+        background: $form-text; 
+        color:#fff;
+        text-decoration: none
+    }
+}
+
 .btn-cta {
     display: block;
     color:#fff;
@@ -140,6 +158,8 @@ button[type=button] {
         text-decoration: none
     }
 }
+
+
 
 #app {
     background-color: $light-bk;
@@ -206,6 +226,10 @@ form {
             }
             border: 1px solid #4dbd74;
         }
+        select.form-control:invalid, select.form-control.is-invalid,
+        select.form-control:valid, select.form-control.is-valid {
+            background-position: right calc(1.375em + .1875rem) center;
+        }
     }
     label {
         color: $alternative-text;
@@ -241,6 +265,8 @@ textarea {
     height: 86px;
 }
 
+
+
 .active {
     color: $active;
     &:hover {
@@ -264,6 +290,10 @@ ul.list-inline {
 
 // Detail Teaser / Blok
 .detail {
+    .list-head {
+        justify-content: flex-start;
+        margin-top: 0;
+    }
     .card-body {
         padding: 6.7rem;
     }
@@ -546,12 +576,6 @@ ul.list-inline {
   
 }
 
-.detail {
-    .list-head {
-        justify-content: flex-start;
-        margin-top: 0;
-    }
-}
 
 .features-icons
  {

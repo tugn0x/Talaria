@@ -89,6 +89,10 @@ export default defineMessages({
     id: `${scope}.invalid_email`,
     defaultMessage: 'Please provide a valid email',
   },
+  invalid_select: {
+    id: `${scope}.invalid_select`,
+    defaultMessage: 'Please select an item',
+  },
   password_match: {
     id: `${scope}.password_match`,
     defaultMessage: 'Password must match',

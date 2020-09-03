@@ -31,6 +31,11 @@ const ReferencesPage = (props) => {
     const groupsOptionList = patron.groupsOptionList;
     const libraryOptionList= patron.libraryOptionList;
     const deliveryOptionList= patron.deliveryOptionList;
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true)
+    }, [])
 
     useEffect(() => {
         if(!isNew && !isLoading){
@@ -88,7 +93,7 @@ const ReferencesPage = (props) => {
     
     return (
         <Loader show={isLoading}>
-            {isNew && (
+            {isNew && isMounted && (
                 <ReferencesForm 
                     messages={messages}
                     createReference={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } 
@@ -114,7 +119,7 @@ const ReferencesPage = (props) => {
                         || 
                         <ErrorMsg message="ERROR: can't edit this reference"/>)
                 ||
-                isRequest &&
+                isRequest && isMounted &&
                     (canRequest(reference) && <ReferenceRequest
                         messages={messages}
                         reference={reference} 
@@ -122,6 +127,7 @@ const ReferencesPage = (props) => {
                         deliveryOptionList={deliveryOptionList}
                         libraryOnChange={libraryOnChange}
                         submitCallBack={submitReferenceRequest}
+                        history={props.history}
                     /> || 
                     <ErrorMsg message="ERROR: can't request this reference"/>)
                 ||

@@ -1,10 +1,11 @@
 import React, { useState,useEffect } from 'react';
-import {Button, Card, CardBody, Row, Col} from 'reactstrap';
+import {Button, Card, CardBody, Row, Col, Input} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import ReferenceDetail from '../ReferenceDetail'
 import SectionTitle from 'components/SectionTitle';
 import './style.scss';
 import RequestItem from '../RequestItem';
+import ErrorBox from '../../Form/ErrorBox';
 
 const ReferenceRequest = props => {
     console.log('ReferenceRequest', props)
@@ -42,7 +43,7 @@ const ReferenceRequest = props => {
         let l={};
         if(evt.target.value!='')
             l=libraryOptionList.find(x => x.library_id == evt.target.value).library.data;
-       
+        console.log(l)
         handleChange(l,'library');
         libraryOnChange(l)     
         
@@ -50,6 +51,7 @@ const ReferenceRequest = props => {
 
      useEffect(() => {
         console.log("FORMDATA:", formData)
+        deliveryOptionList.length === 0 ? setIsSubmitDisabled(!(formData.library && formData.library.id)) :
         setIsSubmitDisabled(!(formData.library && formData.library.id && formData.delivery && formData.delivery.id))
      }, [formData])
  
@@ -72,8 +74,8 @@ const ReferenceRequest = props => {
             console.log("Dont Send Form")
             // Ci sono ERRORI nella VALIDAZIONE!
             // Scroll sul campo che non e' stato fillato
-            const errorTarget = document.querySelectorAll('.was-validated .form-control:invalid')[0]
-            scrollTo(errorTarget.offsetParent, true)
+            // const errorTarget = document.querySelectorAll('.was-validated .form-control:invalid')[0]
+            // scrollTo(errorTarget.offsetParent, true)
             alert("ERRORRRR");
             // return
         } else {
@@ -111,9 +113,9 @@ const ReferenceRequest = props => {
             </div>
             <div className="reference">
                 <ReferenceDetail 
-                            messages={messages}
-                            reference={reference} 
-                            icons={[]}
+                    messages={messages}
+                    reference={reference} 
+                    icons={[]}
                 />
             </div>
             <form onSubmit={onSubmit} noValidate className="">
@@ -121,13 +123,17 @@ const ReferenceRequest = props => {
                 <Card className="detail-body">
                 <Row>
                         <Col sm={6}>
-                            {libraryOptionList && <><span className="text-brown">Library:</span> 
-                                <select id="libraryOptionList" required value={formData.library?formData.library.id:''/*selectedLibrary?selectedLibrary.id:''*/} onChange={ (e) => handleChangeLibrary(e)}>
-                                <option value='' key=''>Select</option>
-                                {libraryOptionList && libraryOptionList.map ( (lib) => 
-                                        <option value={lib.library_id} key={lib.library_id}>{lib.label}</option>
-                                )}
-                            </select></>}   
+                            {libraryOptionList && 
+                                <>  
+                                    <span className="text-brown">Library:</span> 
+                                    <Input type="select" name="libraryOptionList" required id="libraryOptionList" value={formData.library?formData.library.id:''/*selectedLibrary?selectedLibrary.id:''*/} onChange={ (e) => handleChangeLibrary(e)}>
+                                        <option value='' key=''>Select</option>
+                                            {libraryOptionList && libraryOptionList.map ( (lib) => 
+                                                    <option value={lib.library_id} key={lib.id}>{lib.label}</option>
+                                            )}
+                                    </Input>
+                                    <ErrorBox className="invalid-feedback" error={intl.formatMessage({id: "app.global.invalid_select"})} />
+                                </>}   
                             {formData.library.id && <div className="libraryDetail">
                                 Name: {formData.library.name} <br/>
                                 Cost: {formData.library.dd_user_cost} € <br/>
@@ -172,12 +178,12 @@ const ReferenceRequest = props => {
                 </Row>
                 </Card>
                 <div className="d-flex justify-content-between">
-                <Button type="submit" disabled={isSubmitDisabled}>
-                    {intl.formatMessage({id: 'app.global.submit'})}
-                </Button>
-                <Button color="secondary" onClick={() => props.history.goBack() } >
-                    {intl.formatMessage({id: 'app.global.cancel'})}
-                </Button> 
+                    <Button type="submit" className="mt-0" color="cta" disabled={isSubmitDisabled}>
+                        {intl.formatMessage({id: 'app.global.submit'})}
+                    </Button>
+                    <Button color="cancel" onClick={() => props.history.goBack() } >
+                        {intl.formatMessage({id: 'app.global.cancel'})}
+                    </Button> 
                 </div>
             </div>
             </form>
