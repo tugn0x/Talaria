@@ -51,7 +51,6 @@ const ReferenceRequest = props => {
 
      useEffect(() => {
         console.log("FORMDATA:", formData)
-        deliveryOptionList.length === 0 ? setIsSubmitDisabled(!(formData.library && formData.library.id)) :
         setIsSubmitDisabled(!(formData.library && formData.library.id && formData.delivery && formData.delivery.id))
      }, [formData])
  
@@ -68,7 +67,7 @@ const ReferenceRequest = props => {
     const onSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
-        form.classList.add('was-validated');
+        // form.classList.add('was-validated');
         
         if (form.checkValidity() === false) {
             console.log("Dont Send Form")
@@ -118,7 +117,7 @@ const ReferenceRequest = props => {
                     icons={[]}
                 />
             </div>
-            <form onSubmit={onSubmit} noValidate className="">
+            <form onSubmit={onSubmit} className="was-validated" noValidate>
             <div className="library">
                 <Card className="detail-body">
                 <Row>
@@ -149,13 +148,17 @@ const ReferenceRequest = props => {
                         </Col>
                         <Col sm={6}>
                             {deliveryOptionList && deliveryOptionList.length>0 && 
-                            <><span className="text-brown">Pickup:</span> 
-                            <select id="deliveryOptionList" required value={formData.delivery?formData.delivery.id:''} onChange={ (e) => showPickupDetails(e)}>
-                                <option value='' key=''>Select</option>
-                                {deliveryOptionList && deliveryOptionList.map ( (pick) => 
-                                        <option value={pick.id} key={pick.id}>{pick.name}</option>
-                                )}
-                            </select></>}
+                                <>
+                                    <span className="text-brown">Pickup:</span> 
+                                    <Input type="select" name="deliveryOptionList" id="deliveryOptionList" required value={formData.delivery?formData.delivery.id:''} onChange={ (e) => showPickupDetails(e)}>
+                                        <option value='' key=''>Select</option>
+                                        {deliveryOptionList && deliveryOptionList.map ( (pick) => 
+                                                <option value={pick.id} key={pick.id}>{pick.name}</option>
+                                        )}
+                                    </Input>
+                                    <ErrorBox className="invalid-feedback" error={intl.formatMessage({id: "app.global.invalid_select"})} />
+                                </>
+                            }
                             {formData.delivery.id && 
                             <div className="PickupDetail">
                                 <span className="text-brown">Detail:</span><br/>
