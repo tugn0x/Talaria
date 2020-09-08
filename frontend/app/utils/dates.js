@@ -15,11 +15,11 @@ export function formatDate(date, type) {
 export function formatDateTime(date, type) {
   switch(type){
     case 'en':
-      return moment(date).format('YYYY-MM-DD hh:mm:ss');  
+      return moment(date).format('YYYY-MM-DD HH:mm:ss');  
     break;
     case 'it':
-      return moment(date).format('DD/MM/YYYY hh:mm:ss');  
+      return moment(date).format('DD/MM/YYYY HH:mm:ss'); 
     break;
-    default:  return moment(date).format('YYYY-MM-DD hh:mm:ss');
+    default:  return moment(date).format('YYYY-MM-DD HH:mm:ss');
   }
 }
