@@ -100,15 +100,17 @@ const ReferenceRequest = props => {
                 title={messages.headerRequest}
                 back={true}
             />
+            {reference.patronddrequests.data && reference.patronddrequests.data.length>0 &&
             <div className="previusRequests">
                 Precedenti richieste:<br/>
-                {reference.patronddrequests.data && reference.patronddrequests.data.map ( (req) =>
+                {reference.patronddrequests.data.map ( (req) =>
                     <RequestItem 
                         data={req} 
                         editPath={'/patron/requests/:id?/:edit?'}
                     />  
                 )}
             </div>
+            }
             <div className="reference">
                 <ReferenceDetail 
                             messages={messages}
