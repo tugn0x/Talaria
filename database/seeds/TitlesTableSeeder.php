@@ -15,6 +15,8 @@ class TitlesTableSeeder extends Seeder
         Title::create(['name'=>'Research fellow']);
         Title::create(['name'=>'Researcher']);
         Title::create(['name'=>'PhD Student']);
+        Title::create(['name'=>'Professor']);
+        Title::create(['name'=>'Student']);
 
         DB::table('institution_type_title')->insert([
             'institution_type_id' => 2,
@@ -27,6 +29,15 @@ class TitlesTableSeeder extends Seeder
         DB::table('institution_type_title')->insert([
             'institution_type_id' => 2,
             'title_id' => 3
-        ]);        
+        ]);
+        
+        DB::table('institution_type_title')->insert([
+            'institution_type_id' => 1,
+            'title_id' => 4
+        ]);
+        DB::table('institution_type_title')->insert([
+            'institution_type_id' => 1,
+            'title_id' => 5
+        ]);
     }
 }

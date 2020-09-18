@@ -12,17 +12,19 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $defaultpw=Hash::make('password');
 
-     /*   $admin = factory(\App\Models\Users\User::class)->create([
+        $admin = factory(\App\Models\Users\User::class)->create([
             'email' => 'nilde@nilde.it',
             'name' => 'nildenilde',
             'surname' => 'nildenilde',
-            'password' => 'nildenilde',
-            'password_confirmation' => 'nildenilde',
+            'password' => $defaultpw,
+            'password_confirmation' => $defaultpw,
             'privacy_policy_accepted'=>now(),
             'country_id'=>1,
         ]);
         $admin->assign('super-admin');
+
 //        $admin = App\Models\Users\User::create(new App\Models\Users\User([
 //            'email' => 'nilde@nilde.it',
 //            'name' => 'nildenilde',
@@ -35,27 +37,42 @@ class UsersTableSeeder extends Seeder
         // Crea qualche altro utente variegato
         factory(\App\Models\Users\User::class, 25)->create();
 
-        //creo il mio utente (e non gli assegno alcun ruolo)
-        $myuser = factory(\App\Models\Users\User::class)->create([
+        //creo il mio utente (e non gli assegno alcun ruolo, di default=registered)
+        $ale = factory(\App\Models\Users\User::class)->create([
             'email' => 'alessandro.tugnoli@gmail.com',
             'name' => 'Alessandro',
             'surname' => 'Tugnoli',
-            'password' => 'nildenilde',
-            'password_confirmation' => 'nildenilde',
+            'password' => $defaultpw,
+            'password_confirmation' => $defaultpw,
             'status'=>1,
             'country_id'=>1,
             'privacy_policy_accepted'=>now(),
         ]);
 
-        $myuser->libraries()->sync([
+        $librarian = factory(\App\Models\Users\User::class)->create([
+            'email' => 'a.tugnoli@area.bo.cnr.it',
+            'name' => 'Mario',
+            'surname' => 'Rossi',
+            'password' => $defaultpw,
+            'password_confirmation' => $defaultpw,
+            'status'=>1,
+            'country_id'=>1,
+            'privacy_policy_accepted'=>now(),
+        ]);
+
+        $lib1=App\Models\Libraries\Library::find(1);
+
+        $librarian->allow('manage', $lib1);
+
+        /*$myuser->libraries()->sync([
             1 => [
                 'status'=>1,
                 'department_id'=>1,
                 'title_id'=>2,
             ]
-        ]);
+        ]);*/
 
-        $myuser = factory(\App\Models\Users\User::class)->create([
+        /*$myuser = factory(\App\Models\Users\User::class)->create([
             'email' => 'giorgio@nilde.com',
             'name' => 'giorgio',
             'surname' => 'giorgio',
@@ -64,14 +81,14 @@ class UsersTableSeeder extends Seeder
             'status'=>1,
             'country_id'=>1,
             'privacy_policy_accepted'=>now(),
-        ]);
-*/
+        ]);*/
+
 /*
         foreach (\App\Models\Libraries\Library::all() as $item) {
             $myuser->allow('manage', $item);
         }
         */
-        factory(\App\Models\Users\User::class, 25)->create();
+        factory(\App\Models\Users\User::class, 5)->create();
 
         /*
          *
