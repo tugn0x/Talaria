@@ -26,7 +26,6 @@ class LibrariesTableSeeder extends Seeder
             'dd_cost'=>1.00,
             'dd_user_cost'=>2.00,
             'country_id'=>1,
-            'privacy_policy_accepted'=>now(),
         ]);
 
         factory(\App\Models\Libraries\Library::class, 5)->create();
