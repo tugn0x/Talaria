@@ -24,7 +24,13 @@ import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_REMOVE_LABEL,
   REQUEST_REMOVE_GROUP,
   //REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,
-  STOP_LOADING, REQUEST_ERROR } from './constants';
+  STOP_LOADING, REQUEST_ERROR,
+  REQUEST_FIND_REFERENCE_BY_DOI,
+  REQUEST_FIND_REFERENCE_BY_PMID,
+  REQUEST_FIND_REFERENCE_BY_DOI_SUCCESS,
+  REQUEST_FIND_REFERENCE_BY_PMID_SUCCESS,
+  REQUEST_CLEAN_IMPORTREFERENCE
+} from './constants';
 
 export const initialState = {
   loading: false,
@@ -47,6 +53,7 @@ export const initialState = {
     pagination: [],
   },
   reference: {},
+  importedreference: {},
   patronrequest: {}
 };
 
@@ -212,6 +219,30 @@ const PatronReducer = (state = initialState, action) =>
         draft.error = initialState.error;
         // draft.libraryOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break; */
+
+        case REQUEST_FIND_REFERENCE_BY_DOI:
+          draft.loading = true;
+          break;
+        case REQUEST_FIND_REFERENCE_BY_DOI_SUCCESS:
+          draft.loading = false;
+          draft.error = initialState.error;
+          draft.importedreference={};
+          draft.importedreference.fromDOI = action.result;
+          break;  
+
+        case REQUEST_FIND_REFERENCE_BY_PMID:
+          draft.loading = true;
+          break;
+        case REQUEST_FIND_REFERENCE_BY_PMID_SUCCESS:
+          draft.loading = false;
+          draft.error = initialState.error;
+          draft.importedreference={};
+          draft.importedreference.fromPMID = (action.result.result && action.result.result.uids && action.result.result.uids.length>0)?action.result.result[action.result.result.uids[0]]:{};
+          break;  
+        case REQUEST_CLEAN_IMPORTREFERENCE:
+          draft.importedreference={};
+          break;
+          
       case REQUEST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;

@@ -5,7 +5,7 @@ import {useIntl} from 'react-intl';
 import InputSearch from 'components/Form/InputSearch';
 import SectionTitle from 'components/SectionTitle';
 
-const PreForm = ({goToForm, messages}) => {
+const PreForm = ({goToForm, messages,searchCallBack}) => {
     
     const intl = useIntl();
 
@@ -17,7 +17,7 @@ const PreForm = ({goToForm, messages}) => {
             <Card className="pb-5">
                 <p className="big text-center pt-4">{intl.formatMessage(messages.bodySearch)}</p>
                 <InputSearch
-                    submitCallBack={(query) => console.log(query)}
+                    submitCallBack={(query) => searchCallBack(query)}
                     className="w-50 m-auto"
                     placeholder={intl.formatMessage(messages.inputPlaceHolder)}
                 />

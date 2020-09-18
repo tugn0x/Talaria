@@ -32,7 +32,13 @@ import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,
   REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,
   REQUEST_DELETE_REFERENCE,
-  REQUEST_ERROR, STOP_LOADING} from "./constants";
+  REQUEST_ERROR, STOP_LOADING,
+  REQUEST_FIND_REFERENCE_BY_DOI,
+  REQUEST_FIND_REFERENCE_BY_DOI_SUCCESS,
+  REQUEST_FIND_REFERENCE_BY_PMID,
+  REQUEST_FIND_REFERENCE_BY_PMID_SUCCESS,
+  REQUEST_CLEAN_IMPORTREFERENCE
+} from "./constants";
 
 export function defaultAction() {
   return {
@@ -383,8 +389,42 @@ export function requestDeleteReference(id,message,filter) {
   };
 }
 
+/* External request actions */
+export function requestFindReferenceByDOI(doi) {
+  return {
+    type: REQUEST_FIND_REFERENCE_BY_DOI,
+    doi
+  };
+}
 
+export function requestFindReferenceByDOISuccess(result) {
+  return {
+    type: REQUEST_FIND_REFERENCE_BY_DOI_SUCCESS,
+    result
+  };
+}
 
+export function requestFindReferenceByPMID(pmid) {
+  return {
+    type: REQUEST_FIND_REFERENCE_BY_PMID,
+    pmid
+  };
+}
+
+export function cleanImportedreference() {
+  return {
+    type: REQUEST_CLEAN_IMPORTREFERENCE
+  }
+}
+
+export function requestFindReferenceByPMIDSuccess(result) {
+  return {
+    type: REQUEST_FIND_REFERENCE_BY_PMID_SUCCESS,
+    result
+  };
+}
+
+/* END External request action */
 
 /* export function requestAccessToLibrarySuccess(result) {
   return {

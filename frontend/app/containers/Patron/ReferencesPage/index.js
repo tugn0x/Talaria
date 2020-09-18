@@ -11,7 +11,7 @@ import {requestPostReferences,requestUpdateReferences,
         requestMyActiveLibrariesOptionList, requestLabelsOptionList, 
         requestGroupsOptionList, requestApplyLabelsToReferences, 
         requestApplyGroupsToReferences, requestRemoveReferenceLabel,
-        requestRemoveReferenceGroup, requestDeleteReference,requestGetLibraryDeliveries,requestPostRequest} from '../actions'
+        requestRemoveReferenceGroup, requestDeleteReference,requestGetLibraryDeliveries,requestPostRequest,requestFindReferenceByDOI,requestFindReferenceByPMID,cleanImportedreference} from '../actions'
 import messages from './messages';
 import confirm from "reactstrap-confirm";
 import SectionTitle from 'components/SectionTitle';
@@ -24,6 +24,7 @@ const ReferencesPage = (props) => {
     const {dispatch, isLoading, match, patron} = props
     const {params} = match
     const reference = patron.reference 
+    const importedreference=patron.importedreference
     const intl = useIntl();
     const isNew = !params.id || params.id === 'new'
     const isRequest = params.id && params.op=="request"
@@ -31,6 +32,44 @@ const ReferencesPage = (props) => {
     const groupsOptionList = patron.groupsOptionList;
     const libraryOptionList= patron.libraryOptionList;
     const deliveryOptionList= patron.deliveryOptionList;
+
+    const [refData,setRefData] = useState(null);
+
+    const parseFromDOI = (metadata) => {
+        let obj={}
+
+        obj={
+            pub_title: metadata.journal,
+            part_title: metadata.title,
+            volume: metadata.volume,
+            issue: metadata.issue,
+            //pubyear: metadata.pubdate.match(/\d{4}/)[0],
+            first_author: (metadata.author && metadata.author.length>0 && metadata.author[0] && metadata.author[0].sequence=="first")?metadata.author[0].family+" "+metadata.author[0].given:'',
+            //TODO: ciclare su tutti gli "additional" e concatenarli nel campo last_author
+            //last_author: (importedreference.author && importedreference.author.length>1 && importedreference.author[1] && importedreference.author[0].sequence=="additional")?importedreference.author[1].family+" "+importedreference.author[1].given:'',
+            material_type: 1,
+        }
+
+        return obj;
+    }
+
+    const parseFromPMID = (metadata) => {
+        let obj={}
+        
+        obj={
+            pub_title: metadata.fulljournalname,
+            part_title: metadata.title,
+            first_author: metadata.authors?metadata.authors[0].name:'',
+            volume: metadata.volume,
+            issue: metadata.issue,
+            pubyear:  metadata.pubdate.match(/\b(\d{4})\b/)[0],
+            page_start: metadata.pages.split('-')[0],
+            page_end: metadata.pages.split('-')[1],  //non va bene perchè in realtà viene passato 150-72 che corrisponde a 150-172 !!
+            material_type: metadata.pubtype.indexOf('Journal Article')>=0?1:0,
+        }
+        
+        return obj;
+    }
 
     useEffect(() => {
         if(!isNew && !isLoading){
@@ -47,6 +86,29 @@ const ReferencesPage = (props) => {
        if(isRequest && !isLoading)
            dispatch(requestMyActiveLibrariesOptionList())
     }, [isRequest])
+
+    useEffect( () => {
+        if(importedreference && Object.keys(importedreference).length>0)
+        {
+        console.log("PARSING importedreference",importedreference)
+                    //mapping data
+                    
+                    let newref={}
+
+                    if(importedreference.fromDOI)
+                        newref=parseFromDOI(importedreference.fromDOI);
+                    else if(importedreference.fromPMID)
+                        newref=parseFromPMID(importedreference.fromPMID);
+                        
+                    setRefData(newref) 
+
+                    //Clean importedreference (altrimenti se andavo in nuovo riferimento mi proponeva i dati precedenti)
+                    dispatch(cleanImportedreference())
+
+                    //+ modificare redux in modo da creare importreference={ fromDoi: {}, fromPMID:{} }
+        }
+        
+    }, [importedreference])
 
     async function deleteReference (id) {
         let conf = await confirm({
@@ -84,6 +146,24 @@ const ReferencesPage = (props) => {
      const canEdit = (ref) => {
         return (ref.patronrequests==0)
     }
+
+    const findReferenceBySearchParams = (query) => {
+        console.log("findReferenceBySearchParams:", query)
+        let doi=query.match(/\b((10\.\d{4,9}\/[-._;()/:A-Z0-9a-z]+))/);
+        if(doi!=null)
+        {
+            console.log("DOI MATCH!",doi[0])
+            dispatch(requestFindReferenceByDOI(doi[0]))
+        }
+        
+        let pmid=query.match(/\b(\d{7,})\b/)
+        if(pmid!=null)
+        {
+            console.log("PMID MATCH!",pmid[0])
+            dispatch(requestFindReferenceByPMID(pmid[0]))
+        }
+    }
+
     
     
     return (
@@ -91,7 +171,9 @@ const ReferencesPage = (props) => {
             {isNew && (
                 <ReferencesForm 
                     messages={messages}
+                    importReference={refData}
                     createReference={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } 
+                    findReference={ (query) => findReferenceBySearchParams(query)}
                     labelsOptionList={labelsOptionList}
                     groupsOptionList={groupsOptionList}
                 />
@@ -115,15 +197,17 @@ const ReferencesPage = (props) => {
                         <ErrorMsg message="ERROR: can't edit this reference"/>)
                 ||
                 isRequest &&
-                    (canRequest(reference) && <ReferenceRequest
+                    /*(canRequest(reference) &&*/ <ReferenceRequest
                         messages={messages}
                         reference={reference} 
                         libraryOptionList={libraryOptionList}
                         deliveryOptionList={deliveryOptionList}
                         libraryOnChange={libraryOnChange}
                         submitCallBack={submitReferenceRequest}
-                    /> || 
-                    <ErrorMsg message="ERROR: can't request this reference"/>)
+                    /> /*
+                        || 
+                    <ErrorMsg message="ERROR: can't request this reference"/>
+                    )*/
                 ||
                     <div className="detail">
                         <SectionTitle 

@@ -11,10 +11,9 @@ import PreForm from './PreForm';
 const ReferencesForm = (props) => {
     const {createReference, reference, updateReference, messages, 
             labelsOptionList, applyLabels, groupsOptionList, 
-            applyGroups, removeLabel, removeGroup, deleteReference} = props
+            applyGroups, removeLabel, removeGroup, deleteReference,findReference,importReference} = props
     const [goToForm, setGoToForm] = useState(false);
-    
-    
+        
     return (
         <>
                 {reference  && 
@@ -32,17 +31,27 @@ const ReferencesForm = (props) => {
                     />
                 ||
                     <>
-                        {!goToForm && 
+                    {console.log("impref",importReference)}
+                    
+                    {goToForm &&
+                            <FormContent 
+                            messages={messages} 
+                            submitCallBack={(formData) => createReference(formData)}
+                            />
+                    ||    
+                    importReference &&
+                    <FormContent 
+                                messages={messages} 
+                                reference={importReference}
+                                submitCallBack={(formData) => createReference(formData)}
+                            />
+                    ||        
                             <PreForm 
                                 goToForm={setGoToForm}
                                 messages={formMessages}
+                                searchCallBack={(query) => findReference(query)}
                             />
-                        ||
-                            <FormContent 
-                                messages={messages} 
-                                submitCallBack={(formData) => createReference(formData)}
-                            />
-                        }
+                    }
                     </>
                 }
         </>
