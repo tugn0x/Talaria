@@ -17,11 +17,10 @@ const FormContent = (props) => {
             applyLabels, labelsOptionList, applyGroups, groupsOptionList,
             removeLabel, removeGroup, deleteReference} = props;
     const [formData, setFormData] = useState(() => {
-        if(reference){
-            return {material_type: 1}
-        }else {
+        if(!reference)
             return {material_type: 1, pubyear: "", first_author: "", volume: "", page_start: ""}
-        }
+        else return {...reference}    
+        
     })
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
     const [requiredFields, setRequiredFields] = useState(true)
@@ -43,6 +42,8 @@ const FormContent = (props) => {
 
     useEffect(() => {
         setFormClasses(state => [...state, 'was-validated'])
+
+        console.log("formdata",formData);
     },[]) 
 
     const onSubmit = (e) => {
