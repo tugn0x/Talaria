@@ -51,9 +51,15 @@ const ReferenceIcons = (props) => {
     return ( 
         icons && icons.length>0 && 
         <>
-                {canRequest(data) && visibleIcon('request') && <NavLink to={`${requesturl(data.id)}`}  className="btn btn-icon">
-                    <i className="fas fa-share"></i>
-                </NavLink>}
+                {visibleIcon('request') && 
+                 <NavLink to={`${requesturl(data.id)}`}  className="btn btn-icon">
+                    {
+                    canRequest(data) && <i className="fas fa-share"></i>
+                    || 
+                    <i className="fas fa-lock"></i> /*oppure sempre fa-share*/
+                    }
+                 </NavLink>
+                }
                 {data.oa==1 && visibleIcon('oa') && <NavLink to={`${oaurl(data.id)}`} className="btn btn-icon">
                     <i className="icon-oa"></i>
                 </NavLink>}

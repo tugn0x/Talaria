@@ -5,6 +5,7 @@ import ReferenceDetail from '../ReferenceDetail'
 import SectionTitle from 'components/SectionTitle';
 import './style.scss';
 import RequestItem from '../RequestItem';
+import ErrorMsg from 'components/ErrorMsg';
 
 const ReferenceRequest = props => {
     console.log('ReferenceRequest', props)
@@ -62,6 +63,10 @@ const ReferenceRequest = props => {
         setFormData({ ...formData, [field_name]: value   }); 
     } 
 
+    const canRequest = (ref) => {
+        return (ref.active_patronrequests==0)
+     }
+
     
     const onSubmit = (e) => {
         e.preventDefault();
@@ -100,9 +105,9 @@ const ReferenceRequest = props => {
                 title={messages.headerRequest}
                 back={true}
             />
-            {reference.patronddrequests.data && reference.patronddrequests.data.length>0 &&
+            {reference.patronddrequests && reference.patronddrequests.data && reference.patronddrequests.data.length>0 &&
             <div className="previusRequests">
-                Precedenti richieste:<br/>
+                Precedenti richieste e/o in corso:<br/>
                 {reference.patronddrequests.data.map ( (req) =>
                     <RequestItem 
                         data={req} 
@@ -111,6 +116,8 @@ const ReferenceRequest = props => {
                 )}
             </div>
             }
+            {!canRequest(reference) && <ErrorMsg message="ERROR: can't request this reference. Is already in request!"/>}
+            
             <div className="reference">
                 <ReferenceDetail 
                             messages={messages}
@@ -118,6 +125,7 @@ const ReferenceRequest = props => {
                             icons={[]}
                 />
             </div>
+            {canRequest(reference) &&
             <form onSubmit={onSubmit} noValidate className="">
             <div className="library">
                 <Card className="detail-body">
@@ -183,6 +191,7 @@ const ReferenceRequest = props => {
                 </div>
             </div>
             </form>
+            }
         </div>
     );
 };
