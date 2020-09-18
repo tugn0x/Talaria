@@ -1,11 +1,12 @@
 import React, { useState,useEffect } from 'react';
-import {Button, Card, CardBody, Row, Col} from 'reactstrap';
+import {Button, Card, CardBody, Row, Col, Input} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import ReferenceDetail from '../ReferenceDetail'
 import SectionTitle from 'components/SectionTitle';
 import './style.scss';
 import RequestItem from '../RequestItem';
 import ErrorMsg from 'components/ErrorMsg';
+import ErrorBox from '../../Form/ErrorBox';
 
 const ReferenceRequest = props => {
     console.log('ReferenceRequest', props)
@@ -43,7 +44,7 @@ const ReferenceRequest = props => {
         let l={};
         if(evt.target.value!='')
             l=libraryOptionList.find(x => x.library_id == evt.target.value).library.data;
-       
+        console.log(l)
         handleChange(l,'library');
         libraryOnChange(l)     
         
@@ -71,14 +72,14 @@ const ReferenceRequest = props => {
     const onSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
-        form.classList.add('was-validated');
+        // form.classList.add('was-validated');
         
         if (form.checkValidity() === false) {
             console.log("Dont Send Form")
             // Ci sono ERRORI nella VALIDAZIONE!
             // Scroll sul campo che non e' stato fillato
-            const errorTarget = document.querySelectorAll('.was-validated .form-control:invalid')[0]
-            scrollTo(errorTarget.offsetParent, true)
+            // const errorTarget = document.querySelectorAll('.was-validated .form-control:invalid')[0]
+            // scrollTo(errorTarget.offsetParent, true)
             alert("ERRORRRR");
             // return
         } else {
@@ -120,24 +121,28 @@ const ReferenceRequest = props => {
             
             <div className="reference">
                 <ReferenceDetail 
-                            messages={messages}
-                            reference={reference} 
-                            icons={[]}
+                    messages={messages}
+                    reference={reference} 
+                    icons={[]}
                 />
             </div>
-            {canRequest(reference) &&
-            <form onSubmit={onSubmit} noValidate className="">
+            {canRequest(reference) && 
+            <form onSubmit={onSubmit} className="was-validated" noValidate>
             <div className="library">
                 <Card className="detail-body">
                 <Row>
                         <Col sm={6}>
-                            {libraryOptionList && <><span className="text-brown">Library:</span> 
-                                <select id="libraryOptionList" required value={formData.library?formData.library.id:''/*selectedLibrary?selectedLibrary.id:''*/} onChange={ (e) => handleChangeLibrary(e)}>
-                                <option value='' key=''>Select</option>
-                                {libraryOptionList && libraryOptionList.map ( (lib) => 
-                                        <option value={lib.library_id} key={lib.library_id}>{lib.label}</option>
-                                )}
-                            </select></>}   
+                            {libraryOptionList && 
+                                <>  
+                                    <span className="text-brown">Library:</span> 
+                                    <Input type="select" name="libraryOptionList" required id="libraryOptionList" value={formData.library?formData.library.id:''/*selectedLibrary?selectedLibrary.id:''*/} onChange={ (e) => handleChangeLibrary(e)}>
+                                        <option value='' key=''>Select</option>
+                                            {libraryOptionList && libraryOptionList.map ( (lib) => 
+                                                    <option value={lib.library_id} key={lib.id}>{lib.label}</option>
+                                            )}
+                                    </Input>
+                                    <ErrorBox className="invalid-feedback" error={intl.formatMessage({id: "app.global.invalid_select"})} />
+                                </>}   
                             {formData.library.id && <div className="libraryDetail">
                                 Name: {formData.library.name} <br/>
                                 Cost: {formData.library.dd_user_cost} € <br/>
@@ -153,13 +158,17 @@ const ReferenceRequest = props => {
                         </Col>
                         <Col sm={6}>
                             {deliveryOptionList && deliveryOptionList.length>0 && 
-                            <><span className="text-brown">Pickup:</span> 
-                            <select id="deliveryOptionList" required value={formData.delivery?formData.delivery.id:''} onChange={ (e) => showPickupDetails(e)}>
-                                <option value='' key=''>Select</option>
-                                {deliveryOptionList && deliveryOptionList.map ( (pick) => 
-                                        <option value={pick.id} key={pick.id}>{pick.name}</option>
-                                )}
-                            </select></>}
+                                <>
+                                    <span className="text-brown">Pickup:</span> 
+                                    <Input type="select" name="deliveryOptionList" id="deliveryOptionList" required value={formData.delivery?formData.delivery.id:''} onChange={ (e) => showPickupDetails(e)}>
+                                        <option value='' key=''>Select</option>
+                                        {deliveryOptionList && deliveryOptionList.map ( (pick) => 
+                                                <option value={pick.id} key={pick.id}>{pick.name}</option>
+                                        )}
+                                    </Input>
+                                    <ErrorBox className="invalid-feedback" error={intl.formatMessage({id: "app.global.invalid_select"})} />
+                                </>
+                            }
                             {formData.delivery.id && 
                             <div className="PickupDetail">
                                 <span className="text-brown">Detail:</span><br/>
@@ -182,12 +191,12 @@ const ReferenceRequest = props => {
                 </Row>
                 </Card>
                 <div className="d-flex justify-content-between">
-                <Button type="submit" disabled={isSubmitDisabled}>
-                    {intl.formatMessage({id: 'app.global.submit'})}
-                </Button>
-                <Button color="secondary" onClick={() => props.history.goBack() } >
-                    {intl.formatMessage({id: 'app.global.cancel'})}
-                </Button> 
+                    <Button type="submit" className="mt-0" color="cta" disabled={isSubmitDisabled}>
+                        {intl.formatMessage({id: 'app.global.submit'})}
+                    </Button>
+                    <Button color="cancel" onClick={() => props.history.goBack() } >
+                        {intl.formatMessage({id: 'app.global.cancel'})}
+                    </Button> 
                 </div>
             </div>
             </form>

@@ -109,7 +109,7 @@ const CustomForm = (props) => {
                                                                     <CheckBox 
                                                                         field={field}
                                                                         label={field.label && field.label}
-                                                                        data={!formData[field.name] && props.requestData && props.requestData[field.name] ? props.requestData[field.name] : formData[field.name]}
+                                                                        data={formData[field.name] === undefined && props.requestData && props.requestData[field.name] ? props.requestData[field.name] : formData[field.name]}
                                                                         handleChange={(value) => handleChange(value, field.name)}
                                                                     />   
                                                                     </>

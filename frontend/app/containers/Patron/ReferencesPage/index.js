@@ -32,6 +32,11 @@ const ReferencesPage = (props) => {
     const groupsOptionList = patron.groupsOptionList;
     const libraryOptionList= patron.libraryOptionList;
     const deliveryOptionList= patron.deliveryOptionList;
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true)
+    }, [])
 
     const [refData,setRefData] = useState(null);
 
@@ -62,7 +67,7 @@ const ReferencesPage = (props) => {
             first_author: metadata.authors?metadata.authors[0].name:'',
             volume: metadata.volume,
             issue: metadata.issue,
-            pubyear:  metadata.pubdate.match(/\b(\d{4})\b/)[0],
+            pubyear:  metadata.pubdate && metadata.pubdate.match(/\b(\d{4})\b/)[0],
             page_start: metadata.pages.split('-')[0],
             page_end: metadata.pages.split('-')[1],  //non va bene perchè in realtà viene passato 150-72 che corrisponde a 150-172 !!
             material_type: metadata.pubtype.indexOf('Journal Article')>=0?1:0,
@@ -168,7 +173,7 @@ const ReferencesPage = (props) => {
     
     return (
         <Loader show={isLoading}>
-            {isNew && (
+            {isNew && isMounted && (
                 <ReferencesForm 
                     messages={messages}
                     importReference={refData}
@@ -196,7 +201,7 @@ const ReferencesPage = (props) => {
                         || 
                         <ErrorMsg message="ERROR: can't edit this reference"/>)
                 ||
-                isRequest &&
+                isRequest && isMounted &&
                     /*(canRequest(reference) &&*/ <ReferenceRequest
                         messages={messages}
                         reference={reference} 
@@ -204,6 +209,7 @@ const ReferencesPage = (props) => {
                         deliveryOptionList={deliveryOptionList}
                         libraryOnChange={libraryOnChange}
                         submitCallBack={submitReferenceRequest}
+                        history={props.history}
                     /> /*
                         || 
                     <ErrorMsg message="ERROR: can't request this reference"/>
