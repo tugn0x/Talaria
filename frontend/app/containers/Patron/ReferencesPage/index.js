@@ -68,9 +68,9 @@ const ReferencesPage = (props) => {
             volume: metadata.volume,
             issue: metadata.issue,
             pubyear:  metadata.pubdate && metadata.pubdate.match(/\b(\d{4})\b/)[0],
-            page_start: metadata.pages.split('-')[0],
-            page_end: metadata.pages.split('-')[1],  //non va bene perchè in realtà viene passato 150-72 che corrisponde a 150-172 !!
-            material_type: metadata.pubtype.indexOf('Journal Article')>=0?1:0,
+            page_start: metadata.pages && metadata.pages.split('-')[0],
+            page_end: metadata.pages && metadata.pages.split('-')[1],  //non va bene perchè in realtà viene passato 150-72 che corrisponde a 150-172 !!
+            material_type: metadata.pubtype && metadata.pubtype.indexOf('Journal Article')>=0?1:0,
         }
         
         return obj;
@@ -100,9 +100,9 @@ const ReferencesPage = (props) => {
                     
                     let newref={}
 
-                    if(importedreference.fromDOI)
+                    if(importedreference.fromDOI && Object.keys(importedreference.fromDOI).length>0)
                         newref=parseFromDOI(importedreference.fromDOI);
-                    else if(importedreference.fromPMID)
+                    else if(importedreference.fromPMID && Object.keys(importedreference.fromPMID).length>0)
                         newref=parseFromPMID(importedreference.fromPMID);
                         
                     setRefData(newref) 
