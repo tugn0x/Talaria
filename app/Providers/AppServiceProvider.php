@@ -48,9 +48,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //FIX Horizon via https: 
+        //FIX Horizon via https:
         //\Illuminate\Support\Facades\URL::forceScheme('https');
-        
+
         /*
          * Permissions
          */
