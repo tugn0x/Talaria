@@ -22,7 +22,7 @@ function SimpleList(props) {
           pagination, searchOptions,
           loading, modalComponent, title, subtitle,deleteCallback} = props
 
-    const {total_pages, current_page} = pagination
+    const {total_pages, current_page,total,count,per_page} = pagination
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const intl = useIntl();
@@ -214,6 +214,9 @@ function SimpleList(props) {
                       <Pagination
                           current_page={current_page}
                           total_pages={total_pages}
+                          linkTopage={(page,pageSize)=>linkTo(generatePath(`${match.path}`, {
+                            page: page
+                          }))} 
                           setPage={(page) => linkTo(generatePath(`${match.path}`, {
                             page: page
                           }))}

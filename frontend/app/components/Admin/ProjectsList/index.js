@@ -14,7 +14,7 @@ function ProjectsList(props) {
     console.log('ProjectsList', props)
     const {projectsList, editPath, history, match, pagination} = props
     const [modal, setModal] = useState(false);
-    const {total_pages, current_page} = pagination
+    const {total_pages, current_page,total,count,per_page} = pagination
     const toggle = () => setModal(!modal);
     const intl = useIntl();
 
@@ -103,7 +103,9 @@ function ProjectsList(props) {
                     current_page={current_page}
                      total_pages={total_pages}
                     // setPage={(page) => linkTo(`${path}/?page=${page}`)}
-
+                    linkTopage={(page,pageSize)=>linkTo(generatePath(`${match.path}`, {
+                        page: page
+                      }))}
                     setPage={(page) => linkTo(generatePath(`${props.match.path}`, {
                         page: page
                       }))}
