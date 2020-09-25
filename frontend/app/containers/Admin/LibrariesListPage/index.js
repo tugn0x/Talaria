@@ -13,11 +13,11 @@ import confirm from "reactstrap-confirm";
 
 
 const LibrariesListPage = (props) => {
-    console.log('LibrariesListPage', props)
+    //console.log('LibrariesListPage', props)
     const {dispatch, isLoading, admin,  match, history} = props
     const intl = useIntl();
     const libraryOptionList = admin.libraryOptionList
-    
+
     useEffect(() => {
         if(!isLoading) {
             dispatch(requestGetLibrariesList())
@@ -35,11 +35,11 @@ const LibrariesListPage = (props) => {
             dispatch(deleteLibrary(params.id,intl.formatMessage(messages.deletedMessage)))
     }
 
-    
+
 
     return (
         <>
-            <SimpleList 
+            <SimpleList
                 data={libraryOptionList.data}
                 columns={columns}
                 loading={isLoading}

@@ -10,7 +10,7 @@ import {useIntl} from 'react-intl';
 import SimpleForm from 'components/SimpleForm'
 
 const MyLibraryForm = (props) => {
-    console.log('MyLibraryForm', props)
+//console.log('MyLibraryForm', props)
     const { library, usersOptionList,
             searches, loading, resources,
             submitFormAction, institutionsOptionList,
@@ -18,7 +18,7 @@ const MyLibraryForm = (props) => {
     const intl = useIntl();
 
     return (
-            <SimpleForm loading={loading}>
+            // <SimpleForm loading={loading}>
                  <CustomForm
                     submitCallBack={(formData) => submitFormAction(formData)}
                     requestData={library ? library : null}
@@ -34,7 +34,7 @@ const MyLibraryForm = (props) => {
                     granted_permissions={ library ? library.granted_permissions : [] }
                     resources={resources}
                 />
-            </SimpleForm>
+            // </SimpleForm>
     )
 }
 

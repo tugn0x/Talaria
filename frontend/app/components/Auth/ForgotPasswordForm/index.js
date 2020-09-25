@@ -36,13 +36,13 @@ function ForgotPasswordForm(props){
     const form = e.target;
     form.classList.add('was-validated');
     if (form.checkValidity() === false) {
-      console.log("Dont Send Form")
+//console.log("Dont Send Form")
     } else {
-      console.log("...Sending Form")
+//console.log("...Sending Form")
       props.googleReCaptchaProps.executeRecaptcha('ForgotPassword').then(token => {
         props.forgot({ ...formData, recaptcha: token })
       }).catch(error => {
-        console.log("ERROR IN submitChange executeRecaptcha")
+//console.log("ERROR IN submitChange executeRecaptcha")
         console.error("error", error);
       });
 

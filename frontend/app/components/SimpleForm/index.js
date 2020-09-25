@@ -16,7 +16,7 @@ const SimpleForm = (props) => {
                 <Col md="10">
                     <ButtonBack className="float-left" />
                     <div className="clearfix"></div>
-                    {props.children}
+                    {typeof props.children == 'array' && props.children}
                 </Col>
             </Row>
         </Loader>

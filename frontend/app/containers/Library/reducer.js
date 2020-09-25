@@ -93,6 +93,7 @@ const libraryReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = initialState.error;
         draft.library = action.result.data;
+        draft.library.granted_permissions = action.result.data.granted_permissions ? action.result.data.granted_permissions.data : []
         draft.departmentOptionList = action.result.data.departments? action.result.data.departments.data.map(dep => {
             return {value: dep.id, label: dep.name}
         }):[]
