@@ -17,7 +17,6 @@ services:
     - ./frontend:/usr/src/app
     - ./.env:/usr/src/.env
     command: bash -c "npm install; npm run start:production"
-   #command: bash -c "npm install; npm start"
     expose:
     - 3000
     restart: always
