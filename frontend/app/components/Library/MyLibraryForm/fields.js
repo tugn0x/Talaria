@@ -51,7 +51,7 @@ export const fields = {
         options: "institution_id",
         order: 3,
         // selectedOption: "institution_type_id"
-        
+
     },
     subject_id: {
         type: "custom-select",
@@ -250,7 +250,7 @@ export const fields = {
         name: "email_pec",
         width: "col-sm-6",
         group: "administrative_info",
-        
+
     },
     ccu: {
         type: "text",
@@ -269,7 +269,7 @@ export const fields = {
         name: "administrative_email",
         width: "col-sm-6",
         group: "administrative_info",
-        
+
     },
     administrative_phone: {
         type: "number",

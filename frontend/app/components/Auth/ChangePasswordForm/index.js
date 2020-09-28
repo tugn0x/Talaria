@@ -29,10 +29,10 @@ const ChangePassword = (props) => {
         const form = e.target;
         form.classList.add('was-validated');
         if (form.checkValidity() === false) {
-          console.log("Dont Send Form")
+//console.log("Dont Send Form")
         } else {
           changePassword(formData)
-          console.log("Send Form")
+//console.log("Send Form")
         }
     }
 
