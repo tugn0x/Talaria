@@ -14,7 +14,7 @@ const ProjectForm = (props) => {
     
     
     return (
-        <SimpleForm loading={loading}>
+        //<SimpleForm loading={loading}>
         <CustomForm 
             submitCallBack={(formData) => submitFormAction(formData)}  
             requestData={project ? project : null}
@@ -27,7 +27,7 @@ const ProjectForm = (props) => {
             messages={{...messages, ...globalMessages}}
             searchOptionList={searches}
         />
-    </SimpleForm>
+    //</SimpleForm>
     )
 }
 

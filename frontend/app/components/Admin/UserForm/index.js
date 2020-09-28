@@ -14,7 +14,7 @@ const UserForm = (props) => {
     const {user, loading, roles, submitFormAction, userResources} = props
     const intl = useIntl();
     return (
-        <SimpleForm loading={loading}>
+        //<SimpleForm loading={loading}>
             <CustomForm 
                 submitCallBack={(formData) => submitFormAction(formData)}  
                 fields={fields} 
@@ -35,7 +35,7 @@ const UserForm = (props) => {
                 ))
                 }
             </CustomForm>
-          </SimpleForm>  
+         // </SimpleForm>  
     )
 }
 

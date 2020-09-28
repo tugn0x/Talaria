@@ -12,7 +12,7 @@ const InstitutionForm = (props) => {
     const intl = useIntl();
     // console.log(intl.formatMessage(messages.header))
     return (
-        <SimpleForm loading={loading}>
+        //<SimpleForm loading={loading}>
             <CustomForm 
                 submitCallBack={(formData) => submitFormAction(formData)}  
                 requestData={institution ? institution : null}
@@ -27,7 +27,7 @@ const InstitutionForm = (props) => {
                 messages={{...messages, ...globalMessages}}
                 searchOptionList={searches}
             />
-        </SimpleForm>
+        //</SimpleForm>
     )
 }
 

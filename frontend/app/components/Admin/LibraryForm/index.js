@@ -18,7 +18,7 @@ const LibraryForm = (props) => {
     const intl = useIntl();
     
     return (
-            <SimpleForm loading={loading}>
+            //<SimpleForm loading={loading}>
                  <CustomForm 
                     submitCallBack={(formData) => submitFormAction(formData)} 
                     requestData={library ? library : null}
@@ -35,7 +35,7 @@ const LibraryForm = (props) => {
                         library ? library.granted_permissions : [] }
                     resources={resources}
                 /> 
-            </SimpleForm>
+            //</SimpleForm>
     )
 }
 
