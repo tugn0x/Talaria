@@ -22,11 +22,12 @@ const ReferenceIcons = (props) => {
     }
 
     
-    const oaurl=(id) => {
-        return generatePath(`${referenceUrl}`, {
+    const oaurl=(data) => {
+        /*return generatePath(`${referenceUrl}`, {
             id,
             op:'oa'
-        });
+        });*/
+        return data.oa_link;
     }
    
     const canEdit = (data) => {
@@ -60,7 +61,7 @@ const ReferenceIcons = (props) => {
                     }
                  </NavLink>
                 }
-                {data.oa==1 && visibleIcon('oa') && <NavLink to={`${oaurl(data.id)}`} className="btn btn-icon">
+                {data.oa_link!="" && visibleIcon('oa') && <NavLink to={`${oaurl(data)}`} className="btn btn-icon">
                     <i className="icon-oa"></i>
                 </NavLink>}
                 

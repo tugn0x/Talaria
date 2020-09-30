@@ -8,6 +8,8 @@ import CustomCheckBox from 'components/Form/CustomCheckBox';
 import {formatDate,formatDateTime} from 'utils/dates';
 import './style.scss';
 
+/* TODO : trovare il modo di richiamare la visualizzazione di ReferenceItem per la parte dei metadati*/  
+
 const RequestItem = (props) => {
     const {data, editPath,toggleSelection,checked,archiveRequest,askCancelRequest} = props
     const intl = useIntl();
@@ -84,7 +86,7 @@ const RequestItem = (props) => {
                     <p><span className="pub_title">{data.reference.data.pub_title}</span> <span className="part_title">{data.reference.data.part_title}</span></p>
                 </NavLink>
                 <div className="authors">
-                   {data.reference.data.first_author && <span className="first_author">Autore <span>{data.reference.data.first_author}</span></span>} 
+                   {data.reference.data.authors && <span className="authors">Autore <span>{data.reference.data.authors}</span></span>} 
                    <span className="pubyear">Anno <span>{data.reference.data.pubyear}</span></span>
                 </div>
                 {data.library && <span className="libraryLabel pr-3">

@@ -17,16 +17,24 @@ class Reference extends BaseModel
         'material_type',
         'pub_title',
         'part_title',
-        'first_author',
-        'last_author',
+        'authors', //pub author
+        'part_authors', //part authors
+        'relator',
+        'thesis_type',
+        'degree_course',
+        'series_title',
+        'geographic_area',
         'pubyear',
         'volume',
         'issue',
-        'page_start',
-        'page_end',
+        //'page_start',
+        //'page_end',
+        'pages',
         'abstract',
         'doi',
         'issn',
+        'acnp_cod',
+        'sbn_docid',
         'publisher',
         'publishing_place',
         'isbn',
@@ -34,7 +42,7 @@ class Reference extends BaseModel
         'pmid',
         'status',
         'note',
-        //'oa', Gestione copia OA
+        'oa_link',
     ];
 
     protected $constantFields=['material_type'];

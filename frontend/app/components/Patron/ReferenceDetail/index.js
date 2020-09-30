@@ -18,6 +18,7 @@ const ReferenceDetail = props => {
                 />
                 </div>}
                 <Card className="detail-body">
+                *** DA SISTEMARE e AGGIUNGERE campi in base alla tipologia! ***
                     <Row>
                         <Col sm={3}>
                             <p className="text-brown">{intl.formatMessage(messages.material_type)}</p>
@@ -42,12 +43,12 @@ const ReferenceDetail = props => {
                             <p>{reference.pubyear}</p>
                         </Col>
                     <Col sm={3}>
-                            <p className="text-brown">{intl.formatMessage(messages.first_author)}</p>
-                            <p>{reference.first_author}</p>
+                            <p className="text-brown">{intl.formatMessage(messages.authors)}</p>
+                            <p>{reference.authors}</p>
                         </Col>
                     <Col sm={4}>
-                        <p className="text-brown">{intl.formatMessage(messages.last_author)}</p>
-                        <p>{reference.last_author}</p>
+                        <p className="text-brown">{intl.formatMessage(messages.part_authors)}</p>
+                        <p>{reference.part_authors}</p>
                     </Col>    
                     </Row>
                     <Row>
@@ -71,7 +72,7 @@ const ReferenceDetail = props => {
                         </Col>
                         <Col sm={2}>
                             <p className="text-brown">{intl.formatMessage(messages.pages)}</p>
-                            <p>{reference.page_start}-{reference.page_end}</p>
+                            <p>{reference.pages}</p>
                         </Col>
                     </Row>
                     <Row>

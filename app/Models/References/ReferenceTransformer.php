@@ -29,7 +29,6 @@ class ReferenceTransformer extends BaseTransformer
     {
 //        dd('trasformo');
         $to_merge = [
-              'oa'=>1, //random_int(0,1),
               'active_patronrequests'=>$model->activepatronddrequests()->count(),
               'patronrequests'=>$model->patronddrequests()->count()
         ];

@@ -18,6 +18,7 @@ import SectionTitle from 'components/SectionTitle';
 import {useIntl} from 'react-intl';
 import ErrorMsg from '../../../components/ErrorMsg';
 
+/* TODO DA RIVEDERE IN BASE A MAPPING CAMPI */
 
 const ReferencesPage = (props) => {
     console.log('ReferencesPage', props)
@@ -49,7 +50,7 @@ const ReferencesPage = (props) => {
             volume: metadata.volume,
             issue: metadata.issue,
             //pubyear: metadata.pubdate.match(/\d{4}/)[0],
-            first_author: (metadata.author && metadata.author.length>0 && metadata.author[0] && metadata.author[0].sequence=="first")?metadata.author[0].family+" "+metadata.author[0].given:'',
+            authors: (metadata.author && metadata.author.length>0 && metadata.author[0] && metadata.author[0].sequence=="first")?metadata.author[0].family+" "+metadata.author[0].given:'',
             //TODO: ciclare su tutti gli "additional" e concatenarli nel campo last_author
             //last_author: (importedreference.author && importedreference.author.length>1 && importedreference.author[1] && importedreference.author[0].sequence=="additional")?importedreference.author[1].family+" "+importedreference.author[1].given:'',
             material_type: 1,
@@ -58,19 +59,48 @@ const ReferencesPage = (props) => {
         return obj;
     }
 
+    const parsePMIDAuthors = (authors)=> {
+        let text="";
+
+        authors.map( a => { 
+            text+=(text!='')?", "+a.name:a.name;
+        })
+
+        return text;
+    }
+
+    const parsePMIDdoi = (ids) => {
+        let doi=''
+        
+        ids.map( articleid => {
+            if(articleid.idtype==='doi')
+                doi=articleid.value
+
+        })
+        return doi;
+    }
+
     const parseFromPMID = (metadata) => {
         let obj={}
+
+        let pubtype=metadata.pubtype?metadata.pubtype.toString().toLowerCase():null;
         
         obj={
-            pub_title: metadata.fulljournalname,
+            pmid: metadata.uid,
+            pub_title: metadata.fulljournalname?metadata.fulljournalname:metadata.booktitle?metadata.booktitle:'',
             part_title: metadata.title,
-            first_author: metadata.authors?metadata.authors[0].name:'',
-            volume: metadata.volume,
-            issue: metadata.issue,
-            pubyear:  metadata.pubdate && metadata.pubdate.match(/\b(\d{4})\b/)[0],
-            page_start: metadata.pages && metadata.pages.split('-')[0],
-            page_end: metadata.pages && metadata.pages.split('-')[1],  //non va bene perchè in realtà viene passato 150-72 che corrisponde a 150-172 !!
-            material_type: metadata.pubtype && metadata.pubtype.indexOf('Journal Article')>=0?1:0,
+            part_authors: metadata.authors?parsePMIDAuthors(metadata.authors):'',
+            abstract: metadata.abstract?metadata.abstract:'',
+            volume: metadata.volume?metadata.volume:'',
+            issue: metadata.issue?metadata.issue:'',
+            pubyear:  metadata.pubdate?metadata.pubdate.match(/\b(\d{4})\b/)[0]:'',
+            pages: metadata.pages?metadata.pages:'', 
+            material_type: pubtype==null? 0:( pubtype.includes('article')||pubtype.includes('review'))?1:(pubtype.includes('book')||pubtype.includes('biography')||pubtype.includes('diary'))?2:0,
+            issn: metadata.issn?metadata.issn:'',
+            isbn: metadata.isbn?metadata.isbn:'',
+            publisher: metadata.publishername?metadata.publishername:'',
+            publishing_place: metadata.publisherlocation?metadata.publisherlocation:'',
+            doi: metadata.articleids?parsePMIDdoi(metadata.articleids):'',
         }
         
         return obj;

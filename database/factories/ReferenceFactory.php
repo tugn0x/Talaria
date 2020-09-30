@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Reference::class, function (Faker $faker) {
     return [
-        'material_type' => random_int(1,3),
+        'material_type' => 1, //creo sempre articoli
         'pub_title' => $faker->sentence(4),
         'part_title' => $faker->sentence(10),
         'pubyear' => $faker->year(),

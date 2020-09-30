@@ -16,6 +16,8 @@ const ReferenceItem = (props) => {
           case 2: return 'simple_icon fas fa-book'; break;
           /*case 3: return 'simple_icon icon-diploma'; break;*/
           case 3: return 'simple_icon fas fa-scroll'; break;
+          case 4: return 'simple_icon fas fa-bible'; break;
+          case 5: return 'simple_icon fas fa-map'; break;
         }
         return mat;
       }
@@ -26,7 +28,8 @@ const ReferenceItem = (props) => {
         });
     }
     
-    return ( 
+    return (
+        /* *** DA SISTEMARE e AGGIUNGERE campi in base alla tipologia! *** */
         <Row className="list-row justify-content-between">
             <Col sm={2} className="select-checkbox">
                 <CustomCheckBox 
@@ -40,7 +43,7 @@ const ReferenceItem = (props) => {
                     <p><span className="pub_title">{data.pub_title}</span> <span className="part_title">{data.part_title}</span></p>
                 </NavLink>
                 <div className="authors">
-                   {data.first_author && <span className="first_author">Autore <span>{data.first_author}</span></span>} 
+                   {data.authors && <span className="authors">Autori <span>{data.authors}</span></span>} 
                    {data.pubyear && <span className="pubyear">Anno <span>{data.pubyear}</span></span>}
                 </div>
                 

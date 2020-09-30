@@ -43,7 +43,7 @@ return [
         'fileReceived'=>41,
         'notReceived'=>50
     ],*/
-    'reference_material_type' => ['article'=>1,'book'=>2,'thesis'=>3],
+    'reference_material_type' => ['article'=>1,'book'=>2,'thesis'=>3,'manuscript'=>5,'cartography'=>4],
     'patrondocdelrequest_cost_policy' => [
         'deny'=>0,
         'accept'=>1,

@@ -10,7 +10,7 @@ export const scope = 'app.containers.ReferencePage';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Enter a new reference',
+    defaultMessage: 'Insert/Edit reference',
   },
   headerDetail: {
     id: `${scope}.headerDetail`,
@@ -36,16 +36,10 @@ export default defineMessages({
     id: `${scope}.pubyear`,
     defaultMessage: 'Year',
   },
-  page_start: {
-    id: `${scope}.page_start`,
-    defaultMessage: 'Page starts',
-  },
-  page_end: {
-    id: `${scope}.page_end`,
-    defaultMessage: 'Page ends',
-  },
+
+  
   pages: {
-    id: `${scope}.pages`,
+    id: `${scope}.page`,
     defaultMessage: 'Pages',
   },
   abstract: {
@@ -54,24 +48,62 @@ export default defineMessages({
   },
   note: {
     id: `${scope}.note`,
-    defaultMessage: 'Note',
+    defaultMessage: 'Notes',
   },
+  indications: {
+    id: `${scope}.indications`,
+    defaultMessage: 'Other indications/Notes',
+  },
+  mathnote: {
+    id: `${scope}.mathnote`,
+    defaultMessage: 'Mathematical data/Notes',
+  },
+  
   pub_title: {
     id: `${scope}.pub_title`,
-    defaultMessage: 'Pubblication title',
+    defaultMessage: 'Title',
   },
   part_title: {
     id: `${scope}.part_title`,
-    defaultMessage: 'Part title',
+    defaultMessage: 'Article title',
   },
-  first_author: {
-    id: `${scope}.first_author`,
-    defaultMessage: 'First author',
+  authors: {
+    id: `${scope}.authors`,
+    defaultMessage: 'Author/s',
   },
-  last_author: {
-    id: `${scope}.last_author`,
-    defaultMessage: 'Last author',
+  part_authors: {
+    id: `${scope}.part_authors`,
+    defaultMessage: 'Article/chapter authors',
   },
+  candidate: {
+    id: `${scope}.candidate`,
+    defaultMessage: 'Candidate',
+  },
+  relator: {
+    id: `${scope}.relator`,
+    defaultMessage: 'Relator',
+  },
+  thesis_type: {
+    id: `${scope}.thesis_type`,
+    defaultMessage: 'Thesis type',
+  },
+  degree_course: {
+    id: `${scope}.degree_course`,
+    defaultMessage: 'Degree course',
+  },
+  series_title: {
+    id: `${scope}.series_title`,
+    defaultMessage: 'Collana',
+  },
+  collection: {
+    id: `${scope}.collection`,
+    defaultMessage: 'Collection',
+  },
+  geographic_area: {
+    id: `${scope}.geographic_area`,
+    defaultMessage: 'Geographic area',
+  },
+
   volume: {
     id: `${scope}.volume`,
     defaultMessage: 'Volume',
@@ -88,14 +120,34 @@ export default defineMessages({
     id: `${scope}.issn`,
     defaultMessage: 'ISSN',
   },
+  acnp_cod: {
+    id: `${scope}.acnp_cod`,
+    defaultMessage: 'ACNP COD',
+  },
+  sbn_docid: {
+    id: `${scope}.sbn_docid`,
+    defaultMessage: 'SBN DOCID',
+  },
+  
+
   publisher: {
     id: `${scope}.publisher`,
     defaultMessage: 'Publisher',
   },
+
   publishing_place: {
     id: `${scope}.publishing_place`,
     defaultMessage: 'Publishing place',
   },
+  university: {
+    id: `${scope}.university`,
+    defaultMessage: 'University',
+  },
+  place: {
+    id: `${scope}.place`,
+    defaultMessage: 'Place/City',
+  },
+
   isbn: {
     id: `${scope}.isbn`,
     defaultMessage: 'ISBN',
@@ -128,9 +180,21 @@ export default defineMessages({
     id: `${scope}.book`,
     defaultMessage: 'Book',
   },
+  manuscript: {
+    id: `${scope}.manuscript`,
+    defaultMessage: 'Manuscript',
+  },
+  cartography: {
+    id: `${scope}.cartography`,
+    defaultMessage: 'Cartography',
+  },
+  section: {
+    id: `${scope}.section`,
+    defaultMessage: 'Article or Chapter title',
+  },
   chapter: {
     id: `${scope}.chapter`,
-    defaultMessage: 'Chapter',
+    defaultMessage: 'Chapter title',
   },
   titleAuthorsHead: {
     id: `${scope}.titleAuthorsHead`,
