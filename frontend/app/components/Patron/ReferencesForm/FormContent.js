@@ -367,9 +367,16 @@ const FormContent = (props) => {
                         required={false}
                     />
                 </Card>
-                <Button type="submit" disabled={isSubmitDisabled} className="btn-cta">
+                <div className="d-flex justify-content-between">
+                <Button type="submit" className="mt-0" color="cta" disabled={isSubmitDisabled}>
                     {intl.formatMessage({id: 'app.global.submit'})}
                 </Button>
+                {reference && reference.id && 
+                <Button color="cancel" onClick={() => props.history.goBack() } >
+                        {intl.formatMessage({id: 'app.global.cancel'})}
+                </Button> 
+                }
+                </div>
             </FormContainer>
         </>
     );

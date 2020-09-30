@@ -28,6 +28,7 @@ const ReferencesForm = (props) => {
                         removeGroup={removeGroup}
                         reference={reference}
                         deleteReference={deleteReference}
+                        history={props.history}
                     />
                 ||
                     <>

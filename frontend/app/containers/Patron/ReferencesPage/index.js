@@ -227,6 +227,7 @@ const ReferencesPage = (props) => {
                         removeLabel={(id, labelId) => dispatch(requestRemoveReferenceLabel(id,labelId, 'removeLabel' ))}
                         removeGroup={(id, groupId) => dispatch(requestRemoveReferenceGroup(id,groupId,'removeGroup'))}
                         updateReference={ (formData) => dispatch(requestUpdateReferences(formData, params.id, intl.formatMessage(messages.referenceUpdate))) } 
+                        history={props.history}
                         />
                         || 
                         <ErrorMsg message="ERROR: can't edit this reference"/>)
