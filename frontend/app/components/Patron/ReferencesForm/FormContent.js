@@ -156,7 +156,7 @@ const FormContent = (props) => {
                     {(formData.material_type !== 1 ) && 
                     <FormGroup >
                         <Input 
-                            label={formData.material_type === 3 ? intl.formatMessage(messages.candidate) : intl.formatMessage(messages.authors)}
+                            label={intl.formatMessage(messages.authors)}
                             handleChange={(value) => handleChange(value, 'authors')}
                             input={formData.authors  ? formData.authors : ""}
                             required={formData.material_type===3?true:requiredFields}
