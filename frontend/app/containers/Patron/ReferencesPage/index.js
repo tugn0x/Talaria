@@ -44,22 +44,30 @@ const ReferencesPage = (props) => {
     const parseFromDOI = (metadata) => {
         let obj={}
 
+        let pubtype=metadata.crossref_type?metadata.crossref_type.toString().toLowerCase():null;
+
         obj={
             pub_title: metadata.journal,
             part_title: metadata.title,
-            volume: metadata.volume,
-            issue: metadata.issue,
-            //pubyear: metadata.pubdate.match(/\d{4}/)[0],
-            authors: (metadata.author && metadata.author.length>0 && metadata.author[0] && metadata.author[0].sequence=="first")?metadata.author[0].family+" "+metadata.author[0].given:'',
-            //TODO: ciclare su tutti gli "additional" e concatenarli nel campo last_author
-            //last_author: (importedreference.author && importedreference.author.length>1 && importedreference.author[1] && importedreference.author[0].sequence=="additional")?importedreference.author[1].family+" "+importedreference.author[1].given:'',
-            material_type: 1,
+            part_authors: metadata.author?parseAuthors(metadata.author):'',
+            abstract: metadata.abstract?metadata.abstract:'',
+            pubyear: metadata.year,
+            volume: metadata.volume?metadata.volume:'',
+            issue: metadata.issue?metadata.issue:'',
+            pages: metadata.page?metadata.page:'', 
+            material_type: pubtype==null? 0:pubtype.includes('journal-article')?1:0,
+            issn: metadata.issn?metadata.issn:'',
+            isbn: metadata.isbn?metadata.isbn:'',
+            publisher: metadata.publisher?metadata.publisher:'',
+            publishing_place: '',
+            doi: metadata.doi?metadata.doi:'',
+            pmid: metadata.pmid?metadata.pmid:'',
         }
 
         return obj;
     }
 
-    const parsePMIDAuthors = (authors)=> {
+    const parseAuthors = (authors)=> {
         let text="";
 
         authors.map( a => { 
@@ -89,7 +97,7 @@ const ReferencesPage = (props) => {
             pmid: metadata.uid,
             pub_title: metadata.fulljournalname?metadata.fulljournalname:metadata.booktitle?metadata.booktitle:'',
             part_title: metadata.title,
-            part_authors: metadata.authors?parsePMIDAuthors(metadata.authors):'',
+            part_authors: metadata.authors?parseAuthors(metadata.authors):'',
             abstract: metadata.abstract?metadata.abstract:'',
             volume: metadata.volume?metadata.volume:'',
             issue: metadata.issue?metadata.issue:'',
@@ -182,6 +190,8 @@ const ReferencesPage = (props) => {
         return (ref.patronrequests==0)
     }
 
+    //NB: volendo si puo' chiamare OpenAccessButton anche per trovare PMID
+    //invece di usare le API di Pubmed
     const findReferenceBySearchParams = (query) => {
         console.log("findReferenceBySearchParams:", query)
         let doi=query.match(/\b((10\.\d{4,9}\/[-._;()/:A-Z0-9a-z]+))/);
