@@ -18,7 +18,10 @@ import SectionTitle from 'components/SectionTitle';
 import {useIntl} from 'react-intl';
 import ErrorMsg from '../../../components/ErrorMsg';
 
-/* TODO DA RIVEDERE IN BASE A MAPPING CAMPI */
+/* TODO DA RIVEDERE IN BASE A MAPPING CAMPI 
+   manca infatti la corrispondenza dei campi per le varie tipologie
+   di documento ricevuto 
+*/
 
 const ReferencesPage = (props) => {
     console.log('ReferencesPage', props)
