@@ -1,23 +1,24 @@
 import React from 'react';
 import {Row, Col, Button} from 'reactstrap';
 import {NavLink } from 'react-router-dom';
+import {useIntl} from 'react-intl';
 import { generatePath } from "react-router";
 import ReferenceIcons from '../ReferenceIcons';
 import CustomCheckBox from 'components/Form/CustomCheckBox';
 
 const ReferenceItem = (props) => {
-    const {data,toggleSelection,checked,removeLabel,removeGroup,deleteReference} = props
-    
+    const {/*messages,*/data,toggleSelection,checked,removeLabel,removeGroup,deleteReference} = props
+  
+    const intl = useIntl();
   
     const matTypeIcon = (mat) => {
         switch (mat)
         {
           case 1: return 'simple_icon fas fa-file'; break;
           case 2: return 'simple_icon fas fa-book'; break;
-          /*case 3: return 'simple_icon icon-diploma'; break;*/
           case 3: return 'simple_icon fas fa-scroll'; break;
-          case 4: return 'simple_icon fas fa-bible'; break;
-          case 5: return 'simple_icon fas fa-map'; break;
+          case 4: return 'simple_icon fas fa-map'; break;
+          case 5: return 'simple_icon fas fa-bible'; break;          
         }
         return mat;
       }
@@ -27,9 +28,10 @@ const ReferenceItem = (props) => {
             id
         });
     }
-    
+
+    //*** TODO aggiungere traduzione etichette prendendole dal reference
+
     return (
-        /* *** DA SISTEMARE e AGGIUNGERE campi in base alla tipologia! *** */
         <Row className="list-row justify-content-between">
             <Col sm={2} className="select-checkbox">
                 <CustomCheckBox 
@@ -40,12 +42,24 @@ const ReferenceItem = (props) => {
             </Col> 
             <Col sm={7} className="info">
                 <NavLink to={`${referenceurl(data.id)}`}>
-                    <p><span className="pub_title">{data.pub_title}</span> <span className="part_title">{data.part_title}</span></p>
+                    <p><span className="pub_title">{data.pub_title}</span> &nbsp; 
+                    {data.material_type === 1 && <span className="part_title">{data.part_title}</span>}
+                    </p>
                 </NavLink>
                 <div className="authors">
-                   {data.authors && <span className="authors">Autori <span>{data.authors}</span></span>} 
+                   {data.material_type != 1 && data.authors && <span className="authors">Autore/i<span> {data.authors}</span></span>} 
+                   {data.material_type === 1 && data.part_authors && <span className="authors">Autore/i<span> {data.part_authors}</span></span>} 
                    {data.pubyear && <span className="pubyear">Anno <span>{data.pubyear}</span></span>}
                 </div>
+                {data.material_type === 3 &&
+                <div className="university">
+                    <span className="university">Ateneo<span> {data.publisher}</span></span>
+                </div>}
+                {data.material_type === 4 &&
+                <div className="geographic_area">
+                    <span className="geographic_area">Geographic Area<span> {data.geographic_area}</span></span>
+                </div>}
+
                 
                 {data.labels.data && <span className="labels-row">
                     {data.labels.data.map(label => <span key={label.id}>{label.name} <i className="fas fa-times"  onClick={() => removeLabel(label.id)}></i></span>)}

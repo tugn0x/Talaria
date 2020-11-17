@@ -20,8 +20,9 @@ const RequestItem = (props) => {
         {
           case 1: return 'simple_icon fas fa-file'; break;
           case 2: return 'simple_icon fas fa-book'; break;
-          /*case 3: return 'simple_icon icon-diploma'; break;*/
           case 3: return 'simple_icon fas fa-scroll'; break;
+          case 4: return 'simple_icon fas fa-map'; break;
+          case 5: return 'simple_icon fas fa-bible'; break;   
         }
         return mat;
       }
@@ -69,7 +70,8 @@ const RequestItem = (props) => {
     }
 
     return ( 
-        <Row className="list-row justify-content-between">
+        <Row className="list-row justify-content-between">            
+            *** TODO: DA SISTEMARE e AGGIUNGERE campi in modo che sia allineato con le ultime modifiche al riferimento e/o importare il componente direttamente ***
             <Col sm={3} className="select-checkbox">
                 {toggleSelection && <CustomCheckBox 
                     handleChange={toggleSelection}
@@ -118,7 +120,7 @@ const RequestItem = (props) => {
                     <i className="fas fa-hdd"></i>
                 </a>}
                 {askCancelRequest && canDelete(data) && <a href="#" onClick={() => askCancelRequest(data.id)} className="btn btn-icon">
-                    <i className="fas fa-trash"></i>
+                    <i className="fas fa-undo"></i>
                 </a> }
             </>
             }

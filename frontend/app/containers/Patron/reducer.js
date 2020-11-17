@@ -25,10 +25,12 @@ import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_REMOVE_GROUP,
   //REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,
   STOP_LOADING, REQUEST_ERROR,
-  REQUEST_FIND_REFERENCE_BY_DOI,
+  /*REQUEST_FIND_REFERENCE_BY_DOI,
   REQUEST_FIND_REFERENCE_BY_PMID,
   REQUEST_FIND_REFERENCE_BY_DOI_SUCCESS,
-  REQUEST_FIND_REFERENCE_BY_PMID_SUCCESS,
+  REQUEST_FIND_REFERENCE_BY_PMID_SUCCESS,*/
+  REQUEST_FIND_OA,
+  REQUEST_FIND_OA_SUCCESS,
   REQUEST_CLEAN_IMPORTREFERENCE
 } from './constants';
 
@@ -53,8 +55,9 @@ export const initialState = {
     pagination: [],
   },
   reference: {},
-  importedreference: {},
-  patronrequest: {}
+//  importedreference: {},
+  patronrequest: {},
+  oareference: {},
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -220,7 +223,7 @@ const PatronReducer = (state = initialState, action) =>
         // draft.libraryOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break; */
 
-        case REQUEST_FIND_REFERENCE_BY_DOI:
+        /*case REQUEST_FIND_REFERENCE_BY_DOI:
           draft.loading = true;
           break;
         case REQUEST_FIND_REFERENCE_BY_DOI_SUCCESS:
@@ -228,9 +231,9 @@ const PatronReducer = (state = initialState, action) =>
           draft.error = initialState.error;
           draft.importedreference={};
           draft.importedreference.fromDOI = action.result;
-          break;  
+          break;  */
 
-        case REQUEST_FIND_REFERENCE_BY_PMID:
+        /*case REQUEST_FIND_REFERENCE_BY_PMID:
           draft.loading = true;
           break;
         case REQUEST_FIND_REFERENCE_BY_PMID_SUCCESS:
@@ -238,9 +241,20 @@ const PatronReducer = (state = initialState, action) =>
           draft.error = initialState.error;
           draft.importedreference={};
           draft.importedreference.fromPMID = (action.result.result && action.result.result.uids && action.result.result.uids.length>0)?action.result.result[action.result.result.uids[0]]:{};
-          break;  
+          break;  */
+        case REQUEST_FIND_OA:
+          draft.loading=true;
+          break;
+          case REQUEST_FIND_OA_SUCCESS:
+            draft.loading = false;
+            draft.error = initialState.error;
+            draft.oareference={};
+            draft.oareference = action.result?action.result:{};
+            break;  
+              
         case REQUEST_CLEAN_IMPORTREFERENCE:
-          draft.importedreference={};
+          //draft.importedreference={};
+          draft.oareference={};
           break;
           
       case REQUEST_SUCCESS:

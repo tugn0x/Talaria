@@ -197,7 +197,8 @@
   
   "app.containers.ReferencePage.pages": "Pagine",
   "app.containers.ReferencePage.abstract": "Abstract",
-  "app.containers.ReferencePage.pub_title": "Titolo",
+  "app.containers.ReferencePage.title": "Titolo",
+  "app.containers.ReferencePage.pub_title": "Titolo rivista",
   "app.containers.ReferencePage.part_title": "Titolo articolo",
   "app.containers.ReferencePage.section": "Titolo articolo o capitolo",
   "app.containers.ReferencePage.chapter": "Titolo capitolo",

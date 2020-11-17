@@ -37,10 +37,10 @@ const ReferencesListPage = (props) => {
     async function removeLabelFromReference (id,labelId, filter) {
        //console.log("DISPATCH removeLabelFromReference",id,labelId);
         let conf = await confirm({
-            title: intl.formatMessage(messages.confirm),
+            title: intl.formatMessage({id: 'app.global.confirm'}),
             message: intl.formatMessage(messages.askRemoveLabelMessage),
-            confirmText: intl.formatMessage(messages.yes),
-            cancelText: intl.formatMessage(messages.no)
+            confirmText: intl.formatMessage({id: 'app.global.yes'}),
+            cancelText: intl.formatMessage({id: 'app.global.no'})
         }); //
         if(conf)
             dispatch(requestRemoveReferenceLabel(id,labelId,intl.formatMessage(messages.removedMessage), filter))
@@ -49,10 +49,10 @@ const ReferencesListPage = (props) => {
     async function removeGroupFromReference (id,groupId, filter) {
         //console.log("DISPATCH removeGroupFromReference",id,groupId);
         let conf = await confirm({
-            title: intl.formatMessage(messages.confirm),
+            title: intl.formatMessage({id: 'app.global.confirm'}),
             message: intl.formatMessage(messages.askRemoveGroupMessage),
-            confirmText: intl.formatMessage(messages.yes),
-            cancelText: intl.formatMessage(messages.no)
+            confirmText: intl.formatMessage({id: 'app.global.yes'}),
+            cancelText: intl.formatMessage({id: 'app.global.no'})
         }); //
          if(conf)
              dispatch(requestRemoveReferenceGroup(id,groupId,intl.formatMessage(messages.removedMessage), filter))
@@ -75,10 +75,10 @@ const ReferencesListPage = (props) => {
     async function deleteReference (id,filter) {
         console.log("DISPATCH deleteReference",id);
          let conf = await confirm({
-             title: intl.formatMessage(messages.confirm),
-             message: intl.formatMessage(messages.askDeleteReferenceMessage),
-             confirmText: intl.formatMessage(messages.yes),
-             cancelText: intl.formatMessage(messages.no)
+            title: intl.formatMessage({id: 'app.global.confirm'}),
+            message: intl.formatMessage({id: 'app.global.deleteMessage'}),
+            confirmText: intl.formatMessage({id: 'app.global.yes'}),
+            cancelText: intl.formatMessage({id: 'app.global.no'})
          }); //
          if(conf)
              dispatch(requestDeleteReference(id,intl.formatMessage(messages.removedMessage),filter))

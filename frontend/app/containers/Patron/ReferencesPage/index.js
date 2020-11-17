@@ -11,24 +11,24 @@ import {requestPostReferences,requestUpdateReferences,
         requestMyActiveLibrariesOptionList, requestLabelsOptionList, 
         requestGroupsOptionList, requestApplyLabelsToReferences, 
         requestApplyGroupsToReferences, requestRemoveReferenceLabel,
-        requestRemoveReferenceGroup, requestDeleteReference,requestGetLibraryDeliveries,requestPostRequest,requestFindReferenceByDOI,requestFindReferenceByPMID,cleanImportedreference} from '../actions'
+        requestRemoveReferenceGroup, requestDeleteReference,requestGetLibraryDeliveries,requestPostRequest/*,requestFindReferenceByDOI,requestFindReferenceByPMID*/,cleanImportedreference,requestFindOA} from '../actions'
 import messages from './messages';
 import confirm from "reactstrap-confirm";
 import SectionTitle from 'components/SectionTitle';
 import {useIntl} from 'react-intl';
 import ErrorMsg from '../../../components/ErrorMsg';
 
-/* TODO DA RIVEDERE IN BASE A MAPPING CAMPI 
-   manca infatti la corrispondenza dei campi per le varie tipologie
+/* TODO 
+   - mapping da DOI/PMID: manca la corrispondenza dei campi per le varie tipologie
    di documento ricevuto 
 */
 
 const ReferencesPage = (props) => {
-    console.log('ReferencesPage', props)
+    //console.log('ReferencesPage', props)
     const {dispatch, isLoading, match, patron} = props
     const {params} = match
     const reference = patron.reference 
-    const importedreference=patron.importedreference
+    //const importedreference=patron.importedreference
     const intl = useIntl();
     const isNew = !params.id || params.id === 'new'
     const isRequest = params.id && params.op=="request"
@@ -37,49 +37,79 @@ const ReferencesPage = (props) => {
     const libraryOptionList= patron.libraryOptionList;
     const deliveryOptionList= patron.deliveryOptionList;
     const [isMounted, setIsMounted] = useState(false);
-
-    useEffect(() => {
-        setIsMounted(true)
-    }, [])
-
+    const oareference=patron.oareference;
+    const [OALink,setOALink] = useState('');
     const [refData,setRefData] = useState(null);
 
-    const parseFromDOI = (metadata) => {
-        let obj={}
+    useEffect(() => {
+        setIsMounted(true)        
+    }, [])
 
-        let pubtype=metadata.crossref_type?metadata.crossref_type.toString().toLowerCase():null;
-
-        obj={
-            pub_title: metadata.journal,
-            part_title: metadata.title,
-            part_authors: metadata.author?parseAuthors(metadata.author):'',
-            abstract: metadata.abstract?metadata.abstract:'',
-            pubyear: metadata.year,
-            volume: metadata.volume?metadata.volume:'',
-            issue: metadata.issue?metadata.issue:'',
-            pages: metadata.page?metadata.page:'', 
-            material_type: pubtype==null? 0:pubtype.includes('journal-article')?1:0,
-            issn: metadata.issn?metadata.issn:'',
-            isbn: metadata.isbn?metadata.isbn:'',
-            publisher: metadata.publisher?metadata.publisher:'',
-            publishing_place: '',
-            doi: metadata.doi?metadata.doi:'',
-            pmid: metadata.pmid?metadata.pmid:'',
-        }
-
-        return obj;
-    }
+    
 
     const parseAuthors = (authors)=> {
         let text="";
 
         authors.map( a => { 
-            text+=(text!='')?", "+a.name:a.name;
+            let str=(a.family && a.given)?a.given+" "+a.family:'';
+
+            if(str)
+            {
+                text+=(text!='')?", ":''
+                text+=str;
+            }
         })
 
         return text;
     }
 
+    const parseFromOAButton = (reference) => {
+        let obj={}
+
+        if(reference.metadata && Object.keys(reference.metadata).length>0)
+        {
+            let metadata=reference.metadata
+        
+            let pubtype=0
+            
+            if(metadata.crossref_type)
+            {
+                let tystr=metadata.crossref_type.toString().toLowerCase();
+                if(tystr.includes('journal-article'))
+                    pubtype=1;
+            }
+            else            
+            {
+                //try to guess from fields
+                if(metadata.journal)
+                    pubtype=1;
+            }
+
+            obj={
+                pub_title: metadata.journal,
+                part_title: metadata.title,
+                part_authors: metadata.author?parseAuthors(metadata.author):'',
+                abstract: metadata.abstract?metadata.abstract:'',
+                pubyear: metadata.year,
+                volume: metadata.volume?metadata.volume:'',
+                issue: metadata.issue?metadata.issue:'',
+                pages: metadata.page?metadata.page:'', 
+                material_type: pubtype,
+                issn: metadata.issn?metadata.issn:'',
+                isbn: metadata.isbn?metadata.isbn:'',
+                publisher: metadata.publisher?metadata.publisher:'',
+                publishing_place: '',
+                doi: metadata.doi?metadata.doi:'',
+                pmid: metadata.pmid?metadata.pmid:'',
+                oa_link: reference.found && Object.keys(reference.metadata).length>0 && reference.url?reference.url:null
+            }
+        }
+            
+        return obj;
+    }
+
+    //Parsing da PUBMED
+    /*
     const parsePMIDdoi = (ids) => {
         let doi=''
         
@@ -90,8 +120,8 @@ const ReferencesPage = (props) => {
         })
         return doi;
     }
-
-    const parseFromPMID = (metadata) => {
+   
+    const parseFromPubmed = (metadata) => {
         let obj={}
 
         let pubtype=metadata.pubtype?metadata.pubtype.toString().toLowerCase():null;
@@ -115,7 +145,7 @@ const ReferencesPage = (props) => {
         }
         
         return obj;
-    }
+    }*/
 
     useEffect(() => {
         if(!isNew && !isLoading){
@@ -133,7 +163,7 @@ const ReferencesPage = (props) => {
            dispatch(requestMyActiveLibrariesOptionList())
     }, [isRequest])
 
-    useEffect( () => {
+  /* useEffect( () => {
         if(importedreference && Object.keys(importedreference).length>0)
         {
         console.log("PARSING importedreference",importedreference)
@@ -142,25 +172,79 @@ const ReferencesPage = (props) => {
                     let newref={}
 
                     if(importedreference.fromDOI && Object.keys(importedreference.fromDOI).length>0)
-                        newref=parseFromDOI(importedreference.fromDOI);
+                        newref=parseFromOAButton(importedreference.fromDOI);
                     else if(importedreference.fromPMID && Object.keys(importedreference.fromPMID).length>0)
-                        newref=parseFromPMID(importedreference.fromPMID);
+                        newref=parseFromPubmed(importedreference.fromPMID);
                         
                     setRefData(newref) 
 
                     //Clean importedreference (altrimenti se andavo in nuovo riferimento mi proponeva i dati precedenti)
                     dispatch(cleanImportedreference())
-
-                    //+ modificare redux in modo da creare importreference={ fromDoi: {}, fromPMID:{} }
         }
         
-    }, [importedreference])
+    }, [importedreference])*/
+
+    /*useEffect ( () => {
+        if(importedreference && Object.keys(importedreference).length>0)
+            dispatch(requestFindOA(importedreference))
+    },[importedreference]);*/
+
+    /*useEffect ( () => {
+       if(reference && Object.keys(reference).length>0)
+            dispatch(requestFindOA(reference))    
+
+    },[reference]);*/
+
+    useEffect ( () => {
+        console.log("REFDATA:",refData)
+        console.log("coming from OAApi: isNew:",isNew)        
+        console.log("REFERENCE:",reference)
+        if(isMounted && oareference && oareference.find)
+        {
+            console.log("parsing del ref con i dati presi dall'OAButton API!",oareference);
+            //parsing metadati da OA + salvataggio link oa
+            
+            let newref=parseFromOAButton(oareference)
+                       
+            if(newref)            
+            {
+                if(reference && Object.keys(reference).length>0)
+                {
+                    console.log("NOT NEW, so update only oa link")
+                    setOALink(newref.oa_link)                    
+                    
+                }
+                else if(refData==null || !refData||Object.keys(refData).length==0||refData===undefined)
+                {
+                    console.log("Isnew, so update refData",newref)                    
+            
+                    setRefData(newref) 
+                }
+                else
+                {
+                    //console.log("NOT NEW, so update only oa link")
+                    //setRefData({...refData,oa_link:newref.oa_link})                    
+                    
+                    //setOALink(newref.oa_link);
+                    //if(newref.oa_link!="") 
+                    //    setRefData({...refData,oa_link:newref.oa_link})                    
+                }
+                //Clean oareference stored in redux (altrimenti se andavo in nuovo riferimento mi proponeva i dati precedenti)
+                //dispatch(cleanImportedreference())
+            }
+            
+            //setRefData({...refData,oa_link:oareference.url})
+            //if(oareference.found && oareference.url)
+            //    setOALink(oareference.url);
+           
+        }
+    },[oareference]);
 
     async function deleteReference (id) {
         let conf = await confirm({
              title: intl.formatMessage({id: 'app.global.confirm'}),
              // message: intl.formatMessage(messages.askRemoveLabelMessage),
-             message: "Remove Reference",
+             message: intl.formatMessage({id: 'app.global.deleteMessage'}),
              confirmText: intl.formatMessage({id: 'app.global.yes'}),
              cancelText: intl.formatMessage({id: 'app.global.no'})
          }); //
@@ -196,20 +280,42 @@ const ReferencesPage = (props) => {
     //NB: volendo si puo' chiamare OpenAccessButton anche per trovare PMID
     //invece di usare le API di Pubmed
     const findReferenceBySearchParams = (query) => {
-        console.log("findReferenceBySearchParams:", query)
+        console.log("findReferenceBySearchParams:", query)        
+        let data={}
+
+        //base search by title
+        data.title=query
+
+        //try DOI
         let doi=query.match(/\b((10\.\d{4,9}\/[-._;()/:A-Z0-9a-z]+))/);
         if(doi!=null)
         {
             console.log("DOI MATCH!",doi[0])
-            dispatch(requestFindReferenceByDOI(doi[0]))
+            data.doi=doi[0]
+            //dispatch(requestFindReferenceByDOI(doi[0]))            
         }
-        
-        let pmid=query.match(/\b(\d{7,})\b/)
-        if(pmid!=null)
-        {
-            console.log("PMID MATCH!",pmid[0])
-            dispatch(requestFindReferenceByPMID(pmid[0]))
+        else {
+            //try PMID
+            let pmid=query.match(/\b(\d{7,})\b/)
+            if(pmid!=null)
+            {
+                console.log("PMID MATCH!",pmid[0])
+                data.pmid=pmid[0]                
+                //dispatch(requestFindReferenceByPMID(pmid[0]))
+                
+            }
         }
+
+        if(data && (data.pmid||data.doi||data.title))
+            dispatch(requestFindOA(data))
+            
+
+    }
+
+    const findOA = (data) => {
+        console.log("chiamo openaccessbutton");
+        if(data && Object.keys(data).length>0 && (data.title!=""||data.doi!=""))
+            dispatch(requestFindOA(data));
     }
 
     
@@ -224,6 +330,8 @@ const ReferencesPage = (props) => {
                     findReference={ (query) => findReferenceBySearchParams(query)}
                     labelsOptionList={labelsOptionList}
                     groupsOptionList={groupsOptionList}
+                    findOA={ (formData) => findOA({title: formData.pub_title, doi:formData.doi,pmid:formData.pmid}) }
+                    OALink={OALink}
                 />
                 )
             }
@@ -240,6 +348,8 @@ const ReferencesPage = (props) => {
                         removeLabel={(id, labelId) => dispatch(requestRemoveReferenceLabel(id,labelId, 'removeLabel' ))}
                         removeGroup={(id, groupId) => dispatch(requestRemoveReferenceGroup(id,groupId,'removeGroup'))}
                         updateReference={ (formData) => dispatch(requestUpdateReferences(formData, params.id, intl.formatMessage(messages.referenceUpdate))) } 
+                        findOA={ (formData) => findOA({title: formData.pub_title, doi:formData.doi,pmid:formData.pmid}) }
+                        OALink={OALink}
                         history={props.history}
                         />
                         || 
@@ -254,6 +364,10 @@ const ReferencesPage = (props) => {
                         libraryOnChange={libraryOnChange}
                         submitCallBack={submitReferenceRequest}
                         history={props.history}
+                        /*
+                          findOA={ (formData) => findOA({title: formData.pub_title, doi:formData.doi,pmid:formData.pmid}) }
+                          OALink={OALink}
+                        */
                     /> /*
                         || 
                     <ErrorMsg message="ERROR: can't request this reference"/>

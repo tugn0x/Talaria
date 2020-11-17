@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink } from 'react-router-dom';
+import {NavLink,Link } from 'react-router-dom';
 import { generatePath } from "react-router";
 import ApplyReferencesTag from '../ApplyReferencesTag';
 
@@ -54,16 +54,12 @@ const ReferenceIcons = (props) => {
         <>
                 {visibleIcon('request') && 
                  <NavLink to={`${requesturl(data.id)}`}  className="btn btn-icon">
-                    {
-                    canRequest(data) && <i className="fas fa-share"></i>
-                    || 
-                    <i className="fas fa-lock"></i> /*oppure sempre fa-share*/
-                    }
+                    <i className="fas fa-share"></i>                    
                  </NavLink>
                 }
-                {data.oa_link!="" && visibleIcon('oa') && <NavLink to={`${oaurl(data)}`} className="btn btn-icon">
-                    <i className="icon-oa"></i>
-                </NavLink>}
+                {visibleIcon('oa') &&
+                 <a href={data.oa_link} target="_new" className={`${data.oa_link && data.oa_link!=''?'btn btn-icon':'btn btn-icon disabled'}`}><i className="icon-oa"></i></a>
+                }
                 
                 {visibleIcon('print') && <a className="btn btn-icon" onClick={() => console.log("print") }>
                     <i className="fas fa-print"></i>
@@ -85,10 +81,11 @@ const ReferenceIcons = (props) => {
                         options={groupsOptionList} 
                     /> 
                 }
-                {canEdit(data) && visibleIcon('edit') && <NavLink to={`${editurl(data.id)}`}  className="btn btn-icon">
+                {visibleIcon('edit') && 
+                <NavLink to={canEdit(data)?editurl(data.id):'#'} className={`${canEdit(data)?"btn btn-icon":"btn btn-icon disabled"}`}>
                     <i className="fas fa-edit"></i>
                 </NavLink>}
-                {canDelete(data) && visibleIcon('delete') && deleteReference && <a href="#" className="btn btn-icon"  onClick={() => deleteReference(data.id) }>
+                {visibleIcon('delete') && deleteReference && <a href="#" className="btn btn-icon"  onClick={() => deleteReference(data.id) }>
                     <i className="fas fa-trash"></i>
                 </a> }
         

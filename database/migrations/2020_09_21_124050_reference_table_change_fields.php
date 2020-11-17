@@ -21,7 +21,9 @@ class ReferenceTableChangeFields extends Migration
             $table->string('series_title',100)->nullable()->after("degree_course");
             $table->string('geographic_area',100)->nullable()->after("series_title");
             $table->renameColumn('first_author','authors');
+            $table->string('authors',255)->change();
             $table->renameColumn('last_author','part_authors');
+            $table->string('part_authors',255)->change();
             $table->string('pages',15)->nullable()->after('issue');
             $table->dropColumn('page_start');
             $table->dropColumn('page_end');

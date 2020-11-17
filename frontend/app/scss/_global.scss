@@ -400,12 +400,14 @@ ul.list-inline {
             margin: 0;
         }
         .pub_title {
-
+            
         }
         .part_title {
             font-style: italic;
         }
-        .authors {
+        .authors, 
+        .university,
+        .geographic_area {
             > span
             {
                 font-weight: bold;
@@ -441,14 +443,14 @@ ul.list-inline {
 
 .labels-row span {
     color: $labels-border;
-    padding: 0 12px 0 0;
+    margin: 0 5px 0 0;
     i.fa {
         cursor: pointer;
     }
 }
 .groups-row span {
     color: $groups-border;
-    padding: 0 12px 0 0;
+    margin: 0 5px 0 0;
     i.fa {
         cursor: pointer;
     }

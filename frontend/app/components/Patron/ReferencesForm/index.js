@@ -1,22 +1,27 @@
 import React, {useState, useEffect} from 'react'
-/* import {CustomForm} from 'components';
-import {fields} from './fields'; */
-// import messages from './messages';
-// import Loader from 'components/Form/Loader.js';
-// import {useIntl} from 'react-intl';
 import formMessages from './messages';
 import FormContent from './FormContent';
 import PreForm from './PreForm';
+import SectionTitle from 'components/SectionTitle';
 
 const ReferencesForm = (props) => {
     const {createReference, reference, updateReference, messages, 
             labelsOptionList, applyLabels, groupsOptionList, 
-            applyGroups, removeLabel, removeGroup, deleteReference,findReference,importReference} = props
+            applyGroups, removeLabel, removeGroup, deleteReference,findReference,importReference,findOA,OALink} = props
     const [goToForm, setGoToForm] = useState(false);
-        
+
+
+    /*useEffect ( () => {
+        console.log("Update formData with OA:",OALink)
+        if(reference && Object.keys(reference).length>0 && OALink && OALink!="")
+            setFormData({ ...formData, oa_link:OALink});
+
+        console.log("formData:",formData);    
+    },[OALink])*/
+     
     return (
         <>
-                {reference  && 
+            {reference  && 
                     <FormContent 
                         messages={messages} 
                         submitCallBack={(formData) => updateReference(formData)}
@@ -29,6 +34,8 @@ const ReferencesForm = (props) => {
                         reference={reference}
                         deleteReference={deleteReference}
                         history={props.history}
+                        findOA={findOA}
+                        OALink={OALink}
                     />
                 ||
                     <>
@@ -38,6 +45,8 @@ const ReferencesForm = (props) => {
                             <FormContent 
                             messages={messages} 
                             submitCallBack={(formData) => createReference(formData)}
+                            findOA={findOA}
+                            OALink={OALink}
                             />
                     ||    
                     importReference &&
@@ -45,6 +54,8 @@ const ReferencesForm = (props) => {
                                 messages={messages} 
                                 reference={importReference}
                                 submitCallBack={(formData) => createReference(formData)}
+                                findOA={findOA}
+                                OALink={OALink}
                             />
                     ||        
                             <PreForm 

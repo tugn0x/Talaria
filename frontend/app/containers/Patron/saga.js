@@ -5,7 +5,7 @@ import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST,
   REQUEST_UPDATE_LABEL, REQUEST_REMOVE_LABEL, REQUEST_POST_LABEL,
   REQUEST_POST_GROUP, REQUEST_REMOVE_GROUP, REQUEST_UPDATE_GROUP,
-  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,REQUEST_REQUESTS_LIST,REQUEST_GET_REQUEST,REQUEST_DELETE_REFERENCE, REQUEST_GET_LIBRARY_DELIVERIES, REQUEST_POST_REQUEST, REQUEST_FIND_REFERENCE_BY_DOI, REQUEST_FIND_REFERENCE_BY_PMID} from './constants';
+  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,REQUEST_REQUESTS_LIST,REQUEST_GET_REQUEST,REQUEST_DELETE_REFERENCE, REQUEST_GET_LIBRARY_DELIVERIES, REQUEST_POST_REQUEST, /*REQUEST_FIND_REFERENCE_BY_DOI, REQUEST_FIND_REFERENCE_BY_PMID,*/REQUEST_FIND_OA} from './constants';
 import {
   requestError,
   stopLoading,
@@ -26,6 +26,7 @@ import {
   requestGetLibraryDeliveriesSuccess,
   requestFindReferenceByDOISuccess,
   requestFindReferenceByPMIDSuccess,
+  requestFindOASuccess,
 } from './actions';
 import { push } from 'connected-react-router';
 import { toast } from "react-toastify";
@@ -63,7 +64,8 @@ import {  getMyLibrary,
 
 import {
         getReferenceByDOI,
-        getReferenceByPMID
+        getReferenceByPMID,
+        getOA
         } from 'utils/apiExternal';        
 
 export function* requestMyLibrariesSaga(action) {
@@ -561,7 +563,7 @@ export function* requestGetMyLibrarySaga(action) {
 /** 
  * External API
  */
-export function* searchReferenceByDOISaga(action) {
+/*export function* searchReferenceByDOISaga(action) {
   const options = {
     method: 'get',
     doi: action.doi
@@ -589,6 +591,20 @@ export function* searchReferenceByPMIDSaga(action) {
     //yield put(push("/patron/references/import"));
   } catch(e) {
     console.log("PMID ERR",e)
+    yield put(requestError(e.message));
+  }
+}*/
+
+export function* findOASaga(action) {
+  const options = {
+    method: 'get',
+    refData: action.refData
+  }
+  try {
+    const request = yield call(getOA, options);
+    yield put(requestFindOASuccess(request));
+  } catch(e) {
+    console.log("OA ERROR",e)
     yield put(requestError(e.message));
   }
 }
@@ -630,7 +646,7 @@ export default function* patronSaga() {
   yield takeLatest(REQUEST_POST_REQUEST, requestPostRequestSaga);
   yield takeLatest(REQUEST_CHANGE_STATUS_REQUEST,requestChangeStatusRequestSaga);
   yield takeLatest(REQUEST_GET_LIBRARY_DELIVERIES,requestLibraryDeliveriesOptionListSaga);
-  yield takeLatest(REQUEST_FIND_REFERENCE_BY_DOI,searchReferenceByDOISaga);
-  yield takeLatest(REQUEST_FIND_REFERENCE_BY_PMID,searchReferenceByPMIDSaga);
+  /*yield takeLatest(REQUEST_FIND_REFERENCE_BY_DOI,searchReferenceByDOISaga);
+  yield takeLatest(REQUEST_FIND_REFERENCE_BY_PMID,searchReferenceByPMIDSaga);*/
+  yield takeLatest(REQUEST_FIND_OA,findOASaga);
 }
-

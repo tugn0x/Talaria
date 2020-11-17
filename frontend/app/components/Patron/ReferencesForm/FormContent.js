@@ -9,6 +9,7 @@ import ReferenceIcons from '../ReferenceIcons';
 import {requiredConditions} from './requiredConditions';
 import SectionTitle from 'components/SectionTitle';
 import './style.scss';
+import FindOA from '../../FindOA';
 
 //NOTA: submit non si disabilita correttamente (sopratt se importo da pmid è disabilitato anche se non dovrebbe)
 //appena scateno onchange magicam il submit si abilita/disab in base alle condizioni
@@ -18,7 +19,7 @@ const FormContent = (props) => {
     console.log('FormEdit Reference', props)
     const {reference, messages, submitCallBack, 
             applyLabels, labelsOptionList, applyGroups, groupsOptionList,
-            removeLabel, removeGroup, deleteReference} = props;
+            removeLabel, removeGroup, deleteReference,findOA,OALink} = props;
     const [formData, setFormData] = useState(() => {
         if(!reference)
             return {material_type: 1, pubyear: "", authors: "", volume: "", pages: ""}
@@ -28,6 +29,8 @@ const FormContent = (props) => {
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
     const [requiredFields, setRequiredFields] = useState(true)
     const [formClasses, setFormClasses] = useState(["reference-form"])
+  
+
     const intl = useIntl();
    
     const handleChange = (value, field_name) =>{
@@ -40,6 +43,7 @@ const FormContent = (props) => {
     }, [formData])
 
     useEffect(() => {
+        console.log("UE-reference",reference)
         reference && Object.keys(reference.length > 0) ?  setFormData({...formData, ...reference}) : null
     },[reference])
 
@@ -47,6 +51,13 @@ const FormContent = (props) => {
         setFormClasses( (state) => [...state, 'was-validated'])
         setIsSubmitDisabled(document.querySelectorAll('.form-control:invalid').length>0);
     },[]) 
+
+    useEffect(()=> {
+        console.log("UPDATE OA_LINK in form!")
+        if(OALink && OALink!="")
+            setFormData({ ...formData, 'oa_link': OALink});
+    },[OALink])
+
     
     const onSubmit = (e) => {
         e.preventDefault();
@@ -64,11 +75,16 @@ const FormContent = (props) => {
         }
     }
 
+
+
     return (
         <>
             <SectionTitle 
                 title={messages.header}
             />
+            <div>
+                <FindOA reference={formData} findOA={findOA}/>
+            </div>
             <FormContainer onSubmit={onSubmit} className={formClasses.join(" ")} noValidate>
                 <FormGroup className="radio-buttons">
                     <RadioButton 
@@ -138,7 +154,7 @@ const FormContent = (props) => {
                 <Card>
                     <FormGroup >
                         <Input 
-                            label={intl.formatMessage(messages.pub_title)}
+                            label={formData.material_type === 1 ? intl.formatMessage(messages.pub_title) : intl.formatMessage(messages.title)}
                             handleChange={(value) => handleChange(value, 'pub_title')}
                             required={true}
                             input={formData.pub_title ? formData.pub_title : ""}
@@ -273,7 +289,8 @@ const FormContent = (props) => {
                         {formData.material_type != 1 &&
                         <FormGroup className="col-md-4">
                             <Input 
-                                label={(formData.material_type === 2||formData.material_type === 4)?intl.formatMessage(messages.publishing_place):intl.formatMessage(messages.place)}
+                                //label={(formData.material_type === 2||formData.material_type === 4)?intl.formatMessage(messages.publishing_place):intl.formatMessage(messages.place)}
+                                label={intl.formatMessage(messages.publishing_place)}
                                 handleChange={(value) => handleChange(value, 'publishing_place')}
                                 input={formData.publishing_place?formData.publishing_place : ""}
                                 required={false}
@@ -293,7 +310,7 @@ const FormContent = (props) => {
                                     required={false}
                                 />
                         </FormGroup>}
-                        {(formData.material_type === 1 || formData.material_type === 2)&& 
+                        {(formData.material_type === 1 || formData.material_type === 2 || formData.material_type === 4 )&& 
                         <FormGroup className="col-md-3">
                         <Input 
                                     label={intl.formatMessage(messages.issn)}
@@ -336,8 +353,7 @@ const FormContent = (props) => {
                                 input={formData.acnp_cod ? formData.acnp_cod : ""}
                                 required={false}
                             />
-                        </FormGroup>
-                        ||
+                        </FormGroup>}
                         <FormGroup className="col-md-4">
                             <Input 
                                 label={intl.formatMessage(messages.sbn_docid)}
@@ -345,7 +361,7 @@ const FormContent = (props) => {
                                 input={formData.sbn_docid ? formData.sbn_docid : ""}
                                 required={false}
                             />
-                        </FormGroup>}
+                        </FormGroup>
                     </Row>
                 </Card>
                 <h3>{intl.formatMessage(messages.abstract)}</h3>

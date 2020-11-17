@@ -206,11 +206,12 @@ const ReferencesList = (props) => {
                 </Row>
                 <Loader show={loading}>
                     <div className="list-body">
+                    *** TODO traduzione etichette in ReferenceItem  ***
                         {data.length > 0 &&
                             data.map(ref => (
                                 <ReferenceItem 
                                     key={`reference-${ref.id}`}
-                                    data={ref}
+                                    data={ref}                                    
                                     //editPath={props.editPath}
                                     toggleSelection={() => toggleReference(ref.id)}
                                     removeLabel={(labelId) => removeLabelFromReference(ref.id,labelId, multiFilter)}

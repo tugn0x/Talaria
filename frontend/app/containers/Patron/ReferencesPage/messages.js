@@ -58,11 +58,17 @@ export default defineMessages({
     id: `${scope}.mathnote`,
     defaultMessage: 'Mathematical data/Notes',
   },
+
+  title: {
+    id: `${scope}.title`,
+    defaultMessage: 'Title',
+  },
   
   pub_title: {
     id: `${scope}.pub_title`,
-    defaultMessage: 'Title',
+    defaultMessage: 'Journal title',
   },
+  
   part_title: {
     id: `${scope}.part_title`,
     defaultMessage: 'Article title',
