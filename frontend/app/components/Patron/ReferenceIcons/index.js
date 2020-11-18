@@ -81,12 +81,12 @@ const ReferenceIcons = (props) => {
                         options={groupsOptionList} 
                     /> 
                 }
-                {visibleIcon('edit') && 
+                {visibleIcon('edit') && data.id && 
                 <NavLink to={canEdit(data)?editurl(data.id):'#'} className={`${canEdit(data)?"btn btn-icon":"btn btn-icon disabled"}`}>
                     <i className="fas fa-edit"></i>
-                </NavLink>}
-                {visibleIcon('delete') 
-                    && 
+                </NavLink>}               
+                {visibleIcon('delete') && data.id && 
+                (                   
                         (canDelete(data) && deleteReference && 
                         <a href="#" className="btn btn-icon"  onClick={() => deleteReference(data.id) }>
                             <i className="fas fa-trash"></i>
@@ -95,6 +95,7 @@ const ReferenceIcons = (props) => {
                         <a href="#" className="btn btn-icon disabled">
                             <i className="fas fa-trash"></i>
                         </a>)
+                )
                 }
 
 
