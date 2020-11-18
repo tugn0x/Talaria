@@ -11,9 +11,7 @@ import SectionTitle from 'components/SectionTitle';
 import './style.scss';
 import FindOA from '../../FindOA';
 
-//NOTA: submit non si disabilita correttamente (sopratt se importo da pmid è disabilitato anche se non dovrebbe)
-//appena scateno onchange magicam il submit si abilita/disab in base alle condizioni
-//a volte il title_part non è editable
+//NOTA: a volte il title_part/abstract/note non è editable o lo è solo per parte della lunghezza (limite a 50 car?)
 
 const FormContent = (props) => {
     console.log('FormEdit Reference', props)
