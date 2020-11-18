@@ -85,9 +85,20 @@ const ReferenceIcons = (props) => {
                 <NavLink to={canEdit(data)?editurl(data.id):'#'} className={`${canEdit(data)?"btn btn-icon":"btn btn-icon disabled"}`}>
                     <i className="fas fa-edit"></i>
                 </NavLink>}
-                {visibleIcon('delete') && deleteReference && <a href="#" className="btn btn-icon"  onClick={() => deleteReference(data.id) }>
-                    <i className="fas fa-trash"></i>
-                </a> }
+                {visibleIcon('delete') 
+                    && 
+                        (canDelete(data) && deleteReference && 
+                        <a href="#" className="btn btn-icon"  onClick={() => deleteReference(data.id) }>
+                            <i className="fas fa-trash"></i>
+                        </a>)||
+                        (!canDelete(data) &&
+                        <a href="#" className="btn btn-icon disabled">
+                            <i className="fas fa-trash"></i>
+                        </a>)
+                }
+
+
+
         
         </>
     )
