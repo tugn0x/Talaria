@@ -39,8 +39,15 @@ const FormContent = (props) => {
 
     useEffect(() => {
        setRequiredFields(() => requiredConditions(formData));
-       setIsSubmitDisabled(document.querySelectorAll('.form-control:invalid').length>0)
+      // console.log("change formData: reqfield=",requiredConditions(formData))
+      // console.log("CHECK REQUIRED FIELD->disabled submit:",document.querySelectorAll('.form-control:invalid').length>0);
+      // setIsSubmitDisabled(document.querySelectorAll('.form-control:invalid').length>0)
     }, [formData])
+
+    useEffect(() => {
+        setIsSubmitDisabled(document.querySelectorAll('.form-control:invalid').length>0)
+        //console.log("CHECK REQUIRED FIELD->disabled submit:",document.querySelectorAll('.form-control:invalid').length>0);
+     }, [requiredFields])
 
     useEffect(() => {
         console.log("UE-reference",reference)
@@ -166,7 +173,7 @@ const FormContent = (props) => {
                             label={formData.material_type === 1 ? intl.formatMessage(messages.part_title) : formData.material_type === 2 ? intl.formatMessage(messages.section): intl.formatMessage(messages.chapter)}
                             handleChange={(value) => handleChange(value, 'part_title')}
                             input={formData.part_title ? formData.part_title : ""}
-                            required={(formData.material_type === 1 || formData.material_type === 2)?true:false}
+                            required={formData.material_type === 1?true:false}
                         />
                     </FormGroup>}
                     {(formData.material_type !== 1 ) && 
@@ -175,7 +182,7 @@ const FormContent = (props) => {
                             label={intl.formatMessage(messages.authors)}
                             handleChange={(value) => handleChange(value, 'authors')}
                             input={formData.authors  ? formData.authors : ""}
-                            required={formData.material_type===3?true:requiredFields}
+                            required={(formData.material_type!==1)?true:false}
                         />
                     </FormGroup>}
                     {(formData.material_type === 1 || formData.material_type === 2) && 
@@ -184,7 +191,7 @@ const FormContent = (props) => {
                             label={formData.material_type === 1? intl.formatMessage(messages.authors):intl.formatMessage(messages.part_authors)}
                             handleChange={(value) => handleChange(value, 'part_authors')}
                             input={formData.part_authors  ? formData.part_authors : ""}
-                            required={requiredFields}
+                            required={(formData.material_type===1)?requiredFields:false}
                         />
                     </FormGroup>}
                     {(formData.material_type === 3) && 
@@ -193,7 +200,7 @@ const FormContent = (props) => {
                             label={intl.formatMessage(messages.relator)}
                             handleChange={(value) => handleChange(value, 'relator')}
                             input={formData.relator  ? formData.relator : ""}
-                            required={true}
+                            required={false}
                         />
                     </FormGroup>}
                     {(formData.material_type === 3) && 
@@ -242,7 +249,7 @@ const FormContent = (props) => {
                                 type="number"
                                 handleChange={(value) => handleChange(value, 'pubyear')}
                                 input={formData.pubyear ? formData.pubyear : ""}
-                                required={formData.material_type===1?requiredFields:formData.material_type===3?true:false}
+                                required={formData.material_type===1?requiredFields:false}
                             />
                         </FormGroup>
                         {(formData.material_type === 1 || formData.material_type === 2) && 
@@ -262,7 +269,7 @@ const FormContent = (props) => {
                                 type="string"
                                 handleChange={(value) => handleChange(value, 'issue')}
                                 input={formData.issue ? formData.issue : ""}
-                                required={formData.material_type===1?requiredFields:false}
+                                required={false}
                             />
                         </FormGroup>}
                         {(formData.material_type !== 4 ) && 

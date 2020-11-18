@@ -8,9 +8,9 @@ export const requiredConditions = (formData) => {
     let required = true;
 
     //da rivedere!!!
-    if(formData.material_type === 1||formData.material_type === 2)
+    if(formData.material_type === 1 /*||formData.material_type === 2*/)
     {
-            if(pubyear !== "" &&  volume === ""){
+            /*if(pubyear !== "" &&  volume === ""){
                 
                 if(pages === "" && part_authors === ""){
                     required = true;
@@ -31,9 +31,17 @@ export const requiredConditions = (formData) => {
                 }else if(pages !== "" || part_authors !== ""){
                     required = false;
                 }
-            }
+            }*/
+
+            if (   
+              (pubyear!=='' && pages!=='') ||
+              (pubyear!=='' &&  part_authors!=='') ||
+              (volume!=='' && pages!=='')  ||
+              (volume!=='' && part_authors!=='')
+            ) required=false;
+            else required=true
     }
-    else if (formData.material_type === 4)
+   /* else if (formData.material_type === 4)
     {
         if(pubyear === "" && authors === ""){
             required = true;
@@ -48,7 +56,7 @@ export const requiredConditions = (formData) => {
         }else if(pubyear !== "" || authors !== ""|| place!==""){
             required = false;
         }
-    }
+    }*/
     
 
     return required
