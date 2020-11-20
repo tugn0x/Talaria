@@ -17,11 +17,11 @@ class DeliveryTransformer extends BaseTransformer
         'granted_permissions',
         'library',
         'users',
+        'deliveryable',
     ];
 
     protected $defaultIncludes = [
-        'granted_permissions',
-        'deliveryable',
+        'granted_permissions',        
     ];
 
     public function includeGrantedPermissions(Model $model)
@@ -37,6 +37,7 @@ class DeliveryTransformer extends BaseTransformer
     public function getPoliTransformer($deliveryable)
     {   
         $transformer=new BaseLightTransformer();
+        
         switch (get_class($deliveryable)) {
             case 'App\Models\Libraries\Library':
                 $transformer = new LibraryTransformer();
@@ -44,25 +45,28 @@ class DeliveryTransformer extends BaseTransformer
             case 'App\Models\Institutions\Desk':
                 $transformer = new DeskTransformer();
                 break;
-        }
+        }        
         return $transformer;
     }
 
     public function includeDeliveryable(Model $model)
     {
-        return $this->item($model->deliveryable, $this->getPoliTransformer($model->deliveryable));
+        if($model->deliveryable)
+            return $this->item($model->deliveryable, $this->getPoliTransformer($model->deliveryable));
     }
 
     public function includeUsers(Model $model)
     {
-        return $this->collection($model->users, new UserLightTransformer());
+        if($model->users)
+            return $this->collection($model->users, new UserLightTransformer());
     }
 
 
 
     public function includeLibrary(Model $model)
     {
-        return $this->item($model->library, new BaseLightTransformer());
+        if($model->library)
+            return $this->item($model->library, new BaseLightTransformer());
     }
 
 

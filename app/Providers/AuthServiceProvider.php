@@ -39,6 +39,7 @@ use App\Policies\LabelReferencePolicy;
 use App\Policies\PatronDocdelRequestPolicy;
 use App\Policies\UserPolicy;
 use App\Policies\TagPolicy;
+use App\Policies\DeskPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
@@ -63,6 +64,7 @@ class AuthServiceProvider extends ServiceProvider
         PatronDocdelRequest::class=>PatronDocdelRequestPolicy::class,
         DeskInstitution::class=>DeskInstitutionPolicy::class,
         Delivery::class => DeliveryPolicy::class,
+        Desk::class => DeskPolicy::class,
         Library::class => LibraryPolicy::class,
         LibraryUser::class => LibraryUserPolicy::class,
         CatalogLibrary::class => CatalogLibraryPolicy::class,
