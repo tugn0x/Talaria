@@ -60,7 +60,8 @@ class PatronDocdelRequestTransformer extends BaseTransformer
 
     public function includeDocdelRequests(Model $model)
     {
-        return $this->collection($model->docdelrequests, new BaseTransformer());
+        if($model->docdelrequests)
+            return $this->collection($model->docdelrequests, new BaseTransformer());
     }
 
     public function transform(Model $model)
