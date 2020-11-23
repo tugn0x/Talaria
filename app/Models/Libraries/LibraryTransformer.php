@@ -35,7 +35,7 @@ class LibraryTransformer extends BaseTransformer
     ];
 
     public function includeGrantedPermissions(Model $model)
-    {
+    {        
         $transf = new BaseLightTransformer();
         $transf->setCallback(function ($model) {
             return $model->user_with_permissions();
@@ -44,11 +44,13 @@ class LibraryTransformer extends BaseTransformer
     }
     public function includeDepartments(Model $model)
     {
-        return $this->collection($model->departments, new DepartmentTransformer());
+        if($model->departments)
+            return $this->collection($model->departments, new DepartmentTransformer());
     }
     public function includeTitles(Model $model)
     {
-        return $this->collection($model->titles, new TitleTransformer());
+        if($model->titles)
+            return $this->collection($model->titles, new TitleTransformer());
     }
     public function includeInstitution(Model $model)
     {
@@ -68,7 +70,8 @@ class LibraryTransformer extends BaseTransformer
 
     public function includeCatalogs(Model $model)
     {
-        return $this->collection($model->catalogs, new BaseLightTransformer());
+        if($model->catalogs)
+            return $this->collection($model->catalogs, new BaseLightTransformer());
     }
 
     public function includeDeliveries(Model $model)

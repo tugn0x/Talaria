@@ -11,6 +11,9 @@ use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 class ConsortiumTransformer extends BaseTransformer
 {
+    protected $policy = [
+        'manage' => ['granted_permissions']
+    ];
 
     protected $availableIncludes = [
         'granted_permissions',
