@@ -75,7 +75,8 @@ class BaseTransformer extends TransformerAbstract
                 $user = Auth::user();
                 //se l'utente non è settato nessun campo viene nascosto
                 //utile per le azioni che lanciate da command o dalla queue
-                if($user && $user->cannot($permission, $model))
+                //NOTA: 24/11/2020 ho aggiunto il controllo sul nr delle abilities altrimenti la $user->cannot si pianta! (probabile bugfix i Bouncer)
+                if(sizeof($user->getAbilities())==0 || ($permission && $user && $user->cannot($permission, $model)) )
                 {
                     $model->addHidden($fields);
 

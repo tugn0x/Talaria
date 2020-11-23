@@ -39,13 +39,14 @@ class PatronDocdelRequestTransformer extends BaseTransformer
     public function includeLibrary(Model $model)
     {
         if($model->library)
-            return $this->item($model->library, new LibraryTransformer());
+            return $this->item($model->library, new LibraryTransformer());  //new BaseLightTransformer());
     }
 
     public function includeLibraryLabel(Model $model)
     {
-        if($model->user)
+        if($model->user && $model->library)
         {
+
             $lu=LibraryUser::where('library_id','=',$model->library->id)->where('user_id','=',$model->user->id)->firstOrFail();
             return $this->item($lu, new BaseTransformer());
         }
