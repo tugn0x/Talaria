@@ -11,6 +11,15 @@ use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 class ReferenceTransformer extends BaseTransformer
 {
+    //filtro sui campi che restituisco al frontend
+    protected $policy = [
+        'manage' => ['sid'],
+        'deliver' => ['sid'],
+        'borrow' => ['sid'],
+        'lend' => ['sid'],
+        'ill-borrow' => ['sid'],
+        'ill-lend' => ['sid'],        
+    ];
 
     protected $availableIncludes = [
         'labels',
