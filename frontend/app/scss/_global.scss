@@ -81,6 +81,7 @@ button[type=button] {
     margin: 0;
     border-radius: 20px;
     display: inline-block;
+    cursor: pointer;
     /* vertical-align: sub; */
     &:hover,&:active, &:focus {
         text-decoration: none;

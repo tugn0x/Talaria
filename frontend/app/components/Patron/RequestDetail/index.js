@@ -76,8 +76,8 @@ const RequestDetail = props => {
                             Phone: {patronrequest.library.data.phone} | Fax: {patronrequest.library.data.fax}                            
                             DD Service Phone: {patronrequest.library.data.dd_phone} | ILL Service Phone: {patronrequest.library.data.ill_phone}                       
                             DD Service Mail: {patronrequest.library.data.dd_mail} | ILL Mail: {patronrequest.library.data.ill_mail}                            
-                            Site <a target="_new" href={patronrequest.library.data.url}>{patronrequest.library.data.url}</a>
-                            Opac URL: <a target="_new" href={patronrequest.library.data.opac}>{patronrequest.library.data.opac}</a>
+                            Site <a target="_blank" href={patronrequest.library.data.url}>{patronrequest.library.data.url}</a>
+                            Opac URL: <a target="_blank" href={patronrequest.library.data.opac}>{patronrequest.library.data.opac}</a>
                         </Col>
                     </Row>
 

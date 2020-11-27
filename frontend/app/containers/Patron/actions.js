@@ -39,6 +39,9 @@ import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_FIND_REFERENCE_BY_PMID_SUCCESS,*/
   REQUEST_FIND_OA,
   REQUEST_FIND_OA_SUCCESS,
+  REQUEST_FIND_UPDATE_OA,
+  REQUEST_FIND_UPDATE_OA_SUCCESS,
+  REQUEST_FIND_UPDATE_OA_FAIL,
   REQUEST_CLEAN_IMPORTREFERENCE
 } from "./constants";
 
@@ -421,6 +424,35 @@ export function requestFindOA(refData) {
   };
 }
 
+export function requestFindUpdateOA(id,title,foundMessage,notfoundMessage) {
+  console.log("FINDandUpdateOA:",id,title,foundMessage,notfoundMessage)
+  return {
+    type: REQUEST_FIND_UPDATE_OA,
+    id,
+    title,
+    foundMessage,
+    notfoundMessage
+  };
+}
+
+export function requestFindUpdateOAFail(result) {
+  return {
+    type: REQUEST_FIND_UPDATE_OA_FAIL,
+    result
+  };
+}
+
+export function requestFindUpdateOASuccess(result) {
+  return {
+    type: REQUEST_FIND_UPDATE_OA_SUCCESS,
+    result
+  };
+}
+
+
+
+
+
 export function cleanImportedreference() {
   return {
     type: REQUEST_CLEAN_IMPORTREFERENCE
@@ -440,6 +472,7 @@ export function requestFindOASuccess(result) {
     result
   };
 }
+
 
 /* END External request action */
 

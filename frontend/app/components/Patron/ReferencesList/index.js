@@ -20,7 +20,7 @@ import './style.scss';
 
 const ReferencesList = (props) => {
     console.log('ReferencesList', props)
-    const { loading, data, pagination, searchOptions, labelsOptionList, groupsOptionList,removeLabelFromReference,removeGroupFromReference,applyLabels,applyGroups,deleteReference} = props
+    const { loading, data, pagination, searchOptions, labelsOptionList, groupsOptionList,removeLabelFromReference,removeGroupFromReference,applyLabels,applyGroups,deleteReference,findAndUpdateOA,oaloading} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)
@@ -206,7 +206,6 @@ const ReferencesList = (props) => {
                 </Row>
                 <Loader show={loading}>
                     <div className="list-body">
-                    *** TODO traduzione etichette in ReferenceItem  ***
                         {data.length > 0 &&
                             data.map(ref => (
                                 <ReferenceItem 
@@ -218,7 +217,9 @@ const ReferencesList = (props) => {
                                     removeGroup={(groupId) => removeGroupFromReference(ref.id,groupId, multiFilter)}
                                     deleteReference={() => deleteReference(ref.id,multiFilter)}
                                     checked={selectedReferences.includes(ref.id)}
-                                />
+                                    findAndUpdateOA={()=>findAndUpdateOA(ref.id,ref.material_type===1?ref.part_title:ref.title)}
+                                    oaloading={oaloading.includes(ref.id)}
+                                />                                
                                 
                                 
                             ))

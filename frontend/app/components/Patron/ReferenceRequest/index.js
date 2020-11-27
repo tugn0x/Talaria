@@ -117,7 +117,7 @@ const ReferenceRequest = props => {
                 )}
             </div>
             }
-            {!canRequest(reference) && <ErrorMsg message="ERROR: can't request this reference. Is already in request!"/>}
+            {!canRequest(reference) && <ErrorMsg cssclass="alert-warning" message="Il riferimento è attualmente in richiesta!"/>}
             
             <div className="reference">
                 <ReferenceDetail 
@@ -192,7 +192,7 @@ const ReferenceRequest = props => {
                 </Card>
                 <div className="d-flex justify-content-between">
                     <Button type="submit" className="mt-0" color="cta" disabled={isSubmitDisabled}>
-                        {intl.formatMessage({id: 'app.global.submit'})}
+                        {intl.formatMessage({id: 'app.global.request'})}
                     </Button>
                     <Button color="cancel" onClick={() => props.history.goBack() } >
                         {intl.formatMessage({id: 'app.global.cancel'})}

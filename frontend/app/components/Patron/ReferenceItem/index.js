@@ -7,7 +7,7 @@ import ReferenceIcons from '../ReferenceIcons';
 import CustomCheckBox from 'components/Form/CustomCheckBox';
 
 const ReferenceItem = (props) => {
-    const {/*messages,*/data,toggleSelection,checked,removeLabel,removeGroup,deleteReference} = props
+    const {/*messages,*/data,toggleSelection,checked,removeLabel,removeGroup,deleteReference,findAndUpdateOA,oaloading} = props
   
     const intl = useIntl();
   
@@ -75,7 +75,10 @@ const ReferenceItem = (props) => {
                     data={data}
                     icons={['request','oa','edit','delete']}
                     deleteReference={deleteReference}
+                    findAndUpdateOA={findAndUpdateOA}                    
                 />
+                {oaloading && <i className="fas fa-spinner fa-spin"></i>}
+                
             </Col> 
         </Row>
     )

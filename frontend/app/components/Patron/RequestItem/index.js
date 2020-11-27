@@ -69,39 +69,29 @@ const RequestItem = (props) => {
         return false;
     }
 
+    //*** TODO: DA SISTEMARE e AGGIUNGERE campi in modo che sia allineato con le ultime modifiche al riferimento e/o importare il componente direttamente ***
     return ( 
-        <Row className="list-row justify-content-between">            
-            *** TODO: DA SISTEMARE e AGGIUNGERE campi in modo che sia allineato con le ultime modifiche al riferimento e/o importare il componente direttamente ***
+        <Row className="list-row justify-content-between">                        
             <Col sm={3} className="select-checkbox">
                 {toggleSelection && <CustomCheckBox 
                     handleChange={toggleSelection}
                     checked={checked}
-                />}
-                <i className={matTypeIcon(data.reference.data.material_type)}></i>
+                />}                
                 <span className={statusIcon(data.status)}></span> 
                 <span className="status-text">{intl.formatMessage(messages[data.status])}
                 </span>
                 {statusDate(data)}
             </Col>
             <Col sm={7} className="info">
-                <NavLink to={`${requesturl(data.id)}`}>
-                    <p><span className="pub_title">{data.reference.data.pub_title}</span> <span className="part_title">{data.reference.data.part_title}</span></p>
+                <span><i className={matTypeIcon(data.reference.data.material_type)}></i></span>
+                <span><NavLink to={`${requesturl(data.id)}`}>
+                    <span className="pub_title">{data.reference.data.pub_title}</span> <span className="part_title">{data.reference.data.part_title}</span>
                 </NavLink>
+                </span>
                 <div className="authors">
                    {data.reference.data.authors && <span className="authors">Autore <span>{data.reference.data.authors}</span></span>} 
                    <span className="pubyear">Anno <span>{data.reference.data.pubyear}</span></span>
                 </div>
-                {data.library && <span className="libraryLabel pr-3">
-                    <span>Biblioteca</span> 
-                    <span>
-                    <a href="#" id={`tooltip-${data.id}-${data.library.data.id}`} className="active">{data.library_label.data.label}</a> 
-                    <UncontrolledTooltip placement="right" target={`tooltip-${data.id}-${data.library.data.id}`}>
-                        {data.library.data.name}
-                    </UncontrolledTooltip>
-                    </span>
-                </span> }
-                {data.delivery && <span className="delivery"><span>Delivery</span> <span>{data.delivery.data.name}</span></span>}
-                {data.request_date && <span className="requestDate"><span>Data richiesta</span> <span>{formatDateTime(data.request_date, 'it')}</span></span>}
                 <div>
                 {data.reference.data.labels.data && <span className="labels-row">
                     {data.reference.data.labels.data.map(label => <span key={label.id}>{label.name}</span>)}
@@ -109,8 +99,32 @@ const RequestItem = (props) => {
                 {data.reference.data.groups.data && <span className="groups-row">
                     {data.reference.data.groups.data.map(grp => <span key={grp.id}>{grp.name}</span>)}
                 </span>}
-                </div>
-                
+                </div>                
+                {data.library && <span className="libraryLabel pr-3">
+                    <span><i className="fas fa-landmark"></i></span> 
+                    <span>
+                    <a href="#" id={`tooltip-${data.id}-${data.library.data.id}`} className="active">{data.library_label.data.label}</a> 
+                    <UncontrolledTooltip placement="right" target={`tooltip-${data.id}-${data.library.data.id}`}>
+                        {data.library.data.name}
+                    </UncontrolledTooltip>
+                    </span>
+                </span> }
+                {data.delivery && <span className="deliveryLabel pr-3">
+                    <span><i className="fas fa-truck"></i></span>
+                    <span>
+                        <a href="#" id={`tooltip-del-${data.id}-${data.delivery.data.id}`} className="active">{data.delivery.data.name}</a> 
+                        <UncontrolledTooltip placement="right" target={`tooltip-del-${data.id}-${data.delivery.data.id}`}>
+                        <div> 
+                            <span>{data.delivery.data.name}</span><br/>
+                            <span><i className="fas fa-envelope"></i> {data.delivery.data.email}</span><br/>
+                            <span><i className="fas fa-phone"></i> {data.delivery.data.phone}</span><br/>
+                            <span><i className="fas fa-clock"></i> {data.delivery.data.openinghours}</span>
+                        </div>
+                        </UncontrolledTooltip>
+                    </span>
+                </span>}       
+
+                {data.request_date && <span className="requestDate"><span>Data richiesta</span> <span>{formatDateTime(data.request_date, 'it')}</span></span>}
             </Col>
             
             <Col sm={2} className="icons align-self-center">

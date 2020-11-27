@@ -17,7 +17,7 @@ const FormContent = (props) => {
     console.log('FormEdit Reference', props)
     const {reference, messages, submitCallBack, 
             applyLabels, labelsOptionList, applyGroups, groupsOptionList,
-            removeLabel, removeGroup, deleteReference,findOA,OALink} = props;
+            removeLabel, removeGroup, deleteReference/*,findOA,OALink*/} = props;
     const [formData, setFormData] = useState(() => {
         if(!reference)
             return {material_type: 1, pubyear: "", authors: "", volume: "", pages: ""}
@@ -57,11 +57,11 @@ const FormContent = (props) => {
         setIsSubmitDisabled(document.querySelectorAll('.form-control:invalid').length>0);
     },[]) 
 
-    useEffect(()=> {
+    /*useEffect(()=> {
         console.log("UPDATE OA_LINK in form!")
         if(OALink && OALink!="")
             setFormData({ ...formData, 'oa_link': OALink});
-    },[OALink])
+    },[OALink])*/
 
     
     const onSubmit = (e) => {
@@ -85,13 +85,41 @@ const FormContent = (props) => {
     return (
         <>
             <SectionTitle 
-                title={messages.header}
+                title={formData.id?messages.headerEdit:messages.headerNew}
             />
-            <div>
-                <FindOA reference={formData} findOA={findOA}/>
-            </div>
+            {reference && !reference.id && <FindOA reference={formData} /* findOA={findOA}*//>}
             <FormContainer onSubmit={onSubmit} className={formClasses.join(" ")} noValidate>
-                <FormGroup className="radio-buttons">
+                {reference &&
+                    <>
+                        {reference.id && <Row className="list-head">
+                            <div className="features-icons">
+                                <ReferenceIcons 
+                                    data={formData}
+                                    icons={['assignLabel', 'assignGroup', 'delete']}
+                                    labelsOptionList={labelsOptionList}
+                                    applyLabels={applyLabels}
+                                    groupsOptionList={groupsOptionList}
+                                    applyGroups={applyGroups}
+                                    selectedReferences={[formData.id]}
+                                    deleteReference={deleteReference}
+                                />
+                            </div>
+                        </Row>}
+                        {formData.labels && Object.keys(formData.labels.data).length > 0 &&
+                            <div className="labels-row">
+                                {formData.labels.data.map(label => <span key={label.id}>{label.name} <i className="fas fa-times"  onClick={() => removeLabel(reference.id, label.id )}></i></span>)}
+                            </div>
+                        }
+                        {formData.groups && Object.keys(formData.groups.data).length > 0 &&
+                            <div className="groups-row">
+                                {formData.groups.data.map(group => <span key={group.id}>{group.name} <i className="fas fa-times"  onClick={() => removeGroup(reference.id, group.id)}></i></span>)}
+                            </div>
+                        }
+                    </>
+                }
+                  <h3>{intl.formatMessage(messages.materialTypeHead)}</h3>
+                  <Card>
+                  <FormGroup className="radio-buttons">
                     <RadioButton 
                         label={intl.formatMessage(messages.article)} 
                         checked={formData.material_type === 1 ? true : false}
@@ -127,34 +155,7 @@ const FormContent = (props) => {
                         error={  intl.formatMessage({ id: 'app.global.invalid_field' })}
                     /> 
                 </FormGroup>
-                {reference &&
-                    <>
-                        <Row className="list-head">
-                            <div className="features-icons">
-                                <ReferenceIcons 
-                                    data={formData}
-                                    icons={['assignLabel', 'assignGroup', 'delete']}
-                                    labelsOptionList={labelsOptionList}
-                                    applyLabels={applyLabels}
-                                    groupsOptionList={groupsOptionList}
-                                    applyGroups={applyGroups}
-                                    selectedReferences={[formData.id]}
-                                    deleteReference={deleteReference}
-                                />
-                            </div>
-                        </Row>
-                        {formData.labels && Object.keys(formData.labels.data).length > 0 &&
-                            <div className="labels-row">
-                                {formData.labels.data.map(label => <span key={label.id}>{label.name} <i className="fas fa-times"  onClick={() => removeLabel(reference.id, label.id )}></i></span>)}
-                            </div>
-                        }
-                        {formData.groups && Object.keys(formData.groups.data).length > 0 &&
-                            <div className="groups-row">
-                                {formData.groups.data.map(group => <span key={group.id}>{group.name} <i className="fas fa-times"  onClick={() => removeGroup(reference.id, group.id)}></i></span>)}
-                            </div>
-                        }
-                    </>
-                }
+                </Card>
                 <h3>{intl.formatMessage(messages.titleAuthorsHead)}</h3>
                 <Card>
                     <FormGroup >
@@ -307,7 +308,7 @@ const FormContent = (props) => {
                 <Card>
                     <Row>
                         {(formData.material_type === 2 || formData.material_type === 4 )&& 
-                        <FormGroup className="col-md-3">
+                        <FormGroup className="col-sm-3">
                                 <Input 
                                     label={intl.formatMessage(messages.isbn)}
                                     handleChange={(value) => handleChange(value, "isbn")}
@@ -316,7 +317,7 @@ const FormContent = (props) => {
                                 />
                         </FormGroup>}
                         {(formData.material_type === 1 || formData.material_type === 2 || formData.material_type === 4 )&& 
-                        <FormGroup className="col-md-3">
+                        <FormGroup className="col-sm-3">
                         <Input 
                                     label={intl.formatMessage(messages.issn)}
                                     handleChange={(value) => handleChange(value, "issn")}
@@ -324,50 +325,23 @@ const FormContent = (props) => {
                                     required={false}
                                 />
                         </FormGroup>}
-                        <FormGroup className="col-md-4">
-                            <Input 
-                                label={intl.formatMessage(messages.doi)}
-                                handleChange={(value) => handleChange(value, 'doi')}
-                                input={formData.doi ? formData.doi : ""}
-                                required={false}
-                            />
-                        </FormGroup>
-                        <FormGroup className="col-md-3">
-                            <Input 
-                                label={intl.formatMessage(messages.sid)}
-                                handleChange={(value) => handleChange(value, 'sid')}
-                                input={formData.sid ? formData.sid : ""}
-                                required={false}
-                            />
-                        </FormGroup>
-                    </Row>   
-                    <Row>
-                        <FormGroup className="col-md-3">
+                        <FormGroup className="col-sm-3">
                             <Input 
                                 label={intl.formatMessage(messages.pmid)}
                                 handleChange={(value) => handleChange(value, 'pmid')}
                                 input={formData.pmid ? formData.pmid : ""}
                                 required={false}
                             />
-                        </FormGroup>
-                        {formData.material_type === 1 &&
-                        <FormGroup className="col-md-4">
+                        </FormGroup>      
+                        <FormGroup className="col-sm-5">
                             <Input 
-                                label={intl.formatMessage(messages.acnp_cod)}
-                                handleChange={(value) => handleChange(value, 'acnp_cod')}
-                                input={formData.acnp_cod ? formData.acnp_cod : ""}
+                                label={intl.formatMessage(messages.doi)}
+                                handleChange={(value) => handleChange(value, 'doi')}
+                                input={formData.doi ? formData.doi : ""}
                                 required={false}
                             />
-                        </FormGroup>}
-                        <FormGroup className="col-md-4">
-                            <Input 
-                                label={intl.formatMessage(messages.sbn_docid)}
-                                handleChange={(value) => handleChange(value, 'sbn_docid')}
-                                input={formData.sbn_docid ? formData.sbn_docid : ""}
-                                required={false}
-                            />
-                        </FormGroup>
-                    </Row>
+                        </FormGroup>                       
+                    </Row>   
                 </Card>
                 <h3>{intl.formatMessage(messages.abstract)}</h3>
                 <Card>

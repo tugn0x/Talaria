@@ -8,9 +8,9 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.components.ReferenceForm';
 
 export default defineMessages({
-  header: {
-    id: `${scope}.header`,
-    defaultMessage: 'New Reference',
+  headerImport: {
+    id: `${scope}.headerImport`,
+    defaultMessage: 'Import Reference',
   },
   bodySearch: {
     id: `${scope}.bodySearch`,

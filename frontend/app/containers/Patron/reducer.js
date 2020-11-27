@@ -31,6 +31,9 @@ import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_FIND_REFERENCE_BY_PMID_SUCCESS,*/
   REQUEST_FIND_OA,
   REQUEST_FIND_OA_SUCCESS,
+  REQUEST_FIND_UPDATE_OA,
+  REQUEST_FIND_UPDATE_OA_FAIL,
+  REQUEST_FIND_UPDATE_OA_SUCCESS,
   REQUEST_CLEAN_IMPORTREFERENCE
 } from './constants';
 
@@ -49,6 +52,7 @@ export const initialState = {
   referencesList: {
     data: [],
     pagination: [],
+    oaloading:[],
   },
   requestsList: {
     data: [],
@@ -251,6 +255,16 @@ const PatronReducer = (state = initialState, action) =>
             draft.oareference={};
             draft.oareference = action.result?action.result:{};
             break;  
+        case REQUEST_FIND_UPDATE_OA:
+          //draft.loading=true   
+          draft.referencesList.oaloading.push(action.id)
+          break;    
+        case REQUEST_FIND_UPDATE_OA_SUCCESS:
+            draft.referencesList.oaloading = action.result?draft.referencesList.oaloading.filter(function(e) { return e !== action.result }):null  
+            break;      
+        case REQUEST_FIND_UPDATE_OA_FAIL:
+          draft.referencesList.oaloading = action.result?draft.referencesList.oaloading.filter(function(e) { return e !== action.result }):null
+          break;  
               
         case REQUEST_CLEAN_IMPORTREFERENCE:
           //draft.importedreference={};

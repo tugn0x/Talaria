@@ -7,17 +7,8 @@ import SectionTitle from 'components/SectionTitle';
 const ReferencesForm = (props) => {
     const {createReference, reference, updateReference, messages, 
             labelsOptionList, applyLabels, groupsOptionList, 
-            applyGroups, removeLabel, removeGroup, deleteReference,findReference,importReference,findOA,OALink} = props
+    applyGroups, removeLabel, removeGroup, deleteReference,findReference,importReference/*,findOA,OALink*/} = props
     const [goToForm, setGoToForm] = useState(false);
-
-
-    /*useEffect ( () => {
-        console.log("Update formData with OA:",OALink)
-        if(reference && Object.keys(reference).length>0 && OALink && OALink!="")
-            setFormData({ ...formData, oa_link:OALink});
-
-        console.log("formData:",formData);    
-    },[OALink])*/
      
     return (
         <>
@@ -34,8 +25,8 @@ const ReferencesForm = (props) => {
                         reference={reference}
                         deleteReference={deleteReference}
                         history={props.history}
-                        findOA={findOA}
-                        OALink={OALink}
+                        /*findOA={findOA}
+                        OALink={OALink}*/
                     />
                 ||
                     <>
@@ -45,8 +36,8 @@ const ReferencesForm = (props) => {
                             <FormContent 
                             messages={messages} 
                             submitCallBack={(formData) => createReference(formData)}
-                            findOA={findOA}
-                            OALink={OALink}
+                            /*findOA={findOA}
+                            OALink={OALink}*/
                             />
                     ||    
                     importReference &&
@@ -54,8 +45,8 @@ const ReferencesForm = (props) => {
                                 messages={messages} 
                                 reference={importReference}
                                 submitCallBack={(formData) => createReference(formData)}
-                                findOA={findOA}
-                                OALink={OALink}
+                                /*findOA={findOA}
+                                OALink={OALink}*/
                             />
                     ||        
                             <PreForm 

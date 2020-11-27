@@ -1,11 +1,11 @@
-import { call, put, select, takeLatest, fork, take  } from 'redux-saga/effects';
+import { call, put, select, takeLatest, takeEvery,fork, take  } from 'redux-saga/effects';
 import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO_LIBRARIES,REQUEST_UPDATE_ACCESS_TO_LIBRARIES,REQUEST_DELETE_ACCESS_TO_LIBRARIES,  REQUEST_REFERENCES_LIST,
   REQUEST_MY_ACTIVE_LIBRARIES_OPTIONLIST,
   REQUEST_POST_REFERENCES, REQUEST_UPDATE_REFERENCES, REQUEST_UPDATE_REQUEST,REQUEST_ARCHIVE_REQUEST,REQUEST_CHANGE_STATUS_REQUEST,
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST,
   REQUEST_UPDATE_LABEL, REQUEST_REMOVE_LABEL, REQUEST_POST_LABEL,
   REQUEST_POST_GROUP, REQUEST_REMOVE_GROUP, REQUEST_UPDATE_GROUP,
-  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,REQUEST_REQUESTS_LIST,REQUEST_GET_REQUEST,REQUEST_DELETE_REFERENCE, REQUEST_GET_LIBRARY_DELIVERIES, REQUEST_POST_REQUEST, /*REQUEST_FIND_REFERENCE_BY_DOI, REQUEST_FIND_REFERENCE_BY_PMID,*/REQUEST_FIND_OA} from './constants';
+  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,REQUEST_REQUESTS_LIST,REQUEST_GET_REQUEST,REQUEST_DELETE_REFERENCE, REQUEST_GET_LIBRARY_DELIVERIES, REQUEST_POST_REQUEST, /*REQUEST_FIND_REFERENCE_BY_DOI, REQUEST_FIND_REFERENCE_BY_PMID,*/REQUEST_FIND_OA,REQUEST_FIND_UPDATE_OA} from './constants';
 import {
   requestError,
   stopLoading,
@@ -26,7 +26,9 @@ import {
   requestGetLibraryDeliveriesSuccess,
   requestFindReferenceByDOISuccess,
   requestFindReferenceByPMIDSuccess,
-  requestFindOASuccess,
+  requestFindOASuccess,  
+  requestFindUpdateOASuccess,
+  requestFindUpdateOAFail,
 } from './actions';
 import { push } from 'connected-react-router';
 import { toast } from "react-toastify";
@@ -609,6 +611,35 @@ export function* findOASaga(action) {
   }
 }
 
+//chiamare api x trovare OA e aggiornare (POST) il riferimento in modo che ricarichi la pag
+//La ricerca OA avviene x titolo della pubb (puo' essere titolo part o titolo book/thesi/...)
+export function* findUpdateOASaga(action) {
+  console.log("FINDUPDATEOA_SAGA:", action);
+  const options = {
+    method: 'get',    
+    refData: {'title':action.title}
+  }
+  try {
+    const request = yield call(getOA, options);
+    if(request.found && request.url)
+    {
+      console.log("TROVATO OA!:",request.url)    
+      //yield call(() => toast.success("Versione OA trovata!"))
+      yield put(requestFindUpdateOASuccess(action.id));
+      yield call(requestUpdateReferenceSaga, {id: action.id, request: {oa_link: request.url}, message:action.foundMessage })
+    }
+    else {
+      console.log("NON TROVATO");
+      yield put(requestFindUpdateOAFail(action.id));
+      yield call(() => toast.error(action.notfoundMessage))
+    }
+
+  } catch(e) {
+    console.log("OA FIND AND UPDATE ERROR",e)
+    yield put(requestError(e.message));
+  }
+}
+
 //////////////////// END EXTERNAL API /////////////////
 
 /**
@@ -649,4 +680,5 @@ export default function* patronSaga() {
   /*yield takeLatest(REQUEST_FIND_REFERENCE_BY_DOI,searchReferenceByDOISaga);
   yield takeLatest(REQUEST_FIND_REFERENCE_BY_PMID,searchReferenceByPMIDSaga);*/
   yield takeLatest(REQUEST_FIND_OA,findOASaga);
+  yield takeEvery(REQUEST_FIND_UPDATE_OA,findUpdateOASaga);
 }

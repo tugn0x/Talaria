@@ -12,7 +12,7 @@ const PreForm = ({goToForm, messages,searchCallBack}) => {
     return (
         <>
             <SectionTitle 
-                title={messages.header}
+                title={messages.headerImport}
             />
             <Card className="pb-5">
                 <p className="big text-center pt-4">{intl.formatMessage(messages.bodySearch)}</p>

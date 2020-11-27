@@ -326,8 +326,11 @@ export const getRequestsList = (options) => {
   if(pageSize) qstringpar+="&pageSize="+pageSize;
   if(params && params.labelIds && params.labelIds.length>0) qstringpar+="&labelIds="+params.labelIds.join(',')+"";
   if(params && params.groupIds && params.groupIds.length>0) qstringpar+="&groupIds="+params.groupIds.join(',')+"";
-  if(params && params.archived) qstringpar+="&archived="+params.archived;
-  else qstringpar+="&archived=0";
+  if(params && !params.archived)
+    qstringpar+="&archived=0";
+  else if(params && params.archived>=0) 
+    qstringpar+="&archived="+params.archived;
+  //else qstringpar+="&archived=0";
 
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/patronrequests/my?page=${page}${qstringpar}`, options)

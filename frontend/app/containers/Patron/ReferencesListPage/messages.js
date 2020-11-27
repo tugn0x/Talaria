@@ -60,4 +60,12 @@ export default defineMessages({
     id: 'app.global.addedMessage',
     defaultMessage: 'Successfully added',
   },
+  OAfoundAndUpdateMessage: {
+    id: `${scope}.OAfoundAndUpdateMessage`,
+    defaultMessage: 'Versione OA trovata. Riferimento aggiornato.',
+  },
+  OAnotfoundAndUpdateMessage: {
+    id: `${scope}.OAnotfoundAndUpdateMessage`,
+    defaultMessage: 'Versione OA NON trovata. Riferimento non aggiornato.',
+  }
 });

@@ -1,10 +1,11 @@
 import React from 'react';
-import {NavLink,Link } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import { generatePath } from "react-router";
 import ApplyReferencesTag from '../ApplyReferencesTag';
 
 const ReferenceIcons = (props) => {
-    const {data,deleteReference,icons, labelsOptionList, groupsOptionList , applyGroups, applyLabels, selectedReferences} = props
+    const {data,deleteReference,icons, labelsOptionList, groupsOptionList , applyGroups, applyLabels, selectedReferences,findAndUpdateOA} = props
+    
 
     const referenceUrl='/patron/references/:id?/:op?';
     
@@ -19,16 +20,7 @@ const ReferenceIcons = (props) => {
             id,
             op: "request"
         });
-    }
-
-    
-    const oaurl=(data) => {
-        /*return generatePath(`${referenceUrl}`, {
-            id,
-            op:'oa'
-        });*/
-        return data.oa_link;
-    }
+    }    
    
     const canEdit = (data) => {
         if(data.patronrequests==0) return true;
@@ -48,6 +40,13 @@ const ReferenceIcons = (props) => {
         return icons && icons.indexOf(icon)>=0;
     }
 
+    const findOA = (ev,id) => {       
+        ev.preventDefault();
+
+        if(findAndUpdateOA)
+            findAndUpdateOA(id);
+    }
+
 
     return ( 
         icons && icons.length>0 && 
@@ -57,10 +56,8 @@ const ReferenceIcons = (props) => {
                     <i className="fas fa-share"></i>                    
                  </NavLink>
                 }
-                {visibleIcon('oa') &&
-                 <a href={data.oa_link} target="_new" className={`${data.oa_link && data.oa_link!=''?'btn btn-icon':'btn btn-icon disabled'}`}><i className="icon-oa"></i></a>
-                }
-                
+                {visibleIcon('oa') && data.oa_link && <a href={data.oa_link} target="_blank" className='btn btn-icon'><i className="icon-oa"></i></a>} 
+                {visibleIcon('oa') && !data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev,data.id) }><i className="fas fa-search"></i>OA</a>}
                 {visibleIcon('print') && <a className="btn btn-icon" onClick={() => console.log("print") }>
                     <i className="fas fa-print"></i>
                 </a>}
@@ -81,26 +78,17 @@ const ReferenceIcons = (props) => {
                         options={groupsOptionList} 
                     /> 
                 }
-                {visibleIcon('edit') && data.id && 
-                <NavLink to={canEdit(data)?editurl(data.id):'#'} className={`${canEdit(data)?"btn btn-icon":"btn btn-icon disabled"}`}>
+                {visibleIcon('edit') && data.id &&                 
+                <NavLink to={canEdit(data)?editurl(data.id):'#'} className={`${canEdit(data)?'btn btn-icon':'btn btn-icon disabled'}`}>
                     <i className="fas fa-edit"></i>
                 </NavLink>}               
                 {visibleIcon('delete') && data.id && 
-                (                   
-                        (canDelete(data) && deleteReference && 
-                        <a href="#" className="btn btn-icon"  onClick={() => deleteReference(data.id) }>
+                (                                           
+                        <NavLink to='#' className={canDelete(data) && deleteReference?"btn btn-icon":"btn btn-icon disabled"} onClick={() => deleteReference(data.id) }>
                             <i className="fas fa-trash"></i>
-                        </a>)||
-                        (!canDelete(data) &&
-                        <a href="#" className="btn btn-icon disabled">
-                            <i className="fas fa-trash"></i>
-                        </a>)
+                        </NavLink>
                 )
-                }
-
-
-
-        
+                }                
         </>
     )
 }

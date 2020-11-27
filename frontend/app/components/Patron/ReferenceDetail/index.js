@@ -3,6 +3,7 @@ import {Card, Row, Col} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import ReferenceIcons from '../ReferenceIcons';
 import './style.scss';
+import FindOA from '../../FindOA';
 
 const ReferenceDetail = props => {
     console.log('ReferenceDetail', props)
@@ -14,10 +15,11 @@ const ReferenceDetail = props => {
                 <div className="list-head features-icons">
                 <ReferenceIcons 
                         data={reference}
-                        icons={icons ? icons : ['request','oa','edit','print','export','delete']}
+                        icons={icons ? icons : ['request','edit','print','export','delete']}
                         deleteReference={deleteReference}
                 />
                 </div>}
+                <FindOA reference={reference}/>
                 {reference.labels && Object.keys(reference.labels.data).length > 0 &&
                             <div className="labels-row">
                                 {reference.labels.data.map(label => <span key={label.id}>{label.name}</span>)}
@@ -29,7 +31,7 @@ const ReferenceDetail = props => {
                             </div>
                 }
                 <div className="detail-body">                
-                    <h3>{intl.formatMessage(messages.titleAuthorsHead)}</h3>
+                    <h3>{intl.formatMessage(messages.materialTypeHead)}</h3>
                     <Card>
                         <Row>
                             <Col sm={3}>
@@ -37,6 +39,9 @@ const ReferenceDetail = props => {
                                 <p>{reference.material_type_key && intl.formatMessage(messages[reference.material_type_key])}</p>
                             </Col>
                         </Row>
+                    </Card>                
+                    <h3>{intl.formatMessage(messages.titleAuthorsHead)}</h3>
+                    <Card>
                         <Row>
                             <Col sm={12}>
                                 <p className="text-brown">{reference.material_type === 1 ? intl.formatMessage(messages.pub_title) : intl.formatMessage(messages.title)}</p>
@@ -63,21 +68,22 @@ const ReferenceDetail = props => {
                             <p>{reference.part_authors}</p>
                         </Col>}
                         </Row>
-                        <Row>
+                        <Row>                            
                         {(reference.material_type === 3) && 
+                        <>
                         <Col sm={4}>
                             <p className="text-brown">{intl.formatMessage(messages.relator)}</p>
                             <p>{reference.relator}</p>
-                        </Col> &&
+                        </Col>
                         <Col sm={4}>
                             <p className="text-brown">{intl.formatMessage(messages.thesis_type)}</p>
                             <p>{reference.thesis_type}</p>
-                        </Col>&&
+                        </Col>
                         <Col sm={4}>
                         <p className="text-brown">{intl.formatMessage(messages.degree_course)}</p>
                         <p>{reference.degree_course}</p>
                         </Col>                        
-                        }    
+                        </>}    
                         </Row>
                         {(reference.material_type === 1 || reference.material_type === 2 || reference.material_type === 4) && 
                         <Row>
@@ -141,42 +147,39 @@ const ReferenceDetail = props => {
                     <Card>                
                     <Row>
                     {(reference.material_type === 2 || reference.material_type === 4 )&& 
-                        <Col sm={2}>
+                        <Col sm={3}>
                             <p className="text-brown">{intl.formatMessage(messages.isbn)}</p>
                             <p>{reference.isbn}</p>
                         </Col>
                     }
-                    {(reference.material_type === 1 || reference.material_type === 2 || reference.material_type === 4 )&& 
-                        <Col sm={2}>
+                    {(reference.material_type === 1 || reference.material_type === 2 || reference.material_type === 4 )&&                         
+                        <Col sm={3}>
                             <p className="text-brown">{intl.formatMessage(messages.issn)}</p>
                             <p>{reference.issn}</p>
                         </Col>
                     }
-                        <Col sm={2}>
-                            <p className="text-brown">{intl.formatMessage(messages.doi)}</p>
-                            <p>{reference.doi}</p>
-                        </Col>
+                    {reference.pmid && <Col sm={3}>
+                        <p className="text-brown">{intl.formatMessage(messages.pmid)}</p>
+                        <a href={"https://pubmed.ncbi.nlm.nih.gov/"+reference.pmid} target="_blank"><i className="fas fa-external-link-alt"></i> {reference.pmid}</a>
+                    </Col>}
+                    {reference.doi && <Col sm={5}>
+                        <p className="text-brown">{intl.formatMessage(messages.doi)}</p>
+                        <a href={"https://doi.org/"+reference.doi} target="_blank"><i className="fas fa-external-link-alt"></i> {reference.doi}</a>
+                    </Col>}
+                    </Row>
+                    <Row>
+                    {reference.oa_link && <Col sm={10}>
+                        <p className="text-brown">{intl.formatMessage(messages.oa_link)}</p>
+                        <a href={reference.oa_link} target="_blank"><i className="fas fa-external-link-alt"></i> {reference.oa_link}</a>
+                    </Col>}
+
+                    </Row>
+                    {reference.sid && <Row>
                         <Col sm={2}>
                             <p className="text-brown">{intl.formatMessage(messages.sid)}</p>
                             <p>{reference.sid}</p>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={2}>
-                            <p className="text-brown">{intl.formatMessage(messages.pmid)}</p>
-                            <p>{reference.pmid}</p>
-                        </Col>
-                        {reference.material_type === 1 &&
-                        <Col sm={2}>
-                        <p className="text-brown">{intl.formatMessage(messages.acnp_cod)}</p>
-                        <p>{reference.acnp_cod}</p>
-                        </Col>
-                        }
-                                                <Col sm={2}>
-                        <p className="text-brown">{intl.formatMessage(messages.sbn_docid)}</p>
-                        <p>{reference.sbn_docid}</p>
-                        </Col>
-                    </Row>
+                        </Col>                        
+                    </Row>}
                 </Card>
                 <h3>{intl.formatMessage(messages.abstract)}</h3>
                 <Card>                  

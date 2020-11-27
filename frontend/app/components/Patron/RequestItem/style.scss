@@ -2,8 +2,9 @@
 
 .list-row {
     .info {
+        >span:first-child,
         .libraryLabel >span:first-child,
-        .delivery >span:first-child,
+        .deliveryLabel>span:first-child,
         .requestDate >span:first-child,
         .fullfillDate >span:first-child
         {

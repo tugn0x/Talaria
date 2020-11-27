@@ -5,7 +5,7 @@ import { requestReferencesList,requestLabelsOptionList,
         requestGroupsOptionList,requestRemoveReferenceLabel,
         requestRemoveReferenceGroup,requestApplyLabelsToReferences,
         requestApplyGroupsToReferences,
-        requestDeleteReference} from '../actions'
+        requestDeleteReference,requestFindUpdateOA} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -20,7 +20,8 @@ const ReferencesListPage = (props) => {
     console.log('ReferencesListPage', props)
     const {dispatch, isLoading, match, patron, history} = props
     const referencesList = patron.referencesList.data
-    const pagination = patron.referencesList.pagination
+    const pagination = patron.referencesList.pagination    
+    const oaloading = patron.referencesList.oaloading
     const intl = useIntl()
     const labelsOptionList = patron.labelsOptionList
     const groupsOptionList = patron.groupsOptionList
@@ -32,6 +33,11 @@ const ReferencesListPage = (props) => {
             dispatch(requestGroupsOptionList())
         }
     }, [])
+
+    useEffect(() => {
+        console.log("oaloading UE:",oaloading)        
+    }, [oaloading])
+
 
 
     async function removeLabelFromReference (id,labelId, filter) {
@@ -84,6 +90,11 @@ const ReferencesListPage = (props) => {
              dispatch(requestDeleteReference(id,intl.formatMessage(messages.removedMessage),filter))
      }
 
+     async function findAndUpdateOA (id,title) {
+        console.log("FIND and update OA:"+id,title)
+        dispatch(requestFindUpdateOA(id,title,intl.formatMessage(messages.OAfoundAndUpdateMessage),intl.formatMessage(messages.OAnotfoundAndUpdateMessage)));
+     }
+
     return (
         <>
         
@@ -111,6 +122,8 @@ const ReferencesListPage = (props) => {
                 deleteReference={deleteReference}
                 applyLabels={applyLabelsToReferences}
                 applyGroups={applyGroupsToReferences}
+                findAndUpdateOA={findAndUpdateOA}
+                oaloading={oaloading}
                 // modalComponent={ <ReferencesPage match={match} />}
             />
           </>  

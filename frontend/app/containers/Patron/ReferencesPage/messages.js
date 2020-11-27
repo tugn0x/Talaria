@@ -8,6 +8,14 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.ReferencePage';
 
 export default defineMessages({
+  headerNew: {
+    id: `${scope}.headerNew`,
+    defaultMessage: 'New Reference',
+  },
+  headerEdit: {
+    id: `${scope}.headerEdit`,
+    defaultMessage: 'Edit Reference',
+  },  
   header: {
     id: `${scope}.header`,
     defaultMessage: 'Insert/Edit reference',
@@ -162,6 +170,10 @@ export default defineMessages({
     id: `${scope}.sid`,
     defaultMessage: 'SID',
   },
+  oa_link: {
+    id: `${scope}.oa_link`,
+    defaultMessage: 'Link OA',
+  },
   pmid: {
     id: `${scope}.pmid`,
     defaultMessage: 'PMID',
@@ -205,6 +217,10 @@ export default defineMessages({
   titleAuthorsHead: {
     id: `${scope}.titleAuthorsHead`,
     defaultMessage: 'Title and authors',
+  },
+  materialTypeHead:{
+    id: `${scope}.materialTypeHead`,
+    defaultMessage: 'Publication type',
   },
   journalLabel: {
     id: `${scope}.journalLabel`,
