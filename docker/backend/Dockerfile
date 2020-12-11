@@ -35,6 +35,9 @@ WORKDIR /application
 
 RUN useradd -rm -d /home/php -s /bin/bash -u ${UID} php
 
+# php.ini (using default development file)
+RUN cp "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+
 USER php
 
 #COPY ./ /application
