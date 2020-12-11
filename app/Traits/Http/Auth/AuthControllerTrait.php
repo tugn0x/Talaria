@@ -12,7 +12,7 @@ use App\Models\Users\User;
 //use Event;
 use Gate;
 use League\OAuth2\Server\AuthorizationServer;
-use App\Trais\Http\Auth\OauthCustomProviderTrait;
+use App\Traits\Http\Auth\OauthCustomProviderTrait;
 
 //use Authorizer;
 

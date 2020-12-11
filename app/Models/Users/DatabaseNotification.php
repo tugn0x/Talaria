@@ -2,7 +2,7 @@
 
 namespace App\Models\Users;
 
-use App\Models\Libraries\DatabaseNotificationObserver;
+use App\Models\Users\DatabaseNotificationObserver;
 use App\Traits\Model\ModelTrait;
 use Illuminate\Notifications\DatabaseNotification as BaseDatabaseNotification;
 

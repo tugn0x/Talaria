@@ -10,7 +10,7 @@ use App\Models\Users\User;
 use Carbon\Carbon;
 use Hash;
 use League\OAuth2\Server\AuthorizationServer;
-use App\Trais\Http\Auth\OauthCustomProviderTrait;
+use App\Traits\Http\Auth\OauthCustomProviderTrait;
 
 class SocialAuthController extends ApiController
 {

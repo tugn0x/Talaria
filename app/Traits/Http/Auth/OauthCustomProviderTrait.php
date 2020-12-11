@@ -5,7 +5,7 @@
  * Email: giorgio@inkode.it
  */
 
-namespace App\Trais\Http\Auth;
+namespace App\Traits\Http\Auth;
 
 
 use League\OAuth2\Server\AuthorizationServer;

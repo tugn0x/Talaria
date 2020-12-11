@@ -1,4 +1,4 @@
-<?php namespace App\Models\Libraries;
+<?php namespace App\Models\Users;
 
 use App\Models\BaseObserver;
 use \Auth;
