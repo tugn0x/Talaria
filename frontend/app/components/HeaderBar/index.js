@@ -111,7 +111,7 @@ function HeaderBar(props) {
                               <span><FormattedMessage {...messages.patron} /></span>
                           </Row>
                           <Row className="item">
-                              <NavLink to={`/patron`} activeClassName="current">
+                              <NavLink to={`/patron/references`} activeClassName="current">
                                 Patron main page 
                               </NavLink>    
                           </Row>

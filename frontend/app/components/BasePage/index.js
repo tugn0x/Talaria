@@ -59,6 +59,10 @@ function BasePage(props) {
 
   React.useEffect(() => {
     setMounted(true)
+    //se l'utente non ha abiities=>è solo un patron!
+    //e redirect nella sua patron page=>bibliografia
+    if(props.isLogged && props.auth && ( (!props.auth.permissions.resources || props.auth.permissions.resources.length==0) && (props.auth.permissions.roles && props.auth.permissions.roles.includes("patron")) ) )
+      props.history.push('/patron/references');
   },[])
 
   return (
