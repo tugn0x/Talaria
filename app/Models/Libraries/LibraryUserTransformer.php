@@ -36,29 +36,25 @@ class LibraryUserTransformer extends BaseTransformer
             $tr=new BaseLightTransformer();
             $tr->setOnly(['id','name','dd_user_cost','ill_user_cost']);
             return $this->item($model->library, $tr);
-        }
-        return null;
+        }        
     }
 
     public function includeUser(Model $model)
     {
         if($model->user)
-            return $this->item($model->user, new UserLightTransformer());
-        return null;
+            return $this->item($model->user, new UserLightTransformer());        
     }
 
     public function includeDepartment(Model $model)
     {
         if($model->department)
-            return $this->item($model->department, new DepartmentLightTransformer());
-        return null;
+            return $this->item($model->department, new DepartmentLightTransformer());        
     }
 
     public function includeTitle(Model $model)
     {
         if($model->title)
             return $this->item($model->title, new TitleLightTransformer());
-        return null;    
     }
 
     public function toArray(Model $model)

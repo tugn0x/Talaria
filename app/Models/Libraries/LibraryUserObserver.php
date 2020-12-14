@@ -3,6 +3,7 @@
 use App\Models\BaseObserver;
 use \Auth;
 
+
 class LibraryUserObserver extends BaseObserver
 {
 
@@ -23,25 +24,35 @@ class LibraryUserObserver extends BaseObserver
     }
 
     public function creating($model)
-    {
-         //ogni nuova rich va messa in attesa
-         $model->status=config("constants.libraryuser_status.pending");
-         if(auth() && auth()->user()) {
-            $user = auth()->user();
-            $library = Library::find($model->library_id);
-            if(!$user->can('manage-users', $library)) { //non sono il manager della biblio ma sono il patron che sta aggiungendo una biblio
+    {         
+        //ogni nuova rich va messa in attesa
+        $model->status=config("constants.libraryuser_status.pending");
+                  
+         //if(auth() && auth()->user()) {
+         //   $user = auth()->user();
+         /*
+         $user = Auth::user();
+
+         $library = Library::find($model->library_id);               
+         
+         //NOTA: 24/11/2020 ho aggiunto il controllo sul nr delle abilities altrimenti la $user->can si pianta! (probabile bugfix i Bouncer)
+         //if($user->getAbilities()->count()==0 || !$user->can('manage-users', $library) ) {
+         //forzo ad aggiornare solo i miei dati         
+         if(!$user->can('manage-users', $library)) { //non sono il manager della biblio ma sono il patron che sta aggiungendo una biblio          
                 if(!$model->user_id) {
-                    $model->user_id = auth()->user()->id;
+                    $model->user_id = $user->id;
                 }
-            }
-        }
-         return parent::creating($model);
+        }*/
+         
+
+        return parent::creating($model);
+         
     }
 
-    public function created($model)
+    /*public function created($model)
     {
-        /* send mail+notif to library */
-    }
+        //send mail+notif to library         
+    }*/
 
     public function saving($model)
     {

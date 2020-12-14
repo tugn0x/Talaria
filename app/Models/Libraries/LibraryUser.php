@@ -7,6 +7,7 @@ use App\Models\Libraries\Department;
 use App\Models\Libraries\Library;
 use App\Models\Users\Title;
 use App\Models\Users\User;
+use App\Models\Libraries\LibraryUserObserver;
 use App\Traits\Model\OwnerTrait;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
@@ -16,7 +17,8 @@ class LibraryUser extends BaseModel
     protected $forceDeleting=true; //overrides softdelete => force delete!  
     protected $userstamping = false;
     public static function bootSoftDeletes() {}
-    protected static $observerClass = LibraryUserObserver::class;
+    //commento l'observer perchè NON funziona e blocca l'esecuzione della api!
+    //protected static $observerClass = LibraryUserObserver::class;
 
     protected $table = 'library_user';
 
