@@ -57,11 +57,15 @@
         background-color: red;
     }
     
-    &.readyToDelivery,
-    &.waitingForCost,
+    &.readyToDelivery,    
     &.userAskCancel,
     &.costAccepted,
     &.costNotAccepted{
         background-color: #FBB133;
+    }
+
+    &.waitingForCost
+    {
+        background-color: yellow;
     }
 }

@@ -12,6 +12,8 @@ import './style.scss';
 import FindOA from '../../FindOA';
 
 //NOTA: a volte il title_part/abstract/note non è editable o lo è solo per parte della lunghezza (limite a 50 car?)
+//BUG: quando cambio tipologia dovrei ri-verificare tutti i campi che hanno required dipendente dal tipo-materiale
+//     altrimenti il pulsante submit non è in linea con le condizioni!
 
 const FormContent = (props) => {
     console.log('FormEdit Reference', props)
@@ -33,22 +35,23 @@ const FormContent = (props) => {
    
     const handleChange = (value, field_name) =>{
         setFormData({ ...formData, [field_name]: value});
+        setRequiredFields(() => requiredConditions(formData));
     } 
 
     useEffect(() => {
-       setRequiredFields(() => requiredConditions(formData));
+      // setRequiredFields(() => requiredConditions(formData));
       // console.log("change formData: reqfield=",requiredConditions(formData))
       // console.log("CHECK REQUIRED FIELD->disabled submit:",document.querySelectorAll('.form-control:invalid').length>0);
-      // setIsSubmitDisabled(document.querySelectorAll('.form-control:invalid').length>0)
+       setIsSubmitDisabled(document.querySelectorAll('.form-control:invalid').length>0)
     }, [formData])
 
-    useEffect(() => {
+    /*useEffect(() => {
         setIsSubmitDisabled(document.querySelectorAll('.form-control:invalid').length>0)
         //console.log("CHECK REQUIRED FIELD->disabled submit:",document.querySelectorAll('.form-control:invalid').length>0);
-     }, [requiredFields])
+        console.log("ReqFields:",requiredFields);
+     }, [requiredFields])*/
 
-    useEffect(() => {
-        console.log("UE-reference",reference)
+    useEffect(() => {        
         reference && Object.keys(reference.length > 0) ?  setFormData({...formData, ...reference}) : null
     },[reference])
 
@@ -149,7 +152,7 @@ const FormContent = (props) => {
                         handleChange={(e) =>  e.target.checked ? handleChange(5, 'material_type') : null}
                         
                     />
-                    <input className="form-control" type="radio" name="radio" hidden required />
+                   {/* a che serve? <input className="form-control" type="radio" name="radio" hidden required /> */}
                     <ErrorBox 
                         className="invalid-feedback" 
                         error={  intl.formatMessage({ id: 'app.global.invalid_field' })}

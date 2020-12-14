@@ -82,6 +82,14 @@ const RequestsListPage = (props) => {
              dispatch(requestChangeStatusRequest(id,'userAskCancel',intl.formatMessage(messages.canceledMessage),filter))
      } 
 
+     async function acceptCost (id,filter) {
+        dispatch(requestChangeStatusRequest(id,'costAccepted',intl.formatMessage(messages.costAcceptedMessage),filter))
+     }
+
+     async function denyCost (id,filter) {
+        dispatch(requestChangeStatusRequest(id,'costNotAccepted',intl.formatMessage(messages.costDeniedMessage),filter))
+     }
+
 
     return (
         <>
@@ -106,6 +114,8 @@ const RequestsListPage = (props) => {
                 editPath={'/patron/requests/:id?/:edit?'}
                 archiveRequest={archiveRequest}
                 askCancelRequest={askCancelRequest}
+                acceptCost={acceptCost}
+                denyCost={denyCost}
              />
           </>  
     )

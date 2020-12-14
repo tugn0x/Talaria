@@ -135,10 +135,9 @@ const ReferenceRequest = props => {
                             {libraryOptionList && 
                                 <>  
                                     <span className="text-brown">Library:</span> 
-                                    <Input type="select" name="libraryOptionList" required id="libraryOptionList" value={formData.library?formData.library.id:''/*selectedLibrary?selectedLibrary.id:''*/} onChange={ (e) => handleChangeLibrary(e)}>
-                                        <option value='' key=''>Select</option>
+                                    <Input className="libraryOptionList" type="select" name="libraryOptionList" required id="libraryOptionList" value={formData.library?formData.library.id:''/*selectedLibrary?selectedLibrary.id:''*/} onChange={ (e) => handleChangeLibrary(e)}>                                        
                                             {libraryOptionList && libraryOptionList.map ( (lib) => 
-                                                    <option value={lib.library_id} key={lib.id}>{lib.label}</option>
+                                                    <option className={lib.preferred && lib.preferred==1?'preferred':''} value={lib.library_id} key={lib.id} selected={lib.preferred && lib.preferred==1?'selected':''}>{lib.label}</option>
                                             )}
                                     </Input>
                                     <ErrorBox className="invalid-feedback" error={intl.formatMessage({id: "app.global.invalid_select"})} />

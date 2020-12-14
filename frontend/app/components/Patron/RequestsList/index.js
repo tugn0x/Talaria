@@ -13,7 +13,7 @@ import './style.scss';
 
 const RequestsList = (props) => {
     console.log('RequestsList', props)
-    const { loading, data, pagination, searchOptions, labelsOptionList, groupsOptionList,archiveRequest,askCancelRequest} = props
+    const { loading, data, pagination, searchOptions, labelsOptionList, groupsOptionList,archiveRequest,askCancelRequest,acceptCost,denyCost} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)
@@ -190,6 +190,8 @@ const RequestsList = (props) => {
                                     checked={selectedRequests.includes(req.id)}
                                     archiveRequest={() => archiveRequest(req.id,multiFilter)}
                                     askCancelRequest={() => askCancelRequest(req.id,multiFilter)}
+                                    acceptCost={() => acceptCost(req.id,multiFilter)}
+                                    denyCost={() => denyCost(req.id,multiFilter)}
                                 />
                                 
                                 

@@ -37,7 +37,7 @@
   "app.global.cancel": "Annulla",
   "app.global.resetAll": "Cancella tutto",
   "app.global.request": "Richiedi",
-  "app.global.submit": "Salva",
+  "app.global.submit": "Salva",  
   "app.global.edit": "Modifica",
   "app.global.save": "Salva",
   "app.global.library": "Biblioteca",
@@ -84,6 +84,8 @@
   "app.containers.ReferencesGroups.groupCreateNew": "Crea nuova categoria",
 
   "app.containers.RequestsListPage.header": "Richieste",
+  "app.containers.RequestsListPage.costAcceptedMessage": "Costo accettato",
+  "app.containers.RequestsListPage.costDeniedMessage": "Costo rifiutato",
 
   "app.containers.MyLibrariesPage.header": "La mia biblioteca",
   "app.containers.MyLibrariesPage.title": "Aggiungi una biblioteca",

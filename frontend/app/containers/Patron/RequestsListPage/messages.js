@@ -72,6 +72,14 @@ export default defineMessages({
     id: 'app.global.canceledMessage',
     defaultMessage: 'Successfully canceled',
   },
+  costAcceptedMessage: {
+    id: `${scope}.app.global.costAcceptedMessage`,
+    defaultMessage: 'Cost accepted',
+  },
+  costDeniedMessage: {
+    id: `${scope}.app.global.costDeniedMessage`,
+    defaultMessage: 'Cost denied',
+  },
   yes:{
     id: 'app.global.yes',
     defaultMessage: 'Yes',

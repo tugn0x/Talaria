@@ -7,11 +7,12 @@ import messages from './messages';
 import CustomCheckBox from 'components/Form/CustomCheckBox';
 import {formatDate,formatDateTime} from 'utils/dates';
 import './style.scss';
+import RequestIcons from '../RequestIcons';
 
 /* TODO : trovare il modo di richiamare la visualizzazione di ReferenceItem per la parte dei metadati*/  
 
 const RequestItem = (props) => {
-    const {data, editPath,toggleSelection,checked,archiveRequest,askCancelRequest} = props
+    const {data, editPath,toggleSelection,checked,archiveRequest,askCancelRequest,acceptCost,denyCost} = props
     const intl = useIntl();
         
     
@@ -57,16 +58,6 @@ const RequestItem = (props) => {
         return generatePath(`${editPath}`, {
             id
         });
-    }
-
-    const canArchive = (data) => {
-        if(data.status=="canceled" || data.status=="received"|| data.status=="fileReceived" || data.status=="notReceived") return true;
-        return false;
-    }
-
-    const canDelete = (data) => {
-        if(! (data.status=="canceled" || data.status=="received"|| data.status=="fileReceived" || data.status=="notReceived" || data.status=="userAskCancel"|| data.status=="waitingForCost" ) ) return true;
-        return false;
     }
 
     //*** TODO: DA SISTEMARE e AGGIUNGERE campi in modo che sia allineato con le ultime modifiche al riferimento e/o importare il componente direttamente ***
@@ -128,16 +119,12 @@ const RequestItem = (props) => {
             </Col>
             
             <Col sm={2} className="icons align-self-center">
-            {!data.archived && 
-            <>
-                {archiveRequest && canArchive(data) && <a href="#" onClick={() => archiveRequest(data.id)} className="btn btn-icon">
-                    <i className="fas fa-hdd"></i>
-                </a>}
-                {askCancelRequest && canDelete(data) && <a href="#" onClick={() => askCancelRequest(data.id)} className="btn btn-icon">
-                    <i className="fas fa-undo"></i>
-                </a> }
-            </>
-            }
+                <RequestIcons 
+                    data={data} 
+                    archiveRequest={archiveRequest}
+                    askCancelRequest={askCancelRequest}
+                    acceptCost={acceptCost}
+                    denyCost={denyCost}/>
             </Col> 
         </Row>
         

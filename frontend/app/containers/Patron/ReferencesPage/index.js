@@ -20,8 +20,6 @@ import ErrorMsg from '../../../components/ErrorMsg';
 
 
 /* TODO 
-   - mapping da DOI/PMID: manca la corrispondenza dei campi per le varie tipologie
-   di documento ricevuto 
    - find per ISBN ...
 */
 
@@ -54,7 +52,9 @@ const ReferencesPage = (props) => {
 
         authors.map( a => { 
             let str=(a.family && a.given)?a.given+" "+a.family:
-            (a.firstName && a.lastName)?a.firstName+" "+a.lastName:''
+            (a.firstName && a.lastName)?a.firstName+" "+a.lastName:
+            a.fullName?a.fullName:
+            a.name?a.name:''
 
             if(str)
             {
@@ -76,6 +76,8 @@ const ReferencesPage = (props) => {
             //default:              
             let pubtype=1
             
+            //NOTA: le api di OpenAccessButton gestiscono solo articoli!
+            //Specifica metadati: https://dev.api.cottagelabs.com/service/oab/metadata/keys
             if(metadata.crossref_type)
             {
                 let tystr=metadata.crossref_type.toString().toLowerCase();
@@ -104,7 +106,7 @@ const ReferencesPage = (props) => {
                 pubyear: metadata.year,
                 volume: metadata.volume?metadata.volume:'',
                 issue: metadata.issue?metadata.issue:'',
-                pages: metadata.page?metadata.page:'', 
+                pages: metadata.pages?metadata.pages:metadata.page?metadata.page:'', 
                 material_type: pubtype,
                 issn: metadata.issn?metadata.issn:'',
                 isbn: metadata.isbn?metadata.isbn:'',
@@ -350,6 +352,30 @@ const ReferencesPage = (props) => {
             dispatch(requestFindOA(data));
     }
 
+    async function removeLabelFromReference (id,labelId, filter) {
+        //console.log("DISPATCH removeLabelFromReference",id,labelId);
+         let conf = await confirm({
+             title: intl.formatMessage({id: 'app.global.confirm'}),
+             message: intl.formatMessage(messages.askRemoveLabelMessage),
+             confirmText: intl.formatMessage({id: 'app.global.yes'}),
+             cancelText: intl.formatMessage({id: 'app.global.no'})
+         }); //
+         if(conf)
+             dispatch(requestRemoveReferenceLabel(id,labelId,intl.formatMessage(messages.removedMessage), filter))
+     }
+ 
+     async function removeGroupFromReference (id,groupId, filter) {
+         //console.log("DISPATCH removeGroupFromReference",id,groupId);
+         let conf = await confirm({
+             title: intl.formatMessage({id: 'app.global.confirm'}),
+             message: intl.formatMessage(messages.askRemoveGroupMessage),
+             confirmText: intl.formatMessage({id: 'app.global.yes'}),
+             cancelText: intl.formatMessage({id: 'app.global.no'})
+         }); //
+          if(conf)
+              dispatch(requestRemoveReferenceGroup(id,groupId,intl.formatMessage(messages.removedMessage), filter))
+      }
+
     
     
     return (
@@ -377,8 +403,8 @@ const ReferencesPage = (props) => {
                         applyLabels={applyLabelsToReferences}
                         applyGroups={applyGroupsToReferences}
                         deleteReference={(id) => deleteReference(id)}
-                        removeLabel={(id, labelId) => dispatch(requestRemoveReferenceLabel(id,labelId, 'removeLabel' ))}
-                        removeGroup={(id, groupId) => dispatch(requestRemoveReferenceGroup(id,groupId,'removeGroup'))}
+                        removeLabel={(id,labelId)=> removeLabelFromReference(id,labelId)}
+                        removeGroup={(id,groupId)=> removeGroupFromReference(id,groupId)}
                         updateReference={ (formData) => dispatch(requestUpdateReferences(formData, params.id, intl.formatMessage(messages.referenceUpdate))) } 
                         /*findOA={ (formData) => findOA({title: formData.pub_title, doi:formData.doi,pmid:formData.pmid}) }
                         OALink={OALink}*/

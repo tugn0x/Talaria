@@ -242,4 +242,16 @@ export default defineMessages({
     id: `${scope}.identificationHead`,
     defaultMessage: 'Identification',
   },
+  askRemoveLabelMessage:{
+    id: `${scope}.removeLabelMessage`,
+    defaultMessage: 'Remove this label from this reference?',
+  },
+  askRemoveGroupMessage:{
+    id: `${scope}.removeGroupMessage`,
+    defaultMessage: 'Remove this category from this reference?',
+  },
+  removedMessage:{
+    id: 'app.global.removedMessage',
+    defaultMessage: 'Successfully removed',
+  },
 });
