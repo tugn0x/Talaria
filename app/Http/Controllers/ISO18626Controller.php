@@ -82,9 +82,9 @@ class ISO18626Controller extends Controller
                         'volume'=>isset($bibinfo["volume"])?$bibinfo["volume"]:'',
                         'issue'=>isset($bibinfo["issue"])?$bibinfo["issue"]:'',
                         'pubyear'=> $pubyear, 
-                        'page_start'=>$pagestart,
+                        'pages'=>$pagestart,
                         'page_end'=>$pageend,
-                        'first_author'=>$author,
+                        'authors'=>$author,
                         ]);
 
                     $ref->save();
