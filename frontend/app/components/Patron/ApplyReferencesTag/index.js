@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {UncontrolledDropdown, Button, DropdownToggle, DropdownMenu, DropdownItem, InputGroup, InputGroupAddon, Input} from 'reactstrap'
-import messages from 'containers/Patron/ReferencesListPage/messages'
 import {useIntl} from 'react-intl';
 import CustomCheckBox from 'components/Form/CustomCheckBox';
 import './style.scss';
@@ -36,8 +35,8 @@ const ApplyReferencesTag = props => {
             <DropdownMenu center="true" className="rounded">
                 <DropdownItem header>
                     {type === 'label' ? 
-                        <p>{intl.formatMessage(messages.labelAs)}</p>
-                    :  <p>{intl.formatMessage(messages.groupAs)}</p>}
+                        <p>{intl.formatMessage({id: 'app.references.labelAs'})}</p>
+                    :  <p>{intl.formatMessage({id: 'app.references.groupAs'})}</p>}
                     <input type="text" name="apply-search" onChange={(e) => setQuery(e.target.value)} value={query} />
                     <i className="fas fa-search" />    
                 </DropdownItem>
@@ -52,7 +51,7 @@ const ApplyReferencesTag = props => {
                 {query.length > 0 &&
                 <div className="create-new">
                     <span>"{query}"</span>
-                    <span className="action-btn" onClick={() => submitCallBack(query)}>{intl.formatMessage(messages.createNewLabel)}</span>
+                    <span className="action-btn" onClick={() => submitCallBack(query)}>{intl.formatMessage({id: 'app.references.createNewLabelGroup'})}</span>
                 </div>
                 }
             </DropdownMenu>

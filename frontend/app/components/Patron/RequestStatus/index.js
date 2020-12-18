@@ -1,7 +1,6 @@
 import React from 'react';
 import {Button} from 'reactstrap';
 import {useIntl} from 'react-intl';
-import messages from '../RequestItem/messages';
 
 const RequestStatus = props => {
     console.log('RequestStatus', props)
@@ -53,8 +52,8 @@ const RequestStatus = props => {
     
         return (
             <div>
-                <span className={statusIcon(patronrequest.status)}></span> {intl.formatMessage(messages[patronrequest.status])}<br/>  
-                <span className="archived"><i className="fas fa-hdd"></i> Archiviata: {patronrequest.archived?'SI':'NO'}</span>
+                <span className={statusIcon(patronrequest.status)}></span> {intl.formatMessage({id: "app.requests."+patronrequest.status})}<br/>  
+                <span className="archived"><i className="fas fa-hdd"></i> {intl.formatMessage({id: "app.requests.archived"}) + " "+ patronrequest.archived?intl.formatMessage({id: "app.global.yes"}):intl.formatMessage({id: "app.global.no"}) }</span>
                 {opBlock}
             </div>
         )

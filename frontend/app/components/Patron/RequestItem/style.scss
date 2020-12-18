@@ -6,7 +6,8 @@
         .libraryLabel >span:first-child,
         .deliveryLabel>span:first-child,
         .requestDate >span:first-child,
-        .fullfillDate >span:first-child
+        .deliveryReadyDate >span:first-child,
+        .fullfillDate >span:first-child       
         {
             color: #B48372;
             padding-right: 5px;
@@ -15,6 +16,15 @@
     }
 }
 
+.deliveryLabel {
+    
+}
+
+.requestDate,
+.deliveryReadyDate
+{
+    margin-left:5px;
+}
 
 .libraryLabel {
     .fa-info-circle {
@@ -28,9 +38,6 @@
     vertical-align: top;
 }
 
-.requestDate {
-    display: block;
-}
 
 .status-icon{
     height: 20px;
@@ -45,10 +52,16 @@
         background-color: transparent;    
     }
 
+    &.readyToDelivery,   
     &.received,
     &.fileReceived
     {
         background-color: green;
+    }
+
+    &.readyToDelivery
+    {
+        background-color: lightgreen; 
     }
 
     
@@ -56,8 +69,7 @@
     &.canceled {
         background-color: red;
     }
-    
-    &.readyToDelivery,    
+         
     &.userAskCancel,
     &.costAccepted,
     &.costNotAccepted{
@@ -67,5 +79,32 @@
     &.waitingForCost
     {
         background-color: yellow;
+    }    
+}
+
+
+
+
+.deliveryBox > span
+{
+    display:block;
+}
+
+.deliveryBox
+{    
+    margin: 5px 0 0 0;
+    /*background-color: seashell;
+    padding: 5px;*/
+
+    & .fromlibrary_note,
+    .forlibrary_note {
+        font-style: italic;
     }
+
+    & .fromlibrary_note >i,
+    .forlibrary_note >i
+    {
+        color: #B48372;
+        padding-right: 5px;        
+    } 
 }

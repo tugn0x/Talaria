@@ -13,7 +13,6 @@ import { compose } from 'redux';
 /* import {SimpleList} from 'components' */
 import ReferencesList from 'components/Patron/ReferencesList';
 
-import messages from './messages'
 import confirm from "reactstrap-confirm";
 
 const ReferencesListPage = (props) => {
@@ -44,42 +43,41 @@ const ReferencesListPage = (props) => {
        //console.log("DISPATCH removeLabelFromReference",id,labelId);
         let conf = await confirm({
             title: intl.formatMessage({id: 'app.global.confirm'}),
-            message: intl.formatMessage(messages.askRemoveLabelMessage),
+            message: intl.formatMessage({id: 'app.references.askRemoveLabelMessage'}),
             confirmText: intl.formatMessage({id: 'app.global.yes'}),
             cancelText: intl.formatMessage({id: 'app.global.no'})
         }); //
         if(conf)
-            dispatch(requestRemoveReferenceLabel(id,labelId,intl.formatMessage(messages.removedMessage), filter))
+            dispatch(requestRemoveReferenceLabel(id,labelId,intl.formatMessage({id: "app.global.removedMessage"}), filter))
     }
 
     async function removeGroupFromReference (id,groupId, filter) {
         //console.log("DISPATCH removeGroupFromReference",id,groupId);
         let conf = await confirm({
             title: intl.formatMessage({id: 'app.global.confirm'}),
-            message: intl.formatMessage(messages.askRemoveGroupMessage),
+            message: intl.formatMessage({id: "app.references.askRemoveGroupMessage"}),
             confirmText: intl.formatMessage({id: 'app.global.yes'}),
             cancelText: intl.formatMessage({id: 'app.global.no'})
         }); //
          if(conf)
-             dispatch(requestRemoveReferenceGroup(id,groupId,intl.formatMessage(messages.removedMessage), filter))
+             dispatch(requestRemoveReferenceGroup(id,groupId,intl.formatMessage({id: "app.global.removedMessage"}), filter))
      }
 
      const applyLabelsToReferences = (labelIds,refIds) => {
         //Dati di test per provare la API
         /*  let TESTlabelIds= [7,5,'ciaoooo'];
          let TESTrefIds=[48,46,44]; */
-        dispatch(requestApplyLabelsToReferences(refIds,[labelIds],intl.formatMessage(messages.addedMessage)))
+        dispatch(requestApplyLabelsToReferences(refIds,[labelIds],intl.formatMessage({id: "app.global.addedMessage"})))
      }
 
      const applyGroupsToReferences = (groupIds,refIds) => {
         //Dati di test per provare la API
         /*  let TESTgroupIds= [14,15,'testgroup'];
          let TESTrefIds=[48,46,44]; */
-        dispatch(requestApplyGroupsToReferences(refIds,[groupIds],intl.formatMessage(messages.addedMessage)))
+        dispatch(requestApplyGroupsToReferences(refIds,[groupIds],intl.formatMessage({id: "app.global.addedMessage"})))
     }
 
     async function deleteReference (id,filter) {
-        console.log("DISPATCH deleteReference",id);
          let conf = await confirm({
             title: intl.formatMessage({id: 'app.global.confirm'}),
             message: intl.formatMessage({id: 'app.global.deleteMessage'}),
@@ -87,12 +85,11 @@ const ReferencesListPage = (props) => {
             cancelText: intl.formatMessage({id: 'app.global.no'})
          }); //
          if(conf)
-             dispatch(requestDeleteReference(id,intl.formatMessage(messages.removedMessage),filter))
+             dispatch(requestDeleteReference(id,intl.formatMessage({id: "app.global.removedMessage"}),filter))
      }
 
      async function findAndUpdateOA (id,title) {
-        console.log("FIND and update OA:"+id,title)
-        dispatch(requestFindUpdateOA(id,title,intl.formatMessage(messages.OAfoundAndUpdateMessage),intl.formatMessage(messages.OAnotfoundAndUpdateMessage)));
+        dispatch(requestFindUpdateOA(id,title,intl.formatMessage({id: "app.containers.ReferencesListPage.OAfoundAndUpdateMessage"}),intl.formatMessage({id: "app.containers.ReferencesListPage.OAnotfoundAndUpdateMessage"})));
      }
 
     return (
@@ -103,12 +100,10 @@ const ReferencesListPage = (props) => {
                // columns={columns}
                 loading={isLoading}
                 pagination={pagination}
-                history={history}
-                messages={messages}
+                history={history}                
                 labelsOptionList={labelsOptionList}
                 groupsOptionList={groupsOptionList}
-                match={match}
-                title={intl.formatMessage(messages.header)}
+                match={match}                
                 searchOptions={{
                     getSearchList: (page, pageSize, searchFilter ) => {
                         history.push(match.path)

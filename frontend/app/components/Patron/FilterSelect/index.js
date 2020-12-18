@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, InputGroup, InputGroupAddon, Input} from 'reactstrap'
-import messages from 'containers/Patron/ReferencesListPage/messages'
 import {useIntl} from 'react-intl';
 import CustomCheckBox from 'components/Form/CustomCheckBox';
 import './style.scss';
@@ -34,7 +33,7 @@ const FilterSelect = props => {
         <>
         <UncontrolledDropdown className={`filter-select ${type}`} direction="down">
             <DropdownToggle className="d-flex justify-content-between align-items-center">
-                <span>{intl.formatMessage(messages[type])}</span>
+                <span>{intl.formatMessage({id: 'app.references.'+type})}</span>
                 <i className="fas fa-sort"></i>
             </DropdownToggle>
             <DropdownMenu center="true">

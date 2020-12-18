@@ -9,8 +9,8 @@ export const scope = 'app.containers.ReferencesGroups';
 
 export default defineMessages({
   groups: {
-    id: `app.containers.ReferencesListPage.groups`,
-    defaultMessage: 'Labels',
+    id: `app.references.groups`,
+    defaultMessage: 'Groups',
   },
   groupCreateNew: {
     id: `${scope}.groupCreateNew`,

@@ -6,7 +6,6 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import RequestsList from 'components/Patron/RequestsList';
-import messages from './messages'
 import confirm from "reactstrap-confirm";
 
 const RequestsListPage = (props) => {
@@ -28,66 +27,37 @@ const RequestsListPage = (props) => {
     }, [])
 
 
-   /* async function removeLabelFromReference (id,labelId, filter) {
-        let conf = await confirm({
-            title: intl.formatMessage(messages.confirm),
-            message: intl.formatMessage(messages.askRemoveLabelMessage),
-            confirmText: intl.formatMessage(messages.yes),
-            cancelText: intl.formatMessage(messages.no)
-        }); 
-        if(conf)
-            dispatch(requestRemoveReferenceLabel(id,labelId,intl.formatMessage(messages.removedMessage), filter))
-    }
-
-    async function removeGroupFromReference (id,groupId, filter) {
-        let conf = await confirm({
-            title: intl.formatMessage(messages.confirm),
-            message: intl.formatMessage(messages.askRemoveGroupMessage),
-            confirmText: intl.formatMessage(messages.yes),
-            cancelText: intl.formatMessage(messages.no)
-        }); 
-         if(conf)
-             dispatch(requestRemoveReferenceGroup(id,groupId,intl.formatMessage(messages.removedMessage), filter))
-     }
-
-     const applyLabelsToReferences = (labelIds,refIds) => {
-        dispatch(requestApplyLabelsToReferences(refIds,[labelIds],intl.formatMessage(messages.addedMessage)))
-     }
-
-     const applyGroupsToReferences = (groupIds,refIds) => {
-        dispatch(requestApplyGroupsToReferences(refIds,[groupIds],intl.formatMessage(messages.addedMessage)))
-    }*/
-
+    
     async function archiveRequest (id,filter) {
         console.log("DISPATCH archiveRequest",id);
          let conf = await confirm({
-             title: intl.formatMessage(messages.confirm),
-             message: intl.formatMessage(messages.askArchiveRequestMessage),
-             confirmText: intl.formatMessage(messages.yes),
-             cancelText: intl.formatMessage(messages.no)
+            title: intl.formatMessage({id: 'app.global.confirm'}),
+             message: intl.formatMessage({id: "app.containers.RequestsListPage.askArchiveRequestMessage"}),
+             confirmText: intl.formatMessage({id: 'app.global.yes'}),
+             cancelText: intl.formatMessage({id: 'app.global.no'})
          }); //
          if(conf)
-             dispatch(requestArchiveRequest(id,intl.formatMessage(messages.archivedMessage),filter))
+             dispatch(requestArchiveRequest(id,intl.formatMessage({id: "app.containers.RequestsListPage.archivedMessage"}),filter))
      }
 
      async function askCancelRequest (id,filter) {
         console.log("DISPATCH askCancelRequest",id);
          let conf = await confirm({
-             title: intl.formatMessage(messages.confirm),
-             message: intl.formatMessage(messages.askCancelRequestMessage),
-             confirmText: intl.formatMessage(messages.yes),
-             cancelText: intl.formatMessage(messages.no)
+            title: intl.formatMessage({id: 'app.global.confirm'}),
+             message: intl.formatMessage({id: "app.containers.RequestsListPage.askCancelRequestMessage"}),
+             confirmText: intl.formatMessage({id: 'app.global.yes'}),
+             cancelText: intl.formatMessage({id: 'app.global.no'})
          }); //
          if(conf)
-             dispatch(requestChangeStatusRequest(id,'userAskCancel',intl.formatMessage(messages.canceledMessage),filter))
+             dispatch(requestChangeStatusRequest(id,'userAskCancel',intl.formatMessage({id: "app.containers.RequestsListPage.cancelAskedMessage"}),filter))
      } 
 
      async function acceptCost (id,filter) {
-        dispatch(requestChangeStatusRequest(id,'costAccepted',intl.formatMessage(messages.costAcceptedMessage),filter))
+        dispatch(requestChangeStatusRequest(id,'costAccepted',intl.formatMessage({id: "app.containers.RequestsListPage.costAcceptedMessage"}),filter))
      }
 
      async function denyCost (id,filter) {
-        dispatch(requestChangeStatusRequest(id,'costNotAccepted',intl.formatMessage(messages.costDeniedMessage),filter))
+        dispatch(requestChangeStatusRequest(id,'costNotAccepted',intl.formatMessage({id: "app.containers.RequestsListPage.costDeniedMessage"}),filter))
      }
 
 
@@ -99,11 +69,9 @@ const RequestsListPage = (props) => {
                 loading={isLoading}
                 pagination={pagination}
                 history={history}
-                messages={messages}
                 labelsOptionList={labelsOptionList}
                 groupsOptionList={groupsOptionList}
-                match={match}
-                title={intl.formatMessage(messages.header)}
+                match={match}                
                 searchOptions={{
                     getSearchList: (page, pageSize, searchFilter ) => {
                         history.push(match.path)

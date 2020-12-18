@@ -9,7 +9,7 @@ export const scope = 'app.containers.ReferencesLabels';
 
 export default defineMessages({
   labels: {
-    id: `app.containers.ReferencesListPage.labels`,
+    id: `app.references.labels`,
     defaultMessage: 'Labels',
   },
   labelCreateNew: {

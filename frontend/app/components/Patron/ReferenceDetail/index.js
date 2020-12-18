@@ -7,7 +7,7 @@ import FindOA from '../../FindOA';
 
 const ReferenceDetail = props => {
     console.log('ReferenceDetail', props)
-    const {reference, messages, icons,deleteReference} = props
+    const {reference, icons,deleteReference} = props
     const intl = useIntl()
 
     return (
@@ -31,40 +31,40 @@ const ReferenceDetail = props => {
                             </div>
                 }
                 <div className="detail-body">                
-                    <h3>{intl.formatMessage(messages.materialTypeHead)}</h3>
+                    <h3>{intl.formatMessage({id: "app.references.materialTypeHead"})}</h3>
                     <Card>
                         <Row>
                             <Col sm={3}>
-                                <p className="text-brown">{intl.formatMessage(messages.material_type)}</p>
-                                <p>{reference.material_type_key && intl.formatMessage(messages[reference.material_type_key])}</p>
+                                <p className="text-brown">{intl.formatMessage({id: "app.references.material_type"})}</p>
+                                <p>{reference.material_type_key && intl.formatMessage({id: "app.references."+reference.material_type_key})}</p>
                             </Col>
                         </Row>
                     </Card>                
-                    <h3>{intl.formatMessage(messages.titleAuthorsHead)}</h3>
+                    <h3>{intl.formatMessage({id: "app.references.titleAuthorsHead"})}</h3>
                     <Card>
                         <Row>
                             <Col sm={12}>
-                                <p className="text-brown">{reference.material_type === 1 ? intl.formatMessage(messages.pub_title) : intl.formatMessage(messages.title)}</p>
+                                <p className="text-brown">{reference.material_type === 1 ? intl.formatMessage({id: "app.references.pub_title"}) : intl.formatMessage({id: "app.references.title"})}</p>
                                 <p>{reference.pub_title}</p>
                             </Col>
                         </Row>
                         {(reference.material_type === 1 || reference.material_type === 2 || reference.material_type === 3 || reference.material_type === 5) && 
                         <Row>
                         <Col sm={12}>
-                                <p className="text-brown">{reference.material_type === 1 ? intl.formatMessage(messages.part_title) : reference.material_type === 2 ? intl.formatMessage(messages.section): intl.formatMessage(messages.chapter)}</p>
+                                <p className="text-brown">{reference.material_type === 1 ? intl.formatMessage({id: "app.references.part_title"}) : reference.material_type === 2 ? intl.formatMessage({id: "app.references.section"}): intl.formatMessage({id: "app.references.chapter"})}</p>
                                 <p>{reference.part_title}</p>
                         </Col>
                         </Row>}
                         <Row>
                         {(reference.material_type !== 1 ) && 
                         <Col sm={3}>
-                                <p className="text-brown">{intl.formatMessage(messages.authors)}</p>
+                                <p className="text-brown">{intl.formatMessage({id: "app.references.authors"})}</p>
                                 <p>{reference.authors}</p>
                         </Col>
                         }
                         {(reference.material_type === 1 || reference.material_type === 2) && 
                         <Col sm={4}>
-                            <p className="text-brown">{reference.material_type === 1? intl.formatMessage(messages.authors):intl.formatMessage(messages.part_authors)}</p>
+                            <p className="text-brown">{reference.material_type === 1? intl.formatMessage({id: "app.references.authors"}):intl.formatMessage({id: "app.references.part_authors"})}</p>
                             <p>{reference.part_authors}</p>
                         </Col>}
                         </Row>
@@ -72,15 +72,15 @@ const ReferenceDetail = props => {
                         {(reference.material_type === 3) && 
                         <>
                         <Col sm={4}>
-                            <p className="text-brown">{intl.formatMessage(messages.relator)}</p>
+                            <p className="text-brown">{intl.formatMessage({id: "app.references.relator"})}</p>
                             <p>{reference.relator}</p>
                         </Col>
                         <Col sm={4}>
-                            <p className="text-brown">{intl.formatMessage(messages.thesis_type)}</p>
+                            <p className="text-brown">{intl.formatMessage({id: "app.references.thesis_type"})}</p>
                             <p>{reference.thesis_type}</p>
                         </Col>
                         <Col sm={4}>
-                        <p className="text-brown">{intl.formatMessage(messages.degree_course)}</p>
+                        <p className="text-brown">{intl.formatMessage({id: "app.references.degree_course"})}</p>
                         <p>{reference.degree_course}</p>
                         </Col>                        
                         </>}    
@@ -88,7 +88,7 @@ const ReferenceDetail = props => {
                         {(reference.material_type === 1 || reference.material_type === 2 || reference.material_type === 4) && 
                         <Row>
                         <Col sm={12}>
-                                <p className="text-brown">{reference.material_type === 4? intl.formatMessage(messages.collection):intl.formatMessage(messages.series_title)}</p>
+                                <p className="text-brown">{reference.material_type === 4? intl.formatMessage({id: "app.references.collection"}):intl.formatMessage({id: "app.references.series_title"})}</p>
                                 <p>{reference.series_title}</p>
                         </Col>
                         </Row>
@@ -96,34 +96,34 @@ const ReferenceDetail = props => {
                         {(reference.material_type === 4) && 
                         <Row>
                         <Col sm={12}>
-                                <p className="text-brown">{intl.formatMessage(messages.geographic_area)}</p>
+                                <p className="text-brown">{intl.formatMessage({id: "app.references.geographic_area"})}</p>
                                 <p>{reference.geographic_area}</p>
                         </Col>
                         </Row>
                         }
                     </Card>
-                    <h3>{intl.formatMessage(messages.dateInstitutionPlaceHead)}</h3>
+                    <h3>{intl.formatMessage({id: "app.references.institutionPlaceHead"})}</h3>
                     <Card>
                         <Row>
                         <Col sm={2}>
-                                <p className="text-brown">{intl.formatMessage(messages.pubyear)}</p>
+                                <p className="text-brown">{intl.formatMessage({id: "app.references.pubyear"})}</p>
                                 <p>{reference.pubyear}</p>
                         </Col>                    
                         {(reference.material_type === 1 || reference.material_type === 2) && 
                             <Col sm={2}>
-                                <p className="text-brown">{intl.formatMessage(messages.volume)}</p>
+                                <p className="text-brown">{intl.formatMessage({id: "app.references.volume"})}</p>
                                 <p>{reference.volume}</p>
                             </Col>
                         }
                         {(reference.material_type === 1) && 
                             <Col sm={2}>
-                                <p className="text-brown">{intl.formatMessage(messages.issue)}</p>
+                                <p className="text-brown">{intl.formatMessage({id: "app.references.issue"})}</p>
                                 <p>{reference.issue}</p>
                             </Col>
                         }
                         {(reference.material_type !== 4 ) && 
                             <Col sm={2}>
-                                <p className="text-brown">{intl.formatMessage(messages.pages)}</p>
+                                <p className="text-brown">{intl.formatMessage({id: "app.references.pages"})}</p>
                                 <p>{reference.pages}</p>
                             </Col>
                         }
@@ -131,70 +131,70 @@ const ReferenceDetail = props => {
                         <Row>
                             {reference.material_type != 5 && 
                             <Col sm={4}>
-                                <p className="text-brown">{reference.material_type === 3?intl.formatMessage(messages.university):intl.formatMessage(messages.publisher)}</p>
+                                <p className="text-brown">{reference.material_type === 3?intl.formatMessage({id: "app.references.university"}):intl.formatMessage({id: "app.references.publisher"})}</p>
                                 <p>{reference.publisher}</p>
                             </Col>
                             }
                             {reference.material_type != 1 &&
                             <Col sm={4}>
-                                <p className="text-brown">{intl.formatMessage(messages.publishing_place)}</p>
+                                <p className="text-brown">{intl.formatMessage({id: "app.references.publishing_place"})}</p>
                                 <p>{reference.publishing_place}</p>
                             </Col>
                             }
                         </Row>                    
                     </Card>
-                    <h3>{intl.formatMessage(messages.identificationHead)}</h3>
+                    <h3>{intl.formatMessage({id: "app.references.identificationHead"})}</h3>
                     <Card>                
                     <Row>
                     {(reference.material_type === 2 || reference.material_type === 4 )&& 
                         <Col sm={3}>
-                            <p className="text-brown">{intl.formatMessage(messages.isbn)}</p>
+                            <p className="text-brown">{intl.formatMessage({id: "app.references.isbn"})}</p>
                             <p>{reference.isbn}</p>
                         </Col>
                     }
                     {(reference.material_type === 1 || reference.material_type === 2 || reference.material_type === 4 )&&                         
                         <Col sm={3}>
-                            <p className="text-brown">{intl.formatMessage(messages.issn)}</p>
+                            <p className="text-brown">{intl.formatMessage({id: "app.references.issn"})}</p>
                             <p>{reference.issn}</p>
                         </Col>
                     }
                     {reference.pmid && <Col sm={3}>
-                        <p className="text-brown">{intl.formatMessage(messages.pmid)}</p>
+                        <p className="text-brown">{intl.formatMessage({id: "app.references.pmid"})}</p>
                         <a href={"https://pubmed.ncbi.nlm.nih.gov/"+reference.pmid} target="_blank"><i className="fas fa-external-link-alt"></i> {reference.pmid}</a>
                     </Col>}
                     {reference.doi && <Col sm={5}>
-                        <p className="text-brown">{intl.formatMessage(messages.doi)}</p>
+                        <p className="text-brown">{intl.formatMessage({id: "app.references.doi"})}</p>
                         <a href={"https://doi.org/"+reference.doi} target="_blank"><i className="fas fa-external-link-alt"></i> {reference.doi}</a>
                     </Col>}
                     </Row>
                     <Row>
                     {reference.oa_link && <Col sm={10}>
-                        <p className="text-brown">{intl.formatMessage(messages.oa_link)}</p>
+                        <p className="text-brown">{intl.formatMessage({id: "app.references.oa_link"})}</p>
                         <a href={reference.oa_link} target="_blank"><i className="fas fa-external-link-alt"></i> {reference.oa_link}</a>
                     </Col>}
 
                     </Row>
                     {reference.sid && <Row>
                         <Col sm={2}>
-                            <p className="text-brown">{intl.formatMessage(messages.sid)}</p>
+                            <p className="text-brown">{intl.formatMessage({id: "app.references.sid"})}</p>
                             <p>{reference.sid}</p>
                         </Col>                        
                     </Row>}
                 </Card>
-                <h3>{intl.formatMessage(messages.abstract)}</h3>
+                <h3>{intl.formatMessage({id: "app.references.abstract"})}</h3>
                 <Card>                  
                     <Row>
                     <Col sm={12}>
-                        <p className="text-brown">{intl.formatMessage(messages.abstract)}</p>
+                        <p className="text-brown">{intl.formatMessage({id: "app.references.abstract"})}</p>
                         <p>{reference.abstract}</p>
                     </Col>
                     </Row>
                 </Card>
-                <h3>{reference.material_type === 3?intl.formatMessage(messages.indications):reference.material_type === 4?intl.formatMessage(messages.mathnote):intl.formatMessage(messages.note)}</h3>
+                <h3>{reference.material_type === 3?intl.formatMessage({id: "app.references.indications"}):reference.material_type === 4?intl.formatMessage({id: "app.references.mathnote"}):intl.formatMessage({id: "app.references.note"})}</h3>
                 <Card>                   
                     <Row>                    
                     <Col sm={12}>
-                        <p className="text-brown">{intl.formatMessage(messages.note)}</p>
+                        <p className="text-brown">{intl.formatMessage({id: "app.references.note"})}</p>
                         <p>{reference.note}</p>
                     </Col>                    
                     </Row>

@@ -6,24 +6,19 @@ import ReferenceDetail from '../ReferenceDetail';
 import ButtonBack from 'components/Button/ButtonBack';
 import './style.scss';
 import '../RequestItem/style.scss';
-import refmessages from '../../../containers/Patron/ReferencesPage/messages';
 import RequestStatus from '../RequestStatus';
 import SectionTitle from 'components/SectionTitle';
 
+/* TODO: una volta definito l'aspetto finale metto a posto le traduzioni */
+
 const RequestDetail = props => {
     console.log('RequestDetail', props)
-    const {patronrequest, messages,acceptCost,denyCost} = props
+    const {patronrequest,acceptCost,denyCost} = props
 
     const intl = useIntl()
     return (
-        <div className="detail request">
-            {
-                Object.keys(patronrequest).length>0 && 
+            Object.keys(patronrequest).length>0 && 
             <>
-            <div className="header">
-                <ButtonBack className="detail-back" />
-                <h3 className="title-section">{intl.formatMessage(messages.headerDetail)}</h3>
-            </div>
             <div className="features-icons">
                 <NavLink to='#' className="btn btn-link">
                     <i className="fas fa-print"></i>
@@ -62,8 +57,7 @@ const RequestDetail = props => {
                     </Row>
                 </CardBody>
             </Card>
-            <ReferenceDetail 
-                messages={refmessages}
+            <ReferenceDetail                 
                 reference={patronrequest.reference.data} 
                 icons={[]}
             />
@@ -108,8 +102,7 @@ const RequestDetail = props => {
                     </Row>
                 </CardBody>
             </Card>}
-            </>}
-        </div>
+            </>        
     );
 };
 

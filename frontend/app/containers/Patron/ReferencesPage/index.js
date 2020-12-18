@@ -274,8 +274,7 @@ const ReferencesPage = (props) => {
 
     async function deleteReference (id) {
         let conf = await confirm({
-             title: intl.formatMessage({id: 'app.global.confirm'}),
-             // message: intl.formatMessage(messages.askRemoveLabelMessage),
+             title: intl.formatMessage({id: 'app.global.confirm'}),             
              message: intl.formatMessage({id: 'app.global.deleteMessage'}),
              confirmText: intl.formatMessage({id: 'app.global.yes'}),
              cancelText: intl.formatMessage({id: 'app.global.no'})
@@ -346,34 +345,33 @@ const ReferencesPage = (props) => {
 
     }
 
-    const findOA = (data) => {
-        console.log("chiamo openaccessbutton");
+    /*const findOA = (data) => {        
         if(data && Object.keys(data).length>0 && (data.title!=""||data.doi!=""))
             dispatch(requestFindOA(data));
-    }
+    }*/
 
     async function removeLabelFromReference (id,labelId, filter) {
         //console.log("DISPATCH removeLabelFromReference",id,labelId);
          let conf = await confirm({
              title: intl.formatMessage({id: 'app.global.confirm'}),
-             message: intl.formatMessage(messages.askRemoveLabelMessage),
+             message: intl.formatMessage({id: "app.references.askRemoveLabelMessage"}),
              confirmText: intl.formatMessage({id: 'app.global.yes'}),
              cancelText: intl.formatMessage({id: 'app.global.no'})
          }); //
          if(conf)
-             dispatch(requestRemoveReferenceLabel(id,labelId,intl.formatMessage(messages.removedMessage), filter))
+             dispatch(requestRemoveReferenceLabel(id,labelId,intl.formatMessage({id: "app.global.removedMessage"}), filter))
      }
  
      async function removeGroupFromReference (id,groupId, filter) {
          //console.log("DISPATCH removeGroupFromReference",id,groupId);
          let conf = await confirm({
              title: intl.formatMessage({id: 'app.global.confirm'}),
-             message: intl.formatMessage(messages.askRemoveGroupMessage),
+             message: intl.formatMessage({id: "app.references.askRemoveGroupMessage"}),
              confirmText: intl.formatMessage({id: 'app.global.yes'}),
              cancelText: intl.formatMessage({id: 'app.global.no'})
          }); //
           if(conf)
-              dispatch(requestRemoveReferenceGroup(id,groupId,intl.formatMessage(messages.removedMessage), filter))
+              dispatch(requestRemoveReferenceGroup(id,groupId,intl.formatMessage({id: "app.global.removedMessage"}), filter))
       }
 
     
@@ -381,8 +379,7 @@ const ReferencesPage = (props) => {
     return (
         <Loader show={isLoading}>
             {isNew && isMounted && (
-                <ReferencesForm 
-                    messages={messages}
+                <ReferencesForm                     
                     importReference={refData}
                     createReference={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } 
                     findReference={ (query) => findReferenceBySearchParams(query)}
@@ -395,8 +392,7 @@ const ReferencesPage = (props) => {
             }
             {!isNew && isMounted && refData && ( 
                 params.op && params.op=="edit" &&
-                    (canEdit(refData/*reference*/) && <ReferencesForm 
-                        messages={messages}
+                    (canEdit(refData/*reference*/) && <ReferencesForm                         
                         reference={refData/*reference*/}
                         labelsOptionList={labelsOptionList}
                         groupsOptionList={groupsOptionList}
@@ -436,8 +432,7 @@ const ReferencesPage = (props) => {
                             back={true}
                             title={messages.headerDetail}
                         />                        
-                        <ReferenceDetail 
-                            messages={messages}
+                        <ReferenceDetail                             
                             reference={refData/*reference*/} 
                             deleteReference={(id) => deleteReference(id)}
                         />

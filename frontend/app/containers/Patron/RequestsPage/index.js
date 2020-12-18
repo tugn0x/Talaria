@@ -7,9 +7,10 @@ import makeSelectPatron, {isPatronLoading} from '../selectors';
 import {/*RequestsForm,*/Loader} from 'components';
 import RequestDetail from 'components/Patron/RequestDetail';
 //import {requestPostRequests,requestUpdateRequests} from '../actions'
+import SectionTitle from 'components/SectionTitle';
 import messages from './messages'
-import referenceMessages from '../ReferencesPage/messages'
 import {useIntl} from 'react-intl';
+
 
 
 const RequestsPage = (props) => {
@@ -26,14 +27,12 @@ const RequestsPage = (props) => {
         }
     }, [params.id])
 
-    const acceptCost = () => {
-        console.log("Accept Cost!!");
-        dispatch(requestChangeStatusRequest(params.id,'costAccepted',intl.formatMessage(messages.costAcceptedMessage),null/*filter*/))
+    const acceptCost = () => {       
+        dispatch(requestChangeStatusRequest(params.id,'costAccepted',intl.formatMessage({id: 'app.containers.RequestsListPage.costAcceptedMessage'}),null/*filter*/))
     }
 
-    const denyCost = () => {
-        console.log("Deny Cost!!");
-        dispatch(requestChangeStatusRequest(params.id,'costNotAccepted',intl.formatMessage(messages.costNotAcceptedMessage),null/*filter*/))
+    const denyCost = () => {        
+        dispatch(requestChangeStatusRequest(params.id,'costNotAccepted',intl.formatMessage({id: 'app.containers.RequestsListPage.costDeniedMessage'}),null/*filter*/))
     }
     
     return (
@@ -53,13 +52,18 @@ const RequestsPage = (props) => {
                         // loading={isLoading} 
                         updateRequest={ (formData) => dispatch(requestUpdateRequests(formData, params.id, intl.formatMessage(messages.requestUpdate))) } />
                 ||*/
-                !isNew && <RequestDetail 
-                        messages={messages}
-                        referenceMessages={referenceMessages}
-                        patronrequest={patronrequest} 
-                        acceptCost={acceptCost}
-                        denyCost={denyCost}
+                !isNew && 
+                <div className="detail">
+                        <SectionTitle 
+                            back={true}
+                            title={messages.headerDetail}
+                        />            
+                        <RequestDetail 
+                            patronrequest={patronrequest} 
+                            acceptCost={acceptCost}
+                            denyCost={denyCost}
                     />
+                </div>
                 /*)*/
             }
         </Loader>

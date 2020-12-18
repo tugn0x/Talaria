@@ -4,13 +4,16 @@ import {useIntl} from 'react-intl';
 import ReferenceDetail from '../ReferenceDetail'
 import SectionTitle from 'components/SectionTitle';
 import './style.scss';
+import messages from './messages'
 import RequestItem from '../RequestItem';
 import ErrorMsg from 'components/ErrorMsg';
 import ErrorBox from '../../Form/ErrorBox';
 
+/* TODO: una volta definito l'aspetto finale metto a posto le traduzioni */
+
 const ReferenceRequest = props => {
     console.log('ReferenceRequest', props)
-    const {reference, messages,libraryOptionList,deliveryOptionList,libraryOnChange,submitCallBack} = props
+    const {reference, libraryOptionList,deliveryOptionList,libraryOnChange,submitCallBack} = props
 
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
     const [formData, setFormData] = useState({
@@ -24,8 +27,7 @@ const ReferenceRequest = props => {
     useEffect(() => {
         handleChange(reference,'reference')
      }, [reference])
- 
-    
+          
     const intl = useIntl()
 
     const showPickupDetails = (evt) => {
@@ -99,6 +101,16 @@ const ReferenceRequest = props => {
         return
     }
 
+    useEffect(() => {
+        console.log("UEEE libraryOptionsList",libraryOptionList)
+       if(libraryOptionList)
+       {
+            let defaultLib=libraryOptionList.find(x => x.preferred == 1);
+            handleChange(defaultLib,'library');
+            libraryOnChange(defaultLib) 
+        }
+    }, [libraryOptionList])
+
 
     return (
         <div className="detail">
@@ -108,20 +120,20 @@ const ReferenceRequest = props => {
             />
             {reference.patronddrequests && reference.patronddrequests.data && reference.patronddrequests.data.length>0 &&
             <div className="previusRequests">
-                Precedenti richieste e/o in corso:<br/>
+                {intl.formatMessage(messages.prevRequests)}<br/>
                 {reference.patronddrequests.data.map ( (req) =>
                     <RequestItem 
+                        key={`request-${req.id}`}
                         data={req} 
                         editPath={'/patron/requests/:id?/:edit?'}
                     />  
                 )}
             </div>
             }
-            {!canRequest(reference) && <ErrorMsg cssclass="alert-warning" message="Il riferimento è attualmente in richiesta!"/>}
+            {!canRequest(reference) && <ErrorMsg cssclass="alert-warning" message={intl.formatMessage(messages.cannotRequestError)}/>}
             
             <div className="reference">
-                <ReferenceDetail 
-                    messages={messages}
+                <ReferenceDetail                     
                     reference={reference} 
                     icons={[]}
                 />
@@ -137,7 +149,7 @@ const ReferenceRequest = props => {
                                     <span className="text-brown">Library:</span> 
                                     <Input className="libraryOptionList" type="select" name="libraryOptionList" required id="libraryOptionList" value={formData.library?formData.library.id:''/*selectedLibrary?selectedLibrary.id:''*/} onChange={ (e) => handleChangeLibrary(e)}>                                        
                                             {libraryOptionList && libraryOptionList.map ( (lib) => 
-                                                    <option className={lib.preferred && lib.preferred==1?'preferred':''} value={lib.library_id} key={lib.id} selected={lib.preferred && lib.preferred==1?'selected':''}>{lib.label}</option>
+                                                    <option className={lib.preferred && lib.preferred==1?'preferred':''} value={lib.library_id} key={lib.id}>{lib.label}</option>
                                             )}
                                     </Input>
                                     <ErrorBox className="invalid-feedback" error={intl.formatMessage({id: "app.global.invalid_select"})} />

@@ -7,7 +7,7 @@ import ReferenceIcons from '../ReferenceIcons';
 import CustomCheckBox from 'components/Form/CustomCheckBox';
 
 const ReferenceItem = (props) => {
-    const {/*messages,*/data,toggleSelection,checked,removeLabel,removeGroup,deleteReference,findAndUpdateOA,oaloading} = props
+    const {data,toggleSelection,checked,removeLabel,removeGroup,deleteReference,findAndUpdateOA,oaloading} = props
   
     const intl = useIntl();
   
@@ -28,8 +28,7 @@ const ReferenceItem = (props) => {
             id
         });
     }
-
-    //*** TODO aggiungere traduzione etichette prendendole dal reference
+    
 
     return (
         <Row className="list-row justify-content-between">
@@ -47,17 +46,17 @@ const ReferenceItem = (props) => {
                     </p>
                 </NavLink>
                 <div className="authors">
-                   {data.material_type != 1 && data.authors && <span className="authors">Autore/i<span> {data.authors}</span></span>} 
-                   {data.material_type === 1 && data.part_authors && <span className="authors">Autore/i<span> {data.part_authors}</span></span>} 
-                   {data.pubyear && <span className="pubyear">Anno <span>{data.pubyear}</span></span>}
+                   {data.material_type != 1 && data.authors && <span className="authors">{intl.formatMessage({id: "app.references.authors"})}<span> {data.authors}</span></span>} 
+                   {(data.material_type === 1 || data.material_type === 2) && data.part_authors && <span className="authors">{intl.formatMessage({id: data.material_type === 1 ? "app.references.authors":"app.references.part_authors"})}<span> {data.part_authors}</span></span>}                  
+                   {data.pubyear && <span className="pubyear">{intl.formatMessage({id: "app.references.pubyear"})} <span>{data.pubyear}</span></span>}
                 </div>
                 {data.material_type === 3 &&
                 <div className="university">
-                    <span className="university">Ateneo<span> {data.publisher}</span></span>
+                    <span className="university">{intl.formatMessage({id: "app.references.university"})}<span> {data.publisher}</span></span>
                 </div>}
                 {data.material_type === 4 &&
                 <div className="geographic_area">
-                    <span className="geographic_area">Geographic Area<span> {data.geographic_area}</span></span>
+                    <span className="geographic_area">{intl.formatMessage({id: "app.references.geographic_area"})}<span> {data.geographic_area}</span></span>
                 </div>}
 
                 

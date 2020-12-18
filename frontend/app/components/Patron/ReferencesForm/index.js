@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import formMessages from './messages';
+import messages from './messages';
 import FormContent from './FormContent';
 import PreForm from './PreForm';
 import SectionTitle from 'components/SectionTitle';
 
 const ReferencesForm = (props) => {
-    const {createReference, reference, updateReference, messages, 
+    const {createReference, reference, updateReference, 
             labelsOptionList, applyLabels, groupsOptionList, 
     applyGroups, removeLabel, removeGroup, deleteReference,findReference,importReference/*,findOA,OALink*/} = props
     const [goToForm, setGoToForm] = useState(false);
@@ -51,7 +51,7 @@ const ReferencesForm = (props) => {
                     ||        
                             <PreForm 
                                 goToForm={setGoToForm}
-                                messages={formMessages}
+                                messages={messages}
                                 searchCallBack={(query) => findReference(query)}
                             />
                     }
