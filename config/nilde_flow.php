@@ -54,7 +54,7 @@ return [
                     ],
                     'readyToDelivery'	=> [
                         'role'  =>  ['patron'],
-                        'next_statuses'  =>  ['userAskCancel','canceled','received','notReceived'],
+                        'next_statuses'  =>  ['received','notReceived'],
                         'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
                             'Model'=>'owner',
