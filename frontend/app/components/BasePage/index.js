@@ -61,9 +61,12 @@ function BasePage(props) {
     setMounted(true)
     //se l'utente non ha abiities=>è solo un patron!
     //e redirect nella sua patron page=>bibliografia
-    if(props.isLogged && props.auth && ( (!props.auth.permissions.resources || props.auth.permissions.resources.length==0) && (props.auth.permissions.roles && props.auth.permissions.roles.includes("patron")) ) )
-      props.history.push('/patron/references');
-  },[])
+    /*if(props.isLogged && props.auth && ( (!props.auth.permissions.resources || props.auth.permissions.resources.length==0) && (props.auth.permissions.roles && props.auth.permissions.roles.includes("patron")) ) )
+      props.history.push('/patron/references'); */
+    //NOTA: l'ho disattiata il 23/12/2020 perchè faceva casino con l'edit LibraryUser
+    //qUINDI QUESTO IF NON VA FATTO QUI!
+
+  },[]) 
 
   return (
     <>
