@@ -363,5 +363,6 @@
   "app.routes.ProjectNew": "Nuovo progetto",
   "app.routes.Labels": "Etichette",
   "app.routes.Categories": "Categorie",
-  "app.routes.Libraries": "Biblioteche"
+  "app.routes.Libraries": "Biblioteche",
+  "app.routes.Library": "Biblioteca"
 }

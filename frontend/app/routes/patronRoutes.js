@@ -30,11 +30,10 @@ const routes = [
       { path: '/:id?/:edit?', exact: true, name: `RequestDetail`, component: RequestsPage},
     ]
   },
-
   { path: '/:library_id?/my-libraries', name: `MyLibraries`, component: SubRouteSwitch, header: true,
     children: [
       { path: '/library/new', icon: "plus", name: `MyLibraryNew`, url: `/my-libraries/library/new`, component: MyLibraryPage, sidebar: true, order: 1},
-      { path: '/library/:id?', name: `Libraries`, component: MyLibraryPage, },
+      { path: '/library/:id?', name: `Library`, component: MyLibraryPage},
       { path: '/:page?', icon: "landmark", exact: true, name: `MyLibraries`, url: `/my-libraries`, component: MyLibrariesListPage, sidebar: true,order: 2},
     ]
   },

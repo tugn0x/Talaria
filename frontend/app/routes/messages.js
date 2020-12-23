@@ -52,9 +52,9 @@ export default defineMessages({
         id: `${scope}.Requests`,
         defaultMessage: 'My Requests',
     },
-    Libraries: {
-        id: `${scope}.Libraries`,
-        defaultMessage: 'Libraries',
+    Library: {
+        id: `${scope}.Library`,
+        defaultMessage: 'Library',
     },
     MyLibraries: {
         id: `${scope}.MyLibraries`,
