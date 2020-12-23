@@ -36,22 +36,23 @@ class ReferencePolicy extends BasePolicy
 
     public function show(User $user, Model $model)
     {
-        return $model->isOwner($user->id);
+        return $this->canManage($user,$model);
     }
 
 
     public function update(User $user, Model $model)
     {
-        return $model->isOwner($user->id);
+        return $this->canManage($user,$model);
     }
 
     public function delete(User $user, Model $model)
     {
-        return $model->isOwner($user->id);
+        return $this->canManage($user,$model);
     }
 
     public function canManage(User $user, Model $model)
     {
-        return $user->can('manage', $model);
+        //return $user->can('manage', $model);
+        return $model->isOwner($user->id);
     }
 }
