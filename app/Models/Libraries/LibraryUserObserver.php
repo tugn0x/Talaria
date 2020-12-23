@@ -27,24 +27,7 @@ class LibraryUserObserver extends BaseObserver
     {         
         //ogni nuova rich va messa in attesa
         $model->status=config("constants.libraryuser_status.pending");
-                  
-         //if(auth() && auth()->user()) {
-         //   $user = auth()->user();
-         /*
-         $user = Auth::user();
-
-         $library = Library::find($model->library_id);               
-         
-         //NOTA: 24/11/2020 ho aggiunto il controllo sul nr delle abilities altrimenti la $user->can si pianta! (probabile bugfix i Bouncer)
-         //if($user->getAbilities()->count()==0 || !$user->can('manage-users', $library) ) {
-         //forzo ad aggiornare solo i miei dati         
-         if(!$user->can('manage-users', $library)) { //non sono il manager della biblio ma sono il patron che sta aggiungendo una biblio          
-                if(!$model->user_id) {
-                    $model->user_id = $user->id;
-                }
-        }*/
-         
-
+                         
         return parent::creating($model);
          
     }

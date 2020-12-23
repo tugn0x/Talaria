@@ -16,9 +16,8 @@ class LibraryUser extends BaseModel
 {
     protected $forceDeleting=true; //overrides softdelete => force delete!  
     protected $userstamping = false;
-    public static function bootSoftDeletes() {}
-    //commento l'observer perchè NON funziona e blocca l'esecuzione della api!
-    //protected static $observerClass = LibraryUserObserver::class;
+    public static function bootSoftDeletes() {}    
+    protected static $observerClass = LibraryUserObserver::class;
 
     protected $table = 'library_user';
 

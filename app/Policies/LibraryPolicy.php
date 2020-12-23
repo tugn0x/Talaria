@@ -40,11 +40,14 @@ class LibraryPolicy extends BasePolicy
     {
         return $this->canManage($user, $model);
     }
-
-    //NOTA: questo metodo è fondamentale, altrimenti laravel non chiama il before()
-    //utile nel caso ci si logghi come admin!
+    
     public function manage(User $user,Model $model)
     {
-        return $this->canManage($user,$model);
+        //return $this->canManage($user,$model);
+        //qui ci arriva solo se l'utente non ha l'ability di manage
+        //quindi se ce l'ha viene gestita da bouncer che ritorna true
+        //altrimenti arriva qui ma non dovendo gestire altro ritorniamo false
+        //altrimenti si crea un loop infinito
+        return false;
     }
 }
