@@ -45,16 +45,24 @@ const ReferenceRequest = props => {
         evt.preventDefault();
         let l={};
         if(evt.target.value!='')
-            l=libraryOptionList.find(x => x.library_id == evt.target.value).library.data;
-        console.log(l)
-        handleChange(l,'library');
+        {
+            l=libraryOptionList.find(x => x.library_id == evt.target.value);
+            if(l && Object.keys(l).length>0)
+                l=l.library.data
+        }
+                
+        handleChange(l,'library');   
         libraryOnChange(l)     
+        
+        
+        
+
         
      }
 
      useEffect(() => {
         console.log("FORMDATA:", formData)
-        setIsSubmitDisabled(!(formData.library && formData.library.id && formData.delivery && formData.delivery.id))
+        setIsSubmitDisabled(!(formData.library && formData.library.id && formData.delivery && formData.delivery.id))        
      }, [formData])
  
 
@@ -62,7 +70,7 @@ const ReferenceRequest = props => {
     
     /* HANDLE CHANGE Generico */
     const handleChange = (value, field_name) =>{
-        console.log("handlechange FORMDATA:",field_name,value)
+       // console.log("handlechange FORMDATA:",field_name,value)
         setFormData({ ...formData, [field_name]: value   }); 
     } 
 
@@ -101,13 +109,20 @@ const ReferenceRequest = props => {
         return
     }
 
+    useEffect(() => {        
+        setFormData({...formData,'delivery':{} });        
+    }, [deliveryOptionList])
+
     useEffect(() => {
         console.log("UEEE libraryOptionsList",libraryOptionList)
-       if(libraryOptionList)
+       if(libraryOptionList && libraryOptionList.length>0)
        {
-            let defaultLib=libraryOptionList.find(x => x.preferred == 1);
-            handleChange(defaultLib,'library');
-            libraryOnChange(defaultLib) 
+            let defaultLib=libraryOptionList.find(x => x.preferred == 1);            
+            if(defaultLib && Object.keys(defaultLib).length>0)
+            {
+                handleChange(defaultLib.library.data,'library');
+                libraryOnChange(defaultLib.library.data) 
+            }
         }
     }, [libraryOptionList])
 
@@ -144,10 +159,11 @@ const ReferenceRequest = props => {
                 <Card className="detail-body">
                 <Row>
                         <Col sm={6}>
-                            {libraryOptionList && 
+                            {
                                 <>  
                                     <span className="text-brown">Library:</span> 
                                     <Input className="libraryOptionList" type="select" name="libraryOptionList" required id="libraryOptionList" value={formData.library?formData.library.id:''/*selectedLibrary?selectedLibrary.id:''*/} onChange={ (e) => handleChangeLibrary(e)}>                                        
+                                            <option value='' key=''>Select</option>
                                             {libraryOptionList && libraryOptionList.map ( (lib) => 
                                                     <option className={lib.preferred && lib.preferred==1?'preferred':''} value={lib.library_id} key={lib.id}>{lib.label}</option>
                                             )}
