@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import {NavLink} from 'react-router-dom';
 import {UncontrolledTooltip, Row, Col, Button} from 'reactstrap';
 import { generatePath } from "react-router";
 
@@ -66,20 +66,16 @@ const MyLibraryItem = props => {
                 {data.user_service_phone && <div><span className="font-weight-bold">Telefono </span><span>{data.user_service_phone}</span></div> }
                 {data.user_service_email && <div><span className="font-weight-bold">Email </span><span>{data.user_service_email}</span></div> }
             </Col>
-            <Col sm={2} className="icons align-self-center">
-                <a href={`${editurl(data.library_id, data.id)}`} className="btn btn-icon">
-                    <i className="fas fa-edit"></i>
-                </a>
+            <Col sm={2} className="icons align-self-center">                
+                <NavLink to={`${editurl(data.library_id, data.id)}`}  className="btn btn-icon">
+                    <i className="fas fa-edit"></i>                    
+                 </NavLink>
                 <a href="#"  className="btn btn-icon" onClick={deleteCallback}>
                     <i className="fas fa-trash"></i>
                 </a>
             </Col>  
         </Row>
     );
-};
-
-MyLibraryItem.propTypes = {
-    
 };
 
 export default MyLibraryItem;
