@@ -10,7 +10,8 @@ export const fields = {
         type: "text",
         name: "label",
         width: "col-md-12",
-        order: 2
+        order: 2,
+        maxLength: 20
     },
     /*preferred: {
         type: "switch",
