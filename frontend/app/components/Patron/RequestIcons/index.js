@@ -32,7 +32,7 @@ const RequestIcons = (props) => {
                     <i className="fas fa-hdd"></i>
                 </a>}
                 {askCancelRequest && canDelete(data) && <a href="#" onClick={() => askCancelRequest(data.id)} className="btn btn-icon">
-                    <i className="fas fa-undo"></i>
+                    <i className="fas fa-times"></i>
                 </a> }
                 {hasToPay(data) && acceptCost && denyCost &&
                 <>
