@@ -19,6 +19,7 @@ const InputField = (props) => {
         <CustomInput
             className="form-control"
             id={field.name}
+            maxLength={field.maxLength}
             type={field.type !== 'textarea' ? 'text' : 'textarea'}
             disabled={field.disabled ? field.disabled : false}
             placeholder={label ? intl.formatMessage(label) : ""}
