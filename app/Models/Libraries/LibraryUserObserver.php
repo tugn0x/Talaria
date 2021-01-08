@@ -54,6 +54,14 @@ class LibraryUserObserver extends BaseObserver
 
         if(parent::saving($model)) //sto salvando e la validazione non ha dato problemi
         {
+            if($model->preferred && $model->preferred==1)
+            {
+                //vado a togliere il preferred dalle altre sue biblioteche perchè solo una puo' essere preferred
+                $mylibs=LibraryUser::owned($model->user->id)->where("id","<>",$model->id);
+                $mylibs->each(function ($item){
+                    $item->update(["preferred"=>0]);
+                });                
+            }
             //Sto aggiornando lo stato dell'utente x la biblioteca
             if($model->isDirty() && $model->isDirty("status"))
             {
