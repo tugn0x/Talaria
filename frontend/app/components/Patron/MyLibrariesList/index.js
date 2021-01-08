@@ -22,7 +22,7 @@ const MyLibrariesList = props => {
                                     key={`my-library-${lib.id}`}
                                     data={lib}
                                     editPath={props.editPath}
-                                    setPreferred={() => setPreferred(lib.id)}
+                                    setPreferred={() => setPreferred(lib.id,lib.library_id)}
                                     preferred={preferred}
                                     deleteCallback={() => deleteCallback(lib.library_id, lib.id)}
                                     //editPath={props.editPath}

@@ -34,14 +34,8 @@ const MyLibrariesListPage = (props) => {
         })
     }
 
-    const onSetPreferred = (id) => {
-        return
-        /* librariesList.map(lib => {
-            lib.id === id  && !isLoading 
-            ?  dispatch(requestUpdateAccessToLibrary({ preferred: 1, library_id: lib.library_id, id })) 
-            : dispatch(requestUpdateAccessToLibrary({ preferred: 0, library_id: lib.library_id, id })) 
-                
-        }) */
+    const onSetPreferred = (id,libid) => {
+        dispatch(requestUpdateAccessToLibrary({ preferred: 1, library_id: libid, id }))        
     }
  
     async function deleteCallback (params) {
@@ -65,7 +59,7 @@ const MyLibrariesListPage = (props) => {
                 editPath={`/patron/:library_id?/my-libraries/library/:id?` }
                // setPreferred={(library_id, id) => handleSetPreferred(library_id, id)}
                 preferred={preferred}
-                setPreferred={(id) => onSetPreferred(id)} 
+                setPreferred={(id,libid) => onSetPreferred(id,libid)} 
                 deleteCallback={(library_id, id) => deleteCallback({library_id: library_id, id: id})}  
             />
         {/*  <SimpleList 
