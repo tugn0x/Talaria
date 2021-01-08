@@ -64,8 +64,8 @@ function MyLibraryPage(props) {
   }, [])
 
   useEffect(() => {
-    //disabilito la possibilità di modificare il preferred se status!=1
-    Object.keys(patron).length > 0 && patron.status!==1 ? fields.preferred.disabled = true : null
+    //disabilito la possibilità di modificare il preferred 
+    //Object.keys(patron).length > 0 ? fields.preferred.disabled = true : null
   }, [patron])
 
   
@@ -87,7 +87,6 @@ function MyLibraryPage(props) {
             requestData={{ 
               name: library.name, 
               label: patron.label,
-              preferred: patron.preferred,
               department_id: patron.department_id,
               title_id: patron.title_id, 
               user_referent: patron.user_referent,

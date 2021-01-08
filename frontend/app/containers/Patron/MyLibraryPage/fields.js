@@ -12,12 +12,12 @@ export const fields = {
         width: "col-md-12",
         order: 2
     },
-    preferred: {
+    /*preferred: {
         type: "switch",
         name: "preferred",
         width: "col-md-12",
         order: 3,
-    },
+    },*/
     department_id: { 
         type: "custom-select",
         name: 'department_id',
