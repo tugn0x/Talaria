@@ -107,7 +107,7 @@ function MyLibraryPage(props) {
             fields={fieldsIsNew}
             department_id={departmentOptionList} 
             title_id={titleOptionList} 
-            title={intl.formatMessage(messages.header)}
+            title={intl.formatMessage(messages.headerNew)}
             messages={messages}
             library_id={libraryOptionList}
             onChangeData={(field_name, value) => handleChangeData(field_name, value)}

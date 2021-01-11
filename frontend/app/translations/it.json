@@ -89,6 +89,7 @@
   "app.containers.RequestsListPage.cancelAskedMessage": "Annullamento richiesto",  
 
   "app.containers.MyLibrariesPage.header": "La mia biblioteca",
+  "app.containers.MyLibrariesPage.headerNew": "Nuova biblioteca",
   "app.containers.MyLibrariesPage.title": "Aggiungi una biblioteca",
   "app.containers.MyLibrariesPage.library_id": "Seleziona una biblioteca",
   "app.containers.MyLibrariesPage.department_id": "Seleziona un dipartimento",
