@@ -56,7 +56,7 @@ const MyLibrariesListPage = (props) => {
                 loading={isLoading}
                 pagination={patron.my_libraries.pagination}
                 messages={messages}
-                editPath={`/patron/:library_id?/my-libraries/library/:id?` }
+                editPath={`/patron/my-libraries/:library_id?/edit/:id?` }
                // setPreferred={(library_id, id) => handleSetPreferred(library_id, id)}
                 preferred={preferred}
                 setPreferred={(id,libid) => onSetPreferred(id,libid)} 
