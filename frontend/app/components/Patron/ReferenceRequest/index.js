@@ -128,9 +128,9 @@ const ReferenceRequest = props => {
                 title={messages.headerRequest}
                 back={true}
             />
+            {!canRequest(reference) && <ErrorMsg cssclass="alert-warning" message={intl.formatMessage(messages.cannotRequestError)}/>}
             {reference.patronddrequests && reference.patronddrequests.data && reference.patronddrequests.data.length>0 &&
             <div className="previusRequests">
-                {intl.formatMessage(messages.prevRequests)}<br/>
                 {reference.patronddrequests.data.map ( (req) =>
                     <RequestItem 
                         key={`request-${req.id}`}
@@ -139,8 +139,7 @@ const ReferenceRequest = props => {
                     />  
                 )}
             </div>
-            }
-            {!canRequest(reference) && <ErrorMsg cssclass="alert-warning" message={intl.formatMessage(messages.cannotRequestError)}/>}
+            }            
             
             <div className="reference">
                 <ReferenceDetail                     
@@ -150,6 +149,7 @@ const ReferenceRequest = props => {
             </div>
             {canRequest(reference) && 
             <form onSubmit={onSubmit} className="was-validated" noValidate>
+            <h3>Nuova richiesta</h3>
             <div className="library">
                 <Card className="detail-body">
                 <Row>
