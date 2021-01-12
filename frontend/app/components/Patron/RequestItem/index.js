@@ -128,10 +128,10 @@ const RequestItem = (props) => {
                         <span className="deliveryReadyDate">
                             {data.delivery_ready_date && 
                                 <>
-                                    <span>Ritiro dal <span>{formatDateTime(data.delivery_ready_date, 'it')}</span></span> 
+                                    <span>Ritiro disponibile dal <span>{formatDateTime(data.delivery_ready_date, 'it')}</span></span> 
                                 </>
                             }
-                            {!data.delivery_ready_date && <span>Non ancora disponibile</span>}                                                     
+                            {!data.delivery_ready_date && <span>Non ancora disponibile al ritiro</span>}                                                     
                         </span>
                     </span>}    
                 {data.fromlibrary_note && <p className="fromlibrary_note"><i className="fas fa-sticky-note"></i>Note per l'utente: {data.fromlibrary_note}</p>}                  
