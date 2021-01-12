@@ -128,7 +128,7 @@ const RequestItem = (props) => {
                         <span className="deliveryReadyDate">
                             {data.delivery_ready_date && 
                                 <>
-                                    <span>Ritiro dal</span> <span>{formatDateTime(data.delivery_ready_date, 'it')}</span>
+                                    <span>Ritiro dal <span>{formatDateTime(data.delivery_ready_date, 'it')}</span></span> 
                                 </>
                             }
                             {!data.delivery_ready_date && <span>Non ancora disponibile</span>}                                                     
