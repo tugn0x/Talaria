@@ -109,7 +109,7 @@ const RequestItem = (props) => {
                             {data.library.data.name}
                         </UncontrolledTooltip>
                         </span>
-                        {data.request_date && <span className="requestDate"><span>{formatDateTime(data.request_date, 'it')}</span></span>}
+                        {data.request_date && <span className="requestDate"><span>Richiesto il {formatDateTime(data.request_date, 'it')}</span></span>}
                         {data.forlibrary_note && <p className="forlibrary_note"><i className="fas fa-sticky-note"></i>Note richiesta: {data.forlibrary_note}</p>}                  
                     </span> }
                     {data.delivery && <span className="deliveryLabel pr-3">
