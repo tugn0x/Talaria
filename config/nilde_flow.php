@@ -29,7 +29,7 @@ return [
                         ]
                     ],
                     'waitingForCost' => [
-                        'role'  =>  ['patron'],
+                        'role'  =>  [], //borrow/lend/manage?
                         'next_statuses'  =>  ['costAccepted','costNotAccepted'],
                         'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
@@ -52,8 +52,9 @@ return [
                             'Model'=>'owner',
                         ]
                     ],
+                    /*TODO: costNotAnswered: l'utente non risponde ..*/
                     'readyToDelivery'	=> [
-                        'role'  =>  ['patron'],
+                        'role'  =>  ['patron'],//borrow/lend/manage?
                         'next_statuses'  =>  ['received','notReceived'],
                         'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
@@ -62,7 +63,7 @@ return [
                         /*'jobs' => [classe del job da eseguire]*/
                     ],
                     'received'	=> [
-                        'role'  =>  ['patron'],
+                        'role'  =>  [],//borrow/lend/manage?
                         'next_statuses'  =>  [],
                         'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
@@ -71,7 +72,7 @@ return [
                         /*'jobs' => [classe del job da eseguire]*/
                     ],
                     'notReceived'	=> [
-                        'role'  =>  ['patron'],
+                        'role'  =>  [],//borrow/lend/manage?
                         'next_statuses'  =>  [],
                         'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
@@ -80,7 +81,7 @@ return [
                         /*'jobs' => [classe del job da eseguire]*/
                     ],
                     'fileReceived'	=> [
-                        'role'  =>  ['patron'],
+                        'role'  =>  [],//borrow/lend/manage?
                         'next_statuses'  =>  [],
                         'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
