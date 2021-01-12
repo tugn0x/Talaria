@@ -19,12 +19,12 @@ const ReferenceRequest = props => {
     const [formData, setFormData] = useState({
         'delivery': {},
         'library':{},
-        'reference': {},
+        'reference': reference,
         'cost_policy': '2'
     })
 
 
-    useEffect(() => {
+    useEffect(() => {        
         handleChange(reference,'reference')
      }, [reference])
           
@@ -54,14 +54,9 @@ const ReferenceRequest = props => {
         handleChange(l,'library');   
         libraryOnChange(l)     
         
-        
-        
-
-        
      }
 
-     useEffect(() => {
-        console.log("FORMDATA:", formData)
+     useEffect(() => {       
         setIsSubmitDisabled(!(formData.library && formData.library.id && formData.delivery && formData.delivery.id))        
      }, [formData])
  
@@ -114,7 +109,7 @@ const ReferenceRequest = props => {
     }, [deliveryOptionList])
 
     useEffect(() => {
-        console.log("UEEE libraryOptionsList",libraryOptionList)
+       //console.log("UEEE libraryOptionsList",libraryOptionList)
        if(libraryOptionList && libraryOptionList.length>0)
        {
             let defaultLib=libraryOptionList.find(x => x.preferred == 1);            
