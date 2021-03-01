@@ -103,7 +103,7 @@ const RequestItem = (props) => {
                         <span><i className="fas fa-landmark"></i></span> 
                         <span>
                         <a href="#" id={`tooltip-${data.id}-${data.library.data.id}`} className="active">{data.library_label.data.label}</a> 
-                        <UncontrolledTooltip placement="right" target={`tooltip-${data.id}-${data.library.data.id}`}>
+                        <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${data.id}-${data.library.data.id}`}>
                             {data.library.data.name}
                         </UncontrolledTooltip>
                         </span>
@@ -114,7 +114,7 @@ const RequestItem = (props) => {
                         <span><i className="fas fa-luggage-cart"></i></span>
                         <span>
                             <a href="#" id={`tooltip-del-${data.id}-${data.delivery.data.id}`} className="active">{data.delivery.data.name}</a> 
-                            <UncontrolledTooltip placement="right" target={`tooltip-del-${data.id}-${data.delivery.data.id}`}>
+                            <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-del-${data.id}-${data.delivery.data.id}`}>
                             <div> 
                                 <span>{data.delivery.data.name}</span><br/>
                                 <span><i className="fas fa-envelope"></i> {data.delivery.data.email}</span><br/>
