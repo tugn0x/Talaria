@@ -35,7 +35,7 @@ const RequestIcons = (props) => {
     return ( 
         <>
         <NavLink className="btn btn-icon" to={`${referenceurl(data.reference.data.id)}`}>        
-        <i class="fas fa-eye"></i>
+        <i className="fas fa-eye"></i>
         </NavLink>
         {!data.archived && 
             <>
