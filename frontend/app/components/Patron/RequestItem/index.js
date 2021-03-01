@@ -72,17 +72,15 @@ const RequestItem = (props) => {
                 {statusDate(data)}
             </Col>
             <Col sm={7} className="info">
-                <span><i className={matTypeIcon(data.reference.data.material_type)}></i></span>
-                <span>
-                <NavLink to={`${requesturl(data.id)}`}>
+                <div>
+                    <span className="mat_type"><i className={matTypeIcon(data.reference.data.material_type)}></i></span>                
                     <span className="pub_title">{data.reference.data.pub_title}</span> &nbsp; 
-                    {data.reference.data.material_type === 1 && <span className="part_title">{data.reference.data.part_title}</span>}                    
-                </NavLink>
-                </span>
-                <div className="authors">
-                   {data.reference.data.material_type != 1 && data.reference.data.authors && <span className="authors">{intl.formatMessage({id: "app.references.authors"})}<span> {data.reference.data.authors}</span></span>} 
-                   {(data.reference.data.material_type === 1 || data.reference.data.material_type === 2) && data.reference.data.part_authors && <span className="authors">{intl.formatMessage({id: data.reference.data.material_type === 1 ? "app.references.authors":"app.references.part_authors"})}<span> {data.reference.data.part_authors}</span></span>}                  
-                   {data.reference.data.pubyear && <span className="pubyear">{intl.formatMessage({id: "app.references.pubyear"})} <span>{data.reference.data.pubyear}</span></span>}
+                    {data.reference.data.material_type === 1 && <span className="part_title">{data.reference.data.part_title}</span>}                                                   
+                    <div className="authors">
+                        {data.reference.data.material_type != 1 && data.reference.data.authors && <span className="authors">{intl.formatMessage({id: "app.references.authors"})}<span> {data.reference.data.authors}</span></span>} 
+                        {(data.reference.data.material_type === 1 || data.reference.data.material_type === 2) && data.reference.data.part_authors && <span className="authors">{intl.formatMessage({id: data.reference.data.material_type === 1 ? "app.references.authors":"app.references.part_authors"})}<span> {data.reference.data.part_authors}</span></span>}                  
+                        {data.reference.data.pubyear && <span className="pubyear">{intl.formatMessage({id: "app.references.pubyear"})} <span>{data.reference.data.pubyear}</span></span>}
+                    </div>
                 </div>
                 <div>
                 {data.reference.data.material_type === 3 &&

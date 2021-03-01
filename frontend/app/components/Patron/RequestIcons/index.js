@@ -1,11 +1,19 @@
 import React from 'react';
+import { generatePath } from "react-router";
 import {Button} from 'reactstrap';
 import {useIntl} from 'react-intl';
+import {NavLink } from 'react-router-dom';
 
 const RequestIcons = (props) => {
     const {data,archiveRequest,askCancelRequest,acceptCost,denyCost} = props
 
     const intl=useIntl();        
+
+    const referenceurl=(id) => {
+        return generatePath('/patron/references/:id?/:op?', {
+            id
+        });
+    }
    
     const canArchive = (data) => {
         if(data.status=="canceled" || data.status=="received"|| data.status=="fileReceived" || data.status=="notReceived") return true;
@@ -26,6 +34,9 @@ const RequestIcons = (props) => {
 
     return ( 
         <>
+        <NavLink className="btn btn-icon" to={`${referenceurl(data.reference.data.id)}`}>        
+        <i class="fas fa-eye"></i>
+        </NavLink>
         {!data.archived && 
             <>
                 {archiveRequest && canArchive(data) && <a href="#" onClick={() => archiveRequest(data.id)} className="btn btn-icon">
