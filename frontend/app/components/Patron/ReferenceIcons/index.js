@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { generatePath } from "react-router";
 import ApplyReferencesTag from '../ApplyReferencesTag';
 
@@ -52,9 +52,9 @@ const ReferenceIcons = (props) => {
         icons && icons.length>0 && 
         <>
                 {visibleIcon('request') && 
-                 <NavLink to={`${requesturl(data.id)}`}  className="btn btn-icon">
+                 <Link to={`${requesturl(data.id)}`}  className="btn btn-icon">
                     <i className="fas fa-share"></i>                    
-                 </NavLink>
+                 </Link>
                 }
                 {visibleIcon('oa') && data.oa_link && <a href={data.oa_link} target="_blank" className='btn btn-icon'><i className="icon-oa"></i></a>} 
                 {visibleIcon('oa') && !data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev,data.id) }><i className="fas fa-search"></i>OA</a>}
@@ -79,14 +79,14 @@ const ReferenceIcons = (props) => {
                     /> 
                 }
                 {visibleIcon('edit') && data.id &&                 
-                <NavLink to={canEdit(data)?editurl(data.id):'#'} className={`${canEdit(data)?'btn btn-icon':'btn btn-icon disabled'}`}>
+                <Link to={canEdit(data)?editurl(data.id):'#'} className={`${canEdit(data)?'btn btn-icon':'btn btn-icon disabled'}`}>
                     <i className="fas fa-edit"></i>
-                </NavLink>}               
+                </Link>}               
                 {visibleIcon('delete') && data.id && 
                 (                                           
-                        <NavLink to='#' className={canDelete(data) && deleteReference?"btn btn-icon":"btn btn-icon disabled"} onClick={() => deleteReference(data.id) }>
+                        <Link to='#' className={canDelete(data) && deleteReference?"btn btn-icon":"btn btn-icon disabled"} onClick={() => deleteReference(data.id) }>
                             <i className="fas fa-trash"></i>
-                        </NavLink>
+                        </Link>
                 )
                 }                
         </>

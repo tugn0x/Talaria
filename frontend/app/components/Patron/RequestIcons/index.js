@@ -2,7 +2,7 @@ import React from 'react';
 import { generatePath } from "react-router";
 import {Button} from 'reactstrap';
 import {useIntl} from 'react-intl';
-import {NavLink } from 'react-router-dom';
+import {Link } from 'react-router-dom';
 
 const RequestIcons = (props) => {
     const {data,archiveRequest,askCancelRequest,acceptCost,denyCost} = props
@@ -34,9 +34,9 @@ const RequestIcons = (props) => {
 
     return ( 
         <>
-        <NavLink className="btn btn-icon" to={`${referenceurl(data.reference.data.id)}`}>        
+        <Link className="btn btn-icon" to={`${referenceurl(data.reference.data.id)}`}>        
         <i className="fas fa-eye"></i>
-        </NavLink>
+        </Link>
         {!data.archived && 
             <>
                 {archiveRequest && canArchive(data) && <a href="#" onClick={() => archiveRequest(data.id)} className="btn btn-icon">
