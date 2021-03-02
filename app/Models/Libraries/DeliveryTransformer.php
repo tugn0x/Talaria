@@ -21,7 +21,8 @@ class DeliveryTransformer extends BaseTransformer
     ];
 
     protected $defaultIncludes = [
-        'granted_permissions',        
+        'granted_permissions',     
+        'deliveryable',   
     ];
 
     public function includeGrantedPermissions(Model $model)
