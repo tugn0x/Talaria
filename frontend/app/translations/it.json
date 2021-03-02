@@ -147,7 +147,7 @@
   "app.components.InstitutionsList.header": "Lista degli enti",
   "app.components.InstitutionsList.createNewInstitution": "Registra nuovo ente",
   "app.components.InstitutionsList.editInstitution": "Modifica ente",
-
+  
   "app.components.LibraryForm.institution_id": "ID ente",
   "app.components.LibraryForm.subject_id": "ID della disciplina",
   "app.components.LibraryForm.country_id": "ID della nazione",
@@ -195,6 +195,8 @@
 
   "app.containers.RequestPage.headerDetail": "Dettaglio Richiesta",
   
+  "app.libraries.dd_user_cost":"Costo per articolo",
+
   "app.references.labels": "Etichette",
   "app.references.labelAs": "Etichetta come",
   "app.references.groups": "Categorie",
@@ -256,6 +258,11 @@
   "app.requests.costAccepted": "Costo accettato",
   "app.requests.costNotAccepted":"Costo rifiutato",
   "app.requests.readyToDelivery": "Pronto al ritiro",
+  "app.requests.extraCosts": "Altri costi (FN)",
+  "app.requests.denyAnyExtraCost": "Rifiuto ogni costo",
+  "app.requests.acceptAnyExtraCost": "Accetto ogni costo",
+  "app.requests.toBeInformedAboutExtraCost": "Voglio essere informato",
+  "app.requests.forLibraryNotes": "Note per la biblioteca",
   
   "app.components.ReferenceForm.headerNew": "Nuovo Riferimento",
   "app.components.ReferenceForm.headerEdit": "Modifica Riferimento",

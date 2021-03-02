@@ -9,8 +9,6 @@ import RequestItem from '../RequestItem';
 import ErrorMsg from 'components/ErrorMsg';
 import ErrorBox from '../../Form/ErrorBox';
 
-/* TODO: una volta definito l'aspetto finale metto a posto le traduzioni */
-
 const ReferenceRequest = props => {
     console.log('ReferenceRequest', props)
     const {reference, libraryOptionList,deliveryOptionList,libraryOnChange,submitCallBack} = props
@@ -173,13 +171,13 @@ const ReferenceRequest = props => {
                                 </>}   
                             {formData.library.id && <div className="libraryDetail">
                                 <span><i className="fas fa-landmark"></i></span> {formData.library.name} <br/>
-                                Costo per articolo: {formData.library.dd_user_cost} &euro; <br/>                                
-                                Altri costi (FN):<select id="cost_policy" value={formData["cost_policy"]} onChange={ (evt) => handleChange(evt.target.value,'cost_policy')}>
-                                    <option value="0">Rifiuto ogni costo</option>
-                                    <option value="1">Accetto ogni costo</option>
-                                    <option value="2">Voglio essere informato</option>
+                                {intl.formatMessage({id: "app.libraries.dd_user_cost"})}: {formData.library.dd_user_cost} &euro; <br/>                                
+                                {intl.formatMessage({id: "app.requests.extraCosts"})}:<select id="cost_policy" value={formData["cost_policy"]} onChange={ (evt) => handleChange(evt.target.value,'cost_policy')}>
+                                    <option value="0">{intl.formatMessage({id: "app.requests.denyAnyExtraCost"})}</option>
+                                    <option value="1">{intl.formatMessage({id: "app.requests.acceptAnyExtraCost"})}</option>
+                                    <option value="2">{intl.formatMessage({id: "app.requests.toBeInformedAboutExtraCost"})}</option>
                                 </select><br/>
-                                Note per la biblioteca
+                                {intl.formatMessage({id: "app.requests.forLibraryNotes"})}
                                 <textarea id="forlibrary_note" value={formData["forlibrary_note"]} onChange={ (evt) => handleChange(evt.target.value,'forlibrary_note')}></textarea>
 
                             </div>}
