@@ -6,6 +6,10 @@
     }
 }
 
+.detail h2 {
+    text-align: center;
+}
+
 .libraryOptionList option {        
         &.preferred:before {
             font-family: "Font Awesome 5 Free"; 
@@ -18,4 +22,8 @@
             -webkit-font-smoothing: antialiased;
         }    
         
+}
+
+.libraryDetail {
+    margin:5px;
 }

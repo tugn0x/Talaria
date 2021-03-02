@@ -127,10 +127,12 @@ const ReferenceRequest = props => {
             <SectionTitle 
                 title={messages.headerRequest}
                 back={true}
-            />
-            {!canRequest(reference) && <ErrorMsg cssclass="alert-warning" message={intl.formatMessage(messages.cannotRequestError)}/>}
+            />            
             {reference.patronddrequests && reference.patronddrequests.data && reference.patronddrequests.data.length>0 &&
-            <div className="previusRequests">
+            <>
+            <h2>Richieste precedenti</h2>
+            {!canRequest(reference) && <ErrorMsg cssclass="alert-warning" message={intl.formatMessage(messages.cannotRequestError)}/>}
+            <div className="previusRequests card">                
                 {reference.patronddrequests.data.map ( (req) =>
                     <RequestItem 
                         key={`request-${req.id}`}
@@ -139,18 +141,11 @@ const ReferenceRequest = props => {
                     />  
                 )}
             </div>
-            }            
-            
-            <div className="reference">
-                <ReferenceDetail                     
-                    reference={reference} 
-                    icons={[]}
-                />
-            </div>
+            </>
+            }     
             {canRequest(reference) && 
             <form onSubmit={onSubmit} className="was-validated" noValidate>
-            <h3>Nuova richiesta</h3>
-            <div className="library">
+            <h2>Nuova richiesta</h2>
                 <Card className="detail-body">
                 <Row>
                         <Col sm={6}>
@@ -166,8 +161,8 @@ const ReferenceRequest = props => {
                                     <ErrorBox className="invalid-feedback" error={intl.formatMessage({id: "app.global.invalid_select"})} />
                                 </>}   
                             {formData.library.id && <div className="libraryDetail">
-                                Name: {formData.library.name} <br/>
-                                Cost: {formData.library.dd_user_cost} € <br/>
+                                <span><i className="fas fa-landmark"></i></span> {formData.library.name} <br/>
+                                Cost: {formData.library.dd_user_cost} &euro; <br/>                                
                                 Altri costi (FN):<select id="cost_policy" value={formData["cost_policy"]} onChange={ (evt) => handleChange(evt.target.value,'cost_policy')}>
                                     <option value="0">Rifiuto ogni costo</option>
                                     <option value="1">Accetto ogni costo</option>
@@ -194,13 +189,13 @@ const ReferenceRequest = props => {
                             {formData.delivery.id && 
                             <div className="PickupDetail">
                                 <span className="text-brown">Detail:</span><br/>
-                                {formData.delivery.name && <span>Punto di ritiro: {formData.delivery.name}</span>}
-                                {formData.delivery.email &&<span>Email: {formData.delivery.email}</span>}
-                                {formData.delivery.phone && <span>Phone: {formData.delivery.phone}</span>}
-                                {formData.delivery.openinghours && <span>Opening hours: {formData.delivery.openinghours}</span>}
+                                {formData.delivery.name && <span><i className="fas fa-luggage-cart"></i> {formData.delivery.name}</span>}
+                                {formData.delivery.email &&<span><i className="fas fa-envelope"></i> {formData.delivery.email}</span>}
+                                {formData.delivery.phone && <span><i className="fas fa-phone"></i> {formData.delivery.phone}</span>}
+                                {formData.delivery.openinghours && <span><i class="far fa-clock"></i> {formData.delivery.openinghours}</span>}
                             
                                 {formData.delivery.deliveryable && 
-                                <div>
+                                <div><i class="fas fa-map-marker-alt"></i>
                                     {formData.delivery.deliveryable.data.address && <span>Indirizzo: {formData.delivery.deliveryable.data.address}</span>}
                                     {formData.delivery.deliveryable.data.town && <span>Città: {formData.delivery.deliveryable.data.town}</span>}
                                     {formData.delivery.deliveryable.data.district && <span>Regione: {formData.delivery.deliveryable.data.district}</span>}
@@ -210,8 +205,7 @@ const ReferenceRequest = props => {
                                 } 
                             </div>}
                         </Col>
-                </Row>
-                </Card>
+                </Row>                
                 <div className="d-flex justify-content-between">
                     <Button type="submit" className="mt-0" color="cta" disabled={isSubmitDisabled}>
                         {intl.formatMessage({id: 'app.global.request'})}
@@ -220,9 +214,16 @@ const ReferenceRequest = props => {
                         {intl.formatMessage({id: 'app.global.cancel'})}
                     </Button> 
                 </div>
-            </div>
+                </Card>            
             </form>
-            }
+            }       
+            <h2>Dettaglio riferimento</h2>
+            <div className="reference">
+                <ReferenceDetail                     
+                    reference={reference} 
+                    icons={[]}
+                />
+            </div>            
         </div>
     );
 };
