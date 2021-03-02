@@ -73,10 +73,13 @@ const ReferenceRequest = props => {
         return (ref.active_patronrequests==0)
      }
 
-     const displayDeliveryableAddress = (deliveryable) => {
+     //NOTA: non visualizzo la tipologia del delivery quindi non so se è un desk o una biblio
+     //ma forse avrebbe senso farlo
+     const displayDeliveryable = (deliveryable) => {         
          return (
-         <div>
-            {deliveryable.data.address && <div><i className="fas fa-map-marker"></i> {deliveryable.data.address} {deliveryable.data.postcode} {deliveryable.data.district} {deliveryable.data.town} {deliveryable.data.state}</div>}            
+         <div>    
+            {deliveryable.data.name && <div><i className="fas fa-luggage-cart"></i> {deliveryable.data.name}</div>}
+            {deliveryable.data.address && <div><i className="fas fa-map-marker"></i> {deliveryable.data.address} {deliveryable.data.postcode} {deliveryable.data.town} {deliveryable.data.district} {deliveryable.data.state}</div>}            
         </div>
          )
      }
@@ -196,11 +199,10 @@ const ReferenceRequest = props => {
                             }
                             {formData.delivery.id && 
                             <div className="PickupDetail">                                
-                                {formData.delivery.name && <div><i className="fas fa-luggage-cart"></i> {formData.delivery.name}</div>}
+                                {formData.delivery.deliveryable && displayDeliveryable(formData.delivery.deliveryable)} 
                                 {formData.delivery.email &&<div><i className="fas fa-envelope"></i> {formData.delivery.email}</div>}
                                 {formData.delivery.phone && <div><i className="fas fa-phone"></i> {formData.delivery.phone}</div>}
-                                {formData.delivery.openinghours && <div><i className="far fa-clock"></i> {formData.delivery.openinghours}</div>}                            
-                                {formData.delivery.deliveryable && displayDeliveryableAddress(formData.delivery.deliveryable)} 
+                                {formData.delivery.openinghours && <div><i className="far fa-clock"></i> {formData.delivery.openinghours}</div>}                                                            
                             </div>}
                         </Col>
                 </Row>                
