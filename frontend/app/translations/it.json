@@ -41,6 +41,7 @@
   "app.global.edit": "Modifica",
   "app.global.save": "Salva",
   "app.global.library": "Biblioteca",
+  "app.global.pickup": "Punto di consegna",
   "app.global.department": "Dipartimento/Istituto",
   "app.global.title": "Qualifica",
   "app.global.label": "Etichetta",
@@ -265,9 +266,10 @@
   "app.components.ReferenceForm.inputPlaceHolder": "Es: 10.1002/hlca.19740570315",
 
   "app.components.ReferenceRequest.headerRequest": "Stato richiesta",
+  "app.components.ReferenceRequest.newRequest": "Nuova Richiesta",
   "app.components.ReferenceRequest.prevRequests": "Precedenti richieste e/o in corso",
-  "app.components.ReferenceRequest.cannotRequestError": "Il riferimento è attualmente in richiesta!",
-
+  "app.components.ReferenceRequest.cannotRequestError": "Il riferimento è attualmente in richiesta!",  
+  
   "app.components.UserForm.header": "Form aggiorna utente",
   "app.components.UserForm.subtitle": "Aggiorna utente",
   "app.components.UserForm.editUser": "Modifica utente",

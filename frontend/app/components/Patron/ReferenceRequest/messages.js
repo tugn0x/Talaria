@@ -11,14 +11,6 @@ export default defineMessages({
   headerRequest: {
     id: `${scope}.headerRequest`,
     defaultMessage: 'Request status',
-  },  
-  prevRequests: {
-    id: `${scope}.prevRequests`,
-    defaultMessage: 'Previous/current requests',
-  },  
-  cannotRequestError: {
-    id: `${scope}.cannotRequestError`,
-    defaultMessage: 'Reference already actually requested!'
   }
 });
 
