@@ -35,9 +35,8 @@ class PatronDocdelRequest extends BaseModel
         //'user_id', //usiamo create_by
         'librarycounter', //rm_countbib: ogni biblio si vede le rich utente partire da 1 usando questo campo
         //'status',  //status NON deve essere fillable perchè lo gestisco tramite StatusProvider
-        'request_date',
-        'cancel_request_date', //data rich. cancellazione
-        'cancel_date', //data accettaz. cancellazione
+        'request_date',        
+        'cancel_date', //data annullamento/cancellazione
         'fullfill_date',
         'delivery_ready_date', //data articolo disponibile al ritiro
         'cost_policy', //Politica di Accettazione Costi: 0=Non accetta nessun costo; 1=Accetta qualunque costo; 2=Vuole essere informato

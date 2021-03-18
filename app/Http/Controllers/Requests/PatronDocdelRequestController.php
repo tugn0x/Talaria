@@ -88,7 +88,7 @@ class PatronDocdelRequestController extends ApiController
 
             switch ($newstatus)
             {
-                case 'userAskCancel': $others=['cancel_request_date'=>Carbon::now()]; break;
+               // case 'userAskCancel': $others=['cancel_request_date'=>Carbon::now()]; break;
                 
                 case 'canceled': $others=['cancel_date'=>Carbon::now()]; break;
                 

@@ -47,8 +47,7 @@ const RequestDetail = props => {
                     </Col>
                     </Row>
                     <Row><Col sm={12}>
-                        Richiesta cancellazione: {patronrequest.cancel_request_date}
-                        Annullato il {patronrequest.cancel_date}
+                        Annullata il {patronrequest.cancel_date}
                         Evasa/Inevasa il  {patronrequest.fullfill_date}
                     </Col>
                     </Row>

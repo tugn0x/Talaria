@@ -12,14 +12,14 @@ return [
                         //scatenandolo, forse dovrei mettere tra i ruoli anche manager 
                         //ma poi come lo verifico???
                         'role'  =>  ['patron'],
-                        'next_statuses'  =>  ['userAskCancel','canceled','received','waitingForCost','notReceived','fileReceived','readyToDelivery'],
+                        'next_statuses'  =>  ['canceled','received','waitingForCost','notReceived','fileReceived','readyToDelivery'],
                         'constraints'   =>  ['isOwner'],
                     ],
-                    'userAskCancel'	=> [
+                   /* 'userAskCancel'	=> [
                         'role'  =>  ['patron'],
                         'next_statuses'  =>  ['Canceled','received','waitingForCost','notReceived','fileReceived','readyToDelivery'],
                         'constraints'   =>  ['isOwner'],
-                    ],
+                    ],*/
                     'canceled'	=> [
                         'role'  =>  ['patron'],
                         'next_statuses'  =>  [],
@@ -38,7 +38,7 @@ return [
                     ],
                     'costAccepted' => [
                         'role'  =>  ['patron'],
-                        'next_statuses'  =>  ['userAskCancel','canceled','received','fileReceived','notReceived','readyToDelivery'],
+                        'next_statuses'  =>  ['canceled','received','fileReceived','notReceived','readyToDelivery'],
                         'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
                             'Model'=>'owner',
@@ -46,7 +46,7 @@ return [
                     ],
                     'costNotAccepted' => [
                         'role'  =>  ['patron'],
-                        'next_statuses'  =>  ['userAskCancel','canceled','received','fileReceived','notReceived','readyToDelivery'],
+                        'next_statuses'  =>  ['canceled','received','fileReceived','notReceived','readyToDelivery'],
                         'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
                             'Model'=>'owner',

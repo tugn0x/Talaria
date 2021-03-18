@@ -35,7 +35,7 @@ const RequestItem = (props) => {
         let date="";
         switch (data.status)
         {
-            case "userAskCancel": date = data.cancel_request_date; break;
+            //case "userAskCancel": date = data.cancel_request_date; break;
             case "canceled": date= data.cancel_date; break;
             case "requested": date= data.request_date; break;
 
