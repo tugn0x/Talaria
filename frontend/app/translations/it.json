@@ -249,10 +249,8 @@
   
   "app.requests.archived": "Archiviata",
   "app.requests.requested": "In richiesta",
-  "app.requests.received":"Evasa",
-  "app.requests.fileReceived": "File ricevuto",
-  "app.requests.notReceived":"Inevasa",
-  "app.requests.userAskCancel":"Richiesto annullamento",
+  "app.requests.received":"Evasa",  
+  "app.requests.notReceived":"Inevasa",  
   "app.requests.canceled":"Annullata",
   "app.requests.waitingForCost": "Accettazione costo",
   "app.requests.costAccepted": "Costo accettato",

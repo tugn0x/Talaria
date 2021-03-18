@@ -44,9 +44,8 @@ const RequestItem = (props) => {
             
             case "readyToDelivery":  date=data.delivery_ready_date; break;
             
-            case "received":
-            case "fileReceived": 
-            case "notReceived":  date=data.fullfill_date; break;
+            case "received": date=data.fullfill_date; break;            
+            case "notReceived":  date=data.notfulfill_date; break;
             default: return "";
         }
         

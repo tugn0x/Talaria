@@ -53,8 +53,7 @@
     }
 
     &.readyToDelivery,   
-    &.received,
-    &.fileReceived
+    &.received    
     {
         background-color: green;
     }
@@ -69,8 +68,7 @@
     &.canceled {
         background-color: red;
     }
-         
-  //  &.userAskCancel,
+           
     &.costAccepted,
     &.costNotAccepted{
         background-color: #FBB133;

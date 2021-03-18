@@ -55,8 +55,7 @@ class Reference extends BaseModel
     public function activepatronddrequests()
     {
         return $this->patronddrequests()
-        ->where("status",'<>','received')
-        ->where("status",'<>','fileReceived')
+        ->where("status",'<>','received')        
         ->where("status",'<>','notReceived')
         ->where("status",'<>','canceled');
     }

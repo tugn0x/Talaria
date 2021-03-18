@@ -41,12 +41,10 @@ const RequestStatus = props => {
             
             case "costAccepted":
             case "costNotAccepted":
-            case "readyToDelivery":
-            //case "userAskCancel": 
+            case "readyToDelivery":            
             case "canceled": 
             case "requested":
-            case "received":
-            case "fileReceived": 
+            case "received":            
             case "notReceived": break;
         }
     

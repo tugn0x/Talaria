@@ -99,9 +99,8 @@ class PatronDocdelRequestController extends ApiController
                 
                 case "readyToDelivery": $others=['delivery_ready_date'=>Carbon::now()]; break;
                 
-                case 'received':
-                case 'notReceived':
-                case 'fileReceived': $others=['fullfill_date'=>Carbon::now()]; break;    
+                case 'received': $others=['fullfill_date'=>Carbon::now()]; break;    
+                case 'notReceived': $others=['notfulfill_date'=>Carbon::now()]; break;                    
             }
 
             $sr->changeStatus($newstatus,$others);

@@ -37,7 +37,7 @@ class PatronDocdelRequest extends BaseModel
         //'status',  //status NON deve essere fillable perchè lo gestisco tramite StatusProvider
         'request_date',        
         'cancel_date', //data annullamento/cancellazione
-        'fullfill_date',
+        'fullfill_date', //data evasione
         'delivery_ready_date', //data articolo disponibile al ritiro
         'cost_policy', //Politica di Accettazione Costi: 0=Non accetta nessun costo; 1=Accetta qualunque costo; 2=Vuole essere informato
         'answer_cost_date', //data accettaz/rifiuto costo
@@ -46,6 +46,9 @@ class PatronDocdelRequest extends BaseModel
         'fromlibrary_note', //note bib->ute
         'archived', //rich archiviata o no
         'delivery_id', //Punto di Consegna (scelto tra uno di quelli della Biblio)
+        'delivery_format', //formato di invio da parte della biblio (es: 1-PaperCopy, 2-PDF ... vedi ISO18626)
+        'notfulfill_date', //data inevasione
+        'notfulfill_type' //motivo inevasione (1=non reperibile, 2-rich troppo vecchia, 3-ute non abili,
         
 
         // DA VALUTARE

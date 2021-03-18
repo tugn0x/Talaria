@@ -33,14 +33,14 @@ return [
     ],
    /* 'patrondocdelrequest_status' =>[
         'requested'=>20,
-        'userAskCancel'=>31,
+        'userAskCancel'=>31,  =>canceled
         'canceled'=>32,
         'waitingForCost'=>21,
         'costAccepted'=>22,
         'costNotAccepted'=>23,
         'readyToDelivery'=>39,
         'received'=>40,
-        'fileReceived'=>41,
+        'fileReceived'=>41, => received
         'notReceived'=>50
     ],*/
     'reference_material_type' => ['article'=>1,'book'=>2,'thesis'=>3,'manuscript'=>5,'cartography'=>4],

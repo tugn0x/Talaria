@@ -48,7 +48,8 @@ const RequestDetail = props => {
                     </Row>
                     <Row><Col sm={12}>
                         Annullata il {patronrequest.cancel_date}
-                        Evasa/Inevasa il  {patronrequest.fullfill_date}
+                        Evasa il  {patronrequest.fullfill_date}
+                        Inevasa il  {patronrequest.notfulfill_date}
                     </Col>
                     </Row>
                     <Row><Col sm={12}>

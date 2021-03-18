@@ -16,12 +16,12 @@ const RequestIcons = (props) => {
     }
    
     const canArchive = (data) => {
-        if(data.status=="canceled" || data.status=="received"|| data.status=="fileReceived" || data.status=="notReceived") return true;
+        if(data.status=="canceled" || data.status=="received"|| data.status=="notReceived") return true;
         return false;
     }
 
     const canDelete = (data) => {
-        if(! (data.status=="canceled" || data.status=="received"|| data.status=="fileReceived" || data.status=="notReceived" || data.status=="waitingForCost" ) ) return true;
+        if(! (data.status=="canceled" || data.status=="received"|| data.status=="notReceived" || data.status=="waitingForCost" ) ) return true;
         return false;
     }
 
