@@ -33,6 +33,7 @@ class StatusResolver
     TODO: [MAYBE] trovare modo furbo x aggiungere la possibilità di fare delle azioni prima e dopo il cambio status: es: notifica e/o email ?
             'before'    =>  [],
             'after'    =>  [],
+    TODO: trovare il modo di definire un campo "custom" x lo stato in base al modello             
     */
 
     public function __construct(Model $model, $user=false)

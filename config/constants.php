@@ -49,5 +49,26 @@ return [
         'accept'=>1,
         'inform'=>2 
     ],
+    'patrondocdelrequest_cost_policy_status' => [
+        'rejected'=>2,
+        'accepted'=>1,
+        'notanswer'=>3 
+    ],
+    'patrondocdelrequest_delivery_format' => [
+        'PaperCopy'=>1,
+        'PDF'=>2,
+        'URL'=>3 
+    ],
+    'patrondocdelrequest_notfulfill_type' => [
+        'notavailable'=>1,
+        'usernotenabled'=>2,
+        'usernottaken'=>3,
+        'userrejectcost'=>4,
+        'usernotanswercost'=>5,
+        'notfreerlyavail'=>6,
+        'wrongmetadata'=>7,
+        'baddocument'=>8
+
+    ]    
 
 ];

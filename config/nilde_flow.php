@@ -30,7 +30,7 @@ return [
                     ],
                     'waitingForCost' => [
                         'role'  =>  [], //borrow/lend/manage?
-                        'next_statuses'  =>  ['costAccepted','costNotAccepted'],
+                        'next_statuses'  =>  ['costAccepted','costNotAccepted','costNotAnswered'],
                         'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
                             'Model'=>'owner',
@@ -38,7 +38,7 @@ return [
                     ],
                     'costAccepted' => [
                         'role'  =>  ['patron'],
-                        'next_statuses'  =>  ['canceled','received','notReceived','readyToDelivery'],
+                        'next_statuses'  =>  ['received','notReceived','readyToDelivery'],
                         'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
                             'Model'=>'owner',
@@ -46,13 +46,20 @@ return [
                     ],
                     'costNotAccepted' => [
                         'role'  =>  ['patron'],
-                        'next_statuses'  =>  ['canceled','received','notReceived','readyToDelivery'],
+                        'next_statuses'  =>  ['notReceived'],
                         'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
                             'Model'=>'owner',
                         ]
                     ],
-                    /*TODO: costNotAnswered: l'utente non risponde ..*/
+                    'costNotAnswered' => [
+                        'role'  =>  ['patron'],
+                        'next_statuses'  =>  ['costAccepted','notReceived'],
+                        'constraints'   =>  ['isOwner'],
+                        'notify'    =>  [
+                            'Model'=>'owner',
+                        ]
+                    ],
                     'readyToDelivery'	=> [
                         'role'  =>  ['patron'],//borrow/lend/manage?
                         'next_statuses'  =>  ['received','notReceived'],
@@ -79,16 +86,7 @@ return [
                             'Model'=>'owner',
                         ]
                         /*'jobs' => [classe del job da eseguire]*/
-                    ],
-                    'fileReceived'	=> [
-                        'role'  =>  [],//borrow/lend/manage?
-                        'next_statuses'  =>  [],
-                        'constraints'   =>  ['isOwner'],
-                        'notify'    =>  [
-                            'Model'=>'owner',
-                        ]
-                        /*'jobs' => [classe del job da eseguire]*/
-                    ],
+                    ],                   
                 ],
             ],
         ],
