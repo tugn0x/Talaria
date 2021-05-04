@@ -230,7 +230,7 @@ const ReferencesPage = (props) => {
         console.log("REFDATA:",refData)
         console.log("coming from OAApi: isNew:",isNew)        
         console.log("REFERENCE:",reference)
-        if(isMounted && oareference && oareference.find)
+        if(isMounted && oareference && oareference.metadata)
         {
             console.log("parsing del ref con i dati presi dall'OAButton API!",oareference);
             //parsing metadati da OA + salvataggio link oa
