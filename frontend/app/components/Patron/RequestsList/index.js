@@ -185,7 +185,7 @@ const RequestsList = (props) => {
                                 <RequestItem 
                                     key={`request-${req.id}`}
                                     data={req}
-                                    editPath={props.editPath}
+                                    /*editPath={props.editPath}*/
                                     toggleSelection={() => toggleRequests(req.id)}
                                     checked={selectedRequests.includes(req.id)}
                                     archiveRequest={() => archiveRequest(req.id,multiFilter)}

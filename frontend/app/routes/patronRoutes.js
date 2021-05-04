@@ -2,7 +2,7 @@ import MyLibraryPage from 'containers/Patron/MyLibraryPage/Loadable';
 import MyLibrariesListPage from 'containers/Patron/MyLibrariesListPage/Loadable';
 // import ChangePassword from 'containers/User/ChangePassword/Loadable';
 import ReferencesPage from 'containers/Patron/ReferencesPage/Loadable';
-import RequestsPage from 'containers/Patron/RequestsPage/Loadable';
+/*import RequestsPage from 'containers/Patron/RequestsPage/Loadable';*/
 import ReferencesListPage from 'containers/Patron/ReferencesListPage/Loadable';
 import RequestsListPage from 'containers/Patron/RequestsListPage/Loadable';
 import SubRouteSwitch from 'components/SubRouteSwitch';
@@ -27,7 +27,7 @@ const routes = [
     children: [
       { path: '/archive', icon: "hdd", exact:true, name: `ArchivedRequests`, component: RequestsListPage,url: `/requests/archive`, sidebar: true, order: 2},
       { path: '/', icon: "share", exact: true, name: `PendingRequests`, component: RequestsListPage,url: `/requests`, sidebar: true, order: 1},
-      { path: '/:id?/:edit?', exact: true, name: `RequestDetail`, component: RequestsPage},
+      /*{ path: '/:id?/:edit?', exact: true, name: `RequestDetail`, component: RequestsPage},*/
     ]
   },
   { path: '/my-libraries', name: `MyLibraries`, component: SubRouteSwitch, header: true,

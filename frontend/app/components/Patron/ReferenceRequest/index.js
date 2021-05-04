@@ -146,7 +146,7 @@ const ReferenceRequest = props => {
                     <RequestItem 
                         key={`request-${req.id}`}
                         data={req} 
-                        editPath={'/patron/requests/:id?/:edit?'}
+                        /*editPath={'/patron/requests/:id?/:edit?'}*/
                     />  
                 )}
             </div>

@@ -9,9 +9,7 @@ import '../RequestItem/style.scss';
 import RequestStatus from '../RequestStatus';
 import SectionTitle from 'components/SectionTitle';
 
-/* TODO: una volta definito l'aspetto finale metto a posto le traduzioni 
-NOTA: forse questo oggetto non serve più perchè non devo visualizzare il dettaglio
-della rich in una pagina separata ma ho tutti i dati nella lista*/
+/* NOTE: actually not used anymore */
 
 const RequestDetail = props => {
     console.log('RequestDetail', props)

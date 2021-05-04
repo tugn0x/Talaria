@@ -79,7 +79,7 @@ const RequestsListPage = (props) => {
                     },
                     searchOnChange: true
                 }}
-                editPath={'/patron/requests/:id?/:edit?'}
+                /*editPath={'/patron/requests/:id?/:edit?'}*/
                 archiveRequest={archiveRequest}
                 askCancelRequest={askCancelRequest}
                 acceptCost={acceptCost}

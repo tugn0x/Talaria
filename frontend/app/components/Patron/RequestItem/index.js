@@ -52,11 +52,11 @@ const RequestItem = (props) => {
         return <span className="status-date">{formatDateTime(date,'it')}</span>;
       }
     
-    const requesturl=(id) => {
+    /*const requesturl=(id) => {
         return generatePath(`${editPath}`, {
             id
         });
-    }
+    }*/
 
     return ( 
         <Row className="list-row justify-content-between">                        

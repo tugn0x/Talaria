@@ -12,7 +12,7 @@ import messages from './messages'
 import {useIntl} from 'react-intl';
 
 
-
+/* NOTE: actually not used anymore */
 const RequestsPage = (props) => {
     console.log("RequestsPage",props)
     const {dispatch, isLoading, match, patron} = props
