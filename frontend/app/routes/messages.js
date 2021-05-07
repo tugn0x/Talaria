@@ -56,6 +56,10 @@ export default defineMessages({
         id: `${scope}.Library`,
         defaultMessage: 'Library',
     },
+    Libraries: {
+        id: `${scope}.Libraries`,
+        defaultMessage: 'Libraries',
+    },
     MyLibraries: {
         id: `${scope}.MyLibraries`,
         defaultMessage: 'My libraries',
