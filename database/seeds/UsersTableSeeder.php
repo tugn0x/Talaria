@@ -35,10 +35,10 @@ class UsersTableSeeder extends Seeder
 //        $admin->save();
 
         // Crea qualche altro utente variegato
-        factory(\App\Models\Users\User::class, 25)->create();
+        factory(\App\Models\Users\User::class, 5)->create();
 
         //creo il mio utente (e non gli assegno alcun ruolo, di default=registered)
-        $ale = factory(\App\Models\Users\User::class)->create([
+        /*$ale = factory(\App\Models\Users\User::class)->create([
             'email' => 'alessandro.tugnoli@gmail.com',
             'name' => 'Alessandro',
             'surname' => 'Tugnoli',
@@ -47,7 +47,7 @@ class UsersTableSeeder extends Seeder
             'status'=>1,
             'country_id'=>1,
             'privacy_policy_accepted'=>now(),
-        ]);
+        ]);*/
 
         $librarian = factory(\App\Models\Users\User::class)->create([
             'email' => 'a.tugnoli@area.bo.cnr.it',
