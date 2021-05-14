@@ -23,10 +23,10 @@ const routes = [
   },
 
 //  { path: '/searches', name: `Searches`, component: ChangePassword, header: true, },
-  { path: '/requests', name: `Requests`, component: SubRouteSwitch, header: true, permissions: ['patron'], 
+  { path: '/requests', name: `Requests`, component: SubRouteSwitch, header: true, roles: ['patron'], 
     children: [
       { path: '/archive', icon: "hdd", exact:true, name: `ArchivedRequests`, component: RequestsListPage,url: `/requests/archive`, sidebar: true, order: 2},
-      { path: '/', icon: "share", exact: true, name: `PendingRequests`, component: RequestsListPage,url: `/requests`, sidebar: true, order: 1},
+      { path: '/', icon: "share", exact: true, name: `PendingRequests`, component: RequestsListPage,url: `/requests`, sidebar: true, order: 1,permissions: ['patron']},
       /*{ path: '/:id?/:edit?', exact: true, name: `RequestDetail`, component: RequestsPage},*/
     ]
   },
