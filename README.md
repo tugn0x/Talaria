@@ -4,11 +4,11 @@
 3. run `docker-compose up -d` to start all needed containers
 
 # Configuration
-## Frontend
+## Frontend/ReactJS
 The frontend don't need any configuration; it's based on a nodejs container
 running the application by command `npm start` as the container starts
 
-## Laravel setup 
+## Backend/Laravel setup 
 (run these from `laravel` container)
 ```bash
 composer install
