@@ -108,13 +108,13 @@ const ReferencesPage = (props) => {
                 issue: metadata.issue?metadata.issue:'',
                 pages: metadata.pages?metadata.pages:metadata.page?metadata.page:'', 
                 material_type: pubtype,
-                issn: metadata.issn?metadata.issn:'',
+                issn: metadata.issn?String(metadata.issn):'',
                 isbn: metadata.isbn?metadata.isbn:'',
                 publisher: metadata.publisher?metadata.publisher:'',
                 publishing_place: '',
                 doi: metadata.doi?metadata.doi:'',
                 pmid: metadata.pmid?metadata.pmid:'',
-                oa_link: reference.found && Object.keys(reference.metadata).length>0 && reference.url?reference.url:null
+                oa_link: reference.url && Object.keys(reference.metadata).length>0 && reference.url?reference.url:null
             }
         }
             

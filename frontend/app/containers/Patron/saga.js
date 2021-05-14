@@ -621,7 +621,7 @@ export function* findUpdateOASaga(action) {
   }
   try {
     const request = yield call(getOA, options);
-    if(request.found && request.url)
+    if(/*request.found &&*/ request.url)
     {
       console.log("TROVATO OA!:",request.url)    
       //yield call(() => toast.success("Versione OA trovata!"))
