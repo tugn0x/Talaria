@@ -71,6 +71,9 @@ class SocialAuthController extends ApiController
             if(!$user->exists) {
                 $user->forceFill($userData);
                 $user->save();
+                //assign default "roles"
+                if(!is_null(config('api.user_default_roles')))
+                    $user->assign(config('api.user_default_roles'));                
             }
         }
 

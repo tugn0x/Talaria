@@ -358,11 +358,11 @@ export function* prepareFacebook ({ appId, version = 'v2.8', ...options }) {
 export function* loginGoogle ({ scope = 'profile', ...options } = {}) {
   const provider = 'google'
   const auth2 = yield call(window.gapi.auth2.getAuthInstance)
-  // console.log(auth2)
+  //console.log(auth2)
   const user = yield call([auth2, auth2.signIn], { scope, ...options })
-  // console.log('loginGoogle', user)
+  //console.log('loginGoogle', user)
   // const data = {accessToken: user.uc.access_token}
-  const data = {accessToken: user.wc.access_token}
+  const data = {accessToken: user.qc.access_token}
   // console.log(data)
   yield call(socialOauthSaga, {provider, data})
 }

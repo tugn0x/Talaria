@@ -15,11 +15,14 @@ export function checkRole(auth, roles) {
   // if(auth.user.status !== 1 || !auth.permissions.roles) {
     return false;
   }
-  if(auth.permissions.roles.includes("super-admin")) {
-    return true;
+  if(auth.permissions.roles){
+    if(auth.permissions.roles.includes("super-admin")) {
+      return true;
+    }
+    roles = typeof roles === 'string' ? [roles] : roles
+    return roles.map(i => auth.permissions.roles.includes(i)).filter(i => i===true).length > 0
   }
-  roles = typeof roles === 'string' ? [roles] : roles
-  return roles.map(i => auth.permissions.roles.includes(i)).filter(i => i===true).length > 0
+  return false;
 }
 
 export function checkRoutePermission(auth, route, resource) {
