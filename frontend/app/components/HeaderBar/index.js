@@ -105,6 +105,7 @@ function HeaderBar(props) {
                         </div>
                       )}
                       {
+                        checkRole(auth, "patron") && (
                         <div className="resources-menu">
                           <Row className="head item">
                               <i className={`fas fa-book-reader`}></i>
@@ -115,7 +116,7 @@ function HeaderBar(props) {
                                 Patron main page 
                               </NavLink>    
                           </Row>
-                        </div>
+                        </div>)
                       }
                         {
                           auth.permissions.resources && (<ResourceMenu resources={auth.permissions.resources} />)

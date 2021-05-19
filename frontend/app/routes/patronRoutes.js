@@ -12,7 +12,7 @@ import ReferencesGroups from 'containers/Patron/ReferencesGroups/Loadable';
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
-  { path: '/references', name: `Bibliography`, component: SubRouteSwitch, header: true, roles: ['registered'],
+  { path: '/references', name: `Bibliography`, component: SubRouteSwitch, header: true, roles: ['patron'],
     children: [
       { path: '/new', exact: true, icon: "plus", name: `ReferenceNew`, url: `/references/new`, component: ReferencesPage, sidebar: true, order:1},
       { path: '/labels', icon: "tags", exact: true, name: `Labels`, url: '/references/labels', component: ReferencesLabels, sidebar: true, order:3 },
@@ -30,7 +30,7 @@ const routes = [
       /*{ path: '/:id?/:edit?', exact: true, name: `RequestDetail`, component: RequestsPage},*/
     ]
   },
-  { path: '/my-libraries', name: `MyLibraries`, component: SubRouteSwitch, header: true,
+  { path: '/my-libraries', name: `MyLibraries`, component: SubRouteSwitch, header: true, roles: ['patron'],
     children: [
       { path: '/new', icon: "plus", name: `MyLibraryNew`,  component: MyLibraryPage, url:'/my-libraries/new', sidebar: true, order: 1},
       { path: '/:page?', exact: true,icon: "landmark", name: `MyLibraries`, url: `/my-libraries`, component: MyLibrariesListPage, sidebar: true,order: 2},
