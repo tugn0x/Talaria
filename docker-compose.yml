@@ -121,6 +121,7 @@ services:
       - ./frontend:/usr/src/app
       - ./.env:/usr/src/.env
     command: npm start
+    #command: node --stack-size=3000 /usr/local/bin/npm install
     expose:
     - 3000
     restart: always

@@ -1,7 +1,10 @@
+The software requires docker installed in your environment.
+
 # Install
 1. change settings in `.env.example` and rename it as `.env`
 2. check that your hostname matches `API_DOMAIN` and `FRONTEND_DOMAIN` as it was used for `traefik` load balancer 
-3. run `docker-compose up -d` to start all needed containers
+3. `docker network create proxy`
+4. run `docker-compose up -d` to start all needed containers
 
 # Configuration
 ## Frontend/ReactJS
