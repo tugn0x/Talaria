@@ -1,7 +1,11 @@
-logLevel = "DEBUG"
-debug = true
-#logLevel = "ERROR"
-#debug = false
+# debug mode
+#logLevel = "DEBUG"
+#debug = true
+
+# production mode
+logLevel = "ERROR"
+debug = false
+
 insecureSkipVerify = true
 
 # Traefik will listen for traffic on both HTTP and HTTPS.
