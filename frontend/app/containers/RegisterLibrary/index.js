@@ -68,7 +68,7 @@ const RegisterLibrary = (props) => {
     }
 
     return (
-        <BasePage {...props}>
+        <BasePage {...props} routes={[]} messages={messages}>
             <h2>{intl.formatMessage(wizardMessages.header)}</h2>
             <Navigation 
                 step={currentStep} 

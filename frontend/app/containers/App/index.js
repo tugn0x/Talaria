@@ -50,7 +50,7 @@ function App(props) {
         <Route path="/admin" component={() => <AdminPage {...authProps} headermenu={true}  /> }  />
         <Route path="/library/:library_id" component={({match}) => <LibraryPage {...authProps} match={match} headermenu={true} /> }  />
 
-        <Route path="/register-library" component={() => <RegisterLibraryPage {...authProps}/> }  />
+        <Route path="/register-library" component={() => <RegisterLibraryPage {...authProps} headermenu={false}/> }  />
 
         <Route path="/consortium" component={() => <HomePage {...authProps} headermenu={true}/> }  />
         <Route path="/institution" component={() => <HomePage {...authProps} headermenu={true}/> } />
