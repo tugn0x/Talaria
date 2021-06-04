@@ -5,6 +5,7 @@ import {useIntl} from 'react-intl'
 import messages from 'routes/messages';
 import {Row, Col} from 'reactstrap';
 import {NavLink} from 'react-router-dom';
+import ResourceHeaderBar from '../ResourceHeaderBar';
 
 const SubHeaderBar = (props) => {
     const routes = props.routes.filter((route)=>route.header);
@@ -27,7 +28,8 @@ const SubHeaderBar = (props) => {
 
     return (
         <div className="app-subheader bg-dark-bk">
-            <div className="container">
+            {props.auth.permissions.resources && <ResourceHeaderBar auth={props.auth} match={props.match}/>}
+            <div className="container">                
                 <Row className="subheader-menu pl-0">
                     { routes.map((route,i)=> (
                         <Col xs='auto' key={`${route.url}-${i}`} className={`${route.current ? 'current-page' : ''}`}>

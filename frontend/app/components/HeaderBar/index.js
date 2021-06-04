@@ -22,7 +22,6 @@ import subStringer from 'utils/subStringer'
 import {checkRole} from 'utils/permissions'
 import Notification from '../Notification'
 import {Col, Row} from 'reactstrap';
-import ResourceHeaderBar from '../ResourceHeaderBar';
 
 function HeaderBar(props) {
 
@@ -158,9 +157,8 @@ function HeaderBar(props) {
           </div>
           </div>
         </div>
-      </header>
-      {auth.permissions.resources && <ResourceHeaderBar auth={auth} match={match}/>}
-      { headermenu && <SubHeaderBar routes={routes} auth={auth}/> }
+      </header>      
+      { headermenu && <SubHeaderBar routes={routes} auth={auth} match={match}/> }
     </>
   );
 }
