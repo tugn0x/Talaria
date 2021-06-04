@@ -22,6 +22,7 @@ import subStringer from 'utils/subStringer'
 import {checkRole} from 'utils/permissions'
 import Notification from '../Notification'
 import {Col, Row} from 'reactstrap';
+import ResourceHeaderBar from '../ResourceHeaderBar';
 
 function HeaderBar(props) {
 
@@ -29,7 +30,7 @@ function HeaderBar(props) {
 
   // console.log('HeaderBar', props)
 
-  const { auth, isLogged, history, headermenu, routes, isMobile } = props
+  const { auth, isLogged, history, headermenu, routes, isMobile,match } = props
 
   const currentRoute = routes && routes.filter(route => route.current).length > 0 ? routes.filter(route => route.current) : null;
 
@@ -51,7 +52,7 @@ function HeaderBar(props) {
       <header className="app-header navbar bg-grey-white px-4">
       <div className="container">
         <div className="header-container row">
-          <div className="header-left-col">
+          <div className="header-left-col">            
             { isLogged && headermenu && isMobile &&
               currentRoute && currentRoute[0].children.length > 0 &&
               <AppSidebarToggler display="xs">
@@ -59,14 +60,14 @@ function HeaderBar(props) {
                 <span></span>
                 <span></span>
               </AppSidebarToggler>
-            }
+            }            
             <AppNavbarBrand
               full={{ src: logo, alt: 'Nilde Logo' }}
               minimized={{ src: logomini, width: 30, height: 30, alt: 'Nilde Logo' }}
               href={'/'}
               className="col-md-7"
             />
-          </div>
+          </div>          
           <div className="header-right-col">
             <Nav className="account-nav" navbar>
               {
@@ -158,7 +159,8 @@ function HeaderBar(props) {
           </div>
         </div>
       </header>
-      { headermenu && <SubHeaderBar routes={routes} /> }
+      {auth.permissions.resources && <ResourceHeaderBar auth={auth} match={match}/>}
+      { headermenu && <SubHeaderBar routes={routes} auth={auth}/> }
     </>
   );
 }

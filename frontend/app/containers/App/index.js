@@ -52,10 +52,10 @@ function App(props) {
 
         <Route path="/register-library" component={() => <RegisterLibraryPage {...authProps} headermenu={false}/> }  />
 
-        <Route path="/consortium" component={() => <HomePage {...authProps} headermenu={true}/> }  />
-        <Route path="/institution" component={() => <HomePage {...authProps} headermenu={true}/> } />
+        <Route path="/consortium" component={({match}) => <HomePage {...authProps}  match={match} headermenu={true}/> }  />
+        <Route path="/institution" component={({match}) => <HomePage {...authProps}  match={match}  headermenu={true}/> } />
         <Route path="/alpe" component={() => <HomePage {...authProps}/> }  />
-        <Route exact path="/" component={(routerProps) => <HomePage {...authProps} />}/>
+        <Route exact path="/" component={({routerProps,match}) => <HomePage {...authProps} match={match} />}/>
         <Route component={() => <NotFoundPage {...authProps} /> } path="*" />
       </Switch>
   );

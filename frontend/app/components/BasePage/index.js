@@ -64,6 +64,7 @@ function BasePage(props) {
   return (
     <>
       <HeaderBar
+        match={props.match}
         isLogged={props.isLogged}
         routes={lightRoutes}
         location={props.location}
