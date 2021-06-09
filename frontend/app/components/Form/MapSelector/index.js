@@ -62,7 +62,7 @@ function MyMap(props) {
 const MapSelector = (props) => {      
     console.log("MAPSelector:",props)   
     
-    const {field,label,handleChange,getMarkers,markers,onAddressSearch,placesList,onMarkerClick}=props;
+    const {field,label,handleChange,getMarkers,markers,onPlacesSearch,placesList,onMarkerClick}=props;
     
     let zoom=12;
     const intl = useIntl()
@@ -110,7 +110,7 @@ const MapSelector = (props) => {
       {
         setSearchAddress(searchAddress)
         if(searchAddress!="" && searchAddress.length>=2)
-          onAddressSearch(searchAddress)
+          onPlacesSearch(searchAddress)
       }      
   }
 

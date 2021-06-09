@@ -169,7 +169,7 @@ const CustomForm = (props) => {
                                                                 field.type === 'map-selector' &&
                                                                         <MapSelector  
                                                                             field={field} 
-                                                                            onAddressSearch={props.onAddressSearch}
+                                                                            onPlacesSearch={props.onPlacesSearch}
                                                                             getMarkers={props.getMarkers}
                                                                             markers={props.markers}
                                                                             onMarkerClick={props.onMarkerClick}

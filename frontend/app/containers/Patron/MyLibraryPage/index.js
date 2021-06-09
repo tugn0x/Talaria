@@ -117,7 +117,7 @@ function MyLibraryPage(props) {
             messages={messages}
             cancelButton={false}
             onChangeData={(field_name, value) => handleChangeData(field_name, value)}
-            onAddressSearch={(search)=>dispatch(requestSearchPlacesByText(search))}
+            onPlacesSearch={(search)=>dispatch(requestSearchPlacesByText(search))}
             places={props.places}
             getMarkers={(pos)=>dispatch(requestGetLibraryListNearTo(pos))}
             markers={props.libraryList}
