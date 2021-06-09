@@ -31,5 +31,17 @@ createSelector(
   substate => (substate.groupsOptionList)
 );
 
+const placesSelector = () => 
+createSelector(
+  selectPatronDomain,
+  substate => (substate.places)
+);
+
+const libraryListSelector = () => 
+createSelector(
+  selectPatronDomain,
+  substate => (substate.libraryList)
+);
+
 export default makeSelectPatron;
-export {  isPatronLoading,labelsOptionListSelector,groupsOptionListSelector };
+export {  isPatronLoading,labelsOptionListSelector,groupsOptionListSelector,placesSelector,libraryListSelector };

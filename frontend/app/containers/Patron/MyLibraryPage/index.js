@@ -5,7 +5,7 @@
  *
  */
 
-import React, {useEffect} from 'react';
+import React, {useEffect,useState} from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -15,7 +15,8 @@ import messages from './messages';
 import makeSelectLibrary from 'containers/Library/selectors';
 import { CustomForm } from 'components';
 import {requestUser,requestGetLibrary, requestGetLibrariesList} from 'containers/Library/actions';
-import {requestAccessToLibrary,requestUpdateAccessToLibrary} from '../actions';
+import {requestAccessToLibrary,requestUpdateAccessToLibrary,requestSearchPlacesByText,requestGetLibraryListNearTo} from '../actions';
+import { placesSelector,libraryListSelector } from '../selectors';
 
 function MyLibraryPage(props) {
   console.log('MyLibraryPage', props)
@@ -28,12 +29,13 @@ function MyLibraryPage(props) {
   const user_id = props.auth.user.id;
   const departmentOptionList = props.library.departmentOptionList 
   const titleOptionList = props.library.titleOptionList
-  const libraryOptionList = props.library.libraryOptionList && props.library.libraryOptionList.map(lib =>  {return {value: lib.id, label: lib.name}})
-  
+  const libraryOptionList = props.library.libraryOptionList && props.library.libraryOptionList.map(lib =>  {return {value: lib.id, label: lib.name}})  
 
   const handleChangeData = (field_name, value) => {
+    //Usato per aggiornare le tendine con dipartimenti/... un base alla biblio scelta
     if(field_name==="library_id" && value)
-      dispatch(requestGetLibrary(value.value,('departments,titles')))
+      dispatch(requestGetLibrary(value,('departments,titles')))
+    
     //NOTA: le tendine dipartimenti e titles dovrebbero essere REQUIRED solo se sono piene
     //Stiamo valutando come implementarlo xke' al momento anche se si modifica il fields.x.required
     //al volo, non viene renderizzato nuovamente il componente, inoltre
@@ -54,13 +56,15 @@ function MyLibraryPage(props) {
     }*/
   }
 
+  const [choosedLibraryId,setChoosedLibraryId]=useState();
+
   useEffect(() => {
     if(!isNew) {
       dispatch(requestUser(params.library_id, params.id))
       dispatch(requestGetLibrary(params.library_id,('departments,titles')))      
-    }else if(isNew){
+    }/*else if(isNew){
       dispatch(requestGetLibrariesList())
-    }
+    }*/
   }, [])
 
   useEffect(() => {
@@ -82,7 +86,7 @@ function MyLibraryPage(props) {
                 ...formData, 
                 library_id: params.library_id, 
                 id: params.id,
-                message: `${intl.formatMessage(messages.libraryUpdateMessage)}` })
+                message: `${intl.formatMessage(messages.libraryUpdateMessage)}` })                
                 ) } 
             requestData={{ 
               name: library.name, 
@@ -99,18 +103,25 @@ function MyLibraryPage(props) {
             fields={fields}
             title={intl.formatMessage(messages.header)}
             messages={messages}
+            cancelButton={false}
           /> 
       }{isNew && 
           <CustomForm 
-            submitCallBack={(formData) => dispatch(requestAccessToLibrary(
+            submitCallBack={(formData) => dispatch(requestAccessToLibrary(              
             {...formData, user_id},intl.formatMessage(messages.libraryCreateMessage)))} 
+            submitText={intl.formatMessage(messages.librarySubmit)}
             fields={fieldsIsNew}
             department_id={departmentOptionList} 
             title_id={titleOptionList} 
             title={intl.formatMessage(messages.headerNew)}
             messages={messages}
-            library_id={libraryOptionList}
+            cancelButton={false}
             onChangeData={(field_name, value) => handleChangeData(field_name, value)}
+            onAddressSearch={(search)=>dispatch(requestSearchPlacesByText(search))}
+            places={props.places}
+            getMarkers={(pos)=>dispatch(requestGetLibraryListNearTo(pos))}
+            markers={props.libraryList}
+            onMarkerClick={console.log("onMarkerClick")}
           /> 
       }
     </>
@@ -118,7 +129,9 @@ function MyLibraryPage(props) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  library: makeSelectLibrary()
+  library: makeSelectLibrary(),
+  places: placesSelector(),
+  libraryList: libraryListSelector()
 });
 
 function mapDispatchToProps(dispatch) {

@@ -1,0 +1,9 @@
+.leaflet-container {
+    width: 100%; //100vw;
+    height: 400px; //80vh
+    z-index: 0; //in modo che rimanga sotto agli altri
+}
+
+.map-search {
+    z-index: 2000;
+}

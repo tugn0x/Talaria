@@ -72,5 +72,8 @@ export default defineMessages({
     id: `${scope}.createMessage`,
     defaultMessage: 'Library added',
   },
-
+  librarySubmit: {
+    id: `${scope}.librarySubmit`,
+    defaultMessage: 'Subscribe to library',
+  },
 });

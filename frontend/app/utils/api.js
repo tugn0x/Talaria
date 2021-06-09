@@ -474,6 +474,14 @@ export const getLibrariesList = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/?page=${page}&q=${query}`, options)
 };
 
+export const getLibrariesListNearTo = (options) => {
+  const pos = options.pos;
+  const lat=pos.lat
+  const lon=pos.lon
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/nearto?lat=${lat}&lon=${lon}`, options)
+};
+
 export const getLibraryDeliveries = (options) => {
   const library_id = options.id
   options = getOption(options);

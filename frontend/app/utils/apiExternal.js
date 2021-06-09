@@ -4,6 +4,10 @@ const PMID_API_URL='https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi'
                     
 const OPENACCESSBUTTON_API_URL='https://api.openaccessbutton.org'
 
+const OPENSTREETMAP_API_URL='https://nominatim.openstreetmap.org'
+
+
+
 
 //Get Metadata using OpenAccessButton API and DOI
 export const getReferenceByDOI = (options) => {
@@ -28,3 +32,8 @@ export const getOA = (options) => {
 
     return request(`${OPENACCESSBUTTON_API_URL}/find?id=${query}`,  {method: 'get'})
 };
+
+export const getPlacesByText = (options) => {
+    let query=options.search
+    return request(`${OPENSTREETMAP_API_URL}/search?format=json&q=${query}`,  {method: 'get'})
+}

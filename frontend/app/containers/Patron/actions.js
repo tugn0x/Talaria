@@ -42,7 +42,13 @@ import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_FIND_UPDATE_OA,
   REQUEST_FIND_UPDATE_OA_SUCCESS,
   REQUEST_FIND_UPDATE_OA_FAIL,
-  REQUEST_CLEAN_IMPORTREFERENCE
+  REQUEST_CLEAN_IMPORTREFERENCE,
+  REQUEST_SEARCH_PLACES_BY_TEXT,
+  REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
+  REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
+  REQUEST_GET_LIBRARY_LIST,
+  REQUEST_GET_LIBRARY_LIST_SUCCESS
+
 } from "./constants";
 
 export function defaultAction() {
@@ -273,6 +279,20 @@ export function requestLabelsOptionList(query) {
   };
 }
 
+export function requestGetLibraryListNearTo(pos) {
+  return {
+    type: REQUEST_GET_LIBRARY_LIST,
+    pos
+  };
+}
+
+export function requestGetLibraryListNearToSuccess(result) {
+  return {
+    type: REQUEST_GET_LIBRARY_LIST_SUCCESS,
+    result
+  };
+}
+
 export function requestPostLabel( label_name, message) {
   return {
     type: REQUEST_POST_LABEL,
@@ -472,6 +492,28 @@ export function requestFindOASuccess(result) {
     result
   };
 }
+
+export function requestSearchPlacesByText(search) {
+  return {
+    type: REQUEST_SEARCH_PLACES_BY_TEXT,
+    search
+  };
+}
+
+export function requestSearchPlacesByTextSuccess(result) {
+  return {
+    type: REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
+    result
+  };
+}
+
+export function requestSearchPlacesByTextFail(error) {
+  return {
+    type: REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
+    error
+  };
+}
+
 
 
 /* END External request action */

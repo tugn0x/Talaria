@@ -62,11 +62,19 @@ export const fields = {
 }
 
 export const fieldsIsNew = { 
-   library_id: { 
+   /*library_id: { 
         type: "custom-select",
         name: 'library_id',
         width: "col-md-12",
         options: 'library_id',
+        required: true,
+    },*/    
+    library_id: { 
+        type: "map-selector",
+        name: 'library_id',
+        nolabel: true,
+        width: "col-md-12",
+        freeSearch: true,
         required: true,
     },
     department_id: { 
@@ -87,6 +95,7 @@ export const fieldsIsNew = {
         type: "text",
         name: "label",
         width: "col-md-12",
+        maxLength: 20
     },
     user_referent: { 
         type: "text",

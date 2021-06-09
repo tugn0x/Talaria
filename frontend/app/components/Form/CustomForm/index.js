@@ -14,6 +14,8 @@ import CheckBox from '../CheckBox'
 import './style.scss'
 import scrollTo from 'utils/scrollTo';
 import {withRouter} from 'react-router-dom'
+import MapSelector from '../MapSelector';
+
 // PROPS
 // fields
 // callback action
@@ -24,7 +26,7 @@ const CustomForm = (props) => {
     const {
         submitCallBack = () => null,
         title = 'Form',
-        //submitText = "Submit",
+        submitText,
         submitColor = "brown",
         fields = {},
         searchOptionList,
@@ -39,7 +41,7 @@ const CustomForm = (props) => {
     const [formData, setFormData] = useState({})
 
     
-    /* HANDLE CHANGE Generico */
+    /* HANDLE CHANGE Generic */
     const handleChange = (value, field_name) =>{
         setFormData({ ...formData, [field_name]: value   });
         setIsSubmitDisabled(false)
@@ -92,10 +94,10 @@ const CustomForm = (props) => {
                                             <Row>
                                                 {fieldsGroup.fields.map((field, i) => {
                                                     return (
-                                                        <fieldset hidden={field.hidden}  key={`${field.name}-${i}`} className={`${field.width ? field.width : ""} mb-3`}>
-                                                            <div className="form-label">
-                                                                {messages[field.name] && intl.formatMessage(messages[field.name])}
-                                                            </div>
+                                                        <fieldset hidden={field.hidden}  key={`${field.name}-${i}`} className={`${field.width ? field.width : ""} mb-3`}>                                                                
+                                                                {!field.nolabel && <div className="form-label">
+                                                                    {messages[field.name] && intl.formatMessage(messages[field.name])}
+                                                                </div>}
                                                                 {field.type === 'list-checkbox' &&
                                                                     <ListCheckBox
                                                                         type="checkbox"
@@ -164,9 +166,21 @@ const CustomForm = (props) => {
                                                                         resources={props.resources && props.resources}
                                                                     /> 
                                                                 ||
+                                                                field.type === 'map-selector' &&
+                                                                        <MapSelector  
+                                                                            field={field} 
+                                                                            onAddressSearch={props.onAddressSearch}
+                                                                            getMarkers={props.getMarkers}
+                                                                            markers={props.markers}
+                                                                            onMarkerClick={props.onMarkerClick}
+                                                                            handleChange={(value) => handleChange(value, field.name)}
+                                                                            placesList={props.places}
+                                                                            label={messages[field.name] ? intl.formatMessage(messages[field.name]) : ""}
+                                                                        ></MapSelector>                                                                    
+                                                                ||
                                                                     <>  {/*  TEXT, TEXTAREA, NUMBER  */}
                                                                         <InputField 
-                                                                            field={field}
+                                                                            field={field}                                                                            
                                                                             label={messages[field.name] ? messages[field.name] : ""}
                                                                             data={!formData[field.name] && props.requestData && props.requestData[field.name] ? props.requestData[field.name] : formData[field.name]}
                                                                             handleChange={(value) => handleChange(value, field.name)}
@@ -184,7 +198,7 @@ const CustomForm = (props) => {
                         </div>
                         <div className="d-flex justify-content-between">
                             <Button color={submitColor} disabled={isSubmitDisabled} type="submit" block>
-                            {intl.formatMessage(formMessages.submit)}
+                            {submitText?submitText:intl.formatMessage(formMessages.submit)}
                             </Button>
                             {cancelButton && 
                                 <Button color="secondary" onClick={() => props.history.goBack() } >

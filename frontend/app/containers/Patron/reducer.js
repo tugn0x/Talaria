@@ -34,7 +34,12 @@ import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_FIND_UPDATE_OA,
   REQUEST_FIND_UPDATE_OA_FAIL,
   REQUEST_FIND_UPDATE_OA_SUCCESS,
-  REQUEST_CLEAN_IMPORTREFERENCE
+  REQUEST_CLEAN_IMPORTREFERENCE,
+  REQUEST_SEARCH_PLACES_BY_TEXT,
+  REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
+  REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
+  REQUEST_GET_LIBRARY_LIST,
+  REQUEST_GET_LIBRARY_LIST_SUCCESS
 } from './constants';
 
 export const initialState = {
@@ -62,6 +67,10 @@ export const initialState = {
 //  importedreference: {},
   patronrequest: {},
   oareference: {},
+  places: {},
+  libraryList: {    
+    data: [],
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -270,6 +279,30 @@ const PatronReducer = (state = initialState, action) =>
           //draft.importedreference={};
           draft.oareference={};
           break;
+
+        case REQUEST_SEARCH_PLACES_BY_TEXT:
+          draft.loading=true;
+          break;
+        case REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS:
+          draft.loading=false;
+          draft.places=action.result
+          break;  
+
+        case REQUEST_SEARCH_PLACES_BY_TEXT_FAIL:
+          draft.loading = false;
+          draft.error = initialState.error;          
+          draft.places={}
+          break;   
+
+        case REQUEST_GET_LIBRARY_LIST:
+          draft.loading = true;
+          draft.error = action.error;
+          break;  
+        case REQUEST_GET_LIBRARY_LIST_SUCCESS:
+          draft.loading = false;
+          draft.error = initialState.error;
+          draft.libraryList = action.result;
+          break;  
           
       case REQUEST_SUCCESS:
         draft.loading = false;

@@ -5,7 +5,7 @@ import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST,
   REQUEST_UPDATE_LABEL, REQUEST_REMOVE_LABEL, REQUEST_POST_LABEL,
   REQUEST_POST_GROUP, REQUEST_REMOVE_GROUP, REQUEST_UPDATE_GROUP,
-  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,REQUEST_REQUESTS_LIST,REQUEST_GET_REQUEST,REQUEST_DELETE_REFERENCE, REQUEST_GET_LIBRARY_DELIVERIES, REQUEST_POST_REQUEST, /*REQUEST_FIND_REFERENCE_BY_DOI, REQUEST_FIND_REFERENCE_BY_PMID,*/REQUEST_FIND_OA,REQUEST_FIND_UPDATE_OA} from './constants';
+  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,REQUEST_REQUESTS_LIST,REQUEST_GET_REQUEST,REQUEST_DELETE_REFERENCE, REQUEST_GET_LIBRARY_DELIVERIES, REQUEST_POST_REQUEST, /*REQUEST_FIND_REFERENCE_BY_DOI, REQUEST_FIND_REFERENCE_BY_PMID,*/REQUEST_FIND_OA,REQUEST_FIND_UPDATE_OA,REQUEST_SEARCH_PLACES_BY_TEXT,REQUEST_GET_LIBRARY_LIST} from './constants';
 import {
   requestError,
   stopLoading,
@@ -29,6 +29,10 @@ import {
   requestFindOASuccess,  
   requestFindUpdateOASuccess,
   requestFindUpdateOAFail,
+  requestSearchPlacesByTextSuccess,
+  requestSearchPlacesByTextFail,  
+  requestGetLibraryListNearToSuccess
+
 } from './actions';
 import { push } from 'connected-react-router';
 import { toast } from "react-toastify";
@@ -61,14 +65,18 @@ import {  getMyLibrary,
           requestApplyLabelsToReferences,
           requestApplyGroupsToReferences,
           getLibraryDeliveries,
-          createPatronRequest
+          createPatronRequest,  
+          getLibrariesListNearTo        
         } from 'utils/api';
 
 import {
         getReferenceByDOI,
         getReferenceByPMID,
-        getOA
+        getOA,
+        getPlacesByText
         } from 'utils/apiExternal';        
+
+import {userPermissionsSaga} from '../Auth/AuthProvider/saga';
 
 export function* requestMyLibrariesSaga(action) {
   const options = {
@@ -345,6 +353,7 @@ export function* requestAccessToLibrarySaga(action) {
   };
   try {
     const request = yield call(requestAccessToLibrary, options);
+    yield call(userPermissionsSaga) //update roles in user profiles
     yield call(requestMyLibrariesSaga);
     yield put(push("/patron/my-libraries"))
     yield call(() => toast.success(action.message))
@@ -640,6 +649,36 @@ export function* findUpdateOASaga(action) {
   }
 }
 
+export function* findPlacesByText(action) {
+  console.log("findPlacesByText:", action);
+  const options = {
+    method: 'get',    
+    search: action.search,    
+  }
+  try {
+    const result = yield call(getPlacesByText, options);
+    yield put(requestSearchPlacesByTextSuccess(result));          
+  } catch(e) {    
+    yield put(requestSearchPlacesByTextFail(e.message));
+  }
+}
+
+export function* requestLibraryListNearToSaga(action = {}) {
+  console.log("SAGA-requestLibraryListNearToSaga",action)
+  const options = {
+    method: 'get',
+    pos: action.pos ?  action.pos : ""
+  }
+  try {
+    const request = yield call(getLibrariesListNearTo, options);
+    yield put(requestGetLibraryListNearToSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+
+
 //////////////////// END EXTERNAL API /////////////////
 
 /**
@@ -681,4 +720,6 @@ export default function* patronSaga() {
   yield takeLatest(REQUEST_FIND_REFERENCE_BY_PMID,searchReferenceByPMIDSaga);*/
   yield takeLatest(REQUEST_FIND_OA,findOASaga);
   yield takeEvery(REQUEST_FIND_UPDATE_OA,findUpdateOASaga);
+  yield takeLatest(REQUEST_SEARCH_PLACES_BY_TEXT,findPlacesByText);
+  yield takeLatest(REQUEST_GET_LIBRARY_LIST, requestLibraryListNearToSaga);
 }
