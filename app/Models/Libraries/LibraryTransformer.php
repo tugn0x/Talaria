@@ -84,7 +84,12 @@ class LibraryTransformer extends BaseTransformer
 
     public function transform(Model $model)
     {
+        $faker=\Faker\Factory::create('it_IT');
+
         $to_merge = [
+            //just to test localization (because now we haven't such fields in database)
+            'lat'=> $faker->latitude(35,45), 
+            'lon'=> $faker->longitude(10,15), 
 //            patronRoutes
         ];
         return $this->applyTransform($model, $to_merge);

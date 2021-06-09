@@ -194,4 +194,53 @@ class Library extends BaseModel
     public function deliveries() {
         return $this->hasMany(Delivery::class);
     }
+
+    public function scopeNearTo($query, $latitude,$longitude,$max_range=null)
+    {
+        if($max_range && $max_range!="" && $max_range!=null)
+        $max_range="<= ".$max_range;
+
+        //TO TEST THIS function
+        return $query->where('id','>',0);
+        
+        //TODO when we implement lat/lon fields in DB, use one of these methods below:
+            
+        //mariaDB 10.5.10 (OK support for ST_DISTANCE_SPHERE)
+        /*$max_range=is_null($max_range)?15000:$max_range;
+        return $query->whereRaw("
+        ST_DISTANCE_SPHERE (
+            ST_GeomFromText('point(longitude latitude)'),
+            ST_GeomFromText('point(? ?)') 
+            ) < ".$max_range, [
+        $longitude,
+        $latitude,
+        ]);*/
+
+        
+        //MySQL 5.7 o mariaDB <> 10.5.10 (NO support for ST_DISTANCE_SPHERE)
+        /*return $query->whereRaw("
+        ST_Distance (
+            point(longitude,latitude),
+            point(?,?) 
+            ) ".$max_range, [
+        $longitude,
+        $latitude,
+        ]);*/
+        
+        //Any Mysql/Maria => Manual "distance" calculation in km (and return also distance from pos)
+        return $query->addSelect(new Expression("*,6371 * acos(
+            cos(radians($latitude)) * cos(radians(latitude)) * cos(radians(longitude) - radians($longitude))
+            +
+            sin(radians($latitude)) * sin(radians(latitude))
+          ) as distance"))->whereRaw("
+        6371 * acos(
+            cos(radians($latitude)) * cos(radians(latitude)) * cos(radians(longitude) - radians($longitude))
+            +
+            sin(radians($latitude)) * sin(radians(latitude))
+          ) ".$max_range, [
+        $longitude,
+        $latitude,
+        ])->orderBy("distance","asc");    
+                
+    }
 }

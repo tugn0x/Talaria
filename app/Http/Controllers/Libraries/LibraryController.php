@@ -105,4 +105,15 @@ class LibraryController extends ApiController
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
+
+    public function nearTo (Request $request) {
+        if($request->input("lat") && $request->input("lon"))
+        {
+            $collection=$this->model->nearTo($request->input("lat"),$request->input("lon")/*,$request->input("range")*/)->get();
+        
+            //$collection = $this->nilde->index($model, $request);        
+            //return $this->response->paginator($collection, new $this->transformer())->morph();
+            return $this->response->collection($collection, new $this->transformer())->morph();
+        }
+    }
 }

@@ -104,6 +104,7 @@ Route::group([
 
     Route::post('public', 'LibraryController@publicCreate')->name('public-create');
     Route::get('', 'LibraryController@index')->name('index');
+    Route::get('nearto', 'LibraryController@nearTo')->name('nearto');
     Route::get('option-items', 'LibraryController@optionList')->name('option-items');
     Route::get('{id}', 'LibraryController@show')->name('show');
     Route::get('{id}/departments', 'LibraryController@departments')->name('departments');
