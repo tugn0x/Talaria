@@ -5,7 +5,7 @@
  *
  */
 
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import messages from './messages';
 /*
 import { FormattedMessage } from 'react-intl';
@@ -15,21 +15,106 @@ import { connect } from 'react-redux'; */
 import {BasePage} from "components";
 import userRoutes from "routes/userRoutes";
 import history from 'utils/history';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import makeSelectPatron, {isPatronLoading} from '../Patron/selectors';
+//import MyLibrariesList from '../../components/Patron/MyLibrariesList';
+import MyLibrariesListPage from '../Patron/MyLibrariesListPage/Loadable';
+import libmessages from '../Patron/MyLibrariesListPage/messages'; 
+import { NavLink } from 'react-router-dom';
+import resourcesMap from '../../routes/resources';
+import {useIntl} from 'react-intl';
+import RegisterLibrary from '../RegisterLibrary'
+import MyLibraryPage from '../Patron/MyLibraryPage'
 
 function HomePage(props) {
   console.log('HomePage', props)  
+  const {dispatch, isLoading, patron,match} = props;
+  const librariesList = patron.my_libraries.data;
+
+  const [PatronReg,setPatronReg]=useState (true);
+  const togglePatronReg = () => {setPatronReg(true); setLibraryReg(false);}
+  const [LibraryReg,setLibraryReg]=useState (false);
+  const toggleLibraryReg = () => {setLibraryReg(true); setPatronReg(false);}
+
+  const intl=useIntl();
     
-  useEffect(() => {    
+  useEffect(() => { 
+       
     //se l'utente è loggato e non ha abiities=>è solo un patron!
     //e redirect nella sua patron page=>bibliografia
-    if(props.isLogged && props.auth && ( (!props.auth.permissions.resources || props.auth.permissions.resources.length==0) && (props.auth.permissions.roles && props.auth.permissions.roles.includes("patron")) ) )
-      history.push('/patron/references');     
+    if(props.isLogged && props.auth && ( (!props.auth.permissions.resources || props.auth.permissions.resources.length==0) && (props.auth.permissions.roles && props.auth.permissions.roles.length==2 && props.auth.permissions.roles.includes("patron")) ) )
+      history.push('/patron/references');   
+    else if (props.auth.permissions.resources && (Object.keys(props.auth.permissions.resources).length==1))    
+    {      
+      //se ho solo una risorsa da gestire vado nella pag specifica
+      let res="";
+      let resid="";
+      
+      if(props.auth.permissions.resources.libraries)
+      {
+        res="libraries";
+        resid=props.auth.permissions.resources.libraries[0].resource.id;        
+      }
+      else if(props.auth.permissions.resources.institutions)
+      {
+        res="institutions";
+        resid=props.auth.permissions.resources.institutions[0].resource.id;        
+      }
+      //else if (projects,consortiums ....)
+      
+      if(res!="")
+        history.push(resourcesMap[res]+resid);
+    }
   },[]) 
-
-  return (
+libmessages
+  return ( //se sono solo registered o ho più ruoli
     <>
       <BasePage {...props} routes={userRoutes} messages={messages} >
-       <h1 style={{color: 'green'}}>TODO: homepage</h1>
+       <h1 style={{color: 'green'}}>{intl.formatMessage({id:'app.containers.HomePage.header'})}</h1>
+       <h3 style={{color: 'gray'}} className="mb-5">{intl.formatMessage({id:'app.containers.HomePage.subHeader'})}</h3>
+       {props.auth.permissions.roles.includes("registered") && 
+       (!props.auth.permissions.resources || props.auth.permissions.resources.length==0) && 
+       <>
+       <p>{intl.formatMessage({id:'app.containers.HomePage.intro1'})}</p>       
+       <p>{intl.formatMessage({id:'app.containers.HomePage.intro2'})}</p>       
+       <p>{intl.formatMessage({id:'app.containers.HomePage.intro3'})}</p>       
+       <nav>
+       <NavLink
+              className="btn btn-primary mx-3"
+              key="associateLib"                                            
+              isActive={()=>PatronReg}         
+              onClick={(e)=>togglePatronReg()}      
+              to="#"        
+        >{intl.formatMessage({id:'app.global.patron'})}</NavLink>
+        <NavLink
+              className="btn btn-primary mx-3"
+              key="registernewlibrary"                                          
+              isActive={()=>LibraryReg}        
+              to="#"        
+              onClick={(e)=>toggleLibraryReg()}            
+        >{intl.formatMessage({id:'app.global.librarian'})}</NavLink>           
+        </nav>
+        {/* TODO 
+          - must be able to preselect library reading from url (also for patrons and new users without roles)
+        */}
+        {PatronReg && <MyLibraryPage match={match} auth={props.auth}/>}
+        {LibraryReg && <RegisterLibrary {...props.auth} headermenu={false}/> }  
+        </>
+       ||
+       <>
+       <p>You've multiple roles, please choose one from below</p>
+        Roles List:
+        <ul>
+          <li>Role 1</li>
+          <li>Role 2</li>
+          <li>Role 3</li>
+        </ul>
+      </>}
+
+
+
       </BasePage>
     </>
   );
@@ -47,4 +132,23 @@ const withConnect = connect(
 );
  */
 // export default withRouter(withGoogleReCaptcha((SignupForm)));
-export default HomePage;
+//export default HomePage;
+
+
+const mapStateToProps = createStructuredSelector({
+  isLoading: isPatronLoading(),
+  patron: makeSelectPatron()
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+      dispatch,
+  };
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(withConnect)(HomePage);

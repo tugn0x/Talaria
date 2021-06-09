@@ -367,9 +367,15 @@ export function* loginGoogle ({ scope = 'profile', ...options } = {}) {
   yield call(socialOauthSaga, {provider, data})
 }
 export function* socialLoginPrepareSaga() {
-  yield call(prepareFacebook, { appId: process.env.FACEBOOK_APP_ID })
-  yield call(prepareGoogle, { client_id: process.env.GOOGLE_CLIENT_ID })
-  yield call(prepareSPID, {})
+  try{
+    yield call(prepareFacebook, { appId: process.env.FACEBOOK_APP_ID })
+    yield call(prepareGoogle, { client_id: process.env.GOOGLE_CLIENT_ID })
+    yield call(prepareSPID, {})
+  }catch(e) {
+    //catch exception otherwise it will break also traditional login when google fail to load/init!
+    console.log("socialLoginPrepareSaga ERROR",e)
+  }
+  
 }
 
 export function* socialLoginRequestSaga(action) {

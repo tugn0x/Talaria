@@ -60,13 +60,14 @@ import './style.scss'
     }
   return (
         <div className="login-form">
-          <Row className="justify-content-center">
+          <Row className="justify-content-center">            
             <Col md="6" sm="8">
               <CardGroup>
                 <Card>
                   <CardBody>
                     <Form onSubmit={submitChange}>
                       <h1><FormattedMessage {...messages.header} /></h1>
+                      <SocialAuth loginFacebook={props.loginFacebook} loginGoogle={props.loginGoogle}/>
                       {/* <p className="text-muted"><FormattedMessage {...messages.loginDescription} /></p> */}
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
@@ -99,7 +100,7 @@ import './style.scss'
                         />
                       </InputGroup>
                       <Row>
-                        <Col xs="12">
+                        <Col xs="12" md="6">
                           <Button
                             type="submit"
                             color="cta"
@@ -110,6 +111,20 @@ import './style.scss'
                             <FormattedMessage {...messages.loginButton} />
                           </Button>
                         </Col>
+                        <Col xs="12" md="6">
+                          <NavLink className="btn-cta register-button" to="/signup">
+                            {/* <Button
+                              color="brown"
+                              className="signUpButton"
+                              active
+                              tabIndex={-1}
+                              onClick={() => linkTo("signup")}
+                            > */}
+                              <FormattedMessage {...messages.signUpButton} />
+                            {/* </Button> */}
+                          </NavLink>
+                        </Col>
+
                         <Col xs="12" className="text-center pt-3">
                             <NavLink to='/forgot-password' key='/forgot-password' className="text-dark-text">
                               <FormattedMessage {...messages.forgot} />
@@ -117,19 +132,7 @@ import './style.scss'
                         </Col>
                       </Row>
                     </Form>
-                  </CardBody>
-                  <SocialAuth loginFacebook={props.loginFacebook} loginGoogle={props.loginGoogle}/>
-                  <NavLink className="btn-cta register-button" to="/signup">
-                    {/* <Button
-                      color="brown"
-                      className="signUpButton"
-                      active
-                      tabIndex={-1}
-                      onClick={() => linkTo("signup")}
-                    > */}
-                      <FormattedMessage {...messages.signUpButton} />
-                    {/* </Button> */}
-                  </NavLink>
+                  </CardBody>                                    
                 </Card>
                 {/* <Card className="text-white bg-primary py-5 d-md-down-none">
                   <CardBody className="text-center">
