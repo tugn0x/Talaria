@@ -54,6 +54,11 @@ class LibraryUserObserver extends BaseObserver
 
         if(parent::saving($model)) //sto salvando e la validazione non ha dato problemi
         {
+            //Jun 2021: we decide to add patron role to every user associating to library despite library decision
+            $u=$model->user;
+            if($u)
+                $u->assign('patron');
+
             if($model->preferred && $model->preferred==1)
             {
                 //vado a togliere il preferred dalle altre sue biblioteche perchè solo una puo' essere preferred
@@ -68,19 +73,29 @@ class LibraryUserObserver extends BaseObserver
                 //lo sto disabilitando
                 if($model->status==config("constants.libraryuser_status.disabled"))
                 {
-                    /*1. remove role "patron" if he has no other active libraries*/
+                    
+                    /*NOTE: Jun 2021: we decide not remove patron role so he can access is bibliografy forever
+                    so i commented code below
+                    
+                    //1. remove role "patron" if he has no other active libraries
                     $u=$model->user;
                     if($u->active_libraries->count()==1)
                         $u->retract('patron');
+                    */
                     /* 2. send mail+notify to user to let him know it was disabled */
                 }
                 //lo sto abilitando
                 else if($model->status==config("constants.libraryuser_status.enabled"))
                 {
-                    /* 1. add role "patron" if he has not */
+                    /* 
+                    NOTE: Jun 2021: we decide to give patron role when he asked for association despite library accept him
+                    so i commented code below
+                    
+                    //1. add role "patron" if he has not 
                     $u=$model->user;
                     if($u->active_libraries->count()==0)
                         $u->assign('patron');
+                    */
                     /*2. send mail+notify to user to let him know it was enabled */
                 }
 
