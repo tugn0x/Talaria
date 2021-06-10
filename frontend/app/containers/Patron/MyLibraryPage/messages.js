@@ -76,4 +76,9 @@ export default defineMessages({
     id: `${scope}.librarySubmit`,
     defaultMessage: 'Subscribe to library',
   },
+  placesFreeSearchPlaceholder: {
+    id: `${scope}.placesFreeSearchPlaceholder`,
+    defaultMessage: 'Enter City/State to search on',
+  }
+
 });

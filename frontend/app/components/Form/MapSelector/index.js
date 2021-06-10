@@ -6,8 +6,6 @@ import L from 'leaflet';
 import {useIntl} from 'react-intl'
 import PropTypes from 'prop-types';
 
-import {NavLink} from 'react-router-dom';
-
 //import { FormattedMessage } from 'react-intl';
 import "./style.scss";
 
@@ -59,10 +57,11 @@ function MyMap(props) {
 
   }
 
+
 const MapSelector = (props) => {      
     console.log("MAPSelector:",props)   
     
-    const {field,label,handleChange,getMarkers,markers,onPlacesSearch,placesList,onMarkerClick}=props;
+    const {field,label,handleChange,getMarkers,markers,onPlacesSearch,placesList,onMarkerClick,placesFreeSearchPlaceholder,markerPopupComponent}=props;
     
     let zoom=12;
     const intl = useIntl()
@@ -177,8 +176,6 @@ const MapSelector = (props) => {
 
     },[placesList]);
 
-
-
     const myPosOptions = { color: '#880021', fillColor: '#DF6D43' }
     
     return (                               
@@ -194,7 +191,7 @@ const MapSelector = (props) => {
                   closeMenuOnSelect={true}   
                   onSelectResetsInput={false}         
                   hideSelectedOptions={false}    
-                  placeholder="Enter city/State"                                                
+                  placeholder={placesFreeSearchPlaceholder}                                               
                 />}
                   <MapContainer id="mappa" center={position} zoom={zoom} scrollWheelZoom={true}>                   
                     <TileLayer
@@ -208,18 +205,12 @@ const MapSelector = (props) => {
                     </CircleMarker>   
                     {markers && Object.keys(markers.data).length>0 && markers.data.map((marker, index) => {
                       return (
-                        marker.lat && marker.lon && <Marker position={[marker.lat,marker.lon]} key={index}>
+                        marker.lat && marker.lon && 
+                        <Marker position={[marker.lat,marker.lon]} key={index}>
                           <Popup>
-                          <div className="card">
-                            <div className="card-body">
-                              <h5 className="card-title">{marker.name}</h5>
-                              <h6 className="card-subtitle mb-2 text-muted">{marker.address}</h6>
-                              <NavLink className="btn btn-info" to={"/pathtolibrarydetailpage/"+marker.id}>Detail</NavLink>
-                              <NavLink className="btn btn-primary" to="#" onClick={()=>chooseMarkerFromMap(marker)}>Choose this</NavLink>
-                            </div>
-                          </div>                                                        
+                            {markerPopupComponent(marker,chooseMarkerFromMap)}
                           </Popup>
-                          </Marker>                          
+                        </Marker>                          
                       )
                       })}  
                        <MyMap setMapObj={setMapObj} getMarkersAtPos={getMarkers}/>                  

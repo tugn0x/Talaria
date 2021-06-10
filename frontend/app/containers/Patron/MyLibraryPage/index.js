@@ -18,6 +18,17 @@ import {requestUser,requestGetLibrary, requestGetLibrariesList} from 'containers
 import {requestAccessToLibrary,requestUpdateAccessToLibrary,requestSearchPlacesByText,requestGetLibraryListNearTo} from '../actions';
 import { placesSelector,libraryListSelector } from '../selectors';
 
+import {NavLink} from 'react-router-dom';
+
+//TODO: 
+
+//1. find a way to pass library_id for "new registration"
+//in order to let user to subscribe directly to that library already setted
+//(display library name, not map)
+
+//2. find a way to allow search library by name (calling getLibraryOptionList)
+//and store the selected library in the library_id field
+
 function MyLibraryPage(props) {
   console.log('MyLibraryPage', props)
   const intl = useIntl();
@@ -29,7 +40,7 @@ function MyLibraryPage(props) {
   const user_id = props.auth.user.id;
   const departmentOptionList = props.library.departmentOptionList 
   const titleOptionList = props.library.titleOptionList
-  const libraryOptionList = props.library.libraryOptionList && props.library.libraryOptionList.map(lib =>  {return {value: lib.id, label: lib.name}})  
+  //const libraryOptionList = props.libraryOptionList && props.libraryOptionList.map(lib =>  {return {value: lib.id, label: lib.name}})  
 
   const handleChangeData = (field_name, value) => {
     //Usato per aggiornare le tendine con dipartimenti/... un base alla biblio scelta
@@ -119,9 +130,20 @@ function MyLibraryPage(props) {
             onChangeData={(field_name, value) => handleChangeData(field_name, value)}
             onPlacesSearch={(search)=>dispatch(requestSearchPlacesByText(search))}
             places={props.places}
+            placesFreeSearchPlaceholder={intl.formatMessage(messages.placesFreeSearchPlaceholder)}
             getMarkers={(pos)=>dispatch(requestGetLibraryListNearTo(pos))}
             markers={props.libraryList}
             onMarkerClick={console.log("onMarkerClick")}
+            markerPopupComponent={(marker,chooseMarkerFromMap)=>
+              <div className="libraryPopup">
+                <div className="card-body">
+                  <h5 className="card-title">{marker.name}</h5>
+                  <h6 className="card-subtitle mb-2 text-muted">{marker.address}</h6>
+                  <NavLink className="btn btn-info" to={"/pathtolibrarydetailpage/"+marker.id}>Library detail</NavLink>
+                  <NavLink className="btn btn-primary" to="#" onClick={()=>chooseMarkerFromMap(marker)}>Subscribe to this library</NavLink>
+                </div>
+              </div>  
+            }
           /> 
       }
     </>

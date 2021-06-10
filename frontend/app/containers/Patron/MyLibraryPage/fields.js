@@ -62,13 +62,7 @@ export const fields = {
 }
 
 export const fieldsIsNew = { 
-   /*library_id: { 
-        type: "custom-select",
-        name: 'library_id',
-        width: "col-md-12",
-        options: 'library_id',
-        required: true,
-    },*/    
+  
     library_id: { 
         type: "map-selector",
         name: 'library_id',
@@ -76,6 +70,21 @@ export const fieldsIsNew = {
         width: "col-md-12",
         freeSearch: true,
         required: true,
+        order: 1
+    },
+    /*name: {
+        type: "text",
+        name: "name",
+        width: "col-md-12",
+        disabled: true,
+        order: 2
+    },*/
+    label: {
+        type: "text",
+        name: "label",
+        width: "col-md-12",
+        order: 3,
+        maxLength: 20
     },
     department_id: { 
         type: "custom-select",
@@ -90,13 +99,7 @@ export const fieldsIsNew = {
         width: "col-md-12",
         options: 'title_id',
         required: true,
-    },
-    label: {
-        type: "text",
-        name: "label",
-        width: "col-md-12",
-        maxLength: 20
-    },
+    },    
     user_referent: { 
         type: "text",
         name: 'user_referent',

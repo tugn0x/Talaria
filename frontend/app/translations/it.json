@@ -109,6 +109,7 @@
   "app.containers.MyLibrariesPage.updateMessage": "Biblioteca aggiornata con successo",
   "app.containers.MyLibrariesPage.createMessage": "Biblioteca aggiunta con successo",
   "app.containers.MyLibrariesPage.librarySubmit": "Iscriviti alla biblioteca",
+  "app.containers.MyLibrariesPage.placesFreeSearchPlaceholder":"Digitare il nome di una città/stato in cui cercare",
 
   "app.containers.MyLibrariesList.createNew": "Aggiungi biblioteca",
   "app.containers.MyLibrariesList.edit": "Modifica biblioteca",

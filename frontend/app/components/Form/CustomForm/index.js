@@ -172,10 +172,12 @@ const CustomForm = (props) => {
                                                                             onPlacesSearch={props.onPlacesSearch}
                                                                             getMarkers={props.getMarkers}
                                                                             markers={props.markers}
-                                                                            onMarkerClick={props.onMarkerClick}
+                                                                            onMarkerClick={props.onMarkerClick}                                                                            
                                                                             handleChange={(value) => handleChange(value, field.name)}
                                                                             placesList={props.places}
+                                                                            placesFreeSearchPlaceholder={props.placesFreeSearchPlaceholder}
                                                                             label={messages[field.name] ? intl.formatMessage(messages[field.name]) : ""}
+                                                                            markerPopupComponent={props.markerPopupComponent}
                                                                         ></MapSelector>                                                                    
                                                                 ||
                                                                     <>  {/*  TEXT, TEXTAREA, NUMBER  */}
