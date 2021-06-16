@@ -27,10 +27,7 @@ return (
           <a className="btn-garr-container" href="https://devnilde.bo.cnr.it/Shibboleth.sso/Login?target=https://devnilde.bo.cnr.it/shibb/shiblogin.php">
             <div className="btn-garr">
               <img src={GarrImg}/>
-            </div>
-            <div className="btn-garr-text">
-            <FormattedMessage {...messages.garrButton} />
-            </div>
+            </div>            
           </a>
         </Col>  
         }      
