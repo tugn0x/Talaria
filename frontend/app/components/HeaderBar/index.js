@@ -15,7 +15,7 @@ import { DropdownItem, DropdownMenu, DropdownToggle, Nav, UncontrolledDropdown, 
 import SubHeaderBar from 'components/SubHeaderBar'
 import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from 'images/logo-nilde.png'
-import logomini from 'images/logo.png'
+import logomini from 'images/logo-nilde-mini.png'
 import './style.scss'
 import ResourceMenu from "./ResourcesMenu";
 import subStringer from 'utils/subStringer'
