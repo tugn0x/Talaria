@@ -16,8 +16,11 @@ import { SignupForm, BasePage } from "components";
 
 export function SignupPage(props) {
   const [open, setOpen] = React.useState(false);
+  const social_enabled=(process.env.SOCIAL_LOGIN && process.env.SOCIAL_LOGIN=="true")?true:false;
+
   useEffect(() => {
-    props.prepareSocialLogin();
+    if(social_enabled)
+      props.prepareSocialLogin();
     // console.log("use effect")
   });
 

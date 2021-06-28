@@ -23,9 +23,11 @@ import {useIntl} from 'react-intl';
 function LoginPage(props) {
 
   const intl=useIntl();
+  const social_enabled=(process.env.SOCIAL_LOGIN && process.env.SOCIAL_LOGIN=="true")?true:false;
 
   useEffect(() => {
-    props.prepareSocialLogin();
+    if(social_enabled)
+      props.prepareSocialLogin();
     // console.log("use effect")
   });
 
