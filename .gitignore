@@ -27,3 +27,11 @@ NOTE.md
 database/migrations/TEMP
 frontend/v8-compile-cache-0
 nildedevSPMetadata.xml
+docker/certs/ssl-cert-snakeoil.key
+docker/certs/production/devnilde_bo_cnr_it.crt
+docker/certs/ssl-cert-snakeoil.pem
+docker/certs/production/DigiCertCA.crt
+docker/spid-test-idp/conf/idp.crt
+docker/spid-test-idp/conf/idp.key
+docker/spid-test-idp/conf/idpSSL.crt
+docker/spid-test-idp/conf/idpSSL.key
