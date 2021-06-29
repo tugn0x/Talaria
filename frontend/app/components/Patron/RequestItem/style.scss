@@ -14,7 +14,14 @@
         } 
         
     }
+    .request_id {    
+        display: block;          
+        span {
+            font-weight: bold;
+        }
+    }
 }
+
 
 .deliveryLabel {
     
@@ -37,7 +44,6 @@
     display: inline-block;
     vertical-align: top;
 }
-
 
 .status-icon{
     height: 20px;

@@ -41,15 +41,17 @@ const RequestItem = (props) => {
 
             case "costAccepted": 
             case "costNotAccepted": date= data.answer_cost_date; break;
+            case "waitingForCost": date=data.waiting_cost_date; break;
             
             case "readyToDelivery":  date=data.delivery_ready_date; break;
             
             case "received": date=data.fulfill_date; break;            
             case "notReceived":  date=data.notfulfill_date; break;
+            
             default: return "";
         }
         
-        return <span className="status-date">{formatDateTime(date,'it')}</span>;
+        return formatDateTime(date,'it');
       }
     
     /*const requesturl=(id) => {
@@ -68,7 +70,8 @@ const RequestItem = (props) => {
                 <span className={statusIcon(data.status)}></span> 
                 <span className="status-text">{intl.formatMessage({id: "app.requests."+data.status})}
                 </span>
-                {statusDate(data)}
+                <span className="request_id">ID: <span>{data.id}</span></span>
+                <span className="status-date">{statusDate(data)}</span>
             </Col>
             <Col sm={7} className="info">
                 <div>
