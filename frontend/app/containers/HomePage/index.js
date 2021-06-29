@@ -41,14 +41,16 @@ function HomePage(props) {
   const intl=useIntl();
     
   useEffect(() => { 
-       
-    //se l'utente è loggato e non ha abiities=>è solo un patron!
-    //e redirect nella sua patron page=>bibliografia
-    if(props.isLogged && props.auth && ( (!props.auth.permissions.resources || props.auth.permissions.resources.length==0) && (props.auth.permissions.roles && props.auth.permissions.roles.length==2 && props.auth.permissions.roles.includes("patron")) ) )
-      history.push('/patron/references');   
+    //if super-admin       
+    if(props.isLogged && props.auth && ( props.auth.permissions.roles && props.auth.permissions.roles.includes("super-admin")) )  
+      history.push('/admin'); 
+    //if user has no abilities=>is just a patron
+    //so redirect in patron home page (bibliography)
+    else  if(props.isLogged && props.auth && ( (!props.auth.permissions.resources || props.auth.permissions.resources.length==0) && (props.auth.permissions.roles && props.auth.permissions.roles.length==2 && props.auth.permissions.roles.includes("patron")) ) )
+      history.push('/patron/references');         
     else if (props.auth.permissions.resources && (Object.keys(props.auth.permissions.resources).length==1))    
     {      
-      //se ho solo una risorsa da gestire vado nella pag specifica
+      //if it has only one resources redirect to "specific resource" dashboard
       let res="";
       let resid="";
       
@@ -69,7 +71,7 @@ function HomePage(props) {
     }
   },[]) 
 libmessages
-  return ( //se sono solo registered o ho più ruoli
+  return ( //if registered or has many roles/abilities
     <>
       <BasePage {...props} routes={userRoutes} messages={messages} >
        <h1 style={{color: 'green'}}>{intl.formatMessage({id:'app.containers.HomePage.header'})}</h1>

@@ -39,6 +39,6 @@ export function checkRoutePermission(auth, route, resource) {
 }
 
 export function getAuthResource(auth, resource) {
-  console.log('getAuthResource', auth, resource)
-  return auth.permissions.resources[resource.type] && auth.permissions.resources[resource.type].find(i => i.resource.id == resource.id)
+  console.log('getAuthResource', auth, resource)  
+  return auth && auth.permissions && auth.permissions.resources && auth.permissions.resources[resource.type] && auth.permissions.resources[resource.type].find(i => i.resource.id == resource.id)
 }

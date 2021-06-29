@@ -28,10 +28,10 @@ const SubHeaderBar = (props) => {
 
     return (
         <div className="app-subheader bg-dark-bk">
-            {props.auth.permissions.resources && <ResourceHeaderBar auth={props.auth} match={props.match}/>}
+            {props.auth && props.auth.permissions && props.auth.permissions.resources && <ResourceHeaderBar auth={props.auth} match={props.match}/>}
             <div className="container">                
                 <Row className="subheader-menu pl-0">
-                    { routes.map((route,i)=> (
+                    { props.auth.permissions.resources && routes.map((route,i)=> (
                         <Col xs='auto' key={`${route.url}-${i}`} className={`${route.current ? 'current-page' : ''}`}>
                             <NavLink to={route.url} key={route.url}><FormattedMessage {...messages[route.name]}/></NavLink>
                         </Col>)

@@ -139,7 +139,7 @@ function MyLibraryPage(props) {
                 <div className="card-body">
                   <h5 className="card-title">{marker.name}</h5>
                   <h6 className="card-subtitle mb-2 text-muted">{marker.address}</h6>
-                  <NavLink className="btn btn-info" to={"/pathtolibrarydetailpage/"+marker.id}>Library detail</NavLink>
+                  <NavLink className="btn btn-info" to={"/public/library/"+marker.id}>Library detail</NavLink>
                   <NavLink className="btn btn-primary" to="#" onClick={()=>chooseMarkerFromMap(marker)}>Subscribe to this library</NavLink>
                 </div>
               </div>  

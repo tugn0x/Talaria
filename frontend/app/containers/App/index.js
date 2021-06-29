@@ -19,6 +19,7 @@ import {HomePage, NotFoundPage, LoginPage, IdpPage, UserPage, PatronPage, AdminP
 // import {  Footer } from 'components'
 /* import GlobalStyle from 'global-styles'; */
 import {SignupPage, ForgotPassword} from "containers";
+import Fake from '../../components/Fake'
 import {makeSelectLocation} from './selectors'
 import LibraryPage from "../Library/LibraryPage";
 
@@ -42,6 +43,7 @@ function App(props) {
         <Route exact path={"/signup"}  component={() => <SignupPage {...authProps} history={history} />} />
         <Route path={"/forgot-password/:reset_token?"} component={({match}) => <ForgotPassword {...authProps} history={history} match={match} />} />
         <Route path="/idp-callback/:refresh_token" component={IdpPage} />
+        <Route path="/public/library/:library_id" component={({match}) => <Fake {...authProps} match={match} headermenu={true} /> /*display Library List or single public library profile */}  />        
 
         {!props.isLogged && <Route component={() => <LoginPage {...authProps} tokensExistsExpired={props.tokensExistsExpired} />} />}
 
@@ -55,7 +57,7 @@ function App(props) {
         <Route path="/project/:project_id" component={({match}) => <HomePage {...authProps}  match={match} headermenu={true}/> }  />
         <Route path="/consortium/:consortium_id" component={({match}) => <HomePage {...authProps}  match={match} headermenu={true}/> }  />
         <Route path="/institution/:institution_id" component={({match}) => <HomePage {...authProps}  match={match}  headermenu={true}/> } />
-        <Route path="/alpe" component={() => <HomePage {...authProps}/> }  />
+        <Route path="/alpe" component={({match}) => <HomePage {...authProps}  match={match} headermenu={true}/>}/>
         <Route exact path="/" component={({routerProps,match}) => <HomePage {...authProps} match={match} />}/>
         <Route component={() => <NotFoundPage {...authProps} /> } path="*" />
       </Switch>
