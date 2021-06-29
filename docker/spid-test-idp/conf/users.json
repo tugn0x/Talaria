@@ -1,0 +1,152 @@
+{
+    "martinellimaika": {
+        "pwd": "test",
+        "sp": null,
+        "attrs": {
+            "familyName": "Mazza",
+            "email": "hector85@martino-vitale.it",
+            "spidCode": "TENVPmlOSsHp2s",
+            "fiscalNumber": "TINIT-SIEEGB81I20F209Q",
+            "gender": "F",
+            "dateOfBirth": "2010-06-19",
+            "companyName": "Marino-Neri s.r.l.",
+            "registeredOffice": "Viale Kai 33 Appartamento 54\nPiccarda terme, 26796 Sassari (CZ)",
+            "name": "Noemi"
+        }
+    },
+    "test": {
+        "pwd": "test",
+        "sp": null,
+        "attrs": {
+            "familyName": "Riva",
+            "email": "aromano@vodafone.it",
+            "spidCode": "TENVBESZgFYPKG",
+            "fiscalNumber": "TINIT-ULYYHP42V24O828W",
+            "gender": "M",
+            "dateOfBirth": "1999-01-11",
+            "companyName": "Fabbri-Sartori SPA",
+            "registeredOffice": "Via Alessandro 6\nLauro terme, 22512 Pordenone (LI)",
+            "name": "Ippolito"
+        }
+    },
+    "samiragiuliani": {
+        "pwd": "test",
+        "sp": null,
+        "attrs": {
+            "familyName": "De luca",
+            "email": "demissala@live.com",
+            "spidCode": "TENVMXXsnj1lqa",
+            "fiscalNumber": "TINIT-RYIBSY05S52Y129A",
+            "gender": "F",
+            "dateOfBirth": "1977-10-13",
+            "companyName": "Ferrara-Ruggiero Group",
+            "registeredOffice": "Vicolo Abramo 457 Appartamento 77\nSesto Liborio, 46001 Mantova (BS)",
+            "name": "Carmelo"
+        }
+    },
+    "osvaldo70": {
+        "pwd": "test",
+        "sp": null,
+        "attrs": {
+            "familyName": "Montanari",
+            "email": "arduinocostantini@tin.it",
+            "spidCode": "TENVxsaTVoNtRW",
+            "fiscalNumber": "TINIT-UAKWVY77D03H615H",
+            "gender": "F",
+            "dateOfBirth": "1977-07-08",
+            "companyName": "Martino Group",
+            "registeredOffice": "Via Michael 43 Piano 4\nBorgo Olo, 58462 Napoli (PA)",
+            "name": "Laura"
+        }
+    },
+    "spellegrino": {
+        "pwd": "test",
+        "sp": null,
+        "attrs": {
+            "familyName": "Damico",
+            "email": "olimpiafiore@fastwebnet.it",
+            "spidCode": "TENVQhOkuVo7HA",
+            "fiscalNumber": "TINIT-ERPTNC74N10R882Q",
+            "gender": "F",
+            "dateOfBirth": "1991-09-04",
+            "companyName": "Silvestri, Neri e Romano s.r.l.",
+            "registeredOffice": "Piazza Lazzaro 87 Appartamento 08\nQuarto Erminia, 73444 Teramo (TS)",
+            "name": "Fabio"
+        }
+    },
+    "erminiaferrari": {
+        "pwd": "test",
+        "sp": null,
+        "attrs": {
+            "familyName": "Ferrari",
+            "email": "jack02@outlook.com",
+            "spidCode": "TENVkV2KlwgT4r",
+            "fiscalNumber": "TINIT-NPDDLL39B82S941K",
+            "gender": "F",
+            "dateOfBirth": "2014-01-31",
+            "companyName": "Valentini, Coppola e Fabbri s.r.l.",
+            "registeredOffice": "Viale Fatima 27\nCaputo terme, 73084 Cremona (BL)",
+            "name": "Jarno"
+        }
+    },
+    "mazzaferdinando": {
+        "pwd": "test",
+        "sp": null,
+        "attrs": {
+            "familyName": "Martino",
+            "email": "rpellegrino@giordano.net",
+            "spidCode": "TENV5hocTDy41a",
+            "fiscalNumber": "TINIT-YIQYIF69U42N671S",
+            "gender": "M",
+            "dateOfBirth": "1989-01-03",
+            "companyName": "Leone, Sorrentino e Bellini e figli",
+            "registeredOffice": "Borgo Lorenzo 77 Piano 1\nSettimo Sesto, 77531 Ascoli Piceno (PU)",
+            "name": "Amos"
+        }
+    },
+    "rosolinomarchetti": {
+        "pwd": "test",
+        "sp": null,
+        "attrs": {
+            "familyName": "De luca",
+            "email": "unegri@poste.it",
+            "spidCode": "TENVweFAwuuwrL",
+            "fiscalNumber": "TINIT-WJTBGZ31M14N825B",
+            "gender": "M",
+            "dateOfBirth": "1984-03-19",
+            "companyName": "Rinaldi-Russo e figli",
+            "registeredOffice": "Incrocio Orlando 116\nBorgo Eusebio a mare, 58195 Bologna (KR)",
+            "name": "Gianantonio"
+        }
+    },
+    "mercedesmancini": {
+        "pwd": "test",
+        "sp": null,
+        "attrs": {
+            "familyName": "Longo",
+            "email": "teseofarina@tim.it",
+            "spidCode": "TENVidpnXz82x9",
+            "fiscalNumber": "TINIT-HZDGPA38S43D173B",
+            "gender": "M",
+            "dateOfBirth": "2014-12-07",
+            "companyName": "Bernardi SPA",
+            "registeredOffice": "Stretto Barone 877\nSala terme, 67556 Mantova (VV)",
+            "name": "Gianmarco"
+        }
+    },
+    "qorlando": {
+        "pwd": "test",
+        "sp": null,
+        "attrs": {
+            "familyName": "Sorrentino",
+            "email": "caligola18@marini.it",
+            "spidCode": "TENVSd98jIeNJa",
+            "fiscalNumber": "TINIT-QKABZA83J49A047S",
+            "gender": "M",
+            "dateOfBirth": "1999-05-09",
+            "companyName": "Bernardi, Colombo e Parisi SPA",
+            "registeredOffice": "Borgo Grassi 5\nTosca veneto, 62379 Belluno (OR)",
+            "name": "Boris"
+        }
+    }
+}
