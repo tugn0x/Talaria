@@ -43,7 +43,7 @@ class StatusResolver
 
         $this->model = $model;
 
-        $this->status = $this->model->status;
+        $this->status = $this->model->getStatus();
 
         if(!is_bool($user) && $user instanceof User)
             $this->user = $user;
@@ -133,7 +133,7 @@ class StatusResolver
     {
        
         if($newStatus === $this->status)
-            return $this->model->status;
+            return $this->model->getStatus();
         /*
          * check if status could be changed
          */
@@ -154,8 +154,9 @@ class StatusResolver
         if(count($possibility['errors']) > 0)
             throw new \Dingo\Api\Exception\ValidationHttpException([$possibility['errors']]);
 
+        $statusfield=$this->model->getStatusField();
         $status = [
-            'status'    =>  $newStatus,
+                $statusfield=>  $newStatus,
         ];
         if(is_array($others))
             $status = array_merge($others,$status);
@@ -179,7 +180,7 @@ class StatusResolver
     public function notify()
     {
         //TODO: PULIRE PULIRE PULIRE.
-        $this->flow = collect($this->flow_tree[$this->model->status()->first()->status]);
+        $this->flow = collect($this->flow_tree[$this->model->getStatus()]); /*[$this->model->status()->first()->status]*/
         $collection = new Collection();
         if($this->flow->has('notify'))
         {
