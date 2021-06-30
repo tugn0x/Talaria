@@ -23,7 +23,7 @@ class Library extends BaseModel
      */
     protected $fillable = [
         'name',
-        'email',
+        'email',  //REMOVE ?
         'institution_id',
         'subject_id',
         'country_id', //nazione/Paese (IT,US...)
@@ -33,36 +33,44 @@ class Library extends BaseModel
         'district', //provincia
         'postcode', //cap
         'state', //Regione o Stato (EmiliaRomagna, Illinois
-        'phone',
-        'fax',
+        'latitude',
+        'longitude',
+        'phone', //REMOVE 
+        'fax',  //REMOVE 
         'url',
         'opac',
-        'isil_code',
-        'dd_email',
+
+        'isil_code', //MOVE ELSEWHERE ?
+        'dd_email',  //REMOVE 
+        'ill_referent_name',
         'ill_email',
-        'dd_phone',
+        'dd_phone', //REMOVE 
         'ill_phone',
+
         'dd_supply_conditions',
         'dd_imbalance',
         'dd_cost',
         'dd_user_cost',
-        'susp_date_start',
-        'susp_date_end',
-        'susp_notice_days',
+        'susp_date_start', //MOVE ELSEWHERE ?
+        'susp_date_end',   //MOVE ELSEWHERE ?
+        'susp_notice_days',//MOVE ELSEWHERE ?
         'ill_cost',
         'ill_user_cost',
+        
+
+        
         'status',
         'nilde',
-        'rank',
+        'rank',             //MOVE ELSEWHERE ?
         'registration_date',
 
 
          /*info amministrative */
-         'vatnumber',
-         'fiscalcode',
-         'invoice_header',
-         'email_pec',
-         'ccu',
+         'vatnumber',   //MOVE ELSEWHERE ?
+         'fiscalcode',   //MOVE ELSEWHERE ?
+         'invoice_header',   //MOVE ELSEWHERE ?
+         'email_pec',    //MOVE ELSEWHERE ?
+         'ccu',           //MOVE ELSEWHERE ?
          'administrative',
          'administrative_email',
          'administrative_phone',

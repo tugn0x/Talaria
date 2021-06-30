@@ -25,13 +25,20 @@ class LibraryController extends ApiController
 
         $this->broadcast = false;
     }
+
+    //TODO: ridefinire anche index() per disabilitare authorize
+    //e rendere accessibile lista biblo a chiunque
     
     public function show(Request $request, $id)
     {
+        //diabilito auth perchè chiunque puo' visualizzare i dati di una biblio
+        //pensiamo a una pag pubb con elenco biblio/mappa
+        //Nel transformer poi filtro i campi da restituire in base all'auth (es: fornisco granted_permission solo se sono manager)
+        $this->nilde->disableAuthorize();
         $model = $this->nilde->show($this->model, $request, $id);
 //        $model->departments()->select('name', 'id')->get();
         //$model->departments;
-
+        $this->nilde->enableAuthorize();
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
