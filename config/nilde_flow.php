@@ -89,7 +89,30 @@ return [
                     ],                   
                 ],
             ],
-        ],
+            /*TBD
+            
+            'App\Models\Requests\BorrowingDocdelRequest'=> [
 
+                'flow_tree' => [
+                    'requested'	=> [
+                        'role'  =>  [],
+                        'next_statuses'  =>  [],
+                        'constraints'   =>  ['manage'],
+                    ],
+                ]
+            ],            
+            'App\Models\Requests\LendingDocdelRequest'=> [
+
+                'flow_tree' => [
+                    'requested'	=> [
+                        'role'  =>  [],
+                        'next_statuses'  =>  [],
+                        'constraints'   =>  ['manage'],
+                    ],
+                ]
+            ],
+                
+                */                
+        ],
 
 ];

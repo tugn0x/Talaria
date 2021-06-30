@@ -33,7 +33,7 @@ class PatronDocdelRequest extends BaseModel
         'borrowing_library_id', //id biblioteca alla quale ho inviato la rich.
         'reference_id',
         //'user_id', //usiamo create_by
-        'librarycounter', //rm_countbib: ogni biblio si vede le rich utente partire da 1 usando questo campo
+        'librarycounter', //serve???  rm_countbib: ogni biblio si vede le rich utente partire da 1 usando questo campo
         //'status',  //status NON deve essere fillable perchè lo gestisco tramite StatusProvider
         'request_date',        
         'cancel_date', //data annullamento/cancellazione
@@ -71,6 +71,8 @@ class PatronDocdelRequest extends BaseModel
 
     protected $simpleSearchField="pub_title"; //ricerca sul riferimento
 
+    protected $statusField="status";
+
 
     public function reference()
     {
@@ -84,7 +86,7 @@ class PatronDocdelRequest extends BaseModel
 
     public function docdelrequests()
     {
-        return $this->hasMany(DocdelRequest::class,'patron_docdel_request_id','id');
+        return $this->hasMany(BorrowingDocdelRequest::class,'patron_docdel_request_id','id');
     }
 
     public function library()
