@@ -15,21 +15,23 @@ import logoCNR2 from 'images/cnr-footer-logo-2.png';
 import './style.scss';
 
 function Footer(props) {
+  const {changeLang}=props
+
   return (
     <footer className="app-footer">
       <div className="container">
         <div className="top">
           <div className="lang-change">
-            <NavLink to="#">
+            <NavLink to="#" onClick={(e)=>changeLang('it')}>
               Italiano
             </NavLink>
-            <NavLink to="#">
+            <NavLink to="#" onClick={(e)=>changeLang('en')}>
               English (UK)
             </NavLink>
-            <NavLink to="#">
+            <NavLink to="#" onClick={(e)=>changeLang('fr')}>
               Français (France)
             </NavLink>
-            <NavLink to="#">
+            <NavLink to="#" onClick={(e)=>changeLang('es')}>
               Español
             </NavLink>
           </div>
