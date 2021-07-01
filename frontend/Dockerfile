@@ -8,10 +8,12 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 #COPY ./.gitfake .git
 
+RUN npm install
+
 RUN npm install -g cross-env
 
 #RUN npm run setup
-RUN npm install
+
 
 #RUN npm run build:docker
 #RUN npm run build
