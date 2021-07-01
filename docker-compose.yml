@@ -131,6 +131,22 @@ services:
     - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/"
     - "traefik.docker.network=proxy"
 
+  frontend_rscvd:
+    build: ../RSCVD/frontend
+    volumes:
+      - ../RSCVD/frontend:/usr/src/app
+      - ../RSCVD/.env:/usr/src/.env
+    command: npm start
+    #command: node --stack-size=3000 /usr/local/bin/npm install
+    expose:
+    - 3000
+    restart: always
+    labels:
+    - "traefik.port=3000"
+    - "traefik.enable=true"
+    - "traefik.frontend.rule=Host:rscvd.local;PathPrefix:/"
+    - "traefik.docker.network=proxy"  
+
   shibboleth:
 #    image: unicon/shibboleth-sp
     build: ./docker/shibboleth
