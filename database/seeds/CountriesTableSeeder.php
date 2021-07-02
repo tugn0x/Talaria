@@ -12,6 +12,6 @@ class CountriesTableSeeder extends Seeder
      */
     public function run()
     {
-        Country::create(['code'=>'IT','name'=>'Italy']);
+        Country::create(['code'=>'ITA','name'=>'Italy']);
     }
 }

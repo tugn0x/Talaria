@@ -21,10 +21,10 @@ class LibrariesTableSeeder extends Seeder
             'subject_id'=>6,
             'address'=>'Via Gobetti 101',
             'town'=>'Bologna',
-            'dd_email' => 'docdel@area.bo.cnr.it',
-            'dd_phone' => '051-6398026',
-            'dd_cost'=>1.00,
-            'dd_user_cost'=>2.00,
+            'ill_email' => 'docdel@area.bo.cnr.it',
+            'ill_phone' => '051-6398026',
+            'ill_cost'=>1.00,
+            'ill_user_cost'=>2.00,
             'country_id'=>1,
         ]);
 

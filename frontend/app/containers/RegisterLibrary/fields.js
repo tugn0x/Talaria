@@ -35,14 +35,6 @@ export const fields = {
         group: "step_1",
         order: 1,
     },
-    email: {
-        type: "email",
-        required: true,
-        name: "email",
-        width: "col-sm-6",
-        group: "step_1",
-        order: 2,
-    },
     institution_id: {
         type: "custom-select",
         required: true,
@@ -111,24 +103,7 @@ export const fields = {
         placeholder: 'app.global.state',
         group: "step_2",
         width: "col-sm-6"
-    },
-    phone: {
-        type: "text",
-        name: "phone",
-        label: 'app.global.phone',
-        placeholder: 'app.global.phone',
-        group: "step_2",
-        required: true,
-        width: "col-sm-6"
-    },
-    fax: {
-        type: "text",
-        name: "fax",
-        label: 'app.global.fax',
-        placeholder: 'app.global.fax',
-        group: "step_2",
-        width: "col-sm-6"
-    },
+    }, 
     url: {
         type: "text",
         name: "url",

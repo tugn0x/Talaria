@@ -22,8 +22,8 @@ class Library extends BaseModel
      * Fillable attributes
      */
     protected $fillable = [
-        'name',
-        'email',  //REMOVE ?
+        'name',    
+        'alt_name',    
         'institution_id',
         'subject_id',
         'country_id', //nazione/Paese (IT,US...)
@@ -35,37 +35,26 @@ class Library extends BaseModel
         'state', //Regione o Stato (EmiliaRomagna, Illinois
         'latitude',
         'longitude',
-        'phone', //REMOVE 
-        'fax',  //REMOVE 
         'url',
         'opac',
-
-        'isil_code', //MOVE ELSEWHERE ?
-        'dd_email',  //REMOVE 
+        
         'ill_referent_name',
-        'ill_email',
-        'dd_phone', //REMOVE 
+        'ill_email',        
         'ill_phone',
-
-        'dd_supply_conditions',
-        'dd_imbalance',
-        'dd_cost',
-        'dd_user_cost',
-        'susp_date_start', //MOVE ELSEWHERE ?
-        'susp_date_end',   //MOVE ELSEWHERE ?
-        'susp_notice_days',//MOVE ELSEWHERE ?
+        'ill_supply_conditions',
+        'ill_imbalance',
         'ill_cost',
         'ill_user_cost',
-        
-
-        
+        'ill_susp_date_start',
+        'ill_susp_date_end',  
+        'ill_susp_notification_days',
+             
         'status',
-        'nilde',
-        'rank',             //MOVE ELSEWHERE ?
+        'profile_type', //1-borr, 2-borr+lend
+        'external', //true/false        
         'registration_date',
 
-
-         /*info amministrative */
+        /*info administrative */
          'vatnumber',   //MOVE ELSEWHERE ?
          'fiscalcode',   //MOVE ELSEWHERE ?
          'invoice_header',   //MOVE ELSEWHERE ?
@@ -78,8 +67,8 @@ class Library extends BaseModel
     ];
 
     protected $public_fields = [
-        'name',
-        'email',
+        'name',        
+        'alt_name',
         'institution_id',
         'subject_id',
         'country_id', //nazione/Paese (IT,US...)
@@ -89,10 +78,9 @@ class Library extends BaseModel
         'district', //provincia
         'postcode', //cap
         'state', //Regione o Stato (EmiliaRomagna, Illinois
-        'phone',
-        'fax',
         'url',
         'opac',
+
         /*info amministrative */
         'vatnumber',
         'fiscalcode',

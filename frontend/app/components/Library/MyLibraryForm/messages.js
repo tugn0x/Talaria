@@ -28,52 +28,32 @@ export default defineMessages({
     id: `${scope}.opac`,
     defaultMessage: 'Url opac',
   },
-  isil_code: {
-    id: `${scope}.isil_code`,
-    defaultMessage: 'International library  ID',
-  },
-  dd_email: {
-    id: `${scope}.dd_email`,
-    defaultMessage: 'Email DD service',
-  },
   ill_email: {
     id: `${scope}.ill_email`,
     defaultMessage: 'Email LL service',
-  },
-  dd_phone: {
-    id: `${scope}.dd_phone`,
-    defaultMessage: 'Phone DD service',
   },
   ill_phone: {
     id: `${scope}.ill_phone`,
     defaultMessage: 'Phone LL service',
   },
-  dd_supply_conditions: {
-    id: `${scope}.dd_supply_conditions`,
+  ill_supply_conditions: {
+    id: `${scope}.ill_supply_conditions`,
     defaultMessage: 'Supply conditions',
   },
-  dd_imbalance: {
-    id: `${scope}.dd_imbalance`,
+  ill_imbalance: {
+    id: `${scope}.ill_imbalance`,
     defaultMessage: 'Imbalance',
   },
-  dd_cost: {
-    id: `${scope}.dd_cost`,
-    defaultMessage: 'Article price',
-  },
-  dd_user_cost: {
-    id: `${scope}.dd_user_cost`,
-    defaultMessage: 'Price for user',
-  },
-  susp_date_start: {
-    id: `${scope}.susp_date_start`,
+  ill_susp_date_start: {
+    id: `${scope}.ill_susp_date_start`,
     defaultMessage: 'Susp start date',
   },
-  susp_date_end: {
-    id: `${scope}.susp_date_end`,
+  ill_susp_date_end: {
+    id: `${scope}.ill_susp_date_end`,
     defaultMessage: 'Susp end date',
   },
-  susp_notice_days: {
-    id: `${scope}.susp_notice_days`,
+  ill_susp_notification_days: {
+    id: `${scope}.ill_susp_notification_days`,
     defaultMessage: 'Susp notice days',
   },
   ill_cost: {
@@ -88,13 +68,9 @@ export default defineMessages({
     id: `${scope}.status`,
     defaultMessage: 'status',
   },
-  nilde: {
-    id: `${scope}.nilde`,
+  external: {
+    id: `${scope}.external`,
     defaultMessage: 'in Nilde',
-  },
-  rank: {
-    id: `${scope}.rank`,
-    defaultMessage: 'rank',
   },
   registration_date: {
     id: `${scope}.registration_date`,

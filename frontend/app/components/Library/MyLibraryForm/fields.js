@@ -25,14 +25,6 @@ export const fields = {
         group: "general_info",
         order: 1,
     },
-    email: {
-        type: "email",
-        required: true,
-        name: "email",
-        width: "col-sm-6",
-        group: "general_info",
-        order: 2,
-    },
     granted_permissions: {
         type: "granted_permissions",
         name: "granted_permissions",
@@ -80,46 +72,32 @@ export const fields = {
     },
     town: {
         type: "text",
-        name: "town",
+        name: "town",        
         label: 'app.global.town',
         placeholder: 'app.global.town',
         width: "col-sm-6"
     },
     district: {
         type: "text",
-        name: "district",
+        name: "district",        
         label: 'app.global.district',
         placeholder: 'app.global.district',
         width: "col-sm-6"
     },
     postcode: {
         type: "number",
-        name: "postcode",
+        name: "postcode",        
         label: 'app.global.postcode',
         placeholder: 'app.global.postcode',
         width: "col-sm-6"
     },
     state: {
         type: "text",
-        name: "state",
+        name: "state",        
         label: 'app.global.state',
         placeholder: 'app.global.state',
         width: "col-sm-6"
-    },
-    phone: {
-        type: "text",
-        name: "phone",
-        label: 'app.global.phone',
-        placeholder: 'app.global.phone',
-        width: "col-sm-6"
-    },
-    fax: {
-        type: "text",
-        name: "fax",
-        label: 'app.global.fax',
-        placeholder: 'app.global.fax',
-        width: "col-sm-6"
-    },
+    },    
     url: {
         type: "text",
         name: "url",
@@ -130,24 +108,9 @@ export const fields = {
         name: "opac",
         width: "col-sm-6"
     },
-    isil_code: {
-        type: "number",
-        name: "isil_code",
-        width: "col-sm-6"
-    },
-    dd_email: {
-        type: "email",
-        name: "dd_email",
-        width: "col-sm-6"
-    },
     ill_email: {
         type: "email",
         name: "ill_email",
-        width: "col-sm-6"
-    },
-    dd_phone: {
-        type: "number",
-        name: "dd_phone",
         width: "col-sm-6"
     },
     ill_phone: {
@@ -155,39 +118,14 @@ export const fields = {
         name: "ill_phone",
         width: "col-sm-6"
     },
-    dd_supply_conditions: {
+    ill_supply_conditions: {
         type: "textarea",
-        name: "dd_supply_conditions",
+        name: "ill_supply_conditions",
         width: "col-sm-6"
     },
-    dd_imbalance: {
+    ill_imbalance: {
         type: "text",
-        name: "dd_imbalance",
-        width: "col-sm-6"
-    },
-    dd_cost: {
-        type: "number",
-        name: "dd_cost",
-        width: "col-sm-6"
-    },
-    dd_user_cost: {
-        type: "number",
-        name: "dd_user_cost",
-        width: "col-sm-6"
-    },
-    susp_date_start: {
-        type: "date",
-        name: "susp_date_start",
-        width: "col-sm-6"
-    },
-    susp_date_end: {
-        type: "date",
-        name: "susp_date_end",
-        width: "col-sm-6"
-    },
-    susp_notice_days: {
-        type: "number",
-        name: "susp_notice_days",
+        name: "ill_imbalance",
         width: "col-sm-6"
     },
     ill_cost: {
@@ -196,10 +134,25 @@ export const fields = {
         width: "col-sm-6"
     },
     ill_user_cost: {
-        type: "date",
+        type: "number",
         name: "ill_user_cost",
         width: "col-sm-6"
     },
+    ill_susp_date_start: {
+        type: "date",
+        name: "ill_susp_date_start",
+        width: "col-sm-6"
+    },
+    ill_susp_date_end: {
+        type: "date",
+        name: "ill_susp_date_end",
+        width: "col-sm-6"
+    },
+    ill_susp_notification_days: {
+        type: "number",
+        name: "ill_susp_notification_days",
+        width: "col-sm-6"
+    },    
     status: {
         type: "custom-select",
         name: "status",
@@ -211,15 +164,10 @@ export const fields = {
             { value: 2, label: 'in rinnovo' },
         ]
     },
-    nilde: {
+    external: {
         type: "checkbox",
-        name: "nilde",
+        name: "external",
         width: "col-sm-6",
-    },
-    rank: {
-        type: "text",
-        name: "rank",
-        width: "col-sm-6"
     },
     registration_date: {
         type: "date",
