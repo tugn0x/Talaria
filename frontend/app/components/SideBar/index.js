@@ -18,7 +18,7 @@ function SideBar(props) {
   const isMobile = props.windowSize === 'mobile' ? true : false
   // const { auth, isLogged, history, headermenu } = props
 
-  const current = props.routes.filter((route)=>route.current)
+  const current = props.routes && props.routes.filter((route)=>route.current)
   const routes = current.length ? current[0].children : [];
   
  /*NB: per le route con sidebar: true, posso definire anche order: che mi da la posizione nel menu laterale*/
