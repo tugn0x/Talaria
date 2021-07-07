@@ -7,6 +7,7 @@ use App\Models\BaseModel;
 use App\Models\Institutions\Institution;
 use App\Models\Projects\Project;
 use App\Models\Country;
+use App\Models\Currency;
 use App\Models\Requests\DocdelRequest;
 use App\Models\Users\User;
 use App\Models\Requests\PatronDocdelRequest;
@@ -48,6 +49,10 @@ class Library extends BaseModel
         'ill_susp_date_start',
         'ill_susp_date_end',  
         'ill_susp_notification_days',
+
+        'currency_id',
+        'ill_IFLA_voucher',
+        'ill_cost_in_voucher',
              
         'status',
         'profile_type', //1-borr, 2-borr+lend
@@ -131,6 +136,11 @@ class Library extends BaseModel
     public function country()
     {
         return $this->belongsTo(Country::class);
+    }
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
     }
 
     public function users()

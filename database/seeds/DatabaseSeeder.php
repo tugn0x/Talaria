@@ -30,5 +30,6 @@ class DatabaseSeeder extends Seeder
          $this->call(LibraryDeliverySeeder::class); 
          //  $this->call(BibliografySeeder::class);  
          //$this->call(NotificationsTableSeeder::class);      
+         $this->call(CurrenciesSeeder::class); 
     }
 }
