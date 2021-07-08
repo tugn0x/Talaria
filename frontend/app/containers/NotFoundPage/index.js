@@ -9,19 +9,22 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import {ButtonBack, BasePage} from 'components'
 import messages from './messages';
-import {Container} from 'reactstrap'
 
 export default function NotFound(props) {
   console.log("NotFound", props)
   
   return (
     <BasePage {...props}>
-      <Container>
-        <h1>
-          <FormattedMessage {...messages.header} />
-        </h1>
-        <ButtonBack />
-      </Container>
+      <div className="d-flex justify-content-center">               
+            <div className="p-2 text-center">
+              <i class="fas fa-frown fa-4x"></i>
+              <h1>
+                <FormattedMessage {...messages.header} />
+              </h1>
+              <p><FormattedMessage {...messages.intro} /></p>
+              <ButtonBack />
+            </div>              
+      </div>
     </BasePage> 
   );
 }

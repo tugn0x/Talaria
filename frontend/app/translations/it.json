@@ -70,7 +70,8 @@
   "app.containers.ChangePassword.updateMessage": "Password modificata",
   "app.containers.ResetPassword.updateMessage": "Password aggiornata",
   "app.containers.ProfilePage.updateMessage": "Profilo aggiornato",
-  "app.containers.NotFoundPage.header": "",
+  "app.containers.NotFoundPage.header": "Pagina non trovata",
+  "app.containers.NotFoundPage.intro": "Ci dispiace ma non riusciamo a trovare la pagina che cerchi",
 
   "app.containers.UserProfile.header": "Profilo utente",
   "app.containers.UserProfile.subtitle": "Aggiorna il profilo",
@@ -330,8 +331,8 @@
 
   "app.components.LoginForm.header": "Accedi",
   "app.components.LoginForm.loginButton": "Accedi",
-  "app.components.LoginForm.forgot": "Ho dimenticato i dati di accesso",
-  "app.components.LoginForm.signUpButton": "Registrati",
+  "app.components.LoginForm.forgot": "Hai dimenticato la password?",
+  "app.components.LoginForm.signUpButton": "Iscriviti",
   
   "app.components.Button.goBackText": "indietro",
 

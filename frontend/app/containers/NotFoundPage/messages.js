@@ -12,4 +12,8 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: '404 Sorry this page does not exists',
   },
+  intro: {
+    id: `${scope}.intro`,
+    defaultMessage: 'We\' sorry but we can\'t find the page you\'r looking for',
+  },
 });
