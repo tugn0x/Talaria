@@ -106,11 +106,11 @@ Route::group([
     Route::get('', 'LibraryController@index')->name('index');
     Route::get('nearto', 'LibraryController@nearTo')->name('nearto');
     Route::get('option-items', 'LibraryController@optionList')->name('option-items');
-    Route::get('{id}', 'LibraryController@show')->name('show');
-    Route::get('{id}/departments', 'LibraryController@departments')->name('departments');
-    Route::put('{id}', 'LibraryController@update')->name('update');
+    Route::get('{id}', 'LibraryController@show')->where('id', '[0-9]+')->name('show');
+    Route::get('{id}/departments', 'LibraryController@departments')->where('id', '[0-9]+')->name('departments');
+    Route::put('{id}', 'LibraryController@update')->where('id', '[0-9]+')->name('update');
     Route::post('', 'LibraryController@create')->name('create');
-    Route::delete('{id}', 'LibraryController@delete')->name('delete'); //soft delete
+    Route::delete('{id}', 'LibraryController@delete')->where('id', '[0-9]+')->name('delete'); //soft delete
 
 
 
