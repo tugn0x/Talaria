@@ -51,4 +51,21 @@ class Institution extends BaseModel
     {
         return $this->belongsToMany(Desk::class);
     }
+
+    public function scopebyCountryAndType($query, $country_id=null,$institution_type_id=null) {
+        $params=[];
+        if($country_id>0)
+        {
+            $c=['country_id','=',$country_id];
+            $params[]=$c;
+        }
+        if($institution_type_id>0)
+        {
+            $ins=['institution_type_id','=',$institution_type_id];            
+            $params[]=$ins;
+        }        
+        return $query->where($params);
+    }
+
+
 }

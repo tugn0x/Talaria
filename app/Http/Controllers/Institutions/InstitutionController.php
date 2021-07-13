@@ -52,4 +52,13 @@ class InstitutionController extends ApiController
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
+    public function optionList(Request $request)
+    {           
+        $collection = $this->nilde->optionList($this->model, $request,function ($model,$request){
+            return $model->byCountryAndType($request->input('country_id'),$request->input('institution_type_id'));
+        });
+
+        return $this->response->array($collection->toArray());
+    }
+
 }
