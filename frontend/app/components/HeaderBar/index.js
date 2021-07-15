@@ -75,18 +75,22 @@ function HeaderBar(props) {
                 </NavItem>)
               }
               <UncontrolledDropdown nav direction="down">
-                <DropdownToggle nav>
+                
                   { isLogged && (
                       <>
-                        <i className="fas fa-2x fa-user d-table-cell"></i>
-                        <span className="user-name d-none d-md-table-cell align-middle px-3">
-                          {subStringer(auth.user.name, 10)}
-                        </span>
-                        <i className="fas fa-2x fa-sort-down d-table-cell align-middle"></i>
+                        <Link className="nav-link" to="/login">
+                        <i className="fas fa-2x fa-user d-table-cell"></i>                        
+                        <span className="user-name d-none d-md-table-cell align-middle px-3">                          
+                          {subStringer(auth.user.name, 10)}                          
+                        </span>                        
+                        </Link>
+                        <DropdownToggle nav>
+                          <i className="fas fa-2x fa-sort-down d-table-cell align-middle"></i>
+                        </DropdownToggle>
                       </>
                     )
                   }
-                </DropdownToggle>
+                
                 <DropdownMenu right>
                   {
                     isLogged && (

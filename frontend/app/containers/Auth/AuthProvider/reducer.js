@@ -54,6 +54,7 @@ const authReducer = (state = initialState, action) =>
           draft.error = initialState.error;
           draft.oauth = initialState.oauth
           draft.user = initialState.user
+          draft.permissions = initialState.permissions
         break;
       case REQUEST_REFRESH:
          /*  draft.loading = true; */
