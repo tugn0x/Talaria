@@ -6,8 +6,7 @@ use \Auth;
 class LibraryObserver extends BaseObserver
 {
 
-    protected $rules = [
-        'email' => 'required|email',
+    protected $rules = [        
         'name' => 'required|string',
 //        'user_id' => 'required|integer|exists:users,id',
     ];

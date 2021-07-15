@@ -249,8 +249,18 @@
 			"response": []
 		},
 		{
-			"name": "Create Library",
+			"name": "Create Public Library",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearer_reg_user}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -264,13 +274,13 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"null\",\n    \"ciao\": \"ciao!\",\n    \"email\": \"coppola.odone@example.com\"\n}",
+					"raw": "{\n    \"name\": \"TestBiblio\",        \n    \"profile_type\":2,\n    \"subject_id\":1,\n    \"country_id\":1,\n    \"institution_id\":0,\n    \"institution_type_id\":1,\n    \"institution_country_id\":1,\n    \"institution_name\":\"My Test Institution\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -278,12 +288,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/libraries",
+					"raw": "{{url}}/libraries/public",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"libraries"
+						"libraries",
+						"public"
 					]
 				}
 			},
