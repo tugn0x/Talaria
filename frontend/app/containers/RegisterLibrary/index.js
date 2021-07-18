@@ -142,17 +142,14 @@ const RegisterLibrary = (props) => {
     }
 
     return (
-<>
-<br></br>
-        <h2>{intl.formatMessage(wizardMessages.header)}</h2>
-        <Navigation 
-            step={currentStep} 
-            totalSteps={totalSteps}
-            steps={steps}
-            messages={wizardMessages}
-            changeStep={(newStep) => onChangeStep({}, newStep) }/> 
-       
-           
+        <BasePage {...props} routes={[]} messages={messages} headermenu={false}>
+            <h2>{intl.formatMessage(wizardMessages.header)}</h2>
+            <Navigation 
+                step={currentStep} 
+                totalSteps={totalSteps}
+                steps={steps}
+                messages={wizardMessages}
+                changeStep={(newStep) => onChangeStep({}, newStep) }/> 
             {/* CARICA TUTTI GLI STEP DEL FORM SECONDO I FIELDS FILTRATI per STEP */}
             {Object.keys(currentFields).length > 0 && 
              currentStep <= totalSteps - 1 &&

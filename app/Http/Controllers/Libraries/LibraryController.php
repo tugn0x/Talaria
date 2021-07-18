@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 use App\Models\Libraries\DeliveryTransformer;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Institutions\Institution;
 
 class LibraryController extends ApiController
 {
@@ -88,9 +89,24 @@ class LibraryController extends ApiController
         $fillable = $model->getPublicFields();
         $new_model = array_filter($request->only($fillable), function ($val) {
             return !is_null($val);
-        });
+        });        
 
-        $model = $model->fill($new_model);
+        $model = $model->fill($new_model);        
+        if($request->has('institution_id') && $request->input('institution_id')==0 && $request->filled('institution_name') && $request->filled('institution_type_id') && $request->filled('institution_country_id')) 
+        {
+            $inst=Institution::firstOrNew(['name'=>$request->input('institution_name'),'institution_type_id'=>$request->input('institution_type_id'),'country_id'=>$request->input('institution_country_id')]);
+            if(!$inst->exists) //not pulled from db so will be created as new
+            {
+                $inst->status=0; //new institution with status=0
+                $inst->save();                
+            }
+            //update library with correct institution (just created or existing)
+            $model->institution_id=$inst->id; 
+        }        
+
+        //if projects...
+        //if identifiers/catalogs ...
+        
 
         $model->status=config("constants.library_status.new");
 

@@ -10,12 +10,17 @@ use App\Traits\Model\ModelPermissionsTrait;
 class Institution extends BaseModel
 {
     use ModelPermissionsTrait;
+
+    protected $attributes= [
+        'status'=>1, //0=waiting approval, 1=valid
+    ];
+
     protected $fillable = [
         'name',
         'institution_type_id',
         'country_id',
 
-        /*info amministrative */
+        /*info amministrative: TODO REMOVE FROM HERE? */
         'vatnumber',
         'fiscalcode',
         'invoice_header',

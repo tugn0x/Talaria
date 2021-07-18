@@ -34,8 +34,8 @@ class Library extends BaseModel
         'district', //provincia
         'postcode', //cap
         'state', //Regione o Stato (EmiliaRomagna, Illinois
-        'latitude',
-        'longitude',
+        'lat',
+        'lon',
         'url',
         'opac',
         
@@ -235,14 +235,14 @@ class Library extends BaseModel
         
         //Any Mysql/Maria => Manual "distance" calculation in km (and return also distance from pos)
         return $query->addSelect(new Expression("*,6371 * acos(
-            cos(radians($latitude)) * cos(radians(latitude)) * cos(radians(longitude) - radians($longitude))
+            cos(radians($latitude)) * cos(radians(lat)) * cos(radians(lon) - radians($longitude))
             +
-            sin(radians($latitude)) * sin(radians(latitude))
+            sin(radians($latitude)) * sin(radians(lat))
           ) as distance"))->whereRaw("
         6371 * acos(
-            cos(radians($latitude)) * cos(radians(latitude)) * cos(radians(longitude) - radians($longitude))
+            cos(radians($latitude)) * cos(radians(lat)) * cos(radians(lon) - radians($longitude))
             +
-            sin(radians($latitude)) * sin(radians(latitude))
+            sin(radians($latitude)) * sin(radians(lat))
           ) ".$max_range, [
         $longitude,
         $latitude,

@@ -60,7 +60,7 @@ Route::group([
     Route::get('', 'InstitutionController@index')->name('index');
     Route::post('', 'InstitutionController@create')->name('create');
     Route::get('option-items', 'InstitutionController@optionList')->name('option-items');
-    Route::get('{id}', 'InstitutionController@show')->name('show');
-    Route::get('{id}/departments', 'InstitutionController@departments')->name('departments');
-    Route::put('{id}', 'InstitutionController@update')->name('update');
+    Route::get('{id}', 'InstitutionController@show')->where('id', '[0-9]+')->name('show');
+    Route::get('{id}/departments', 'InstitutionController@departments')->where('id', '[0-9]+')->name('departments');
+    Route::put('{id}', 'InstitutionController@update')->where('id', '[0-9]+')->name('update');
 });
