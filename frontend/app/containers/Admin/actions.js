@@ -19,17 +19,24 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_GET_ROLES, REQUEST_GET_ROLES_SUCCESS,
    REQUEST_GET_PROJECT, REQUEST_GET_PROJECT_SUCCESS,
    REQUEST_GET_PROJECTS_LIST, REQUEST_GET_PROJECTS_LIST_SUCCESS,
-   REQUEST_GET_PROJECS_OPTIONLIST, REQUEST_GET_PROJECTS_OPTIONLIST_SUCCESS,
+   REQUEST_GET_PROJECTS_OPTIONLIST, REQUEST_GET_PROJECTS_OPTIONLIST_SUCCESS,
    REQUEST_UPDATE_PROJECT, 
    REQUEST_POST_PROJECT,
    REQUEST_GET_INSTITUTIONS_LIST, REQUEST_GET_INSTITUTIONS_LIST_SUCCESS,
    REQUEST_GET_INSTITUTIONS_OPTIONLIST, REQUEST_GET_INSTITUTIONS_OPTIONLIST_SUCCESS,
+  REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST, REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST_SUCCESS,
    REQUEST_GET_INSTITUTION, REQUEST_GET_INSTITUTION_SUCCESS,
    REQUEST_INSTITUTIONSTYPES_OPTIONLIST, REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
-   REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS, REQUEST_GET_INSTITUTION_TYPE_LIST,
+      REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS, REQUEST_GET_INSTITUTION_TYPE_LIST,
    REQUEST_POST_INSTITUTION, UPDATE_INSTITUTION,
    REQUEST_GET_COUNTRIES_OPTIONLIST, REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS,
-   REQUEST_LIBRARYSUBJECT_OPTIONLIST, REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS
+   REQUEST_LIBRARYSUBJECT_OPTIONLIST, REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS,
+   REQUEST_SEARCH_PLACES_BY_TEXT,
+   REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
+   REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
+   REQUEST_GET_LIBRARY_LIST,
+   REQUEST_GET_LIBRARY_LIST_SUCCESS
+ 
 } from "./constants";
 
 export function defaultAction() {
@@ -148,6 +155,45 @@ export function requestPostPublicLibrary(request, message) {
     message
   };
 }
+
+//search for a place in the map for the library registration
+export function requestSearchPlacesByText(search) {
+  return {
+    type: REQUEST_SEARCH_PLACES_BY_TEXT,
+    search
+  };
+}
+
+export function requestSearchPlacesByTextSuccess(result) {
+  return {
+    
+    type: REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
+    result
+  };
+}
+
+export function requestSearchPlacesByTextFail(error) {
+  return {
+    type: REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
+    error
+  };
+}
+
+export function requestGetLibraryListNearTo(pos) {
+  return {
+    type: REQUEST_GET_LIBRARY_LIST,
+    pos
+  };
+}
+
+export function requestGetLibraryListNearToSuccess(result) {
+  return {
+    type: REQUEST_GET_LIBRARY_LIST_SUCCESS,
+    result
+  };
+}
+
+//search for a place in the map for the library registration
 
 export function requestGetLibrary(id) {
   return {
@@ -285,6 +331,22 @@ export function requestPostInstitution(request, message) {
 export function requestGetInstitutionSuccess(result) {
   return {
     type: REQUEST_GET_INSTITUTION_SUCCESS,
+    result
+  };
+}
+
+export function requestGetInstitutionsByTypeByCountryOptionList(request, countryid, institutiontypeid) {
+  return {
+    type: REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST,
+    request,
+    countryid,
+    institutiontypeid
+  };
+}
+
+export function requestGetInstitutionsByTypeByCountryOptionListSuccess(result) {
+  return {
+    type: REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST_SUCCESS,
     result
   };
 }

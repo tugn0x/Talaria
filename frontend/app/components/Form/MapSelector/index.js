@@ -83,7 +83,6 @@ const MapSelector = (props) => {
         setGPS({});        
     }
   
-      
     useEffect(() => {    
     
     if(navigator.geolocation)
@@ -121,7 +120,9 @@ const MapSelector = (props) => {
     {
       goToPos([val.value.lat,val.value.lon])
       if(getMarkers) 
+      
         getMarkers({'lat': val.value.lat,'lon':val.value.lon});
+    
     }
     
   }
@@ -165,10 +166,10 @@ const MapSelector = (props) => {
       let list=[];
       if(placesList && placesList.length>0)
       { placesList.forEach(p => {
-          if(p.type=="administrative") {
+          //if(p.type=="administrative") {
             let item={'label': p.display_name,'value': {...p}};
             list.push(item);
-          }
+          //}
           
         })        
         setPlacesOptions(list);

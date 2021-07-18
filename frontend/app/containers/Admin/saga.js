@@ -16,12 +16,16 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_GET_INSTITUTIONS_LIST,
           REQUEST_GET_INSTITUTION,
           REQUEST_GET_INSTITUTIONS_OPTIONLIST,
+          REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST,
           REQUEST_INSTITUTIONSTYPES_OPTIONLIST,
           REQUEST_POST_INSTITUTION,
           REQUEST_GET_COUNTRIES_OPTIONLIST,
           UPDATE_INSTITUTION,
           REQUEST_LIBRARYSUBJECT_OPTIONLIST,
-          REQUEST_POST_PUBLIC_LIBRARY
+          REQUEST_POST_PUBLIC_LIBRARY,
+          REQUEST_SEARCH_PLACES_BY_TEXT,
+          REQUEST_GET_LIBRARY_LIST
+
 } from './constants';
 import {
   requestError,
@@ -39,22 +43,31 @@ import {
   requestGetInstitutionsListSuccess,
   requestGetInstitutionTypeOptionListSuccess,
   requestGetInstitutionsOptionListSuccess,
+  requestGetInstitutionsByTypeByCountryOptionListSuccess,
   requestGetCountriesOptionListSuccess,
   requestGetInstitutionSuccess,
   requestGetRolesSuccess,
-  requestLibrarySubjectOptionListSuccess
+  requestLibrarySubjectOptionListSuccess,
+  requestSearchPlacesByTextSuccess,
+  requestSearchPlacesByTextFail,  
+  requestGetLibraryListNearToSuccess,
+  
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
 import {getUsersList, updateUser, createUser, getUsersOptionsList,
         getRoles, getUser, getLibrary, getLibrariesList, updateLibrary,deleteLibrary,
         createLibrary, getInstituionTypeList, getInstitutionsList,
-        getInstitution, updateInstitution, getInstitutionTypesOptionList,
+        getInstitution, updateInstitution, getInstitutionTypesOptionList,  getInstitutionsByTypeByCountryOptionList,
         getInstitutionsOptionList,
         createInstitution, getCountriesOptionsList,
         getProject, getProjectsList, updateProject,getProjectsOptionList,
-        createProject, getLibrariesSubjects,createPublicLibrary} from 'utils/api'
+        createProject, getLibrariesSubjects,createPublicLibrary,
+        getLibrariesListNearTo} from 'utils/api'
 
+        import {
+          getPlacesByText
+          } from 'utils/apiExternal';   
 
 export function* requestUserSaga(action) {
   const options = {
@@ -159,8 +172,10 @@ export function* requestPostPublicLibrarySaga(action) {
   const options = {
     method: 'post',
     body: {...action.request }
+    
   };
   try {
+    
     const request = yield call(createPublicLibrary, options);
     // yield call(requestGetLibrariesListSaga);
     yield put(push("/"));
@@ -271,10 +286,29 @@ export function* requestInstitutionsOptionListSaga(action) {
   const options = {
     method: 'get',
     query: action.request ? action.request : ""
+  
   }
   try {
     const request = yield call(getInstitutionsOptionList, options);
     yield put(requestGetInstitutionsOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+
+
+
+export function* requestGetInstitutionsByTypeByCountryOptionListSaga(action) {
+ const options = {
+    method: 'get',
+    query: action.request ? action.request : "",
+    countryid: action.countryid,
+    institutiontypeid: action.institutiontypeid
+  }
+  try {
+    const request = yield call(getInstitutionsByTypeByCountryOptionList, options);
+    yield put(requestGetInstitutionsByTypeByCountryOptionListSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -419,6 +453,35 @@ export function* requestProjectsOptionListSaga(action) {
   }
 }
 
+export function* findPlacesByText(action) {
+  console.log("findPlacesByText:", action);
+  const options = {
+    method: 'get',    
+    search: action.search,    
+  }
+  try {
+    const result = yield call(getPlacesByText, options);
+    yield put(requestSearchPlacesByTextSuccess(result));          
+  } catch(e) {    
+    yield put(requestSearchPlacesByTextFail(e.message));
+  }
+}
+
+export function* requestLibraryListNearToSaga(action = {}) {
+  console.log("SAGA-requestLibraryListNearToSaga",action)
+  const options = {
+    method: 'get',
+    pos: action.pos ?  action.pos : ""
+  }
+  try {
+    const request = yield call(getLibrariesListNearTo, options);
+    yield put(requestGetLibraryListNearToSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+
 /**
  * Root saga manages watcher lifecycle
  */
@@ -443,10 +506,18 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_POST_PROJECT, requestPostProjectSaga);
   yield takeLatest(REQUEST_GET_INSTITUTIONS_LIST, requestGetInstitutionsListSaga);
   yield takeLatest(REQUEST_INSTITUTIONSTYPES_OPTIONLIST, requestInstitutionTypeOptionListSaga);
+  
+  
   yield takeLatest(REQUEST_GET_INSTITUTIONS_OPTIONLIST, requestInstitutionsOptionListSaga);
+
+
+  yield takeLatest(REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST, requestGetInstitutionsByTypeByCountryOptionListSaga);
+
   yield takeLatest(REQUEST_LIBRARYSUBJECT_OPTIONLIST, requestLibrarySubjectOptionListSaga);
   yield takeLatest(REQUEST_GET_INSTITUTION, requestGetInstitutionSaga);
   yield takeLatest(REQUEST_POST_INSTITUTION, requestPostInstitutionSaga);
   yield takeLatest(REQUEST_GET_COUNTRIES_OPTIONLIST, requestGetCountriesOptionListSaga);
   yield takeLatest(UPDATE_INSTITUTION, requestUpdateInstitutionSaga);
+  yield takeLatest(REQUEST_SEARCH_PLACES_BY_TEXT,findPlacesByText);
+  yield takeLatest(REQUEST_GET_LIBRARY_LIST, requestLibraryListNearToSaga);
 }

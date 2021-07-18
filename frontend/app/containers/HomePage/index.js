@@ -32,10 +32,12 @@ function HomePage(props) {
   console.log('HomePage', props)  
   const {dispatch, isLoading, patron,match} = props;
   const librariesList = patron.my_libraries.data;
-
+  const DisplayPatronTab=(process.env.MANAGE_PATRONS && process.env.MANAGE_PATRONS=="true")?true:false; 
   const [PatronReg,setPatronReg]=useState (true);
   const togglePatronReg = () => {setPatronReg(true); setLibraryReg(false);}
-  const [LibraryReg,setLibraryReg]=useState (false);
+  const [LibraryReg,setLibraryReg]=useState (!DisplayPatronTab);
+
+  
   const toggleLibraryReg = () => {setLibraryReg(true); setPatronReg(false);}
 
   const intl=useIntl();
@@ -83,6 +85,7 @@ libmessages
        <p>{intl.formatMessage({id:'app.containers.HomePage.intro2'})}</p>       
        <p>{intl.formatMessage({id:'app.containers.HomePage.intro3'})}</p>       
        <nav>
+       { DisplayPatronTab === true ? (
        <NavLink
               className="btn btn-primary mx-3"
               key="associateLib"                                            
@@ -90,7 +93,7 @@ libmessages
               onClick={(e)=>togglePatronReg()}      
               to="#"        
         >{intl.formatMessage({id:'app.global.patron'})}</NavLink>
-        <NavLink
+        ):(<span></span>)}<NavLink
               className="btn btn-primary mx-3"
               key="registernewlibrary"                                          
               isActive={()=>LibraryReg}        
@@ -101,8 +104,10 @@ libmessages
         {/* TODO 
           - must be able to preselect library reading from url (also for patrons and new users without roles)
         */}
-        {PatronReg && <MyLibraryPage match={match} auth={props.auth}/>}
-        {LibraryReg && <RegisterLibrary {...props.auth} headermenu={false}/> }  
+         {PatronReg && DisplayPatronTab && <MyLibraryPage match={match}  auth={props.auth}/>}
+         {LibraryReg && <RegisterLibrary {...props.auth} headermenu={false} /> }  
+         
+        
         </>
        ||
        <>
