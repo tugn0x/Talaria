@@ -17,7 +17,7 @@ import { requestGetInstitutionsOptionList, requestGetCountriesOptionList,
 import './style.scss'
 import {Button,Row, Col} from 'reactstrap'
 import {useIntl} from 'react-intl'
-import {CustomForm} from 'components'
+import {CustomForm, BasePage} from 'components'
 import {requestSearchPlacesByText} from '../Admin/actions';
 
 
@@ -144,6 +144,7 @@ const RegisterLibrary = (props) => {
     return (
         <BasePage {...props} routes={[]} messages={messages} headermenu={false}>
             <h2>{intl.formatMessage(wizardMessages.header)}</h2>
+            <br></br>
             <Navigation 
                 step={currentStep} 
                 totalSteps={totalSteps}
@@ -232,7 +233,7 @@ const RegisterLibrary = (props) => {
                    
                 </div>
             }
-        </> 
+        </BasePage> 
     )
 }
 

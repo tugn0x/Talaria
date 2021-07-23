@@ -14,489 +14,262 @@ class CountriesTableSeeder extends Seeder
     {
        // Country::create(['code'=>'ITA','name'=>'Italy']);
        Country::truncate();
-       $countries = [
-           ['name' => 'Afghanistan', 'code' => 'AF'],
-           ['name' => 'Åland Islands', 'code' => 'AX'],
-           ['name' => 'Albania', 'code' => 'AL'],
-           ['name' => 'Algeria', 'code' => 'DZ'],
-           ['name' => 'American Samoa', 'code' => 'AS'],
-           ['name' => 'Andorra', 'code' => 'AD'],
-           ['name' => 'Angola', 'code' => 'AO'],
-           ['name' => 'Anguilla', 'code' => 'AI'],
-           ['name' => 'Antarctica', 'code' => 'AQ'],
-           ['name' => 'Antigua and Barbuda', 'code' => 'AG'],
-           ['name' => 'Argentina', 'code' => 'AR'],
-           ['name' => 'Armenia', 'code' => 'AM'],
-           ['name' => 'Aruba', 'code' => 'AW'],
-           ['name' => 'Australia', 'code' => 'AU'],
-           ['name' => 'Austria', 'code' => 'AT'],
-           ['name' => 'Azerbaijan', 'code' => 'AZ'],
-           ['name' => 'Bahamas', 'code' => 'BS'],
-           ['name' => 'Bahrain', 'code' => 'BH'],
-           ['name' => 'Bangladesh', 'code' => 'BD'],
-
-           ['name' => 'Barbados', 'code' => 'BB'],
-
-           ['name' => 'Belarus', 'code' => 'BY'],
-
-           ['name' => 'Belgium', 'code' => 'BE'],
-
-           ['name' => 'Belize', 'code' => 'BZ'],
-
-           ['name' => 'Benin', 'code' => 'BJ'],
-
-           ['name' => 'Bermuda', 'code' => 'BM'],
-
-           ['name' => 'Bhutan', 'code' => 'BT'],
-
-           ['name' => 'Bolivia, Plurinational State of', 'code' => 'BO'],
-
-           ['name' => 'Bonaire, Sint Eustatius and Saba', 'code' => 'BQ'],
-
-           ['name' => 'Bosnia and Herzegovina', 'code' => 'BA'],
-
-           ['name' => 'Botswana', 'code' => 'BW'],
-
-           ['name' => 'Bouvet Island', 'code' => 'BV'],
-
-           ['name' => 'Brazil', 'code' => 'BR'],
-
-           ['name' => 'British Indian Ocean Territory', 'code' => 'IO'],
-
-           ['name' => 'Brunei Darussalam', 'code' => 'BN'],
-
-           ['name' => 'Bulgaria', 'code' => 'BG'],
-
-           ['name' => 'Burkina Faso', 'code' => 'BF'],
-
-           ['name' => 'Burundi', 'code' => 'BI'],
-
-           ['name' => 'Cambodia', 'code' => 'KH'],
-
-           ['name' => 'Cameroon', 'code' => 'CM'],
-
-           ['name' => 'Canada', 'code' => 'CA'],
-
-           ['name' => 'Cape Verde', 'code' => 'CV'],
-
-           ['name' => 'Cayman Islands', 'code' => 'KY'],
-
-           ['name' => 'Central African Republic', 'code' => 'CF'],
-
-           ['name' => 'Chad', 'code' => 'TD'],
-
-           ['name' => 'Chile', 'code' => 'CL'],
-
-           ['name' => 'China', 'code' => 'CN'],
-
-           ['name' => 'Christmas Island', 'code' => 'CX'],
-
-           ['name' => 'Cocos (Keeling) Islands', 'code' => 'CC'],
-
-           ['name' => 'Colombia', 'code' => 'CO'],
-
-           ['name' => 'Comoros', 'code' => 'KM'],
-
-           ['name' => 'Congo', 'code' => 'CG'],
-
-           ['name' => 'Congo, the Democratic Republic of the', 'code' => 'CD'],
-
-           ['name' => 'Cook Islands', 'code' => 'CK'],
-
-           ['name' => 'Costa Rica', 'code' => 'CR'],
-
-           ['name' => 'Côte d\'Ivoire', 'code' => 'CI'],
-
-           ['name' => 'Croatia', 'code' => 'HR'],
-
-           ['name' => 'Cuba', 'code' => 'CU'],
-
-           ['name' => 'Curaçao', 'code' => 'CW'],
-
-           ['name' => 'Cyprus', 'code' => 'CY'],
-
-           ['name' => 'Czech Republic', 'code' => 'CZ'],
-
-           ['name' => 'Denmark', 'code' => 'DK'],
-
-           ['name' => 'Djibouti', 'code' => 'DJ'],
-
-           ['name' => 'Dominica', 'code' => 'DM'],
-
-           ['name' => 'Dominican Republic', 'code' => 'DO'],
-
-           ['name' => 'Ecuador', 'code' => 'EC'],
-
-           ['name' => 'Egypt', 'code' => 'EG'],
-
-           ['name' => 'El Salvador', 'code' => 'SV'],
-
-           ['name' => 'Equatorial Guinea', 'code' => 'GQ'],
-
-           ['name' => 'Eritrea', 'code' => 'ER'],
-
-           ['name' => 'Estonia', 'code' => 'EE'],
-
-           ['name' => 'Ethiopia', 'code' => 'ET'],
-
-           ['name' => 'Falkland Islands (Malvinas)', 'code' => 'FK'],
-
-           ['name' => 'Faroe Islands', 'code' => 'FO'],
-
-           ['name' => 'Fiji', 'code' => 'FJ'],
-
-           ['name' => 'Finland', 'code' => 'FI'],
-
-           ['name' => 'France', 'code' => 'FR'],
-
-           ['name' => 'French Guiana', 'code' => 'GF'],
-
-           ['name' => 'French Polynesia', 'code' => 'PF'],
-
-           ['name' => 'French Southern Territories', 'code' => 'TF'],
-
-           ['name' => 'Gabon', 'code' => 'GA'],
-
-           ['name' => 'Gambia', 'code' => 'GM'],
-
-           ['name' => 'Georgia', 'code' => 'GE'],
-
-           ['name' => 'Germany', 'code' => 'DE'],
-
-           ['name' => 'Ghana', 'code' => 'GH'],
-
-           ['name' => 'Gibraltar', 'code' => 'GI'],
-
-           ['name' => 'Greece', 'code' => 'GR'],
-
-           ['name' => 'Greenland', 'code' => 'GL'],
-
-           ['name' => 'Grenada', 'code' => 'GD'],
-
-           ['name' => 'Guadeloupe', 'code' => 'GP'],
-
-           ['name' => 'Guam', 'code' => 'GU'],
-
-           ['name' => 'Guatemala', 'code' => 'GT'],
-
-           ['name' => 'Guernsey', 'code' => 'GG'],
-
-           ['name' => 'Guinea', 'code' => 'GN'],
-
-           ['name' => 'Guinea-Bissau', 'code' => 'GW'],
-
-           ['name' => 'Guyana', 'code' => 'GY'],
-
-           ['name' => 'Haiti', 'code' => 'HT'],
-
-           ['name' => 'Heard Island and McDonald Mcdonald Islands', 'code' => 'HM'],
-
-           ['name' => 'Holy See (Vatican City State)', 'code' => 'VA'],
-
-           ['name' => 'Honduras', 'code' => 'HN'],
-
-           ['name' => 'Hong Kong', 'code' => 'HK'],
-
-           ['name' => 'Hungary', 'code' => 'HU'],
-
-           ['name' => 'Iceland', 'code' => 'IS'],
-
-           ['name' => 'India', 'code' => 'IN'],
-
-           ['name' => 'Indonesia', 'code' => 'ID'],
-
-           ['name' => 'Iran, Islamic Republic of', 'code' => 'IR'],
-
-           ['name' => 'Iraq', 'code' => 'IQ'],
-
-           ['name' => 'Ireland', 'code' => 'IE'],
-
-           ['name' => 'Isle of Man', 'code' => 'IM'],
-
-           ['name' => 'Israel', 'code' => 'IL'],
-
-           ['name' => 'Italy', 'code' => 'IT'],
-
-           ['name' => 'Jamaica', 'code' => 'JM'],
-
-           ['name' => 'Japan', 'code' => 'JP'],
-
-           ['name' => 'Jersey', 'code' => 'JE'],
-
-           ['name' => 'Jordan', 'code' => 'JO'],
-
-           ['name' => 'Kazakhstan', 'code' => 'KZ'],
-
-           ['name' => 'Kenya', 'code' => 'KE'],
-
-           ['name' => 'Kiribati', 'code' => 'KI'],
-
-           ['name' => 'Korea, Democratic People\'s Republic of', 'code' => 'KP'],
-
-           ['name' => 'Korea, Republic of', 'code' => 'KR'],
-
-           ['name' => 'Kuwait', 'code' => 'KW'],
-
-           ['name' => 'Kyrgyzstan', 'code' => 'KG'],
-
-           ['name' => 'Lao People\'s Democratic Republic', 'code' => 'LA'],
-
-           ['name' => 'Latvia', 'code' => 'LV'],
-
-           ['name' => 'Lebanon', 'code' => 'LB'],
-
-           ['name' => 'Lesotho', 'code' => 'LS'],
-
-           ['name' => 'Liberia', 'code' => 'LR'],
-
-           ['name' => 'Libya', 'code' => 'LY'],
-
-           ['name' => 'Liechtenstein', 'code' => 'LI'],
-
-           ['name' => 'Lithuania', 'code' => 'LT'],
-
-           ['name' => 'Luxembourg', 'code' => 'LU'],
-
-           ['name' => 'Macao', 'code' => 'MO'],
-
-           ['name' => 'Macedonia, the Former Yugoslav Republic of', 'code' => 'MK'],
-
-           ['name' => 'Madagascar', 'code' => 'MG'],
-
-           ['name' => 'Malawi', 'code' => 'MW'],
-
-           ['name' => 'Malaysia', 'code' => 'MY'],
-
-           ['name' => 'Maldives', 'code' => 'MV'],
-
-           ['name' => 'Mali', 'code' => 'ML'],
-
-           ['name' => 'Malta', 'code' => 'MT'],
-
-           ['name' => 'Marshall Islands', 'code' => 'MH'],
-
-           ['name' => 'Martinique', 'code' => 'MQ'],
-
-           ['name' => 'Mauritania', 'code' => 'MR'],
-
-           ['name' => 'Mauritius', 'code' => 'MU'],
-
-           ['name' => 'Mayotte', 'code' => 'YT'],
-
-           ['name' => 'Mexico', 'code' => 'MX'],
-
-           ['name' => 'Micronesia, Federated States of', 'code' => 'FM'],
-
-           ['name' => 'Moldova, Republic of', 'code' => 'MD'],
-
-           ['name' => 'Monaco', 'code' => 'MC'],
-
-           ['name' => 'Mongolia', 'code' => 'MN'],
-
-           ['name' => 'Montenegro', 'code' => 'ME'],
-
-           ['name' => 'Montserrat', 'code' => 'MS'],
-
-           ['name' => 'Morocco', 'code' => 'MA'],
-
-           ['name' => 'Mozambique', 'code' => 'MZ'],
-
-           ['name' => 'Myanmar', 'code' => 'MM'],
-
-           ['name' => 'Namibia', 'code' => 'NA'],
-
-           ['name' => 'Nauru', 'code' => 'NR'],
-
-           ['name' => 'Nepal', 'code' => 'NP'],
-
-           ['name' => 'Netherlands', 'code' => 'NL'],
-
-           ['name' => 'New Caledonia', 'code' => 'NC'],
-
-           ['name' => 'New Zealand', 'code' => 'NZ'],
-
-           ['name' => 'Nicaragua', 'code' => 'NI'],
-
-           ['name' => 'Niger', 'code' => 'NE'],
-
-           ['name' => 'Nigeria', 'code' => 'NG'],
-
-           ['name' => 'Niue', 'code' => 'NU'],
-
-           ['name' => 'Norfolk Island', 'code' => 'NF'],
-
-           ['name' => 'Northern Mariana Islands', 'code' => 'MP'],
-
-           ['name' => 'Norway', 'code' => 'NO'],
-
-           ['name' => 'Oman', 'code' => 'OM'],
-
-           ['name' => 'Pakistan', 'code' => 'PK'],
-
-           ['name' => 'Palau', 'code' => 'PW'],
-
-           ['name' => 'Palestine, State of', 'code' => 'PS'],
-
-           ['name' => 'Panama', 'code' => 'PA'],
-
-           ['name' => 'Papua New Guinea', 'code' => 'PG'],
-
-           ['name' => 'Paraguay', 'code' => 'PY'],
-
-           ['name' => 'Peru', 'code' => 'PE'],
-
-           ['name' => 'Philippines', 'code' => 'PH'],
-
-           ['name' => 'Pitcairn', 'code' => 'PN'],
-
-           ['name' => 'Poland', 'code' => 'PL'],
-
-           ['name' => 'Portugal', 'code' => 'PT'],
-
-           ['name' => 'Puerto Rico', 'code' => 'PR'],
-
-           ['name' => 'Qatar', 'code' => 'QA'],
-
-           ['name' => 'Réunion', 'code' => 'RE'],
-
-           ['name' => 'Romania', 'code' => 'RO'],
-
-           ['name' => 'Russian Federation', 'code' => 'RU'],
-
-           ['name' => 'Rwanda', 'code' => 'RW'],
-
-           ['name' => 'Saint Barthélemy', 'code' => 'BL'],
-
-           ['name' => 'Saint Helena, Ascension and Tristan da Cunha', 'code' => 'SH'],
-
-           ['name' => 'Saint Kitts and Nevis', 'code' => 'KN'],
-
-           ['name' => 'Saint Lucia', 'code' => 'LC'],
-
-           ['name' => 'Saint Martin (French part)', 'code' => 'MF'],
-
-           ['name' => 'Saint Pierre and Miquelon', 'code' => 'PM'],
-
-           ['name' => 'Saint Vincent and the Grenadines', 'code' => 'VC'],
-
-           ['name' => 'Samoa', 'code' => 'WS'],
-
-           ['name' => 'San Marino', 'code' => 'SM'],
-
-           ['name' => 'Sao Tome and Principe', 'code' => 'ST'],
-
-           ['name' => 'Saudi Arabia', 'code' => 'SA'],
-
-           ['name' => 'Senegal', 'code' => 'SN'],
-
-           ['name' => 'Serbia', 'code' => 'RS'],
-
-           ['name' => 'Seychelles', 'code' => 'SC'],
-
-           ['name' => 'Sierra Leone', 'code' => 'SL'],
-
-           ['name' => 'Singapore', 'code' => 'SG'],
-
-           ['name' => 'Sint Maarten (Dutch part)', 'code' => 'SX'],
-
-           ['name' => 'Slovakia', 'code' => 'SK'],
-
-           ['name' => 'Slovenia', 'code' => 'SI'],
-
-           ['name' => 'Solomon Islands', 'code' => 'SB'],
-
-           ['name' => 'Somalia', 'code' => 'SO'],
-
-           ['name' => 'South Africa', 'code' => 'ZA'],
-
-           ['name' => 'South Georgia and the South Sandwich Islands', 'code' => 'GS'],
-
-           ['name' => 'South Sudan', 'code' => 'SS'],
-
-           ['name' => 'Spain', 'code' => 'ES'],
-
-           ['name' => 'Sri Lanka', 'code' => 'LK'],
-
-           ['name' => 'Sudan', 'code' => 'SD'],
-
-           ['name' => 'Suriname', 'code' => 'SR'],
-
-           ['name' => 'Svalbard and Jan Mayen', 'code' => 'SJ'],
-
-           ['name' => 'Swaziland', 'code' => 'SZ'],
-
-           ['name' => 'Sweden', 'code' => 'SE'],
-
-           ['name' => 'Switzerland', 'code' => 'CH'],
-
-           ['name' => 'Syrian Arab Republic', 'code' => 'SY'],
-
-           ['name' => 'Taiwan', 'code' => 'TW'],
-
-           ['name' => 'Tajikistan', 'code' => 'TJ'],
-
-           ['name' => 'Tanzania, United Republic of', 'code' => 'TZ'],
-
-           ['name' => 'Thailand', 'code' => 'TH'],
-
-           ['name' => 'Timor-Leste', 'code' => 'TL'],
-
-           ['name' => 'Togo', 'code' => 'TG'],
-
-           ['name' => 'Tokelau', 'code' => 'TK'],
-
-           ['name' => 'Tonga', 'code' => 'TO'],
-
-           ['name' => 'Trinidad and Tobago', 'code' => 'TT'],
-
-           ['name' => 'Tunisia', 'code' => 'TN'],
-
-           ['name' => 'Turkey', 'code' => 'TR'],
-
-           ['name' => 'Turkmenistan', 'code' => 'TM'],
-
-           ['name' => 'Turks and Caicos Islands', 'code' => 'TC'],
-
-           ['name' => 'Tuvalu', 'code' => 'TV'],
-
-           ['name' => 'Uganda', 'code' => 'UG'],
-
-           ['name' => 'Ukraine', 'code' => 'UA'],
-
-           ['name' => 'United Arab Emirates', 'code' => 'AE'],
-
-           ['name' => 'United Kingdom', 'code' => 'GB'],
-
-           ['name' => 'United States', 'code' => 'US'],
-
-           ['name' => 'United States Minor Outlying Islands', 'code' => 'UM'],
-
-           ['name' => 'Uruguay', 'code' => 'UY'],
-
-           ['name' => 'Uzbekistan', 'code' => 'UZ'],
-
-           ['name' => 'Vanuatu', 'code' => 'VU'],
-
-           ['name' => 'Venezuela, Bolivarian Republic of', 'code' => 'VE'],
-
-           ['name' => 'Viet Nam', 'code' => 'VN'],
-
-           ['name' => 'Virgin Islands, British', 'code' => 'VG'],
-
-           ['name' => 'Virgin Islands, U.S.', 'code' => 'VI'],
-
-           ['name' => 'Wallis and Futuna', 'code' => 'WF'],
-
-           ['name' => 'Western Sahara', 'code' => 'EH'],
-
-           ['name' => 'Yemen', 'code' => 'YE'],
-
-           ['name' => 'Zambia', 'code' => 'ZM'],
-
-           ['name' => 'Zimbabwe', 'code' => 'ZW'],
-
-       ];
-
+       $countries = array(
+        array('id' => '1','name' => 'AFGHANISTAN','code' => 'AFG'),
+        array('id' => '2','name' => 'ALBANIA','code' => 'ALB'),
+        array('id' => '3','name' => 'ALGERIA','code' => 'DZA'),
+        array('id' => '4','name' => 'AMERICAN SAMOA','code' => 'ASM'),
+        array('id' => '5','name' => 'ANDORRA','code' => 'AND'),
+        array('id' => '6','name' => 'ANGOLA','code' => 'AGO'),
+        array('id' => '7','name' => 'ANGUILLA','code' => 'AIA'),
+        array('id' => '8','name' => 'ANTARCTICA','code' => 'AQ'),
+        array('id' => '9','name' => 'ANTIGUA AND BARBUDA','code' => 'ATG'),
+        array('id' => '10','name' => 'ARGENTINA','code' => 'ARG'),
+        array('id' => '11','name' => 'ARMENIA','code' => 'ARM'),
+        array('id' => '12','name' => 'ARUBA','code' => 'ABW'),
+        array('id' => '13','name' => 'AUSTRALIA','code' => 'AUS'),
+        array('id' => '14','name' => 'AUSTRIA','code' => 'AUT'),
+        array('id' => '15','name' => 'AZERBAIJAN','code' => 'AZE'),
+        array('id' => '16','name' => 'BAHAMAS','code' => 'BHS'),
+        array('id' => '17','name' => 'BAHRAIN','code' => 'BHR'),
+        array('id' => '18','name' => 'BANGLADESH','code' => 'BGD'),
+        array('id' => '19','name' => 'BARBADOS','code' => 'BRB'),
+        array('id' => '20','name' => 'BELARUS','code' => 'BLR'),
+        array('id' => '21','name' => 'BELGIUM','code' => 'BEL'),
+        array('id' => '22','name' => 'BELIZE','code' => 'BLZ'),
+        array('id' => '23','name' => 'BENIN','code' => 'BEN'),
+        array('id' => '24','name' => 'BERMUDA','code' => 'BMU'),
+        array('id' => '25','name' => 'BHUTAN','code' => 'BTN'),
+        array('id' => '26','name' => 'BOLIVIA','code' => 'BOL'),
+        array('id' => '27','name' => 'BOSNIA AND HERZEGOVINA','code' => 'BIH'),
+        array('id' => '28','name' => 'BOTSWANA','code' => 'BWA'),
+        array('id' => '29','name' => 'BOUVET ISLAND','code' => 'BV'),
+        array('id' => '30','name' => 'BRAZIL','code' => 'BRA'),
+        array('id' => '31','name' => 'BRITISH INDIAN OCEAN TERRITORY','code' => 'IOT'),
+        array('id' => '32','name' => 'BRUNEI DARUSSALAM','code' => 'BRN'),
+        array('id' => '33','name' => 'BULGARIA','code' => 'BGR'),
+        array('id' => '34','name' => 'BURKINA FASO','code' => 'BFA'),
+        array('id' => '35','name' => 'BURUNDI','code' => 'BDI'),
+        array('id' => '36','name' => 'CAMBODIA','code' => 'KHM'),
+        array('id' => '37','name' => 'CAMEROON','code' => 'CMR'),
+        array('id' => '38','name' => 'CANADA','code' => 'CAN'),
+        array('id' => '39','name' => 'CAPE VERDE','code' => 'CPV'),
+        array('id' => '40','name' => 'CAYMAN ISLANDS','code' => 'CYM'),
+        array('id' => '41','name' => 'CENTRAL AFRICAN REPUBLIC','code' => 'CAF'),
+        array('id' => '42','name' => 'CHAD','code' => 'TCD'),
+        array('id' => '43','name' => 'CHILE','code' => 'CHL'),
+        array('id' => '44','name' => 'CHINA','code' => 'CHN'),
+        array('id' => '45','name' => 'CHRISTMAS ISLAND','code' => 'CX'),
+        array('id' => '46','name' => 'COCOS (KEELING) ISLANDS','code' => 'CCK'),
+        array('id' => '47','name' => 'COLOMBIA','code' => 'COL'),
+        array('id' => '48','name' => 'COMOROS','code' => 'COM'),
+        array('id' => '49','name' => 'CONGO','code' => 'COG'),
+        array('id' => '50','name' => 'CONGO','code' => '180'),
+        array('id' => '51','name' => 'COOK ISLANDS','code' => 'COK'),
+        array('id' => '52','name' => 'COSTA RICA','code' => 'CRI'),
+        array('id' => '53','name' => 'COTE D\'IVOIRE','code' => 'CIV'),
+        array('id' => '54','name' => 'CROATIA','code' => 'HRV'),
+        array('id' => '55','name' => 'CUBA','code' => 'CUB'),
+        array('id' => '56','name' => 'CYPRUS','code' => 'CYP'),
+        array('id' => '57','name' => 'CZECH REPUBLIC','code' => 'CZE'),
+        array('id' => '58','name' => 'DENMARK','code' => 'DNK'),
+        array('id' => '59','name' => 'DJIBOUTI','code' => 'DJI'),
+        array('id' => '60','name' => 'DOMINICA','code' => 'DMA'),
+        array('id' => '61','name' => 'DOMINICAN REPUBLIC','code' => 'DOM'),
+        array('id' => '62','name' => 'ECUADOR','code' => 'ECU'),
+        array('id' => '63','name' => 'EGYPT','code' => 'EGY'),
+        array('id' => '64','name' => 'EL SALVADOR','code' => 'SLV'),
+        array('id' => '65','name' => 'EQUATORIAL GUINEA','code' => 'GNQ'),
+        array('id' => '66','name' => 'ERITREA','code' => 'ERI'),
+        array('id' => '67','name' => 'ESTONIA','code' => 'EST'),
+        array('id' => '68','name' => 'ETHIOPIA','code' => 'ETH'),
+        array('id' => '69','name' => 'FALKLAND ISLANDS (MALVINAS)','code' => 'FLK'),
+        array('id' => '70','name' => 'FAROE ISLANDS','code' => 'FRO'),
+        array('id' => '71','name' => 'FIJI','code' => 'FJI'),
+        array('id' => '72','name' => 'FINLAND','code' => 'FIN'),
+        array('id' => '73','name' => 'FRANCE','code' => 'FRA'),
+        array('id' => '74','name' => 'FRENCH GUIANA','code' => 'GUF'),
+        array('id' => '75','name' => 'FRENCH POLYNESIA','code' => 'PYF'),
+        array('id' => '76','name' => 'FRENCH SOUTHERN TERRITORIES','code' => 'FRT'),
+        array('id' => '77','name' => 'GABON','code' => 'GAB'),
+        array('id' => '78','name' => 'GAMBIA','code' => 'GMB'),
+        array('id' => '79','name' => 'GEORGIA','code' => 'GEO'),
+        array('id' => '80','name' => 'GERMANY','code' => 'DEU'),
+        array('id' => '81','name' => 'GHANA','code' => 'GHA'),
+        array('id' => '82','name' => 'GIBRALTAR','code' => 'GIB'),
+        array('id' => '83','name' => 'GREECE','code' => 'GRC'),
+        array('id' => '84','name' => 'GREENLAND','code' => 'GRL'),
+        array('id' => '85','name' => 'GRENADA','code' => 'GRD'),
+        array('id' => '86','name' => 'GUADELOUPE','code' => 'GLP'),
+        array('id' => '87','name' => 'GUAM','code' => 'GUM'),
+        array('id' => '88','name' => 'GUATEMALA','code' => 'GTM'),
+        array('id' => '89','name' => 'GUINEA','code' => 'GIN'),
+        array('id' => '90','name' => 'GUINEA-BISSAU','code' => 'GNB'),
+        array('id' => '91','name' => 'GUYANA','code' => 'GUY'),
+        array('id' => '92','name' => 'HAITI','code' => 'HTI'),
+        array('id' => '93','name' => 'HEARD ISLAND AND MCDONALD ISLANDS','code' => 'HMD'),
+        array('id' => '94','name' => 'HOLY SEE (VATICAN CITY STATE)','code' => 'VAT'),
+        array('id' => '95','name' => 'HONDURAS','code' => 'HND'),
+        array('id' => '96','name' => 'HONG KONG','code' => 'HKG'),
+        array('id' => '97','name' => 'HUNGARY','code' => 'HUN'),
+        array('id' => '98','name' => 'ICELAND','code' => 'ISL'),
+        array('id' => '99','name' => 'INDIA','code' => 'IND'),
+        array('id' => '100','name' => 'INDONESIA','code' => 'IDN'),
+        array('id' => '101','name' => 'IRAN','code' => '364'),
+        array('id' => '102','name' => 'IRAQ','code' => 'IRQ'),
+        array('id' => '103','name' => 'IRELAND','code' => 'IRL'),
+        array('id' => '104','name' => 'ISRAEL','code' => 'ISR'),
+        array('id' => '105','name' => 'ITALY','code' => 'ITA'),
+        array('id' => '106','name' => 'JAMAICA','code' => 'JAM'),
+        array('id' => '107','name' => 'JAPAN','code' => 'JPN'),
+        array('id' => '108','name' => 'JORDAN','code' => 'JOR'),
+        array('id' => '109','name' => 'KAZAKHSTAN','code' => 'KAZ'),
+        array('id' => '110','name' => 'KENYA','code' => 'KEN'),
+        array('id' => '111','name' => 'KIRIBATI','code' => 'KIR'),
+        array('id' => '112','name' => 'KOREA','code' => '408'),
+        array('id' => '113','name' => 'KOREA','code' => '410'),
+        array('id' => '114','name' => 'KUWAIT','code' => 'KWT'),
+        array('id' => '115','name' => 'KYRGYZSTAN','code' => 'KGZ'),
+        array('id' => '116','name' => 'LAO PEOPLE\'S DEMOCRATIC REPUBLIC','code' => 'LAO'),
+        array('id' => '117','name' => 'LATVIA','code' => 'LVA'),
+        array('id' => '118','name' => 'LEBANON','code' => 'LBN'),
+        array('id' => '119','name' => 'LESOTHO','code' => 'LSO'),
+        array('id' => '120','name' => 'LIBERIA','code' => 'LBR'),
+        array('id' => '121','name' => 'LIBYAN ARAB JAMAHIRIYA','code' => 'LBY'),
+        array('id' => '122','name' => 'LIECHTENSTEIN','code' => 'LIE'),
+        array('id' => '123','name' => 'LITHUANIA','code' => 'LTU'),
+        array('id' => '124','name' => 'LUXEMBOURG','code' => 'LUX'),
+        array('id' => '125','name' => 'MACAO','code' => 'MAC'),
+        array('id' => '126','name' => 'MACEDONIA','code' => '807'),
+        array('id' => '127','name' => 'MADAGASCAR','code' => 'MDG'),
+        array('id' => '128','name' => 'MALAWI','code' => 'MWI'),
+        array('id' => '129','name' => 'MALAYSIA','code' => 'MYS'),
+        array('id' => '130','name' => 'MALDIVES','code' => 'MDV'),
+        array('id' => '131','name' => 'MALI','code' => 'MLI'),
+        array('id' => '132','name' => 'MALTA','code' => 'MLT'),
+        array('id' => '133','name' => 'MARSHALL ISLANDS','code' => 'MHL'),
+        array('id' => '134','name' => 'MARTINIQUE','code' => 'MTQ'),
+        array('id' => '135','name' => 'MAURITANIA','code' => 'MRT'),
+        array('id' => '136','name' => 'MAURITIUS','code' => 'MUS'),
+        array('id' => '137','name' => 'MAYOTTE','code' => 'MYT'),
+        array('id' => '138','name' => 'MEXICO','code' => 'MEX'),
+        array('id' => '139','name' => 'MICRONESIA','code' => '583'),
+        array('id' => '140','name' => 'MOLDOVA','code' => '498'),
+        array('id' => '141','name' => 'MONACO','code' => 'MCO'),
+        array('id' => '142','name' => 'MONGOLIA','code' => 'MNG'),
+        array('id' => '143','name' => 'MONTSERRAT','code' => 'MSR'),
+        array('id' => '144','name' => 'MOROCCO','code' => 'MAR'),
+        array('id' => '145','name' => 'MOZAMBIQUE','code' => 'MOZ'),
+        array('id' => '146','name' => 'MYANMAR','code' => 'MMR'),
+        array('id' => '147','name' => 'NAMIBIA','code' => 'NAM'),
+        array('id' => '148','name' => 'NAURU','code' => 'NRU'),
+        array('id' => '149','name' => 'NEPAL','code' => 'NPL'),
+        array('id' => '150','name' => 'NETHERLANDS','code' => 'NLD'),
+        array('id' => '151','name' => 'NETHERLANDS ANTILLES','code' => 'ANT'),
+        array('id' => '152','name' => 'NEW CALEDONIA','code' => 'NCL'),
+        array('id' => '153','name' => 'NEW ZEALAND','code' => 'NZL'),
+        array('id' => '154','name' => 'NICARAGUA','code' => 'NIC'),
+        array('id' => '155','name' => 'NIGER','code' => 'NER'),
+        array('id' => '156','name' => 'NIGERIA','code' => 'NGA'),
+        array('id' => '157','name' => 'NIUE','code' => 'NIU'),
+        array('id' => '158','name' => 'NORFOLK ISLAND','code' => 'NFK'),
+        array('id' => '159','name' => 'NORTHERN MARIANA ISLANDS','code' => 'MNP'),
+        array('id' => '160','name' => 'NORWAY','code' => 'NOR'),
+        array('id' => '161','name' => 'OMAN','code' => 'OMN'),
+        array('id' => '162','name' => 'PAKISTAN','code' => 'PAK'),
+        array('id' => '163','name' => 'PALAU','code' => 'PLW'),
+        array('id' => '164','name' => 'PALESTINIAN TERRITORY','code' => 'PAT'),
+        array('id' => '165','name' => 'PANAMA','code' => 'PAN'),
+        array('id' => '166','name' => 'PAPUA NEW GUINEA','code' => 'PNG'),
+        array('id' => '167','name' => 'PARAGUAY','code' => 'PRY'),
+        array('id' => '168','name' => 'PERU','code' => 'PER'),
+        array('id' => '169','name' => 'PHILIPPINES','code' => 'PHL'),
+        array('id' => '170','name' => 'PITCAIRN','code' => 'PCN'),
+        array('id' => '171','name' => 'POLAND','code' => 'POL'),
+        array('id' => '172','name' => 'PORTUGAL','code' => 'PRT'),
+        array('id' => '173','name' => 'PUERTO RICO','code' => 'PRI'),
+        array('id' => '174','name' => 'QATAR','code' => 'QAT'),
+        array('id' => '175','name' => 'REUNION','code' => 'REU'),
+        array('id' => '176','name' => 'ROMANIA','code' => 'ROM'),
+        array('id' => '177','name' => 'RUSSIAN FEDERATION','code' => 'RUS'),
+        array('id' => '178','name' => 'RWANDA','code' => 'RWA'),
+        array('id' => '179','name' => 'SAINT HELENA','code' => 'SHN'),
+        array('id' => '180','name' => 'SAINT KITTS AND NEVIS','code' => 'KNA'),
+        array('id' => '181','name' => 'SAINT LUCIA','code' => 'LCA'),
+        array('id' => '182','name' => 'SAINT PIERRE AND MIQUELON','code' => 'SPM'),
+        array('id' => '183','name' => 'SAINT VINCENT AND THE GRENADINES','code' => 'VCT'),
+        array('id' => '184','name' => 'SAMOA','code' => 'WSM'),
+        array('id' => '185','name' => 'SAN MARINO','code' => 'SMR'),
+        array('id' => '186','name' => 'SAO TOME AND PRINCIPE','code' => 'STP'),
+        array('id' => '187','name' => 'SAUDI ARABIA','code' => 'SAU'),
+        array('id' => '188','name' => 'SENEGAL','code' => 'SEN'),
+        array('id' => '189','name' => 'SERBIA AND MONTENEGRO','code' => 'SCG'),
+        array('id' => '190','name' => 'SEYCHELLES','code' => 'SYC'),
+        array('id' => '191','name' => 'SIERRA LEONE','code' => 'SLE'),
+        array('id' => '192','name' => 'SINGAPORE','code' => 'SGP'),
+        array('id' => '193','name' => 'SLOVAKIA','code' => 'SVK'),
+        array('id' => '194','name' => 'SLOVENIA','code' => 'SVN'),
+        array('id' => '195','name' => 'SOLOMON ISLANDS','code' => 'SLB'),
+        array('id' => '196','name' => 'SOMALIA','code' => 'SOM'),
+        array('id' => '197','name' => 'SOUTH AFRICA','code' => 'ZAF'),
+        array('id' => '198','name' => 'SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS','code' => 'SGS'),
+        array('id' => '199','name' => 'SPAIN','code' => 'ESP'),
+        array('id' => '200','name' => 'SRI LANKA','code' => 'LKA'),
+        array('id' => '201','name' => 'SUDAN','code' => 'SDN'),
+        array('id' => '202','name' => 'SURINAME','code' => 'SUR'),
+        array('id' => '203','name' => 'SVALBARD AND JAN MAYEN','code' => 'SJM'),
+        array('id' => '204','name' => 'SWAZILAND','code' => 'SWZ'),
+        array('id' => '205','name' => 'SWEDEN','code' => 'SWE'),
+        array('id' => '206','name' => 'SWITZERLAND','code' => 'CHE'),
+        array('id' => '207','name' => 'SYRIAN ARAB REPUBLIC','code' => 'SYR'),
+        array('id' => '208','name' => 'TAIWAN','code' => '158'),
+        array('id' => '209','name' => 'TAJIKISTAN','code' => 'TJK'),
+        array('id' => '210','name' => 'TANZANIA','code' => '834'),
+        array('id' => '211','name' => 'THAILAND','code' => 'THA'),
+        array('id' => '212','name' => 'TIMOR-LESTE','code' => 'TLS'),
+        array('id' => '213','name' => 'TOGO','code' => 'TGO'),
+        array('id' => '214','name' => 'TOKELAU','code' => 'TKL'),
+        array('id' => '215','name' => 'TONGA','code' => 'TON'),
+        array('id' => '216','name' => 'TRINIDAD AND TOBAGO','code' => 'TTO'),
+        array('id' => '217','name' => 'TUNISIA','code' => 'TUN'),
+        array('id' => '218','name' => 'TURKEY','code' => 'TUR'),
+        array('id' => '219','name' => 'TURKMENISTAN','code' => 'TKM'),
+        array('id' => '220','name' => 'TURKS AND CAICOS ISLANDS','code' => 'TCA'),
+        array('id' => '221','name' => 'TUVALU','code' => 'TUV'),
+        array('id' => '222','name' => 'UGANDA','code' => 'UGA'),
+        array('id' => '223','name' => 'UKRAINE','code' => 'UKR'),
+        array('id' => '224','name' => 'UNITED ARAB EMIRATES','code' => 'ARE'),
+        array('id' => '225','name' => 'UNITED KINGDOM','code' => 'GBR'),
+        array('id' => '226','name' => 'UNITED STATES','code' => 'USA'),
+        array('id' => '227','name' => 'UNITED STATES MINOR OUTLYING ISLANDS','code' => 'UMI'),
+        array('id' => '228','name' => 'URUGUAY','code' => 'URY'),
+        array('id' => '229','name' => 'UZBEKISTAN','code' => 'UZB'),
+        array('id' => '230','name' => 'VANUATU','code' => 'VUT'),
+        array('id' => '231','name' => 'VENEZUELA','code' => 'VEN'),
+        array('id' => '232','name' => 'VIET NAM','code' => 'VNM'),
+        array('id' => '233','name' => 'VIRGIN ISLANDS','code' => '92'),
+        array('id' => '234','name' => 'VIRGIN ISLANDS','code' => '850'),
+        array('id' => '235','name' => 'WALLIS AND FUTUNA','code' => 'WLF'),
+        array('id' => '236','name' => 'WESTERN SAHARA','code' => 'ESH'),
+        array('id' => '237','name' => 'YEMEN','code' => 'YEM'),
+        array('id' => '238','name' => 'ZAMBIA','code' => 'ZMB'),
+        array('id' => '239','name' => 'ZIMBABWE','code' => 'ZWE'),
+        array('id' => '240','name' => 'SERBIA','code' => 'SRB'),
+        array('id' => '241','name' => 'ASIA PACIFIC REGION','code' => '0'),
+        array('id' => '242','name' => 'MONTENEGRO','code' => 'MNE'),
+        array('id' => '243','name' => 'ALAND ISLANDS','code' => 'ALA'),
+        array('id' => '244','name' => 'BONAIRE','code' => '535'),
+        array('id' => '245','name' => 'CURACAO','code' => 'CUW'),
+        array('id' => '246','name' => 'GUERNSEY','code' => 'GGY'),
+        array('id' => '247','name' => 'ISLE OF MAN','code' => 'IMN'),
+        array('id' => '248','name' => 'JERSEY','code' => 'JEY'),
+        array('id' => '249','name' => 'KOSOVO','code' => '---'),
+        array('id' => '250','name' => 'SAINT BARTHELEMY','code' => 'BLM'),
+        array('id' => '251','name' => 'SAINT MARTIN','code' => 'MAF'),
+        array('id' => '252','name' => 'SINT MAARTEN','code' => 'SXM'),
+        array('id' => '253','name' => 'SOUTH SUDAN','code' => 'SSD')
+
+      );
          
 
        foreach ($countries as $key => $value) {

@@ -1,4 +1,4 @@
- export const fieldsGroups = {
+export const fieldsGroups = {
     step_1: {
         name: 'step_1',
         order: 0,
@@ -127,10 +127,10 @@ export const fields = {
         order: 10,
     },
 
-    ill_service_contact_label: {
+   library_contact_label: {
         type: "Label",
         required: false,
-        label:"ILL service contacts",
+        label:"Service contact",
         name: "alt_name",
         width: "col-sm-12",
         group: "step_1",
@@ -266,10 +266,6 @@ export const fields = {
         group: "step_1",
         order: 24,
     },
-
-
-
-
     opac: {
         type: "text",
         required: false,
@@ -278,7 +274,6 @@ export const fields = {
         width: "col-sm-12",
         order: 25,
         hidden: true,
-        
     },
     subject_id: {
         type: "custom-select",
@@ -297,13 +292,7 @@ export const fields = {
     //     width: "col-sm-12",
     //     group: "step_1",
     //     order: 18,
-       
     // },
-   
-  
-
-
-  
 
     // district: {
     //     type: "text",
@@ -335,16 +324,6 @@ export const fields = {
 //         width: "col-sm-6",
 //         order: 13,
 //     },
-
-
-  
-
-
-
-
-
-
-   
 //     subject_id: {
 //         type: "custom-select",
 //         required: true,

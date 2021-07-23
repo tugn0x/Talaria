@@ -37,4 +37,17 @@ export default defineMessages({
     id: `${scope}.createMessage`,
     defaultMessage: `Public Library created`,
   },
+
+  placesFreeSearchPlaceholder: {
+    id: `${scope}.placesFreeSearchPlaceholder`,
+    defaultMessage: `Search for a new library`,
+  },
+  
+
+  suggested_institution_name: {
+    id: `${scope}.suggested_institution_name`,
+    defaultMessage: `Search for a new library`,
+  },
+
+
 });
