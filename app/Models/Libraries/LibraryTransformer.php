@@ -24,14 +24,16 @@ class LibraryTransformer extends BaseTransformer
         'country',
         'subject',
         'catalogs',
+        'projects',
         'deliveries'
     ];
 
     protected $defaultIncludes = [
         'granted_permissions',
-        'institution',
+        'institution',        
         'country',
         'subject',
+        'projects',
     ];
 
     public function includeGrantedPermissions(Model $model)
@@ -74,6 +76,12 @@ class LibraryTransformer extends BaseTransformer
             return $this->collection($model->catalogs, new BaseLightTransformer());
     }
 
+    public function includeProjects(Model $model)
+    {
+        if($model->projects)
+            return $this->collection($model->projects, new BaseLightTransformer());
+    }
+
     public function includeDeliveries(Model $model)
     {
         if($model->deliveries)
@@ -87,9 +95,9 @@ class LibraryTransformer extends BaseTransformer
         $faker=\Faker\Factory::create('it_IT');
 
         $to_merge = [
-            //just to test localization (because now we haven't such fields in database)
-            'lat'=> $faker->latitude(35,45), 
-            'lon'=> $faker->longitude(10,15), 
+            //just to test localization (because now we haven't such data stored)
+            'lat'=> !$model->lat?$faker->latitude(35,45):$model->lat, 
+            'lon'=> !$model->lon?$faker->longitude(10,15):$model->lon 
 //            patronRoutes
         ];
         return $this->applyTransform($model, $to_merge);

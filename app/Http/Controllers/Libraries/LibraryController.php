@@ -10,6 +10,7 @@ use App\Http\Controllers\ApiController;
 use App\Models\Libraries\DeliveryTransformer;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Institutions\Institution;
+use App\Models\Projects\Project;
 
 class LibraryController extends ApiController
 {
@@ -102,15 +103,26 @@ class LibraryController extends ApiController
             }
             //update library with correct institution (just created or existing)
             $model->institution_id=$inst->id; 
-        }        
+        }
 
-        //if projects...
-        //if identifiers/catalogs ...
-        
 
         $model->status=config("constants.library_status.new");
 
         $model->save();
+
+        //Projects
+        if($request->has('projects') && $request->filled('projects') && $request->filled('institution_type_id') )
+        {
+            foreach ($request->input('projects') as $prjid)
+            {
+                $prj=Project::findOrFail($prjid);
+                $model->projects()->attach($prjid);
+            }            
+        }    
+
+        //Identifiers/catalogs 
+        //...
+
 
         //If create fails
         if (!$model->exists) {
