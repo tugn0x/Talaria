@@ -61,7 +61,7 @@ function MyMap(props) {
 const MapSelector = (props) => {      
     console.log("MAPSelector:",props)   
     
-    const {field,label,handleChange,getMarkers,markers,onPlacesSearch,placesList,onMarkerClick,placesFreeSearchPlaceholder,markerPopupComponent}=props;
+    const {field,label,handleChange,getMarkers,markers,onPlacesSearch,placesList,onMarkerClick,placesFreeSearchPlaceholder,markerPopupComponent,selectedMarker}=props;
     
     let zoom=12;
     const intl = useIntl()
@@ -72,6 +72,8 @@ const MapSelector = (props) => {
     const [mapobj,setMapObj]=useState(null);
 
     const [position,setPosition]=useState([0,0]); 
+
+    const [selectedPlace,setSelectedPlace]=useState(null)    
 
     function positionSuccess (gps) {
       console.log("GPS:",gps);
@@ -98,9 +100,16 @@ const MapSelector = (props) => {
   
   }, [])
 
+  useEffect( ()=>{
+    console.log("MAPSELECTOR UE:",selectedMarker)
+  //  setSelectedMarker(selectedMarker);        
+    handleChange(selectedMarker.id,field.name);
+    if(mapobj && selectedMarker.lat && selectedMarker.lon)       
+        mapobj.flyTo(new L.LatLng(selectedMarker.lat,selectedMarker.lon),mapobj.getZoom());        
+        
+  },[selectedMarker && selectedMarker.id])
+  
 
-  const [selectedPlace,setSelectedPlace]=useState(null)
-  const [selectedPMarker,setSelectedMarker]=useState(null)
 
   //triggered when you type something in the input field of the select
   const onSearchInputChange=(searchAddress,e)=> {
@@ -127,9 +136,8 @@ const MapSelector = (props) => {
   }
 
   //triggered on click on "choose" button in marker detail popup
-  const chooseMarkerFromMap = (marker)=>{
-    setSelectedMarker(marker);
-    handleChange(marker.id);
+  const chooseMarkerFromMap = (marker)=>{    
+    handleChange(marker.id,field.name);
   }
 
     
@@ -141,7 +149,7 @@ const MapSelector = (props) => {
   
 
     const goToPos = (pos) => {      
-      if(pos)
+      if(pos && mapobj)
       {
         mapobj.flyTo(new L.LatLng(pos[0],pos[1]),mapobj.getZoom());
         setPosition(pos);  
@@ -179,7 +187,8 @@ const MapSelector = (props) => {
     const myPosOptions = { color: '#880021', fillColor: '#DF6D43' }
     
     return (                               
-                <>                 
+                <> 
+                {(!gps || !gps.coords) && <div className="alert alert-warning">{intl.formatMessage({id: 'app.components.MapSelector.positionNotAvailable' })}</div>}                
                 {field.freeSearch && <Select id="searchaddressSelect"
                   options={placesOptions}
                   onInputChange={onSearchInputChange}                               
@@ -215,7 +224,7 @@ const MapSelector = (props) => {
                       })}  
                        <MyMap setMapObj={setMapObj} getMarkersAtPos={getMarkers}/>                  
                 </MapContainer>
-                {selectedPMarker && <div className="alert alert-success">{label}: <b>{selectedPMarker.name}</b> </div>} 
+                {selectedMarker && selectedMarker.name && <div className="alert alert-success">{label}: <b>{selectedMarker.name}</b></div>} 
                 </>    
                 
   );

@@ -34,7 +34,7 @@ function MyLibraryPage(props) {
   const intl = useIntl();
   const {dispatch, match} = props
   const {params} = match
-  const isNew = !params.id || params.id === 'new'
+  const isNew = !params || !params.id || params.id === 'new'
   const library = props.library.library
   const patron = props.library.user;
   const user_id = props.auth.user.id;
@@ -67,16 +67,30 @@ function MyLibraryPage(props) {
     }*/
   }
 
-  const [choosedLibraryId,setChoosedLibraryId]=useState();
+  const [selectedMarker,setSelectedMarker]=useState({});
 
   useEffect(() => {
-    if(!isNew) {
-      dispatch(requestUser(params.library_id, params.id))
+    if(params && params.library_id)
+    {
+      console.log("GET LIB:",params.library_id)
       dispatch(requestGetLibrary(params.library_id,('departments,titles')))      
-    }/*else if(isNew){
-      dispatch(requestGetLibrariesList())
-    }*/
+    }
+    if(!isNew && params && params.library_id) {
+      dispatch(requestUser(params.library_id, params.id))
+      //dispatch(requestGetLibrary(params.library_id,('departments,titles')))      
+    }
   }, [])
+
+  useEffect(() => {
+      let obj={
+        'id': library.id,
+        'name': library.name,
+        'address': library.address,
+        'lat': library.lat,
+        'lon': library.lon,
+      }
+      setSelectedMarker(obj)
+  }, [library])
 
   useEffect(() => {
     //disabilito la possibilità di modificare il preferred 
@@ -122,6 +136,7 @@ function MyLibraryPage(props) {
             {...formData, user_id},intl.formatMessage(messages.libraryCreateMessage)))} 
             submitText={intl.formatMessage(messages.librarySubmit)}
             fields={fieldsIsNew}
+            selectedMarker={selectedMarker}  
             department_id={departmentOptionList} 
             title_id={titleOptionList} 
             title={intl.formatMessage(messages.headerNew)}
