@@ -4,7 +4,8 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
+import { withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -13,33 +14,45 @@ import { compose } from 'redux';
 import messages from './messages';
 import {requestSignup, socialLoginPrepare, socialLoginRequest} from '../AuthProvider/actions';
 import { SignupForm, BasePage } from "components";
+import {Redirect} from 'react-router-dom'
+import { isLogged } from '../AuthProvider/selectors';
+
 
 export function SignupPage(props) {
-  const [open, setOpen] = React.useState(false);
-  const fb_enabled=(process.env.FACEBOOK_LOGIN && process.env.FACEBOOK_LOGIN=="true")?true:false;
+  console.log("SignupPage:",props)
+
+  const [mounted,setMounted]=useState(false);
+  
+  /*const fb_enabled=(process.env.FACEBOOK_LOGIN && process.env.FACEBOOK_LOGIN=="true")?true:false;
   const google_enabled=(process.env.GOOGLE_LOGIN && process.env.GOOGLE_LOGIN=="true")?true:false; 
-
-
+  
   useEffect(() => {
     if(fb_enabled||google_enabled)
-      props.prepareSocialLogin();
+      props.prepareSocialLogin();    
     // console.log("use effect")
-  });
+  },[]);*/
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  //get redirectTo URL from signup button in order to redirect after signup callback
+  const redirectTo=props.location && props.location.state && props.location.state.redirectTo ? props.location.state.redirectTo:null
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  console.log("SignupPage redirectTo:",redirectTo)
+
+  useEffect(() => {
+    setMounted(true)
+  },[]);
 
 
-  return (
-    <BasePage {...props} routes={[]} messages={messages}>
-      <div>
-        <SignupForm {...props} handleOpen={handleOpen} signup={(request, redirect) => props.dispatch(requestSignup(request, redirect))} />
-      </div>
+  if(props.isLogged)
+  {
+    if(redirectTo!=null)
+      return <Redirect to={redirectTo}/>  
+    else
+      return <Redirect to="/login"/>  
+  }
+    
+  return (    
+     (mounted && !props.isLogged) && <BasePage {...props} routes={[]} messages={messages}>
+        <SignupForm {...props} signup={(request) => props.dispatch(requestSignup(request, redirectTo))} />      
     </BasePage>
   );
 }
@@ -55,9 +68,9 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    prepareSocialLogin: () => dispatch(socialLoginPrepare()),
+    /*prepareSocialLogin: () => dispatch(socialLoginPrepare()),
     loginGoogle: () => dispatch(socialLoginRequest('google')),
-    loginFacebook: () => dispatch(socialLoginRequest('facebook')),
+    loginFacebook: () => dispatch(socialLoginRequest('facebook')),*/
   };
 }
 
@@ -66,4 +79,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(SignupPage);
+export default compose(withConnect,withRouter)(SignupPage);

@@ -119,10 +119,11 @@ export function requestError(errorMessage) {
   };
 }
 
-export function requestSignup(request) {
+export function requestSignup(request,redirectTo) {
   return {
     type: REQUEST_SIGNUP,
-    request: request
+    request: request,
+    redirect: redirectTo
   };
 }
 

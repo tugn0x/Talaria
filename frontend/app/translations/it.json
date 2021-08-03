@@ -129,7 +129,7 @@
   "app.containers.LibrariesListPage.edit": "Modifica",
   
   
-  "app.containers.RegisterNewLibrary.header": "Registra biblioteca pubblica",
+  "app.containers.RegisterNewLibrary.header": "Registra biblioteca",
   "app.containers.RegisterNewLibrary.link": "Registra biblioteca",
   "app.containers.RegisterNewLibrary.step_1": "Inserisci informazioni generali",
   "app.containers.RegisterNewLibrary.step_2": "Inserisci informazioni generali 2",
@@ -157,7 +157,7 @@
   "app.components.InstitutionsList.header": "Lista degli enti",
   "app.components.InstitutionsList.createNewInstitution": "Registra nuovo ente",
   "app.components.InstitutionsList.editInstitution": "Modifica ente",
-  
+  "app.components.MapSelector.positionNotAvailable":"Geolocalizzazione non disponibile",
   "app.components.LibraryForm.institution_id": "ID ente",
   "app.components.LibraryForm.subject_id": "ID della disciplina",
   "app.components.LibraryForm.country_id": "ID della nazione",
@@ -188,6 +188,7 @@
   "app.components.LibraryForm.granted_permissions": "Permessi utenti",
   "app.components.InstitutionForm.header": "Form ente",
   "app.components.LibraryForm.header": "Registrazione biblioteca",
+  "app.containers.AssociateLibraryPage.header": "Scegli una biblioteca",
 
   "app.components.Notification.header": "Notifiche",
   "app.components.Notification.mark_all_as_read": "Segna tutte come lette",
@@ -319,6 +320,7 @@
   "app.components.HeaderBar.Profile": "Profilo",
   "app.components.HeaderBar.Libraries": "Biblioteche",
   "app.components.HeaderBar.Logout": "Esci",
+  "app.components.HeaderBar.LoginSignup": "Accedi/Iscriviti",
   "app.components.HeaderBar.Admin": "Admin",
   "app.components.HeaderBar.Patron": "Patron",
 

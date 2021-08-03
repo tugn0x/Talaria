@@ -4,7 +4,13 @@
   "app.containers.NotFoundPage.intro": "We're sorry but we can't find the page you're looking for",
   "app.global.email": "Email",
 
-  "app.components.LoginForm.signUpButton": "Sign up",
-  "app.components.LoginForm.forgot": "Forgot your password?"
+  "app.components.LoginForm.signUpButton": "Signup",
+  "app.components.LoginForm.forgot": "Forgot your password?",
+
+  "app.components.MapSelector.positionNotAvailable":"Geolocalizzation not available",
+  
+  "app.containers.AssociateLibraryPage.header": "Choose a library",
+
+  "app.components.HeaderBar.LoginSignup": "Login/Signup"
 }
 

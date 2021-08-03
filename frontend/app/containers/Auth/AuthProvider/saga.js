@@ -78,7 +78,12 @@ export function* signupAuthSaga(action) {
     setToken(request.access_token);
     yield put(requestSignupSuccess(request));
     yield call(defaultAuthCallsSaga);
-    yield put(push("/"));
+    
+    if(action.redirect && action.redirect!=null)
+      yield put(push(action.redirect));
+    else 
+      yield put(push('/login')); 
+
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -259,7 +264,7 @@ export function* socialOauthSaga(action) {
     setToken(request.access_token);
     yield put(requestSignupSuccess(request));
     yield call(defaultAuthCallsSaga);
-    yield put(push("/"));
+    //yield put(push("/"));
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -367,10 +372,16 @@ export function* loginGoogle ({ scope = 'profile', ...options } = {}) {
   yield call(socialOauthSaga, {provider, data})
 }
 export function* socialLoginPrepareSaga() {
+  const fb_enabled=(process.env.FACEBOOK_LOGIN && process.env.FACEBOOK_LOGIN=="true")?true:false;
+  const google_enabled=(process.env.GOOGLE_LOGIN && process.env.GOOGLE_LOGIN=="true")?true:false; 
+  const spid_enabled=(process.env.SPID_LOGIN && process.env.SPID_LOGIN=="true")?true:false; 
   try{
-    yield call(prepareFacebook, { appId: process.env.FACEBOOK_APP_ID })
-    yield call(prepareGoogle, { client_id: process.env.GOOGLE_CLIENT_ID })
-    yield call(prepareSPID, {})
+    if(fb_enabled) 
+      yield call(prepareFacebook, { appId: process.env.FACEBOOK_APP_ID })
+    if(google_enabled) 
+      yield call(prepareGoogle, { client_id: process.env.GOOGLE_CLIENT_ID })
+    if(spid_enabled) 
+      yield call(prepareSPID, {})
   }catch(e) {
     //catch exception otherwise it will break also traditional login when google fail to load/init!
     console.log("socialLoginPrepareSaga ERROR",e)
@@ -380,12 +391,15 @@ export function* socialLoginPrepareSaga() {
 
 export function* socialLoginRequestSaga(action) {
   // console.log('socialLoginRequestSaga', action)
+  const fb_enabled=(process.env.FACEBOOK_LOGIN && process.env.FACEBOOK_LOGIN=="true")?true:false;
+  const google_enabled=(process.env.GOOGLE_LOGIN && process.env.GOOGLE_LOGIN=="true")?true:false; 
+  const spid_enabled=(process.env.SPID_LOGIN && process.env.SPID_LOGIN=="true")?true:false; 
   switch (action.provider) {
     case 'facebook':
-      yield call(loginFacebook, action.options)
+      if(fb_enabled) yield call(loginFacebook, action.options)
       break;
     case 'google':
-      yield call(loginGoogle, action.options)
+      if(google_enabled) yield call(loginGoogle, action.options)
       break;
   }
 }

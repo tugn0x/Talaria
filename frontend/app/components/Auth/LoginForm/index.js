@@ -31,6 +31,7 @@ import './style.scss'
 
 
   function LoginForm(props) {
+    console.log("LoginForm:",props)
     const [formData,setFormData] = React.useState({
       username: "",
       password: ""
@@ -53,11 +54,28 @@ import './style.scss'
       props.googleReCaptchaProps.executeRecaptcha('homepage').then(token => {
         props.login({ ...formData, recaptcha: token })
       }).catch(error => {
-        console.log("ERROR IN submitChange executeRecaptcha")
         console.error("error", error);
       });
       // e.preventDefault();
     }
+
+    const signupLink = () => {
+
+      let signuplnk="/signup";
+      if(location.pathname!='/login')      
+      {
+        signuplnk=
+        {
+          'pathname': "/signup",
+          'state': {
+            'redirectTo': location.pathname+location.search
+          }
+        }        
+      }
+      //console.log("GOTOLINK:",signuplnk)
+      return signuplnk;
+    }
+
   return (
         <div className="login-form">
           <Row className="justify-content-center">            
@@ -112,16 +130,8 @@ import './style.scss'
                           </Button>
                         </Col>
                         <Col xs="12" md="6">
-                          <NavLink className="btn-cta register-button" to="/signup">
-                            {/* <Button
-                              color="brown"
-                              className="signUpButton"
-                              active
-                              tabIndex={-1}
-                              onClick={() => linkTo("signup")}
-                            > */}
-                              <FormattedMessage {...messages.signUpButton} />
-                            {/* </Button> */}
+                          <NavLink className="btn-cta register-button" to={signupLink()}>
+                              <FormattedMessage {...messages.signUpButton} />                            
                           </NavLink>
                         </Col>
 
