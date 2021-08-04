@@ -111,9 +111,9 @@ class LibraryController extends ApiController
         $model->save();
 
         //Projects
-        if($request->has('projects') && $request->filled('projects') && $request->filled('institution_type_id') )
+        if($request->has('project_id') && $request->filled('project_id') )
         {
-            foreach ($request->input('projects') as $prjid)
+            foreach ($request->input('project_id') as $prjid)
             {
                 $prj=Project::findOrFail($prjid);
                 $model->projects()->attach($prjid);
