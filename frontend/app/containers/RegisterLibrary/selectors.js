@@ -13,6 +13,13 @@ createSelector(
   substate => (substate.institutionsOptionList)
 );
 
+const institutionsByTypeCountryOptionListSelector = () => 
+createSelector(
+  selectAdminDomain,
+  substate => (substate.institutionsByTypeCountryOptionList)
+);
+
+
 const countriesOptionListSelector = () => 
 createSelector(
   selectAdminDomain,
@@ -25,6 +32,24 @@ createSelector(
   substate => (substate.librarySubjectOptionList)
 );
 
+const projectsOptionListSelector = () => 
+createSelector(
+  selectAdminDomain,
+  substate => (substate.projectsOptionList)
+);
+
+const institutionsTypeOptionListSelector = () => 
+createSelector(
+  selectAdminDomain,
+  substate => (substate.institutionsTypesOptionList)
+);
+
+const placesSelector = () => 
+createSelector(
+  selectAdminDomain,
+  substate => (substate.places)
+);
 
 // export default makeSelectAdmin;
-export {  institutionsOptionListSelector, countriesOptionListSelector, librarySubjectOptionListSelector };
+export {  institutionsOptionListSelector, countriesOptionListSelector, librarySubjectOptionListSelector,projectsOptionListSelector, 
+  institutionsTypeOptionListSelector, placesSelector, institutionsByTypeCountryOptionListSelector };

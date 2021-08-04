@@ -45,6 +45,7 @@
   "app.global.department": "Dipartimento/Istituto",
   "app.global.patron": "Utente",
   "app.global.librarian": "Bibliotecario",
+  "app.global.librarianfull": "Full Bibliotecario",
   "app.global.title": "Qualifica",
   "app.global.label": "Etichetta",
   "app.global.pending": "In attesa",
@@ -59,7 +60,7 @@
   "app.global.confirm": "Conferma",
   "app.global.accept": "Accetta",
   "app.global.deny": "Nega",
-
+  
   "app.containers.HomePage.header": "Benvenuto su NILDE - Network Inter Library Document Exchange",
   "app.containers.HomePage.subHeader":"Un network di biblioteche e un software per un'informazione scientifica a portata di click!",
   "app.containers.HomePage.intro1":"Se desideri ottenere la documentazione che stai cercando, devi iscriverti ad una biblioteca di tua scelta appartenente al network NILDE inserendo qui i tuoi dati.",
@@ -157,7 +158,8 @@
   "app.components.InstitutionsList.header": "Lista degli enti",
   "app.components.InstitutionsList.createNewInstitution": "Registra nuovo ente",
   "app.components.InstitutionsList.editInstitution": "Modifica ente",
-  "app.components.MapSelector.positionNotAvailable":"Geolocalizzazione non disponibile",
+  "app.components.MapSelector.positionNotAvailable":"Geolocalizzazione non disponibile",  
+  "app.containers.RegisterNewLibrary.placesFreeSearchPlaceholder": "search for your library",
   "app.components.LibraryForm.institution_id": "ID ente",
   "app.components.LibraryForm.subject_id": "ID della disciplina",
   "app.components.LibraryForm.country_id": "ID della nazione",

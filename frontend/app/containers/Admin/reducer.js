@@ -24,10 +24,18 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_GET_INSTITUTIONS_LIST_SUCCESS,
   REQUEST_GET_INSTITUTION, REQUEST_GET_INSTITUTION_SUCCESS,
   REQUEST_GET_INSTITUTIONS_OPTIONLIST, REQUEST_GET_INSTITUTIONS_OPTIONLIST_SUCCESS,
+  
+  REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST,REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST_SUCCESS,
+
   REQUEST_INSTITUTIONSTYPES_OPTIONLIST, REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
   REQUEST_GET_COUNTRIES_OPTIONLIST, REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS,
   REQUEST_LIBRARYSUBJECT_OPTIONLIST, REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS,
-  UPDATE_INSTITUTION
+  UPDATE_INSTITUTION,
+  REQUEST_SEARCH_PLACES_BY_TEXT,
+  REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
+  REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
+  REQUEST_GET_LIBRARY_LIST,
+  REQUEST_GET_LIBRARY_LIST_SUCCESS
 } from "./constants";
 
 export const initialState = {
@@ -59,11 +67,18 @@ export const initialState = {
   },
   institution: [],
   institutionsOptionList: [],
-  institutionsTypesOptionList: [],
+  
+  institutionsByTypeCountryOptionList: [],
+
+
   countriesOptionList: [],
   librarySubjectOptionList: [],
   roles: [],
   resources: [],
+  libraryList: {    
+    data: [],
+  },
+  places: {},
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -173,6 +188,15 @@ const AdminReducer = (state = initialState, action) =>
         draft.error = initialState.error;
         draft.institutionsOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break;
+      
+      case REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST:
+        draft.error = action.error;
+        break;
+      case REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST_SUCCESS:
+        draft.error = initialState.error;
+        draft.institutionsByTypeCountryOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
+        draft.institutionsByTypeCountryOptionList.push({"value":0,"label":"Institution not present"})
+        break;
       case REQUEST_GET_INSTITUTIONS_LIST:
         draft.loading = true;
         draft.error = action.error;
@@ -253,6 +277,31 @@ const AdminReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = action.error;
         break;
+
+        case REQUEST_SEARCH_PLACES_BY_TEXT:
+          draft.loading=true;
+          break;
+        case REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS:
+          draft.loading=false;
+          draft.places=action.result
+          break;  
+
+        case REQUEST_SEARCH_PLACES_BY_TEXT_FAIL:
+          draft.loading = false;
+          draft.error = initialState.error;          
+          draft.places={}
+          break;   
+
+          
+          case REQUEST_GET_LIBRARY_LIST:
+            draft.loading = true;
+            draft.error = action.error;
+            break;  
+          case REQUEST_GET_LIBRARY_LIST_SUCCESS:
+            draft.loading = false;
+            draft.error = initialState.error;
+            draft.libraryList = action.result;
+            break;  
     }
   });
 

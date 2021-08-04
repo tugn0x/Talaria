@@ -85,7 +85,6 @@ const MapSelector = (props) => {
         setGPS({});        
     }
   
-      
     useEffect(() => {    
     
     if(navigator.geolocation)
@@ -103,11 +102,14 @@ const MapSelector = (props) => {
   useEffect( ()=>{
     console.log("MAPSELECTOR UE:",selectedMarker)
   //  setSelectedMarker(selectedMarker);        
-    handleChange(selectedMarker.id,field.name);
-    if(mapobj && selectedMarker.lat && selectedMarker.lon)       
+    if(selectedMarker && selectedMarker.id)
+    {
+      handleChange(selectedMarker.id,field.name);
+      if(mapobj && selectedMarker.lat && selectedMarker.lon)       
         mapobj.flyTo(new L.LatLng(selectedMarker.lat,selectedMarker.lon),mapobj.getZoom());        
+    }
         
-  },[selectedMarker && selectedMarker.id])
+  },[selectedMarker])
   
 
 
@@ -130,7 +132,9 @@ const MapSelector = (props) => {
     {
       goToPos([val.value.lat,val.value.lon])
       if(getMarkers) 
+      
         getMarkers({'lat': val.value.lat,'lon':val.value.lon});
+    
     }
     
   }
@@ -173,10 +177,10 @@ const MapSelector = (props) => {
       let list=[];
       if(placesList && placesList.length>0)
       { placesList.forEach(p => {
-          if(p.type=="administrative") {
+          //if(p.type=="administrative") {
             let item={'label': p.display_name,'value': {...p}};
             list.push(item);
-          }
+          //}
           
         })        
         setPlacesOptions(list);

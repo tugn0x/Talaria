@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Card, CardBody, Form, Button, Row } from 'reactstrap'
+import { Card, CardBody, Form, Button,Label, Row } from 'reactstrap'
 import PropTypes from 'prop-types';
 import {useIntl} from 'react-intl'
 import formMessages from './messages'
@@ -41,6 +41,7 @@ const CustomForm = (props) => {
     const [formData, setFormData] = useState({})
 
     
+
     /* HANDLE CHANGE Generic */
     const handleChange = (value, field_name) =>{        
         setFormData({ ...formData, [field_name]: value   });
@@ -48,9 +49,17 @@ const CustomForm = (props) => {
         // props per il wizard form registra biblioteca pubblica
         props.onChangeData && props.onChangeData(field_name, value) 
         props.getValidation &&  props.getValidation(document.querySelector('form').checkValidity()) 
-    } 
+    }
 
-    
+
+    /* HANDLE CHANGE Generic */
+    const onClickData = (e, value, field_name) =>{
+        console.log(e + " " + "onClickData called")
+        e.preventDefault();
+        setIsSubmitDisabled(false)
+        props.onClickData && props.onClickData(field_name, value);
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -181,6 +190,26 @@ const CustomForm = (props) => {
                                                                             markerPopupComponent={props.markerPopupComponent}
                                                                         ></MapSelector>                                                                    
                                                                 ||
+                                                                
+                                                                field.type === 'Button' &&
+                                                                <>
+                                                                    <Button
+                                                                    field={field}
+                                                                    label={field.label && field.label}
+                                                                    onClick={(e, value) => onClickData(e, value, field.name)}
+                                                                    >{field.label}</Button> 
+                                                                </>  
+                                                                ||
+                                                                field.type === 'Label' &&
+                                                                <>
+                                                                   <br></br><b><h2><Label 
+                                                                    field={field}
+                                                                    label={field.label && field.label}
+                                                                    size = {field.size}
+                                                                    cssModule = {field.cssModule}
+                                                                    >{field.label}</Label> </h2></b>
+                                                                </>  
+                                                                ||
                                                                     <>  {/*  TEXT, TEXTAREA, NUMBER  */}
                                                                         <InputField 
                                                                             field={field}                                                                            
@@ -199,7 +228,7 @@ const CustomForm = (props) => {
                             })}
                         {props.children}
                         </div>
-                        <div className="d-flex justify-content-between">
+                                             <div className="d-flex justify-content-between">
                             <Button color={submitColor} disabled={isSubmitDisabled} type="submit" block>
                             {submitText?submitText:intl.formatMessage(formMessages.submit)}
                             </Button>

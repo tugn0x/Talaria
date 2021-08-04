@@ -522,6 +522,15 @@ export const getInstitutionsOptionList = (options) => {
   return request(`${BASE_URL}/api/v1/institutions/option-items?label=name&q=${query}`, options)
 };
 
+export const getInstitutionsByTypeByCountryOptionList = (options) => {
+  options = getOption(options);
+  const query = options.query;
+  const countryid = options.countryid;
+  const institutiontypeid = options.institutiontypeid;
+  console.log(`${BASE_URL}/api/v1/institutions/option-items/?label=name&country_id=${countryid}&institution_type_id=${institutiontypeid}`)
+  return request(`${BASE_URL}/api/v1/institutions/option-items/?label=name&country_id=${countryid}&institution_type_id=${institutiontypeid}`, options)
+};
+
 export const getCountriesOptionsList = (options) => {
   options = getOption(options);
   const query = options.query ? options.query : "";
