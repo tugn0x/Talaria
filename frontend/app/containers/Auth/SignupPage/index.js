@@ -15,7 +15,6 @@ import messages from './messages';
 import {requestSignup, socialLoginPrepare, socialLoginRequest} from '../AuthProvider/actions';
 import { SignupForm, BasePage } from "components";
 import {Redirect} from 'react-router-dom'
-import { isLogged } from '../AuthProvider/selectors';
 
 
 export function SignupPage(props) {
