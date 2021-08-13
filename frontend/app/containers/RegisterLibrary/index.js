@@ -6,14 +6,14 @@ import { compose } from 'redux';
 import {institutionsOptionListSelector,
     countriesOptionListSelector, librarySubjectOptionListSelector, projectsOptionListSelector,institutionsTypeOptionListSelector,
     placesSelector, 
-    institutionsByTypeCountryOptionListSelector} from './selectors';
+    institutionsByTypeCountryOptionListSelector, libraryProjectsOptionListSelector} from './selectors';
 import wizardMessages from './messages'
 import globalMessages from 'utils/globalMessages';
 import messages from 'components/Admin/LibraryForm/messages';
 import {fields, totalSteps, setNewSteps} from './fields'
 import { requestGetInstitutionsOptionList, requestGetCountriesOptionList,
     requestLibrarySubjectOptionList, requestPostPublicLibrary, requestGetProjectsOptionList, requestGetInstitutionsByTypeByCountryOptionList,
-    requestGetInstitutionTypeOptionList, requestGetInstitutionCountry } from "containers/Admin/actions"
+    requestGetInstitutionTypeOptionList, requestGetInstitutionCountry,requestGetlibraryProjectsOptionList } from "containers/Admin/actions"
 import './style.scss'
 import {Button,Row, Col} from 'reactstrap'
 import {useIntl} from 'react-intl'
@@ -35,12 +35,14 @@ const RegisterLibrary = (props) => {
 
     const [countryid, setCountryid] = useState(0);
     const [institutiontypeid, setInstitutiontypeid] = useState(0);
+    const projectsarrname = [];
   
     // Fai le chiamate per le option list
     useEffect(() => {
         dispatch(requestGetCountriesOptionList())
-        dispatch(requestLibrarySubjectOptionList())
+        //dispatch(requestLibrarySubjectOptionList())
         dispatch(requestGetInstitutionTypeOptionList())
+        dispatch(requestGetlibraryProjectsOptionList())
         //dispatch(requestGetLibrary(1,('departments,titles')))    
         //dispatch(requestGetProjectsOptionList())
     },[])
@@ -54,6 +56,11 @@ const RegisterLibrary = (props) => {
         setCurrentFields(Fields)
     }, [currentStep])
     
+    useEffect(()=> {
+        Object.keys(props.libraryProjectsOptionList).forEach(key => 
+            projectsarrname.push(props.libraryProjectsOptionList[key].value))
+    })
+
     // Cambia Step
     const onChangeStep = (formData, newStep) => {
         setData({...data, ...formData})
@@ -90,11 +97,12 @@ const RegisterLibrary = (props) => {
         }
 
         if (field_name === "institution_id" && value.value === 0)
-        fields.suggested_institution_name.hidden = false;
+            fields.suggested_institution_name.hidden = false;
     
         if (field_name === "institution_id" && value.value !== 0)
             fields.suggested_institution_name.hidden = true;
-        
+
+            
         setData({...data, [field_name]: value})
     }
 
@@ -111,27 +119,31 @@ const RegisterLibrary = (props) => {
     const hideComponent = (field_name, value) => {
         if (fields.opac.hidden===false)
         {
-            fields.subject_id.required="false";
+            fields.opac.required = false;
+            fields.subject_id.required = false;
+            
             fields.opac.hidden=true;
             fields.subject_id.hidden=true;
+            
             fields.showfullProfile.label="Click here"
-            fields.subject_id.disabled = false;
         }
         else
-        {
-            fields.subject_id.required="true";
+        {            
+            fields.subject_id.required = true;
+            fields.opac.required = true;
+            
             fields.opac.hidden=false;
             fields.subject_id.hidden=false;
+            
             fields.showfullProfile.label="Switch to Basic Library"
-            fields.subject_id.disabled = true;
+            dispatch(requestLibrarySubjectOptionList())
         }
-
         setData({...data, [field_name]: value})
-        //setData({...data, "lon": longtitude,"lat": latitude })
     }
 
     // Check validation on change input
     const checkValidation = (validation) => {
+     
         if(!validation){
             let objSteps = {}
             Object.keys(steps).map(key => {
@@ -156,8 +168,6 @@ const RegisterLibrary = (props) => {
              currentStep <= totalSteps - 1 &&
                 (<CustomForm 
                     submitCallBack={(formData) => onChangeStep(formData, totalSteps > currentStep ? currentStep+1 : currentStep )} 
-
-                  
                     requestData={data ? data : null}
                     onChangeData={(field_name, value) => onChangeData(field_name, value)}
                     fields={currentFields}
@@ -167,12 +177,9 @@ const RegisterLibrary = (props) => {
                     institution_type_id = {props.institutionsTypesOptionList}
                     country_id={props.countriesOptionList}
                     int_country_id = {props.countriesOptionList}
-
-
                     institution_id={props.institutionsByTypeCountryOptionList}
-                    
                     subject_id={props.librarySubjectOptionList}
-                    project_id = {props.projectsOptionList}
+                    project_id = {props.libraryProjectsOptionList}
                     onClickData={hideComponent}
                     onPlacesSearch={(search)=>dispatch(requestSearchPlacesByText(search))}
                     places={props.places}
@@ -190,9 +197,6 @@ const RegisterLibrary = (props) => {
                     //     </div>
                     //   </div>  
                     // }
-
-
-
                     searchOptionList={{ 
                         institution_type_id: (input) => dispatch(requestGetInstitutionTypeOptionList(input)), 
                         country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
@@ -242,6 +246,7 @@ const mapStateToProps = createStructuredSelector({
     
     institutionsByTypeCountryOptionList: institutionsByTypeCountryOptionListSelector(),
     
+    libraryProjectsOptionList: libraryProjectsOptionListSelector(),
     countriesOptionList: countriesOptionListSelector(),
     librarySubjectOptionList: librarySubjectOptionListSelector(),
     projectsOptionList: projectsOptionListSelector(),

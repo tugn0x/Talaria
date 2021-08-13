@@ -68,7 +68,7 @@ export const fields = {
         type: "Label",
         required: false,
         label:"Library Location",
-        name: "alt_name",
+        name: "library_location_label",
         width: "col-sm-12",
         group: "step_1",
         order: 5,
@@ -131,7 +131,7 @@ export const fields = {
         type: "Label",
         required: false,
         label:"Service contact",
-        name: "alt_name",
+        name: "library_contact_label",
         width: "col-sm-12",
         group: "step_1",
         order: 11,
@@ -150,16 +150,15 @@ export const fields = {
     ill_phone: {
         type: "text",
         name: "ill_phone",
-        label: 'app.global.ill_phone',
+        label: 'ill_phone',
         group: "step_1",
         width: "col-sm-6",
         order: 13,
     },
 
-    ill_user_referent: {
+    ill_referent_name: {
         type: "text",
-        name: "ill_user_referent",
-        label: 'ill_user_referent',
+        name: "ill_referent_name",
         group: "step_1",
         width: "col-sm-12",
         order: 14,
@@ -169,22 +168,35 @@ export const fields = {
         type: "Label",
         required: false,
         label:"Institution",
-        name: "alt_name",
+        name: "ill_institution_label",
         width: "col-sm-12",
         group: "step_1",
         order: 15,
     },
 
+    // institution_type_id: {
+    //     type: "custom-select",
+    //     required: true,
+    //     name: "institution_type_id",
+    //     width: "col-sm-6",
+    //     group: "step_1",
+    //     options: "institution_type_id",
+    //     order: 16,
+
+    // },
+
     institution_type_id: {
         type: "custom-select",
         required: true,
         name: "institution_type_id",
-        width: "col-sm-6",
+        width: "col-md-6",
         group: "step_1",
         options: "institution_type_id",
         order: 16,
-        // selectedOption: "institution_type_id"
+       // selectedOption: "institution_type_id"
+        
     },
+
     int_country_id: {
         type: "custom-select",
         required: true,
@@ -193,13 +205,13 @@ export const fields = {
         group: "step_1",
         options: "int_country_id",
         order: 17,
-        selectedOption: "country_id"
+        selectedOption: "int_country_id"
     },
     institution_id: {
         type: "custom-select",
         required: true,
         name: "institution_id",
-        width: "col-sm-6",
+        width: "col-sm-12",
         group: "step_1",
         options: "institution_id",
         order: 18,
@@ -209,7 +221,7 @@ export const fields = {
         type: "text",
         required: false,
         name: "suggested_institution_name",
-        width: "col-md-6",
+        width: "col-md-12",
         group: "step_1",
         order: 19,
         hidden: true,
@@ -224,16 +236,28 @@ export const fields = {
         order: 20,
     },
 
+    // project_id: {
+    //     type: "custom-select",
+    //     required: true,
+    //     name: "project_id",
+    //     width: "col-sm-12",
+    //     group: "step_1",
+    //     options: "project_id",
+    //     order: 21,
+    //     selectedOption: "id"
+    // },
+
 
     project_id: {
-        type: "custom-select",
-        required: false,
-        name: "id",
+        label:"project_id",
+        type: "list-checkbox",
+        name: "project_id",
         width: "col-sm-12",
         group: "step_1",
-        options: "projectid",
         order: 21,
     },
+
+
 
     // volunteer_library_label: {
     //     type: "Label",
@@ -272,8 +296,8 @@ export const fields = {
         name: "opac",
         group: "step_1",
         width: "col-sm-12",
-        order: 25,
         hidden: true,
+        order: 25,
     },
     subject_id: {
         type: "custom-select",

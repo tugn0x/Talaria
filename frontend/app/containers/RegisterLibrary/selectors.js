@@ -50,6 +50,12 @@ createSelector(
   substate => (substate.places)
 );
 
+const libraryProjectsOptionListSelector = () => 
+createSelector(
+  selectAdminDomain,
+  substate => (substate.libraryProjectsOptionList)
+);
+
 // export default makeSelectAdmin;
 export {  institutionsOptionListSelector, countriesOptionListSelector, librarySubjectOptionListSelector,projectsOptionListSelector, 
-  institutionsTypeOptionListSelector, placesSelector, institutionsByTypeCountryOptionListSelector };
+  institutionsTypeOptionListSelector, placesSelector, institutionsByTypeCountryOptionListSelector, libraryProjectsOptionListSelector };

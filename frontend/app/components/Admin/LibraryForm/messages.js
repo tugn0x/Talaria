@@ -136,5 +136,30 @@ export default defineMessages({
     id: `${scope}.createSubmitText`,
     defaultMessage: 'Create Reference',
   },
+
+  institution_type_id: {
+    id: `${scope}.institution_type_id`,
+    defaultMessage: 'Institution Type ID',
+  },
+
+  int_country_id: {
+    id: `${scope}.int_country_id`,
+    defaultMessage: 'Institution Country ID',
+  },
+
+
+ill_referent_name: {
+  id: `${scope}.ill_referent_name`,
+  defaultMessage: 'Ill referant name',
+},
+
+alt_name: {
+  id: `${scope}.alt_name`,
+  defaultMessage: 'Alternative name',
+}
+
+
+
+  
 });
 
