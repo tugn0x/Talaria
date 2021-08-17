@@ -71,7 +71,7 @@ function HeaderBar(props) {
             <Nav className="account-nav" navbar>
               {
                 !isLogged && (<NavItem>
-                  <Link to="/login" className="nav-link">Login</Link>
+                  <Link to="/login" className="nav-link"><FormattedMessage {...messages.LoginSignup} /></Link>
                 </NavItem>)
               }
               <UncontrolledDropdown nav direction="down">

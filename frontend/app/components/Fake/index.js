@@ -6,9 +6,12 @@ function Fake(props) {
   
 
   return (
-      <div class="fake">
+      <div className="fake">
         <h4>fake component</h4>
         <p>bla bla bla</p>
+        {props.history && props.history.location &&
+          <p>Location: {props.history.location.pathname}{props.history.location.search}</p>
+        }
         {props.match && <p>
           URL:{props.match.url}<br/>
           PATH:{props.match.path}<br/>             

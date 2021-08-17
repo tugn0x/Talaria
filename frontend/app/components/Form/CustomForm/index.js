@@ -43,7 +43,7 @@ const CustomForm = (props) => {
     
 
     /* HANDLE CHANGE Generic */
-    const handleChange = (value, field_name) =>{
+    const handleChange = (value, field_name) =>{        
         setFormData({ ...formData, [field_name]: value   });
         setIsSubmitDisabled(false)
         // props per il wizard form registra biblioteca pubblica
@@ -178,6 +178,7 @@ const CustomForm = (props) => {
                                                                 field.type === 'map-selector' &&
                                                                         <MapSelector  
                                                                             field={field} 
+                                                                            selectedMarker={props.selectedMarker}
                                                                             onPlacesSearch={props.onPlacesSearch}
                                                                             getMarkers={props.getMarkers}
                                                                             markers={props.markers}

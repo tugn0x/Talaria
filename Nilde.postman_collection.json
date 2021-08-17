@@ -280,7 +280,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"TestBiblio\",        \n    \"profile_type\":2,\n    \"subject_id\":1,\n    \"country_id\":1,\n    \"institution_id\":0,\n    \"institution_type_id\":1,\n    \"institution_country_id\":1,\n    \"institution_name\":\"My Test Institution\"\n}",
+					"raw": "{\n    \"name\": \"TestBiblio29\",        \n    \"profile_type\":2,\n    \"subject_id\":1,\n    \"country_id\":1,\n    \"institution_id\":1,\n    \"institution_type_id\":1,\n    \"institution_country_id\":1,\n    \"projects\": [2,3]\n}",
 					"options": {
 						"raw": {
 							"language": "json"

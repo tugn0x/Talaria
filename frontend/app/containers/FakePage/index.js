@@ -9,7 +9,7 @@ function FakePage(props) {
   return (
     <>
       <h1>Fake Page</h1>
-      <Fake/>
+      <Fake {...props}/>
     </>
   );
 }

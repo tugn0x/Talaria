@@ -20,6 +20,7 @@ import {useIntl} from 'react-intl';
 import './style.scss';
 
 function SignupForm(props) {
+  console.log("SignupForm",props)
   const [formData,setFormData] = React.useState({
     name: "",
     email: "",
@@ -67,7 +68,7 @@ function SignupForm(props) {
     return
   }
 
-  return (
+  return (        
       <Row className="justify-content-center">
           <Col md="9" lg="7" xl="6">
             <Card className="mx-4">
@@ -176,7 +177,7 @@ function SignupForm(props) {
               </CardFooter> */}
             </Card>
           </Col>
-        </Row>
+        </Row>        
   );
 }
 SignupForm.propTypes = {};
