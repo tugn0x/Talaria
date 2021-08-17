@@ -17,8 +17,7 @@ const routes = [
       { path: '/new', exact: true, icon: "plus", name: `ReferenceNew`, url: `/references/new`, component: ReferencesPage, sidebar: true, order:1},
       { path: '/labels', icon: "tags", exact: true, name: `Labels`, url: '/references/labels', component: ReferencesLabels, sidebar: true, order:3 },
       { path: '/categories', icon: "folder",exact: true, name: `Categories`, url: '/references/categories', component: ReferencesGroups, sidebar: true , order:4},
-      { path: '/', icon: "icon-riferimenti", exact: true, name: `ReferenceList`, url: `/references`, component: ReferencesListPage,sidebar: true, order:2 },
-      { path: '/openurl', exact: true, name: `Fake`, component: Fake},      
+      { path: '/', icon: "icon-riferimenti", exact: true, name: `ReferenceList`, url: `/references`, component: ReferencesListPage,sidebar: true, order:2 },      
       { path: '/:id?/:op?', exact: true, name: `ReferenceUpdate`, component: ReferencesPage},      
     ]
   },

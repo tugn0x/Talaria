@@ -11,6 +11,8 @@ import authProviderSaga from './containers/Auth/AuthProvider/saga';
 import patronSaga from './containers/Patron/saga';
 import adminSaga from './containers/Admin/saga';
 import librarySaga from './containers/Library/saga';
+import OASearchReference from './containers/OASearchReference/saga'
+
 import appSaga from './containers/App/saga';
 
 export default function configureStore(initialState = {}, history) {
@@ -52,6 +54,7 @@ export default function configureStore(initialState = {}, history) {
   sagaMiddleware.run(persistanceSaga);
   sagaMiddleware.run(authProviderSaga);
   sagaMiddleware.run(patronSaga);
+  sagaMiddleware.run(OASearchReference);
   sagaMiddleware.run(adminSaga);
   sagaMiddleware.run(librarySaga);
   sagaMiddleware.run(appSaga);

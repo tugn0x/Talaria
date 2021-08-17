@@ -36,13 +36,13 @@ import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   /*REQUEST_FIND_REFERENCE_BY_DOI,
   REQUEST_FIND_REFERENCE_BY_DOI_SUCCESS,
   REQUEST_FIND_REFERENCE_BY_PMID,
-  REQUEST_FIND_REFERENCE_BY_PMID_SUCCESS,*/
-  REQUEST_FIND_OA,
-  REQUEST_FIND_OA_SUCCESS,
+  REQUEST_FIND_REFERENCE_BY_PMID_SUCCESS,*/  
   REQUEST_FIND_UPDATE_OA,
   REQUEST_FIND_UPDATE_OA_SUCCESS,
   REQUEST_FIND_UPDATE_OA_FAIL,
-  REQUEST_CLEAN_IMPORTREFERENCE,
+  REQUEST_FIND_REFERENCE_BY_ID,
+  REQUEST_FIND_REFERENCE_BY_ID_SUCCESS,
+
   REQUEST_SEARCH_PLACES_BY_TEXT,
   REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
   REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
@@ -414,6 +414,20 @@ export function requestDeleteReference(id,message,filter) {
   };
 }
 
+export function requestFindReferenceById(id) {
+  return {
+    type: REQUEST_FIND_REFERENCE_BY_ID,
+    id
+  };
+}
+
+export function requestFindReferenceByIdSuccess(result) {
+  return {
+    type: REQUEST_FIND_REFERENCE_BY_ID_SUCCESS,
+    result
+  };
+}
+
 /* External request actions */
 export function requestFindReferenceByDOI(doi) {
   return {
@@ -436,16 +450,8 @@ export function requestFindReferenceByPMID(pmid) {
   };
 }
 
-export function requestFindOA(refData) {
-  console.log("FINDOA:",refData)
-  return {
-    type: REQUEST_FIND_OA,
-    refData
-  };
-}
-
 export function requestFindUpdateOA(id,title,foundMessage,notfoundMessage) {
-  console.log("FINDandUpdateOA:",id,title,foundMessage,notfoundMessage)
+  console.log("FINDandUpdateOA action")
   return {
     type: REQUEST_FIND_UPDATE_OA,
     id,
@@ -469,26 +475,9 @@ export function requestFindUpdateOASuccess(result) {
   };
 }
 
-
-
-
-
-export function cleanImportedreference() {
-  return {
-    type: REQUEST_CLEAN_IMPORTREFERENCE
-  }
-}
-
 export function requestFindReferenceByPMIDSuccess(result) {
   return {
     type: REQUEST_FIND_REFERENCE_BY_PMID_SUCCESS,
-    result
-  };
-}
-
-export function requestFindOASuccess(result) {
-  return {
-    type: REQUEST_FIND_OA_SUCCESS,
     result
   };
 }

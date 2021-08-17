@@ -34,7 +34,7 @@ const routes = [
     children: [
       { path: '', exact: true, name: `PendingRequests`, component: Fake,sidebar: true, order:1 },
       { path: '/archive', name: `ArchivedRequests`, component: Fake,url: '/borrowing/archive',sidebar: true, order:2  },
-      { path: '/openurl', exact: true, name: `Fake`, component: Fake},   //new borrowing request   
+      { path: '/new', exact: true, name: `Fake`, component: Fake},   //new borrowing request   
      ]
   },
   {
@@ -42,6 +42,7 @@ const routes = [
     children: [
       { path: '', exact: true, name: `PendingRequests`, component: Fake,sidebar: true, order:1 },
       { path: '/archive', name: `ArchivedRequests`, component: Fake,url: '/lending/archive',sidebar: true, order:2  },
+      { path: '/new', exact: true, name: `Fake`, component: Fake},   //new external lending 
 
      ]
   },

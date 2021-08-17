@@ -5,7 +5,7 @@ import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST,
   REQUEST_UPDATE_LABEL, REQUEST_REMOVE_LABEL, REQUEST_POST_LABEL,
   REQUEST_POST_GROUP, REQUEST_REMOVE_GROUP, REQUEST_UPDATE_GROUP,
-  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,REQUEST_REQUESTS_LIST,REQUEST_GET_REQUEST,REQUEST_DELETE_REFERENCE, REQUEST_GET_LIBRARY_DELIVERIES, REQUEST_POST_REQUEST, /*REQUEST_FIND_REFERENCE_BY_DOI, REQUEST_FIND_REFERENCE_BY_PMID,*/REQUEST_FIND_OA,REQUEST_FIND_UPDATE_OA,REQUEST_SEARCH_PLACES_BY_TEXT,REQUEST_GET_LIBRARY_LIST} from './constants';
+  REQUEST_GET_MY_LIBRARY, REQUEST_GET_REFERENCE,REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,REQUEST_REQUESTS_LIST,REQUEST_GET_REQUEST,REQUEST_DELETE_REFERENCE, REQUEST_GET_LIBRARY_DELIVERIES, REQUEST_POST_REQUEST, /*REQUEST_FIND_REFERENCE_BY_DOI, REQUEST_FIND_REFERENCE_BY_PMID,*/REQUEST_FIND_UPDATE_OA,REQUEST_SEARCH_PLACES_BY_TEXT,REQUEST_GET_LIBRARY_LIST, REQUEST_FIND_REFERENCE_BY_ID} from './constants';
 import {
   requestError,
   stopLoading,
@@ -24,9 +24,10 @@ import {
   requestGetReferenceSuccess,
   requestGetRequestSuccess,
   requestGetLibraryDeliveriesSuccess,
-  requestFindReferenceByDOISuccess,
-  requestFindReferenceByPMIDSuccess,
-  requestFindOASuccess,  
+  //requestFindReferenceByDOISuccess,
+  //requestFindReferenceByPMIDSuccess,  
+  requestFindReferenceById,
+  requestFindReferenceByIdSuccess,
   requestFindUpdateOASuccess,
   requestFindUpdateOAFail,
   requestSearchPlacesByTextSuccess,
@@ -72,7 +73,8 @@ import {  getMyLibrary,
 import {
         getReferenceByDOI,
         getReferenceByPMID,
-        getOA,
+        getOA,        
+        getOAReferenceByID,
         getPlacesByText
         } from 'utils/apiExternal';        
 
@@ -606,45 +608,58 @@ export function* searchReferenceByPMIDSaga(action) {
   }
 }*/
 
-export function* findOASaga(action) {
-  const options = {
-    method: 'get',
-    refData: action.refData
-  }
-  try {
-    const request = yield call(getOA, options);
-    yield put(requestFindOASuccess(request));
-  } catch(e) {
-    console.log("OA ERROR",e)
-    yield put(requestError(e.message));
-  }
-}
+
 
 //chiamare api x trovare OA e aggiornare (POST) il riferimento in modo che ricarichi la pag
 //La ricerca OA avviene x titolo della pubb (puo' essere titolo part o titolo book/thesi/...)
 export function* findUpdateOASaga(action) {
   console.log("FINDUPDATEOA_SAGA:", action);
-  const options = {
-    method: 'get',    
-    refData: {'title':action.title}
-  }
-  try {
-    const request = yield call(getOA, options);
-    if(/*request.found &&*/ request.url)
-    {
-      console.log("TROVATO OA!:",request.url)    
-      //yield call(() => toast.success("Versione OA trovata!"))
-      yield put(requestFindUpdateOASuccess(action.id));
-      yield call(requestUpdateReferenceSaga, {id: action.id, request: {oa_link: request.url}, message:action.foundMessage })
+  if(action.title && action.title!="")
+  {
+    const options = {
+      method: 'get',    
+      refData: {'title':action.title}
     }
-    else {
-      console.log("NON TROVATO");
+    try {
+      const request = yield call(getOA, options);
+      if(/*request.found &&*/ request.url)
+      {
+        console.log("TROVATO OA!:",request.url)    
+        //yield call(() => toast.success("Versione OA trovata!"))
+        yield put(requestFindUpdateOASuccess(action.id));
+        yield call(requestUpdateReferenceSaga, {id: action.id, request: {oa_link: request.url}, message:action.foundMessage })
+      }
+      else {
+        console.log("NON TROVATO");
+        yield put(requestFindUpdateOAFail(action.id));
+        yield call(() => toast.error(action.notfoundMessage))
+      }
+  
+    } catch(e) {
+      console.log("OA FIND AND UPDATE ERROR",e)
+      yield put(requestError(e.message));
       yield put(requestFindUpdateOAFail(action.id));
       yield call(() => toast.error(action.notfoundMessage))
     }
+  }
+  else {
+    console.log("NON TROVATO-title mancante");
+        yield put(requestFindUpdateOAFail(action.id));
+        yield call(() => toast.error(action.notfoundMessage))
+  }
+  
+}
 
+export function* requestOAReferenceByIdSaga(action) {
+  const options = {
+    method: 'get',
+    id: action.id
+  }
+  try {
+    const request = yield call(getOAReferenceByID, options);    
+    yield put(requestFindReferenceByIdSuccess(request));    
   } catch(e) {
-    console.log("OA FIND AND UPDATE ERROR",e)
+    console.log("PMID ERR",e)
     yield put(requestError(e.message));
   }
 }
@@ -716,9 +731,10 @@ export default function* patronSaga() {
   yield takeLatest(REQUEST_POST_REQUEST, requestPostRequestSaga);
   yield takeLatest(REQUEST_CHANGE_STATUS_REQUEST,requestChangeStatusRequestSaga);
   yield takeLatest(REQUEST_GET_LIBRARY_DELIVERIES,requestLibraryDeliveriesOptionListSaga);
+  yield takeLatest(REQUEST_FIND_REFERENCE_BY_ID,requestOAReferenceByIdSaga);
   /*yield takeLatest(REQUEST_FIND_REFERENCE_BY_DOI,searchReferenceByDOISaga);
   yield takeLatest(REQUEST_FIND_REFERENCE_BY_PMID,searchReferenceByPMIDSaga);*/
-  yield takeLatest(REQUEST_FIND_OA,findOASaga);
+
   yield takeEvery(REQUEST_FIND_UPDATE_OA,findUpdateOASaga);
   yield takeLatest(REQUEST_SEARCH_PLACES_BY_TEXT,findPlacesByText);
   yield takeLatest(REQUEST_GET_LIBRARY_LIST, requestLibraryListNearToSaga);

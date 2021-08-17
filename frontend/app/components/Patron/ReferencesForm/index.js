@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import messages from './messages';
 import FormContent from './FormContent';
-import PreForm from './PreForm';
-import SectionTitle from 'components/SectionTitle';
-
+import OASearchReference from '../../../containers/OASearchReference';
+import SectionTitle from '../../SectionTitle';
 const ReferencesForm = (props) => {
+    console.log("REFERENCEFORM:",props);
     const {createReference, reference, updateReference, 
             labelsOptionList, applyLabels, groupsOptionList, 
-    applyGroups, removeLabel, removeGroup, deleteReference,findReference,importReference/*,findOA,OALink*/} = props
-    const [goToForm, setGoToForm] = useState(false);
+    applyGroups, removeLabel, removeGroup, deleteReference,onFoundReference,importReference/*,findOA,OALink*/} = props
+    
+    const [goTo, setGoTo] = useState(false);
      
     return (
         <>
@@ -28,35 +29,35 @@ const ReferencesForm = (props) => {
                         /*findOA={findOA}
                         OALink={OALink}*/
                     />
-                ||
-                    <>
-                    {console.log("impref",importReference)}
-                    
-                    {goToForm &&
+                ||                     
+                    (goTo &&
                             <FormContent 
                             messages={messages} 
-                            submitCallBack={(formData) => createReference(formData)}
-                            /*findOA={findOA}
-                            OALink={OALink}*/
+                            submitCallBack={(formData) => createReference(formData)}                            
                             />
-                    ||    
-                    importReference &&
-                    <FormContent 
-                                messages={messages} 
-                                reference={importReference}
-                                submitCallBack={(formData) => createReference(formData)}
-                                /*findOA={findOA}
-                                OALink={OALink}*/
-                            />
-                    ||        
-                            <PreForm 
-                                goToForm={setGoToForm}
-                                messages={messages}
-                                searchCallBack={(query) => findReference(query)}
-                            />
-                    }
-                    </>
-                }
+                    || 
+
+                        (importReference &&
+                        <FormContent 
+                                    messages={messages} 
+                                    reference={importReference}
+                                    submitCallBack={(formData) => createReference(formData)}
+                                    /*findOA={findOA}
+                                    OALink={OALink}*/
+                                />
+                        ||       
+                            <>  
+                                <SectionTitle 
+                                    title={messages.headerNew}
+                                />                           
+                                <OASearchReference        
+                                onFound={(reference)=>onFoundReference(reference)}        
+                                goToForm={()=>setGoTo(true)}         
+                                />
+                            </>
+                        )
+                    )                    
+            }
         </>
     )
 }
