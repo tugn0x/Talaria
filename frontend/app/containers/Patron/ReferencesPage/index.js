@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import makeSelectPatron, {isPatronLoading} from '../selectors';
-import {ReferencesForm,Loader} from 'components';
+import {ReferenceForm,Loader} from 'components';
 import ReferenceDetail from 'components/Patron/ReferenceDetail';
 import ReferenceRequest from 'components/Patron/ReferenceRequest';
 import {requestPostReferences,requestUpdateReferences,
@@ -55,14 +55,22 @@ const ReferencesPage = (props) => {
         {
             if(byPubmed)
             {
+                //get pmid from url and call OAbutton API to get metadata from pmid
                 let id=(new URLSearchParams(queryString)).get("id").replace('pmid:','');
                 dispatch(requestFindReferenceById(id));                
             }        
             else
             {
                 console.log("PARSING OPENURL",queryString)
-                let newref=parseOpenURL(queryString);
+                let newref=parseOpenURL(queryString);                
+
+                //add extra fields
+                let oalink=(new URLSearchParams(queryString)).get("oa_link");
+                if(oalink!=null && oa_link!="")
+                    newref["oa_link"]=decodeURIComponent(oalink);
+
                 setRefData({...newref});  
+                
             }
         }
     }, [byOpenUrl])
@@ -72,6 +80,7 @@ const ReferencesPage = (props) => {
         {
             //PROBLEMA: i campi restituiti da pubmed non sono uguali a 
             //quelli di refdata quindi occorre mapping ....           
+            //mentre quelli dell'openurl sono praticamente gli stessi
             
             //parsePubmed data
             console.log("PARSING PUBMED",reference)
@@ -138,7 +147,7 @@ const ReferencesPage = (props) => {
              cancelText: intl.formatMessage({id: 'app.global.no'})
          }); //
          if(conf)
-             dispatch(requestDeleteReference(id,intl.formatMessage({id: 'app.global.removedMessage'})))
+             dispatch(requestDeleteReference(id,intl.formatMessage({id: 'app.global.deletedMessage'})))
      }
     
     const applyLabelsToReferences = (labelIds,refIds) => {
@@ -179,7 +188,7 @@ const ReferencesPage = (props) => {
              cancelText: intl.formatMessage({id: 'app.global.no'})
          }); //
          if(conf)
-             dispatch(requestRemoveReferenceLabel(id,labelId,intl.formatMessage({id: "app.global.removedMessage"}), filter))
+             dispatch(requestRemoveReferenceLabel(id,labelId,intl.formatMessage({id: "app.global.deletedMessage"}), filter))
      }
  
      async function removeGroupFromReference (id,groupId, filter) {
@@ -191,7 +200,7 @@ const ReferencesPage = (props) => {
              cancelText: intl.formatMessage({id: 'app.global.no'})
          }); //
           if(conf)
-              dispatch(requestRemoveReferenceGroup(id,groupId,intl.formatMessage({id: "app.global.removedMessage"}), filter))
+              dispatch(requestRemoveReferenceGroup(id,groupId,intl.formatMessage({id: "app.global.deletedMessage"}), filter))
       }
 
     
@@ -199,7 +208,7 @@ const ReferencesPage = (props) => {
     return (
         <Loader show={isLoading}>
             {isNew && isMounted && (
-                <ReferencesForm                     
+                <ReferenceForm                     
                     importReference={refData}
                     createReference={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } 
                     onFoundReference={foundReference}
@@ -212,15 +221,15 @@ const ReferencesPage = (props) => {
             }
             {!isNew && isMounted && refData && ( 
                 params.op && params.op=="edit" &&
-                    (canEdit(refData/*reference*/) && <ReferencesForm                         
+                    (canEdit(refData/*reference*/) && <ReferenceForm                         
                         reference={refData/*reference*/}
                         labelsOptionList={labelsOptionList}
                         groupsOptionList={groupsOptionList}
                         applyLabels={applyLabelsToReferences}
                         applyGroups={applyGroupsToReferences}
                         deleteReference={(id) => deleteReference(id)}
-                        removeLabel={(id,labelId)=> removeLabelFromReference(id,labelId)}
-                        removeGroup={(id,groupId)=> removeGroupFromReference(id,groupId)}
+                        removeLabel={(labelId)=> removeLabelFromReference(refData.id,labelId)}
+                        removeGroup={(groupId)=> removeGroupFromReference(refData.id,groupId)}
                         updateReference={ (formData) => dispatch(requestUpdateReferences(formData, params.id, intl.formatMessage(messages.referenceUpdate))) } 
                         /*findOA={ (formData) => findOA({title: formData.pub_title, doi:formData.doi,pmid:formData.pmid}) }
                         OALink={OALink}*/

@@ -1,27 +1,16 @@
 import React from 'react';
 import {Row, Col, Button} from 'reactstrap';
-import {NavLink } from 'react-router-dom';
 import {useIntl} from 'react-intl';
 import { generatePath } from "react-router";
 import ReferenceIcons from '../ReferenceIcons';
 import CustomCheckBox from 'components/Form/CustomCheckBox';
+import ReferenceCitation from '../../ReferenceCitation';
+import ReferenceTags from '../ReferenceTags';
 
 const ReferenceItem = (props) => {
     const {data,toggleSelection,checked,removeLabel,removeGroup,deleteReference,findAndUpdateOA,oaloading} = props
   
-    const intl = useIntl();
-  
-    const matTypeIcon = (mat) => {
-        switch (mat)
-        {
-          case 1: return 'simple_icon fas fa-file'; break;
-          case 2: return 'simple_icon fas fa-book'; break;
-          case 3: return 'simple_icon fas fa-scroll'; break;
-          case 4: return 'simple_icon fas fa-map'; break;
-          case 5: return 'simple_icon fas fa-bible'; break;          
-        }
-        return mat;
-      }
+    const intl = useIntl();    
     
     const referenceurl=(id) => {
         return generatePath('/patron/references/:id?/:op?', {
@@ -32,42 +21,15 @@ const ReferenceItem = (props) => {
 
     return (
         <Row className="list-row justify-content-between">
-            <Col sm={2} className="select-checkbox">
+            <Col sm={1} className="select-checkbox">
                 <CustomCheckBox 
                     handleChange={toggleSelection}
                     checked={checked}
-                />
-                <i className={`${matTypeIcon(data.material_type)}`}></i>
+                />                
             </Col> 
-            <Col sm={7} className="info">
-                <NavLink to={`${referenceurl(data.id)}`}>
-                    <p><span className="pub_title">{data.pub_title}</span> &nbsp; 
-                    {data.material_type === 1 && <span className="part_title">{data.part_title}</span>}
-                    </p>
-                </NavLink>
-                <div className="authors">
-                   {data.material_type != 1 && data.authors && <span className="authors">{intl.formatMessage({id: "app.references.authors"})}<span> {data.authors}</span></span>} 
-                   {(data.material_type === 1 || data.material_type === 2) && data.part_authors && <span className="authors">{intl.formatMessage({id: data.material_type === 1 ? "app.references.authors":"app.references.part_authors"})}<span> {data.part_authors}</span></span>}                  
-                   {data.pubyear && <span className="pubyear">{intl.formatMessage({id: "app.references.pubyear"})} <span>{data.pubyear}</span></span>}
-                </div>
-                {data.material_type === 3 &&
-                <div className="university">
-                    <span className="university">{intl.formatMessage({id: "app.references.university"})}<span> {data.publisher}</span></span>
-                </div>}
-                {data.material_type === 4 &&
-                <div className="geographic_area">
-                    <span className="geographic_area">{intl.formatMessage({id: "app.references.geographic_area"})}<span> {data.geographic_area}</span></span>
-                </div>}
-
-                
-                {data.labels.data && <span className="labels-row">
-                    {data.labels.data.map(label => <span key={label.id}>{label.name} <i className="fas fa-times"  onClick={() => removeLabel(label.id)}></i></span>)}
-                </span>}
-                
-                {data.groups.data && <span className="groups-row">
-                    {data.groups.data.map(grp => <span key={grp.id}>{grp.name} <i className="fas fa-times"  onClick={() => removeGroup(grp.id) }></i></span>)}
-                </span>}
-                
+            <Col sm={8}>
+            <ReferenceTags data={data} removeLabel={(labelId)=>removeLabel(labelId )} removeGroup={(groupId)=>removeGroup(groupId)}/>              
+            <ReferenceCitation full={false} data={data} referenceurl={referenceurl}/>
             </Col>
             <Col sm={3} className="icons align-self-center">
                 <ReferenceIcons 

@@ -1,0 +1,40 @@
+.referenceCit {
+    p {
+        margin: 0;
+    }
+    
+    .mat_type {
+        padding-right: 5px;
+        float:left;
+    }  
+
+    .title {
+        margin-bottom: 10px;
+        
+        & .pub_title {
+        
+        }
+        & .part_title {
+            font-style: italic;
+        }
+    }
+    
+    .pubyear {            
+    }
+    
+    .authors, 
+    .university,
+    .geographic_area {
+        > span
+        {
+            font-weight: bold;
+            padding-right: 10px;
+            span
+            {
+                font-weight: normal;
+                padding-right: 0px;
+            }
+        }
+        
+    } 
+}

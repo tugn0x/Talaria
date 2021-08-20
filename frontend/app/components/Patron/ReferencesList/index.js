@@ -12,7 +12,7 @@ import {useIntl} from 'react-intl';
 // import ReferencesPage from 'containers/Patron/ReferencesPage'
 // import { NavLink } from 'react-router-dom';
 import ReferenceItem from '../ReferenceItem';
-import FilterSelect from '../FilterSelect';
+import FilterSelect from '../../FilterSelect';
 import ApplyReferencesTag from '../ApplyReferencesTag';
 import CustomCheckBox from 'components/Form/CustomCheckBox';
 import SectionTitle from 'components/SectionTitle';

@@ -1,0 +1,36 @@
+@import '../../../scss/variables';
+
+.reference_tags {
+    margin:0 5px 5px 0;
+
+    & .labels-row,
+    .groups-row  {
+        margin-right:5px;        
+        color: $orange;
+    }
+
+    & .labels-row > i,
+    .groups-row > i  {
+        margin-right: 2px;
+    }
+
+
+    & .labels-row span {
+        color: $labels-border;
+        margin: 0 5px 0 0;
+        i.fa,i.fas {
+            margin-left:2px;
+            cursor: pointer;
+        }
+    }
+
+    & .groups-row span {
+        color: $groups-border;
+        margin: 0 5px 0 0;
+        i.fa,i.fas {
+            margin-left:2px;
+            cursor: pointer;
+        }
+    }    
+}
+

@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Row, Col, Button} from 'reactstrap';
-// import './style.scss';
 
-const ReferencesTag = props => {
+const EditTagItem = props => {
     const {data, updateItem, removeItem} = props
     const [tag, setTag] = useState({})
 
@@ -55,4 +54,4 @@ const ReferencesTag = props => {
     );
 };
 
-export default ReferencesTag;
+export default EditTagItem;

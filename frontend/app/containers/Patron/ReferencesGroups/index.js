@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {groupsOptionListSelector, isPatronLoading} from '../selectors';
-import ReferencesTag from 'components/Patron/ReferencesTag';
+import EditTagItem from 'components/EditTagItem';
 import messages from './messages';
 import Loader from 'components/Form/Loader';
 import {useIntl} from 'react-intl';
@@ -50,7 +50,7 @@ const ReferencesGroups = props => {
             />
             <Loader show={loading}>
                 {groupsOptionList.length > 0 && groupsOptionList.map(group => (
-                        <ReferencesTag 
+                        <EditTagItem 
                             key={`${group.label}-${group.value}`}
                             data={group}
                             updateItem={(group_id, name) => updateItem(group_id, name)}

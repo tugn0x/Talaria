@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {labelsOptionListSelector, isPatronLoading} from '../selectors';
-import ReferencesTag from 'components/Patron/ReferencesTag';
+import EditTagItem from 'components/EditTagItem';
 import messages from './messages';
 import Loader from 'components/Form/Loader';
 import {useIntl} from 'react-intl';
@@ -50,7 +50,7 @@ const ReferencesLabels = props => {
               
             <Loader show={loading}>
                 {labelsOptionList.length > 0 && labelsOptionList.map((label, i) => (
-                        <ReferencesTag 
+                        <EditTagItem 
                             key={`${label.label}-${label.value}`}
                             data={label}
                             updateItem={(label_id, name) => updateItem(label_id, name)}

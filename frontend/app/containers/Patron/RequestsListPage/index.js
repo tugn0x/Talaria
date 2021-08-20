@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import RequestsList from 'components/Patron/RequestsList';
 import confirm from "reactstrap-confirm";
+import messages from './messages.js';
 
 const RequestsListPage = (props) => {
     console.log('RequestsListPage', props)
@@ -65,6 +66,7 @@ const RequestsListPage = (props) => {
         <>
         
             <RequestsList 
+                sectionTitle={archive==1?messages.headerArchive:messages.header}
                 data={requestsList}
                 loading={isLoading}
                 pagination={pagination}

@@ -1,22 +1,22 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {Card, Form as FormContainer, FormGroup, Button, Row} from 'reactstrap';
 import {useIntl} from 'react-intl';
-import RadioButton from 'components/Form/RadioButton';
+import RadioButton from '../Form/RadioButton';
 import scrollTo from 'utils/scrollTo';
-import Input from 'components/Form/Input';
-import ErrorBox from 'components/Form/ErrorBox';
-import ReferenceIcons from '../ReferenceIcons';
+import Input from '../Form/Input';
+import ErrorBox from '../Form/ErrorBox';
+
 import {requiredConditions} from './requiredConditions';
-import SectionTitle from 'components/SectionTitle';
+
 import './style.scss';
-import FindOA from '../../FindOA';
+
 
 //NOTA: a volte il title_part/abstract/note non è editable o lo è solo per parte della lunghezza (limite a 50 car?)
 //BUG: quando cambio tipologia dovrei ri-verificare tutti i campi che hanno required dipendente dal tipo-materiale
 //     altrimenti il pulsante submit non è in linea con le condizioni!
 
-const FormContent = (props) => {
-    console.log('FormEdit Reference', props)
+const ReferenceFormContent = (props) => {
+    console.log('ReferenceFormContent', props)
     const {reference, messages, submitCallBack, 
             applyLabels, labelsOptionList, applyGroups, groupsOptionList,
             removeLabel, removeGroup, deleteReference/*,findOA,OALink*/} = props;
@@ -85,41 +85,8 @@ const FormContent = (props) => {
 
 
 
-    return (
-        <>
-            <SectionTitle 
-                title={formData.id?messages.headerEdit:messages.headerNew}
-            />
-            {reference && !reference.id && <FindOA reference={formData} /* findOA={findOA}*//>}
-            <FormContainer onSubmit={onSubmit} className={formClasses.join(" ")} noValidate>
-                {reference &&
-                    <>
-                        {reference.id && <Row className="list-head">
-                            <div className="features-icons">
-                                <ReferenceIcons 
-                                    data={formData}
-                                    icons={['assignLabel', 'assignGroup', 'delete']}
-                                    labelsOptionList={labelsOptionList}
-                                    applyLabels={applyLabels}
-                                    groupsOptionList={groupsOptionList}
-                                    applyGroups={applyGroups}
-                                    selectedReferences={[formData.id]}
-                                    deleteReference={deleteReference}
-                                />
-                            </div>
-                        </Row>}
-                        {formData.labels && Object.keys(formData.labels.data).length > 0 &&
-                            <div className="labels-row">
-                                {formData.labels.data.map(label => <span key={label.id}>{label.name} <i className="fas fa-times"  onClick={() => removeLabel(reference.id, label.id )}></i></span>)}
-                            </div>
-                        }
-                        {formData.groups && Object.keys(formData.groups.data).length > 0 &&
-                            <div className="groups-row">
-                                {formData.groups.data.map(group => <span key={group.id}>{group.name} <i className="fas fa-times"  onClick={() => removeGroup(reference.id, group.id)}></i></span>)}
-                            </div>
-                        }
-                    </>
-                }
+    return (                
+            <FormContainer onSubmit={onSubmit} className={formClasses.join(" ")} noValidate>                
                   <h3>{intl.formatMessage({id: "app.references.materialTypeHead"})}</h3>
                   <Card>
                   <FormGroup className="radio-buttons">
@@ -374,9 +341,8 @@ const FormContent = (props) => {
                 </Button> 
                 }
                 </div>
-            </FormContainer>
-        </>
+            </FormContainer>        
     );
 };
 
-export default FormContent;
+export default ReferenceFormContent;

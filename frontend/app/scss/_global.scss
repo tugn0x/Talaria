@@ -396,36 +396,8 @@ ul.list-inline {
         padding-left: 0;
         padding-right: 0;
     }
-    .info {
-        p {
-            margin: 0;
-        }
-        .mat_type {
-            padding-right: 5px;
-        }        
-        .pub_title {
-            
-        }
-        .part_title {
-            font-style: italic;
-        }
-        .authors, 
-        .university,
-        .geographic_area {
-            > span
-            {
-                font-weight: bold;
-                padding-right: 10px;
-                span
-                {
-                    font-weight: normal;
-                    padding-right: 0px;
-                }
-            }
-            
-        } 
-    }
-    
+
+
     .select-checkbox {
         i {
             font-size: 1.5rem;
@@ -443,21 +415,6 @@ ul.list-inline {
         align-items: center;
         justify-content: flex-end;
     } */
-}
-
-.labels-row span {
-    color: $labels-border;
-    margin: 0 5px 0 0;
-    i.fa {
-        cursor: pointer;
-    }
-}
-.groups-row span {
-    color: $groups-border;
-    margin: 0 5px 0 0;
-    i.fa {
-        cursor: pointer;
-    }
 }
 
 .list-head{

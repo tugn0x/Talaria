@@ -1,19 +1,17 @@
 import React, {useEffect, useState} from 'react'
 import {Row, Col, Button} from 'reactstrap'
-import messages from './messages'
-import { FormattedMessage } from 'react-intl';
 import {Pagination, InputSearch} from 'components';
 import Loader from 'components/Form/Loader';
 import {useIntl} from 'react-intl';
 import RequestItem from '../RequestItem';
-import FilterSelect from '../FilterSelect';
+import FilterSelect from '../../FilterSelect';
 import SectionTitle from 'components/SectionTitle';
 import CustomCheckBox from 'components/Form/CustomCheckBox';
 import './style.scss';
 
 const RequestsList = (props) => {
     console.log('RequestsList', props)
-    const { loading, data, pagination, searchOptions, labelsOptionList, groupsOptionList,archiveRequest,askCancelRequest,acceptCost,denyCost} = props
+    const { sectionTitle,loading, data, pagination, searchOptions, labelsOptionList, groupsOptionList,archiveRequest,askCancelRequest,acceptCost,denyCost} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)
@@ -95,7 +93,7 @@ const RequestsList = (props) => {
         mounted &&
         <>
             <SectionTitle 
-                title={messages.header}
+                title={sectionTitle}
             />
             <div className="search-filter-bar">
                 <Row>
@@ -137,7 +135,7 @@ const RequestsList = (props) => {
                                     groupIds: state.groupIds
                         }) ) } /> 
                     </Col>
-                    <Col sm={2}>{!disableCancelFilter && <a href="#" onClick={handleCancelFilter} className="btn btn-link active"><FormattedMessage {...messages.ResetAll} /></a> }</Col>
+                    <Col sm={2}>{!disableCancelFilter && <a href="#" onClick={handleCancelFilter} className="btn btn-link active">{intl.formatMessage({id:'app.global.resetAll'})}</a> }</Col>
                 </Row>
                 <Row>
                     <Col md={12} className="activeFilters">
@@ -175,7 +173,7 @@ const RequestsList = (props) => {
                         </div>
                     </div>
                     <div className="select-counter">
-                        <FormattedMessage {...messages.RequestSelected} /> {selectedRequests.length} di {data.length} 
+                    {intl.formatMessage({id:'app.components.RequestsList.RequestSelected'})} {selectedRequests.length} di {data.length} 
                     </div>
                 </Row>
                 <Loader show={loading}>
@@ -198,7 +196,7 @@ const RequestsList = (props) => {
                             ))
                         ||
                             <h5 className="text-center">
-                                {intl.formatMessage(messages.RequestsNotFound)}
+                                {intl.formatMessage({id:'app.components.RequestsList.RequestsNotFound'})}
                             </h5>
                         }
                     </div>

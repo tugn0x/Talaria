@@ -20,7 +20,7 @@ import ChangePasswordForm from './Auth/ChangePasswordForm';
 
 // Patron
 // import MyLibrariesList from './Patron/MyLibrariesList/Loadable';
-import ReferencesForm from './Patron/ReferencesForm';
+import ReferenceForm from './Patron/ReferenceForm';
 import ReferencesList from './Patron/ReferencesList';
 import ReferenceItem from './Patron/ReferenceItem';
 
@@ -63,7 +63,7 @@ export {
   ChangePasswordForm,
  // MyLibrariesList,
   MyLibraryForm,
-  ReferencesForm,
+  ReferenceForm,
   ReferencesList,
   ReferenceItem,
   LibraryForm,
