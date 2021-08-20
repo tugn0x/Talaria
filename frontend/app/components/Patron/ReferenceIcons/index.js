@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import { generatePath } from "react-router";
-import ApplyReferencesTag from '../ApplyReferencesTag';
+import ApplyTag from '../../ApplyTag';
 
 const ReferenceIcons = (props) => {
     const {data,deleteReference,icons, labelsOptionList, groupsOptionList , applyGroups, applyLabels, selectedReferences,findAndUpdateOA} = props
@@ -65,14 +65,14 @@ const ReferenceIcons = (props) => {
                     <i className="fas fa-file-export"></i>
                 </a>}
                 { visibleIcon('assignLabel') && applyLabels &&  
-                    <ApplyReferencesTag
+                    <ApplyTag
                         type="label"
                         submitCallBack={(id) => applyLabels(id, selectedReferences)}
                         options={labelsOptionList} 
                     /> 
                 }
                 {visibleIcon('assignGroup') && applyGroups &&
-                    <ApplyReferencesTag
+                    <ApplyTag
                         type="group"
                         submitCallBack={(ids) => applyGroups(ids, selectedReferences)}
                         options={groupsOptionList} 

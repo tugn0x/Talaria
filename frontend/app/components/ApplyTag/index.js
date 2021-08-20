@@ -5,8 +5,8 @@ import {useIntl} from 'react-intl';
 import CustomCheckBox from 'components/Form/CustomCheckBox';
 import './style.scss';
 
-const ApplyReferencesTag = props => {
-    console.log('ApplyReferencesTag', props)
+const ApplyTag = props => {
+    console.log('ApplyTag', props)
     const {type, submitCallBack, options, disabled} = props
     const [data, setData] = useState(options)
     const [query, setQuery] = useState("")
@@ -59,9 +59,9 @@ const ApplyReferencesTag = props => {
     );
 };
 
-ApplyReferencesTag.propTypes = {
+ApplyTag.propTypes = {
     type: PropTypes.string,
     options: PropTypes.array
 };
 
-export default ApplyReferencesTag;
+export default ApplyTag;
