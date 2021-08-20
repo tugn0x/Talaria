@@ -126,7 +126,8 @@ const parseFromOAButton = (reference) => {
               pubtype=1;
           else if(metadata.isbn||metadata.book)    
               pubtype=2;
-      }      
+      } 
+
       obj={
           pub_title: pubtype==1?metadata.journal:metadata.title?metadata.title:'',
           part_title: pubtype==1?metadata.title:'',
@@ -144,7 +145,7 @@ const parseFromOAButton = (reference) => {
           publishing_place: '',
           doi: metadata.doi?metadata.doi:'',
           pmid: metadata.pmid?metadata.pmid:'',
-          oa_link: reference.url && Object.keys(reference.metadata).length>0 && reference.url?reference.url:null
+          oa_link: reference.url /*&& Object.keys(reference.metadata).length>0 &&*/?reference.url:null
       }      
   }  
       
@@ -237,7 +238,7 @@ useEffect ( () => {
       //    setOALink(oareference.url);
      
   }
-  else console.log("OASearchReference NOT MOUNTED")
+  //else console.log("OASearchReference NOT MOUNTED")
 },[oareference]);
 
 useEffect(() => {

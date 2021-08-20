@@ -32,13 +32,22 @@ function HomePage(props) {
     console.log("OA import:",reference)
   }
 
-  const importByOpenURL = (refdata) => {
-    console.log("importByOpenURL",refdata)
-    let openurl="/newreference";                
+  //import reference data by creating a "custom OpenURL" (openurl with extra parameters)
+  const customImportURL = (refdata) => {
+    console.log("customImportURL",refdata)
+    let customURL="/newreference";   //if no data=>will go to empty form             
     if(refdata && Object.keys(refdata).length>0)
-        openurl=generateOpenURL(refdata);    
+    {
+      //if data, builds new URL to import 
+      
+      customURL=generateOpenURL(refdata);    
+        
+        //extraparams
+        if(refdata.oa_link && refdata.oa_link!="" && refdata.oa_link!=null)
+          customURL+="&oa_link="+encodeURIComponent(refdata.oa_link);
+    }
     
-    history.push(openurl);
+    history.push(customURL);
 }
 
   
@@ -56,7 +65,7 @@ function HomePage(props) {
       <OASearchReference           
         onFound={(reference)=>foundOA(reference)}        
         showReference={true}
-        goToForm={(oareference)=>importByOpenURL(oareference)}         
+        goToForm={(oareference)=>customImportURL(oareference)}         
       />      
       <br/>      
 

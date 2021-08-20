@@ -5,7 +5,7 @@ import InputSearch from 'components/Form/InputSearch';
 import messages from './messages';
 import FindOA from '../FindOA'
 import './style.scss';
-import Reference from '../Reference';
+import ReferenceCitation from '../ReferenceCitation';
 
 const OASearchReferenceForm = (props) => {
     const {goToForm, showReference,searchCallBack,isLoading,oareference}=props;
@@ -29,7 +29,7 @@ const OASearchReferenceForm = (props) => {
                     {showReference && 
                     <div className="alert alert-primary w-50 mx-auto my-2">
                         <strong>{intl.formatMessage({ id: 'app.components.OASearch.referenceFound' })}</strong>
-                        <Reference data={oareference} full={false} cssClass="oaPreview"/>
+                        <ReferenceCitation data={oareference} full={false}/>
                     </div>}
                     <div className="w-50 mx-auto my-2"><FindOA reference={oareference}/></div>
                 </>    

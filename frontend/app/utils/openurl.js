@@ -1,10 +1,10 @@
-//NOTE: some filds we have in reference don't exists in standard Openurl!
-//so are not imported in new reference! Actually reference field names = openurl fields name
-//so mapping is not needed
+//NOTE: some filds we have in reference don't exists in standard Openurl (like issn-l, oa_link..)!
+//so my are not imported correctly in new reference! 
 export const generateOpenURL = (reference) => {
     let url="/openurl"
     if(reference && Object.keys(reference).length>0)
     {
+        //Generate std OpenURL
         url+="?url_ver=Z39.88-2004&ctx_ver=Z39.88-2004&url_ctx_fmt="+encodeURIComponent("info:ofi/fmt:kev:mtx:ctx");         
         
         if(reference.abstract)
@@ -79,9 +79,7 @@ export const generateOpenURL = (reference) => {
             }
             if(reference.part_title!="")
                 url+="&rft.atitle="+encodeURIComponent(reference.part_title);            
-        }
-        
-
+        }       
     }
 
     console.log("generatedOpenURL:",url)
@@ -183,23 +181,10 @@ export const parseOpenURL = (params) => {
                     break;    
                 case 'rft.au': 
                     ref["part_authors"]=v.toString();                   
-                    break;                        
-                case 'abstract':
-                    ref["abstract"]=v;
-                    break;                        
+                    break;                                       
             }
 
         })
     } 
-    else {
-        if(queryArr["sid"]=="Entrez:PubMed") //sid=Entrez%3APubMed&id=pmid%3A29120751
-        {
-            //parse from pubmed
-            let id=queryArr["id"].replace('pmid:','');
-            //get data from pubmed server..
-            //
-        }
-    }
-
     return ref;
 }
