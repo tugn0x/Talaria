@@ -26,6 +26,7 @@ import {makeSelectLocation} from './selectors'
 import LibraryPage from "../Library/LibraryPage";
 import AssociateLibraryPage from '../../containers/Patron/AssociateLibraryPage/Loadable'
 import {changeLocale} from '../LanguageProvider/actions';
+import { ImportReference } from '../ImportReference';
 
 
 function App(props) {
@@ -49,16 +50,17 @@ function App(props) {
   return (
     !props.auth.loading && 
       <Switch>        
-        <Route exact path="/" component={({routerProps,match}) => <HomePage {...authProps} match={match} changeLang={changeLanguage} />}/>
+        <Route exact path="/" component={({routerProps,match}) => <HomePage {...authProps} match={match} history={history} changeLang={changeLanguage} />}/>
 
         <Route path={"/signup"}  component={({match,history}) => <SignupPage {...authProps} match={match} history={history} changeLang={changeLanguage} />} />
         <Route path={"/forgot-password/:reset_token?"} component={({match}) => <ForgotPassword {...authProps} history={history} match={match}  changeLang={changeLanguage}/>} />
         <Route path="/idp-callback/:refresh_token" component={IdpPage}  changeLang={changeLanguage}/>
         <Route path="/public/library/:library_id" component={({match}) => <Fake {...authProps} match={match} headermenu={true}  changeLang={changeLanguage} /> }  />        
 
-        
+                
+        <Route path="/openurl" component={({match,history}) => props.isLogged?<ImportReference byOpenURL={true} {...authProps} history={history} match={match} headermenu={true}  changeLang={changeLanguage} />:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} />}  />        
+        <Route path="/newreference" component={({match,history}) => props.isLogged?<ImportReference byOpenURL={false} {...authProps} history={history} match={match} headermenu={true}  changeLang={changeLanguage} />:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} />}  />        
 
-        <Route path="/openurltest" component={({match,history}) => props.isLogged?<Fake {...authProps} history={history} match={match} headermenu={true}  changeLang={changeLanguage} />:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} />}  />        
         <Route path="/login" component={(match) => <LoginPage {...authProps}  match={match} headermenu={true} changeLang={changeLanguage}/>}/>
 
         <Route path="/user" component={({match}) =>  props.isLogged?<UserPage {...authProps} changeLang={changeLanguage}/>:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} /> }  />

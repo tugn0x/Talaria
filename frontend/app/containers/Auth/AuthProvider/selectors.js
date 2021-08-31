@@ -25,7 +25,7 @@ const makeSelectAuth = () =>
 const isLogged = () =>
   createSelector(
     selectAuthDomain,
-    substate => (substate.user /*&& substate.user.is_verified*/ && substate.oauth && substate.oauth.token && substate.oauth.expire_at && substate.oauth.expire_at > moment().unix()) ? true : false,
+    substate => (!substate.loading && substate.user && substate.user.id && Object.keys(substate.permissions).length>0 /*&& substate.user.is_verified*/ && substate.oauth && substate.oauth.token && substate.oauth.expire_at && substate.oauth.expire_at > moment().unix()) ? true : false,
   );
 
 const isAuthLoading = () =>

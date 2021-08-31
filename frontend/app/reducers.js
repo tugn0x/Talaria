@@ -13,6 +13,7 @@ import patronReducer from 'containers/Patron/reducer';
 import adminReducer from 'containers/Admin/reducer';
 import libraryReducer from 'containers/Library/reducer';
 import appReducer from 'containers/App/reducer';
+import OASearchReferenceReducer from 'containers/OASearchReference/reducer'
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -24,6 +25,7 @@ export default function createReducer(injectedReducers = {}) {
     persistence: persitanceReducer,
     auth: authProviderReducer,
     patron: patronReducer,
+    oasearchreference: OASearchReferenceReducer,
     admin: adminReducer,
     library: libraryReducer,
     app: appReducer,

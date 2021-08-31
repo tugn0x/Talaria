@@ -275,12 +275,13 @@
   
   "app.components.ReferenceForm.headerNew": "Nuovo Riferimento",
   "app.components.ReferenceForm.headerEdit": "Modifica Riferimento",
-  "app.components.ReferenceForm.headerImport": "Importa Riferimento",
-  "app.components.ReferenceForm.bodySearch": "Cerca un riferimento inserendo DOI, PMID o ISBN o titolo esatto",
-  "app.components.ReferenceForm.goToForm": "Oppure inserisci i dati manualmente",
-  "app.components.ReferenceForm.goToFormButton": "Vai al form",
-  "app.components.ReferenceForm.inputPlaceHolder": "Es: 10.1002/hlca.19740570315",
-
+  
+  "app.components.OASearchReferenceForm.bodySearch": "Cerca un riferimento inserendo DOI, PMID o ISBN o titolo esatto",
+  "app.components.OASearchReferenceForm.inputPlaceHolder": "Es: 10.1002/hlca.19740570315",  
+  "app.components.OASearchReferenceForm.goToForm": "Oppure inserisci i dati manualmente",
+  "app.components.OASearchReferenceForm.goToFormButton": "Vai al form",
+  "app.components.OASearchReferenceForm.resetSearchButton": "Nuova ricerca",
+  
   "app.components.ReferenceRequest.headerRequest": "Stato richiesta",
   "app.components.ReferenceRequest.newRequest": "Nuova Richiesta",
   "app.components.ReferenceRequest.prevRequests": "Precedenti richieste e/o in corso",

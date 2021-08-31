@@ -28,10 +28,7 @@ import {checkRole} from '../../../utils/permissions'
 // import TwoColumnLayout from "components/TwoColumnLayout";
 
 function LoginPage(props) {
-  console.log("LoginPage:",props)
-
-  const {match}=props
-
+  console.log("LoginPage:",props)    
   const intl=useIntl();  
   const fb_enabled=(process.env.FACEBOOK_LOGIN && process.env.FACEBOOK_LOGIN=="true")?true:false;
   const google_enabled=(process.env.GOOGLE_LOGIN && process.env.GOOGLE_LOGIN=="true")?true:false; 
@@ -84,7 +81,7 @@ function LoginPage(props) {
     
   setAuthChecked(true);
 
-  },[props.auth])
+  },[props.isLogged/*props.auth*/])
 
   //MAIN
   return (

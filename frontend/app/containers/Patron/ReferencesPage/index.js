@@ -11,173 +11,84 @@ import {requestPostReferences,requestUpdateReferences,
         requestMyActiveLibrariesOptionList, requestLabelsOptionList, 
         requestGroupsOptionList, requestApplyLabelsToReferences, 
         requestApplyGroupsToReferences, requestRemoveReferenceLabel,
-        requestRemoveReferenceGroup, requestDeleteReference,requestGetLibraryDeliveries,requestPostRequest/*,requestFindReferenceByDOI,requestFindReferenceByPMID*/,cleanImportedreference,requestFindOA} from '../actions'
+        requestRemoveReferenceGroup, requestDeleteReference,requestGetLibraryDeliveries,requestPostRequest,requestFindReferenceById/*,requestFindReferenceByDOI,requestFindReferenceByPMID*/} from '../actions'
 import messages from './messages';
 import confirm from "reactstrap-confirm";
 import SectionTitle from 'components/SectionTitle';
 import {useIntl} from 'react-intl';
 import ErrorMsg from '../../../components/ErrorMsg';
-
+import {parseOpenURL,parsePubmedReference} from '../../../utils/openurl';
 
 /* TODO 
    - find per ISBN ...
 */
 
 const ReferencesPage = (props) => {
-    //console.log('ReferencesPage', props)
+    console.log('ReferencesPage', props)
     const {dispatch, isLoading, match, patron} = props
-    const {params} = match
-    const reference = patron.reference 
-    //const importedreference=patron.importedreference
+    const {params} = match    
     const intl = useIntl();
     const isNew = !params.id || params.id === 'new'
     const isRequest = params.id && params.op=="request"
+    const reference = patron.reference
     const labelsOptionList = patron.labelsOptionList;
     const groupsOptionList = patron.groupsOptionList;
     const libraryOptionList= patron.libraryOptionList;
     const deliveryOptionList= patron.deliveryOptionList;
-    const [isMounted, setIsMounted] = useState(false);
-    const oareference=patron.oareference;
+    
+    const queryString=window.location.search;
+    const byOpenUrl=(new URLSearchParams(queryString)).get("byopenurl")
+    const byPubmed=( (new URLSearchParams(queryString)).get("sid")=='Entrez:PubMed')?true:false;
+    
+    const [isMounted, setIsMounted] = useState(false);    
     const [OALink,setOALink] = useState('');
-    const [refData,setRefData] = useState(null);  
-    /*const [refData,setRefData] = useState(() => {
-        if(!reference || Object.keys(reference).length==0)
-            return null;
-        else return {...reference}    
-        
-    })*/      
+    const [refData,setRefData] = useState(null);      
 
-    const parseAuthors = (authors)=> {
-        let text="";
-
-        authors.map( a => { 
-            let str=(a.family && a.given)?a.given+" "+a.family:
-            (a.firstName && a.lastName)?a.firstName+" "+a.lastName:
-            a.fullName?a.fullName:
-            a.name?a.name:''
-
-            if(str)
-            {
-                text+=(text!='')?", ":''
-                text+=str;
-            }
-        })
-
-        return text;
-    }
-
-    const parseFromOAButton = (reference) => {
-        let obj={}
-
-        if(reference.metadata && Object.keys(reference.metadata).length>0)
-        {
-            let metadata=reference.metadata
-        
-            //default:              
-            let pubtype=1
-            
-            //NOTA: le api di OpenAccessButton gestiscono solo articoli!
-            //Specifica metadati: https://dev.api.cottagelabs.com/service/oab/metadata/keys
-            if(metadata.crossref_type)
-            {
-                let tystr=metadata.crossref_type.toString().toLowerCase();
-                if(tystr.includes('journal'))
-                    pubtype=1;
-                else if(tystr.includes('book'))
-                    pubtype=2;    
-                /*else if(tystr.includes('thesis'))
-                    pubtype=3; */
-            }
-            else            
-            {
-                //try to guess from fields                
-                if(metadata.journal)
-                    pubtype=1;
-                else if(metadata.isbn||metadata.book)    
-                    pubtype=2;
-            }
-
-            obj={
-                pub_title: pubtype==1?metadata.journal:metadata.title?metadata.title:'',
-                part_title: pubtype==1?metadata.title:'',
-                authors: (!pubtype || pubtype!=1) && metadata.author?parseAuthors(metadata.author):'',
-                part_authors: pubtype==1 && metadata.author?parseAuthors(metadata.author):'',
-                abstract: metadata.abstract?metadata.abstract:'',
-                pubyear: metadata.year,
-                volume: metadata.volume?metadata.volume:'',
-                issue: metadata.issue?metadata.issue:'',
-                pages: metadata.pages?metadata.pages:metadata.page?metadata.page:'', 
-                material_type: pubtype,
-                issn: metadata.issn?String(metadata.issn):'',
-                isbn: metadata.isbn?metadata.isbn:'',
-                publisher: metadata.publisher?metadata.publisher:'',
-                publishing_place: '',
-                doi: metadata.doi?metadata.doi:'',
-                pmid: metadata.pmid?metadata.pmid:'',
-                oa_link: reference.url && Object.keys(reference.metadata).length>0 && reference.url?reference.url:null
-            }
-        }
-            
-        return obj;
-    }
-
-    //Parsing da PUBMED
-    /*
-    const parsePMIDdoi = (ids) => {
-        let doi=''
-        
-        ids.map( articleid => {
-            if(articleid.idtype==='doi')
-                doi=articleid.value
-
-        })
-        return doi;
-    }
-   
-    const parseFromPubmed = (metadata) => {
-        let obj={}
-
-        let pubtype=metadata.pubtype?metadata.pubtype.toString().toLowerCase():null;
-        
-        obj={
-            pmid: metadata.uid,
-            pub_title: metadata.fulljournalname?metadata.fulljournalname:metadata.booktitle?metadata.booktitle:'',
-            part_title: metadata.title,
-            part_authors: metadata.authors?parseAuthors(metadata.authors):'',
-            abstract: metadata.abstract?metadata.abstract:'',
-            volume: metadata.volume?metadata.volume:'',
-            issue: metadata.issue?metadata.issue:'',
-            pubyear:  metadata.pubdate?metadata.pubdate.match(/\b(\d{4})\b/)[0]:'',
-            pages: metadata.pages?metadata.pages:'', 
-            material_type: pubtype==null? 0:( pubtype.includes('article')||pubtype.includes('review'))?1:(pubtype.includes('book')||pubtype.includes('biography')||pubtype.includes('diary'))?2:0,
-            issn: metadata.issn?metadata.issn:'',
-            isbn: metadata.isbn?metadata.isbn:'',
-            publisher: metadata.publishername?metadata.publishername:'',
-            publishing_place: metadata.publisherlocation?metadata.publisherlocation:'',
-            doi: metadata.articleids?parsePMIDdoi(metadata.articleids):'',
-        }
-        
-        return obj;
-    }*/
-
-
-    useEffect(() => {        
-      //  if(isNew)    
-      //      setRefData(null)  
-        setIsMounted(true)        
+    useEffect(() => {                
+        setRefData(null)     
+        setIsMounted(true)             
     }, [])
+
+    //import by OpenURL
+    useEffect(() => {
+        if(byOpenUrl && byOpenUrl!="" && queryString!="")        
+        {
+            if(byPubmed)
+            {
+                let id=(new URLSearchParams(queryString)).get("id").replace('pmid:','');
+                dispatch(requestFindReferenceById(id));                
+            }        
+            else
+            {
+                console.log("PARSING OPENURL",queryString)
+                let newref=parseOpenURL(queryString);
+                setRefData({...newref});  
+            }
+        }
+    }, [byOpenUrl])
    
     useEffect(() => {
-        if(reference && Object.keys(reference).length>0 )
+        if(isNew && byPubmed && reference && Object.keys(reference).length>0)        
+        {
+            //PROBLEMA: i campi restituiti da pubmed non sono uguali a 
+            //quelli di refdata quindi occorre mapping ....           
+            
+            //parsePubmed data
+            console.log("PARSING PUBMED",reference)
+            let pubmedref=parsePubmedReference(reference)
+            setRefData({...pubmedref})       
+        }
+        else 
+        if(!isNew && reference && Object.keys(reference).length>0 )
             setRefData({...reference})       
     }, [reference])
 
 
     useEffect(() => {
-        if(!isNew && !isLoading){
+        if(props.isLogged && !isNew && !isLoading){
            dispatch(requestGetReference(params.id));
         }
-        if(!isLoading){
+        if(props.isLogged && !isLoading){
             dispatch(requestLabelsOptionList());
             dispatch(requestGroupsOptionList());
         }
@@ -185,61 +96,15 @@ const ReferencesPage = (props) => {
     }, [params.id])
 
     useEffect(() => {
-       if(isRequest && !isLoading)
+       if(props.isLogged && isRequest && !isLoading)
            dispatch(requestMyActiveLibrariesOptionList())
     }, [isRequest])
 
-    useEffect(() => {        
-          if(isNew)    
-              setRefData(null)          
-      }, [isNew])
-
-  /* useEffect( () => {
-        if(importedreference && Object.keys(importedreference).length>0)
+    const foundReference = (newref) => {
+        console.log("foundReference:",newref)
+        if(isMounted && newref)
         {
-        console.log("PARSING importedreference",importedreference)
-                    //mapping data
-                    
-                    let newref={}
-
-                    if(importedreference.fromDOI && Object.keys(importedreference.fromDOI).length>0)
-                        newref=parseFromOAButton(importedreference.fromDOI);
-                    else if(importedreference.fromPMID && Object.keys(importedreference.fromPMID).length>0)
-                        newref=parseFromPubmed(importedreference.fromPMID);
-                        
-                    setRefData(newref) 
-
-                    //Clean importedreference (altrimenti se andavo in nuovo riferimento mi proponeva i dati precedenti)
-                    dispatch(cleanImportedreference())
-        }
-        
-    }, [importedreference])*/
-
-    /*useEffect ( () => {
-        if(importedreference && Object.keys(importedreference).length>0)
-            dispatch(requestFindOA(importedreference))
-    },[importedreference]);*/
-
-    /*useEffect ( () => {
-       if(reference && Object.keys(reference).length>0)
-            dispatch(requestFindOA(reference))    
-
-    },[reference]);*/
-
-    useEffect ( () => {
-        console.log("REFDATA:",refData)
-        console.log("coming from OAApi: isNew:",isNew)        
-        console.log("REFERENCE:",reference)
-        if(isMounted && oareference && oareference.metadata)
-        {
-            console.log("parsing del ref con i dati presi dall'OAButton API!",oareference);
-            //parsing metadati da OA + salvataggio link oa
-            
-            let newref=parseFromOAButton(oareference)
-                       
-            if(newref)            
-            {
-                if(refData!=null /*&& reference && Object.keys(reference).length>0*/)
+                if(refData!=null)
                 {
                     console.log("NOT NEW, so update only oa link")
                     //setOALink(newref.oa_link) 
@@ -260,17 +125,10 @@ const ReferencesPage = (props) => {
                     //setOALink(newref.oa_link);
                     //if(newref.oa_link!="") 
                     //    setRefData({...refData,oa_link:newref.oa_link})                    
-                }
-                //Clean oareference stored in redux (altrimenti se andavo in nuovo riferimento mi proponeva i dati precedenti)
-                //dispatch(cleanImportedreference())
-            }
-            
-            //setRefData({...refData,oa_link:oareference.url})
-            //if(oareference.found && oareference.url)
-            //    setOALink(oareference.url);
-           
+                }                                    
         }
-    },[oareference]);
+    }
+
 
     async function deleteReference (id) {
         let conf = await confirm({
@@ -310,45 +168,7 @@ const ReferencesPage = (props) => {
          return false;   
     }
 
-    const findReferenceBySearchParams = (query) => {
-        console.log("findReferenceBySearchParams:", query)        
-        let data={}
-
-        //base search by title
-        data.title=query
-
-        //try DOI
-        let doi=query.match(/\b((10\.\d{4,9}\/[-._;()/:A-Z0-9a-z]+))/);
-        if(doi!=null)
-        {
-            console.log("DOI MATCH!",doi[0])
-            data.doi=doi[0]
-            //dispatch(requestFindReferenceByDOI(doi[0]))            
-        }
-        else {
-            //try PMID
-            let pmid=query.match(/\b(\d{7,})\b/)
-            if(pmid!=null)
-            {
-                console.log("PMID MATCH!",pmid[0])
-                data.pmid=pmid[0]                
-                //dispatch(requestFindReferenceByPMID(pmid[0]))
-                
-            }
-            //else try ISBN ...
-
-        }
-
-        if(data && (data.pmid||data.doi||data.title))
-            dispatch(requestFindOA(data))
-            
-
-    }
-
-    /*const findOA = (data) => {        
-        if(data && Object.keys(data).length>0 && (data.title!=""||data.doi!=""))
-            dispatch(requestFindOA(data));
-    }*/
+    
 
     async function removeLabelFromReference (id,labelId, filter) {
         //console.log("DISPATCH removeLabelFromReference",id,labelId);
@@ -382,7 +202,7 @@ const ReferencesPage = (props) => {
                 <ReferencesForm                     
                     importReference={refData}
                     createReference={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } 
-                    findReference={ (query) => findReferenceBySearchParams(query)}
+                    onFoundReference={foundReference}
                     labelsOptionList={labelsOptionList}
                     groupsOptionList={groupsOptionList}
                     /*findOA={ (formData) => findOA({title: formData.pub_title, doi:formData.doi,pmid:formData.pmid}) }

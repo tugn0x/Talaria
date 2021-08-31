@@ -1,7 +1,10 @@
 import React from "react";
 import './style.scss';
+import {useIntl} from 'react-intl';
 
 const FindOA = (props) => {
+
+    const intl=useIntl();
 
     const {reference,findOA}=props;
 
@@ -15,19 +18,27 @@ const FindOA = (props) => {
     }
     
     return  (
+        reference &&
         <div className="findOA">
             <>
                 { ((reference.oa_link && reference.oa_link!=''))&&
                     <div className="alert alert-success" role="alert">
                         <a href={reference.oa_link} target="_blank" className={`${reference.oa_link && reference.oa_link!=''?'btn btn-icon':'btn btn-icon disabled'}`}><i className="icon-oa"></i></a> 
                         <a href={reference.oa_link} target="_blank">
-                            La pubblicazione è disponibile OA, clicca qui!
+                        {intl.formatMessage({ id: 'app.components.findOA.oapubfound' })}
                         </a>
                     </div>}
-                { findOA && (!reference.oa_link||reference.oa_link=='') && reference && (reference.doi||reference.pmid||reference.pub_title) &&
+                { (!reference.oa_link||reference.oa_link=='') && reference && (reference.doi||reference.pmid||reference.pub_title) &&
                     <div className="alert alert-warning" role="alert">
-                        Verifica se la pubblicazione esiste in versione OA.
-                        <button type="button" className="btn-success" onClick={ () => handleFindOA()}><i className="fas fa-search"> Trova OA</i></button>  
+                        {findOA && 
+                        <>
+                            {intl.formatMessage({ id: 'app.components.findOA.oapubverify' })}
+                            <button type="button" className="btn-success" onClick={ () => handleFindOA()}><i className="fas fa-search"> {intl.formatMessage({ id: 'app.components.findOA.oafindButton' })}</i></button>
+                        </>
+                        }
+                        {!findOA && 
+                        <>{intl.formatMessage({ id: 'app.components.findOA.oapubnotfound' })}</>
+                        }
                     </div>
                 }
             </>            
