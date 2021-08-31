@@ -6,6 +6,7 @@ import formMessages from './messages'
 import {ErrorBox} from 'components';
 import {selectFieldsGroups} from './selectFieldsGroups'
 import ListCheckBox from '../ListCheckBox'
+import ListCheckBoxName from '../ListCheckBoxName'
 import GrantedPermissions from '../GrantedPermissions'
 import InputField from '../InputField'
 import Switch from '../Switch'
@@ -43,7 +44,7 @@ const CustomForm = (props) => {
     
 
     /* HANDLE CHANGE Generic */
-    const handleChange = (value, field_name) =>{        
+    const handleChange = (value, field_name) =>{       
         setFormData({ ...formData, [field_name]: value   });
         setIsSubmitDisabled(false)
         // props per il wizard form registra biblioteca pubblica
@@ -107,7 +108,15 @@ const CustomForm = (props) => {
                                                                 {!field.nolabel && <div className="form-label">
                                                                     {messages[field.name] && intl.formatMessage(messages[field.name])}
                                                                 </div>}
-                                                                {field.type === 'list-checkbox' &&
+                                                                {field.type === 'list-checkbox-name' &&
+                                                                    <ListCheckBoxName
+                                                                        type="checkbox"
+                                                                        data={props[field.name]}
+                                                                        selectedData={props.requestData && props.requestData[field.name] && !formData[field.name] ? props.requestData[field.name] : formData[field.name] ? formData[field.name] : []}
+                                                                        handleChange={(value) => handleChange(value, field.name)}
+                                                                    />
+                                                                ||
+                                                                field.type === 'list-checkbox' &&
                                                                     <ListCheckBox
                                                                         type="checkbox"
                                                                         data={props[field.name]}

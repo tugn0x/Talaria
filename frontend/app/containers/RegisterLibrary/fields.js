@@ -219,8 +219,8 @@ export const fields = {
     },
     suggested_institution_name: {
         type: "text",
+        name:"suggested_institution_name",
         required: false,
-        name: "suggested_institution_name",
         width: "col-md-12",
         group: "step_1",
         order: 19,
@@ -275,7 +275,7 @@ export const fields = {
         required: false,
         hidden: false,
         name: "volunteer_library_label",
-        label:"Want be a Volunteer Library?",
+        label:"Want to be a Volunteer Library?",
         width: "col-sm-12",
         group: "step_1",
         order: 23,
@@ -310,6 +310,65 @@ export const fields = {
         order: 26,
     },
     
+    ill_service_conditions: {
+        type: "Label",
+        required: false,
+        hidden: false,
+        name: "ill_service_conditions_label",
+        label:"ILL service conditions",
+        width: "col-sm-12",
+        group: "step_1",
+        order: 27
+    },
+
+    ill_user_cost: {
+        type: "number",
+        required: false,
+        name: "ill_user_cost",
+        width: "col-sm-6",
+        group: "step_1",
+        order: 28,
+    },
+
+    ill_service_conditions_other: {
+        type: "Label",
+        required: false,
+        hidden: false,
+        name: "ill_service_conditions_others_label",
+        label:"ILL service to other libraries",
+        width: "col-sm-12",
+        group: "step_1",
+        order: 29,
+    },
+
+
+    ill_cost: {
+        type: "number",
+        required: false,
+        name: "ill_cost",
+        width: "col-sm-6",
+        group: "step_1",
+        order: 30,
+    },
+
+    ill_imbalance: {
+        type: "text",
+        required: false,
+        name: "ill_imbalance",
+        width: "col-sm-6",
+        group: "step_1",
+        order: 31,
+    },
+
+    ill_supply_conditions: {
+        type: "textarea",
+        required: false,
+        name: "ill_supply_conditions",
+        width: "col-sm-6",
+        group: "step_1",
+        order: 32,
+    },
+
     // custombutton: {
     //     type: "Button",
     //     label:"Show Hide",

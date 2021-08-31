@@ -20,9 +20,12 @@ import {useIntl} from 'react-intl'
 import {CustomForm, BasePage} from 'components'
 import {requestSearchPlacesByText} from '../Admin/actions';
 
+const ILL_REQUEST_PAYMENT=(process.env.ILL_REQUEST_PAYMENT && process.env.ILL_REQUEST_PAYMENT=="true")?true:false;
+const LIBRARY_DIFFERENT_PROFILES = (process.env.LIBRARY_DIFFERENT_PROFILES && process.env.LIBRARY_DIFFERENT_PROFILES=="true")?true:false;
 
 const RegisterLibrary = (props) => {
     console.log('RegisterLibrary', props)
+    
     let [institutionPresent, setInstitutionPresent] = useState(false)
     const intl = useIntl()
     const {dispatch} = props
@@ -36,15 +39,32 @@ const RegisterLibrary = (props) => {
     const [countryid, setCountryid] = useState(0);
     const [institutiontypeid, setInstitutiontypeid] = useState(0);
     const projectsarrname = [];
-  
+
     // Fai le chiamate per le option list
     useEffect(() => {
         dispatch(requestGetCountriesOptionList())
-        //dispatch(requestLibrarySubjectOptionList())
         dispatch(requestGetInstitutionTypeOptionList())
         dispatch(requestGetlibraryProjectsOptionList())
-        //dispatch(requestGetLibrary(1,('departments,titles')))    
-        //dispatch(requestGetProjectsOptionList())
+        if (ILL_REQUEST_PAYMENT===false) //RSCVD
+        {
+            fields.ill_user_cost.hidden=true;
+            fields.ill_service_conditions.hidden=true;
+            fields.ill_service_conditions_other.hidden=true;
+            fields.ill_cost.hidden=true;
+            fields.ill_imbalance.hidden=true;
+            fields.ill_supply_conditions.hidden=true
+        }
+        if (LIBRARY_DIFFERENT_PROFILES===true)
+        {
+                setData({...data, "ill_user_cost": "0", "ill_cost": "0"})
+                fields.volunteer_library_label.label = "Disciplina"
+                fields.opac.hidden=false;
+                fields.subject_id.hidden=false;
+                fields.showfullProfile.hidden = true;
+                dispatch(requestLibrarySubjectOptionList())
+        }
+
+        //alert(JSON.stringify(fields.suggested_institution_name))
     },[])
 
     // Filtra i CAMPI / Fields da mostrare a seconda dello step in cui ti trovi
@@ -70,7 +90,6 @@ const RegisterLibrary = (props) => {
     
     // Aggiorna dati nei campi *handle change*
     const onChangeData = (field_name, value) => {
-
         if (field_name === "institution_type_id")
         {
             setInstitutiontypeid(value.value);
@@ -80,7 +99,6 @@ const RegisterLibrary = (props) => {
                 return institutiontypeid;
               });
         }
-
         if (field_name === "int_country_id")
         {
             setCountryid(value.value);
@@ -102,7 +120,6 @@ const RegisterLibrary = (props) => {
         if (field_name === "institution_id" && value.value !== 0)
             fields.suggested_institution_name.hidden = true;
 
-            
         setData({...data, [field_name]: value})
     }
 
@@ -112,7 +129,7 @@ const RegisterLibrary = (props) => {
             console.log("lon:" + position.lon + " lat: " + position.lat)
             setLongtitude(position.lon);
             setLatitude(position.lat);
-            setData({...data, "lon": position.lon,"lat": position.lat })
+            setData({...data, "lon": position.lon,"lat": position.lat, "subject_id":0 })
         }
     }
 
@@ -124,7 +141,7 @@ const RegisterLibrary = (props) => {
             
             fields.opac.hidden=true;
             fields.subject_id.hidden=true;
-            
+    
             fields.showfullProfile.label="Click here"
         }
         else
@@ -185,18 +202,7 @@ const RegisterLibrary = (props) => {
                     places={props.places}
                     placesFreeSearchPlaceholder={intl.formatMessage(wizardMessages.placesFreeSearchPlaceholder)}
                     getMarkers={(pos)=>showlibraryposition(pos)}
-                    // markers={props.libraryList}
                     onMarkerClick={console.log("onMarkerClick")}
-                    // markerPopupComponent={(marker,chooseMarkerFromMap)=>
-                    //   <div className="libraryPopup">
-                    //     <div className="card-body">
-                    //       <h5 className="card-title">{marker.name}</h5>
-                    //       <h6 className="card-subtitle mb-2 text-muted">{marker.address}</h6>
-                    //       <NavLink className="btn btn-info" to={"/public/library/"+marker.id}>Library detail</NavLink>
-                    //       <NavLink className="btn btn-primary" to="#" onClick={()=>chooseMarkerFromMap(marker)}>Subscribe to this library</NavLink>
-                    //     </div>
-                    //   </div>  
-                    // }
                     searchOptionList={{ 
                         institution_type_id: (input) => dispatch(requestGetInstitutionTypeOptionList(input)), 
                         country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
@@ -227,7 +233,6 @@ const RegisterLibrary = (props) => {
                             </Col>
                         </Row>
                     )}
-
 
 
                     <Button color="brown" onClick={() => dispatch(requestPostPublicLibrary(data, intl.formatMessage(wizardMessages.createMessage)))}>

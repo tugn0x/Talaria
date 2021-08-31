@@ -156,9 +156,12 @@ ill_referent_name: {
 alt_name: {
   id: `${scope}.alt_name`,
   defaultMessage: 'Alternative name',
+},
+
+suggested_institution_name: {
+  id: `${scope}.suggested_institution_name`,
+  defaultMessage: 'Your institution Name',
 }
-
-
 
   
 });
