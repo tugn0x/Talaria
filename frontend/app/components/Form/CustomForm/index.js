@@ -211,12 +211,12 @@ const CustomForm = (props) => {
                                                                 ||
                                                                 field.type === 'Label' &&
                                                                 <>
-                                                                   <br></br><b><h2><Label 
+                                                                   <Label 
                                                                     field={field}
                                                                     label={field.label && field.label}
-                                                                    size = {field.size}
+                                                                    style={{fontSize: field.size, paddingBottom: field.paddingbottom, paddingTop: field.paddingtop}}
                                                                     cssModule = {field.cssModule}
-                                                                    >{field.label}</Label> </h2></b>
+                                                                    >{field.label}</Label>
                                                                 </>  
                                                                 ||
                                                                     <>  {/*  TEXT, TEXTAREA, NUMBER  */}

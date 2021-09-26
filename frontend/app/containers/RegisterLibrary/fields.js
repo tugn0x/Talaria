@@ -68,8 +68,10 @@ export const fields = {
         type: "Label",
         required: false,
         label:"Library Location",
+        paddingtop:"30px",
         name: "library_location_label",
         width: "col-sm-12",
+        size:"25px",
         group: "step_1",
         order: 5,
     },
@@ -130,9 +132,11 @@ export const fields = {
    library_contact_label: {
         type: "Label",
         required: false,
+        paddingtop:"30px",
         label:"Service contact",
         name: "library_contact_label",
         width: "col-sm-12",
+        size:"25px",
         group: "step_1",
         order: 11,
     },
@@ -167,6 +171,8 @@ export const fields = {
     ill_institution_label: {
         type: "Label",
         required: false,
+        paddingtop:"30px",
+        size:"25px",
         label:"Institution",
         name: "ill_institution_label",
         width: "col-sm-12",
@@ -230,6 +236,8 @@ export const fields = {
     ill_service_contact_label: {
         type: "Label",
         required: false,
+        paddingtop:"30px",
+        size:"25px",
         label:"Progect or Consortium",
         width: "col-sm-12",
         group: "step_1",
@@ -273,7 +281,9 @@ export const fields = {
     volunteer_library_label: {
         type: "Label",
         required: false,
+        paddingtop:"30px",
         hidden: false,
+        size:"25px",
         name: "volunteer_library_label",
         label:"Want to be a Volunteer Library?",
         width: "col-sm-12",
@@ -313,6 +323,7 @@ export const fields = {
     ill_service_conditions: {
         type: "Label",
         required: false,
+        size:"25px",
         hidden: false,
         name: "ill_service_conditions_label",
         label:"ILL service conditions",
@@ -333,6 +344,7 @@ export const fields = {
     ill_service_conditions_other: {
         type: "Label",
         required: false,
+        size:"25px",
         hidden: false,
         name: "ill_service_conditions_others_label",
         label:"ILL service to other libraries",
@@ -480,5 +492,20 @@ export const fields = {
     //     width: "col-sm-6",
     //     group: "step_2",
     // },
+
+     
+    ill_help_other: {
+        type: "Label",
+        required: false,
+        size:"20px",
+        paddingtop:"100px",
+        hidden: false,
+        name: "ill_service_conditions_others_label",
+        label:"Have any inquiry, Please send email to info@hermess.org",
+        width: "col-sm-12",
+        group: "step_1",
+        order: 29,
+    },
+
 }
 
