@@ -28,20 +28,21 @@ class BorrowingDocdelRequestObserver extends BaseObserver
          $model->request_date=Carbon::now();
          $model->request_type=0; //DD
          $model->forward=0;
-         $model->borrowing_status="new";         
-
+         $model->borrowing_status="new";
+         
+         //This code is not working :(
+         if($model->patrondocdelrequest)
+        {
+            $model->created_by=null;
+            $model->updated_by=null; 
+        }
+              
          return parent::creating($model);
     }
 
     
     public function saving($model)
     {
-        //come faccio a distinguire se è in fase di creating?
-        if($model->patrondocdelrequest)
-        {
-                $model->created_by=null;
-                $model->updated_by=null;   //this doesn't work :(               
-        }
         return parent::saving($model);
 
     }
