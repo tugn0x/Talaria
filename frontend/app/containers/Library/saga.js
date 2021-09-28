@@ -382,11 +382,11 @@ export function* requestGetBorrowingSaga(action) {
 //La ricerca OA avviene x titolo della pubb (puo' essere titolo part o titolo book/thesi/...)
 export function* findUpdateOABorrowingSaga(action) {
   console.log("FINDUPDATEBORROWINGOA_SAGA:", action);
-  if(action.title && action.title!="")
+  if(action.data && action.data!="")
   {
     const options = {
       method: 'get',    
-      refData: {'title':action.title}
+      refData: action.data
     }
     try {
       const request = yield call(getOA, options);

@@ -595,13 +595,13 @@ export function* searchReferenceByPMIDSaga(action) {
 
 //chiamare api x trovare OA e aggiornare (POST) il riferimento in modo che ricarichi la pag
 //La ricerca OA avviene x titolo della pubb (puo' essere titolo part o titolo book/thesi/...)
-export function* findUpdateOASaga(action) {
+export function* findUpdateOASaga(action) { 
   console.log("FINDUPDATEOA_SAGA:", action);
-  if(action.title && action.title!="")
+  if(action.data && action.data!="")
   {
     const options = {
       method: 'get',    
-      refData: {'title':action.title}
+      refData: action.data
     }
     try {
       const request = yield call(getOA, options);

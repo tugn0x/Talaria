@@ -88,8 +88,8 @@ const ReferencesListPage = (props) => {
              dispatch(requestDeleteReference(id,intl.formatMessage({id: "app.global.deletedMessage"}),filter))
      }
 
-     async function findAndUpdateOA (id,title) {
-        dispatch(requestFindUpdateOA(id,title,intl.formatMessage({id: "app.containers.ReferencesListPage.OAfoundAndUpdateMessage"}),intl.formatMessage({id: "app.containers.ReferencesListPage.OAnotfoundAndUpdateMessage"})));
+     async function findAndUpdateOA (id,data) {
+        dispatch(requestFindUpdateOA(id,data,intl.formatMessage({id: "app.containers.ReferencesListPage.OAfoundAndUpdateMessage"}),intl.formatMessage({id: "app.containers.ReferencesListPage.OAnotfoundAndUpdateMessage"})));
      }
 
     return (

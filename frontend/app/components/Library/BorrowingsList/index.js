@@ -92,6 +92,23 @@ const BorrowingsList = (props) => {
         setSelectedRequests(state => ( handleIds([...state], id)))
     }
 
+    const findAndUpdateOA=(req)=>{
+        let data={}
+        
+        if(req.reference.data.material_type && req.reference.data.material_type===1)
+            data.title=req.reference.data.part_title
+        else data.title=req.reference.data.title
+
+        if(req.reference.data.doi)
+            data.doi=req.reference.data.doi
+
+        if(req.reference.data.pmid)
+            data.pmid=req.reference.data.pmid
+
+        findAndUpdateOABorrowingReference(req.id,req.reference.data.id,data)
+    }
+    
+
     // var disableToolbarClass = disableToolbar? 'disabled':'';
 
     return (
@@ -189,7 +206,7 @@ const BorrowingsList = (props) => {
                                     //deleteReference={() => deleteReference(ref.id,multiFilter)}
                                     checked={selectedRequests.includes(req.id)}
                                     //findAndUpdateOA={()=>findAndUpdateOA(ref.id,ref.material_type===1?ref.part_title:ref.title)}
-                                    findAndUpdateOABorrowingReference={()=>findAndUpdateOABorrowingReference(req.id,req.reference.data.id,req.reference.data.material_type===1?req.reference.data.part_title:req.reference.data.title)}
+                                    findAndUpdateOABorrowingReference={()=>findAndUpdateOA(req)}
                                     oaloading={oaloading.includes(req.id)}
                                 />                                
                                 

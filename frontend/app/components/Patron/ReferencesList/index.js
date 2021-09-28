@@ -103,6 +103,21 @@ const ReferencesList = (props) => {
         setSelectedReferences(state => ( handleIds([...state], id)))
     }
 
+    const findOA=(ref)=>{
+        let data={}
+        if(ref.material_type && ref.material_type===1)
+            data.title=ref.part_title
+        else data.title=ref.title
+
+        if(ref.doi)
+            data.doi=ref.doi
+
+        if(ref.pmid)
+            data.pmid=ref.pmid
+        
+        findAndUpdateOA(ref.id,data)
+    }
+
     // var disableToolbarClass = disableToolbar? 'disabled':'';
 
     return (
@@ -217,7 +232,7 @@ const ReferencesList = (props) => {
                                     removeGroup={(groupId) => removeGroupFromReference(ref.id,groupId, multiFilter)}
                                     deleteReference={() => deleteReference(ref.id,multiFilter)}
                                     checked={selectedReferences.includes(ref.id)}
-                                    findAndUpdateOA={()=>findAndUpdateOA(ref.id,ref.material_type===1?ref.part_title:ref.title)}
+                                    findAndUpdateOA={()=>findOA(ref)}
                                     oaloading={oaloading.includes(ref.id)}
                                 />                                
                                 

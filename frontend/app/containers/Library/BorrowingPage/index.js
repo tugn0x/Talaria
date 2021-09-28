@@ -66,10 +66,11 @@ const BorrowingPage = (props) => {
          }
      }
 
-     async function findAndUpdateOABorrowingReference (id,reference_id,title) {         
-        dispatch(requestFindUpdateOABorrowingReference(id,match.params.library_id,reference_id,title,intl.formatMessage({id: "app.containers.BorrowingPage.OAfoundAndUpdateMessage"}),intl.formatMessage({id: "app.containers.BorrowingPage.OAnotfoundAndUpdateMessage"})));
+     async function findAndUpdateOABorrowingReference (id,reference_id,data) {         
+        dispatch(requestFindUpdateOABorrowingReference(id,match.params.library_id,reference_id,data,intl.formatMessage({id: "app.containers.BorrowingPage.OAfoundAndUpdateMessage"}),intl.formatMessage({id: "app.containers.BorrowingPage.OAnotfoundAndUpdateMessage"})));
      }
 
+          
     return (
         <>
         

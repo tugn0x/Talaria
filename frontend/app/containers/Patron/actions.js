@@ -419,12 +419,12 @@ export function requestFindReferenceByPMID(pmid) {
   };
 }
 
-export function requestFindUpdateOA(id,title,foundMessage,notfoundMessage) {
+export function requestFindUpdateOA(id,data,foundMessage,notfoundMessage) {
   console.log("FINDandUpdateOA action")
   return {
     type: REQUEST_FIND_UPDATE_OA,
     id,
-    title,
+    data,
     foundMessage,
     notfoundMessage
   };

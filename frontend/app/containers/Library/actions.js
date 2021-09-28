@@ -284,14 +284,14 @@ export function requestGetBorrowingSuccess (result) {
   };  
 }
  
- export function requestFindUpdateOABorrowingReference(id,borrowing_library_id,reference_id,title,foundMessage,notfoundMessage) {
+ export function requestFindUpdateOABorrowingReference(id,borrowing_library_id,reference_id,data,foundMessage,notfoundMessage) {
   console.log("requestFindUpdateOABorrowingReference action")
   return {
     type: REQUEST_FIND_UPDATE_BORROWING_OA,
     id,
     reference_id,
     borrowing_library_id,
-    title,
+    data,
     foundMessage,
     notfoundMessage
   };
