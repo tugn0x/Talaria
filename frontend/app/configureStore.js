@@ -9,6 +9,7 @@ import createReducer from './reducers';
 import { persitanceMiddleWare, persistanceSaga } from './persistence';
 import authProviderSaga from './containers/Auth/AuthProvider/saga';
 import patronSaga from './containers/Patron/saga';
+import referenceSaga from './containers/Reference/saga';
 import adminSaga from './containers/Admin/saga';
 import librarySaga from './containers/Library/saga';
 import OASearchReference from './containers/OASearchReference/saga'
@@ -55,6 +56,7 @@ export default function configureStore(initialState = {}, history) {
   sagaMiddleware.run(authProviderSaga);
   sagaMiddleware.run(patronSaga);
   sagaMiddleware.run(OASearchReference);
+  sagaMiddleware.run(referenceSaga);
   sagaMiddleware.run(adminSaga);
   sagaMiddleware.run(librarySaga);
   sagaMiddleware.run(appSaga);

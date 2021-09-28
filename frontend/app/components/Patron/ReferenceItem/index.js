@@ -29,7 +29,7 @@ const ReferenceItem = (props) => {
             </Col> 
             <Col sm={8}>
             <ReferenceTags data={data} removeLabel={(labelId)=>removeLabel(labelId )} removeGroup={(groupId)=>removeGroup(groupId)}/>              
-            <ReferenceCitation full={false} data={data} referenceurl={referenceurl}/>
+            <ReferenceCitation data={data} referenceurl={referenceurl}/>
             </Col>
             <Col sm={3} className="icons align-self-center">
                 <ReferenceIcons 

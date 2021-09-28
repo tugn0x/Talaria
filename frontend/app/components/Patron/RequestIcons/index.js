@@ -59,7 +59,7 @@ const RequestIcons = (props) => {
                 </a> }
                 {hasToPay(data) && acceptCost && denyCost &&
                 <div className="costIcons">                    
-                    <i class="fas fa-coins"></i> {data.cost} &euro;   
+                    <i className="fas fa-coins"></i> {data.cost} &euro;   
                     <span className="cost_policy">Cost Policy: {costPolicy(data)}</span>                                         
                     {data.cost_policy==2 && 
                         <div className="costButtons">

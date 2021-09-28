@@ -30,32 +30,27 @@ const ReferenceForm = (props) => {
     return (
         <>
             {reference  && 
-                <>
-                    <SectionTitle 
-                        title={reference.id?messages.headerEdit:messages.headerNew}
-                    />
-                    {reference && !reference.id && <FindOA reference={formData} /* findOA={findOA}*//>}
-                    {reference &&
-                        <>
-                            {reference.id && <Row className="list-head">
-                                <div className="features-icons">
-                                    <ReferenceIcons 
-                                        data={formData}
-                                        icons={['assignLabel', 'assignGroup', 'delete']}
-                                        labelsOptionList={labelsOptionList}
-                                        applyLabels={applyLabels}
-                                        groupsOptionList={groupsOptionList}
-                                        applyGroups={applyGroups}
-                                        selectedReferences={[formData.id]}
-                                        deleteReference={deleteReference}
-                                    />
-                                </div>
-                            </Row>}
-                            <ReferenceTags data={formData} removeLabel={(labelId)=>removeLabel(labelId )} removeGroup={(groupId)=>removeGroup(groupId)}/>                                
-                        </>
-                    }
-                    <ReferenceFormContent 
-                        messages={messages} 
+                <>                    
+                    {!reference.id && <FindOA reference={formData} /* findOA={findOA}*//>}
+                    
+                    <>
+                        {reference.id && <Row className="list-head">                            
+                                <ReferenceIcons 
+                                    customClass="features-icons"
+                                    data={formData}
+                                    icons={['assignLabel', 'assignGroup', 'delete']}
+                                    labelsOptionList={labelsOptionList}
+                                    applyLabels={applyLabels}
+                                    groupsOptionList={groupsOptionList}
+                                    applyGroups={applyGroups}
+                                    selectedReferences={[formData.id]}
+                                    deleteReference={deleteReference}
+                                />                            
+                        </Row>}
+                        <ReferenceTags data={formData} removeLabel={(labelId)=>removeLabel(labelId )} removeGroup={(groupId)=>removeGroup(groupId)}/>                                
+                    </>
+                    
+                    <ReferenceFormContent                         
                         submitCallBack={(formData) => updateReference(formData)}
                         labelsOptionList={labelsOptionList}
                         groupsOptionList={groupsOptionList}
@@ -72,16 +67,13 @@ const ReferenceForm = (props) => {
                 </>
                 ||                     
                     (goTo &&
-                            <>
-                            <SectionTitle 
-                                title={(reference && reference.id)?messages.headerEdit:messages.headerNew}
-                            />
+                            <>                            
                             {reference && !reference.id && <FindOA reference={formData} /* findOA={findOA}*//>}
                             {reference &&
                                 <>
-                                    {reference.id && <Row className="list-head">
-                                        <div className="features-icons">
+                                    {reference.id && <Row className="list-head">                                        
                                             <ReferenceIcons 
+                                                customClass="features-icons"
                                                 data={formData}
                                                 icons={['assignLabel', 'assignGroup', 'delete']}
                                                 labelsOptionList={labelsOptionList}
@@ -90,14 +82,12 @@ const ReferenceForm = (props) => {
                                                 applyGroups={applyGroups}
                                                 selectedReferences={[formData.id]}
                                                 deleteReference={deleteReference}
-                                            />
-                                        </div>
+                                            />                                        
                                     </Row>}
                                     <ReferenceTags data={formData} removeLabel={(labelId)=>removeLabel(labelId )} removeGroup={(groupId)=>removeGroup(groupId)}/>                                
                                 </>
                             }                            
-                            <ReferenceFormContent 
-                            messages={messages} 
+                            <ReferenceFormContent                             
                             submitCallBack={(formData) => createReference(formData)}                            
                             />
                         </>
@@ -105,12 +95,8 @@ const ReferenceForm = (props) => {
 
                         (importReference &&
                         <>
-                        <SectionTitle 
-                                title={importReference.id?messages.headerEdit:messages.headerNew}
-                        />
                         {importReference && !importReference.id && <FindOA reference={importReference} /* findOA={findOA}*//>}                        
-                        <ReferenceFormContent 
-                                    messages={messages} 
+                        <ReferenceFormContent                                     
                                     reference={importReference}
                                     submitCallBack={(formData) => createReference(formData)}
                                     /*findOA={findOA}
@@ -118,15 +104,10 @@ const ReferenceForm = (props) => {
                                 />
                         </>
                         ||       
-                            <>  
-                                <SectionTitle 
-                                    title={messages.headerNew}
-                                />                           
-                                <OASearchReference        
-                                onFound={(reference)=>onFoundReference(reference)}        
-                                goToForm={()=>setGoTo(true)}         
-                                />
-                            </>
+                        <OASearchReference        
+                            onFound={(reference)=>onFoundReference(reference)}        
+                            goToForm={()=>setGoTo(true)}         
+                        />                            
                         )
                     )                    
             }

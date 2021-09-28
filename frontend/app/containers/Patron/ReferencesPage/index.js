@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import {requestGetReference, requestRemoveLabel} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -11,13 +10,16 @@ import {requestPostReferences,requestUpdateReferences,
         requestMyActiveLibrariesOptionList, requestLabelsOptionList, 
         requestGroupsOptionList, requestApplyLabelsToReferences, 
         requestApplyGroupsToReferences, requestRemoveReferenceLabel,
-        requestRemoveReferenceGroup, requestDeleteReference,requestGetLibraryDeliveries,requestPostRequest,requestFindReferenceById/*,requestFindReferenceByDOI,requestFindReferenceByPMID*/} from '../actions'
+        requestRemoveReferenceGroup, requestDeleteReference,requestGetLibraryDeliveries,requestPostRequest,
+        requestRemoveLabel} from '../actions'
 import messages from './messages';
 import confirm from "reactstrap-confirm";
 import SectionTitle from 'components/SectionTitle';
 import {useIntl} from 'react-intl';
 import ErrorMsg from '../../../components/ErrorMsg';
 import {parseOpenURL,parsePubmedReference} from '../../../utils/openurl';
+import makeSelectReference, { isReferenceLoading } from '../../Reference/selectors';
+import {requestGetReference,requestFindReferenceById} from '../../Reference/actions';
 
 /* TODO 
    - find per ISBN ...
@@ -25,12 +27,11 @@ import {parseOpenURL,parsePubmedReference} from '../../../utils/openurl';
 
 const ReferencesPage = (props) => {
     console.log('ReferencesPage', props)
-    const {dispatch, isLoading, match, patron} = props
+    const {dispatch, isLoading,isReferenceLoading, match, patron,reference} = props
     const {params} = match    
     const intl = useIntl();
     const isNew = !params.id || params.id === 'new'
-    const isRequest = params.id && params.op=="request"
-    const reference = patron.reference
+    const isRequest = params.id && params.op=="request"    
     const labelsOptionList = patron.labelsOptionList;
     const groupsOptionList = patron.groupsOptionList;
     const libraryOptionList= patron.libraryOptionList;
@@ -94,7 +95,7 @@ const ReferencesPage = (props) => {
 
 
     useEffect(() => {
-        if(props.isLogged && !isNew && !isLoading){
+        if(props.isLogged && !isNew && !isReferenceLoading){
            dispatch(requestGetReference(params.id));
         }
         if(props.isLogged && !isLoading){
@@ -206,22 +207,34 @@ const ReferencesPage = (props) => {
     
     
     return (
-        <Loader show={isLoading}>
+        <Loader show={isReferenceLoading}>
             {isNew && isMounted && (
-                <ReferenceForm                     
-                    importReference={refData}
-                    createReference={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } 
-                    onFoundReference={foundReference}
-                    labelsOptionList={labelsOptionList}
-                    groupsOptionList={groupsOptionList}
-                    /*findOA={ (formData) => findOA({title: formData.pub_title, doi:formData.doi,pmid:formData.pmid}) }
-                    OALink={OALink}*/
-                />
+                <>
+                    <SectionTitle 
+                    back={false}
+                    title={messages.headerNew}
+                    />  
+                    <ReferenceForm
+                        importReference={refData}
+                        createReference={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } 
+                        onFoundReference={foundReference}
+                        labelsOptionList={labelsOptionList}
+                        groupsOptionList={groupsOptionList}
+                        /*findOA={ (formData) => findOA({title: formData.pub_title, doi:formData.doi,pmid:formData.pmid}) }
+                        OALink={OALink}*/
+                    />
+                </>
                 )
             }
             {!isNew && isMounted && refData && ( 
                 params.op && params.op=="edit" &&
-                    (canEdit(refData/*reference*/) && <ReferenceForm                         
+                    (canEdit(refData/*reference*/) && 
+                    <>                     
+                    <SectionTitle 
+                        back={false}
+                        title={messages.headerEdit}
+                    /> 
+                    <ReferenceForm
                         reference={refData/*reference*/}
                         labelsOptionList={labelsOptionList}
                         groupsOptionList={groupsOptionList}
@@ -235,6 +248,7 @@ const ReferencesPage = (props) => {
                         OALink={OALink}*/
                         history={props.history}
                         />
+                    </>
                         || 
                         <ErrorMsg cssclass="alert-danger" message="ERROR: can't edit this reference"/>)
                 ||
@@ -274,7 +288,9 @@ const ReferencesPage = (props) => {
 
 const mapStateToProps = createStructuredSelector({
     isLoading: isPatronLoading(),
-    patron: makeSelectPatron()
+    patron: makeSelectPatron(),
+    isReferenceLoading: isReferenceLoading(),
+    reference: makeSelectReference()
 });
   
 function mapDispatchToProps(dispatch) {

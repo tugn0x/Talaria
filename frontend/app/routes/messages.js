@@ -38,11 +38,15 @@ export default defineMessages({
     },
     ReferenceNew: {
         id: `${scope}.ReferenceNew`,
-        defaultMessage: 'Nuovo riferimento',
+        defaultMessage: 'New reference',
     },
     RequestNew: {
         id: `${scope}.RequestNew`,
-        defaultMessage: 'Nuova richiesta',
+        defaultMessage: 'New request',
+    },
+    RequestDetail: {
+        id: `${scope}.RequestDetail`,
+        defaultMessage: 'Request detail',
     },
     Searches: {
         id: `${scope}.Searches`,
@@ -179,7 +183,7 @@ export default defineMessages({
     ArchivedRequests: {
         id: `${scope}.ArchivedRequests`,
         defaultMessage: 'Archive',
-    },
+    },    
     LinkingServices: {
         id: `${scope}.LinkingServices`,
         defaultMessage: 'Servizi di Linking',

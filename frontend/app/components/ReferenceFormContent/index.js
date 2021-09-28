@@ -17,7 +17,7 @@ import './style.scss';
 
 const ReferenceFormContent = (props) => {
     console.log('ReferenceFormContent', props)
-    const {reference, messages, submitCallBack, 
+    const {reference, submitCallBack, 
             applyLabels, labelsOptionList, applyGroups, groupsOptionList,
             removeLabel, removeGroup, deleteReference/*,findOA,OALink*/} = props;
     const [formData, setFormData] = useState(() => {

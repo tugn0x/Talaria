@@ -4,7 +4,7 @@ import { generatePath } from "react-router";
 import ApplyTag from '../../ApplyTag';
 
 const ReferenceIcons = (props) => {
-    const {data,deleteReference,icons, labelsOptionList, groupsOptionList , applyGroups, applyLabels, selectedReferences,findAndUpdateOA} = props
+    const {data,customClass,deleteReference,icons, labelsOptionList, groupsOptionList , applyGroups, applyLabels, selectedReferences,findAndUpdateOA} = props
     
 
     const referenceUrl='/patron/references/:id?/:op?';
@@ -50,7 +50,7 @@ const ReferenceIcons = (props) => {
 
     return ( 
         icons && icons.length>0 && 
-        <>
+        <div className={`${customClass}`}>
                 {visibleIcon('request') && 
                  <Link to={`${requesturl(data.id)}`}  className="btn btn-icon">
                     <i className="fas fa-share"></i>                    
@@ -89,7 +89,7 @@ const ReferenceIcons = (props) => {
                         </Link>
                 )
                 }                
-        </>
+        </div>
     )
 }
 

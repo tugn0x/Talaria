@@ -10,6 +10,7 @@ import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import  { persitanceReducer } from './persistence';
 import authProviderReducer from 'containers/Auth/AuthProvider/reducer';
 import patronReducer from 'containers/Patron/reducer';
+import referenceReducer from 'containers/Reference/reducer';
 import adminReducer from 'containers/Admin/reducer';
 import libraryReducer from 'containers/Library/reducer';
 import appReducer from 'containers/App/reducer';
@@ -25,6 +26,7 @@ export default function createReducer(injectedReducers = {}) {
     persistence: persitanceReducer,
     auth: authProviderReducer,
     patron: patronReducer,
+    reference: referenceReducer,
     oasearchreference: OASearchReferenceReducer,
     admin: adminReducer,
     library: libraryReducer,

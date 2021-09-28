@@ -48,7 +48,7 @@ const ReferencesListPage = (props) => {
             cancelText: intl.formatMessage({id: 'app.global.no'})
         }); //
         if(conf)
-            dispatch(requestRemoveReferenceLabel(id,labelId,intl.formatMessage({id: "app.global.deletedMessage"}), filter))
+            dispatch(requestRemoveReferenceLabel(id,labelId,intl.formatMessage({id: "app.global.removedMessage"}), filter))
     }
 
     async function removeGroupFromReference (id,groupId, filter) {
@@ -60,7 +60,7 @@ const ReferencesListPage = (props) => {
             cancelText: intl.formatMessage({id: 'app.global.no'})
         }); //
          if(conf)
-             dispatch(requestRemoveReferenceGroup(id,groupId,intl.formatMessage({id: "app.global.deletedMessage"}), filter))
+             dispatch(requestRemoveReferenceGroup(id,groupId,intl.formatMessage({id: "app.global.removedMessage"}), filter))
      }
 
      const applyLabelsToReferences = (labelIds,refIds) => {

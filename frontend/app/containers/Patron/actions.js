@@ -16,7 +16,6 @@ import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_POST_REQUEST,
   REQUEST_CHANGE_STATUS_REQUEST,
   REQUEST_POST_REFERENCES, REQUEST_SUCCESS,
-  REQUEST_GET_REFERENCE, REQUEST_GET_REFERENCE_SUCCESS,
   REQUEST_UPDATE_REFERENCES, 
   REQUEST_POST_LABEL,
   REQUEST_UPDATE_LABEL,
@@ -40,9 +39,6 @@ import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_FIND_UPDATE_OA,
   REQUEST_FIND_UPDATE_OA_SUCCESS,
   REQUEST_FIND_UPDATE_OA_FAIL,
-  REQUEST_FIND_REFERENCE_BY_ID,
-  REQUEST_FIND_REFERENCE_BY_ID_SUCCESS,
-
   REQUEST_SEARCH_PLACES_BY_TEXT,
   REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
   REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
@@ -54,20 +50,6 @@ import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
 export function defaultAction() {
   return {
     type: DEFAULT_ACTION,
-  };
-}
-
-export function requestGetReference(id) {
-  return {
-    type: REQUEST_GET_REFERENCE,
-    id,
-  };
-}
-
-export function requestGetReferenceSuccess(result) {
-  return {
-    type: REQUEST_GET_REFERENCE_SUCCESS,
-    result,
   };
 }
 
@@ -414,19 +396,6 @@ export function requestDeleteReference(id,message,filter) {
   };
 }
 
-export function requestFindReferenceById(id) {
-  return {
-    type: REQUEST_FIND_REFERENCE_BY_ID,
-    id
-  };
-}
-
-export function requestFindReferenceByIdSuccess(result) {
-  return {
-    type: REQUEST_FIND_REFERENCE_BY_ID_SUCCESS,
-    result
-  };
-}
 
 /* External request actions */
 export function requestFindReferenceByDOI(doi) {

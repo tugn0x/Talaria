@@ -15,7 +15,7 @@ import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_GET_REQUEST, REQUEST_GET_REQUEST_SUCCESS,
   REQUEST_POST_REQUEST,
   REQUEST_POST_REFERENCES, REQUEST_SUCCESS,
-  REQUEST_UPDATE_REFERENCES, REQUEST_GET_REFERENCE, REQUEST_GET_REFERENCE_SUCCESS,
+  REQUEST_UPDATE_REFERENCES,   
   REQUEST_GET_MY_LIBRARY, REQUEST_GET_MY_LIBRARY_SUCCESS,
   REQUEST_GET_LABELS_OPTIONLIST,REQUEST_GET_LABELS_OPTIONLIST_SUCCESS,
   REQUEST_GET_GROUPS_OPTIONLIST,REQUEST_GET_GROUPS_OPTIONLIST_SUCCESS,
@@ -32,8 +32,6 @@ import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_FIND_UPDATE_OA,
   REQUEST_FIND_UPDATE_OA_FAIL,
   REQUEST_FIND_UPDATE_OA_SUCCESS,  
-  REQUEST_FIND_REFERENCE_BY_ID,
-  REQUEST_FIND_REFERENCE_BY_ID_SUCCESS,
   REQUEST_SEARCH_PLACES_BY_TEXT,
   REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
   REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
@@ -61,8 +59,7 @@ export const initialState = {
   requestsList: {
     data: [],
     pagination: [],
-  },
-  reference: {},
+  },  
   patronrequest: {},  
   places: {},
   libraryList: {    
@@ -75,15 +72,7 @@ const PatronReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case DEFAULT_ACTION:
-        break;
-      case REQUEST_GET_REFERENCE:
-        draft.loading = true;
-        break;
-      case REQUEST_GET_REFERENCE_SUCCESS:
-        draft.loading = false;
-        draft.error = initialState.error;
-        draft.reference = action.result.data;
-        break;  
+        break;          
       case REQUEST_UPDATE_REFERENCES:
         draft.loading = true;
       break;
@@ -261,17 +250,7 @@ const PatronReducer = (state = initialState, action) =>
             break;      
         case REQUEST_FIND_UPDATE_OA_FAIL:
           draft.referencesList.oaloading = action.result?draft.referencesList.oaloading.filter(function(e) { return e !== action.result }):null
-          break;                        
-
-          case REQUEST_FIND_REFERENCE_BY_ID:
-            draft.loading=true;
-          break;
-        case REQUEST_FIND_REFERENCE_BY_ID_SUCCESS:
-              draft.loading = false;
-              draft.error = initialState.error;
-              draft.reference={};
-              draft.reference = action.result?action.result:{};
-              break;   
+          break;                                 
 
         case REQUEST_SEARCH_PLACES_BY_TEXT:
           draft.loading=true;

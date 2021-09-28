@@ -12,16 +12,16 @@ const ReferenceDetail = props => {
 
     return (
         <>  {!(icons && icons.length==0) && 
-                <div className="list-head features-icons">
                 <ReferenceIcons 
+                        customClass="list-head features-icons"
                         data={reference}
                         icons={icons ? icons : ['request','edit','print','export','delete']}
                         deleteReference={deleteReference}
                 />
-                </div>}
-                <FindOA reference={reference}/>
-                <ReferenceTags data={reference}/>                
-                <ReferenceDetailContent reference={reference} customClass="detail-body"/>
+            }
+            <FindOA reference={reference}/>
+            <ReferenceTags data={reference}/>                            
+            <ReferenceDetailContent reference={reference} customClass="detail-body"/>
             
         </>
     );

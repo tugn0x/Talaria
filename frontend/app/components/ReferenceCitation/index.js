@@ -17,12 +17,12 @@ export const matTypeIcon = (mat) => {
 }
 
 const ReferenceCitation = props => {
-    const {full,data,cssClass, referenceurl}=props;
+    const {data,customClass, referenceurl}=props;
 
     const intl=useIntl();
 
     return (data && 
-        <div className={"referenceCit "+cssClass}>
+        <div className={"referenceCit "+(customClass?customClass:'')}>
         <span className="mat_type"><i className={`${matTypeIcon(data.material_type)}`}></i></span>
         <div className="title">                
         {referenceurl && <NavLink to={`${referenceurl(data.id)}`}>
@@ -48,12 +48,7 @@ const ReferenceCitation = props => {
         {data.material_type === 4 &&
         <div className="geographic_area">
             <span className="geographic_area">{intl.formatMessage({id: "app.references.geographic_area"})}<span> {data.geographic_area}</span></span>
-        </div>}
-
-        {full && 
-        <>
-
-        </>}    
+        </div>}   
     </div>
     )
 }

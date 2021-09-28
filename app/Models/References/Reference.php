@@ -33,6 +33,7 @@ class Reference extends BaseModel
         'abstract',
         'doi',
         'issn',
+        //'add issn-l' (hidden,not required, filled only by/after "ISSN check" on ISSN registry)
         'acnp_cod',
         'sbn_docid',
         'publisher',

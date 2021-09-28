@@ -33,7 +33,7 @@ const FilterSelect = props => {
         <>
         <UncontrolledDropdown className={`filter-select ${type}`} direction="down">
             <DropdownToggle className="d-flex justify-content-between align-items-center">
-                <span>{intl.formatMessage({id: 'app.references.'+type})}</span>
+                <span>{intl.formatMessage({id: 'app.components.FilterSelect.'+type})}</span>
                 <i className="fas fa-sort"></i>
             </DropdownToggle>
             <DropdownMenu center="true">

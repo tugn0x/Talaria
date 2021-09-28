@@ -29,7 +29,7 @@ const OASearchReferenceForm = (props) => {
                     {showReference && 
                     <div className="alert alert-primary w-50 mx-auto my-2">
                         <strong>{intl.formatMessage({ id: 'app.components.OASearch.referenceFound' })}</strong>
-                        <ReferenceCitation data={oareference} full={false}/>
+                        <ReferenceCitation data={oareference}/>
                     </div>}
                     <div className="w-50 mx-auto my-2"><FindOA reference={oareference}/></div>
                 </>    
