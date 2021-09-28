@@ -324,6 +324,7 @@ export const fields = {
         type: "Label",
         required: false,
         size:"25px",
+        paddingtop:"30px",
         hidden: false,
         name: "ill_service_conditions_label",
         label:"ILL service conditions",
@@ -345,6 +346,7 @@ export const fields = {
         type: "Label",
         required: false,
         size:"25px",
+        paddingtop:"30px",
         hidden: false,
         name: "ill_service_conditions_others_label",
         label:"ILL service to other libraries",
@@ -504,7 +506,7 @@ export const fields = {
         label:"Have any inquiry, Please send email to info@hermess.org",
         width: "col-sm-12",
         group: "step_1",
-        order: 29,
+        order: 33,
     },
 
 }

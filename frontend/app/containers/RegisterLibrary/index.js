@@ -54,7 +54,7 @@ const RegisterLibrary = (props) => {
             fields.ill_imbalance.hidden=true;
             fields.ill_supply_conditions.hidden=true
         }
-        if (LIBRARY_DIFFERENT_PROFILES===true)
+        if (LIBRARY_DIFFERENT_PROFILES===false)
         {
                 setData({...data, "ill_user_cost": "0", "ill_cost": "0"})
                 fields.volunteer_library_label.label = "Disciplina"
