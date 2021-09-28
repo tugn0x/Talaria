@@ -40,7 +40,7 @@ class BorrowingDocdelRequestObserver extends BaseObserver
         if($model->patrondocdelrequest)
         {
                 $model->created_by=null;
-                $model->updated_by=null;   //questo non lo esegue :(               
+                $model->updated_by=null;   //this doesn't work :(               
         }
         return parent::saving($model);
 
