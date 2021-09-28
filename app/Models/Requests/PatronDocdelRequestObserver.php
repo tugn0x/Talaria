@@ -29,6 +29,23 @@ class PatronDocdelRequestObserver extends BaseObserver
          return parent::creating($model);
     }
 
+    public function created($model)
+    {            
+        //Note: instead of calling ::create method, i've used filled
+        //because otherwise it will not run constructor, so i cannot fill all
+        //fields (inherited by DocDelRequest), but just BorrowingDocdelRequest's own fields
+         $br=new BorrowingDocdelRequest();
+         $br->fill([                     
+            'patron_docdel_request_id'=>$model->id,
+            'reference_id'=>$model->reference_id,
+            'borrowing_library_id'=>$model->borrowing_library_id,
+            'borrowing_status'=>'created', //gestire con constants + check status
+         ]);
+         $br->save();
+
+                     
+    }
+
     public function saving($model)
     {
         return parent::saving($model);

@@ -32,5 +32,14 @@ createSelector(
   substate => (substate.loading)
 );
 
+const tagsOptionListSelector = () => 
+createSelector(
+  selectLibraryDomain,
+  substate => (substate.tagsOptionList)
+);
+
+
+
+
 export default makeSelectLibrary;
-export {  isLibraryLoading, isAdminLoading , makeSelectAdmin };
+export {  isLibraryLoading, isAdminLoading , makeSelectAdmin,tagsOptionListSelector };

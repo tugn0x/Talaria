@@ -1,0 +1,27 @@
+@import '../../../scss/variables';
+
+.request_tags {
+    margin:0 5px 5px 0;
+
+    & .tags-row
+    {
+        margin-right:5px;        
+        color: $orange;
+    }
+
+    & .tags-row > i
+    {
+        margin-right: 2px;
+    }
+
+
+    & .tags-row span {
+        color: $labels-border;
+        margin: 0 5px 0 0;
+        i.fa,i.fas {
+            margin-left:2px;
+            cursor: pointer;
+        }
+    }    
+}
+

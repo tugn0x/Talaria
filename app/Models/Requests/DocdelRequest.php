@@ -9,8 +9,10 @@ use App\Models\References\Reference;
 class DocdelRequest extends BaseModel
 {
     protected $table = 'docdel_requests';
+    
+    protected $simpleSearchField="pub_title"; //ricerca sul riferimento
 
-    private $docdel_attributes=[
+    protected $fillable=[
         'reference_id',
         'borrowing_library_id',
         'lending_library_id',
@@ -19,15 +21,12 @@ class DocdelRequest extends BaseModel
         'request_protnr', //dd_nprotrichie
         'request_note', //dd_note_richforni
         'on_cost', //dd_costofn
-        'accept_cost_status', //Stato accettazione utente dopo richiesta: 1=Biblio richiede accettazione, 2=Ute accetta, 3=Ute non accetta
-        'accept_cost_date', //quando ha accettato/rifiutato il costo
         'fulfill_date', //dd_dataeva
         'fulfill_protnr', //dd_nproteva
         'fulfill_location', //dd_collocazione (ricavata da ACNP)
         'fulfill_note', //dd_note_fornirich       
         'fullfill_type',    //tipo evasione (=SentiVia/DeliveryMethod ISO18626?)
-        'notfullfill_type', //tipo inevasione (prendere da NILDE global_const $DDILL_INEVASO_xxx + "fornitore non disp" + "altro" (con descrizione in borr_notes) )
-        'archived', //archived si/no
+        'notfullfill_type', //tipo inevasione (prendere da NILDE global_const $DDILL_INEVASO_xxx + "fornitore non disp" + "altro" (con descrizione in borr_notes) )        
         'filename',
         'file_status', //Stato del file se inviato in NILDE: 0-non disponibile; 1-disponibile; 2-disponibile con HC
         'file_download', // 	Indicatore di avvenuta stampa del file se inviato in NILDE: 0-Non Stampato; 1-Stampato
@@ -61,13 +60,15 @@ class DocdelRequest extends BaseModel
     {
         parent::__construct();
         
-        $this->attributes=$this->docdel_attributes;
+        //$this->attributes=$this->docdel_attributes;
 
-        $this->fillable=$this->docdel_attributes;        
+        //$this->fillable=$this->docdel_attributes;        
         
-        $this->visible=array_merge($this->visible,$this->docdel_attributes);
+        $this->visible=array_merge($this->visible,$this->fillable);
     }
 
+    //NOTE: the reference is also setted by PatronDocdelRequest when created,
+    //so reference will alwais EXISTS both for PatrondocdelRequest and BorrowingDocdelRequest
     public function reference()
     {
         return $this->belongsTo(Reference::class)->withTrashed();
@@ -81,10 +82,27 @@ class DocdelRequest extends BaseModel
     public function lendinglibrary()
     {
         return $this->belongsTo(Library::class,'lending_library_id');
+    }      
+
+    public function scopeInReference($query, $reference_id)
+    {
+        return $query->where('reference_id', $reference_id);
     }
 
-    public function tags()
+     //override del ModelTrait::scopeSimpleSearch
+    //in modo da cercare sul riferimento!
+    public function scopeSimpleSearch($query, $q)
     {
-        return $this->belongsToMany(Tag::class);
+        $text = trim($q);
+        return $query->whereHas('reference', function ($query2) use ($text) {
+                $query2->where($this->simpleSearchField, 'like', '%'. $text .'%');
+        });
     }
+
+    public function operator()
+    {
+        return $this->editor();
+    }
+
+
 }

@@ -55,8 +55,14 @@
   "app.global.no": "No",
   "app.global.addMessage": "Aggiungere?",
   "app.global.addedMessage": "Aggiunto con successo",
-  "app.global.deleteMessage": "Rimuovere?",
-  "app.global.deletedMessage": "Rimozione avvenuta con successo",
+  "app.global.createMessage": "Creare?",
+  "app.global.createdMessage": "Creato con successo",
+  "app.global.removeMessage": "Rimuovere?",
+  "app.global.removedMessage": "Rimozione avvenuta con successo",
+  "app.global.updateMessage": "Modificare?",
+  "app.global.updatedMessage": "Modifica avvenuta con successo",
+  "app.global.deleteMessage": "Eliminare?",
+  "app.global.deletedMessage": "Cancellazione avvenuta con successo",
   "app.global.confirm": "Conferma",
   "app.global.accept": "Accetta",
   "app.global.deny": "Nega",
@@ -90,7 +96,8 @@
   "app.containers.ReferencesGroups.groupCreateMessage": "Categoria creata con successo",
   "app.containers.ReferencesGroups.groupCreateNew": "Crea nuova categoria",
 
-  "app.containers.RequestsListPage.header": "Richieste",
+  "app.containers.RequestsListPage.header": "Richieste in corso",
+  "app.containers.RequestsListPage.headerArchive": "Archivio richieste",
   "app.containers.RequestsListPage.costAcceptedMessage": "Costo accettato",
   "app.containers.RequestsListPage.costDeniedMessage": "Costo rifiutato",
   "app.containers.RequestsListPage.askArchiveRequestMessage": "Archiviare la richiesta?",
@@ -151,6 +158,8 @@
   "app.containers.LibraryUsersListPage.createNew": "Aggiungi utente",
   "app.containers.LibraryUsersListPage.edit": "Modifica utente",
 
+  "app.containers.LibraryTags.header":"Etichette",
+  "app.containers.LibraryTags.tagCreateNew":"Nuova etichetta",  
 
   "app.containers.InstitutionPage.createSuccess": "Nuovo ente creato",
   "app.containers.InstitutionPage.updateSuccess": "Ente aggiornato",
@@ -202,11 +211,21 @@
   "app.components.Notification.mark_all_as_read": "Segna tutte come lette",
 
   "app.containers.ReferencePage.header": "Inserisci/Modifica riferimento",
+  "app.containers.ReferencePage.headerNew": "Nuovo Riferimento",
+  "app.containers.ReferencePage.headerEdit": "Modifica Riferimento",
+  "app.containers.ReferencePage.headerDetail": "Dettaglio Riferimento",
   "app.containers.ReferencePage.referenceAdded": "Riferimento aggiunta",
   "app.containers.ReferencePage.referenceUpdate": "Riferimento aggiornata",
-  "app.containers.ReferencePage.headerDetail": "Dettaglio Riferimento",
-
+  
   "app.containers.RequestPage.headerDetail": "Dettaglio Richiesta",
+
+
+  "app.containers.BorrowingRequestPage.headerNew": "Nuova richiesta",
+  "app.containers.BorrowingRequestPage.headerEdit": "Modifica Richiesta",
+  "app.containers.BorrowingRequestPage.headerDetail": "Dettaglio Richiesta",
+
+  "app.containers.BorrowingPage.OAfoundAndUpdateMessage": "Versione OA trovata. Richiesta aggiornata.",
+  "app.containers.BorrowingPage.OAnotfoundAndUpdateMessage": "Versione OA NON trovata. Richiesta non aggiornata.",
   
   "app.libraries.dd_user_cost":"Costo per articolo",
 
@@ -274,9 +293,7 @@
   "app.requests.acceptAnyExtraCost": "Accetto ogni costo",
   "app.requests.toBeInformedAboutExtraCost": "Voglio essere informato",
   "app.requests.forLibraryNotes": "Note per la biblioteca",
-  
-  "app.components.ReferenceForm.headerNew": "Nuovo Riferimento",
-  "app.components.ReferenceForm.headerEdit": "Modifica Riferimento",
+  "app.requests.askRemoveTagMessage":"Rimuovere l'etichetta?",
   
   "app.components.OASearchReferenceForm.bodySearch": "Cerca un riferimento inserendo DOI, PMID o ISBN o titolo esatto",
   "app.components.OASearchReferenceForm.inputPlaceHolder": "Es: 10.1002/hlca.19740570315",  
@@ -299,11 +316,15 @@
   "app.components.ReferencesList.header": "Riferimenti",
   "app.components.ReferencesList.createNewReference": "Nuovo riferimento",
   "app.components.ReferencesList.ReferencesNotFound": "Non ci sono riferimenti",
-  "app.components.ReferencesList.ReferenceSelected": "Selezionati",
-  
-  "app.components.RequestsList.header": "Richieste in corso",
+  "app.components.ReferencesList.ReferenceSelected": "Selezionati",  
+    
   "app.components.RequestsList.RequestsNotFound": "Non ci sono richieste in corso",
   "app.components.RequestsList.RequestSelected": "Selezionati",
+
+  "app.components.BorrowingsList.header": "Borrowing",
+  "app.components.BorrowingsList.createNewBorrowing": "Nuovo borrowing",
+  "app.components.BorrowingsList.BorrowingsNotFound": "Non ci sono borrowing",
+  "app.components.BorrowingsList.BorrowingSelected": "Selezionati",
   
 
   "app.components.ProjectsList.header": "Lista progetti",
@@ -349,6 +370,9 @@
 
   "app.components.ForgotPasswordForm.header": "Password Dimenticata",
   "app.components.Footer.header": "Questo l header del Footer",
+  "app.components.FilterSelect.labels": "Etichette",
+  "app.components.FilterSelect.groups": "Categorie",
+  "app.components.FilterSelect.tags": "Etichette",
 
   "app.routes.Bibliography": "Bibliografia",
   "app.routes.Reference": "Riferimenti",
@@ -357,6 +381,7 @@
   "app.routes.ArchivedRequests": "Archivio",
   "app.routes.ReferenceNew": "Nuovo riferimento",
   "app.routes.RequestNew": "Nuova richiesta",
+  "app.routes.RequestDetail": "Dettaglio richiesta",
   "app.routes.Searches": "Ricerche",
   "app.routes.Requests": "Richieste",
   "app.routes.MyLibraries": "Le mie biblioteche",
@@ -383,7 +408,7 @@
   "app.routes.Projects": "Progetti",
   "app.routes.MyProject": "Il mio progetto",
   "app.routes.ProjectNew": "Nuovo progetto",
-  "app.routes.Labels": "Etichette",
+  "app.routes.Labels": "Etichette",  
   "app.routes.Categories": "Categorie",
   "app.routes.Libraries": "Biblioteche",
   "app.routes.Library": "Biblioteca"

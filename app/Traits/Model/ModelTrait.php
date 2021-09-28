@@ -150,6 +150,12 @@ trait ModelTrait
         return $this->belongsTo('App\Models\Users\User', 'created_by');
     }
 
+    public function editor()
+    {
+//        return $this->belongsTo('App\Models\User\User', 'user_id');
+        return $this->belongsTo('App\Models\Users\User', 'updated_by');
+    }
+
 
     public function hasInternalMessages()
     {

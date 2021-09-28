@@ -394,12 +394,93 @@ export const deleteLibraryUser = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/library-users/${id}`, options)
 }
 
+export const getLibraryTagsOptionList = (options) => {
+  options = getOption(options);
+  const library_id = options.library_id
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/tags/option-items?label=name`, options)
+};
+
+//BORROWING
+export const getBorrowingsList = (options) => {
+  const library_id = options.library_id
+  const page = options.page;
+  const params = options.query;
+  const pageSize = options.pageSize;
+  let qstringpar="";
+  if(params && params.query && params.query!="") qstringpar+="&q="+params.query;
+  if(pageSize) qstringpar+="&pageSize="+pageSize;
+  if(params && params.labelIds && params.labelIds.length>0) qstringpar+="&tagIds="+params.labelIds.join(',')+"";  
+  if(params && !params.archived)
+    qstringpar+="&archived=0";
+  else if(params && params.archived>=0) 
+    qstringpar+="&archived="+params.archived;
+  
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/borrowings?page=${page}${qstringpar}`, options)
+};
+
+export const requestApplyTagsToBorrowingRequests = (options) => {             
+  options = getOption(options);
+  const library_id = options.library_id
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/borrowings/updateSelected`, options)
+};
+
+export const removeDDRequestTag = (options) => {
+  const id = options.id
+  const tid = options.tagId
+  const library_id = options.library_id
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/requests/${id}/tags/${tid}`, options)
+};
+
+
+export const createLibraryTag = (options) => {
+  options = getOption(options);
+  const library_id = options.library_id
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/tags`, options)
+};
+
+export const updateLibraryTag = (options) => {
+  const tag_id = options.tag_id
+  options = getOption(options);
+  const library_id = options.library_id
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/tags/${tag_id}`, options)
+};
+
+export const deleteLibraryTag = (options) => {
+  const tag_id = options.tag_id
+  options = getOption(options);
+  const library_id = options.library_id
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/tags/${tag_id}`, options)
+};
+
+export const createNewBorrowing = (options) => {
+  options = getOption(options);
+  const library_id = options.borrowing_library_id
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/borrowings`, options)
+};
+
+export const getBorrowingRequest = (options) => {
+  options = getOption(options);
+  const library_id = options.library_id
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/borrowings/${options.id}`, options)
+};
+
+export const updateBorrowing = (options) => {
+  options = getOption(options);
+  const library_id = options.borrowing_library_id
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/borrowings/${options.id}`, options)
+};
+
+ 
+//LENDING
+
+
 /// POST PUBLIC LIBRARY
 export const createPublicLibrary = (options) => {
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/libraries/public?include=granted_permissions,institution,country,departments`, options)
 };
-
 
 //--------- ADMIN -------------//
 ///////   Users   ////////

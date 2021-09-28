@@ -1,0 +1,21 @@
+.request_id {
+    font-weight: bold;
+    margin-left: 5px;
+    display: inline !important;
+}
+
+.request_status {
+
+}
+
+.patronrequest {
+    display: block;    
+
+    & .patronrequest_id {
+        font-weight: bold;        
+    }
+
+    & .patron {
+    display: block;        
+    }
+}

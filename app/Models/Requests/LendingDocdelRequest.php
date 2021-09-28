@@ -24,4 +24,22 @@ class LendingDocdelRequest extends DocdelRequest
         $this->visible=array_merge(parent::getVisible(),$this->lending_attributes);        
     }
 
+    //TODO: filtrare solo quelli della lending req
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+
+    public function library()
+    {
+        return parent::lendinglibrary();
+    }    
+
+
+    public function scopeInLibrary($query, $library_id)
+    {        
+        return $query->where('lending_library_id', $library_id);
+    } 
+
 }

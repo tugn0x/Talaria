@@ -3,6 +3,8 @@
   "app.containers.NotFoundPage.header": "Page not found",
   "app.containers.NotFoundPage.intro": "We're sorry but we can't find the page you're looking for",
   "app.global.email": "Email",
+  "app.global.update": "Update",
+  "app.global.search": "Search",
 
   "app.components.LoginForm.signUpButton": "Signup",
   "app.components.LoginForm.forgot": "Forgot your password?",

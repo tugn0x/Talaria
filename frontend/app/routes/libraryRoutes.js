@@ -3,6 +3,9 @@ import UsersListPage from 'containers/Library/UsersListPage/Loadable';
 import SubRouteSwitch from 'components/SubRouteSwitch';
 import ManageLibraryPage from 'containers/Library/ManageLibraryPage/Loadable';
 import Fake from 'components/Fake';
+import BorrowingPage from '../containers/Library/BorrowingPage/Loadable'
+import BorrowingRequestPage from '../containers/Library/BorrowingRequestPage/Loadable'
+import TagsPage from '../containers/Library/TagsPage/Loadable';
 
 const routes = [
   /*
@@ -14,13 +17,13 @@ const routes = [
    */
 
   {
-    path: '/manage', name: `MyLibrary`, header: true, component: SubRouteSwitch, permissions: ['manage'], resource: {type: 'libraries', key: 'library_id',},
+    path: '/manage', name: `MyLibrary`, header: true, component: SubRouteSwitch, permissions: ['manage','borrow','lend','deliver','manage-users'], resource: {type: 'libraries', key: 'library_id',},
     children: [
       { path: '', exact: true, name: `Profile`, component: ManageLibraryPage, url: '/manage',permissions: ['manage'], sidebar: true, order:1},
       // vari pezzi dei dati della biblio (dati servizio, dati anag, ...)
       { path: '/service',exact: true, name: `Service`, component: Fake,url: '/manage/service',permissions: ['manage'],sidebar: true, order:2  },
       { path: '/linkingservices', name: `LinkingServices`, component: Fake,url: '/manage/linkingservices',permissions: ['manage'],sidebar: true, order:2  },
-      { path: '/labels', exact: true, name: `Labels`, url: '/manage/labels', component: Fake,permissions: ['manage','borrow','lend','deliver'],sidebar: true, order:3 },
+      { path: '/tags', exact: true, name: `Labels`, url: '/manage/tags', component: TagsPage,permissions: ['manage','borrow','lend','deliver'],sidebar: true, order:3 },
       { path: '/operators', name: `Operators`, component: Fake,url: '/manage/operators', permissions: ['manage'],sidebar: true, order:5 },
       { path: '/departments',  name: `Departments`, component: Fake,url: '/manage/departments',permissions: ['manage','manage-users'],sidebar: true, order:4  },
       { path: '/pickup', name: `Pickup`, component: Fake,url: '/manage/pickup', permissions: ['manage'],sidebar: true, order:5 },
@@ -32,9 +35,11 @@ const routes = [
   {
     path: '/borrowing', name: `Borrowing`, header: true, component: SubRouteSwitch, permissions: ['manage','borrow'], resource: {type: 'libraries', key: 'library_id',},
     children: [
-      { path: '', exact: true, name: `PendingRequests`, component: Fake,sidebar: true, order:1 },
-      { path: '/archive', name: `ArchivedRequests`, component: Fake,url: '/borrowing/archive',sidebar: true, order:2  },
-      { path: '/new', exact: true, name: `Fake`, component: Fake},   //new borrowing request   
+      /*{ path: '', exact: true, name: `PendingRequests`, component: Fake,sidebar: true, order:1 },*/
+      { path: '/', icon: "share", exact: true, name: `PendingRequests`, component: BorrowingPage,url: '/borrowing',sidebar: true, order:2 }, 
+      { path: '/archive', icon: "hdd", name: `ArchivedRequests`, component: BorrowingPage,url: '/borrowing/archive',sidebar: true, order:3  },
+      { path: '/new', icon: "plus", exact: true, name: `RequestNew`, component: BorrowingRequestPage,url: '/borrowing/new',sidebar: true, order:1},   
+      { path: '/:id?/:op?', exact: true, name: `RequestUpdate`, component: BorrowingRequestPage, sidebar: false},      
      ]
   },
   {

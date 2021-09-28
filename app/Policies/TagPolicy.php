@@ -18,7 +18,9 @@ class TagPolicy extends BasePolicy
     {
         //
     }
-
+    
+    //non essendoci un model associato ritorno true e poi
+    //filtro nel controller
     public function create(User $user, Model $model)
     {
         return true;
@@ -28,6 +30,14 @@ class TagPolicy extends BasePolicy
     {
         //ogni operatore della biblio puo' vedere i tag
         return $this->canManage($user,$model);
+    }
+
+
+    //non essendoci un model associato ritorno true e poi
+    //filtro nel controller
+    public function optionList(User $user, Model $model)
+    {
+       return true; 
     }
 
 
@@ -46,9 +56,9 @@ class TagPolicy extends BasePolicy
     public function canManage(User $user, Model $model)
     {
         //ogni operatore della biblio puo' gestire i tag
-        return $user->can('manage', $model->library)||
-               $user->can('manage-users', $model->library)||
+        return $user->can('manage', $model->library)||              
                $user->can('borrow', $model->library)||
+               $user->can('deliver', $model->library)||
                $user->can('lend', $model->library);
 
     }

@@ -24,6 +24,8 @@ use App\Models\Libraries\Catalog;
 use App\Models\References\LabelReference;
 use App\Models\References\LabelReferenceTransformer;
 use App\Models\Requests\PatronDocdelRequest;
+use App\Models\Requests\BorrowingDocdelRequest;                        
+use App\Models\Requests\DocdelRequest;      
 use App\Policies\BasePolicy;
 use App\Policies\LibraryPolicy;
 use App\Policies\DeliveryPolicy;
@@ -40,6 +42,10 @@ use App\Policies\PatronDocdelRequestPolicy;
 use App\Policies\UserPolicy;
 use App\Policies\TagPolicy;
 use App\Policies\DeskPolicy;
+use App\Policies\BorrowingDocdelRequestPolicy;
+use App\Policies\DocdelRequestTagPolicy;
+use App\Policies\DocdelRequestPolicy;
+use App\Models\Requests\DocdelRequestTag;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
@@ -62,6 +68,7 @@ class AuthServiceProvider extends ServiceProvider
         Label::class => LabelPolicy::class,
         LabelReference::class => LabelReferencePolicy::class,
         PatronDocdelRequest::class=>PatronDocdelRequestPolicy::class,
+        BorrowingDocdelRequest::class=>BorrowingDocdelRequestPolicy::class,
         DeskInstitution::class=>DeskInstitutionPolicy::class,
         Delivery::class => DeliveryPolicy::class,
         Desk::class => DeskPolicy::class,
@@ -76,6 +83,8 @@ class AuthServiceProvider extends ServiceProvider
         Subject::class => ListBasePolicy::class,
         Catalog::class => ListBasePolicy::class,
         Tag::class => TagPolicy::class,
+        DocdelRequestTag::class => DocdelRequestTagPolicy::class,
+        DocdelRequest::class => DocdelRequestPolicy::class
       
     ];
 

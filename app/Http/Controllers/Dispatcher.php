@@ -182,7 +182,6 @@ class Dispatcher extends BaseController
     public function update(Model $model, Request $request, $id=null, callable $onUpdated=null, callable $onUpdate=null)
     {
         $model = $id ? $model->findOrFail($id) : $model;
-
         if($this->haveToAuthorize)
         {
             $this->authorize($model);

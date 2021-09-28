@@ -11,7 +11,12 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_GET_LIBRARY, REQUEST_GET_LIBRARY_SUCCESS,
   REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS,
   REQUEST_UPDATE_LIBRARY, REQUEST_POST_LIBRARY,
-  REQUEST_POST_USER} from "./constants";
+  REQUEST_POST_USER,
+  REQUEST_BORROWINGS_LIST,REQUEST_BORROWINGS_LIST_SUCCESS,REQUEST_LENDINGS_LIST,REQUEST_LENDINGS_LIST_SUCCESS,
+  REQUEST_GET_LIBRARY_TAGS_OPTIONLIST,REQUEST_GET_LIBRARY_TAGS_OPTIONLIST_SUCCESS, REQUEST_POST_NEW_BORROWING,
+  REQUEST_GET_BORROWING,REQUEST_GET_BORROWING_SUCCESS, REQUEST_UPDATE_BORROWING, REQUEST_UPDATE_BORROWING_SUCCESS,
+  REQUEST_FIND_UPDATE_BORROWING_OA,REQUEST_FIND_UPDATE_BORROWING_OA_FAIL,REQUEST_FIND_UPDATE_BORROWING_OA_SUCCESS
+} from "./constants";
 
 export const initialState = {
   loading: false,
@@ -19,6 +24,18 @@ export const initialState = {
   departmentOptionList: [],
   titleOptionList: [],
   usersList: {
+    data: [],
+    pagination: {}
+  },
+  borrowingsList: {
+    data: [],
+    pagination: {},
+    oaloading: [],
+  },
+  borrowing: {},
+  lending: {},
+  tagsOptionList:[],
+  lendingsList: {
     data: [],
     pagination: {}
   },
@@ -114,6 +131,72 @@ const libraryReducer = (state = initialState, action) =>
         draft.error = initialState.error;
         draft.libraryOptionList = action.result.data
         break;
+
+        case REQUEST_GET_LIBRARY_TAGS_OPTIONLIST:
+          draft.loading = true;
+          draft.error = action.error;
+          break;
+        case REQUEST_GET_LIBRARY_TAGS_OPTIONLIST_SUCCESS:
+            draft.loading = false;
+            draft.error = initialState.error;
+            draft.tagsOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
+            break;  
+
+      case REQUEST_BORROWINGS_LIST:
+        draft.loading = true;
+        break;
+      case REQUEST_BORROWINGS_LIST_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.borrowingsList.data = action.result.data;
+        draft.borrowingsList.pagination = action.result.meta.pagination
+        break;
+
+      case REQUEST_POST_NEW_BORROWING:
+        //draft.loading=true;
+        break;   
+        
+      case REQUEST_GET_BORROWING:
+          draft.loading = true;
+          draft.borrowing={};
+          break;  
+      case REQUEST_GET_BORROWING_SUCCESS:
+            draft.loading = false;
+            draft.error = initialState.error;            
+            draft.borrowing = action.result.data;
+            break; 
+
+      case REQUEST_UPDATE_BORROWING:
+        draft.loading = true;
+        draft.borrowing={};
+        break;              
+        
+      case REQUEST_UPDATE_BORROWING_SUCCESS: 
+            draft.loading = false;
+            draft.error = initialState.error;            
+            draft.borrowing = action.result.data;
+      break;    
+      
+      case REQUEST_FIND_UPDATE_BORROWING_OA:        
+        draft.borrowingsList.oaloading.push(action.id)
+        break;    
+      case REQUEST_FIND_UPDATE_BORROWING_OA_SUCCESS:
+          draft.borrowingsList.oaloading = action.result?draft.borrowingsList.oaloading.filter(function(e) { return e !== action.result }):null  
+          break;      
+      case REQUEST_FIND_UPDATE_BORROWING_OA_FAIL:
+        draft.borrowingsList.oaloading = action.result?draft.borrowingsList.oaloading.filter(function(e) { return e !== action.result }):null
+        break;    
+
+      case REQUEST_LENDINGS_LIST:
+        draft.loading = true;
+        break;
+      case REQUEST_LENDINGS_LIST_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.lendingsList.data = action.result.data;
+        draft.lendingsList.pagination = action.result.meta.pagination
+        break;  
+        
       case REQUEST_SUCCESS:
         draft.loading = false;
         draft.error = initialState.error;

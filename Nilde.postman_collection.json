@@ -1050,6 +1050,44 @@
 			"response": []
 		},
 		{
+			"name": "Borrowing",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearer_librarian_mario}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/libraries/1/borrowings",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"libraries",
+						"1",
+						"borrowings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Upate selected References",
 			"request": {
 				"method": "PUT",
@@ -1423,6 +1461,10 @@
 		},
 		{
 			"key": "bearer_reg_user",
+			"value": ""
+		},
+		{
+			"key": "bearer_librarian_mario",
 			"value": ""
 		}
 	]

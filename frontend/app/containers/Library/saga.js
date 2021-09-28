@@ -1,9 +1,20 @@
-import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
+import { call, put, takeLatest, takeEvery, take } from 'redux-saga/effects';
 import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
          /*  REQUEST_POST_USER, */ REQUEST_USER, REQUEST_GET_LIBRARY,
           REQUEST_GET_LIBRARIES_LIST,
           REQUEST_UPDATE_LIBRARY,
-          REQUEST_POST_LIBRARY} from './constants';
+          REQUEST_POST_LIBRARY,
+          REQUEST_BORROWINGS_LIST,
+          REQUEST_GET_LIBRARY_TAGS_OPTIONLIST,
+          REQUEST_APPLY_TAGS_TO_DDREQUESTS,
+        REQUEST_REMOVE_DDREQUEST_TAG,
+      REQUEST_POST_LIBRARY_TAG,
+      REQUEST_UPDATE_LIBRARY_TAG,
+      REQUEST_REMOVE_LIBRARY_TAG,
+      REQUEST_POST_NEW_BORROWING,
+      REQUEST_GET_BORROWING,
+      REQUEST_UPDATE_BORROWING,
+      REQUEST_FIND_UPDATE_BORROWING_OA} from './constants';
 import {
   requestError,
   stopLoading,
@@ -12,13 +23,34 @@ import {
   requestUserSuccess,
   requestGetLibrarySuccess,
   requestGetLibrariesListSuccess,
-  requestUsersList
+  requestUsersList,
+  requestBorrowingsListSuccess,
+  requestLibraryTagsOptionList,
+  requestLibraryTagsOptionListSuccess,
+  requestBorrowingsList,  
+  requestGetBorrowingSuccess,
+  requestUpdateBorrowingSuccess,
+  requestFindUpdateOABorrowingReferenceSuccess,
+  requestFindUpdateOABorrowingReferenceFail
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
 import {getLibraryUsersList, updateLibraryUser, deleteLibraryUser, createUser,
         getLibraryUser, getLibrary, getLibrariesList, updateLibrary,
-        createLibrary} from 'utils/api'
+        createLibrary,getBorrowingsList,
+        getLibraryTagsOptionList,
+        requestApplyTagsToBorrowingRequests,
+        removeDDRequestTag,
+        createLibraryTag,
+      updateLibraryTag,
+    deleteLibraryTag,
+    createNewBorrowing,
+    getBorrowingRequest,
+    updateBorrowing
+} from '../../utils/api'
+
+import {getOA} from '../../utils/apiExternal';
+
 // import moment from 'moment';
 
 export function* requestUserSaga(action) {
@@ -172,6 +204,221 @@ export function* requestGetLibrariesListSaga(action = {}) {
   }
 }
 
+export function* requestBorrowingsListSaga(action) {
+  const options = {
+    method: 'get',
+    library_id:action.library_id,
+    page: action.page ? action.page : '1',
+    query: action.query ? action.query : null,
+    pageSize: action.pageSize ? action.pageSize : null
+  };
+  try {
+   console.log(action)
+    const request = yield call(getBorrowingsList, options);
+    yield put(requestBorrowingsListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestLibraryTagsOptionListSaga(action) {
+  const options = {
+    method: 'get',
+    library_id:action.library_id,
+  }
+  try {
+    const request = yield call(getLibraryTagsOptionList, options);
+    yield put(requestLibraryTagsOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestApplyTagsToDDRequestsSaga(action) {
+  const options = {
+    method: 'put',
+    body: {
+      requests: action.reqIds,
+      tagIds: action.tagIds,      
+    },
+    library_id: action.library_id
+
+  };
+ 
+  try {
+    const request = yield call(requestApplyTagsToBorrowingRequests, options);
+    
+    yield put (requestBorrowingsList(action.library_id))
+    // Callback dopo il Crea nuova etichetta
+    if(action.tagIds.some(tagId => typeof tagId === 'string' )){
+      yield call(requestLibraryTagsOptionListSaga(action))
+    }
+    yield call(() => toast.success(action.message)) 
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestRemoveTagToDDRequestsSaga (action) {
+  const options = {
+    method: 'delete',
+    id: action.id,
+    tagId: action.tagId,
+    library_id: action.library_id
+  };
+
+  
+  try {
+    const request = yield call(removeDDRequestTag, options);
+    yield put (requestBorrowingsList(action.library_id))
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestPostLibraryTagSaga(action) {
+  const options = {
+    method: 'post',
+    body: {
+      name: action.tag_name,      
+    },
+    library_id: action.library_id
+  };
+  try {
+    const request = yield call(createLibraryTag, options);
+    yield put(requestLibraryTagsOptionList(action.library_id));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestUpdateLibraryTagSaga(action) {
+  const options = {
+    method: 'put',
+    tag_id: action.tag_id,
+    body: {
+      name: action.tag_value
+    },
+    library_id: action.library_id
+    
+  };
+  try {
+    const request = yield call(updateLibraryTag, options);
+    yield put(requestLibraryTagsOptionList(action.library_id));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+
+export function* requestRemoveLibraryTagSaga(action) {
+  const options = {
+    method: 'delete', 
+    tag_id: action.tag_id,    
+    library_id: action.library_id
+  };
+  try {
+    const request = yield call(deleteLibraryTag, options);
+    yield put(requestLibraryTagsOptionList(action.library_id));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestPostNewBorrowingSaga(action){
+  const options = {
+    method: 'post',
+    body: action.reference,
+    borrowing_library_id: action.borrowing_library_id
+  };
+  try {
+    const request = yield call(createNewBorrowing, options);
+    //yield put (requestBorrowingsList(action.borrowing_library_id))    
+    yield put(push("/library/"+action.borrowing_library_id+"/borrowing/"+request.data.id));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestUpdateBorrowingSaga(action) {
+  const options = {
+    method: 'put',
+    body: action.borrowing,
+    borrowing_library_id: action.borrowing_library_id,
+    id: action.id,
+  };
+  try {
+    const request = yield call(updateBorrowing, options);
+    yield put (requestBorrowingsList(action.borrowing_library_id))    
+    yield put (push("/library/"+action.borrowing_library_id+"/borrowing/"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+
+export function* requestGetBorrowingSaga(action) {
+  const options = {
+    method: 'get',
+    id: action.id,
+    library_id: action.library_id
+  };
+  try {
+    const request = yield call(getBorrowingRequest, options);
+    yield put(requestGetBorrowingSuccess(request))
+    // yield call(() => toast.success(action.message))
+  } catch(e) {    
+    yield put(requestError(e.message));
+  }
+}
+
+//chiamare api x trovare OA e aggiornare (POST) il riferimento in modo che ricarichi la pag
+//La ricerca OA avviene x titolo della pubb (puo' essere titolo part o titolo book/thesi/...)
+export function* findUpdateOABorrowingSaga(action) {
+  console.log("FINDUPDATEBORROWINGOA_SAGA:", action);
+  if(action.title && action.title!="")
+  {
+    const options = {
+      method: 'get',    
+      refData: {'title':action.title}
+    }
+    try {
+      const request = yield call(getOA, options);
+      if(/*request.found &&*/ request.url)
+      {
+        console.log("TROVATO OA!:",request.url)    
+        //yield call(() => toast.success("Versione OA trovata!"))
+        yield put(requestFindUpdateOABorrowingReferenceSuccess(action.id));
+        yield call(requestUpdateBorrowingSaga, {id: action.id,borrowing_library_id:action.borrowing_library_id, borrowing: {reference: {id: action.reference_id, oa_link: request.url} }, message:action.foundMessage })
+      }
+      else {
+        console.log("NON TROVATO");
+        yield put(requestFindUpdateOABorrowingReferenceFail(action.id));
+        yield call(() => toast.error(action.notfoundMessage))
+      }
+  
+    } catch(e) {
+      console.log("OA FIND AND UPDATE ERROR",e)
+      yield put(requestError(e.message));
+      yield put(requestFindUpdateOABorrowingReferenceFail(action.id));
+      yield call(() => toast.error(action.notfoundMessage))
+    }
+  }
+  else {
+    console.log("NON TROVATO-title mancante");
+        yield put(requestFindUpdateOABorrowingReferenceFail(action.id));
+        yield call(() => toast.error(action.notfoundMessage))
+  }
+  
+}
+
+
 
 /**
  * Root saga manages watcher lifecycle
@@ -186,4 +433,15 @@ export default function* librarySaga() {
   yield takeLatest(REQUEST_GET_LIBRARIES_LIST, requestGetLibrariesListSaga);
   yield takeLatest(REQUEST_UPDATE_LIBRARY, requestUpdateLibrarySaga);
   yield takeLatest(REQUEST_POST_LIBRARY, requestPostLibrarySaga);
+  yield takeLatest(REQUEST_BORROWINGS_LIST,requestBorrowingsListSaga);
+  yield takeLatest(REQUEST_GET_LIBRARY_TAGS_OPTIONLIST,requestLibraryTagsOptionListSaga);
+  yield takeLatest(REQUEST_APPLY_TAGS_TO_DDREQUESTS,requestApplyTagsToDDRequestsSaga);
+  yield takeLatest(REQUEST_REMOVE_DDREQUEST_TAG,requestRemoveTagToDDRequestsSaga);
+  yield takeLatest(REQUEST_POST_LIBRARY_TAG,requestPostLibraryTagSaga);
+  yield takeLatest(REQUEST_UPDATE_LIBRARY_TAG,requestUpdateLibraryTagSaga);
+  yield takeLatest(REQUEST_REMOVE_LIBRARY_TAG,requestRemoveLibraryTagSaga);
+  yield takeLatest(REQUEST_POST_NEW_BORROWING,requestPostNewBorrowingSaga);
+  yield takeLatest(REQUEST_GET_BORROWING,requestGetBorrowingSaga)
+  yield takeLatest(REQUEST_UPDATE_BORROWING,requestUpdateBorrowingSaga)
+  yield takeEvery(REQUEST_FIND_UPDATE_BORROWING_OA,findUpdateOABorrowingSaga);
 }

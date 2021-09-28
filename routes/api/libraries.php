@@ -75,8 +75,10 @@ Route::group([
         'as' => 'api.v1.libraries.library-tags.',
     ], function () {
         Route::get('{library}/tags', 'TagController@index')->name('index');
+        Route::get('{library}/tags/option-items', 'TagController@optionList')->name('option-items');
         Route::get('{library}/tags/{tag_id}', 'TagController@show')->name('show');
         Route::put('{library}/tags/{tag_id}', 'TagController@update')->name('update');
+        Route::delete('{library}/tags/{tag_id}', 'TagController@delete')->name('delete');
         Route::post('{library}/tags', 'TagController@store')->name('create');
     });
 
