@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import {CustomInput, Row} from 'reactstrap'
+import { requestApplyLabelsToReferences } from '../../../utils/api'
 
 const ListCheckBox = (props) => {
     console.log('ListCheckBox', props)
@@ -7,14 +8,16 @@ const ListCheckBox = (props) => {
     
     const [formData, setFormData] = useState(selectedData)
 
-    const handleFormData = (e) => {
+    const handleFormData = (e, item) => {
         if(e.target.checked){
-           handleChange([...formData, e.target.name])
-        }else{
-           handleChange(formData.filter(name => name !== e.target.name))
+           handleChange([...formData, item.value])
+        }else{            
+            var index = selectedData.indexOf(formData[0])
+            selectedData.splice(index, 1);
+            handleChange(formData.filter(name => name!==e.target.name))
         } 
+        console.log("Projectids"+ JSON.stringify(selectedData))
     }
-    
     useEffect(() => {
        setFormData(selectedData)
     }, [selectedData])
@@ -22,19 +25,21 @@ const ListCheckBox = (props) => {
     return (
         <>
            <div className="d-flex flex-wrap">
-                {formData && data.map(name => 
-                    type === 'checkbox' &&
-                    <CustomInput
-                        key={name}
-                        className="col-sm-4"
-                        id={name}
-                        type={type}
-                        name={name}
-                        label={name}
-                        onChange={(e) => handleFormData(e)}
-                        checked={formData.includes(name)}
-                    />   
-                ) }
+                {
+                    formData && data.map(item => 
+                        type === 'checkbox' &&
+                        <CustomInput
+                            key={item.value}
+                            className="col-sm-4"
+                            id={item.value}
+                            type={type}
+                            name={item.label}
+                            label={item.label}
+                            onChange={(e) => handleFormData(e, item)}
+                            checked={formData.includes(item.value)}
+                        />   
+                    )
+                }
             </div> 
         </>
     )

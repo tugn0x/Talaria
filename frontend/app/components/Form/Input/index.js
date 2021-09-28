@@ -10,7 +10,7 @@ const Input = ({label, handleChange, type, required, input}) => {
     const [inputValue, setInptValue] = React.useState("");
     const intl = useIntl();
     const onChange = (e) => {
-        const reg = type === 'number' ? /^[0-9\g]+$/ : /^.{1,50}$/
+        const reg = type === 'number' ? /^[0-9\g]+$/ : /^.{1,200}$/
         if(e.target.value === '' || reg.test(e.target.value)){
             handleChange(e.target.value)
             setInptValue(e.target.value)
@@ -32,6 +32,7 @@ const Input = ({label, handleChange, type, required, input}) => {
                     onChange={(e) => onChange(e)}
                     value={inputValue}
                     required={required}
+                    
                 ></textarea>
              ||   
                 <InputField 

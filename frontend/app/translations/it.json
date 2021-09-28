@@ -175,7 +175,7 @@
   "app.components.LibraryForm.opac": "Url dell' opac",
   "app.components.LibraryForm.email_pec": "email pec",
   "app.components.LibraryForm.ill_email": "Ill email",
-  "app.components.LibraryForm.ill_phone": "ill_phone",
+  "app.components.LibraryForm.ill_phone": "ill phone",
   "app.components.LibraryForm.ill_supply_conditions": "ill_supply_conditions",
   "app.components.LibraryForm.ill_imbalance": "ill_imbalance",
   "app.components.LibraryForm.ill_cost": "ill_cost",
@@ -199,14 +199,12 @@
   "app.components.LibraryForm.granted_permissions": "Permessi utenti",
   "app.components.InstitutionForm.header": "Form ente",
   "app.components.LibraryForm.header": "Registrazione biblioteca",
-  "app.components.findOA.oapubfound":"La pubblicazione è disponibile OA, clicca qui!",
-  "app.components.findOA.oapubnotfound":"Versione OA non disponibile",
-  "app.components.findOA.oapubverify":"Verifica se la pubblicazione esiste in versione OA",
-  "app.components.findOA.oafindButton":"Trova OA",
-  "app.components.OASearch.referenceFound": "Riferimento bibliografico trovato!",
-  "app.components.OASearch.referenceNotFound": "Riferimento bibliografico non trovato!",
-  "app.containers.AssociateLibraryPage.header": "Scegli una biblioteca",
-
+  
+  "app.components.LibraryForm.institution_type_id": "ID tipo istituto ",
+  "app.components.LibraryForm.int_country_id": "nazione ",
+  "app.components.LibraryForm.ill_referent_name": "nome referente ",
+  "app.components.LibraryForm.alt_name": "Nome alternativo ",
+  
   "app.components.Notification.header": "Notifiche",
   "app.components.Notification.mark_all_as_read": "Segna tutte come lette",
 

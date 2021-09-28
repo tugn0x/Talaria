@@ -60,7 +60,7 @@ export const fields = {
         // error: "app.global.invalid_privacy_policy_accepted",
     },
     roles: {
-        type: "list-checkbox",
+        type: "list-checkbox-name",
         name: "roles",
         width: "col-sm-12",
     },

@@ -35,7 +35,9 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
   REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
   REQUEST_GET_LIBRARY_LIST,
-  REQUEST_GET_LIBRARY_LIST_SUCCESS
+  REQUEST_GET_LIBRARY_LIST_SUCCESS,
+  REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST,
+  REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST_SUCCESS
 } from "./constants";
 
 export const initialState = {
@@ -72,6 +74,7 @@ export const initialState = {
 
 
   countriesOptionList: [],
+  libraryProjectsOptionList: [],
   librarySubjectOptionList: [],
   roles: [],
   resources: [],
@@ -265,6 +268,15 @@ const AdminReducer = (state = initialState, action) =>
         draft.error = initialState.error;
         draft.projectsList.data = action.result.data
         draft.projectsList.pagination = action.result.meta.pagination
+        break;
+      case REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
+      case REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.libraryProjectsOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break;
       case REQUEST_SUCCESS:
         draft.loading = false;

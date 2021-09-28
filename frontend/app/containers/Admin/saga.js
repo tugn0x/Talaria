@@ -24,7 +24,8 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_LIBRARYSUBJECT_OPTIONLIST,
           REQUEST_POST_PUBLIC_LIBRARY,
           REQUEST_SEARCH_PLACES_BY_TEXT,
-          REQUEST_GET_LIBRARY_LIST
+          REQUEST_GET_LIBRARY_LIST,
+          REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST
 
 } from './constants';
 import {
@@ -51,6 +52,7 @@ import {
   requestSearchPlacesByTextSuccess,
   requestSearchPlacesByTextFail,  
   requestGetLibraryListNearToSuccess,
+  requestGetlibraryProjectsOptionListSuccess,
   
 } from './actions';
 import { toast } from "react-toastify";
@@ -61,7 +63,7 @@ import {getUsersList, updateUser, createUser, getUsersOptionsList,
         getInstitution, updateInstitution, getInstitutionTypesOptionList,  getInstitutionsByTypeByCountryOptionList,
         getInstitutionsOptionList,
         createInstitution, getCountriesOptionsList,
-        getProject, getProjectsList, updateProject,getProjectsOptionList,
+        getProject, getProjectsList, updateProject,getProjectsOptionList, getlibraryProjectsOptionList,
         createProject, getLibrariesSubjects,createPublicLibrary,
         getLibrariesListNearTo} from 'utils/api'
 
@@ -453,6 +455,24 @@ export function* requestProjectsOptionListSaga(action) {
   }
 }
 
+export function*  requestGetlibraryProjectsOptionList(action) {
+  const options = {
+    method: 'get',
+    query: action.request ? action.request : ""
+  }
+  try {
+    const request = yield call(getlibraryProjectsOptionList, options);
+
+    yield put(requestGetlibraryProjectsOptionListSuccess(request));
+  } catch(e) {
+    
+    
+    yield put(requestError(e.message));
+  }
+}
+
+
+
 export function* findPlacesByText(action) {
   console.log("findPlacesByText:", action);
   const options = {
@@ -502,6 +522,9 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_GET_PROJECT, requestGetProjectSaga);
   yield takeLatest(REQUEST_GET_PROJECTS_LIST, requestGetProjectsListSaga);
   yield takeLatest(REQUEST_GET_PROJECTS_OPTIONLIST, requestProjectsOptionListSaga);
+
+  yield takeLatest(REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST, requestGetlibraryProjectsOptionList)
+
   yield takeLatest(REQUEST_UPDATE_PROJECT, requestUpdateProjectSaga);
   yield takeLatest(REQUEST_POST_PROJECT, requestPostProjectSaga);
   yield takeLatest(REQUEST_GET_INSTITUTIONS_LIST, requestGetInstitutionsListSaga);

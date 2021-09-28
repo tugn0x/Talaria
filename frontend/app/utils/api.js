@@ -659,6 +659,14 @@ export const getProjectsOptionList = (options) => {
 };
 
 
+export const getlibraryProjectsOptionList = (options) => {
+  options = getOption(options);
+  const query = options.query;
+  return request(`${BASE_URL}/api/v1/projects/option-items?label=name&q=${query}`, options)
+  //return request(`${BASE_URL}/api/v1/projects/option-items`, options)
+}
+
+
 /*
 |        | GET|HEAD | api/v1/institutions/institution-types                   | api.v1.institutions.index                              | App\Http\Controllers\Institutions\InstitutionTypeController@index         | api,auth:api                                     |
 |        | POST     | api/v1/institutions/institution-types                   | api.v1.institutions.store                              | App\Http\Controllers\Institutions\InstitutionTypeController@store         | api,auth:api                                     |

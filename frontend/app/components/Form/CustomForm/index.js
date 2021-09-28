@@ -6,6 +6,7 @@ import formMessages from './messages'
 import {ErrorBox} from 'components';
 import {selectFieldsGroups} from './selectFieldsGroups'
 import ListCheckBox from '../ListCheckBox'
+import ListCheckBoxName from '../ListCheckBoxName'
 import GrantedPermissions from '../GrantedPermissions'
 import InputField from '../InputField'
 import Switch from '../Switch'
@@ -43,7 +44,7 @@ const CustomForm = (props) => {
     
 
     /* HANDLE CHANGE Generic */
-    const handleChange = (value, field_name) =>{        
+    const handleChange = (value, field_name) =>{       
         setFormData({ ...formData, [field_name]: value   });
         setIsSubmitDisabled(false)
         // props per il wizard form registra biblioteca pubblica
@@ -107,7 +108,15 @@ const CustomForm = (props) => {
                                                                 {!field.nolabel && <div className="form-label">
                                                                     {messages[field.name] && intl.formatMessage(messages[field.name])}
                                                                 </div>}
-                                                                {field.type === 'list-checkbox' &&
+                                                                {field.type === 'list-checkbox-name' &&
+                                                                    <ListCheckBoxName
+                                                                        type="checkbox"
+                                                                        data={props[field.name]}
+                                                                        selectedData={props.requestData && props.requestData[field.name] && !formData[field.name] ? props.requestData[field.name] : formData[field.name] ? formData[field.name] : []}
+                                                                        handleChange={(value) => handleChange(value, field.name)}
+                                                                    />
+                                                                ||
+                                                                field.type === 'list-checkbox' &&
                                                                     <ListCheckBox
                                                                         type="checkbox"
                                                                         data={props[field.name]}
@@ -202,12 +211,12 @@ const CustomForm = (props) => {
                                                                 ||
                                                                 field.type === 'Label' &&
                                                                 <>
-                                                                   <br></br><b><h2><Label 
+                                                                   <Label 
                                                                     field={field}
                                                                     label={field.label && field.label}
-                                                                    size = {field.size}
+                                                                    style={{fontSize: field.size, paddingBottom: field.paddingbottom, paddingTop: field.paddingtop}}
                                                                     cssModule = {field.cssModule}
-                                                                    >{field.label}</Label> </h2></b>
+                                                                    >{field.label}</Label>
                                                                 </>  
                                                                 ||
                                                                     <>  {/*  TEXT, TEXTAREA, NUMBER  */}
