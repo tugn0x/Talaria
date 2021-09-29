@@ -1,6 +1,7 @@
 import React, {useState}  from 'react'
 import {Button} from 'reactstrap'
 import PropTypes from 'prop-types'
+import {useIntl} from 'react-intl'
 // import {Link} from 'react-router'
 import {Dropdown, DropdownToggle, DropdownItem,DropdownMenu} from 'reactstrap'
 import './style.scss'
@@ -13,12 +14,14 @@ const Pagination = (props) => {
 
     const toggle = () => setDropdownOpen(prevState => !prevState);  
 
+    const intl=useIntl();
+
     
 
     return (
-        total_pages > 1 && 
+        total_pages >= 1 && 
         (<div className="pagination">
-            <span>Mostra righe 
+            <span>{intl.formatMessage({ id: 'app.components.Pagination.itemsPerPageDropdown' })}
                 <Dropdown className="perPageDropdown"  direction="down" isOpen={dropdownOpen} toggle={toggle}>
                     <DropdownToggle className="btn-link" color="default" caret>
                         {per_page}
@@ -33,7 +36,7 @@ const Pagination = (props) => {
                     </DropdownMenu>
                 </Dropdown>
             </span>
-            <span>{(current_page-1)*per_page+1}-{(current_page-1)*per_page+count} di {total}</span>
+            <span>{(current_page-1)*per_page+1}-{(current_page-1)*per_page+count} {intl.formatMessage({ id: 'app.components.Pagination.of' })} {total}</span>
             {/* <Button className="backward" color="link" onClick={() => setPage(1)} disabled={current_page !== 1 ? false : true}>
                 <i className="fas fa-backward"></i>
             </Button> */}

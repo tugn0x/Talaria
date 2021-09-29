@@ -52,7 +52,7 @@
   "app.global.enabled": "Abilitato",
   "app.global.disabled": "Disabilitato",
   "app.global.yes": "Si",
-  "app.global.no": "No",
+  "app.global.no": "No",  
   "app.global.addMessage": "Aggiungere?",
   "app.global.addedMessage": "Aggiunto con successo",
   "app.global.createMessage": "Creare?",
@@ -164,6 +164,8 @@
   "app.containers.InstitutionPage.createSuccess": "Nuovo ente creato",
   "app.containers.InstitutionPage.updateSuccess": "Ente aggiornato",
 
+  "app.components.Pagination.itemsPerPageDropdown": "Mostra righe",
+  "app.components.Pagination.of": "di",
   "app.components.InstitutionsList.header": "Lista degli enti",
   "app.components.InstitutionsList.createNewInstitution": "Registra nuovo ente",
   "app.components.InstitutionsList.editInstitution": "Modifica ente",
