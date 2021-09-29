@@ -6,14 +6,14 @@
         padding: 0.5rem 0;
         div:not(.current-page){
             a:hover {
-                color: $theme_color;
+                color: $active;
                 text-decoration: none;
             }
         }
         .current-page {
             a {
                 text-decoration: none;
-                color: $theme_color;
+                color: $active;
             }
             
         }

@@ -5,7 +5,7 @@
     padding: 0.45rem;
     background: none;
     border: none;
-    color: $orange;
+    color: $active;
     margin: 0;
     &:active, &:focus {
         border: none;
@@ -24,7 +24,7 @@
         }
     }
     &:hover {
-       // background-color: $orange;
+       // background-color: $active;
         /* span, i:before {
             color: white;
         } */

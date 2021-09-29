@@ -28,17 +28,6 @@ $line: #AB725F;
 
 $active: #DF6D43;
 
-/* $labels-color: #DAD0EE;
-$labels-border: #8A4991; */
-
-/* $groups-color: #C9E3F8;
-$groups-border: #5892BF; */
-
-$consegnato: #50C950;
-$cancellato: #FF6565;
-$attesa:#FBAE2B;
-
-
 
 // Typography
 $font-size-normal: 1rem;
@@ -72,19 +61,6 @@ $heightInput: 32px;
 /*----------------*/
 
 // COLORS
-
-/* Refactor - da eliminare - Inizio */
-$theme_color: #DF6D43;
-$grey-light: #EBE2DF;
-$grey-lighter: #F5F5F5;
-$grey: #3B3D40;
-$brown: #AB725F;
-
-$grey-nav-link: #73818f;
-$grey-nav-link-hover: #2f353a;
-$orange: $theme_color;
-/* Fine Refactor */
-
 $labels-color: #DAD0EE;
 $labels-border: #8A4991;
 
@@ -95,17 +71,22 @@ $facebook: #3b5998;
 $google-plus: #DD4B39;
 
 $theme-colors: (
-  "brown": $brown,
-  "grey": $grey,
-  "orange": $orange,
-  "grey-light": $grey-light,
-  "grey-lighter": $grey-lighter,
+  "brown": $line,
+  "grey": $dark-text,
+  "orange": $active,
+  "grey-light": $dark-bk,
+  "grey-lighter": $box-color,
   "active": $active,
   "white": $main-menu,
   "dark-bk": $dark-bk,
   "dark-text": $dark-text,
   "alternative": $alternative-text,
 );
+
+$consegnato: #50C950;
+$cancellato: #FF6565;
+$attesa:#FBAE2B;
+
 
 /* Biblioteca  = fas fa-landmark
 Progetti = fas  fa-project-diagram

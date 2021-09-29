@@ -6,9 +6,9 @@
     .tbody {
         padding: 0 1rem;
         > .row {
-            background: $grey-lighter;
-            border-top: 1px solid $grey-light;
-            border-bottom: 1px solid $grey-light;
+            background: $box-color;
+            border-top: 1px solid $dark-bk;
+            border-bottom: 1px solid $dark-bk
         }
     }
     .row {

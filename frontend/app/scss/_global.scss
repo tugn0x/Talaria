@@ -90,7 +90,7 @@ button[type=button] {
         background: $dark-bk;
     }
     i, span {
-        color: $orange;
+        color: $active;
         font-size: 1.5rem;
         margin-top: 0;
         display: inline-block;
@@ -109,9 +109,9 @@ button[type=button] {
 .btn-link {
     background: none;
     border: none;
-    color: $grey-nav-link;
+    color: $form-text;
     &:hover {
-        color: $grey-nav-link-hover;
+        color: $dark-text;
         background: none;
         border: none;
     }
@@ -284,7 +284,7 @@ ul.list-inline {
 
 .card {
     border-radius: 4px;
-    border-color: $grey-light;
+    border-color: $dark-bk;
     background-color: $box-color;
     padding: 1.5rem 6.785rem;
 }
@@ -320,7 +320,7 @@ ul.list-inline {
                 text-align: center;
             }
             &:not(:last-child) {
-                border-right: 2px solid $grey-lighter;
+                border-right: 2px solid $box-color;
             }
             &:not(.edit-icons) i {
                 cursor: pointer;
@@ -330,7 +330,7 @@ ul.list-inline {
     .thead {
         margin-bottom: 1.5rem;
         div[class*=col-]{
-            background-color: $grey-light;
+            background-color: $dark-bk;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -344,12 +344,12 @@ ul.list-inline {
             div[class*=col-]{ 
                 padding: 1rem;
                 background-color: $white;
-                border-color: $grey-lighter;
+                border-color: $box-color;
                 border-width: 2px 2px 2px 0;
                 border-style: solid;
                 height: 100%;
                 &:first-child {
-                    border-left: $grey-lighter 2px solid;
+                    border-left: $box-color 2px solid;
                     > * {
                         padding-left: .65rem;
                     }
@@ -460,8 +460,8 @@ ul.list-inline {
 }
 
 .custom-control-input:checked ~ .custom-control-label::before {
-    border-color: $brown;
-    background-color: $brown;
+    border-color: $line;
+    background-color: $line;
 }
 
 
@@ -483,7 +483,7 @@ ul.list-inline {
     background-size: 100%;
     width: 150px;
     height: 150px;
-    color: $orange;
+    color: $active;
 }*/
 
 // DROPDOWN Generico
@@ -644,9 +644,9 @@ ul.list-inline {
     color: $alternative-text;
 }
 /* .switch-success .switch-input:checked+.switch-slider {
-    background-color: $orange;
-    border-color: $orange;
+    background-color: $active;
+    border-color: $active;
     &:before {
-        border-color: $orange;
+        border-color: $active;
     }
 } */

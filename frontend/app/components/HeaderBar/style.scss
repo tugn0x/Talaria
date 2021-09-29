@@ -29,7 +29,7 @@
                 border-bottom: 1px solid $dark-bk;
             }
             &:focus, &:active, &:hover, &.current {
-                background-color: $orange;
+                background-color: $active;
                 color: white;
                 .fa:before{
                     color: white;
@@ -46,9 +46,9 @@
     .nav-item {
         min-width: 32px;
         .nav-link {
-            color: $theme_color;
+            color: $active;
             span, .fa-sort-down {
-                color: $grey;
+                color: $dark-text;
             }
             .fa-sort-down {
                 font-size: 1rem;

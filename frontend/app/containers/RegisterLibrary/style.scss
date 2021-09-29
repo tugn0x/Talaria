@@ -27,7 +27,7 @@ $circleWidth: 40px;
             left: 50%;
             height: 1px;
             top: 26px;
-            background: $grey-lighter;
+            background: $box-color;
         }
     }
     button {
@@ -48,14 +48,14 @@ $circleWidth: 40px;
             &:before {
                 content: "\25CF";
                 font-size: 1.5rem;
-                color: $orange;
+                color: $active;
                 position: relative;
                 z-index: 100;
             }
         }
         p {
             font-size: 0.85rem;
-            color: $grey;
+            color: $dark-text;
             line-height: 12px;
         }
         &.disabled {
@@ -64,7 +64,7 @@ $circleWidth: 40px;
             }
             p {
                 font-size: 0.85rem;
-                color: $grey;
+                color: $dark-text;
             }
         }
     }
@@ -73,9 +73,9 @@ $circleWidth: 40px;
 .summary-wizard {
     .row {
         padding: 2rem 0;
-        border-bottom: 1px solid $grey;
+        border-bottom: 1px solid $dark-text;
         &:first-child {
-            border-top: 1px solid $grey;
+            border-top: 1px solid $dark-text;
         }
         
     }
