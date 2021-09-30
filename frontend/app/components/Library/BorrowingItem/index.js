@@ -6,7 +6,7 @@ import CustomCheckBox from 'components/Form/CustomCheckBox';
 import ReferenceCitation from '../../ReferenceCitation';
 import RequestTags from '../RequestTags';
 import './style.scss';
-import { PatronRequestStatus,PatronRequestData } from '../../Patron/PatronRequest';
+import { BorrowingPatronRequest } from '../BorrowingPatronRequest';
 import { Link } from 'react-router-dom';
 import {UncontrolledTooltip} from 'reactstrap';
 import {formatDate,formatDateTime} from '../../../utils/dates';
@@ -27,11 +27,21 @@ const statusDate = (req) => {
   switch (req.borrowing_status)
   {
       case "requested": date= req.request_date; break;
+      case "newrequest": date= req.created_at; break;
       /*...*/      
-      default: return "date: gg/mm/yyyy";
+      default: date="gg/mm/yyyy";      
   }
-  
-  return formatDateTime(date,'it');
+
+  let datearr=formatDateTime(date,'it').split(" ");  
+
+  let dat=datearr[0];
+  let time=datearr[1];
+
+  return (
+        <>
+            <i class="fas fa-clock"></i> {dat}<br/><span class="status-time">{time} </span>            
+        </>
+  )
 }
 
 export const BorrowingStatus = (props) => {
@@ -43,7 +53,7 @@ export const BorrowingStatus = (props) => {
     return (
         <div className={"borrowing_status " + (customClass?customClass:'')}>            
             <span className={statusIcon(data.borrowing_status)}></span> 
-            <span className="status-text">Status: {data.borrowing_status ? intl.formatMessage({id: "app.requests."+data.borrowing_status}):'xxx'}
+            <span className="status-text">{data.borrowing_status ? intl.formatMessage({id: "app.requests."+data.borrowing_status}):'xxx'}
             </span>        
             <span className="status-date">{statusDate(data)}</span>
             {data.operator && <div className="status-operator">
@@ -57,7 +67,7 @@ export const BorrowingReferenceIcons = (props) => {
     const {data,reqPath,findAndUpdateOABorrowingReference,oaloading}=props;    
 
     const canEdit = (data) => {
-        return data.borrowing_status=="new";
+        return data.borrowing_status=="newrequest";
     }   
 
     const findAndUpdateOA = (ev) => {       
@@ -72,8 +82,9 @@ export const BorrowingReferenceIcons = (props) => {
                 {canEdit(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'edit')}><i className="fas fa-edit"></i></Link>}
                 {data.reference.data.oa_link && <a href={data.reference.data.oa_link} target="_blank" className='btn btn-icon'><i className="icon-oa"></i></a>} 
                 {!oaloading && !data.reference.data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev) }><i className="fas fa-search"></i>OA</a>}
-                {oaloading && <i className="fas fa-spinner fa-spin"></i>}
-                <a className="btn btn-icon"><i className="fas fa-info-circle"></i></a>
+                {oaloading && <i className="fas fa-spinner fa-spin"></i>}                
+                <a className="btn btn-primary btn-sm" onClick={()=>alert('TODO !')}>C.H.</a>
+                <a className="btn btn-icon"  onClick={()=>alert('TODO !')}><i className="fas fa-file-pdf"></i></a>
         </div>
     )
 }
@@ -116,15 +127,7 @@ const BorrowingItem = (props) => {
             </Col>
             <Col sm={2}>
             {data.patrondocdelrequest && data.patrondocdelrequest.data &&
-            <div className="patronrequest">            
-                <span className="patronrequest_id">PR ID: {data.patrondocdelrequest.data.id}</span>             
-                {data.patrondocdelrequest.data.user &&
-                <span className="patron">
-                    <i className="fas fa-user-circle"></i> 
-                    {data.patrondocdelrequest.data.user.data.full_name}
-                </span>}                          
-                <PatronRequestData data={data.patrondocdelrequest.data}/>
-            </div>
+                <BorrowingPatronRequest data={data}/>            
             }              
             </Col>
             <Col sm={4}>      
@@ -135,7 +138,12 @@ const BorrowingItem = (props) => {
             <Col sm={2}>            
                {data.lendingLibrary && 
                 <span>
-                    <strong>Lib: </strong> {data.lendingLibrary.data.name}
+                    <i className="fas fa-landmark"></i> {data.lendingLibrary.data.name}
+                </span>
+                }
+                {data.borrowing_status=="requested" && !data.lendingLibrary &&
+                <span>
+                    <i className="fas fa-cloud"></i> 
                 </span>
                 }
             </Col>

@@ -28,11 +28,8 @@ class BorrowingDocdelRequestObserver extends BaseObserver
          $model->request_date=Carbon::now();
          $model->request_type=0; //DD
          $model->forward=0;         
-         $model->borrowing_status="new";
-        
-         if($model->patrondocdelrequest)
-            $model->borrowing_status="created";  
-              
+         $model->borrowing_status="newrequest";
+            
          return parent::creating($model);
     }
 

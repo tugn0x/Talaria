@@ -8,14 +8,9 @@
 
 }
 
-.patronrequest {
-    display: block;    
-
-    & .patronrequest_id {
-        font-weight: bold;        
-    }
-
-    & .patron {
-    display: block;        
+.status-date {
+    display: block;
+    & .status-time {
+        padding-left:16px;
     }
 }

@@ -1,0 +1,18 @@
+
+.patronrequest {
+    display: block;    
+
+    & .patronrequest_id {
+        font-weight: bold;        
+    }
+
+    & .patron {
+    display: block;        
+    }
+}
+
+.patron_data {
+    & span {
+        display: block;
+    }
+}

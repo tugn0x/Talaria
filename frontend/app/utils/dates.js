@@ -25,3 +25,11 @@ export function formatDateTime(date, type) {
     default:  return moment.utc(date).local().format('YYYY-MM-DD HH:mm:ss');
   }
 }
+
+export function daysFromToday(date) {
+  var given = moment(date, "YYYY-MM-DD");
+  var current = moment().startOf('day');
+
+  //Difference in number of days
+  return moment.duration(current.diff(given)).asDays();
+}

@@ -66,6 +66,7 @@
   "app.global.confirm": "Conferma",
   "app.global.accept": "Accetta",
   "app.global.deny": "Nega",
+  "app.global.daysago":"giorni fa",
   
   "app.containers.HomePage.header": "Benvenuto su NILDE - Network Inter Library Document Exchange",
   "app.containers.HomePage.subHeader":"Un network di biblioteche e un software per un'informazione scientifica a portata di click!",
@@ -300,6 +301,7 @@
   "app.requests.toBeInformedAboutExtraCost": "Voglio essere informato",
   "app.requests.forLibraryNotes": "Note per la biblioteca",
   "app.requests.askRemoveTagMessage":"Rimuovere l'etichetta?",
+  "app.requests.newrequest": "Nuova",
   
   "app.components.OASearchReferenceForm.bodySearch": "Cerca un riferimento inserendo DOI, PMID o ISBN o titolo esatto",
   "app.components.OASearchReferenceForm.inputPlaceHolder": "Es: 10.1002/hlca.19740570315",  
