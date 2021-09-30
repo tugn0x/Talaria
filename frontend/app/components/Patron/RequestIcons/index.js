@@ -61,7 +61,7 @@ const RequestIcons = (props) => {
                 <div className="costIcons">                    
                     <i className="fas fa-coins"></i> {data.cost} &euro;   
                     <span className="cost_policy">Cost Policy: {costPolicy(data)}</span>                                         
-                    {data.cost_policy==2 && 
+                    {data.cost_policy==2 && data.status=="waitingForCost"   &&
                         <div className="costButtons">
                             <Button color="success" size="sm" onClick={() => acceptCost(data.id)}>{intl.formatMessage({id: 'app.global.accept'})}</Button>{' '}<Button color="danger" size="sm" onClick={() => denyCost(data.id)}>{intl.formatMessage({id: 'app.global.deny'})}</Button>
                         </div>
