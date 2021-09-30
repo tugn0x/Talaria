@@ -50,10 +50,7 @@ class DocdelRequest extends BaseModel
     protected $visible=[               
         'id',
         'created_at',
-        'updated_at',
-        'updated_by', 
-        'deleted_at',
-        'deleted_by',        
+        'updated_at',        
     ];
 
     public function __construct()
@@ -98,11 +95,4 @@ class DocdelRequest extends BaseModel
                 $query2->where($this->simpleSearchField, 'like', '%'. $text .'%');
         });
     }
-
-    public function operator()
-    {
-        return $this->editor();
-    }
-
-
 }

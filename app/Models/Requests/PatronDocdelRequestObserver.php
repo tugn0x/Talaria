@@ -38,8 +38,7 @@ class PatronDocdelRequestObserver extends BaseObserver
          $br->fill([                     
             'patron_docdel_request_id'=>$model->id,
             'reference_id'=>$model->reference_id,
-            'borrowing_library_id'=>$model->borrowing_library_id,
-            'borrowing_status'=>'created', //gestire con constants + check status
+            'borrowing_library_id'=>$model->borrowing_library_id,            
          ]);
          $br->save();
 

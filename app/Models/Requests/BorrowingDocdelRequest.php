@@ -26,6 +26,7 @@ class BorrowingDocdelRequest extends DocdelRequest
         'archived', //archived si/no
         'forward', //0|1 indica se la rich è stata reinoltrata (la rich reinoltrata avrà parent_id=id di questa richiesta)
         //'desk_delivery_format', //formato di invio del della biblio al desk                
+        'operator_id'
     ];
       
     protected static $observerClass=BorrowingDocdelRequestObserver::class;
@@ -56,6 +57,11 @@ class BorrowingDocdelRequest extends DocdelRequest
     {
         return parent::borrowinglibrary();
     }        
+
+    public function operator()
+    {        
+        return $this->belongsTo('App\Models\Users\User', 'operator_id');
+    }
 
     public function scopeArchived($query, $archived)
     {

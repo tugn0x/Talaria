@@ -25,8 +25,8 @@ class BorrowingDocdelRequestTransformer extends BaseTransformer
         'library',  
         'lendingLibrary',
         'patrondocdelrequest',
-        'tags',
-        'operator',
+        'tags',        
+        'operator'
     ];
 
     public function includeReference(Model $model)
@@ -63,7 +63,7 @@ class BorrowingDocdelRequestTransformer extends BaseTransformer
     {
         if($model->operator)
             return $this->item($model->operator, new UserLightTransformer());
-    }
+    }    
 
 
     public function transform(Model $model)

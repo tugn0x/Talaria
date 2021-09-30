@@ -27,22 +27,25 @@ class BorrowingDocdelRequestObserver extends BaseObserver
          //quando salvo viene messa in richiesta in quanto di default è status=requested
          $model->request_date=Carbon::now();
          $model->request_type=0; //DD
-         $model->forward=0;
+         $model->forward=0;         
          $model->borrowing_status="new";
-         
-         //This code is not working :(
+        
          if($model->patrondocdelrequest)
-        {
-            $model->created_by=null;
-            $model->updated_by=null; 
-        }
+            $model->borrowing_status="created";  
               
          return parent::creating($model);
     }
 
     
     public function saving($model)
-    {
+    {        
+        if( (!$model->patrondocdelrequest && !$model->wasRecentlyCreated) || //è nuova ma non patronreq
+        $model->wasRecentlyCreated) //lo sto aggiornando (anche se è patronddreq non mi interessa)
+            if(auth() && auth()->user()) {
+                $userid = auth()->user()->id;
+                $model->operator_id=$userid;
+            }
+
         return parent::saving($model);
 
     }
