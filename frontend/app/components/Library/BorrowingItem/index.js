@@ -44,6 +44,10 @@ const statusDate = (req) => {
   )
 }
 
+const canEdit = (data) => {
+    return data.borrowing_status=="newrequest";
+}  
+
 const canArchive=(data) => {
     //todo: add check on status
     return data.patrondocdelrequest && data.patrondocdelrequest.data.user;
@@ -83,11 +87,7 @@ export const BorrowingStatus = (props) => {
 
 export const BorrowingReferenceIcons = (props) => {
     const {data,reqPath,findAndUpdateOABorrowingReference,oaloading}=props;    
-
-    const canEdit = (data) => {
-        return data.borrowing_status=="newrequest";
-    }   
-
+   
     const findAndUpdateOA = (ev) => {       
         ev.preventDefault();
 
@@ -101,7 +101,7 @@ export const BorrowingReferenceIcons = (props) => {
                 {data.reference.data.oa_link && <a href={data.reference.data.oa_link} target="_blank" className='btn btn-icon'><i className="icon-oa"></i></a>} 
                 {!oaloading && !data.reference.data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev) }><i className="fas fa-search"></i>OA</a>}
                 {oaloading && <i className="fas fa-spinner fa-spin"></i>}                
-                <a className="btn btn-primary btn-sm" onClick={()=>alert('TODO !')}>C.H.</a>
+                <a className="btn btn-icon" onClick={()=>alert('TODO !')}><i className="fa fa-search-location"></i></a>
                 <a className="btn btn-icon"  onClick={()=>alert('TODO !')}><i className="fas fa-file-pdf"></i></a>
         </div>
     )
