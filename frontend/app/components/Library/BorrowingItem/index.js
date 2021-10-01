@@ -9,7 +9,7 @@ import './style.scss';
 import { BorrowingPatronRequest } from '../BorrowingPatronRequest';
 import { Link } from 'react-router-dom';
 import {UncontrolledTooltip} from 'reactstrap';
-import {formatDate,formatDateTime} from '../../../utils/dates';
+import {daysFromToday,formatDateTime} from '../../../utils/dates';
 
 const requesturl=(reqPath,id,op) => {
     return generatePath(reqPath, {
@@ -43,6 +43,24 @@ const statusDate = (req) => {
         </>
   )
 }
+
+const canArchive=(data) => {
+    //todo: add check on status
+    return data.patrondocdelrequest && data.patrondocdelrequest.data.user;
+}
+
+const canDelete=(data) => {
+    return true;
+}
+
+const canTrash=(data) => {
+    return true;
+}
+
+const isRequested=(data) => {
+    return data.borrowing_status!="newrequest";
+}
+
 
 export const BorrowingStatus = (props) => {
 
@@ -91,14 +109,14 @@ export const BorrowingReferenceIcons = (props) => {
 
 export const BorrowingRequestIcons = (props) => {
     const {data,reqPath}=props;    
-
-    
-
+ 
     return (
         <div className="borrowing_request_icons">
-                <Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fas fa-eye"></i></Link>
-                <a className="btn btn-icon"><i className="fas fa-info-circle"></i></a>
-                <a className="btn btn-icon"><i className="fas fa-info-circle"></i></a>                
+                {/*<Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fas fa-eye"></i></Link>*/}
+                {!isRequested(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-share"></i></a>}
+                {canDelete(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-times"></i></a>}                
+                {canTrash(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-trash"></i></a>}                
+                {canArchive(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-hdd"></i></a>}                
         </div>
     )
 }
@@ -116,7 +134,8 @@ const BorrowingItem = (props) => {
                     handleChange={toggleSelection}
                     checked={checked}
                 /> 
-                <div className="request_id">ID: <span>{data.id}</span></div>
+                <div className="request_id">
+                <Link to={requesturl(editPath,data.id)} className="active">ID: <span>{data.id}</span></Link></div>
                 <BorrowingStatus data={data} customClass="request_status"/>                 
                 {data.borrowing_notes && <div className="borrowing_notes">
                 <a href="#" id={`tooltip-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
@@ -130,22 +149,29 @@ const BorrowingItem = (props) => {
                 <BorrowingPatronRequest data={data}/>            
             }              
             </Col>
-            <Col sm={4}>      
+            <Col sm={3}>      
             <RequestTags data={data.tags.data} removeTag={removeTag}/>                 
             <ReferenceCitation data={data.reference.data}/>
             <BorrowingReferenceIcons data={data} reqPath={editPath} findAndUpdateOABorrowingReference={findAndUpdateOABorrowingReference} oaloading={oaloading}/>                
             </Col>
-            <Col sm={2}>            
+            <Col sm={3} className="align-self-center">            
+            {isRequested(data) &&             
+            <>
                {data.lendingLibrary && 
                 <span>
                     <i className="fas fa-landmark"></i> {data.lendingLibrary.data.name}
-                </span>
-                }
-                {data.borrowing_status=="requested" && !data.lendingLibrary &&
+                </span>                
+               }
+               {!data.lendingLibrary && 
                 <span>
-                    <i className="fas fa-cloud"></i> 
+                    <i className="fas fa-cloud"></i> {intl.formatMessage({id:'app.global.alllibraries'})} 
                 </span>
-                }
+               }
+               {data.request_date && <span className="daysago"><span class="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
+               
+               <span className="fullfilment">...[fulfilled/unfilled status]...</span>              
+            </>            
+            }            
             </Col>
             <Col sm={2} className="icons align-self-center">
             <BorrowingRequestIcons data={data} reqPath={editPath} />                                

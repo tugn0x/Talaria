@@ -67,6 +67,7 @@
   "app.global.accept": "Accetta",
   "app.global.deny": "Nega",
   "app.global.daysago":"giorni fa",
+  "app.global.alllibraries": "Tutte le biblioteche",
   
   "app.containers.HomePage.header": "Benvenuto su NILDE - Network Inter Library Document Exchange",
   "app.containers.HomePage.subHeader":"Un network di biblioteche e un software per un'informazione scientifica a portata di click!",

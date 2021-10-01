@@ -40,7 +40,7 @@ export const BorrowingPatronRequest = (props) => {
                     </div>
                 </UncontrolledTooltip>                                
             </span>}                                  
-            {pdr.request_date && <span className="requestDate"><span><i className="fas fa-hourglass-half"></i> {daysFromToday(pdr.request_date)} {intl.formatMessage({id:'app.global.daysago'})}</span></span>}
+            {pdr.request_date && <span className="requestDate"><span class="badge badge-pill badge-primary">{daysFromToday(pdr.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
             {pdr.forlibrary_note && <div className="forlibrary_note">
                 <a href="#" id={`tooltip-${pdr.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
                 <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${pdr.id}`}>

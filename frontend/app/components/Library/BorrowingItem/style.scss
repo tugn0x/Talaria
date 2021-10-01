@@ -1,5 +1,4 @@
 .request_id {
-    font-weight: bold;
     margin-left: 5px;
     display: inline !important;
 }
@@ -13,4 +12,14 @@
     & .status-time {
         padding-left:16px;
     }
+}
+
+.daysago {
+    margin-top:5px;
+    display: block;
+}
+
+.fullfilment {
+    margin-top:5px;
+    display: block;
 }
