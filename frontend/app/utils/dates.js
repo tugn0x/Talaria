@@ -12,9 +12,9 @@ export function formatDate(date/*, type*/) {
     default:  return moment(date).format('YYYY-MM-DD');
   }*/  
   let intl=useIntl();
-  let mymoment=moment()
+  let mymoment=moment(date)
   mymoment.locale(intl.locale)
-  return mymoment.utc(date).local().format('L');
+  return mymoment.utc().local().format('L');
 }
 
 //NB: tutte le date ricevute dal frontend saranno in UTC (laravel le salva cosi)
@@ -31,15 +31,15 @@ export function formatDateTime(date/*, type*/) {
     default:  return moment.utc(date).local().format('YYYY-MM-DD HH:mm:ss');
   }*/    
   let intl=useIntl();
-  let mymoment=moment()
+  let mymoment=moment(date)
   mymoment.locale(intl.locale)
-  return mymoment.utc(date).local().format('L LT');
+  return mymoment.utc().local().format('L LT');
 }
 
 export function daysFromToday(date) {  
-  var given = moment(date, "L");
-  var current = moment().startOf('day');
+  var given = moment(date, "YYYY-MM-DD hh:mm:ss");
+  var current = moment();
 
   //Difference in number of days
-  return moment.duration(current.diff(given)).asDays();
+  return current.diff(given,'days')+1;
 }
