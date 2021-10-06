@@ -472,6 +472,11 @@ export const updateBorrowing = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/borrowings/${options.id}`, options)
 };
 
+export const changeStatusBorrowingRequest = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/borrowings/${options.id}/changestatus`, options)
+};
+
  
 //LENDING
 

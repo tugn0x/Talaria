@@ -4,7 +4,7 @@ import {Row, Col} from 'reactstrap';
 // import messages from './messages';
 // import globalMessages from 'utils/globalMessages';
 import { useIntl } from 'react-intl';
-import {formatDate} from 'utils/formatDate'
+import {formatDate} from 'utils/dates'
 import {CustomModal, ButtonPlus, Pagination, Loader, InputSearch} from 'components'
 import { generatePath } from "react-router";
 import {
@@ -173,7 +173,7 @@ function SimpleList(props) {
                                       <span>
                                         {
                                           field.type === 'date' &&
-                                            formatDate(item[field.name], intl.locale)
+                                            formatDate(item[field.name])
                                           ||
                                           field.type === 'status' &&
                                             <div className={`status-point ${statusClass(item[field.name])}`}></div>

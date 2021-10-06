@@ -117,9 +117,6 @@ const BorrowingsList = (props) => {
             <SectionTitle 
                 title={props.sectionTitle}
             />
-            <br/>
-            <div className="alert alert-danger">TODO: icons based on status, request data, operations </div>
-            <br/>
             <div className="search-filter-bar">
                 <Row>
                     <Col md={4} sm={12}>

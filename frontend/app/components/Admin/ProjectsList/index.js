@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Row, Col} from 'reactstrap';
 import messages from './messages';
 import { useIntl } from 'react-intl';
-import {formatDate} from 'utils/formatDate'
+import {formatDate} from 'utils/dates'
 import ButtonPlus from 'components/Button/ButtonPlus'
 import CustomModal from 'components/Modal/Loadable'
 import {Pagination, InputSearch} from 'components';
@@ -72,7 +72,7 @@ function ProjectsList(props) {
                             </Col>
                             <Col xs={2}>
                                 <span>
-                                    {formatDate(project.created_at, intl.locale)}
+                                    {formatDate(project.created_at)}
                                 </span>
                             </Col>
                             <Col xs={2}>

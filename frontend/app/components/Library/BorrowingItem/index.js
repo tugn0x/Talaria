@@ -27,12 +27,16 @@ const statusDate = (req) => {
   switch (req.borrowing_status)
   {
       case "requested": date= req.request_date; break;
-      case "newrequest": date= req.created_at; break;
-      /*...*/      
-      default: date="gg/mm/yyyy";      
-  }
 
-  let datearr=formatDateTime(date,'it').split(" ");  
+      case "newrequest": 
+      case "canceled": 
+      case "canceleddirect":  date= req.created_at; 
+                              break;                             
+      /*...*/      
+      default: date= req.created_at; 
+  }  
+
+  /*let datearr=formatDateTime(date).split(" ");  
 
   let dat=datearr[0];
   let time=datearr[1];
@@ -41,6 +45,11 @@ const statusDate = (req) => {
         <>
             <i class="fas fa-clock"></i> {dat}<br/><span class="status-time">{time} </span>            
         </>
+  )*/
+  return (
+      <>
+        <i class="fas fa-clock"></i> {formatDateTime(date)}            
+      </>
   )
 }
 
@@ -54,11 +63,13 @@ const canArchive=(data) => {
 }
 
 const canDelete=(data) => {
-    return true;
+    return (
+        (data.borrowing_status=="newrequest" || data.borrowing_status=="requested")
+    );    
 }
 
-const canTrash=(data) => {
-    return true;
+const canTrash=(data) => {    
+    return data.borrowing_status=="documentready";
 }
 
 const isRequested=(data) => {
@@ -123,8 +134,7 @@ export const BorrowingRequestIcons = (props) => {
 
 
 const BorrowingItem = (props) => {
-    const {editPath,data,toggleSelection,checked,removeTag,deleteReference,findAndUpdateOABorrowingReference,oaloading} = props
-  
+    const {editPath,data,toggleSelection,checked,removeTag,deleteReference,findAndUpdateOABorrowingReference,oaloading} = props      
     const intl = useIntl();  
 
     return (
@@ -162,7 +172,7 @@ const BorrowingItem = (props) => {
                     <i className="fas fa-landmark"></i> {data.lendingLibrary.data.name}
                 </span>                
                }
-               {!data.lendingLibrary && 
+               {!data.lendingLibrary && data.all_lender==1 &&
                 <span>
                     <i className="fas fa-cloud"></i> {intl.formatMessage({id:'app.global.alllibraries'})} 
                 </span>

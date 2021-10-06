@@ -29,7 +29,7 @@ const statusDate = (data) => {
       default: return "";
   }
   
-  return formatDateTime(date,'it');
+  return formatDateTime(date);
 }
 
 export const PatronRequestStatus = (props) => {
@@ -64,7 +64,7 @@ export const PatronRequestData = (props) => {
                     {data.library.data.name}
                 </UncontrolledTooltip>
                 </span>
-                {data.request_date && <span className="requestDate"><span>Richiesto il {formatDateTime(data.request_date, 'it')}</span></span>}
+                {data.request_date && <span className="requestDate"><span>Richiesto il {formatDateTime(data.request_date)}</span></span>}
                 {data.forlibrary_note && <div className="forlibrary_note">
                 <a href="#" id={`tooltip-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
                 <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${data.id}`}>
@@ -88,7 +88,7 @@ export const PatronRequestData = (props) => {
                 <span className="deliveryReadyDate">
                     {data.delivery_ready_date && 
                         <>
-                            <span>Ritiro disponibile dal <span>{formatDateTime(data.delivery_ready_date, 'it')}</span></span> 
+                            <span>Ritiro disponibile dal <span>{formatDateTime(data.delivery_ready_date)}</span></span> 
                         </>
                     }
                     {!data.delivery_ready_date && <span>Non ancora disponibile al ritiro</span>}                                                     

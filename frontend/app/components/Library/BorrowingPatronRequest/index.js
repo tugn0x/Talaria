@@ -46,7 +46,8 @@ export const BorrowingPatronRequest = (props) => {
                 <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${pdr.id}`}>
                     {pdr.forlibrary_note}
                 </UncontrolledTooltip>                                
-            </div>}
+            </div>}            
+            {data.user_cancel_date && <span className="user_cancel_date"><i className="fas fa-times"></i> {formatDateTime(data.user_cancel_date)}</span>}
             <div><i className="fas fa-coins"></i> TODO...</div>
             <BorrowingPatronRequestIcons data={data}/>
             
