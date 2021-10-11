@@ -33,32 +33,32 @@ const RequestsListPage = (props) => {
         console.log("DISPATCH archiveRequest",id);
          let conf = await confirm({
             title: intl.formatMessage({id: 'app.global.confirm'}),
-             message: intl.formatMessage({id: "app.containers.RequestsListPage.askArchiveRequestMessage"}),
+             message: intl.formatMessage({id: "app.requests.askArchiveRequestMessage"}),
              confirmText: intl.formatMessage({id: 'app.global.yes'}),
              cancelText: intl.formatMessage({id: 'app.global.no'})
          }); //
          if(conf)
-             dispatch(requestArchiveRequest(id,intl.formatMessage({id: "app.containers.RequestsListPage.archivedMessage"}),filter))
+             dispatch(requestArchiveRequest(id,intl.formatMessage({id: "app.requests.archivedMessage"}),filter))
      }
 
      async function askCancelRequest (id,filter) {
         console.log("DISPATCH askCancelRequest",id);
          let conf = await confirm({
             title: intl.formatMessage({id: 'app.global.confirm'}),
-             message: intl.formatMessage({id: "app.containers.RequestsListPage.askCancelRequestMessage"}),
+             message: intl.formatMessage({id: "app.requests.askCancelRequestMessage"}),
              confirmText: intl.formatMessage({id: 'app.global.yes'}),
              cancelText: intl.formatMessage({id: 'app.global.no'})
          }); //
          if(conf)
-             dispatch(requestChangeStatusRequest(id,'canceled',intl.formatMessage({id: "app.containers.RequestsListPage.cancelAskedMessage"}),filter))
+             dispatch(requestChangeStatusRequest(id,'canceled',intl.formatMessage({id: "app.requests.cancelAskedMessage"}),filter))
      } 
 
      async function acceptCost (id,filter) {
-        dispatch(requestChangeStatusRequest(id,'costAccepted',intl.formatMessage({id: "app.containers.RequestsListPage.costAcceptedMessage"}),filter))
+        dispatch(requestChangeStatusRequest(id,'costAccepted',intl.formatMessage({id: "app.requests.costAcceptedMessage"}),filter))
      }
 
      async function denyCost (id,filter) {
-        dispatch(requestChangeStatusRequest(id,'costNotAccepted',intl.formatMessage({id: "app.containers.RequestsListPage.costDeniedMessage"}),filter))
+        dispatch(requestChangeStatusRequest(id,'costNotAccepted',intl.formatMessage({id: "app.requests.costDeniedMessage"}),filter))
      }
 
 

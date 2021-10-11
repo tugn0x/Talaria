@@ -20,7 +20,7 @@ import './style.scss';
 
 const BorrowingsList = (props) => {
     console.log('BorrowingsList', props)
-    const { editPath,loading, data, pagination, searchOptions, tagsOptionList, removeTagFromRequest,applyTags,deleteReference,findAndUpdateOABorrowingReference,oaloading} = props
+    const { editPath,loading, data, pagination, searchOptions, tagsOptionList, removeTagFromRequest,applyTags,deleteReference,findAndUpdateOABorrowingReference,oaloading,askCancelRequest} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)
@@ -204,6 +204,7 @@ const BorrowingsList = (props) => {
                                     checked={selectedRequests.includes(req.id)}
                                     //findAndUpdateOA={()=>findAndUpdateOA(ref.id,ref.material_type===1?ref.part_title:ref.title)}
                                     findAndUpdateOABorrowingReference={()=>findAndUpdateOA(req)}
+                                    askCancelRequest={()=>askCancelRequest(req.id,multiFilter)}
                                     oaloading={oaloading.includes(req.id)}
                                 />                                
                                 

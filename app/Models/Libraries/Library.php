@@ -12,6 +12,7 @@ use App\Models\Requests\DocdelRequest;
 use App\Models\Users\User;
 use App\Models\Requests\PatronDocdelRequest;
 use App\Traits\Model\ModelPermissionsTrait;
+use Illuminate\Database\Eloquent\Collection;
 
 class Library extends BaseModel
 {
@@ -172,6 +173,21 @@ class Library extends BaseModel
     public function catalogs()
     {
         return $this->belongsToMany(Catalog::class);
+    }
+
+    public function operators($ability=null){
+        
+        //WARNING: may be slow!!
+
+        $users = User::all();        
+        $lib=self::find($this->id);
+
+        $filtered = $users->filter(function ($user) use ($ability,$lib) 
+        {
+            return ($user->can($ability, $lib)||$user->can("manage", $lib));
+        });
+
+        return $filtered;
     }
 
 

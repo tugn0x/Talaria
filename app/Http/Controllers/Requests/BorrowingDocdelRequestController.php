@@ -172,42 +172,54 @@ class BorrowingDocdelRequestController extends ApiController
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
+
+    //TODO: FIX
+    public function changeStatus(Request $request,$id)
+    {
+        // $this->authorize($this->model);
+        $id = $request->route()->parameters['id'];
+        $model = $this->model->findOrFail($id);
+
+        if($request->input("status"))
+        {
+            $sr=new StatusResolver($model);
+            
+            $newstatus=$request->input("status");
+
+            $others=[];            
+
+            switch ($newstatus)
+            {                
+                case 'canceled': 
+                    $others=['cancel_date'=>Carbon::now()]; 
+                    if($model->borrowing_status=="newrequest" && !$model->patrondocdelrequest) //new request without patron
+                    {                        
+                        $model->forceDelete();
+                        return $this->response->item($model, new $this->transformer())->morph();
+                    }
+                    else if($model->borrowing_status=="newrequest") //new request with patron
+                    {
+                        $newstatus="canceleddirect";                        
+                    } 
+                    else if($model->lendingLibrary) 
+                        $newstatus="cancelrequested";                              
+                    else {
+                        $newstatus="canceleddirect";
+                    }
+                    break;
+                    
+                case 'canceleddirect': 
+                    $others=['cancel_date'=>Carbon::now()];
+                    break;
+            }
+
+            $sr->changeStatus($newstatus,$others);
+        }
+        return $this->response->item($model, new $this->transformer())->morph();
+    }
 }
 
 
 
 
 
-//TODO: FIX
-/*public function changeStatus(Request $request,$id)
-{
-    // $this->authorize($this->model);
-    $model = $this->model->findOrFail($id);
-
-    if($request->input("status"))
-    {
-        $sr=new StatusResolver($model);
-        
-        $newstatus=$request->input("status");
-
-        $others=[];
-
-        switch ($newstatus)
-        {                
-            case 'canceled': $others=['cancel_date'=>Carbon::now()]; break;
-            
-            case "waitingForCost": $others=['cost'=>$request->input("cost")]; break;
-            
-            case "costAccepted": 
-            case "costNotAccepted": $others=['answer_cost_date'=>Carbon::now()]; break;
-            
-            case "readyToDelivery": $others=['delivery_ready_date'=>Carbon::now()]; break;
-            
-            case 'received': $others=['fulfill_date'=>Carbon::now()]; break;    
-            case 'notReceived': $others=['notfulfill_date'=>Carbon::now()]; break;                    
-        }
-
-        $sr->changeStatus($newstatus,$others);
-    }
-    return $this->response->item($model, new $this->transformer())->morph();
-}*/

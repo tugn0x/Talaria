@@ -11,14 +11,16 @@ class BaseNotification extends Notification
 {
     use Queueable;
 
+    protected $object;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
+    public function __construct($model)
+    {        
+        $this->object=$model;        
     }
 
     /**
@@ -29,7 +31,8 @@ class BaseNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        //return ['mail', 'database'];
+        return $notifiable->preferNotifiedBy();
     }
 
     /**
@@ -54,8 +57,12 @@ class BaseNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            //
-        ];
-    }
+       return [      
+               'title'=>'Notification title!',   
+               'message'=>'bla bla bla!',
+               'url'=>'https://www.google.com',
+               'object_type'=>get_class($this->object),
+               'object_id'=>$this->object->id              
+       ];
+    }    
 }

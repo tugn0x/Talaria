@@ -151,10 +151,21 @@ class User extends UserBase
      * Get the entity's notifications.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * 
      */
     public function notifications()
     {
         return $this->morphMany(DatabaseNotification::class, 'notifiable')->orderBy('created_at', 'desc');
+    }
+
+    /*TODO: save on DB the user preference about notification
+    * NOTE: When sending notifications via the mail channel, the notification system will automatically look for an email property on your notifiable entity
+     * otherwise you've to override the routeNotificationForMail($notification)     
+    */
+    public function preferNotifiedBy() {
+        //if(...) return ['mail','xxx','xxx'...]
+        //else
+        return ['database']; 
     }
 
     public function isPatronOf($libraryId) {

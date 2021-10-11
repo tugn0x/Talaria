@@ -28,11 +28,11 @@ const RequestsPage = (props) => {
     }, [params.id])
 
     const acceptCost = () => {       
-        dispatch(requestChangeStatusRequest(params.id,'costAccepted',intl.formatMessage({id: 'app.containers.RequestsListPage.costAcceptedMessage'}),null/*filter*/))
+        dispatch(requestChangeStatusRequest(params.id,'costAccepted',intl.formatMessage({id: 'app.requests.costAcceptedMessage'}),null/*filter*/))
     }
 
     const denyCost = () => {        
-        dispatch(requestChangeStatusRequest(params.id,'costNotAccepted',intl.formatMessage({id: 'app.containers.RequestsListPage.costDeniedMessage'}),null/*filter*/))
+        dispatch(requestChangeStatusRequest(params.id,'costNotAccepted',intl.formatMessage({id: 'app.requests.costDeniedMessage'}),null/*filter*/))
     }
     
     return (

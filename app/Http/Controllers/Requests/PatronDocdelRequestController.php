@@ -103,7 +103,7 @@ class PatronDocdelRequestController extends ApiController
                 case 'notReceived': $others=['notfulfill_date'=>Carbon::now()]; break;                    
             }
 
-            $sr->changeStatus($newstatus,$others);
+            $model=$sr->changeStatus($newstatus,$others);                        
         }
         return $this->response->item($model, new $this->transformer())->morph();
     }

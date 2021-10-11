@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {useIntl} from 'react-intl'
 import makeSelectLibrary, {isLibraryLoading} from '../selectors';
-import {requestBorrowingsList,requestLibraryTagsOptionList,requestRemoveDDRequestTag,requestApplyTagsToDDRequests,requestFindUpdateOABorrowingReference} from '../actions'
+import {requestBorrowingsList,requestLibraryTagsOptionList,requestRemoveDDRequestTag,requestApplyTagsToDDRequests,requestFindUpdateOABorrowingReference,requestChangeStatusBorrowing} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -49,10 +49,6 @@ const BorrowingPage = (props) => {
         dispatch(requestApplyTagsToDDRequests(match.params.library_id,reqIds,[tagIds],'etichetta applicata'))
      }
     
-    
-
-    
-
     async function removeTagFromDDRequest (id,tagId, filter) {        
          let conf = await confirm({
              title: intl.formatMessage({id: 'app.global.confirm'}),
@@ -69,6 +65,18 @@ const BorrowingPage = (props) => {
      async function findAndUpdateOABorrowingReference (id,reference_id,data) {         
         dispatch(requestFindUpdateOABorrowingReference(id,match.params.library_id,reference_id,data,intl.formatMessage({id: "app.containers.BorrowingPage.OAfoundAndUpdateMessage"}),intl.formatMessage({id: "app.containers.BorrowingPage.OAnotfoundAndUpdateMessage"})));
      }
+
+     async function askCancelRequest (id,filter) {
+        console.log("DISPATCH askCancelRequest",id);
+         let conf = await confirm({
+            title: intl.formatMessage({id: 'app.global.confirm'}),
+             message: intl.formatMessage({id: "app.requests.askCancelRequestMessage"}),
+             confirmText: intl.formatMessage({id: 'app.global.yes'}),
+             cancelText: intl.formatMessage({id: 'app.global.no'})
+         }); //
+         if(conf)
+             dispatch(requestChangeStatusBorrowing(id,match.params.library_id,'canceled',intl.formatMessage({id: "app.requests.cancelAskedMessage"}),filter))
+     } 
 
           
     return (
@@ -93,6 +101,7 @@ const BorrowingPage = (props) => {
                 }}                
                 removeTagFromRequest={archive==1?undefined:removeTagFromDDRequest}                
                 //deleteReference={deleteReference}
+                askCancelRequest={askCancelRequest}
                 applyTags={archive==1?undefined:applyTagsToDDRequests}
                 findAndUpdateOABorrowingReference={findAndUpdateOABorrowingReference}
                 oaloading={oaloading}

@@ -88,10 +88,17 @@ class PatronDocdelRequest extends BaseModel
     {
         return $this->hasMany(BorrowingDocdelRequest::class,'patron_docdel_request_id','id');
     }
-
+    
     public function library()
     {
         return $this->belongsTo(Library::class,'borrowing_library_id');
+    }
+    
+    public function libraryOperators() {
+        $lib=$this->library;
+        //get all borrowing/lending/.. operators
+        return $lib->operators("borrow");
+
     }
 
     public function delivery()

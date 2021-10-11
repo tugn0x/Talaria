@@ -13,11 +13,14 @@ class DatabaseNotificationObserver extends BaseObserver
     ];
 
     public function saving($model)
-    {
+    {        
         if(is_array($model->data) && (key_exists("object_id",$model->data) && key_exists("object_type",$model->data)) || $model->object)
         {
-            $model->object_type = Arr::get("object_type", $model->data, get_class($model->object));
-            $model->object_id = Arr::get("object_id", $model->data, $model->object->id);
+            //$model->object_type = Arr::get($model->data,"object_type", get_class($model->object));
+            //$model->object_id = Arr::get($model->data,"object_id",$model->object->id);
+            $model->object_type = $model->data["object_type"];
+            $model->object_id = $model->data["object_id"];
+
         }
         return parent::saving($model);
     }

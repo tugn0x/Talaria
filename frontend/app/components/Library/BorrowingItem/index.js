@@ -48,7 +48,7 @@ const statusDate = (req) => {
   )*/
   return (
       <>
-        <i class="fas fa-clock"></i> {formatDateTime(date)}            
+        <i class="fas fa-clock"></i>{formatDateTime(date)}            
       </>
   )
 }
@@ -57,9 +57,10 @@ const canEdit = (data) => {
     return data.borrowing_status=="newrequest";
 }  
 
-const canArchive=(data) => {
+const canArchive=(data) => {    
+    return data.patrondocdelrequest && data.patrondocdelrequest.data.user 
     //todo: add check on status
-    return data.patrondocdelrequest && data.patrondocdelrequest.data.user;
+    //...&& (...in terminal status);
 }
 
 const canDelete=(data) => {
@@ -72,8 +73,23 @@ const canTrash=(data) => {
     return data.borrowing_status=="documentready";
 }
 
-const isRequested=(data) => {
-    return data.borrowing_status!="newrequest";
+const isArchived=(data) => {
+    return data.archived  // || (other "pending" states)
+}
+
+const inRequest=(data) => {
+    return data.request_date && data.borrowing_status=="requested"  // || (other "pending" states)
+}
+
+const canRequest=(data) => {
+    return data.borrowing_status=="newrequest" && 
+    (data.reference.data.isbn||data.reference.data.issn
+     ||data.reference.data.acnp_cod||data.reference.data.sbn_docid)
+}
+
+
+const documentReady=(data) => {
+    return data.borrowing_status=="documentready" //&&delivery_format=xxxx
 }
 
 
@@ -107,25 +123,25 @@ export const BorrowingReferenceIcons = (props) => {
     }
 
     return (
-        <div className="borrowing_reference_icons">
+        !isArchived(data) && <div className="borrowing_reference_icons">
                 {canEdit(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'edit')}><i className="fas fa-edit"></i></Link>}
                 {data.reference.data.oa_link && <a href={data.reference.data.oa_link} target="_blank" className='btn btn-icon'><i className="icon-oa"></i></a>} 
-                {!oaloading && !data.reference.data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev) }><i className="fas fa-search"></i>OA</a>}
-                {oaloading && <i className="fas fa-spinner fa-spin"></i>}                
-                <a className="btn btn-icon" onClick={()=>alert('TODO !')}><i className="fa fa-search-location"></i></a>
-                <a className="btn btn-icon"  onClick={()=>alert('TODO !')}><i className="fas fa-file-pdf"></i></a>
+                {!inRequest(data) && !oaloading && !data.reference.data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev) }><i className="fas fa-search"></i>OA</a>}
+                {!inRequest(data) && oaloading && <i className="fas fa-spinner fa-spin"></i>}                
+                {!inRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO !')}><i className="fa fa-search-location"></i></a>}
+                {documentReady(data) && <a className="btn btn-icon"  onClick={()=>alert('TODO !')}><i className="fas fa-file-pdf"></i></a>}
         </div>
     )
 }
 
 export const BorrowingRequestIcons = (props) => {
-    const {data,reqPath}=props;    
+    const {data,reqPath,askCancelRequest}=props;    
  
     return (
-        <div className="borrowing_request_icons">
+        !isArchived(data) && <div className="borrowing_request_icons">
                 {/*<Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fas fa-eye"></i></Link>*/}
-                {!isRequested(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-share"></i></a>}
-                {canDelete(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-times"></i></a>}                
+                {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-share"></i></a>}
+                {canDelete(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-times"></i></a>}                
                 {canTrash(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-trash"></i></a>}                
                 {canArchive(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-hdd"></i></a>}                
         </div>
@@ -134,7 +150,7 @@ export const BorrowingRequestIcons = (props) => {
 
 
 const BorrowingItem = (props) => {
-    const {editPath,data,toggleSelection,checked,removeTag,deleteReference,findAndUpdateOABorrowingReference,oaloading} = props      
+    const {editPath,data,toggleSelection,checked,removeTag,deleteReference,findAndUpdateOABorrowingReference,oaloading,askCancelRequest} = props      
     const intl = useIntl();  
 
     return (
@@ -165,7 +181,7 @@ const BorrowingItem = (props) => {
             <BorrowingReferenceIcons data={data} reqPath={editPath} findAndUpdateOABorrowingReference={findAndUpdateOABorrowingReference} oaloading={oaloading}/>                
             </Col>
             <Col sm={3} className="align-self-center">            
-            {isRequested(data) &&             
+            {inRequest(data) &&             
             <>
                {data.lendingLibrary && 
                 <span>
@@ -177,14 +193,14 @@ const BorrowingItem = (props) => {
                     <i className="fas fa-cloud"></i> {intl.formatMessage({id:'app.global.alllibraries'})} 
                 </span>
                }
-               {data.request_date && <span className="daysago"><span class="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
+               {!isArchived(data) && data.request_date && <span className="daysago"><span class="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
                
                <span className="fullfilment">...[fulfilled/unfilled status]...</span>              
             </>            
             }            
             </Col>
             <Col sm={2} className="icons align-self-center">
-            <BorrowingRequestIcons data={data} reqPath={editPath} />                                
+            <BorrowingRequestIcons data={data} reqPath={editPath} askCancelRequest={askCancelRequest} />                                
             </Col> 
         </Row>
     )

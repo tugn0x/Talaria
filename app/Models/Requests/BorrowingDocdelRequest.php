@@ -9,6 +9,9 @@
 
 namespace App\Models\Requests;
 use App\Models\Libraries\Tag;
+use Carbon\Carbon;
+use Auth;
+
 
 class BorrowingDocdelRequest extends DocdelRequest
 {
@@ -23,10 +26,14 @@ class BorrowingDocdelRequest extends DocdelRequest
         'trash_type', //tipo cestinamento (trash o trashHC)
         'borrowing_notes', //dd_note_interne      
         'parent_id', //parent dd request id 
-        'archived', //archived si/no
+        'archived', //0|1 indica se la rich è conclusa e quindi messa in archivio (impostarlo in modo automatico in base allo stato terminale)
         'forward', //0|1 indica se la rich è stata reinoltrata (la rich reinoltrata avrà parent_id=id di questa richiesta)
         //'desk_delivery_format', //formato di invio del della biblio al desk                
-        'operator_id'
+        'operator_id',
+        'user_license', //(NULL=non impostato, 0=can't send pdf to user, 1=ok can send pdf to user,2=not specified in the lic.)
+        'user_cancel_date', //data rich canc da utente  
+        'all_lender', //0=no, 1=all library will see this              
+
     ];
       
     protected static $observerClass=BorrowingDocdelRequestObserver::class;
@@ -62,6 +69,22 @@ class BorrowingDocdelRequest extends DocdelRequest
     {        
         return $this->belongsTo('App\Models\Users\User', 'operator_id');
     }
+
+    public function userAskCancel() {
+        $this->user_cancel_date=Carbon::now(); 
+        if($this->borrowing_status=="newrequest" /*|| status==requested && (no other possible suppliers has accepted (willsupply) )*/ ){            
+            $this->borrowing_status="canceleddirect"; //change status without statusResolver (otherwise i need to call controller!!)
+        }
+        return $this->save();        
+    }
+
+    public function canManage(User $user=null){
+        $u = $user ? $user:Auth::user();        
+        return 
+            $u->can('manage', $this->borrowinglibrary()->first())||
+            $u->can('borrow', $this->borrowinglibrary()->first());
+    }
+
 
     public function scopeArchived($query, $archived)
     {

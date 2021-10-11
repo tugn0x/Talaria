@@ -14,7 +14,10 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
       REQUEST_POST_NEW_BORROWING,
       REQUEST_GET_BORROWING,
       REQUEST_UPDATE_BORROWING,
-      REQUEST_FIND_UPDATE_BORROWING_OA} from './constants';
+      REQUEST_FIND_UPDATE_BORROWING_OA,
+      REQUEST_CHANGE_STATUS_BORROWING
+
+    } from './constants';
 import {
   requestError,
   stopLoading,
@@ -46,7 +49,8 @@ import {getLibraryUsersList, updateLibraryUser, deleteLibraryUser, createUser,
     deleteLibraryTag,
     createNewBorrowing,
     getBorrowingRequest,
-    updateBorrowing
+    updateBorrowing,
+    changeStatusBorrowingRequest
 } from '../../utils/api'
 
 import {getOA} from '../../utils/apiExternal';
@@ -418,6 +422,24 @@ export function* findUpdateOABorrowingSaga(action) {
   
 }
 
+export function* requestChangeStatusBorrowingSaga(action) {
+  const options = {
+    method: 'put',
+    body: {'status': action.status },
+    id: action.id,
+    borrowing_library_id: action.borrowing_library_id,
+  };
+  try {
+    const request = yield call(changeStatusBorrowingRequest, options);    
+    yield put (requestBorrowingsList(action.borrowing_library_id))    
+    yield put (push("/library/"+action.borrowing_library_id+"/borrowing/"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+
 
 
 /**
@@ -444,4 +466,5 @@ export default function* librarySaga() {
   yield takeLatest(REQUEST_GET_BORROWING,requestGetBorrowingSaga)
   yield takeLatest(REQUEST_UPDATE_BORROWING,requestUpdateBorrowingSaga)
   yield takeEvery(REQUEST_FIND_UPDATE_BORROWING_OA,findUpdateOABorrowingSaga);
+  yield takeLatest(REQUEST_CHANGE_STATUS_BORROWING,requestChangeStatusBorrowingSaga);
 }

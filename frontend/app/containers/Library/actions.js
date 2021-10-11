@@ -23,7 +23,8 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_UPDATE_BORROWING_SUCCESS,
    REQUEST_FIND_UPDATE_BORROWING_OA,
    REQUEST_FIND_UPDATE_BORROWING_OA_FAIL,
-   REQUEST_FIND_UPDATE_BORROWING_OA_SUCCESS
+   REQUEST_FIND_UPDATE_BORROWING_OA_SUCCESS,
+   REQUEST_CHANGE_STATUS_BORROWING
   } from "./constants";
 
 export function defaultAction() {
@@ -308,6 +309,17 @@ export function requestFindUpdateOABorrowingReferenceSuccess(result) {
   return {
     type: REQUEST_FIND_UPDATE_BORROWING_OA_SUCCESS,
     result
+  };
+}
+
+export function requestChangeStatusBorrowing(id,borrowing_library_id,status, message,filter) {
+  return {
+    type: REQUEST_CHANGE_STATUS_BORROWING,
+    id,
+    borrowing_library_id,
+    status,
+    message,
+    filter
   };
 }
 

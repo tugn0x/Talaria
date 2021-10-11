@@ -19,6 +19,8 @@ class DatabaseNotification extends BaseDatabaseNotification
     {
         return $this->morphTo();
     }
+    
+    
     public static function boot()
     {
         parent::boot();

@@ -30,8 +30,8 @@ class DocdelRequest extends BaseModel
         'filename',
         'file_status', //Stato del file se inviato in NILDE: 0-non disponibile; 1-disponibile; 2-disponibile con HC
         'file_download', // 	Indicatore di avvenuta stampa del file se inviato in NILDE: 0-Non Stampato; 1-Stampato
-        'cancel_request_date', //data richiesta annullamento
-        'cancel_date', //data accettazione richiesta annullamento
+        'cancel_request_date', //data richiesta annullamento alla lender
+        'cancel_date', //data accettazione richiesta annullamento da lender
         'fulfill_inventorynr', //dd_ninventario_forni        
         
         //TODO

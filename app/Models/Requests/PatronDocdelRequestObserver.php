@@ -4,6 +4,7 @@ use App\Models\BaseObserver;
 use \Auth;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use App\Notifications\BaseNotification;
 
 class PatronDocdelRequestObserver extends BaseObserver
 {
@@ -40,15 +41,21 @@ class PatronDocdelRequestObserver extends BaseObserver
             'reference_id'=>$model->reference_id,
             'borrowing_library_id'=>$model->borrowing_library_id,            
          ]);
-         $br->save();
+         if($br->save())
+         {            
+             $pdr=PatronDocdelRequest::find($model->id);
+            $n=new BaseNotification($br);
+            
+            foreach ($pdr->libraryOperators() as $op)    
+              $op->notify($n);           
+         }
 
                      
     }
 
     public function saving($model)
-    {
+    {        
         return parent::saving($model);
-
     }
 
     public function saved($model)

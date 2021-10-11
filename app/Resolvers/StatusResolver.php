@@ -8,6 +8,7 @@ use Auth;
 use \App\Models\User\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use App\Notifications\BaseNotification;
 
 /**
  * Created by PhpStorm.
@@ -80,7 +81,7 @@ class StatusResolver
                     'errors'    =>  $this->checkConstraint($next)
                 ];
             }
-        }
+        }    
         $this->next_statuses = collect($this->next_statuses);
         return $this;
     }
@@ -103,7 +104,7 @@ class StatusResolver
                 $errors[] = trans(get_class($this->model).'.status.not_'.$constraint);
             elseif( (is_array($verify) && count($verify)>0) )
                 $errors = array_merge($errors,$verify);
-        }
+        }        
 //        if(count($errors))
 //            exit(print_r($errors));
         return $errors;
@@ -119,7 +120,12 @@ class StatusResolver
      */
     public function checkRole($status)
     {
-        return $this->user->hasRole($this->flow_tree[$status]['role']);
+        if($this->flow_tree[$status]['role']&& is_array($this->flow_tree[$status]['role']) && 
+        $this->flow_tree[$status]['role']->count>0)
+            return $this->user->hasRole($this->flow_tree[$status]['role']);
+        
+        //if no role specified
+        return true;    
     }
 
 
@@ -168,18 +174,30 @@ class StatusResolver
 
         $this->model->save();
 
-        //jobs() => chiamare la dispatch sui singoli jobs....
-        //notify()...
+        //handle jobs
+        $this->jobs();
+
+        //handle notifications
+        $this->notify();
+        
         return $this->model;
     }
 
     public function jobs() {
-        //executing jobs
+        //executing jobs   
+
+        $this->flow = collect($this->flow_tree[$this->model->getStatus()]); 
+        $collection = new Collection();                  
+        if($this->flow->has('jobs'))
+        {                      
+            foreach ($this->flow->get('jobs') as $jobclass) {                
+                $jobclass::dispatchNow($this->model);                
+            }
+        }
     }
 
     public function notify()
-    {
-        //TODO: PULIRE PULIRE PULIRE.
+    {        
         $this->flow = collect($this->flow_tree[$this->model->getStatus()]); /*[$this->model->status()->first()->status]*/
         $collection = new Collection();
         if($this->flow->has('notify'))
@@ -187,7 +205,7 @@ class StatusResolver
             foreach ($this->flow->get('notify') as $entity=>$method) {
                 switch ($entity){
                     case 'Model':
-                        $items = $this->model->$method()->get();
+                        $items = $this->model->$method();
                         if($items->count())
                         {
                                 foreach ($items as $item) {
@@ -196,7 +214,7 @@ class StatusResolver
                         }
                         break;
                     case 'User':
-                        $items = User::$method()->get();
+                        $items = User::$method();
                         if($items->count())
                         {
                                 foreach ($items as $item) {
@@ -206,9 +224,19 @@ class StatusResolver
                         break;
                 }
             }
-            return $collection->unique();
+            if($collection->count()>0)
+            {
+                $userstobenotified=$collection->unique();            
+                foreach($userstobenotified as $u)
+                {
+                    //$notificationClass="App\\Notifications\\".(new \ReflectionClass($this->model))->getShortName()."Notification";
+                    //$bn=new $notificationClass($this->model);
+                    $bn=new BaseNotification($this->model);                    
+                    $u->notify($bn);
+                }
+            }
         }
-        return false;
+        //return false;
     }
 
 }

@@ -41,5 +41,5 @@ export function daysFromToday(date) {
   var current = moment();
 
   //Difference in number of days
-  return current.diff(given,'days')+1;
+  return current.diff(given,'days');
 }
