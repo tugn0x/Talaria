@@ -7,7 +7,8 @@ class LendingDocdelRequest extends DocdelRequest
 
     private $lending_attributes=[
         'lending_status', //stato rich. borrow
-        'lending_notes', //dd_note_interne      
+        'lending_notes', //dd_note_interne     
+        'lending_archived', //0|1 indica se la rich è archiviata 
     ];
 
     protected $statusField="lending_status";
@@ -41,5 +42,10 @@ class LendingDocdelRequest extends DocdelRequest
     {        
         return $query->where('lending_library_id', $library_id);
     } 
+
+    public function scopeArchived($query, $archived)
+    {
+        return $query->where('lending_archived','=',$archived);
+    }
 
 }
