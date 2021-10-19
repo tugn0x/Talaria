@@ -5,7 +5,7 @@ import messages from './messages'
 import { FormattedMessage } from 'react-intl';
 import {Pagination, InputSearch} from 'components';
 import Loader from 'components/Form/Loader';
-// import CustomModal from 'components/Modal/Loadable'
+import CustomModal from 'components/Modal/Loadable'
 import {useIntl} from 'react-intl';
 // import ButtonPlus from 'components/Button/ButtonPlus'
 // import { generatePath } from "react-router";
@@ -17,16 +17,16 @@ import ApplyTag from '../../ApplyTag';
 import CustomCheckBox from 'components/Form/CustomCheckBox';
 import SectionTitle from 'components/SectionTitle';
 import './style.scss';
+import FindISSNISBN from '../../FindISSNISBN';
 
 const BorrowingsList = (props) => {
     console.log('BorrowingsList', props)
-    const { editPath,loading, data, pagination, searchOptions, tagsOptionList, removeTagFromRequest,applyTags,deleteReference,findAndUpdateOABorrowingReference,oaloading,askCancelRequest} = props
+    const { editPath,loading, data, pagination, searchOptions, tagsOptionList, removeTagFromRequest,applyTags,deleteReference,findAndUpdateOABorrowingReference,oaloading,askCancelRequest,askArchiveRequest,findISSNISBNcb,findISSNISBNresults,updateISSNISBNReference} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)
-    /*  const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal); */
-
+    const [findISSNISBNmodal, setfindISSNISBNmodal] = useState(false);    
+    const [currentReq,setCurrentReq]=useState(null);
     const [selectedRequests, setSelectedRequests] = useState([]);
     const [disableToolbar,setDisableToolbar]=useState(false);
     const [disableCancelFilter,setDisableCancelFilter]=useState(true);
@@ -92,6 +92,8 @@ const BorrowingsList = (props) => {
         setSelectedRequests(state => ( handleIds([...state], id)))
     }
 
+
+
     const findAndUpdateOA=(req)=>{
         let data={}
         
@@ -106,6 +108,40 @@ const BorrowingsList = (props) => {
             data.pmid=req.reference.data.pmid
 
         findAndUpdateOABorrowingReference(req.id,req.reference.data.id,data)
+    }
+
+    const findISSNISBNtoggle = (req) => {
+        setCurrentReq(req);
+        setfindISSNISBNmodal(!findISSNISBNmodal);
+    }
+
+    const findISSNISBNcallback=(req) => {
+        let data={}
+
+        console.log("findISSNISBNcallback",req)
+
+        data.material_type=req.reference.data.material_type
+
+        if(req.reference.data.material_type && req.reference.data.material_type===1)
+        {
+            data.title=req.reference.data.pub_title
+            data.year=req.reference.data.pubyear
+        }
+        else data.title=req.reference.data.pub_title
+        
+        if(req.reference.data.issn)
+            data.issn=req.reference.data.issn
+        
+        if(req.reference.data.isbn)
+            data.isbn=req.reference.data.isbn
+
+        console.log("findISSNISBNcallback DATA",data)
+        findISSNISBNcb(req.id,data)
+    }
+
+    const updateISSNISBNcallback=(data,req)=>{        
+        setfindISSNISBNmodal(false)
+        updateISSNISBNReference(data,req,multiFilter)
     }
     
 
@@ -154,7 +190,7 @@ const BorrowingsList = (props) => {
                     { tagsOptionList && multiFilter.labelIds && multiFilter.labelIds.length>0 &&
                      <ul id="labelsActiveFilter" className="filtersList">    
                       {multiFilter.labelIds.map( el => 
-                         <li key={el} className="labelFilter">{tagsOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fas fa-times"  onClick={() => toggleTagFilter(el) }></i></li>
+                         <li key={el} className="tagFilter">{tagsOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fas fa-times"  onClick={() => toggleTagFilter(el) }></i></li>
                         ) 
                       }
                       </ul>
@@ -175,7 +211,7 @@ const BorrowingsList = (props) => {
                                 <i className="fas fa-file-export"></i>
                             </Button>}
                             {applyTags && <ApplyTag
-                                type="label"
+                                type="tag"
                                 disabled={disableToolbar}
                                 submitCallBack={(ids) => applyTags(ids, selectedRequests)}
                                 options={tagsOptionList} 
@@ -204,7 +240,9 @@ const BorrowingsList = (props) => {
                                     checked={selectedRequests.includes(req.id)}
                                     //findAndUpdateOA={()=>findAndUpdateOA(ref.id,ref.material_type===1?ref.part_title:ref.title)}
                                     findAndUpdateOABorrowingReference={()=>findAndUpdateOA(req)}
+                                    findISSNISBNtoggle={()=>findISSNISBNtoggle(req)}
                                     askCancelRequest={()=>askCancelRequest(req.id,multiFilter)}
+                                    askArchiveRequest={()=>askArchiveRequest(req.id,multiFilter)}
                                     oaloading={oaloading.includes(req.id)}
                                 />                                
                                 
@@ -218,6 +256,16 @@ const BorrowingsList = (props) => {
                     </div>
                 </Loader>
             </div>
+            <CustomModal
+                modal={findISSNISBNmodal}
+                toggle={()=>setfindISSNISBNmodal(!findISSNISBNmodal)}>
+                <FindISSNISBN 
+                reqdata={currentReq}
+                results={findISSNISBNresults}
+                findCB={()=>findISSNISBNcallback(currentReq)}
+                updateISSNISBNcallback={(data)=>updateISSNISBNcallback(data,currentReq)}
+                />                    
+            </CustomModal>
             {Object.keys(pagination).length &&
                 <Pagination
                     total={total}

@@ -68,6 +68,7 @@
   "app.global.deny": "Nega",
   "app.global.daysago":"giorni fa",
   "app.global.alllibraries": "Tutte le biblioteche",
+  "app.global.createNewLabelGroupTag": "Crea nuova",
   
   "app.containers.HomePage.header": "Benvenuto su NILDE - Network Inter Library Document Exchange",
   "app.containers.HomePage.subHeader":"Un network di biblioteche e un software per un'informazione scientifica a portata di click!",
@@ -154,8 +155,8 @@
   "app.containers.LibraryUsersListPage.createNew": "Aggiungi utente",
   "app.containers.LibraryUsersListPage.edit": "Modifica utente",
 
-  "app.containers.LibraryTags.header":"Etichette",
-  "app.containers.LibraryTags.tagCreateNew":"Nuova etichetta",  
+  "app.containers.LibraryTags.header":"Tag",
+  "app.containers.LibraryTags.tagCreateNew":"Nuovo tag",  
 
   "app.containers.InstitutionPage.createSuccess": "Nuovo ente creato",
   "app.containers.InstitutionPage.updateSuccess": "Ente aggiornato",
@@ -218,6 +219,8 @@
   "app.containers.ReferencePage.headerDetail": "Dettaglio Riferimento",
   "app.containers.ReferencePage.referenceAdded": "Riferimento aggiunta",
   "app.containers.ReferencePage.referenceUpdate": "Riferimento aggiornata",
+  "app.containers.ReferencePage.addedLabelToReference": "Etichetta applicata",
+  "app.containers.ReferencePage.addedGroupToReference": "Categoria applicata",
   
   "app.containers.RequestPage.headerDetail": "Dettaglio Richiesta",
 
@@ -228,6 +231,7 @@
 
   "app.containers.BorrowingPage.OAfoundAndUpdateMessage": "Versione OA trovata. Richiesta aggiornata.",
   "app.containers.BorrowingPage.OAnotfoundAndUpdateMessage": "Versione OA NON trovata. Richiesta non aggiornata.",
+  "app.containers.BorrowingPage.addedTagToRequest": "Tag applicato",
   
   "app.libraries.dd_user_cost":"Costo per articolo",
 
@@ -236,8 +240,7 @@
   "app.references.groups": "Categorie",
   "app.references.groupAs": "Raggruppa come",
   "app.references.askRemoveGroupMessage":"Rimuovere la categoria dal riferimento?",
-  "app.references.askRemoveLabelMessage":"Rimuovere l'etichetta dal riferimento?",  
-  "app.references.createNewLabelGroup": "Crea nuova",
+  "app.references.askRemoveLabelMessage":"Rimuovere l'etichetta dal riferimento?",    
   "app.references.titleAuthorsHead": "Titolo e autori",
   "app.references.materialTypeHead": "Tipo pubblicazione",
   "app.references.institutionPlaceHead": "Dati di pubblicazione",
@@ -287,7 +290,7 @@
   "app.requests.received":"Evasa",  
   "app.requests.notReceived":"Inevasa",  
   "app.requests.canceled":"Annullata",
-  "app.requests.canceleddirect":"Annullata Dir.",
+  "app.requests.canceledDirect":"Annullata Dir.",
   "app.requests.waitingForCost": "Accettazione costo",
   "app.requests.costAccepted": "Costo accettato",
   "app.requests.costNotAccepted":"Costo rifiutato",
@@ -304,6 +307,8 @@
   "app.requests.archivedMessage": "Archiviata con successo",
   "app.requests.askCancelRequestMessage": "Annullare la richiesta?",
   "app.requests.cancelAskedMessage": "Annullamento richiesto",  
+  "app.requests.canceledMessage": "Richiesta annullata",  
+  "app.requests.tagAs": "Tagga come",
   
   "app.components.OASearchReferenceForm.bodySearch": "Cerca un riferimento inserendo DOI, PMID o ISBN o titolo esatto",
   "app.components.OASearchReferenceForm.inputPlaceHolder": "Es: 10.1002/hlca.19740570315",  
@@ -382,7 +387,7 @@
   "app.components.Footer.header": "Questo l header del Footer",
   "app.components.FilterSelect.labels": "Etichette",
   "app.components.FilterSelect.groups": "Categorie",
-  "app.components.FilterSelect.tags": "Etichette",
+  "app.components.FilterSelect.tags": "Tag",
 
   "app.routes.Bibliography": "Bibliografia",
   "app.routes.Reference": "Riferimenti",
@@ -419,6 +424,7 @@
   "app.routes.MyProject": "Il mio progetto",
   "app.routes.ProjectNew": "Nuovo progetto",
   "app.routes.Labels": "Etichette",  
+  "app.routes.Tags": "Tag", 
   "app.routes.Categories": "Categorie",
   "app.routes.Libraries": "Biblioteche",
   "app.routes.Library": "Biblioteca"

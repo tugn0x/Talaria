@@ -50,7 +50,7 @@ const RequestsListPage = (props) => {
              cancelText: intl.formatMessage({id: 'app.global.no'})
          }); //
          if(conf)
-             dispatch(requestChangeStatusRequest(id,'canceled',intl.formatMessage({id: "app.requests.cancelAskedMessage"}),filter))
+             dispatch(requestChangeStatusRequest(id,'canceled',intl.formatMessage({id: "app.requests.canceledMessage"}),filter))
      } 
 
      async function acceptCost (id,filter) {

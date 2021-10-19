@@ -16,7 +16,10 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_GET_LIBRARY_TAGS_OPTIONLIST,REQUEST_GET_LIBRARY_TAGS_OPTIONLIST_SUCCESS, REQUEST_POST_NEW_BORROWING,
   REQUEST_GET_BORROWING,REQUEST_GET_BORROWING_SUCCESS, REQUEST_UPDATE_BORROWING, REQUEST_UPDATE_BORROWING_SUCCESS,
   REQUEST_FIND_UPDATE_BORROWING_OA,REQUEST_FIND_UPDATE_BORROWING_OA_FAIL,REQUEST_FIND_UPDATE_BORROWING_OA_SUCCESS,
-  REQUEST_CHANGE_STATUS_BORROWING 
+  REQUEST_CHANGE_STATUS_BORROWING, 
+  REQUEST_GET_ISSN_ISBN,
+  REQUEST_GET_ISSN_ISBN_SUCCESS,
+  REQUEST_GET_ISSN_ISBN_FAIL  
 } from "./constants";
 
 export const initialState = {
@@ -39,6 +42,10 @@ export const initialState = {
   lendingsList: {
     data: [],
     pagination: {}
+  },
+  findISSNISBNresults: {
+    loading:false,
+    data: [],    
   },
   error: null,
   user: {}
@@ -195,6 +202,23 @@ const libraryReducer = (state = initialState, action) =>
         draft.error = initialState.error;
         draft.lendingsList.data = action.result.data;
         draft.lendingsList.pagination = action.result.meta.pagination
+        break;  
+
+      case REQUEST_GET_ISSN_ISBN:
+        draft.error = initialState.error;    
+        draft.findISSNISBNresults.loading=true;  
+        draft.findISSNISBNresults.data=[]
+        break;
+
+      case REQUEST_GET_ISSN_ISBN_SUCCESS:
+          draft.findISSNISBNresults.loading=false;  
+          draft.error = initialState.error;       
+          draft.findISSNISBNresults.data=action.result.data
+          break;  
+
+      case REQUEST_GET_ISSN_ISBN_FAIL:
+        draft.findISSNISBNresults.loading=false;  
+        draft.error=action.result
         break;  
         
       case REQUEST_SUCCESS:

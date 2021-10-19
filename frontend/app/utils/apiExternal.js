@@ -6,6 +6,12 @@ const OPENACCESSBUTTON_API_URL='https://api.openaccessbutton.org'
 
 const OPENSTREETMAP_API_URL='https://nominatim.openstreetmap.org'
 
+const FIND_ISSN_SERVICE_URL='https://issn.org/api'  //sample
+
+const FIND_ISBN_SERVICE_URL='https://sbn.it/api' //sample
+
+const FIND_ISSN_ACNP_URL='https://acnp.bo.it/....' //sample
+
 
 
 
@@ -38,3 +44,47 @@ export const getPlacesByText = (options) => {
     let query=options.search
     return request(`${OPENSTREETMAP_API_URL}/search?format=json&q=${query}`,  {method: 'get'})
 }
+
+export const getFindISSN = (options) => {
+  console.log("getFindISSN",options)
+    const title=options.title
+    const year=options.year
+    const issn=options.issn
+    //return request(`${FIND_ISSN_SERVICE_URL}/xxxx?issn=${issn}&title=${title}&year=${year}`,  {method: 'get'})
+    const result = {    
+        'data': [
+          {'issn': '9999-9999', 'issn_l': '9a9a-9b9b','pub_title': 'debugTitle99' },
+          {'issn': '8888-8888', 'pub_title': 'debugTitle88' },
+        ]
+      }; 
+      console.log("getFindISSN results",result);
+    return result;  
+};
+
+export const getFindISSN_ACNP = (options) => {
+    const title=options.title
+    const year=options.year
+    const issn=options.issn
+    //return request(`${FIND_ISSN_ACNP_URL}/xxxx?issn=${issn}&title=${title}&year=${year}`,  {method: 'get'})
+    const result = {    
+        'data': [
+          {'issn': '9999-9999', 'pub_title': 'acnpTitle99' },
+          {'issn': '8888-8888', 'pub_title': 'acnpTitle88' },
+        ]
+      }; 
+      console.log("getFindISSN_ACNP results",result);  
+    return result;
+};
+
+export const getFindISBN = (options) => {
+    const booktitle=options.booktitle
+    //return request(`${FIND_ISBN_SERVICE_URL}/xxxx?booktitle=${booktitle}`,  {method: 'get'})
+    const result = {    
+        'data': [
+          {'isbn': '999999999999','sbn_docid':'aaaaaaaaaaaaaaa', 'pub_title': 'sbnTitle99' },
+          {'isbn': '888888888888','sbn_docid':'bbbbbbbbbbbbbbb', 'pub_title': 'sbnTitle88' },
+        ]
+      }; 
+    console.log("getFindISBN results",result);  
+    return result;
+};

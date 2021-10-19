@@ -15,8 +15,8 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
       REQUEST_GET_BORROWING,
       REQUEST_UPDATE_BORROWING,
       REQUEST_FIND_UPDATE_BORROWING_OA,
-      REQUEST_CHANGE_STATUS_BORROWING
-
+      REQUEST_CHANGE_STATUS_BORROWING,
+      REQUEST_GET_ISSN_ISBN,
     } from './constants';
 import {
   requestError,
@@ -34,8 +34,10 @@ import {
   requestGetBorrowingSuccess,
   requestUpdateBorrowingSuccess,
   requestFindUpdateOABorrowingReferenceSuccess,
-  requestFindUpdateOABorrowingReferenceFail
+  requestFindUpdateOABorrowingReferenceFail,
+  requestFindISSNISBNSuccess,
 } from './actions';
+
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
 import {getLibraryUsersList, updateLibraryUser, deleteLibraryUser, createUser,
@@ -53,7 +55,7 @@ import {getLibraryUsersList, updateLibraryUser, deleteLibraryUser, createUser,
     changeStatusBorrowingRequest
 } from '../../utils/api'
 
-import {getOA} from '../../utils/apiExternal';
+import {getOA,getPubmedReferenceByPMID,getFindISSN,getFindISBN, getFindISSN_ACNP} from '../../utils/apiExternal';
 
 // import moment from 'moment';
 
@@ -439,6 +441,49 @@ export function* requestChangeStatusBorrowingSaga(action) {
   }
 }
 
+export function* requestFindISSNISBNsaga(action) {
+  
+  //data { material_type: 1..5, issn:xxx, title:xxxx, isbn:xxxx}
+  //if article => search on ISSN_REGISTRY OR ACNP to get correct title and ISSN+ISSN_L
+  //otherwise => search on SBN matching title and get ISBN  
+  const issn_search=(process.env.ISSN_SEARCH && process.env.ISSN_SEARCH=="true")?true:false;
+  const isbn_search=(process.env.ISBN_SEARCH && process.env.ISBN_SEARCH=="true")?true:false;
+  const issn_registry=(process.env.ISSN_SEARCH_REGISTRY && process.env.ISSN_SEARCH_REGISTRY=="true")?true:false;
+  const issn_acnp=(process.env.ISSN_SEARCH_ACNP && process.env.ISSN_SEARCH_ACNP=="true")?true:false;
+  const isbn_sbn=(process.env.ISBN_SEARCH_SBN && process.env.ISBN_SEARCH_SBN=="true")?true:false;
+
+  
+  try{
+    let result=[]
+
+    if(action.data.material_type==1)    
+    {
+      if(issn_search && issn_registry)
+        result = yield call(getFindISSN, action.data);    
+      else if(issn_search && issn_acnp)
+        result = yield call(getFindISSN_ACNP, action.data);            
+      else 
+        result = [];
+    }
+    else        
+    {
+      if(isbn_search && isbn_sbn)
+        result = yield call(getFindISBN, action.data);    
+      else 
+        result = [];  
+    }
+    
+    console.log("requestFindISSNISBNsaga res:",result)  
+    yield put (requestFindISSNISBNSuccess(result))      
+      
+  }
+  catch (e) {
+    console.log("ERROR",e)
+    yield put(requestError(e.message));
+  }
+  
+}
+
 
 
 
@@ -464,7 +509,8 @@ export default function* librarySaga() {
   yield takeLatest(REQUEST_REMOVE_LIBRARY_TAG,requestRemoveLibraryTagSaga);
   yield takeLatest(REQUEST_POST_NEW_BORROWING,requestPostNewBorrowingSaga);
   yield takeLatest(REQUEST_GET_BORROWING,requestGetBorrowingSaga)
-  yield takeLatest(REQUEST_UPDATE_BORROWING,requestUpdateBorrowingSaga)
-  yield takeEvery(REQUEST_FIND_UPDATE_BORROWING_OA,findUpdateOABorrowingSaga);
+  yield takeLatest(REQUEST_UPDATE_BORROWING,requestUpdateBorrowingSaga)  
   yield takeLatest(REQUEST_CHANGE_STATUS_BORROWING,requestChangeStatusBorrowingSaga);
+  yield takeLatest(REQUEST_GET_ISSN_ISBN,requestFindISSNISBNsaga);
+  yield takeEvery(REQUEST_FIND_UPDATE_BORROWING_OA,findUpdateOABorrowingSaga);
 }

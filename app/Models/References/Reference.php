@@ -33,7 +33,7 @@ class Reference extends BaseModel
         'abstract',
         'doi',
         'issn',
-        //'add issn-l' (hidden,not required, filled only by/after "ISSN check" on ISSN registry)
+        'issn_l',        
         'acnp_cod',
         'sbn_docid',
         'publisher',
@@ -46,7 +46,7 @@ class Reference extends BaseModel
         'oa_link',
     ];
 
-    protected $constantFields=['material_type'];
+    //protected $constantFields=['material_type'];
 
     public function patronddrequests()
     {

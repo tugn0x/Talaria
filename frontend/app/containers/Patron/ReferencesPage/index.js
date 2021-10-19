@@ -150,12 +150,12 @@ const ReferencesPage = (props) => {
          if(conf)
              dispatch(requestDeleteReference(id,intl.formatMessage({id: 'app.global.deletedMessage'})))
      }
-    
+     
     const applyLabelsToReferences = (labelIds,refIds) => {
-        dispatch(requestApplyLabelsToReferences(refIds,[labelIds],'etichetta applicata', true))
+        dispatch(requestApplyLabelsToReferences(refIds,[labelIds],intl.formatMessage({id:'app.containers.ReferencePage.addedLabelToReference'}), true))
      }
     const applyGroupsToReferences = (labelIds,refIds) => {
-        dispatch(requestApplyGroupsToReferences(refIds,[labelIds],'etichetta applicata', true))
+        dispatch(requestApplyGroupsToReferences(refIds,[labelIds],intl.formatMessage({id:'app.containers.ReferencePage.addedGroupToReference'}), true))
      }
 
      const libraryOnChange = (lib) => {

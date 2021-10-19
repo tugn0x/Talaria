@@ -13,18 +13,18 @@ return [
                         'role'  =>  ['patron'],
                         'next_statuses'  =>  ['canceled','received','waitingForCost','notReceived','readyToDelivery'],
                         'constraints'   =>  ['isOwner'],
-                        'notify'    =>  [
+                        /*'notify'    =>  [
                             'Model'=>'libraryOperators',                               
-                        ],
+                        ],*/
                         'jobs'=>[]
                     ],                   
                     'canceled'	=> [
                         'role'  =>  ['patron'],
                         'next_statuses'  =>  [],
                         'constraints'   =>  ['isOwner'],
-                        'notify'    =>  [
+                        /*'notify'    =>  [
                             'Model'=>'libraryOperators',
-                        ],
+                        ],*/
                         'jobs' => ['App\\Jobs\\PatronUpdateBorrowing']
                     ],
                     'waitingForCost' => [
@@ -99,7 +99,7 @@ return [
                 'flow_tree' => [
                     'newrequest'	=> [
                         'role'  =>  [],//borrow/lend/manage?
-                        'next_statuses'  =>  ['canceled','canceleddirect','requested'],
+                        'next_statuses'  =>  ['canceled','canceledDirect','requested'],
                         'constraints'   =>  [],                        
                     ],
                     'canceled'	=> [
@@ -107,27 +107,28 @@ return [
                         'next_statuses'  =>  [],
                         'constraints'   =>  ['canManage'],                        
                     ],
-                    'canceleddirect'	=> [
+                    'canceledDirect'	=> [
                         'role'  =>  [],//borrow/lend/manage?,
                         'next_statuses'  =>  [],
                         'constraints'   =>  ['canManage'],                        
                     ],
-                    'cancelrequested'	=> [
+                    'cancelRequested'	=> [
                         'role'  =>  [],//borrow/lend/manage?,
-                        'next_statuses'  =>  ['canceledaccepted','canceled'],
+                        'next_statuses'  =>  ['canceledAccepted','canceled'],
                         'constraints'   =>  ['canManage'],                        
-                         /*'notify'    =>  [
+                        /*'notify'    =>  [
                             'Model'=>'lender',
-                        ],  */
+                        ],  */  
+                        //'jobs' => ['App\Jobs\LendingRequestUpdate']
                     ],
-                    'canceledaccepted'	=> [
+                    'canceledAccepted'	=> [
                         'role'  =>  [],//borrow/lend/manage?,
                         'next_statuses'  =>  ['canceled'],
                         'constraints'   =>  [],                        
                     ],
                     'requested'	=> [
                         'role'  =>  [],//borrow/lend/manage?,
-                        'next_statuses'  =>  ['canceleddirect','cancelrequested'],
+                        'next_statuses'  =>  ['canceledDirect','cancelRequested'],
                         'constraints'   =>  [],  
                         /*'notify'    =>  [
                             'Model'=>'lender o tutti i lender (x orphan req)',

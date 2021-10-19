@@ -188,4 +188,8 @@ export default defineMessages({
         id: `${scope}.LinkingServices`,
         defaultMessage: 'Servizi di Linking',
     },
+    Tags: {
+        id: `${scope}.Tags`,
+        defaultMessage: 'Tags',
+    },
 });

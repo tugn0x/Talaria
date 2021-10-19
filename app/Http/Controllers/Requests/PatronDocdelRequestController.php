@@ -90,7 +90,7 @@ class PatronDocdelRequestController extends ApiController
             {
                // case 'userAskCancel': $others=['cancel_request_date'=>Carbon::now()]; break;
                 
-                case 'canceled': $others=['cancel_date'=>Carbon::now()]; break;
+                case 'canceled': $others=['cancel_date'=>Carbon::now(),'archived'=>1]; break;
                 
                 case "waitingForCost": $others=['cost'=>$request->input("cost")]; break;
                 

@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import {UncontrolledTooltip} from 'reactstrap';
 import {daysFromToday,formatDateTime} from '../../../utils/dates';
 
+
 const requesturl=(reqPath,id,op) => {
     return generatePath(reqPath, {
         id,
@@ -30,7 +31,7 @@ const statusDate = (req) => {
 
       case "newrequest": 
       case "canceled": 
-      case "canceleddirect":  date= req.created_at; 
+      case "canceledDirect":  date= req.created_at; 
                               break;                             
       /*...*/      
       default: date= req.created_at; 
@@ -48,7 +49,7 @@ const statusDate = (req) => {
   )*/
   return (
       <>
-        <i class="fas fa-clock"></i>{formatDateTime(date)}            
+        <i className="fas fa-clock"></i>{formatDateTime(date)}            
       </>
   )
 }
@@ -59,14 +60,21 @@ const canEdit = (data) => {
 
 const canArchive=(data) => {    
     return data.patrondocdelrequest && data.patrondocdelrequest.data.user 
+    && data.borrowing_status!="newrequest";
     //todo: add check on status
     //...&& (...in terminal status);
 }
 
 const canDelete=(data) => {
     return (
-        (data.borrowing_status=="newrequest" || data.borrowing_status=="requested")
+        (data.borrowing_status=="newrequest" && !data.patrondocdelrequest)
     );    
+}
+
+const canCancel=(data) => {
+    return (
+        data.borrowing_status=="requested" // || (other "pending" states) 
+        )
 }
 
 const canTrash=(data) => {    
@@ -82,9 +90,14 @@ const inRequest=(data) => {
 }
 
 const canRequest=(data) => {
-    return data.borrowing_status=="newrequest" && 
-    (data.reference.data.isbn||data.reference.data.issn
-     ||data.reference.data.acnp_cod||data.reference.data.sbn_docid)
+    return data.borrowing_status=="newrequest"
+}
+
+const mustCheckData=(data) => {
+    return (
+        (data.reference.data.material_type==1 && !data.reference.data.issn)||
+        (data.reference.data.material_type==2 && !data.reference.data.isbn)
+    )        
 }
 
 
@@ -113,8 +126,11 @@ export const BorrowingStatus = (props) => {
 }
 
 export const BorrowingReferenceIcons = (props) => {
-    const {data,reqPath,findAndUpdateOABorrowingReference,oaloading}=props;    
-   
+    const {data,reqPath,findAndUpdateOABorrowingReference,oaloading,findISSNISBNtoggle}=props;    
+
+    const issn_search_enabled=(process.env.ISSN_SEARCH && process.env.ISSN_SEARCH=="true")?true:false;
+    const isbn_search_enabled=(process.env.ISBN_SEARCH && process.env.ISBN_SEARCH=="true")?true:false;
+
     const findAndUpdateOA = (ev) => {       
         ev.preventDefault();
 
@@ -127,6 +143,7 @@ export const BorrowingReferenceIcons = (props) => {
                 {canEdit(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'edit')}><i className="fas fa-edit"></i></Link>}
                 {data.reference.data.oa_link && <a href={data.reference.data.oa_link} target="_blank" className='btn btn-icon'><i className="icon-oa"></i></a>} 
                 {!inRequest(data) && !oaloading && !data.reference.data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev) }><i className="fas fa-search"></i>OA</a>}
+                {/* NOT WORK THIS (issn_search_enabled || isbn_search_enabled ) && */ !inRequest(data) && mustCheckData(data) /* && f(x) */ && <a target="_blank" className='btn btn-icon' onClick={()=>findISSNISBNtoggle()}><i className="fas fa-tasks"></i></a>}
                 {!inRequest(data) && oaloading && <i className="fas fa-spinner fa-spin"></i>}                
                 {!inRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO !')}><i className="fa fa-search-location"></i></a>}
                 {documentReady(data) && <a className="btn btn-icon"  onClick={()=>alert('TODO !')}><i className="fas fa-file-pdf"></i></a>}
@@ -135,22 +152,23 @@ export const BorrowingReferenceIcons = (props) => {
 }
 
 export const BorrowingRequestIcons = (props) => {
-    const {data,reqPath,askCancelRequest}=props;    
+    const {data,reqPath,askCancelRequest,askArchiveRequest}=props;    
  
     return (
         !isArchived(data) && <div className="borrowing_request_icons">
                 {/*<Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fas fa-eye"></i></Link>*/}
                 {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-share"></i></a>}
-                {canDelete(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-times"></i></a>}                
+                {canCancel(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-times"></i></a>}                
+                {canDelete(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-backspace"></i></a>}                
                 {canTrash(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-trash"></i></a>}                
-                {canArchive(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-hdd"></i></a>}                
+                {canArchive(data) && askArchiveRequest && <a className="btn btn-icon" onClick={()=>askArchiveRequest(data.id)}><i className="fas fa-hdd"></i></a>}                
         </div>
     )
 }
 
 
 const BorrowingItem = (props) => {
-    const {editPath,data,toggleSelection,checked,removeTag,deleteReference,findAndUpdateOABorrowingReference,oaloading,askCancelRequest} = props      
+    const {editPath,data,toggleSelection,checked,removeTag,deleteReference,findAndUpdateOABorrowingReference,oaloading,askCancelRequest,askArchiveRequest,findISSNISBNtoggle} = props      
     const intl = useIntl();  
 
     return (
@@ -178,7 +196,7 @@ const BorrowingItem = (props) => {
             <Col sm={3}>      
             <RequestTags data={data.tags.data} removeTag={removeTag}/>                 
             <ReferenceCitation data={data.reference.data}/>
-            <BorrowingReferenceIcons data={data} reqPath={editPath} findAndUpdateOABorrowingReference={findAndUpdateOABorrowingReference} oaloading={oaloading}/>                
+            <BorrowingReferenceIcons data={data} reqPath={editPath} findAndUpdateOABorrowingReference={findAndUpdateOABorrowingReference} oaloading={oaloading} findISSNISBNtoggle={findISSNISBNtoggle} />                
             </Col>
             <Col sm={3} className="align-self-center">            
             {inRequest(data) &&             
@@ -193,14 +211,14 @@ const BorrowingItem = (props) => {
                     <i className="fas fa-cloud"></i> {intl.formatMessage({id:'app.global.alllibraries'})} 
                 </span>
                }
-               {!isArchived(data) && data.request_date && <span className="daysago"><span class="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
+               {!isArchived(data) && data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
                
                <span className="fullfilment">...[fulfilled/unfilled status]...</span>              
             </>            
             }            
             </Col>
             <Col sm={2} className="icons align-self-center">
-            <BorrowingRequestIcons data={data} reqPath={editPath} askCancelRequest={askCancelRequest} />                                
+            <BorrowingRequestIcons data={data} reqPath={editPath} askCancelRequest={askCancelRequest} askArchiveRequest={askArchiveRequest}/>                                
             </Col> 
         </Row>
     )

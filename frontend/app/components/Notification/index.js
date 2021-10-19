@@ -9,6 +9,7 @@ import {Loader} from 'components'
 import messages from './messages'
 import subStringer from 'utils/subStringer'
 import {useIntl} from 'react-intl'
+import {Link} from 'react-router-dom'
 import './style.scss'
 
 const Notification = (props) => {
@@ -74,10 +75,10 @@ const Notification = (props) => {
                             tag="div" 
                             key={notify.id} 
                             onClick={() => console.log('click notification')} 
-                            className={`item btn ${notify.read ? 'read' : ''}`}>
-                            <div>
-                                <h6>{notify.data.title}</h6>
-                                <span>{subStringer(notify.data.message, 20)}</span>
+                            className={`item btn ${notify.read ? 'read' : ''}`}>                            
+                            <div>                                
+                                <h6><Link to={notify.data.url} className="notify-url">{notify.data.title}</Link></h6>
+                                <span>{subStringer(notify.data.message, 20)}</span>                                
                             </div>
                             <i className="fas fa-close"></i>
                         </DropdownItem>

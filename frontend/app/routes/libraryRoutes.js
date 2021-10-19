@@ -23,7 +23,7 @@ const routes = [
       // vari pezzi dei dati della biblio (dati servizio, dati anag, ...)
       { path: '/service',exact: true, name: `Service`, component: Fake,url: '/manage/service',permissions: ['manage'],sidebar: true, order:2  },
       { path: '/linkingservices', name: `LinkingServices`, component: Fake,url: '/manage/linkingservices',permissions: ['manage'],sidebar: true, order:2  },
-      { path: '/tags', exact: true, name: `Labels`, url: '/manage/tags', component: TagsPage,permissions: ['manage','borrow','lend','deliver'],sidebar: true, order:3 },
+      { path: '/tags', exact: true, name: `Tags`, url: '/manage/tags', component: TagsPage,permissions: ['manage','borrow','lend','deliver'],sidebar: true, order:3 },
       { path: '/operators', name: `Operators`, component: Fake,url: '/manage/operators', permissions: ['manage'],sidebar: true, order:5 },
       { path: '/departments',  name: `Departments`, component: Fake,url: '/manage/departments',permissions: ['manage','manage-users'],sidebar: true, order:4  },
       { path: '/pickup', name: `Pickup`, component: Fake,url: '/manage/pickup', permissions: ['manage'],sidebar: true, order:5 },

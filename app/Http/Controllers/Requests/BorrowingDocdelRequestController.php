@@ -199,16 +199,16 @@ class BorrowingDocdelRequestController extends ApiController
                     }
                     else if($model->borrowing_status=="newrequest") //new request with patron
                     {
-                        $newstatus="canceleddirect";                        
+                        $newstatus="canceledDirect";                        
                     } 
                     else if($model->lendingLibrary) 
-                        $newstatus="cancelrequested";                              
+                        $newstatus="cancelequested";                                                      
                     else {
-                        $newstatus="canceleddirect";
+                        $newstatus="canceled";
                     }
                     break;
                     
-                case 'canceleddirect': 
+                case 'canceledDirect': 
                     $others=['cancel_date'=>Carbon::now()];
                     break;
             }

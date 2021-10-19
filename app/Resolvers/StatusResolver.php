@@ -120,10 +120,11 @@ class StatusResolver
      */
     public function checkRole($status)
     {
-        if($this->flow_tree[$status]['role']&& is_array($this->flow_tree[$status]['role']) && 
-        $this->flow_tree[$status]['role']->count>0)
-            return $this->user->hasRole($this->flow_tree[$status]['role']);
-        
+        if($this->flow_tree[$status]['role'] && is_array($this->flow_tree[$status]['role']))
+        {
+            if(count($this->flow_tree[$status]['role'])>0)
+                return $this->user->hasRole($this->flow_tree[$status]['role']);                
+        }    
         //if no role specified
         return true;    
     }
@@ -224,15 +225,18 @@ class StatusResolver
                         break;
                 }
             }
-            if($collection->count()>0)
+            if($collection && $collection->count()>0)
             {
+                $bn=new BaseNotification($this->model);   
+
                 $userstobenotified=$collection->unique();            
                 foreach($userstobenotified as $u)
                 {
-                    //$notificationClass="App\\Notifications\\".(new \ReflectionClass($this->model))->getShortName()."Notification";
-                    //$bn=new $notificationClass($this->model);
-                    $bn=new BaseNotification($this->model);                    
-                    $u->notify($bn);
+                    $notificationClass="App\\Notifications\\".(new \ReflectionClass($this->model))->getShortName()."Notification";
+                    if(class_exists($notificationClass))                                        
+                        $bn=new $notificationClass($this->model);                       
+
+                    $u->notify($bn);                    
                 }
             }
         }

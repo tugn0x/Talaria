@@ -22,7 +22,7 @@ const RequestIcons = (props) => {
     }
 
     const canDelete = (data) => {
-        if(! (data.status=="canceled" || data.status=="received"|| data.status=="notReceived" || data.status=="waitingForCost" ) ) return true;
+        if(! (data.status=="canceled" || data.status=="readyToDelivery"|| data.status=="received"|| data.status=="notReceived" || data.status=="waitingForCost" ) ) return true;
         return false;
     }
 

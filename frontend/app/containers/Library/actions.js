@@ -24,7 +24,10 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_FIND_UPDATE_BORROWING_OA,
    REQUEST_FIND_UPDATE_BORROWING_OA_FAIL,
    REQUEST_FIND_UPDATE_BORROWING_OA_SUCCESS,
-   REQUEST_CHANGE_STATUS_BORROWING
+   REQUEST_CHANGE_STATUS_BORROWING,
+   REQUEST_GET_ISSN_ISBN,
+   REQUEST_GET_ISSN_ISBN_SUCCESS,
+   REQUEST_GET_ISSN_ISBN_FAIL
   } from "./constants";
 
 export function defaultAction() {
@@ -324,13 +327,26 @@ export function requestChangeStatusBorrowing(id,borrowing_library_id,status, mes
 }
 
 
-
-/* export function requestUpdateLibrarySuccess(result) {
+export function requestFindISSNISBN (data) {
   return {
-    type: REQUEST_UPDATE_LIBRARY_SUCCESS,
+    type: REQUEST_GET_ISSN_ISBN,
+    data    
+  };
+}
+
+export function requestFindISSNISBNSuccess(result) {
+  return {
+    type: REQUEST_GET_ISSN_ISBN_SUCCESS,
     result
   };
-} */
+}
+
+export function requestFindISSNISBNFail (result) {
+  return {
+    type: REQUEST_GET_ISSN_ISBN_FAIL,
+    result
+  };
+}
 
 export function requestSuccess() {
   return {

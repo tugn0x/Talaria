@@ -1,0 +1,17 @@
+.findISSNISBN {
+
+    button {
+        margin-left: 5px;
+        height: 20px;
+        padding: 5px;
+        line-height: 1em;
+    }
+
+    ul.issnisbn_list li {
+        list-style-position: outside;
+        list-style-image: none;
+        list-style-type: square;
+    }
+
+    /*margin: 0px 0 60px 0;*/
+}

@@ -26,7 +26,7 @@ class BorrowingDocdelRequest extends DocdelRequest
         'trash_type', //tipo cestinamento (trash o trashHC)
         'borrowing_notes', //dd_note_interne      
         'parent_id', //parent dd request id 
-        'archived', //0|1 indica se la rich è conclusa e quindi messa in archivio (impostarlo in modo automatico in base allo stato terminale)
+        'archived', //0|1 indica se la rich è archiviata
         'forward', //0|1 indica se la rich è stata reinoltrata (la rich reinoltrata avrà parent_id=id di questa richiesta)
         //'desk_delivery_format', //formato di invio del della biblio al desk                
         'operator_id',
@@ -73,7 +73,7 @@ class BorrowingDocdelRequest extends DocdelRequest
     public function userAskCancel() {
         $this->user_cancel_date=Carbon::now(); 
         if($this->borrowing_status=="newrequest" /*|| status==requested && (no other possible suppliers has accepted (willsupply) )*/ ){            
-            $this->borrowing_status="canceleddirect"; //change status without statusResolver (otherwise i need to call controller!!)
+            $this->borrowing_status="canceledDirect"; //change status without statusResolver (otherwise i need to call controller!!)
         }
         return $this->save();        
     }

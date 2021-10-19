@@ -30,13 +30,13 @@ const ApplyTag = props => {
     return (
         <UncontrolledDropdown className={`apply ${type}`} direction="down">
             <DropdownToggle color="icon" disabled={disabled}>
-                {type === 'label' ? <i className="icon-tag-plus"></i> :  <i className="fas fa-folder-plus"></i>}
+                { (type === 'label'|| type==="tag" ) ? <i className="icon-tag-plus"></i> :  <i className="fas fa-folder-plus"></i>}
             </DropdownToggle>
             <DropdownMenu center="true" className="rounded">
                 <DropdownItem header>
-                    {type === 'label' ? 
-                        <p>{intl.formatMessage({id: 'app.references.labelAs'})}</p>
-                    :  <p>{intl.formatMessage({id: 'app.references.groupAs'})}</p>}
+                    {type === 'label' && <p>{intl.formatMessage({id: 'app.references.labelAs'})}</p>}
+                    {type === 'tag' && <p>{intl.formatMessage({id: 'app.requests.tagAs'})}</p>}
+                    {type === 'group' && <p>{intl.formatMessage({id: 'app.references.groupAs'})}</p>}
                     <input type="text" name="apply-search" onChange={(e) => setQuery(e.target.value)} value={query} />
                     <i className="fas fa-search" />    
                 </DropdownItem>
@@ -51,7 +51,7 @@ const ApplyTag = props => {
                 {query.length > 0 &&
                 <div className="create-new">
                     <span>"{query}"</span>
-                    <span className="action-btn" onClick={() => submitCallBack(query)}>{intl.formatMessage({id: 'app.references.createNewLabelGroup'})}</span>
+                    <span className="action-btn" onClick={() => submitCallBack(query)}>{intl.formatMessage({id: 'app.global.createNewLabelGroupTag'})}</span>
                 </div>
                 }
             </DropdownMenu>

@@ -1,5 +1,5 @@
 export function checkPermissions(user, permissions, resource) {
-  console.log('checkPermissions', user, permissions, resource);
+  //console.log('checkPermissions', user, permissions, resource);
   if(checkRole(user, "super-admin")) {
     return true;
   }
@@ -10,7 +10,7 @@ export function checkPermissions(user, permissions, resource) {
   return permissions.map(i => resource.permissions.includes(i)).filter(i => i===true).length > 0
 }
 export function checkRole(auth, roles) {
-  console.log('checkRole', auth.permissions, roles)
+  //console.log('checkRole', auth.permissions, roles)
   if(auth.user.status !== 1) {
   // if(auth.user.status !== 1 || !auth.permissions.roles) {
     return false;

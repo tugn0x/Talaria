@@ -3,6 +3,21 @@ import {Card, Row, Col} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import './style.scss';
 
+const renderMaterialType = (typ) => {
+    const intl=useIntl();
+    let mattype="";
+
+    switch (typ) {
+        case 1: mattype=intl.formatMessage({id: "app.references.article"}); break;
+        case 2: mattype=intl.formatMessage({id: "app.references.book"}); break;
+        case 3: mattype=intl.formatMessage({id: "app.references.thesis"}); break;
+        case 4: mattype=intl.formatMessage({id: "app.references.cartography"}); break;
+        case 5: mattype=intl.formatMessage({id: "app.references.manuscript"}); break;
+    }
+
+    return mattype;
+}
+
 const ReferenceDetailContent = props => {
     console.log('ReferenceDetailContent', props)
     const {reference,customClass} = props
@@ -15,7 +30,7 @@ return (
                         <Row>
                             <Col sm={3}>
                                 <p className="text-brown">{intl.formatMessage({id: "app.references.material_type"})}</p>
-                                <p>{reference.material_type_key && intl.formatMessage({id: "app.references."+reference.material_type_key})}</p>
+                                <p>{reference.material_type && renderMaterialType(reference.material_type)}</p>
                             </Col>
                         </Row>
                     </Card>                
