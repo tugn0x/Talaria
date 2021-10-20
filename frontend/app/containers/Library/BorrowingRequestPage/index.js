@@ -126,15 +126,21 @@ const BorrowingRequestPage = (props) => {
         }
     }
 
+    const sendRequestToLender = (lender) => {
+        //dispatch( funz(id,lender)  )
+        alert("sending req to LENDER !");
+        console.log("sendRequestToLender",lender)
+    }
+
     return (
         <Loader show={isLoading}>
             <div className="detail">
                 <SectionTitle 
-                    back={false}
+                    back={isNew?false:true}
                     title={isNew?messages.headerNew:messages.headerDetail}
                 />            
                 {(isRequest && !isEdit && Object.keys(borrowing).length>0) &&                                 
-                    <BorrowingDetail history={props.history} data={borrowing} />                      
+                    <BorrowingDetail history={props.history} data={borrowing} sendRequestToLender={sendRequestToLender} />                      
                 ||
                 (isNew && isMounted) &&                 
                 <ReferenceForm    

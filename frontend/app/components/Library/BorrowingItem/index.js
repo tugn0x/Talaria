@@ -12,7 +12,7 @@ import {UncontrolledTooltip} from 'reactstrap';
 import {daysFromToday,formatDateTime} from '../../../utils/dates';
 
 
-const requesturl=(reqPath,id,op) => {
+export const requesturl=(reqPath,id,op) => {
     return generatePath(reqPath, {
         id,
         op
@@ -54,42 +54,42 @@ const statusDate = (req) => {
   )
 }
 
-const canEdit = (data) => {
+export const canEdit = (data) => {
     return data.borrowing_status=="newrequest";
 }  
 
-const canArchive=(data) => {    
+export const canArchive=(data) => {    
     return data.patrondocdelrequest && data.patrondocdelrequest.data.user 
     && data.borrowing_status!="newrequest";
     //todo: add check on status
     //...&& (...in terminal status);
 }
 
-const canDelete=(data) => {
+export const canDelete=(data) => {
     return (
         (data.borrowing_status=="newrequest" && !data.patrondocdelrequest)
     );    
 }
 
-const canCancel=(data) => {
+export const canCancel=(data) => {
     return (
         data.borrowing_status=="requested" // || (other "pending" states) 
         )
 }
 
-const canTrash=(data) => {    
+export const canTrash=(data) => {    
     return data.borrowing_status=="documentready";
 }
 
-const isArchived=(data) => {
+export const isArchived=(data) => {
     return data.archived  // || (other "pending" states)
 }
 
-const inRequest=(data) => {
+export const inRequest=(data) => {
     return data.request_date && data.borrowing_status=="requested"  // || (other "pending" states)
 }
 
-const canRequest=(data) => {
+export const canRequest=(data) => {
     return data.borrowing_status=="newrequest"
 }
 
@@ -101,7 +101,7 @@ const mustCheckData=(data) => {
 }
 
 
-const documentReady=(data) => {
+export const documentReady=(data) => {
     return data.borrowing_status=="documentready" //&&delivery_format=xxxx
 }
 
@@ -156,8 +156,8 @@ export const BorrowingRequestIcons = (props) => {
  
     return (
         !isArchived(data) && <div className="borrowing_request_icons">
-                {/*<Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fas fa-eye"></i></Link>*/}
-                {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-share"></i></a>}
+                {/*<Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fas fa-eye"></i></Link>*/}                
+                {canRequest(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-share"></i></Link>}
                 {canCancel(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-times"></i></a>}                
                 {canDelete(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-backspace"></i></a>}                
                 {canTrash(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-trash"></i></a>}                
