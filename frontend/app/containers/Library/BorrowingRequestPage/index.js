@@ -6,7 +6,7 @@ import makeSelectLibrary, {isLibraryLoading} from '../selectors';
 import {ReferenceForm,Loader} from 'components';
 import BorrowingDetail from '../../../components/Library/BorrowingDetail';
 
-import {requestLibraryTagsOptionList, requestPostNewBorrowing,requestGetBorrowing,requestUpdateBorrowing} from '../actions'
+import {requestLibraryTagsOptionList, requestPostNewBorrowing,requestGetBorrowing,requestUpdateBorrowing,requestChangeStatusBorrowing,requestGetLibrariesList} from '../actions'
 
 import {requestFindReferenceById} from '../../Reference/actions';
 
@@ -25,6 +25,7 @@ const BorrowingRequestPage = (props) => {
     const isRequest = !isNew && params.id>0        
     const isEdit= params.id>0 && params.op && params.op==='edit' 
     const borrowing=library.borrowing
+    const lendersList=library.libraryOptionList;
     //const tagsOptionList=library.tagsOptionList
     
     const queryString=window.location.search;
@@ -91,7 +92,7 @@ const BorrowingRequestPage = (props) => {
 
 
     useEffect(() => {       
-        if(props.isLogged && isRequest && !isNew && !isLoading){            
+        if(props.isLogged && isRequest && !isNew){            
             dispatch(requestGetBorrowing(params.id,match.params.library_id));
         }        
         
@@ -126,10 +127,20 @@ const BorrowingRequestPage = (props) => {
         }
     }
 
-    const sendRequestToLender = (lender) => {
-        //dispatch( funz(id,lender)  )
-        alert("sending req to LENDER !");
+    const sendRequestToLender = (lender,filter) => {
         console.log("sendRequestToLender",lender)
+        let lid=lender[0]; //DEBUG:prendo solo il primo !!
+        
+        let extrafields={            
+                'lending_library_id': lid            
+        }
+        dispatch(requestChangeStatusBorrowing(params.id,match.params.library_id,'requested',extrafields,intl.formatMessage({id: "app.requests.requestedMessage"}),filter))    
+    }
+
+    const findLender = (options) => {
+        console.log("findLender",options)        
+        //todo dispatch (filtered by option, cat ...) ...
+        dispatch(requestGetLibrariesList())
     }
 
     return (
@@ -140,7 +151,7 @@ const BorrowingRequestPage = (props) => {
                     title={isNew?messages.headerNew:messages.headerDetail}
                 />            
                 {(isRequest && !isEdit && Object.keys(borrowing).length>0) &&                                 
-                    <BorrowingDetail history={props.history} data={borrowing} sendRequestToLender={sendRequestToLender} />                      
+                    <BorrowingDetail history={props.history} data={borrowing} sendRequestToLender={sendRequestToLender} findLender={findLender} lendersList={lendersList} />                      
                 ||
                 (isNew && isMounted) &&                 
                 <ReferenceForm    

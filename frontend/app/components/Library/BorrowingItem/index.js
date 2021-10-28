@@ -58,9 +58,12 @@ export const canEdit = (data) => {
     return data.borrowing_status=="newrequest";
 }  
 
+
 export const canArchive=(data) => {    
-    return data.patrondocdelrequest && data.patrondocdelrequest.data.user 
-    && data.borrowing_status!="newrequest";
+    return !isArchived(data) && ( 
+    (data.patrondocdelrequest && data.patrondocdelrequest.data.user 
+    && data.borrowing_status!="requested" && data.borrowing_status!="newrequest" && data.borrowing_status!="canceled" && data.borrowing_status!="cancelRequested")
+    ||(data.borrowing_status=="canceled" ) );
     //todo: add check on status
     //...&& (...in terminal status);
 }
@@ -86,7 +89,7 @@ export const isArchived=(data) => {
 }
 
 export const inRequest=(data) => {
-    return data.request_date && data.borrowing_status=="requested"  // || (other "pending" states)
+    return (data.request_date!=null)    
 }
 
 export const canRequest=(data) => {
@@ -142,10 +145,11 @@ export const BorrowingReferenceIcons = (props) => {
         !isArchived(data) && <div className="borrowing_reference_icons">
                 {canEdit(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'edit')}><i className="fas fa-edit"></i></Link>}
                 {data.reference.data.oa_link && <a href={data.reference.data.oa_link} target="_blank" className='btn btn-icon'><i className="icon-oa"></i></a>} 
-                {!inRequest(data) && !oaloading && !data.reference.data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev) }><i className="fas fa-search"></i>OA</a>}
-                {/* NOT WORK THIS (issn_search_enabled || isbn_search_enabled ) && */ !inRequest(data) && mustCheckData(data) /* && f(x) */ && <a target="_blank" className='btn btn-icon' onClick={()=>findISSNISBNtoggle()}><i className="fas fa-tasks"></i></a>}
-                {!inRequest(data) && oaloading && <i className="fas fa-spinner fa-spin"></i>}                
-                {!inRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO !')}><i className="fa fa-search-location"></i></a>}
+                {canRequest(data) && !oaloading && !data.reference.data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev) }><i className="fas fa-search"></i>OA</a>}
+                {(issn_search_enabled || isbn_search_enabled ) && canRequest(data) &&  mustCheckData(data) && <a target="_blank" className='btn btn-icon' onClick={()=>findISSNISBNtoggle()} title="checkISSN/ISBN"><i className="fas fa-keyboard"></i></a>}
+                {canRequest(data) &&  !mustCheckData(data) && <span className="btn btn-icon"><i className="fas fa-check-double"></i></span>}
+                {canRequest(data) && oaloading && <i className="fas fa-spinner fa-spin"></i>}                
+                {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO !')}><i className="fa fa-search-location"></i></a>}
                 {documentReady(data) && <a className="btn btn-icon"  onClick={()=>alert('TODO !')}><i className="fas fa-file-pdf"></i></a>}
         </div>
     )
@@ -201,7 +205,7 @@ const BorrowingItem = (props) => {
             <Col sm={3} className="align-self-center">            
             {inRequest(data) &&             
             <>
-               {data.lendingLibrary && 
+               {data.lendingLibrary && data.lendingLibrary.data.id>0  && 
                 <span>
                     <i className="fas fa-landmark"></i> {data.lendingLibrary.data.name}
                 </span>                

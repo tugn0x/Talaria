@@ -28,7 +28,7 @@ class NotificationController extends ApiController
 
     public function index(Request $request)
     {
-        $collection = $this->nilde->index($this->model->owned()->select('*'), $request, function($collection, $request)
+        $collection = $this->nilde->index($this->model->owned()->select('*')->orderBy('created_at','desc'), $request, function($collection, $request)
         {
             if($request->has("readed"))
             {

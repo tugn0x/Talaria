@@ -8,7 +8,7 @@ import {canRequest} from '../BorrowingItem'
 import BorrowingChooseLender from '../BorrowingChooseLender'
 
 const BorrowingRequestOperations = (props) => {
-    const {data, sendRequestToLender} = props
+    const {data, sendRequestToLender,findLender,lendersList} = props
 
     const intl=useIntl();   
          
@@ -23,7 +23,7 @@ const BorrowingRequestOperations = (props) => {
                     check holdings on available catalogs !
                 </div>
                 }
-                <BorrowingChooseLender selectLenderCb={sendRequestToLender}/>                                                                
+                <BorrowingChooseLender selectLenderCb={sendRequestToLender} findLender={findLender} lendersList={lendersList}/>                                                                
             </div>}
         </div>
     )

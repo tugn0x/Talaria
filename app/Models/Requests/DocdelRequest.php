@@ -16,6 +16,8 @@ class DocdelRequest extends BaseModel
         'reference_id',
         'borrowing_library_id',
         'lending_library_id',
+        'borrowing_status', //status req. borrow
+        'lending_status', //status req. lending
         'request_type', //0=DD 1: ILL        
         'request_date', //dd_datarichie Data richiesta alla bib lender
         'request_protnr', //dd_nprotrichie
@@ -33,6 +35,8 @@ class DocdelRequest extends BaseModel
         'cancel_request_date', //data richiesta annullamento alla lender
         'cancel_date', //data accettazione richiesta annullamento da lender
         'fulfill_inventorynr', //dd_ninventario_forni        
+        'all_lender', //0=no, 1=all lending library will see this request, 2=some lending libraries will see this request
+
         
         //TODO
         //'delivery_format', //diverso da fullfill_type? formato di invio del della biblioF alla biblioR
@@ -76,10 +80,22 @@ class DocdelRequest extends BaseModel
         return $this->belongsTo(Library::class,'borrowing_library_id');
     }
 
+    public function borrowingLibraryOperators() {
+        $blib=$this->borrowinglibrary;        
+        if($blib)
+            return $blib->operators("borrow");
+    }
+
     public function lendinglibrary()
     {
         return $this->belongsTo(Library::class,'lending_library_id');
-    }      
+    }     
+    
+    public function lendingLibraryOperators() {
+        $llib=$this->lendinglibrary;        
+        if($llib)
+            return $llib->operators("lend");
+    }
 
     public function scopeInReference($query, $reference_id)
     {

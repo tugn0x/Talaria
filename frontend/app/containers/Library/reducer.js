@@ -47,6 +47,11 @@ export const initialState = {
     loading:false,
     data: [],    
   },
+  libraryOptionList: {
+    loading: false,
+    data:[],
+    pagination: {}
+  },
   error: null,
   user: {}
 };
@@ -131,13 +136,13 @@ const libraryReducer = (state = initialState, action) =>
         draft.error = action.error;
         break;
        case REQUEST_GET_LIBRARIES_LIST:
-        draft.loading = true;
+        draft.libraryOptionList.loading=true
         draft.error = action.error;
         break;
       case REQUEST_GET_LIBRARIES_LIST_SUCCESS:
-        draft.loading = false;
+        draft.libraryOptionList.loading = false;
         draft.error = initialState.error;
-        draft.libraryOptionList = action.result.data
+        draft.libraryOptionList = action.result
         break;
 
         case REQUEST_GET_LIBRARY_TAGS_OPTIONLIST:

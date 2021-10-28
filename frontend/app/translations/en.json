@@ -291,6 +291,7 @@
   "app.requests.notReceived":"Not received",  
   "app.requests.canceled":"Canceled",
   "app.requests.canceledDirect":"Canceled Dir.",
+  "app.requests.cancelRequested": "Cancel requested",
   "app.requests.waitingForCost": "Waiting for corst",
   "app.requests.costAccepted": "Cost accepted",
   "app.requests.costNotAccepted":"Cost not accepted",
@@ -308,6 +309,7 @@
   "app.requests.askCancelRequestMessage": "Cancel the request?",
   "app.requests.cancelAskedMessage": "Canceled successfully",  
   "app.requests.canceledMessage": "Request canceled",  
+  "app.requests.requestedMessage": "Request sent",  
   "app.requests.tagAs": "Tag as",
   
   "app.components.OASearchReferenceForm.bodySearch": "Search a reference by entering DOI, PMID or ISBN or exact title",

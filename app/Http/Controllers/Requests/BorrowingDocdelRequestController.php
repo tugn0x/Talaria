@@ -9,7 +9,6 @@ use App\Models\BaseTransformer;
 use App\Models\Libraries\Tag;
 use App\Models\Requests\BorrowingDocdelRequest;
 use App\Models\Requests\BorrowingDocdelRequestTransformer;
-use App\Resolvers\StatusResolver;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -172,50 +171,22 @@ class BorrowingDocdelRequestController extends ApiController
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
-
-    //TODO: FIX
+    
     public function changeStatus(Request $request,$id)
     {
         // $this->authorize($this->model);
         $id = $request->route()->parameters['id'];
         $model = $this->model->findOrFail($id);
 
+        $extra=$request->has("extrafields")?$request->input("extrafields"):[];
+        
         if($request->input("status"))
-        {
-            $sr=new StatusResolver($model);
-            
-            $newstatus=$request->input("status");
-
-            $others=[];            
-
-            switch ($newstatus)
-            {                
-                case 'canceled': 
-                    $others=['cancel_date'=>Carbon::now()]; 
-                    if($model->borrowing_status=="newrequest" && !$model->patrondocdelrequest) //new request without patron
-                    {                        
-                        $model->forceDelete();
-                        return $this->response->item($model, new $this->transformer())->morph();
-                    }
-                    else if($model->borrowing_status=="newrequest") //new request with patron
-                    {
-                        $newstatus="canceledDirect";                        
-                    } 
-                    else if($model->lendingLibrary) 
-                        $newstatus="cancelequested";                                                      
-                    else {
-                        $newstatus="canceled";
-                    }
-                    break;
-                    
-                case 'canceledDirect': 
-                    $others=['cancel_date'=>Carbon::now()];
-                    break;
-            }
-
-            $sr->changeStatus($newstatus,$others);
-        }
-        return $this->response->item($model, new $this->transformer())->morph();
+            $model=$model->changeStatus($request->input("status"),$extra);
+        
+        if($model)
+            return $this->response->item($model, new $this->transformer())->morph();           
+        else //if i delete the model 
+            return $this->response->noContent();
     }
 }
 

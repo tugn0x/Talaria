@@ -427,14 +427,18 @@ export function* findUpdateOABorrowingSaga(action) {
 export function* requestChangeStatusBorrowingSaga(action) {
   const options = {
     method: 'put',
-    body: {'status': action.status },
+    body: {'status': action.status,
+     'extrafields': {...action.extrafields},    
+    },
     id: action.id,
     borrowing_library_id: action.borrowing_library_id,
   };
   try {
+    //console.log("requestChangeStatusBorrowingSaga - action",action)
+    //console.log("requestChangeStatusBorrowingSaga - options",options)
     const request = yield call(changeStatusBorrowingRequest, options);    
     yield put (requestBorrowingsList(action.borrowing_library_id))    
-    yield put (push("/library/"+action.borrowing_library_id+"/borrowing/"));
+    yield put (push("/library/"+action.borrowing_library_id+"/borrowing/"));    
     yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));

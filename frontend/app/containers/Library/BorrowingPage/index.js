@@ -81,7 +81,7 @@ const BorrowingPage = (props) => {
              cancelText: intl.formatMessage({id: 'app.global.no'})
          }); //
          if(conf)
-             dispatch(requestChangeStatusBorrowing(id,match.params.library_id,'canceled',intl.formatMessage({id: "app.requests.cancelAskedMessage"}),filter))
+             dispatch(requestChangeStatusBorrowing(id,match.params.library_id,'canceled',null,intl.formatMessage({id: "app.requests.cancelAskedMessage"}),filter))
      } 
 
      async function askArchiveRequest (id,filter) {
@@ -111,7 +111,6 @@ const BorrowingPage = (props) => {
 
         dispatch(requestUpdateBorrowing(borrowingReq.id,match.params.library_id,newBorrowing,intl.formatMessage({id: "app.global.updatedMessage"}),filter))         
      }
-
           
     return (
         <>
@@ -142,7 +141,7 @@ const BorrowingPage = (props) => {
                 oaloading={oaloading}
                 findISSNISBNcb={(id,data)=>findISSNISBNcb(id,data)}
                 findISSNISBNresults={findISSNISBNresults}
-                updateISSNISBNReference={updateISSNISBNReference}
+                updateISSNISBNReference={updateISSNISBNReference}                
             />
           </>  
     )

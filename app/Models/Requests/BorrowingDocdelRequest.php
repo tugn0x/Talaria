@@ -11,6 +11,8 @@ namespace App\Models\Requests;
 use App\Models\Libraries\Tag;
 use Carbon\Carbon;
 use Auth;
+use App\Resolvers\StatusResolver;
+
 
 
 class BorrowingDocdelRequest extends DocdelRequest
@@ -20,8 +22,7 @@ class BorrowingDocdelRequest extends DocdelRequest
         'docdel_request_parent_id', //id della docdelrequest "padre" (se una rich. viene reinoltrata N volte, tutte le N avranno come parent la rich. originale, in modo da ricostruire lo storico!)
         'patron_docdel_request_id',
         'accept_cost_status', //Stato accettazione utente dopo richiesta: 1=Biblio richiede accettazione, 2=Ute accetta, 3=Ute non accetta
-        'accept_cost_date', //quando ha accettato/rifiutato il costo        
-        'borrowing_status', //stato rich. borrow
+        'accept_cost_date', //quando ha accettato/rifiutato il costo                
         'trash_date', //data cestinamento
         'trash_type', //tipo cestinamento (trash o trashHC)
         'borrowing_notes', //dd_note_interne      
@@ -31,8 +32,7 @@ class BorrowingDocdelRequest extends DocdelRequest
         //'desk_delivery_format', //formato di invio del della biblio al desk                
         'operator_id',
         'user_license', //(NULL=non impostato, 0=can't send pdf to user, 1=ok can send pdf to user,2=not specified in the lic.)
-        'user_cancel_date', //data rich canc da utente  
-        'all_lender', //0=no, 1=all library will see this              
+        'user_cancel_date', //data rich canc da utente          
 
     ];
       
@@ -71,11 +71,14 @@ class BorrowingDocdelRequest extends DocdelRequest
     }
 
     public function userAskCancel() {
-        $this->user_cancel_date=Carbon::now(); 
-        if($this->borrowing_status=="newrequest" /*|| status==requested && (no other possible suppliers has accepted (willsupply) )*/ ){            
-            $this->borrowing_status="canceledDirect"; //change status without statusResolver (otherwise i need to call controller!!)
-        }
-        return $this->save();        
+        $other=["user_cancel_date"=>Carbon::now()]; 
+
+        if($this->borrowing_status=="newrequest"  //new request
+        ||($this->borrowing_status=="requested" && $this->lending_status=="requestReceived") ) //requested but no lender accept the request issuing "i will supply" 
+            $this->changeStatus("canceledDirect",$other);
+        
+        else if($this->borrowing_status=="requested") //may have already accepted/not the request
+            $this->changeStatus("cancelRequested",$other);                               
     }
 
     public function canManage(User $user=null){
@@ -97,7 +100,6 @@ class BorrowingDocdelRequest extends DocdelRequest
         return $query->where('borrowing_library_id', $library_id);
     }  
     
-    
     public function scopeByTags($query, $tagIds){
         return $query->whereHas('tags', function($q) use ($tagIds){
             $arr=explode(',',$tagIds);
@@ -105,6 +107,69 @@ class BorrowingDocdelRequest extends DocdelRequest
                 return $q->whereIn('tags.id', $arr);
             return;    
         });        
+    }
+
+    public function changeStatus($newstatus,$others=[]) {
+            $sr=new StatusResolver($this);                        
+
+            switch ($newstatus)
+            {                
+                case 'requested': 
+                    
+                    //all libraries selected
+                    if($others["lending_library_id"]==0)
+                    {
+                        $others["lending_library_id"]=null;
+                        $others["all_lender"]=1;
+                    }
+
+                    $others=array_merge($others,[
+                        'request_date'=>Carbon::now(),
+                        'lending_status'=>'requestReceived'
+                    ]);
+                    break;
+
+                case 'canceled':                    
+                    if($this->borrowing_status=="newrequest" && !$this->patrondocdelrequest) //new request without patron
+                    {                        
+                        $this->forceDelete();
+                        return; //return $this->response->item($this, new $this->transformer())->morph();
+                    }
+                    else if($this->borrowing_status=="newrequest") //new request with patron
+                    {
+                        $newstatus="canceledDirect";                        
+                        return $this->changeStatus($newstatus,$others);                     
+                    } 
+                    else if($this->lendingLibrary && $this->borrowing_status!="cancelRequested") //cancel with lender
+                    {                          
+                        $newstatus="cancelRequested";                                                                            
+                        return $this->changeStatus($newstatus,$others);                     
+                    }
+                    else {                        
+                        $others=array_merge($others,['cancel_date'=>Carbon::now()]); 
+                        $newstatus="canceled";                    
+                    }
+                    
+                    break;
+                    
+                case 'canceledDirect': 
+                    $others=array_merge($others,['cancel_date'=>Carbon::now()]);
+                    break;
+                /*case 'canceledAccepted': 
+                        $others=array_merge($others,['cancel_date'=>Carbon::now()]);
+                        break;    
+                */
+                case 'cancelRequested': 
+                    $others=array_merge($others,[
+                        'cancel_request_date'=>Carbon::now(),
+                        'lending_status'=>'cancelRequested'
+                    ]);
+                    break;
+
+            }
+
+            $sr->changeStatus($newstatus,$others);
+            return $this;
     }
      
 }

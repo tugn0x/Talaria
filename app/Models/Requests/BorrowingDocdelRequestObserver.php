@@ -24,8 +24,7 @@ class BorrowingDocdelRequestObserver extends BaseObserver
 
     public function creating($model)
     {
-         //quando salvo viene messa in richiesta in quanto di default è status=requested
-         $model->request_date=Carbon::now();
+         //quando salvo viene messa in richiesta in quanto di default è status=requested         
          $model->request_type=0; //DD
          $model->forward=0;         
          $model->borrowing_status="newrequest";

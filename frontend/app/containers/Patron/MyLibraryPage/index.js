@@ -14,7 +14,7 @@ import {fields, fieldsIsNew} from './fields';
 import messages from './messages';
 import makeSelectLibrary from 'containers/Library/selectors';
 import { CustomForm } from 'components';
-import {requestUser,requestGetLibrary, requestGetLibrariesList} from 'containers/Library/actions';
+import {requestUser,requestGetLibrary} from 'containers/Library/actions';
 import {requestAccessToLibrary,requestUpdateAccessToLibrary,requestSearchPlacesByText,requestGetLibraryListNearTo} from '../actions';
 import { placesSelector,libraryListSelector } from '../selectors';
 

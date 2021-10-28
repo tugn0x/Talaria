@@ -1,5 +1,5 @@
 <?php
-//NB: il nome dello stato deve essere di max(20) caratteri!
+//NB: status "name" must be less than 20 char lenght!
 //NOTA: everytime you change this, please run:
 //php artisan cache:clear + php artisan optimize 
 
@@ -13,7 +13,7 @@ return [
                         'role'  =>  ['patron'],
                         'next_statuses'  =>  ['canceled','received','waitingForCost','notReceived','readyToDelivery'],
                         'constraints'   =>  ['isOwner'],
-                        /*'notify'    =>  [
+                        /*'notify'    =>  [   //Notify is managed directly in patronrequest created observer method
                             'Model'=>'libraryOperators',                               
                         ],*/
                         'jobs'=>[]
@@ -21,10 +21,7 @@ return [
                     'canceled'	=> [
                         'role'  =>  ['patron'],
                         'next_statuses'  =>  [],
-                        'constraints'   =>  ['isOwner'],
-                        /*'notify'    =>  [
-                            'Model'=>'libraryOperators',
-                        ],*/
+                        'constraints'   =>  ['isOwner'],                        
                         'jobs' => ['App\\Jobs\\PatronUpdateBorrowing']
                     ],
                     'waitingForCost' => [
@@ -98,41 +95,57 @@ return [
             'App\Models\Requests\BorrowingDocdelRequest'=> [
                 'flow_tree' => [
                     'newrequest'	=> [
-                        'role'  =>  [],//borrow/lend/manage?
+                        'role'  =>  [],//borrow?
                         'next_statuses'  =>  ['canceled','canceledDirect','requested'],
                         'constraints'   =>  [],                        
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',                            
+                        ],  
                     ],
                     'canceled'	=> [
                         'role'  =>  [],//borrow/lend/manage?
                         'next_statuses'  =>  [],
-                        'constraints'   =>  ['canManage'],                        
+                        'constraints'   =>  [],  
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',                            
+                        ],  
+                        'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
                     ],
+                    //NOTE on canceledDirect: i removed constraint because this status can be changed both from patron or borrower                       
                     'canceledDirect'	=> [
-                        'role'  =>  [],//borrow/lend/manage?,
+                        'role'  =>  [],//borrow?,
                         'next_statuses'  =>  [],
-                        'constraints'   =>  ['canManage'],                        
+                        'constraints'   =>  [],     
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',
+                        ],                                              
                     ],
+                    //NOTE on cancelRequested: i removed constraint because this status can be changed both from patron or borrower                       
                     'cancelRequested'	=> [
                         'role'  =>  [],//borrow/lend/manage?,
-                        'next_statuses'  =>  ['canceledAccepted','canceled'],
-                        'constraints'   =>  ['canManage'],                        
-                        /*'notify'    =>  [
-                            'Model'=>'lender',
-                        ],  */  
-                        //'jobs' => ['App\Jobs\LendingRequestUpdate']
+                        'next_statuses'  =>  ['canceled'],
+                        'constraints'   =>  [],  
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',
+                        ],  
+                        'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
                     ],
-                    'canceledAccepted'	=> [
+                    /*'canceledAccepted'	=> [
                         'role'  =>  [],//borrow/lend/manage?,
                         'next_statuses'  =>  ['canceled'],
-                        'constraints'   =>  [],                        
-                    ],
-                    'requested'	=> [
-                        'role'  =>  [],//borrow/lend/manage?,
-                        'next_statuses'  =>  ['canceledDirect','cancelRequested'],
                         'constraints'   =>  [],  
-                        /*'notify'    =>  [
-                            'Model'=>'lender o tutti i lender (x orphan req)',
-                        ],  */                    
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',                            
+                        ],                        
+                    ],*/                    
+                    'requested'	=> [
+                        'role'  =>  [],//borrow?,
+                        'next_statuses'  =>  ['canceledDirect','cancelRequested'],
+                        'constraints'   =>  ["canManage"],  
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',                                                        
+                        ],  
+                        'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
                     ],
 
                 ]

@@ -6,13 +6,13 @@ import RequestTags from '../RequestTags'
 
 const BorrowingDetail = (props) => {
     console.log('BorrowingDetail', props)
-    const {data,sendRequestToLender} = props
+    const {data,sendRequestToLender,findLender,lendersList} = props
     const intl = useIntl()
 
     return (<div className="borrowingDetail">
                 <RequestTags data={data.tags.data} /> 
                 <ReferenceDetailContent reference={data.reference.data} customClass="detail-body"/>                                
-                <BorrowingRequestOperations data={data} sendRequestToLender={sendRequestToLender}/>
+                <BorrowingRequestOperations data={data} sendRequestToLender={sendRequestToLender} findLender={findLender} lendersList={lendersList}/>
             </div>
     );
 };

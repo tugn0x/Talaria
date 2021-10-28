@@ -5,8 +5,7 @@ namespace App\Models\Requests;
 class LendingDocdelRequest extends DocdelRequest
 {
 
-    private $lending_attributes=[
-        'lending_status', //stato rich. borrow
+    private $lending_attributes=[        
         'lending_notes', //dd_note_interne     
         'lending_archived', //0|1 indica se la rich è archiviata 
     ];

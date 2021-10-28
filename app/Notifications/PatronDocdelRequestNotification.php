@@ -33,8 +33,8 @@ class PatronDocdelRequestNotification extends BaseNotification
     {
         $pdrid=$this->object->id;
         return [      
-               'title'=>'Patron Notification',   
-               'message'=>'bla bla bla!',
+                'title'=>"Request #$pdrid status changed",   
+                'message'=>'Request status:'.$this->object->status,
                'url'=>"/patron/requests/$pdrid",
                'object_type'=>get_class($this->object),
                'object_id'=>$pdrid              

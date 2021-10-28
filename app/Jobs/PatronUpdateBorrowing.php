@@ -53,14 +53,14 @@ class PatronUpdateBorrowing implements ShouldQueue
                                 {
                                     $borrddr->userAskCancel();
                                     
-                                    $n=new BorrowingDocdelRequestNotification($borrddr);
+                                    /*$n=new BorrowingDocdelRequestNotification($borrddr);
 
                                     $lib=$this->patronddrequest->library;
                                     //get all borrowing/lending/.. operators
                                     $oper= $lib->operators("borrow");
             
                                     foreach ($oper as $op)    
-                                      $op->notify($n);    
+                                      $op->notify($n);    */
                                 }
                             }
                             break;

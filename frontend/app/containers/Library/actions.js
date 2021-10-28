@@ -99,10 +99,11 @@ export function requestDeleteUser(id,library_id,message) {
   };
 } */
 
-export function requestGetLibrariesList(page) {
+export function requestGetLibrariesList(page='1',query) {
   return {
     type: REQUEST_GET_LIBRARIES_LIST,
-    page
+    page,
+    query
   };
 }
 
@@ -315,12 +316,13 @@ export function requestFindUpdateOABorrowingReferenceSuccess(result) {
   };
 }
 
-export function requestChangeStatusBorrowing(id,borrowing_library_id,status, message,filter) {
+export function requestChangeStatusBorrowing(id,borrowing_library_id,status, extrafields,message,filter) {
   return {
     type: REQUEST_CHANGE_STATUS_BORROWING,
     id,
-    borrowing_library_id,
+    borrowing_library_id,    
     status,
+    extrafields,
     message,
     filter
   };

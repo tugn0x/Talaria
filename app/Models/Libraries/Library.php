@@ -181,11 +181,15 @@ class Library extends BaseModel
 
         $users = User::all();        
         $lib=self::find($this->id);
+        $filtered=new Collection();
 
-        $filtered = $users->filter(function ($user) use ($ability,$lib) 
+        if($ability)
         {
-            return ($user->can($ability, $lib)||$user->can("manage", $lib));
-        });
+            $filtered = $users->filter(function ($user) use ($ability,$lib) 
+            {
+                return ($user->isNotA('super-admin') && ($user->can($ability, $lib)||$user->can("manage", $lib)) );
+            });        
+        }
 
         return $filtered;
     }
