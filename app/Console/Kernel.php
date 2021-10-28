@@ -1,9 +1,13 @@
 <?php
+//To run this we have to put in cron like
+//* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
+//to check if some jobs is in queue:  php artisan queue:list
 
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Jobs\AutomaticCleanDDRequests;
 
 class Kernel extends ConsoleKernel
 {
@@ -23,9 +27,8 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected function schedule(Schedule $schedule)
-    {
-        // $schedule->command('inspire')
-        //          ->hourly();
+    {        
+        $schedule->job(new AutomaticCleanDDRequests)->everyMinute();
     }
 
     /**
