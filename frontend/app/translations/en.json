@@ -86,8 +86,8 @@
   "app.containers.UserProfile.header": "Profilo utente",
   "app.containers.UserProfile.subtitle": "Aggiorna il profilo",
 
-  "app.containers.ReferencesListPage.OAfoundAndUpdateMessage": "Versione OA trovata. Riferimento aggiornato.",
-  "app.containers.ReferencesListPage.OAnotfoundAndUpdateMessage": "Versione OA NON trovata. Riferimento non aggiornato.",
+  "app.containers.ReferencesListPage.OAfoundAndUpdateMessage": "OA version found, reference updated!",
+  "app.containers.ReferencesListPage.OAnotfoundAndUpdateMessage": "OA version not found. Reference not updated.",
   
   "app.containers.ReferencesLabels.labelRemoveMessage": "Etichetta eliminata con successo",
   "app.containers.ReferencesLabels.labelUpdateMessage": "Etichetta aggiornata con successo",
@@ -204,14 +204,14 @@
   "app.components.LibraryForm.ill_referent_name": "nome referente ",
   "app.components.LibraryForm.alt_name": "Nome alternativo ",
 
-  "app.components.findOA.oapubfound":"La pubblicazione è disponibile OA, clicca qui!",
-  "app.components.findOA.oapubnotfound":"Versione OA non disponibile",
-  "app.components.findOA.oapubverify":"Verifica se la pubblicazione esiste in versione OA",
-  "app.components.findOA.oafindButton":"Trova OA",
+  "app.components.findOA.oapubfound":"OA version found, click here to get it!",
+  "app.components.findOA.oapubnotfound":"OA version not found.",
+  "app.components.findOA.oapubverify":"Check if the publication is OA available",
+  "app.components.findOA.oafindButton":"Check OA availability",
 
   
-  "app.components.Notification.header": "Notifiche",
-  "app.components.Notification.mark_all_as_read": "Segna tutte come lette",
+  "app.components.Notification.header": "Notifications",
+  "app.components.Notification.mark_all_as_read": "Mark all as read",
 
   "app.containers.ReferencePage.header": "Inserisci/Modifica riferimento",
   "app.containers.ReferencePage.headerNew": "Nuovo Riferimento",
