@@ -80,8 +80,8 @@ export const canCancel=(data) => {
         )
 }
 
-export const canTrash=(data) => {    
-    return data.borrowing_status=="documentready";
+export const canForward=(data)=>{
+    return canArchive(data)
 }
 
 export const isArchived=(data) => {
@@ -156,15 +156,16 @@ export const BorrowingReferenceIcons = (props) => {
 }
 
 export const BorrowingRequestIcons = (props) => {
-    const {data,reqPath,askCancelRequest,askArchiveRequest}=props;    
+    const {data,reqPath,askCancelRequest,askArchiveRequest,customClass}=props;    
  
     return (
-        !isArchived(data) && <div className="borrowing_request_icons">
+        !isArchived(data) && <div className={"borrowing_request_icons " + (customClass?customClass:'')}>
                 {/*<Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fas fa-eye"></i></Link>*/}                
                 {canRequest(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-share"></i></Link>}
                 {canCancel(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-times"></i></a>}                
                 {canDelete(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-backspace"></i></a>}                
-                {canTrash(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-trash"></i></a>}                
+                {documentReady(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-trash"></i></a>}                
+                {canForward(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-redo"></i></a>}                
                 {canArchive(data) && askArchiveRequest && <a className="btn btn-icon" onClick={()=>askArchiveRequest(data.id)}><i className="fas fa-hdd"></i></a>}                
         </div>
     )
@@ -197,14 +198,14 @@ const BorrowingItem = (props) => {
                 <BorrowingPatronRequest data={data}/>            
             }              
             </Col>
-            <Col sm={3}>      
+            <Col sm={5}>      
             <RequestTags data={data.tags.data} removeTag={removeTag}/>                 
             <ReferenceCitation data={data.reference.data}/>
             <BorrowingReferenceIcons data={data} reqPath={editPath} findAndUpdateOABorrowingReference={findAndUpdateOABorrowingReference} oaloading={oaloading} findISSNISBNtoggle={findISSNISBNtoggle} />                
             </Col>
-            <Col sm={3} className="align-self-center">            
+            <Col sm={3} className="">
             {inRequest(data) &&             
-            <>
+            <div className="lendersbox">
                {data.lendingLibrary && data.lendingLibrary.data.id>0  && 
                 <span>
                     <i className="fas fa-landmark"></i> {data.lendingLibrary.data.name}
@@ -218,11 +219,9 @@ const BorrowingItem = (props) => {
                {!isArchived(data) && data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
                
                <span className="fullfilment">...[fulfilled/unfilled status]...</span>              
-            </>            
-            }            
-            </Col>
-            <Col sm={2} className="icons align-self-center">
-            <BorrowingRequestIcons data={data} reqPath={editPath} askCancelRequest={askCancelRequest} askArchiveRequest={askArchiveRequest}/>                                
+            </div>            
+            }   
+            <BorrowingRequestIcons customClass="icons d-flex justify-content-center" data={data} reqPath={editPath} askCancelRequest={askCancelRequest} askArchiveRequest={askArchiveRequest}/>                                
             </Col> 
         </Row>
     )
