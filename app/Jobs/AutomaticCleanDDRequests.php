@@ -23,20 +23,38 @@ class AutomaticCleanDDRequests implements ShouldQueue
         //
     }
 
+    private function updateCanceledRequests() {
+        //automatic "accept cancel" for borrowing request in cancelRequested state
+        $borrowings=BorrowingDocdelRequest::where('borrowing_status','=','cancelRequested')
+        ->whereNotNull('cancel_request_date')
+        ->whereRaw("DATEDIFF(now(),cancel_request_date) >= 2")->get();        
+        foreach($borrowings as $borr)             
+            $borr->changeStatus("canceledAccepted",["lending_status"=>"canceledAccepted"]);
+
+    }
+
+    private function resetNotAcceptedRequests() {
+        //automatic "restart as new" for borrowing request in requested state
+        $reqborrowings=BorrowingDocdelRequest::where('borrowing_status','=','requested')
+        ->whereNotNull('request_date')
+        ->whereRaw("DATEDIFF(now(),request_date) >= 5")->get();        
+        foreach($reqborrowings as $borr)
+        {            
+            $borr->changeStatus("newrequest",["lending_status"=>null,'lending_library_id'=>null]);                
+        }
+    }
+    
+
     /**
      * Execute the job.
      *
      * @return void
+     * 
+     * NOTE: this job is called from app\Console\Kernel.php, through the artisan queue command runned by crontab
      */
     public function handle()
     {
-        //automatic "accept cancel" for borrowing request in cancelRequested state
-        $borrowings=BorrowingDocdelRequest::where('borrowing_status','=','cancelRequested')
-        ->whereNotNull('cancel_request_date')
-        ->whereRaw("DATEDIFF(now(),cancel_request_date) >= 5")->get();        
-        foreach($borrowings as $borr)             
-            $borr->changeStatus("canceled",["lending_status"=>"cancelAccepted"]);
-
-        
+        $this->updateCanceledRequests();
+        $this->resetNotAcceptedRequests();
     }
 }
