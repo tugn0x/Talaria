@@ -101,6 +101,7 @@ return [
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                            
                         ],  
+                        //TODO: 'jobs'=>['App\Jobs\BorrowingRequestReset'] //clean all temp lender to start new request and update lender (if only 1) saying request was canceled
                     ],
                     'canceled'	=> [
                         'role'  =>  [],//borrow/lend/manage?
@@ -119,6 +120,7 @@ return [
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',
                         ],                                              
+                        //'jobs' => ['App\Jobs\LendingRequestUpdateNotify'] non posso notificare xke' non ho più il lender!
                     ],
                     //NOTE on cancelRequested: i removed constraint because this status can be changed both from patron or borrower                       
                     'cancelRequested'	=> [
@@ -130,17 +132,20 @@ return [
                         ],  
                         'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
                     ],
-                    /*'canceledAccepted'	=> [
+                    'canceledAccepted'	=> [
                         'role'  =>  [],//borrow/lend/manage?,
                         'next_statuses'  =>  ['canceled'],
                         'constraints'   =>  [],  
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                            
                         ],                        
-                    ],*/                    
+                    ],
+
+                    //Note: i added also "canceled" next status, because from frontend 
+                    //we need to change in "canceled" (from requested state) but we don't know what will be really the next status (cancelDirect,cancelRequested)
                     'requested'	=> [
                         'role'  =>  [],//borrow?,
-                        'next_statuses'  =>  ['canceledDirect','cancelRequested'],
+                        'next_statuses'  =>  ['newrequest','canceled','canceledDirect','cancelRequested'], 
                         'constraints'   =>  ["canManage"],  
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                                                        

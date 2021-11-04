@@ -290,6 +290,7 @@
   "app.requests.received":"Received",  
   "app.requests.notReceived":"Not received",  
   "app.requests.canceled":"Canceled",
+  "app.requests.canceledAccepted": "Canceled accepted",
   "app.requests.canceledDirect":"Canceled Dir.",
   "app.requests.cancelRequested": "Cancel requested",
   "app.requests.waitingForCost": "Waiting for corst",

@@ -73,11 +73,12 @@ class BorrowingDocdelRequest extends DocdelRequest
     public function userAskCancel() {
         $other=["user_cancel_date"=>Carbon::now()]; 
 
-        if($this->borrowing_status=="newrequest"  //new request
-        ||($this->borrowing_status=="requested" && $this->lending_status=="requestReceived") ) //requested but no lender accept the request issuing "i will supply" 
+        if($this->borrowing_status=="newrequest")  //new request
             $this->changeStatus("canceledDirect",$other);
+        else if($this->borrowing_status=="requested" && $this->lending_status=="requestReceived")  //requested but no lender accept the request issuing "i will supply" 
+            $this->changeStatus("newrequest",$other); //restart as new request
         
-        else if($this->borrowing_status=="requested") //may have already accepted/not the request
+        else if($this->borrowing_status=="requested" /*&& any lending status*/ ) //may have already accepted/not the request
             $this->changeStatus("cancelRequested",$other);                               
     }
 
@@ -140,10 +141,23 @@ class BorrowingDocdelRequest extends DocdelRequest
                         $newstatus="canceledDirect";                        
                         return $this->changeStatus($newstatus,$others);                     
                     } 
-                    else if($this->lendingLibrary && $this->borrowing_status!="cancelRequested") //cancel with lender
+                    else if($this->lendingLibrary && $this->lending_status!="requestReceived" && $this->borrowing_status!="cancelRequested") //cancel with lender
                     {                          
                         $newstatus="cancelRequested";                                                                            
                         return $this->changeStatus($newstatus,$others);                     
+                    }
+                    //i lender (anche orfani) l'hanno ricevuto ma nessuno ha risposto
+                    //NOTA: impossibile notificare xke' non ho più il lender!
+                    else if($this->lending_status=="requestReceived" && $this->borrowing_status!="cancelRequested") //cancel with lender (wich not will supply)
+                    {                          
+                        $newstatus="canceledDirect";  
+                        $others=array_merge($others,['lending_library_id'=>null,'lending_status'=>null,'all_lender'=>null]);                                                                          
+                        return $this->changeStatus($newstatus,$others);                     
+                    }
+                    else if($this->borrowing_status=="cancelRequested"||$this->borrowing_status=="canceledAccepted") //cancel accepted by lender (automatic after 2 days or manually)
+                    {
+                        $others=array_merge($others,['cancel_date'=>Carbon::now()]); 
+                        $newstatus="canceled";                    
                     }
                     else {                        
                         $others=array_merge($others,['cancel_date'=>Carbon::now()]); 
@@ -153,18 +167,27 @@ class BorrowingDocdelRequest extends DocdelRequest
                     break;
                     
                 case 'canceledDirect': 
-                    $others=array_merge($others,['cancel_date'=>Carbon::now()]);
+                    $others=array_merge($others,['cancel_date'=>Carbon::now(),'archived'=>1]);
                     break;
-                /*case 'canceledAccepted': 
+                case 'canceledAccepted': 
                         $others=array_merge($others,['cancel_date'=>Carbon::now()]);
-                        break;    
-                */
+                        break;                    
                 case 'cancelRequested': 
                     $others=array_merge($others,[
                         'cancel_request_date'=>Carbon::now(),
                         'lending_status'=>'cancelRequested'
                     ]);
                     break;
+                case 'newrequest': 
+                        if($this->borrowing_status=="requested") {
+                            //if requested => reset as new request
+                            $others=array_merge($others,[
+                                'lending_library_id'=>null,
+                                'all_lender'=>0,
+                                'lending_status'=>'',                                
+                            ]);                            
+                        }
+                        break;    
 
             }
 

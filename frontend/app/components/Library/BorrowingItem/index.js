@@ -63,7 +63,7 @@ export const canArchive=(data) => {
     return !isArchived(data) && ( 
     (data.patrondocdelrequest && data.patrondocdelrequest.data.user 
     && data.borrowing_status!="requested" && data.borrowing_status!="newrequest" && data.borrowing_status!="canceled" && data.borrowing_status!="cancelRequested")
-    ||(data.borrowing_status=="canceled" ) );
+    ||(data.borrowing_status=="canceled"||data.borrowing_status=="canceledAccepted"||data.borrowing_status=="canceledDirect" ) );
     //todo: add check on status
     //...&& (...in terminal status);
 }
@@ -218,7 +218,7 @@ const BorrowingItem = (props) => {
                }
                {!isArchived(data) && data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
                
-               <span className="fullfilment">...[fulfilled/unfilled status]...</span>              
+               <span className="fullfilment">{data.lending_status}</span>              
             </div>            
             }   
             <BorrowingRequestIcons customClass="icons d-flex justify-content-center" data={data} reqPath={editPath} askCancelRequest={askCancelRequest} askArchiveRequest={askArchiveRequest}/>                                

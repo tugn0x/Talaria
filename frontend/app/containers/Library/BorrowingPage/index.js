@@ -24,10 +24,10 @@ const BorrowingPage = (props) => {
     const intl = useIntl()
     
     useEffect(() => {        
-        if(!isLoading) {
+        //if(!isLoading) {
             dispatch(requestBorrowingsList(match.params.library_id,null,null,{archived:archive}))            
             dispatch(requestLibraryTagsOptionList(match.params.library_id))
-        }
+        //}
     }, [])
 
 
