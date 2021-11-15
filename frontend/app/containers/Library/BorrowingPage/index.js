@@ -83,6 +83,24 @@ const BorrowingPage = (props) => {
          if(conf)
              dispatch(requestChangeStatusBorrowing(id,match.params.library_id,'canceled',null,intl.formatMessage({id: "app.requests.cancelAskedMessage"}),filter))
      } 
+     async function forwardRequest (id,filter) {
+        console.log("DISPATCH forwardRequest",id);
+         let conf = await confirm({
+            title: intl.formatMessage({id: 'app.global.confirm'}),
+             message: intl.formatMessage({id: "app.requests.forwardRequestMessage"}),
+             confirmText: intl.formatMessage({id: 'app.global.yes'}),
+             cancelText: intl.formatMessage({id: 'app.global.no'})
+         }); //
+         //if(conf)
+         //    dispatch(requestChangeStatusBorrowing(id,match.params.library_id,'forward',null,intl.formatMessage({id: "app.requests.forwardedMessage"}),filter))
+         let data={
+            id: id,
+            'forward':1,
+        }
+        if(conf)
+            dispatch(requestUpdateBorrowing(id,match.params.library_id,data,intl.formatMessage({id: "app.requests.forwardedMessage"}),filter))
+     } 
+     
 
      async function askArchiveRequest (id,filter) {
         console.log("DISPATCH askArchiveRequest",id);
@@ -135,6 +153,7 @@ const BorrowingPage = (props) => {
                 removeTagFromRequest={archive==1?undefined:removeTagFromDDRequest}                
                 //deleteReference={deleteReference}
                 askCancelRequest={askCancelRequest}
+                forwardRequest={forwardRequest}
                 askArchiveRequest={askArchiveRequest}
                 applyTags={archive==1?undefined:applyTagsToDDRequests}
                 findAndUpdateOABorrowingReference={findAndUpdateOABorrowingReference}

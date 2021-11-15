@@ -58,25 +58,29 @@ export const canEdit = (data) => {
     return data.borrowing_status=="newrequest";
 }  
 
+export const isPatronRequest = (data) => {
+    return data.patrondocdelrequest?true:false;
+}
+
 
 export const canArchive=(data) => {    
     return !isArchived(data) && ( 
     (data.patrondocdelrequest && data.patrondocdelrequest.data.user 
     && data.borrowing_status!="requested" && data.borrowing_status!="newrequest" && data.borrowing_status!="canceled" && data.borrowing_status!="cancelRequested")
-    ||(data.borrowing_status=="canceled"||data.borrowing_status=="canceledAccepted"||data.borrowing_status=="canceledDirect" ) );
+    ||(data.borrowing_status=="canceled"||data.borrowing_status=="canceledDirect" ) );
     //todo: add check on status
     //...&& (...in terminal status);
 }
 
 export const canDelete=(data) => {
     return (
-        (data.borrowing_status=="newrequest" && !data.patrondocdelrequest)
+        (data.borrowing_status=="newrequest" && !isPatronRequest(data))
     );    
 }
 
 export const canCancel=(data) => {
     return (
-        data.borrowing_status=="requested" // || (other "pending" states) 
+        data.borrowing_status=="requested" && !isPatronRequest(data) // || (other "pending" states) 
         )
 }
 
@@ -156,16 +160,16 @@ export const BorrowingReferenceIcons = (props) => {
 }
 
 export const BorrowingRequestIcons = (props) => {
-    const {data,reqPath,askCancelRequest,askArchiveRequest,customClass}=props;    
+    const {data,reqPath,forwardRequest,askCancelRequest,askArchiveRequest,customClass}=props;    
  
     return (
-        !isArchived(data) && <div className={"borrowing_request_icons " + (customClass?customClass:'')}>
-                {/*<Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fas fa-eye"></i></Link>*/}                
+        <div className={"borrowing_request_icons " + (customClass?customClass:'')}>
+                <Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fas fa-eye"></i></Link>                               
                 {canRequest(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-share"></i></Link>}
                 {canCancel(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-times"></i></a>}                
                 {canDelete(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-backspace"></i></a>}                
                 {documentReady(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-trash"></i></a>}                
-                {canForward(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-redo"></i></a>}                
+                {canForward(data) && forwardRequest && <a className="btn btn-icon" onClick={()=>forwardRequest(data.id)}><i className="fas fa-redo"></i></a>}                
                 {canArchive(data) && askArchiveRequest && <a className="btn btn-icon" onClick={()=>askArchiveRequest(data.id)}><i className="fas fa-hdd"></i></a>}                
         </div>
     )
@@ -173,7 +177,7 @@ export const BorrowingRequestIcons = (props) => {
 
 
 const BorrowingItem = (props) => {
-    const {editPath,data,toggleSelection,checked,removeTag,deleteReference,findAndUpdateOABorrowingReference,oaloading,askCancelRequest,askArchiveRequest,findISSNISBNtoggle} = props      
+    const {editPath,data,toggleSelection,checked,removeTag,deleteReference,findAndUpdateOABorrowingReference,oaloading,askCancelRequest,askArchiveRequest,forwardRequest,findISSNISBNtoggle} = props      
     const intl = useIntl();  
 
     return (
@@ -221,7 +225,7 @@ const BorrowingItem = (props) => {
                <span className="fullfilment">{data.lending_status}</span>              
             </div>            
             }   
-            <BorrowingRequestIcons customClass="icons d-flex justify-content-center" data={data} reqPath={editPath} askCancelRequest={askCancelRequest} askArchiveRequest={askArchiveRequest}/>                                
+            <BorrowingRequestIcons customClass="icons d-flex justify-content-center" data={data} reqPath={editPath} forwardRequest={forwardRequest} askCancelRequest={askCancelRequest} askArchiveRequest={askArchiveRequest}/>                                
             </Col> 
         </Row>
     )

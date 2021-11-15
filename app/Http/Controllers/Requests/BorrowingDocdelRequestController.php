@@ -12,6 +12,7 @@ use App\Models\Requests\BorrowingDocdelRequestTransformer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\BorrowingDocdelRequestNotification;
 
 class BorrowingDocdelRequestController extends ApiController
 {
@@ -158,6 +159,13 @@ class BorrowingDocdelRequestController extends ApiController
      {        
         $bid = $request->route()->parameters['id'];  
         
+        if($request->has("forward") && $request->input("forward")==1)
+        {
+            //when i forward i need also to archive the request
+            $request->merge(["forward"=>$request->input("forward"), 
+            "archived"=>1]); 
+        }
+
         $model = $this->nilde->update($this->model, $request, $bid);
 
         if($request->has("reference"))
@@ -165,12 +173,35 @@ class BorrowingDocdelRequestController extends ApiController
             
             $reffields=$request->input("reference");
             
-            //NOTE: this will not call Policy!!
+            //NOTE: this will not call Policy, and will overwrite model!!            
             $model->reference()->update($reffields);                   
+        }
+        
+        if($request->has("forward") && $request->input("forward")==1)
+        {
+            //App\Jobs\BorrowingRequestCloseAndForward::dispatchNow($this->model); 
+                    
+            //"clone" current request
+            $newReq=new BorrowingDocdelRequest; //i use this instead of ::create([...]) otherwise it will not call the constructor!
+            $newReq->reference_id=$model->reference_id;
+            $newReq->borrowing_library_id=$model->borrowing_library_id;
+            $newReq->patron_docdel_request_id=$model->patron_docdel_request_id;
+            $newReq->docdel_request_parent_id=$model->id;
+                        
+            if($newReq->save())
+            {                         
+                $n=new BorrowingDocdelRequestNotification($newReq);
+                
+                foreach ($newReq->borrowingLibraryOperators() as $op)    
+                $op->notify($n);           
+            } 
+
+            return $this->response->item($newReq, new $this->transformer())->setMeta($newReq->getInternalMessages())->morph();
         }
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
+
     
     public function changeStatus(Request $request,$id)
     {

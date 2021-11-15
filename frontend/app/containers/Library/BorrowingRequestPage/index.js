@@ -35,7 +35,10 @@ const BorrowingRequestPage = (props) => {
     const [isMounted, setIsMounted] = useState(false);    
     const [OALink,setOALink] = useState('');
     const [refData,setRefData] = useState(null);      
-    const [reqData,setReqData] = useState(null);          
+    const [reqData,setReqData] = useState(null);     
+    
+    const requestDetailPath='/library/'+params.library_id+"/borrowing/:id/:op?";
+    
 
     useEffect(() => {                
         //setRefData(null)           
@@ -149,9 +152,9 @@ const BorrowingRequestPage = (props) => {
                 <SectionTitle 
                     back={isNew?false:true}
                     title={isNew?messages.headerNew:messages.headerDetail}
-                />            
+                />                 
                 {(isRequest && !isEdit && Object.keys(borrowing).length>0) &&                                 
-                    <BorrowingDetail history={props.history} data={borrowing} sendRequestToLender={sendRequestToLender} findLender={findLender} lendersList={lendersList} />                      
+                    <BorrowingDetail requestDetailPath={requestDetailPath} history={props.history} data={borrowing} sendRequestToLender={sendRequestToLender} findLender={findLender} lendersList={lendersList} />                      
                 ||
                 (isNew && isMounted) &&                 
                 <ReferenceForm    

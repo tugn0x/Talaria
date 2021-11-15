@@ -27,3 +27,36 @@
 .lendersbox {
     margin:0 10px 0 10px;
 }
+
+.status-icon{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    border:1px solid;
+    border-color: #B48372;
+    margin: 0 .5rem 0 0;
+    &.newrequest
+    {
+        background-color: transparent;    
+    }
+
+    &.readyToDelivery,   
+    &.received,
+    &.fulfilled    
+    {
+        background-color: green;
+    }
+
+    
+    &.notReceived,
+    &.canceled,
+    &.canceledDirect {
+        background-color: red;
+    }
+    
+    &.requested,
+    &.cancelRequested{
+        background-color: #FBB133;
+    }    
+}

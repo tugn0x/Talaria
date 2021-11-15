@@ -40,7 +40,7 @@ return [
                         'notify'    =>  [
                             'Model'=>'owner',                            
                         ],
-                        'jobs' => ['App\Jobs\PatronUpdateBorrowing']
+                        'jobs' => ['App\\Jobs\\PatronUpdateBorrowing']
                     ],
                     'costNotAccepted' => [
                         'role'  =>  ['patron'],
@@ -49,7 +49,7 @@ return [
                         'notify'    =>  [
                             'Model'=>'owner',                            
                         ],
-                        'jobs' => ['App\Jobs\PatronUpdateBorrowing']
+                        'jobs' => ['App\\Jobs\\PatronUpdateBorrowing']
                     ],
                     'costNotAnswered' => [
                         'role'  =>  [],//borrow/lend/manage?
@@ -101,21 +101,30 @@ return [
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                            
                         ],  
-                        //TODO: 'jobs'=>['App\Jobs\BorrowingRequestReset'] //clean all temp lender to start new request and update lender (if only 1) saying request was canceled
+                        //TODO: 'jobs'=>['App\\Jobs\\BorrowingRequestReset'] //clean all temp lender to start new request and update lender (if only 1) saying request was canceled
                     ],
+                    /*'forward' => [
+                        'role'  =>  [],//borrow/lend/manage?
+                        'next_statuses'  =>  ['canceled'], //old statuses
+                        'constraints'   =>  [], 
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',                            
+                        ],                          
+                        'jobs' => ['App\\Jobs\\BorrowingRequestCloseAndForwardAsNew']
+                    ],*/
                     'canceled'	=> [
                         'role'  =>  [],//borrow/lend/manage?
-                        'next_statuses'  =>  [],
+                        'next_statuses'  =>  ['forward'],
                         'constraints'   =>  [],  
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                            
                         ],  
-                        'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
+                        'jobs' => ['App\\Jobs\\LendingRequestUpdateNotify']
                     ],
                     //NOTE on canceledDirect: i removed constraint because this status can be changed both from patron or borrower                       
                     'canceledDirect'	=> [
                         'role'  =>  [],//borrow?,
-                        'next_statuses'  =>  [],
+                        'next_statuses'  =>  ['forward'],
                         'constraints'   =>  [],     
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',
@@ -130,16 +139,16 @@ return [
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',
                         ],  
-                        'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
+                        'jobs' => ['App\\Jobs\\LendingRequestUpdateNotify']
                     ],
-                    'canceledAccepted'	=> [
+                    /*'canceledAccepted'	=> [
                         'role'  =>  [],//borrow/lend/manage?,
                         'next_statuses'  =>  ['canceled'],
                         'constraints'   =>  [],  
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                            
                         ],                        
-                    ],
+                    ],*/
 
                     //Note: i added also "canceled" next status, because from frontend 
                     //we need to change in "canceled" (from requested state) but we don't know what will be really the next status (cancelDirect,cancelRequested)
@@ -150,7 +159,7 @@ return [
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                                                        
                         ],  
-                        'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
+                        'jobs' => ['App\\Jobs\\LendingRequestUpdateNotify']
                     ],
 
                 ]

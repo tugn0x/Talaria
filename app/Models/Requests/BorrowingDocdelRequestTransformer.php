@@ -17,7 +17,8 @@ use App\Models\Users\UserLightTransformer;
 class BorrowingDocdelRequestTransformer extends BaseTransformer
 {
 
-    protected $availableIncludes = [                                                
+    protected $availableIncludes = [
+        'tracking'                                                
     ];
 
     protected $defaultIncludes = [
@@ -64,6 +65,13 @@ class BorrowingDocdelRequestTransformer extends BaseTransformer
         if($model->operator)
             return $this->item($model->operator, new UserLightTransformer());
     }    
+
+    public function includeTracking(Model $model)
+    {       
+        $track=$model->tracking();
+        if($track && $track->count()>0)
+            return $this->collection($track, new BorrowingDocdelRequestTransformer());            
+    }
 
 
     public function transform(Model $model)

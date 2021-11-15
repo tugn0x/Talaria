@@ -463,7 +463,7 @@ export const createNewBorrowing = (options) => {
 export const getBorrowingRequest = (options) => {
   options = getOption(options);
   const library_id = options.library_id
-  return request(`${BASE_URL}/api/v1/libraries/${library_id}/borrowings/${options.id}`, options)
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/borrowings/${options.id}`+"?include=tracking", options)
 };
 
 export const updateBorrowing = (options) => {

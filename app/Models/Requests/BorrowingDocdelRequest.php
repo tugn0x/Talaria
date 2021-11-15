@@ -18,15 +18,14 @@ use App\Resolvers\StatusResolver;
 class BorrowingDocdelRequest extends DocdelRequest
 {
 
-    private $borrowing_attributes=[
+    private $borrowing_attributes=[        
         'docdel_request_parent_id', //id della docdelrequest "padre" (se una rich. viene reinoltrata N volte, tutte le N avranno come parent la rich. originale, in modo da ricostruire lo storico!)
         'patron_docdel_request_id',
         'accept_cost_status', //Stato accettazione utente dopo richiesta: 1=Biblio richiede accettazione, 2=Ute accetta, 3=Ute non accetta
         'accept_cost_date', //quando ha accettato/rifiutato il costo                
         'trash_date', //data cestinamento
         'trash_type', //tipo cestinamento (trash o trashHC)
-        'borrowing_notes', //dd_note_interne      
-        'parent_id', //parent dd request id 
+        'borrowing_notes', //dd_note_interne              
         'archived', //0|1 indica se la rich è archiviata
         'forward', //0|1 indica se la rich è stata reinoltrata (la rich reinoltrata avrà parent_id=id di questa richiesta)
         //'desk_delivery_format', //formato di invio del della biblio al desk                
@@ -53,6 +52,52 @@ class BorrowingDocdelRequest extends DocdelRequest
     {
         return $this->belongsTo(PatronDocdelRequest::class,'patron_docdel_request_id')->withTrashed();
     }
+
+    public function parentRequest()
+    {
+        return $this->belongsTo(BorrowingDocdelRequest::class,'docdel_request_parent_id');                    
+    }
+
+    public function requestHistory()
+    {                
+        $coll=new \Illuminate\Support\Collection;                                
+        if($this->parentRequest!=null)      
+        {
+            $coll->push($this->parentRequest);
+            return $coll->merge($this->parentRequest->requestHistory());                                
+        }
+        return $coll;
+    }
+
+    public function childrenRequests()
+    {                
+        $coll=new \Illuminate\Support\Collection;                        
+        if($this->forward==1)    
+        {
+            $nextChildren=BorrowingDocdelRequest::where('docdel_request_parent_id',$this->id)->get();  
+            if($nextChildren->count()>0)
+            {
+                foreach ($nextChildren as $child)
+                {
+                    $coll->push($child);
+                    $coll=$coll->merge($child->childrenRequests());                                
+                }
+            }
+        }
+        
+        return $coll;
+    }
+
+    public function tracking() {
+        $coll=new \Illuminate\Support\Collection;                        
+        $coll=$coll->push($this);
+        $coll=$coll->merge($this->requestHistory()); //history in reverse order (from older to current)        
+        $coll=$coll->merge($this->childrenRequests()); //all children/subsequent requests 
+        return $coll->sortBy('id',SORT_NUMERIC)->values();
+    }
+
+
+
 
     public function tags()
     {
@@ -151,14 +196,14 @@ class BorrowingDocdelRequest extends DocdelRequest
                     else if($this->lending_status=="requestReceived" && $this->borrowing_status!="cancelRequested") //cancel with lender (wich not will supply)
                     {                          
                         $newstatus="canceledDirect";  
-                        $others=array_merge($others,['lending_library_id'=>null,'lending_status'=>null,'all_lender'=>null]);                                                                          
+                        //$others=array_merge($others,['lending_library_id'=>null,'lending_status'=>null,'all_lender'=>null]);                                                                          
                         return $this->changeStatus($newstatus,$others);                     
                     }
-                    else if($this->borrowing_status=="cancelRequested"||$this->borrowing_status=="canceledAccepted") //cancel accepted by lender (automatic after 2 days or manually)
+                    /*else if($this->borrowing_status=="cancelRequested"||$this->lending_status=="canceledAccepted") //cancel accepted by lender (automatic after 2 days or manually)
                     {
                         $others=array_merge($others,['cancel_date'=>Carbon::now()]); 
                         $newstatus="canceled";                    
-                    }
+                    }*/
                     else {                        
                         $others=array_merge($others,['cancel_date'=>Carbon::now()]); 
                         $newstatus="canceled";                    
@@ -169,9 +214,9 @@ class BorrowingDocdelRequest extends DocdelRequest
                 case 'canceledDirect': 
                     $others=array_merge($others,['cancel_date'=>Carbon::now(),'archived'=>1]);
                     break;
-                case 'canceledAccepted': 
+                /*case 'canceledAccepted': 
                         $others=array_merge($others,['cancel_date'=>Carbon::now()]);
-                        break;                    
+                        break; */                   
                 case 'cancelRequested': 
                     $others=array_merge($others,[
                         'cancel_request_date'=>Carbon::now(),
@@ -188,6 +233,13 @@ class BorrowingDocdelRequest extends DocdelRequest
                             ]);                            
                         }
                         break;    
+                /*case 'forward': 
+                    $others=array_merge($others,[
+                        'forward'=>1,
+                        'archived'=>1,  
+                        'borrowing_status'=>$this->borrowing_status  //override status! I don't want to apply "forward" status but keep the old status in the field
+                    ]);                       
+                    break; */         
 
             }
 

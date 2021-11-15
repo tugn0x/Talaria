@@ -312,6 +312,8 @@
   "app.requests.canceledMessage": "Richiesta annullata",  
   "app.requests.requestedMessage": "Richiesta inviata",  
   "app.requests.tagAs": "Tagga come",
+  "app.requests.forwardRequestMessage": "Duplicare e inoltrare come nuova richiesta?",  
+  "app.requests.forwardedMessage": "Richiesta duplicata",  
   
   "app.components.OASearchReferenceForm.bodySearch": "Cerca un riferimento inserendo DOI, PMID o ISBN o titolo esatto",
   "app.components.OASearchReferenceForm.inputPlaceHolder": "Es: 10.1002/hlca.19740570315",  
