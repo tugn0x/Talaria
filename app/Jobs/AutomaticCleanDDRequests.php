@@ -29,7 +29,7 @@ class AutomaticCleanDDRequests implements ShouldQueue
         ->whereNotNull('cancel_request_date')
         ->whereRaw("DATEDIFF(now(),cancel_request_date) >= 2")->get();        
         foreach($borrowings as $borr)             
-            $borr->changeStatus("canceledAccepted",["lending_status"=>"canceledAccepted"]);
+            $borr->changeStatus("canceled",["lending_status"=>"canceledAccepted"]);
 
     }
 
@@ -40,7 +40,7 @@ class AutomaticCleanDDRequests implements ShouldQueue
         ->whereRaw("DATEDIFF(now(),request_date) >= 5")->get();        
         foreach($reqborrowings as $borr)
         {            
-            $borr->changeStatus("newrequest",["lending_status"=>null,'lending_library_id'=>null]);                
+            $borr->changeStatus("newrequest",['request_data'=>null,'lending_status'=>null,'all_lender'=>0,'lending_library_id'=>null]);                
         }
     }
     
