@@ -183,7 +183,11 @@ export default defineMessages({
     ArchivedRequests: {
         id: `${scope}.ArchivedRequests`,
         defaultMessage: 'Archive',
-    },    
+    }, 
+    AllRequests: {
+        id: `${scope}.AllRequests`,
+        defaultMessage: 'Orfani',
+    }, 
     LinkingServices: {
         id: `${scope}.LinkingServices`,
         defaultMessage: 'Servizi di Linking',

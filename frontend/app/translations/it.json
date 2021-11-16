@@ -160,6 +160,7 @@
 
   "app.containers.InstitutionPage.createSuccess": "Nuovo ente creato",
   "app.containers.InstitutionPage.updateSuccess": "Ente aggiornato",
+  "app.containers.LendingPage.headerArchive":"Archive",
 
   "app.components.Pagination.itemsPerPageDropdown": "Mostra righe",
   "app.components.Pagination.of": "di",
@@ -212,6 +213,7 @@
   
   "app.components.Notification.header": "Notifiche",
   "app.components.Notification.mark_all_as_read": "Segna tutte come lette",
+  "app.components.LendingsList.LendingSelected":"Selected",
 
   "app.containers.ReferencePage.header": "Inserisci/Modifica riferimento",
   "app.containers.ReferencePage.headerNew": "Nuovo Riferimento",
@@ -232,7 +234,7 @@
   "app.containers.BorrowingPage.OAfoundAndUpdateMessage": "Versione OA trovata. Richiesta aggiornata.",
   "app.containers.BorrowingPage.OAnotfoundAndUpdateMessage": "Versione OA NON trovata. Richiesta non aggiornata.",
   "app.containers.BorrowingPage.addedTagToRequest": "Tag applicato",
-  
+  "app.containers.LendingPage.header":"header",
   "app.libraries.dd_user_cost":"Costo per articolo",
 
   "app.references.labels": "Etichette",
@@ -314,7 +316,13 @@
   "app.requests.tagAs": "Tagga come",
   "app.requests.forwardRequestMessage": "Duplicare e inoltrare come nuova richiesta?",  
   "app.requests.forwardedMessage": "Richiesta duplicata",  
-  
+  "app.requests.pendingRequest":"Pending Request",
+  "app.requests.requestReceived":"Request Received",
+  "app.requests.copyCompleted":"Copy Completed",
+  "app.requests.unFilled":"Unfilled",
+  "app.requests.willSupply":"Will Supply",
+
+  "app.components.LendingsList.LendingsNotFound":"Lending request not found",
   "app.components.OASearchReferenceForm.bodySearch": "Cerca un riferimento inserendo DOI, PMID o ISBN o titolo esatto",
   "app.components.OASearchReferenceForm.inputPlaceHolder": "Es: 10.1002/hlca.19740570315",  
   "app.components.OASearchReferenceForm.goToForm": "Oppure inserisci i dati manualmente",
@@ -432,5 +440,8 @@
   "app.routes.Tags": "Tag", 
   "app.routes.Categories": "Categorie",
   "app.routes.Libraries": "Biblioteche",
-  "app.routes.Library": "Biblioteca"
+  "app.routes.Library": "Biblioteca",
+  "app.routes.Stats": "Stats",
+  "app.routes.Licenses": "Licenses",
+  "app.routes.AllRequests":"All Requests"
 }

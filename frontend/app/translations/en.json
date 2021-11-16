@@ -314,7 +314,12 @@
   "app.requests.tagAs": "Tag as",
   "app.requests.forwardRequestMessage": "Clone and forward as request?",  
   "app.requests.forwardedMessage": "Request cloned",  
-  
+  "app.requests.pendingRequest":"Pending Request",
+  "app.requests.copyCompleted":"Copy Completed",
+  "app.requests.unFilled":"Unfilled",
+  "app.requests.requestReceived":"Request Received",
+  "app.requests.willSupply":"Will Supply",
+  "app.components.LendingsList.LendingsNotFound":"Lending request not found",
   "app.components.OASearchReferenceForm.bodySearch": "Search a reference by entering DOI, PMID or ISBN or exact title",
   "app.components.OASearchReferenceForm.inputPlaceHolder": "Es: 10.1002/hlca.19740570315",  
   "app.components.OASearchReferenceForm.goToForm": "Or fill the form manually",
@@ -432,7 +437,9 @@
   "app.routes.Tags": "Tags", 
   "app.routes.Categories": "Categories",
   "app.routes.Libraries": "Libraries",
-  "app.routes.Library": "Library"
-  
+  "app.routes.Library": "Library",
+  "app.routes.Stats": "Stats",
+  "app.routes.Licenses": "Licenses",
+  "app.routes.AllRequests":"All Requests"
 }
 

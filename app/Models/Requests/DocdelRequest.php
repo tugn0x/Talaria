@@ -5,6 +5,7 @@ use App\Models\BaseModel;
 use App\Models\Libraries\Library;
 use App\Models\Libraries\Tag;
 use App\Models\References\Reference;
+
 //TODO: CHECK against LibraryCloud Excel file
 class DocdelRequest extends BaseModel
 {
@@ -16,6 +17,7 @@ class DocdelRequest extends BaseModel
         'reference_id',
         'borrowing_library_id',
         'lending_library_id',
+        'lending_archived',
         'borrowing_status', //status req. borrow
         'lending_status', //status req. lending
         'request_type', //0=DD 1: ILL        
@@ -86,21 +88,25 @@ class DocdelRequest extends BaseModel
             return $blib->operators("borrow");
     }
 
-    public function lendinglibrary()
-    {
-        return $this->belongsTo(Library::class,'lending_library_id');
-    }     
-    
     public function lendingLibraryOperators() {
-        $llib=$this->lendinglibrary;        
-        if($llib)
-            return $llib->operators("lend");
+        $blib=$this->lendinglibrary;        
+        if($blib)
+            return $blib->operators("lend");
     }
 
+    public function lendinglibrary() //can not get library borrowing name!!
+    {
+        //return $this->belongsTo(Library::class,'borrowing_library_id'); 
+        return $this->belongsTo(Library::class,'lending_library_id'); 
+    } 
+    
+    
+    
     public function scopeInReference($query, $reference_id)
     {
         return $query->where('reference_id', $reference_id);
     }
+ 
 
      //override del ModelTrait::scopeSimpleSearch
     //in modo da cercare sul riferimento!
