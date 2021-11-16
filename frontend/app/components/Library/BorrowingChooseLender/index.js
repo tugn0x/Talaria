@@ -51,14 +51,14 @@ const BorrowingChooseLender = (props) => {
                 {lendersList.data && lendersList.data.length>0 &&
                 <>
                     <ul className="librarylist">
-                        <li className="alllibraries"><input name="lender" type="radio" value="0" onChange={e=>onChangeLibraryList(e.target.value)} />ALL libraries</li>
+                        <li key="alllibraries" className="alllibraries"><input name="lender" type="radio" value="0" onChange={e=>onChangeLibraryList(e.target.value)} />ALL libraries</li>
                         {lendersList.data.map ( (lib) => 
-                            <li><input name="lender" type="radio" value={lib.id} onChange={e=>onChangeLibraryList(e.target.value)} />{lib.name}</li>    
+                            <li key={lib.id}><input name="lender" type="radio" value={lib.id} onChange={e=>onChangeLibraryList(e.target.value)} />{lib.name}</li>    
                         )}                                        
                     </ul>
                     {allselected && <button className="btn btn-warning" onClick={()=>sendRequestToLender()}>Send request to ALL libraries</button>}                
                 
-                    &nbsp;&nbsp;<button className="btn btn-primary" onClick={()=>sendRequestToLender()}>Send request to selected library</button>
+                    {lender && !allselected && <>&nbsp;&nbsp;<button className="btn btn-primary" onClick={()=>sendRequestToLender()}>Send request to selected library</button></>}
                 </>}
             </div>
     );
