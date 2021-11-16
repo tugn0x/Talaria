@@ -33,7 +33,10 @@ const statusDate = (req) => {
       case "canceled": 
       case "canceledDirect":  date= req.created_at; 
                               break;                             
-      /*...*/      
+      case "fulfilled": 
+      case "documentReady": 
+      case "notReceived": date=req.fulfill_date; break;
+       
       default: date= req.created_at; 
   }  
 
@@ -67,7 +70,7 @@ export const canArchive=(data) => {
     return !isArchived(data) && ( 
     (data.patrondocdelrequest && data.patrondocdelrequest.data.user 
     && data.borrowing_status!="requested" && data.borrowing_status!="newrequest" && data.borrowing_status!="canceled" && data.borrowing_status!="cancelRequested")
-    ||(data.borrowing_status=="canceled"||data.borrowing_status=="canceledDirect" ) );
+    ||(data.borrowing_status=="canceled"||data.borrowing_status=="canceledDirect"|| data.borrowing_status=="notReceived") );
     //todo: add check on status
     //...&& (...in terminal status);
 }
@@ -109,7 +112,7 @@ const mustCheckData=(data) => {
 
 
 export const documentReady=(data) => {
-    return data.borrowing_status=="documentready" //&&delivery_format=xxxx
+    return data.borrowing_status=="documentReady" //&&delivery_format=xxxx
 }
 
 
@@ -169,6 +172,7 @@ export const BorrowingRequestIcons = (props) => {
                 {canCancel(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-times"></i></a>}                
                 {canDelete(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-backspace"></i></a>}                
                 {documentReady(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-trash"></i></a>}                
+                {documentReady(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-download"></i></a>}                
                 {canForward(data) && forwardRequest && <a className="btn btn-icon" onClick={()=>forwardRequest(data.id)}><i className="fas fa-redo"></i></a>}                
                 {canArchive(data) && askArchiveRequest && <a className="btn btn-icon" onClick={()=>askArchiveRequest(data.id)}><i className="fas fa-hdd"></i></a>}                
         </div>

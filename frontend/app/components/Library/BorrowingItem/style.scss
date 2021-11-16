@@ -43,7 +43,8 @@
 
     &.readyToDelivery,   
     &.received,
-    &.fulfilled    
+    &.fulfilled,
+    &.documentReady    
     {
         background-color: green;
     }
