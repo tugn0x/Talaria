@@ -17,6 +17,11 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
       REQUEST_FIND_UPDATE_BORROWING_OA,
       REQUEST_CHANGE_STATUS_BORROWING,
       REQUEST_GET_ISSN_ISBN,
+      REQUEST_LENDINGS_LIST,
+      REQUEST_CHANGE_STATUS_LENDING,
+      REQUEST_CHANGE_LENDING_ARCHIVED,
+      REQUEST_APPLY_LENDING_TAGS_TO_DDREQUESTS,
+      REQUEST_ACCEPT_ALLLENDER
     } from './constants';
 import {
   requestError,
@@ -32,6 +37,8 @@ import {
   requestLibraryTagsOptionListSuccess,
   requestBorrowingsList,  
   requestGetBorrowingSuccess,
+  requestLendingsList,
+  requestLendingsListSuccess,
   requestUpdateBorrowingSuccess,
   requestFindUpdateOABorrowingReferenceSuccess,
   requestFindUpdateOABorrowingReferenceFail,
@@ -52,7 +59,12 @@ import {getLibraryUsersList, updateLibraryUser, deleteLibraryUser, createUser,
     createNewBorrowing,
     getBorrowingRequest,
     updateBorrowing,
-    changeStatusBorrowingRequest
+    changeStatusBorrowingRequest,
+    changeStatusLendingRequest,
+    getLendingsList,
+    changeLendingArchivedRequest,
+    requestApplyTagsToLendingRequests,
+    acceptallLenderLendingRequest
 } from '../../utils/api'
 
 import {getOA,getPubmedReferenceByPMID,getFindISSN,getFindISBN, getFindISSN_ACNP} from '../../utils/apiExternal';
@@ -227,6 +239,24 @@ export function* requestBorrowingsListSaga(action) {
   }
 }
 
+export function* requestLendingsListSaga(action) {
+  const options = {
+    method: 'get',
+    library_id:action.library_id,
+    page: action.page ? action.page : '1',
+    query: action.query ? action.query : null,
+    pageSize: action.pageSize ? action.pageSize : null
+  };
+  try {
+   console.log(action)
+    const request = yield call(getLendingsList, options);
+    yield put(requestLendingsListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+
 export function* requestLibraryTagsOptionListSaga(action) {
   const options = {
     method: 'get',
@@ -255,6 +285,33 @@ export function* requestApplyTagsToDDRequestsSaga(action) {
     const request = yield call(requestApplyTagsToBorrowingRequests, options);
     
     yield put (requestBorrowingsList(action.library_id))
+    // Callback dopo il Crea nuova etichetta
+    if(action.tagIds.some(tagId => typeof tagId === 'string' )){
+      yield call(requestLibraryTagsOptionListSaga(action))
+    }
+    yield call(() => toast.success(action.message)) 
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestApplyLendingTagsToDDRequests(action) {  
+  const options = {
+    method: 'put',
+    body: {
+      requests: action.reqIds,
+      tagIds: action.tagIds,      
+    },
+    library_id: action.library_id
+
+  };
+ 
+
+  try {
+
+    const request = yield call(requestApplyTagsToLendingRequests, options);
+    
+    yield put (requestLendingsList(action.library_id))
     // Callback dopo il Crea nuova etichetta
     if(action.tagIds.some(tagId => typeof tagId === 'string' )){
       yield call(requestLibraryTagsOptionListSaga(action))
@@ -434,11 +491,63 @@ export function* requestChangeStatusBorrowingSaga(action) {
     borrowing_library_id: action.borrowing_library_id,
   };
   try {
-    //console.log("requestChangeStatusBorrowingSaga - action",action)
-    //console.log("requestChangeStatusBorrowingSaga - options",options)
+  
     const request = yield call(changeStatusBorrowingRequest, options);    
     yield put (requestBorrowingsList(action.borrowing_library_id))    
-    yield put (push("/library/"+action.borrowing_library_id+"/borrowing/"));    
+    yield put (push("/library/"+action.borrowing_library_id+"/borrowing/"));
+    yield call(() => toast.success(JSON.stringify(action)))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestChangeStatusLendingSaga(action) {
+  
+  const options = {
+    method: 'put',
+    body: {'status': action.status },
+    id: action.id,
+    lending_library_id: action.lending_library_id
+  };
+
+  try {
+    const request = yield call(changeStatusLendingRequest, options);    
+    yield put (requestLendingsList(action.lending_library_id))    
+    yield put (push("/library/"+action.lending_library_id+"/lending/"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestChangeLendingArchivedSaga(action) {
+  
+  const options = {
+    method: 'put',
+    body: {'lending_archived': 1},
+    id: action.id,
+    lending_library_id: action.lending_library_id,
+  };
+  try {
+    const request = yield call(changeLendingArchivedRequest, options);    
+    yield put (requestLendingsList(action.lending_library_id))    
+    yield put (push("/library/"+action.lending_library_id+"/lending/"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestAcceptAllLenderLendingSaga(action) {
+  const options = {
+    method: 'put',
+    body: {'all_lender':0,'lending_library_id': action.lending_library_id},
+    id: action.id,
+  };
+  try {
+    const request = yield call(acceptallLenderLendingRequest, options);    
+    yield put (requestLendingsList(action.lending_library_id))    
+    yield put (push("/library/"+action.lending_library_id+"/lending/"));
     yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
@@ -505,8 +614,14 @@ export default function* librarySaga() {
   yield takeLatest(REQUEST_UPDATE_LIBRARY, requestUpdateLibrarySaga);
   yield takeLatest(REQUEST_POST_LIBRARY, requestPostLibrarySaga);
   yield takeLatest(REQUEST_BORROWINGS_LIST,requestBorrowingsListSaga);
+
+  yield takeLatest(REQUEST_LENDINGS_LIST, requestLendingsListSaga);
+
   yield takeLatest(REQUEST_GET_LIBRARY_TAGS_OPTIONLIST,requestLibraryTagsOptionListSaga);
+  
   yield takeLatest(REQUEST_APPLY_TAGS_TO_DDREQUESTS,requestApplyTagsToDDRequestsSaga);
+  yield takeLatest(REQUEST_APPLY_LENDING_TAGS_TO_DDREQUESTS,requestApplyLendingTagsToDDRequests);
+
   yield takeLatest(REQUEST_REMOVE_DDREQUEST_TAG,requestRemoveTagToDDRequestsSaga);
   yield takeLatest(REQUEST_POST_LIBRARY_TAG,requestPostLibraryTagSaga);
   yield takeLatest(REQUEST_UPDATE_LIBRARY_TAG,requestUpdateLibraryTagSaga);
@@ -514,7 +629,13 @@ export default function* librarySaga() {
   yield takeLatest(REQUEST_POST_NEW_BORROWING,requestPostNewBorrowingSaga);
   yield takeLatest(REQUEST_GET_BORROWING,requestGetBorrowingSaga)
   yield takeLatest(REQUEST_UPDATE_BORROWING,requestUpdateBorrowingSaga)  
+  
   yield takeLatest(REQUEST_CHANGE_STATUS_BORROWING,requestChangeStatusBorrowingSaga);
+  yield takeLatest(REQUEST_CHANGE_STATUS_LENDING,requestChangeStatusLendingSaga);
+  yield takeLatest(REQUEST_CHANGE_LENDING_ARCHIVED,requestChangeLendingArchivedSaga);
+
+  yield takeLatest(REQUEST_ACCEPT_ALLLENDER, requestAcceptAllLenderLendingSaga)
+
   yield takeLatest(REQUEST_GET_ISSN_ISBN,requestFindISSNISBNsaga);
   yield takeEvery(REQUEST_FIND_UPDATE_BORROWING_OA,findUpdateOABorrowingSaga);
 }

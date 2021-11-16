@@ -6,6 +6,8 @@ import Fake from 'components/Fake';
 import BorrowingPage from '../containers/Library/BorrowingPage/Loadable'
 import BorrowingRequestPage from '../containers/Library/BorrowingRequestPage/Loadable'
 import TagsPage from '../containers/Library/TagsPage/Loadable';
+import LendingPage from '../containers/Library/LendingPage';
+import LendingRequestPage from '../containers/Library/LendingRequestPage';
 
 const routes = [
   /*
@@ -45,11 +47,11 @@ const routes = [
   {
     path: '/lending', name: `Lending`, header: true, component: SubRouteSwitch, permissions: ['manage','lend'], resource: {type: 'libraries', key: 'library_id',},
     children: [
-      { path: '', exact: true, name: `PendingRequests`, component: Fake,sidebar: true, order:1 },
-      { path: '/archive', name: `ArchivedRequests`, component: Fake,url: '/lending/archive',sidebar: true, order:2  },
-      { path: '/new', exact: true, name: `Fake`, component: Fake},   //new external lending 
-
-     ]
+      { path: '/', icon: "share", exact: true, name: `PendingRequests`, component: LendingPage,url: '/lending',sidebar: true, order:1}, 
+      { path: '/archive', icon: "hdd", name: `ArchivedRequests`, component: LendingPage,url: '/lending/archive',sidebar: true, order:2 },
+      { path: '/allrequests', icon: "hdd", name: `AllRequests`, component: LendingPage,url: '/lending/allrequests',sidebar: true, order:3 },
+      { path: '/:id?/:op?', exact: true, name: `RequestUpdate`, component: LendingRequestPage, sidebar: false},      
+    ]
   },
   {
     path: '/delivery', name: `Delivery`, header: true, component: SubRouteSwitch, permissions: ['manage','deliver'], resource: {type: 'libraries', key: 'library_id',},

@@ -4,6 +4,7 @@
  *
  */
 
+import { Alert } from "reactstrap";
 import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_ERROR, STOP_LOADING, REQUEST_USERS_LIST, REQUEST_USERS_LIST_SUCCESS,
    REQUEST_UPDATE_USER, REQUEST_UPDATE_USER_SUCCESS, REQUEST_DELETE_USER,
@@ -16,6 +17,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_BORROWINGS_LIST,REQUEST_BORROWINGS_LIST_SUCCESS,REQUEST_LENDINGS_LIST,REQUEST_LENDINGS_LIST_SUCCESS,
    REQUEST_GET_LIBRARY_TAGS_OPTIONLIST,REQUEST_GET_LIBRARY_TAGS_OPTIONLIST_SUCCESS,
    REQUEST_APPLY_TAGS_TO_DDREQUESTS,REQUEST_REMOVE_DDREQUEST_TAG,
+   REQUEST_APPLY_LENDING_TAGS_TO_DDREQUESTS,
    REQUEST_POST_LIBRARY_TAG,REQUEST_UPDATE_LIBRARY_TAG,REQUEST_REMOVE_LIBRARY_TAG, 
    REQUEST_POST_NEW_BORROWING,
    REQUEST_GET_BORROWING,REQUEST_GET_BORROWING_SUCCESS,
@@ -25,9 +27,12 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_FIND_UPDATE_BORROWING_OA_FAIL,
    REQUEST_FIND_UPDATE_BORROWING_OA_SUCCESS,
    REQUEST_CHANGE_STATUS_BORROWING,
+   REQUEST_CHANGE_STATUS_LENDING,
    REQUEST_GET_ISSN_ISBN,
    REQUEST_GET_ISSN_ISBN_SUCCESS,
-   REQUEST_GET_ISSN_ISBN_FAIL
+   REQUEST_GET_ISSN_ISBN_FAIL,
+   REQUEST_CHANGE_LENDING_ARCHIVED,
+   REQUEST_ACCEPT_ALLLENDER
   } from "./constants";
 
 export function defaultAction() {
@@ -174,6 +179,18 @@ export function requestApplyTagsToDDRequests(library_id,reqIds,tagIds,message) {
     library_id,
   };
 }
+
+export function requestApplyLendingTagsToDDRequests(library_id,reqIds,tagIds,message) {
+  return {
+    type: REQUEST_APPLY_LENDING_TAGS_TO_DDREQUESTS,
+    reqIds,
+    tagIds,
+    message,
+    library_id,
+  };
+}
+
+
 
 
 export function requestLibraryTagsOptionListSuccess(result) {
@@ -327,6 +344,44 @@ export function requestChangeStatusBorrowing(id,borrowing_library_id,status, ext
     filter
   };
 }
+
+export function requestChangeStatusLending(id,lending_library_id,status, message,filter) {
+
+  return {
+    type: REQUEST_CHANGE_STATUS_LENDING,
+    id,
+    lending_library_id,
+    status,
+    message,
+    filter
+  };
+}
+
+export function requestChangeLendingArchived(id,lending_library_id,status, message,filter) {
+  return {
+    type: REQUEST_CHANGE_LENDING_ARCHIVED,
+    id,
+    lending_library_id,
+    status,
+    message,
+    filter
+  };
+}
+
+
+export function requestAcceptAllLenderLending(id,lending_library_id,status, message,filter) {
+  return {
+    type: REQUEST_ACCEPT_ALLLENDER,
+    id,
+    lending_library_id,
+    status,
+    message,
+    filter
+  };
+}
+
+
+
 
 
 export function requestFindISSNISBN (data) {

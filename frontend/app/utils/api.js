@@ -425,6 +425,12 @@ export const requestApplyTagsToBorrowingRequests = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/borrowings/updateSelected`, options)
 };
 
+export const requestApplyTagsToLendingRequests = (options) => {             
+  options = getOption(options);
+  const library_id = options.library_id
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/lendings/updateSelected`, options)
+};
+
 export const removeDDRequestTag = (options) => {
   const id = options.id
   const tid = options.tagId
@@ -481,6 +487,44 @@ export const changeStatusBorrowingRequest = (options) => {
  
 //LENDING
 
+export const getLendingsList = (options) => {
+
+  var library_id = options.library_id
+  const page = options.page;
+  const params = options.query;
+  const pageSize = options.pageSize;
+  
+  let qstringpar="";
+  if(params && params.query && params.query!="") qstringpar+="&q="+params.query;
+  if(pageSize) qstringpar+="&pageSize="+pageSize;
+  if(params && params.labelIds && params.labelIds.length>0) qstringpar+="&tagIds="+params.labelIds.join(',')+""; 
+  if(params && params.all_lender>0) qstringpar+="&all_lender="+ params.all_lender;
+  else if(params && !params.lending_archived) { qstringpar+="&lending_archived=0"; }
+  else if(params && params.lending_archived>=0) 
+    qstringpar+="&lending_archived="+params.lending_archived;
+  options = getOption(options);
+
+   return request(`${BASE_URL}/api/v1/libraries/${library_id}/lendings?page=${page}${qstringpar}`, options)
+  };
+
+  
+export const changeStatusLendingRequest = (options) => {
+  options = getOption(options);
+  const library_id = options.lending_library_id
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/lendings/${options.id}/changestatus`, options)
+  };
+  
+  export const changeLendingArchivedRequest = (options) => {
+  options = getOption(options);
+  const library_id = options.lending_library_id
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/lendings/${options.id}/changelendingarchived`, options)
+  };
+  
+  export const acceptallLenderLendingRequest = (options) => {
+  options = getOption(options);
+  const library_id = options.lending_library_id
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/lendings/${options.id}/acceptallLenderLending`, options)
+  };
 
 /// POST PUBLIC LIBRARY
 export const createPublicLibrary = (options) => {

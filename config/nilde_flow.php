@@ -163,7 +163,79 @@ return [
                     ],
 
                 ]
-            ],     
+            ],
+            'App\Models\Requests\LendingDocdelRequest'=> [
+                'flow_tree' => [
+                'pendingRequest' => [
+                    'role' => [],//borrow/lend/manage?
+                    'next_statuses' => ['requestReceived'],
+                    'constraints' => [], 
+                    'notify' => [
+                    'Model'=>'borrowingLibraryOperators', 
+                ], 
+                // 'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
+                ],
+                
+                'requestReceived' => [
+                    'role' => [],//borrow/lend/manage?
+                    'next_statuses' => ['willSupply'],
+                    'constraints' => [], 
+                    'notify' => [
+                    'Model'=>'borrowingLibraryOperators', 
+                    ], 
+                    // 'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
+                ],
+                'willSupply' => [
+                    'role' => [],//borrow/lend/manage?
+                    'next_statuses' => ['copyCompleted','unFilled'],
+                    'constraints' => [], 
+                    'notify' => [
+                    'Model'=>'borrowingLibraryOperators', 
+                    ], 
+                    // 'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
+                ],
+                
+                'cancelRequested' => [
+                    'role' => [],//borrow/lend/manage?
+                    'next_statuses' => ['canceledAccepted'],
+                    'constraints' => [], 
+                    'notify' => [
+                    'Model'=>'borrowingLibraryOperators', 
+                ], 
+                //'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
+                ],
+                'canceledAccepted' => [
+                    'role' => [],//borrow/lend/manage?
+                    'next_statuses' => [],
+                    'constraints' => [], 
+                    'notify' => [
+                    'Model'=>'borrowingLibraryOperators', 
+                ], 
+                //'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
+                ],
+                'unFilled' => [
+                    'role' => [],//borrow/lend/manage?
+                    'next_statuses' => [],
+                    'constraints' => [], 
+                    'notify' => [
+                    'Model'=>'borrowingLibraryOperators', 
+                ], 
+                //'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
+                ],
+                'copyCompleted' => [
+                    'role' => [],//borrow/lend/manage?
+                    'next_statuses' => [''],
+                    'constraints' => [], 
+                    'notify' => [
+                    'Model'=>'borrowingLibraryOperators', 
+                ], 
+                // 'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
+                ],
+                           
+                ]
+               
+                              
+         
             /*
             /* 'userAskCancel'	=> [
                         'role'  =>  ['patron'],
@@ -184,5 +256,6 @@ return [
                 
                 */                
         ],
+    ],
 
 ];
