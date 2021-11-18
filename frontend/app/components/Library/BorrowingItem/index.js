@@ -29,13 +29,17 @@ const statusDate = (req) => {
   {
       case "requested": date= req.request_date; break;
 
-      case "newrequest": 
-      case "canceled": 
-      case "canceledDirect":  date= req.created_at; 
-                              break;                             
-      case "fulfilled": 
-      case "documentReady": 
+      case "newrequest": date= req.created_at; 
+                         break;                             
+      
+      case "canceledDirect":
+      case "canceled": date= req.cancel_date; 
+                       break;                             
+      
+      case "fulfilled":       
       case "notReceived": date=req.fulfill_date; break;
+
+      case "documentReady": date=req.ready_date; break;
        
       default: date= req.created_at; 
   }  
@@ -52,7 +56,12 @@ const statusDate = (req) => {
   )*/
   return (
       <>
-        <i className="fas fa-clock"></i>{formatDateTime(date)}            
+        <div><i className="fas fa-clock"></i>{formatDateTime(date)}</div>            
+        {req.forward==1 && req.forward_date && 
+            <div>
+                <i className="fas fa-redo"></i> {formatDateTime(req.forward_date)}
+            </div>
+        }
       </>
   )
 }

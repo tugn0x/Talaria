@@ -102,19 +102,10 @@ return [
                             'Model'=>'borrowingLibraryOperators',                            
                         ],  
                         //TODO: 'jobs'=>['App\\Jobs\\BorrowingRequestReset'] //clean all temp lender to start new request and update lender (if only 1) saying request was canceled
-                    ],
-                    /*'forward' => [
-                        'role'  =>  [],//borrow/lend/manage?
-                        'next_statuses'  =>  ['canceled'], //old statuses
-                        'constraints'   =>  [], 
-                        'notify'    =>  [
-                            'Model'=>'borrowingLibraryOperators',                            
-                        ],                          
-                        'jobs' => ['App\\Jobs\\BorrowingRequestCloseAndForwardAsNew']
-                    ],*/
+                    ],                   
                     'canceled'	=> [
                         'role'  =>  [],//borrow/lend/manage?
-                        'next_statuses'  =>  ['forward'],
+                        'next_statuses'  =>  [],
                         'constraints'   =>  [],  
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                            
@@ -124,7 +115,7 @@ return [
                     //NOTE on canceledDirect: i removed constraint because this status can be changed both from patron or borrower                       
                     'canceledDirect'	=> [
                         'role'  =>  [],//borrow?,
-                        'next_statuses'  =>  ['forward'],
+                        'next_statuses'  =>  [],
                         'constraints'   =>  [],     
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',
@@ -154,13 +145,41 @@ return [
                     //we need to change in "canceled" (from requested state) but we don't know what will be really the next status (cancelDirect,cancelRequested)
                     'requested'	=> [
                         'role'  =>  [],//borrow?,
-                        'next_statuses'  =>  ['newrequest','canceled','canceledDirect','cancelRequested'], 
+                        'next_statuses'  =>  ['newrequest','canceled','canceledDirect','cancelRequested','fulfilled','notReceived'], 
                         'constraints'   =>  ["canManage"],  
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                                                        
                         ],  
                         'jobs' => ['App\\Jobs\\LendingRequestUpdateNotify']
                     ],
+                    //todo
+                    'fulfilled'	=> [
+                        'role'  =>  [],//borrow?,
+                        'next_statuses'  =>  ['documentReady'], 
+                        'constraints'   =>  ["canManage"],  
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',                                                        
+                        ],                          
+                    ],
+                    //todo
+                    'documentReady'	=> [ 
+                        'role'  =>  [],//borrow?,
+                        'next_statuses'  =>  [''], 
+                        'constraints'   =>  ["canManage"],  
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',                                                        
+                        ],                          
+                    ],
+                    //todo
+                    'notReceived'	=> [ 
+                        'role'  =>  [],//borrow?,
+                        'next_statuses'  =>  [''], 
+                        'constraints'   =>  ["canManage"],  
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',                                                        
+                        ],                          
+                    ],
+                    //todo: notDeliveredToUser,notReceivedArchived?,deliveredToUser,documentReadyArchived?
 
                 ]
             ],

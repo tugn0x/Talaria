@@ -163,7 +163,7 @@ class BorrowingDocdelRequestController extends ApiController
         {
             //when i forward i need also to archive the request
             $request->merge(["forward"=>$request->input("forward"), 
-            "archived"=>1]); 
+            "archived"=>1,'forward_date'=>now()]); 
         }
 
         $model = $this->nilde->update($this->model, $request, $bid);

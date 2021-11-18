@@ -23,6 +23,8 @@ class BorrowingDocdelRequest extends DocdelRequest
         'patron_docdel_request_id',
         'accept_cost_status', //Stato accettazione utente dopo richiesta: 1=Biblio richiede accettazione, 2=Ute accetta, 3=Ute non accetta
         'accept_cost_date', //quando ha accettato/rifiutato il costo                
+        'ready_date', //the document is available for download or is just arrived from mail
+        'forward_date', //date in which i decided to forward the req
         'trash_date', //data cestinamento
         'trash_type', //tipo cestinamento (trash o trashHC)
         'borrowing_notes', //dd_note_interne              
