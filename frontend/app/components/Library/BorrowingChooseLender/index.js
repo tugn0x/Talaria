@@ -71,13 +71,13 @@ const BorrowingChooseLender = (props) => {
                                 <label className="">Note for lender</label>
                                 <textarea placeholder="note" required="" class="form-control" value=""/>                                
                             </div>                                        
-                            <span className="alert alert-warning">Copyright statement,Copyright statement, Copyright statement, Copyright statement, Copyright statement, Copyright statement.... </span>
+                            <span className="alert alert-primary">Copyright statement,Copyright statement, Copyright statement, Copyright statement, Copyright statement, Copyright statement.... </span>
                         </div>
                     </div>
                     }
                     <div className="sendTolenderButtons">                        
-                        {allselected && <span className="alert alert-warning">Your request will be view by ALL libraries. Are you sure? If yes click on the button below, 
-                                otherwise please select a single library</span>                                
+                        {allselected && <div className="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> Your request will be view by ALL libraries. <br/>Are you sure? If yes click on the button below, 
+                                <strong>otherwise please select a single library</strong></div>                                
                         }       
                         {allselected && 
                             <button className="btn btn-warning" onClick={()=>sendRequestToLender()}>Send request to ALL libraries</button>
