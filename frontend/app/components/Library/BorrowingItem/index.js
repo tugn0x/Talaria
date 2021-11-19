@@ -221,8 +221,9 @@ const BorrowingItem = (props) => {
             <BorrowingReferenceIcons data={data} reqPath={editPath} findAndUpdateOABorrowingReference={findAndUpdateOABorrowingReference} oaloading={oaloading} findISSNISBNtoggle={findISSNISBNtoggle} />                
             </Col>
             <Col sm={3} className="">
-            {inRequest(data) &&             
             <div className="lendersbox">
+            {inRequest(data) &&             
+            <>
                {data.lendingLibrary && data.lendingLibrary.data.id>0  && 
                 <span>
                     <i className="fas fa-landmark"></i> {data.lendingLibrary.data.name}
@@ -233,12 +234,12 @@ const BorrowingItem = (props) => {
                     <i className="fas fa-cloud"></i> {intl.formatMessage({id:'app.global.alllibraries'})} 
                 </span>
                }
-               {!isArchived(data) && data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
-               
-               <span className="fullfilment">{data.lending_status}</span>              
-            </div>            
+               {!isArchived(data) && data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}                              
+               <span className="fullfilment">{data.lending_status ? intl.formatMessage({id: "app.requests."+data.lending_status}):'xxx'}</span>   
+            </>            
             }   
-            <BorrowingRequestIcons customClass="icons d-flex justify-content-center" data={data} reqPath={editPath} forwardRequest={forwardRequest} askCancelRequest={askCancelRequest} askArchiveRequest={askArchiveRequest}/>                                
+            <BorrowingRequestIcons customClass="icons d-flex" data={data} reqPath={editPath} forwardRequest={forwardRequest} askCancelRequest={askCancelRequest} askArchiveRequest={askArchiveRequest}/>                                
+            </div>
             </Col> 
         </Row>
     )
