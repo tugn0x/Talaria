@@ -160,8 +160,9 @@
 
   "app.containers.InstitutionPage.createSuccess": "Nuovo ente creato",
   "app.containers.InstitutionPage.updateSuccess": "Ente aggiornato",
-  "app.containers.LendingPage.headerArchive":"Archive",
-
+  "app.containers.LendingPage.headerArchive":"Archivio", 
+  "app.containers.LendingPage.header":"Richieste in corso", 
+  "app.containers.LendingPage.headerAllRequest":"Richieste orfane", 
   "app.components.Pagination.itemsPerPageDropdown": "Mostra righe",
   "app.components.Pagination.of": "di",
   "app.components.InstitutionsList.header": "Lista degli enti",
@@ -213,7 +214,7 @@
   
   "app.components.Notification.header": "Notifiche",
   "app.components.Notification.mark_all_as_read": "Segna tutte come lette",
-  "app.components.LendingsList.LendingSelected":"Selected",
+  "app.components.LendingsList.LendingSelected":"Selezionati",
 
   "app.containers.ReferencePage.header": "Inserisci/Modifica riferimento",
   "app.containers.ReferencePage.headerNew": "Nuovo Riferimento",
@@ -233,8 +234,9 @@
 
   "app.containers.BorrowingPage.OAfoundAndUpdateMessage": "Versione OA trovata. Richiesta aggiornata.",
   "app.containers.BorrowingPage.OAnotfoundAndUpdateMessage": "Versione OA NON trovata. Richiesta non aggiornata.",
-  "app.containers.BorrowingPage.addedTagToRequest": "Tag applicato",
-  "app.containers.LendingPage.header":"header",
+  "app.containers.BorrowingPage.addedTagToRequest": "Tag applicato",  
+  "app.containers.BorrowingPage.headerArchive":"Archivio", 
+  "app.containers.BorrowingPage.header":"Richieste in corso", 
   "app.libraries.dd_user_cost":"Costo per articolo",
 
   "app.references.labels": "Etichette",
@@ -321,7 +323,7 @@
   "app.requests.forwardedMessage": "Richiesta duplicata",  
   "app.requests.pendingRequest":"Pending Request",
   "app.requests.requestReceived":"Request Received",  
-  "app.requests.unFilled":"Unfilled",
+  "app.requests.unFilled":"Inevaso",
   "app.requests.willSupply":"Will Supply",
 
   "app.components.LendingsList.LendingsNotFound":"Lending request not found",
@@ -443,7 +445,7 @@
   "app.routes.Categories": "Categorie",
   "app.routes.Libraries": "Biblioteche",
   "app.routes.Library": "Biblioteca",
-  "app.routes.Stats": "Stats",
-  "app.routes.Licenses": "Licenses",
-  "app.routes.AllRequests":"All Requests"
+  "app.routes.Stats": "Statistiche",
+  "app.routes.Licenses": "Licenze",
+  "app.routes.AllRequests":"Richieste orfane"
 }

@@ -160,7 +160,9 @@
 
   "app.containers.InstitutionPage.createSuccess": "Nuovo ente creato",
   "app.containers.InstitutionPage.updateSuccess": "Ente aggiornato",
-
+  "app.containers.LendingPage.headerArchive":"Archive", 
+  "app.containers.LendingPage.header":"Pending requests", 
+  "app.containers.LendingPage.headerAllRequest":"Orphaned requests", 
   "app.components.Pagination.itemsPerPageDropdown": "Show rows",
   "app.components.Pagination.of": "of",
   "app.components.InstitutionsList.header": "Lista degli enti",
@@ -212,6 +214,7 @@
   
   "app.components.Notification.header": "Notifications",
   "app.components.Notification.mark_all_as_read": "Mark all as read",
+  "app.components.LendingsList.LendingSelected":"Selected",
 
   "app.containers.ReferencePage.header": "Inserisci/Modifica riferimento",
   "app.containers.ReferencePage.headerNew": "Nuovo Riferimento",
@@ -232,8 +235,9 @@
   "app.containers.BorrowingPage.OAfoundAndUpdateMessage": "OA version found. Request updated.",
   "app.containers.BorrowingPage.OAnotfoundAndUpdateMessage": "OA version not found. Request not updated.",
   "app.containers.BorrowingPage.addedTagToRequest": "Tag applied",
-    
   "app.libraries.dd_user_cost":"Cost per article",
+  "app.containers.BorrowingPage.headerArchive":"Archive", 
+  "app.containers.BorrowingPage.header":"Pending requests", 
 
   "app.references.labels": "Labels",
   "app.references.labelAs": "Label by",
@@ -318,9 +322,10 @@
   "app.requests.forwardRequestMessage": "Clone and forward as request?",  
   "app.requests.forwardedMessage": "Request cloned",  
   "app.requests.pendingRequest":"Pending Request",  
-  "app.requests.unFilled":"Unfilled",
   "app.requests.requestReceived":"Request Received",
+  "app.requests.unFilled":"Unfilled",
   "app.requests.willSupply":"Will Supply",
+
   "app.components.LendingsList.LendingsNotFound":"Lending request not found",
   "app.components.OASearchReferenceForm.bodySearch": "Search a reference by entering DOI, PMID or ISBN or exact title",
   "app.components.OASearchReferenceForm.inputPlaceHolder": "Es: 10.1002/hlca.19740570315",  
@@ -442,6 +447,6 @@
   "app.routes.Library": "Library",
   "app.routes.Stats": "Stats",
   "app.routes.Licenses": "Licenses",
-  "app.routes.AllRequests":"All Requests"
+  "app.routes.AllRequests":"Orphaned requests"
 }
 
