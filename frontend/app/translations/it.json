@@ -320,8 +320,7 @@
   "app.requests.forwardRequestMessage": "Duplicare e inoltrare come nuova richiesta?",  
   "app.requests.forwardedMessage": "Richiesta duplicata",  
   "app.requests.pendingRequest":"Pending Request",
-  "app.requests.requestReceived":"Request Received",
-  "app.requests.copyCompleted":"Copy Completed",
+  "app.requests.requestReceived":"Request Received",  
   "app.requests.unFilled":"Unfilled",
   "app.requests.willSupply":"Will Supply",
 
