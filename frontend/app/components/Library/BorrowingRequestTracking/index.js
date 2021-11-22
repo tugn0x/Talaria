@@ -2,6 +2,7 @@ import React from 'react';
 import {useIntl} from 'react-intl';
 import { generatePath } from "react-router";
 import { Link } from 'react-router-dom';
+import {BorrowingStatus, statusIcon} from '../BorrowingItem'
 
 import './style.scss';
 
@@ -38,7 +39,7 @@ const BorrowingTrackingItem = (props) => {
 
     return (
         <div className="borrowingRequest">
-            <div className="itemHeader">
+            <div className="itemHeader">                
                 {data.lendingLibrary && <i className="fas fa-share"></i>}                
                 <span className="id"><span className="label">ID:</span> 
                     {requestDetailPath && <Link className="requestLink" to={`${requestURL(data.id)}`}>                                    
@@ -48,9 +49,9 @@ const BorrowingTrackingItem = (props) => {
                 </span>&nbsp;-&nbsp; 
 
                 {data.lendingLibrary && <span className="library"> {data.lendingLibrary.data.name}</span>}
-                {data.all_lender && data.all_lender==1 && <span className="library">{intl.formatMessage({id:'app.global.alllibraries'})}</span>}
-                <span className="request_date"><span className="label">DATE:</span>  {data.request_date}</span>
-                <span className="status"><span className="label">STATUS:</span> {data.borrowing_status}</span>
+                {data.all_lender && data.all_lender==1 && <span className="library">{intl.formatMessage({id:'app.global.alllibraries'})}</span>}                
+                <span className="request_date"><span className="label">DATE:</span>  {data.request_date}</span>                
+                <BorrowingStatus data={data} customClass="request_status"/>                                 
             </div>
             <div className="itemData">
                 

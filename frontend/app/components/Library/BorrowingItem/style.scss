@@ -5,9 +5,14 @@
 
 .status-date {
     display: block;
+    font-size: 0.85em;
     & .status-time {
         padding-left:16px;
     }
+}
+
+.status-operator {
+    font-size: 0.85em;
 }
 
 .daysago {
@@ -41,9 +46,9 @@
         background-color: transparent;    
     }
 
-    &.readyToDelivery,   
-    &.received,
-    &.fulfilled    
+    &.readyToDelivery,       
+    &.fulfilled,
+    &.documentReady    
     {
         background-color: green;
     }

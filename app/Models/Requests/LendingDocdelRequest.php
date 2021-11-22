@@ -24,7 +24,7 @@ class LendingDocdelRequest extends DocdelRequest
         'all_lender',        
         'borrowing_notes', //dd_note_interne
     ];
-      
+     
     protected static $observerClass=LendingDocdelRequestObserver::class;
 
     protected $statusField="lending_status";
@@ -42,10 +42,9 @@ class LendingDocdelRequest extends DocdelRequest
 
     public function tags()
     {
-        //filter by libraryid
-        if($this->lendinglibrary())
-            //return $this->belongsToMany(Tag::class,"docdel_request_tag","docdel_request_id","tag_id")->inLibrary($this->lendinglibrary()->first()->id);
-            return $this->belongsToMany(Tag::class,"docdel_request_tag","docdel_request_id","tag_id");
+        //filter by libraryid (in case only on lending request for your library and not for all_lender)
+        //TODO: try to return empty list when all_lender=1        
+        return $this->belongsToMany(Tag::class,"docdel_request_tag","docdel_request_id","tag_id")->inLibrary($this->lendinglibrary? $this->lendinglibrary()->first()->id:null);                                
     }
     
     public function library()

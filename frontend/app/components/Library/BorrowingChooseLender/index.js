@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {useIntl} from 'react-intl';
 import './style.scss';
 
@@ -32,8 +32,12 @@ const BorrowingChooseLender = (props) => {
         findLender(catid);
     }
 
+    useEffect(() => {
+        findLenderByCat(0)        
+    }, [])
+
     return (<div className="BorrowingChooseLender">
-                <h3>Choose the lender:</h3>                                          
+                <h3>To send request choose a lender from list below:</h3>                                          
                 <nav className="navbar navbar-expand-lg navbar-dark bg-primary">   
                     <ul className="navbar-nav">
                       <li className="nav-item active">
@@ -55,10 +59,31 @@ const BorrowingChooseLender = (props) => {
                         {lendersList.data.map ( (lib) => 
                             <li key={lib.id}><input name="lender" type="radio" value={lib.id} onChange={e=>onChangeLibraryList(e.target.value)} />{lib.name}</li>    
                         )}                                        
-                    </ul>
-                    {allselected && <button className="btn btn-warning" onClick={()=>sendRequestToLender()}>Send request to ALL libraries</button>}                
-                
-                    {lender && !allselected && <>&nbsp;&nbsp;<button className="btn btn-primary" onClick={()=>sendRequestToLender()}>Send request to selected library</button></>}
+                    </ul>                    
+                    {(allselected || (lender && !allselected) ) && 
+                    <div className="requestFieldsBlock">  
+                        <div className="card">
+                            <div cclassNamelass="form-group">
+                                <label className="">Protocol nr.</label>
+                                <input placeholder="protocol" required="" type="text" class="form-control" value=""/>                                
+                            </div>                                        
+                            <div className="form-group">
+                                <label className="">Note for lender</label>
+                                <textarea placeholder="note" required="" class="form-control" value=""/>                                
+                            </div>                                        
+                            <span className="alert alert-primary">Copyright statement,Copyright statement, Copyright statement, Copyright statement, Copyright statement, Copyright statement.... </span>
+                        </div>
+                    </div>
+                    }
+                    <div className="sendTolenderButtons">                        
+                        {allselected && <div className="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> Your request will be view by ALL libraries. <br/>Are you sure? If yes click on the button below, 
+                                <strong>otherwise please select a single library</strong></div>                                
+                        }       
+                        {allselected && 
+                            <button className="btn btn-warning" onClick={()=>sendRequestToLender()}>Send request to ALL libraries</button>
+                        }
+                        {lender && !allselected && <button className="btn btn-primary" onClick={()=>sendRequestToLender()}>Send request to selected library</button>}
+                    </div>
                 </>}
             </div>
     );

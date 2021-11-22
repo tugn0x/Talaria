@@ -53,8 +53,8 @@ export const getFindISSN = (options) => {
     //return request(`${FIND_ISSN_SERVICE_URL}/xxxx?issn=${issn}&title=${title}&year=${year}`,  {method: 'get'})
     const result = {    
         'data': [
-          {'issn': '9999-9999', 'issn_l': '9a9a-9b9b','pub_title': 'debugTitle99' },
-          {'issn': '8888-8888', 'pub_title': 'debugTitle88' },
+          {'issn': '1749-4893', 'issn_l': '1749-4893','pub_title': 'Nature Photonics' },
+          {'issn': '1948-5875', 'pub_title': 'ACS medicinal chemistry letters' },
         ]
       }; 
       console.log("getFindISSN results",result);

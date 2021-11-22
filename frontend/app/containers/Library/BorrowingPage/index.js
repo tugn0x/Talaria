@@ -100,6 +100,22 @@ const BorrowingPage = (props) => {
         if(conf)
             dispatch(requestUpdateBorrowing(id,match.params.library_id,data,intl.formatMessage({id: "app.requests.forwardedMessage"}),filter))
      } 
+
+     async function askTrashRequest (id,filter) {
+        console.log("DISPATCH askTrashRequest",id);
+         let conf = await confirm({
+            title: intl.formatMessage({id: 'app.global.confirm'}),
+             message: intl.formatMessage({id: "app.requests.askTrashRequestMessage"}),
+             confirmText: intl.formatMessage({id: 'app.global.yes'}),
+             cancelText: intl.formatMessage({id: 'app.global.no'})
+         }); 
+         let data={
+            id: id,
+            'trash_type':1, //todo: define which type (HC, normal...)
+        }
+        if(conf)
+            dispatch(requestUpdateBorrowing(id,match.params.library_id,data,intl.formatMessage({id: "app.requests.trashedMessage"}),filter))
+     } 
      
 
      async function askArchiveRequest (id,filter) {
@@ -154,6 +170,7 @@ const BorrowingPage = (props) => {
                 //deleteReference={deleteReference}
                 askCancelRequest={askCancelRequest}
                 forwardRequest={forwardRequest}
+                askTrashRequest={askTrashRequest}
                 askArchiveRequest={askArchiveRequest}
                 applyTags={archive==1?undefined:applyTagsToDDRequests}
                 findAndUpdateOABorrowingReference={findAndUpdateOABorrowingReference}

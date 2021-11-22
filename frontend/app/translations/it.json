@@ -163,10 +163,9 @@
 
   "app.containers.InstitutionPage.createSuccess": "Nuovo ente creato",
   "app.containers.InstitutionPage.updateSuccess": "Ente aggiornato",
-  "app.containers.LendingPage.headerArchive":"Archive",
-  "app.containers.LendingPage.ChangeStatus":"Status successfully updated",
-  "app.containers.LendingPage.AcceptRequestFromAll":"Request Accept by lender",
-  "app.containers.LendingPage.addedTagToRequest":"Tag applied",
+  "app.containers.LendingPage.headerArchive":"Archivio", 
+  "app.containers.LendingPage.header":"Richieste in corso", 
+  "app.containers.LendingPage.headerAllRequest":"Richieste orfane", 
   "app.components.Pagination.itemsPerPageDropdown": "Mostra righe",
   "app.components.Pagination.of": "di",
   "app.components.InstitutionsList.header": "Lista degli enti",
@@ -218,7 +217,7 @@
   
   "app.components.Notification.header": "Notifiche",
   "app.components.Notification.mark_all_as_read": "Segna tutte come lette",
-  "app.components.LendingsList.LendingSelected":"Selected",
+  "app.components.LendingsList.LendingSelected":"Selezionati",
 
   "app.containers.ReferencePage.header": "Inserisci/Modifica riferimento",
   "app.containers.ReferencePage.headerNew": "Nuovo Riferimento",
@@ -238,9 +237,9 @@
 
   "app.containers.BorrowingPage.OAfoundAndUpdateMessage": "Versione OA trovata. Richiesta aggiornata.",
   "app.containers.BorrowingPage.OAnotfoundAndUpdateMessage": "Versione OA NON trovata. Richiesta non aggiornata.",
-  "app.containers.BorrowingPage.addedTagToRequest": "Tag applicato",
-  
-  "app.containers.LendingPage.header":"Inserisci/Modifica riferimento",
+  "app.containers.BorrowingPage.addedTagToRequest": "Tag applicato",  
+  "app.containers.BorrowingPage.headerArchive":"Archivio", 
+  "app.containers.BorrowingPage.header":"Richieste in corso", 
   "app.libraries.dd_user_cost":"Costo per articolo",
 
   "app.references.labels": "Etichette",
@@ -297,10 +296,13 @@
   "app.requests.requested": "In richiesta",
   "app.requests.received":"Evasa",  
   "app.requests.notReceived":"Inevasa",  
-  "app.requests.canceled":"Annullata",
+  "app.requests.canceled":"Annullata",  
   "app.requests.canceledAccepted": "Annullamento accettato",
   "app.requests.canceledDirect":"Annullata Dir.",
   "app.requests.cancelRequested": "Richiesto annullamento",
+  "app.requests.fulfilled":"Evasa",
+  "app.requests.documentReady":"Documento ricevuto",
+  "app.requests.copyCompleted":"Documento inviato",
   "app.requests.waitingForCost": "Accettazione costo",
   "app.requests.costAccepted": "Costo accettato",
   "app.requests.costNotAccepted":"Costo rifiutato",
@@ -315,6 +317,8 @@
   "app.requests.costDeniedMessage": "Il costo è stato rifiutato",
   "app.requests.askArchiveRequestMessage": "Archiviare la richiesta?",
   "app.requests.archivedMessage": "Archiviata con successo",
+  "app.requests.askTrashRequestMessage": "Cestinare la richiesta?",
+  "app.requests.trashedMessage": "Cestinata con successo",
   "app.requests.askCancelRequestMessage": "Annullare la richiesta?",
   "app.requests.cancelAskedMessage": "Annullamento richiesto",  
   "app.requests.canceledMessage": "Richiesta annullata",  
@@ -323,10 +327,8 @@
   "app.requests.forwardRequestMessage": "Duplicare e inoltrare come nuova richiesta?",  
   "app.requests.forwardedMessage": "Richiesta duplicata",  
   "app.requests.pendingRequest":"Pending Request",
-  "app.requests.requestReceived":"Request Received",
-  
-  "app.requests.copyCompleted":"Copy Completed",
-  "app.requests.unFilled":"Unfilled",
+  "app.requests.requestReceived":"Request Received",  
+  "app.requests.unFilled":"Inevaso",
   "app.requests.willSupply":"Will Supply",
 
   "app.components.LendingsList.LendingsNotFound":"Lending request not found",
@@ -448,7 +450,7 @@
   "app.routes.Categories": "Categorie",
   "app.routes.Libraries": "Biblioteche",
   "app.routes.Library": "Biblioteca",
-  "app.routes.Stats": "Stats",
-  "app.routes.Licenses": "Licenses",
-  "app.routes.AllRequests":"All Requests"
+  "app.routes.Stats": "Statistiche",
+  "app.routes.Licenses": "Licenze",
+  "app.routes.AllRequests":"Richieste orfane"
 }

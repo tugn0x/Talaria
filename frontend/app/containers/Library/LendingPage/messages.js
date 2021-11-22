@@ -8,6 +8,10 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.LendingPage';
 
 export default defineMessages({
+  headerAllRequest: {
+    id: `${scope}.headerAllRequest`,
+    defaultMessage: 'All requests',
+  },
   header: {
     id: `${scope}.header`,
     defaultMessage: 'Pending requests',

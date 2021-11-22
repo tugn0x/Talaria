@@ -163,7 +163,9 @@
 
   "app.containers.InstitutionPage.createSuccess": "Nuovo ente creato",
   "app.containers.InstitutionPage.updateSuccess": "Ente aggiornato",
-
+  "app.containers.LendingPage.headerArchive":"Archive", 
+  "app.containers.LendingPage.header":"Pending requests", 
+  "app.containers.LendingPage.headerAllRequest":"Orphaned requests", 
   "app.components.Pagination.itemsPerPageDropdown": "Show rows",
   "app.components.Pagination.of": "of",
   "app.components.InstitutionsList.header": "Lista degli enti",
@@ -215,6 +217,7 @@
   
   "app.components.Notification.header": "Notifications",
   "app.components.Notification.mark_all_as_read": "Mark all as read",
+  "app.components.LendingsList.LendingSelected":"Selected",
 
   "app.containers.ReferencePage.header": "Inserisci/Modifica riferimento",
   "app.containers.ReferencePage.headerNew": "Nuovo Riferimento",
@@ -235,8 +238,9 @@
   "app.containers.BorrowingPage.OAfoundAndUpdateMessage": "OA version found. Request updated.",
   "app.containers.BorrowingPage.OAnotfoundAndUpdateMessage": "OA version not found. Request not updated.",
   "app.containers.BorrowingPage.addedTagToRequest": "Tag applied",
-    
   "app.libraries.dd_user_cost":"Cost per article",
+  "app.containers.BorrowingPage.headerArchive":"Archive", 
+  "app.containers.BorrowingPage.header":"Pending requests", 
 
   "app.references.labels": "Labels",
   "app.references.labelAs": "Label by",
@@ -296,6 +300,9 @@
   "app.requests.canceledAccepted": "Canceled accepted",
   "app.requests.canceledDirect":"Canceled Dir.",
   "app.requests.cancelRequested": "Cancel requested",
+  "app.requests.fulfilled":"Fulfilled",
+  "app.requests.documentReady":"Document ready",
+  "app.requests.copyCompleted":"Document sent",
   "app.requests.waitingForCost": "Waiting for corst",
   "app.requests.costAccepted": "Cost accepted",
   "app.requests.costNotAccepted":"Cost not accepted",
@@ -311,17 +318,18 @@
   "app.requests.askArchiveRequestMessage": "Archive the request?",
   "app.requests.archivedMessage": "Archived successfully",
   "app.requests.askCancelRequestMessage": "Cancel the request?",
+  "app.requests.askTrashRequestMessage": "Trash the request?",
+  "app.requests.trashedMessage": "Trashed successfully",
   "app.requests.cancelAskedMessage": "Canceled successfully",  
   "app.requests.canceledMessage": "Request canceled",  
   "app.requests.requestedMessage": "Request sent",  
   "app.requests.tagAs": "Tag as",
   "app.requests.forwardRequestMessage": "Clone and forward as request?",  
   "app.requests.forwardedMessage": "Request cloned",  
-  "app.requests.pendingRequest":"Pending Request",
-  
-  "app.requests.copyCompleted":"Copy Completed",
-  "app.requests.unFilled":"Unfilled",
+ 
+  "app.requests.pendingRequest":"Pending Request",  
   "app.requests.requestReceived":"Request Received",
+  "app.requests.unFilled":"Unfilled",
   "app.requests.willSupply":"Will Supply",
   "app.requests.FulfillHeaderMessage":"fulfill",
 
@@ -446,6 +454,6 @@
   "app.routes.Library": "Library",
   "app.routes.Stats": "Stats",
   "app.routes.Licenses": "Licenses",
-  "app.routes.AllRequests":"All Requests"
+  "app.routes.AllRequests":"Orphaned requests"
 }
 

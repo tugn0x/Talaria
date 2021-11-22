@@ -58,7 +58,7 @@ const LendingPage = (props) => {
         <>
         
             { <LendingList 
-                sectionTitle={archive==1?messages.headerArchive:messages.header}
+                sectionTitle={archive==1?messages.headerArchive:(allrequests==1?messages.headerAllRequest:messages.header)}
                 data={lendingList}                               
                 loading={isLoading}
                 pagination={pagination}
