@@ -19,6 +19,9 @@
     }
 
     & .borrowingRequest {
+        border-bottom: 1px dashed;
+        padding: 10px 0 10px 0;
+
         & a.requestLink {
         }
     }
