@@ -3,7 +3,7 @@
   "app.global.email": "Email",
   "app.global.id": "ID",
   "app.global.user_id": "User ID",
-  "app.global.surname": "Surgname",
+  "app.global.surname": "Surname",
   "app.global.password_repeat": "Retype password",
   "app.global.password_match": "Passwords must match",
   "app.global.invalid_name": "Insert name",
@@ -69,8 +69,6 @@
   "app.global.daysago":"days ago",
   "app.global.alllibraries": "All libraries",
   "app.global.createNewLabelGroupTag": "Create new",
-  "app.global.fulFillMessage":"Fulfilled successfully",
-  "app.global.unFilledMessage":"unFilled successfully",
 
   
   "app.containers.HomePage.header": "This is the HomePage container!",
@@ -332,6 +330,9 @@
   "app.requests.unFilled":"Unfilled",
   "app.requests.willSupply":"Will Supply",
   "app.requests.FulfillHeaderMessage":"fulfill",
+  "app.requests.fulfilledMessage":"Fulfilled successfully",
+  "app.requests.unFilledMessage":"unFilled successfully",
+  "app.requests.willSupplyMessage":"Request accepted",
 
   "app.components.LendingsList.LendingsNotFound":"Lending request not found",
   "app.components.OASearchReferenceForm.bodySearch": "Search a reference by entering DOI, PMID or ISBN or exact title",

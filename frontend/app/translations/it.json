@@ -69,8 +69,7 @@
   "app.global.daysago":"giorni fa",
   "app.global.alllibraries": "Tutte le biblioteche",
   "app.global.createNewLabelGroupTag": "Crea nuova",
-  "app.global.fulFillMessage":"Fulfilled successfully",
-  "app.global.unFilledMessage":"unFilled successfully",
+  
 
   
   "app.containers.HomePage.header": "Benvenuto su NILDE - Network Inter Library Document Exchange",
@@ -330,6 +329,9 @@
   "app.requests.requestReceived":"Request Received",  
   "app.requests.unFilled":"Inevaso",
   "app.requests.willSupply":"Will Supply",
+  "app.requests.fulfilledMessage":"Evasa con successo",
+  "app.requests.unFilledMessage":"Inevasa con successo",
+  "app.requests.willSupplyMessage":"Richiesta accettata",
 
   "app.components.LendingsList.LendingsNotFound":"Lending request not found",
   "app.components.OASearchReferenceForm.bodySearch": "Cerca un riferimento inserendo DOI, PMID o ISBN o titolo esatto",

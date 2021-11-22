@@ -41,12 +41,12 @@ const LendingRequestPage = (props) => {
 
     const FulfillLendingRequestStatus = (data) => {
         data.lending_status="copyCompleted";
-        dispatch(requestChangeStatusLending(data.id, data.lending_library_id, data.lending_status,intl.formatMessage({id: "app.requests.copyCompleted"}),""))
+        dispatch(requestChangeStatusLending(data.id, data.lending_library_id, data.lending_status,intl.formatMessage({id: "app.requests.fulfilledMessage"}),""))
     }
 
     const unFulfillLendingRequestStatus = (data) => {
         data.lending_status="unFilled";
-        dispatch(requestChangeStatusLending(data.id, data.lending_library_id, data.lending_status,intl.formatMessage({id: "app.requests.unFilled"}),""))
+        dispatch(requestChangeStatusLending(data.id, data.lending_library_id, data.lending_status,intl.formatMessage({id: "app.requests.unFilledMessage"}),""))
     }
 
 
