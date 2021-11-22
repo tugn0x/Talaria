@@ -19,7 +19,7 @@ export const requesturl=(reqPath,id,op) => {
     });
 }
 
-const statusIcon = (status) => {
+export const statusIcon = (status) => {
     return "status-icon " + status
 }
 
@@ -79,7 +79,7 @@ export const canArchive=(data) => {
     return !isArchived(data) && ( 
     (data.patrondocdelrequest && data.patrondocdelrequest.data.user 
     && data.borrowing_status!="requested" && data.borrowing_status!="newrequest" && data.borrowing_status!="canceled" && data.borrowing_status!="cancelRequested")
-    ||(data.borrowing_status=="canceled"||data.borrowing_status=="canceledDirect"|| data.borrowing_status=="notReceived") );
+    ||(data.borrowing_status=="canceled"||data.borrowing_status=="canceledDirect"|| data.borrowing_status=="notReceived"|| (data.borrowing_status=="documentReady" /*&& isTrashed(data) */ ) ) );
     //todo: add check on status
     //...&& (...in terminal status);
 }
@@ -100,8 +100,14 @@ export const canForward=(data)=>{
     return canArchive(data)
 }
 
+
+
 export const isArchived=(data) => {
     return data.archived  // || (other "pending" states)
+}
+
+export const isTrashed=(data) => {
+    return data.trash_date
 }
 
 export const inRequest=(data) => {
@@ -112,6 +118,20 @@ export const canRequest=(data) => {
     return data.borrowing_status=="newrequest"
 }
 
+export const canDownload=(data) => {
+    return !isTrashed(data) && data.borrowing_status=="documentReady" /* && delivery_format=="pdf"*/
+}
+
+export const canRegisterAsReceived=(data) => {
+    return data.borrowing_status=="fulfilled" /* && delivery_format=="paperCopy"*/
+}
+
+export const canTrash=(data) => {
+    return data.borrowing_status=="documentReady" && !isTrashed(data)
+}
+
+
+
 const mustCheckData=(data) => {
     return (
         (data.reference.data.material_type==1 && !data.reference.data.issn)||
@@ -119,10 +139,6 @@ const mustCheckData=(data) => {
     )        
 }
 
-
-export const documentReady=(data) => {
-    return data.borrowing_status=="documentReady" //&&delivery_format=xxxx
-}
 
 
 export const BorrowingStatus = (props) => {
@@ -136,7 +152,8 @@ export const BorrowingStatus = (props) => {
             <span className={statusIcon(data.borrowing_status)}></span> 
             <span className="status-text">{data.borrowing_status ? intl.formatMessage({id: "app.requests."+data.borrowing_status}):'xxx'}
             </span>        
-            <span className="status-date">{statusDate(data)}</span>
+            <span className="status-date">{statusDate(data)}</span>   
+            {isTrashed(data) && <span className="status-date"><i className="fas fa-trash"></i> {data.trash_date}</span>}                   
             {data.operator && <div className="status-operator">
                 <i className="fas fa-user-cog"></i> { data.operator.data.full_name}
             </div>}
@@ -165,23 +182,22 @@ export const BorrowingReferenceIcons = (props) => {
                 {(issn_search_enabled || isbn_search_enabled ) && canRequest(data) &&  mustCheckData(data) && <a target="_blank" className='btn btn-icon' onClick={()=>findISSNISBNtoggle()} title="checkISSN/ISBN"><i className="fas fa-keyboard"></i></a>}
                 {canRequest(data) &&  !mustCheckData(data) && <span className="btn btn-icon"><i className="fas fa-check-double"></i></span>}
                 {canRequest(data) && oaloading && <i className="fas fa-spinner fa-spin"></i>}                
-                {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO !')}><i className="fa fa-search-location"></i></a>}
-                {documentReady(data) && <a className="btn btn-icon"  onClick={()=>alert('TODO !')}><i className="fas fa-file-pdf"></i></a>}
+                {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO !')}><i className="fa fa-search-location"></i></a>}                
+                {canDownload(data) && <a className="btn btn-icon" onClick={()=>alert("TODO: download & VIEW document !")}><i className="fas fa-download"></i></a>}                
         </div>
     )
 }
 
 export const BorrowingRequestIcons = (props) => {
-    const {data,reqPath,forwardRequest,askCancelRequest,askArchiveRequest,customClass}=props;    
+    const {data,reqPath,forwardRequest,askTrashRequest,askCancelRequest,askArchiveRequest,customClass}=props;    
  
     return (
         <div className={"borrowing_request_icons " + (customClass?customClass:'')}>
                 <Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fas fa-eye"></i></Link>                               
                 {canRequest(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-share"></i></Link>}
                 {canCancel(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-times"></i></a>}                
-                {canDelete(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-backspace"></i></a>}                
-                {documentReady(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-trash"></i></a>}                
-                {documentReady(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-download"></i></a>}                
+                {canDelete(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-backspace"></i></a>}                                                
+                {canTrash(data) && askTrashRequest && <a className="btn btn-icon" onClick={()=>askTrashRequest(data.id)}><i className="fas fa-trash"></i></a>}                
                 {canForward(data) && forwardRequest && <a className="btn btn-icon" onClick={()=>forwardRequest(data.id)}><i className="fas fa-redo"></i></a>}                
                 {canArchive(data) && askArchiveRequest && <a className="btn btn-icon" onClick={()=>askArchiveRequest(data.id)}><i className="fas fa-hdd"></i></a>}                
         </div>
@@ -190,7 +206,7 @@ export const BorrowingRequestIcons = (props) => {
 
 
 const BorrowingItem = (props) => {
-    const {editPath,data,toggleSelection,checked,removeTag,deleteReference,findAndUpdateOABorrowingReference,oaloading,askCancelRequest,askArchiveRequest,forwardRequest,findISSNISBNtoggle} = props      
+    const {editPath,data,toggleSelection,checked,removeTag,deleteReference,findAndUpdateOABorrowingReference,oaloading,askCancelRequest,askArchiveRequest,forwardRequest,askTrashRequest,findISSNISBNtoggle} = props      
     const intl = useIntl();  
 
     return (
@@ -238,7 +254,7 @@ const BorrowingItem = (props) => {
                <span className="fullfilment">{data.lending_status ? intl.formatMessage({id: "app.requests."+data.lending_status}):'xxx'}</span>   
             </>            
             }   
-            <BorrowingRequestIcons customClass="icons d-flex" data={data} reqPath={editPath} forwardRequest={forwardRequest} askCancelRequest={askCancelRequest} askArchiveRequest={askArchiveRequest}/>                                
+            <BorrowingRequestIcons customClass="icons d-flex" data={data} reqPath={editPath} forwardRequest={forwardRequest} askTrashRequest={askTrashRequest} askCancelRequest={askCancelRequest} askArchiveRequest={askArchiveRequest}/>                                
             </div>
             </Col> 
         </Row>

@@ -21,7 +21,7 @@ import FindISSNISBN from '../../FindISSNISBN';
 
 const BorrowingsList = (props) => {
     console.log('BorrowingsList', props)
-    const { editPath,loading, data, pagination, searchOptions, tagsOptionList, removeTagFromRequest,applyTags,deleteReference,findAndUpdateOABorrowingReference,oaloading,forwardRequest,askCancelRequest,askArchiveRequest,findISSNISBNcb,findISSNISBNresults,updateISSNISBNReference} = props
+    const { editPath,loading, data, pagination, searchOptions, tagsOptionList, removeTagFromRequest,applyTags,deleteReference,findAndUpdateOABorrowingReference,oaloading,forwardRequest,askTrashRequest,askCancelRequest,askArchiveRequest,findISSNISBNcb,findISSNISBNresults,updateISSNISBNReference} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)
@@ -242,6 +242,7 @@ const BorrowingsList = (props) => {
                                     findAndUpdateOABorrowingReference={()=>findAndUpdateOA(req)}
                                     findISSNISBNtoggle={()=>findISSNISBNtoggle(req)}
                                     forwardRequest={()=>forwardRequest(req.id,multiFilter)}
+                                    askTrashRequest={()=>askTrashRequest(req.id,multiFilter)}
                                     askCancelRequest={()=>askCancelRequest(req.id,multiFilter)}
                                     askArchiveRequest={()=>askArchiveRequest(req.id,multiFilter)}
                                     oaloading={oaloading.includes(req.id)}

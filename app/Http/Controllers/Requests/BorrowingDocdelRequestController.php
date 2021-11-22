@@ -166,6 +166,12 @@ class BorrowingDocdelRequestController extends ApiController
             "archived"=>1,'forward_date'=>now()]); 
         }
 
+        if($request->has("trash_type")) {
+            $request->merge(["trash_type"=>$request->input("trash_type"),
+            "trash_date"=>now()
+            ]);
+        }
+
         $model = $this->nilde->update($this->model, $request, $bid);
 
         if($request->has("reference"))
