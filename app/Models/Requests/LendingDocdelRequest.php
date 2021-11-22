@@ -62,8 +62,7 @@ class LendingDocdelRequest extends DocdelRequest
     public function canManage(User $user=null){
         $u = $user ? $user:Auth::user();        
         return 
-            $u->can('manage', $this->lendingLibrary()->first())||
-            $u->can('borrow', $this->lendingLibrary()->first())||
+            $u->can('manage', $this->lendingLibrary()->first())||            
             $u->can('lend', $this->lendingLibrary()->first());
     }
 
