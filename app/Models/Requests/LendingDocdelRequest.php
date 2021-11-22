@@ -97,7 +97,7 @@ class LendingDocdelRequest extends DocdelRequest
             case 'cancelRequested': 
                   $others=array_merge($others,[
                       'cancel_request_date'=>Carbon::now(),
-                      'borrowing_status'=>"Canceled",
+                      'borrowing_status'=>"canceled",
                       'lending_archived'=>1,
                   ]);
    
