@@ -27,12 +27,17 @@ const statusDate = (req) => {
   let date="";
   switch (req.lending_status)
   {
-      case "requestReceived": date= req.request_date; break;
-
       case "willSupply": 
-      case "canceled": 
-      case "canceleddirect":  date= req.created_at; 
+      case "requestReceived": date= req.request_date; break;      
+      
+      case "cancelRequested":  date= req.cancel_request_date; break;
+
+      case "canceledAccepted": date= req.cancel_date; 
                               break;                             
+
+      case "unFilled": 
+      case "copyCompleted": date= req.fulfill_date; break;                                                           
+
       /*...*/      
       default: date= req.created_at; 
   }  
@@ -60,7 +65,7 @@ export const LendingStatus = (props) => {
 
     return (
      
-        <div className={"borrowing_status " + (customClass?customClass:'')}>            
+        <div className={"lending_status " + (customClass?customClass:'')}>            
             
             <span className={statusIcon(data.lending_status)}></span> 
             <span className="status-text">{data.lending_status ? intl.formatMessage({id: "app.requests."+data.lending_status}):'Pending Request'}
@@ -80,11 +85,10 @@ export const LendingStatus = (props) => {
     )
 }
 
-export const LendingReferenceIcons = (props) => {
-    const {data,reqPath,oaloading, UpdateLendingRequestStatus, UpdateLendingAcceptRequest}=props;    
+const LendingRequestIcons = (props) => {
+    const {data,reqPath,UpdateLendingRequestStatus, UpdateLendingAcceptRequest}=props;    
     return (
-        <div className="borrowing_reference_icons">
-                {oaloading && <i className="fas fa-spinner fa-spin"></i>}                
+        <div className="lending_request_icons">                
                 {isRequestReceived(data) && (data.all_lender==null) && <a className="btn btn-icon"  onClick={()=>UpdateLendingRequestStatus(data)}><i className="fas fa-parachute-box"></i></a>}
                 {(data.all_lender==null || data.all_lender==0) && data.lending_archived==null && data.lending_status=="willSupply" && 
                 <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-book-open"></i></Link>}
@@ -155,12 +159,10 @@ const LendingItem = (props) => {
             <ReferenceCitation data={data.reference.data}/>
             </Col>
             <Col sm={2} className="icons align-self-center">
-            <LendingReferenceIcons data={data} reqPath={editPath} 
-            UpdateLendingRequestStatus={(data) => UpdateLendingRequestStatus(data)} 
-            UpdateLendingArchivedStatus={(data) => UpdateLendingArchivedStatus(data)}
-            UpdateLendingAcceptRequest={(data) => UpdateLendingAcceptRequest(data)}
-            findAndUpdateOABorrowingReference={findAndUpdateOABorrowingReference} 
-            oaloading={oaloading}/>
+            <LendingRequestIcons data={data} reqPath={editPath} 
+            UpdateLendingRequestStatus={(data) => UpdateLendingRequestStatus(data)}             
+            UpdateLendingAcceptRequest={(data) => UpdateLendingAcceptRequest(data)}            
+            />
             </Col> 
         </Row>
     )

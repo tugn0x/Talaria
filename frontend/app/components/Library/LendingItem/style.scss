@@ -20,3 +20,33 @@
     margin-top:5px;
     display: block;
 }
+
+.status-icon{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    border:1px solid;
+    border-color: #B48372;
+    margin: 0 .5rem 0 0;
+    &.requestReceived
+    {
+        background-color: transparent;    
+    }
+
+    &.copyCompleted
+    {
+        background-color: green;
+    }
+
+    
+    &.unFilled,
+    &.canceledAccepted {
+        background-color: red;
+    }
+    
+    &.willSupply,
+    &.cancelRequested{
+        background-color: #FBB133;
+    }    
+}
