@@ -15,7 +15,7 @@ const FulfillLendingPanel = props => {
     
 return (
     <><div className={customClass}>
-        {/* <h3>{intl.formatMessage({id: "app.references.materialTypeHead"})}</h3> */}
+        { <h3>{intl.formatMessage({id: "app.global.FulfillHeaderMessage"})}</h3> }
         <h3>Fulfill</h3>
         {<Card>
             <Row>

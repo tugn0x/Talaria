@@ -69,6 +69,9 @@
   "app.global.daysago":"giorni fa",
   "app.global.alllibraries": "Tutte le biblioteche",
   "app.global.createNewLabelGroupTag": "Crea nuova",
+  "app.global.fulFillMessage":"Fulfilled successfully",
+  "app.global.unFilledMessage":"unFilled successfully",
+
   
   "app.containers.HomePage.header": "Benvenuto su NILDE - Network Inter Library Document Exchange",
   "app.containers.HomePage.subHeader":"Un network di biblioteche e un software per un'informazione scientifica a portata di click!",
@@ -161,7 +164,9 @@
   "app.containers.InstitutionPage.createSuccess": "Nuovo ente creato",
   "app.containers.InstitutionPage.updateSuccess": "Ente aggiornato",
   "app.containers.LendingPage.headerArchive":"Archive",
-
+  "app.containers.LendingPage.ChangeStatus":"Status successfully updated",
+  "app.containers.LendingPage.AcceptRequestFromAll":"Request Accept by lender",
+  "app.containers.LendingPage.addedTagToRequest":"Tag applied",
   "app.components.Pagination.itemsPerPageDropdown": "Mostra righe",
   "app.components.Pagination.of": "di",
   "app.components.InstitutionsList.header": "Lista degli enti",
@@ -234,7 +239,8 @@
   "app.containers.BorrowingPage.OAfoundAndUpdateMessage": "Versione OA trovata. Richiesta aggiornata.",
   "app.containers.BorrowingPage.OAnotfoundAndUpdateMessage": "Versione OA NON trovata. Richiesta non aggiornata.",
   "app.containers.BorrowingPage.addedTagToRequest": "Tag applicato",
-  "app.containers.LendingPage.header":"header",
+  
+  "app.containers.LendingPage.header":"Inserisci/Modifica riferimento",
   "app.libraries.dd_user_cost":"Costo per articolo",
 
   "app.references.labels": "Etichette",
@@ -285,7 +291,7 @@
   "app.references.indications": "Altre indicazioni/Note",
   "app.references.mathnote": "Dati matematici/Note",
   "app.references.oa_link": "Link OA",  
-  
+  "app.requests.FulfillHeaderMessage":"fulfill",
   "app.requests.newrequest": "Nuova",
   "app.requests.archived": "Archiviata",
   "app.requests.requested": "In richiesta",
@@ -318,6 +324,7 @@
   "app.requests.forwardedMessage": "Richiesta duplicata",  
   "app.requests.pendingRequest":"Pending Request",
   "app.requests.requestReceived":"Request Received",
+  
   "app.requests.copyCompleted":"Copy Completed",
   "app.requests.unFilled":"Unfilled",
   "app.requests.willSupply":"Will Supply",

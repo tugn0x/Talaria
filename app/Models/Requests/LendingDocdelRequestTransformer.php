@@ -46,12 +46,6 @@ class LendingDocdelRequestTransformer extends BaseTransformer
              //new BaseLightTransformer());
     }
 
-    // public function includePatronDocdelRequest(Model $model)
-    // {
-    //     if($model->patrondocdelrequest)
-    //         return $this->item($model->patrondocdelrequest, new PatronDocdelRequestTransformer());
-    // }
-
     public function includeTags(Model $model)
     {
         if($model->tags)
@@ -64,12 +58,10 @@ class LendingDocdelRequestTransformer extends BaseTransformer
             return $this->item($model->operator, new UserLightTransformer());
     }    
 
-
     public function transform(Model $model)
     {
         $to_merge = [
         ];
         return $this->applyTransform($model, $to_merge);
     }
-
 }

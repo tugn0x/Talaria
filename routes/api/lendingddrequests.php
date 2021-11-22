@@ -21,23 +21,12 @@ Route::group([
 ], function () {
 
     Route::get('{library}/lendings', 'LendingDocdelRequestController@index')->name('index');
-    //Route::get('/lendings/selectAllrequests', 'LendingDocdelRequestController@selectAllrequests')->name('selectAllrequests');
-    //aggiorno in massa i borrowing selezionati (devo passargli un json con id dei borrowing, i campi da aggiornare
-    //ed eventualmente array tagIds da applicare)
     Route::put('{library}/lendings/updateSelected', 'LendingDocdelRequestController@updateSelected')->name('updateSelected');
-    
     Route::get('{library}/lendings/{id}', 'LendingDocdelRequestController@show')->name('show');
-    
     Route::put('{library}/lendings/{id}', 'LendingDocdelRequestController@update')->name('update');
-    
     Route::post('{library}/lendings', 'LendingDocdelRequestController@store')->name('create');
-    
     Route::put('{library}/lendings/{id}/changestatus', 'LendingDocdelRequestController@changeStatus')->name('changeStatus');
-    
-    Route::put('{library}/lendings/{id}/changelendingarchived', 'LendingDocdelRequestController@changelendingarchived')->name('changelendingarchived');
-    
     Route::put('{library}/lendings/{id}/acceptallLenderLending', 'LendingDocdelRequestController@acceptallLenderLending')->name('acceptallLenderLending');
-    
     Route::delete('{library}/requests/{ddrequest}/tags/{tag}', 'DocdelRequestTagController@delete')->name('delete'); //hard delete       
 });
 

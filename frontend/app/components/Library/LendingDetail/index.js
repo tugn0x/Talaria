@@ -11,13 +11,13 @@ const LendingDetail = (props) => {
     const {data, FulfillLendingRequestStatus, unFulfillLendingRequestStatus} = props
     const intl = useIntl()
     
-    
+
 
     return (<div className="borrowingDetail">
                 <RequestTags data={data.tags.data} /> 
                 <ReferenceDetailContent reference={data.reference.data} customClass="detail-body"/>                                
-                <FulfillLendingRequest FulfillLendingRequestStatus={FulfillLendingRequestStatus} unFulfillLendingRequestStatus={unFulfillLendingRequestStatus} data={data} customClass="detail-body"/>
-                
+                {data.lending_status==='willSupply' &&               
+                <FulfillLendingRequest FulfillLendingRequestStatus={FulfillLendingRequestStatus} unFulfillLendingRequestStatus={unFulfillLendingRequestStatus} data={data} customClass="detail-body"/>}
 
               
 

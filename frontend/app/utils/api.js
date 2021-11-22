@@ -472,6 +472,7 @@ export const getBorrowingRequest = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/borrowings/${options.id}`+"?include=tracking", options)
 };
 
+
 export const updateBorrowing = (options) => {
   options = getOption(options);
   const library_id = options.borrowing_library_id
@@ -507,6 +508,11 @@ export const getLendingsList = (options) => {
    return request(`${BASE_URL}/api/v1/libraries/${library_id}/lendings?page=${page}${qstringpar}`, options)
   };
 
+  export const getLendingRequest = (options) => {
+    options = getOption(options);
+    const lending_library_id = options.library_id
+    return request(`${BASE_URL}/api/v1/libraries/${lending_library_id}/lendings/${options.id}`, options)
+  };
   
 export const changeStatusLendingRequest = (options) => {
   options = getOption(options);

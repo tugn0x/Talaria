@@ -13,6 +13,7 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
       REQUEST_REMOVE_LIBRARY_TAG,
       REQUEST_POST_NEW_BORROWING,
       REQUEST_GET_BORROWING,
+      REQUEST_GET_LENDING,
       REQUEST_UPDATE_BORROWING,
       REQUEST_FIND_UPDATE_BORROWING_OA,
       REQUEST_CHANGE_STATUS_BORROWING,
@@ -43,6 +44,7 @@ import {
   requestFindUpdateOABorrowingReferenceSuccess,
   requestFindUpdateOABorrowingReferenceFail,
   requestFindISSNISBNSuccess,
+  requestGetLendingSuccess,
 } from './actions';
 
 import { toast } from "react-toastify";
@@ -64,7 +66,8 @@ import {getLibraryUsersList, updateLibraryUser, deleteLibraryUser, createUser,
     getLendingsList,
     changeLendingArchivedRequest,
     requestApplyTagsToLendingRequests,
-    acceptallLenderLendingRequest
+    acceptallLenderLendingRequest,
+    getLendingRequest
 } from '../../utils/api'
 
 import {getOA,getPubmedReferenceByPMID,getFindISSN,getFindISBN, getFindISSN_ACNP} from '../../utils/apiExternal';
@@ -441,6 +444,21 @@ export function* requestGetBorrowingSaga(action) {
   }
 }
 
+export function* requestGetLendingSaga(action) {
+  const options = {
+    method: 'get',
+    id: action.id,
+    library_id: action.library_id
+  };
+  try {
+    const request = yield call(getLendingRequest, options);
+    yield put(requestGetLendingSuccess(request))
+    //yield call(() => toast.success(action.message))
+  } catch(e) {    
+    yield put(requestError(e.message));
+  }
+}
+
 //chiamare api x trovare OA e aggiornare (POST) il riferimento in modo che ricarichi la pag
 //La ricerca OA avviene x titolo della pubb (puo' essere titolo part o titolo book/thesi/...)
 export function* findUpdateOABorrowingSaga(action) {
@@ -630,6 +648,8 @@ export default function* librarySaga() {
   yield takeLatest(REQUEST_GET_BORROWING,requestGetBorrowingSaga)
   yield takeLatest(REQUEST_UPDATE_BORROWING,requestUpdateBorrowingSaga)  
   
+  yield takeLatest(REQUEST_GET_LENDING,requestGetLendingSaga)
+
   yield takeLatest(REQUEST_CHANGE_STATUS_BORROWING,requestChangeStatusBorrowingSaga);
   yield takeLatest(REQUEST_CHANGE_STATUS_LENDING,requestChangeStatusLendingSaga);
   yield takeLatest(REQUEST_CHANGE_LENDING_ARCHIVED,requestChangeLendingArchivedSaga);

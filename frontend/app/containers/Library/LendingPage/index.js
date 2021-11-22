@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {useIntl} from 'react-intl'
 import makeSelectLibrary, {isLibraryLoading} from '../selectors';
-import {requestLendingsList,requestLibraryTagsOptionList,requestApplyTagsToDDRequests, requestApplyLendingTagsToDDRequests, requestRemoveDDRequestTag, requestChangeStatusLending,requestAcceptAllLenderLendingSaga, requestChangeLendingArchived, requestAcceptAllLenderLending, FulfillLendingRequestStatus, unFulfillLendingRequestStatus} from '../actions'
+import {requestLendingsList,requestLibraryTagsOptionList,requestApplyLendingTagsToDDRequests, requestRemoveDDRequestTag, requestChangeStatusLending, requestAcceptAllLenderLending, FulfillLendingRequestStatus, unFulfillLendingRequestStatus} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -18,53 +18,29 @@ const LendingPage = (props) => {
     const tagsOptionList=library.tagsOptionList
     const oaloading = library.lendingsList.oaloading
     const allrequests = props.match.path.includes("allrequests")?1:0;
-    //alert(allrequests)
-    //alert(archive)
     const editPath='/library/'+match.params.library_id+"/lending/:id/:op?";
 
     const intl = useIntl()
     
     useEffect(() => {  
         //if(isLoading) {
-       
             dispatch(requestLendingsList(match.params.library_id,null,null,{lending_archived:archive, all_lender:allrequests}))            
             dispatch(requestLibraryTagsOptionList(match.params.library_id))
         //}
     }, [])
 
-    //const applyTagsToDDRequests = (tagIds,reqIds) => {
-    //    dispatch(requestApplyTagsToDDRequests(match.params.lending_library_id,reqIds,[tagIds],'etichetta applicata'))
-    // }
-
-     const applyTagsToDDRequests = (tagIds,reqIds) => { 
-        dispatch(requestApplyTagsToDDRequests(match.params.lending_library_id,reqIds,[tagIds],intl.formatMessage({id:'app.containers.BorrowingPage.addedTagToRequest'})))
-     }
-    
+   
     const applyLendingTagsToDDRequests = (tagIds,reqIds) => { 
-        dispatch(requestApplyLendingTagsToDDRequests(match.params.library_id,reqIds,[tagIds],intl.formatMessage({id:'app.containers.BorrowingPage.addedTagToRequest'})))
+        dispatch(requestApplyLendingTagsToDDRequests(match.params.library_id,reqIds,[tagIds],intl.formatMessage({id:'app.containers.LendingPage.addedTagToRequest'})))
      }
     
     const UpdateLendingRequestStatus = (data) => {
-        
-        //alert(match.params.library_id)
-        //if (data.lending_status == 'pendingRequest') 
-        //    {
-                //alert(JSON.stringify(data.lending_status))
-                //data.lending_status="requestReceived"
-                dispatch(requestChangeStatusLending(data.id, match.params.library_id, data.lending_status,"",""))
-               //dispatch(requestAcceptAllLenderLendingSaga(data.id, match.params.library_id, data.lending_status,"",""));
-        //    }
+        dispatch(requestChangeStatusLending(data.id, match.params.library_id, data.lending_status,intl.formatMessage({id:'app.requests.willSupply'}),""))
     }
-
-    const UpdateLendingArchivedStatus = (data) => {
-        dispatch(requestChangeLendingArchived(data.id, match.params.library_id, data.lending_archived,"",""))
-    }
-
     const UpdateLendingAcceptRequest = (data) => {
-       //alert('Request Accepted');
-       data.lending_status="pendingRequest";
-       dispatch(requestAcceptAllLenderLending(data.id,  match.params.library_id, data.lending_status,"",""))
+       dispatch(requestAcceptAllLenderLending(data.id,match.params.library_id, data.lending_status,intl.formatMessage({id:'app.requests.willSupply'}),""))
     }
+    
     async function removeTagFromDDRequest (id,tagId, filter) {        
          let conf = await confirm({
              title: intl.formatMessage({id: 'app.global.confirm'}),
@@ -98,17 +74,12 @@ const LendingPage = (props) => {
                     },
                     searchOnChange: true
                 }}                
-                //removeTagFromRequest={archive==1?undefined:removeTagFromDDRequest}                
-                //deleteReference={deleteReference}
                 removeTagFromRequest={removeTagFromDDRequest}                
                 FulfillLendingRequestStatus={FulfillLendingRequestStatus}
                 unFulfillLendingRequestStatus={unFulfillLendingRequestStatus}
-                //applyTags={archive==1?undefined:applyTagsToDDRequests}
                 applyTags={applyLendingTagsToDDRequests}
                 UpdateLendingRequestStatus={UpdateLendingRequestStatus}
-                UpdateLendingArchivedStatus={UpdateLendingArchivedStatus}
                 UpdateLendingAcceptRequest={UpdateLendingAcceptRequest}
-                
                 oaloading={oaloading}
             /> }
             <h1></h1>

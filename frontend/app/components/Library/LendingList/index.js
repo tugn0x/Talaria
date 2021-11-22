@@ -1,16 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import {Row, Col, Button} from 'reactstrap'
 import messages from './messages'
-// import globalMessages from 'utils/globalMessages'
 import { FormattedMessage } from 'react-intl';
 import {Pagination, InputSearch} from 'components';
 import Loader from 'components/Form/Loader';
-// import CustomModal from 'components/Modal/Loadable'
 import {useIntl} from 'react-intl';
-// import ButtonPlus from 'components/Button/ButtonPlus'
-// import { generatePath } from "react-router";
-// import ReferencesPage from 'containers/Patron/ReferencesPage'
-// import { NavLink } from 'react-router-dom';
 import LendingItem from '../LendingItem';
 import FilterSelect from '../../FilterSelect';
 import ApplyTag from '../../ApplyTag';
@@ -25,15 +19,9 @@ const LendingsList = (props) => {
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)
-
-    //alert("data2021" + JSON.stringify(data))
-    /*  const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal); */
-
     const [selectedRequests, setSelectedRequests] = useState([]);
     const [disableToolbar,setDisableToolbar]=useState(false);
     const [disableCancelFilter,setDisableCancelFilter]=useState(true);
-
     const [multiFilter, setMultiFilter ] = useState(
         {
             query: '',
@@ -66,11 +54,7 @@ const LendingsList = (props) => {
         else setDisableCancelFilter(true);            
     }, [multiFilter])
 
-    /* const linkTo = (path) => {
-        history.push(path)
-     }; */
-
-    
+ 
     const handleCancelFilter = () => {
         setMultiFilter({
             query: '',
@@ -79,7 +63,6 @@ const LendingsList = (props) => {
     }
 
     const toggleTagFilter = (labelId) => {
-
         setMultiFilter( state => ({
             query: state.query,
             labelIds: handleIds(state.labelIds, labelId),            
@@ -95,26 +78,6 @@ const LendingsList = (props) => {
     const toggleRequest = (id) => {
         setSelectedRequests(state => ( handleIds([...state], id)))
     }
-
-    // const findAndUpdateOA=(req)=>{
-    //     let data={}
-        
-    //     if(req.reference.data.material_type && req.reference.data.material_type===1)
-    //         data.title=req.reference.data.part_title
-    //     else data.title=req.reference.data.title
-
-    //     if(req.reference.data.doi)
-    //         data.doi=req.reference.data.doi
-
-    //     if(req.reference.data.pmid)
-    //         data.pmid=req.reference.data.pmid
-
-    //     findAndUpdateOABorrowingReference(req.id,req.reference.data.id,data)
-    // }
-    
-   
-
-    // var disableToolbarClass = disableToolbar? 'disabled':'';
 
     return (
         mounted &&
@@ -198,18 +161,14 @@ const LendingsList = (props) => {
                             data.map(req => (
                                 
                                 <LendingItem 
-                                    key={`borrowing-${req.id}`}
+                                    key={`lending-${req.id}`}
                                     data={req}                                    
                                     editPath={editPath}
                                     toggleSelection={() => toggleRequest(req.id)}
                                     removeTag={removeTagFromRequest? (tagId) => {
                                         removeTagFromRequest(req.id,tagId, multiFilter) 
                                     }:undefined}
-                                    
-                                    //deleteReference={() => deleteReference(ref.id,multiFilter)}
                                     checked={selectedRequests.includes(req.id)}
-                                    //findAndUpdateOA={()=>findAndUpdateOA(ref.id,ref.material_type===1?ref.part_title:ref.title)}
-                                   
                                     UpdateLendingRequestStatus={(data)=>UpdateLendingRequestStatus(data)}
                                     UpdateLendingArchivedStatus={(data)=>UpdateLendingArchivedStatus(data)}
                                     UpdateLendingAcceptRequest={(data)=>UpdateLendingAcceptRequest(data)}

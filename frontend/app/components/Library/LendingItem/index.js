@@ -44,48 +44,20 @@ const statusDate = (req) => {
   )
 }
 
-// const canEdit = (data) => {
-//     return data.borrowing_status=="newrequest";
-// }  
-
-// const canArchive=(data) => {
-//     //todo: add check on status
-//     return data.patrondocdelrequest && data.patrondocdelrequest.data.user;
-// }
-
-// const canDelete=(data) => {
-//     return (
-//         (data.borrowing_status=="newrequest" || data.borrowing_status=="requested")
-//     );    
-// }
-
-// const canTrash=(data) => {    
-//     return data.borrowing_status=="documentready";
-// }
-
 const isRequested=(data) => {
     return data.lending_status!="newrequest";
 }
 
 const isRequestReceived=(data) => {
-    
     return data.lending_status=="requestReceived";
 }
 
 
-const canSupply=(data)=> {
-    return data.lending_status=="willSupply";
-}
-
 export const LendingStatus = (props) => {
 
     const intl = useIntl();
-
     const {data,customClass}=props;
 
-    //alert(JSON.stringify(data))
-
-   
     return (
      
         <div className={"borrowing_status " + (customClass?customClass:'')}>            
@@ -109,27 +81,7 @@ export const LendingStatus = (props) => {
 }
 
 export const LendingReferenceIcons = (props) => {
-    const {data,reqPath,findAndUpdateOABorrowingReference,oaloading, UpdateLendingRequestStatus, UpdateLendingAcceptRequest}=props;    
-   
-    const findAndUpdateOA = (ev) => {       
-        ev.preventDefault();
-        if(findAndUpdateOABorrowingReference)
-            findAndUpdateOABorrowingReference();
-    }
-
-    // const updatelendingstatus = (data) =>{
-    //     if (UpdateLendingRequestStatus)
-    //     {
-    //         //alert(JSON.stringify(data))
-    //         data.lending_status = "Fulfill"
-            
-    //         requestChangeStatusLending(data.id, data.lending_library_id, data.lending_status)
-            
-    //         //alert(data.lending_status)
-    //     }
-    // }
-
-
+    const {data,reqPath,oaloading, UpdateLendingRequestStatus, UpdateLendingAcceptRequest}=props;    
     return (
         <div className="borrowing_reference_icons">
                 {oaloading && <i className="fas fa-spinner fa-spin"></i>}                
@@ -142,21 +94,6 @@ export const LendingReferenceIcons = (props) => {
         </div>
     )
 }
-
-// export const LendingRequestIcons = (props) => {
-//     const {data,reqPath}=props;    
- 
-//     return (
-//         <div className="borrowing_request_icons">
-//                 {/*<Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fas fa-eye"></i></Link>*/}
-//                 {!isRequested(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-share"></i></a>}
-//                 {canDelete(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-times"></i></a>}                
-//                 {canTrash(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-trash"></i></a>}                
-//                 {canArchive(data) && <a className="btn btn-icon" onClick={()=>alert("TODO !")}><i className="fas fa-hdd"></i></a>}                
-//         </div>
-//     )
-// }
-
 
 const LendingItem = (props) => {
     const {editPath,data,toggleSelection,checked,removeTag,findAndUpdateOABorrowingReference, UpdateLendingRequestStatus, UpdateLendingAcceptRequest, UpdateLendingArchivedStatus, oaloading} = props      
@@ -207,37 +144,22 @@ const LendingItem = (props) => {
                {data.request_date && <span className="daysago"><span class="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
                
                {/* <span className="fullfilment">...[Static fulfilled/unfilled status]...</span>               */}
-
-              
             </>            
             }            
                           
             </Col>
             
-            {/* <Col sm={2}>
-            {
-            data.patrondocdelrequest && data.patrondocdelrequest.data &&
-                <BorrowingPatronRequest data={data}/>            
-            }              
-            </Col> */}
+          
             <Col sm={5}>      
-           
             <RequestTags data={data.tags.data} removeTag={removeTag}/>                 
-           
-            
-
             <ReferenceCitation data={data.reference.data}/>
-            
-            {/* <LendingReferenceIcons data={data} reqPath={editPath} findAndUpdateOABorrowingReference={findAndUpdateOABorrowingReference} oaloading={oaloading}/>                 */}
             </Col>
             <Col sm={2} className="icons align-self-center">
-            {/* <LendingRequestIcons data={data} reqPath={editPath} />                                 */}
             <LendingReferenceIcons data={data} reqPath={editPath} 
             UpdateLendingRequestStatus={(data) => UpdateLendingRequestStatus(data)} 
             UpdateLendingArchivedStatus={(data) => UpdateLendingArchivedStatus(data)}
             UpdateLendingAcceptRequest={(data) => UpdateLendingAcceptRequest(data)}
             findAndUpdateOABorrowingReference={findAndUpdateOABorrowingReference} 
-            
             oaloading={oaloading}/>
             </Col> 
         </Row>

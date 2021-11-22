@@ -69,6 +69,9 @@
   "app.global.daysago":"days ago",
   "app.global.alllibraries": "All libraries",
   "app.global.createNewLabelGroupTag": "Create new",
+  "app.global.fulFillMessage":"Fulfilled successfully",
+  "app.global.unFilledMessage":"unFilled successfully",
+
   
   "app.containers.HomePage.header": "This is the HomePage container!",
   "app.containers.HomePage.subHeader":"Un network di biblioteche e un software per un'informazione scientifica a portata di click!",
@@ -315,10 +318,13 @@
   "app.requests.forwardRequestMessage": "Clone and forward as request?",  
   "app.requests.forwardedMessage": "Request cloned",  
   "app.requests.pendingRequest":"Pending Request",
+  
   "app.requests.copyCompleted":"Copy Completed",
   "app.requests.unFilled":"Unfilled",
   "app.requests.requestReceived":"Request Received",
   "app.requests.willSupply":"Will Supply",
+  "app.requests.FulfillHeaderMessage":"fulfill",
+
   "app.components.LendingsList.LendingsNotFound":"Lending request not found",
   "app.components.OASearchReferenceForm.bodySearch": "Search a reference by entering DOI, PMID or ISBN or exact title",
   "app.components.OASearchReferenceForm.inputPlaceHolder": "Es: 10.1002/hlca.19740570315",  

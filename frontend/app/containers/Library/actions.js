@@ -21,6 +21,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_POST_LIBRARY_TAG,REQUEST_UPDATE_LIBRARY_TAG,REQUEST_REMOVE_LIBRARY_TAG, 
    REQUEST_POST_NEW_BORROWING,
    REQUEST_GET_BORROWING,REQUEST_GET_BORROWING_SUCCESS,
+   REQUEST_GET_LENDING, REQUEST_GET_LENDING_SUCCESS,
    REQUEST_UPDATE_BORROWING,
    REQUEST_UPDATE_BORROWING_SUCCESS,
    REQUEST_FIND_UPDATE_BORROWING_OA,
@@ -32,7 +33,8 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_GET_ISSN_ISBN_SUCCESS,
    REQUEST_GET_ISSN_ISBN_FAIL,
    REQUEST_CHANGE_LENDING_ARCHIVED,
-   REQUEST_ACCEPT_ALLLENDER
+   REQUEST_ACCEPT_ALLLENDER,
+   
   } from "./constants";
 
 export function defaultAction() {
@@ -297,6 +299,23 @@ export function requestGetBorrowing (id,library_id) {
       id,
       library_id,
     };  
+}
+
+
+export function requestGetLending (id,library_id) {
+  return {
+    type: REQUEST_GET_LENDING,
+    id,
+    library_id,
+  };  
+}
+
+
+export function requestGetLendingSuccess (result) {
+  return {
+    type: REQUEST_GET_LENDING_SUCCESS,
+    result
+  };  
 }
 
 export function requestGetBorrowingSuccess (result) {
