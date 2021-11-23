@@ -120,7 +120,7 @@ return [
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',
                         ],                                              
-                        //'jobs' => ['App\Jobs\LendingRequestUpdateNotify'] non posso notificare xke' non ho più il lender!
+                        'jobs' => ['App\Jobs\LendingRequestUpdateNotify'] 
                     ],
                     //NOTE on cancelRequested: i removed constraint because this status can be changed both from patron or borrower                       
                     'cancelRequested'	=> [
@@ -187,7 +187,7 @@ return [
                 'flow_tree' => [                
                     'requestReceived' => [
                         'role' => [],//borrow/lend/manage?
-                        'next_statuses' => ['willSupply'],
+                        'next_statuses' => ['willSupply','canceledAccepted'],
                         'constraints' => [], 
                         'notify' => [
                         'Model'=>'borrowingLibraryOperators', 

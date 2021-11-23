@@ -25,7 +25,12 @@ class AutomaticCleanDDRequests implements ShouldQueue
 
     private function updateCanceledRequests() {
         //automatic "accept cancel" for borrowing request in cancelRequested state
-        $borrowings=BorrowingDocdelRequest::where('borrowing_status','=','cancelRequested')
+        $borrowings=BorrowingDocdelRequest::where(
+         [
+            ['borrowing_status','=','cancelRequested'],
+            ['lending_status','=','cancelRequested']
+         ]
+        )
         ->whereNotNull('cancel_request_date')
         ->whereRaw("DATEDIFF(now(),cancel_request_date) >= 2")->get();        
         foreach($borrowings as $borr)             

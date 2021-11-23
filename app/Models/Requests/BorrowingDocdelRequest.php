@@ -194,11 +194,11 @@ class BorrowingDocdelRequest extends DocdelRequest
                         return $this->changeStatus($newstatus,$others);                     
                     }
                     //i lender (anche orfani) l'hanno ricevuto ma nessuno ha risposto
-                    //NOTA: impossibile notificare xke' non ho più il lender!
-                    else if($this->lending_status=="requestReceived" && $this->borrowing_status!="cancelRequested") //cancel with lender (wich not will supply)
+                    //=>cancelDirect                    
+                    else if($this->lending_status=="requestReceived" && $this->borrowing_status!="cancelRequested") //cancel with lender/all_lender=1 (wich not will supply)
                     {                          
                         $newstatus="canceledDirect";  
-                        //$others=array_merge($others,['lending_library_id'=>null,'lending_status'=>null,'all_lender'=>null]);                                                                          
+                        $others=array_merge($others,['lending_archived'=>1,'lending_status'=>'canceledAccepted']);
                         return $this->changeStatus($newstatus,$others);                     
                     }
                     /*else if($this->borrowing_status=="cancelRequested"||$this->lending_status=="canceledAccepted") //cancel accepted by lender (automatic after 2 days or manually)
