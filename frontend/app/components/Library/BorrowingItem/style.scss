@@ -46,11 +46,15 @@
         background-color: transparent;    
     }
 
-    &.readyToDelivery,       
-    &.fulfilled,
+    &.readyToDelivery,           
     &.documentReady    
     {
         background-color: green;
+    }
+
+    &.fulfilled
+    {
+        background-color: lightgreen;
     }
 
     

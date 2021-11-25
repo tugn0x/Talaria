@@ -317,6 +317,7 @@
   "app.requests.archivedMessage": "Archived successfully",
   "app.requests.askCancelRequestMessage": "Cancel the request?",
   "app.requests.askTrashRequestMessage": "Trash the request?",
+  "app.requests.askTrashHCRequestMessage": "Trash the request for HC conversion problems?",
   "app.requests.trashedMessage": "Trashed successfully",
   "app.requests.cancelAskedMessage": "Canceled successfully",  
   "app.requests.canceledMessage": "Request canceled",  

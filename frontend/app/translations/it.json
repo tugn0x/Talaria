@@ -317,6 +317,7 @@
   "app.requests.askArchiveRequestMessage": "Archiviare la richiesta?",
   "app.requests.archivedMessage": "Archiviata con successo",
   "app.requests.askTrashRequestMessage": "Cestinare la richiesta?",
+  "app.requests.askTrashHCRequestMessage": "Cestinare la richiesta per problemi di HC?",
   "app.requests.trashedMessage": "Cestinata con successo",
   "app.requests.askCancelRequestMessage": "Annullare la richiesta?",
   "app.requests.cancelAskedMessage": "Annullamento richiesto",  

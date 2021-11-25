@@ -29,8 +29,8 @@ class DocdelRequest extends BaseModel
         'fulfill_protnr', //dd_nproteva
         'fulfill_location', //dd_collocazione (ricavata da ACNP)
         'fulfill_note', //dd_note_fornirich       
-        'fullfill_type',    //tipo evasione (=SentiVia/DeliveryMethod ISO18626?)
-        'notfullfill_type', //tipo inevasione (prendere da NILDE global_const $DDILL_INEVASO_xxx + "fornitore non disp" + "altro" (con descrizione in borr_notes) )        
+        'fullfill_type',    //tipo evasione (=SentiVia/DeliveryMethod ISO18626: ArticleExchange,Ariel,Email,Mail,Odyssey,URL,FTP) + file + url?
+	    'notfullfill_type', //tipo inevasione (prendere da NILDE global_const $DDILL_INEVASO_xxx + "fornitore non disp" + "altro" (con descrizione in borr_notes) )        
         'filename',
         'file_status', //Stato del file se inviato in NILDE: 0-non disponibile; 1-disponibile; 2-disponibile con HC
         'file_download', // 	Indicatore di avvenuta stampa del file se inviato in NILDE: 0-Non Stampato; 1-Stampato
@@ -41,8 +41,7 @@ class DocdelRequest extends BaseModel
 
         
         //TODO
-        //'delivery_format', //diverso da fullfill_type? formato di invio del della biblioF alla biblioR
-        //'request_multiple', //0- no, 1-inviata a N fornitori, 2-inviata a tutti  (x rich orfane)         
+        //'delivery_format', //diverso da fullfill_type? formato di invio del della biblioF alla biblioR        
         //'request_protocol', //0: NILDE, 1: ISO18626 .. (se impostato a 1 avro' dati rich ISO in altra tabella)
         
 

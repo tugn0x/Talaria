@@ -101,17 +101,22 @@ const BorrowingPage = (props) => {
             dispatch(requestForwardBorrowing(id,match.params.library_id,data,intl.formatMessage({id: "app.requests.forwardedMessage"}),filter))
      } 
 
-     async function askTrashRequest (id,filter) {
+     async function askTrashRequest (id,typ,filter) {
         console.log("DISPATCH askTrashRequest",id);
-         let conf = await confirm({
+        let msg=intl.formatMessage({id: "app.requests.askTrashRequestMessage"})
+        
+        if(typ==2) //trashHC normal
+            msg=intl.formatMessage({id: "app.requests.askTrashHCRequestMessage"})
+        
+        let conf = await confirm({
             title: intl.formatMessage({id: 'app.global.confirm'}),
-             message: intl.formatMessage({id: "app.requests.askTrashRequestMessage"}),
+             message: msg,
              confirmText: intl.formatMessage({id: 'app.global.yes'}),
              cancelText: intl.formatMessage({id: 'app.global.no'})
          }); 
          let data={
             id: id,
-            'trash_type':1, //todo: define which type (HC, normal...)
+            'trash_type':typ,
         }
         if(conf)
             dispatch(requestUpdateBorrowing(id,match.params.library_id,data,intl.formatMessage({id: "app.requests.trashedMessage"}),filter))

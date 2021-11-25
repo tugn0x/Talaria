@@ -72,7 +72,7 @@ class LendingDocdelRequest extends DocdelRequest
         $sr=new StatusResolver($this);                        
          switch ($newstatus)
          {  
-           
+            //Rabih: fix this :)
             case 'requestReceived': 
                 $newstatus="willSupply";    
                 $others=array_merge($others,[
@@ -93,7 +93,7 @@ class LendingDocdelRequest extends DocdelRequest
                     'lending_archived'=>1,
                 ]);
                 break;  
-                
+            /*    
             case 'cancelRequested': 
                   $others=array_merge($others,[
                       'cancel_request_date'=>Carbon::now(),
@@ -102,7 +102,7 @@ class LendingDocdelRequest extends DocdelRequest
                   ]);
    
                 $newstatus="canceledAccepted";                        
-                break;
+                break;*/
          }
  
          $sr->changeStatus($newstatus,$others);

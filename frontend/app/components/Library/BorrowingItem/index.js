@@ -119,15 +119,24 @@ export const canRequest=(data) => {
 }
 
 export const canDownload=(data) => {
-    return !isTrashed(data) && data.borrowing_status=="documentReady" /* && delivery_format=="pdf"*/
+    return !isTrashed(data) && data.borrowing_status=="documentReady" //&& data.file_download==0 //non stampato     
 }
+
+/*
+export const docDownloaded=(data)=>{
+    return data.borrowing_status=="documentReady" && data.file_download==1       
+}
+
+export const isURL=(data)=>{
+    return data.borrowing_status=="documentReady" //&& ( is an url )       
+}*/
 
 export const canRegisterAsReceived=(data) => {
     return data.borrowing_status=="fulfilled" /* && delivery_format=="paperCopy"*/
 }
 
 export const canTrash=(data) => {
-    return data.borrowing_status=="documentReady" && !isTrashed(data)
+    return !isTrashed(data) && data.borrowing_status=="documentReady"     
 }
 
 
@@ -184,6 +193,7 @@ export const BorrowingReferenceIcons = (props) => {
                 {canRequest(data) && oaloading && <i className="fas fa-spinner fa-spin"></i>}                
                 {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO !')}><i className="fa fa-search-location"></i></a>}                
                 {canDownload(data) && <a className="btn btn-icon" onClick={()=>alert("TODO: download & VIEW document !")}><i className="fas fa-download"></i></a>}                
+                {/* add paper/url/.. type checking and button activation to manage*/}
         </div>
     )
 }
@@ -197,9 +207,16 @@ export const BorrowingRequestIcons = (props) => {
                 {canRequest(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-share"></i></Link>}
                 {canCancel(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-times"></i></a>}                
                 {canDelete(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest(data.id)}><i className="fas fa-backspace"></i></a>}                                                
-                {canTrash(data) && askTrashRequest && <a className="btn btn-icon" onClick={()=>askTrashRequest(data.id)}><i className="fas fa-trash"></i></a>}                
+                {canTrash(data) && askTrashRequest && 
+                    <>
+                        <a className="btn btn-icon" onClick={()=>askTrashRequest(data.id,1)}><i className="fas fa-trash"></i></a>
+                        <a className="btn btn-icon" onClick={()=>askTrashRequest(data.id,2)}><i className="fas fa-trash">HC</i></a>
+                    </>
+                }                
                 {canForward(data) && forwardRequest && <a className="btn btn-icon" onClick={()=>forwardRequest(data.id)}><i className="fas fa-redo"></i></a>}                
                 {canArchive(data) && askArchiveRequest && <a className="btn btn-icon" onClick={()=>askArchiveRequest(data.id)}><i className="fas fa-hdd"></i></a>}                
+                
+                {/* add paper/url/.. type checking and button activation to manage*/}
         </div>
     )
 }
@@ -252,8 +269,14 @@ const BorrowingItem = (props) => {
                }
                {!isArchived(data) && data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}                              
                <span className="fullfilment">{data.lending_status ? intl.formatMessage({id: "app.requests."+data.lending_status}):'xxx'}</span>   
-            </>            
-            }   
+            </>}
+            {inRequest(data) &&             
+            data.fulfill_note && <div className="fulfill_notes">
+                <a href="#" id={`fulfilnote-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
+                <UncontrolledTooltip autohide={false} placement="right" target={`fulfilnote-${data.id}`}>
+                    {data.fulfill_note}
+                </UncontrolledTooltip>                                
+            </div>}            
             <BorrowingRequestIcons customClass="icons d-flex" data={data} reqPath={editPath} forwardRequest={forwardRequest} askTrashRequest={askTrashRequest} askCancelRequest={askCancelRequest} askArchiveRequest={askArchiveRequest}/>                                
             </div>
             </Col> 

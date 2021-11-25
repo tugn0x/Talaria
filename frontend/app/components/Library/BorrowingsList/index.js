@@ -242,7 +242,7 @@ const BorrowingsList = (props) => {
                                     findAndUpdateOABorrowingReference={()=>findAndUpdateOA(req)}
                                     findISSNISBNtoggle={()=>findISSNISBNtoggle(req)}
                                     forwardRequest={()=>forwardRequest(req.id,multiFilter)}
-                                    askTrashRequest={()=>askTrashRequest(req.id,multiFilter)}
+                                    askTrashRequest={(id,typ)=>askTrashRequest(id,typ,multiFilter)}
                                     askCancelRequest={()=>askCancelRequest(req.id,multiFilter)}
                                     askArchiveRequest={()=>askArchiveRequest(req.id,multiFilter)}
                                     oaloading={oaloading.includes(req.id)}

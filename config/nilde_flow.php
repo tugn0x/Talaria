@@ -184,50 +184,44 @@ return [
                 ]
             ],
             'App\Models\Requests\LendingDocdelRequest'=> [
-                'flow_tree' => [                
+                'flow_tree' => [             
+                    //this configuration is needed by status resolver to exists because it checks when do status change FROM this state
+                    //but it will not change TO this state cause is instad the borrow that change directly lending_status field without doing a lending->changeStatus
                     'requestReceived' => [
-                        'role' => [],//borrow/lend/manage?
+                        'role' => [],
                         'next_statuses' => ['willSupply','canceledAccepted'],
-                        'constraints' => [], 
-                        'notify' => [
-                        'Model'=>'borrowingLibraryOperators', 
-                        ], 
-                        // 'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
+                        'constraints' => [],                         
                     ],
                     'willSupply' => [
                         'role' => [],//borrow/lend/manage?
                         'next_statuses' => ['copyCompleted','unFilled'],
                         'constraints' => [], 
                         'notify' => [
-                        'Model'=>'borrowingLibraryOperators', 
+                        'Model'=>'borrowingLibraryOperators',//<- wrong 
                         ], 
                         // 'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
                     ],
-                    
+                    //this configuration is needed by status resolver to exists because it checks when do status change FROM this state
+                    //but it will not change TO this state cause is instad the borrow that change directly lending_status field without doing a lending->changeStatus                    
                     'cancelRequested' => [
                         'role' => [],//borrow/lend/manage?
                         'next_statuses' => ['canceledAccepted'],
-                        'constraints' => [], 
-                        'notify' => [
-                            'Model'=>'borrowingLibraryOperators', 
-                        ], 
-                    //'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
+                        'constraints' => [],                                         
                     ],
                     'canceledAccepted' => [
                         'role' => [],//borrow/lend/manage?
                         'next_statuses' => [],
                         'constraints' => [], 
                         'notify' => [
-                             'Model'=>'borrowingLibraryOperators', 
-                        ], 
-                    //'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
+                             'Model'=>'borrowingLibraryOperators', //<- wrong
+                        ],                     
                     ],
                     'unFilled' => [
                         'role' => [],//borrow/lend/manage?
                         'next_statuses' => [],
                         'constraints' => [], 
                         'notify' => [
-                            'Model'=>'borrowingLibraryOperators', 
+                            'Model'=>'borrowingLibraryOperators', //<- wrong
                         ], 
                     //'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
                     ],
@@ -236,7 +230,7 @@ return [
                         'next_statuses' => [''],
                         'constraints' => [], 
                         'notify' => [
-                            'Model'=>'borrowingLibraryOperators', 
+                            'Model'=>'borrowingLibraryOperators', //<- wrong
                         ], 
                     // 'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
                     ],

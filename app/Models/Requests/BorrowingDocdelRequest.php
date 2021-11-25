@@ -26,7 +26,7 @@ class BorrowingDocdelRequest extends DocdelRequest
         'ready_date', //the document is available for download or is just arrived from mail
         'forward_date', //date in which i decided to forward the req
         'trash_date', //data cestinamento
-        'trash_type', //tipo cestinamento (trash o trashHC)
+        'trash_type', //tipo cestinamento (trash=1,trashHC=2)
         'borrowing_notes', //dd_note_interne              
         'archived', //0|1 indica se la rich è archiviata
         'forward', //0|1 indica se la rich è stata reinoltrata (la rich reinoltrata avrà parent_id=id di questa richiesta)
