@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {useIntl} from 'react-intl'
 import makeSelectLibrary, {isLibraryLoading} from '../selectors';
-import {requestBorrowingsList,requestLibraryTagsOptionList,requestRemoveDDRequestTag,requestApplyTagsToDDRequests,requestFindUpdateOABorrowingReference,requestChangeStatusBorrowing,requestUpdateBorrowing,requestFindISSNISBN} from '../actions'
+import {requestBorrowingsList,requestLibraryTagsOptionList,requestRemoveDDRequestTag,requestApplyTagsToDDRequests,requestFindUpdateOABorrowingReference,requestChangeStatusBorrowing,requestUpdateBorrowing,requestFindISSNISBN,requestForwardBorrowing} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -98,7 +98,7 @@ const BorrowingPage = (props) => {
             'forward':1,
         }
         if(conf)
-            dispatch(requestUpdateBorrowing(id,match.params.library_id,data,intl.formatMessage({id: "app.requests.forwardedMessage"}),filter))
+            dispatch(requestForwardBorrowing(id,match.params.library_id,data,intl.formatMessage({id: "app.requests.forwardedMessage"}),filter))
      } 
 
      async function askTrashRequest (id,filter) {

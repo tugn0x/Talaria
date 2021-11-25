@@ -24,6 +24,8 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_GET_LENDING, REQUEST_GET_LENDING_SUCCESS,
    REQUEST_UPDATE_BORROWING,
    REQUEST_UPDATE_BORROWING_SUCCESS,
+   REQUEST_FORWARD_BORROWING,
+   REQUEST_FORWARD_BORROWING_SUCCESS,
    REQUEST_FIND_UPDATE_BORROWING_OA,
    REQUEST_FIND_UPDATE_BORROWING_OA_FAIL,
    REQUEST_FIND_UPDATE_BORROWING_OA_SUCCESS,
@@ -289,6 +291,24 @@ export function requestUpdateBorrowingSuccess (result)
 {
   return {
     type: REQUEST_UPDATE_BORROWING_SUCCESS,
+    result
+  };  
+}
+
+export function requestForwardBorrowing(id,library_id,reqData,message){
+  return {
+    type: REQUEST_FORWARD_BORROWING,
+    borrowing_library_id:library_id,
+    borrowing: reqData,  
+    id,  
+    message,
+  };
+}
+
+export function requestForwardBorrowingSuccess (result)
+{
+  return {
+    type: REQUEST_FORWARD_BORROWING_SUCCESS,
     result
   };  
 }

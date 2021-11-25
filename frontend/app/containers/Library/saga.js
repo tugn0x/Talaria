@@ -15,6 +15,7 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
       REQUEST_GET_BORROWING,
       REQUEST_GET_LENDING,
       REQUEST_UPDATE_BORROWING,
+      REQUEST_FORWARD_BORROWING,
       REQUEST_FIND_UPDATE_BORROWING_OA,
       REQUEST_CHANGE_STATUS_BORROWING,
       REQUEST_GET_ISSN_ISBN,
@@ -428,6 +429,22 @@ export function* requestUpdateBorrowingSaga(action) {
   }
 }
 
+export function* requestForwardBorrowingSaga(action) {
+  const options = {
+    method: 'put',
+    body: action.borrowing,
+    borrowing_library_id: action.borrowing_library_id,
+    id: action.id,
+  };
+  try {
+    const request = yield call(updateBorrowing, options);
+    yield put (push("/library/"+action.borrowing_library_id+"/borrowing/"+request.data.id));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 
 export function* requestGetBorrowingSaga(action) {
   const options = {
@@ -647,6 +664,7 @@ export default function* librarySaga() {
   yield takeLatest(REQUEST_POST_NEW_BORROWING,requestPostNewBorrowingSaga);
   yield takeLatest(REQUEST_GET_BORROWING,requestGetBorrowingSaga)
   yield takeLatest(REQUEST_UPDATE_BORROWING,requestUpdateBorrowingSaga)  
+  yield takeLatest(REQUEST_FORWARD_BORROWING,requestForwardBorrowingSaga)
   
   yield takeLatest(REQUEST_GET_LENDING,requestGetLendingSaga)
 
