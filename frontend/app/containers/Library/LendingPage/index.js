@@ -34,9 +34,23 @@ const LendingPage = (props) => {
         dispatch(requestApplyLendingTagsToDDRequests(match.params.library_id,reqIds,[tagIds],intl.formatMessage({id:'app.containers.LendingPage.addedTagToRequest'})))
      }
     
-    const UpdateLendingRequestStatus = (data) => {
-        dispatch(requestChangeStatusLending(data.id, match.params.library_id, data.lending_status,intl.formatMessage({id:'app.requests.willSupply'}),""))
+     async function UpdateLendingRequestStatus (data) {
+        if(data.lending_status=='cancelRequested')
+        {
+            let confcan = await confirm({
+            title: intl.formatMessage({id: 'app.global.confirm'}),
+            message: intl.formatMessage({id: "app.requests.acceptCancelMessage"}),
+            confirmText: intl.formatMessage({id: 'app.global.yes'}),
+            cancelText: intl.formatMessage({id: 'app.global.no'})
+            }); 
+            if(confcan)
+                dispatch(requestChangeStatusLending(data.id, match.params.library_id, "canceledAccepted",intl.formatMessage({id:'app.requests.canceledAccepted'}),""))
+        }
+        else
+            dispatch(requestChangeStatusLending(data.id, match.params.library_id, 'willSupply',intl.formatMessage({id:'app.requests.willSupply'}),""))
     }
+
+        
     const UpdateLendingAcceptRequest = (data) => {
        dispatch(requestAcceptAllLenderLending(data.id,match.params.library_id, data.lending_status,intl.formatMessage({id:'app.requests.willSupply'}),""))
     }
@@ -69,7 +83,7 @@ const LendingPage = (props) => {
                 searchOptions={{
                     getSearchList: (page, pageSize, searchFilter ) => {
                         history.push(match.url)
-                        searchFilter={...searchFilter,archived:archive}
+                        searchFilter={...searchFilter,lending_archived:archive,all_lender:allrequests}
                         dispatch(requestLendingsList(match.params.library_id,page, pageSize, searchFilter))
                     },
                     searchOnChange: true

@@ -333,7 +333,7 @@
   "app.requests.fulfilledMessage":"Evasa con successo",
   "app.requests.unFilledMessage":"Inevasa con successo",
   "app.requests.willSupplyMessage":"Richiesta accettata",
-
+  "app.requests.acceptCancelMessage": "Do you want to accept cancel request?",
   "app.components.LendingsList.LendingsNotFound":"Lending request not found",
   "app.components.OASearchReferenceForm.bodySearch": "Cerca un riferimento inserendo DOI, PMID o ISBN o titolo esatto",
   "app.components.OASearchReferenceForm.inputPlaceHolder": "Es: 10.1002/hlca.19740570315",  

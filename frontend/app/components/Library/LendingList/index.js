@@ -28,6 +28,7 @@ const LendingsList = (props) => {
             labelIds:[],            
         }
     );
+    const [hidetagsAllLender, setHidetagsAllLender] = useState(false)
 
     const handleIds = (ids, id) => {
         if(ids.includes(id)){
@@ -40,6 +41,7 @@ const LendingsList = (props) => {
     }
 
     useEffect(() => {
+        if (window.location.href.indexOf("allrequests") != -1)  setHidetagsAllLender(true)
         setMounted(true)
      }, [])
     
@@ -103,7 +105,7 @@ const LendingsList = (props) => {
                         }
                     </Col>                    
                     <Col md={3} sm={5}>
-                        {<FilterSelect 
+                        {!hidetagsAllLender && <FilterSelect 
                                 type={"tags"} 
                                 options={tagsOptionList} 
                                 selectedIds={multiFilter.labelIds}

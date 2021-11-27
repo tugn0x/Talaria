@@ -334,7 +334,7 @@
   "app.requests.fulfilledMessage":"Fulfilled successfully",
   "app.requests.unFilledMessage":"unFilled successfully",
   "app.requests.willSupplyMessage":"Request accepted",
-
+  "app.requests.acceptCancelMessage": "Do you want to accept cancel request?",
   "app.components.LendingsList.LendingsNotFound":"Lending request not found",
   "app.components.OASearchReferenceForm.bodySearch": "Search a reference by entering DOI, PMID or ISBN or exact title",
   "app.components.OASearchReferenceForm.inputPlaceHolder": "Es: 10.1002/hlca.19740570315",  
