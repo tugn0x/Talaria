@@ -152,14 +152,12 @@ return [
                         ],  
                         'jobs' => ['App\\Jobs\\LendingRequestUpdateNotify']
                     ],
-                    //todo
+                    //this configuration is needed by status resolver to exists because it checks when do status change FROM this state
+                    //but it will not change TO this state cause is instead the lender that change directly borrowing_status field without doing a borrow->changeStatus
                     'fulfilled'	=> [
                         'role'  =>  [],//borrow?,
                         'next_statuses'  =>  ['documentReady'], 
-                        'constraints'   =>  ["canManage"],  
-                        'notify'    =>  [
-                            'Model'=>'borrowingLibraryOperators',                                                        
-                        ],                          
+                        'constraints'   =>  ["canManage"],                                                   
                     ],
                     //todo
                     'documentReady'	=> [ 
@@ -170,14 +168,12 @@ return [
                             'Model'=>'borrowingLibraryOperators',                                                        
                         ],                          
                     ],
-                    //todo
+                    //this configuration is needed by status resolver to exists because it checks when do status change FROM this state
+                    //but it will not change TO this state cause is instead the lender that change directly borrowing_status field without doing a borrow->changeStatus
                     'notReceived'	=> [ 
                         'role'  =>  [],//borrow?,
                         'next_statuses'  =>  [''], 
-                        'constraints'   =>  ["canManage"],  
-                        'notify'    =>  [
-                            'Model'=>'borrowingLibraryOperators',                                                        
-                        ],                          
+                        'constraints'   =>  ["canManage"],                                                   
                     ],
                     //todo: notDeliveredToUser,notReceivedArchived?,deliveredToUser,documentReadyArchived?
 

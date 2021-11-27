@@ -530,7 +530,7 @@ export function* requestChangeStatusBorrowingSaga(action) {
     const request = yield call(changeStatusBorrowingRequest, options);    
     yield put (requestBorrowingsList(action.borrowing_library_id))    
     yield put (push("/library/"+action.borrowing_library_id+"/borrowing/"));
-    yield call(() => toast.success(JSON.stringify(action.message)))
+    yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
   }
