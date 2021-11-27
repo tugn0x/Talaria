@@ -296,7 +296,7 @@
   "app.requests.received":"Evasa",  
   "app.requests.notReceived":"Inevasa",  
   "app.requests.canceled":"Annullata",  
-  "app.requests.canceledAccepted": "Annullamento accettato",
+  "app.requests.canceledAccepted": "Annullata",
   "app.requests.canceledDirect":"Annullata Dir.",
   "app.requests.cancelRequested": "Richiesto annullamento",
   "app.requests.fulfilled":"Evasa",

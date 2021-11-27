@@ -117,16 +117,21 @@ class BorrowingDocdelRequest extends DocdelRequest
         return $this->belongsTo('App\Models\Users\User', 'operator_id');
     }
 
+    //called only from patron!
     public function userAskCancel() {
-        $other=["user_cancel_date"=>Carbon::now()]; 
+        if($this->patrondocdelrequest) 
+        { 
+            $other=["user_cancel_date"=>Carbon::now()]; 
 
-        if($this->borrowing_status=="newrequest")  //new request
-            $this->changeStatus("canceledDirect",$other);
-        else if($this->borrowing_status=="requested" && $this->lending_status=="requestReceived")  //requested but no lender accept the request issuing "i will supply" 
-            $this->changeStatus("newrequest",$other); //restart as new request
-        
-        else if($this->borrowing_status=="requested" /*&& any lending status*/ ) //may have already accepted/not the request
-            $this->changeStatus("cancelRequested",$other);                               
+            if($this->borrowing_status=="newrequest")  //new request
+                $this->changeStatus("canceledDirect",$other);
+            else if($this->borrowing_status=="requested" && $this->lending_status=="requestReceived")  //requested but no lender accept the request issuing "i will supply" 
+                //$this->changeStatus("newrequest",$other); //restart as new request
+                $this->changeStatus("canceledDirect",$other);
+            
+            else if($this->borrowing_status=="requested" /*&& any lending status*/ ) //may have already accepted/not the request
+                $this->changeStatus("cancelRequested",$other);                               
+        }
     }
 
     public function canManage(User $user=null){
@@ -214,7 +219,7 @@ class BorrowingDocdelRequest extends DocdelRequest
                     break;
                     
                 case 'canceledDirect': 
-                    $others=array_merge($others,['cancel_date'=>Carbon::now(),'archived'=>1]);
+                    $others=array_merge($others,['cancel_date'=>Carbon::now(),'archived'=>1,'lending_status'=>'canceledAccepted','lending_archived'=>1]);
                     break;
                 /*case 'canceledAccepted': 
                         $others=array_merge($others,['cancel_date'=>Carbon::now()]);

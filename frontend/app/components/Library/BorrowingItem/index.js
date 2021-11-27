@@ -77,9 +77,16 @@ export const isPatronRequest = (data) => {
 
 export const canArchive=(data) => {    
     return !isArchived(data) && ( 
-    (data.patrondocdelrequest && data.patrondocdelrequest.data.user 
-    && data.borrowing_status!="requested" && data.borrowing_status!="newrequest" && data.borrowing_status!="canceled" && data.borrowing_status!="cancelRequested")
-    ||(data.borrowing_status=="canceled"||data.borrowing_status=="canceledDirect"|| data.borrowing_status=="notReceived"|| (data.borrowing_status=="documentReady" /*&& isTrashed(data) */ ) ) );
+    (
+        data.patrondocdelrequest && data.patrondocdelrequest.data.user 
+        && (data.borrowing_status=="canceled" || data.borrowing_status=="canceledDirect") 
+    )
+    ||
+    (
+        !data.patrondocdelrequest && (data.borrowing_status=="canceled"||data.borrowing_status=="canceledDirect"|| data.borrowing_status=="notReceived"|| (data.borrowing_status=="documentReady" /*&& isTrashed(data) */ )) 
+    ) 
+    
+    );
     //todo: add check on status
     //...&& (...in terminal status);
 }
@@ -97,7 +104,12 @@ export const canCancel=(data) => {
 }
 
 export const canForward=(data)=>{
-    return canArchive(data)
+   return (data.patrondocdelrequest && data.patrondocdelrequest.data.user 
+     && ( data.borrowing_status!="canceledDirect" && data.borrowing_status!="canceled")
+     )
+     ||
+     (!data.patrondocdelrequest && canArchive(data)
+     )      
 }
 
 
