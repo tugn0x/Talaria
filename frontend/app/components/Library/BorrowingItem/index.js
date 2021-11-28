@@ -261,7 +261,7 @@ const BorrowingItem = (props) => {
             }              
             </Col>
             <Col sm={5}>      
-            <RequestTags data={data.tags.data} removeTag={removeTag}/>                 
+            <RequestTags data={data.tags.data} removeTag={!isArchived(data)?removeTag:null}/>                 
             <ReferenceCitation data={data.reference.data}/>
             <BorrowingReferenceIcons data={data} reqPath={editPath} findAndUpdateOABorrowingReference={findAndUpdateOABorrowingReference} oaloading={oaloading} findISSNISBNtoggle={findISSNISBNtoggle} />                
             </Col>

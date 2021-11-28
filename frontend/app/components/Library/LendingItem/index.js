@@ -57,6 +57,11 @@ const isRequestReceived=(data) => {
     return data.lending_status=="requestReceived";
 }
 
+export const isArchived=(data) => {
+    return data.lending_archived
+}
+
+
 
 export const LendingStatus = (props) => {
 
@@ -155,7 +160,7 @@ const LendingItem = (props) => {
             
           
             <Col sm={5}>      
-            <RequestTags data={data.tags.data} removeTag={removeTag}/>                 
+            <RequestTags data={data.tags.data} removeTag={!isArchived(data)?removeTag:null}/>                 
             <ReferenceCitation data={data.reference.data}/>
             </Col>
             <Col sm={2} className="icons align-self-center">
