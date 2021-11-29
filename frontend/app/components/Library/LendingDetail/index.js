@@ -16,7 +16,7 @@ const LendingDetail = (props) => {
     return (<div className="borrowingDetail">
                 <RequestTags data={data.tags.data} /> 
                 <ReferenceDetailContent reference={data.reference.data} customClass="detail-body"/>                                
-                {data.lending_status==='willSupply' &&               
+                {(data.lending_status==='willSupply'||data.lending_status==='requestReceived') &&               
                 <FulfillLendingRequest FulfillLendingRequestStatus={FulfillLendingRequestStatus} unFulfillLendingRequestStatus={unFulfillLendingRequestStatus} data={data} customClass="detail-body"/>}
 
               

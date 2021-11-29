@@ -21,15 +21,15 @@ return (
         <h3>{intl.formatMessage({id: "app.requests.FulfillHeaderMessage"})}</h3>
         {<Card>
             <Row>
-                <Col sm={3}>
-                    {(data.all_lender == null || data.all_lender == 0) && data.lending_archived == null &&
+            {(data.all_lender == null || data.all_lender == 0) && data.lending_archived== null && data.lending_status=="willSupply" &&
+                <Col sm={3}>                    
                         <button type="button" class="btn btn-primary btn-lg" 
                         
                         onClick={function() { setunfilPanelActions(false); setshowPanelActions(true); }}
                         
                         >Fulfill</button>
-                        }
-                </Col>
+                      
+                </Col>}
                 <Col sm={3}>
                     {(data.all_lender == null || data.all_lender == 0) && data.lending_archived == null &&
                       <button type="button" class="btn btn-danger btn-lg" onClick={function() { setunfilPanelActions(true); setshowPanelActions(false); }}>Unfulfill</button>
