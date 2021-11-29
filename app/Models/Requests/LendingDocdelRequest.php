@@ -124,7 +124,13 @@ class LendingDocdelRequest extends DocdelRequest
 
     public function scopeLendingalllender($query, $all_lender)
     {
-        return $query->where('all_lender','=',$all_lender);
+        return $query->where('all_lender','=',$all_lender)
+        ->where(
+            function($query) {
+              return $query
+                     ->where('lending_archived', '=', 0)
+                     ->orWhere('lending_archived', '=', null);
+             });        
     }
    
     public function scopeByTags($query, $tagIds){
