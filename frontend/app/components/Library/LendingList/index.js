@@ -15,7 +15,7 @@ import './style.scss';
 const LendingsList = (props) => {
    
     console.log('LendingsList', props)
-    const { editPath,loading, data, pagination, searchOptions, tagsOptionList, removeTagFromRequest,applyTags,UpdateLendingRequestStatus, UpdateLendingArchivedStatus,UpdateLendingAcceptRequest, deleteReference,findAndUpdateOABorrowingReference,oaloading, FulfillLendingRequestStatus} = props
+    const { match, editPath,loading, data, pagination, searchOptions, tagsOptionList, removeTagFromRequest,applyTags,UpdateLendingRequestStatus, UpdateLendingArchivedStatus,UpdateLendingAcceptRequest, deleteReference,findAndUpdateOABorrowingReference,oaloading, FulfillLendingRequestStatus} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)
@@ -29,6 +29,7 @@ const LendingsList = (props) => {
         }
     );
     const [hidetagsAllLender, setHidetagsAllLender] = useState(false)
+    const [hideapplytagarchive, setHideapplytagarchive] = useState(false)
 
     const handleIds = (ids, id) => {
         if(ids.includes(id)){
@@ -41,7 +42,12 @@ const LendingsList = (props) => {
     }
 
     useEffect(() => {
-        if (window.location.href.indexOf("allrequests") != -1)  setHidetagsAllLender(true)
+        if(props.match.path.includes("allrequests")) 
+            setHidetagsAllLender(true)
+
+        if(props.match.path.includes("archive")) 
+            setHideapplytagarchive(true)    
+
         setMounted(true)
      }, [])
     
@@ -146,7 +152,7 @@ const LendingsList = (props) => {
                             </Button>}
                             {applyTags && <ApplyTag
                                 type="label"
-                                disabled={disableToolbar}
+                                disabled={disableToolbar|| hidetagsAllLender || hideapplytagarchive}
                                 submitCallBack={(ids) => applyTags(ids, selectedRequests)}
                                 options={tagsOptionList} 
                             />
@@ -163,7 +169,7 @@ const LendingsList = (props) => {
                             data.map(req => (
                                 
                                 <LendingItem 
-                                    match={props.match}
+                                    match={match}
                                     key={`lending-${req.id}`}
                                     data={req}                                    
                                     editPath={editPath}
