@@ -340,6 +340,8 @@
   "app.components.OASearchReferenceForm.goToForm": "Oppure inserisci i dati manualmente",
   "app.components.OASearchReferenceForm.goToFormButton": "Vai al form",
   "app.components.OASearchReferenceForm.resetSearchButton": "Nuova ricerca",
+  "app.components.OASearch.referenceFound": "Riferimento trovato",
+  "app.components.OASearch.referenceNotFound": "Riferimento non trovato",
   
   "app.components.ReferenceRequest.headerRequest": "Stato richiesta",
   "app.components.ReferenceRequest.newRequest": "Nuova Richiesta",
