@@ -163,6 +163,7 @@ const LendingsList = (props) => {
                             data.map(req => (
                                 
                                 <LendingItem 
+                                    match={props.match}
                                     key={`lending-${req.id}`}
                                     data={req}                                    
                                     editPath={editPath}

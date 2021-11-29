@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom';
 import {UncontrolledTooltip} from 'reactstrap';
 import {daysFromToday,formatDateTime} from '../../../utils/dates';
 
-
 const requesturl=(reqPath,id,op) => {
     return generatePath(reqPath, {
         id,
@@ -49,12 +48,13 @@ const statusDate = (req) => {
   )
 }
 
-const isRequested=(data) => {
-    return data.lending_status!="newrequest";
-}
 
 const isRequestReceived=(data) => {
     return data.lending_status=="requestReceived";
+}
+
+const isRequestedByMe=(data,libraryId) => {
+    return data.borrowing_library_id==libraryId;
 }
 
 export const isArchived=(data) => {
@@ -84,28 +84,34 @@ export const LendingStatus = (props) => {
             </div>
             }
 
-            {data.borrowing_notes && <div className="borrowing_notes"></div>}
+            {data.lending_notes && <div className="borrowing_notes"></div>}
               
         </div>
     )
 }
 
 const LendingRequestIcons = (props) => {
-    const {data,reqPath,UpdateLendingRequestStatus, UpdateLendingAcceptRequest}=props;    
+    const {match, data,reqPath,UpdateLendingRequestStatus, UpdateLendingAcceptRequest}=props;    
+    const libraryId=match.params.library_id
     return (
-        <div className="lending_request_icons">                
-                {isRequestReceived(data) && (data.all_lender==null) && <a className="btn btn-icon"  onClick={()=>UpdateLendingRequestStatus(data)}><i className="fas fa-parachute-box"></i></a>}
+        <div className="lending_request_icons">                        
+                {isRequestReceived(data) && (data.all_lender==null|| data.all_lender==0)  && 
+                    <>
+                        <a className="btn btn-icon"  onClick={()=>UpdateLendingRequestStatus(data)}><i className="fas fa-parachute-box"></i></a>
+                        <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-ban"></i></Link>
+                    </>
+                }
                 {(data.all_lender==null || data.all_lender==0) && data.lending_archived==null && data.lending_status=="willSupply" && 
                 <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-book-open"></i></Link>}
                 {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-book-open"></i></Link>}
                 {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <a className="btn btn-icon" onClick={()=>UpdateLendingRequestStatus(data)}><i class="far fa-check-circle"></i></a>}
-                {(data.all_lender==1) && isRequested(data) && <a className="btn btn-icon" onClick={()=>UpdateLendingAcceptRequest(data)}><i className="fas fa-parachute-box"></i></a>}
+                {(data.all_lender==1) && isRequestReceived(data) && !isRequestedByMe(data,libraryId) && <a className="btn btn-icon" onClick={()=>UpdateLendingAcceptRequest(data)}><i className="fas fa-parachute-box"></i></a>}
         </div>
     )
 }
 
-const LendingItem = (props) => {
-    const {editPath,data,toggleSelection,checked,removeTag,findAndUpdateOABorrowingReference, UpdateLendingRequestStatus, UpdateLendingAcceptRequest, UpdateLendingArchivedStatus, oaloading} = props      
+const LendingItem = (props) => {    
+    const {match,editPath,data,toggleSelection,checked,removeTag,findAndUpdateOABorrowingReference, UpdateLendingRequestStatus, UpdateLendingAcceptRequest, UpdateLendingArchivedStatus, oaloading} = props      
     const intl = useIntl();  
 
     return (
@@ -129,7 +135,7 @@ const LendingItem = (props) => {
                
             </Col>
             <Col sm={3}>
-            {isRequested(data) &&             
+            {isRequestReceived(data) &&             
             <>
                {data.borrowinglibrary && 
                 <span>
@@ -164,7 +170,7 @@ const LendingItem = (props) => {
             <ReferenceCitation data={data.reference.data}/>
             </Col>
             <Col sm={2} className="icons align-self-center">
-            <LendingRequestIcons data={data} reqPath={editPath} 
+            <LendingRequestIcons match={match} data={data} reqPath={editPath} 
             UpdateLendingRequestStatus={(data) => UpdateLendingRequestStatus(data)}             
             UpdateLendingAcceptRequest={(data) => UpdateLendingAcceptRequest(data)}            
             />
