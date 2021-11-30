@@ -14,8 +14,7 @@ const PatronTrackingItem = (props) => {
             <div className="itemHeader">
                 <i className="fas fa-user-circle"></i>
                 <span className="id"><span className="label">USER REQ ID:</span> {data.id}</span>&nbsp;-&nbsp; 
-                {data.user && <span className="user">{data.user.data.full_name}</span>}
-                <span className="request_date"><span className="label">DATE:</span>  {data.request_date}</span>
+                {data.user && <span className="user">{data.user.data.full_name}</span>}                
                 <span className="status"><span className="label">STATUS:</span> {data.status}</span>
             </div>
             <div className="itemData">
@@ -49,8 +48,7 @@ const BorrowingTrackingItem = (props) => {
                 </span>&nbsp;-&nbsp; 
 
                 {data.lendingLibrary && <span className="library"> {data.lendingLibrary.data.name}</span>}
-                {data.all_lender && data.all_lender==1 && <span className="library">{intl.formatMessage({id:'app.global.alllibraries'})}</span>}                
-                <span className="request_date"><span className="label">DATE:</span>  {data.request_date}</span>                
+                {data.all_lender==1 && <span className="library">{intl.formatMessage({id:'app.global.alllibraries'})}</span>}                                
                 <BorrowingStatus data={data} customClass="request_status"/>                                 
             </div>
             <div className="itemData">
@@ -80,7 +78,7 @@ const BorrowingRequestTracking = (props) => {
     const intl = useIntl()
 
     return (data && <div className={"borrowingTracking "+ customClass}>
-                <h3>Request tracking</h3>
+                <h3>{intl.formatMessage({id: "app.requests.status"})}</h3>
                 <div className="card">
                     <ul className="trackList">                    
                     {data.length > 0 && data.map((ddr) => (

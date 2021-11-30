@@ -10,8 +10,7 @@ export const BorrowingPatronRequestIcons = (props) => {
 
     return (
         <div className="borrowing_patronrequest_icons">                
-                <a className="btn btn-icon" onClick={()=>alert('TODO !')}><i className="fas fa-info-circle"></i></a>
-                <a className="btn btn-icon" onClick={()=>alert('TODO !')}><i className="fas fa-info-circle"></i></a>                
+                {/*<a className="btn btn-icon" onClick={()=>alert('TODO !')}><i className="fas fa-info-circle"></i></a>*/}               
         </div>
     )
 }
@@ -48,7 +47,7 @@ export const BorrowingPatronRequest = (props) => {
                 </UncontrolledTooltip>                                
             </div>}            
             {data.user_cancel_date && <span className="user_cancel_date"><i className="fas fa-times"></i> {formatDateTime(data.user_cancel_date)}</span>}
-            <div><i className="fas fa-coins"></i> TODO...</div>
+            {/*<div><i className="fas fa-coins"></i> TODO...</div>*/}
             <BorrowingPatronRequestIcons data={data}/>
             
              

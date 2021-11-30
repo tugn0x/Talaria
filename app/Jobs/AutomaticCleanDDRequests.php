@@ -41,6 +41,7 @@ class AutomaticCleanDDRequests implements ShouldQueue
     private function resetNotAcceptedRequests() {
         //automatic "restart as new" for borrowing request in requested state
         $reqborrowings=BorrowingDocdelRequest::where('borrowing_status','=','requested')
+        ->where('lending_status','=','requestReceived')
         ->whereNotNull('request_date')
         ->whereRaw("DATEDIFF(now(),request_date) >= 5")->get();        
         foreach($reqborrowings as $borr)
