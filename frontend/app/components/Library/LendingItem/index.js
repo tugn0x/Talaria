@@ -135,7 +135,6 @@ const LendingItem = (props) => {
                
             </Col>
             <Col sm={3}>
-            {isRequestReceived(data) &&             
             <>
                {data.borrowinglibrary && 
                 <span>
@@ -144,17 +143,10 @@ const LendingItem = (props) => {
                 </span>                
                 
                }               
-               {!data.lendingLibrary && data.all_lender==1 &&
-                <span>
-                    <i className="fas fa-cloud"></i> {intl.formatMessage({id:'app.global.alllibraries'})} 
-                </span>
-               }
                {!isArchived(data) && data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
                
                {/* <span className="fullfilment">...[Static fulfilled/unfilled status]...</span>               */}
-            </>            
-            }            
-                          
+            </>                                      
             </Col>
             
           
