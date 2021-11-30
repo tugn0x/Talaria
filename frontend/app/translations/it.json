@@ -290,6 +290,7 @@
   "app.references.mathnote": "Dati matematici/Note",
   "app.references.oa_link": "Link OA",  
   "app.requests.FulfillHeaderMessage":"fulfill",
+  "app.requests.status": "Stato richiesta",
   "app.requests.newrequest": "Nuova",
   "app.requests.archived": "Archiviata",
   "app.requests.requested": "In richiesta",

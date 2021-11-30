@@ -291,6 +291,7 @@
   
   "app.requests.newrequest": "New",
   "app.requests.archived": "Archived",
+  "app.requests.status": "Request status",
   "app.requests.requested": "Pending",
   "app.requests.received":"Received",  
   "app.requests.notReceived":"Not received",  

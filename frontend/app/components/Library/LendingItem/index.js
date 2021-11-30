@@ -104,7 +104,7 @@ const LendingRequestIcons = (props) => {
                 {(data.all_lender==null || data.all_lender==0) && data.lending_archived==null && data.lending_status=="willSupply" && 
                 <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-book-open"></i></Link>}
                 {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-book-open"></i></Link>}
-                {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <a className="btn btn-icon" onClick={()=>UpdateLendingRequestStatus(data)}><i class="far fa-check-circle"></i></a>}
+                {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <a className="btn btn-icon" onClick={()=>UpdateLendingRequestStatus(data)}><i className="far fa-check-circle"></i></a>}
                 {(data.all_lender==1) && isRequestReceived(data) && !isRequestedByMe(data,libraryId) && <a className="btn btn-icon" onClick={()=>UpdateLendingAcceptRequest(data)}><i className="fas fa-parachute-box"></i></a>}
         </div>
     )
@@ -143,20 +143,13 @@ const LendingItem = (props) => {
                     
                 </span>                
                 
-               }
-               {
-                   <span className="daysago"> 
-                       
-                        <span className="status-date">{statusDate(data)}</span>
-                    </span>
-                    
-               }
+               }               
                {!data.lendingLibrary && data.all_lender==1 &&
                 <span>
                     <i className="fas fa-cloud"></i> {intl.formatMessage({id:'app.global.alllibraries'})} 
                 </span>
                }
-               {data.request_date && <span className="daysago"><span class="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
+               {!isArchived(data) && data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
                
                {/* <span className="fullfilment">...[Static fulfilled/unfilled status]...</span>               */}
             </>            
