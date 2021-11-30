@@ -12,4 +12,38 @@ class LendingDocdelRequestObserver extends BaseObserver
         'lending_library_id' => 'nullable|integer|exists:libraries,id',
         'reference_id' => 'required|integer|exists:references,id',              
     ];
+
+    public function creating($model)
+    {
+        return parent::creating($model);
+    }
+
+    
+    public function saving($model)
+    {        
+        if( (!$model->wasRecentlyCreated) || $model->wasRecentlyCreated) //new or updating
+            if(auth() && auth()->user()) {
+                $userid = auth()->user()->id;
+                $model->lending_operator_id=$userid;
+            }
+
+        return parent::saving($model);
+
+    }
+
+    public function saved($model)
+    {
+        return parent::saved($model);
+
+    }
+
+    public function deleting($model)
+    {
+        return parent::deleting($model);
+    }
+
+    public function restoring($model)
+    {
+        return parent::restoring($model);
+    }
 }

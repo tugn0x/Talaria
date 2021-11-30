@@ -55,7 +55,7 @@ class LendingDocdelRequest extends DocdelRequest
     
     public function operator()
     {        
-        return $this->belongsTo('App\Models\Users\User', 'operator_id');
+        return $this->belongsTo('App\Models\Users\User', 'lending_operator_id');
     }
 
 
