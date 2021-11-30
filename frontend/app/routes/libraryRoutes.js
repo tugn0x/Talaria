@@ -48,8 +48,8 @@ const routes = [
     path: '/lending', name: `Lending`, header: true, component: SubRouteSwitch, permissions: ['manage','lend'], resource: {type: 'libraries', key: 'library_id',},
     children: [
       { path: '/', icon: "share", exact: true, name: `PendingRequests`, component: LendingPage,url: '/lending',sidebar: true, order:1}, 
-      { path: '/archive', icon: "hdd", name: `ArchivedRequests`, component: LendingPage,url: '/lending/archive',sidebar: true, order:2 },
-      { path: '/allrequests', icon: "cloud", name: `AllRequests`, component: LendingPage,url: '/lending/allrequests',sidebar: true, order:3 },
+      { path: '/archive', icon: "hdd", name: `ArchivedRequests`, component: LendingPage,url: '/lending/archive',sidebar: true, order:3 },
+      { path: '/allrequests', icon: "cloud", name: `AllRequests`, component: LendingPage,url: '/lending/allrequests',sidebar: true, order:2 },
       { path: '/:id?/:op?', exact: true, name: `RequestUpdate`, component: LendingRequestPage, sidebar: false},      
     ]
   },
