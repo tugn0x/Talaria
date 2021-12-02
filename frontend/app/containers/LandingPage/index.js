@@ -23,7 +23,7 @@ function LandingPage(props) {
   const [LibraryReg,setLibraryReg]=useState (false);
   const toggleLibraryReg = () => {setLibraryReg(true); setPatronReg(false);}
 
- 
+  const patrons_enabled=(process.env.MANAGE_PATRONS && process.env.MANAGE_PATRONS=="true")?true:false;
 
   return (                      
         (props.auth.permissions.roles && props.auth.permissions.roles.includes("registered") && 
@@ -34,13 +34,13 @@ function LandingPage(props) {
        <p>{intl.formatMessage({id:'app.containers.HomePage.intro2'})}</p>       
        <p>{intl.formatMessage({id:'app.containers.HomePage.intro3'})}</p>       
        <nav>
-       <NavLink
+       {patrons_enabled && <NavLink
               className="btn btn-primary mx-3"
               key="associateLib"                                            
               isActive={()=>PatronReg}         
               onClick={(e)=>togglePatronReg()}      
               to="#"        
-        >{intl.formatMessage({id:'app.global.patron'})}</NavLink>
+        >{intl.formatMessage({id:'app.global.patron'})}</NavLink>}
         <NavLink
               className="btn btn-primary mx-3"
               key="registernewlibrary"                                          
