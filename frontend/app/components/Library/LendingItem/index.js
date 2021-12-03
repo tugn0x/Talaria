@@ -110,6 +110,16 @@ const LendingRequestIcons = (props) => {
     )
 }
 
+const LendingReferenceIcons = (props) => {
+    const {data}=props;    
+
+    return (
+        <div className="lending_reference_icons">               
+                <a className="btn btn-icon" onClick={()=>alert('TODO Check holding !')}><i className="fa fa-search-location"></i></a>                
+        </div>
+    )
+}
+
 const LendingItem = (props) => {    
     const {match,editPath,data,toggleSelection,checked,removeTag,findAndUpdateOABorrowingReference, UpdateLendingRequestStatus, UpdateLendingAcceptRequest, UpdateLendingArchivedStatus, oaloading} = props      
     const intl = useIntl();  
@@ -151,8 +161,9 @@ const LendingItem = (props) => {
             
           
             <Col sm={5}>      
-            <RequestTags data={data.tags.data} removeTag={!isArchived(data)?removeTag:null}/>                 
+            {data.tags && <RequestTags data={data.tags.data} removeTag={!isArchived(data)?removeTag:null}/>}
             <ReferenceCitation data={data.reference.data}/>
+            <LendingReferenceIcons data={data} />                
             </Col>
             <Col sm={2} className="icons align-self-center">
             <LendingRequestIcons match={match} data={data} reqPath={editPath} 
