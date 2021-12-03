@@ -41,9 +41,16 @@ function BasePage(props) {
     })
   }
 
+  const hideRoute=(route) => {
+    if(route.hide) return route.hide;
+
+    return false;
+
+  }
+
   const filterRoutes = (routes, auth, resource) => {
     return routes.filter((route)=>{
-      return checkRoutePermission(auth, route, resource)
+      return checkRoutePermission(auth, route, resource) && !hideRoute(route)
     })
   }
 

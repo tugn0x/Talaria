@@ -9,6 +9,13 @@ import TagsPage from '../containers/Library/TagsPage/Loadable';
 import LendingPage from '../containers/Library/LendingPage';
 import LendingRequestPage from '../containers/Library/LendingRequestPage';
 
+const patrons_enabled=(process.env.MANAGE_PATRONS && process.env.MANAGE_PATRONS=="true")?true:false;
+
+const hidePatronRoutes = () =>{
+    return !patrons_enabled;    
+}
+
+
 const routes = [
   /*
   TODO: la path è /users, ma si tratta a tutti gli effetti dei library-users, cioè del collegamento tra utente Patron e Biblioteca
@@ -27,8 +34,8 @@ const routes = [
       { path: '/linkingservices', name: `LinkingServices`, component: Fake,url: '/manage/linkingservices',permissions: ['manage'],sidebar: true, order:2  },
       { path: '/tags', exact: true, name: `Tags`, url: '/manage/tags', component: TagsPage,permissions: ['manage','borrow','lend','deliver'],sidebar: true, order:3 },
       { path: '/operators', name: `Operators`, component: Fake,url: '/manage/operators', permissions: ['manage'],sidebar: true, order:5 },
-      { path: '/departments',  name: `Departments`, component: Fake,url: '/manage/departments',permissions: ['manage','manage-users'],sidebar: true, order:4  },
-      { path: '/pickup', name: `Pickup`, component: Fake,url: '/manage/pickup', permissions: ['manage'],sidebar: true, order:5 },
+      { path: '/departments',  name: `Departments`, component: Fake,url: '/manage/departments',permissions: ['manage','manage-users'], hide: hidePatronRoutes(),sidebar: true, order:4  },
+      { path: '/pickup', name: `Pickup`, component: Fake,url: '/manage/pickup', permissions: ['manage'], hide: hidePatronRoutes(),sidebar: true, order:5 },
       { path: '/catalogs', name: `Catalogs`, component: Fake,url: '/manage/catalogs', permissions: ['manage'],sidebar: true, order:5 },
       { path: '/protocols', name: `Protocols`, component: Fake,url: '/manage/protocols', permissions: ['manage'],sidebar: true, order:5 },
 
@@ -54,14 +61,14 @@ const routes = [
     ]
   },
   {
-    path: '/delivery', name: `Delivery`, header: true, component: SubRouteSwitch, permissions: ['manage','deliver'], resource: {type: 'libraries', key: 'library_id',},
+    path: '/delivery', name: `Delivery`, header: true, component: SubRouteSwitch, permissions: ['manage','deliver'], hide: hidePatronRoutes(), resource: {type: 'libraries', key: 'library_id',},
     children: [
       { path: '', exact: true, name: `PendingRequests`, component: Fake,sidebar: true, order:1 },
       { path: '/archive', name: `ArchivedRequests`, component: Fake,url: '/delivery/archive',sidebar: true, order:2  },
      ]
   },
   {
-    path: '/patrons', name: `LibraryUsers`, component: SubRouteSwitch, header: true, permissions: ['manage','manage-users'], resource: {type: 'libraries', key: 'library_id',},
+    path: '/patrons', name: `LibraryUsers`, component: SubRouteSwitch, header: true, permissions: ['manage','manage-users'],  hide: hidePatronRoutes(),resource: {type: 'libraries', key: 'library_id',},
     children: [
      /*  { path: '/patron/new', icon: "plus", name: `LibraryUserNew`, url: `/patron/user/new`, component: ReferencesPage, sidebar: true}, */
       { path: '/patron/:id?',  name: `LibraryUser`, url:'/patrons/patron',  component: UserPage},
