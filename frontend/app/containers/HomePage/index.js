@@ -36,7 +36,7 @@ function HomePage(props) {
   const customImportURL = (refdata) => {
     console.log("customImportURL",refdata)
     let customURL="/newreference";   //if no data=>will go to empty form             
-    if(refdata && Object.keys(refdata).length>0)
+    if(refdata && refdata!=null && Object.keys(refdata).length>0)
     {
       //if data, builds new URL to import 
       
