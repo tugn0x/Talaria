@@ -67,9 +67,9 @@ const BorrowingRequestPage = (props) => {
 
                 //add extra fields
                 let oalink=(new URLSearchParams(queryString)).get("oa_link");
-                if(oalink!=null && oa_link!="")
+                if(oalink && oalink!=null && oalink!="")
                     newref["oa_link"]=decodeURIComponent(oalink);
-
+                
                 setRefData({...newref});  
                 
             }
