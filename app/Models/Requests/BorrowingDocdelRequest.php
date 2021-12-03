@@ -212,7 +212,7 @@ class BorrowingDocdelRequest extends DocdelRequest
                         else //borrow vuole cancellare=>reset richiesta come nuova (caso 6a)
                         {
                             $newstatus="newrequest";  
-                            $others=array_merge($others,['request_data'=>null,'lending_status'=>null,'all_lender'=>0,'lending_library_id'=>null]);                
+                            $others=array_merge($others,['request_date'=>null,'lending_status'=>null,'all_lender'=>0,'lending_library_id'=>null]);                
                             return $this->changeStatus($newstatus,$others);  
                         }
                     }
