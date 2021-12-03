@@ -42,7 +42,7 @@ class BorrowingDocdelRequestController extends ApiController
                 $arc+=0; //force to be integer
                 $this->model = $this->model->Archived($arc);   
             }
-            else $this->model->Archived(0); //not archived
+            else $this->model = $this->model->Archived(0); //not archived
             
             if($request->has("tagIds"))
                 $this->model = $this->model->byTags($request->input("tagIds"));        

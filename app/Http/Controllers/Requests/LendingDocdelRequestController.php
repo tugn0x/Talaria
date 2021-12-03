@@ -35,7 +35,7 @@ class LendingDocdelRequestController extends ApiController
                  $all=$request->input("all_lender");
                  $all+=0; //force to be integer
                  $this->model = $this->model->Lendingalllender($all);   
-                 $collection = $this->nilde->index( $this->model , $request);        
+                 //$collection = $this->nilde->index( $this->model , $request);        
             }
             else
             {
@@ -46,14 +46,15 @@ class LendingDocdelRequestController extends ApiController
                     $arc+=0; //force to be integer
                     $this->model = $this->model->Lendingarchived($arc);   
                 }
-                else $this->model->Lendingarchived(0); //not archived
+                else $this->model=$this->model->Lendingarchived(0); //not archived
                 
-                $collection = $this->nilde->index( $this->model , $request);        
+                //$collection = $this->nilde->index( $this->model , $request);        
 
             }
             if($request->has("tagIds"))
-                 $this->model = $this->model->byTags($request->input("tagIds"));     
+                 $this->model = $this->model->byTags($request->input("tagIds"));                                  
 
+        $collection = $this->nilde->index( $this->model , $request);                    
         return $this->response->paginator($collection, new $this->transformer())->morph();
     }
 
