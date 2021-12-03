@@ -3,7 +3,7 @@
  * LandingPage
  *
  */
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {useIntl} from 'react-intl';
 
 import RegisterLibrary from '../RegisterLibrary'
@@ -14,6 +14,8 @@ import { NavLink } from 'react-router-dom';
 function LandingPage(props) {
   console.log("LandingPage:",props)
 
+  const patrons_enabled=(process.env.MANAGE_PATRONS && process.env.MANAGE_PATRONS=="true")?true:false;
+
   const {match}=props
 
   const intl=useIntl();  
@@ -21,9 +23,14 @@ function LandingPage(props) {
   const [PatronReg,setPatronReg]=useState (true);
   const togglePatronReg = () => {setPatronReg(true); setLibraryReg(false);}
   const [LibraryReg,setLibraryReg]=useState (false);
-  const toggleLibraryReg = () => {setLibraryReg(true); setPatronReg(false);}
+  const toggleLibraryReg = () => {setLibraryReg(true); setPatronReg(false);}  
 
-  const patrons_enabled=(process.env.MANAGE_PATRONS && process.env.MANAGE_PATRONS=="true")?true:false;
+  useEffect(() => {
+  if(patrons_enabled)
+    togglePatronReg()
+  else toggleLibraryReg()
+    
+  }, [patrons_enabled])
 
   return (                      
         (props.auth.permissions.roles && props.auth.permissions.roles.includes("registered") && 
@@ -49,8 +56,8 @@ function LandingPage(props) {
               onClick={(e)=>toggleLibraryReg()}            
         >{intl.formatMessage({id:'app.global.librarian'})}</NavLink>           
         </nav>
-        {PatronReg && <MyLibraryPage match={match} auth={props.auth}/>}
-        {LibraryReg && <RegisterLibrary {...props.auth} headermenu={false}/> }  
+        {(patrons_enabled && PatronReg) && <MyLibraryPage match={match} auth={props.auth}/>}
+        {LibraryReg && <RegisterLibrary {...props.auth}/> }  
         </>
        ||
        <>
