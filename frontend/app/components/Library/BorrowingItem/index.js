@@ -203,7 +203,7 @@ export const BorrowingReferenceIcons = (props) => {
                 {(issn_search_enabled || isbn_search_enabled ) && canRequest(data) &&  mustCheckData(data) && <a target="_blank" className='btn btn-icon' onClick={()=>findISSNISBNtoggle()} title="checkISSN/ISBN"><i className="fas fa-keyboard"></i></a>}
                 {canRequest(data) &&  !mustCheckData(data) && <span className="btn btn-icon"><i className="fas fa-check-double"></i></span>}
                 {canRequest(data) && oaloading && <i className="fas fa-spinner fa-spin"></i>}                
-                {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO !')}><i className="fa fa-search-location"></i></a>}                
+                {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO Check holding !')}><i className="fa fa-search-location"></i></a>}                
                 {canDownload(data) && <a className="btn btn-icon" onClick={()=>alert("TODO: download & VIEW document !")}><i className="fas fa-download"></i></a>}                
                 {/* add paper/url/.. type checking and button activation to manage*/}
         </div>
@@ -261,7 +261,7 @@ const BorrowingItem = (props) => {
             }              
             </Col>
             <Col sm={5}>      
-            <RequestTags data={data.tags.data} removeTag={!isArchived(data)?removeTag:null}/>                 
+            {data.tags && <RequestTags data={data.tags.data} removeTag={!isArchived(data)?removeTag:null}/>}                 
             <ReferenceCitation data={data.reference.data}/>
             <BorrowingReferenceIcons data={data} reqPath={editPath} findAndUpdateOABorrowingReference={findAndUpdateOABorrowingReference} oaloading={oaloading} findISSNISBNtoggle={findISSNISBNtoggle} />                
             </Col>
