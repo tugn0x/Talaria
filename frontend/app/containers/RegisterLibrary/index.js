@@ -9,7 +9,7 @@ import {institutionsOptionListSelector,
     institutionsByTypeCountryOptionListSelector, libraryProjectsOptionListSelector} from './selectors';
 import wizardMessages from './messages'
 import globalMessages from 'utils/globalMessages';
-import messages from 'components/Admin/LibraryForm/messages';
+
 import {fields, totalSteps, setNewSteps} from './fields'
 import { requestGetInstitutionsOptionList, requestGetCountriesOptionList,
     requestLibrarySubjectOptionList, requestPostPublicLibrary, requestGetProjectsOptionList, requestGetInstitutionsByTypeByCountryOptionList,
@@ -25,6 +25,8 @@ const LIBRARY_DIFFERENT_PROFILES = (process.env.LIBRARY_DIFFERENT_PROFILES && pr
 
 const RegisterLibrary = (props) => {
     console.log('RegisterLibrary', props)
+
+    const messages= {...wizardMessages,...globalMessages}
     
     let [institutionPresent, setInstitutionPresent] = useState(false)
     const intl = useIntl()
@@ -57,8 +59,10 @@ const RegisterLibrary = (props) => {
         if (LIBRARY_DIFFERENT_PROFILES===false)
         {
                 setData({...data, "ill_user_cost": "0", "ill_cost": "0"})
-                fields.volunteer_library_label.label = "Disciplina"
+                fields.volunteer_library_label.hidden = true;
+                fields.opac_label.hidden=false;
                 fields.opac.hidden=false;
+                fields.subject_label.hidden=false;
                 fields.subject_id.hidden=false;
                 fields.showfullProfile.hidden = true;
                 dispatch(requestLibrarySubjectOptionList())
@@ -140,9 +144,11 @@ const RegisterLibrary = (props) => {
             fields.subject_id.required = false;
             
             fields.opac.hidden=true;
+            fields.opac_label.hidden=true;
             fields.subject_id.hidden=true;
+            fields.subject_label.hidden=true;
     
-            fields.showfullProfile.label="Click here"
+            fields.showfullProfile.label=intl.formatMessage(wizardMessages.switchToFullProfile)
         }
         else
         {            
@@ -150,9 +156,11 @@ const RegisterLibrary = (props) => {
             fields.opac.required = true;
             
             fields.opac.hidden=false;
+            fields.opac_label.hidden=false;
             fields.subject_id.hidden=false;
+            fields.subject_label.hidden=false;
             
-            fields.showfullProfile.label="Switch to Basic Library"
+            fields.showfullProfile.label=intl.formatMessage(wizardMessages.switchToBasicProfile)
             dispatch(requestLibrarySubjectOptionList())
         }
         setData({...data, [field_name]: value})
@@ -171,7 +179,8 @@ const RegisterLibrary = (props) => {
     }
 
     return (
-        <BasePage {...props} routes={[]} messages={messages} headermenu={false}>
+        /*<BasePage {...props} routes={[]} messages={wizardMessages} headermenu={false}>*/
+        <>
             <h2>{intl.formatMessage(wizardMessages.header)}</h2>
             <br></br>
             <Navigation 
@@ -211,7 +220,7 @@ const RegisterLibrary = (props) => {
                         int_country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
                         //disciplinary_id: (input) => dispatch(requestGetDisciplinariesOptionList(input)), 
                     }}
-                    messages={{...messages, ...globalMessages}}
+                    messages={messages}
                     getValidation={(validation) => checkValidation(validation) }
                 />)
             }
@@ -226,7 +235,7 @@ const RegisterLibrary = (props) => {
                     {Object.keys(data).map(key => 
                         <Row key={key}>
                             <Col sm={6}>
-                                {messages[key] ? intl.formatMessage({...messages, ...globalMessages}[key]) : key}
+                                {messages[key] && intl.formatMessage(messages[key])}
                             </Col>
                             <Col sm={6}>
                                 {data[key]}
@@ -242,7 +251,8 @@ const RegisterLibrary = (props) => {
                    
                 </div>
             }
-        </BasePage> 
+        {/*</BasePage>*/}
+        </>
     )
 }
 

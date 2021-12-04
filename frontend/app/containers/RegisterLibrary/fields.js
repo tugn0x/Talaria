@@ -67,7 +67,7 @@ export const fields = {
     library_location_label: {
         type: "Label",
         required: false,
-        label:"Library Location",
+        nolabel: true,
         paddingtop:"30px",
         name: "library_location_label",
         width: "col-sm-12",
@@ -88,7 +88,7 @@ export const fields = {
     },
     state: {
         type: "text",
-        required: true,
+        required: false,
         name: "state",
         label: 'app.global.state',
         placeholder: 'app.global.state',
@@ -133,7 +133,7 @@ export const fields = {
         type: "Label",
         required: false,
         paddingtop:"30px",
-        label:"Service contact",
+        nolabel: true,
         name: "library_contact_label",
         width: "col-sm-12",
         size:"25px",
@@ -173,23 +173,12 @@ export const fields = {
         required: false,
         paddingtop:"30px",
         size:"25px",
-        label:"Institution",
+        nolabel:true,
         name: "ill_institution_label",
         width: "col-sm-12",
         group: "step_1",
         order: 15,
     },
-
-    // institution_type_id: {
-    //     type: "custom-select",
-    //     required: true,
-    //     name: "institution_type_id",
-    //     width: "col-sm-6",
-    //     group: "step_1",
-    //     options: "institution_type_id",
-    //     order: 16,
-
-    // },
 
     institution_type_id: {
         type: "custom-select",
@@ -233,50 +222,26 @@ export const fields = {
         hidden: true,
     },
 
-    ill_service_contact_label: {
+    projects_label: {
         type: "Label",
         required: false,
         paddingtop:"30px",
         size:"25px",
-        label:"Progect or Consortium",
+        name: "projects_label",
+        nolabel:true,
         width: "col-sm-12",
         group: "step_1",
         order: 20,
     },
 
-    // project_id: {
-    //     type: "custom-select",
-    //     required: true,
-    //     name: "project_id",
-    //     width: "col-sm-12",
-    //     group: "step_1",
-    //     options: "project_id",
-    //     order: 21,
-    //     selectedOption: "id"
-    // },
-
-
     project_id: {
-        label:"project_id",
+        nolabel: true,
         type: "list-checkbox",
         name: "project_id",
         width: "col-sm-12",
         group: "step_1",
         order: 21,
     },
-
-
-
-    // volunteer_library_label: {
-    //     type: "Label",
-    //     required: false,
-    //     hidden: false,
-    //     name: "volunteer_library_label",
-    //     label:"can't find your instution or consortium? write us at: mail@mail.com",
-    //     width: "col-sm-12",
-    //     group: "step_1",
-    //     order: 22,
-    // },
 
     volunteer_library_label: {
         type: "Label",
@@ -285,12 +250,11 @@ export const fields = {
         hidden: false,
         size:"25px",
         name: "volunteer_library_label",
-        label:"Want to be a Volunteer Library?",
+        nolabel: true,
         width: "col-sm-12",
         group: "step_1",
-        order: 23,
-    },
-  
+        order: 22,
+    },    
 
     showfullProfile: {
         type: "Button",
@@ -298,8 +262,22 @@ export const fields = {
         name: "showfullProfile",
         width: "col-md-12",
         group: "step_1",
+        order: 23,
+    },
+
+    opac_label: {
+        type: "Label",
+        required: false,
+        paddingtop:"30px",
+        hidden: true,
+        size:"25px",
+        name: "opac_label",
+        nolabel: true,
+        width: "col-sm-12",
+        group: "step_1",
         order: 24,
     },
+
     opac: {
         type: "text",
         required: false,
@@ -309,6 +287,20 @@ export const fields = {
         hidden: true,
         order: 25,
     },
+
+    subject_label: {
+        type: "Label",
+        required: false,
+        paddingtop:"30px",
+        hidden: true,
+        size:"25px",
+        name: "subject_label",
+        nolabel: true,
+        width: "col-sm-12",
+        group: "step_1",
+        order: 26,
+    },
+
     subject_id: {
         type: "custom-select",
         required: false,
@@ -317,7 +309,7 @@ export const fields = {
         group: "step_1",
         options: "subject_id",
         hidden: true,
-        order: 26,
+        order: 27,
     },
     
     ill_service_conditions: {
@@ -326,11 +318,11 @@ export const fields = {
         size:"25px",
         paddingtop:"30px",
         hidden: false,
-        name: "ill_service_conditions_label",
-        label:"ILL service conditions",
+        name: "ill_service_conditions",
+        nolabel:true,
         width: "col-sm-12",
         group: "step_1",
-        order: 27
+        order: 28
     },
 
     ill_user_cost: {
@@ -339,7 +331,7 @@ export const fields = {
         name: "ill_user_cost",
         width: "col-sm-6",
         group: "step_1",
-        order: 28,
+        order: 29,
     },
 
     ill_service_conditions_other: {
@@ -348,11 +340,11 @@ export const fields = {
         size:"25px",
         paddingtop:"30px",
         hidden: false,
-        name: "ill_service_conditions_others_label",
-        label:"ILL service to other libraries",
+        name: "ill_service_conditions_other",
+        nolabel: true,
         width: "col-sm-12",
         group: "step_1",
-        order: 29,
+        order: 30,
     },
 
 
@@ -362,7 +354,7 @@ export const fields = {
         name: "ill_cost",
         width: "col-sm-6",
         group: "step_1",
-        order: 30,
+        order: 31,
     },
 
     ill_imbalance: {
@@ -371,7 +363,7 @@ export const fields = {
         name: "ill_imbalance",
         width: "col-sm-6",
         group: "step_1",
-        order: 31,
+        order: 32,
     },
 
     ill_supply_conditions: {
@@ -380,120 +372,8 @@ export const fields = {
         name: "ill_supply_conditions",
         width: "col-sm-6",
         group: "step_1",
-        order: 32,
+        order: 33,
     },
-
-    // custombutton: {
-    //     type: "Button",
-    //     label:"Show Hide",
-    //     width: "col-sm-12",
-    //     group: "step_1",
-    //     order: 18,
-    // },
-
-    // district: {
-    //     type: "text",
-    //     name: "district",
-    //     label: 'app.global.district',
-    //     placeholder: 'app.global.district',
-    //     group: "step_1",
-    //     width: "col-sm-6",
-    //     order: 29,
-    // },
-
-
-   
-//     identifier_id_2: {
-//         type: "custom-select",
-//         required: true,
-//         name: "identifier_id",
-//         label: 'app.global.identifier_id',
-//         width: "col-md-6",
-//         group: "step_1",
-//         options: "identifier_id",
-//         order: 12,
-//     },
-//     identifier_code_2: {
-//         type: "text",
-//         name: "identifier_code",
-//         label: 'app.global.identifier_code',
-//         group: "step_1",
-//         width: "col-sm-6",
-//         order: 13,
-//     },
-//     subject_id: {
-//         type: "custom-select",
-//         required: true,
-//         name: "subject_id",
-//         width: "col-sm-6",
-//         group: "step_1",
-//         options: "subject_id",
-//         order: 22,
-//     },
-    
-//   /*library Identifier */
-
-    
-    
-//     /*info amministrative */
-    
-
-    // vatnumber: {
-    //     type: "number",
-    //     name: "vatnumber",
-    //     width: "col-sm-6",
-    //     group: "step_2",
-    // },
-    // fiscalcode: {
-    //     type: "text",
-    //     name: "fiscalcode",
-    //     width: "col-sm-6",
-    //     group: "step_2",
-    // },
-    // invoice_header: {
-    //     type: "text",
-    //     name: "invoice_header",
-    //     width: "col-sm-6",
-    //     group: "step_2",
-    // },
-    // email_pec: {
-    //     type: "email",
-    //     name: "email_pec",
-    //     width: "col-sm-6",
-    //     group: "step_2",
-        
-    // },
-    // ccu: {
-    //     type: "text",
-    //     name: "ccu",
-    //     width: "col-sm-6",
-    //     group: "step_2",
-    // },
-    // administrative: {
-    //     type: "text",
-    //     name: "administrative",
-    //     width: "col-sm-6",
-    //     group: "step_2",
-    // },
-    // administrative_email: {
-    //     type: "email",
-    //     name: "administrative_email",
-    //     width: "col-sm-6",
-    //     group: "step_2",
-        
-    // },
-    // administrative_phone: {
-    //     type: "number",
-    //     name: "administrative_phone",
-    //     width: "col-sm-6",
-    //     group: "step_2",
-    // },
-    // terzo_code: {
-    //     type: "text",
-    //     name: "terzo_code",
-    //     width: "col-sm-6",
-    //     group: "step_2",
-    // },
 
      
     ill_help_other: {
@@ -502,11 +382,11 @@ export const fields = {
         size:"20px",
         paddingtop:"100px",
         hidden: false,
-        name: "ill_service_conditions_others_label",
-        label:"Have any inquiry, Please send email to info@hermess.org",
+        name: "ill_help_other",  
+        nolabel:true,        
         width: "col-sm-12",
         group: "step_1",
-        order: 33,
+        order: 34,
     },
 
 }
