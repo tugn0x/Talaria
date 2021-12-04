@@ -63,8 +63,7 @@ function Footer(props) {
             </>
           }
           {!props.isLogged && 
-            <>
-              Footer content if you r not logged
+            <>              
             </>
           }
           </div>

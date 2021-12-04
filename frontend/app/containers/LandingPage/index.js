@@ -56,8 +56,10 @@ function LandingPage(props) {
               onClick={(e)=>toggleLibraryReg()}            
         >{intl.formatMessage({id:'app.global.librarian'})}</NavLink>           
         </nav>
-        {(patrons_enabled && PatronReg) && <MyLibraryPage match={match} auth={props.auth}/>}
-        {LibraryReg && <RegisterLibrary {...props.auth}/> }  
+        <div class="card-form card">
+          {(patrons_enabled && PatronReg) && <MyLibraryPage match={match} auth={props.auth}/>}
+          {LibraryReg && <RegisterLibrary {...props.auth}/> }  
+        </div>
         </>
        ||
        <>
