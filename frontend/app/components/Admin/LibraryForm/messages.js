@@ -68,7 +68,7 @@ export default defineMessages({
   },
   external: {
     id: 'app.libraries.external',
-    defaultMessage: 'in Nilde',
+    defaultMessage: 'external',
   },
   registration_date: {
     id: 'app.libraries.registration_date',

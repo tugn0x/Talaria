@@ -408,8 +408,8 @@
   "app.components.HeaderBar.Admin": "Admin",
   "app.components.HeaderBar.Patron": "Patron",
 
-  "app.components.SignupForm.header": "Registrati",
-  "app.components.SignupForm.subtitle": "Crea un profilo",
+  "app.components.SignupForm.header": "Signup",
+  "app.components.SignupForm.subtitle": "Create your profile",
 
   "app.components.CustomForm.select": "Select",
 

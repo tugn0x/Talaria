@@ -70,7 +70,7 @@ export default defineMessages({
   },
   external: {
     id: `${scope}.external`,
-    defaultMessage: 'in Nilde',
+    defaultMessage: 'external',
   },
   registration_date: {
     id: `${scope}.registration_date`,

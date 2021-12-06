@@ -1,16 +1,18 @@
 @import '../../scss/vendors/variables';
 .app-subheader {
     overflow-y: auto;
-    .subheader-menu {
+    
+    & .subheader-menu {
         flex-wrap: nowrap;
         padding: 0.5rem 0;
-        div:not(.current-page){
+        & div:not(.current-page){
             a:hover {
                 color: $active;
                 text-decoration: none;
             }
         }
-        .current-page {
+        
+        & .current-page {
             a {
                 text-decoration: none;
                 color: $active;
