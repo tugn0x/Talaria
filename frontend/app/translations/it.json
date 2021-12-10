@@ -246,7 +246,7 @@
   "app.libraries.administrative_info": "Informazioni amministrative",
   "app.libraries.granted_permissions": "Permessi utenti",
   "app.libraries.institution_type_id": "Tipo istituto",
-  "app.libraries.int_country_id": "Nazione ",
+  "app.libraries.institution_country_id": "Nazione ",
   "app.libraries.ill_referent_name": "Nome referente ",
   "app.libraries.alt_name": "Nome alternativo ",
   "app.libraries.dd_user_cost":"Costo per articolo",

@@ -179,8 +179,8 @@ export default defineMessages({
     defaultMessage: 'Institution Type',
   },
 
-  int_country_id: {
-    id: 'app.libraries.int_country_id',
+  institution_country_id: {
+    id: 'app.libraries.institution_country_id',
     defaultMessage: 'Institution Country',
   },
 

@@ -42,11 +42,14 @@ const RegisterLibrary = (props) => {
     const [institutiontypeid, setInstitutiontypeid] = useState(0);
     const projectsarrname = [];
 
+    const [basicProfile,setBasicProfile]=useState(LIBRARY_DIFFERENT_PROFILES);
+
     // Fai le chiamate per le option list
     useEffect(() => {
         dispatch(requestGetCountriesOptionList())
         dispatch(requestGetInstitutionTypeOptionList())
         dispatch(requestGetlibraryProjectsOptionList())
+        dispatch(requestLibrarySubjectOptionList())
         if (ILL_REQUEST_PAYMENT===false) //RSCVD
         {
             fields.ill_user_cost.hidden=true;
@@ -59,13 +62,13 @@ const RegisterLibrary = (props) => {
         if (LIBRARY_DIFFERENT_PROFILES===false)
         {
                 setData({...data, "ill_user_cost": "0", "ill_cost": "0"})
+                setBasicProfile(false);
                 fields.volunteer_library_label.hidden = true;
                 fields.opac_label.hidden=false;
                 fields.opac.hidden=false;
                 fields.subject_label.hidden=false;
                 fields.subject_id.hidden=false;
-                fields.showfullProfile.hidden = true;
-                dispatch(requestLibrarySubjectOptionList())
+                fields.showfullProfile.hidden = true;                             
         }
 
         //alert(JSON.stringify(fields.suggested_institution_name))
@@ -85,11 +88,16 @@ const RegisterLibrary = (props) => {
             projectsarrname.push(props.libraryProjectsOptionList[key].value))
     })
 
+    useEffect(() => {
+       //set profile
+       setData({...data, 'profile_type': basicProfile?1:2})
+    }, [basicProfile])
+
     // Cambia Step
     const onChangeStep = (formData, newStep) => {
         setData({...data, ...formData})
         setCurrentStep(parseInt(newStep))
-        setSteps({...steps, [parseInt(newStep)]: {active: true} })
+        setSteps({...steps, [parseInt(newStep)]: {active: true} })      
     }
     
     // Aggiorna dati nei campi *handle change*
@@ -103,7 +111,7 @@ const RegisterLibrary = (props) => {
                 return institutiontypeid;
               });
         }
-        if (field_name === "int_country_id")
+        if (field_name === "institution_country_id")
         {
             setCountryid(value.value);
             setCountryid((countryid) => {
@@ -137,7 +145,9 @@ const RegisterLibrary = (props) => {
         }
     }
 
-    const hideComponent = (field_name, value) => {
+    const toggleLibraryProfile = (ev) => {
+        setBasicProfile(!basicProfile);
+
         if (fields.opac.hidden===false)
         {
             fields.opac.required = false;
@@ -160,10 +170,9 @@ const RegisterLibrary = (props) => {
             fields.subject_id.hidden=false;
             fields.subject_label.hidden=false;
             
-            fields.showfullProfile.label=intl.formatMessage(wizardMessages.switchToBasicProfile)
-            dispatch(requestLibrarySubjectOptionList())
+            fields.showfullProfile.label=intl.formatMessage(wizardMessages.switchToBasicProfile)            
         }
-        setData({...data, [field_name]: value})
+        //setData({...data, [field_name]: value})
     }
 
     // Check validation on change input
@@ -202,11 +211,11 @@ const RegisterLibrary = (props) => {
                     className="wizard-form"
                     institution_type_id = {props.institutionsTypesOptionList}
                     country_id={props.countriesOptionList}
-                    int_country_id = {props.countriesOptionList}
+                    institution_country_id = {props.countriesOptionList}
                     institution_id={props.institutionsByTypeCountryOptionList}
                     subject_id={props.librarySubjectOptionList}
                     project_id = {props.libraryProjectsOptionList}
-                    onClickData={hideComponent}
+                    onClickData={toggleLibraryProfile}
                     onPlacesSearch={(search)=>dispatch(requestSearchPlacesByText(search))}
                     places={props.places}
                     placesFreeSearchPlaceholder={intl.formatMessage(wizardMessages.placesFreeSearchPlaceholder)}
@@ -217,7 +226,7 @@ const RegisterLibrary = (props) => {
                         country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
                         subject_id: (input) => dispatch(requestLibrarySubjectOptionList(input)), 
                         project_id: (input) => dispatch(requestGetProjectsOptionList(input)),
-                        int_country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
+                        institution_country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
                         //disciplinary_id: (input) => dispatch(requestGetDisciplinariesOptionList(input)), 
                     }}
                     messages={messages}

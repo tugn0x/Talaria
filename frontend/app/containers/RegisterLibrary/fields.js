@@ -192,15 +192,15 @@ export const fields = {
         
     },
 
-    int_country_id: {
+    institution_country_id: {
         type: "custom-select",
         required: true,
-        name: "int_country_id",
+        name: "institution_country_id",
         width: "col-md-6",
         group: "step_1",
-        options: "int_country_id",
+        options: "institution_country_id",
         order: 17,
-        selectedOption: "int_country_id"
+        selectedOption: "institution_country_id"
     },
     institution_id: {
         type: "custom-select",
@@ -389,5 +389,18 @@ export const fields = {
         order: 34,
     },
 
+    /* todo
+    profile_type: {
+        type: "number",
+        required: true,
+        hidden: true,
+        name: "profile_type",
+        label: 'app.global.profile_type',
+        placeholder: 'app.global.profile_type',
+        group: "step_1",
+        width: "col-sm-6",
+        order: 9,
+    },
+*/
 }
 
