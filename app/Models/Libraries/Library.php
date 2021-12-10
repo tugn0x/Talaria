@@ -86,6 +86,7 @@ class Library extends BaseModel
         'state', //Regione o Stato (EmiliaRomagna, Illinois
         'url',
         'opac',
+        'profile_type', //1-borr, 2-borr+lend
 
         /*info amministrative */
         'vatnumber',

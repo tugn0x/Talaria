@@ -387,20 +387,6 @@ export const fields = {
         width: "col-sm-12",
         group: "step_1",
         order: 34,
-    },
-
-    /* todo
-    profile_type: {
-        type: "number",
-        required: true,
-        hidden: true,
-        name: "profile_type",
-        label: 'app.global.profile_type',
-        placeholder: 'app.global.profile_type',
-        group: "step_1",
-        width: "col-sm-6",
-        order: 9,
-    },
-*/
+    },    
 }
 

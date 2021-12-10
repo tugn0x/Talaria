@@ -61,8 +61,7 @@ const RegisterLibrary = (props) => {
         }
         if (LIBRARY_DIFFERENT_PROFILES===false)
         {
-                setData({...data, "ill_user_cost": "0", "ill_cost": "0"})
-                setBasicProfile(false);
+                setData({...data, "ill_user_cost": "0", "ill_cost": "0"})                
                 fields.volunteer_library_label.hidden = true;
                 fields.opac_label.hidden=false;
                 fields.opac.hidden=false;
@@ -70,6 +69,8 @@ const RegisterLibrary = (props) => {
                 fields.subject_id.hidden=false;
                 fields.showfullProfile.hidden = true;                             
         }
+        //set profile
+        setData({...data, 'profile_type': basicProfile?1:2})
 
         //alert(JSON.stringify(fields.suggested_institution_name))
     },[])
