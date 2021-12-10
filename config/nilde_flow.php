@@ -120,7 +120,7 @@ return [
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',
                         ],                                              
-                        'jobs' => ['App\Jobs\LendingRequestUpdateNotify'] 
+                        'jobs' => ['App\\Jobs\\LendingRequestUpdateNotify'] 
                     ],
                     //NOTE on cancelRequested: i removed constraint because this status can be changed both from patron or borrower                       
                     'cancelRequested'	=> [
@@ -193,9 +193,9 @@ return [
                         'next_statuses' => ['copyCompleted','unFilled'],
                         'constraints' => [], 
                         'notify' => [
-                        'Model'=>'borrowingLibraryOperators',//<- wrong 
+                            'Model'=>'lendingLibraryOperators',
                         ], 
-                        // 'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
+                        'jobs' => ['App\\Jobs\\BorrowingRequestUpdateNotify']
                     ],
                     //this configuration is needed by status resolver to exists because it checks when do status change FROM this state
                     //but it will not change TO this state cause is instad the borrow that change directly lending_status field without doing a lending->changeStatus                    
@@ -209,26 +209,27 @@ return [
                         'next_statuses' => [],
                         'constraints' => [], 
                         'notify' => [
-                             'Model'=>'borrowingLibraryOperators', //<- wrong
+                             'Model'=>'lendingLibraryOperators', 
                         ],                     
+                        'jobs' => ['App\\Jobs\\BorrowingRequestUpdateNotify']
                     ],
                     'unFilled' => [
                         'role' => [],//borrow/lend/manage?
                         'next_statuses' => [],
                         'constraints' => [], 
                         'notify' => [
-                            'Model'=>'borrowingLibraryOperators', //<- wrong
-                        ], 
-                    //'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
+                            'Model'=>'lendingLibraryOperators', 
+                        ],                         
+                        'jobs' => ['App\\Jobs\\BorrowingRequestUpdateNotify']
                     ],
                     'copyCompleted' => [
                         'role' => [],//borrow/lend/manage?
                         'next_statuses' => [''],
                         'constraints' => [], 
                         'notify' => [
-                            'Model'=>'borrowingLibraryOperators', //<- wrong
+                            'Model'=>'lendingLibraryOperators', 
                         ], 
-                    // 'jobs' => ['App\Jobs\LendingRequestUpdateNotify']
+                        'jobs' => ['App\\Jobs\\BorrowingRequestUpdateNotify']
                     ],
                            
                 ]

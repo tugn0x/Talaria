@@ -8,10 +8,10 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Requests\DocdelRequest;
-use App\Notifications\LendingDocdelRequestNotification;
-use App\Models\Requests\LendingDocdelRequest;
+use App\Notifications\BorrowingDocdelRequestNotification;
+use App\Models\Requests\BorrowingDocdelRequest;
 
-class LendingRequestUpdateNotify implements ShouldQueue
+class BorrowingRequestUpdateNotify implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -34,16 +34,16 @@ class LendingRequestUpdateNotify implements ShouldQueue
     public function handle()
     {
         //Notify to lender        
-        $lender=$this->docdelreq->lendinglibrary;
+        $borrow=$this->docdelreq->borrowinglibrary;
         
-        if($lender) 
+        if($borrow) 
         {
-            $lending=LendingDocdelRequest::findOrFail($this->docdelreq->id);
+            $borrowing=BorrowingDocdelRequest::findOrFail($this->docdelreq->id);
 
-            $n=new LendingDocdelRequestNotification($lending);
+            $n=new BorrowingDocdelRequestNotification($borrowing);
 
             //get all lending operators
-            $oper= $lender->operators("lend");
+            $oper= $borrow->operators("borr");
                 
             foreach ($oper as $op)    
                 $op->notify($n);
