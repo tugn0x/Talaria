@@ -105,7 +105,7 @@ export const canCancel=(data) => {
 
 export const canForward=(data)=>{
    return (data.patrondocdelrequest && data.patrondocdelrequest.data.user 
-     && ( data.borrowing_status!="canceledDirect" && data.borrowing_status!="canceled")
+     && ( data.borrowing_status!="newrequest" && data.borrowing_status!="canceledDirect" && data.borrowing_status!="canceled")
      )
      ||
      (!data.patrondocdelrequest && canArchive(data)
