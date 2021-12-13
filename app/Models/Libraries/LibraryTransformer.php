@@ -94,6 +94,9 @@ class LibraryTransformer extends BaseTransformer
     {
         $faker=\Faker\Factory::create('it_IT');
 
+        $to_merge = [];
+        
+        if(!$model->lat||!$model->lon)
         $to_merge = [
             //just to test localization (because now we haven't such data stored)
             'lat'=> !$model->lat?$faker->latitude(35,45):$model->lat, 

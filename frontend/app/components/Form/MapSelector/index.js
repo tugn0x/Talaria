@@ -41,7 +41,7 @@ function MyMap(props) {
       },*/
       moveend: (e)=> {
         let cent=map.getCenter();
-        getMarkersAtPos({'lat':cent.lat,'lon':cent.lon})
+        getMarkersAtPos({'lat':cent.lat,'lon':cent.lng})
 
       }
     });

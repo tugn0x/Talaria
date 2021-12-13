@@ -13,6 +13,7 @@ use App\Models\Users\User;
 use App\Models\Requests\PatronDocdelRequest;
 use App\Traits\Model\ModelPermissionsTrait;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Query\Expression;
 
 class Library extends BaseModel
 {
@@ -228,7 +229,7 @@ class Library extends BaseModel
         $max_range="<= ".$max_range;
 
         //TO TEST THIS function
-        return $query->where('id','>',0);
+        //return $query->where('id','>',0);
         
         //TODO when we implement lat/lon fields in DB, use one of these methods below:
             
