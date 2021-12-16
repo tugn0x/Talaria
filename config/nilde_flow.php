@@ -185,7 +185,7 @@ return [
                     //but it will not change TO this state cause is instad the borrow that change directly lending_status field without doing a lending->changeStatus
                     'requestReceived' => [
                         'role' => [],
-                        'next_statuses' => ['willSupply','canceledAccepted'],
+                        'next_statuses' => ['willSupply','canceledAccepted','unFilled'],
                         'constraints' => [],                         
                     ],
                     'willSupply' => [
