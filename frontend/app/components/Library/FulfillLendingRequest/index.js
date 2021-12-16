@@ -23,7 +23,7 @@ return (
             <Row>
             {(data.all_lender == null || data.all_lender == 0) && data.lending_archived== null && data.lending_status=="willSupply" &&
                 <Col sm={3}>                    
-                        <button type="button" class="btn btn-primary btn-lg" 
+                        <button type="button" className="btn btn-primary btn-lg" 
                         
                         onClick={function() { setunfilPanelActions(false); setshowPanelActions(true); }}
                         
@@ -32,7 +32,7 @@ return (
                 </Col>}
                 <Col sm={3}>
                     {(data.all_lender == null || data.all_lender == 0) && data.lending_archived == null &&
-                      <button type="button" class="btn btn-danger btn-lg" onClick={function() { setunfilPanelActions(true); setshowPanelActions(false); }}>Unfulfill</button>
+                      <button type="button" className="btn btn-danger btn-lg" onClick={function() { setunfilPanelActions(true); setshowPanelActions(false); }}>Unfulfill</button>
                     }
                 </Col>
             </Row>
@@ -48,7 +48,7 @@ return (
                    
             <div>
                 <input type="file"  />
-                <button type="button" onClick={() => alert('Upload succefuly Done!')}  class="btn btn-info">Upload file</button>
+                <button type="button" onClick={() => alert('Upload succefuly Done!')}  className="btn btn-info">Upload file</button>
             </div>
                     </Col>
                    
@@ -58,10 +58,10 @@ return (
                     <Col sm={6}>
                    
             <div>
-            <div class="form-group">
+            <div className="form-group">
             <label for="exampleInputEmail1">Notes</label>
-            <input type="email" class="form-control" id="txtnote" aria-describedby="" placeholder="Enter note here"></input>
-            <small id="emailHelp" class="form-text text-muted">This message will send to the borrowing library.</small>
+            <input type="email" className="form-control" id="txtnote" aria-describedby="" placeholder="Enter note here"></input>
+            <small id="emailHelp" className="form-text text-muted">This message will send to the borrowing library.</small>
             </div>    
             </div>
                     </Col>
@@ -77,7 +77,7 @@ return (
        
                        
                    
-                   <button type="button" onClick={() => FulfillLendingRequestStatus(data)} class="btn btn-success">Submit</button>        
+                   <button type="button" onClick={() => FulfillLendingRequestStatus(data)} className="btn btn-success">Submit</button>        
                    </div>
                            </Col>
                            
@@ -95,10 +95,10 @@ return (
                     <Col sm={6}>
                    
             <div>
-            <div class="form-group">
+            <div className="form-group">
             <label for="exampleInputEmail1">Unfill Notes</label>
-            <input type="email" class="form-control" id="txtnote" aria-describedby="" placeholder="Enter note here"></input>
-            <small id="emailHelp" class="form-text text-muted">This message will send to the borrowing library.</small>
+            <input type="email" className="form-control" id="txtnote" aria-describedby="" placeholder="Enter note here"></input>
+            <small id="emailHelp" className="form-text text-muted">This message will send to the borrowing library.</small>
             </div>    
             </div>
                     </Col>
@@ -114,7 +114,7 @@ return (
        
                        
                    
-                   <button type="button" onClick={() => unFulfillLendingRequestStatus(data)} class="btn btn-success">Submit</button>        
+                   <button type="button" onClick={() => unFulfillLendingRequestStatus(data)} className="btn btn-success">Submit</button>        
                    </div>
                            </Col>
                            

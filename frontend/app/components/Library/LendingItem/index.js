@@ -43,7 +43,7 @@ const statusDate = (req) => {
 
   return (
       <>
-        <i class="fas fa-clock"></i> {formatDateTime(date)}            
+        <i className="fas fa-clock"></i> {formatDateTime(date)}            
       </>
   )
 }
