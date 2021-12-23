@@ -226,9 +226,10 @@ export const BorrowingRequestIcons = (props) => {
                     </>
                 }                
                 {canForward(data) && forwardRequest && <a className="btn btn-icon" onClick={()=>forwardRequest(data.id)}><i className="fas fa-redo"></i></a>}                
-                {canArchive(data) && askArchiveRequest && <a className="btn btn-icon" onClick={()=>askArchiveRequest(data.id)}><i className="fas fa-hdd"></i></a>}                
-                
+                {canArchive(data) && askArchiveRequest && <a className="btn btn-icon" onClick={()=>askArchiveRequest(data.id)}><i className="fas fa-hdd"></i></a>}                                
                 {/* add paper/url/.. type checking and button activation to manage*/}
+                {isPatronRequest(data) && canRequest(data) && <span><button>evadi dir</button><button>inevadi dir</button></span>}
+                {isPatronRequest(data) && data.borrowing_status=="notReceived" && <span><button>inevadi a ute</button></span>}
         </div>
     )
 }
