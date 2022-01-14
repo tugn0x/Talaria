@@ -108,11 +108,13 @@ export function requestDeleteUser(id,library_id,message) {
   };
 } */
 
-export function requestGetLibrariesList(page='1',query) {
+export function requestGetLibrariesList(page='1',query=null,filterBy=null,filterVal=null) {
   return {
     type: REQUEST_GET_LIBRARIES_LIST,
     page,
-    query
+    query,
+    filterBy,
+    filterVal
   };
 }
 

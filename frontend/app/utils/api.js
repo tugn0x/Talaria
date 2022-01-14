@@ -607,8 +607,11 @@ export const deleteLibrary = (options) => {
 export const getLibrariesList = (options) => {
   const page = options.page;
   const query = options.query;
+  const filterBy = options.filterBy;
+  const filterVal = options.filterVal;  
+
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/?page=${page}&q=${query}`, options)
+  return request(`${BASE_URL}/api/v1/libraries/?page=${page}&q=${query}&filterBy=${filterBy}&filterVal=${filterVal}`, options)
 };
 
 export const getLibrariesListNearTo = (options) => {
