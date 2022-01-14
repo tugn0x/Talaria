@@ -42,6 +42,9 @@ class Dispatcher extends BaseController
         $order = $request->input('sortInfo', 'desc');
         $trashed = $request->input('trashed');
         $q = $request->input('q');
+        $filterField=$request->input('filterBy');
+        $filterValue=$request->input('filterVal');
+
 
         if($trashed == 'true')
         {
@@ -64,6 +67,9 @@ class Dispatcher extends BaseController
         {
             $collection->simpleSearch($q);
         }
+
+        if($filterField && $filterField!="" && $filterValue && $filterValue!="")
+            $collection->filterByField($filterField,$filterValue);
 
         $collection->orderBy($sort, $order);
 
