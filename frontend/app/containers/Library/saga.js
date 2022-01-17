@@ -217,7 +217,9 @@ export function* requestGetLibrariesListSaga(action = {}) {
   const options = {
     method: 'get',
     page: action.page ? action.page : '1',
-    query: action.query ? action.query : ''
+    query: action.query ? action.query : '',
+    filterBy: action.filterBy ? action.filterBy : '',
+    filterVal: action.filterBy ? action.filterVal : '',
   };
   try {
     const request = yield call(getLibrariesList, options);

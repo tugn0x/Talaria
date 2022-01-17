@@ -260,4 +260,8 @@ trait ModelTrait
 
         return $query->where($this->simpleSearchField, 'like', '%'. $q .'%');
     }
+
+    public function scopeFilterByField ($query,$field,$val) {
+        $query->where($field,'=',$val);
+    }
 }

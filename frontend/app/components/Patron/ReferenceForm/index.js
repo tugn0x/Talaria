@@ -93,7 +93,7 @@ const ReferenceForm = (props) => {
                         </>
                     || 
 
-                        (importReference &&
+                        /*(importReference &&*/
                         <>
                         {importReference && !importReference.id && <FindOA reference={importReference} /* findOA={findOA}*//>}                        
                         <ReferenceFormContent                                     
@@ -108,7 +108,7 @@ const ReferenceForm = (props) => {
                             onFound={(reference)=>onFoundReference(reference)}        
                             goToForm={()=>setGoTo(true)}         
                         />                            
-                        )
+                        //)
                     )                    
             }
         </>

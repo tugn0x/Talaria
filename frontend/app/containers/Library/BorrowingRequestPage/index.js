@@ -143,7 +143,7 @@ const BorrowingRequestPage = (props) => {
     const findLender = (options) => {
         console.log("findLender",options)        
         //todo dispatch (filtered by option, cat ...) ...
-        dispatch(requestGetLibrariesList())
+        dispatch(requestGetLibrariesList(1,null,'profile_type',2)) //filtered by lender only
     }
 
     return (

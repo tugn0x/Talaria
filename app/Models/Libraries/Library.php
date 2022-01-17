@@ -223,6 +223,15 @@ class Library extends BaseModel
         return $this->hasMany(Delivery::class);
     }
 
+    //filter only active (not suspended) libraries
+    public function scopeActive($query) {
+        return $query->where('status','=',1); 
+    }
+
+    public function scopeLender($query) {
+        return $query->where('profile_type','=',2); //1=borrow, 2=borrow+lender
+    }
+
     public function scopeNearTo($query, $latitude,$longitude,$max_range=null)
     {
         if($max_range && $max_range!="" && $max_range!=null)
