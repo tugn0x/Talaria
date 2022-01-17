@@ -28,6 +28,10 @@ class LendingDocdelRequestController extends ApiController
     { 
          $l=\App\Models\Libraries\Library::find($request->route()->parameters['library']);
          $libid = $request->route()->parameters['library']; 
+         $u=Auth::user();
+
+         if($u->can('manage',$l)||$u->can('lend',$l))
+         {
 
             if($request->has("all_lender"))
             {
@@ -54,8 +58,10 @@ class LendingDocdelRequestController extends ApiController
             if($request->has("tagIds"))
                  $this->model = $this->model->byTags($request->input("tagIds"));                                  
 
-        $collection = $this->nilde->index( $this->model , $request);                    
-        return $this->response->paginator($collection, new $this->transformer())->morph();
+            $collection = $this->nilde->index( $this->model , $request);                    
+            return $this->response->paginator($collection, new $this->transformer())->morph();
+        }
+        else  $this->response->errorUnauthorized(trans('apinilde::auth.unauthorized'));
     }
 
  
