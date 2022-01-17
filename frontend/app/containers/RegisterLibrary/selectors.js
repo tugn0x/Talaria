@@ -1,61 +1,59 @@
 import { createSelector } from 'reselect';
-import { initialState } from 'containers/Admin/reducer';
+import { initialState } from 'containers/RegisterLibrary/reducer';
 
 /**
- * 
+ * Library Registration Selectors
  */
 
-const selectAdminDomain = state => state.admin || initialState;
+const libraryRegDomain = state => state.libraryreg || initialState;
 
 const institutionsOptionListSelector = () => 
 createSelector(
-  selectAdminDomain,
+  libraryRegDomain,
   substate => (substate.institutionsOptionList)
 );
 
 const institutionsByTypeCountryOptionListSelector = () => 
 createSelector(
-  selectAdminDomain,
+  libraryRegDomain,
   substate => (substate.institutionsByTypeCountryOptionList)
 );
 
-
 const countriesOptionListSelector = () => 
 createSelector(
-  selectAdminDomain,
+  libraryRegDomain,
   substate => (substate.countriesOptionList)
 );
 
 const librarySubjectOptionListSelector = () => 
 createSelector(
-  selectAdminDomain,
+  libraryRegDomain,
   substate => (substate.librarySubjectOptionList)
 );
 
 const projectsOptionListSelector = () => 
 createSelector(
-  selectAdminDomain,
+  libraryRegDomain,
   substate => (substate.projectsOptionList)
 );
 
 const institutionsTypeOptionListSelector = () => 
 createSelector(
-  selectAdminDomain,
+  libraryRegDomain,
   substate => (substate.institutionsTypesOptionList)
 );
 
 const placesSelector = () => 
 createSelector(
-  selectAdminDomain,
+  libraryRegDomain,
   substate => (substate.places)
 );
 
 const libraryProjectsOptionListSelector = () => 
 createSelector(
-  selectAdminDomain,
+  libraryRegDomain,
   substate => (substate.libraryProjectsOptionList)
 );
 
-// export default makeSelectAdmin;
 export {  institutionsOptionListSelector, countriesOptionListSelector, librarySubjectOptionListSelector,projectsOptionListSelector, 
   institutionsTypeOptionListSelector, placesSelector, institutionsByTypeCountryOptionListSelector, libraryProjectsOptionListSelector };

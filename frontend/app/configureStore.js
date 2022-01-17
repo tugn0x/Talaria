@@ -12,6 +12,7 @@ import patronSaga from './containers/Patron/saga';
 import referenceSaga from './containers/Reference/saga';
 import adminSaga from './containers/Admin/saga';
 import librarySaga from './containers/Library/saga';
+import libraryregSaga from './containers/RegisterLibrary/saga'
 import OASearchReference from './containers/OASearchReference/saga'
 
 import appSaga from './containers/App/saga';
@@ -59,6 +60,7 @@ export default function configureStore(initialState = {}, history) {
   sagaMiddleware.run(referenceSaga);
   sagaMiddleware.run(adminSaga);
   sagaMiddleware.run(librarySaga);
+  sagaMiddleware.run(libraryregSaga);
   sagaMiddleware.run(appSaga);
   store.runSaga = sagaMiddleware.run;
   store.injectedReducers = {}; // Reducer registry

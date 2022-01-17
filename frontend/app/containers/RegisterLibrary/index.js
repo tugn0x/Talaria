@@ -7,25 +7,25 @@ import {institutionsOptionListSelector,
     countriesOptionListSelector, librarySubjectOptionListSelector, projectsOptionListSelector,institutionsTypeOptionListSelector,
     placesSelector, 
     institutionsByTypeCountryOptionListSelector, libraryProjectsOptionListSelector} from './selectors';
+
+    
 import wizardMessages from './messages'
 import globalMessages from 'utils/globalMessages';
-
 import {fields, totalSteps, setNewSteps} from './fields'
 import { requestGetInstitutionsOptionList, requestGetCountriesOptionList,
     requestLibrarySubjectOptionList, requestPostPublicLibrary, requestGetProjectsOptionList, requestGetInstitutionsByTypeByCountryOptionList,
-    requestGetInstitutionTypeOptionList, requestGetInstitutionCountry,requestGetlibraryProjectsOptionList } from "containers/Admin/actions"
+    requestGetInstitutionTypeOptionList, requestGetInstitutionCountry,requestGetlibraryProjectsOptionList } from "./actions"
 import './style.scss'
 import {Button,Row, Col} from 'reactstrap'
 import {useIntl} from 'react-intl'
 import {CustomForm, BasePage} from 'components'
-import {requestSearchPlacesByText} from '../Admin/actions';
+import {requestSearchPlacesByText} from './actions';
 
 const ILL_REQUEST_PAYMENT=(process.env.ILL_REQUEST_PAYMENT && process.env.ILL_REQUEST_PAYMENT=="true")?true:false;
 const LIBRARY_DIFFERENT_PROFILES = (process.env.LIBRARY_DIFFERENT_PROFILES && process.env.LIBRARY_DIFFERENT_PROFILES=="true")?true:false;
 
 const RegisterLibrary = (props) => {
     console.log('RegisterLibrary', props)
-
     const messages= {...wizardMessages,...globalMessages}
     
     let [institutionPresent, setInstitutionPresent] = useState(false)
@@ -49,7 +49,8 @@ const RegisterLibrary = (props) => {
         dispatch(requestGetCountriesOptionList())
         dispatch(requestGetInstitutionTypeOptionList())
         dispatch(requestGetlibraryProjectsOptionList())
-        dispatch(requestLibrarySubjectOptionList())
+        
+
         if (ILL_REQUEST_PAYMENT===false) //RSCVD
         {
             fields.ill_user_cost.hidden=true;
@@ -61,17 +62,19 @@ const RegisterLibrary = (props) => {
         }
         if (LIBRARY_DIFFERENT_PROFILES===false)
         {
-                setData({...data, "ill_user_cost": "0", "ill_cost": "0"})                
-                fields.volunteer_library_label.hidden = true;
-                fields.opac_label.hidden=false;
-                fields.opac.hidden=false;
-                fields.subject_label.hidden=false;
-                fields.subject_id.hidden=false;
-                fields.showfullProfile.hidden = true;                             
+            setData({...data, "ill_user_cost": "0", "ill_cost": "0"})                
+            fields.volunteer_library_label.hidden = true;
+            fields.opac_label.hidden=false;
+            fields.opac.hidden=false;
+            fields.subject_label.hidden=false;
+            fields.subject_id.hidden=false;
+            fields.showfullProfile.hidden = true;                             
         }
+
         //set profile
         setData({...data, 'profile_type': basicProfile?1:2})
 
+        //alert(JSON.stringify(props.countriesOptionList)) 
         //alert(JSON.stringify(fields.suggested_institution_name))
     },[])
 
@@ -160,6 +163,7 @@ const RegisterLibrary = (props) => {
             fields.subject_label.hidden=true;
     
             fields.showfullProfile.label=intl.formatMessage(wizardMessages.switchToFullProfile)
+            
         }
         else
         {            
@@ -172,6 +176,7 @@ const RegisterLibrary = (props) => {
             fields.subject_label.hidden=false;
             
             fields.showfullProfile.label=intl.formatMessage(wizardMessages.switchToBasicProfile)            
+            dispatch(requestLibrarySubjectOptionList())
         }
         //setData({...data, [field_name]: value})
     }
@@ -268,15 +273,14 @@ const RegisterLibrary = (props) => {
 
 const mapStateToProps = createStructuredSelector({
     institutionsOptionList: institutionsOptionListSelector(),
-    
     institutionsByTypeCountryOptionList: institutionsByTypeCountryOptionListSelector(),
-    
     libraryProjectsOptionList: libraryProjectsOptionListSelector(),
     countriesOptionList: countriesOptionListSelector(),
     librarySubjectOptionList: librarySubjectOptionListSelector(),
     projectsOptionList: projectsOptionListSelector(),
     institutionsTypesOptionList: institutionsTypeOptionListSelector(),
     places: placesSelector(),
+
   });
   
   function mapDispatchToProps(dispatch) {

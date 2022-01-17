@@ -46,7 +46,10 @@ function SignupForm(props) {
   }
 
   const handlePrivacyPolicty = (e) =>{
-    const value = e.target.checked ? formatDate() : ''
+    //const value = e.target.checked ? formatDate(new Date) : ''
+    var today = new Date();
+    const value = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
     setFormData({ ...formData,['privacy_policy_accepted']: value })
   }
 

@@ -30,7 +30,6 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_INSTITUTIONSTYPES_OPTIONLIST, REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
       REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS, REQUEST_GET_INSTITUTION_TYPE_LIST,
    REQUEST_POST_INSTITUTION, UPDATE_INSTITUTION,
-   REQUEST_GET_COUNTRIES_OPTIONLIST, REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS,
    REQUEST_LIBRARYSUBJECT_OPTIONLIST, REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS,
    REQUEST_SEARCH_PLACES_BY_TEXT,
    REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
@@ -157,28 +156,7 @@ export function requestPostPublicLibrary(request, message) {
   };
 }
 
-//search for a place in the map for the library registration
-export function requestSearchPlacesByText(search) {
-  return {
-    type: REQUEST_SEARCH_PLACES_BY_TEXT,
-    search
-  };
-}
 
-export function requestSearchPlacesByTextSuccess(result) {
-  return {
-    
-    type: REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
-    result
-  };
-}
-
-export function requestSearchPlacesByTextFail(error) {
-  return {
-    type: REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
-    error
-  };
-}
 
 export function requestGetLibraryListNearTo(pos) {
   return {
@@ -415,19 +393,6 @@ export function requestLibrarySubjectOptionListSuccess(result) {
   };
 }
 
-export function requestGetCountriesOptionList(request) {
-  return {
-    type: REQUEST_GET_COUNTRIES_OPTIONLIST,
-    request
-  };
-}
-
-export function requestGetCountriesOptionListSuccess(result) {
-  return {
-    type: REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS,
-    result
-  };
-}
 
 export function requestGetInstitutionTypeList(page) {
   console.log('requestGetInstitutionTypeList PASSO DA QUI?')

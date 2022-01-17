@@ -250,6 +250,7 @@
   "app.libraries.ill_referent_name": "Nome referente ",
   "app.libraries.alt_name": "Nome alternativo ",
   "app.libraries.dd_user_cost":"Costo per articolo",
+  "app.libraries.suggested_institution_name":"Nome istituto suggerito ",
 
   "app.references.labels": "Etichette",
   "app.references.labelAs": "Etichetta come",

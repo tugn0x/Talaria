@@ -8,6 +8,7 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
           REQUEST_GET_LIBRARY_TAGS_OPTIONLIST,
           REQUEST_APPLY_TAGS_TO_DDREQUESTS,
         REQUEST_REMOVE_DDREQUEST_TAG,
+        REQUEST_REMOVE_LENDINGDDREQUEST_TAG,
       REQUEST_POST_LIBRARY_TAG,
       REQUEST_UPDATE_LIBRARY_TAG,
       REQUEST_REMOVE_LIBRARY_TAG,
@@ -344,6 +345,24 @@ export function* requestRemoveTagToDDRequestsSaga (action) {
   }
 }
 
+export function* requestRemoveTagToLendingDDRequestsSaga (action) {
+  const options = {
+    method: 'delete',
+    id: action.id,
+    tagId: action.tagId,
+    library_id: action.library_id
+  };
+
+  
+  try {
+    const request = yield call(removeDDRequestTag, options);
+    yield put (requestLendingsList(action.library_id))
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 export function* requestPostLibraryTagSaga(action) {
   const options = {
     method: 'post',
@@ -658,6 +677,7 @@ export default function* librarySaga() {
   yield takeLatest(REQUEST_APPLY_LENDING_TAGS_TO_DDREQUESTS,requestApplyLendingTagsToDDRequests);
 
   yield takeLatest(REQUEST_REMOVE_DDREQUEST_TAG,requestRemoveTagToDDRequestsSaga);
+  yield takeLatest(REQUEST_REMOVE_LENDINGDDREQUEST_TAG, requestRemoveTagToLendingDDRequestsSaga)
   yield takeLatest(REQUEST_POST_LIBRARY_TAG,requestPostLibraryTagSaga);
   yield takeLatest(REQUEST_UPDATE_LIBRARY_TAG,requestUpdateLibraryTagSaga);
   yield takeLatest(REQUEST_REMOVE_LIBRARY_TAG,requestRemoveLibraryTagSaga);

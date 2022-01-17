@@ -15,6 +15,7 @@ import adminReducer from 'containers/Admin/reducer';
 import libraryReducer from 'containers/Library/reducer';
 import appReducer from 'containers/App/reducer';
 import OASearchReferenceReducer from 'containers/OASearchReference/reducer'
+import libregReducer from 'containers/RegisterLibrary/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -30,6 +31,7 @@ export default function createReducer(injectedReducers = {}) {
     oasearchreference: OASearchReferenceReducer,
     admin: adminReducer,
     library: libraryReducer,
+    libraryreg: libregReducer,
     app: appReducer,
     ...injectedReducers,
   });
