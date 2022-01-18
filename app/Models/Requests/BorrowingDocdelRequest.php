@@ -104,7 +104,8 @@ class BorrowingDocdelRequest extends DocdelRequest
     public function tags()
     {
         if($this->borrowinglibrary())
-            return $this->belongsToMany(Tag::class,"docdel_request_tag","docdel_request_id","tag_id")->inLibrary($this->borrowinglibrary()->first()->id);
+            //return $this->belongsToMany(Tag::class,"docdel_request_tag","docdel_request_id","tag_id")->inLibrary($this->borrowinglibrary()->first()->id);
+            return $this->belongsToMany(Tag::class,"docdel_request_tag","docdel_request_id","tag_id");
     }
     
     public function library()

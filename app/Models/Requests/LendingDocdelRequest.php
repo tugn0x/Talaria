@@ -44,7 +44,8 @@ class LendingDocdelRequest extends DocdelRequest
     {
         //filter by libraryid (in case only on lending request for your library and not for all_lender)
         //TODO: try to return empty list when all_lender=1        
-        return $this->belongsToMany(Tag::class,"docdel_request_tag","docdel_request_id","tag_id")->inLibrary($this->lendinglibrary? $this->lendinglibrary()->first()->id:null);                                
+        //return $this->belongsToMany(Tag::class,"docdel_request_tag","docdel_request_id","tag_id")->inLibrary($this->lendinglibrary? $this->lendinglibrary()->first()->id:null);                                
+        return $this->belongsToMany(Tag::class,"docdel_request_tag","docdel_request_id","tag_id");
     }
     
     public function library()
