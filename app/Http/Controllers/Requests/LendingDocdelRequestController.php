@@ -54,11 +54,13 @@ class LendingDocdelRequestController extends ApiController
                 
                 //$collection = $this->nilde->index( $this->model , $request);        
 
+            
+                if($request->has("tagIds"))
+                    $this->model = $this->model->byTags($request->input("tagIds"));                                  
+                
             }
-            if($request->has("tagIds"))
-                 $this->model = $this->model->byTags($request->input("tagIds"));                                  
 
-            $collection = $this->nilde->index( $this->model , $request);                    
+            $collection = $this->nilde->index( $this->model , $request);                                
             return $this->response->paginator($collection, new $this->transformer())->morph();
         }
         else  $this->response->errorUnauthorized(trans('apinilde::auth.unauthorized'));
