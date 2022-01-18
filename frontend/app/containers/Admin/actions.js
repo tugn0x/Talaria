@@ -31,6 +31,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
       REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS, REQUEST_GET_INSTITUTION_TYPE_LIST,
    REQUEST_POST_INSTITUTION, UPDATE_INSTITUTION,
    REQUEST_LIBRARYSUBJECT_OPTIONLIST, REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS,
+   REQUEST_GET_COUNTRIES_OPTIONLIST, REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS,
    REQUEST_SEARCH_PLACES_BY_TEXT,
    REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
    REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
@@ -377,6 +378,20 @@ export function requestGetInstitutionTypeOptionListSuccess(result) {
   };
 }
 
+
+export function requestGetCountriesOptionList(request) {
+  return {
+      type: REQUEST_GET_COUNTRIES_OPTIONLIST,
+      request
+    };
+  }
+  
+  export function requestGetCountriesOptionListSuccess(result) {
+    return {
+      type: REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS,
+      result
+    };
+  }
 
 
 export function requestLibrarySubjectOptionList(request) {
