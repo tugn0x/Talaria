@@ -32,6 +32,7 @@ export function* requestGetReferenceSaga(action) {
     }
   }
 
+//Find reference metadata by PMID  
 export function* requestOAReferenceByIdSaga(action) {
     const options = {
       method: 'get',
