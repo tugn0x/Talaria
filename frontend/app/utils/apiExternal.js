@@ -18,14 +18,22 @@ const FIND_ISSN_ACNP_URL='https://acnp.bo.it/....' //sample
 //Get PMID Metadata using OpenAccessButton API
 export const getOAReferenceByID = (options) => {
     const id=options.id
-    return request(`${OPENACCESSBUTTON_API_URL}/metadata?pmid=${id}`,  {method: 'get'})
+    return request(`${OPENACCESSBUTTON_API_URL}/metadata?id=${id}`,  {method: 'get'})
 };
 
 //Find OA and get metadata by DOI/PMID/Title
 export const getOA = (options) => {
+    console.log("API GETOA:",options.refData)
     let query=options.refData.title?'id='+options.refData.title:''; //3
 
-    if(options.refData.pmid) query='pmid='+options.refData.pmid; //2
+    if(options.refData.pmid) //2
+    {      
+      if(options.refData.pmid.toLowerCase().startsWith('pmc'))
+        query='id='+options.refData.pmid; 
+      else 
+        query='pmid='+options.refData.pmid;
+
+    }
     if(options.refData.doi) query='id='+options.refData.doi; //1
     
 

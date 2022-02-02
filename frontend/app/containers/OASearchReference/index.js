@@ -50,7 +50,7 @@ const findReferenceBySearchParams = (query) => {
         }    
         else {
             //try PMID
-            let pmid=query.match(/\b(\d{7,})\b/)
+            let pmid=query.match(/\b(PMC)?(\d{3,})\b/)
             if(pmid!=null)
             {
                 console.log("PMID MATCH!",pmid[0])
