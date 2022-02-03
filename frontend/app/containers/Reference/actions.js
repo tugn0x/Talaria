@@ -16,7 +16,7 @@ export function requestGetReference(id) {
     };
   }
   
-  
+  //Find reference metadata by PMID
   export function requestFindReferenceById(id) {
     return {
       type: REQUEST_FIND_REFERENCE_BY_ID,

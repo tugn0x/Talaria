@@ -15,8 +15,7 @@ const FIND_ISSN_ACNP_URL='https://acnp.bo.it/....' //sample
 
 
 
-//Get Metadata using OpenAccessButton API
-//ID can be doi,pmid,...
+//Get PMID Metadata using OpenAccessButton API
 export const getOAReferenceByID = (options) => {
     const id=options.id
     return request(`${OPENACCESSBUTTON_API_URL}/metadata?id=${id}`,  {method: 'get'})
@@ -24,13 +23,21 @@ export const getOAReferenceByID = (options) => {
 
 //Find OA and get metadata by DOI/PMID/Title
 export const getOA = (options) => {
-    let query=options.refData.title?options.refData.title:''; //3
+    console.log("API GETOA:",options.refData)
+    let query=options.refData.title?'id='+options.refData.title:''; //3
 
-    if(options.refData.pmid) query=options.refData.pmid; //2
-    if(options.refData.doi) query=options.refData.doi; //1
+    if(options.refData.pmid) //2
+    {      
+      if(options.refData.pmid.toLowerCase().startsWith('pmc'))
+        query='id='+options.refData.pmid; 
+      else 
+        query='pmid='+options.refData.pmid;
+
+    }
+    if(options.refData.doi) query='id='+options.refData.doi; //1
     
 
-    return request(`${OPENACCESSBUTTON_API_URL}/find?id=${query}`,  {method: 'get'})
+    return request(`${OPENACCESSBUTTON_API_URL}/find?${query}`,  {method: 'get'})
 };
 
 //Metadata using Pubmed API and PMID
