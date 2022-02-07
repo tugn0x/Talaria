@@ -32,12 +32,12 @@ const LendingPage = (props) => {
    
     const applyLendingTagsToDDRequests = (tagIds,reqIds) => { 
         dispatch(requestApplyLendingTagsToDDRequests(match.params.library_id,reqIds,[tagIds],intl.formatMessage({id:'app.containers.LendingPage.addedTagToRequest'})))
-        var tagexists = tagsOptionList.filter(function(item) {
-            return item.value == [tagIds];
-          });
+        // var tagexists = tagsOptionList.filter(function(item) {
+        //     return item.value == [tagIds];
+        //   });
 
-        if (Object.keys(tagexists).length == 0)
-            dispatch(requestLibraryTagsOptionList(match.params.library_id))
+        // if (Object.keys(tagexists).length == 0)
+        //     dispatch(requestLibraryTagsOptionList(match.params.library_id))
      }
     
      async function UpdateLendingRequestStatus (data) {
