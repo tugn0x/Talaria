@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import {useIntl} from 'react-intl';
+import {FormattedHTMLMessage, FormattedMessage, useIntl} from 'react-intl';
 import './style.scss';
 
 const BorrowingChooseLender = (props) => {
@@ -63,17 +63,29 @@ const BorrowingChooseLender = (props) => {
                     {(allselected || (lender && !allselected) ) && 
                     <div className="requestFieldsBlock">  
                         <div className="card">
-                            <div cclassNamelass="form-group">
+                            <div className="form-group">
                                 <label className="">Protocol nr.</label>
                                 <input placeholder="protocol" required="" type="text" class="form-control" value=""/>                                
-                            </div>                                        
+                            </div>
+
+                            <div class="form-group custom-checkbox custom-control">
+                                <input id="specialdelivery" type="checkbox" name="specialdelivery" class="custom-control-input" value="1"/>
+                                <label class="custom-control-label" for="specialdelivery">Special delivery method for blind people</label>
+                            </div>    
+                            <div class="form-group custom-checkbox custom-control">
+                                <input id="pdfeditorial" type="checkbox" name="pdfeditorial" class="custom-control-input" value="1"/>
+                                <label class="custom-control-label" for="pdfeditorial">Need PDF editorial version (not OA author version</label>
+                            </div>                         
+
                             <div className="form-group">
                                 <label className="">Note for lender</label>
                                 <textarea placeholder="note" required="" class="form-control" value=""/>                                
                             </div>                                        
-                            <span className="alert alert-primary">Copyright statement,Copyright statement, Copyright statement, Copyright statement, Copyright statement, Copyright statement.... </span>
+                            <span className="alert alert-primary copyrightstatement">                                
+                                <FormattedHTMLMessage id="app.requests.borrowingCopyrightStatement" defaultMessage="borrowingCopyrightStatement" />
+                            </span>
                         </div>
-                    </div>
+                    </div> 
                     }
                     <div className="sendTolenderButtons">                        
                         {allselected && <div className="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> Your request will be view by ALL libraries. <br/>Are you sure? If yes click on the button below, 

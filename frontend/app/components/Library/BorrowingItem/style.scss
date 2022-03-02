@@ -20,6 +20,12 @@
     display: block;
 }
 
+.unfilled_reason {    
+    display: block;
+    font-size: 0.85em;
+}
+
+
 .fullfilment {
     margin-top:5px;
     display: block;
@@ -60,7 +66,8 @@
     
     &.notReceived,
     &.canceled,
-    &.canceledDirect {
+    &.canceledDirect,
+    &.documentNotReady  {
         background-color: red;
     }
     

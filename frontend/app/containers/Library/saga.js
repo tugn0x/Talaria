@@ -294,7 +294,7 @@ export function* requestApplyTagsToDDRequestsSaga(action) {
     yield put (requestBorrowingsList(action.library_id))
     // Callback dopo il Crea nuova etichetta
     if(action.tagIds.some(tagId => typeof tagId === 'string' )){
-      yield call(requestLibraryTagsOptionListSaga(action))
+      yield call(requestLibraryTagsOptionListSaga,action)
     }
     yield call(() => toast.success(action.message)) 
   } catch(e) {
@@ -557,14 +557,21 @@ export function* requestChangeStatusBorrowingSaga(action) {
   }
 }
 
+//TODO: update code in order to pass extrafields to reducer/action (lending)
+//so we can use extrafields here!
+//extrafields was already managed by Laravel LendingDDRequest so all the fields specified
+//in extrafields will be updated correctly!
 export function* requestChangeStatusLendingSaga(action) {
   
   const options = {
     method: 'put',
-    body: {'status': action.status },
+    body: {
+      'status': action.status, 
+      'extrafields': {...action.extrafields},
+    }, 
     id: action.id,
     lending_library_id: action.lending_library_id
-  };
+  }; 
 
   try {
     const request = yield call(changeStatusLendingRequest, options);    

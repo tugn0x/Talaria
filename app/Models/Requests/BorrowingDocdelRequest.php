@@ -34,13 +34,14 @@ class BorrowingDocdelRequest extends DocdelRequest
         'operator_id',
         'user_license', //(NULL=non impostato, 0=can't send pdf to user, 1=ok can send pdf to user,2=not specified in the lic.)
         'user_cancel_date', //data rich canc da utente          
-
     ];
       
     protected static $observerClass=BorrowingDocdelRequestObserver::class;
 
     protected $statusField="borrowing_status";
     protected $table = 'docdel_requests';    
+
+    protected $constantFields=['fulfill_type'];
        
     public function __construct()
     {
@@ -252,6 +253,14 @@ class BorrowingDocdelRequest extends DocdelRequest
                             ]);                            
                         }
                         break;    
+                case 'documentReady': 
+                case 'documentNotReady': 
+                    if($this->borrowing_status=="fulfilled") {                        
+                        $others=array_merge($others,[
+                            'ready_date'=>Carbon::now()
+                        ]);                            
+                    }
+                    break;          
                 /*case 'forward': 
                     $others=array_merge($others,[
                         'forward'=>1,

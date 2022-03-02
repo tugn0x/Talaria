@@ -9,3 +9,14 @@
 .sendTolenderButtons {    
     margin: 20px 0 0 0;    
 }
+
+.copyrightstatement {
+    font-style: italic;
+    font-size: 0.8em;
+
+    & ul {        
+        li {
+            list-style: inside;
+        }
+    }
+}

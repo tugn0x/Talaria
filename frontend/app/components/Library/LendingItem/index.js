@@ -114,9 +114,10 @@ const LendingReferenceIcons = (props) => {
     const {data}=props;    
 
     return (
-        <div className="lending_reference_icons">               
-                <a className="btn btn-icon" onClick={()=>alert('TODO Check holding !')}><i className="fa fa-search-location"></i></a>                
-        </div>
+        !isArchived && 
+            <div className="lending_reference_icons">               
+                    <a className="btn btn-icon" onClick={()=>alert('TODO Check holding !')}><i className="fa fa-search-location"></i></a>                
+            </div>
     )
 }
 

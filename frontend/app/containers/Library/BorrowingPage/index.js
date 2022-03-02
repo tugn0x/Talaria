@@ -101,11 +101,12 @@ const BorrowingPage = (props) => {
             dispatch(requestForwardBorrowing(id,match.params.library_id,data,intl.formatMessage({id: "app.requests.forwardedMessage"}),filter))
      } 
 
+     //NOTE: typ=2 actually not used but implemented correctly
      async function askTrashRequest (id,typ,filter) {
         console.log("DISPATCH askTrashRequest",id);
         let msg=intl.formatMessage({id: "app.requests.askTrashRequestMessage"})
         
-        if(typ==2) //trashHC normal
+        if(typ==2) //trashHC
             msg=intl.formatMessage({id: "app.requests.askTrashHCRequestMessage"})
         
         let conf = await confirm({
@@ -150,6 +151,50 @@ const BorrowingPage = (props) => {
 
         dispatch(requestUpdateBorrowing(borrowingReq.id,match.params.library_id,newBorrowing,intl.formatMessage({id: "app.global.updatedMessage"}),filter))         
      }
+
+     async function setReceivedRequest (id,filter) {
+        console.log("DISPATCH setReceivedRequest",id);
+         let conf = await confirm({
+            title: intl.formatMessage({id: 'app.global.confirm'}),
+             message: intl.formatMessage({id: "app.requests.askReceivedRequestMessage"}),
+             confirmText: intl.formatMessage({id: 'app.global.yes'}),
+             cancelText: intl.formatMessage({id: 'app.global.no'})
+         }); //
+
+         if(conf)
+             dispatch(requestChangeStatusBorrowing(id,match.params.library_id,'documentReady',null,intl.formatMessage({id: "app.requests.setReceivedRequestMessage"}),filter))
+     } 
+
+     async function setNotReceivedRequest (id,filter) {
+        console.log("DISPATCH setNotReceivedRequest",id);
+         let conf = await confirm({
+            title: intl.formatMessage({id: 'app.global.confirm'}),
+             message: intl.formatMessage({id: "app.requests.askNotReceivedRequestMessage"}),
+             confirmText: intl.formatMessage({id: 'app.global.yes'}),
+             cancelText: intl.formatMessage({id: 'app.global.no'})
+         }); //
+
+         if(conf)
+             dispatch(requestChangeStatusBorrowing(id,match.params.library_id,'documentNotReady',null,intl.formatMessage({id: "app.requests.setNotReceivedRequestMessage"}),filter))
+     } 
+     async function savedAsDownloaded (id,filter) {
+        console.log("DISPATCH savedAsDownloaded",id);
+         let conf = await confirm({
+            title: intl.formatMessage({id: 'app.global.confirm'}),
+             message: intl.formatMessage({id: "app.requests.askDownloadedMessage"}),
+             confirmText: intl.formatMessage({id: 'app.global.yes'}),
+             cancelText: intl.formatMessage({id: 'app.global.no'})
+         }); //
+
+         let data={
+            id: id,
+            'download':1,
+         }
+
+         if(conf)
+             dispatch(requestUpdateBorrowing(id,match.params.library_id,data,intl.formatMessage({id: "app.requests.setDownloadedMessage"}),filter))         
+     } 
+     
           
     return (
         <>
@@ -183,6 +228,9 @@ const BorrowingPage = (props) => {
                 findISSNISBNcb={(id,data)=>findISSNISBNcb(id,data)}
                 findISSNISBNresults={findISSNISBNresults}
                 updateISSNISBNReference={updateISSNISBNReference}                
+                setNotReceivedRequest={setNotReceivedRequest}
+                setReceivedRequest={setReceivedRequest}
+                savedAsDownloaded={savedAsDownloaded}
             />
           </>  
     )
