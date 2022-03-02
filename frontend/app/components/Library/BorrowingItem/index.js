@@ -305,7 +305,7 @@ const BorrowingItem = (props) => {
                     checked={checked}
                 /> 
                 <div className="request_id">
-                <Link to={requesturl(editPath,data.id)} className="active">ID: <span>{data.id}</span></Link></div>
+                <Link to={requesturl(editPath,data.id)} className="active"><i class="fas fa-info-circle"></i> <span>{data.id}</span></Link></div>
                 <BorrowingStatus data={data} customClass="request_status"/>                 
                 {data.borrowing_notes && <div className="borrowing_notes">
                 <a href="#" id={`tooltip-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 

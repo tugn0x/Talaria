@@ -134,7 +134,7 @@ const LendingItem = (props) => {
                 /> 
               
               <div className="request_id">
-                        <Link to={requesturl(editPath,data.id)} className="active">ID: <span>{data.id}</span></Link>
+                        <Link to={requesturl(editPath,data.id)} className="active"><i class="fas fa-info-circle"></i> <span>{data.id}</span></Link>
                         </div>
                 <LendingStatus data={data} customClass="request_status"/>                 
                 {data.lending_notes && <div className="borrowing_notes">
