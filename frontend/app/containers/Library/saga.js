@@ -321,7 +321,7 @@ export function* requestApplyLendingTagsToDDRequests(action) {
     yield put (requestLendingsList(action.library_id))
     // Callback dopo il Crea nuova etichetta
     if(action.tagIds.some(tagId => typeof tagId === 'string' )){
-      yield call(requestLibraryTagsOptionListSaga(action))
+      yield call(requestLibraryTagsOptionListSaga,action)
     }
     yield call(() => toast.success(action.message)) 
   } catch(e) {
