@@ -26,22 +26,26 @@ class DocdelRequest extends BaseModel
         'request_note', //dd_note_richforni
         'on_cost', //dd_costofn
         'fulfill_date', //dd_dataeva
-        'fulfill_protnr', //dd_nproteva
+        'fulfill_protnr', //dd_nproteva borrow
         'fulfill_location', //dd_collocazione (ricavata da ACNP)
         'fulfill_note', //dd_note_fornirich       
-        'fullfill_type',    //tipo evasione (=SentiVia/DeliveryMethod ISO18626: ArticleExchange,Ariel,Email,Mail,Odyssey,URL,FTP) + file + url?
-	    'notfullfill_type', //tipo inevasione (prendere da NILDE global_const $DDILL_INEVASO_xxx + "fornitore non disp" + "altro" (con descrizione in borr_notes) )        
+        'fulfill_type',    //tipo evasione (=SentiVia/DeliveryMethod ISO18626: ArticleExchange,Ariel,Email,Mail,Odyssey,URL,FTP) + file + url?
+	    'notfulfill_type', //tipo inevasione (prendere da NILDE global_const $DDILL_INEVASO_xxx + "fornitore non disp" + "altro" (con descrizione in borr_notes) )        
         'filename',
         'file_status', //Stato del file se inviato in NILDE: 0-non disponibile; 1-disponibile; 2-disponibile con HC
-        'file_download', // 	Indicatore di avvenuta stampa del file se inviato in NILDE: 0-Non Stampato; 1-Stampato
         'cancel_request_date', //data richiesta annullamento alla lender
         'cancel_date', //data accettazione richiesta annullamento da lender
         'fulfill_inventorynr', //dd_ninventario_forni        
-        'all_lender', //0=no, 1=all lending library will see this request, 2=some lending libraries will see this request
+        'all_lender', //0=no, 1=all lending library will see this request, 2=some lending libraries will see this request        
+        'url',        
+        //patron_file
+        //patron_file_status
+        //patron_file_download
+        //pdf_editorial
+        //special_delivery (x blind)
 
         
         //TODO
-        //'delivery_format', //diverso da fullfill_type? formato di invio del della biblioF alla biblioR        
         //'request_protocol', //0: NILDE, 1: ISO18626 .. (se impostato a 1 avro' dati rich ISO in altra tabella)
         
 

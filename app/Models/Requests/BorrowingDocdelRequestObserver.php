@@ -41,6 +41,9 @@ class BorrowingDocdelRequestObserver extends BaseObserver
                 $userid = auth()->user()->id;
                 $model->operator_id=$userid;
             }
+            
+        if($model->isDirty('download'))
+            $model->download_date=Carbon::now();
 
         return parent::saving($model);
 

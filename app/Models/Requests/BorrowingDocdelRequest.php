@@ -24,6 +24,8 @@ class BorrowingDocdelRequest extends DocdelRequest
         'accept_cost_status', //Stato accettazione utente dopo richiesta: 1=Biblio richiede accettazione, 2=Ute accetta, 3=Ute non accetta
         'accept_cost_date', //quando ha accettato/rifiutato il costo                
         'ready_date', //the document is available for download or is just arrived from mail
+        'download', //file/url downloaded
+        'download_date', //file/url downloaded date
         'forward_date', //date in which i decided to forward the req
         'trash_date', //data cestinamento
         'trash_type', //tipo cestinamento (trash=1,trashHC=2)
@@ -215,7 +217,13 @@ class BorrowingDocdelRequest extends DocdelRequest
                         else //borrow vuole cancellare=>reset richiesta come nuova (caso 6a)
                         {
                             $newstatus="newrequest";  
-                            $others=array_merge($others,['request_date'=>null,'lending_status'=>null,'all_lender'=>0,'lending_library_id'=>null]);                
+                            $others=array_merge($others,[                                
+                                'lending_library_id'=>null,
+                                'all_lender'=>0,
+                                'lending_status'=>null, 
+                                'request_date'=>null,                                
+                                'request_note'=>'', 
+                            ]);                
                             return $this->changeStatus($newstatus,$others);  
                         }
                     }
@@ -249,7 +257,9 @@ class BorrowingDocdelRequest extends DocdelRequest
                             $others=array_merge($others,[
                                 'lending_library_id'=>null,
                                 'all_lender'=>0,
-                                'lending_status'=>'',                                
+                                'lending_status'=>null, 
+                                'request_date'=>null,                                
+                                'request_note'=>'',                                
                             ]);                            
                         }
                         break;    

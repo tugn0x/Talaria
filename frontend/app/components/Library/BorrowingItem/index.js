@@ -97,6 +97,9 @@ const statusDate = (req) => {
         {req.forward==1 && req.forward_date && 
             <span className="status-date"><i className="fas fa-redo"></i> {formatDateTime(req.forward_date)}</span>            
         }
+        {req.download==1 && req.download_date && 
+            <span className="status-date"><i className="fas fa-download"></i> {formatDateTime(req.download_date)}</span>            
+        }
       </>
   )
 }
@@ -228,12 +231,12 @@ export const BorrowingStatus = (props) => {
         <div className={"borrowing_status " + (customClass?customClass:'')}>            
             <span className={statusIcon(data.borrowing_status)}></span> 
             <span className="status-text">{data.borrowing_status ? intl.formatMessage({id: "app.requests."+data.borrowing_status}):'xxx'} <span className="fulfill_type">{deliveryMethod(data)}</span></span>                    
+            {data.operator && <div className="status-operator">
+                <i className="simple_icon fas fa-user-cog"></i> { data.operator.data.full_name}
+            </div>}
             <span className="unfilled_reason">{unfilledReason(data)}</span>
             {statusDate(data)}
-            {isTrashed(data) && <span className="status-date"><i className="fas fa-trash text-danger"></i> {data.trash_date}</span>}                   
-            {data.operator && <div className="status-operator">
-                <i className="fas fa-user-cog"></i> { data.operator.data.full_name}
-            </div>}
+            {isTrashed(data) && <span className="status-date"><i className="fas fa-trash text-danger"></i> {data.trash_date}</span>}                               
         </div>
     )
 }
