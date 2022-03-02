@@ -156,11 +156,20 @@ return [
                     //but it will not change TO this state cause is instead the lender that change directly borrowing_status field without doing a borrow->changeStatus
                     'fulfilled'	=> [
                         'role'  =>  [],//borrow?,
-                        'next_statuses'  =>  ['documentReady'], 
+                        'next_statuses'  =>  ['documentReady','documentNotReady'], 
                         'constraints'   =>  ["canManage"],                                                   
                     ],
                     //todo
                     'documentReady'	=> [ 
+                        'role'  =>  [],//borrow?,
+                        'next_statuses'  =>  [''], 
+                        'constraints'   =>  ["canManage"],  
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',                                                        
+                        ],                          
+                    ],
+                    //todo
+                    'documentNotReady'	=> [ 
                         'role'  =>  [],//borrow?,
                         'next_statuses'  =>  [''], 
                         'constraints'   =>  ["canManage"],  

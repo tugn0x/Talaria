@@ -187,7 +187,7 @@ trait RolesAbilitiesPermissionsTrait
 
 //    public function syncMacroAbilities($resources) {
 //        $abilities = [];
-//        foreach(config('nilde.morphmap') as $alias => $class) {
+//        foreach(config('constants.morphmap') as $alias => $class) {
 //            $resources = $this->permissions()
 //                ->select('abilities.entity_id','abilities.entity_type','abilities.name')
 //                ->where('abilities.entity_type', $class)
@@ -196,7 +196,7 @@ trait RolesAbilitiesPermissionsTrait
 //                ->get();
 //        }
 //        foreach ($resources as $class => $items) {
-//            $class = config('nilde.morphmap.'.$class);
+//            $class = config('constants.morphmap.'.$class);
 //            $abilities[$class] = [];
 //            foreach ($items as $item) {
 //                foreach ($item['permissions'] as $permission) {

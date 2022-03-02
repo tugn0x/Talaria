@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
-        Relation::morphmap(config('nilde.morphmap'));
+        Relation::morphmap(config('constants.morphmap'));
 
         $this->app->bind(
             Illuminate\Notifications\Channels\DatabaseChannel::class,
@@ -64,7 +64,7 @@ class AppServiceProvider extends ServiceProvider
         /*
          * Adding relation morphmap aliases
          */
-        Relation::morphMap(config('nilde.morphmap'));
+        Relation::morphMap(config('constants.morphmap'));
 
     }
 }

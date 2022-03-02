@@ -1,6 +1,14 @@
 <?php
 
 return [
+    'morphmap' => [
+        //        'libraries'     => 'App\Models\Libraries\Library',
+        //        'institutions'  => 'App\Models\Institutions\Institution',
+        //        'projects'      => 'App\Models\Projects\Project',
+        //        'consortia'     => 'App\Models\Institutions\Consortium',
+        
+        //        'users'         => 'App\Models\Users\User',
+    ],
     'status' => [
         'enabled'=>1,
         'disabled'=>0
@@ -68,7 +76,14 @@ return [
         'notfreerlyavail'=>6,
         'wrongmetadata'=>7,
         'baddocument'=>8
-
-    ]    
+    ],
+    'borrowingdocdelrequest_fulfill_type'     => [
+        'SED'=>1,
+        'Mail'=>2,
+        'Fax'=>3,
+        'URL'=>4,
+        'ArticleExchange'=>5,
+        'Other'=>6,
+    ]
 
 ];
