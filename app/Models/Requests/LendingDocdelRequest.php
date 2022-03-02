@@ -51,6 +51,10 @@ class LendingDocdelRequest extends DocdelRequest
         //if($this->lendinglibrary)
         //    return $this->belongsToMany(Tag::class,"docdel_request_tag","docdel_request_id","tag_id")->inLibrary($this->lendinglibrary()->first()->id);                                        
         
+
+        //ATTENZIONE: questa fornisce anche i tag creati dal borrow, quindi bisogna filtrare x biblio =>
+        //pero' restituendo dei tag che appartengono a una biblio diversa ritorna lista vuota
+        //quindi forse bisogna fare una condizione diversa!
         //filter only lending tag
         return $this->belongsToMany(Tag::class,"docdel_request_tag","docdel_request_id","tag_id")->inLibrary($this->lendinglibrary? $this->lendinglibrary()->first()->id:null);                                
     }
@@ -95,9 +99,18 @@ class LendingDocdelRequest extends DocdelRequest
                 break;  
 
             case 'copyCompleted': 
+                $bstatus='fulfilled';
+
+                //Particular cases
+                if($this->fulfill_type==1 && !env('USE_HARDCOPY',false) ) //File && HC disabled
+                    $bstatus='documentReady';
+
+                else if($this->fulfill_type==4) //URL
+                    $bstatus='documentReady';
+
                 $others=array_merge($others,[
                     'fulfill_date'=>Carbon::now(),
-                    'borrowing_status'=>'fulfilled',
+                    'borrowing_status'=>$bstatus,
                     'lending_archived'=>1,
                 ]);
                 break;  
