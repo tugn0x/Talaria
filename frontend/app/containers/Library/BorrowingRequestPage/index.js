@@ -130,14 +130,10 @@ const BorrowingRequestPage = (props) => {
         }
     }
 
-    const sendRequestToLender = (lender,filter) => {
-        console.log("sendRequestToLender",lender)
-        let lid=lender[0]; //DEBUG:prendo solo il primo !!
+    const sendRequestToLender = (requestfields,filter) => {
         
-        let extrafields={            
-                'lending_library_id': lid            
-        }
-        dispatch(requestChangeStatusBorrowing(params.id,match.params.library_id,'requested',extrafields,intl.formatMessage({id: "app.requests.requestedMessage"}),filter))    
+        console.log("CALL sendRequestToLender",requestfields)
+        dispatch(requestChangeStatusBorrowing(params.id,match.params.library_id,'requested',requestfields,intl.formatMessage({id: "app.requests.requestedMessage"}),filter))    
     }
 
     const findLender = (options) => {

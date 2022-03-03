@@ -1,5 +1,9 @@
 import React,{useState,useEffect} from 'react';
-import {FormattedHTMLMessage, FormattedMessage, useIntl} from 'react-intl';
+import {FormattedHTMLMessage, useIntl} from 'react-intl';
+import {Card, Form as FormContainer, FormGroup, Button} from 'reactstrap';
+import CustomCheckBox from '../../Form/CustomCheckBox';
+import Input from '../../Form/Input';
+
 import './style.scss';
 
 const BorrowingChooseLender = (props) => {
@@ -10,15 +14,47 @@ const BorrowingChooseLender = (props) => {
 
     const [allselected,setAllSelected]=useState(false);
 
-    const [lender,setLender]=useState(null)
+    //const [lender,setLender]=useState(null)
 
+    const [formData,setFormData]=useState({
+        request_protnr:'',
+        special_delivery: 0,
+        pdf_editorial:0,
+        lending_library_id: null
+    });
 
-    const sendRequestToLender=()=>{
-        let lenderArr=lender;
+    const handleChange = (value, field_name) =>{
+        setFormData({ ...formData, [field_name]: value});        
+    } 
+
+    const setLender = (lender) => {
+        //set it as array or 0 (=all lender)
+
+        let lenderArr=lender;        
         
         if(lenderArr && lenderArr>0 && !Array.isArray(lenderArr)) //unique lender
-            lenderArr=[lender];          
-        selectLenderCb(lenderArr)//set it as array or 0 (=all lender)
+            lenderArr=[lender];  
+        
+        setFormData({ ...formData, lending_library_id: lenderArr[0]}) //ATTUALMENTE PRENDO SOLO 1 BIBLIO   
+    }
+
+
+    const onSubmit=(e)=>{     
+                
+            e.preventDefault();
+            /*const form = e.target;
+            if (form.checkValidity() === false) {
+                console.log("Dont Send Form")
+                const errorTarget = document.querySelectorAll('.was-validated .form-control:invalid')[0]
+                scrollTo(errorTarget.offsetParent, true)
+                
+                return
+            } else {
+                // Tutto ok invia Form!
+                selectLenderCb(formData)
+                console.log("Send Form", formData)
+            }*/
+            selectLenderCb(formData)
     }
 
     const onChangeLibraryList=(v)=>{
@@ -60,42 +96,59 @@ const BorrowingChooseLender = (props) => {
                             <li key={lib.id}><input name="lender" type="radio" value={lib.id} onChange={e=>onChangeLibraryList(e.target.value)} />{lib.name}</li>    
                         )}                                        
                     </ul>                    
-                    {(allselected || (lender && !allselected) ) && 
+                    {(allselected || (formData.lending_library_id && !allselected) ) && 
                     <div className="requestFieldsBlock">  
-                        <div className="card">
-                            <div className="form-group">
-                                <label className="">Protocol nr.</label>
-                                <input placeholder="protocol" required="" type="text" class="form-control" value=""/>                                
-                            </div>
-
-                            <div class="form-group custom-checkbox custom-control">
-                                <input id="specialdelivery" type="checkbox" name="specialdelivery" class="custom-control-input" value="1"/>
-                                <label class="custom-control-label" for="specialdelivery">Special delivery method for blind people</label>
-                            </div>    
-                            <div class="form-group custom-checkbox custom-control">
-                                <input id="pdfeditorial" type="checkbox" name="pdfeditorial" class="custom-control-input" value="1"/>
-                                <label class="custom-control-label" for="pdfeditorial">Need PDF editorial version (not OA author version</label>
-                            </div>                         
-
-                            <div className="form-group">
-                                <label className="">Note for lender</label>
-                                <textarea placeholder="note" required="" class="form-control" value=""/>                                
-                            </div>                                        
-                            <span className="alert alert-primary copyrightstatement">                                
-                                <FormattedHTMLMessage id="app.requests.borrowingCopyrightStatement" defaultMessage="borrowingCopyrightStatement" />
-                            </span>
-                        </div>
-                    </div> 
-                    }
-                    <div className="sendTolenderButtons">                        
-                        {allselected && <div className="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> Your request will be view by ALL libraries. <br/>Are you sure? If yes click on the button below, 
-                                <strong>otherwise please select a single library</strong></div>                                
-                        }       
-                        {allselected && 
-                            <button className="btn btn-warning" onClick={()=>sendRequestToLender()}>Send request to ALL libraries</button>
-                        }
-                        {lender && !allselected && <button className="btn btn-primary" onClick={()=>sendRequestToLender()}>Send request to selected library</button>}
-                    </div>
+                        <FormContainer onSubmit={onSubmit} className="was-validated" noValidate>                
+                        <Card>
+                                <FormGroup >
+                                    <Input 
+                                        label={intl.formatMessage({id: "app.requests.request_protnr"})}
+                                        handleChange={(value) => handleChange(value, 'request_protnr')}
+                                        required={false}
+                                        input={formData.request_protnr ? formData.request_protnr : ""}
+                                    />
+                                </FormGroup>
+                                <FormGroup >
+                                    <CustomCheckBox
+                                        label={intl.formatMessage({id: "app.requests.special_delivery"})} 
+                                        checked={formData.special_delivery === 1 ? true : false}
+                                        handleChange={(e) =>  handleChange(e.target.checked?1:0, 'special_delivery')}
+                                    />
+                                </FormGroup>
+                                <FormGroup >
+                                    <CustomCheckBox
+                                        label={intl.formatMessage({id: "app.requests.pdf_editorial"})} 
+                                        checked={formData.pdf_editorial === 1 ? true : false}
+                                        handleChange={(e) =>  handleChange(e.target.checked?1:0, 'pdf_editorial')}
+                                    />
+                                </FormGroup>                            
+                                <FormGroup>
+                                    <Input 
+                                        label={intl.formatMessage({id: "app.requests.request_note"})}
+                                        handleChange={(value) => handleChange(value, 'request_note')}
+                                        input={formData.request_note ? formData.request_note : ""}
+                                        type="textarea"
+                                        required={false}
+                                    />
+                                </FormGroup>
+                                <div className="alert alert-primary copyrightstatement">                                                
+                                            <FormattedHTMLMessage id="app.requests.borrowingCopyrightStatement" defaultMessage="borrowingCopyrightStatement" />
+                                </div>                                
+                                {allselected && 
+                                    <div className="alert alert-warning">
+                                        <i class="fas fa-exclamation-triangle"></i> 
+                                        <FormattedHTMLMessage id="app.requests.sendToAllLibrariesWarning"/>
+                                    </div>                                
+                                }                                                                               
+                                <div className="d-flex justify-content-between sendTolenderButtons">                                        
+                                    <Button type="submit" className="mt-0" color="warning">
+                                        {intl.formatMessage({id:"app.requests.sendRequest"})}
+                                    </Button>                         
+                                </div>
+                        </Card>
+                        </FormContainer>
+                    </div>                     
+                    }                    
                 </>}
             </div>
     );

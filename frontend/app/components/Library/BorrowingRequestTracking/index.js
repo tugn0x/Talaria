@@ -45,10 +45,10 @@ const BorrowingTrackingItem = (props) => {
                         {data.id}
                     </Link>}
                     {!requestDetailPath && <>{data.id}</>}
-                </span>&nbsp;-&nbsp; 
+                </span>
 
-                {data.lendingLibrary && <span className="library"> {data.lendingLibrary.data.name}</span>}
-                {data.all_lender==1 && <span className="library">{intl.formatMessage({id:'app.global.alllibraries'})}</span>}                                
+                {data.lendingLibrary && <span className="library">&nbsp;-&nbsp; {data.lendingLibrary.data.name}</span>}
+                {data.all_lender==1 && <span className="library">&nbsp;-&nbsp; {intl.formatMessage({id:'app.global.alllibraries'})}</span>}                                
                 <BorrowingStatus data={data} customClass="request_status"/>                                 
             </div>
             <div className="itemData">

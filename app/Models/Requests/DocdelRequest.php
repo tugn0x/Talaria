@@ -40,9 +40,7 @@ class DocdelRequest extends BaseModel
         'url',        
         //patron_file
         //patron_file_status
-        //patron_file_download
-        //pdf_editorial
-        //special_delivery (x blind)
+        //patron_file_download      
 
         
         //TODO
