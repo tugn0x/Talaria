@@ -12,8 +12,8 @@ const BorrowingDetail = (props) => {
 
     return (<div className="borrowingDetail">
                 <RequestTags data={data.tags.data} /> 
-                <BorrowingRequestTracking requestDetailPath={requestDetailPath} reqdata={data} customClass="detail-body"/>
-                <ReferenceDetailContent reference={data.reference.data} customClass="detail-body"/>                                
+                <BorrowingRequestTracking requestDetailPath={requestDetailPath} reqdata={data} customClass="detail-body"/>                
+                <ReferenceDetailContent reference={data.reference.data} customClass="detail-body" canCollapse={true} collapsed={true}/>                                
                 <BorrowingRequestOperations data={data} sendRequestToLender={sendRequestToLender} findLender={findLender} lendersList={lendersList}/>
             </div>
     );

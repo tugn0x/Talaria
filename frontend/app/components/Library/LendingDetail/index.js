@@ -22,7 +22,7 @@ const LendingDetail = (props) => {
                         <LendingStatus data={data}/>
                     </div>  
                 </div>  
-                <ReferenceDetailContent reference={data.reference.data} customClass="detail-body"/>                                
+                <ReferenceDetailContent reference={data.reference.data} customClass="detail-body" canCollapse={true} collapsed={true}/>                                
                 {(data.lending_status==='willSupply'||data.lending_status==='requestReceived') &&               
                 <FulfillLendingRequest FulfillLendingRequestStatus={FulfillLendingRequestStatus} unFulfillLendingRequestStatus={unFulfillLendingRequestStatus} data={data} customClass="detail-body"/>}
 

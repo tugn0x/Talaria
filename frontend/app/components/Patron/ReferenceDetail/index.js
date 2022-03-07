@@ -21,7 +21,7 @@ const ReferenceDetail = props => {
             }
             <FindOA reference={reference}/>
             <ReferenceTags data={reference}/>                            
-            <ReferenceDetailContent reference={reference} customClass="detail-body"/>
+            <ReferenceDetailContent canCollapse={false} collapsed={false} reference={reference} customClass="detail-body"/>
             
         </>
     );

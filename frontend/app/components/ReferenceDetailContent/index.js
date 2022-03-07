@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Card, Row, Col} from 'reactstrap';
 import {useIntl} from 'react-intl';
+import { Link } from 'react-router-dom';
 import './style.scss';
+
+import ReferenceCitation from '../ReferenceCitation';
 
 const renderMaterialType = (typ) => {
     const intl=useIntl();
@@ -20,11 +23,23 @@ const renderMaterialType = (typ) => {
 
 const ReferenceDetailContent = props => {
     console.log('ReferenceDetailContent', props)
-    const {reference,customClass} = props
-    const intl = useIntl()
+    const {reference,customClass,canCollapse=false,collapsed=false} = props
+    const intl = useIntl()  
 
-return (
-    <div className={customClass}>                
+    const [showRef,setShowRef]=useState(canCollapse?!collapsed:true)  
+
+
+return (    
+<>
+
+{canCollapse &&  
+<Card>
+    <ReferenceCitation data={reference}/>
+    <Link className="toggle-ref-link" onClick={()=>setShowRef(!showRef)}>
+        <i className={`fas ${showRef?'fa-toggle-on':'fa-toggle-off'}`}></i> 
+    </Link>
+</Card>}
+{showRef && <div id="refID" className={customClass}>                
                     <h3>{intl.formatMessage({id: "app.references.materialTypeHead"})}</h3>
                     <Card>
                         <Row>
@@ -221,8 +236,8 @@ return (
                             }
                         </Col>
                         </Row>*/}                    
-    </div>
-
+    </div>}
+</>
 )
 
 }
