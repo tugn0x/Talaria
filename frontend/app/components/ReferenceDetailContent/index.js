@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Card, Row, Col} from 'reactstrap';
 import {useIntl} from 'react-intl';
-import { Link } from 'react-router-dom';
 import './style.scss';
 
 import ReferenceCitation from '../ReferenceCitation';
@@ -35,9 +34,9 @@ return (
 {canCollapse &&  
 <Card>
     <ReferenceCitation data={reference}/>
-    <Link className="toggle-ref-link" onClick={()=>setShowRef(!showRef)}>
+    <a className="toggle-ref-link" onClick={()=>setShowRef(!showRef)}>
         <i className={`fas ${showRef?'fa-toggle-on':'fa-toggle-off'}`}></i> 
-    </Link>
+    </a>
 </Card>}
 {showRef && <div id="refID" className={customClass}>                
                     <h3>{intl.formatMessage({id: "app.references.materialTypeHead"})}</h3>
