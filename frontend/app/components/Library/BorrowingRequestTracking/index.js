@@ -40,11 +40,13 @@ const BorrowingTrackingItem = (props) => {
         <div className="borrowingRequest">
             <div className="itemHeader">                
                 {data.lendingLibrary && <i className="fas fa-share"></i>}                
-                <span className="id"><span className="label"><i class="fas fa-info-circle"></i> </span> 
+                <span className="id">
                     {requestDetailPath && <Link className="requestLink" replace to={`${requestURL(data.id)}`}>                                    
+                        <span className="label"><i class="fas fa-info-circle"></i> </span> 
                         {data.id}
                     </Link>}
-                    {!requestDetailPath && <>{data.id}</>}
+                    {!requestDetailPath && <><span className="label"><i class="fas fa-info-circle"></i> </span> 
+                        {data.id}</>}
                 </span>
 
                 {data.lendingLibrary && <span className="library">&nbsp;-&nbsp; {data.lendingLibrary.data.name}</span>}

@@ -8,14 +8,10 @@
     & .itemData {
         display: block;
     }
-    
-    span {
-        margin-right: 5px;
-    }
-    
+        
     span span.label {
         font-weight: bold;        
-        margin: 5px;
+        margin-left: 5px;
     }
 
     & .borrowingRequest {
