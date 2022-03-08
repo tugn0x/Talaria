@@ -71,7 +71,7 @@ const BorrowingPage = (props) => {
          //console.log("findISSNISBNcb:",data)
          dispatch(requestFindISSNISBN(data))
      }
-
+ 
      async function askCancelRequest (id,filter) {
         console.log("DISPATCH askCancelRequest",id);
          let conf = await confirm({
@@ -83,6 +83,21 @@ const BorrowingPage = (props) => {
          if(conf)
              dispatch(requestChangeStatusBorrowing(id,match.params.library_id,'canceled',null,intl.formatMessage({id: "app.requests.cancelAskedMessage"}),filter))
      } 
+
+     //same as askCancelRequest but change success message
+     async function deleteRequest (id,filter) {
+        console.log("DISPATCH deleteRequest",id);
+         let conf = await confirm({
+            title: intl.formatMessage({id: 'app.global.confirm'}),
+             message: intl.formatMessage({id: "app.requests.askDeleteRequestMessage"}),
+             confirmText: intl.formatMessage({id: 'app.global.yes'}),
+             cancelText: intl.formatMessage({id: 'app.global.no'})
+         }); //
+         if(conf)
+             dispatch(requestChangeStatusBorrowing(id,match.params.library_id,'canceled',null,intl.formatMessage({id: "app.requests.deletedMessage"}),filter))
+     } 
+
+     
      async function forwardRequest (id,filter) {
         console.log("DISPATCH forwardRequest",id);
          let conf = await confirm({
@@ -139,6 +154,19 @@ const BorrowingPage = (props) => {
          if(conf)
              dispatch(requestUpdateBorrowing(id,match.params.library_id,data,intl.formatMessage({id: "app.requests.archivedMessage"}),filter))
      } 
+
+     async function askArchiveRequestAsNotReceived (id,filter) {
+        console.log("DISPATCH askArchiveRequestAsNotReceived",id);
+         let conf = await confirm({
+            title: intl.formatMessage({id: 'app.global.confirm'}),
+             message: intl.formatMessage({id: "app.requests.askArchiveRequestAsNotReceivedMessage"}),
+             confirmText: intl.formatMessage({id: 'app.global.yes'}),
+             cancelText: intl.formatMessage({id: 'app.global.no'})
+         }); //
+         if(conf)             
+             dispatch(requestChangeStatusBorrowing(id,match.params.library_id,'notReceived',null,intl.formatMessage({id: "app.requests.archivedMessage"}),filter))
+     } 
+     
 
      const updateISSNISBNReference=(refdata,borrowingReq,filter)=>{
         let newBorrowing={
@@ -219,9 +247,11 @@ const BorrowingPage = (props) => {
                 removeTagFromRequest={archive==1?undefined:removeTagFromDDRequest}                
                 //deleteReference={deleteReference}
                 askCancelRequest={askCancelRequest}
+                deleteRequest={deleteRequest}
                 forwardRequest={forwardRequest}
                 askTrashRequest={askTrashRequest}
                 askArchiveRequest={askArchiveRequest}
+                askArchiveRequestAsNotReceived={askArchiveRequestAsNotReceived}
                 applyTags={archive==1?undefined:applyTagsToDDRequests}
                 findAndUpdateOABorrowingReference={findAndUpdateOABorrowingReference}
                 oaloading={oaloading}

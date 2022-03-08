@@ -21,7 +21,7 @@ import FindISSNISBN from '../../FindISSNISBN';
 
 const BorrowingsList = (props) => {
     console.log('BorrowingsList', props)
-    const { editPath,loading, data, pagination, searchOptions, tagsOptionList, removeTagFromRequest,applyTags,deleteReference,findAndUpdateOABorrowingReference,oaloading,forwardRequest,askTrashRequest,askCancelRequest,askArchiveRequest,findISSNISBNcb,findISSNISBNresults,updateISSNISBNReference,setReceivedRequest,setNotReceivedRequest,savedAsDownloaded} = props
+    const { editPath,loading, data, pagination, searchOptions, tagsOptionList, removeTagFromRequest,applyTags,deleteReference,findAndUpdateOABorrowingReference,oaloading,forwardRequest,askTrashRequest,askCancelRequest,askArchiveRequest,askArchiveRequestAsNotReceived,findISSNISBNcb,findISSNISBNresults,updateISSNISBNReference,setReceivedRequest,setNotReceivedRequest,savedAsDownloaded,deleteRequest} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)
@@ -245,6 +245,8 @@ const BorrowingsList = (props) => {
                                     askTrashRequest={(typ)=>askTrashRequest(req.id,typ,multiFilter)}
                                     askCancelRequest={()=>askCancelRequest(req.id,multiFilter)}
                                     askArchiveRequest={()=>askArchiveRequest(req.id,multiFilter)}
+                                    deleteRequest={()=>deleteRequest(req.id,multiFilter)}
+                                    askArchiveRequestAsNotReceived={()=>askArchiveRequestAsNotReceived(req.id,multiFilter)}
                                     oaloading={oaloading.includes(req.id)}
                                     setReceivedRequest={()=>setReceivedRequest(req.id,multiFilter)}
                                     setNotReceivedRequest={()=>setNotReceivedRequest(req.id,multiFilter)}

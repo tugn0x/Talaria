@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Requests\BorrowingDocdelRequest;
+use Carbon\Carbon;
 
 class AutomaticCleanDDRequests implements ShouldQueue
 {
@@ -49,6 +50,32 @@ class AutomaticCleanDDRequests implements ShouldQueue
             $borr->changeStatus("newrequest",['request_data'=>null,'lending_status'=>null,'all_lender'=>0,'lending_library_id'=>null]);                
         }
     }
+
+    private function archiveAsNotReceivedNewForwardedRequests() {        
+        $reqborrowings=BorrowingDocdelRequest::where('borrowing_status','=','newrequest')
+        ->where('docdel_request_parent_id','<>','null')
+        ->where('patron_docdel_request_id','=','null')
+        ->where('archived','<>','1')
+        ->whereRaw("DATEDIFF(now(),created_at) >= 15")->get();        
+        foreach($reqborrowings as $borr)
+        {   
+            //change to notReceived & archived with reason "NotAvailableForILL"         
+            $borr->changeStatus("notReceived",['archived'=>1,'fulfill_date'=>Carbon::now(),'notfulfill_type'=>config("constants.borrowingdocdelrequest_notfulfill_type.NotAvailableForILL"),'lending_status'=>null,'all_lender'=>0,'lending_library_id'=>null]);                
+        }
+    }
+
+    private function archiveAsReceivedRequests() {        
+        $reqborrowings=BorrowingDocdelRequest::where('borrowing_status','=','documentReady')
+        ->where('docdel_request_parent_id','<>','null')
+        ->where('patron_docdel_request_id','=','null')
+        ->where('archived','<>','1')
+        ->whereRaw("DATEDIFF(now(),created_at) >= 15")->get();        
+        foreach($reqborrowings as $borr)
+        {   
+            //change to notReceived & archived with reason "NotAvailableForILL"         
+            $borr->changeStatus("documentReady",['archived'=>1,'fulfill_date'=>Carbon::now(),'notfulfill_type'=>config("constants.borrowingdocdelrequest_notfulfill_type.NotAvailableForILL"),'lending_status'=>null,'all_lender'=>0,'lending_library_id'=>null]);                
+        }
+    }
     
 
     /**
@@ -62,5 +89,7 @@ class AutomaticCleanDDRequests implements ShouldQueue
     {
         $this->updateCanceledRequests();
         $this->resetNotAcceptedRequests();
+        $this->archiveAsNotReceivedNewForwardedRequests();
+        $this->archiveAsReceivedRequests();
     }
 }

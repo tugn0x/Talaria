@@ -31,6 +31,7 @@ class BorrowingDocdelRequest extends DocdelRequest
         'trash_type', //tipo cestinamento (trash=1,trashHC=2)
         'borrowing_notes', //dd_note_interne              
         'archived', //0|1 indica se la rich è archiviata
+        'archived_date',
         'forward', //0|1 indica se la rich è stata reinoltrata (la rich reinoltrata avrà parent_id=id di questa richiesta)
         //'desk_delivery_format', //formato di invio del della biblio al desk                
         'operator_id',
@@ -43,7 +44,7 @@ class BorrowingDocdelRequest extends DocdelRequest
     protected $statusField="borrowing_status";
     protected $table = 'docdel_requests';    
 
-    protected $constantFields=['fulfill_type'];
+    protected $constantFields=['fulfill_type','notfulfill_type'];
        
     public function __construct()
     {
@@ -270,7 +271,24 @@ class BorrowingDocdelRequest extends DocdelRequest
                             'ready_date'=>Carbon::now()
                         ]);                            
                     }
-                    break;          
+                    break; 
+ 
+                case 'notReceived':  
+                      //new and forwarded previously
+                      if($this->borrowing_status=='newrequest' && $this->docdel_request_parent_id<>null)
+                      {
+                        $others=array_merge($others,[
+                            'archived'=>1,                            
+                            'fulfill_date'=>Carbon::now(),
+                            'notfulfill_type'=>config("constants.borrowingdocdelrequest_notfulfill_type.NotAvailableForILL"),
+                            'lending_status'=>null,
+                            'all_lender'=>0,
+                            'lending_library_id'=>null]);                
+                      }
+                    break;
+                
+                    //TODO        
+                case 'notDeliveredToUserDirect': break;         
                 /*case 'forward': 
                     $others=array_merge($others,[
                         'forward'=>1,

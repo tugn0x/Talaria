@@ -43,7 +43,10 @@ const statusDate = (req) => {
 
   return (
       <>
-        <i className="fas fa-clock"></i> {formatDateTime(date)}            
+        <span className="status-date"><i className="fas fa-clock"></i> {formatDateTime(date)}</span>            
+        {req.lending_archived==1 && req.lending_archived_date && 
+            <span className="status-date"><i className="fas fa-hdd"></i> {formatDateTime(req.lending_archived_date)}</span>            
+        }
       </>
   )
 }
@@ -74,18 +77,22 @@ export const LendingStatus = (props) => {
             
             <span className={statusIcon(data.lending_status)}></span> 
             <span className="status-text">{data.lending_status ? intl.formatMessage({id: "app.requests."+data.lending_status}):'Pending Request'}
-            </span>        
-            <span className="status-date">{statusDate(data)}</span>
+            </span>       
             {
             data.operator && <div className="status-operator">
                 <i className="fas fa-user-cog"></i> { 
                 data.operator.data.full_name
                 }
+                
+                {data.lending_notes && <span className="lending_notes">
+                <a href="#" id={`tooltip-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
+                <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${data.id}`}>
+                    {data.lending_notes}
+                </UncontrolledTooltip>                                
+                </span>}
             </div>
-            }
-
-            {data.lending_notes && <div className="borrowing_notes"></div>}
-              
+            }            
+            <span className="status-date">{statusDate(data)}</span>                       
         </div>
     )
 }
@@ -136,14 +143,13 @@ const LendingItem = (props) => {
               <div className="request_id">
                         <Link to={requesturl(editPath,data.id)} className="active"><i class="fas fa-info-circle"></i> <span>{data.id}</span></Link>
                         </div>
-                <LendingStatus data={data} customClass="request_status"/>                 
-                {data.lending_notes && <div className="borrowing_notes">
-                 <a href="#" id={`tooltip-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
-                 <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${data.id}`}>
-                     {data.lending_notes}
-                 </UncontrolledTooltip>                                
-                 </div>}
-               
+                <LendingStatus data={data} customClass="request_status"/>                                                             
+                {data.fulfill_note && <div className="fulfill_note">
+                <a href="#" id={`fulfill_note-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
+                <UncontrolledTooltip autohide={false} placement="right" target={`fulfill_note-${data.id}`}>
+                    {data.fulfill_note}
+                </UncontrolledTooltip>                                
+            </div>} 
             </Col>
             <Col sm={3}>
             <>
@@ -152,8 +158,13 @@ const LendingItem = (props) => {
                     <i className="fas fa-landmark"></i> {data.borrowinglibrary.data.name}
                     
                 </span>                
-                
-               }               
+               } 
+               {data.request_note && <div className="fulfill_notes">
+                <a href="#" id={`request_note-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
+                <UncontrolledTooltip autohide={false} placement="right" target={`request_note-${data.id}`}>
+                    {data.request_note}
+                </UncontrolledTooltip>                                
+                </div>}                
                {!isArchived(data) && data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
                
                {/* <span className="fullfilment">...[Static fulfilled/unfilled status]...</span>               */}

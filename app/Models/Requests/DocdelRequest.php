@@ -16,8 +16,9 @@ class DocdelRequest extends BaseModel
     protected $fillable=[
         'reference_id',
         'borrowing_library_id',
-        'lending_library_id',
-        'lending_archived',
+        'lending_library_id',  
+        'lending_archived', //inherited: this is defined also here in order to be changed by borrowingdocdelrequest too and not only by lendingdocdelrequest
+        'lending_archived_date', //inherited: this is defined also here in order to be changed by borrowingdocdelrequest too and not only by lendingdocdelrequest                      
         'borrowing_status', //status req. borrow
         'lending_status', //status req. lending
         'request_type', //0=DD 1: ILL        

@@ -1,7 +1,8 @@
 <?php
-//NB: status "name" must be less than 20 char lenght!
-//NOTA: everytime you change this, please run:
-//php artisan cache:clear + php artisan optimize 
+//NOTES:
+//- status "name" must be less than 20 char lenght!
+//- role are not defined, so averyone can call these statusChange
+//- everytime you change this, please run: php artisan cache:clear + php artisan optimize 
 
 return [
     'status_resolver' =>
@@ -25,7 +26,7 @@ return [
                         'jobs' => ['App\\Jobs\\PatronUpdateBorrowing']
                     ],
                     'waitingForCost' => [
-                        'role'  =>  [], //borrow/lend/manage?
+                        'role'  =>  [], 
                         'next_statuses'  =>  ['costAccepted','costNotAccepted','costNotAnswered'],
                         'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
@@ -52,7 +53,7 @@ return [
                         'jobs' => ['App\\Jobs\\PatronUpdateBorrowing']
                     ],
                     'costNotAnswered' => [
-                        'role'  =>  [],//borrow/lend/manage?
+                        'role'  =>  [],
                         'next_statuses'  =>  ['costAccepted','notReceived'],
                         'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
@@ -61,7 +62,7 @@ return [
                         'jobs'=>[]
                     ],
                     'readyToDelivery'	=> [
-                        'role'  =>  [],//borrow/lend/manage?
+                        'role'  =>  [],
                         'next_statuses'  =>  ['received','notReceived'],
                         'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
@@ -71,7 +72,7 @@ return [
                         
                     ],
                     'received'	=> [
-                        'role'  =>  [],//borrow/lend/manage?
+                        'role'  =>  [],
                         'next_statuses'  =>  [],
                         'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
@@ -81,7 +82,7 @@ return [
                         
                     ],
                     'notReceived'	=> [
-                        'role'  =>  [],//borrow/lend/manage?
+                        'role'  =>  [],
                         'next_statuses'  =>  [],
                         'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
@@ -95,8 +96,8 @@ return [
             'App\Models\Requests\BorrowingDocdelRequest'=> [
                 'flow_tree' => [
                     'newrequest'	=> [
-                        'role'  =>  [],//borrow?
-                        'next_statuses'  =>  ['canceled','canceledDirect','requested'],
+                        'role'  =>  [],
+                    'next_statuses'  =>  ['canceled','canceledDirect','requested','notDeliveredToUserDirect','notReceived'/*,'DeliveredToUserDirect','DeliveringToDesk'*/],
                         'constraints'   =>  [],                        
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                            
@@ -104,7 +105,7 @@ return [
                         //TODO: 'jobs'=>['App\\Jobs\\BorrowingRequestReset'] //clean all temp lender to start new request and update lender (if only 1) saying request was canceled
                     ],                   
                     'canceled'	=> [
-                        'role'  =>  [],//borrow/lend/manage?
+                        'role'  =>  [],
                         'next_statuses'  =>  [],
                         'constraints'   =>  [],  
                         'notify'    =>  [
@@ -114,7 +115,7 @@ return [
                     ],
                     //NOTE on canceledDirect: i removed constraint because this status can be changed both from patron or borrower                       
                     'canceledDirect'	=> [
-                        'role'  =>  [],//borrow?,
+                        'role'  =>  [],
                         'next_statuses'  =>  [],
                         'constraints'   =>  [],     
                         'notify'    =>  [
@@ -124,7 +125,7 @@ return [
                     ],
                     //NOTE on cancelRequested: i removed constraint because this status can be changed both from patron or borrower                       
                     'cancelRequested'	=> [
-                        'role'  =>  [],//borrow/lend/manage?,
+                        'role'  =>  [],
                         'next_statuses'  =>  ['canceled'],
                         'constraints'   =>  [],  
                         'notify'    =>  [
@@ -144,7 +145,7 @@ return [
                     //Note: i added also "canceled" next status, because from frontend 
                     //we need to change in "canceled" (from requested state) but we don't know what will be really the next status (cancelDirect,cancelRequested)
                     'requested'	=> [
-                        'role'  =>  [],//borrow?,
+                        'role'  =>  [],
                         'next_statuses'  =>  ['newrequest','canceled','canceledDirect','cancelRequested','fulfilled','notReceived'], 
                         'constraints'   =>  ["canManage"],  
                         'notify'    =>  [
@@ -155,22 +156,20 @@ return [
                     //this configuration is needed by status resolver to exists because it checks when do status change FROM this state
                     //but it will not change TO this state cause is instead the lender that change directly borrowing_status field without doing a borrow->changeStatus
                     'fulfilled'	=> [
-                        'role'  =>  [],//borrow?,
+                        'role'  =>  [],
                         'next_statuses'  =>  ['documentReady','documentNotReady'], 
                         'constraints'   =>  ["canManage"],                                                   
-                    ],
-                    //todo
+                    ],                    
                     'documentReady'	=> [ 
-                        'role'  =>  [],//borrow?,
+                        'role'  =>  [],
                         'next_statuses'  =>  [''], 
                         'constraints'   =>  ["canManage"],  
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                                                        
                         ],                          
-                    ],
-                    //todo
+                    ],                    
                     'documentNotReady'	=> [ 
-                        'role'  =>  [],//borrow?,
+                        'role'  =>  [],
                         'next_statuses'  =>  [''], 
                         'constraints'   =>  ["canManage"],  
                         'notify'    =>  [
@@ -178,13 +177,27 @@ return [
                         ],                          
                     ],
                     //this configuration is needed by status resolver to exists because it checks when do status change FROM this state
-                    //but it will not change TO this state cause is instead the lender that change directly borrowing_status field without doing a borrow->changeStatus
+                    //and because it's used just in the case of a new request (but with parent) that must be set as notReceived+archived
+                    //also the lender will change that directly without doing a borrow->changeStatus
                     'notReceived'	=> [ 
-                        'role'  =>  [],//borrow?,
+                        'role'  =>  [],
                         'next_statuses'  =>  [''], 
                         'constraints'   =>  ["canManage"],                                                   
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',                                                        
+                        ],  
                     ],
                     //todo: notDeliveredToUser,notReceivedArchived?,deliveredToUser,documentReadyArchived?
+                    'notDeliveredToUserDirect' => [
+                        'role'  =>  [],
+                        'next_statuses'  =>  [''], 
+                        'constraints'   =>  ["canManage"],
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',                                                        
+                        ], 
+                        /*'jobs' => ['App\\Jobs\\PatronRequestUpdateNotify']*/
+                    ]
+
 
                 ]
             ],

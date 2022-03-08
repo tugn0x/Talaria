@@ -45,6 +45,20 @@ class BorrowingDocdelRequestObserver extends BaseObserver
         if($model->isDirty('download'))
             $model->download_date=Carbon::now();
 
+        if($model->isDirty('forward'))
+            $model->forward_date=Carbon::now();        
+        
+        if($model->isDirty('archived'))
+            $model->archived_date=Carbon::now();    
+
+        if($model->isDirty('trash_type'))
+            $model->trash_date=Carbon::now();        
+
+        //when borrowing cancel request     
+        if($model->isDirty('lending_archived'))
+            $model->lending_archived_date=Carbon::now();        
+    
+
         return parent::saving($model);
 
     }

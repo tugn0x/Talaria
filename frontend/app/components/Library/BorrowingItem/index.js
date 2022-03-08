@@ -100,6 +100,9 @@ const statusDate = (req) => {
         {req.download==1 && req.download_date && 
             <span className="status-date"><i className="fas fa-download"></i> {formatDateTime(req.download_date)}</span>            
         }
+        {req.archived==1 && req.archived_date && 
+            <span className="status-date"><i className="fas fa-hdd"></i> {formatDateTime(req.archived_date)}</span>            
+        }
       </>
   )
 }
@@ -159,7 +162,7 @@ export const canForward=(data)=>{
      ||
      (!data.patrondocdelrequest && canArchive(data)
      )      */
-     return (data.borrowing_status=="notReceived" || data.borrowing_status=='canceled' || (canArchive(data) && isTrashed(data) ) );
+     return ( (!isArchived(data) && (data.borrowing_status=="notReceived" || data.borrowing_status=='canceled') ) || (canArchive(data) && isTrashed(data) ) );
             
 }
 
@@ -176,7 +179,7 @@ export const canSavedAsNotReceived=(data) => {
 }
 
 export const canTrash=(data) => {
-    return !isTrashed(data) && data.borrowing_status=="documentReady" && ( !(isFile(data)||isURL(data)) || ( (isFile(data)||isURL(data)) && hasBeenDownloaded(data) ) )    
+    return !isArchived(data) && !isTrashed(data) && data.borrowing_status=="documentReady" && ( !(isFile(data)||isURL(data)) || ( (isFile(data)||isURL(data)) && hasBeenDownloaded(data) ) )    
 }
 
 //means "document downloaded/or accessed by url"
@@ -208,6 +211,10 @@ export const hasBeenDownloaded=(data) => {
     return data.download && data.download==1
 }
 
+export const canPatronReqDirectManaged=(data)=> {
+    return isPatronRequest(data) && !isArchived(data) && canRequest(data)
+}
+
 
 
 
@@ -233,7 +240,13 @@ export const BorrowingStatus = (props) => {
             <span className="status-text">{data.borrowing_status ? intl.formatMessage({id: "app.requests."+data.borrowing_status}):'xxx'} <span className="fulfill_type">{deliveryMethod(data)}</span></span>                    
             {data.operator && <div className="status-operator">
                 <i className="simple_icon fas fa-user-cog"></i> { data.operator.data.full_name}
-            </div>}
+                {data.borrowing_notes && <span className="borrowing_notes">
+                <a href="#" id={`tooltip-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
+                <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${data.id}`}>
+                    {data.borrowing_notes}
+                </UncontrolledTooltip>                                
+                </span>}
+            </div>}            
             <span className="unfilled_reason">{unfilledReason(data)}</span>
             {statusDate(data)}
             {isTrashed(data) && <span className="status-date"><i className="fas fa-trash text-danger"></i> {data.trash_date}</span>}                               
@@ -271,30 +284,41 @@ export const BorrowingReferenceIcons = (props) => {
 }
 
 export const BorrowingRequestIcons = (props) => {
-    const {data,reqPath,forwardRequest,askTrashRequest,askCancelRequest,askArchiveRequest,customClass,savedAsDownloaded,setReceivedRequest,setNotReceivedRequest}=props;    
- 
+    const {data,reqPath,forwardRequest,askTrashRequest,askCancelRequest,deleteRequest,askArchiveRequest,askArchiveRequestAsNotReceived,customClass,savedAsDownloaded,setReceivedRequest,setNotReceivedRequest}=props;    
+  
     return (
         <div className={"borrowing_request_icons " + (customClass?customClass:'')}>
                 <Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fas fa-eye"></i></Link>                               
                 {canRequest(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-share"></i></Link>}
                 {canCancel(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest()}><i className="fas fa-times"></i></a>}                
-                {canDelete(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest()}><i className="fas fa-backspace"></i></a>}                                                
+                {canDelete(data) && deleteRequest && <a className="btn btn-icon" onClick={()=>deleteRequest()}><i className="fas fa-backspace"></i></a>}                                                
                 {canTrash(data) && askTrashRequest && <a className="btn btn-icon" onClick={()=>askTrashRequest(1)}><i className="fas fa-trash"></i></a>}                
                 {canForward(data) && forwardRequest && <a className="btn btn-icon" onClick={()=>forwardRequest()}><i className="fas fa-redo"></i></a>}                
                 {canArchive(data) && askArchiveRequest && <a className="btn btn-icon" onClick={()=>askArchiveRequest()}><i className="fas fa-hdd"></i></a>}                                                
-                {isPatronRequest(data) && canRequest(data) && <span><button>evadi dir</button><button>inevadi dir</button></span>}
+                
+                {/*casi di evasione/inevasione a patron DIRETTA*/}
+                {canPatronReqDirectManaged(data) && <span><button>evadi dir a patron</button><button>inevadi dir a patron</button></span>}
+                
+                {/*casi di evasione/inevasione a patron DOPO DD*/}
                 {isPatronRequest(data) && data.borrowing_status=="documentNotReady" && <span><button>inevadi/noconsegna a patron</button></span>}                
                 {isPatronRequest(data) && data.borrowing_status=="documentReady" && <span><button>evadi/consegna a patron</button></span>}                
                 {isPatronRequest(data) && data.borrowing_status=="notReceived" && <span><button>inevadi a patron</button></span>}                                
+                
+                {/*casi di evasione/inevasione SENZA patron DOPO DD*/}
                 {!isPatronRequest(data) && canSavedAsDownloaded(data) && savedAsDownloaded && <a className="btn btn-icon" onClick={()=>savedAsDownloaded()}><i className="fas fa-arrow-circle-right"></i></a>}                
-                {!isPatronRequest(data) && canSavedAsReceived(data) && setReceivedRequest && setNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setReceivedRequest()}><i className="fas fa-box"></i></a> <a className="btn btn-icon" onClick={()=>setNotReceivedRequest()}><i className="fas fa-box-open"></i></a></>}                
+                {!isPatronRequest(data) && canSavedAsReceived(data) && setReceivedRequest && setNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setReceivedRequest()}><i className="fas fa-box"></i></a> <a className="btn btn-icon" onClick={()=>setNotReceivedRequest()}><i className="fas fa-box-open"></i></a></>}                                
+
+                {/*casi di archiviazione come inevasione SENZA patron DIRETTA dopo diversi forward/inevasioni dd
+                sembra un caso di "DIRETTA" ma solo perchè è una nuova richiesta ma di fatto è collegata alle altre
+                x cui il dd c'e' stato!*/}
+                {!isPatronRequest(data) && hasParentRequest(data) && !isArchived(data) && canRequest(data) && askArchiveRequestAsNotReceived && <a className="btn btn-icon" onClick={()=>askArchiveRequestAsNotReceived()}><i className="fas fa-hdd text-warning"></i></a>} 
         </div>
     )
 }
 
 
 const BorrowingItem = (props) => {
-    const {editPath,data,toggleSelection,checked,removeTag,deleteReference,findAndUpdateOABorrowingReference,oaloading,askCancelRequest,askArchiveRequest,forwardRequest,askTrashRequest,findISSNISBNtoggle,setReceivedRequest,setNotReceivedRequest,savedAsDownloaded} = props      
+    const {editPath,data,toggleSelection,checked,removeTag,deleteReference,findAndUpdateOABorrowingReference,oaloading,askCancelRequest,askArchiveRequest,forwardRequest,askTrashRequest,findISSNISBNtoggle,setReceivedRequest,setNotReceivedRequest,savedAsDownloaded,askArchiveRequestAsNotReceived,deleteRequest} = props      
     const intl = useIntl();  
 
     return (
@@ -306,13 +330,7 @@ const BorrowingItem = (props) => {
                 /> 
                 <div className="request_id">
                 <Link to={requesturl(editPath,data.id)} className="active"><i class="fas fa-info-circle"></i> <span>{data.id}</span></Link></div>
-                <BorrowingStatus data={data} customClass="request_status"/>                 
-                {data.borrowing_notes && <div className="borrowing_notes">
-                <a href="#" id={`tooltip-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
-                <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${data.id}`}>
-                    {data.borrowing_notes}
-                </UncontrolledTooltip>                                
-                </div>}
+                <BorrowingStatus data={data} customClass="request_status"/>                                 
             </Col>
             <Col sm={2}>
             {data.patrondocdelrequest && data.patrondocdelrequest.data &&
@@ -340,14 +358,19 @@ const BorrowingItem = (props) => {
                }
                {!isArchived(data) && data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}                                                            
             </>}
-            {inRequest(data) &&             
-            data.fulfill_note && <div className="fulfill_notes">
+            {data.request_note && <div className="request_note">
+                <a href="#" id={`request_note-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
+                <UncontrolledTooltip autohide={false} placement="right" target={`request_note-${data.id}`}>
+                    {data.request_note}
+                </UncontrolledTooltip>                                
+            </div>} 
+            {data.fulfill_note && <div className="fulfill_notes">
                 <a href="#" id={`fulfilnote-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
                 <UncontrolledTooltip autohide={false} placement="right" target={`fulfilnote-${data.id}`}>
                     {data.fulfill_note}
                 </UncontrolledTooltip>                                
             </div>}            
-            <BorrowingRequestIcons customClass="icons d-flex" data={data} reqPath={editPath} forwardRequest={forwardRequest} askTrashRequest={askTrashRequest} askCancelRequest={askCancelRequest} askArchiveRequest={askArchiveRequest} savedAsDownloaded={savedAsDownloaded}  setReceivedRequest={setReceivedRequest} setNotReceivedRequest={setNotReceivedRequest} />                                
+            <BorrowingRequestIcons customClass="icons d-flex" data={data} reqPath={editPath} forwardRequest={forwardRequest} askTrashRequest={askTrashRequest} askCancelRequest={askCancelRequest} deleteRequest={deleteRequest} askArchiveRequest={askArchiveRequest} askArchiveRequestAsNotReceived={askArchiveRequestAsNotReceived} savedAsDownloaded={savedAsDownloaded}  setReceivedRequest={setReceivedRequest} setNotReceivedRequest={setNotReceivedRequest} />                                
             </div>
             </Col> 
         </Row>

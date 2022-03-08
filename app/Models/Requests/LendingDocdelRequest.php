@@ -21,8 +21,8 @@ class LendingDocdelRequest extends DocdelRequest
         'lending_status', //stato rich. borrow
         'lending_notes', //dd_note_interne     
         'lending_archived', //0|1 indica se la rich è archiviata
+        'lending_archived_date',
         'all_lender',        
-        'borrowing_notes', //dd_note_interne
     ];
      
     protected static $observerClass=LendingDocdelRequestObserver::class;
@@ -111,7 +111,7 @@ class LendingDocdelRequest extends DocdelRequest
                 $others=array_merge($others,[
                     'fulfill_date'=>Carbon::now(),
                     'borrowing_status'=>$bstatus,
-                    'lending_archived'=>1,
+                    'lending_archived'=>1                    
                 ]);
                 break;  
                 
@@ -119,7 +119,7 @@ class LendingDocdelRequest extends DocdelRequest
                   $others=array_merge($others,[
                       'cancel_date'=>Carbon::now(),
                       'borrowing_status'=>"canceled",
-                      'lending_archived'=>1,
+                      'lending_archived'=>1
                   ]);
                 break;
                 

@@ -26,6 +26,9 @@ class LendingDocdelRequestObserver extends BaseObserver
                 $userid = auth()->user()->id;
                 $model->lending_operator_id=$userid;
             }
+        
+        if($model->isDirty('lending_archived'))
+            $model->lending_archived_date=Carbon::now();        
 
         return parent::saving($model);
 

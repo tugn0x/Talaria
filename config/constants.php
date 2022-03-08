@@ -1,4 +1,5 @@
 <?php
+//- everytime you change this, please run: php artisan cache:clear + php artisan optimize 
 
 return [
     'morphmap' => [
@@ -84,6 +85,14 @@ return [
         'URL'=>4,
         'ArticleExchange'=>5,
         'Other'=>6,
-    ]
-
-];
+    ],
+    'borrowingdocdelrequest_notfulfill_type'     => [
+        'NotAvailableForILL'=>1,
+        'NotHeld'=>2,
+        'NotOnShelf'=>3,
+        'ILLNotPermittedByLicense'=>4,
+        'WrongRef'=>5,
+        'MaxReqNumber'=>6,
+        'Other'=>7,
+    ],
+]; 

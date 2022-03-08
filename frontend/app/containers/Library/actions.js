@@ -34,7 +34,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_GET_ISSN_ISBN,
    REQUEST_GET_ISSN_ISBN_SUCCESS,
    REQUEST_GET_ISSN_ISBN_FAIL,
-   REQUEST_CHANGE_LENDING_ARCHIVED,
+   //REQUEST_CHANGE_LENDING_ARCHIVED,
    REQUEST_ACCEPT_ALLLENDER,
    
   } from "./constants";
@@ -409,6 +409,7 @@ export function requestChangeStatusLending(id,lending_library_id,status, message
   };
 }
 
+/*not used
 export function requestChangeLendingArchived(id,lending_library_id,status, message,filter) {
   return {
     type: REQUEST_CHANGE_LENDING_ARCHIVED,
@@ -418,7 +419,7 @@ export function requestChangeLendingArchived(id,lending_library_id,status, messa
     message,
     filter
   };
-}
+}*/
 
 
 export function requestAcceptAllLenderLending(id,lending_library_id,status, message,filter) {

@@ -22,7 +22,7 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
       REQUEST_GET_ISSN_ISBN,
       REQUEST_LENDINGS_LIST,
       REQUEST_CHANGE_STATUS_LENDING,
-      REQUEST_CHANGE_LENDING_ARCHIVED,
+      //REQUEST_CHANGE_LENDING_ARCHIVED,
       REQUEST_APPLY_LENDING_TAGS_TO_DDREQUESTS,
       REQUEST_ACCEPT_ALLLENDER
     } from './constants';
@@ -583,6 +583,7 @@ export function* requestChangeStatusLendingSaga(action) {
   }
 }
 
+/*not used
 export function* requestChangeLendingArchivedSaga(action) {
   
   const options = {
@@ -599,7 +600,7 @@ export function* requestChangeLendingArchivedSaga(action) {
   } catch(e) {
     yield put(requestError(e.message));
   }
-}
+}*/
 
 export function* requestAcceptAllLenderLendingSaga(action) {
   const options = {
@@ -699,7 +700,7 @@ export default function* librarySaga() {
 
   yield takeLatest(REQUEST_CHANGE_STATUS_BORROWING,requestChangeStatusBorrowingSaga);
   yield takeLatest(REQUEST_CHANGE_STATUS_LENDING,requestChangeStatusLendingSaga);
-  yield takeLatest(REQUEST_CHANGE_LENDING_ARCHIVED,requestChangeLendingArchivedSaga);
+  //yield takeLatest(REQUEST_CHANGE_LENDING_ARCHIVED,requestChangeLendingArchivedSaga);
 
   yield takeLatest(REQUEST_ACCEPT_ALLLENDER, requestAcceptAllLenderLendingSaga)
 
