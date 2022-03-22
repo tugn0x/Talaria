@@ -5,7 +5,7 @@ import ErrorBox from 'components/Form/ErrorBox';
 import {useIntl} from 'react-intl';
 
 
-const Input = ({label, handleChange, type, required, input}) => {
+const Input = ({label, handleChange, type, required, input,noplaceholder}) => {
     
     const [inputValue, setInptValue] = React.useState("");
     const intl = useIntl();
@@ -28,7 +28,7 @@ const Input = ({label, handleChange, type, required, input}) => {
             {label && <Label>{label}</Label>}
             {type === 'textarea' && 
                 <textarea
-                    placeholder={label}
+                    placeholder={noplaceholder?'':label}
                     onChange={(e) => onChange(e)}
                     value={inputValue}
                     required={required}
@@ -36,7 +36,7 @@ const Input = ({label, handleChange, type, required, input}) => {
                 ></textarea>
              ||   
                 <InputField 
-                    placeholder={label}
+                    placeholder={noplaceholder?'':label}
                     onChange={(e) => onChange(e)}
                     value={inputValue}
                     required={required}
