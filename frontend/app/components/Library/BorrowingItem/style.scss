@@ -13,6 +13,13 @@
     margin-left: 5px;
 }
 
+.request_note,
+.fulfill_notes,
+.unfilled_reason {
+    display: inline;
+    margin-left: 5px;
+}
+
 .status-date {
     display: block;
     font-size: 0.85em;
@@ -28,13 +35,8 @@
 .daysago {
     margin-top:5px;
     display: block;
-}
-
-.unfilled_reason {    
-    display: block;
     font-size: 0.85em;
 }
-
 
 .fullfilment {
     margin-top:5px;
@@ -51,6 +53,7 @@
 
 .status-text {
     color: $alternative-text;
+    font-size: 0.85em;
 }
 
 .status-icon{
@@ -68,7 +71,9 @@
     }
 
     &.readyToDelivery,           
-    &.documentReady    
+    &.documentReady,
+    &.deliveredToUserDirect,
+    &.deliveredToUser    
     {
         background-color: green;
     }
@@ -82,7 +87,9 @@
     &.notReceived,
     &.canceled,
     &.canceledDirect,
-    &.documentNotReady  {
+    &.documentNotReady,
+    &.notDeliveredToUserDirect,
+    &.notDeliveredToUser  {
         background-color: red;
     }
     

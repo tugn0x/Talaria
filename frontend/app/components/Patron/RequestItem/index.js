@@ -16,6 +16,11 @@ import {PatronRequestData, PatronRequestStatus} from '../PatronRequest';
 const RequestItem = (props) => {
     const {data, editPath,toggleSelection,checked,archiveRequest,askCancelRequest,acceptCost,denyCost} = props
     const intl = useIntl();
+
+    const statusIcon = (status) => {
+        return "status-icon " + status
+    }
+    
     
     /*const requesturl=(id) => {
         return generatePath(`${editPath}`, {
@@ -25,17 +30,22 @@ const RequestItem = (props) => {
 
     return ( 
         <Row className="list-row justify-content-between">                        
-            <Col sm={3} className="select-checkbox">
-                {toggleSelection && <CustomCheckBox 
+            <Col sm={3}>
+                {toggleSelection && <CustomCheckBox className="select-checkbox"
                     handleChange={toggleSelection}
                     checked={checked}
-                />}                
+                />} 
+               <div className="request_id active"><i className="fas fa-info-circle"></i> <span>{data.id}</span></div>               
+               <div className="patronrequest_status">
+                <span className={statusIcon(data.status)}></span> 
+                <span className="status-text">{intl.formatMessage({id: "app.requests."+data.status})}</span>        
+               </div>
                <PatronRequestStatus data={data}/>
+               <PatronRequestData data={data}/>  
             </Col>
             <Col sm={7}>                
                 <ReferenceTags data={data.reference.data}/>              
-                <ReferenceCitation data={data.reference.data}/>       
-                <PatronRequestData data={data}/>                              
+                <ReferenceCitation data={data.reference.data}/>                                                   
             </Col>
             
             <Col sm={2} className="icons align-self-center">

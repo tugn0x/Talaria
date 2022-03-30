@@ -43,7 +43,7 @@ export const deliveryMethod=(data) => {
     
 }
 
-export const unfilledReason = (data) => {
+const lendingUnfilledReason = (data) => {
     let intl=useIntl();
     let ret=""
     switch (data.notfulfill_type) {
@@ -55,12 +55,24 @@ export const unfilledReason = (data) => {
         case 6: ret=intl.formatMessage({id: "app.requests.notfulfill_type.MaxReqNumber"}); break; 
         case 7: ret=intl.formatMessage({id: "app.requests.notfulfill_type.Other"}); break;
     }
-    return ret!=""?<><i className="fas fa-comment text-danger"></i> {ret}</>:'';
+    //return ret!=""?<><i className="fas fa-comment text-danger"></i> {ret}</>:'';
+    return ret;
 }
 
+const documentAccess=(data) => {
+    return (
+        <>
+        {!canSavedAsDownloaded(data) && data.borrowing_status=="fulfilled" && isFile(data) && <span><a className="btn btn-icon"><i className="fas fa-hourglass-half"></i></a> (waiting HC)</span>}   
+        
+        {isFile(data) && <a className="btn btn-icon" onClick={()=>alert("TODO: open document !")}><i className="fas fa-download"></i></a>}                
+      
+        {isURL(data) && <a className="btn btn-icon" onClick={()=>alert("TODO: open URL!")}><i className="fas fa-external-link-alt"></i></a>}         
+        </>
+    )
+}
 
-const statusDate = (req) => {
-  let date="";
+const statusInfo = (req) => {
+  /*let date="";
   switch (req.borrowing_status)
   {
       case "requested": date= req.request_date; break;
@@ -77,32 +89,68 @@ const statusDate = (req) => {
 
       case "documentReady":
       case "documentNotReady": date=req.ready_date; break;
+
+      case "notDeliveredToUser":
+      case "notDeliveredToUserDirect": date=req.user_delivery_date; break;
        
       default: date= req.created_at; 
-  }  
-
-  /*let datearr=formatDateTime(date).split(" ");  
-
-  let dat=datearr[0];
-  let time=datearr[1];
+  }  */
 
   return (
-        <>
-            <i class="fas fa-clock"></i> {dat}<br/><span class="status-time">{time} </span>            
-        </>
-  )*/
-  return (
-      <>
-        <span className="status-date"><i className="fas fa-clock"></i> {formatDateTime(date)}</span>
+      <>        
+        {req.borrowing_status=="newrequest" && <span className="status-date"><i className="fas fa-plus"></i> {formatDateTime(req.created_at)}</span>}        
+        {req.request_date && <span className="status-date">
+            <i className="fas fa-share"></i> {formatDateTime(req.request_date)}
+            {req.request_note && <div className="request_note">
+                <span id={`request_note-${req.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
+                <UncontrolledTooltip autohide={false} placement="right" target={`request_note-${req.id}`}>
+                    {req.request_note}
+                </UncontrolledTooltip>                                
+            </div>}                     
+        </span>}        
+        {(req.borrowing_status=="fulfilled"||req.borrowing_status=="notReceived" ||
+         req.borrowing_status=="documentReady"||req.borrowing_status=="documentNotReady" ||
+         req.borrowing_status=="notDeliveredToUser"||req.borrowing_status=="notDeliveredToUserDirect") &&
+        
+        <span className="status-date">
+            <i className="fas fa-reply"></i> {formatDateTime(
+                (req.borrowing_status=="fulfilled"||req.borrowing_status=="notReceived") && req.fulfill_date ? req.fulfill_date :
+                (req.borrowing_status=="documentReady"||req.borrowing_status=="documentNotReady") && req.ready_date ? req.ready_date :                    
+                (req.borrowing_status=="notDeliveredToUser"||req.borrowing_status=="notDeliveredToUserDirect") && req.user_delivery_date? req.user_delivery_date: null
+            )} 
+                        
+            {req.notfulfill_type && <div className="unfilled_reason">
+            <span id={`unfilled_reason-${req.id}`} className="active"><i className="fas fa-comment text-danger"></i></span> 
+                    <UncontrolledTooltip autohide={false} placement="right" target={`unfilled_reason-${req.id}`}>
+                        {lendingUnfilledReason(req)}
+                    </UncontrolledTooltip>                                
+            </div>}
+
+            {req.fulfill_note && <div className="fulfill_notes">
+                <span id={`fulfilnote-${req.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
+                <UncontrolledTooltip autohide={false} placement="right" target={`fulfilnote-${req.id}`}>
+                    {req.fulfill_note}
+                </UncontrolledTooltip>                                
+            </div>}
+        
+        </span>
+        }              
+       
+        {req.cancel_date && <span className="status-date"><i className="fas fa-times"></i> {formatDateTime(req.cancel_date)}</span>}
+       
         {req.forward==1 && req.forward_date && 
             <span className="status-date"><i className="fas fa-redo"></i> {formatDateTime(req.forward_date)}</span>            
         }
+       
         {req.download==1 && req.download_date && 
             <span className="status-date"><i className="fas fa-download"></i> {formatDateTime(req.download_date)}</span>            
         }
+       
         {req.archived==1 && req.archived_date && 
             <span className="status-date"><i className="fas fa-hdd"></i> {formatDateTime(req.archived_date)}</span>            
         }
+       
+        {req.trash_date && <span className="status-date"><i className="fas fa-trash text-danger"></i> {formatDateTime(req.trash_date)}</span>}   
       </>
   )
 }
@@ -162,7 +210,7 @@ export const canForward=(data)=>{
      ||
      (!data.patrondocdelrequest && canArchive(data)
      )      */
-     return ( (!isArchived(data) && (data.borrowing_status=="notReceived" || data.borrowing_status=='canceled') ) || (canArchive(data) && isTrashed(data) ) );
+     return ( (!isArchived(data) && (data.borrowing_status=="notReceived" || data.borrowing_status=='canceled') || (data.borrowing_status=="documentNotReady")) || (canArchive(data) && isTrashed(data) ) );
             
 }
 
@@ -171,7 +219,7 @@ export const canRequest=(data) => {
 }
 
 export const canSavedAsReceived=(data) => {
-    return data.borrowing_status=="fulfilled"  && data.fulfill_type && !(isFile(data)||isURL(data))
+    return data.borrowing_status=="fulfilled"  && !(isFile(data)||isURL(data))
 }
 
 export const canSavedAsNotReceived=(data) => {
@@ -200,22 +248,52 @@ export const inRequest=(data) => {
 }
 
 export const isFile=(data) => {
-    return data.fulfill_type==1 
+    return data.fulfill_type && data.fulfill_type==1 
+}
+
+export const isMail=(data) => {
+    return data.fulfill_type && data.fulfill_type==2 
 }
 
 export const isURL=(data) => {
-    return data.fulfill_type==4 /* && data.url!='' */
+    return data.fulfill_type && data.fulfill_type==4 /* && data.url!='' */
+}
+
+export const isFAX=(data) => {
+    return data.fulfill_type && data.fulfill_type==3 
+}
+
+export const isArticleExchange=(data) => {
+    return data.fulfill_type && data.fulfill_type==5
+}
+
+export const isOther=(data) => {
+    return data.fulfill_type && data.fulfill_type==6
 }
 
 export const hasBeenDownloaded=(data) => {
-    return data.download && data.download==1
+    return data.borrowing_status=="documentReady" && data.download && data.download==1
 }
 
 export const canPatronReqDirectManaged=(data)=> {
     return isPatronRequest(data) && !isArchived(data) && canRequest(data)
 }
 
+export const canPatronReqNotDirectManaged=(data)=> {
+    return isPatronRequest(data) && !isArchived(data) && inRequest(data)
+}
 
+export const canFulfillToPatron=(data)=> {
+    return isPatronRequest(data) && 
+        (
+            (data.borrowing_status=="documentReady" && (isFile(data)||isURL(data)) && hasBeenDownloaded(data))||
+            (!isFile(data) && !isURL(data) && data.borrowing_status=="documentReady")
+        )    
+}
+
+export const canUnfillToPatron=(data)=> {
+    return (isPatronRequest(data) && (data.borrowing_status=="documentNotReady" || data.borrowing_status=="notReceived"));
+}
 
 
 
@@ -241,15 +319,14 @@ export const BorrowingStatus = (props) => {
             {data.operator && <div className="status-operator">
                 <i className="simple_icon fas fa-user-cog"></i> { data.operator.data.full_name}
                 {data.borrowing_notes && <span className="borrowing_notes">
-                <a href="#" id={`tooltip-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
+                <span id={`tooltip-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
                 <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${data.id}`}>
                     {data.borrowing_notes}
                 </UncontrolledTooltip>                                
                 </span>}
             </div>}            
-            <span className="unfilled_reason">{unfilledReason(data)}</span>
-            {statusDate(data)}
-            {isTrashed(data) && <span className="status-date"><i className="fas fa-trash text-danger"></i> {data.trash_date}</span>}                               
+            {statusInfo(data)}    
+            {documentAccess(data)}                                    
         </div>
     )
 }
@@ -275,10 +352,7 @@ export const BorrowingReferenceIcons = (props) => {
                 {(issn_search_enabled || isbn_search_enabled ) && canRequest(data) &&  mustCheckData(data) && <a target="_blank" className='btn btn-icon' onClick={()=>findISSNISBNtoggle()} title="checkISSN/ISBN"><i className="fas fa-keyboard"></i></a>}
                 {canRequest(data) &&  !mustCheckData(data) && <span className="btn btn-icon"><i className="fas fa-check-double"></i></span>}
                 {canRequest(data) && oaloading && <i className="fas fa-spinner fa-spin"></i>}                
-                {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO Check holding !')}><i className="fa fa-search-location"></i></a>}          
-                {!isPatronRequest(data) && !canSavedAsDownloaded(data) && data.borrowing_status=="fulfilled" && isFile(data) && <span><a className="btn btn-icon"><i className="fas fa-hourglass-half"></i></a> (waiting HC)</span>}                      
-                {!isPatronRequest(data) && canSavedAsDownloaded(data) && isFile(data) && <a className="btn btn-icon" onClick={()=>alert("TODO: open document !")}><i className="fas fa-download"></i></a>}                
-                {!isPatronRequest(data) && canSavedAsDownloaded(data) && isURL(data) && <a className="btn btn-icon" onClick={()=>alert("TODO: open URL!")}><i className="fas fa-external-link-alt"></i></a>}                                                
+                {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO Check holding !')}><i className="fa fa-search-location"></i></a>}                                                                         
         </div>
     )
 }
@@ -288,25 +362,34 @@ export const BorrowingRequestIcons = (props) => {
   
     return (
         <div className={"borrowing_request_icons " + (customClass?customClass:'')}>
-                <Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fas fa-eye"></i></Link>                               
-                {canRequest(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-share"></i></Link>}
+                {/*<Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fas fa-eye"></i></Link>*/}                              
+                {canRequest(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,"request")}><i className="fas fa-share"></i></Link>}
                 {canCancel(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest()}><i className="fas fa-times"></i></a>}                
                 {canDelete(data) && deleteRequest && <a className="btn btn-icon" onClick={()=>deleteRequest()}><i className="fas fa-backspace"></i></a>}                                                
                 {canTrash(data) && askTrashRequest && <a className="btn btn-icon" onClick={()=>askTrashRequest(1)}><i className="fas fa-trash"></i></a>}                
                 {canForward(data) && forwardRequest && <a className="btn btn-icon" onClick={()=>forwardRequest()}><i className="fas fa-redo"></i></a>}                
                 {canArchive(data) && askArchiveRequest && <a className="btn btn-icon" onClick={()=>askArchiveRequest()}><i className="fas fa-hdd"></i></a>}                                                
+                                   
+                
+                
+                {canSavedAsDownloaded(data) && savedAsDownloaded && (isFile(data)||isURL(data)) &&
+                        <a className="btn btn-icon" onClick={()=>savedAsDownloaded()}><i className="fas fa-arrow-circle-right"></i></a>                   
+                }                
+                
+                {canSavedAsReceived(data) && setReceivedRequest && setNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setReceivedRequest()}><i className="fas fa-box"></i></a> <a className="btn btn-icon" onClick={()=>setNotReceivedRequest()}><i className="fas fa-box-open"></i></a></>}                                
                 
                 {/*casi di evasione/inevasione a patron DIRETTA*/}
-                {canPatronReqDirectManaged(data) && <span><button>evadi dir a patron</button><button>inevadi dir a patron</button></span>}
-                
+                {canPatronReqDirectManaged(data) && 
+                <>
+                    <Link className="btn btn-link" to={requesturl(reqPath,data.id,'deliver')}>Evadi/inevadi dir</Link>                                        
+                </>
+                }    
                 {/*casi di evasione/inevasione a patron DOPO DD*/}
-                {isPatronRequest(data) && data.borrowing_status=="documentNotReady" && <span><button>inevadi/noconsegna a patron</button></span>}                
-                {isPatronRequest(data) && data.borrowing_status=="documentReady" && <span><button>evadi/consegna a patron</button></span>}                
-                {isPatronRequest(data) && data.borrowing_status=="notReceived" && <span><button>inevadi a patron</button></span>}                                
+                {canFulfillToPatron(data) &&  <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}><i className="fas fa-truck text-warning"></i></Link>}                                                
+                {canUnfillToPatron(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}><i className="fas fa-poo"></i></Link>}                                
                 
                 {/*casi di evasione/inevasione SENZA patron DOPO DD*/}
-                {!isPatronRequest(data) && canSavedAsDownloaded(data) && savedAsDownloaded && <a className="btn btn-icon" onClick={()=>savedAsDownloaded()}><i className="fas fa-arrow-circle-right"></i></a>}                
-                {!isPatronRequest(data) && canSavedAsReceived(data) && setReceivedRequest && setNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setReceivedRequest()}><i className="fas fa-box"></i></a> <a className="btn btn-icon" onClick={()=>setNotReceivedRequest()}><i className="fas fa-box-open"></i></a></>}                                
+                
 
                 {/*casi di archiviazione come inevasione SENZA patron DIRETTA dopo diversi forward/inevasioni dd
                 sembra un caso di "DIRETTA" ma solo perchè è una nuova richiesta ma di fatto è collegata alle altre
@@ -323,26 +406,28 @@ const BorrowingItem = (props) => {
 
     return (
         <Row className="list-row justify-content-between">
-            <Col sm={2}>
+            <Col sm={3}>
                 <CustomCheckBox 
                     handleChange={toggleSelection}
                     checked={checked}
                 /> 
-                <div className="request_id">
-                <Link to={requesturl(editPath,data.id)} className="active"><i class="fas fa-info-circle"></i> <span>{data.id}</span></Link></div>
+                <div className="request_id"><Link to={requesturl(editPath,data.id)} className="active"><i className="fas fa-info-circle"></i> <span>{data.id}</span></Link></div>
                 <BorrowingStatus data={data} customClass="request_status"/>                                 
             </Col>
-            <Col sm={2}>
+            <Col sm={3}>
             {data.patrondocdelrequest && data.patrondocdelrequest.data &&
-                <BorrowingPatronRequest data={data}/>            
+                <>
+                    <BorrowingPatronRequest data={data}/>            
+                    {!isArchived(data) && data.patrondocdelrequest.data.status=="requested" && data.patrondocdelrequest.data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.patrondocdelrequest.data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
+                </>
             }              
             </Col>
-            <Col sm={5}>      
+            <Col sm={4}>      
             {data.tags && <RequestTags data={data.tags.data} removeTag={!isArchived(data)?removeTag:null}/>}                 
             <ReferenceCitation data={data.reference.data}/>
             <BorrowingReferenceIcons data={data} reqPath={editPath} findAndUpdateOABorrowingReference={findAndUpdateOABorrowingReference} oaloading={oaloading} findISSNISBNtoggle={findISSNISBNtoggle} />                
             </Col>
-            <Col sm={3} className="">
+            <Col sm={2} className="">
             <div className="lendersbox">
             {inRequest(data) &&             
             <>
@@ -356,21 +441,9 @@ const BorrowingItem = (props) => {
                     <i className="fas fa-cloud"></i> {intl.formatMessage({id:'app.global.alllibraries'})} 
                 </span>
                }
-               {!isArchived(data) && data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}                                                            
-            </>}
-            {data.request_note && <div className="request_note">
-                <a href="#" id={`request_note-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
-                <UncontrolledTooltip autohide={false} placement="right" target={`request_note-${data.id}`}>
-                    {data.request_note}
-                </UncontrolledTooltip>                                
-            </div>} 
-            {data.fulfill_note && <div className="fulfill_notes">
-                <a href="#" id={`fulfilnote-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
-                <UncontrolledTooltip autohide={false} placement="right" target={`fulfilnote-${data.id}`}>
-                    {data.fulfill_note}
-                </UncontrolledTooltip>                                
-            </div>}            
-            <BorrowingRequestIcons customClass="icons d-flex" data={data} reqPath={editPath} forwardRequest={forwardRequest} askTrashRequest={askTrashRequest} askCancelRequest={askCancelRequest} deleteRequest={deleteRequest} askArchiveRequest={askArchiveRequest} askArchiveRequestAsNotReceived={askArchiveRequestAsNotReceived} savedAsDownloaded={savedAsDownloaded}  setReceivedRequest={setReceivedRequest} setNotReceivedRequest={setNotReceivedRequest} />                                
+               {!isArchived(data) && data.borrowing_status=="requested" && data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}                                                            
+            </>}                    
+            {!isArchived(data) && <BorrowingRequestIcons customClass="icons d-flex" data={data} reqPath={editPath} forwardRequest={forwardRequest} askTrashRequest={askTrashRequest} askCancelRequest={askCancelRequest} deleteRequest={deleteRequest} askArchiveRequest={askArchiveRequest} askArchiveRequestAsNotReceived={askArchiveRequestAsNotReceived} savedAsDownloaded={savedAsDownloaded}  setReceivedRequest={setReceivedRequest} setNotReceivedRequest={setNotReceivedRequest} />}                                
             </div>
             </Col> 
         </Row>

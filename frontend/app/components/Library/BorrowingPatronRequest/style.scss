@@ -1,20 +1,22 @@
 
 .patronrequest {
-    display: block;    
-
+    display: block;   
+    
     & .patronrequest_id {
         font-weight: bold;        
     }
 
     & .patron {
-    display: block;        
+        display: block;  
+        font-size: 0.85em;      
+        }
+        
+        & .daysago {
+            margin-top:5px;
+            display: block;
+            font-size: 0.85em;
     }
-}
-
-.user_cancel_date {
-    margin-top:5px;
-    display: block;
-    color:red;
+    
 }
 
 .patron_data {

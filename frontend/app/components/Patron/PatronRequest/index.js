@@ -5,9 +5,6 @@ import {formatDate,formatDateTime} from '../../../utils/dates';
 import './style.scss';
 
 
-const statusIcon = (status) => {
-    return "status-icon " + status
-}
 
 const statusDate = (data) => {
   let date="";
@@ -24,28 +21,83 @@ const statusDate = (data) => {
       case "readyToDelivery":  date=data.delivery_ready_date; break;
       
       case "received": date=data.fulfill_date; break;            
-      case "notReceived":  date=data.notfulfill_date; break;
+      case "notReceived":  date=data.fulfill_date; break;
       
       default: return "";
   }
   
-  return formatDateTime(date);
+  return <span className="status-date"><i className="fas fa-clock"></i> {formatDateTime(date)}</span>
 }
+
+const notfulfillReason = (data) => {
+    let intl=useIntl();
+    let ret=""
+    switch (data.notfulfill_type) {
+        case 1: ret=intl.formatMessage({id: "app.patronrequest.notfulfill_type.NotAvailable"}); break;
+        case 2: ret=intl.formatMessage({id: "app.patronrequest.notfulfill_type.PatronNotEnabled"}); break;
+        case 3: ret=intl.formatMessage({id: "app.patronrequest.notfulfill_type.PatronNotTake"}); break;
+        case 4: ret=intl.formatMessage({id: "app.patronrequest.notfulfill_type.PatronNotAcceptCost"}); break;
+        case 5: ret=intl.formatMessage({id: "app.patronrequest.notfulfill_type.PatronNotAnswerCost"}); break;
+        case 6: ret=intl.formatMessage({id: "app.patronrequest.notfulfill_type.NotAvailableForFree"}); break; 
+        case 7: ret=intl.formatMessage({id: "app.patronrequest.notfulfill_type.WrongRef"}); break;
+    }
+            
+    return ret;
+}
+
+
+const costPolicy = (data) => {    
+        let intl=useIntl();
+        let ret=""
+        switch (data.cost_policy) {
+            case 1: ret=intl.formatMessage({id: "app.requests.acceptAnyExtraCost"}); break;
+            case 0: ret=intl.formatMessage({id: "app.requests.denyAnyExtraCost"}); break;
+            case 2: ret=intl.formatMessage({id: "app.requests.toBeInformedAboutExtraCost"}); break;            
+        }
+                
+        return ret;    
+}
+  
+
 
 export const PatronRequestStatus = (props) => {
 
     const intl = useIntl();
 
-    const {data,customClass}=props;
+    const {data}=props;    
 
     return (
-        <div className={"patronrequest_status " + (customClass?customClass:'')}>
-        <span className={statusIcon(data.status)}></span> 
-        <span className="status-text">{intl.formatMessage({id: "app.requests."+data.status})}
-        </span>
-        <span className="request_id">ID: <span>{data.id}</span></span>
-        <span className="status-date">{statusDate(data)}</span>
-        </div>
+        <>        
+        {data.request_date && <span className="status-date">
+            <i className="fas fa-share"></i> {formatDateTime(data.request_date)}
+            {data.forlibrary_note && <div className="forlibrary_note">
+                <span id={`tooltip-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
+                <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${data.id}`}>
+                    {data.forlibrary_note}
+                </UncontrolledTooltip>                                
+            </div>} 
+        </span>}                    
+               
+        {data.cancel_date && <span className="status-date"><i className="fas fa-times"></i> {formatDateTime(data.cancel_date)}</span>}
+        {data.fulfill_date && 
+        <span className="status-date"><i className="fas fa-reply"></i> {formatDateTime(data.fulfill_date)}
+            {data.notfulfill_type && <div className="notfulfillreason">
+            <span id={`notfulfill_type-${data.id}`} className="active"><i className="fas fa-comment text-danger"></i></span> 
+                    <UncontrolledTooltip autohide={false} placement="right" target={`notfulfill_type-${data.id}`}>
+                        {notfulfillReason(data)}
+                    </UncontrolledTooltip>                                
+            </div>}
+        
+            {data.fromlibrary_note && <div className="fromlibrary_note">
+                <span id={`tooltipfulfillnote-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
+                <UncontrolledTooltip autohide={false} placement="right" target={`tooltipfulfillnote-${data.id}`}>
+                    {data.fromlibrary_note}
+                </UncontrolledTooltip>                                
+            </div>}           
+        </span>}
+        {data.delivery_ready_date && <span className="status-date"><i className="fas fa-luggage-cart"></i> {formatDateTime(data.delivery_ready_date)}</span>}        
+        {<span className="costpolicy"><i className="fas fa-coins"></i> {costPolicy(data)} </span>}                
+        </>
     )
 }
 
@@ -56,26 +108,16 @@ export const PatronRequestData = (props) => {
 
     return (
         <div className={"patronrequest_data " + (customClass?customClass:'')}>
-            {data.library && <span className="libraryLabel pr-3">
-                <span><i className="fas fa-landmark"></i></span> 
-                <span>
-                <a href="#" id={`tooltip-${data.id}-${data.library.data.id}`} className="active">{data.library_label.data.label}</a> 
+            {data.library && <div className="libraryLabel pr-3">
+                <span><i className="fas fa-landmark"></i></span>                 
+                <span id={`tooltip-${data.id}-${data.library.data.id}`} className="active">{data.library_label.data.label}</span> 
                 <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${data.id}-${data.library.data.id}`}>
                     {data.library.data.name}
-                </UncontrolledTooltip>
-                </span>
-                {data.request_date && <span className="requestDate"><span>Richiesto il {formatDateTime(data.request_date)}</span></span>}
-                {data.forlibrary_note && <div className="forlibrary_note">
-                <a href="#" id={`tooltip-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
-                <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${data.id}`}>
-                    {data.forlibrary_note}
-                </UncontrolledTooltip>                                
-                </div>}
-            </span> }
-            {data.delivery && <span className="deliveryLabel pr-3">
+                </UncontrolledTooltip>                  
+            </div> }
+            {data.delivery && <div className="deliveryLabel pr-3">
                 <span><i className="fas fa-luggage-cart"></i></span>
-                <span>
-                    <a href="#" id={`tooltip-del-${data.id}-${data.delivery.data.id}`} className="active">{data.delivery.data.name}</a> 
+                    <span id={`tooltip-del-${data.id}-${data.delivery.data.id}`} className="active">{data.delivery.data.name}</span> 
                     <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-del-${data.id}-${data.delivery.data.id}`}>
                     <div> 
                         <span>{data.delivery.data.name}</span><br/>
@@ -83,18 +125,8 @@ export const PatronRequestData = (props) => {
                         <span><i className="fas fa-phone"></i> {data.delivery.data.phone}</span><br/>
                         <span><i className="fas fa-clock"></i> {data.delivery.data.openinghours}</span>
                     </div>
-                    </UncontrolledTooltip>
-                </span>
-                <span className="deliveryReadyDate">
-                    {data.delivery_ready_date && 
-                        <>
-                            <span>Ritiro disponibile dal <span>{formatDateTime(data.delivery_ready_date)}</span></span> 
-                        </>
-                    }
-                    {!data.delivery_ready_date && <span>Non ancora disponibile al ritiro</span>}                                                     
-                </span>
-            </span>}    
-        {data.fromlibrary_note && <p className="fromlibrary_note"><i className="fas fa-sticky-note"></i>Note per l'utente: {data.fromlibrary_note}</p>}                  
+                    </UncontrolledTooltip>                
+            </div>}            
         </div>  
     )
 }

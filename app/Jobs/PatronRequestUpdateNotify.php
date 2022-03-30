@@ -1,4 +1,5 @@
 <?php
+//AL MOMENTO NON USATA
 
 namespace App\Jobs;
 
@@ -8,10 +9,10 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Requests\DocdelRequest;
-use App\Notifications\BorrowingDocdelRequestNotification;
+use App\Notifications\PatronDocdelRequestNotification;
 use App\Models\Requests\BorrowingDocdelRequest;
 
-class BorrowingRequestUpdateNotify implements ShouldQueue
+class PatronRequestUpdateNotify implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -21,7 +22,7 @@ class BorrowingRequestUpdateNotify implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(DocdelRequest $ddreq)
+    public function __construct(BorrowingDocdelRequest $ddreq)
     {
         $this->docdelreq=$ddreq;
     }
@@ -33,20 +34,18 @@ class BorrowingRequestUpdateNotify implements ShouldQueue
      */
     public function handle()
     {
-        //Notify to borrower        
-        $borrow=$this->docdelreq->borrowinglibrary;
+        //Notify to patron        
+
+        $patronreq=$this->docdelreq->patronRequest();
         
-        if($borrow) 
+        if($patronreq) 
         {
-            $borrowing=BorrowingDocdelRequest::findOrFail($this->docdelreq->id);
+            $n=new PatronDocdelRequestNotification($patronreq);
 
-            $n=new BorrowingDocdelRequestNotification($borrowing);
-
-            //get all lending operators
-            $oper= $borrow->operators("borr");
-                
-            foreach ($oper as $op)    
-                $op->notify($n);
+            //get patron
+            $patron= $patronreq->user();
+                              
+            $patron->notify($n);
         }
         //else no need to notify
     }

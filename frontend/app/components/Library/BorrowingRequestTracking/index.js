@@ -2,20 +2,26 @@ import React from 'react';
 import {useIntl} from 'react-intl';
 import { generatePath } from "react-router";
 import { Link } from 'react-router-dom';
-import {BorrowingStatus, statusIcon} from '../BorrowingItem'
+import {BorrowingStatus} from '../BorrowingItem'
+import {BorrowingPatronRequestStatus} from '../BorrowingPatronRequest'
 
 import './style.scss';
 
-const PatronTrackingItem = (props) => {
+const BorrowingPatronTrackingItem = (props) => {
 
     const {data} = props
+    const pdr=data.patrondocdelrequest.data 
+
     return (
         <div className="patronRequest">
-            <div className="itemHeader">
-                <i className="fas fa-user-circle"></i>
-                <span className="id"><span className="label">USER REQ ID:</span> {data.id}</span>&nbsp;-&nbsp; 
-                {data.user && <span className="user">{data.user.data.full_name}</span>}                
-                <span className="status"><span className="label">STATUS:</span> {data.status}</span>
+            <div className="itemHeader">                
+                <span className="id">
+                    <span className="label">
+                        <i className="fas fa-info-circle"></i> 
+                    </span> {pdr.id}                                        
+                </span>
+                <i className="fas fa-user-circle"></i> {pdr.user && <span className="user">{pdr.user.data.full_name}</span>}                                
+                <BorrowingPatronRequestStatus data={pdr}/>
             </div>
             <div className="itemData">
                 
@@ -39,14 +45,15 @@ const BorrowingTrackingItem = (props) => {
     return (
         <div className="borrowingRequest">
             <div className="itemHeader">                
-                {data.lendingLibrary && <i className="fas fa-share"></i>}                
+                {/*data.lendingLibrary && <><i className="fas fa-share"></i> &nbsp;</>*/}                
                 <span className="id">
                     {requestDetailPath && <Link className="requestLink" replace to={`${requestURL(data.id)}`}>                                    
-                        <span className="label"><i class="fas fa-info-circle"></i> </span> 
+                        <span className="label"><i className="fas fa-info-circle"></i> </span> 
                         {data.id}
                     </Link>}
-                    {!requestDetailPath && <><span className="label"><i class="fas fa-info-circle"></i> </span> 
-                        {data.id}</>}
+                    {!requestDetailPath && <><span className="label"><i className="fas fa-info-circle"></i> </span> 
+                        {data.id}
+                    </>}                    
                 </span>
 
                 {data.lendingLibrary && <span className="library">&nbsp;-&nbsp; {data.lendingLibrary.data.name}</span>}
@@ -67,7 +74,7 @@ const BorrowingRequestTrackingItem = (props) => {
     return (
         <li key={key} className={`trackingItem ${current?'currentReq':''}`}>
             {!data.docdel_request_parent_id && data.patrondocdelrequest &&
-                <PatronTrackingItem data={data.patrondocdelrequest.data}/>        
+                <BorrowingPatronTrackingItem data={data}/>        
             }    
             <BorrowingTrackingItem requestDetailPath={!current?requestDetailPath:null} data={data}/>                            
         </li>);

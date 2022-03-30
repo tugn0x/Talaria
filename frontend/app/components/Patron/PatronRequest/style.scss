@@ -1,7 +1,9 @@
 @import '../../../scss/variables';
 
 .patronrequest_data {
-    >span:first-child,
+    font-size: 0.85em;
+
+    /*& >span:first-child,
     .libraryLabel >span:first-child,
     .deliveryLabel>span:first-child,
     .requestDate >span:first-child,
@@ -10,7 +12,7 @@
     {
         color: #B48372;
         padding-right: 5px;
-    } 
+    } */
     
 }
 
@@ -39,8 +41,8 @@
 
 .status-text,
 .status-date {
-    display: inline-block;
-    vertical-align: top;
+    /*display: inline-block;
+    vertical-align: top;*/
 }
 
 .status-icon{
@@ -86,28 +88,13 @@
 }
 
 
-
-
-.patronrequest_data > span
-{
-    display:block;
+.forlibrary_note,
+.fromlibrary_note,
+.notfulfillreason {
+    display: inline;
+    margin-left: 5px;
 }
 
-.patronrequest_data
-{    
-    margin: 5px 0 0 0;
-    /*background-color: seashell;
-    padding: 5px;*/
-
-    & .fromlibrary_note,
-    .forlibrary_note {
-        font-style: italic;
-    }
-
-    & .fromlibrary_note >i,
-    .forlibrary_note >i
-    {
-        color: #B48372;
-        padding-right: 5px;        
-    } 
+.costpolicy {
+    font-size: 0.85em;
 }

@@ -36,7 +36,8 @@ class BorrowingDocdelRequest extends DocdelRequest
         //'desk_delivery_format', //formato di invio del della biblio al desk                
         'operator_id',
         'user_license', //(NULL=non impostato, 0=can't send pdf to user, 1=ok can send pdf to user,2=not specified in the lic.)
-        'user_cancel_date', //data rich canc da utente          
+        'user_cancel_date', //data rich canc da utente (uguale a pdr.cancel_date)         
+        'user_delivery_date', //data consegna/nonconsegna a utente
     ];
       
     protected static $observerClass=BorrowingDocdelRequestObserver::class;
@@ -123,11 +124,16 @@ class BorrowingDocdelRequest extends DocdelRequest
         return $this->belongsTo('App\Models\Users\User', 'operator_id');
     }
 
+    public function patron() {
+        if($this->patrondocdelrequest)
+            return $this->patrondocdelrequest->user;
+    }
+
     //called only from patron!
     public function userAskCancel() {
         if($this->patrondocdelrequest) 
         { 
-            $other=["user_cancel_date"=>Carbon::now()]; 
+            $other=["user_cancel_date"=>$this->patrondocdelrequest->cancel_date]; 
 
             if($this->borrowing_status=="newrequest")  //new request
                 $this->changeStatus("canceledDirect",$other);
@@ -286,9 +292,44 @@ class BorrowingDocdelRequest extends DocdelRequest
                             'lending_library_id'=>null]);                
                       }
                     break;
+                                           
+                case 'notDeliveredToUserDirect':                         
+                case 'notDeliveredToUser':  
+                        //update patronrequest                        
+                        if($this->patrondocdelrequest)
+                        {
+                            $this->patrondocdelrequest->fromlibrary_note=$others["fromlibrary_note"];
+                            $this->patrondocdelrequest->notfulfill_type=$others["notfulfill_type"]; 
+                            $this->patrondocdelrequest->save();
+                        }
+
+                        //note: update only borrowing fields (es: fromlibrary_note is for PDR only so i have to remove from $others)                        
+                        $others=[
+                            'archived'=>1,   
+                            'user_delivery_date'=>Carbon::now()                                               
+                        ];                                                   
+                       
+                        break;                                                                    
+                case 'deliveredToUser':                         
+                if($this->patrondocdelrequest)
+                {
+                    $this->patrondocdelrequest->fromlibrary_note=$others["fromlibrary_note"];                    
+                    $this->patrondocdelrequest->fulfill_date=Carbon::now();
+                    
+                    if($this->fulfill_type==config("constants.borrowingdocdelrequest_fulfill_type.URL"))
+                        $this->patrondocdelrequest->url=$this->url;
+
+                    $this->patrondocdelrequest->delivery_format=($this->fulfill_type==config("constants.borrowingdocdelrequest_fulfill_type.SED")||$this->fulfill_type==config("constants.borrowingdocdelrequest_fulfill_type.URL"))?$this->fulfill_type:null;
+                    $this->patrondocdelrequest->save();
+                }
+
+                //note: update only borrowing fields (es: fromlibrary_note is for PDR only so i have to remove from $others)                        
+                $others=[
+                    'archived'=>1,   
+                    'user_delivery_date'=>Carbon::now()                                               
+                ];                                                   
                 
-                    //TODO        
-                case 'notDeliveredToUserDirect': break;         
+                break;               
                 /*case 'forward': 
                     $others=array_merge($others,[
                         'forward'=>1,

@@ -27,7 +27,17 @@ class BorrowingDocdelRequestObserver extends BaseObserver
          //quando salvo viene messa in richiesta in quanto di default è status=requested         
          $model->request_type=0; //DD
          $model->forward=0;         
+         $model->request_date=null;
          $model->borrowing_status="newrequest";
+
+         if($model->patrondocdelrequest)
+            $model->operator_id=null;
+         else {
+            if(auth() && auth()->user()) {
+                $userid = auth()->user()->id;
+                $model->operator_id=$userid;
+            }
+         }    
             
          return parent::creating($model);
     }
@@ -35,12 +45,11 @@ class BorrowingDocdelRequestObserver extends BaseObserver
     
     public function saving($model)
     {        
-        if( (!$model->patrondocdelrequest && !$model->wasRecentlyCreated) || //è nuova ma non patronreq
-        $model->wasRecentlyCreated) //lo sto aggiornando (anche se è patronddreq non mi interessa)
+        if($model->id) //il modello esiste già => sono in update!
             if(auth() && auth()->user()) {
                 $userid = auth()->user()->id;
                 $model->operator_id=$userid;
-            }
+            }        
             
         if($model->isDirty('download'))
             $model->download_date=Carbon::now();

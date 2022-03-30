@@ -24,6 +24,8 @@ const BorrowingRequestPage = (props) => {
     const isNew = !params.id || params.id === 'new'    
     const isRequest = !isNew && params.id>0        
     const isEdit= params.id>0 && params.op && params.op==='edit' 
+    const isRequesting=params.op && params.op==='request'
+    const isDelivering=params.op && params.op==='deliver'
     const borrowing=library.borrowing
     const lendersList=library.libraryOptionList;
     //const tagsOptionList=library.tagsOptionList
@@ -142,6 +144,26 @@ const BorrowingRequestPage = (props) => {
         dispatch(requestGetLibrariesList(1,null,'profile_type',2)) //filtered by lender only
     }
 
+    const directUnfillCallback=(requestfields,filter=null) => {
+        console.log("Direct Unfill to patron",requestfields)
+        dispatch(requestChangeStatusBorrowing(params.id,match.params.library_id,'notDeliveredToUserDirect',requestfields,intl.formatMessage({id: "app.requests.unfilledToPatronMessage"}),filter))            
+    }
+    
+    const unfillCallback=(requestfields,filter=null) => {
+        console.log("Unfill to patron",requestfields)
+        dispatch(requestChangeStatusBorrowing(params.id,match.params.library_id,'notDeliveredToUser',requestfields,intl.formatMessage({id: "app.requests.unfilledToPatronMessage"}),filter))            
+    }
+
+    const directFulfillCallback=(requestfields) => {console.log("Direct fulfill to patron",requestfields)}
+
+    const fulfillCallback=(requestfields,filter) => {
+        console.log("Fulfill to patron",requestfields)
+        dispatch(requestChangeStatusBorrowing(params.id,match.params.library_id,'deliveredToUser',requestfields,intl.formatMessage({id: "app.requests.fulfilledToPatronMessage"}),filter))            
+    
+    }
+
+    const deliverCallback=(requestfields) => {console.log("Deliver to desk",requestfields)}
+
     return (
         <Loader show={isLoading}>
             <div className="detail">
@@ -150,7 +172,7 @@ const BorrowingRequestPage = (props) => {
                     title={isNew?messages.headerNew:messages.headerDetail}
                 />                 
                 {(isRequest && !isEdit && Object.keys(borrowing).length>0) &&                                 
-                    <BorrowingDetail requestDetailPath={requestDetailPath} history={props.history} data={borrowing} sendRequestToLender={sendRequestToLender} findLender={findLender} lendersList={lendersList} />                      
+                    <BorrowingDetail requestDetailPath={requestDetailPath} history={props.history} data={borrowing} sendRequestToLender={sendRequestToLender} findLender={findLender} lendersList={lendersList} isDelivering={isDelivering} isRequesting={isRequesting} directUnfillCallback={directUnfillCallback} unfillCallback={unfillCallback} directFulfillCallback={directFulfillCallback} fulfillCallback={fulfillCallback} deliverCallback={deliverCallback}/>                      
                 ||
                 (isNew && isMounted) &&                 
                 <ReferenceForm    

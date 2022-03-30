@@ -1,7 +1,8 @@
 <?php
 //NOTES:
 //- status "name" must be less than 20 char lenght!
-//- role are not defined, so averyone can call these statusChange
+//- role/constraint are not defined, so averyone can call these statusChange
+   //otherwise was too difficult to filter these methods
 //- everytime you change this, please run: php artisan cache:clear + php artisan optimize 
 
 return [
@@ -74,7 +75,7 @@ return [
                     'received'	=> [
                         'role'  =>  [],
                         'next_statuses'  =>  [],
-                        'constraints'   =>  ['isOwner'],
+                       // 'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
                             'Model'=>'owner',
                         ],
@@ -84,7 +85,7 @@ return [
                     'notReceived'	=> [
                         'role'  =>  [],
                         'next_statuses'  =>  [],
-                        'constraints'   =>  ['isOwner'],
+                        //'constraints'   =>  ['isOwner'],
                         'notify'    =>  [
                             'Model'=>'owner',
                         ],
@@ -162,40 +163,61 @@ return [
                     ],                    
                     'documentReady'	=> [ 
                         'role'  =>  [],
-                        'next_statuses'  =>  [''], 
+                        'next_statuses'  =>  ['deliveredToUser','notDeliveredToUser'], 
                         'constraints'   =>  ["canManage"],  
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                                                        
                         ],                          
+                        'jobs' => ['App\\Jobs\\BorrowingUpdatePatronRequest']
                     ],                    
                     'documentNotReady'	=> [ 
                         'role'  =>  [],
-                        'next_statuses'  =>  [''], 
+                        'next_statuses'  =>  ['notDeliveredToUser'], 
                         'constraints'   =>  ["canManage"],  
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                                                        
                         ],                          
+                        'jobs' => ['App\\Jobs\\BorrowingUpdatePatronRequest']
                     ],
                     //this configuration is needed by status resolver to exists because it checks when do status change FROM this state
                     //and because it's used just in the case of a new request (but with parent) that must be set as notReceived+archived
                     //also the lender will change that directly without doing a borrow->changeStatus
                     'notReceived'	=> [ 
                         'role'  =>  [],
-                        'next_statuses'  =>  [''], 
+                        'next_statuses'  =>  ['notDeliveredToUser'], 
                         'constraints'   =>  ["canManage"],                                                   
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                                                        
                         ],  
+                        'jobs' => ['App\\Jobs\\BorrowingUpdatePatronRequest']
                     ],
-                    //todo: notDeliveredToUser,notReceivedArchived?,deliveredToUser,documentReadyArchived?
+                    //todo: notReceivedArchived?,documentReadyArchived?
                     'notDeliveredToUserDirect' => [
                         'role'  =>  [],
                         'next_statuses'  =>  [''], 
                         'constraints'   =>  ["canManage"],
                         'notify'    =>  [
-                            'Model'=>'borrowingLibraryOperators',                                                        
+                            'Model'=>'borrowingLibraryOperators',                                                                                    
                         ], 
-                        /*'jobs' => ['App\\Jobs\\PatronRequestUpdateNotify']*/
+                        'jobs' => ['App\\Jobs\\BorrowingUpdatePatronRequest']
+                    ],
+                    'notDeliveredToUser' => [
+                        'role'  =>  [],
+                        'next_statuses'  =>  [''], 
+                        'constraints'   =>  ["canManage"],
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',                                                                                    
+                        ], 
+                        'jobs' => ['App\\Jobs\\BorrowingUpdatePatronRequest']
+                    ],
+                    'deliveredToUser' => [
+                        'role'  =>  [],
+                        'next_statuses'  =>  [''], 
+                        'constraints'   =>  ["canManage"],
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',                                                                                    
+                        ], 
+                        'jobs' => ['App\\Jobs\\BorrowingUpdatePatronRequest']
                     ]
 
 

@@ -26,22 +26,20 @@ class DocdelRequest extends BaseModel
         'request_protnr', //dd_nprotrichie
         'request_note', //dd_note_richforni
         'on_cost', //dd_costofn
-        'fulfill_date', //dd_dataeva
+        'fulfill_date', //dd_dataeva (for both fulfil/notfulfill)
         'fulfill_protnr', //dd_nproteva borrow
         'fulfill_location', //dd_collocazione (ricavata da ACNP)
         'fulfill_note', //dd_note_fornirich       
         'fulfill_type',    //tipo evasione (=SentiVia/DeliveryMethod ISO18626: ArticleExchange,Ariel,Email,Mail,Odyssey,URL,FTP) + file + url?
 	    'notfulfill_type', //tipo inevasione (prendere da NILDE global_const $DDILL_INEVASO_xxx + "fornitore non disp" + "altro" (con descrizione in borr_notes) )        
         'filename',
+        //'file_id', //TODO & CHECK
         'file_status', //Stato del file se inviato in NILDE: 0-non disponibile; 1-disponibile; 2-disponibile con HC
         'cancel_request_date', //data richiesta annullamento alla lender
         'cancel_date', //data accettazione richiesta annullamento da lender
         'fulfill_inventorynr', //dd_ninventario_forni        
         'all_lender', //0=no, 1=all lending library will see this request, 2=some lending libraries will see this request        
         'url',        
-        //patron_file
-        //patron_file_status
-        //patron_file_download      
 
         
         //TODO

@@ -79,32 +79,11 @@ class PatronDocdelRequestController extends ApiController
         $model = $this->model->findOrFail($id);
 
         if($request->input("status"))
-        {
-            $sr=new StatusResolver($model);
-            
-            $newstatus=$request->input("status");
-
-            $others=[];
-
-            switch ($newstatus)
-            {
-               // case 'userAskCancel': $others=['cancel_request_date'=>Carbon::now()]; break;
-                
-                case 'canceled': $others=['cancel_date'=>Carbon::now(),'archived'=>1]; break;
-                
-                case "waitingForCost": $others=['cost'=>$request->input("cost")]; break;
-                
-                case "costAccepted": 
-                case "costNotAccepted": $others=['answer_cost_date'=>Carbon::now()]; break;
-                
-                case "readyToDelivery": $others=['delivery_ready_date'=>Carbon::now()]; break;
-                
-                case 'received': $others=['fulfill_date'=>Carbon::now()]; break;    
-                case 'notReceived': $others=['notfulfill_date'=>Carbon::now()]; break;                    
-            }
-
-            $model=$sr->changeStatus($newstatus,$others);                        
-        }
-        return $this->response->item($model, new $this->transformer())->morph();
+            $model=$model->changeStatus($request->input("status"));                        
+        
+        if($model)
+            return $this->response->item($model, new $this->transformer())->morph();
+        else 
+            return $this->response->noContent();            
     }
 }
