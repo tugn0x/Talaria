@@ -64,9 +64,10 @@ return [
         'notanswer'=>3 
     ],
     'patrondocdelrequest_delivery_format' => [
-        'PaperCopy'=>1,
-        'PDF'=>2,
-        'URL'=>3 
+        'PaperCopy'=>2,
+        'File'=>1,
+        'URL'=>3,
+        'Other'=>4
     ],
     'patrondocdelrequest_notfulfill_type' => [
         'notavailable'=>1,
@@ -94,5 +95,9 @@ return [
         'WrongRef'=>5,
         'MaxReqNumber'=>6,
         'Other'=>7,
+    ],
+    'borrowingdocdelrequest_desk_delivery_format' => [
+        'PaperCopy'=>2,
+        'File'=>1,        
     ],
 ]; 

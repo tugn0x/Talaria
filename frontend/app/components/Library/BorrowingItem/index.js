@@ -43,6 +43,20 @@ export const deliveryMethod=(data) => {
     
 }
 
+export const deskDeliveryFormat=(data) => {
+    let intl=useIntl();
+    let icon=""
+    let alt="";
+    switch (data.desk_delivery_format) {
+        case 1: icon="fa-file"; alt=intl.formatMessage({id: "app.requests.desk_delivery_format.file"}); break;
+        case 2: icon="fa-envelope"; alt=intl.formatMessage({id: "app.requests.desk_delivery_format.mail"}); break;        
+    }
+    
+    return <i title={alt} className={"simple_icon fas "+icon}></i>;         
+}
+
+
+
 const lendingUnfilledReason = (data) => {
     let intl=useIntl();
     let ret=""
@@ -135,7 +149,13 @@ const statusInfo = (req) => {
         
         </span>
         }              
-       
+        {req.desk_delivery_date && <span className="status-date">
+            <i className="fas fa-truck-loading"></i> {formatDateTime(req.desk_delivery_date)}
+            {req.desk_delivery_format && <span className="deskDeliveryFormat">{deskDeliveryFormat(req)}</span>}
+        </span>}
+        {req.desk_received_date && <span className="status-date"><i className="fas fa-envelope"></i> {formatDateTime(req.desk_received_date)}</span>}
+        
+               
         {req.cancel_date && <span className="status-date"><i className="fas fa-times"></i> {formatDateTime(req.cancel_date)}</span>}
        
         {req.forward==1 && req.forward_date && 
@@ -381,12 +401,16 @@ export const BorrowingRequestIcons = (props) => {
                 {/*casi di evasione/inevasione a patron DIRETTA*/}
                 {canPatronReqDirectManaged(data) && 
                 <>
-                    <Link className="btn btn-link" to={requesturl(reqPath,data.id,'deliver')}>Evadi/inevadi dir</Link>                                        
+                    <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}>
+                        <i className="fas fa-truck text-info"></i> 
+                    </Link>                                     
                 </>
                 }    
                 {/*casi di evasione/inevasione a patron DOPO DD*/}
-                {canFulfillToPatron(data) &&  <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}><i className="fas fa-truck text-warning"></i></Link>}                                                
-                {canUnfillToPatron(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}><i className="fas fa-poo"></i></Link>}                                
+                {canFulfillToPatron(data) &&  <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}><i className="fas fa-truck text-success"></i></Link>}                                                
+                {canUnfillToPatron(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}>
+                <span className="fa-stack"><i className="fas fa-truck fa-stack-2x text-warning"></i><i className="fas fa-times fa-stack-2x"></i></span>
+                </Link>}                                
                 
                 {/*casi di evasione/inevasione SENZA patron DOPO DD*/}
                 

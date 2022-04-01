@@ -161,8 +161,20 @@ const BorrowingRequestPage = (props) => {
         dispatch(requestChangeStatusBorrowing(params.id,match.params.library_id,'deliveredToUser',requestfields,intl.formatMessage({id: "app.requests.fulfilledToPatronMessage"}),filter))            
     
     }
+ 
+    const deliverCallback=(requestfields,filter) => {
+        console.log("Deliver to desk",requestfields)
+        let st=""
 
-    const deliverCallback=(requestfields) => {console.log("Deliver to desk",requestfields)}
+        if(requestfields.desk_delivery_format=='2') //2=paper
+            st="deliveringToDesk" 
+
+        else if(requestfields.desk_delivery_format=='1') //file to print
+            st="deskReceived"
+
+        
+        dispatch(requestChangeStatusBorrowing(params.id,match.params.library_id,st,requestfields,intl.formatMessage({id: "app.requests.deliveredToDeskMessage"}),filter))                 
+    }
 
     return (
         <Loader show={isLoading}>

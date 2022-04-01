@@ -6,7 +6,7 @@ import './style.scss';
 
 
 
-const statusDate = (data) => {
+/*const statusDate = (data) => {
   let date="";
   switch (data.status)
   {
@@ -27,7 +27,7 @@ const statusDate = (data) => {
   }
   
   return <span className="status-date"><i className="fas fa-clock"></i> {formatDateTime(date)}</span>
-}
+}*/
 
 const notfulfillReason = (data) => {
     let intl=useIntl();
@@ -57,6 +57,30 @@ const costPolicy = (data) => {
                 
         return ret;    
 }
+
+
+export const deliveryFormat=(data) => {
+    let intl=useIntl();
+    let icon=""
+    let alt="";
+    switch (data.delivery_format) {
+        case 1: icon="fa-file"; alt=intl.formatMessage({id: "app.patronrequest.delivery_format.file"}); break;
+        case 2: icon="fa-scroll"; alt=intl.formatMessage({id: "app.patronrequest.delivery_format.papercopy"}); break;        
+        case 3: icon="fa-external-link-alt"; alt=intl.formatMessage({id: "app.patronrequest.delivery_format.url"}); break;        
+    }
+    
+    return <i title={alt} className={"simple_icon fas "+icon}></i>;         
+}
+
+const documentAccess=(data) => {
+    return (
+        <div className="documentAccess">
+        {data.status=="received" && (data.delivery_format==1||data.delivery_format==3) && <a className="btn btn-icon" onClick={()=>alert("TODO: open document !")}>{deliveryFormat(data)}</a>}                
+      
+        {data.status=="received" && data.delivery_format==2 && <span>{deliveryFormat(data)}</span>}         
+        </div>
+    )
+}
   
 
 
@@ -79,6 +103,7 @@ export const PatronRequestStatus = (props) => {
         </span>}                    
                
         {data.cancel_date && <span className="status-date"><i className="fas fa-times"></i> {formatDateTime(data.cancel_date)}</span>}
+        {data.delivery_ready_date && <span className="status-date"><i className="fas fa-luggage-cart"></i> {formatDateTime(data.delivery_ready_date)}</span>}                
         {data.fulfill_date && 
         <span className="status-date"><i className="fas fa-reply"></i> {formatDateTime(data.fulfill_date)}
             {data.notfulfill_type && <div className="notfulfillreason">
@@ -93,9 +118,9 @@ export const PatronRequestStatus = (props) => {
                 <UncontrolledTooltip autohide={false} placement="right" target={`tooltipfulfillnote-${data.id}`}>
                     {data.fromlibrary_note}
                 </UncontrolledTooltip>                                
-            </div>}           
-        </span>}
-        {data.delivery_ready_date && <span className="status-date"><i className="fas fa-luggage-cart"></i> {formatDateTime(data.delivery_ready_date)}</span>}        
+            </div>} 
+            {documentAccess(data)}                 
+        </span>}        
         {<span className="costpolicy"><i className="fas fa-coins"></i> {costPolicy(data)} </span>}                
         </>
     )

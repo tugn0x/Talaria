@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {Card, Form as FormContainer, FormGroup, Button} from 'reactstrap';
 import Input from '../../Form/Input';
 import {useIntl} from 'react-intl';
@@ -8,20 +8,27 @@ import {canPatronReqDirectManaged,hasBeenDownloaded,isFile,isMail,isURL,isFAX,is
 
 const BorrowingRequestDeliverToDesk = props => {
     console.log('BorrowingRequestDeliverToDesk', props)
-    const {deliverCallback,data}=props
+    const {data,deliverCallback}=props
 
     const intl = useIntl()
-    const [formData,setFormData]=useState({
-        fromlibrary_note:'',    
+
+    const [submitEnable, setSubmitEnable]=useState(false);
+
+    const [formData,setFormData]=useState({        
+        desk_delivery_format:null
     });
-    
+       
     const handleChange = (value, field_name) =>{
-        setFormData({ ...formData, [field_name]: value});        
+        setFormData({ ...formData, [field_name]: value});                     
     }    
-    
-    const onSubmit=(e)=>{     
-                    
-        e.preventDefault();    
+
+    const setDeskDeliveryType=(ty) => {                 
+        handleChange(ty,'desk_delivery_format');  //1=file, 2=paper         
+        setSubmitEnable(true) 
+    }
+
+    const onSubmit=(e)=>{                         
+        e.preventDefault();   
         deliverCallback(formData)
     }
         
@@ -32,22 +39,36 @@ return (<div>
                                     {(canPatronReqDirectManaged(data) || ( isMail(data)||(isURL(data) && hasBeenDownloaded(data))||isFAX(data)||isArticleExchange(data)||isOther(data)) )&&
                                     <>
                                         <FormGroup >
-                                            <span>- file upload and send to desk</span>
+                                            <div>Choose: <input type="file"/></div>
+                                            <div className="d-flex justify-content-between">  
+                                                <Button type="button" disabled={submitEnable} onClick={(e)=>setDeskDeliveryType(1)} className="mt-0" color="info">
+                                                file upload and send to desk 
+                                                </Button> 
+                                            </div>
+
                                         </FormGroup>                                                                                                            
                                         <FormGroup >
-                                            <span>- send paper to desk</span>
+                                            <div className="d-flex justify-content-between">                                        
+                                                <Button type="button" disabled={submitEnable} onClick={(e)=>setDeskDeliveryType(2)} className="mt-0" color="info">
+                                                send paper to desk
+                                                </Button> 
+                                            </div>
+                                            
                                         </FormGroup>
                                     </>
                                     }
-                                    {isFile(data) && hasBeenDownloaded(data) && <FormGroup>
-                                        <span>- forward file to desk to print!</span>
-                                    </FormGroup>}
-
+                                    {isFile(data) && hasBeenDownloaded(data) && <FormGroup>                                        
+                                        <div className="d-flex justify-content-between">                                        
+                                            <Button type="button" disabled={submitEnable} onClick={(e)=>setDeskDeliveryType(1)} className="mt-0" color="info">
+                                            forward file to desk to print!
+                                            </Button> 
+                                        </div>
+                                    </FormGroup>}     
                                     <div className="d-flex justify-content-between">                                        
-                                        <Button type="submit" className="mt-0" color="info">
-                                            {intl.formatMessage({id:"app.requests.sendToDesk"})}
-                                        </Button>                         
-                                    </div>
+                                            <Button type="submit" className="mt-0" color="info" disabled={!submitEnable}>
+                                                {intl.formatMessage({id:"app.requests.sendToDesk"})}
+                                            </Button> 
+                                        </div>                               
                             </Card>
                             </FormContainer>
     

@@ -98,7 +98,7 @@ return [
                 'flow_tree' => [
                     'newrequest'	=> [
                         'role'  =>  [],
-                    'next_statuses'  =>  ['canceled','canceledDirect','requested','notDeliveredToUserDirect','notReceived'/*,'DeliveredToUserDirect','DeliveringToDesk'*/],
+                    'next_statuses'  =>  ['canceled','canceledDirect','requested','notDeliveredToUserDirect','notReceived','deliveredToUserDirect','deliveringToDesk'],
                         'constraints'   =>  [],                        
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                            
@@ -163,7 +163,7 @@ return [
                     ],                    
                     'documentReady'	=> [ 
                         'role'  =>  [],
-                        'next_statuses'  =>  ['deliveredToUser','notDeliveredToUser'], 
+                        'next_statuses'  =>  ['deliveredToUser','notDeliveredToUser','deskReceived','deliveringToDesk'], 
                         'constraints'   =>  ["canManage"],  
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                                                        
@@ -197,7 +197,7 @@ return [
                         'next_statuses'  =>  [''], 
                         'constraints'   =>  ["canManage"],
                         'notify'    =>  [
-                            'Model'=>'borrowingLibraryOperators',                                                                                    
+                            'Model'=>'borrowingLibraryOperators',                                                                                                                
                         ], 
                         'jobs' => ['App\\Jobs\\BorrowingUpdatePatronRequest']
                     ],
@@ -206,7 +206,7 @@ return [
                         'next_statuses'  =>  [''], 
                         'constraints'   =>  ["canManage"],
                         'notify'    =>  [
-                            'Model'=>'borrowingLibraryOperators',                                                                                    
+                            'Model'=>'borrowingLibraryOperators',                                                                                                                
                         ], 
                         'jobs' => ['App\\Jobs\\BorrowingUpdatePatronRequest']
                     ],
@@ -215,12 +215,49 @@ return [
                         'next_statuses'  =>  [''], 
                         'constraints'   =>  ["canManage"],
                         'notify'    =>  [
-                            'Model'=>'borrowingLibraryOperators',                                                                                    
+                            'Model'=>'borrowingLibraryOperators',       
+                            //'Model'=>'deskLibraryOperators'                                                                             
                         ], 
                         'jobs' => ['App\\Jobs\\BorrowingUpdatePatronRequest']
-                    ]
-
-
+                    ],
+                    'deliveredToUserDirect' => [
+                        'role'  =>  [],
+                        'next_statuses'  =>  [''], 
+                        'constraints'   =>  ["canManage"],
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',       
+                            //'Model'=>'deskLibraryOperators'                                                                             
+                        ], 
+                        'jobs' => ['App\\Jobs\\BorrowingUpdatePatronRequest']
+                    ],
+                    'deliveringToDesk' => [
+                        'role'  =>  [],
+                        'next_statuses'  =>  ['deskReceived','deskNotReceived'], 
+                        'constraints'   =>  ["canManage"],
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',         
+                            //'Model'=>'deskLibraryOperators'                                                                           
+                        ],                                 
+                    ],
+                    'deskReceived' => [
+                        'role'  =>  [],
+                        'next_statuses'  =>  ['deliveredToUser','deliveredToUserDirect'], 
+                        'constraints'   =>  ["canManage"],
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators',                                                                                    
+                            //'Model'=>'deskLibraryOperators'
+                        ], 
+                        'jobs' => ['App\\Jobs\\PatronRequestUpdateNotify'] //notify to patron
+                    ],
+                    'deskNotReceived' => [
+                        'role'  =>  [],
+                        'next_statuses'  =>  ['notDeliveredToUserDirect','documentNotReady'], 
+                        'constraints'   =>  ["canManage"],
+                        'notify'    =>  [
+                            'Model'=>'borrowingLibraryOperators', 
+                            //'Model'=>'deskLibraryOperators'                                                                                   
+                        ],                         
+                    ],                    
                 ]
             ],
             'App\Models\Requests\LendingDocdelRequest'=> [

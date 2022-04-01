@@ -1,5 +1,4 @@
 <?php
-//AL MOMENTO NON USATA
 
 namespace App\Jobs;
 

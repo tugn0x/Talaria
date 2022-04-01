@@ -13,7 +13,7 @@ const BorrowingRequestFulfillToPatron = props => {
     const {fulfillCallback,data}=props
 
     const intl = useIntl()
-    const [formData,setFormData]=useState({
+    const [formData,setFormData]=useState({        
         fromlibrary_note:'',          
     });
     

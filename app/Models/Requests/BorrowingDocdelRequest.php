@@ -33,7 +33,9 @@ class BorrowingDocdelRequest extends DocdelRequest
         'archived', //0|1 indica se la rich è archiviata
         'archived_date',
         'forward', //0|1 indica se la rich è stata reinoltrata (la rich reinoltrata avrà parent_id=id di questa richiesta)
-        //'desk_delivery_format', //formato di invio del della biblio al desk                
+        'desk_delivery_format', //formato di invio del della biblio al desk  (1=file/2=carta)              
+        'desk_received_date', //data ricezione posta al desk
+        'desk_delivery_date', //data spedizione posta al desk
         'operator_id',
         'user_license', //(NULL=non impostato, 0=can't send pdf to user, 1=ok can send pdf to user,2=not specified in the lic.)
         'user_cancel_date', //data rich canc da utente (uguale a pdr.cancel_date)         
@@ -118,6 +120,10 @@ class BorrowingDocdelRequest extends DocdelRequest
     {
         return parent::borrowinglibrary();
     }        
+
+    public function deskLibraryOperators() {
+        //TODO
+    }
 
     public function operator()
     {        
@@ -311,15 +317,27 @@ class BorrowingDocdelRequest extends DocdelRequest
                        
                         break;                                                                    
                 case 'deliveredToUser':                         
-                if($this->patrondocdelrequest)
+                if($this->patrondocdelrequest) 
                 {
                     $this->patrondocdelrequest->fromlibrary_note=$others["fromlibrary_note"];                    
                     $this->patrondocdelrequest->fulfill_date=Carbon::now();
-                    
-                    if($this->fulfill_type==config("constants.borrowingdocdelrequest_fulfill_type.URL"))
-                        $this->patrondocdelrequest->url=$this->url;
 
-                    $this->patrondocdelrequest->delivery_format=($this->fulfill_type==config("constants.borrowingdocdelrequest_fulfill_type.SED")||$this->fulfill_type==config("constants.borrowingdocdelrequest_fulfill_type.URL"))?$this->fulfill_type:null;
+                    if(!$this->patrondocdelrequest->delivery_format || $this->patrondocdelrequest->delivery_format!=config("constants.patrondocdelrequest_delivery_format.PaperCopy")) // NOT (was sent to desk to be printed)                   
+                    {
+                        //sharing URL/file from borrowing
+
+                        if($this->fulfill_type==config("constants.borrowingdocdelrequest_fulfill_type.URL"))
+                        {
+                            $this->patrondocdelrequest->url=$this->url;
+                            $this->patrondocdelrequest->delivery_format=config("constants.patrondocdelrequest_delivery_format.URL"); 
+                        }
+                        else if($this->fulfill_type==config("constants.borrowingdocdelrequest_fulfill_type.SED"))
+                        {
+                            $this->patrondocdelrequest->filename=$this->filename;    
+                            $this->patrondocdelrequest->delivery_format=config("constants.patrondocdelrequest_delivery_format.File"); 
+                        }
+                    }
+                   
                     $this->patrondocdelrequest->save();
                 }
 
@@ -329,7 +347,35 @@ class BorrowingDocdelRequest extends DocdelRequest
                     'user_delivery_date'=>Carbon::now()                                               
                 ];                                                   
                 
-                break;               
+                break;  
+                
+                case 'deskReceived': 
+                    if($this->patrondocdelrequest) {
+                        
+                        $others=array_merge($others,[                                
+                            'desk_received_date'=>Carbon::now()                                               
+                        ]); 
+
+                        $this->patrondocdelrequest->delivery_format=config("constants.patrondocdelrequest_delivery_format.PaperCopy");                        
+                        $this->patrondocdelrequest->status="readyToDelivery";
+                        $this->patrondocdelrequest->delivery_ready_date=Carbon::now();
+                        $this->patrondocdelrequest->save();
+
+                        
+                    }
+                    
+                    break;
+                
+                case 'deliveringToDesk': 
+                    if($this->patrondocdelrequest) {
+                        $this->patrondocdelrequest->delivery_format=config("constants.patrondocdelrequest_delivery_format.PaperCopy");
+                        $this->patrondocdelrequest->save();
+
+                        $others=array_merge($others,[                                
+                            'desk_delivery_date'=>Carbon::now()                                               
+                        ]);   
+                    }
+                    break;
                 /*case 'forward': 
                     $others=array_merge($others,[
                         'forward'=>1,
