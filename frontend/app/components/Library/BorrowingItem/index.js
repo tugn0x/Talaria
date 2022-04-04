@@ -36,7 +36,7 @@ export const deliveryMethod=(data) => {
         case 6: icon="Other"; alt=intl.formatMessage({id: "app.requests.deliveryMethod.other"}); break;
     }
     
-    if(data.fulfill_type && data.fulfill_type<=4) return <i title={alt} className={"simple_icon fa-border fas "+icon}></i>;     
+    if(data.fulfill_type && data.fulfill_type<=4) return <i title={alt} className={"simple_icon fas "+icon}></i>;     
     if(data.fulfill_type && data.fulfill_type>=5) return alt?<span>({alt})</span>:'';
     
     return '';
@@ -76,11 +76,11 @@ const lendingUnfilledReason = (data) => {
 const documentAccess=(data) => {
     return (
         <>
-        {!canSavedAsDownloaded(data) && data.borrowing_status=="fulfilled" && isFile(data) && <span><a className="btn btn-icon"><i className="fas fa-hourglass-half"></i></a> (waiting HC)</span>}   
+        {!canSavedAsDownloaded(data) && data.borrowing_status=="fulfilled" && isFile(data) && <button type="button" class="btn-warning btn-sm"><i className="fas fa-hourglass-half"></i> (waiting HC)</button>}   
         
-        {isFile(data) && <a className="btn btn-icon" onClick={()=>alert("TODO: open document !")}><i className="fas fa-download"></i></a>}                
+        {isFile(data) && <button type="button" class="btn-primary btn-sm" onClick={()=>alert("TODO: view document !")}>Download <i className="fas fa-file"></i></button>}                
       
-        {isURL(data) && <a className="btn btn-icon" onClick={()=>alert("TODO: open URL!")}><i className="fas fa-external-link-alt"></i></a>}         
+        {isURL(data) && <button type="button" class="btn-primary btn-sm" onClick={()=>alert("TODO: open url !")}>Open URL <i className="fas fa-external-link-alt"></i></button>}         
         </>
     )
 }
@@ -111,8 +111,8 @@ const statusInfo = (req) => {
   }  */
 
   return (
-      <>        
-        {req.borrowing_status=="newrequest" && <span className="status-date"><i className="fas fa-plus"></i> {formatDateTime(req.created_at)}</span>}        
+      <>
+        {req.created_at && <span className="status-date"><i className="fas fa-plus"></i> {formatDateTime(req.created_at)}</span>}        
         {req.request_date && <span className="status-date">
             <i className="fas fa-share"></i> {formatDateTime(req.request_date)}
             {req.request_note && <div className="request_note">
@@ -122,38 +122,41 @@ const statusInfo = (req) => {
                 </UncontrolledTooltip>                                
             </div>}                     
         </span>}        
-        {(req.borrowing_status=="fulfilled"||req.borrowing_status=="notReceived" ||
+        {/*(req.borrowing_status=="fulfilled"||req.borrowing_status=="notReceived" ||
          req.borrowing_status=="documentReady"||req.borrowing_status=="documentNotReady" ||
-         req.borrowing_status=="notDeliveredToUser"||req.borrowing_status=="notDeliveredToUserDirect") &&
+         req.borrowing_status=="notDeliveredToUser"||req.borrowing_status=="notDeliveredToUserDirect") &&*/
         
-        <span className="status-date">
-            <i className="fas fa-reply"></i> {formatDateTime(
-                (req.borrowing_status=="fulfilled"||req.borrowing_status=="notReceived") && req.fulfill_date ? req.fulfill_date :
-                (req.borrowing_status=="documentReady"||req.borrowing_status=="documentNotReady") && req.ready_date ? req.ready_date :                    
-                (req.borrowing_status=="notDeliveredToUser"||req.borrowing_status=="notDeliveredToUserDirect") && req.user_delivery_date? req.user_delivery_date: null
-            )} 
-                        
-            {req.notfulfill_type && <div className="unfilled_reason">
-            <span id={`unfilled_reason-${req.id}`} className="active"><i className="fas fa-comment text-danger"></i></span> 
-                    <UncontrolledTooltip autohide={false} placement="right" target={`unfilled_reason-${req.id}`}>
-                        {lendingUnfilledReason(req)}
-                    </UncontrolledTooltip>                                
-            </div>}
+        <>
+            
+            {req.fulfill_date && 
+                <span className="status-date">
+                    <i className="fas fa-reply"></i> {formatDateTime(req.fulfill_date)}  
+                    {req.fulfill_type && <span className="deliverymethod">{deliveryMethod(req)}</span> }            
+                    {req.notfulfill_type && <div className="unfilled_reason">
+                    <span id={`unfilled_reason-${req.id}`} className="active"><i className="fas fa-comment text-danger"></i></span> 
+                            <UncontrolledTooltip autohide={false} placement="right" target={`unfilled_reason-${req.id}`}>
+                                {lendingUnfilledReason(req)}
+                            </UncontrolledTooltip>                                
+                    </div>}
 
-            {req.fulfill_note && <div className="fulfill_notes">
-                <span id={`fulfilnote-${req.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
-                <UncontrolledTooltip autohide={false} placement="right" target={`fulfilnote-${req.id}`}>
-                    {req.fulfill_note}
-                </UncontrolledTooltip>                                
-            </div>}
-        
-        </span>
+                    {req.fulfill_note && <div className="fulfill_notes">
+                        <span id={`fulfilnote-${req.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
+                        <UncontrolledTooltip autohide={false} placement="right" target={`fulfilnote-${req.id}`}>
+                            {req.fulfill_note}
+                        </UncontrolledTooltip>                                
+                    </div>}
+                </span>
+            }
+            {req.borrowing_status=="documentReady" && req.ready_date && <span className="status-date"><i class="fas fa-check-circle"></i> {formatDateTime(req.ready_date)} </span>}
+            {req.borrowing_status=="documentNotReady" && req.ready_date && <span className="status-date"><i class="fas fa-times-circle"></i> {formatDateTime(req.ready_date)} </span>}
+            {req.user_delivery_date && <span className="status-date"><i className="fas fa-luggage-cart"></i> {formatDateTime(req.user_delivery_date)} </span>}                                                                       
+        </>
         }              
         {req.desk_delivery_date && <span className="status-date">
             <i className="fas fa-truck-loading"></i> {formatDateTime(req.desk_delivery_date)}
             {req.desk_delivery_format && <span className="deskDeliveryFormat">{deskDeliveryFormat(req)}</span>}
         </span>}
-        {req.desk_received_date && <span className="status-date"><i className="fas fa-envelope"></i> {formatDateTime(req.desk_received_date)}</span>}
+        {req.desk_received_date && <span className="status-date"><i className="fas fa-box-open"></i> {formatDateTime(req.desk_received_date)}</span>}
         
                
         {req.cancel_date && <span className="status-date"><i className="fas fa-times"></i> {formatDateTime(req.cancel_date)}</span>}
@@ -335,7 +338,7 @@ export const BorrowingStatus = (props) => {
     return (
         <div className={"borrowing_status " + (customClass?customClass:'')}>            
             <span className={statusIcon(data.borrowing_status)}></span> 
-            <span className="status-text">{data.borrowing_status ? intl.formatMessage({id: "app.requests."+data.borrowing_status}):'xxx'} <span className="fulfill_type">{deliveryMethod(data)}</span></span>                    
+            <span className="status-text">{data.borrowing_status ? intl.formatMessage({id: "app.requests."+data.borrowing_status}):'xxx'}</span>                    
             {data.operator && <div className="status-operator">
                 <i className="simple_icon fas fa-user-cog"></i> { data.operator.data.full_name}
                 {data.borrowing_notes && <span className="borrowing_notes">
