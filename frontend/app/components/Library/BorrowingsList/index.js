@@ -273,7 +273,7 @@ const BorrowingsList = (props) => {
                 updateISSNISBNcallback={(data)=>updateISSNISBNcallback(data,currentReq)}
                 />                    
             </CustomModal>
-            {Object.keys(pagination).length &&
+            {Object.keys(pagination).length>0 &&
                 <Pagination
                     total={total}
                     count={count}
@@ -281,7 +281,7 @@ const BorrowingsList = (props) => {
                     current_page={current_page}
                     total_pages={total_pages}
                     linkToPage={(page, pagesize) => searchOptions.getSearchList(page,pagesize, multiFilter )}
-                />
+                />    
             }
             </>
         
