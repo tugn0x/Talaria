@@ -54,6 +54,7 @@ function BasePage(props) {
     })
   }
 
+  //route da visualizzare nel menu (filtrate in base al ruolo/permessi sulla risorsa)
   const lightRoutes = props.routes && mapRoutes(props.routes, props.auth, props.resource, '')
   
   const closeSideBar = () => {
@@ -101,9 +102,14 @@ function BasePage(props) {
                           location={props.location}/>
                       </Col>
                   }
-                  <Col md={windowSize === 'desktop' ? 9 : 12}> 
+                  <Col md={windowSize === 'desktop' ? 9 : 12}>                     
                     <Switch>
-                      {props.routes && props.routes.map((route, idx) => {
+                      {props.routes && 
+                      props.routes.filter((route)=>{
+                        //filtro in base al ruolo/permessi sulla risorsa
+                        return checkRoutePermission(props.auth, route, props.resource)
+                      })
+                      .map((route, idx) => {                        
                         return route.component ? (
                           <Route
                             key={'userRoutes_'+idx}
