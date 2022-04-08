@@ -72,16 +72,6 @@ export const deliveryFormat=(data) => {
     return <i title={alt} className={"simple_icon fas "+icon}></i>;         
 }
 
-const documentAccess=(data) => {
-    return (
-        <div className="documentAccess">
-        {data.status=="received" && (data.delivery_format==1||data.delivery_format==3) && <a className="btn btn-icon" onClick={()=>alert("TODO: open document !")}>{deliveryFormat(data)}</a>}                
-      
-        {data.status=="received" && data.delivery_format==2 && <span>{deliveryFormat(data)}</span>}         
-        </div>
-    )
-}
-  
 
 
 export const PatronRequestStatus = (props) => {
@@ -103,9 +93,12 @@ export const PatronRequestStatus = (props) => {
         </span>}                    
                
         {data.cancel_date && <span className="status-date"><i className="fas fa-times"></i> {formatDateTime(data.cancel_date)}</span>}
-        {data.delivery_ready_date && <span className="status-date"><i className="fas fa-luggage-cart"></i> {formatDateTime(data.delivery_ready_date)}</span>}                
+        {data.delivery_ready_date && <span className="status-date"><i className="fas fa-check-circle"></i> {formatDateTime(data.delivery_ready_date)}</span>}                
         {data.fulfill_date && 
-        <span className="status-date"><i className="fas fa-reply"></i> {formatDateTime(data.fulfill_date)}
+        <span className="status-date">
+            <i className="fas fa-reply"></i> {formatDateTime(data.fulfill_date)}
+            <span className="deliveryFormat">{deliveryFormat(data)}</span>             
+        
             {data.notfulfill_type && <div className="notfulfillreason">
             <span id={`notfulfill_type-${data.id}`} className="active"><i className="fas fa-comment text-danger"></i></span> 
                     <UncontrolledTooltip autohide={false} placement="right" target={`notfulfill_type-${data.id}`}>
@@ -118,8 +111,7 @@ export const PatronRequestStatus = (props) => {
                 <UncontrolledTooltip autohide={false} placement="right" target={`tooltipfulfillnote-${data.id}`}>
                     {data.fromlibrary_note}
                 </UncontrolledTooltip>                                
-            </div>} 
-            {documentAccess(data)}                 
+            </div>}                          
         </span>}        
         {<span className="costpolicy"><i className="fas fa-coins"></i> {costPolicy(data)} </span>}                
         </>

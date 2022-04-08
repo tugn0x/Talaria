@@ -75,13 +75,13 @@ const lendingUnfilledReason = (data) => {
 
 const documentAccess=(data) => {
     return (
-        <>
-        {!canSavedAsDownloaded(data) && data.borrowing_status=="fulfilled" && isFile(data) && <button type="button" class="btn-warning btn-sm"><i className="fas fa-hourglass-half"></i> (waiting HC)</button>}   
+        <div className="access_document_icons">
+        {!isArchived(data) && isFile(data) && !canSavedAsDownloaded(data) && data.borrowing_status=="fulfilled"  && <button type="button" class="btn btn-warning btn-sm"><i className="fas fa-hourglass-half"></i> (waiting HC)</button>}   
         
-        {isFile(data) && <button type="button" class="btn-primary btn-sm" onClick={()=>alert("TODO: view document !")}>Download <i className="fas fa-file"></i></button>}                
+        {!isArchived(data) && isFile(data) && <button type="button" class="btn btn-primary btn-sm" onClick={()=>alert("TODO: view document !")}>Download <i className="fas fa-file"></i></button>}                
       
-        {isURL(data) && <button type="button" class="btn-primary btn-sm" onClick={()=>alert("TODO: open url !")}>Open URL <i className="fas fa-external-link-alt"></i></button>}         
-        </>
+        {isURL(data) && <button type="button" class="btn btn-primary btn-sm" onClick={()=>alert("TODO: open url !")}>Open URL <i className="fas fa-external-link-alt"></i></button>}         
+        </div>
     )
 }
 
@@ -148,17 +148,9 @@ const statusInfo = (req) => {
                 </span>
             }
             {req.borrowing_status=="documentReady" && req.ready_date && <span className="status-date"><i class="fas fa-check-circle"></i> {formatDateTime(req.ready_date)} </span>}
-            {req.borrowing_status=="documentNotReady" && req.ready_date && <span className="status-date"><i class="fas fa-times-circle"></i> {formatDateTime(req.ready_date)} </span>}
-            {req.user_delivery_date && <span className="status-date"><i className="fas fa-luggage-cart"></i> {formatDateTime(req.user_delivery_date)} </span>}                                                                       
+            {req.borrowing_status=="documentNotReady" && req.ready_date && <span className="status-date"><i class="fas fa-times-circle"></i> {formatDateTime(req.ready_date)} </span>}            
         </>
         }              
-        {req.desk_delivery_date && <span className="status-date">
-            <i className="fas fa-truck-loading"></i> {formatDateTime(req.desk_delivery_date)}
-            {req.desk_delivery_format && <span className="deskDeliveryFormat">{deskDeliveryFormat(req)}</span>}
-        </span>}
-        {req.desk_received_date && <span className="status-date"><i className="fas fa-box-open"></i> {formatDateTime(req.desk_received_date)}</span>}
-        
-               
         {req.cancel_date && <span className="status-date"><i className="fas fa-times"></i> {formatDateTime(req.cancel_date)}</span>}
        
         {req.forward==1 && req.forward_date && 
@@ -168,12 +160,21 @@ const statusInfo = (req) => {
         {req.download==1 && req.download_date && 
             <span className="status-date"><i className="fas fa-download"></i> {formatDateTime(req.download_date)}</span>            
         }
-       
+
+        {req.trash_date && <span className="status-date"><i className="fas fa-trash text-danger"></i> {formatDateTime(req.trash_date)}</span>}   
+        
+        {req.desk_delivery_date && <span className="status-date">
+            <i className="fas fa-truck-loading"></i> {formatDateTime(req.desk_delivery_date)}
+            {req.desk_delivery_format && <span className="deskDeliveryFormat">{deskDeliveryFormat(req)}</span>}
+        </span>}  
+        {req.desk_received_date && <span className="status-date"><i className="fas fa-box-open"></i> {formatDateTime(req.desk_received_date)}</span>}
+        
+        {req.user_delivery_date && <span className="status-date"><i className="fas fa-luggage-cart"></i> {formatDateTime(req.user_delivery_date)} </span>}                                                                              
+        
         {req.archived==1 && req.archived_date && 
             <span className="status-date"><i className="fas fa-hdd"></i> {formatDateTime(req.archived_date)}</span>            
         }
-       
-        {req.trash_date && <span className="status-date"><i className="fas fa-trash text-danger"></i> {formatDateTime(req.trash_date)}</span>}   
+               
       </>
   )
 }
@@ -257,7 +258,7 @@ export const canTrash=(data) => {
 export const canSavedAsDownloaded=(data) => {
     return (!isTrashed(data) && data.borrowing_status=="documentReady" && (isFile(data)||isURL(data)) && !hasBeenDownloaded(data));
 }
-
+ 
 export const isArchived=(data) => {
     return data.archived 
 }
@@ -348,8 +349,7 @@ export const BorrowingStatus = (props) => {
                 </UncontrolledTooltip>                                
                 </span>}
             </div>}            
-            {statusInfo(data)}    
-            {documentAccess(data)}                                    
+            {statusInfo(data)}              
         </div>
     )
 }
@@ -383,8 +383,9 @@ export const BorrowingReferenceIcons = (props) => {
 export const BorrowingRequestIcons = (props) => {
     const {data,reqPath,forwardRequest,askTrashRequest,askCancelRequest,deleteRequest,askArchiveRequest,askArchiveRequestAsNotReceived,customClass,savedAsDownloaded,setReceivedRequest,setNotReceivedRequest}=props;    
   
-    return (
-        <div className={"borrowing_request_icons " + (customClass?customClass:'')}>
+    return (        
+        <div className={"borrowing_request_icons " + (customClass?customClass:'')}>                                                  
+
                 {/*<Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fas fa-eye"></i></Link>*/}                              
                 {canRequest(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,"request")}><i className="fas fa-share"></i></Link>}
                 {canCancel(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest()}><i className="fas fa-times"></i></a>}                
@@ -469,7 +470,8 @@ const BorrowingItem = (props) => {
                 </span>
                }
                {!isArchived(data) && data.borrowing_status=="requested" && data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}                                                            
-            </>}                    
+            </>}       
+            {documentAccess(data)}               
             {!isArchived(data) && <BorrowingRequestIcons customClass="icons d-flex" data={data} reqPath={editPath} forwardRequest={forwardRequest} askTrashRequest={askTrashRequest} askCancelRequest={askCancelRequest} deleteRequest={deleteRequest} askArchiveRequest={askArchiveRequest} askArchiveRequestAsNotReceived={askArchiveRequestAsNotReceived} savedAsDownloaded={savedAsDownloaded}  setReceivedRequest={setReceivedRequest} setNotReceivedRequest={setNotReceivedRequest} />}                                
             </div>
             </Col> 

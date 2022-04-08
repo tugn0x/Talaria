@@ -9,7 +9,7 @@ import './style.scss';
 import RequestIcons from '../RequestIcons';
 import ReferenceCitation from '../../ReferenceCitation';
 import ReferenceTags from '../ReferenceTags';
-import {PatronRequestData, PatronRequestStatus} from '../PatronRequest';
+import {PatronRequestData, PatronRequestStatus,deliveryFormat} from '../PatronRequest';
 
 /* TODO: una volta definito l'aspetto finale metto a posto le traduzioni */
 
@@ -20,6 +20,35 @@ const RequestItem = (props) => {
     const statusIcon = (status) => {
         return "status-icon " + status
     }
+
+
+    const isArchived=(data) => {
+        return data.archived 
+    }
+
+    const isFile=(data) => {
+        return data.delivery_format && data.delivery_format==1 
+    }
+
+    const isPaper=(data) => {
+        return data.delivery_format && data.delivery_format==2
+    }
+    
+    const isURL=(data) => {
+        return data.delivery_format && data.delivery_format==3
+    }
+
+
+  const documentAccess=(data) => {
+    return (
+        <div className="access_document_icons">
+        
+        {!isArchived(data) && data.status=="received" && isFile(data) && <button type="button" class="btn btn-primary btn-sm" onClick={()=>alert("TODO: view document !")}>Download <i className="fas fa-file"></i></button>}                
+      
+        {isURL(data) && data.status=="received" && <button type="button" class="btn btn-primary btn-sm" onClick={()=>alert("TODO: open url !")}>Open URL <i className="fas fa-external-link-alt"></i></button>}         
+        </div>
+    )
+}
     
     
     /*const requesturl=(id) => {
@@ -49,6 +78,7 @@ const RequestItem = (props) => {
             </Col>
             
             <Col sm={2} className="icons align-self-center">
+                {documentAccess(data)}    
                 <RequestIcons 
                     data={data} 
                     archiveRequest={archiveRequest}

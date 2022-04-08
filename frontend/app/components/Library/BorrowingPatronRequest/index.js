@@ -3,7 +3,7 @@ import {useIntl} from 'react-intl';
 import './style.scss';
 import { Link } from 'react-router-dom';
 import {UncontrolledTooltip} from 'reactstrap';
-import {PatronRequestStatus} from '../../Patron/PatronRequest'
+import {PatronRequestStatus,PatronRequestData} from '../../Patron/PatronRequest'
 import {formatDate,formatDateTime,daysFromToday} from '../../../utils/dates';
 
 export const BorrowingPatronRequestIcons = (props) => {
@@ -22,7 +22,10 @@ export const BorrowingPatronRequestStatus = (props) => {
 
 
     return (
-        <PatronRequestStatus data={data}/>
+        <>
+            <PatronRequestStatus data={data}/>
+            <PatronRequestData data={data}/>
+        </>
     )
 }
 
