@@ -20,6 +20,7 @@ import UserPage from "./User/UserPage/Loadable"
 import PatronPage from "./Patron/PatronPage/Loadable"
 import AdminPage from "./Admin/AdminPage/Loadable"
 import RegisterLibraryPage from './RegisterLibrary'
+import NotAuthorizedPage from './NotAuthorizedPage';
 /*
 LIBRARY STUFFS
  */
@@ -32,6 +33,7 @@ export {
   HomePage,
   LanguageProvider,
   NotFoundPage,
+  NotAuthorizedPage,
 
   AuthProvider,
   ForgotPassword,

@@ -2,10 +2,10 @@
  *
  * BasePage
  *
- */
+ */ 
 
 import React, { useEffect } from 'react';
-import {Switch, Route, withRouter} from 'react-router-dom';
+import {Switch, Route, withRouter,Redirect} from 'react-router-dom';
 import {HeaderBar, SideBar, Footer} from 'components';
 import {Container, Row, Col} from "reactstrap"
 import { generatePath } from "react-router";
@@ -105,11 +105,11 @@ function BasePage(props) {
                   <Col md={windowSize === 'desktop' ? 9 : 12}>                     
                     <Switch>
                       {props.routes && 
-                      props.routes.filter((route)=>{
+                      /*props.routes.filter((route)=>{
                         //filtro in base al ruolo/permessi sulla risorsa
                         return checkRoutePermission(props.auth, route, props.resource)
-                      })
-                      .map((route, idx) => {                        
+                      })*/
+                      props.routes.map((route, idx) => {                        
                         return route.component ? (
                           <Route
                             key={'userRoutes_'+idx}
@@ -117,9 +117,12 @@ function BasePage(props) {
                             path={`${props.match.path}${route.path}`}
                             exact={route.exact ? route.exact : false}
                             name={route.name}
-                            render={routeProps => (
-                              <route.component {...props} {...routeProps} />
-                            )} />
+                            render={routeProps => 
+                              /*if authorized goes to component, otherwise redirect to notauth page*/
+                              checkRoutePermission(props.auth, route, props.resource) ? 
+                                (<route.component {...props} {...routeProps} />)
+                                : (<Redirect to="/autherror"/>)
+                            } />
                         ) : (null);
                       })}
                     </Switch>

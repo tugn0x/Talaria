@@ -82,7 +82,9 @@
   "app.containers.ProfilePage.updateMessage": "Profilo aggiornato",
   "app.containers.NotFoundPage.header": "Pagina non trovata",
   "app.containers.NotFoundPage.intro": "Ci dispiace ma non riusciamo a trovare la pagina che cerchi",
-
+  "app.containers.NotAuthorizedPage.header": "Accesso negato",
+  "app.containers.NotAuthorizedPage.intro": "Ci dispiace ma non puoi accedere alla pagina richiesta",
+  
   "app.containers.UserProfile.header": "Profilo utente",
   "app.containers.UserProfile.subtitle": "Aggiorna il profilo",
 
@@ -216,6 +218,9 @@
   "app.containers.BorrowingPage.addedTagToRequest": "Tag applicato",  
   "app.containers.BorrowingPage.headerArchive":"Archivio", 
   "app.containers.BorrowingPage.header":"Richieste in corso", 
+
+  "app.containers.DeliveryPage.header":"Richieste in corso", 
+  "app.containers.DeliveryPage.headerArchive":"Archivio", 
     
   "app.libraries.institution_id": "Istituzione",
   "app.libraries.subject_id": "Disciplina",

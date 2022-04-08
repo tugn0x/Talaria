@@ -82,6 +82,8 @@
   "app.containers.ProfilePage.updateMessage": "Profilo aggiornato",
   "app.containers.NotFoundPage.header": "Page not found",
   "app.containers.NotFoundPage.intro": "We're sorry but we can't find the page you're looking for",
+  "app.containers.NotAuthorizedPage.header": "Access forbidden",
+  "app.containers.NotAuthorizedPage.intro": "We' sorry but you can't access the page you'r looking for",  
 
   "app.containers.UserProfile.header": "Profilo utente",
   "app.containers.UserProfile.subtitle": "Aggiorna il profilo",
@@ -216,6 +218,9 @@
   "app.containers.BorrowingPage.addedTagToRequest": "Tag applied",
   "app.containers.BorrowingPage.headerArchive":"Archive", 
   "app.containers.BorrowingPage.header":"Pending requests", 
+
+  "app.containers.DeliveryPage.header":"Pending requests", 
+  "app.containers.DeliveryPage.headerArchive":"Archive", 
 
   "app.libraries.institution_id": "Institution",
   "app.libraries.subject_id": "Disciplinary sector",

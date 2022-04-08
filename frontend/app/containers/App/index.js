@@ -15,7 +15,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { syncPersistanceRequest, isSync } from "../../persistence";
 import {requestLogout} from "../Auth/AuthProvider/actions";
-import {HomePage, NotFoundPage, LoginPage, IdpPage, UserPage, PatronPage, AdminPage, RegisterLibraryPage} from 'containers';
+import {HomePage, NotAuthorizedPage,NotFoundPage, LoginPage, IdpPage, UserPage, PatronPage, AdminPage, RegisterLibraryPage} from 'containers';
 import MyLibraryPage from '../../containers/Patron/MyLibraryPage/Loadable'
 
 // import {  Footer } from 'components'
@@ -77,7 +77,8 @@ function App(props) {
         <Route path="/institution/:institution_id" component={({match}) =>  props.isLogged?<HomePage {...authProps}  match={match}  headermenu={true} changeLang={changeLanguage}/>:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} /> } />
         <Route path="/alpe" component={({match}) =>  props.isLogged?<HomePage {...authProps}  match={match} headermenu={true} changeLang={changeLanguage}/>:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} />}/>        
 
-        <Route component={() => <NotFoundPage {...authProps} changeLang={changeLanguage} /> } path="*" />   
+        <Route path="/autherror" component={() => <NotAuthorizedPage {...authProps} changeLang={changeLanguage} /> }/>   
+        <Route component={() => <NotFoundPage {...authProps} changeLang={changeLanguage} /> } path="*" />           
       </Switch>
   );
 }
