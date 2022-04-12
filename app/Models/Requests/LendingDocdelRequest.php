@@ -102,10 +102,10 @@ class LendingDocdelRequest extends DocdelRequest
                 $bstatus='fulfilled';
 
                 //Particular cases
-                if($this->fulfill_type==1 && !env('USE_HARDCOPY',false) ) //File && HC disabled
+                if($others["fulfill_type"]==1 && !env('USE_HARDCOPY',false) ) //File && HC disabled
                     $bstatus='documentReady';
 
-                else if($this->fulfill_type==4) //URL
+                else if($others["fulfill_type"]==4) //URL
                     $bstatus='documentReady';
 
                 $others=array_merge($others,[
