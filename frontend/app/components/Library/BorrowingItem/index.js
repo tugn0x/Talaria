@@ -78,9 +78,9 @@ const documentAccess=(data) => {
         <div className="access_document_icons">
         {!isArchived(data) && isFile(data) && !canSavedAsDownloaded(data) && data.borrowing_status=="fulfilled"  && <button type="button" class="btn btn-warning btn-sm"><i className="fas fa-hourglass-half"></i> (waiting HC)</button>}   
         
-        {!isArchived(data) && isFile(data) && <button type="button" class="btn btn-primary btn-sm" onClick={()=>alert("TODO: view document !")}>Download <i className="fas fa-file"></i></button>}                
+        {!isArchived(data) && isFile(data) && <button type="button" class="btn btn-primary btn-sm btn-download-icon" onClick={()=>alert("TODO: view document !")}><i className="fas fa-file"></i></button>}                
       
-        {isURL(data) && <button type="button" class="btn btn-primary btn-sm" onClick={()=>alert("TODO: open url !")}>Open URL <i className="fas fa-external-link-alt"></i></button>}         
+        {isURL(data) && <button type="button" class="btn btn-primary btn-sm btn-download-icon" onClick={()=>alert("TODO: open url !")}><i className="fas fa-external-link-alt"></i></button>}         
         </div>
     )
 }

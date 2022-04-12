@@ -100,6 +100,29 @@ button[type=button] {
     }
 }
 
+.btn-download-icon {
+    border-radius: 20px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    padding: 0px;
+    margin: 0;
+    display: inline-block;
+    cursor: pointer;
+
+    &:hover,&:active, &:focus {
+        text-decoration: none;
+    }
+    &.active, &:active {
+        
+    }
+    i, span {
+        margin-top: 0;
+        display: inline-block;              
+    }
+
+}
+
 .btn-brown:not(:disabled):not(.disabled).active {
     &:hover {
         background-color:rgb(200, 130, 133);
