@@ -148,7 +148,7 @@ return [
                     'requested'	=> [
                         'role'  =>  [],
                         'next_statuses'  =>  ['newrequest','canceled','canceledDirect','cancelRequested','fulfilled','notReceived'], 
-                        'constraints'   =>  ["canManage"],  
+                        'constraints'   =>  ["canBorrow"],  
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                                                        
                         ],  
@@ -159,12 +159,12 @@ return [
                     'fulfilled'	=> [
                         'role'  =>  [],
                         'next_statuses'  =>  ['documentReady','documentNotReady'], 
-                        'constraints'   =>  ["canManage"],                                                   
+                        'constraints'   =>  ["canBorrow"],                                                   
                     ],                    
                     'documentReady'	=> [ 
                         'role'  =>  [],
                         'next_statuses'  =>  ['deliveredToUser','notDeliveredToUser','deskReceived','deliveringToDesk'], 
-                        'constraints'   =>  ["canManage"],  
+                        'constraints'   =>  ["canBorrow"],  
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                                                        
                         ],                          
@@ -173,7 +173,7 @@ return [
                     'documentNotReady'	=> [ 
                         'role'  =>  [],
                         'next_statuses'  =>  ['notDeliveredToUser'], 
-                        'constraints'   =>  ["canManage"],  
+                        'constraints'   =>  ["canBorrow"],  
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                                                        
                         ],                          
@@ -185,78 +185,81 @@ return [
                     'notReceived'	=> [ 
                         'role'  =>  [],
                         'next_statuses'  =>  ['notDeliveredToUser'], 
-                        'constraints'   =>  ["canManage"],                                                   
+                        'constraints'   =>  ["canBorrow"],                                                   
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                                                        
                         ],  
                         'jobs' => ['App\\Jobs\\BorrowingUpdatePatronRequest']
-                    ],
-                    //todo: notReceivedArchived?,documentReadyArchived?
+                    ],                    
                     'notDeliveredToUserDirect' => [
                         'role'  =>  [],
                         'next_statuses'  =>  [''], 
-                        'constraints'   =>  ["canManage"],
+                        'constraints'   =>  ["canDeliver"],
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                                                                                                                
+                            'Model'=>'deskLibraryOperators'
                         ], 
                         'jobs' => ['App\\Jobs\\BorrowingUpdatePatronRequest']
                     ],
                     'notDeliveredToUser' => [
                         'role'  =>  [],
                         'next_statuses'  =>  [''], 
-                        'constraints'   =>  ["canManage"],
+                        'constraints'   =>  ["canDeliver"],
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                                                                                                                
+                            'Model'=>'deskLibraryOperators'
                         ], 
                         'jobs' => ['App\\Jobs\\BorrowingUpdatePatronRequest']
                     ],
                     'deliveredToUser' => [
                         'role'  =>  [],
                         'next_statuses'  =>  [''], 
-                        'constraints'   =>  ["canManage"],
+                        'constraints'   =>  ["canDeliver"],
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',       
-                            //'Model'=>'deskLibraryOperators'                                                                             
+                            'Model'=>'deskLibraryOperators'                                                                             
                         ], 
                         'jobs' => ['App\\Jobs\\BorrowingUpdatePatronRequest']
                     ],
                     'deliveredToUserDirect' => [
                         'role'  =>  [],
                         'next_statuses'  =>  [''], 
-                        'constraints'   =>  ["canManage"],
+                        'constraints'   =>  ["canDeliver"],
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',       
-                            //'Model'=>'deskLibraryOperators'                                                                             
+                            'Model'=>'deskLibraryOperators'                                                                            
                         ], 
                         'jobs' => ['App\\Jobs\\BorrowingUpdatePatronRequest']
                     ],
+                    //NB: added notDeliveredToUser+Direct cause it will change to these from deskNotReceived
                     'deliveringToDesk' => [
                         'role'  =>  [],
-                        'next_statuses'  =>  ['deskReceived','deskNotReceived'], 
-                        'constraints'   =>  ["canManage"],
+                        'next_statuses'  =>  ['deskReceived','deskNotReceived','notDeliveredToUser','notDeliveredToUserDirect'], 
+                        'constraints'   =>  ["canBorrow"],
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',         
-                            //'Model'=>'deskLibraryOperators'                                                                           
+                            'Model'=>'deskLibraryOperators'                                                                  
                         ],                                 
                     ],
                     'deskReceived' => [
                         'role'  =>  [],
-                        'next_statuses'  =>  ['deliveredToUser','deliveredToUserDirect'], 
-                        'constraints'   =>  ["canManage"],
+                        'next_statuses'  =>  ['deliveredToUser','notDeliveredToUser','deliveredToUserDirect','notDeliveredToUserDirect'], 
+                        'constraints'   =>  ["canDeliver"],
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                                                                                    
-                            //'Model'=>'deskLibraryOperators'
+                            'Model'=>'deskLibraryOperators'
                         ], 
                         'jobs' => ['App\\Jobs\\PatronRequestUpdateNotify'] //notify to patron
                     ],
+                    /*questo è uno stato di transizione*/
                     'deskNotReceived' => [
                         'role'  =>  [],
-                        'next_statuses'  =>  ['notDeliveredToUserDirect','documentNotReady'], 
-                        'constraints'   =>  ["canManage"],
-                        'notify'    =>  [
+                        'next_statuses'  =>  ['notDeliveredToUserDirect','notDeliveredToUser'], 
+                        'constraints'   =>  ["canDeliver"],
+                        /*'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators', 
-                            //'Model'=>'deskLibraryOperators'                                                                                   
-                        ],                         
+                            'Model'=>'deskLibraryOperators'                                                                                
+                        ],*/                         
                     ],                    
                 ]
             ],

@@ -76,11 +76,12 @@ const lendingUnfilledReason = (data) => {
 const documentAccess=(data) => {
     return (
         <div className="access_document_icons">
-        {!isArchived(data) && isFile(data) && !canSavedAsDownloaded(data) && data.borrowing_status=="fulfilled"  && <button type="button" class="btn btn-warning btn-sm"><i className="fas fa-hourglass-half"></i> (waiting HC)</button>}   
+            {/* TODO: use Rabih Download component*/}
+        {!isArchived(data) && isFile(data) && !canSavedAsDownloaded(data) && data.borrowing_status=="fulfilled"  && <button type="button" className="btn btn-warning btn-sm"><i className="fas fa-hourglass-half"></i> (waiting HC)</button>}   
         
-        {!isArchived(data) && isFile(data) && <button type="button" class="btn btn-primary btn-sm btn-download-icon" onClick={()=>alert("TODO: view document !")}><i className="fas fa-file"></i></button>}                
+        {!isArchived(data) && isFile(data) && <button type="button" className="btn btn-primary btn-sm btn-download-icon" onClick={()=>alert("TODO: view document !")}><i className="fas fa-file"></i></button>}                
       
-        {isURL(data) && <button type="button" class="btn btn-primary btn-sm btn-download-icon" onClick={()=>alert("TODO: open url !")}><i className="fas fa-external-link-alt"></i></button>}         
+        {isURL(data) && <a href className="btn btn-primary btn-sm btn-download-icon" target="_blank" href={data.url}><i className="fas fa-external-link-alt"></i></a>}         
         </div>
     )
 }
@@ -147,8 +148,8 @@ const statusInfo = (req) => {
                     </div>}
                 </span>
             }
-            {req.borrowing_status=="documentReady" && req.ready_date && <span className="status-date"><i class="fas fa-check-circle"></i> {formatDateTime(req.ready_date)} </span>}
-            {req.borrowing_status=="documentNotReady" && req.ready_date && <span className="status-date"><i class="fas fa-times-circle"></i> {formatDateTime(req.ready_date)} </span>}            
+            {req.borrowing_status=="documentReady" && req.ready_date && <span className="status-date"><i className="fas fa-check-circle"></i> {formatDateTime(req.ready_date)} </span>}
+            {req.borrowing_status=="documentNotReady" && req.ready_date && <span className="status-date"><i className="fas fa-times-circle"></i> {formatDateTime(req.ready_date)} </span>}            
         </>
         }              
         {req.cancel_date && <span className="status-date"><i className="fas fa-times"></i> {formatDateTime(req.cancel_date)}</span>}
@@ -300,11 +301,7 @@ export const hasBeenDownloaded=(data) => {
 }
 
 export const canPatronReqDirectManaged=(data)=> {
-    return isPatronRequest(data) && !isArchived(data) && canRequest(data)
-}
-
-export const canPatronReqNotDirectManaged=(data)=> {
-    return isPatronRequest(data) && !isArchived(data) && inRequest(data)
+    return isPatronRequest(data) && !isArchived(data) && !data.lendingLibrary
 }
 
 export const canFulfillToPatron=(data)=> {
@@ -372,7 +369,7 @@ export const BorrowingReferenceIcons = (props) => {
                 {canEdit(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'edit')}><i className="fas fa-edit"></i></Link>}
                 {data.reference.data.oa_link && <a href={data.reference.data.oa_link} target="_blank" className='btn btn-icon'><i className="icon-oa"></i></a>} 
                 {canRequest(data) && !oaloading && !data.reference.data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev) }><i className="fas fa-search"></i>OA</a>}
-                {(issn_search_enabled || isbn_search_enabled ) && canRequest(data) &&  mustCheckData(data) && <a target="_blank" className='btn btn-icon' onClick={()=>findISSNISBNtoggle()} title="checkISSN/ISBN"><i className="fas fa-keyboard"></i></a>}
+                {canRequest(data) && (issn_search_enabled || isbn_search_enabled ) && mustCheckData(data) && <a target="_blank" className='btn btn-icon' onClick={()=>findISSNISBNtoggle()} title="checkISSN/ISBN"><i className="fas fa-keyboard"></i></a>}
                 {canRequest(data) &&  !mustCheckData(data) && <span className="btn btn-icon"><i className="fas fa-check-double"></i></span>}
                 {canRequest(data) && oaloading && <i className="fas fa-spinner fa-spin"></i>}                
                 {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO Check holding !')}><i className="fa fa-search-location"></i></a>}                                                                         
@@ -403,7 +400,7 @@ export const BorrowingRequestIcons = (props) => {
                 {canSavedAsReceived(data) && setReceivedRequest && setNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setReceivedRequest()}><i className="fas fa-box"></i></a> <a className="btn btn-icon" onClick={()=>setNotReceivedRequest()}><i className="fas fa-box-open"></i></a></>}                                
                 
                 {/*casi di evasione/inevasione a patron DIRETTA*/}
-                {canPatronReqDirectManaged(data) && 
+                {canPatronReqDirectManaged(data) && canRequest(data) &&
                 <>
                     <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}>
                         <i className="fas fa-truck text-info"></i> 

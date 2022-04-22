@@ -189,6 +189,7 @@ class Library extends BaseModel
         {
             $filtered = $users->filter(function ($user) use ($ability,$lib) 
             {
+                //manager and super-admin can do everything
                 return ($user->isNotA('super-admin') && ($user->can($ability, $lib)||$user->can("manage", $lib)) );
             });        
         }

@@ -36,7 +36,7 @@ return (<div>
     <FormContainer onSubmit={onSubmit} className="was-validated" noValidate>                
                             <Card>
                                 <span className="alert alert-warning">
-                                    <i class="fas fa-exclamation-triangle"></i> Please check if your license permit you to send URL/file to your patron before doing it!
+                                    <i className="fas fa-exclamation-triangle"></i> Please check if your license permit you to send URL/file to your patron before doing it!
                                 </span>
                                 {canPatronReqDirectManaged(data) &&
                                     <FormGroup >                                       
@@ -48,8 +48,8 @@ return (<div>
                                         {isURL(data) && 
                                         <div>
                                             The following URL will be sent to patron
-                                            <div class="alert alert-success" role="alert">
-                                                <a target="_blank" href={data.url}><i title="URL" class="fas fa-external-link-alt"></i> {data.url}</a>
+                                            <div className="alert alert-success" role="alert">
+                                                <a target="_blank" href={data.url}><i title="URL" className="fas fa-external-link-alt"></i> {data.url}</a>
                                             </div>
                                         </div>}          
                                         {isFile(data) &&                             
