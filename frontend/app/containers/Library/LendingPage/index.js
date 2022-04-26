@@ -94,10 +94,10 @@ const LendingPage = (props) => {
                     },
                     searchOnChange: true
                 }}                
-                removeTagFromRequest={removeTagFromDDRequest}                
+                removeTagFromRequest={archive==1?undefined:removeTagFromDDRequest}                
                 FulfillLendingRequestStatus={FulfillLendingRequestStatus}
                 unFulfillLendingRequestStatus={unFulfillLendingRequestStatus}
-                applyTags={applyLendingTagsToDDRequests}
+                applyTags={archive==1?undefined:applyLendingTagsToDDRequests}
                 UpdateLendingRequestStatus={UpdateLendingRequestStatus}
                 UpdateLendingAcceptRequest={UpdateLendingAcceptRequest}
                 oaloading={oaloading}
