@@ -177,20 +177,17 @@ class Library extends BaseModel
         return $this->belongsToMany(Catalog::class);
     }
 
-    public function operators($ability=null){
-        
-        //WARNING: may be slow!!
+    public function operators($ability=null){               
 
-        $users = User::all();        
+        $users = User::all();      //WARNING: may be slow!!   
         $lib=self::find($this->id);
         $filtered=new Collection();
 
         if($ability)
         {
             $filtered = $users->filter(function ($user) use ($ability,$lib) 
-            {
-                //manager and super-admin can do everything
-                return ($user->isNotA('super-admin') && ($user->can($ability, $lib)||$user->can("manage", $lib)) );
+            {                
+                return ($user->can($ability, $lib)||$user->can("manage", $lib))&& ($user->isNotA('super-admin') );
             });        
         }
 
