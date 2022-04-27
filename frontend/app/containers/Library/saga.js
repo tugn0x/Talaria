@@ -24,7 +24,11 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
       REQUEST_CHANGE_STATUS_LENDING,
       //REQUEST_CHANGE_LENDING_ARCHIVED,
       REQUEST_APPLY_LENDING_TAGS_TO_DDREQUESTS,
-      REQUEST_ACCEPT_ALLLENDER
+      REQUEST_ACCEPT_ALLLENDER,
+      UPLOAD_REQUEST,
+      UPLOAD_SUCCESS,
+      UPLOAD_FAILURE,
+      UPLOAD_PROGRESS
     } from './constants';
 import {
   requestError,
@@ -47,6 +51,7 @@ import {
   requestFindUpdateOABorrowingReferenceFail,
   requestFindISSNISBNSuccess,
   requestGetLendingSuccess,
+  uploadSuccess
 } from './actions';
 
 import { toast } from "react-toastify";
@@ -69,7 +74,8 @@ import {getLibraryUsersList, updateLibraryUser, deleteLibraryUser, createUser,
     changeLendingArchivedRequest,
     requestApplyTagsToLendingRequests,
     acceptallLenderLendingRequest,
-    getLendingRequest
+    getLendingRequest,
+    fileuploadRequest
 } from '../../utils/api'
 
 import {getOA,getPubmedReferenceByPMID,getFindISSN,getFindISBN, getFindISSN_ACNP} from '../../utils/apiExternal';
@@ -562,15 +568,14 @@ export function* requestChangeStatusBorrowingSaga(action) {
 //extrafields was already managed by Laravel LendingDDRequest so all the fields specified
 //in extrafields will be updated correctly!
 export function* requestChangeStatusLendingSaga(action) {
-  
   const options = {
     method: 'put',
     body: {
-      'status': action.status, 
-      'extrafields': {...action.extrafields},
+      'status': action.status,
+      'extrafields': {...action.extrafields}, 
     }, 
     id: action.id,
-    lending_library_id: action.lending_library_id
+    lending_library_id: action.lending_library_id,
   }; 
 
   try {
@@ -613,6 +618,30 @@ export function* requestAcceptAllLenderLendingSaga(action) {
     yield put (requestLendingsList(action.lending_library_id))    
     yield put (push("/library/"+action.lending_library_id+"/lending/"));
     yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* uploadRequestWatcherSaga() {    
+  yield takeEvery(UPLOAD_REQUEST, 
+    function*(action) { 
+      const file = action.payload; 
+      yield call(uploadFileSaga, file);    
+    });
+ }
+
+export function* uploadFileSaga(action) {
+  const options = {
+    method: 'post',
+    body: {'filename': action.selectedFile, 'uploadFile': action.payload, enctype:'multipart/form-data'},
+    id: action.id,
+    lending_library_id: action.lending_library_id
+  };
+
+  try {
+    const request = yield call(fileuploadRequest, options);   
+    yield put (uploadSuccess(request))
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -706,4 +735,7 @@ export default function* librarySaga() {
 
   yield takeLatest(REQUEST_GET_ISSN_ISBN,requestFindISSNISBNsaga);
   yield takeEvery(REQUEST_FIND_UPDATE_BORROWING_OA,findUpdateOABorrowingSaga);
+
+  yield takeEvery(UPLOAD_REQUEST,uploadFileSaga); 
+  
 }

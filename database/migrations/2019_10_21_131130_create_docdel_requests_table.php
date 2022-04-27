@@ -38,6 +38,7 @@ class CreateDocdelRequestsTable extends Migration
             $table->smallInteger('process_status')->nullable(); //dd_stato_borr
             $table->smallInteger('request_status')->nullable(); //dd_stato_dd_ill
             $table->string('filename')->nullable(); 
+            $table->string('filehash')->nullable(); 
             $table->smallInteger('file_status')->nullable(); //Stato del file se inviato in NILDE: 0-non disponibile; 1-disponibile; 2-disponibile con HC 
             $table->smallInteger('file_download')->nullable(); // 	Indicatore di avvenuta stampa del file se inviato in NILDE: 0-Non Stampato; 1-Stampato             
             $table->dateTime('cancelrequest_date')->nullable(); //dd_richiesta_annullamento

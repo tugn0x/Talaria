@@ -532,6 +532,13 @@ export const changeStatusLendingRequest = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/lendings/${options.id}/acceptallLenderLending`, options)
   };
 
+  //UploadFile
+  export const fileuploadRequest = (options) => {
+    options = getOption(options);
+    const library_id = options.lending_library_id
+    return request(`${BASE_URL}/api/v1/libraries/${library_id}/UploadFile`, options)
+  };
+
 /// POST PUBLIC LIBRARY
 export const createPublicLibrary = (options) => {
   options = getOption(options);

@@ -3,18 +3,14 @@ import {useIntl} from 'react-intl';
 import ReferenceDetailContent from '../../ReferenceDetailContent';
 import FulfillLendingRequest from  '../FulfillLendingRequest';
 import {LendingStatus} from '../LendingItem'
-
 import RequestTags from '../RequestTags'
-import { useState } from 'react'
 
 const LendingDetail = (props) => {
     console.log('LendingDetail', props)
-    const {data, FulfillLendingRequestStatus, unFulfillLendingRequestStatus} = props
+    const {data, FulfillLendingRequestStatus, unFulfillLendingRequestStatus, uploadFile, uploadSuccessCallback, fileUploadStatus} = props
     const intl = useIntl()
-    
 
-
-    return (<div className="lendingDetail">
+return (<div className="lendingDetail">
                 <RequestTags data={data.tags.data} /> 
                 <div className="lendingTracking detail-body">
                 <h3>{intl.formatMessage({id: "app.requests.status"})}</h3>
@@ -23,8 +19,9 @@ const LendingDetail = (props) => {
                     </div>  
                 </div>  
                 <ReferenceDetailContent reference={data.reference.data} customClass="detail-body" canCollapse={true} collapsed={true}/>                                
-                {(data.lending_status==='willSupply'||data.lending_status==='requestReceived') &&               
-                <FulfillLendingRequest FulfillLendingRequestStatus={FulfillLendingRequestStatus} unFulfillLendingRequestStatus={unFulfillLendingRequestStatus} data={data} customClass="detail-body"/>}
+                {(data.lending_status==='willSupply'||data.lending_status==='requestReceived') 
+                  && <FulfillLendingRequest uploadFile={uploadFile} uploadSuccessCallback={uploadSuccessCallback} fileUploadStatus={fileUploadStatus} FulfillLendingRequestStatus={FulfillLendingRequestStatus} unFulfillLendingRequestStatus={unFulfillLendingRequestStatus} data={data} customClass="detail-body"/>
+                }
 
               
 
