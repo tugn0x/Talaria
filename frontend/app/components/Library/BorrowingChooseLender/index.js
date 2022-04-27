@@ -136,7 +136,7 @@ const BorrowingChooseLender = (props) => {
                                 </div>                                
                                 {allselected && 
                                     <div className="alert alert-warning">
-                                        <i class="fas fa-exclamation-triangle"></i> 
+                                        <i className="fas fa-exclamation-triangle"></i> 
                                         <FormattedHTMLMessage id="app.requests.sendToAllLibrariesWarning"/>
                                     </div>                                
                                 }                                                                               

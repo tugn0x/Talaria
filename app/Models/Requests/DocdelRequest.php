@@ -34,7 +34,7 @@ class DocdelRequest extends BaseModel
 	    'notfulfill_type', //tipo inevasione (prendere da NILDE global_const $DDILL_INEVASO_xxx + "fornitore non disp" + "altro" (con descrizione in borr_notes) )        
         'filename',
         //'file_id', //TODO & CHECK
-        'file_status', //Stato del file se inviato in NILDE: 0-non disponibile; 1-disponibile; 2-disponibile con HC
+        'file_status', //File status: 0-not available; 1-available; 2-available and converted by HC server
         'cancel_request_date', //data richiesta annullamento alla lender
         'cancel_date', //data accettazione richiesta annullamento da lender
         'fulfill_inventorynr', //dd_ninventario_forni        

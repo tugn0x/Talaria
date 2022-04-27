@@ -40,6 +40,7 @@ const notfulfillReason = (data) => {
         case 5: ret=intl.formatMessage({id: "app.patronrequest.notfulfill_type.PatronNotAnswerCost"}); break;
         case 6: ret=intl.formatMessage({id: "app.patronrequest.notfulfill_type.NotAvailableForFree"}); break; 
         case 7: ret=intl.formatMessage({id: "app.patronrequest.notfulfill_type.WrongRef"}); break;
+        case 8: ret=intl.formatMessage({id: "app.patronrequest.notfulfill_type.DeskLost"}); break;
     }
             
     return ret;

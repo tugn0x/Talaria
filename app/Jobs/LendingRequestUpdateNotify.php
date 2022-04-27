@@ -43,7 +43,8 @@ class LendingRequestUpdateNotify implements ShouldQueue
             $n=new LendingDocdelRequestNotification($lending);
 
             //get all lending operators
-            $oper= $lender->operators("lend");
+            $oper= $lending->lendingLibraryOperators();
+            
                 
             foreach ($oper as $op)    
                 $op->notify($n);

@@ -35,14 +35,15 @@ class PatronRequestUpdateNotify implements ShouldQueue
     {
         //Notify to patron        
 
-        $patronreq=$this->docdelreq->patronRequest();
+        $patronreq=$this->docdelreq->patrondocdelrequest;
+        
         
         if($patronreq) 
         {
             $n=new PatronDocdelRequestNotification($patronreq);
 
             //get patron
-            $patron= $patronreq->user();
+            $patron= $patronreq->user;
                               
             $patron->notify($n);
         }

@@ -17,7 +17,7 @@ export default function NotFound(props) {
     <BasePage {...props}>
       <div className="d-flex justify-content-center">               
             <div className="p-2 text-center">
-              <i class="fas fa-frown fa-4x"></i>
+              <i className="fas fa-frown fa-4x"></i>
               <h1>
                 <FormattedMessage {...messages.header} />
               </h1>

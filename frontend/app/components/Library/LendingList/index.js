@@ -111,7 +111,7 @@ const LendingsList = (props) => {
                         }
                     </Col>                    
                     <Col md={3} sm={5}>
-                        {!hidetagsAllLender && <FilterSelect 
+                        {(!hidetagsAllLender && !hideapplytagarchive) && <FilterSelect 
                                 type={"tags"} 
                                 options={tagsOptionList} 
                                 selectedIds={multiFilter.labelIds}

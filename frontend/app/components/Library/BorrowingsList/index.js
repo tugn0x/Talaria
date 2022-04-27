@@ -171,7 +171,7 @@ const BorrowingsList = (props) => {
                         }
                     </Col>                    
                     <Col md={3} sm={5}>
-                        {<FilterSelect 
+                        {applyTags && <FilterSelect 
                                 type={"tags"} 
                                 options={tagsOptionList} 
                                 selectedIds={multiFilter.labelIds}

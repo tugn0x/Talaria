@@ -77,7 +77,7 @@ return [
         'usernotanswercost'=>5,
         'notfreerlyavail'=>6,
         'wrongmetadata'=>7,
-        'baddocument'=>8
+        'lostdocument'=>8
     ],
     'borrowingdocdelrequest_fulfill_type'     => [
         'SED'=>1,

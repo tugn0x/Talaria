@@ -15,6 +15,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_POST_LIBRARY, REQUEST_POST_LIBRARY_SUCCESS,
    REQUEST_POST_USER, REQUEST_POST_USER_SUCCESS,
    REQUEST_BORROWINGS_LIST,REQUEST_BORROWINGS_LIST_SUCCESS,REQUEST_LENDINGS_LIST,REQUEST_LENDINGS_LIST_SUCCESS,
+   REQUEST_BORROWINGSTODELIVER_LIST,REQUEST_BORROWINGSTODELIVER_LIST_SUCCESS,
    REQUEST_GET_LIBRARY_TAGS_OPTIONLIST,REQUEST_GET_LIBRARY_TAGS_OPTIONLIST_SUCCESS,
    REQUEST_APPLY_TAGS_TO_DDREQUESTS,REQUEST_REMOVE_DDREQUEST_TAG,REQUEST_REMOVE_LENDINGDDREQUEST_TAG,
    REQUEST_APPLY_LENDING_TAGS_TO_DDREQUESTS,
@@ -31,6 +32,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_FIND_UPDATE_BORROWING_OA_SUCCESS,
    REQUEST_CHANGE_STATUS_BORROWING,
    REQUEST_CHANGE_STATUS_LENDING,
+   REQUEST_CHANGE_STATUS_DELIVERY,
    REQUEST_GET_ISSN_ISBN,
    REQUEST_GET_ISSN_ISBN_SUCCESS,
    REQUEST_GET_ISSN_ISBN_FAIL,
@@ -283,6 +285,25 @@ export function requestLendingsListSuccess(result) {
   };
 }
 
+//TODO: pass page/pageSize/filter...
+export function requestBorrowingToDeliverList(library_id,delivery_id,page, pageSize, query) {
+  return {
+    type: REQUEST_BORROWINGSTODELIVER_LIST,
+    library_id,
+    delivery_id,
+    page,
+    query,
+    pageSize
+  };
+}                
+
+export function requestBorrowingToDeliverListSuccess(result) {
+  return {
+    type: REQUEST_BORROWINGSTODELIVER_LIST_SUCCESS,
+    result
+  };
+}
+
 export function requestPostNewBorrowing(library_id,refData,message){
   return {
     type: REQUEST_POST_NEW_BORROWING,
@@ -387,7 +408,7 @@ export function requestFindUpdateOABorrowingReferenceSuccess(result) {
     result
   };
 }
-
+//TODO: pass page/pageSize/filter...
 export function requestChangeStatusBorrowing(id,borrowing_library_id,status, extrafields,message,filter) {
   return {
     type: REQUEST_CHANGE_STATUS_BORROWING,
@@ -406,6 +427,19 @@ export function requestChangeStatusLending(id,lending_library_id,status, extrafi
     type: REQUEST_CHANGE_STATUS_LENDING,
     id,
     lending_library_id,
+    status,
+    extrafields,
+    message,
+    filter
+  };
+}
+//TODO: pass page/pageSize/filter...
+export function requestChangeStatusDelivery(id,borrowing_library_id,delivery_id,status, extrafields,message,filter) {
+  return {
+    type: REQUEST_CHANGE_STATUS_DELIVERY,
+    id,
+    borrowing_library_id,
+    delivery_id,    
     status,
     extrafields,
     message,

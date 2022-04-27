@@ -43,9 +43,9 @@ const RequestItem = (props) => {
     return (
         <div className="access_document_icons">
         
-        {!isArchived(data) && data.status=="received" && isFile(data) && <button type="button" class="btn btn-primary btn-sm btn-download-icon" onClick={()=>alert("TODO: view document !")}><i className="fas fa-file"></i></button>}                
+        {!isArchived(data) && data.status=="received" && isFile(data) && <button type="button" className="btn btn-primary btn-sm btn-download-icon" onClick={()=>alert("TODO: view document !")}><i className="fas fa-file"></i></button>}                
       
-        {isURL(data) && data.status=="received" && <button type="button" class="btn btn-primary btn-sm btn-download-icon" onClick={()=>alert("TODO: open url !")}><i className="fas fa-external-link-alt"></i></button>}         
+        {isURL(data) && data.status=="received" && <button type="button" className="btn btn-primary btn-sm btn-download-icon" onClick={()=>alert("TODO: open url !")}><i className="fas fa-external-link-alt"></i></button>}         
         </div>
     )
 }

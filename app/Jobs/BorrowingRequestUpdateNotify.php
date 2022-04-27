@@ -42,8 +42,9 @@ class BorrowingRequestUpdateNotify implements ShouldQueue
 
             $n=new BorrowingDocdelRequestNotification($borrowing);
 
-            //get all lending operators
-            $oper= $borrow->operators("borr");
+            //get all borrowing operators
+            $oper= $borrow->borrowingLibraryOperators();
+            
                 
             foreach ($oper as $op)    
                 $op->notify($n);

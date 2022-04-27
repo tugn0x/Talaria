@@ -68,11 +68,11 @@ const BorrowingTrackingItem = (props) => {
 }
 
 const BorrowingRequestTrackingItem = (props) => {
-    const {data,key,current,requestDetailPath}=props;
+    const {data,current,requestDetailPath}=props;
     
 
     return (
-        <li key={key} className={`trackingItem ${current?'currentReq':''}`}>
+        <li className={`trackingItem ${current?'currentReq':''}`}>
             {!data.docdel_request_parent_id && data.patrondocdelrequest &&
                 <BorrowingPatronTrackingItem data={data}/>        
             }    
@@ -91,7 +91,7 @@ const BorrowingRequestTracking = (props) => {
                 <div className="card">
                     <ul className="trackList">                    
                     {data.length > 0 && data.map((ddr) => (
-                        <BorrowingRequestTrackingItem requestDetailPath={requestDetailPath} current={reqdata.id==ddr.id} key={ddr.id} data={ddr}/>
+                        <BorrowingRequestTrackingItem requestDetailPath={requestDetailPath} key={ddr.id} current={reqdata.id==ddr.id} data={ddr}/>
                     ))}
                     </ul>
                 </div>                

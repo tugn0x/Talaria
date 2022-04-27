@@ -5,6 +5,7 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
           REQUEST_UPDATE_LIBRARY,
           REQUEST_POST_LIBRARY,
           REQUEST_BORROWINGS_LIST,
+          REQUEST_BORROWINGSTODELIVER_LIST,
           REQUEST_GET_LIBRARY_TAGS_OPTIONLIST,
           REQUEST_APPLY_TAGS_TO_DDREQUESTS,
         REQUEST_REMOVE_DDREQUEST_TAG,
@@ -19,6 +20,7 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
       REQUEST_FORWARD_BORROWING,
       REQUEST_FIND_UPDATE_BORROWING_OA,
       REQUEST_CHANGE_STATUS_BORROWING,
+      REQUEST_CHANGE_STATUS_DELIVERY,
       REQUEST_GET_ISSN_ISBN,
       REQUEST_LENDINGS_LIST,
       REQUEST_CHANGE_STATUS_LENDING,
@@ -40,9 +42,11 @@ import {
   requestGetLibrariesListSuccess,
   requestUsersList,
   requestBorrowingsListSuccess,
+  requestBorrowingToDeliverListSuccess,
   requestLibraryTagsOptionList,
   requestLibraryTagsOptionListSuccess,
-  requestBorrowingsList,  
+  requestBorrowingsList, 
+  requestBorrowingToDeliverList, 
   requestGetBorrowingSuccess,
   requestLendingsList,
   requestLendingsListSuccess,
@@ -58,7 +62,7 @@ import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
 import {getLibraryUsersList, updateLibraryUser, deleteLibraryUser, createUser,
         getLibraryUser, getLibrary, getLibrariesList, updateLibrary,
-        createLibrary,getBorrowingsList,
+        createLibrary,getBorrowingsList,getBorrowingToDeliverList,
         getLibraryTagsOptionList,
         requestApplyTagsToBorrowingRequests,
         removeDDRequestTag,
@@ -66,7 +70,7 @@ import {getLibraryUsersList, updateLibraryUser, deleteLibraryUser, createUser,
       updateLibraryTag,
     deleteLibraryTag,
     createNewBorrowing,
-    getBorrowingRequest,
+    getBorrowingRequest,    
     updateBorrowing,
     changeStatusBorrowingRequest,
     changeStatusLendingRequest,
@@ -247,6 +251,24 @@ export function* requestBorrowingsListSaga(action) {
    console.log(action)
     const request = yield call(getBorrowingsList, options);
     yield put(requestBorrowingsListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestBorrowingsToDeliverListSaga(action) {
+  const options = {
+    method: 'get',
+    library_id:action.library_id,
+    delivery_id:action.delivery_id,
+    page: action.page ? action.page : '1',
+    query: action.query ? action.query : null,
+    pageSize: action.pageSize ? action.pageSize : null
+  };
+  try {
+   console.log(action)
+    const request = yield call(getBorrowingToDeliverList, options);
+    yield put(requestBorrowingToDeliverListSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -563,6 +585,27 @@ export function* requestChangeStatusBorrowingSaga(action) {
   }
 }
 
+export function* requestChangeStatusDeliverySaga(action) {
+  const options = {
+    method: 'put',
+    body: {'status': action.status,
+     'extrafields': {...action.extrafields},    
+    },
+    id: action.id,
+    borrowing_library_id: action.borrowing_library_id,
+    delivery_id: action.delivery_id,
+  };
+  try {
+  
+    const request = yield call(changeStatusBorrowingRequest, options);    
+    yield put (requestBorrowingToDeliverList(action.borrowing_library_id,action.delivery_id,action.page,action.pageSize,action.query))    
+    yield put (push("/library/"+action.borrowing_library_id+"/delivery"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 //TODO: update code in order to pass extrafields to reducer/action (lending)
 //so we can use extrafields here!
 //extrafields was already managed by Laravel LendingDDRequest so all the fields specified
@@ -707,6 +750,7 @@ export default function* librarySaga() {
   yield takeLatest(REQUEST_UPDATE_LIBRARY, requestUpdateLibrarySaga);
   yield takeLatest(REQUEST_POST_LIBRARY, requestPostLibrarySaga);
   yield takeLatest(REQUEST_BORROWINGS_LIST,requestBorrowingsListSaga);
+  yield takeLatest(REQUEST_BORROWINGSTODELIVER_LIST,requestBorrowingsToDeliverListSaga);
 
   yield takeLatest(REQUEST_LENDINGS_LIST, requestLendingsListSaga);
 
@@ -729,6 +773,7 @@ export default function* librarySaga() {
 
   yield takeLatest(REQUEST_CHANGE_STATUS_BORROWING,requestChangeStatusBorrowingSaga);
   yield takeLatest(REQUEST_CHANGE_STATUS_LENDING,requestChangeStatusLendingSaga);
+  yield takeLatest(REQUEST_CHANGE_STATUS_DELIVERY,requestChangeStatusDeliverySaga);
   //yield takeLatest(REQUEST_CHANGE_LENDING_ARCHIVED,requestChangeLendingArchivedSaga);
 
   yield takeLatest(REQUEST_ACCEPT_ALLLENDER, requestAcceptAllLenderLendingSaga)

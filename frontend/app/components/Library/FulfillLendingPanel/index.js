@@ -21,12 +21,12 @@ return (
             <Row>
                 <Col sm={3}>
                     {(data.all_lender == null || data.all_lender == 0) && data.lending_archived == 0 &&
-                        <button type="button" class="btn btn-primary btn-lg" onClick={() => setshowPanelActions(true)}>Fulfill</button>
+                        <button type="button" className="btn btn-primary btn-lg" onClick={() => setshowPanelActions(true)}>Fulfill</button>
                         }
                 </Col>
                 <Col sm={3}>
                     {(data.all_lender == null || data.all_lender == 0) && data.lending_archived == 0 &&
-                             <button type="button" class="btn btn-danger btn-lg"  onClick={() => setshowPanelActions(false)}>Unfulfill</button>
+                             <button type="button" className="btn btn-danger btn-lg"  onClick={() => setshowPanelActions(false)}>Unfulfill</button>
                         }
                 </Col>
             </Row>
@@ -43,7 +43,7 @@ return (
                    
             <div>
                 <input type="file"  />
-                <button type="button" onClick={() => alert('Upload succefuly Done!')}  class="btn btn-info">Upload file</button>
+                <button type="button" onClick={() => alert('Upload succefuly Done!')}  className="btn btn-info">Upload file</button>
             </div>
                     </Col>
                    
@@ -53,10 +53,10 @@ return (
                     <Col sm={6}>
                    
             <div>
-            <div class="form-group">
+            <div className="form-group">
     <label for="exampleInputEmail1">Notes</label>
-    <input type="email" class="form-control" id="txtnote" aria-describedby="" placeholder="Enter note here"></input>
-    <small id="emailHelp" class="form-text text-muted">This message will send to the borrowing library.</small>
+    <input type="email" className="form-control" id="txtnote" aria-describedby="" placeholder="Enter note here"></input>
+    <small id="emailHelp" className="form-text text-muted">This message will send to the borrowing library.</small>
   </div>    
             </div>
                     </Col>
@@ -72,7 +72,7 @@ return (
        
                        
                    
-                   <button type="button" onClick={() => alert('Fulfill Done!')} class="btn btn-success">Submit</button>        
+                   <button type="button" onClick={() => alert('Fulfill Done!')} className="btn btn-success">Submit</button>        
                    </div>
                            </Col>
                            

@@ -219,8 +219,7 @@
   "app.containers.BorrowingPage.headerArchive":"Archive", 
   "app.containers.BorrowingPage.header":"Pending requests", 
 
-  "app.containers.DeliveryPage.header":"Pending requests", 
-  "app.containers.DeliveryPage.headerArchive":"Archive", 
+  "app.containers.DeliveryPage.header":"Pending requests",   
 
   "app.libraries.institution_id": "Institution",
   "app.libraries.subject_id": "Disciplinary sector",
@@ -355,8 +354,13 @@
   "app.requests.askReceivedRequestMessage":"Set as received?",
   "app.requests.setNotReceivedRequestMessage":"Not received",
   "app.requests.setReceivedRequestMessage":"Received",
+  "app.requests.askDeskReceivedMessage": "Set as received?",
+  "app.requests.askDeskNotReceivedMessage": "Set as not received?",
+  "app.requests.setDeskReceivedMessage": "Received",
+  "app.requests.setDeskNotReceivedMessage": "Not received",
   "app.requests.askDownloadedMessage": "Document was checked?",
   "app.requests.setDownloadedMessage": "Document checked",
+  "app.requests.askDeskUserNotTakenMessage":"Set as not taken from user?",
   "app.requests.requestedMessage": "Request sent",  
   "app.requests.tagAs": "Tag as",
   "app.requests.forwardRequestMessage": "Clone and forward as request?",  
@@ -370,6 +374,7 @@
   "app.requests.unFilledMessage":"unFilled successfully",
   "app.requests.unfilledToPatronMessage":"Unfilled to patron",
   "app.requests.fulfilledToPatronMessage":"Fulfilled to patron",  
+  "app.requests.askFulfillToPatronMessage":"Fulfill to patron?",
   "app.requests.deliveredToDesk":"Delivered to desk",  
   "app.requests.deliveredToDeskMessage":"Successfully delivered to desk", 
   "app.requests.willSupplyMessage":"Request accepted",
@@ -410,6 +415,7 @@
   "app.patronrequest.notfulfill_type.PatronNotAnswerCost":"Patron didn't answer about cost policy",
   "app.patronrequest.notfulfill_type.NotAvailableForFree":"Not freerly available",
   "app.patronrequest.notfulfill_type.WrongRef":"Wrong reference",
+  "app.patronrequest.notfulfill_type.DeskLost": "Lost at desk side",
   "app.components.LendingsList.LendingsNotFound":"Lending request not found",  
   "app.components.OASearchReferenceForm.bodySearch": "Search a reference by entering DOI, PMID or ISBN or exact title",
   "app.components.OASearchReferenceForm.inputPlaceHolder": "Es: 10.1002/hlca.19740570315",  
@@ -443,7 +449,8 @@
   "app.components.BorrowingsList.createNewBorrowing": "New request",
   "app.components.BorrowingsList.BorrowingsNotFound": "No request",
   "app.components.BorrowingsList.BorrowingSelected": "Selected",
-  
+
+  "app.components.DeliveryList.DeliveryNotFound": "No pending delivery requests",
 
   "app.components.ProjectsList.header": "Lista progetti",
   "app.components.ProjectsList.createNewProject": "Nuovo progetto",
