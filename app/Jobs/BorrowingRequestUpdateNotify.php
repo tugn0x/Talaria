@@ -16,11 +16,8 @@ class BorrowingRequestUpdateNotify implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $docdelreq;
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
+    
+    /*NOTA: passo una DocdelRequest perchè questa classe viene chiamata sia da Borr che da Lend*/
     public function __construct(DocdelRequest $ddreq)
     {
         $this->docdelreq=$ddreq;
@@ -39,15 +36,18 @@ class BorrowingRequestUpdateNotify implements ShouldQueue
         if($borrow) 
         {
             $borrowing=BorrowingDocdelRequest::findOrFail($this->docdelreq->id);
+            if($borrowing)
+            {
+                $n=new BorrowingDocdelRequestNotification($borrowing);
 
-            $n=new BorrowingDocdelRequestNotification($borrowing);
-
-            //get all borrowing operators
-            $oper= $borrow->borrowingLibraryOperators();
-            
+                //get all borrowing operators
+                $oper= $borrowing->borrowingLibraryOperators();
                 
-            foreach ($oper as $op)    
-                $op->notify($n);
+                    
+                foreach ($oper as $op)    
+                    $op->notify($n);
+            }
+            
         }
         //else no need to notify
     }
