@@ -83,7 +83,9 @@ export const PatronRequestStatus = (props) => {
 
     return (
         <>        
-        {data.request_date && <span className="status-date">
+        {<span className="costpolicy"><i className="fas fa-coins"></i> {costPolicy(data)} </span>}                
+        {data.request_date && 
+        <span className="status-date">            
             <i className="fas fa-share"></i> {formatDateTime(data.request_date)}
             {data.forlibrary_note && <div className="forlibrary_note">
                 <span id={`tooltip-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
@@ -113,8 +115,7 @@ export const PatronRequestStatus = (props) => {
                     {data.fromlibrary_note}
                 </UncontrolledTooltip>                                
             </div>}                          
-        </span>}        
-        {<span className="costpolicy"><i className="fas fa-coins"></i> {costPolicy(data)} </span>}                
+        </span>}                
         </>
     )
 }
