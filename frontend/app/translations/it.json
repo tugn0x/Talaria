@@ -401,8 +401,10 @@
   "app.requests.request_note":"Note",
   "app.requests.sendToAllLibrariesWarning":"La richiesta sarà visualizzata da TUTTE le biblioteche. <br/>Sei sicuro di voler procedere? Se si, clicca sul bottone sottostante, <strong>altrimenti scegli una singola biblioteca dalla lista</strong>",
   "app.requests.sendRequest": "Invia richiesta",
-  "app.requests.special_delivery":"**TO BE TRANSLATED IN IT** Special delivery method for blind people",
-  "app.requests.pdf_editorial":"**TO BE TRANSLATED IN IT** Need PDF editorial version (not OA author version",
+  "app.requests.request_special_delivery":"Richiesto formato invio adatto a persone non vedenti",
+  "app.requests.request_pdf_editorial":"Richiesto versione originale (non versione OA)",
+  "app.requests.borrowing_notes": "Note interne",
+  "app.requests.lending_notes": "Note interne",
   "app.patronrequest.delivery_format.file":"File",
   "app.patronrequest.delivery_format.papercopy":"Carta",
   "app.patronrequest.delivery_format.url":"URL",
@@ -416,7 +418,7 @@
   "app.patronrequest.notfulfill_type.NotAvailableForFree":"Non reperibile gratuitamente",
   "app.patronrequest.notfulfill_type.WrongRef":"Riferimento errato",
   "app.patronrequest.notfulfill_type.DeskLost": "Perduto dal desk",
-  "app.components.LendingsList.LendingsNotFound":"Lending request not found",
+  "app.components.LendingsList.LendingsNotFound":"Non ci sono lending",
   "app.components.OASearchReferenceForm.bodySearch": "Cerca un riferimento inserendo DOI, PMID o ISBN o titolo esatto",
   "app.components.OASearchReferenceForm.inputPlaceHolder": "Es: 10.1002/hlca.19740570315",  
   "app.components.OASearchReferenceForm.goToForm": "Oppure inserisci i dati manualmente",
@@ -450,7 +452,7 @@
   "app.components.BorrowingsList.BorrowingsNotFound": "Non ci sono borrowing",
   "app.components.BorrowingsList.BorrowingSelected": "Selezionati",
 
-  "app.components.DeliveryList.DeliveryNotFound": "Non ci sono richieste di consegna",
+  "app.components.DeliveryList.DeliveryNotFound": "Non ci sono richieste in corso",
 
   "app.components.ProjectsList.header": "Lista progetti",
   "app.components.ProjectsList.createNewProject": "Nuovo progetto",
@@ -498,6 +500,7 @@
   "app.components.FilterSelect.labels": "Etichette",
   "app.components.FilterSelect.groups": "Categorie",
   "app.components.FilterSelect.tags": "Tag",
+  "app.components.FilterSelect.desks": "Punti di consegna",
 
   "app.routes.Bibliography": "Bibliografia",
   "app.routes.Reference": "Riferimenti",

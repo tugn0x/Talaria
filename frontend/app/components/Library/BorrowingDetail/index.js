@@ -6,6 +6,23 @@ import RequestTags from '../RequestTags'
 import BorrowingRequestTracking from '../BorrowingRequestTracking';
 import {canPatronReqDirectManaged, canRequest} from '../BorrowingItem';
 import BorrowingChooseLender from '../BorrowingChooseLender';
+import './style.scss';
+
+export const BorrowingRequestData = (props) => {
+    const {data} = props
+    const intl = useIntl()
+
+    return (
+    <div className="borrowingRequestData card">   
+        {data.borrowing_notes && <span className="alert alert-info requestData"><span className="label">{intl.formatMessage({id: "app.requests.borrowing_notes"})}: </span>{data.borrowing_notes} </span>}
+        {data.request_protnr && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.request_protnr"})}: </span>{data.request_protnr} </span>}
+        {data.request_note && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.request_note"})}: </span>{data.request_note} </span>}
+        {data.request_special_delivery==1 && <span className="requestData"><i class="fas fa-check-square"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_special_delivery"})} </span></span>}
+        {data.request_pdf_editorial==1 &&  <span className="requestData"><i class="fas fa-check-square"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_pdf_editorial"})}</span></span>}
+    </div>
+
+    )
+} 
 
 const BorrowingDetail = (props) => {
     console.log('BorrowingDetail', props)
@@ -13,8 +30,9 @@ const BorrowingDetail = (props) => {
     const intl = useIntl()
 
     return (<div className="borrowingDetail">               
-                <BorrowingRequestTracking requestDetailPath={requestDetailPath} reqdata={data} customClass="detail-body"/>                
                 <RequestTags data={data.tags.data} /> 
+                <BorrowingRequestTracking requestDetailPath={requestDetailPath} reqdata={data} customClass="detail-body"/>                              
+                <BorrowingRequestData data={data}/>
                 <ReferenceDetailContent reference={data.reference.data} customClass="detail-body" canCollapse={true} collapsed={true}/>                                
                 {canRequest(data) && isRequesting &&
                 <div>
@@ -27,7 +45,7 @@ const BorrowingDetail = (props) => {
                     }
                     <BorrowingChooseLender selectLenderCb={sendRequestToLender} findLender={findLender} lendersList={lendersList}/>                                                                
                 </div>
-                }
+                }                
                 {isDelivering && <BorrowingRequestOperations data={data} sendRequestToLender={sendRequestToLender} findLender={findLender} lendersList={lendersList} unfillCallback={canPatronReqDirectManaged(data)?directUnfillCallback:unfillCallback} fulfillCallback={canPatronReqDirectManaged(data)?directFulfillCallback:fulfillCallback} deliverCallback={deliverCallback}/>}
             </div>
     );

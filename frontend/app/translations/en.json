@@ -401,8 +401,10 @@
   "app.requests.request_note":"Notes",
   "app.requests.sendToAllLibrariesWarning":"Your request will be view by ALL libraries. <br/>Are you sure? If yes click on the button below, <strong>otherwise please select a single library</strong>",
   "app.requests.sendRequest": "Send request",
-  "app.requests.special_delivery":"Special delivery method for blind people",
-  "app.requests.pdf_editorial":"Need PDF editorial version (not OA author version",  
+  "app.requests.request_special_delivery":"Special delivery method for blind people",
+  "app.requests.request_pdf_editorial":"Need PDF editorial version (not OA author version",  
+  "app.requests.borrowing_notes": "Internal notes",
+  "app.requests.lending_notes": "Internal notes",
   "app.patronrequest.delivery_format.file":"File",
   "app.patronrequest.delivery_format.papercopy":"Paper",
   "app.patronrequest.delivery_format.url":"URL",
@@ -442,7 +444,7 @@
   "app.components.ReferencesList.ReferencesNotFound": "No references",
   "app.components.ReferencesList.ReferenceSelected": "Selected",  
     
-  "app.components.RequestsList.RequestsNotFound": "No requests",
+  "app.components.RequestsList.RequestsNotFound": "No pending requests",
   "app.components.RequestsList.RequestSelected": "Selected",
 
   "app.components.BorrowingsList.header": "Borrowing",
@@ -450,7 +452,7 @@
   "app.components.BorrowingsList.BorrowingsNotFound": "No request",
   "app.components.BorrowingsList.BorrowingSelected": "Selected",
 
-  "app.components.DeliveryList.DeliveryNotFound": "No pending delivery requests",
+  "app.components.DeliveryList.DeliveryNotFound": "No pending requests",
 
   "app.components.ProjectsList.header": "Lista progetti",
   "app.components.ProjectsList.createNewProject": "Nuovo progetto",
@@ -498,6 +500,7 @@
   "app.components.FilterSelect.labels": "Labels",
   "app.components.FilterSelect.groups": "Categorie",
   "app.components.FilterSelect.tags": "Tags",
+  "app.components.FilterSelect.desks": "Delivery points",
 
   "app.routes.Bibliography": "Bibliography",
   "app.routes.Reference": "Reference",

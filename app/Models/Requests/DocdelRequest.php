@@ -25,9 +25,11 @@ class DocdelRequest extends BaseModel
         'request_date', //dd_datarichie Data richiesta alla bib lender
         'request_protnr', //dd_nprotrichie
         'request_note', //dd_note_richforni
+        'request_special_delivery', //special delivery for blind people
+        'request_pdf_editorial', //want original PDF (not OA)
         'on_cost', //dd_costofn
         'fulfill_date', //dd_dataeva (for both fulfil/notfulfill)
-        'fulfill_protnr', //dd_nproteva borrow
+        'fulfill_protnr', //dd_nproteva
         'fulfill_location', //dd_collocazione (ricavata da ACNP)
         'fulfill_note', //dd_note_fornirich       
         'fulfill_type',    //tipo evasione (=SentiVia/DeliveryMethod ISO18626: ArticleExchange,Ariel,Email,Mail,Odyssey,URL,FTP) + file + url?

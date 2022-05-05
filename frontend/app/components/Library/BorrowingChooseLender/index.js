@@ -18,8 +18,8 @@ const BorrowingChooseLender = (props) => {
 
     const [formData,setFormData]=useState({
         request_protnr:'',
-        special_delivery: 0,
-        pdf_editorial:0,
+        request_special_delivery: 0,
+        request_pdf_editorial:0,
         lending_library_id: null
     });
 
@@ -110,16 +110,16 @@ const BorrowingChooseLender = (props) => {
                                 </FormGroup>
                                 <FormGroup >
                                     <CustomCheckBox
-                                        label={intl.formatMessage({id: "app.requests.special_delivery"})} 
-                                        checked={formData.special_delivery === 1 ? true : false}
-                                        handleChange={(e) =>  handleChange(e.target.checked?1:0, 'special_delivery')}
+                                        label={intl.formatMessage({id: "app.requests.request_special_delivery"})} 
+                                        checked={formData.request_special_delivery === 1 ? true : false}
+                                        handleChange={(e) =>  handleChange(e.target.checked?1:0, 'request_special_delivery')}
                                     />
                                 </FormGroup>
                                 <FormGroup >
                                     <CustomCheckBox
-                                        label={intl.formatMessage({id: "app.requests.pdf_editorial"})} 
-                                        checked={formData.pdf_editorial === 1 ? true : false}
-                                        handleChange={(e) =>  handleChange(e.target.checked?1:0, 'pdf_editorial')}
+                                        label={intl.formatMessage({id: "app.requests.request_pdf_editorial"})} 
+                                        checked={formData.request_pdf_editorial === 1 ? true : false}
+                                        handleChange={(e) =>  handleChange(e.target.checked?1:0, 'request_pdf_editorial')}
                                     />
                                 </FormGroup>                            
                                 <FormGroup>
