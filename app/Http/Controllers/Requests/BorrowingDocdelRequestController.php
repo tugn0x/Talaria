@@ -35,9 +35,10 @@ class BorrowingDocdelRequestController extends ApiController
 
         if( $request->has("toDeliver") && $request->input("toDeliver")==1 )
         {
+            //manager can do deliver
             if( $u->can('manage',$l) || $u->can('deliver',$l))
             {
-                $this->model = $this->model->InDelivery($l->id,$request->input("deliveryId"));    
+                $this->model = $this->model->InDelivery($l->id,$request->input("deliveryIds"));    
                 $collection = $this->nilde->index( $this->model , $request);        
                 return $this->response->paginator($collection, new $this->transformer())->morph();
             }
@@ -258,18 +259,33 @@ class BorrowingDocdelRequestController extends ApiController
     public function changeStatus(Request $request,$id)
     {
         // $this->authorize($this->model);
-        $id = $request->route()->parameters['id'];
-        $model = $this->model->findOrFail($id);
 
-        $extra=$request->has("extrafields")?$request->input("extrafields"):[];
-        
-        if($request->input("status"))
-            $model=$model->changeStatus($request->input("status"),$extra);
-        
-        if($model)
-            return $this->response->item($model, new $this->transformer())->morph();           
-        else //if i delete the model 
-            return $this->response->noContent();
+        $l=\App\Models\Libraries\Library::find($request->route()->parameters['library']);
+        $u=Auth::user();
+
+        if($request->input("status") &&
+            ( 
+                //stati gestibili dagli operatori di delivery
+                (in_array($request->input("status"),['deskReceived','deskNotReceived','deliveredToUserDirect','notDeliveredToUserDirect','deliveredToUser','notDdeliveredToUser']) && ($u->can('manage',$l)||$u->can('borrow',$l)||$u->can('deliver',$l)) ) 
+                ||
+                ($u->can('manage',$l)||$u->can('borrow',$l)) //per tutti gli altri serve il borrow/manager
+            )
+        )
+        {   
+            $id = $request->route()->parameters['id'];
+            $model = $this->model->findOrFail($id);
+
+            $extra=$request->has("extrafields")?$request->input("extrafields"):[];
+            
+            if($request->input("status"))
+                $model=$model->changeStatus($request->input("status"),$extra);
+            
+            if($model)
+                return $this->response->item($model, new $this->transformer())->morph();           
+            else //if i delete the model 
+                return $this->response->noContent();
+        }
+        else  $this->response->errorUnauthorized(trans('apinilde::auth.unauthorized'));
     }
 }
 
