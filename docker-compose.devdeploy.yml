@@ -29,6 +29,21 @@ services:
     - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/,/spidlogin"
     - "traefik.docker.network=proxy"
 
+  frontend_rscvd:
+    build: ../RSCVD/frontend
+    volumes:
+      - ../RSCVD/frontend:/usr/src/app
+      - ../RSCVD/.env:/usr/src/.env
+    command: bash -c "npm install; npm run start:production"    
+    expose:
+    - 3000
+    restart: always
+    labels:
+    - "traefik.port=3000"
+    - "traefik.enable=true"
+    - "traefik.frontend.rule=Host:devrscvd.bo.cnr.it;PathPrefix:/"
+    - "traefik.docker.network=proxy"  
+
   phpmyadmin:
     labels:
     - "traefik.frontend.auth.basic.users=${PMA_AUTH}"       
