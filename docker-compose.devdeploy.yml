@@ -8,6 +8,8 @@ services:
     - 80:80
     - 443:443
     volumes:
+    - "${SSL_CERT_PATH}:/etc/ssl/traefik/localhost.crt"
+    - "${SSL_KEY_PATH}:/etc/ssl/traefik/localhost.key"
     - /var/run/docker.sock:/var/run/docker.sock:ro
     - ./docker/traefik:/etc/traefik
 
@@ -16,6 +18,7 @@ services:
     volumes:
     - ./frontend:/usr/src/app
     - ./.env:/usr/src/.env
+    #command: npm start
     command: bash -c "npm install; npm run start:production"
     expose:
     - 3000
