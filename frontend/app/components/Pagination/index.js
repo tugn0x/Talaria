@@ -19,7 +19,7 @@ const Pagination = (props) => {
     
 
     return (
-        total_pages >= 1 && 
+        total>0 && total_pages >= 1 && 
         (<div className="pagination">
             <span>{intl.formatMessage({ id: 'app.components.Pagination.itemsPerPageDropdown' })}
                 <Dropdown className="perPageDropdown"  direction="down" isOpen={dropdownOpen} toggle={toggle}>
