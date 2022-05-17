@@ -183,18 +183,20 @@ class BorrowingDocdelRequest extends DocdelRequest
         return $query->where('borrowing_library_id', $library_id);
     }
 
-    public function scopeInDelivery($query, $library_id,$delivery_id=null)
+    public function scopeInDelivery($query, $library_id,$deliveryIds=null)
     {        
-        if($delivery_id>0)
+        if($deliveryIds!=null)
             return $query->where('borrowing_library_id', $library_id)
                    ->where(function ($query) {
                        return $query->where('borrowing_status','deliveringToDesk')->orWhere('borrowing_status','deskReceived');
                     })
-                   ->whereHas('patrondocdelrequest', function($q) use ($delivery_id){
-                    return $q->where('delivery_id', $delivery_id);
-                return;    
-            });  
-        else if($delivery_id==null)    
+                   ->whereHas('patrondocdelrequest', function($q) use ($deliveryIds){
+                    //return $q->where('delivery_id', $delivery_id);
+                    $arr=explode(',',$deliveryIds);
+                    if(sizeof($arr)>0)
+                        return $q->whereIn('delivery_id', $arr);                        
+                    });  
+        else if($deliveryIds==null)    
         {
             $l=Library::findOrFail($library_id);
             $deliveries=$l->deliveries(); //all desks
@@ -203,7 +205,7 @@ class BorrowingDocdelRequest extends DocdelRequest
             ->where(function ($query) {
                 return $query->where('borrowing_status','deliveringToDesk')->orWhere('borrowing_status','deskReceived');
              })
-            ->whereHas('patrondocdelrequest', function($q) use ($delivery_id,$deliveries){
+            ->whereHas('patrondocdelrequest', function($q) use ($deliveries){
                 return $q->whereIn('delivery_id',$deliveries->pluck('id')->toArray());
             });
         
@@ -379,19 +381,56 @@ class BorrowingDocdelRequest extends DocdelRequest
                     break;  
                 
                 case 'deliveredToUserDirect': 
-                case 'deliveredToUser':     
-                //from borrow
-                if($this->borrowing_status=="documentReady")            
-                {            
-                    if($this->patrondocdelrequest) 
-                    {
-                        $this->patrondocdelrequest->fromlibrary_note=$others["fromlibrary_note"];                    
-                        $this->patrondocdelrequest->fulfill_date=Carbon::now();
+                    if($this->patrondocdelrequest)
+                    {                        
+                        //no borrowing, no desk, just direct fullfill with file/url
+                        if($this->borrowing_status=="newrequest") 
+                        {                       
 
+                            $this->patrondocdelrequest->fromlibrary_note=$others["fromlibrary_note"];                                            
+                            
+                            if($others["url"]){
+                                $this->patrondocdelrequest->url=$others["url"];                                            
+                                $this->patrondocdelrequest->delivery_format=config("constants.patrondocdelrequest_delivery_format.URL"); 
+                            }
+                            /*else if($others[filehash])
+                            { ....
+                                ...
+                                $this->patrondocdelrequest->filename=$this->filename;    
+                                $this->patrondocdelrequest->delivery_format=config("constants.patrondocdelrequest_delivery_format.File"); 
+                            }*/                  
+                            
+                        }
+                        else if($this->borrowing_status=="deskReceived") { //ho stampato la paper e l'ho data all'utente
+                            $this->patrondocdelrequest->delivery_format=config("constants.patrondocdelrequest_delivery_format.PaperCopy");    
+                        }
+                    
+                        $this->patrondocdelrequest->save();                    
+
+
+                    //note: update only borrowing fields (es: fromlibrary_note is for PDR only so i have to remove from $others)                        
+                    $others=[
+                        'archived'=>1,   
+                        'user_delivery_date'=>Carbon::now()                                               
+                    ];  
+                    
+                    } 
+                    break;
+
+                case 'deliveredToUser':     
+                if($this->patrondocdelrequest) 
+                {
+                    $this->patrondocdelrequest->fulfill_date=Carbon::now();
+
+                    //from borrow
+                    if($this->borrowing_status=="documentReady")            
+                    {            
                         if(!$this->patrondocdelrequest->delivery_format || $this->patrondocdelrequest->delivery_format!=config("constants.patrondocdelrequest_delivery_format.PaperCopy")) // NOT (was sent to desk to be printed)                   
                         {
                             //sharing URL/file from borrowing
 
+                            $this->patrondocdelrequest->fromlibrary_note=$others["fromlibrary_note"];                    
+                 
                             if($this->fulfill_type==config("constants.borrowingdocdelrequest_fulfill_type.URL"))
                             {
                                 $this->patrondocdelrequest->url=$this->url;
@@ -402,15 +441,15 @@ class BorrowingDocdelRequest extends DocdelRequest
                                 $this->patrondocdelrequest->filename=$this->filename;    
                                 $this->patrondocdelrequest->delivery_format=config("constants.patrondocdelrequest_delivery_format.File"); 
                             }
-                        }
-                    
-                        $this->patrondocdelrequest->save();
+                        }                        
+                    }
+                    else if($this->borrowing_status=="deskReceived") //from desk 
+                    {
+                        //nothing to do and no notes
                     }
                 }
-                else if($this->borrowing_status=="deskReceived") //from desk 
-                {
 
-                }
+                $this->patrondocdelrequest->save();
 
                 //note: update only borrowing fields (es: fromlibrary_note is for PDR only so i have to remove from $others)                        
                 $others=[

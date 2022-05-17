@@ -82,22 +82,23 @@ Route::group([
         Route::post('{library}/tags', 'TagController@store')->name('create');
     });
 
-    /* LIBRARY DELIVERY*/
+    /* LIBRARY DELIVERY (pickup)*/
     Route::group([
         'as' => 'api.v1.libraries.library-deliveries.',
     ], function () {
         Route::get('{library}/deliveries', 'DeliveryController@index')->name('index');
-        
-        /* Tutti i Delivery dell'operatore (se abilitato al delivery) della biblio*/
-         Route::get('{library}/deliveries/my', 'DeliveryController@my')->name('my');
-        
-        
+        Route::get('{library}/deliveries/option-items', 'DeliveryController@optionList')->name('option-items');
+                
         //posso usare questa anche per sapere conoscere gli operatori del PdC (?include=users)
-        Route::get('{library}/deliveries/{delivery_id}', 'DeliveryController@show')->name('show');
-        
+        Route::get('{library}/deliveries/{delivery_id}', 'DeliveryController@show')->name('show');        
         Route::put('{library}/deliveries/{delivery_id}', 'DeliveryController@update')->name('update');
         Route::post('{library}/deliveries', 'DeliveryController@store')->name('create');
         Route::delete('{library}/deliveries/{delivery_id}', 'DeliveryController@delete')->name('delete'); //hard delete
+
+        /* Tutti i Delivery dell'operatore (se abilitato al delivery) della biblio*/
+        //Route::get('{library}/deliveries/my', 'DeliveryController@my')->name('my');
+        
+        
         
         
     });

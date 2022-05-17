@@ -31,9 +31,17 @@ class DeliveryPolicy extends BasePolicy
 
     }
 
+
+     //non essendoci un model associato ritorno true e poi
+    //filtro nel controller
+    public function optionList(User $user, Model $model)
+    {
+       return true; 
+    }
+
+    
     public function show(User $user, Model $model)
     {
-        //return $this->canManage($user, $model);
         return true;
     }
 

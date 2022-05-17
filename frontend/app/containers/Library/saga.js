@@ -26,7 +26,8 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
       REQUEST_CHANGE_STATUS_LENDING,
       //REQUEST_CHANGE_LENDING_ARCHIVED,
       REQUEST_APPLY_LENDING_TAGS_TO_DDREQUESTS,
-      REQUEST_ACCEPT_ALLLENDER
+      REQUEST_ACCEPT_ALLLENDER,
+      REQUEST_GET_LIBRARY_DESKS_OPTIONLIST
     } from './constants';
 import {
   requestError,
@@ -51,6 +52,7 @@ import {
   requestFindUpdateOABorrowingReferenceFail,
   requestFindISSNISBNSuccess,
   requestGetLendingSuccess,
+  requestGetLibraryDesksOptionListSuccess,
 } from './actions';
 
 import { toast } from "react-toastify";
@@ -73,7 +75,8 @@ import {getLibraryUsersList, updateLibraryUser, deleteLibraryUser, createUser,
     changeLendingArchivedRequest,
     requestApplyTagsToLendingRequests,
     acceptallLenderLendingRequest,
-    getLendingRequest
+    getLendingRequest,
+    getLibraryDeliveriesOptionList
 } from '../../utils/api'
 
 import {getOA,getPubmedReferenceByPMID,getFindISSN,getFindISBN, getFindISSN_ACNP} from '../../utils/apiExternal';
@@ -233,7 +236,7 @@ export function* requestGetLibrariesListSaga(action = {}) {
   }
 }
 
-export function* requestBorrowingsListSaga(action) {
+export function* requestBorrowingsListSaga(action) {  
   const options = {
     method: 'get',
     library_id:action.library_id,
@@ -253,11 +256,10 @@ export function* requestBorrowingsListSaga(action) {
 export function* requestBorrowingsToDeliverListSaga(action) {
   const options = {
     method: 'get',
-    library_id:action.library_id,
-    delivery_id:action.delivery_id,
+    library_id:action.library_id,    
     page: action.page ? action.page : '1',
-    query: action.query ? action.query : null,
-    pageSize: action.pageSize ? action.pageSize : null
+    filter: action.filter ? action.filter : null,
+    pageSize: action.pageSize ? action.pageSize : null    
   };
   try {
    console.log(action)
@@ -312,12 +314,12 @@ export function* requestApplyTagsToDDRequestsSaga(action) {
  
   try {
     const request = yield call(requestApplyTagsToBorrowingRequests, options);
-    
-    yield put (requestBorrowingsList(action.library_id))
+           
     // Callback dopo il Crea nuova etichetta
     if(action.tagIds.some(tagId => typeof tagId === 'string' )){
       yield call(requestLibraryTagsOptionListSaga,action)
     }
+    yield put (requestBorrowingsList(action.library_id,action.page,action.pageSize,action.filter))              
     yield call(() => toast.success(action.message)) 
   } catch(e) {
     yield put(requestError(e.message));
@@ -362,7 +364,7 @@ export function* requestRemoveTagToDDRequestsSaga (action) {
   
   try {
     const request = yield call(removeDDRequestTag, options);
-    yield put (requestBorrowingsList(action.library_id))
+    yield put (requestBorrowingsList(action.library_id,action.page,action.pageSize,action.filter))        
     yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
@@ -460,11 +462,11 @@ export function* requestUpdateBorrowingSaga(action) {
     method: 'put',
     body: action.borrowing,
     borrowing_library_id: action.borrowing_library_id,
-    id: action.id,
-  };
+    id: action.id,    
+  };    
   try {
     const request = yield call(updateBorrowing, options);
-    yield put (requestBorrowingsList(action.borrowing_library_id))    
+    yield put (requestBorrowingsList(action.borrowing_library_id,action.page,action.pageSize,action.filter))        
     yield put (push("/library/"+action.borrowing_library_id+"/borrowing/"));
     yield call(() => toast.success(action.message))
   } catch(e) {
@@ -536,7 +538,7 @@ export function* findUpdateOABorrowingSaga(action) {
         console.log("TROVATO OA!:",request.url)    
         //yield call(() => toast.success("Versione OA trovata!"))
         yield put(requestFindUpdateOABorrowingReferenceSuccess(action.id));
-        yield call(requestUpdateBorrowingSaga, {id: action.id,borrowing_library_id:action.borrowing_library_id, borrowing: {reference: {id: action.reference_id, oa_link: request.url} }, message:action.foundMessage })
+        yield call(requestUpdateBorrowingSaga, {id: action.id,borrowing_library_id:action.borrowing_library_id, borrowing: {reference: {id: action.reference_id, oa_link: request.url} }, message:action.foundMessage,filter:action.filter })
       }
       else {
         console.log("NON TROVATO");
@@ -571,7 +573,8 @@ export function* requestChangeStatusBorrowingSaga(action) {
   try {
   
     const request = yield call(changeStatusBorrowingRequest, options);    
-    yield put (requestBorrowingsList(action.borrowing_library_id))    
+    yield put (requestBorrowingsList(action.borrowing_library_id,action.page,action.pageSize,action.filter))        
+    //aggiungo questa push altrimenti se vengo da una pagina diversa dalla lista (es: scelta lender), non ricaricherebbe tutto (mentre cosi' tiene anche i filtri)!
     yield put (push("/library/"+action.borrowing_library_id+"/borrowing/"));
     yield call(() => toast.success(action.message))
   } catch(e) {
@@ -586,13 +589,13 @@ export function* requestChangeStatusDeliverySaga(action) {
      'extrafields': {...action.extrafields},    
     },
     id: action.id,
-    borrowing_library_id: action.borrowing_library_id,
-    delivery_id: action.delivery_id,
+    borrowing_library_id: action.borrowing_library_id,    
+    filter: action.filter
   };
   try {
   
     const request = yield call(changeStatusBorrowingRequest, options);    
-    yield put (requestBorrowingToDeliverList(action.borrowing_library_id,action.delivery_id,action.page,action.pageSize,action.query))    
+    yield put (requestBorrowingToDeliverList(action.borrowing_library_id,action.page,action.pageSize,action.filter))    
     yield put (push("/library/"+action.borrowing_library_id+"/delivery"));
     yield call(() => toast.success(action.message))
   } catch(e) {
@@ -656,6 +659,20 @@ export function* requestAcceptAllLenderLendingSaga(action) {
     yield put (requestLendingsList(action.lending_library_id))    
     yield put (push("/library/"+action.lending_library_id+"/lending/"));
     yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestLibraryDesksOptionListSaga(action) {
+  const options = {
+    method: 'get',
+    library_id:action.library_id,
+  }
+  
+  try {
+    const request = yield call(getLibraryDeliveriesOptionList, options);
+    yield put(requestGetLibraryDesksOptionListSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -739,6 +756,8 @@ export default function* librarySaga() {
   yield takeLatest(REQUEST_GET_BORROWING,requestGetBorrowingSaga)
   yield takeLatest(REQUEST_UPDATE_BORROWING,requestUpdateBorrowingSaga)  
   yield takeLatest(REQUEST_FORWARD_BORROWING,requestForwardBorrowingSaga)
+
+  yield takeLatest(REQUEST_GET_LIBRARY_DESKS_OPTIONLIST,requestLibraryDesksOptionListSaga);
   
   yield takeLatest(REQUEST_GET_LENDING,requestGetLendingSaga)
 

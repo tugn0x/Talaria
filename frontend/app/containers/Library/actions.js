@@ -36,8 +36,10 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_GET_ISSN_ISBN,
    REQUEST_GET_ISSN_ISBN_SUCCESS,
    REQUEST_GET_ISSN_ISBN_FAIL,
+   REQUEST_GET_LIBRARY_DESKS_OPTIONLIST,
    //REQUEST_CHANGE_LENDING_ARCHIVED,
    REQUEST_ACCEPT_ALLLENDER,
+   REQUEST_GET_LIBRARY_DESKS_OPTIONLIST_SUCCESS,
    
   } from "./constants";
 
@@ -189,12 +191,13 @@ export function requestRemoveDDLendingRequestTag(library_id,id,tagId,message, fi
 }
 
 
-export function requestApplyTagsToDDRequests(library_id,reqIds,tagIds,message) {
+export function requestApplyTagsToDDRequests(library_id,reqIds,tagIds,message,  filter) {
   return {
     type: REQUEST_APPLY_TAGS_TO_DDREQUESTS,
     reqIds,
     tagIds,
     message,
+    filter,
     library_id,
   };
 }
@@ -282,14 +285,12 @@ export function requestLendingsListSuccess(result) {
   };
 }
 
-//TODO: pass page/pageSize/filter...
-export function requestBorrowingToDeliverList(library_id,delivery_id,page, pageSize, query) {
+export function requestBorrowingToDeliverList(library_id,page, pageSize, filter) {
   return {
     type: REQUEST_BORROWINGSTODELIVER_LIST,
-    library_id,
-    delivery_id,
+    library_id,    
     page,
-    query,
+    filter,
     pageSize
   };
 }                
@@ -311,13 +312,14 @@ export function requestPostNewBorrowing(library_id,refData,message){
 }
 
 
-export function requestUpdateBorrowing(id,library_id,reqData,message){
+export function requestUpdateBorrowing(id,library_id,reqData,message,filter){
   return {
     type: REQUEST_UPDATE_BORROWING,
     borrowing_library_id:library_id,
     borrowing: reqData,  
     id,  
     message,
+    filter
   };
 }
 
@@ -329,13 +331,14 @@ export function requestUpdateBorrowingSuccess (result)
   };  
 }
 
-export function requestForwardBorrowing(id,library_id,reqData,message){
+export function requestForwardBorrowing(id,library_id,reqData,message,filter){
   return {
     type: REQUEST_FORWARD_BORROWING,
     borrowing_library_id:library_id,
     borrowing: reqData,  
     id,  
     message,
+    filter
   };
 }
 
@@ -379,7 +382,7 @@ export function requestGetBorrowingSuccess (result) {
   };  
 }
  
- export function requestFindUpdateOABorrowingReference(id,borrowing_library_id,reference_id,data,foundMessage,notfoundMessage) {
+ export function requestFindUpdateOABorrowingReference(id,borrowing_library_id,reference_id,data,foundMessage,notfoundMessage,filter) {
   console.log("requestFindUpdateOABorrowingReference action")
   return {
     type: REQUEST_FIND_UPDATE_BORROWING_OA,
@@ -387,6 +390,7 @@ export function requestGetBorrowingSuccess (result) {
     reference_id,
     borrowing_library_id,
     data,
+    filter,
     foundMessage,
     notfoundMessage
   };
@@ -405,7 +409,7 @@ export function requestFindUpdateOABorrowingReferenceSuccess(result) {
     result
   };
 }
-//TODO: pass page/pageSize/filter...
+
 export function requestChangeStatusBorrowing(id,borrowing_library_id,status, extrafields,message,filter) {
   return {
     type: REQUEST_CHANGE_STATUS_BORROWING,
@@ -429,19 +433,33 @@ export function requestChangeStatusLending(id,lending_library_id,status, message
     filter
   };
 }
-//TODO: pass page/pageSize/filter...
-export function requestChangeStatusDelivery(id,borrowing_library_id,delivery_id,status, extrafields,message,filter) {
+
+export function requestChangeStatusDelivery(id,borrowing_library_id,status, extrafields,message,filter) {
   return {
     type: REQUEST_CHANGE_STATUS_DELIVERY,
     id,
-    borrowing_library_id,
-    delivery_id,    
+    borrowing_library_id,    
     status,
     extrafields,
     message,
     filter
   };
 }
+
+export function requestGetLibraryDesksOptionList(library_id) {
+  return {
+    type: REQUEST_GET_LIBRARY_DESKS_OPTIONLIST,
+    library_id,
+  };
+}
+
+export function requestGetLibraryDesksOptionListSuccess(result) {
+  return {
+    type: REQUEST_GET_LIBRARY_DESKS_OPTIONLIST_SUCCESS,
+    result
+  };
+}
+
 
 /*not used
 export function requestChangeLendingArchived(id,lending_library_id,status, message,filter) {

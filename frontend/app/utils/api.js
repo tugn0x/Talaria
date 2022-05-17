@@ -487,23 +487,15 @@ export const changeStatusBorrowingRequest = (options) => {
 
 //DELIVERY
 export const getBorrowingToDeliverList = (options) => {
-  const library_id = options.library_id
-  const delivery_id = options.delivery_id
+  const library_id = options.library_id  
   const page = options.page;
-  const params = options.query;
+  const params = options.filter;
   const pageSize = options.pageSize;
   let qstringpar="&toDeliver=1";
   if(params && params.query && params.query!="") qstringpar+="&q="+params.query;
   if(pageSize) qstringpar+="&pageSize="+pageSize;
-  if(params && params.labelIds && params.labelIds.length>0) qstringpar+="&tagIds="+params.labelIds.join(',')+"";  
-  if(params && !params.archived)
-    qstringpar+="&archived=0";
-  else if(params && params.archived>=0) 
-    qstringpar+="&archived="+params.archived;
-
-  if(params && !params.delivery_id)
-    qstringpar+="&deliveryId="+delivery_id;  
-  
+  if(params && params.desksIds && params.desksIds.length>0) qstringpar+="&deliveryIds="+params.desksIds.join(',')+"";  
+   
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/borrowings?page=${page}${qstringpar}`, options)
 };
@@ -649,6 +641,12 @@ export const getLibraryDeliveries = (options) => {
   const library_id = options.id
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/deliveries`, options)
+};
+
+export const getLibraryDeliveriesOptionList = (options) => {
+  options = getOption(options);
+  const library_id = options.library_id
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/deliveries/option-items?label=name`, options)
 };
 
 

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {useIntl} from 'react-intl'
 import makeSelectLibrary, {isLibraryLoading} from '../selectors';
-import {requestBorrowingToDeliverList,requestChangeStatusDelivery} from '../actions'
+import {requestBorrowingToDeliverList,requestChangeStatusDelivery,requestGetLibraryDesksOptionList} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -13,6 +13,7 @@ const DeliveryPage = (props) => {
     console.log('DeliveryPage', props)
     const {dispatch, isLoading, match, library, history} = props    
     const borrowingsList = library.borrowingsList.data
+    const desksOptionList=library.desksOptionList;
     const pagination = library.borrowingsList.pagination       
 
     const editPath='/library/'+match.params.library_id+"/delivery/:id/:op?";
@@ -20,7 +21,8 @@ const DeliveryPage = (props) => {
     const intl = useIntl()
     
     useEffect(() => {        
-            dispatch(requestBorrowingToDeliverList(match.params.library_id,1,null,null,{}))                                
+            dispatch(requestBorrowingToDeliverList(match.params.library_id,null,null,{}))                                
+            dispatch(requestGetLibraryDesksOptionList(match.params.library_id))
     }, [])
 
      async function setDeskReceivedRequest (id,filter) {
@@ -33,7 +35,7 @@ const DeliveryPage = (props) => {
          }); 
 
          if(conf)
-             dispatch(requestChangeStatusDelivery(id,match.params.library_id,1,'deskReceived',null,intl.formatMessage({id: "app.requests.setDeskReceivedMessage"}),filter))        
+             dispatch(requestChangeStatusDelivery(id,match.params.library_id,'deskReceived',null,intl.formatMessage({id: "app.requests.setDeskReceivedMessage"}),filter))        
      } 
 
      async function setDeskNotReceivedRequest (id,filter) {
@@ -46,7 +48,7 @@ const DeliveryPage = (props) => {
          }); 
 
          if(conf)
-             dispatch(requestChangeStatusDelivery(id,match.params.library_id,1,'deskNotReceived',null,intl.formatMessage({id: "app.requests.setDeskNotReceivedMessage"}),filter))        
+             dispatch(requestChangeStatusDelivery(id,match.params.library_id,'deskNotReceived',null,intl.formatMessage({id: "app.requests.setDeskNotReceivedMessage"}),filter))        
      } 
 
      async function deliverToUser (id,direct,filter) {
@@ -62,7 +64,7 @@ const DeliveryPage = (props) => {
 
          //NB: è lo statusChange di laravel che imposterà notfulfill_type=3 (user not taken)
          if(conf)
-             dispatch(requestChangeStatusDelivery(id,match.params.library_id,1,status,null,intl.formatMessage({id: "app.requests.fulfilledToPatronMessage"}),filter))        
+             dispatch(requestChangeStatusDelivery(id,match.params.library_id,status,null,intl.formatMessage({id: "app.requests.fulfilledToPatronMessage"}),filter))        
     }
 
     async function userNotTaken (id,direct,filter) {
@@ -78,7 +80,7 @@ const DeliveryPage = (props) => {
 
          //NB: è lo statusChange di laravel che imposterà notfulfill_type=3 (user not taken)
          if(conf)
-             dispatch(requestChangeStatusDelivery(id,match.params.library_id,1,status,null,intl.formatMessage({id: "app.requests.unfilledToPatronMessage"}),filter))                     
+             dispatch(requestChangeStatusDelivery(id,match.params.library_id,status,null,intl.formatMessage({id: "app.requests.unfilledToPatronMessage"}),filter))                     
     }
 
     
@@ -88,22 +90,20 @@ const DeliveryPage = (props) => {
           
     return (
         <>
-            <div className="alert alert-danger">
-                DEBUG: STO FILTRANDO PER delivery_id=1                
-            </div>
             <DeliveryList 
                 sectionTitle={messages.header}                
                 data={borrowingsList}                               
                 loading={isLoading}
                 pagination={pagination}
-                history={history}                                              
+                history={history}          
+                desksOptionList={desksOptionList}                                       
                 match={match}   
                 editPath={editPath}             
                 searchOptions={{
                     getSearchList: (page, pageSize, searchFilter ) => {
                         history.push(match.url)
-                        searchFilter={...searchFilter,archived:archive}
-                        dispatch(requestBorrowingToDeliverList(match.params.library_id,null,page, pageSize, searchFilter))
+                        searchFilter={...searchFilter}
+                        dispatch(requestBorrowingToDeliverList(match.params.library_id,page, pageSize, searchFilter))
                     },
                     searchOnChange: true
                 }}                

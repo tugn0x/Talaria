@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Libraries;
 
 use App\Http\Controllers\ApiController;
 use App\Models\BaseTransformer;
+use App\Models\Libraries\Library;
 use App\Models\Libraries\Delivery;
 use App\Models\Libraries\DeliveryTransformer;
 use Illuminate\Http\Request;
@@ -21,25 +22,17 @@ class DeliveryController extends ApiController
 
     }
 
-    /*public function index(Request $request)
-    {
-        $this->model = $this->filterRelations($request);
-        $items = $this->model->get();
-        return response()->json($items);
-        //$collection = $this->nilde->index($this->model, $request);
-        //return $this->response->paginator($collection, new $this->transformer())->morph();
-    }*/
-
     public function index(Request $request)
     {
         $this->model = $this->filterRelations($request);
         $items = $this->model->get();
         
-        return $this->response->collection($items, new $this->transformer())->morph();
+        //return $this->response->collection($items, new $this->transformer())->morph();
 
         //col paginatore
-        //$collection = $this->nilde->index($this->model, $request);
-        //return $this->response->paginator($collection, new $this->transformer())->morph();
+        $collection = $this->nilde->index($this->model, $request);
+        return $this->response->paginator($collection, new $this->transformer())->morph();
+        
 
     }
 
@@ -53,7 +46,7 @@ class DeliveryController extends ApiController
 
      //i miei Delivery della biblioteca x cui sto operando
     //NB: non mi serve definire la policy perchè tanto è filtrata x owner
-    public function my(Request $request)
+    /*public function my(Request $request)
     {
         $this->model = $this->filterRelations($request);
         $count = $request->input('pageSize', config('api.page_size'));
@@ -64,7 +57,7 @@ class DeliveryController extends ApiController
         ->select('deliveries.*')
         ->paginate($count);
         return $this->response->paginator($my_applications, new $this->transformer())->morph();
-    }
+    }*/
 
     public function update(Request $request, $id)
     {
@@ -114,4 +107,22 @@ class DeliveryController extends ApiController
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
+
+    //NOTE: i cannot auth the model (because is an OptionList)
+    //so i have to filter here by library andh auth
+    public function optionList(Request $request)
+    {   
+        $l=Library::find($request->route()->parameters['library']);
+        $u=Auth::user();
+        if($u->can('manage',$l)||$u->can('deliver',$l)||$u->can('borrow',$l))
+        {
+            $collection = $this->nilde->optionList($this->model, $request,function ($model,$request) use ($l) {
+                return $model->inLibrary($l->id);
+            });
+
+            return $this->response->array($collection->toArray());
+        }
+        else  $this->response->errorUnauthorized(trans('apinilde::auth.unauthorized'));
+    }
+
 }

@@ -1,1 +1,37 @@
 @import '../../../scss/variables';
+
+.activeFilters
+{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items:center;
+    margin: 0;
+    
+    .filtersList {
+        list-style: none;
+        list-style-type: none;
+        padding:0;
+        margin: 5rem 0 0 0;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        li {
+            height: $heightInput;
+            i {
+                padding-left: 5px;
+            }
+        }
+        .deskFilter
+        {
+            padding: 5px 12px;
+            border-radius: 5px;
+            background-color: $labels-color;
+            margin-right:5px;
+            border: 1px solid $labels-border;
+            i.fa {
+                cursor: pointer;
+            }
+        }           
+    }
+}

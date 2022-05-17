@@ -14,7 +14,7 @@ import './style.scss';
 
 const DeliveryList = (props) => {
     console.log('DeliveryList', props)
-    const { editPath,loading, data, pagination, searchOptions,setDeskReceivedRequest,deliverToUser,setDeskNotReceivedRequest,userNotTaken} = props
+    const { editPath,loading, data,desksOptionList, pagination, searchOptions,setDeskReceivedRequest,deliverToUser,setDeskNotReceivedRequest,userNotTaken} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)
@@ -23,9 +23,22 @@ const DeliveryList = (props) => {
 
     const [multiFilter, setMultiFilter ] = useState(
         {
-            query: '',                      
+            query: '',   
+            desksIds:[],                    
         }
     );
+
+
+
+    const handleIds = (ids, id) => {
+        if(ids.includes(id)){
+            const index = ids.findIndex(el => el === id);
+            ids.splice(index, 1)
+            return ids
+        }else {
+            return [...ids, id]
+        }
+    }
 
 
     useEffect(() => {
@@ -42,10 +55,18 @@ const DeliveryList = (props) => {
     
     const handleCancelFilter = () => {
         setMultiFilter({
-            query: '',                       
+            query: '',    
+            desksIds:[],                    
         })
     }
 
+
+    const toggleDeskFilter = (deskId) => {
+        setMultiFilter( state => ({
+            query: state.query,
+            desksIds: handleIds(state.desksIds, deskId),            
+        }))
+    };
 
     
     
@@ -65,7 +86,8 @@ const DeliveryList = (props) => {
                             <InputSearch
                                 submitCallBack={(query) => { 
                                     setMultiFilter( state => ({
-                                        query:query,                                        
+                                        query:query,     
+                                        desksIds:state.desksIds,                                   
                                     }) )
                                 } 
                                 }
@@ -75,11 +97,31 @@ const DeliveryList = (props) => {
                         }
                     </Col>                    
                     <Col md={3} sm={5}>
-                        {<span>TODO: desk dropdown</span> }
+                        {<FilterSelect 
+                                type={"desks"} 
+                                options={desksOptionList} 
+                                selectedIds={multiFilter.desksIds}
+                                submitCallBack={(deskId) => setMultiFilter( state => ({
+                                    query: state.query,
+                                    desksIds: handleIds(state.desksIds, deskId),                                    
+                        }) ) } /> 
+                    }
                     </Col>
                     <Col md={3} sm={5}>                    
                     </Col>
                     <Col sm={2}>{!disableCancelFilter && <a href="#" onClick={handleCancelFilter} className="btn btn-link active"><FormattedMessage {...messages.ResetAll} /></a> }</Col>
+                </Row>
+                <Row>
+                    <Col md={12} className="activeFilters">                    
+                    { desksOptionList && multiFilter.desksIds && multiFilter.desksIds.length>0 &&
+                     <ul id="desksActiveFilter" className="filtersList">    
+                      {multiFilter.desksIds.map( el => 
+                         <li key={el} className="deskFilter">{desksOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fas fa-times"  onClick={() => toggleDeskFilter(el) }></i></li>
+                        ) 
+                      }
+                      </ul>
+                    }
+                    </Col>
                 </Row>
             </div>
             
