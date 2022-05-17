@@ -46,8 +46,8 @@ const BorrowingPage = (props) => {
              dispatch(requestDeleteRequest(id,intl.formatMessage({id: 'app.global.deletedMessage'})))
      }*/
     
-    const applyTagsToDDRequests = (tagIds,reqIds) => { 
-        dispatch(requestApplyTagsToDDRequests(match.params.library_id,reqIds,[tagIds],intl.formatMessage({id:'app.containers.BorrowingPage.addedTagToRequest'})))
+    const applyTagsToDDRequests = (tagIds,reqIds, filter) => { 
+        dispatch(requestApplyTagsToDDRequests(match.params.library_id,reqIds,[tagIds],intl.formatMessage({id:'app.containers.BorrowingPage.addedTagToRequest'}),filter))
      }
     
     async function removeTagFromDDRequest (id,tagId, filter) {        
@@ -63,8 +63,8 @@ const BorrowingPage = (props) => {
          }
      }
 
-     async function findAndUpdateOABorrowingReference (id,reference_id,data) {         
-        dispatch(requestFindUpdateOABorrowingReference(id,match.params.library_id,reference_id,data,intl.formatMessage({id: "app.containers.BorrowingPage.OAfoundAndUpdateMessage"}),intl.formatMessage({id: "app.containers.BorrowingPage.OAnotfoundAndUpdateMessage"})));
+     async function findAndUpdateOABorrowingReference (id,reference_id,data,filter) {         
+        dispatch(requestFindUpdateOABorrowingReference(id,match.params.library_id,reference_id,data,intl.formatMessage({id: "app.containers.BorrowingPage.OAfoundAndUpdateMessage"}),intl.formatMessage({id: "app.containers.BorrowingPage.OAnotfoundAndUpdateMessage"}),filter));
      }
 
      async function findISSNISBNcb (id,data) {                        

@@ -154,10 +154,14 @@ const BorrowingRequestPage = (props) => {
         dispatch(requestChangeStatusBorrowing(params.id,match.params.library_id,'notDeliveredToUser',requestfields,intl.formatMessage({id: "app.requests.unfilledToPatronMessage"}),filter))            
     }
 
-    const directFulfillCallback=(requestfields) => {console.log("Direct fulfill to patron",requestfields)}
+    const directFulfillCallback=(requestfields,filter) => {
+        console.log("Direct fulfill to patron",requestfields)
+        //TODO finish managing file upload
+        dispatch(requestChangeStatusBorrowing(params.id,match.params.library_id,'deliveredToUserDirect',requestfields,intl.formatMessage({id: "app.requests.fulfilledToPatronMessage"}),filter))            
+    }
 
     const fulfillCallback=(requestfields,filter) => {
-        console.log("Fulfill to patron",requestfields)
+        console.log("Fulfill to patron",requestfields)        
         dispatch(requestChangeStatusBorrowing(params.id,match.params.library_id,'deliveredToUser',requestfields,intl.formatMessage({id: "app.requests.fulfilledToPatronMessage"}),filter))            
     
     }

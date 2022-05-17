@@ -10,6 +10,7 @@ import { BorrowingPatronRequest } from '../BorrowingPatronRequest';
 import { Link } from 'react-router-dom';
 import {UncontrolledTooltip} from 'reactstrap';
 import {daysFromToday,formatDateTime} from '../../../utils/dates';
+import {documentAccess as patronRequestDocumentAccess}  from '../../Patron/PatronRequest';
 
 
 export const requesturl=(reqPath,id,op) => {
@@ -73,7 +74,7 @@ const lendingUnfilledReason = (data) => {
     return ret;
 }
 
-const documentAccess=(data) => {
+export const documentAccess=(data) => {
     return (
         <div className="access_document_icons">
             {/* TODO: use Rabih Download component*/}
@@ -444,6 +445,7 @@ const BorrowingItem = (props) => {
                 <>
                     <BorrowingPatronRequest data={data}/>            
                     {!isArchived(data) && data.patrondocdelrequest.data.status=="requested" && data.patrondocdelrequest.data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.patrondocdelrequest.data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
+                    {patronRequestDocumentAccess(data.patrondocdelrequest.data)}               
                 </>
             }              
             </Col>
@@ -468,7 +470,7 @@ const BorrowingItem = (props) => {
                }
                {!isArchived(data) && data.borrowing_status=="requested" && data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}                                                            
             </>}       
-            {documentAccess(data)}               
+            {documentAccess(data)}            
             {!isArchived(data) && <BorrowingRequestIcons customClass="icons d-flex" data={data} reqPath={editPath} forwardRequest={forwardRequest} askTrashRequest={askTrashRequest} askCancelRequest={askCancelRequest} deleteRequest={deleteRequest} askArchiveRequest={askArchiveRequest} askArchiveRequestAsNotReceived={askArchiveRequestAsNotReceived} savedAsDownloaded={savedAsDownloaded}  setReceivedRequest={setReceivedRequest} setNotReceivedRequest={setNotReceivedRequest} />}                                
             </div>
             </Col> 

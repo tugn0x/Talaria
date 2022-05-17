@@ -40,7 +40,18 @@ return (<div>
                                 </span>
                                 {canPatronReqDirectManaged(data) &&
                                     <FormGroup >                                       
-                                        <span>- file/URL send to patron</span>
+                                        <span>- Send this URL to patron</span>
+                                        <FormGroup >                                
+                                            <Input                                         
+                                                type="textarea"                                         
+                                                label={intl.formatMessage({id: "app.patronrequest.url"})}
+                                                handleChange={(value) => handleChange(value, 'url')}                                        
+                                                input={formData.url ? formData.url : ""}
+                                            />
+                                        </FormGroup> 
+
+                                        <span>- or send a file to patron</span>
+
                                     </FormGroup>
                                 }
                                 {!canPatronReqDirectManaged(data) && (isFile(data)||isURL(data)) && hasBeenDownloaded(data) &&

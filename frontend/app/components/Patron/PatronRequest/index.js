@@ -29,6 +29,22 @@ import './style.scss';
   return <span className="status-date"><i className="fas fa-clock"></i> {formatDateTime(date)}</span>
 }*/
 
+const isArchived=(data) => {
+    return data.archived 
+}
+
+const isFile=(data) => {
+    return data.delivery_format && data.delivery_format==1 
+}
+
+const isPaper=(data) => {
+    return data.delivery_format && data.delivery_format==2
+}
+
+const isURL=(data) => {
+    return data.delivery_format && data.delivery_format==3
+}
+
 const notfulfillReason = (data) => {
     let intl=useIntl();
     let ret=""
@@ -73,6 +89,17 @@ export const deliveryFormat=(data) => {
     return <i title={alt} className={"simple_icon fas "+icon}></i>;         
 }
 
+export const documentAccess=(data) => {
+    return (
+        <div className="access_document_icons">
+        
+        {!isArchived(data) && data.status=="received" && isFile(data) && <button type="button" className="btn btn-primary btn-sm btn-download-icon" onClick={()=>alert("TODO: view document !")}><i className="fas fa-file"></i></button>}                
+      
+        {isURL(data) && data.status=="received" && <a className="btn btn-primary btn-sm btn-download-icon" href={data.url} target="_blank"><i className="fas fa-external-link-alt"></i></a>}         
+        </div>
+    )
+}
+
 
 
 export const PatronRequestStatus = (props) => {
@@ -114,7 +141,7 @@ export const PatronRequestStatus = (props) => {
                 <UncontrolledTooltip autohide={false} placement="right" target={`tooltipfulfillnote-${data.id}`}>
                     {data.fromlibrary_note}
                 </UncontrolledTooltip>                                
-            </div>}                          
+            </div>}                                  
         </span>}                
         </>
     )

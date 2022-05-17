@@ -2,7 +2,7 @@ import React from 'react';
 import {useIntl} from 'react-intl';
 import { generatePath } from "react-router";
 import { Link } from 'react-router-dom';
-import {BorrowingStatus} from '../BorrowingItem'
+import {BorrowingStatus,documentAccess} from '../BorrowingItem'
 import {BorrowingPatronRequestStatus} from '../BorrowingPatronRequest'
 
 import './style.scss';
@@ -43,27 +43,26 @@ const BorrowingTrackingItem = (props) => {
     const intl=useIntl();
 
     return (
-        <div className="borrowingRequest">
-            <div className="itemHeader">                
-                {/*data.lendingLibrary && <><i className="fas fa-share"></i> &nbsp;</>*/}                
-                <span className="id">
-                    {requestDetailPath && <Link className="requestLink" replace to={`${requestURL(data.id)}`}>                                    
-                        <span className="label"><i className="fas fa-info-circle"></i> </span> 
-                        {data.id}
-                    </Link>}
-                    {!requestDetailPath && <><span className="label"><i className="fas fa-info-circle"></i> </span> 
-                        {data.id}
-                    </>}                    
-                </span>
+            <div className="borrowingRequest">
+                    <div className="itemHeader">                
+                        {/*data.lendingLibrary && <><i className="fas fa-share"></i> &nbsp;</>*/}                
+                        <span className="id">
+                            {requestDetailPath && <Link className="requestLink" replace to={`${requestURL(data.id)}`}>                                    
+                                <span className="label"><i className="fas fa-info-circle"></i> </span> 
+                                {data.id}
+                            </Link>}
+                            {!requestDetailPath && <><span className="label"><i className="fas fa-info-circle"></i> </span> 
+                                {data.id}
+                            </>}                    
+                        </span>
 
-                {data.lendingLibrary && <span className="library">&nbsp;-&nbsp; {data.lendingLibrary.data.name}</span>}
-                {data.all_lender==1 && <span className="library">&nbsp;-&nbsp; {intl.formatMessage({id:'app.global.alllibraries'})}</span>}                                
-                <BorrowingStatus data={data} customClass="request_status"/>                                 
-            </div>
-            <div className="itemData">
-                
-            </div>    
-        </div>            
+                        {data.lendingLibrary && <span className="library">&nbsp;-&nbsp; {data.lendingLibrary.data.name}</span>}
+                        {data.all_lender==1 && <span className="library">&nbsp;-&nbsp; {intl.formatMessage({id:'app.global.alllibraries'})}</span>}                                
+                        <BorrowingStatus data={data} customClass="request_status"/>                                 
+                        {documentAccess(data)}
+                    </div>
+                    <div className="itemData"></div>             
+            </div>             
     )
 }
 

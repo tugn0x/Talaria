@@ -94,7 +94,7 @@ const BorrowingsList = (props) => {
 
 
 
-    const findAndUpdateOA=(req)=>{
+    const findAndUpdateOA=(req,filter)=>{
         let data={}
         
         if(req.reference.data.material_type && req.reference.data.material_type===1)
@@ -107,7 +107,7 @@ const BorrowingsList = (props) => {
         if(req.reference.data.pmid)
             data.pmid=req.reference.data.pmid
 
-        findAndUpdateOABorrowingReference(req.id,req.reference.data.id,data)
+        findAndUpdateOABorrowingReference(req.id,req.reference.data.id,data,filter)
     }
 
     const findISSNISBNtoggle = (req) => {
@@ -139,7 +139,7 @@ const BorrowingsList = (props) => {
         findISSNISBNcb(req.id,data)
     }
 
-    const updateISSNISBNcallback=(data,req)=>{        
+    const updateISSNISBNcallback=(data,req,multiFilter)=>{        
         setfindISSNISBNmodal(false)
         updateISSNISBNReference(data,req,multiFilter)
     }
@@ -213,7 +213,7 @@ const BorrowingsList = (props) => {
                             {applyTags && <ApplyTag
                                 type="tag"
                                 disabled={disableToolbar}
-                                submitCallBack={(ids) => applyTags(ids, selectedRequests)}
+                                submitCallBack={(ids) => applyTags(ids, selectedRequests,multiFilter)}
                                 options={tagsOptionList} 
                             />
                             }
@@ -239,7 +239,7 @@ const BorrowingsList = (props) => {
                                     //deleteReference={() => deleteReference(ref.id,multiFilter)}
                                     checked={selectedRequests.includes(req.id)}
                                     //findAndUpdateOA={()=>findAndUpdateOA(ref.id,ref.material_type===1?ref.part_title:ref.title)}
-                                    findAndUpdateOABorrowingReference={()=>findAndUpdateOA(req)}
+                                    findAndUpdateOABorrowingReference={()=>findAndUpdateOA(req,multiFilter)}
                                     findISSNISBNtoggle={()=>findISSNISBNtoggle(req)}
                                     forwardRequest={()=>forwardRequest(req.id,multiFilter)}
                                     askTrashRequest={(typ)=>askTrashRequest(req.id,typ,multiFilter)}
@@ -270,7 +270,7 @@ const BorrowingsList = (props) => {
                 reqdata={currentReq}
                 results={findISSNISBNresults}
                 findCB={()=>findISSNISBNcallback(currentReq)}
-                updateISSNISBNcallback={(data)=>updateISSNISBNcallback(data,currentReq)}
+                updateISSNISBNcallback={(data)=>updateISSNISBNcallback(data,currentReq,multiFilter)}
                 />                    
             </CustomModal>
             {Object.keys(pagination).length>0 &&

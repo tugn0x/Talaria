@@ -16,7 +16,7 @@ export const BorrowingRequestData = (props) => {
     (data.borrowing_notes||data.request_protnr||data.request_note||
         data.request_special_delivery==1||data.request_pdf_editorial==1 ) && 
     <div className="borrowingRequestData card">   
-        {data.borrowing_notes && <span className="alert alert-info requestData"><span className="label">{intl.formatMessage({id: "app.requests.borrowing_notes"})}: </span>{data.borrowing_notes} </span>}
+        {data.borrowing_notes && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.borrowing_notes"})}: </span>{data.borrowing_notes} </span>}
         {data.request_protnr && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.request_protnr"})}: </span>{data.request_protnr} </span>}
         {data.request_note && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.request_note"})}: </span>{data.request_note} </span>}
         {data.request_special_delivery==1 && <span className="requestData"><i class="fas fa-check-square"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_special_delivery"})} </span></span>}

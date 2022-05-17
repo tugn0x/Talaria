@@ -9,7 +9,7 @@ import './style.scss';
 import RequestIcons from '../RequestIcons';
 import ReferenceCitation from '../../ReferenceCitation';
 import ReferenceTags from '../ReferenceTags';
-import {PatronRequestData, PatronRequestStatus,deliveryFormat} from '../PatronRequest';
+import {PatronRequestData, PatronRequestStatus,deliveryFormat,documentAccess} from '../PatronRequest';
 
 /* TODO: una volta definito l'aspetto finale metto a posto le traduzioni */
 
@@ -21,35 +21,6 @@ const RequestItem = (props) => {
         return "status-icon " + status
     }
 
-
-    const isArchived=(data) => {
-        return data.archived 
-    }
-
-    const isFile=(data) => {
-        return data.delivery_format && data.delivery_format==1 
-    }
-
-    const isPaper=(data) => {
-        return data.delivery_format && data.delivery_format==2
-    }
-    
-    const isURL=(data) => {
-        return data.delivery_format && data.delivery_format==3
-    }
-
-
-  const documentAccess=(data) => {
-    return (
-        <div className="access_document_icons">
-        
-        {!isArchived(data) && data.status=="received" && isFile(data) && <button type="button" className="btn btn-primary btn-sm btn-download-icon" onClick={()=>alert("TODO: view document !")}><i className="fas fa-file"></i></button>}                
-      
-        {isURL(data) && data.status=="received" && <button type="button" className="btn btn-primary btn-sm btn-download-icon" onClick={()=>alert("TODO: open url !")}><i className="fas fa-external-link-alt"></i></button>}         
-        </div>
-    )
-}
-    
     
     /*const requesturl=(id) => {
         return generatePath(`${editPath}`, {
