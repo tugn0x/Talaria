@@ -51,12 +51,7 @@ class Institution extends BaseModel
     {
         return $this->belongsTo(Country::class);
     }
-
-    public function desks()
-    {
-        return $this->belongsToMany(Desk::class);
-    }
-
+    
     public function scopebyCountryAndType($query, $country_id=null,$institution_type_id=null) {
         $params=[];
         if($country_id>0)

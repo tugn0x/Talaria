@@ -10,8 +10,6 @@ $factory->define(Delivery::class, function (Faker $faker) {
     return [
         'name' => "Delivery service",
         'openinghours' => '8-12, 15-19 L-S',
-        'library_id'=>1,
-        'deliveryable_id'=>1,
-        'deliveryable_type'=>'App\Models\Libraries\Library'
+        'library_id'=>1,        
     ];
 });

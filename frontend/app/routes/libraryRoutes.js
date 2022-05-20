@@ -64,7 +64,7 @@ const routes = [
   {
     path: '/delivery', name: `Delivery`, header: true, component: SubRouteSwitch, permissions: ['manage','deliver'], hide: hidePatronRoutes(), resource: {type: 'libraries', key: 'library_id',},
     children: [
-      { path: '', exact: true, name: `PendingRequests`, component: DeliveryPage,url: '/delivery',sidebar: true, order:1 },
+      { path: '', icon:'truck', exact: true, name: `PendingRequests`, component: DeliveryPage,url: '/delivery',sidebar: true, order:1 },
       { path: '/:id?/:op?', exact: true, name: `RequestUpdate`, component: BorrowingRequestPage, sidebar: false},      
       /*{ path: '/archive', icon: "hdd", name: `ArchivedRequests`, component: BorrowingPage,url: '/borrowing/archive',sidebar: true, order:3  },*/
      ]

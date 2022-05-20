@@ -161,15 +161,17 @@ export const PatronRequestData = (props) => {
                     {data.library.data.name}
                 </UncontrolledTooltip>                  
             </div> }
-            {data.delivery && <div className="deliveryLabel pr-3">
+            {data.delivery && <div className="deliveryLabel pr-3"> 
                 <span><i className="fas fa-luggage-cart"></i></span>
                     <span id={`tooltip-del-${data.id}-${data.delivery.data.id}`} className="active">{data.delivery.data.name}</span> 
                     <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-del-${data.id}-${data.delivery.data.id}`}>
                     <div> 
-                        <span>{data.delivery.data.name}</span><br/>
-                        <span><i className="fas fa-envelope"></i> {data.delivery.data.email}</span><br/>
-                        <span><i className="fas fa-phone"></i> {data.delivery.data.phone}</span><br/>
-                        <span><i className="fas fa-clock"></i> {data.delivery.data.openinghours}</span>
+                        <span><i className="fas fa-luggage-cart"></i> {data.delivery.data.name}</span><br/>                        
+                        {data.delivery.data.description && <><span><i className="fas fa-info-circle"></i> {data.delivery.data.description}</span><br/></>}
+                        {data.delivery.data.address && <><span><i className="fas fa-map-marker"></i> {data.delivery.data.address} {data.delivery.data.postcode} {data.delivery.data.town} {data.delivery.data.district} {data.delivery.data.state}</span><br/></>}                                    
+                        {data.delivery.data.email && <><span><i className="fas fa-envelope"></i> {data.delivery.data.email}</span><br/></>}
+                        {data.delivery.data.phone && <><span><i className="fas fa-phone"></i> {data.delivery.data.phone}</span><br/></>}
+                        {data.delivery.data.openinghours && <><span><i className="fas fa-clock"></i> {data.delivery.data.openinghours}</span></>}
                     </div>
                     </UncontrolledTooltip>                
             </div>}            

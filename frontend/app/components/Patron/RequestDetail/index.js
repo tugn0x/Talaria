@@ -74,7 +74,7 @@ const RequestDetail = props => {
                         </Col>
                     </Row>
 
-                </CardBody>
+                </CardBody> 
             </Card>
             {patronrequest.delivery && <Card className="detail-delivery">
                 <CardBody>
@@ -86,17 +86,12 @@ const RequestDetail = props => {
                             {patronrequest.delivery.data.email &&<span>Email: {patronrequest.delivery.data.email}</span>}
                             {patronrequest.delivery.data.phone && <span>Phone: {patronrequest.delivery.data.phone}</span>}
                             {patronrequest.delivery.data.openinghours && <span>Opening hours: {patronrequest.delivery.data.openinghours}</span>}
-                            </div>
-                            {patronrequest.delivery.data.deliveryable && 
-                            <div>
-                                {patronrequest.delivery.data.deliveryable.data.address && <span>Indirizzo: {patronrequest.delivery.data.deliveryable.data.address}</span>}
-                                {patronrequest.delivery.data.deliveryable.data.town && <span>Città: {patronrequest.delivery.data.deliveryable.data.town}</span>}
-                                {patronrequest.delivery.data.deliveryable.data.district && <span>Regione: {patronrequest.delivery.data.deliveryable.data.district}</span>}
-                                {patronrequest.delivery.data.deliveryable.data.postcode && <span>PostCode: {patronrequest.delivery.data.deliveryable.data.postcode}</span>}
-                                {patronrequest.delivery.data.deliveryable.data.state && <span>PostCode: {patronrequest.delivery.data.deliveryable.data.state}</span>}
-                            </div>
-                            } 
-                            
+                            {patronrequest.delivery.data.address && <span>Indirizzo: {patronrequest.delivery.data.address}</span>}
+                            {patronrequest.delivery.data.town && <span>Città: {patronrequest.delivery.data.town}</span>}
+                            {patronrequest.delivery.data.district && <span>Regione: {patronrequest.delivery.data.district}</span>}
+                            {patronrequest.delivery.data.postcode && <span>PostCode: {patronrequest.delivery.data.postcode}</span>}
+                            {patronrequest.delivery.data.state && <span>PostCode: {patronrequest.delivery.data.state}</span>}
+                            </div>                                                        
                         </Col>
                     </Row>
                 </CardBody>

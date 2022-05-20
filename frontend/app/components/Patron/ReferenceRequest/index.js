@@ -65,23 +65,11 @@ const ReferenceRequest = props => {
     const handleChange = (value, field_name) =>{
        // console.log("handlechange FORMDATA:",field_name,value)
         setFormData({ ...formData, [field_name]: value   }); 
-    } 
-
+    }  
+ 
     const canRequest = (ref) => {
         return (ref.active_patronrequests==0)
      }
-
-     //NOTA: non visualizzo la tipologia del delivery quindi non so se è un desk o una biblio
-     //ma forse avrebbe senso farlo
-     const displayDeliveryable = (deliveryable) => {         
-         return (
-         <div>    
-            {deliveryable.data.name && <div><i className="fas fa-luggage-cart"></i> {deliveryable.data.name}</div>}
-            {deliveryable.data.address && <div><i className="fas fa-map-marker"></i> {deliveryable.data.address} {deliveryable.data.postcode} {deliveryable.data.town} {deliveryable.data.district} {deliveryable.data.state}</div>}            
-        </div>
-         )
-     }
-
     
     const onSubmit = (e) => {
         e.preventDefault();
@@ -196,8 +184,10 @@ const ReferenceRequest = props => {
                                 </>
                             }
                             {formData.delivery.id && 
-                            <div className="PickupDetail">                                
-                                {formData.delivery.deliveryable && displayDeliveryable(formData.delivery.deliveryable)} 
+                            <div className="PickupDetail">                                                            
+                                {formData.delivery.name && <div><i className="fas fa-luggage-cart"></i> {formData.delivery.name}</div>}
+                                {formData.delivery.description && <div><i className="fas fa-info-circle"></i> {formData.delivery.description}</div>}
+                                {formData.delivery.address && <div><i className="fas fa-map-marker"></i> {formData.delivery.address} {formData.delivery.postcode} {formData.delivery.town} {formData.delivery.district} {formData.delivery.state}</div>}            
                                 {formData.delivery.email &&<div><i className="fas fa-envelope"></i> {formData.delivery.email}</div>}
                                 {formData.delivery.phone && <div><i className="fas fa-phone"></i> {formData.delivery.phone}</div>}
                                 {formData.delivery.openinghours && <div><i className="far fa-clock"></i> {formData.delivery.openinghours}</div>}                                                            

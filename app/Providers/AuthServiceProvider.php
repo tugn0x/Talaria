@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Models\Country;
-use App\Models\Institutions\DeskInstitution;
 use App\Models\Institutions\Institution;
 use App\Models\Institutions\InstitutionType;
 use App\Models\Libraries\CatalogLibrary;
@@ -11,7 +10,6 @@ use App\Models\Libraries\Library;
 use App\Models\Projects\Project;
 use App\Models\Libraries\LibraryUser;
 use App\Models\Libraries\Subject;
-use App\Models\Institutions\Desk;
 use App\Models\Libraries\Delivery;
 use App\Models\Libraries\DeliveryUser;
 use App\Models\Libraries\Tag;
@@ -30,7 +28,6 @@ use App\Policies\BasePolicy;
 use App\Policies\LibraryPolicy;
 use App\Policies\DeliveryPolicy;
 use App\Policies\LibraryUserPolicy;
-use App\Policies\DeskInstitutionPolicy;
 use App\Policies\CatalogLibraryPolicy;
 use App\Policies\ListBasePolicy;
 use App\Policies\ReferencePolicy;
@@ -41,7 +38,6 @@ use App\Policies\LabelReferencePolicy;
 use App\Policies\PatronDocdelRequestPolicy;
 use App\Policies\UserPolicy;
 use App\Policies\TagPolicy;
-use App\Policies\DeskPolicy;
 use App\Policies\BorrowingDocdelRequestPolicy;
 use App\Policies\DocdelRequestTagPolicy;
 use App\Policies\DocdelRequestPolicy;
@@ -61,17 +57,14 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Model' => 'App\Policies\ModelPolicy',
-        User::class => UserPolicy::class,
-        Desk::class => ListBasePolicy::class,
+        User::class => UserPolicy::class,        
         Group::class => GroupPolicy::class,
         GroupReference::class => GroupReferencePolicy::class,
         Label::class => LabelPolicy::class,
         LabelReference::class => LabelReferencePolicy::class,
         PatronDocdelRequest::class=>PatronDocdelRequestPolicy::class,
-        BorrowingDocdelRequest::class=>BorrowingDocdelRequestPolicy::class,
-        DeskInstitution::class=>DeskInstitutionPolicy::class,
-        Delivery::class => DeliveryPolicy::class,
-        Desk::class => DeskPolicy::class,
+        BorrowingDocdelRequest::class=>BorrowingDocdelRequestPolicy::class,        
+        Delivery::class => DeliveryPolicy::class,        
         Library::class => LibraryPolicy::class,
         LibraryUser::class => LibraryUserPolicy::class,
         CatalogLibrary::class => CatalogLibraryPolicy::class,

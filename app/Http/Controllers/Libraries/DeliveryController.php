@@ -43,22 +43,7 @@ class DeliveryController extends ApiController
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
-
-     //i miei Delivery della biblioteca x cui sto operando
-    //NB: non mi serve definire la policy perchè tanto è filtrata x owner
-    /*public function my(Request $request)
-    {
-        $this->model = $this->filterRelations($request);
-        $count = $request->input('pageSize', config('api.page_size'));
-
-        $my_applications = $this->model
-        ->join('delivery_user', 'deliveries.id', '=', 'delivery_user.delivery_id')
-        ->where('delivery_user.user_id',Auth::user()->id)
-        ->select('deliveries.*')
-        ->paginate($count);
-        return $this->response->paginator($my_applications, new $this->transformer())->morph();
-    }*/
-
+    
     public function update(Request $request, $id)
     {
          if(!empty($this->validate) )
@@ -74,7 +59,7 @@ class DeliveryController extends ApiController
      }
 
     public function filterRelations($request) {
-        $library = $request->route()->parameters();
+        $library = $request->route()->parameters['library'];
         return $this->model->inLibrary($library);
     }
 
@@ -88,8 +73,13 @@ class DeliveryController extends ApiController
                 'phone' => $request->phone,
                 'openinghours' => $request->openinghours,
                 'library_id' => $request->library,
-                'deliveryable_id' => $request->deliveryable_id,
-                'deliveryable_type' => $request->deliveryable_type
+                'description'=> $request->description,
+                'country_id'=> $request->country_id,
+                'address'=> $request->address,
+                'town'=> $request->town,
+                'district'=> $request->district,
+                'postcode'=> $request->postcode,
+                'state'=> $request->state,                 
             ]);
             return $model;
         });
@@ -113,7 +103,8 @@ class DeliveryController extends ApiController
     public function optionList(Request $request)
     {   
         $l=Library::find($request->route()->parameters['library']);
-        $u=Auth::user();
+        
+        /*$u=Auth::user();
         if($u->can('manage',$l)||$u->can('deliver',$l)||$u->can('borrow',$l))
         {
             $collection = $this->nilde->optionList($this->model, $request,function ($model,$request) use ($l) {
@@ -121,8 +112,16 @@ class DeliveryController extends ApiController
             });
 
             return $this->response->array($collection->toArray());
+
         }
         else  $this->response->errorUnauthorized(trans('apinilde::auth.unauthorized'));
+        */
+
+        //option list must be public available
+        $collection = $this->nilde->optionList($this->model, $request,function ($model,$request) use ($l) {
+            return $model->inLibrary($l->id);
+        });
+        return $this->response->array($collection->toArray());
     }
 
 }

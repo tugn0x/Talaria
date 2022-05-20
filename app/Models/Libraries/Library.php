@@ -217,12 +217,7 @@ class Library extends BaseModel
         return $this->public_fields;
     }
 
-    //Rel con il delivery service
-    public function delivery()
-    {
-        return $this->morphOne('App\Models\Libraries\Delivery', 'deliveryable');
-    }
-
+    
     //Tutti i PdC della biblioteca
     public function deliveries() {
         return $this->hasMany(Delivery::class);

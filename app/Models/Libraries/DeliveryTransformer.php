@@ -2,65 +2,18 @@
 
 use App\Models\BaseLightTransformer;
 use App\Models\BaseTransformer;
-use App\Models\Institutions\DeskTransformer;
 use App\Models\Users\UserLightTransformer;
 use Illuminate\Database\Eloquent\Model;
 
 class DeliveryTransformer extends BaseTransformer
-{
-    protected $policy = [
-        'manage' => ['granted_permissions']
+{   
+    protected $availableIncludes = [      
+        'library',        
     ];
 
-
-    protected $availableIncludes = [
-        'granted_permissions',
-        'library',
-        'users',
-        'deliveryable',
+    protected $defaultIncludes = [             
+        'country'        
     ];
-
-    protected $defaultIncludes = [
-        'granted_permissions',     
-        'deliveryable',   
-    ];
-
-    public function includeGrantedPermissions(Model $model)
-    {
-        $transf = new BaseLightTransformer();
-        $transf->setCallback(function ($model) {
-            return $model->user_with_permissions();
-        });
-        return $this->item($model, $transf);
-    }
-
-    //Ritorna il trasformer corretto in base al tipo dell'oggetto "morphed" (che puo' essere un Desk o una Library) 
-    public function getPoliTransformer($deliveryable)
-    {   
-        $transformer=new BaseLightTransformer();
-        
-        switch (get_class($deliveryable)) {
-            case 'App\Models\Libraries\Library':
-                $transformer = new LibraryTransformer();
-                break;
-            case 'App\Models\Institutions\Desk':
-                $transformer = new DeskTransformer();
-                break;
-        }        
-        return $transformer;
-    }
-
-    public function includeDeliveryable(Model $model)
-    {
-        if($model->deliveryable)
-            return $this->item($model->deliveryable, $this->getPoliTransformer($model->deliveryable));
-    }
-
-    public function includeUsers(Model $model)
-    {
-        if($model->users)
-            return $this->collection($model->users, new UserLightTransformer());
-    }
 
 
 
@@ -68,6 +21,12 @@ class DeliveryTransformer extends BaseTransformer
     {
         if($model->library)
             return $this->item($model->library, new BaseLightTransformer());
+    }
+
+    public function includeCountry(Model $model)
+    {
+        if($model->country)
+            return $this->item($model->country, new BaseLightTransformer());
     }
 
 
