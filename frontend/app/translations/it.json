@@ -523,7 +523,7 @@
   "app.routes.BorrowingArchive": "Archivio Borrowing",
   "app.routes.LendingArchive": "Archivio Lending",
   "app.routes.DeliveryArchive": "Archivio Consegna",
-  "app.routes.Pickup": "Pickup",
+  "app.routes.Pickup": "Punti di consegna",
   "app.routes.LibraryServices": "Servizi",
   "app.routes.LibraryUsers": "I miei utenti",
   "app.routes.LibraryDepartments": "Dipartimenti",
