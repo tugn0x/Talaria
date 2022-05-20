@@ -558,8 +558,16 @@ export const changeStatusLendingRequest = (options) => {
   //UploadFile
   export const fileuploadRequest = (options) => {
     options = getOption(options);
-    const library_id = options.lending_library_id
+    const library_id = options.libraryid
     return request(`${BASE_URL}/api/v1/libraries/${library_id}/UploadFile`, options)
+  };
+
+  //DownloadFile
+  export const filedownloadRequest = (options) => {
+    options = getOption(options);
+    const library_id = options.library_id
+    const filehash = options.filehash;
+    return request(`${BASE_URL}/api/v1/libraries/${library_id}/DownloadFile?q=${filehash}`, options)
   };
 
 /// POST PUBLIC LIBRARY

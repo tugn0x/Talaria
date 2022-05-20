@@ -3,8 +3,12 @@ import {Card, Row, Col, Form as FormContainer, FormGroup, Button} from 'reactstr
 import {useIntl} from 'react-intl';
 import './style.scss';
 import { useState } from "react";
-import FileUpload from  '../FileUpload';
 import ReactDOM, { render } from 'react-dom';
+
+//import FileUpload from '../../../containers/FileUpload';
+import FileUpload from '../FileUpload'
+
+
 
 const FulfillLendingRequest = props => {
 
@@ -14,13 +18,10 @@ const FulfillLendingRequest = props => {
     const [showPanelActions, setshowPanelActions] = useState(false)
     const [showunfilPanelActions, setunfilPanelActions] = useState(false)
     const [deliverymethod, setDeliveryMethod] = useState(0);
-    const hStylesucess = { color: 'green' };
-    const hStylefail = { color: 'red' };
-    const displaymsg = <h4 style={ hStylesucess }>File uploaded successfully</h4>
-    const displaymsgerror = <h4 style={ hStylefail }>file upload failed</h4>
+
+    const displaymsg = <h4>{intl.formatMessage({id: "app.requests.lendingUploadSuccess"})}</h4>
+    const displaymsgerror = <h3>{intl.formatMessage({id: "app.requests.lendingUploadFail"})}</h3>
         
-
-
 
     const handlernote = (event) => {
         const value = event.target.value
@@ -30,6 +31,12 @@ const FulfillLendingRequest = props => {
         const value = event.target.value
         handleChange(value,'url');  
     }
+
+    const handlerinventorynr = (event) => {
+        const value = event.target.value
+        handleChange(value,'fulfill_inventorynr');  
+    }
+
     const setDeliveryType=(event) => {                 
         const value = event.target.value
         setDeliveryMethod(value) // 1 File - 2 Mail - 3 hardcopy - 4 URL
@@ -43,7 +50,8 @@ const FulfillLendingRequest = props => {
         url:null,
         fulfill_note: null,
         filehash: null,
-        filename:null
+        filename:null,
+        fulfill_inventorynr :null
     });
 
        
@@ -72,22 +80,36 @@ return (
     
     {(showPanelActions) && (!showunfilPanelActions) && <div className={customClass}>
             <h3>Fulfill panels</h3>
-            <label for="delivery">Choose a delivery method: </label>
-            <select id="delivery" name="delivery" onChange={setDeliveryType}>
-                <option value="0">---</option>
-                <option value="1">File</option>
-                <option value="2">Mail</option>
-                <option value="3">HardCopy</option>
-                <option value="4">URL</option>
-            </select>             
+            
+            {
+                <Card>
+                    <Row>
+                        <Col sm={6}>   
+                            <label for="delivery">Choose a delivery method: </label>
+                            <select id="delivery" name="delivery" onChange={setDeliveryType}>
+                                <option value="0">---</option>
+                                <option value="1">{intl.formatMessage({id: "app.requests.deliveryMethod.file"})}</option>
+                                <option value="2">{intl.formatMessage({id: "app.requests.deliveryMethod.mail"})}</option>
+                                <option value="3">{intl.formatMessage({id: "app.requests.deliveryMethod.fax"})}</option>
+                                <option value="4">{intl.formatMessage({id: "app.requests.deliveryMethod.url"})}</option>
+                                <option value="5">{intl.formatMessage({id: "app.requests.deliveryMethod.articleexchange"})}</option>
+                                <option value="6">{intl.formatMessage({id: "app.requests.deliveryMethod.other"})}</option>
+                            </select>     
+                        </Col>
+                    </Row>
+                </Card>
+            }
+                   
+            
 
             {(deliverymethod==1) && 
             <Card>
+
                 <FileUpload uploadFile={uploadFile} uploadSuccessCallback={uploadSuccessCallback} fileUploadStatus={fileUploadStatus} data={data} customClass="detail-body"/>
                 <Row>
                     <Col sm={6}>                       
                     { 
-                        (uploadSuccessCallback) && (fileUploadStatus=='uploaded') &&   
+                        (uploadSuccessCallback) && (fileUploadStatus=='uploaded') && (deliverymethod==1) &&   
                             <div>
                                  <div className="form-group">
                                     {displaymsg}
@@ -107,27 +129,58 @@ return (
                 
             {
             (deliverymethod > 0) &&
+            <div>
             <Card>
                 <Row>
-                    <Col sm={6}>
+                    <Col sm={12}>
                     <div className="form-group">
                     { (deliverymethod == 4) &&
                         <div>
                             <label for="exampleInputURL">URL</label>
                             <input type="text" className="form-control" id="url" onChange={handlerURL} aria-describedby="" placeholder="Enter URL here"></input>                    
                         </div>
-                    }                        
+                    }   
+                    </div>
+                    <div className="form-group">
+                        <label for="exampleInputinventory">{intl.formatMessage({id: "app.requests.inventoryNumber"})}</label>
+                        <input type="text" className="form-control" id="fulfill_inventorynr"  onChange={handlerinventorynr} aria-describedby="" placeholder="Enter inventory number here"></input>
+                    </div>
+                    <div className="form-group">
                         <label for="exampleInputEmail1">Notes</label>
-                        <input type="text" className="form-control" id="fulfill_note"  onChange={handlernote} aria-describedby="" placeholder="Enter note here"></input>
+                        <textarea id="fulfill_note" className="form-control" onChange={handlernote} aria-describedby="" placeholder="Enter note here" rows="5" cols="50"></textarea>
                         <small id="emailHelp" className="form-text text-muted">This message will send to the borrowing library.</small>
                     </div>
-                        {( (uploadSuccessCallback) ||  (deliverymethod > 1) ) && 
-                        <div>
-                            <button type="button" onClick={() => FulfillLendingRequestStatus(data,formData)} className="btn btn-success">Submit</button>        
-                        </div>}
+                      
                     </Col>
                 </Row>
              </Card>  
+             <Card>
+                  <Row>
+                    <Col sm={12}>
+                        <div className="form-group">
+                        
+                        <label for="examplecopyright">Copyright Statement </label>
+
+                        <span class="span">
+                        {intl.formatMessage({id: "app.requests.lendingCopyrightStatement"})}
+                        </span>
+                        </div>
+                    </Col>
+                </Row>
+             </Card>
+
+             {( (uploadSuccessCallback) ||  (deliverymethod > 1) ) && 
+            <Card>
+                <Row>
+                    <Col sm={6}>
+                   
+                        <div>
+                            <button type="button" onClick={() => FulfillLendingRequestStatus(data,formData)} className="btn btn-success">Submit</button>        
+                        </div>
+                    </Col>
+                </Row>
+            </Card>}
+             </div>
             }
         </div>}
         
@@ -150,7 +203,7 @@ return (
                 <Row>
                     <Col sm={6}>
                     <div>
-                        <button type="button" onClick={() => unFulfillLendingRequestStatus(data)} className="btn btn-success">Submit</button>        
+                        <button type="button" onClick={() => unFulfillLendingRequestStatus(data)} className="btn btn-success">{intl.formatMessage({id: "app.requests.submitButton"})}</button>        
                     </div>
                     </Col>
                 </Row>

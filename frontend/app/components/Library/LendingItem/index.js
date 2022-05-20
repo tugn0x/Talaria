@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Row, Col, Button} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import { generatePath } from "react-router";
 import CustomCheckBox from 'components/Form/CustomCheckBox';
 import ReferenceCitation from '../../ReferenceCitation';
+import FileDownload from '../../../containers/FileDownload';
+//import FileDownload from '../FileDownload'
 import RequestTags from '../RequestTags';
 import './style.scss';
 import { Link } from 'react-router-dom';
@@ -129,7 +131,7 @@ const LendingReferenceIcons = (props) => {
 }
 
 const LendingItem = (props) => {    
-    const {match,editPath,data,toggleSelection,checked,removeTag,findAndUpdateOABorrowingReference, UpdateLendingRequestStatus, UpdateLendingAcceptRequest, UpdateLendingArchivedStatus, oaloading} = props      
+    const {match,editPath,data,toggleSelection,checked,removeTag, UpdateLendingRequestStatus, UpdateLendingAcceptRequest} = props      
     const intl = useIntl();  
 
     return (
@@ -150,6 +152,9 @@ const LendingItem = (props) => {
                     {data.fulfill_note}
                 </UncontrolledTooltip>                                
             </div>} 
+            {data.filename && <div className="fulfill_note">
+            </div>} 
+            {data.filehash && <FileDownload  reqid={data.id} libraryid={data.library.data.id} filehash={data.filehash} customClass="detail-body" />} 
             </Col>
             <Col sm={3}>
             <>

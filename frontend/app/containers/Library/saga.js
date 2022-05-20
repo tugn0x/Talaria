@@ -1,4 +1,4 @@
-import { call, put, takeLatest, takeEvery, take } from 'redux-saga/effects';
+import { call, put, takeLatest, takeEvery, take, takeLeading } from 'redux-saga/effects';
 import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
          /*  REQUEST_POST_USER, */ REQUEST_USER, REQUEST_GET_LIBRARY,
           REQUEST_GET_LIBRARIES_LIST,
@@ -27,10 +27,7 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
       //REQUEST_CHANGE_LENDING_ARCHIVED,
       REQUEST_APPLY_LENDING_TAGS_TO_DDREQUESTS,
       REQUEST_ACCEPT_ALLLENDER,
-      UPLOAD_REQUEST,
-      UPLOAD_SUCCESS,
-      UPLOAD_FAILURE,
-      UPLOAD_PROGRESS
+      UPLOAD_REQUEST
     } from './constants';
 import {
   requestError,
@@ -79,8 +76,7 @@ import {getLibraryUsersList, updateLibraryUser, deleteLibraryUser, createUser,
     requestApplyTagsToLendingRequests,
     acceptallLenderLendingRequest,
     getLendingRequest,
-    fileuploadRequest
-} from '../../utils/api'
+    fileuploadRequest} from '../../utils/api'
 
 import {getOA,getPubmedReferenceByPMID,getFindISSN,getFindISBN, getFindISSN_ACNP} from '../../utils/apiExternal';
 
@@ -611,6 +607,13 @@ export function* requestChangeStatusDeliverySaga(action) {
 //extrafields was already managed by Laravel LendingDDRequest so all the fields specified
 //in extrafields will be updated correctly!
 export function* requestChangeStatusLendingSaga(action) {
+
+  //to empty filename and filehash when user upload file and then change his mind to another delivery method
+  if (action.extrafields.fulfill_type!=null &  action.extrafields.fulfill_type!= 1) {
+    action.extrafields.filename = null
+    action.extrafields.filehash = null
+  }
+  
   const options = {
     method: 'put',
     body: {
@@ -781,6 +784,6 @@ export default function* librarySaga() {
   yield takeLatest(REQUEST_GET_ISSN_ISBN,requestFindISSNISBNsaga);
   yield takeEvery(REQUEST_FIND_UPDATE_BORROWING_OA,findUpdateOABorrowingSaga);
 
-  yield takeEvery(UPLOAD_REQUEST,uploadFileSaga); 
+  yield takeLatest(UPLOAD_REQUEST,uploadFileSaga); 
   
 }

@@ -15,7 +15,7 @@ import { acceptallLenderLendingRequest } from '../../../utils/api';
 
 const LendingRequestPage = (props) => {
     console.log('LendingRequestPage', props)
-    const {dispatch, isLoading, match, library,reference, filename} = props
+    const {dispatch, isLoading, match, library,reference, filename } = props
     const {params} = match       
     const intl = useIntl();
     const isNew = !params.id || params.id === 'new'    
@@ -24,7 +24,7 @@ const LendingRequestPage = (props) => {
     const lending=library.lending
     const lendersList=library.libraryOptionList;
     const [isMounted, setIsMounted] = useState(false);    
-    const [fileUploadname, setfileUploadName] = useState("");
+        const [fileUploadname, setfileUploadName] = useState("");
 
     useEffect(() => {                
         setIsMounted(true)     
@@ -42,7 +42,7 @@ const LendingRequestPage = (props) => {
 
     const FulfillLendingRequestStatus = (data, formdata) => {
         data.lending_status="copyCompleted";
-        dispatch(requestChangeStatusLending(data.id, data.lending_library_id, data.lending_status, {filename:filename.fileupload.originalfilename,filehash: filename.fileupload.data, fulfill_type:formdata.fulfill_type, fulfill_note:formdata.fulfill_note, url:formdata.url}, intl.formatMessage({id: "app.requests.fulfilledMessage"}),""))
+        dispatch(requestChangeStatusLending(data.id, data.lending_library_id, data.lending_status, {filename:filename.fileupload.originalfilename,filehash: filename.fileupload.data, fulfill_type:formdata.fulfill_type, fulfill_note:formdata.fulfill_note, url:formdata.url, fulfill_inventorynr:formdata.fulfill_inventorynr}, intl.formatMessage({id: "app.requests.fulfilledMessage"}),""))
     }
 
     const unFulfillLendingRequestStatus = (data) => {

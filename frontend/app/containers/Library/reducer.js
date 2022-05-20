@@ -260,6 +260,23 @@ const libraryReducer = (state = initialState, action) =>
           draft.error = initialState.error;
           break;
 
+        // case DOWNLOAD_REQUEST:
+        //     draft.filedownload.push(action.id)
+        //     // draft.loading = false;
+        //     // draft.error = initialState.error;
+        //     break;
+  
+        // case DOWNLOAD_SUCCESS:
+        //     draft.loading = false;
+        //     draft.error = initialState.error;
+        //     draft.filedownload  = action.result
+        //     draft.filedownload = Object.values(action.result).filter(c => c.id !== draft.filedownload.id)
+        //  break;  
+            
+        // case DOWNLOAD_FAILURE:
+        //     draft.loading = true;
+        //     draft.error = initialState.error;
+        //     break;
       case REQUEST_GET_ISSN_ISBN:
         draft.error = initialState.error;    
         draft.findISSNISBNresults.loading=true;  

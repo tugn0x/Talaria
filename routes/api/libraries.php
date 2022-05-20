@@ -41,6 +41,17 @@ Route::group([
         
     });
 
+
+    /*
+     * FILE DOWNLOAD
+     */
+    Route::group([
+        'as' => 'api.v1.libraries.',
+    ], function () {
+        Route::get('{library}/DownloadFile', 'FileUploadDocdelRequestController@DownloadFile')->name('DownloadFile');
+    });
+    
+
  
     /*
      * CATALOGS

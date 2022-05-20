@@ -11,6 +11,11 @@ const FileUpload = props => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [originalFilename, setFilename] = useState(null)
 
+    
+
+    const File_Extension = process.env.FILE_EXTENSION
+
+    
     function onChange(e) {
         let files = e.target.files || e.dataTransfer.files;
         console.log("file name is " + JSON.stringify(e.target.files[0].name))
@@ -34,8 +39,9 @@ return (
     <>
     <div className={customClass}>
         <div>
-            <input type="file" name="file" onChange={onChange} />
+            <input type="file" name="file" accept={File_Extension} onChange={onChange} />
             <button type="button" onClick={() => uploadFile(data, file, originalFilename)} className="btn btn-info">Upload file</button>
+            {/* {file ? <textarea id="base64File" rows="30" cols="150" value={file} readOnly></textarea> : null } */}
         </div>
     </div> 
     </>

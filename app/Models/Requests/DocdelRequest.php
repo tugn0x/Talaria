@@ -33,6 +33,7 @@ class DocdelRequest extends BaseModel
         'fulfill_type',    //tipo evasione (=SentiVia/DeliveryMethod ISO18626: ArticleExchange,Ariel,Email,Mail,Odyssey,URL,FTP) + file + url?
 	    'notfulfill_type', //tipo inevasione (prendere da NILDE global_const $DDILL_INEVASO_xxx + "fornitore non disp" + "altro" (con descrizione in borr_notes) )        
         'filename',
+        'filehash',
         //'file_id', //TODO & CHECK
         'file_status', //File status: 0-not available; 1-available; 2-available and converted by HC server
         'cancel_request_date', //data richiesta annullamento alla lender
