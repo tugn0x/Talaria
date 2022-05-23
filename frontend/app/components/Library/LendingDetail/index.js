@@ -13,7 +13,7 @@ export const LendingRequestData = (props) => {
         
             return (
             <div className="LendingRequestData">
-                {(data.request_protnr||data.request_note||
+                {(data.fulfill_location||data.request_protnr||data.request_note||
                 data.request_special_delivery==1||data.request_pdf_editorial==1 ) && 
                 <div className="borrowingRequestData">  
                     {data.request_protnr && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.request_protnr"})}: </span>{data.request_protnr} </span>}
@@ -27,12 +27,12 @@ export const LendingRequestData = (props) => {
                     </div>}
                 </div>}
 
-                <div className="lendingData">  
+                {(data.lending_notes||data.fulfill_protnr||data.fulfill_note||data.fulfill_inventorynr) && <div className="lendingData">  
                     {data.lending_notes && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.lending_notes"})}: </span>{data.lending_notes} </span>}
                     {data.fulfill_protnr && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.fulfill_protnr"})}: </span>{data.fulfill_protnr} </span>}
                     {data.fulfill_note && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.fulfill_note"})}: </span>{data.fulfill_note} </span>}
                     {data.fulfill_inventorynr && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.fulfill_inventorynr"})}: </span>{data.fulfill_inventorynr} </span>}
-                </div>
+                </div>}
             </div>
         
             )
