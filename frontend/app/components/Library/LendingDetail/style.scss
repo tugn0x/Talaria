@@ -1,0 +1,26 @@
+@import '../../../scss/vendors/variables';
+
+.LendingRequestData {
+    border-top: 1px solid $dark-bk;
+    margin-top: 5px;
+    padding: 5px 0 0 0;
+
+    & .shelflocation {        
+    }
+
+    & .lendingData {
+        border-top: 1px solid $dark-bk;
+        margin-top: 5px;
+        padding: 5px 0 0 0;
+    }
+
+    & .requestData {
+        display: block;
+
+        & .label {
+            font-weight: bold;
+        }
+    }
+
+
+}
