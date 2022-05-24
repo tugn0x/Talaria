@@ -22,7 +22,8 @@ class LendingDocdelRequest extends DocdelRequest
         'lending_notes', //dd_note_interne     
         'lending_archived', //0|1 indica se la rich è archiviata
         'lending_archived_date',
-        'all_lender',        
+        'all_lender',  
+        'lending_operator_id',      
     ];
      
     protected static $observerClass=LendingDocdelRequestObserver::class;

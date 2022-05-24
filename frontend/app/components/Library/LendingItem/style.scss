@@ -13,6 +13,10 @@
     margin-left: 5px;
 }
 
+.fulfill_note {
+    margin-left: 5px;
+}
+
 
 .status-date {
     display: block;
@@ -20,6 +24,10 @@
     & .status-time {
         padding-left:16px;
     }
+}
+
+.status-operator {
+    font-size: 0.85em;
 }
 
 .daysago {

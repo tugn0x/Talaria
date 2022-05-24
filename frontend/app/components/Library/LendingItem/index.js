@@ -43,10 +43,18 @@ const statusDate = (req) => {
 
   return (
       <>
-        <span className="status-date"><i className="fas fa-clock"></i> {formatDateTime(date)}</span>            
+        <span className="status-date"><i className="fas fa-clock"></i> {formatDateTime(date)}                   
+        {req.fulfill_note && <span className="fulfill_note">
+                <a href="#" id={`fulfill_note-${req.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
+                <UncontrolledTooltip autohide={false} placement="right" target={`fulfill_note-${req.id}`}>
+                    {req.fulfill_note}
+                </UncontrolledTooltip>                                
+        </span>} 
+        </span>
         {req.lending_archived==1 && req.lending_archived_date && 
             <span className="status-date"><i className="fas fa-hdd"></i> {formatDateTime(req.lending_archived_date)}</span>            
         }
+
       </>
   )
 }
@@ -92,7 +100,7 @@ export const LendingStatus = (props) => {
                 </span>}
             </div>
             }            
-            <span className="status-date">{statusDate(data)}</span>                       
+            {statusDate(data)}
         </div>
     )
 }
@@ -143,13 +151,7 @@ const LendingItem = (props) => {
               <div className="request_id">
                         <Link to={requesturl(editPath,data.id)} className="active"><i className="fas fa-info-circle"></i> <span>{data.id}</span></Link>
                         </div>
-                <LendingStatus data={data} customClass="request_status"/>                                                             
-                {data.fulfill_note && <div className="fulfill_note">
-                <a href="#" id={`fulfill_note-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
-                <UncontrolledTooltip autohide={false} placement="right" target={`fulfill_note-${data.id}`}>
-                    {data.fulfill_note}
-                </UncontrolledTooltip>                                
-            </div>} 
+                <LendingStatus data={data} customClass="request_status"/>                                                                             
             </Col>
             <Col sm={3}>
             <>

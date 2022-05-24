@@ -15,17 +15,20 @@ class LendingDocdelRequestObserver extends BaseObserver
 
     public function creating($model)
     {
+        if(auth() && auth()->user()) {
+            $userid = auth()->user()->id;
+            $model->lending_operator_id=$userid;
+        }
         return parent::creating($model);
     }
 
     
     public function saving($model)
-    {        
-        if( (!$model->wasRecentlyCreated) || $model->wasRecentlyCreated) //new or updating
-            if(auth() && auth()->user()) {
-                $userid = auth()->user()->id;
-                $model->lending_operator_id=$userid;
-            }
+    {                
+        if(auth() && auth()->user()) {
+            $userid = auth()->user()->id;
+            $model->lending_operator_id=$userid;
+        }             
         
         if($model->isDirty('lending_archived'))
             $model->lending_archived_date=Carbon::now();        
