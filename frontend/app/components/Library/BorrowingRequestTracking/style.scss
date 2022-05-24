@@ -15,7 +15,7 @@
     }
 
     & .borrowingRequest {        
-        padding: 10px 0 10px 0;
+        padding: 10px 0 0 0;
                         
         & a.requestLink {
             &:hover {
@@ -25,10 +25,13 @@
     }
 
     & .trackingItem {   
+
+        padding:5px;
+        margin-bottom: 5px;
                     
         & .patronRequest {
             margin-right: 5px;                   
-        margin-right: 5px;        
+            margin-right: 5px;        
             margin-right: 5px;                   
 
             & .itemHeader .id {
@@ -43,12 +46,12 @@
     
 
     & .patronRequest {
-        border-bottom: 1px dashed;        
+/*        border-bottom: 1px dashed;        */
     }
 
     & .trackingItem:not(:last-child) {
         & .borrowingRequest { 
-            border-bottom: 1px dashed;
+/*            border-bottom: 1px dashed;*/
         }
 
     }

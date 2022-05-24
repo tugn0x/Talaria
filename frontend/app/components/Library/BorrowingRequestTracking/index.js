@@ -71,7 +71,7 @@ const BorrowingRequestTrackingItem = (props) => {
     
 
     return (
-        <li className={`trackingItem ${current?'currentReq':''}`}>
+        <li className={`trackingItem card ${current?'currentReq':''}`}>
             {!data.docdel_request_parent_id && data.patrondocdelrequest &&
                 <BorrowingPatronTrackingItem data={data}/>        
             }    
