@@ -29,13 +29,13 @@ const routes = [
   {
     path: '/manage', name: `MyLibrary`, header: true, component: SubRouteSwitch, permissions: ['manage','borrow','lend','manage-users'], resource: {type: 'libraries', key: 'library_id',},
     children: [
-      { path: '', icon: 'info-circle', exact: true, name: `Profile`, component: ManageLibraryPage, url: '/manage',permissions: ['manage'], sidebar: true, order:1},
+      { path: '', icon: 'info-circle', exact: true, name: `LibraryProfile`, component: ManageLibraryPage, url: '/manage',permissions: ['manage'], sidebar: true, order:1},
       // vari pezzi dei dati della biblio (dati servizio, dati anag, ...)
-      { path: '/service', icon: 'cog',exact: true, name: `Service`, component: Fake,url: '/manage/service',permissions: ['manage'],sidebar: true, order:2  },
-      { path: '/linkingservices', icon: 'link', name: `LinkingServices`, component: Fake,url: '/manage/linkingservices',permissions: ['manage'],sidebar: true, order:2  },
+      { path: '/service', icon: 'cog',exact: true, name: `LibraryServices`, component: Fake,url: '/manage/service',permissions: ['manage'],sidebar: true, order:2  },
+      { path: '/linkingservices', icon: 'link', name: `LibraryLinkingServices`, component: Fake,url: '/manage/linkingservices',permissions: ['manage'],sidebar: true, order:2  },
       { path: '/tags', icon:'tag', exact: true, name: `Tags`, url: '/manage/tags', component: TagsPage,permissions: ['manage','borrow','lend'],sidebar: true, order:3 },
       { path: '/operators', icon: 'user-cog', name: `Operators`, component: Fake,url: '/manage/operators', permissions: ['manage'],sidebar: true, order:5 },
-      { path: '/departments', icon: 'building',  name: `Departments`, component: Fake,url: '/manage/departments',permissions: ['manage','manage-users'], hide: hidePatronRoutes(),sidebar: true, order:4  },
+      { path: '/departments', icon: 'building',  name: `LibraryDepartments`, component: Fake,url: '/manage/departments',permissions: ['manage','manage-users'], hide: hidePatronRoutes(),sidebar: true, order:4  },
       { path: '/pickup', icon: 'truck',name: `Pickup`, component: Fake,url: '/manage/pickup', permissions: ['manage'], hide: hidePatronRoutes(),sidebar: true, order:5 },
       { path: '/catalogs', icon: 'database', name: `Catalogs`, component: Fake,url: '/manage/catalogs', permissions: ['manage'],sidebar: true, order:5 },
       { path: '/protocols', icon: 'network-wired', name: `Protocols`, component: Fake,url: '/manage/protocols', permissions: ['manage'],sidebar: true, order:5 },

@@ -92,8 +92,8 @@ export default defineMessages({
         id: `${scope}.LibraryUsers`,
         defaultMessage: 'Library users',
     },
-    Departments: {
-        id: `${scope}.Departments`,
+    LibraryDepartments: {
+        id: `${scope}.LibraryDepartments`,
         defaultMessage: 'Departments',
     },
     LibraryUser: {
@@ -144,13 +144,9 @@ export default defineMessages({
         id: `${scope}.Borrowing`,
         defaultMessage: 'Borrowing',
     },
-    Profile: {
-        id: `${scope}.Profile`,
+    LibraryProfile: {
+        id: `${scope}.LibraryProfile`,
         defaultMessage: 'Profile',
-    },
-    Service: {
-        id: `${scope}.Service`,
-        defaultMessage: 'Service',
     },
     Lending: {
         id: `${scope}.Lending`,
@@ -188,8 +184,12 @@ export default defineMessages({
         id: `${scope}.AllRequests`,
         defaultMessage: 'Orfani',
     }, 
-    LinkingServices: {
-        id: `${scope}.LinkingServices`,
+    LibraryServices: {
+        id: `${scope}.LibraryServices`,
+        defaultMessage: 'Servizi',
+    },
+    LibraryLinkingServices: {
+        id: `${scope}.LibraryLinkingServices`,
         defaultMessage: 'Servizi di Linking',
     },
     Tags: {
