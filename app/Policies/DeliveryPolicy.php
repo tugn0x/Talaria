@@ -51,6 +51,12 @@ class DeliveryPolicy extends BasePolicy
         return $this->canManage($user, $model);
     }
 
+    public function delete(User $user, Model $model)
+    {
+        return $this->canManage($user,$model);
+
+    }
+
     public function canManage(User $user, Model $model)
     {
         //solo la biblio puo' creare i suoi Delivery

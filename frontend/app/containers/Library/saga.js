@@ -27,7 +27,8 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
       //REQUEST_CHANGE_LENDING_ARCHIVED,
       REQUEST_APPLY_LENDING_TAGS_TO_DDREQUESTS,
       REQUEST_ACCEPT_ALLLENDER,
-      REQUEST_GET_LIBRARY_DESKS_OPTIONLIST
+      REQUEST_GET_LIBRARY_DESKS_OPTIONLIST,
+      REQUEST_GET_LIBRARY_DESKS,
     } from './constants';
 import {
   requestError,
@@ -53,6 +54,7 @@ import {
   requestFindISSNISBNSuccess,
   requestGetLendingSuccess,
   requestGetLibraryDesksOptionListSuccess,
+  requestPickupListSuccess
 } from './actions';
 
 import { toast } from "react-toastify";
@@ -76,7 +78,8 @@ import {getLibraryUsersList, updateLibraryUser, deleteLibraryUser, createUser,
     requestApplyTagsToLendingRequests,
     acceptallLenderLendingRequest,
     getLendingRequest,
-    getLibraryDeliveriesOptionList
+    getLibraryDeliveriesOptionList,
+    getLibraryDeliveries
 } from '../../utils/api'
 
 import {getOA,getPubmedReferenceByPMID,getFindISSN,getFindISBN, getFindISSN_ACNP} from '../../utils/apiExternal';
@@ -678,6 +681,20 @@ export function* requestLibraryDesksOptionListSaga(action) {
   }
 }
 
+export function* requestLibraryDesksSaga(action) {
+  const options = {
+    method: 'get',
+    id:action.library_id,
+  }
+
+  try {
+    const request = yield call(getLibraryDeliveries, options);
+    yield put(requestPickupListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 export function* requestFindISSNISBNsaga(action) {
   
   //data { material_type: 1..5, issn:xxx, title:xxxx, isbn:xxxx}
@@ -758,6 +775,7 @@ export default function* librarySaga() {
   yield takeLatest(REQUEST_FORWARD_BORROWING,requestForwardBorrowingSaga)
 
   yield takeLatest(REQUEST_GET_LIBRARY_DESKS_OPTIONLIST,requestLibraryDesksOptionListSaga);
+  yield takeLatest (REQUEST_GET_LIBRARY_DESKS,requestLibraryDesksSaga);
   
   yield takeLatest(REQUEST_GET_LENDING,requestGetLendingSaga)
 

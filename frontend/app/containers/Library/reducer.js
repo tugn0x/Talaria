@@ -24,12 +24,18 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_GET_ISSN_ISBN_SUCCESS,
   REQUEST_GET_ISSN_ISBN_FAIL,  
   REQUEST_GET_LIBRARY_DESKS_OPTIONLIST_SUCCESS,
-  REQUEST_GET_LIBRARY_DESKS_OPTIONLIST
+  REQUEST_GET_LIBRARY_DESKS_OPTIONLIST,
+  REQUEST_GET_LIBRARY_DESKS,
+  REQUEST_GET_LIBRARY_DESKS_SUCCESS
 } from "./constants";
 
 export const initialState = {
   loading: false,
   library: {},
+  pickupsList:{
+    data: [],
+    pagination: {}
+  },
   departmentOptionList: [],
   titleOptionList: [],
   usersList: {
@@ -172,6 +178,17 @@ const libraryReducer = (state = initialState, action) =>
        draft.desksOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
        break;     
 
+       case REQUEST_GET_LIBRARY_DESKS:
+          draft.loading = true;
+          break;
+        case REQUEST_GET_LIBRARY_DESKS_SUCCESS:
+          draft.loading = false;
+          draft.error = initialState.error;
+          draft.pickupsList.data = action.result.data;
+          draft.pickupsList.pagination = action.result.meta.pagination
+          break;  
+
+
       case REQUEST_BORROWINGS_LIST:
         draft.loading = true;
         break;
@@ -246,7 +263,7 @@ const libraryReducer = (state = initialState, action) =>
         draft.error = initialState.error;
         draft.lendingsList.data = action.result.data;
         draft.lendingsList.pagination = action.result.meta.pagination
-        break;  
+        break;          
 
       case REQUEST_GET_ISSN_ISBN:
         draft.error = initialState.error;    

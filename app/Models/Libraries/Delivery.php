@@ -11,6 +11,8 @@ use App\Models\Country;
 class Delivery extends BaseModel
 {
     use ModelPermissionsTrait;
+    protected static $observerClass = DeliveryObserver::class;
+
     protected $fillable = [
         'name',
         'email',
@@ -26,7 +28,7 @@ class Delivery extends BaseModel
         'state', 
     ];
     protected $attributes = [
-        'status' => 0  //per il momento non è gestito
+        'status' => 1
     ];
 
    
@@ -47,6 +49,11 @@ class Delivery extends BaseModel
     public function scopeInLibrary($query, $library_id)
     {
         return $query->where('library_id',$library_id);
+    }    
+
+    public function scopeIsActive($query, $library_id)
+    {
+        return $query->where('status',1);
     }    
 
 }

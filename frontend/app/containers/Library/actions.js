@@ -40,6 +40,8 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    //REQUEST_CHANGE_LENDING_ARCHIVED,
    REQUEST_ACCEPT_ALLLENDER,
    REQUEST_GET_LIBRARY_DESKS_OPTIONLIST_SUCCESS,
+   REQUEST_GET_LIBRARY_DESKS,
+   REQUEST_GET_LIBRARY_DESKS_SUCCESS
    
   } from "./constants";
 
@@ -456,6 +458,20 @@ export function requestGetLibraryDesksOptionList(library_id) {
 export function requestGetLibraryDesksOptionListSuccess(result) {
   return {
     type: REQUEST_GET_LIBRARY_DESKS_OPTIONLIST_SUCCESS,
+    result
+  };
+}
+
+export function requestPickupList(library_id) {
+  return {
+    type: REQUEST_GET_LIBRARY_DESKS,
+    library_id,
+  };
+}
+
+export function requestPickupListSuccess(result) {
+  return {
+    type: REQUEST_GET_LIBRARY_DESKS_SUCCESS,
     result
   };
 }

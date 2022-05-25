@@ -7,6 +7,7 @@ import BorrowingPage from '../containers/Library/BorrowingPage/Loadable'
 import DeliveryPage from '../containers/Library/DeliveryPage/Loadable'
 import BorrowingRequestPage from '../containers/Library/BorrowingRequestPage/Loadable'
 import TagsPage from '../containers/Library/TagsPage/Loadable';
+import PickupsPage from '../containers/Library/PickupsPage/Loadable';
 import LendingPage from '../containers/Library/LendingPage';
 import LendingRequestPage from '../containers/Library/LendingRequestPage';
 
@@ -36,7 +37,7 @@ const routes = [
       { path: '/tags', icon:'tag', exact: true, name: `Tags`, url: '/manage/tags', component: TagsPage,permissions: ['manage','borrow','lend'],sidebar: true, order:3 },
       { path: '/operators', icon: 'user-cog', name: `Operators`, component: Fake,url: '/manage/operators', permissions: ['manage'],sidebar: true, order:5 },
       { path: '/departments', icon: 'building',  name: `LibraryDepartments`, component: Fake,url: '/manage/departments',permissions: ['manage','manage-users'], hide: hidePatronRoutes(),sidebar: true, order:4  },
-      { path: '/pickup', icon: 'truck',name: `Pickup`, component: Fake,url: '/manage/pickup', permissions: ['manage'], hide: hidePatronRoutes(),sidebar: true, order:5 },
+      { path: '/pickup', icon: 'truck',name: `Pickup`, component: PickupsPage,url: '/manage/pickup', permissions: ['manage'], hide: hidePatronRoutes(),sidebar: true, order:5 },
       { path: '/catalogs', icon: 'database', name: `Catalogs`, component: Fake,url: '/manage/catalogs', permissions: ['manage'],sidebar: true, order:5 },
       { path: '/protocols', icon: 'network-wired', name: `Protocols`, component: Fake,url: '/manage/protocols', permissions: ['manage'],sidebar: true, order:5 },
 

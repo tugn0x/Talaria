@@ -1,0 +1,14 @@
+@import '../../../scss/vendors/variables';
+
+.pickupInfo {
+
+    & .name {
+        font-weight: bold;
+    }
+
+    & .description{
+        display: inline-block;
+        font-style: italic;
+        font-size: 0.85;
+    }
+}
