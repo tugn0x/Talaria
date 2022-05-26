@@ -17,6 +17,7 @@ import appReducer from 'containers/App/reducer';
 import OASearchReferenceReducer from 'containers/OASearchReference/reducer'
 import libregReducer from 'containers/RegisterLibrary/reducer';
 import filedownloadreducer from 'containers/FileDownload/reducer'
+import fileuploadreducer from './containers/FileUpload/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -34,6 +35,7 @@ export default function createReducer(injectedReducers = {}) {
     library: libraryReducer,
     libraryreg: libregReducer,
     filedownload: filedownloadreducer,
+    fileupload: fileuploadreducer,
     app: appReducer,
     ...injectedReducers,
   });

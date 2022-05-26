@@ -7,7 +7,7 @@ import RequestTags from '../RequestTags'
 
 const LendingDetail = (props) => {
     console.log('LendingDetail', props)
-    const {data, FulfillLendingRequestStatus, unFulfillLendingRequestStatus, uploadFile, uploadSuccessCallback, fileUploadStatus} = props
+    const {data, FulfillLendingRequestStatus, unFulfillLendingRequestStatus} = props
     const intl = useIntl()
 
 return (<div className="lendingDetail">
@@ -20,7 +20,7 @@ return (<div className="lendingDetail">
                 </div>  
                 <ReferenceDetailContent reference={data.reference.data} customClass="detail-body" canCollapse={true} collapsed={true}/>                                
                 {(data.lending_status==='willSupply'||data.lending_status==='requestReceived') 
-                  && <FulfillLendingRequest uploadFile={uploadFile} uploadSuccessCallback={uploadSuccessCallback} fileUploadStatus={fileUploadStatus} FulfillLendingRequestStatus={FulfillLendingRequestStatus} unFulfillLendingRequestStatus={unFulfillLendingRequestStatus} data={data} customClass="detail-body"/>
+                  && <FulfillLendingRequest FulfillLendingRequestStatus={FulfillLendingRequestStatus} unFulfillLendingRequestStatus={unFulfillLendingRequestStatus} data={data} customClass="detail-body"/>
                 }
 
               

@@ -1,27 +1,23 @@
-import React, {useEffect} from 'react'
-import {Card, Row, Col, Form as FormContainer, FormGroup, Button} from 'reactstrap';
+import React from 'react'
+import {Card, Row, Col, Form as FormContainer} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import './style.scss';
 import { useState } from "react";
-import ReactDOM, { render } from 'react-dom';
-
-//import FileUpload from '../../../containers/FileUpload';
-import FileUpload from '../FileUpload'
-
-
+import FileUpload from '../../../containers/FileUpload';
 
 const FulfillLendingRequest = props => {
-
     console.log('FulfillLendingRequest', props)
-    const {data,customClass,FulfillLendingRequestStatus, unFulfillLendingRequestStatus, uploadFile, uploadSuccessCallback, fileUploadStatus} = props
+    const {data,customClass,FulfillLendingRequestStatus, unFulfillLendingRequestStatus} = props
     const intl = useIntl()
     const [showPanelActions, setshowPanelActions] = useState(false)
     const [showunfilPanelActions, setunfilPanelActions] = useState(false)
+    
+    
     const [deliverymethod, setDeliveryMethod] = useState(0);
-
-    const displaymsg = <h4>{intl.formatMessage({id: "app.requests.lendingUploadSuccess"})}</h4>
-    const displaymsgerror = <h3>{intl.formatMessage({id: "app.requests.lendingUploadFail"})}</h3>
-        
+    const [fileuploadstatus, SetfileuploadStatus] = useState(null)
+    const callbackuploadFunction = (fileupload) => {
+        SetfileuploadStatus(fileupload.status)
+    }
 
     const handlernote = (event) => {
         const value = event.target.value
@@ -80,7 +76,6 @@ return (
     
     {(showPanelActions) && (!showunfilPanelActions) && <div className={customClass}>
             <h3>Fulfill panels</h3>
-            
             {
                 <Card>
                     <Row>
@@ -99,32 +94,9 @@ return (
                     </Row>
                 </Card>
             }
-                   
-            
-
-            {(deliverymethod==1) && 
-            <Card>
-
-                <FileUpload uploadFile={uploadFile} uploadSuccessCallback={uploadSuccessCallback} fileUploadStatus={fileUploadStatus} data={data} customClass="detail-body"/>
-                <Row>
-                    <Col sm={6}>                       
-                    { 
-                        (uploadSuccessCallback) && (fileUploadStatus=='uploaded') && (deliverymethod==1) &&   
-                            <div>
-                                 <div className="form-group">
-                                    {displaymsg}
-                                 </div>
-                            </div> 
-                    }
-                    {
-                        (fileUploadStatus=='failed') &&
-                            <div className="form-group">
-                                {displaymsgerror}
-                            </div>
-                    }
-                    </Col>
-                </Row>
-            </Card>
+            {
+            (deliverymethod==1) && 
+                <FileUpload  parentCallback={callbackuploadFunction}  deliverymethod={deliverymethod} data={data} customClass="detail-body"/>
             }
                 
             {
@@ -169,7 +141,7 @@ return (
                 </Row>
              </Card>
 
-             {( (uploadSuccessCallback) ||  (deliverymethod > 1) ) && 
+             {( (fileuploadstatus) ||  (deliverymethod > 1) ) && 
             <Card>
                 <Row>
                     <Col sm={6}>
