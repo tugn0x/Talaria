@@ -462,10 +462,13 @@ export function requestGetLibraryDesksOptionListSuccess(result) {
   };
 }
 
-export function requestPickupList(library_id) {
+export function requestPickupList(library_id,page, pageSize, query) {
   return {
     type: REQUEST_GET_LIBRARY_DESKS,
     library_id,
+    page,
+    pageSize,
+    query
   };
 }
 

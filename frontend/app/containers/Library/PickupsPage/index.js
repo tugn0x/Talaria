@@ -36,6 +36,14 @@ const PickupsPage = (props) => {
                 updatePickup={()=>alert("updatePickup()!")}
                 deletePickup={()=>alert("deletePickup()!")}
                 changePickupStatus={()=>alert("changePickupStatus()!")}
+                searchOptions={{
+                    getSearchList: (page, pageSize, searchFilter ) => {
+                        history.push(match.url)
+                        searchFilter={searchFilter}
+                        dispatch(requestPickupList(match.params.library_id,page, pageSize, searchFilter))
+                    },
+                    searchOnChange: true
+                }}   
             />        
     )
 }

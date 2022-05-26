@@ -639,8 +639,18 @@ export const getLibrariesListNearTo = (options) => {
 
 export const getLibraryDeliveries = (options) => {
   const library_id = options.id
+  const pageSize=options.pageSize
+  const page=options.page
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/${library_id}/deliveries`, options)
+  
+  let qstringpar="";
+
+  if(pageSize) qstringpar+="pageSize="+pageSize;
+  if(page) qstringpar+=(qstringpar!=""?'&':'')+"page="+page;
+
+  if(qstringpar!="") qstringpar="?"+qstringpar
+  
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}/deliveries${qstringpar}`, options)
 };
 
 export const getLibraryDelivery = (options) => {

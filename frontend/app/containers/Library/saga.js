@@ -685,6 +685,9 @@ export function* requestLibraryDesksSaga(action) {
   const options = {
     method: 'get',
     id:action.library_id,
+    page: action.page ? action.page : '1',
+    query: action.query ? action.query : null,
+    pageSize: action.pageSize ? action.pageSize : null
   }
 
   try {
