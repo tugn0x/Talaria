@@ -5,10 +5,14 @@ import { createSelector } from 'reselect';
 // import { toggleDrawer } from 'containers/Sidebar/actions';
 import { syncAuth, requestRefresh } from "containers/Auth/AuthProvider/actions";
 import { setToken } from 'utils/api';
+import {changeLocale} from './containers/LanguageProvider/actions';
+
 // import { isMobileOrTablet } from 'utils/mobileDetector';
 import { REQUEST_LOGIN, REQUEST_LOGOUT, REQUEST_LOGIN_SUCCESS, REQUEST_LOGOUT_SUCCESS, REQUEST_REFRESH_SUCCESS, REQUEST_SIGNUP_SUCCESS, REQUEST_PROFILE_SUCCESS, REQUEST_PERMISSIONS_SUCCESS, REQUEST_REFRESH, REQUEST_UPDATE_PROFILE_SUCCESS } from 'containers/Auth/AuthProvider/constants';
 import {REQUEST_GET_LIBRARIES_LIST} from "./containers/Admin/constants";
 import {REQUEST_GET_LIBRARY_DELIVERIES} from './containers/Patron/constants';
+import {CHANGE_LOCALE} from './containers/LanguageProvider/constants';
+
 // import { REQUEST_ILLNESS, REQUEST_PERCEPTION } from 'containers/SubmitPage/constants';
 
 const SKIP_REFRESH = [
@@ -78,6 +82,7 @@ export const persitanceMiddleWare = store => next => action => {
   }
 
   next(action);
+  const state = store.getState();
   switch (action.type) {
     case REQUEST_LOGIN_SUCCESS:
     case REQUEST_REFRESH_SUCCESS:
@@ -85,13 +90,15 @@ export const persitanceMiddleWare = store => next => action => {
     case REQUEST_PERMISSIONS_SUCCESS:
     case REQUEST_PROFILE_SUCCESS:
     case REQUEST_UPDATE_PROFILE_SUCCESS:
-      const state = store.getState();
       if(state.auth) {
         persistore.set("auth", state.auth);
       }
       break;
     case REQUEST_LOGOUT_SUCCESS:
         persistore.delete("auth");
+      break;
+    case CHANGE_LOCALE:      
+      persistore.set("locale", state.locale);
       break;
   }
 }
@@ -103,6 +110,12 @@ export function* refreshPersistance() {
     setToken(authStore.oauth.token);
     yield put(syncAuth(authStore))
   }
+
+  //TODO (not working): apply language (read by storage)
+  /*const loc=persistore.get("locale")
+  if(loc)
+    dispatch(changeLocale(loc));*/
+
   // if(isMobileOrTablet.any()) {
     // yield put(toggleDrawer())
   // }
