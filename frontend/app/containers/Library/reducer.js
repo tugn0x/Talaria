@@ -26,7 +26,9 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_GET_LIBRARY_DESKS_OPTIONLIST_SUCCESS,
   REQUEST_GET_LIBRARY_DESKS_OPTIONLIST,
   REQUEST_GET_LIBRARY_DESKS,
-  REQUEST_GET_LIBRARY_DESKS_SUCCESS
+  REQUEST_GET_LIBRARY_DESKS_SUCCESS,
+  REQUEST_GET_LIBRARY_DESK,
+  REQUEST_GET_LIBRARY_DESK_SUCCESS
 } from "./constants";
 
 export const initialState = {
@@ -36,6 +38,7 @@ export const initialState = {
     data: [],
     pagination: {}
   },
+  pickup : {},
   departmentOptionList: [],
   titleOptionList: [],
   usersList: {
@@ -186,7 +189,17 @@ const libraryReducer = (state = initialState, action) =>
           draft.error = initialState.error;
           draft.pickupsList.data = action.result.data;
           draft.pickupsList.pagination = action.result.meta.pagination
-          break;  
+          break; 
+       
+        case REQUEST_GET_LIBRARY_DESK:
+            draft.loading = true;
+            draft.pickup={};
+            break;  
+        case REQUEST_GET_LIBRARY_DESK_SUCCESS:
+              draft.loading = false;
+              draft.error = initialState.error;            
+              draft.pickup = action.result.data;
+              break;    
 
 
       case REQUEST_BORROWINGS_LIST:

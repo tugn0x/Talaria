@@ -41,7 +41,9 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_ACCEPT_ALLLENDER,
    REQUEST_GET_LIBRARY_DESKS_OPTIONLIST_SUCCESS,
    REQUEST_GET_LIBRARY_DESKS,
-   REQUEST_GET_LIBRARY_DESKS_SUCCESS
+   REQUEST_GET_LIBRARY_DESKS_SUCCESS,
+   REQUEST_GET_LIBRARY_DESK,
+   REQUEST_GET_LIBRARY_DESK_SUCCESS
    
   } from "./constants";
 
@@ -475,6 +477,21 @@ export function requestPickupList(library_id,page, pageSize, query) {
 export function requestPickupListSuccess(result) {
   return {
     type: REQUEST_GET_LIBRARY_DESKS_SUCCESS,
+    result
+  };
+}
+
+export function requestPickup(library_id,desk_id) {
+  return {
+    type: REQUEST_GET_LIBRARY_DESK,
+    library_id,
+    desk_id,
+  };
+}
+
+export function requestPickupSuccess(result) {
+  return {
+    type: REQUEST_GET_LIBRARY_DESK_SUCCESS,
     result
   };
 }

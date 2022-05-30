@@ -15,13 +15,32 @@ const PickupsPage = (props) => {
     const pickupsList = library.pickupsList.data
     const pagination = library.pickupsList.pagination       
 
-    const editPath='/library/'+match.params.library_id+"/delivery/:id/:op?";
+    const editPath='/library/'+match.params.library_id+"/manage/pickup/:id/:op?";
 
     const intl = useIntl()
     
-    useEffect(() => {  
+    useEffect(() => {          
             dispatch(requestPickupList(match.params.library_id))                        
     }, [])
+
+    async function deletePickup (id,filter) {
+        alert("TODO deletePickup!");
+         /*let conf = await confirm({
+            title: intl.formatMessage({id: 'app.global.confirm'}),
+             message: intl.formatMessage({id: "app.requests.askDownloadedMessage"}),
+             confirmText: intl.formatMessage({id: 'app.global.yes'}),
+             cancelText: intl.formatMessage({id: 'app.global.no'})
+         }); //
+
+         let data={
+            id: id,
+            'download':1,
+         }
+
+         if(conf)
+             dispatch(requestUpdateBorrowing(id,match.params.library_id,data,intl.formatMessage({id: "app.requests.setDownloadedMessage"}),filter))         
+        */
+     } 
      
           
     return (
@@ -32,9 +51,8 @@ const PickupsPage = (props) => {
                 pagination={pagination}
                 history={history}                
                 match={match}   
-                editPath={editPath}                                        
-                updatePickup={()=>alert("updatePickup()!")}
-                deletePickup={()=>alert("deletePickup()!")}
+                editPath={editPath}                                                        
+                deletePickup={deletePickup}
                 changePickupStatus={()=>alert("changePickupStatus()!")}
                 searchOptions={{
                     getSearchList: (page, pageSize, searchFilter ) => {

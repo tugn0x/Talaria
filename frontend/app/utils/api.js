@@ -654,7 +654,8 @@ export const getLibraryDeliveries = (options) => {
 };
 
 export const getLibraryDelivery = (options) => {
-  const library_id = options.id
+  const library_id = options.library_id
+  const delivery_id = options.delivery_id
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/libraries/${library_id}/deliveries/${delivery_id}`, options)
 };

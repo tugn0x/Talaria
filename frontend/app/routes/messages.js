@@ -160,6 +160,12 @@ export default defineMessages({
         id: `${scope}.Pickup`,
         defaultMessage: 'Pickup',
     },
+    PickupUpdate: {
+        id: `${scope}.PickupUpdate`,
+        defaultMessage: 'Edit Pickup',
+    },
+    
+
     Operators: {
         id: `${scope}.Operators`,
         defaultMessage: 'Operators',

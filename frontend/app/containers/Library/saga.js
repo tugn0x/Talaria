@@ -29,6 +29,7 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
       REQUEST_ACCEPT_ALLLENDER,
       REQUEST_GET_LIBRARY_DESKS_OPTIONLIST,
       REQUEST_GET_LIBRARY_DESKS,
+      REQUEST_GET_LIBRARY_DESK
     } from './constants';
 import {
   requestError,
@@ -54,7 +55,8 @@ import {
   requestFindISSNISBNSuccess,
   requestGetLendingSuccess,
   requestGetLibraryDesksOptionListSuccess,
-  requestPickupListSuccess
+  requestPickupListSuccess,
+  requestPickupSuccess
 } from './actions';
 
 import { toast } from "react-toastify";
@@ -79,7 +81,8 @@ import {getLibraryUsersList, updateLibraryUser, deleteLibraryUser, createUser,
     acceptallLenderLendingRequest,
     getLendingRequest,
     getLibraryDeliveriesOptionList,
-    getLibraryDeliveries
+    getLibraryDeliveries,
+    getLibraryDelivery
 } from '../../utils/api'
 
 import {getOA,getPubmedReferenceByPMID,getFindISSN,getFindISBN, getFindISSN_ACNP} from '../../utils/apiExternal';
@@ -667,7 +670,7 @@ export function* requestAcceptAllLenderLendingSaga(action) {
   }
 }
 
-export function* requestLibraryDesksOptionListSaga(action) {
+export function* requestLibraryDesksOptionListSaga(action) {  
   const options = {
     method: 'get',
     library_id:action.library_id,
@@ -697,6 +700,22 @@ export function* requestLibraryDesksSaga(action) {
     yield put(requestError(e.message));
   }
 }
+
+export function* requestLibraryDeskSaga(action) {
+  const options = {
+    method: 'get',
+    library_id:action.library_id,
+    delivery_id:action.desk_id    
+  }
+
+  try {
+    const request = yield call(getLibraryDelivery, options);
+    yield put(requestPickupSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 
 export function* requestFindISSNISBNsaga(action) {
   
@@ -779,6 +798,7 @@ export default function* librarySaga() {
 
   yield takeLatest(REQUEST_GET_LIBRARY_DESKS_OPTIONLIST,requestLibraryDesksOptionListSaga);
   yield takeLatest (REQUEST_GET_LIBRARY_DESKS,requestLibraryDesksSaga);
+  yield takeLatest (REQUEST_GET_LIBRARY_DESK,requestLibraryDeskSaga);
   
   yield takeLatest(REQUEST_GET_LENDING,requestGetLendingSaga)
 

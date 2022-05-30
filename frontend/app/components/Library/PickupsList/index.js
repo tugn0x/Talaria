@@ -13,7 +13,7 @@ import './style.scss';
 
 const PickupsList = (props) => {
     console.log('PickupsList', props)
-    const { editPath,loading, data,pagination,searchOptions,changePickupStatus,deletePickup,updatePickup} = props
+    const { editPath,loading, data,pagination,searchOptions,changePickupStatus,deletePickup} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)
@@ -40,7 +40,9 @@ const PickupsList = (props) => {
                                 <PickupItem 
                                     key={`pickup-${pick.id}`}
                                     data={pick}                                    
-                                    editPath={editPath}                                    
+                                    editPath={editPath}   
+                                    changePickupStatus={changePickupStatus}
+                                    deletePickup={deletePickup}                                    
                                 />                                                                                                
                             ))
                         ||
