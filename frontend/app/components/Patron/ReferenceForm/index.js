@@ -93,22 +93,22 @@ const ReferenceForm = (props) => {
                         </>
                     || 
 
-                        /*(importReference &&*/
+                        (importReference &&
                         <>
-                        {importReference && !importReference.id && <FindOA reference={importReference} /* findOA={findOA}*//>}                        
+                        {!importReference.id && <FindOA reference={importReference} /* findOA={findOA}*//>}                        
                         <ReferenceFormContent                                     
                                     reference={importReference}
                                     submitCallBack={(formData) => createReference(formData)}
                                     /*findOA={findOA}
                                     OALink={OALink}*/
                                 />
-                        </>
+                        </>)
                         ||       
                         <OASearchReference        
                             onFound={(reference)=>onFoundReference(reference)}        
                             goToForm={()=>setGoTo(true)}         
                         />                            
-                        //)
+                        
                     )                    
             }
         </>
