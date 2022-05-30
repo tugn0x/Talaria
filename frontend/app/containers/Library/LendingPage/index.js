@@ -32,12 +32,7 @@ const LendingPage = (props) => {
    
     const applyLendingTagsToDDRequests = (tagIds,reqIds) => { 
         dispatch(requestApplyLendingTagsToDDRequests(match.params.library_id,reqIds,[tagIds],intl.formatMessage({id:'app.containers.LendingPage.addedTagToRequest'})))
-        // var tagexists = tagsOptionList.filter(function(item) {
-        //     return item.value == [tagIds];
-        //   });
 
-        // if (Object.keys(tagexists).length == 0)
-        //     dispatch(requestLibraryTagsOptionList(match.params.library_id))
      }
     
      async function UpdateLendingRequestStatus (data) {
@@ -50,12 +45,11 @@ const LendingPage = (props) => {
             cancelText: intl.formatMessage({id: 'app.global.no'})
             }); 
             if(confcan)
-                dispatch(requestChangeStatusLending(data.id, match.params.library_id, "canceledAccepted",intl.formatMessage({id:'app.requests.canceledAccepted'}),""))
+                dispatch(requestChangeStatusLending(data.id, match.params.library_id, "canceledAccepted","",intl.formatMessage({id:'app.requests.canceledAccepted'}),""))
         }
         else
-            dispatch(requestChangeStatusLending(data.id, match.params.library_id, 'willSupply',intl.formatMessage({id:'app.requests.willSupply'}),""))
+            dispatch(requestChangeStatusLending(data.id, match.params.library_id, 'willSupply',"",intl.formatMessage({id:'app.requests.willSupply'}),""))
     }
-
         
     const UpdateLendingAcceptRequest = (data) => {
        dispatch(requestAcceptAllLenderLending(data.id,match.params.library_id, data.lending_status,intl.formatMessage({id:'app.requests.willSupply'}),""))

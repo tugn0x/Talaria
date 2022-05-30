@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Row, Col, Button} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import { generatePath } from "react-router";
 import CustomCheckBox from 'components/Form/CustomCheckBox';
 import ReferenceCitation from '../../ReferenceCitation';
+import FileDownload from '../../../containers/FileDownload';
+//import FileDownload from '../FileDownload'
 import RequestTags from '../RequestTags';
 import './style.scss';
 import { Link } from 'react-router-dom';
 import {UncontrolledTooltip} from 'reactstrap';
 import {daysFromToday,formatDateTime} from '../../../utils/dates';
+import {deliveryMethod,lendingUnfilledReason} from '../BorrowingItem';
 
 const requesturl=(reqPath,id,op) => {
     return generatePath(reqPath, {
@@ -21,9 +24,9 @@ const statusIcon = (status) => {
     return "status-icon " + status
 }
 
-const statusDate = (req) => {
+const statusInfo = (req) => {
  
-  let date="";
+  /*let date="";
   switch (req.lending_status)
   {
       case "willSupply": 
@@ -36,21 +39,48 @@ const statusDate = (req) => {
 
       case "unFilled": 
       case "copyCompleted": date= req.fulfill_date; break;                                                           
-
-      /*...*/      
+      
       default: date= req.created_at; 
-  }  
+  }  */
 
   return (
       <>
-        <span className="status-date"><i className="fas fa-clock"></i> {formatDateTime(date)}                   
-        {req.fulfill_note && <span className="fulfill_note">
-                <a href="#" id={`fulfill_note-${req.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
-                <UncontrolledTooltip autohide={false} placement="right" target={`fulfill_note-${req.id}`}>
-                    {req.fulfill_note}
+        {req.created_at && <span className="status-date"><i className="fas fa-plus"></i> {formatDateTime(req.created_at)}</span>}        
+        {req.request_date && <span className="status-date">
+            <i className="fas fa-share"></i> {formatDateTime(req.request_date)}
+            {req.request_note && <div className="request_note">
+                <span id={`request_note-${req.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
+                <UncontrolledTooltip autohide={false} placement="right" target={`request_note-${req.id}`}>
+                    {req.request_note}
                 </UncontrolledTooltip>                                
+            </div>}                     
         </span>} 
-        </span>
+
+        <>            
+            {req.fulfill_date && 
+                <span className="status-date">
+                    <i className="fas fa-reply"></i> {formatDateTime(req.fulfill_date)}  
+                    {req.fulfill_type && <span className="deliverymethod">{deliveryMethod(req)}</span> }                                
+                    {req.notfulfill_type && <div className="unfilled_reason">
+                    <span id={`unfilled_reason-${req.id}`} className="active"><i className="fas fa-comment text-danger"></i></span> 
+                            <UncontrolledTooltip autohide={false} placement="right" target={`unfilled_reason-${req.id}`}>
+                                {lendingUnfilledReason(req)}
+                            </UncontrolledTooltip>                                
+                    </div>}
+                    {req.fulfill_note && <div className="fulfill_notes">
+                        <span id={`fulfilnote-${req.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
+                        <UncontrolledTooltip autohide={false} placement="right" target={`fulfilnote-${req.id}`}>
+                            {req.fulfill_note}
+                        </UncontrolledTooltip>                                
+                    </div>}                    
+                </span>
+            }
+            {req.borrowing_status=="documentReady" && req.ready_date && <span className="status-date"><i className="fas fa-check-circle"></i> {formatDateTime(req.ready_date)} </span>}
+            {req.borrowing_status=="documentNotReady" && req.ready_date && <span className="status-date"><i className="fas fa-times-circle"></i> {formatDateTime(req.ready_date)} </span>}            
+        </>
+        {req.cancel_request_date && <span className="status-date"><i className="fas fa-times"></i><i className="fas fa-question"></i> {formatDateTime(req.cancel_request_date)}</span>}
+        {req.cancel_date && <span className="status-date"><i className="fas fa-times"></i> {formatDateTime(req.cancel_date)}</span>}
+
         {req.lending_archived==1 && req.lending_archived_date && 
             <span className="status-date"><i className="fas fa-hdd"></i> {formatDateTime(req.lending_archived_date)}</span>            
         }
@@ -100,7 +130,11 @@ export const LendingStatus = (props) => {
                 </span>}
             </div>
             }            
-            {statusDate(data)}
+            {statusInfo(data)}
+            {
+                //DEBUG fileDownloader:
+                //data.filehash && <FileDownload  reqid={data.id} libraryid={data.library.data.id} filehash={data.filehash} customClass="detail-body" />
+            } 
         </div>
     )
 }
@@ -137,12 +171,12 @@ const LendingReferenceIcons = (props) => {
 }
 
 const LendingItem = (props) => {    
-    const {match,editPath,data,toggleSelection,checked,removeTag,findAndUpdateOABorrowingReference, UpdateLendingRequestStatus, UpdateLendingAcceptRequest, UpdateLendingArchivedStatus, oaloading} = props      
+    const {match,editPath,data,toggleSelection,checked,removeTag, UpdateLendingRequestStatus, UpdateLendingAcceptRequest} = props      
     const intl = useIntl();  
 
     return (
         <Row className="list-row justify-content-between">
-            <Col sm={2}>
+            <Col sm={3}>
                 <CustomCheckBox 
                     handleChange={toggleSelection}
                     checked={checked}
@@ -151,7 +185,7 @@ const LendingItem = (props) => {
               <div className="request_id">
                         <Link to={requesturl(editPath,data.id)} className="active"><i className="fas fa-info-circle"></i> <span>{data.id}</span></Link>
                         </div>
-                <LendingStatus data={data} customClass="request_status"/>                                                                             
+                        <LendingStatus data={data} customClass="request_status"/>                                                                             
             </Col>
             <Col sm={3}>
             <>
@@ -174,7 +208,7 @@ const LendingItem = (props) => {
             </Col>
             
           
-            <Col sm={5}>      
+            <Col sm={4}>      
             {data.tags && <RequestTags data={data.tags.data} removeTag={!isArchived(data)?removeTag:null}/>}
             <ReferenceCitation data={data.reference.data}/>
             <LendingReferenceIcons data={data} />                

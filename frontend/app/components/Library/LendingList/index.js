@@ -15,7 +15,7 @@ import './style.scss';
 const LendingsList = (props) => {
    
     console.log('LendingsList', props)
-    const { match, editPath,loading, data, pagination, searchOptions, tagsOptionList, removeTagFromRequest,applyTags,UpdateLendingRequestStatus, UpdateLendingArchivedStatus,UpdateLendingAcceptRequest, deleteReference,findAndUpdateOABorrowingReference,oaloading, FulfillLendingRequestStatus} = props
+    const { match, editPath,loading, data, pagination, searchOptions, tagsOptionList, removeTagFromRequest,applyTags,UpdateLendingRequestStatus, UpdateLendingArchivedStatus,UpdateLendingAcceptRequest, deleteReference,findAndUpdateOABorrowingReference,oaloading, FulfillLendingRequestStatus, FileDownloadRequest, base64callback, base64content,  downloadbase64content} = props
     const {total_pages, current_page,total,count,per_page} = pagination
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)
@@ -181,6 +181,9 @@ const LendingsList = (props) => {
                                     UpdateLendingRequestStatus={(data)=>UpdateLendingRequestStatus(data)}
                                     UpdateLendingArchivedStatus={(data)=>UpdateLendingArchivedStatus(data)}
                                     UpdateLendingAcceptRequest={(data)=>UpdateLendingAcceptRequest(data)}
+                                    FileDownloadRequest={FileDownloadRequest}
+                                    base64content={base64content}
+                                    downloadbase64content={downloadbase64content}
                                     // oaloading={oaloading.includes(req.id)}
                                 />                                
                                 

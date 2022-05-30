@@ -58,7 +58,7 @@ export const deskDeliveryFormat=(data) => {
 
 
 
-const lendingUnfilledReason = (data) => {
+export const lendingUnfilledReason = (data) => {
     let intl=useIntl();
     let ret=""
     switch (data.notfulfill_type) {
@@ -128,19 +128,17 @@ const statusInfo = (req) => {
          req.borrowing_status=="documentReady"||req.borrowing_status=="documentNotReady" ||
          req.borrowing_status=="notDeliveredToUser"||req.borrowing_status=="notDeliveredToUserDirect") &&*/
         
-        <>
-            
+        <>            
             {req.fulfill_date && 
                 <span className="status-date">
                     <i className="fas fa-reply"></i> {formatDateTime(req.fulfill_date)}  
-                    {req.fulfill_type && <span className="deliverymethod">{deliveryMethod(req)}</span> }            
+                    {req.fulfill_type && <span className="deliverymethod">{deliveryMethod(req)}</span> }                                
                     {req.notfulfill_type && <div className="unfilled_reason">
                     <span id={`unfilled_reason-${req.id}`} className="active"><i className="fas fa-comment text-danger"></i></span> 
                             <UncontrolledTooltip autohide={false} placement="right" target={`unfilled_reason-${req.id}`}>
                                 {lendingUnfilledReason(req)}
                             </UncontrolledTooltip>                                
-                    </div>}
-
+                    </div>}                    
                     {req.fulfill_note && <div className="fulfill_notes">
                         <span id={`fulfilnote-${req.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
                         <UncontrolledTooltip autohide={false} placement="right" target={`fulfilnote-${req.id}`}>
@@ -153,6 +151,7 @@ const statusInfo = (req) => {
             {req.borrowing_status=="documentNotReady" && req.ready_date && <span className="status-date"><i className="fas fa-times-circle"></i> {formatDateTime(req.ready_date)} </span>}            
         </>
         }              
+        {req.cancel_request_date && <span className="status-date"><i className="fas fa-times"></i><i className="fas fa-question"></i> {formatDateTime(req.cancel_request_date)}</span>}
         {req.cancel_date && <span className="status-date"><i className="fas fa-times"></i> {formatDateTime(req.cancel_date)}</span>}
        
         {req.forward==1 && req.forward_date && 

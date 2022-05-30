@@ -38,8 +38,12 @@ createSelector(
   substate => (substate.tagsOptionList)
 );
 
-
+const fileUploadNameSelector = () =>
+createSelector(
+  selectLibraryDomain,
+  substate => (substate.getFileUploadname)
+);
 
 
 export default makeSelectLibrary;
-export {  isLibraryLoading, isAdminLoading , makeSelectAdmin,tagsOptionListSelector };
+export {  isLibraryLoading, isAdminLoading , makeSelectAdmin,tagsOptionListSelector, fileUploadNameSelector };

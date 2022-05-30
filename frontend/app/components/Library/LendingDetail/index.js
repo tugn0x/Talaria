@@ -3,7 +3,6 @@ import {useIntl} from 'react-intl';
 import ReferenceDetailContent from '../../ReferenceDetailContent';
 import FulfillLendingRequest from  '../FulfillLendingRequest';
 import {LendingStatus} from '../LendingItem'
-
 import RequestTags from '../RequestTags'
 import './style.scss';
 
@@ -42,10 +41,8 @@ const LendingDetail = (props) => {
     console.log('LendingDetail', props)
     const {data, FulfillLendingRequestStatus, unFulfillLendingRequestStatus} = props
     const intl = useIntl()
-    
 
-
-    return (<div className="lendingDetail">
+return (<div className="lendingDetail">
                 <RequestTags data={data.tags.data} /> 
                 <div className="lendingTracking detail-body">
                 <h3>{intl.formatMessage({id: "app.requests.status"})}</h3>

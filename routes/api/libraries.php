@@ -31,6 +31,17 @@ Route::group([
         //Route::get('subjects', 'SubjectController@index')->name('index');
     });
 
+   /*
+     * FILE UPLOAD/DOWNLOAD
+     */
+    Route::group([
+        'as' => 'api.v1.libraries.files.',
+    ], function () {
+        Route::post('{library}/UploadFile', 'FileUploadDocdelRequestController@UploadFile')->name('UploadFile');
+        Route::get('{library}/DownloadFile', 'FileUploadDocdelRequestController@DownloadFile')->name('DownloadFile');    
+    });
+
+ 
     /*
      * CATALOGS
      */

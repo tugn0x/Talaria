@@ -81,3 +81,8 @@ export const REQUEST_GET_ISSN_ISBN_FAIL="app/Library/REQUEST_GET_ISSN_ISBN_FAIL"
 export const REQUEST_ERROR = 'app/Library/REQUEST_ERROR';
 export const REQUEST_SUCCESS = 'app/Library/REQUEST_SUCCESS';
 export const STOP_LOADING = 'app/Library/STOP_LOADING';
+
+export const UPLOAD_REQUEST =  'app/Library/UPLOAD_REQUEST';
+export const UPLOAD_PROGRESS =  'app/Library/UPLOAD_PROGRESS';
+export const UPLOAD_SUCCESS =   'app/Library/UPLOAD_SUCCESS';
+export const UPLOAD_FAILURE =  'app/Library/UPLOAD_FAILURE';

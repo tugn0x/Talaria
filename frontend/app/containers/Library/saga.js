@@ -1,4 +1,4 @@
-import { call, put, takeLatest, takeEvery, take } from 'redux-saga/effects';
+import { call, put, takeLatest, takeEvery, take, takeLeading } from 'redux-saga/effects';
 import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
          /*  REQUEST_POST_USER, */ REQUEST_USER, REQUEST_GET_LIBRARY,
           REQUEST_GET_LIBRARIES_LIST,
@@ -29,7 +29,8 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
       REQUEST_ACCEPT_ALLLENDER,
       REQUEST_GET_LIBRARY_DESKS_OPTIONLIST,
       REQUEST_GET_LIBRARY_DESKS,
-      REQUEST_GET_LIBRARY_DESK
+      REQUEST_GET_LIBRARY_DESK,
+      UPLOAD_REQUEST
     } from './constants';
 import {
   requestError,
@@ -56,7 +57,8 @@ import {
   requestGetLendingSuccess,
   requestGetLibraryDesksOptionListSuccess,
   requestPickupListSuccess,
-  requestPickupSuccess
+  requestPickupSuccess,
+  uploadSuccess
 } from './actions';
 
 import { toast } from "react-toastify";
@@ -82,8 +84,9 @@ import {getLibraryUsersList, updateLibraryUser, deleteLibraryUser, createUser,
     getLendingRequest,
     getLibraryDeliveriesOptionList,
     getLibraryDeliveries,
-    getLibraryDelivery
-} from '../../utils/api'
+    getLibraryDelivery,
+    fileuploadRequest
+} from '../../utils/api'    
 
 import {getOA,getPubmedReferenceByPMID,getFindISSN,getFindISBN, getFindISSN_ACNP} from '../../utils/apiExternal';
 
@@ -614,15 +617,21 @@ export function* requestChangeStatusDeliverySaga(action) {
 //extrafields was already managed by Laravel LendingDDRequest so all the fields specified
 //in extrafields will be updated correctly!
 export function* requestChangeStatusLendingSaga(action) {
+
+  //to empty filename and filehash when user upload file and then change his mind to another delivery method
+  if (action.extrafields.fulfill_type!=null &  action.extrafields.fulfill_type!= 1) {
+    action.extrafields.filename = null
+    action.extrafields.filehash = null
+  }
   
   const options = {
     method: 'put',
     body: {
-      'status': action.status, 
-      'extrafields': {...action.extrafields},
+      'status': action.status,
+      'extrafields': {...action.extrafields}, 
     }, 
     id: action.id,
-    lending_library_id: action.lending_library_id
+    lending_library_id: action.lending_library_id,
   }; 
 
   try {
@@ -716,6 +725,29 @@ export function* requestLibraryDeskSaga(action) {
   }
 }
 
+export function* uploadRequestWatcherSaga() {    
+  yield takeEvery(UPLOAD_REQUEST, 
+    function*(action) { 
+      const file = action.payload; 
+      yield call(uploadFileSaga, file);    
+    });
+ }
+
+export function* uploadFileSaga(action) {
+  const options = {
+    method: 'post',
+    body: {'filename': action.selectedFile, 'uploadFile': action.payload, enctype:'multipart/form-data'},
+    id: action.id,
+    lending_library_id: action.lending_library_id
+  };
+
+  try {
+    const request = yield call(fileuploadRequest, options);   
+    yield put (uploadSuccess(request))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
 
 export function* requestFindISSNISBNsaga(action) {
   
@@ -811,4 +843,7 @@ export default function* librarySaga() {
 
   yield takeLatest(REQUEST_GET_ISSN_ISBN,requestFindISSNISBNsaga);
   yield takeEvery(REQUEST_FIND_UPDATE_BORROWING_OA,findUpdateOABorrowingSaga);
+
+  yield takeLatest(UPLOAD_REQUEST,uploadFileSaga); 
+  
 }

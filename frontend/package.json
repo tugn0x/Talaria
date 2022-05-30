@@ -88,6 +88,7 @@
     "intl-relativeformat": "^6.4.3",
     "invariant": "2.2.4",
     "ip": "1.1.5",
+    "large-file-downloader": "^1.0.4",
     "leaflet": "1.7.1",
     "lodash": "^4.17.21",
     "minimist": "1.2.0",

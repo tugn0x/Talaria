@@ -1,18 +1,18 @@
 @import '../../../scss/vendors/variables';
 
-.LendingRequestData {
-    border-top: 1px solid $dark-bk;
-    margin-top: 5px;
-    padding: 5px 0 0 0;
+.LendingRequestData:not(:empty) {    
+    
 
     & .shelflocation {        
     }
 
-    & .lendingData {
+    & .borrowingRequestData:not(:empty),
+    & .lendingData:not(:empty) {
         border-top: 1px solid $dark-bk;
         margin-top: 5px;
         padding: 5px 0 0 0;
     }
+
 
     & .requestData {
         display: block;

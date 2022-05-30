@@ -4,6 +4,7 @@
  *
  */
 import produce from 'immer';
+import { bindActionCreators } from 'redux';
 import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_ERROR, STOP_LOADING, REQUEST_USERS_LIST, REQUEST_USERS_LIST_SUCCESS,
   REQUEST_UPDATE_USER, REQUEST_UPDATE_USER_SUCCESS,
@@ -28,7 +29,11 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_GET_LIBRARY_DESKS,
   REQUEST_GET_LIBRARY_DESKS_SUCCESS,
   REQUEST_GET_LIBRARY_DESK,
-  REQUEST_GET_LIBRARY_DESK_SUCCESS
+  REQUEST_GET_LIBRARY_DESK_SUCCESS,
+  UPLOAD_REQUEST,
+  UPLOAD_SUCCESS,
+  UPLOAD_FAILURE,
+  UPLOAD_PROGRESS
 } from "./constants";
 
 export const initialState = {
@@ -58,6 +63,7 @@ export const initialState = {
     data: [],
     pagination: {}
   },
+  fileupload: "",
   findISSNISBNresults: {
     loading:false,
     data: [],    
@@ -68,7 +74,7 @@ export const initialState = {
     pagination: {}
   },
   error: null,
-  user: {}
+  user: {},
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -278,6 +284,43 @@ const libraryReducer = (state = initialState, action) =>
         draft.lendingsList.pagination = action.result.meta.pagination
         break;          
 
+      case UPLOAD_PROGRESS:
+          draft.loading = false;
+          draft.error = initialState.error;
+
+      case UPLOAD_REQUEST:
+          draft.loading = false;
+          draft.error = initialState.error;
+          break;
+
+      case UPLOAD_SUCCESS:
+          draft.loading = false;
+          draft.error = initialState.error;
+          draft.fileupload  = action.result;
+          break;  
+          
+      case UPLOAD_FAILURE:
+          draft.loading = true;
+          draft.error = initialState.error;
+          break;
+
+        // case DOWNLOAD_REQUEST:
+        //     draft.filedownload.push(action.id)
+        //     // draft.loading = false;
+        //     // draft.error = initialState.error;
+        //     break;
+  
+        // case DOWNLOAD_SUCCESS:
+        //     draft.loading = false;
+        //     draft.error = initialState.error;
+        //     draft.filedownload  = action.result
+        //     draft.filedownload = Object.values(action.result).filter(c => c.id !== draft.filedownload.id)
+        //  break;  
+            
+        // case DOWNLOAD_FAILURE:
+        //     draft.loading = true;
+        //     draft.error = initialState.error;
+        //     break;
       case REQUEST_GET_ISSN_ISBN:
         draft.error = initialState.error;    
         draft.findISSNISBNresults.loading=true;  
