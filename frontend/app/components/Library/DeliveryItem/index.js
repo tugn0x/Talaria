@@ -10,6 +10,7 @@ import {BorrowingPatronRequest} from '../BorrowingPatronRequest';
 import ReferenceCitation from '../../ReferenceCitation';
 import '../BorrowingItem/style.scss';
 import './style.scss';
+import FileDownload from '../../../containers/FileDownload';
 
 
 export const requesturl=(reqPath,id,op) => {
@@ -43,9 +44,8 @@ const canDeliverToPatron = (data) => {
 
 const documentAccess=(data) => {
     return (
-        <div className="delivery_access_document_icons">
-            {/* TODO: use Rabih Download component*/}
-            {deskReceivedFile(data) && <button type="button" className="btn btn-primary btn-sm btn-download-icon" onClick={()=>alert("TODO: view document !")}><i className="fas fa-file"></i></button>}                
+        <div className="delivery_access_document_icons">            
+            {deskReceivedFile(data) && <FileDownload  reqid={data.id} libraryid={data.library.data.id} filehash={data.filehash} customClass="detail-body" />}                
         </div>
     )
 }
