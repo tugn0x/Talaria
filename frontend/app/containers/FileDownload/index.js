@@ -42,9 +42,8 @@ return (
     <FileDownloadForm   
           FileDownloadCallBack={ () => GetfiledownloadBase64()}                                        
           isLoading={isLoading}
-         />          
-    <a id='dwnldLnk' download={filehash} /> 
-    {!downloaded && <i className="fas fa-spinner fa-pulse fa-2x"></i>}
+    />              
+    {!downloaded && <span><i className="fas fa-spinner fa-pulse"></i></span>}
   </>
     )
 }

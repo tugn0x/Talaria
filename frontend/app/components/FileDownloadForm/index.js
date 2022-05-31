@@ -7,11 +7,8 @@ import './style.scss';
 const FileDownloadForm = (props) => {
     const {FileDownloadCallBack}=props;
     return (
-        <>       
-                <div>
-                    <button type="button" onClick={() => FileDownloadCallBack()} className="btn btn-info">Download</button>
-                </div> 
-        </>
+        <button type="button" onClick={() => FileDownloadCallBack()} className="btn btn-primary btn-sm btn-download-icon"><i className="fas fa-file"></i></button>                    
+                
     );
 };
 
