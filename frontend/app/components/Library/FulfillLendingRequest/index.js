@@ -1,6 +1,6 @@
 import React from 'react'
 import {Card, Row, Col, Form as FormContainer} from 'reactstrap';
-import {useIntl} from 'react-intl';
+import {FormattedHTMLMessage,useIntl} from 'react-intl';
 import './style.scss';
 import { useState } from "react";
 import FileUpload from '../../../containers/FileUpload';
@@ -80,7 +80,7 @@ return (
                 <Card>
                     <Row>
                         <Col sm={6}>   
-                            <label for="delivery">Choose a delivery method: </label>
+                            <label htmlFor="delivery">Choose a delivery method: </label>
                             <select id="delivery" name="delivery" onChange={setDeliveryType}>
                                 <option value="0">---</option>
                                 <option value="1">{intl.formatMessage({id: "app.requests.deliveryMethod.file"})}</option>
@@ -108,17 +108,17 @@ return (
                     <div className="form-group">
                     { (deliverymethod == 4) &&
                         <div>
-                            <label for="exampleInputURL">URL</label>
+                            <label htmlFor="exampleInputURL">URL</label>
                             <input type="text" className="form-control" id="url" onChange={handlerURL} aria-describedby="" placeholder="Enter URL here"></input>                    
                         </div>
                     }   
                     </div>
                     <div className="form-group">
-                        <label for="exampleInputinventory">{intl.formatMessage({id: "app.requests.inventoryNumber"})}</label>
+                        <label htmlFor="exampleInputinventory">{intl.formatMessage({id: "app.requests.inventoryNumber"})}</label>
                         <input type="text" className="form-control" id="fulfill_inventorynr"  onChange={handlerinventorynr} aria-describedby="" placeholder="Enter inventory number here"></input>
                     </div>
                     <div className="form-group">
-                        <label for="exampleInputEmail1">Notes</label>
+                        <label htmlFor="exampleInputEmail1">Notes</label>
                         <textarea id="fulfill_note" className="form-control" onChange={handlernote} aria-describedby="" placeholder="Enter note here" rows="5" cols="50"></textarea>
                         <small id="emailHelp" className="form-text text-muted">This message will send to the borrowing library.</small>
                     </div>
@@ -129,14 +129,9 @@ return (
              <Card>
                   <Row>
                     <Col sm={12}>
-                        <div className="form-group">
-                        
-                        <label for="examplecopyright">Copyright Statement </label>
-
-                        <span class="span">
-                        {intl.formatMessage({id: "app.requests.lendingCopyrightStatement"})}
-                        </span>
-                        </div>
+                        <div className="alert alert-primary copyrightstatement">                                                
+                                            <FormattedHTMLMessage id="app.requests.lendingCopyrightStatement" defaultMessage="borrowingCopyrightStatement" />
+                        </div>                          
                     </Col>
                 </Row>
              </Card>
@@ -163,7 +158,7 @@ return (
                     <Col sm={6}>
                         <div>
                             <div className="form-group">
-                                <label for="exampleInputEmail1">Unfill Notes</label>
+                                <label htmlFor="exampleInputEmail1">Unfill Notes</label>
                                 <input type="email" className="form-control" id="txtnote" onChange={handlernote} aria-describedby="" placeholder="Enter note here"
                                ></input>
                                 <small id="emailHelp" className="form-text text-muted">This message will send to the borrowing library.</small>

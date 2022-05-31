@@ -1,3 +1,14 @@
 .span {
     display: inline-block;
 }
+
+.copyrightstatement {
+    font-style: italic;
+    font-size: 0.8em;
+
+    & ul {        
+        li {
+            list-style: inside;
+        }
+    }
+}
