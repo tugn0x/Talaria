@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import {UncontrolledTooltip} from 'reactstrap';
 import {daysFromToday,formatDateTime} from '../../../utils/dates';
 import {documentAccess as patronRequestDocumentAccess}  from '../../Patron/PatronRequest';
+import FileDownload from '../../../containers/FileDownload';
 
 
 export const requesturl=(reqPath,id,op) => {
@@ -77,10 +78,12 @@ export const lendingUnfilledReason = (data) => {
 export const documentAccess=(data) => {
     return (
         <div className="access_document_icons">
-            {/* TODO: use Rabih Download component*/}
+            
         {!isArchived(data) && isFile(data) && !canSavedAsDownloaded(data) && data.borrowing_status=="fulfilled"  && <button type="button" className="btn btn-warning btn-sm"><i className="fas fa-hourglass-half"></i> (waiting HC)</button>}   
         
-        {!isArchived(data) && isFile(data) && <button type="button" className="btn btn-primary btn-sm btn-download-icon" onClick={()=>alert("TODO: view document !")}><i className="fas fa-file"></i></button>}                
+        {!isArchived(data) && isFile(data) &&  data.filehash &&            
+            <FileDownload  reqid={data.id} libraryid={data.library.data.id} filehash={data.filehash} customClass="detail-body" />
+        }                
       
         {isURL(data) && <a href className="btn btn-primary btn-sm btn-download-icon" target="_blank" href={data.url}><i className="fas fa-external-link-alt"></i></a>}         
         </div>

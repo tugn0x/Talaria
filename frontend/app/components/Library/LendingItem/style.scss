@@ -75,3 +75,11 @@
         background-color: #FBB133;
     }    
 }
+
+.lending_request_icons {
+    margin-top:15px;
+    @include media-breakpoint-down(xs) {
+        background-color: $tools-menu;                
+    }
+}
+

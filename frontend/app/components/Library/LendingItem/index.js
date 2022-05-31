@@ -11,7 +11,7 @@ import './style.scss';
 import { Link } from 'react-router-dom';
 import {UncontrolledTooltip} from 'reactstrap';
 import {daysFromToday,formatDateTime} from '../../../utils/dates';
-import {deliveryMethod,lendingUnfilledReason} from '../BorrowingItem';
+import {isURL,deliveryMethod,lendingUnfilledReason} from '../BorrowingItem';
 
 const requesturl=(reqPath,id,op) => {
     return generatePath(reqPath, {
@@ -23,6 +23,17 @@ const requesturl=(reqPath,id,op) => {
 const statusIcon = (status) => {
     return "status-icon " + status
 }
+
+
+export const documentAccess=(data) => {
+    return (
+        <div className="access_document_icons">
+                
+        {isURL(data) && <a href className="btn btn-primary btn-sm btn-download-icon" target="_blank" href={data.url}><i className="fas fa-external-link-alt"></i></a>}         
+        </div>
+    )
+}
+
 
 const statusInfo = (req) => {
  
@@ -143,7 +154,7 @@ const LendingRequestIcons = (props) => {
     const {match, data,reqPath,UpdateLendingRequestStatus, UpdateLendingAcceptRequest}=props;    
     const libraryId=match.params.library_id
     return (
-        <div className="lending_request_icons">                        
+        <div className="lending_request_icons icons d-flex">                        
                 {isRequestReceived(data) && (data.all_lender==null|| data.all_lender==0)  && 
                     <>
                         <a className="btn btn-icon"  onClick={()=>UpdateLendingRequestStatus(data)}><i className="fas fa-parachute-box"></i></a>
@@ -155,6 +166,8 @@ const LendingRequestIcons = (props) => {
                 {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-book-open"></i></Link>}
                 {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <a className="btn btn-icon" onClick={()=>UpdateLendingRequestStatus(data)}><i className="far fa-check-circle"></i></a>}
                 {(data.all_lender==1) && isRequestReceived(data) && !isRequestedByMe(data,libraryId) && <a className="btn btn-icon" onClick={()=>UpdateLendingAcceptRequest(data)}><i className="fas fa-parachute-box"></i></a>}
+
+                {documentAccess(data)}
         </div>
     )
 }
@@ -213,7 +226,7 @@ const LendingItem = (props) => {
             <ReferenceCitation data={data.reference.data}/>
             <LendingReferenceIcons data={data} />                
             </Col>
-            <Col sm={2} className="icons align-self-center">
+            <Col sm={2}>
             <LendingRequestIcons match={match} data={data} reqPath={editPath} 
             UpdateLendingRequestStatus={(data) => UpdateLendingRequestStatus(data)}             
             UpdateLendingAcceptRequest={(data) => UpdateLendingAcceptRequest(data)}            

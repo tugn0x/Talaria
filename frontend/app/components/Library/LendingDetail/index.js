@@ -5,6 +5,7 @@ import FulfillLendingRequest from  '../FulfillLendingRequest';
 import {LendingStatus} from '../LendingItem'
 import RequestTags from '../RequestTags'
 import './style.scss';
+import {documentAccess} from '../LendingItem';
 
 export const LendingRequestData = (props) => {
             const {data} = props
@@ -48,6 +49,7 @@ return (<div className="lendingDetail">
                 <h3>{intl.formatMessage({id: "app.requests.status"})}</h3>
                     <div className="card">                                    
                         <LendingStatus data={data}/>
+                        {documentAccess(data)}
                         <LendingRequestData data={data}/>
                     </div>  
                 </div>                  
