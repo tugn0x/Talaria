@@ -31,8 +31,7 @@ function createFile(file) {
             <div className={customClass}>
                 <div>
                     <input type="file" name="file" accept={File_Extension} onChange={onChange}  />
-                    <button type="button" onClick={() => FileUploadCallBack(data, file, originalFilename)} className="btn btn-info">Upload file</button>
-                        {/* {file ? <textarea id="base64File" rows="30" cols="150" value={file} readOnly></textarea> : null } */}
+                    {selectedFile && <button type="button" onClick={() => FileUploadCallBack(data, file, originalFilename)} className="btn btn-info">Upload file</button>}                        
                 </div>
             </div> 
         </>

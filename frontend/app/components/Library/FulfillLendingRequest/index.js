@@ -94,9 +94,9 @@ return (
                     </Row>
                 </Card>
             }
-            {
+            { 
             (deliverymethod==1) && 
-                <FileUpload  parentCallback={callbackuploadFunction}  deliverymethod={deliverymethod} data={data} customClass="detail-body"/>
+                <FileUpload  parentCallback={callbackuploadFunction} data={data} customClass="detail-body"/>
             }
                 
             {

@@ -10,7 +10,7 @@ import {useIntl} from 'react-intl';
     
 const FileUpload = (props) => {
   console.log("FileUpload:", props)      
-  const {dispatch, data, fileupload, deliverymethod}=props
+  const {dispatch, data, fileupload}=props
   const intl = useIntl()
   const displaymsg = <h4>{intl.formatMessage({id: "app.requests.lendingUploadSuccess"})}</h4>
   const displaymsgerror = <h3>{intl.formatMessage({id: "app.requests.lendingUploadFail"})}</h3>
@@ -27,26 +27,18 @@ const FileUpload = (props) => {
 return (
   <>
     <FileUploadForm FileUploadCallBack={uploadFile} />  
-    <Card>
-      <Row>
-        <Col sm={6}>                       
-        { 
-          (fileupload.status=='uploaded') && (deliverymethod==1) &&   
-           <div>
-              <div className="form-group">
-                {displaymsg}
-              </div>
-          </div> 
-        }
-        {
+    {fileupload && fileupload.status && <span className={"fileuploadstatusmessage"}>
+    { 
+          (fileupload.status=='uploaded') &&   
+           <span className="text-success">{displaymsg}</span>    
+    }
+    {
           (fileupload.status=='failed') &&
-          <div className="form-group">
-              {displaymsgerror}
-          </div>
-        }
-        </Col>
-      </Row>
-    </Card>        
+          <span className="text-danger">{displaymsgerror}</span>                        
+    }
+    </span>
+    }
+    
   </>
     )
 }
