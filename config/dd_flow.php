@@ -98,7 +98,7 @@ return [
                 'flow_tree' => [
                     'newrequest'	=> [
                         'role'  =>  [],
-                    'next_statuses'  =>  ['canceled','canceledDirect','requested','notDeliveredToUserDirect','notReceived','deliveredToUserDirect','deliveringToDesk'],
+                    'next_statuses'  =>  ['canceled','canceledDirect','requested','notDeliveredToUserDirect','notReceived','deliveredToUserDirect','deskReceived','deliveringToDesk'],
                         'constraints'   =>  [],                        
                         'notify'    =>  [
                             'Model'=>'borrowingLibraryOperators',                            
