@@ -171,7 +171,10 @@ const statusInfo = (req) => {
             <i className="fas fa-truck-loading"></i> {formatDateTime(req.desk_delivery_date)}
             {req.desk_delivery_format && <span className="deskDeliveryFormat">{deskDeliveryFormat(req)}</span>}
         </span>}  
-        {req.desk_received_date && <span className="status-date"><i className="fas fa-box-open"></i> {formatDateTime(req.desk_received_date)}</span>}
+        {req.desk_received_date && <span className="status-date">
+            <i className="fas fa-box-open"></i> {formatDateTime(req.desk_received_date)}
+            {req.desk_delivery_format && <span className="deskDeliveryFormat">{deskDeliveryFormat(req)}</span>}
+        </span>}
         
         {req.user_delivery_date && <span className="status-date"><i className="fas fa-luggage-cart"></i> {formatDateTime(req.user_delivery_date)} </span>}                                                                              
         
