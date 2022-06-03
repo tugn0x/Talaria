@@ -23,7 +23,7 @@ export const LendingRequestData = (props) => {
                 
                     {data.fulfill_location &&
                     <div className="shelflocation">
-                        <span className="requestData"><span className="label"><i class="fas fa-solid fa-thumbtack"></i> {intl.formatMessage({id: "app.requests.fulfill_location"})}: </span>{data.fulfill_location} </span>
+                        <span className="requestData"><span className="label"><i className="fas fa-solid fa-thumbtack"></i> {intl.formatMessage({id: "app.requests.fulfill_location"})}: </span>{data.fulfill_location} </span>
                     </div>}
                 </div>}
 

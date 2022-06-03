@@ -19,8 +19,8 @@ export const BorrowingRequestData = (props) => {
         {data.borrowing_notes && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.borrowing_notes"})}: </span>{data.borrowing_notes} </span>}
         {data.request_protnr && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.request_protnr"})}: </span>{data.request_protnr} </span>}
         {data.request_note && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.request_note"})}: </span>{data.request_note} </span>}
-        {data.request_special_delivery==1 && <span className="requestData"><i class="fas fa-check-square"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_special_delivery"})} </span></span>}
-        {data.request_pdf_editorial==1 &&  <span className="requestData"><i class="fas fa-check-square"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_pdf_editorial"})}</span></span>}
+        {data.request_special_delivery==1 && <span className="requestData"><i className="fas fa-check-square"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_special_delivery"})} </span></span>}
+        {data.request_pdf_editorial==1 &&  <span className="requestData"><i className="fas fa-check-square"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_pdf_editorial"})}</span></span>}
 
         {(data.fulfill_protnr||data.fulfill_note||data.fulfill_inventorynr) && <div className="lendingData">                      
             {data.fulfill_protnr && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.fulfill_protnr"})}: </span>{data.fulfill_protnr} </span>}
