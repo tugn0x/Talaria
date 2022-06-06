@@ -17,7 +17,7 @@ const BorrowingChooseLender = (props) => {
     //const [lender,setLender]=useState(null)
 
     const [formData,setFormData]=useState({
-        request_protnr:'',
+        borrowing_protnr:'',
         request_special_delivery: 0,
         request_pdf_editorial:0,
         lending_library_id: null
@@ -102,10 +102,10 @@ const BorrowingChooseLender = (props) => {
                         <Card>
                                 <FormGroup >
                                     <Input 
-                                        label={intl.formatMessage({id: "app.requests.request_protnr"})}
-                                        handleChange={(value) => handleChange(value, 'request_protnr')}
+                                        label={intl.formatMessage({id: "app.requests.borrowing_protnr"})}
+                                        handleChange={(value) => handleChange(value, 'borrowing_protnr')}
                                         required={false}
-                                        input={formData.request_protnr ? formData.request_protnr : ""}
+                                        input={formData.borrowing_protnr ? formData.borrowing_protnr : ""}
                                     />
                                 </FormGroup>
                                 <FormGroup >

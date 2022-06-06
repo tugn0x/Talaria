@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {Card, Form as FormContainer, FormGroup, Button} from 'reactstrap';
 import Input from '../../Form/Input';
 import { Link } from 'react-router-dom';
@@ -6,6 +6,7 @@ import {useIntl} from 'react-intl';
 import './style.scss';
 import { useState } from "react";
 import {canPatronReqDirectManaged, hasBeenDownloaded,isFile,isURL} from '../BorrowingItem'
+import FileUpload from '../../../containers/FileUpload';
 
 const BorrowingRequestFulfillToPatron = props => {
     console.log('BorrowingRequestFulfillToPatron', props)
@@ -16,11 +17,26 @@ const BorrowingRequestFulfillToPatron = props => {
     const [formData,setFormData]=useState({        
         fromlibrary_note:'',          
     });
+
+    const [fileUploadStatus,setFileUploadStatus]=useState(null)
     
     const handleChange = (value, field_name) =>{
         setFormData({ ...formData, [field_name]: value});        
     }    
-    
+
+    useEffect(() => {        
+        if(fileUploadStatus && fileUploadStatus.status=="uploaded")
+        {
+            setFormData({
+                ...formData,
+                'filehash':fileUploadStatus.data,
+                'filename':fileUploadStatus.originalfilename,
+                'desk_delivery_format':1
+            })                        
+            //setSubmitEnable(true) 
+        }
+    }, [fileUploadStatus])
+     
     const onSubmit=(e)=>{     
     
         const form = e.target;            
@@ -29,6 +45,11 @@ const BorrowingRequestFulfillToPatron = props => {
         
         if (form.checkValidity() ) 
             fulfillCallback(formData)        
+    }
+
+    const addFileToRequest = (uploadstatus) => {                
+        //console.log("addFileToRequest",uploadstatus)  
+        setFileUploadStatus(uploadstatus)        
     }
         
     
@@ -50,7 +71,9 @@ return (<div>
                                             />
                                         </FormGroup> 
 
-                                        <span>- or send a file to patron</span>
+                                        <span>- or send a file to patron
+                                        <FileUpload parentCallback={addFileToRequest} data={data} customClass="detail-body"/>
+                                        </span>
 
                                     </FormGroup>
                                 }

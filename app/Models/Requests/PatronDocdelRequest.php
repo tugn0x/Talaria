@@ -53,6 +53,8 @@ class PatronDocdelRequest extends BaseModel
         'delivery_ready_date', //data articolo disponibile al ritiro
         'notfulfill_type', //motivo inevasione (1=non reperibile, 2-ute non abili, 3=ute non ritira,4=ute rifiuta costo,5=ute non risponde al costo,6=non reperibile gratuitamente,7-rif errato)
         'url',
+        'filename',
+        'filehash',
         
 
         // DA VALUTARE

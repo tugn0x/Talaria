@@ -31,6 +31,7 @@ class BorrowingDocdelRequest extends DocdelRequest
         'trash_date', //data cestinamento
         'trash_type', //tipo cestinamento (trash=1,trashHC=2)
         'borrowing_notes', //dd_note_interne              
+        'borrowing_protnr', //dd_nprotrichie
         'archived', //0|1 indica se la rich è archiviata
         'archived_date',
         'forward', //0|1 indica se la rich è stata reinoltrata (la rich reinoltrata avrà parent_id=id di questa richiesta)
@@ -389,16 +390,16 @@ class BorrowingDocdelRequest extends DocdelRequest
 
                             $this->patrondocdelrequest->fromlibrary_note=$others["fromlibrary_note"];                                            
                             
-                            if($others["url"]){
+                            if(isset($others["url"])){
                                 $this->patrondocdelrequest->url=$others["url"];                                            
                                 $this->patrondocdelrequest->delivery_format=config("constants.patrondocdelrequest_delivery_format.URL"); 
                             }
-                            /*else if($others[filehash])
-                            { ....
-                                ...
-                                $this->patrondocdelrequest->filename=$this->filename;    
+                            else if(isset($others["filehash"])&&isset($others["filename"]))
+                            { 
+                                $this->patrondocdelrequest->filename=$others["filename"];
+                                $this->patrondocdelrequest->filehash=$others["filehash"];
                                 $this->patrondocdelrequest->delivery_format=config("constants.patrondocdelrequest_delivery_format.File"); 
-                            }*/                  
+                            }
                             
                         }
                         else if($this->borrowing_status=="deskReceived") { //ho stampato la paper e l'ho data all'utente
@@ -438,7 +439,8 @@ class BorrowingDocdelRequest extends DocdelRequest
                             }
                             else if($this->fulfill_type==config("constants.borrowingdocdelrequest_fulfill_type.SED"))
                             {
-                                $this->patrondocdelrequest->filename=$this->filename;    
+                                $this->patrondocdelrequest->filename=$this->filename;                                  
+                                $this->patrondocdelrequest->filehash=$this->filehash;                                  
                                 $this->patrondocdelrequest->delivery_format=config("constants.patrondocdelrequest_delivery_format.File"); 
                             }
                         }                        

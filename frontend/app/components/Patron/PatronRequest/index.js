@@ -3,6 +3,7 @@ import {UncontrolledTooltip} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import {formatDate,formatDateTime} from '../../../utils/dates';
 import './style.scss';
+import FileDownload from '../../../containers/FileDownload';
 
 
 
@@ -92,8 +93,10 @@ export const deliveryFormat=(data) => {
 export const documentAccess=(data) => {
     return (
         <div className="access_document_icons">
-        
-        {!isArchived(data) && data.status=="received" && isFile(data) && <button type="button" className="btn btn-primary btn-sm btn-download-icon" onClick={()=>alert("TODO: view document !")}><i className="fas fa-file"></i></button>}                
+                
+        {!isArchived(data) && data.status=="received" && isFile(data) && data.filehash &&            
+            <FileDownload reqid={data.id} libraryid={data.library.data.id} filehash={data.filehash} customClass="detail-body" />
+        }                   
       
         {isURL(data) && data.status=="received" && <a className="btn btn-primary btn-sm btn-download-icon" href={data.url} target="_blank"><i className="fas fa-external-link-alt"></i></a>}         
         </div>

@@ -13,17 +13,16 @@ export const BorrowingRequestData = (props) => {
     const intl = useIntl()
 
     return (
-    (data.borrowing_notes||data.request_protnr||data.request_note||
+    (data.borrowing_notes||data.borrowing_protnr||data.request_note||
         data.request_special_delivery==1||data.request_pdf_editorial==1 ) && 
     <div className="borrowingRequestData card">   
         {data.borrowing_notes && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.borrowing_notes"})}: </span>{data.borrowing_notes} </span>}
-        {data.request_protnr && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.request_protnr"})}: </span>{data.request_protnr} </span>}
+        {data.borrowing_protnr && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.borrowing_protnr"})}: </span>{data.borrowing_protnr} </span>}
         {data.request_note && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.request_note"})}: </span>{data.request_note} </span>}
         {data.request_special_delivery==1 && <span className="requestData"><i className="fas fa-check-square"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_special_delivery"})} </span></span>}
         {data.request_pdf_editorial==1 &&  <span className="requestData"><i className="fas fa-check-square"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_pdf_editorial"})}</span></span>}
 
-        {(data.fulfill_protnr||data.fulfill_note||data.fulfill_inventorynr) && <div className="lendingData">                      
-            {data.fulfill_protnr && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.fulfill_protnr"})}: </span>{data.fulfill_protnr} </span>}
+        {(data.fulfill_note||data.fulfill_inventorynr) && <div className="lendingData">                                
             {data.fulfill_note && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.fulfill_note"})}: </span>{data.fulfill_note} </span>}
             {data.fulfill_inventorynr && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.fulfill_inventorynr"})}: </span>{data.fulfill_inventorynr} </span>}
         </div>}

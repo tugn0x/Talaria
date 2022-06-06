@@ -22,6 +22,7 @@ class LendingDocdelRequest extends DocdelRequest
         'lending_notes', //dd_note_interne     
         'lending_archived', //0|1 indica se la rich è archiviata
         'lending_archived_date',
+        'lending_protnr', //dd_nproteva
         'all_lender',  
         'lending_operator_id',      
     ];
