@@ -41,12 +41,12 @@ const LendingRequestPage = (props) => {
 
     const FulfillLendingRequestStatus = (data, formdata) => {
         data.lending_status="copyCompleted";
-        dispatch(requestChangeStatusLending(data.id, data.lending_library_id, data.lending_status, {filename:fileuploadSelector.fileupload.originalfilename,filehash: fileuploadSelector.fileupload.data, fulfill_type:formdata.fulfill_type, fulfill_note:formdata.fulfill_note, url:formdata.url, fulfill_inventorynr:formdata.fulfill_inventorynr}, intl.formatMessage({id: "app.requests.fulfilledMessage"}),""))
+        dispatch(requestChangeStatusLending(data.id, data.lending_library_id, data.lending_status, {filename:fileuploadSelector.fileupload.originalfilename,filehash: fileuploadSelector.fileupload.data, fulfill_type:formdata.fulfill_type, fulfill_note:formdata.fulfill_note, url:formdata.url, fulfill_inventorynr:formdata.fulfill_inventorynr,lending_protnr:formdata.lending_protnr}, intl.formatMessage({id: "app.requests.fulfilledMessage"}),""))
     }
 
-    const unFulfillLendingRequestStatus = (data) => {
+    const unFulfillLendingRequestStatus = (data,formadata) => {
         data.lending_status="unFilled";
-        dispatch(requestChangeStatusLending(data.id, data.lending_library_id, data.lending_status, "", intl.formatMessage({id: "app.requests.unFilledMessage"}),""))
+        dispatch(requestChangeStatusLending(data.id, data.lending_library_id, data.lending_status, formadata, intl.formatMessage({id: "app.requests.unFilledMessage"}),""))
     }
 
     return (

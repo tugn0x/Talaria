@@ -14,6 +14,8 @@ const FulfillLendingRequest = props => {
     
     
     const [deliverymethod, setDeliveryMethod] = useState(0);
+    const [notdeliverymethod, setNotDeliveryMethod] = useState(0);
+    
     const [fileuploadstatus, SetfileuploadStatus] = useState(null)
     const callbackuploadFunction = (fileupload) => {
         SetfileuploadStatus(fileupload.status)
@@ -33,11 +35,23 @@ const FulfillLendingRequest = props => {
         handleChange(value,'fulfill_inventorynr');  
     }
 
+    const handlerlendingprotnr = (event) => {
+        const value = event.target.value
+        handleChange(value,'lending_protnr');  
+    }
+    
+
     const setDeliveryType=(event) => {                 
         const value = event.target.value
         setDeliveryMethod(value) // 1 File - 2 Mail - 3 hardcopy - 4 URL
         handleChange(value,'fulfill_type');
     }
+    const setNotDeliveryType=(event) => {                 
+        const value = event.target.value  
+        setNotDeliveryMethod(value);      
+        handleChange(value,'notfulfill_type');
+    }
+    
     const handleChange = (value, field_name) =>{
         setFormData({ ...formData, [field_name]: value});                     
     }  
@@ -47,7 +61,10 @@ const FulfillLendingRequest = props => {
         fulfill_note: null,
         filehash: null,
         filename:null,
-        fulfill_inventorynr :null
+        fulfill_inventorynr :null,
+        notfulfill_type:null,
+        lending_protnr:null,
+
     });
 
        
@@ -101,18 +118,22 @@ return (
                         <div className="form-group">
                         { (deliverymethod == 4) &&
                             <div>
-                                <label htmlFor="exampleInputURL">URL</label>
-                                <input type="text" className="form-control" id="url" onChange={handlerURL} aria-describedby="" placeholder="Enter URL here"></input>                    
+                                <label htmlFor="url">URL</label>
+                                <input type="text" className="form-control" id="url" onChange={handlerURL} aria-describedby=""></input>                    
                             </div>
                         }   
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputinventory">{intl.formatMessage({id: "app.requests.inventoryNumber"})}</label>
-                            <input type="text" className="form-control" id="fulfill_inventorynr"  onChange={handlerinventorynr} aria-describedby="" placeholder="Enter inventory number here"></input>
+                        <div className="form-group">                        
+                            <label htmlFor="fulfill_inventorynr">{intl.formatMessage({id: "app.requests.lending_protnr"})}</label>
+                            <input type="text" className="form-control" id="lending_protnr"  onChange={handlerlendingprotnr} aria-describedby=""></input>                                                                
                         </div>
                         <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Notes</label>
-                            <textarea id="fulfill_note" className="form-control" onChange={handlernote} aria-describedby="" placeholder="Enter note here" rows="5" cols="50"></textarea>                        
+                            <label htmlFor="fulfill_inventorynr">{intl.formatMessage({id: "app.requests.inventoryNumber"})}</label>
+                            <input type="text" className="form-control" id="fulfill_inventorynr"  onChange={handlerinventorynr} aria-describedby=""></input>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="fulfill_note">{intl.formatMessage({id: "app.requests.fulfill_note"})}</label>
+                            <textarea id="fulfill_note" className="form-control" onChange={handlernote} aria-describedby="" rows="5" cols="50"></textarea>                        
                         </div>
                         
                         </Col>
@@ -120,7 +141,7 @@ return (
                     <Row>
                         <Col sm={12}>
                             <div className="alert alert-primary copyrightstatement">                                                
-                                                <FormattedHTMLMessage id="app.requests.lendingCopyrightStatement" defaultMessage="borrowingCopyrightStatement" />
+                                <FormattedHTMLMessage id="app.requests.lendingCopyrightStatement" defaultMessage="borrowingCopyrightStatement" />
                             </div>                          
                         </Col>
                     </Row>
@@ -132,7 +153,7 @@ return (
                         <Col sm={6}>
                     
                             <div>
-                                <button type="button" onClick={() => FulfillLendingRequestStatus(data,formData)} className="btn btn-success">Submit</button>        
+                                <button type="button" onClick={() => FulfillLendingRequestStatus(data,formData)} className="btn btn-success">{intl.formatMessage({id: "app.requests.submitButton"})}</button>        
                             </div>
                         </Col>
                     </Row>
@@ -146,24 +167,38 @@ return (
             <h3>{intl.formatMessage({id: "app.requests.unfill"})}</h3>
             {<Card>
                 <Row>
+                    <Col sm={6}>   
+                        <label htmlFor="notfulfill_type">{intl.formatMessage({id: "app.requests.notfulfill_type"})}</label>
+                        <select id="notfulfill_type" name="notfulfill_type" onChange={setNotDeliveryType}>
+                            <option value="0">---</option>
+                            <option value="1">{intl.formatMessage({id: "app.requests.notfulfill_type.NotAvailableForILL"})}</option>
+                            <option value="2">{intl.formatMessage({id: "app.requests.notfulfill_type.NotHeld"})}</option>
+                            <option value="3">{intl.formatMessage({id: "app.requests.notfulfill_type.NotOnShelf"})}</option>
+                            <option value="4">{intl.formatMessage({id: "app.requests.notfulfill_type.ILLNotPermittedByLicense"})}</option>
+                            <option value="5">{intl.formatMessage({id: "app.requests.notfulfill_type.WrongRef"})}</option>
+                            <option value="6">{intl.formatMessage({id: "app.requests.notfulfill_type.MaxReqNumber"})}</option>
+                            <option value="7">{intl.formatMessage({id: "app.requests.notfulfill_type.Other"})}</option>
+                        </select>     
+                    </Col>
+                </Row>
+                <Row> 
                     <Col sm={6}>
                         <div>
                             <div className="form-group">
-                                <label htmlFor="exampleInputEmail1">Unfill Notes</label>
-                                <input type="email" className="form-control" id="txtnote" onChange={handlernote} aria-describedby="" placeholder="Enter note here"
-                               ></input>                                
+                                <label htmlFor="fulfill_note">{intl.formatMessage({id: "app.requests.fulfill_note"})}</label>
+                                <textarea className="form-control" id="fulfill_note" onChange={handlernote} aria-describedby="" rows="5" cols="50"></textarea>                                
                             </div>    
                         </div>
                     </Col>
                 </Row>
 
-                <Row>
+                {notdeliverymethod >0 && <Row>
                     <Col sm={6}>
                     <div>
-                        <button type="button" onClick={() => unFulfillLendingRequestStatus(data)} className="btn btn-success">{intl.formatMessage({id: "app.requests.submitButton"})}</button>        
+                        <button type="button" onClick={() => unFulfillLendingRequestStatus(data,formData)} className="btn btn-success">{intl.formatMessage({id: "app.requests.submitButton"})}</button>        
                     </div>
                     </Col>
-                </Row>
+                </Row>}
             </Card>
             }  
             </div>
