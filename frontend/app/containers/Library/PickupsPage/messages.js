@@ -10,7 +10,7 @@ export const scope = 'app.containers.PickupsPage';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Pickup list',
+    defaultMessage: 'Pickup',
   },    
 });
 

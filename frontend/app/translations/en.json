@@ -178,6 +178,9 @@
   "app.containers.LendingPage.headerArchive":"Archive", 
   "app.containers.LendingPage.header":"Pending requests", 
   "app.containers.LendingPage.headerAllRequest":"Orphaned requests", 
+
+  "app.containers.PickupsPage.header":"Pickup",
+
   "app.components.Pagination.itemsPerPageDropdown": "Show rows",
   "app.components.Pagination.of": "of",
   "app.components.InstitutionsList.header": "Lista degli enti",

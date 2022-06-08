@@ -178,6 +178,9 @@
   "app.containers.LendingPage.headerArchive":"Archivio", 
   "app.containers.LendingPage.header":"Richieste in corso", 
   "app.containers.LendingPage.headerAllRequest":"Richieste orfane", 
+  
+  "app.containers.PickupsPage.header":"Punti di consegna",
+  
   "app.components.Pagination.itemsPerPageDropdown": "Mostra righe",
   "app.components.Pagination.of": "di",
   "app.components.InstitutionsList.header": "Lista degli enti",
