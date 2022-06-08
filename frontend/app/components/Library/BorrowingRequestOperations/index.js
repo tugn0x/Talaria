@@ -47,9 +47,9 @@ const BorrowingRequestOperations = (props) => {
             {isPatronRequest(data) && 
             <Card className="patronDirectDelivery">
                 <div className="d-flex justify-content-between operationButtons">                                        
-                    {(canPatronReqDirectManaged(data) || canFulfillToPatron(data)) && <button disabled={deliveryToDesk} className="btn btn-info" onClick={()=>setDelivery()}>Send to desk</button>}
-                    {(canPatronReqDirectManaged(data) || (canFulfillToPatron(data) && (isFile(data)||isURL(data) ) ) ) && <button disabled={fulfill} className="btn btn-success" onClick={()=>enableFulfill()}>Fulfill</button>}
-                    {(canPatronReqDirectManaged(data) || canUnfillToPatron(data) ) &&<button disabled={unfill} className="btn btn-danger" onClick={()=>enableUnfill()}>Unfill</button>}
+                    {(canPatronReqDirectManaged(data) || canFulfillToPatron(data)) && <button disabled={deliveryToDesk} className="btn btn-info" onClick={()=>setDelivery()}>{intl.formatMessage({id: "app.requests.sendToDesk"})}</button>}
+                    {(canPatronReqDirectManaged(data) || (canFulfillToPatron(data) && (isFile(data)||isURL(data) ) ) ) && <button disabled={fulfill} className="btn btn-success" onClick={()=>enableFulfill()}>{intl.formatMessage({id: "app.requests.fulfill"})}</button>}
+                    {(canPatronReqDirectManaged(data) || canUnfillToPatron(data) ) &&<button disabled={unfill} className="btn btn-danger" onClick={()=>enableUnfill()}>{intl.formatMessage({id: "app.requests.unfill"})}</button>}
                 </div>
                 {deliveryToDesk && <BorrowingRequestDeliverToDesk data={data} deliverCallback={deliverCallback}/>}
                 {fulfill && <BorrowingRequestFulfillToPatron data={data} fulfillCallback={fulfillCallback}/>}                                

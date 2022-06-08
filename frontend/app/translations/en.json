@@ -515,6 +515,10 @@
   "app.components.FilterSelect.tags": "Tags",
   "app.components.FilterSelect.desks": "Delivery points",
 
+  "app.components.FulfillLendingRequest.chooseDeliveryMethod":"Choose delivery method",
+
+  "app.components.FileUploadForm.filechoose":"Select file to upload",
+
   "app.routes.LibraryProfile": "Library Profile",
   "app.routes.Bibliography": "Bibliography",
   "app.routes.Reference": "Reference",

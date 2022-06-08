@@ -515,6 +515,10 @@
   "app.components.FilterSelect.tags": "Tag",
   "app.components.FilterSelect.desks": "Punti di consegna",
 
+  "app.components.FulfillLendingRequest.chooseDeliveryMethod":"Scegliere la modalità di evasione",
+
+  "app.components.FileUploadForm.filechoose":"Scegli il file da inviare",
+
   "app.routes.LibraryProfile": "Profilo Biblioteca",
   "app.routes.Bibliography": "Bibliografia",
   "app.routes.Reference": "Riferimenti",

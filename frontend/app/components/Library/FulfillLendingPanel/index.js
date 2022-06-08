@@ -55,8 +55,7 @@ return (
             <div>
             <div className="form-group">
     <label for="exampleInputEmail1">Notes</label>
-    <input type="email" className="form-control" id="txtnote" aria-describedby="" placeholder="Enter note here"></input>
-    <small id="emailHelp" className="form-text text-muted">This message will send to the borrowing library.</small>
+    <input type="email" className="form-control" id="txtnote" aria-describedby="" placeholder="Enter note here"></input>    
   </div>    
             </div>
                     </Col>
