@@ -15,11 +15,10 @@ class CreateDemoLibrariesAndAccountSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard(); //altrienti non setta la passw perchè è unfillable
-        $defaultpw=Hash::make('d3mo$Demo');
+        Model::unguard(); //altrienti non setta la passw perchè è unfillable        
 
         $lib1 = factory(\App\Models\Libraries\Library::class)->create([            
-            'name' => 'Library kkk',
+            'name' => 'Library jj',
             'status'=>1,            
             'subject_id'=>1,            
             'country_id'=>1,
@@ -30,16 +29,16 @@ class CreateDemoLibrariesAndAccountSeeder extends Seeder
         //DESK
         DB::table('deliveries')->insert([
             'library_id' => $lib1->id,
-            'name'=>'Desk kkk'
+            'name'=>'Desk jj'
         ]);
 
         //User
         $user1 = factory(\App\Models\Users\User::class)->create([
-            'email' => 'mariorossi33@ggg.com',
-            'name' => 'Mario',
-            'surname' => 'Rossi',
+            'email' => 'jjj@jjj.com',
+            'name' => 'JJJ',
+            'surname' => 'JJJ',
             'status'=>1,            
-            'privacy_policy_accepted'=>now(),
+            'privacy_policy_accepted'=>now(),            
         ]);
 
         //Account patron+manager
