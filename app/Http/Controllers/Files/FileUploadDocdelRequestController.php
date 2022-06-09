@@ -1,9 +1,8 @@
 <?php
-namespace App\Http\Controllers\Libraries;
+namespace App\Http\Controllers\Files;
 use App\Http\Controllers\ApiController;
 use App\Models\References\Reference;
 use App\Models\BaseTransformer;
-use App\Models\Libraries\Tag;
 use App\Models\Requests\DocdelRequest;
 use App\Models\Requests\DocdelRequestTransformer;
 use Carbon\Carbon;
