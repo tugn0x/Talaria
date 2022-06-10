@@ -3,7 +3,6 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import makeSelectLibrary, {isLibraryLoading} from '../selectors';
-import fileUploadNameSelector from '../selectors'
 import {Loader} from 'components';
 import LendingDetail from '../../../components/Library/LendingDetail';
 import {requestLibraryTagsOptionList, requestGetLending, requestChangeStatusLending, requestuploadFile} from '../actions'
@@ -11,11 +10,10 @@ import messages from './messages';
 import SectionTitle from 'components/SectionTitle';
 import {useIntl} from 'react-intl';
 import makeSelectReference from '../../Reference/selectors';
-import { acceptallLenderLendingRequest } from '../../../utils/api';
 
 const LendingRequestPage = (props) => {
     console.log('LendingRequestPage', props)
-    const {dispatch, isLoading, match, library,reference, fileuploadSelector } = props
+    const {dispatch, isLoading, match, library,reference } = props
     const {params} = match       
     const intl = useIntl();
     const isNew = !params.id || params.id === 'new'    
@@ -41,7 +39,7 @@ const LendingRequestPage = (props) => {
 
     const FulfillLendingRequestStatus = (data, formdata) => {
         data.lending_status="copyCompleted";
-        dispatch(requestChangeStatusLending(data.id, data.lending_library_id, data.lending_status, {filename:fileuploadSelector.fileupload.originalfilename,filehash: fileuploadSelector.fileupload.data, fulfill_type:formdata.fulfill_type, fulfill_note:formdata.fulfill_note, url:formdata.url, fulfill_inventorynr:formdata.fulfill_inventorynr,lending_protnr:formdata.lending_protnr}, intl.formatMessage({id: "app.requests.fulfilledMessage"}),""))
+        dispatch(requestChangeStatusLending(data.id, data.lending_library_id, data.lending_status,formdata, intl.formatMessage({id: "app.requests.fulfilledMessage"}),""))
     }
 
     const unFulfillLendingRequestStatus = (data,formadata) => {
@@ -68,7 +66,6 @@ const mapStateToProps = createStructuredSelector({
     isLoading: isLibraryLoading(),
     library: makeSelectLibrary(),
     reference: makeSelectReference(),
-    fileuploadSelector: fileUploadNameSelector(),    
 });
   
 function mapDispatchToProps(dispatch) {

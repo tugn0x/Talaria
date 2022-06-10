@@ -1,9 +1,8 @@
 <?php
-namespace App\Http\Controllers\Libraries;
+namespace App\Http\Controllers\Files;
 use App\Http\Controllers\ApiController;
 use App\Models\References\Reference;
 use App\Models\BaseTransformer;
-use App\Models\Libraries\Tag;
 use App\Models\Requests\DocdelRequest;
 use App\Models\Requests\DocdelRequestTransformer;
 use Carbon\Carbon;
@@ -39,14 +38,5 @@ class FileUploadDocdelRequestController extends ApiController
             return \Response::json(['data' => null, 'status'=>'failed']);
         }
         return \Response::json(['data' => $fileName, 'status'=>'uploaded', 'originalfilename'=>$request->get("uploadFile")]);
-    }
-
-    public function DownloadFile(Request $request, $id)
-    {
-        Log::info(print_r("id" . $id, true));  
-        Log::info(print_r($request->get("q"), true));  
-        $contents = Storage::disk('public')->get($request->get("q"));
-        $base64content = base64_encode($contents);
-        return \Response::json(['id' => $id,'filecontent' => $base64content]);
-    }
+    }   
 }

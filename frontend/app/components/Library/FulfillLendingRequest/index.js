@@ -1,5 +1,5 @@
-import React from 'react'
-import {Card, Row, Col, Form as FormContainer} from 'reactstrap';
+import React,{useEffect} from 'react';
+import {Card, Row, Col,formData, Form as FormContainer} from 'reactstrap';
 import {FormattedHTMLMessage,useIntl} from 'react-intl';
 import './style.scss';
 import { useState } from "react";
@@ -11,15 +11,25 @@ const FulfillLendingRequest = props => {
     const intl = useIntl()
     const [showPanelActions, setshowPanelActions] = useState(false)
     const [showunfilPanelActions, setunfilPanelActions] = useState(false)
-    
-    
     const [deliverymethod, setDeliveryMethod] = useState(0);
     const [notdeliverymethod, setNotDeliveryMethod] = useState(0);
-    
     const [fileuploadstatus, SetfileuploadStatus] = useState(null)
     const callbackuploadFunction = (fileupload) => {
-        SetfileuploadStatus(fileupload.status)
+        SetfileuploadStatus(fileupload)
     }
+
+    useEffect(() => {      
+      
+        if(fileuploadstatus && fileuploadstatus.status=="uploaded")
+        {
+            setFormData({
+                ...formData,
+                'filehash':fileuploadstatus.data,
+                'filename':fileuploadstatus.originalfilename,
+            })                        
+        }
+    }, [fileuploadstatus])
+
 
     const handlernote = (event) => {
         const value = event.target.value

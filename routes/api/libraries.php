@@ -31,28 +31,6 @@ Route::group([
         //Route::get('subjects', 'SubjectController@index')->name('index');
     });
 
-   /*
-     * FILE UPLOAD/DOWNLOAD
-     */
-    Route::group([
-        'as' => 'api.v1.libraries.files.',
-    ], function () {
-        Route::post('{library}/UploadFile', 'FileUploadDocdelRequestController@UploadFile')->name('UploadFile');
-        Route::get('{library}/DownloadFile', 'FileUploadDocdelRequestController@DownloadFile')->name('DownloadFile');    
-    });
-
- 
-    /*
-     * CATALOGS
-     */
-    Route::group([
-        'as' => 'api.v1.libraries.catalogs.',
-    ], function () {
-        Route::get('catalogs/option-items', 'CatalogController@optionList')->name('catalogs.option-items');
-        //Route::get('catalogs', 'CatalogController@index')->name('index');
-       
-    });
-
     /*
      * LIBRARY USERS
      */
