@@ -8,14 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class CreateDemoLibrariesAndAccountSeeder extends Seeder
 {    
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        Model::unguard(); //altrienti non setta la passw perchè è unfillable        
+        Model::unguard(); //altrimenti non setta la passw perchè è unfillable        
 
         $lib1 = factory(\App\Models\Libraries\Library::class)->create([            
             'name' => 'Library jj',
@@ -27,10 +22,10 @@ class CreateDemoLibrariesAndAccountSeeder extends Seeder
         ]);
 
         //DESK
-        DB::table('deliveries')->insert([
+        /*DB::table('deliveries')->insert([
             'library_id' => $lib1->id,
             'name'=>'Desk jj'
-        ]);
+        ]);*/
 
         //User
         $user1 = factory(\App\Models\Users\User::class)->create([
@@ -41,19 +36,23 @@ class CreateDemoLibrariesAndAccountSeeder extends Seeder
             'privacy_policy_accepted'=>now(),            
         ]);
 
-        //Account patron+manager
-        DB::table('library_user')->insert([
+        $user1->allow('manage', $lib1); //manager
+        
+
+        //Account patron
+        /*DB::table('library_user')->insert([
             'library_id' => $lib1->id,
             'user_id' => $user1->id,
             'status'=>1,
             'department_id'=>null,
             'title_id'=>null,
         ]);
-
         $user1->assign('patron'); //patron
-        $user1->allow('manage', $lib1); //manager
+        
+        */
+       
 
-
+        
         Model::reguard();
     }
 }
