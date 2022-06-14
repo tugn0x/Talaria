@@ -181,6 +181,9 @@
 
   "app.containers.PickupsPage.header":"Pickup",
 
+  "app.components.PickupsList.PickupsNotFound":"Pickups not found",
+  "app.components.PickupsList.createNewPickup":"New pickup",
+
   "app.components.Pagination.itemsPerPageDropdown": "Show rows",
   "app.components.Pagination.of": "of",
   "app.components.InstitutionsList.header": "Lista degli enti",

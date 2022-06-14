@@ -181,6 +181,9 @@
   
   "app.containers.PickupsPage.header":"Punti di consegna",
   
+  "app.components.PickupsList.PickupsNotFound":"Nessun punto di consegna",
+  "app.components.PickupsList.createNewPickup":"Nuovo punto di consegna",
+  
   "app.components.Pagination.itemsPerPageDropdown": "Mostra righe",
   "app.components.Pagination.of": "di",
   "app.components.InstitutionsList.header": "Lista degli enti",
