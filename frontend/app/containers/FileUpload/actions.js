@@ -1,4 +1,4 @@
-import {UPLOAD_REQUEST,UPLOAD_SUCCESS, UPLOAD_PROGRESS} from './constants';
+import {UPLOAD_REQUEST,UPLOAD_SUCCESS, UPLOAD_PROGRESS, REQUEST_CLEAN_FILEUPLOAD} from './constants';
 
   export function requestuploadFile(id,lending_library_id,selectedFile, originalfilename, status, message,filter) {
     return {
@@ -31,12 +31,15 @@ import {UPLOAD_REQUEST,UPLOAD_SUCCESS, UPLOAD_PROGRESS} from './constants';
        type: UPLOAD_SUCCESS,
        result
      };
-  
-     
-  
-      
    }
-   
+  
+   export function cleanFileUpload() {
+    return {
+      type: REQUEST_CLEAN_FILEUPLOAD
+     
+    }
+  }
+
    export function uploadFailure(id,lending_library_id,file, status, message,filter) {
      return {
        type: UPLOAD_FAILURE,

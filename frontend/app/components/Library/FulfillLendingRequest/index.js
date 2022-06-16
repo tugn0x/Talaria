@@ -28,6 +28,14 @@ const FulfillLendingRequest = props => {
                 'filename':fileuploadstatus.originalfilename,
             })                        
         }
+        else
+        {
+            setFormData({
+                ...formData,
+                'filehash':null,
+                'filename':null,
+            })  
+        }
     }, [fileuploadstatus])
 
 
@@ -77,7 +85,13 @@ const FulfillLendingRequest = props => {
 
     });
 
-       
+    function isEmpty(object) {
+        for (const property in object) {
+          return false;
+        }
+        return true;
+      }
+
 return (
     <>
     <div>
@@ -118,7 +132,7 @@ return (
                         </select>     
                     </Col>
                 </Row>
-                {(deliverymethod==1) && <FileUpload  parentCallback={callbackuploadFunction} data={data} customClass="detail-body"/>}
+                {(deliverymethod==1) && <FileUpload  parentCallback={callbackuploadFunction} deliverymethod={deliverymethod} data={data} customClass="detail-body"/>}
             
                 {
                 (deliverymethod > 0) &&
@@ -156,8 +170,7 @@ return (
                         </Col>
                     </Row>
                 
-
-                {( (fileuploadstatus) ||  (deliverymethod > 1) ) && 
+                {  ( !isEmpty(fileuploadstatus) || (deliverymethod >1) )  &&
                 <Card>
                     <Row>
                         <Col sm={6}>

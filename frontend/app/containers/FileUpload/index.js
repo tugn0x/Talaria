@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {requestuploadFile} from './actions' 
+import {cleanFileUpload, requestuploadFile} from './actions' 
 import fileUploadSelector  from './selectors';
 import {Card, Row, Col} from 'reactstrap';
 import FileUploadForm from '../../components/FileUploadForm';
@@ -10,7 +10,7 @@ import {useIntl} from 'react-intl';
     
 const FileUpload = (props) => {
   console.log("FileUpload:", props)      
-  const {dispatch, data, fileupload}=props
+  const {dispatch, data, fileupload, deliverymethod}=props
   const intl = useIntl()
   const displaymsg = <h4>{intl.formatMessage({id: "app.requests.lendingUploadSuccess"})}</h4>
   const displaymsgerror = <h3>{intl.formatMessage({id: "app.requests.lendingUploadFail"})}</h3>
@@ -23,6 +23,12 @@ const FileUpload = (props) => {
   useEffect(() => {                
     props.parentCallback(fileupload);
   }, [fileupload])
+
+
+  useEffect(() => {      
+    dispatch(cleanFileUpload(''))  
+  }, [deliverymethod])
+
 
 return (
   <>

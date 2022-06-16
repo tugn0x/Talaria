@@ -8,7 +8,8 @@ import {
   UPLOAD_REQUEST,
   UPLOAD_PROGRESS,
   UPLOAD_SUCCESS,
-  UPLOAD_FAILURE
+  UPLOAD_FAILURE,
+  REQUEST_CLEAN_FILEUPLOAD
 } from './constants';
 
 export const initialState = {
@@ -31,15 +32,20 @@ const fileuploadreducer = (state = initialState, action) =>
         break;
 
     case UPLOAD_SUCCESS:
-    draft.loading = false;
+        draft.loading = false;
         draft.error = initialState.error;
-        draft.fileupload  = action.result;        
+        draft.fileupload = action.result;        
         break;  
         
     case UPLOAD_FAILURE:
         draft.loading = true;
         draft.error = initialState.error;
         break;
+    
+
+    case REQUEST_CLEAN_FILEUPLOAD:
+      draft.fileupload={};
+      break;
     }
   });
 
