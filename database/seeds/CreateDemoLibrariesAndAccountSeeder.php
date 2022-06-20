@@ -139,7 +139,7 @@ class CreateDemoLibrariesAndAccountSeeder extends Seeder
         ]);
 
         $user5b = factory(\App\Models\Users\User::class)->create([
-            'email' => 'Dalia.Koulaima@balamand.edu.lb ',
+            'email' => 'Dalia.Koulaima@balamand.edu.lb',
             'name' => 'Dalia',
             'surname' => 'Koulaima',
             'status'=>1,            
