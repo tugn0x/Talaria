@@ -10,7 +10,7 @@ import {useIntl} from 'react-intl';
     
 const FileUpload = (props) => {
   console.log("FileUpload:", props)      
-  const {dispatch, data, fileupload, deliverymethod}=props
+  const {dispatch, data, fileupload, cleanuploadprops}=props
   const intl = useIntl()
   const displaymsg = <h4>{intl.formatMessage({id: "app.requests.lendingUploadSuccess"})}</h4>
   const displaymsgerror = <h3>{intl.formatMessage({id: "app.requests.lendingUploadFail"})}</h3>
@@ -25,9 +25,10 @@ const FileUpload = (props) => {
   }, [fileupload])
 
 
-  useEffect(() => {      
-    dispatch(cleanFileUpload(''))  
-  }, [deliverymethod])
+  useEffect(() => {
+    if(cleanuploadprops)  // when cleanuploadprops is set to true, it dispatch the cleanfileupload. Otherwise do nothing
+      dispatch(cleanFileUpload(''))  
+  }, [cleanuploadprops])
 
 
 return (

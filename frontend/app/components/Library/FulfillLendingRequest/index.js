@@ -132,7 +132,7 @@ return (
                         </select>     
                     </Col>
                 </Row>
-                {(deliverymethod==1) && <FileUpload  parentCallback={callbackuploadFunction} deliverymethod={deliverymethod} data={data} customClass="detail-body"/>}
+                {(deliverymethod==1) && <FileUpload  parentCallback={callbackuploadFunction} cleanuploadprops={true} data={data} customClass="detail-body"/>}
             
                 {
                 (deliverymethod > 0) &&
