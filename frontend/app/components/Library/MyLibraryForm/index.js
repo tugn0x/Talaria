@@ -24,14 +24,15 @@ const MyLibraryForm = (props) => {
                     requestData={library ? library : null}
                     fields={fields}
                     fieldsGroups={fieldsGroups}
-                    title={library && library.name ? library.name : intl.formatMessage(messages.header)}
-                    usersOptionList={usersOptionList}
+                    title={library && library.name ? library.name : intl.formatMessage(messages.header)}                    
                     institution_id={institutionsOptionList}
                     country_id={countriesOptionList}
-                    subject_id={librarySubjectOptionList}
-                    searchOptionList={searches}
+                    subject_id={librarySubjectOptionList}                    
                     messages={{...messages, ...globalMessages}}
-                    granted_permissions={ library ? library.granted_permissions : [] }
+                    //DISABLED userlist/grant permission
+                    //searchOptionList={searches}
+                    //usersOptionList={usersOptionList}
+                    //granted_permissions={ library ? library.granted_permissions : [] }
                     resources={resources}
                 />
             // </SimpleForm>
