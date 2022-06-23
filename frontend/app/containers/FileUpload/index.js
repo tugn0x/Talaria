@@ -12,8 +12,6 @@ const FileUpload = (props) => {
   console.log("FileUpload:", props)      
   const {dispatch, data, fileupload, cleanuploadprops}=props
   const intl = useIntl()
-  const displaymsg = <h4>{intl.formatMessage({id: "app.requests.lendingUploadSuccess"})}</h4>
-  const displaymsgerror = <h3>{intl.formatMessage({id: "app.requests.lendingUploadFail"})}</h3>
   const uploadFile = (data, file, originalfilename) => {
       console.log(file)
       console.log(originalfilename)
@@ -27,7 +25,7 @@ const FileUpload = (props) => {
 
   useEffect(() => {
     if(cleanuploadprops)  // when cleanuploadprops is set to true, it dispatch the cleanfileupload. Otherwise do nothing
-      dispatch(cleanFileUpload(''))  
+      dispatch(cleanFileUpload())  
   }, [cleanuploadprops])
 
 
@@ -37,11 +35,11 @@ return (
     {fileupload && fileupload.status && <span className={"fileuploadstatusmessage"}>
     { 
           (fileupload.status=='uploaded') &&   
-           <span className="text-success">{displaymsg}</span>    
+           <span className="text-success"><h4>{intl.formatMessage({id: "app.requests.UploadSuccess"})}</h4></span>    
     }
     {
           (fileupload.status=='failed') &&
-          <span className="text-danger">{displaymsgerror}</span>                        
+          <span className="text-danger"> <h3>{intl.formatMessage({id: "app.requests.UploadFail"})}</h3></span>                        
     }
     </span>
     }

@@ -31,16 +31,12 @@ function createFile(file) {
       };
     reader.readAsDataURL(file);
 }
-    return (
-        <>    
-            <div className={customClass}>
-                <div>
+    return (          
+            <div className={customClass}>                
                     <Label for="uploadfile">{intl.formatMessage({id: "app.components.FileUploadForm.filechoose"})}</Label>
                     <input type="file" id="uploadfile" name="file" accept={File_Extension} onChange={onChange}  />
-                    {selectedFile && <button type="button" onClick={() => FileUploadCallBack(data, file, originalFilename)} className="btn btn-info">Upload file</button>}                        
-                </div>
-            </div> 
-        </>
+                    {selectedFile && <button type="button" onClick={() => FileUploadCallBack(data, file, originalFilename)} className="btn btn-info">Upload file</button>}                                        
+            </div>         
     );
 };
 
