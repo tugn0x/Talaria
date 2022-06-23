@@ -77,7 +77,7 @@ const routes = [
     children: [
      /*  { path: '/patron/new', icon: "plus", name: `LibraryUserNew`, url: `/patron/user/new`, component: ReferencesPage, sidebar: true}, */
       { path: '/patron/:id?',  name: `LibraryUser`, url:'/patrons/patron',  component: UserPage},
-      { path: '', exact: true, name: `LibraryUsers`, component: UsersListPage, sidebar: true, order:1},
+      { path: '', exact: true, name: `LibraryUsers`,  url:'/patrons', component: UsersListPage, sidebar: true, order:1},
     ]
   },
   {
