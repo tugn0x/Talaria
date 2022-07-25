@@ -26,7 +26,7 @@ export const generateOpenURL = (reference) => {
             url+="&rft_id="+encodeURIComponent("info:doi/"+reference.doi); 
         
         if(reference.pmid)
-            url+="&rft_id="+encodeURIComponent("info:pmid/"+reference.pmid.trim());
+            url+="&rft_id="+encodeURIComponent("info:pmid/"+parseInt(reference.pmid,10));
         
         if(reference.issn)
             url+="&rft.issn="+reference.issn;   
