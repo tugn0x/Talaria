@@ -9,17 +9,17 @@ import fileUploadSelector  from './selectors';
 import {Card, Row, Col} from 'reactstrap';
 import FileUploadForm from '../../components/FileUploadForm';
 import {useIntl} from 'react-intl';
-    
+import LoadingSpinner from "../LoadingSpinner";
 const FileUpload = (props) => {
   console.log("FileUpload:", props)      
   const {dispatch, data, fileupload, cleanuploadprops}=props
-
+  const [Showspinner, setShowspinner] = useState(null)
   const [ShowMessage, setShowMessage] = useState(null)
-
   const intl = useIntl()
   const uploadFile = (data, file, originalfilename, hideMessageFlag) => {
       if (hideMessageFlag==1)
       {
+        setShowspinner(true)
         setShowMessage(false) //hide the message of "file upload succefully" or "File upload failed"
         console.log(file)
         console.log(originalfilename)
@@ -31,6 +31,7 @@ const FileUpload = (props) => {
 
   useEffect(() => {                
     props.parentCallback(fileupload);
+    setShowspinner(false)
   }, [fileupload])
 
 
@@ -43,7 +44,8 @@ const FileUpload = (props) => {
 return (
   <>
     <FileUploadForm FileUploadCallBack={uploadFile} />  
-    {fileupload && fileupload.status && <span className={"fileuploadstatusmessage"}>
+    {(Showspinner) && <LoadingSpinner />}
+    {fileupload && !Showspinner && fileupload.status && <span className={"fileuploadstatusmessage"}>
     { 
           (fileupload.status=='uploaded') &&  (!ShowMessage) &&
            <span className="text-success"><h4>{intl.formatMessage({id: "app.requests.UploadSuccess"})}</h4></span>    
