@@ -10,7 +10,7 @@ const FileUploadForm = (props) => {
     const [file, setFile] = useState(false)
     const [selectedFile, setSelectedFile] = useState(null);
     const [originalFilename, setFilename] = useState(null)
-
+    var hideMessageFlag = 0;
     const intl=useIntl();
 
   function onChange(e) {
@@ -30,12 +30,13 @@ function createFile(file) {
         setFile(reader.result)
       };
     reader.readAsDataURL(file);
+    FileUploadCallBack(data, file, originalFilename, hideMessageFlag)
 }
     return (          
             <div className={customClass}>                
                     <Label for="uploadfile">{intl.formatMessage({id: "app.components.FileUploadForm.filechoose"})}</Label>
                     <input type="file" id="uploadfile" name="file" accept={File_Extension} onChange={onChange}  />
-                    {selectedFile && <button type="button" onClick={() => FileUploadCallBack(data, file, originalFilename)} className="btn btn-info">Upload file</button>}                                        
+                    {selectedFile && <button type="button" onClick={() => FileUploadCallBack(data, file, originalFilename, hideMessageFlag+1)} className="btn btn-info">Upload file</button>}
             </div>         
     );
 };
