@@ -6,7 +6,7 @@ import {requestdownloadFile, cleanFileDownload} from './actions'
 import fileDownloadSelector  from './selectors';
 import FileDownloadForm from '../../components/FileDownloadForm';
 import downloadFile from 'large-file-downloader';
-
+import LoadingSpinner from "../LoadingSpinner";
 
 const FileDownload = (props) => {
     console.log("FileDownlad:", props)      
@@ -43,7 +43,12 @@ return (
           FileDownloadCallBack={ () => GetfiledownloadBase64()}                                        
           isLoading={isLoading}
     />              
-    {!downloaded && <span><i className="fas fa-spinner fa-pulse"></i></span>}
+    {/* {!downloaded && <span><i className="fas fa-spinner fa-pulse"></i></span>} */}
+
+
+    {!downloaded && <LoadingSpinner />}
+
+
   </>
     )
 }
