@@ -43,12 +43,7 @@ return (
           FileDownloadCallBack={ () => GetfiledownloadBase64()}                                        
           isLoading={isLoading}
     />              
-    {/* {!downloaded && <span><i className="fas fa-spinner fa-pulse"></i></span>} */}
-
-
     {!downloaded && <LoadingSpinner />}
-
-
   </>
     )
 }
