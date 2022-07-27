@@ -20,7 +20,8 @@ const itTranslationMessages = require('./translations/it.json');
 // addLocaleData(deLocaleData);
 // addLocaleData(itLocaleData);
 
-const DEFAULT_LOCALE = 'it';
+//const DEFAULT_LOCALE = 'it';
+const DEFAULT_LOCALE = localStorage.getItem("lang") ? localStorage.getItem("lang") : 'en';
 
 // prettier-ignore
 const appLocales = [

@@ -45,6 +45,7 @@ function App(props) {
   const changeLanguage = (lang) => {
     console.log("change language:",lang)
     props.dispatch(changeLocale(lang));
+    localStorage.setItem("lang", lang)
   }
 
   return (
