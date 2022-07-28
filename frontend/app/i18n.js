@@ -20,19 +20,25 @@ const itTranslationMessages = require('./translations/it.json');
 // addLocaleData(deLocaleData);
 // addLocaleData(itLocaleData);
 
-//const DEFAULT_LOCALE = 'it';
-var userLang = navigator.language || navigator.userLanguage; 
-if (userLang.includes('-')) //en-US, it-IT, ar
-  userLang = userLang.substring(0, 2);  
-
-const DEFAULT_LOCALE = localStorage.getItem("lang") ? localStorage.getItem("lang") : userLang;
-
 // prettier-ignore
 const appLocales = [
   'en',
   // 'de',
-  'it',
+  'it'
 ];
+
+//const DEFAULT_LOCALE = 'it';
+var userLang = navigator.language || navigator.userLanguage; 
+if (userLang.includes('-')) //en-US, it-IT, ar
+{
+  userLang = userLang.substring(0, 2).toLowerCase();
+  if (!appLocales.includes(userLang))
+    userLang = 'en'
+}
+
+const DEFAULT_LOCALE = localStorage.getItem("lang") ? localStorage.getItem("lang") : userLang;
+
+
 
 const formatTranslationMessages = (locale, messages) => {
   const defaultFormattedMessages =
