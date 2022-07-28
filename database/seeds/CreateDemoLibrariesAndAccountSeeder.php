@@ -158,6 +158,28 @@ class CreateDemoLibrariesAndAccountSeeder extends Seeder
         $user5b->allow('manage', $lib5); //manager
         $user5c->allow('manage', $lib5); //manager
 
+
+        $lib6 = factory(\App\Models\Libraries\Library::class)->create([            
+            'name' => 'Penn Libraries - University of Pennsylvania',
+            'status'=>1,            
+            'subject_id'=>1,            
+            'country_id'=>226,
+            'profile_type'=>2,
+            'external'=>0,
+        ]);
+       
+        //User
+        $user6= factory(\App\Models\Users\User::class)->create([
+            'email' => 'tombruno@upenn.edu',
+            'name' => 'Tom',
+            'surname' => 'Bruno',
+            'status'=>1,            
+            'privacy_policy_accepted'=>now(),            
+        ]);
+
+        $user6->allow('manage', $lib6); //manager
+        
+
         
         Model::reguard();
     }
