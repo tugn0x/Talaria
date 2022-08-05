@@ -178,6 +178,17 @@ class CreateDemoLibrariesAndAccountSeeder extends Seeder
         ]);
 
         $user6->allow('manage', $lib6); //manager
+
+        //User
+        $user7= factory(\App\Models\Users\User::class)->create([
+            'email' => 'lapis@pobox.upenn.edu',
+            'name' => 'Lapis',
+            'surname' => 'Cohen',
+            'status'=>1,            
+            'privacy_policy_accepted'=>now(),            
+        ]);
+
+        $user7->allow('manage', $lib6); //manager
         
 
         
