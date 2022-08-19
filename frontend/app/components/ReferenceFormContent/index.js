@@ -17,13 +17,14 @@ import './style.scss';
 
 const ReferenceFormContent = (props) => {
     console.log('ReferenceFormContent', props)
-    const {reference, submitCallBack, 
+    const {reference, submitCallBack,  
             applyLabels, labelsOptionList, applyGroups, groupsOptionList,
             removeLabel, removeGroup, deleteReference/*,findOA,OALink*/} = props;
-    const [formData, setFormData] = useState(() => {
-        if(!reference)
-            return {material_type: 1, pubyear: "", authors: "", volume: "", pages: ""}
-        else return {...reference}    
+    const [formData, setFormData] = useState(() => {        
+        if(reference && Object.keys(reference.length > 0)) return {...reference}    
+        
+        //in any case force to return default
+        return {material_type: 1, pubyear: "", authors: "", volume: "", pages: ""}         
         
     })
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)

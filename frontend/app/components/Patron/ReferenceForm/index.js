@@ -5,7 +5,7 @@ import ReferenceFormContent from '../../ReferenceFormContent';
 import OASearchReference from '../../../containers/OASearchReference';
 import SectionTitle from '../../SectionTitle';
 import ReferenceIcons from '../ReferenceIcons';
-import FindOA from '../../FindOA';
+import FindOA from '../../FindOA'; 
 import ReferenceTags from '../ReferenceTags';
 
 const ReferenceForm = (props) => {
@@ -17,10 +17,10 @@ const ReferenceForm = (props) => {
     const [goTo, setGoTo] = useState(false);
 
     const [formData, setFormData] = useState(() => {
-        if(!reference)
-            return {material_type: 1, pubyear: "", authors: "", volume: "", pages: ""}
-        else return {...reference}    
+        if(reference && Object.keys(reference.length > 0)) return {...reference}   
         
+        //in any case force to return default
+        return {material_type: 1, pubyear: "", authors: "", volume: "", pages: ""}            
     })
 
     useEffect(() => {        
