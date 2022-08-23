@@ -10,7 +10,7 @@ import ReferenceTags from '../ReferenceTags';
 
 const ReferenceForm = (props) => {
     console.log("REFERENCEFORM:",props);
-    const {createReference, reference, updateReference, 
+    const {clearButton,createReference, reference, updateReference, 
             labelsOptionList, applyLabels, groupsOptionList, 
     applyGroups, removeLabel, removeGroup, deleteReference,onFoundReference,importReference/*,findOA,OALink*/} = props
     
@@ -50,7 +50,8 @@ const ReferenceForm = (props) => {
                         <ReferenceTags data={formData} removeLabel={(labelId)=>removeLabel(labelId )} removeGroup={(groupId)=>removeGroup(groupId)}/>                                
                     </>
                     
-                    <ReferenceFormContent                         
+                    <ReferenceFormContent  
+                        clearButton={clearButton}                       
                         submitCallBack={(formData) => updateReference(formData)}
                         labelsOptionList={labelsOptionList}
                         groupsOptionList={groupsOptionList}
@@ -87,7 +88,8 @@ const ReferenceForm = (props) => {
                                     <ReferenceTags data={formData} removeLabel={(labelId)=>removeLabel(labelId )} removeGroup={(groupId)=>removeGroup(groupId)}/>                                
                                 </>
                             }                            
-                            <ReferenceFormContent                             
+                            <ReferenceFormContent    
+                            clearButton={clearButton}                         
                             submitCallBack={(formData) => createReference(formData)}                            
                             />
                         </>
@@ -96,7 +98,8 @@ const ReferenceForm = (props) => {
                         (importReference &&
                         <>
                         {!importReference.id && <FindOA reference={importReference} /* findOA={findOA}*//>}                        
-                        <ReferenceFormContent                                     
+                        <ReferenceFormContent   
+                                    clearButton={clearButton}                                  
                                     reference={importReference}
                                     submitCallBack={(formData) => createReference(formData)}
                                     /*findOA={findOA}

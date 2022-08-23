@@ -15,9 +15,10 @@ import './style.scss';
 //BUG: quando cambio tipologia dovrei ri-verificare tutti i campi che hanno required dipendente dal tipo-materiale
 //     altrimenti il pulsante submit non è in linea con le condizioni!
 
-const ReferenceFormContent = (props) => {
+const ReferenceFormContent = (props) => {    
+     
     console.log('ReferenceFormContent', props)
-    const {reference, submitCallBack,  
+    const {clearButton,reference, submitCallBack,  
             applyLabels, labelsOptionList, applyGroups, groupsOptionList,
             removeLabel, removeGroup, deleteReference/*,findOA,OALink*/} = props;
     const [formData, setFormData] = useState(() => {        
@@ -82,6 +83,10 @@ const ReferenceFormContent = (props) => {
             submitCallBack(formData)
             console.log("Send Form", formData)
         }
+    }
+
+    const clearForm=() => {
+        setFormData({});
     }
 
 
@@ -333,13 +338,18 @@ const ReferenceFormContent = (props) => {
                     />
                 </Card>
                 <div className="d-flex justify-content-between">
+                    {clearButton && 
+                    <Button color="clear" onClick={()=>clearForm()} >
+                        {intl.formatMessage({id: 'app.global.resetAll'})}
+                    </Button> 
+                    }
                 <Button type="submit" className="mt-0" color="cta" disabled={isSubmitDisabled}>
                     {intl.formatMessage({id: 'app.global.submit'})}
                 </Button>
                 {reference && reference.id && 
                 <Button color="cancel" onClick={() => props.history.goBack() } >
                         {intl.formatMessage({id: 'app.global.cancel'})}
-                </Button> 
+                </Button>                 
                 }
                 </div>
             </FormContainer>        
