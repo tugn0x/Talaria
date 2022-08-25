@@ -5,7 +5,8 @@ import { requestReferencesList,requestLabelsOptionList,
         requestGroupsOptionList,requestRemoveReferenceLabel,
         requestRemoveReferenceGroup,requestApplyLabelsToReferences,
         requestApplyGroupsToReferences,
-        requestDeleteReference,requestFindUpdateOA} from '../actions'
+        requestDeleteReference,requestFindUpdateOA,
+        requestMyActiveLibrariesOptionList} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -24,12 +25,15 @@ const ReferencesListPage = (props) => {
     const intl = useIntl()
     const labelsOptionList = patron.labelsOptionList
     const groupsOptionList = patron.groupsOptionList
+    const activeLibrariesList=patron.libraryOptionList
+
 
     useEffect(() => {
         if(!isLoading) {
             dispatch(requestReferencesList())
             dispatch(requestLabelsOptionList())
             dispatch(requestGroupsOptionList())
+            dispatch(requestMyActiveLibrariesOptionList())
         }
     }, [])
 
@@ -93,8 +97,8 @@ const ReferencesListPage = (props) => {
      }
 
     return (
-        <>
-        
+        <>        
+            {console.log("PATRON",activeLibrariesList)}    
             <ReferencesList 
                 data={referencesList}
                // columns={columns}
@@ -114,6 +118,7 @@ const ReferencesListPage = (props) => {
                 //editPath={'/patron/references/:id?/:edit?'}
                 removeLabelFromReference={removeLabelFromReference}
                 removeGroupFromReference={removeGroupFromReference}
+                enableReferenceRequest={activeLibrariesList.length>0}
                 deleteReference={deleteReference}
                 applyLabels={applyLabelsToReferences}
                 applyGroups={applyGroupsToReferences}
