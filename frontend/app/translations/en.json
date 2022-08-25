@@ -105,7 +105,7 @@
   "app.containers.RequestsListPage.headerArchive": "Archivio richieste",  
 
   "app.containers.MyLibrariesPage.header": "La mia biblioteca",
-  "app.containers.MyLibrariesPage.headerNew": "Scegli una biblioteca a cui iscriverti",
+  "app.containers.MyLibrariesPage.headerNew": "Choose a library",
   "app.containers.MyLibrariesPage.title": "Iscriviti a una biblioteca",
   "app.containers.MyLibrariesPage.library_id": "La mia biblioteca",
   "app.containers.MyLibrariesPage.department_id": "Il mio istituto/dipartimento",
