@@ -65,7 +65,7 @@ const RequestDetail = props => {
                     <CardTitle>Biblioteca</CardTitle>
                     <Row>
                         <Col sm={12}>
-                            Name: {patronrequest.library.data.name} - ({patronrequest.library_label.data.label})
+                            Name: {patronrequest.library.data.name} - ({patronrequest.library_label?patronrequest.library_label.data.label:patronrequest.library.name})
                             Phone: {patronrequest.library.data.phone} | Fax: {patronrequest.library.data.fax}                            
                             DD Service Phone: {patronrequest.library.data.dd_phone} | ILL Service Phone: {patronrequest.library.data.ill_phone}                       
                             DD Service Mail: {patronrequest.library.data.dd_mail} | ILL Mail: {patronrequest.library.data.ill_mail}                            

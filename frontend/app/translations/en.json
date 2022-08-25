@@ -129,7 +129,7 @@
   "app.containers.MyLibrariesListPage.user_mat": "Matricola/Tessera",
   "app.containers.MyLibrariesListPage.user_service_phone": "Telefono servizio",
   "app.containers.MyLibrariesListPage.user_service_email": "Email servizio",
-  "app.containers.MyLibrariesListPage.librariesNotFound": "Non ci sono librerie disponibili",
+  "app.containers.MyLibrariesListPage.librariesNotFound": "No associated libraries",
   
   "app.containers.LibrariesListPage.header": "Biblioteche",
   "app.containers.LibrariesListPage.createNew": "Registra nuova biblioteca",
