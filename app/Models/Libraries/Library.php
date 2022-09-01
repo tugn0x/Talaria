@@ -76,6 +76,8 @@ class Library extends BaseModel
     ];
 
     protected $public_fields = [
+        'lat',
+        'lon',
         'name',        
         'alt_name',
         'institution_id',

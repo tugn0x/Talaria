@@ -189,6 +189,16 @@ ill_referent_name: {
   defaultMessage: 'Ill referant name',
 },
 
+lat: {
+  id: 'app.libraries.lat',
+  defaultMessage: 'Latitude',
+},
+
+lon: {
+  id: 'app.libraries.long',
+  defaultMessage: 'Longtitude',
+},
+
 alt_name: {
   id: 'app.libraries.alt_name',
   defaultMessage: 'Alternative name',
@@ -234,6 +244,18 @@ library_location_label: {
   id: 'app.containers.RegisterNewLibrary.library_location_label',
   defaultMessage: 'Library location',
 },
+
+library_coordinates_note: {
+  id: 'app.containers.RegisterNewLibrary.library_coordinates_note_label',
+  defaultMessage: 'Location',
+},
+
+
+library_coordinates: {
+  id: 'app.containers.RegisterNewLibrary.library_coordinates',
+  defaultMessage: 'Library location',
+}, 
+
 
 subject_label: {
   id: 'app.containers.RegisterNewLibrary.subject_label',

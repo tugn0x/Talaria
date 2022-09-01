@@ -150,7 +150,14 @@
   "app.containers.RegisterNewLibrary.projects_label":  "Project or Consortium",
   "app.containers.RegisterNewLibrary.ill_institution_label": "Institution",
   "app.containers.RegisterNewLibrary.library_contact_label": "Service contacts",
-  "app.containers.RegisterNewLibrary.library_location_label": "Library location",
+  "app.containers.RegisterNewLibrary.library_location_label": "Library location & profile",
+
+  "app.containers.RegisterNewLibrary.library_coordinates": "Location",
+
+  "app.containers.RegisterNewLibrary.library_coordinates_note_label": "This GPS coords are needed to display the library in a map",
+  
+
+
   "app.containers.RegisterNewLibrary.subject_label":"Library disciplinary sector",
   "app.containers.RegisterNewLibrary.opac_label":"Library Online Catalog (OPAC)",
   "app.containers.RegisterNewLibrary.switchToBasicProfile":"Switch to Basic profile",

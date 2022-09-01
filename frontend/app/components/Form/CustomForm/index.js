@@ -61,6 +61,13 @@ const CustomForm = (props) => {
         props.onClickData && props.onClickData(field_name, value);
     }
 
+
+    const RetrievePositionData = (e, value, field_name) =>{
+        e.preventDefault();
+        setIsSubmitDisabled(false)
+        props.RetrievePositionData && props.RetrievePositionData(field_name, value);
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -206,6 +213,15 @@ const CustomForm = (props) => {
                                                                     field={field}
                                                                     label={field.label && field.label}
                                                                     onClick={(e, value) => onClickData(e, value, field.name)}
+                                                                    >{field.label}</Button> 
+                                                                </>  
+                                                                ||
+                                                                field.type === 'ButtonMapPosition' &&
+                                                                <>
+                                                                    <Button
+                                                                    field={field}
+                                                                    label={field.label && field.label}
+                                                                    onClick={(e, value) => RetrievePositionData(e, value, field.name)}
                                                                     >{field.label}</Button> 
                                                                 </>  
                                                                 ||
