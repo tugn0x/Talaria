@@ -14,8 +14,10 @@
         
         & .current-page {
             a {
-                text-decoration: none;
+                text-decoration: underline;
                 color: $active;
+                background-color: white;                
+                padding: 10px;
             }
             
         }

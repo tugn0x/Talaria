@@ -49,35 +49,7 @@ function LibraryPage(props) {
         libraryRoutes=libraryRoutes.filter( (route)=> {        
           return route.path!="/lending" 
         });                                     
-      }  
-      
-      /* TODO FIX: this doesn't work after switch to another library and back to another) but we've to implement manage_patron field*/
-      if(library.library.manage_patrons==0) //not manage patrons
-      {      
-        //remove patrons related menu items
-        libraryRoutes=libraryRoutes.filter( (route)=> {
-          return (
-            route.path!="/delivery" &&
-            route.path!="/patrons"
-          )}
-        );
-
-        libraryRoutes.forEach(function(route, index) {
-        console.log("libraryRoutes DENTRO",route)  
-        if (route.path == '/manage' && route.children) {          
-          let route2=route;
-          route2.children=route2.children.filter ( (subroute) => 
-          {
-            return (
-              subroute.path!="/departments" &&
-              subroute.path!="/pickup"              
-            )
-          })
-          libraryRoutes[index]=route2
-        }        
-      }) 
-      console.log("libraryRoutes DOPO",libraryRoutes)                                
-      }
+      }              
       
       setFilteredRoutes(libraryRoutes);            
       setIsMounted(true)

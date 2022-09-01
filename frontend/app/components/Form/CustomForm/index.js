@@ -26,7 +26,7 @@ const CustomForm = (props) => {
     console.log('CustomForm', props)
     const {
         submitCallBack = () => null,
-        title = 'Form',
+        title,
         submitText,
         submitColor = "brown",
         fields = {},
@@ -99,7 +99,7 @@ const CustomForm = (props) => {
         Object.keys(fields).length > 0 &&
             (<Card className="card-form">
                 <CardBody className="p-4">
-                    { <h3>{title}</h3>  }
+                    { title && <h3>{title}</h3>  }
                     <Form onSubmit={onSubmit} noValidate className={props.className}>
                         <div className="form-groups">
                             {selectFieldsGroups(fields,fieldsGroups).map((fieldsGroup) => {

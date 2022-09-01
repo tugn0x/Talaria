@@ -8,7 +8,7 @@ import ReferenceCitation from '../../ReferenceCitation';
 import ReferenceTags from '../ReferenceTags';
 
 const ReferenceItem = (props) => {
-    const {data,toggleSelection,checked,removeLabel,removeGroup,deleteReference,findAndUpdateOA,oaloading} = props
+    const {data,toggleSelection,checked,removeLabel,removeGroup,deleteReference,findAndUpdateOA,oaloading,canRequest} = props
   
     const intl = useIntl();    
     
@@ -17,6 +17,10 @@ const ReferenceItem = (props) => {
             id
         });
     }
+
+    const filteredIcons=[
+        ...(canRequest?['request']:[]),
+        ,'oa','edit','delete'];
     
 
     return (
@@ -34,7 +38,7 @@ const ReferenceItem = (props) => {
             <Col sm={3} className="icons align-self-center">
                 <ReferenceIcons 
                     data={data}
-                    icons={['request','oa','edit','delete']}
+                    icons={filteredIcons}
                     deleteReference={deleteReference}
                     findAndUpdateOA={findAndUpdateOA}                    
                 />

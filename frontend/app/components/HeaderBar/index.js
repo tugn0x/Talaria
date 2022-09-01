@@ -61,8 +61,8 @@ function HeaderBar(props) {
               </AppSidebarToggler>
             }            
             <AppNavbarBrand
-              full={{ src: logo, alt: 'Nilde Logo' }}
-              minimized={{ src: logomini, width: 30, height: 30, alt: 'Nilde Logo' }}
+              full={{ src: logo, alt: 'Logo' }}
+              minimized={{ src: logomini, width: 30, height: 30, alt: 'Logo' }}
               href={'/'}
               className="col-md-7"
             />

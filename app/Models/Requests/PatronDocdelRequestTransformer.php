@@ -49,8 +49,9 @@ class PatronDocdelRequestTransformer extends BaseTransformer
         if($model->user && $model->library)
         {
 
-            $lu=LibraryUser::where('library_id','=',$model->library->id)->where('user_id','=',$model->user->id)->firstOrFail();
-            return $this->item($lu, new BaseTransformer());
+            $lu=LibraryUser::where('library_id','=',$model->library->id)->where('user_id','=',$model->user->id)->first();
+            if($lu!=null) 
+                return $this->item($lu, new BaseTransformer());
         }
 
     }

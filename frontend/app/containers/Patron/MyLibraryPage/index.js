@@ -13,6 +13,7 @@ import { compose } from 'redux';
 import {fields, fieldsIsNew} from './fields';
 import messages from './messages';
 import makeSelectLibrary from 'containers/Library/selectors';
+import SectionTitle from 'components/SectionTitle';
 import { CustomForm } from 'components';
 import {requestUser,requestGetLibrary} from 'containers/Library/actions';
 import {requestAccessToLibrary,requestUpdateAccessToLibrary,requestSearchPlacesByText,requestGetLibraryListNearTo} from '../actions';
@@ -105,6 +106,10 @@ function MyLibraryPage(props) {
 
   return (
     <>
+      <SectionTitle 
+                        back={true}
+                        title={isNew?messages.headerNew:messages.header}
+      /> 
       {!isNew &&
           <CustomForm 
             submitCallBack={(formData) => dispatch(requestUpdateAccessToLibrary({
@@ -125,8 +130,7 @@ function MyLibraryPage(props) {
             }}
             department_id={departmentOptionList} 
             title_id={titleOptionList} 
-            fields={fields}
-            title={intl.formatMessage(messages.header)}
+            fields={fields}            
             messages={messages}
             cancelButton={false}
           /> 
@@ -138,8 +142,7 @@ function MyLibraryPage(props) {
             fields={fieldsIsNew}
             selectedMarker={selectedMarker}  
             department_id={departmentOptionList} 
-            title_id={titleOptionList} 
-            title={intl.formatMessage(messages.headerNew)}
+            title_id={titleOptionList}             
             messages={messages}
             cancelButton={false}
             onChangeData={(field_name, value) => handleChangeData(field_name, value)}

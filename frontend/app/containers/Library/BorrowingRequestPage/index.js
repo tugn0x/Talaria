@@ -192,12 +192,14 @@ const BorrowingRequestPage = (props) => {
                 ||
                 (isNew && isMounted) &&                 
                 <ReferenceForm    
+                    clearButton={(isNew||byOpenUrl||byPubmed)?true:false}
                     importReference={refData}
                     createReference={ (formData) => {dispatch(requestPostNewBorrowing(match.params.library_id,formData,intl.formatMessage({id: "app.global.createdMessage"})))} } 
                     onFoundReference={foundReference}                                      
                 />                                
                 || (isEdit && isMounted && Object.keys(borrowing).length>0) && 
                 <ReferenceForm
+                    clearButton={(isNew||byOpenUrl||byPubmed)?true:false}
                     reference={borrowing.reference.data}                    
                     updateReference={ (formData) => {dispatch(requestUpdateBorrowing(borrowing.id,match.params.library_id,{'reference': formData},intl.formatMessage({id: "app.global.updatedMessage"})))} } 
                     history={props.history}

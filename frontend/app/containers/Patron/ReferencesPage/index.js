@@ -76,7 +76,7 @@ const ReferencesPage = (props) => {
         }
     }, [byOpenUrl])
    
-    useEffect(() => {
+    useEffect(() => {        
         if(isNew && byPubmed && reference && Object.keys(reference).length>0)        
         {
             //PROBLEMA: i campi restituiti da pubmed non sono uguali a 
@@ -215,6 +215,7 @@ const ReferencesPage = (props) => {
                     title={messages.headerNew}
                     />  
                     <ReferenceForm
+                        clearButton={(isNew||byOpenUrl||byPubmed)?true:false}
                         importReference={refData}
                         createReference={ (formData) => dispatch(requestPostReferences(formData, intl.formatMessage(messages.referenceAdded))) } 
                         onFoundReference={foundReference}
@@ -234,7 +235,8 @@ const ReferencesPage = (props) => {
                         back={false}
                         title={messages.headerEdit}
                     /> 
-                    <ReferenceForm
+                    <ReferenceForm 
+                        clearButton={(isNew||byOpenUrl||byPubmed)?true:false}
                         reference={refData/*reference*/}
                         labelsOptionList={labelsOptionList}
                         groupsOptionList={groupsOptionList}

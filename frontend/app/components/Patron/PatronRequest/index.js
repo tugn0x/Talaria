@@ -159,7 +159,7 @@ export const PatronRequestData = (props) => {
         <div className={"patronrequest_data " + (customClass?customClass:'')}>
             {data.library && <div className="libraryLabel pr-3">
                 <span><i className="fas fa-landmark"></i></span>                 
-                <span id={`tooltip-${data.id}-${data.library.data.id}`} className="active">{data.library_label.data.label}</span> 
+                <span id={`tooltip-${data.id}-${data.library.data.id}`} className="active">{data.library_label?data.library_label.data.label:data.library.name}</span> 
                 <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${data.id}-${data.library.data.id}`}>
                     {data.library.data.name}
                 </UncontrolledTooltip>                  
