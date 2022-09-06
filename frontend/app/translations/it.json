@@ -152,11 +152,8 @@
   "app.containers.RegisterNewLibrary.library_contact_label": "Contatti servizio ILL",
   "app.containers.RegisterNewLibrary.library_location_label": "Località/Indirizzo completo",
 
-  "app.containers.RegisterNewLibrary.library_coordinates": "Posizione",
+  "app.containers.RegisterNewLibrary.library_coordinates": "Click the button below OR Enter manually",
   "app.containers.RegisterNewLibrary.library_coordinates_note": "This GPS coords are needed to display the library in a map",
-
-
-
   "app.containers.RegisterNewLibrary.subject_label":"Settore disciplinare",
   "app.containers.RegisterNewLibrary.opac_label":"Online Catalog (OPAC)",
   "app.containers.RegisterNewLibrary.switchToBasicProfile":"Scegli il profilo base",
