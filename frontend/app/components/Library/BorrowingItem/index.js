@@ -172,7 +172,7 @@ const statusInfo = (req) => {
             {req.desk_delivery_format && <span className="deskDeliveryFormat">{deskDeliveryFormat(req)}</span>}
         </span>}  
         {req.desk_received_date && <span className="status-date">
-            <i className="fas fa-box-open"></i> {formatDateTime(req.desk_received_date)}
+            <i className="fas fa-box"></i> {formatDateTime(req.desk_received_date)}
             {req.desk_delivery_format && <span className="deskDeliveryFormat">{deskDeliveryFormat(req)}</span>}
         </span>}
         
@@ -403,7 +403,13 @@ export const BorrowingRequestIcons = (props) => {
                         <a className="btn btn-icon" onClick={()=>savedAsDownloaded()}><i className="fas fa-arrow-circle-right"></i></a>                   
                 }                
                 
-                {canSavedAsReceived(data) && setReceivedRequest && setNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setReceivedRequest()}><i className="fas fa-box"></i></a> <a className="btn btn-icon" onClick={()=>setNotReceivedRequest()}><i className="fas fa-box-open"></i></a></>}                                
+                {canSavedAsReceived(data) && setReceivedRequest && setNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setReceivedRequest()}><i className="fas fa-box"></i></a> 
+                    <a className="btn btn-icon" onClick={()=>setNotReceivedRequest()}>
+                    <span class="fa-stack fa-1x">
+                        <i class="fas fa-box fa-stack-1x"></i>
+                        <i class="fas fa-ban fa-stack-2x"></i>
+                    </span>
+                    </a></>}                                
                 
                 {/*casi di evasione/inevasione a patron DIRETTA*/}
                 {canPatronReqDirectManaged(data) && canRequest(data) &&
@@ -416,7 +422,7 @@ export const BorrowingRequestIcons = (props) => {
                 {/*casi di evasione/inevasione a patron DOPO DD*/}
                 {canFulfillToPatron(data) &&  <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}><i className="fas fa-truck text-success"></i></Link>}                                                
                 {canUnfillToPatron(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}>
-                <span className="fa-stack"><i className="fas fa-truck fa-stack-2x text-warning"></i><i className="fas fa-times fa-stack-2x"></i></span>
+                <span className="fa-stack"><i className="fas fa-truck fa-stack-1x text-warning"></i><i className="fas fa-ban fa-stack-2x"></i></span>
                 </Link>}                                
                 
                 {/*casi di evasione/inevasione SENZA patron DOPO DD*/}
