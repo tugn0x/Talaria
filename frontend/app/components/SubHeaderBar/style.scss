@@ -14,9 +14,9 @@
         
         & .current-page {
             a {
-                text-decoration: underline;
+                text-decoration: none;
                 color: $active;
-                background-color: white;                
+                background-color: $light-bk;                
                 padding: 10px;
             }
             
