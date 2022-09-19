@@ -82,6 +82,7 @@ button[type=button] {
     border-radius: 20px;
     display: inline-block;
     cursor: pointer;
+    font-size: 1.3rem;
     /* vertical-align: sub; */
     &:hover,&:active, &:focus {
         text-decoration: none;
@@ -91,12 +92,16 @@ button[type=button] {
     }
     i, span {
         color: $active;
-        font-size: 1.5rem;
+        /*font-size: 1.5rem;*/
         margin-top: 0;
         display: inline-block;
-        vertical-align: middle;
+        /*vertical-align: middle;*/
         /* display: table-cell;
         vertical-align: middle; */
+    }
+    .fa-stack { //override for stacked icon
+        /*font-size: initial !important;*/
+        top: -5px;
     }
 }
 
