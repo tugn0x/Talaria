@@ -32,7 +32,7 @@ const routes = [
   },
   { path: '/my-libraries', name: `MyLibraries`, component: SubRouteSwitch, header: true, roles: ['patron'],
     children: [
-      { path: '/new', icon: "plus", name: `MyLibraryNew`,  component: MyLibraryPage, url:'/my-libraries/new', sidebar: true, order: 1},
+      { path: '/new/:library_id?', icon: "plus", name: `MyLibraryNew`,  component: MyLibraryPage, url:'/my-libraries/new/:library_id?', sidebar: true, order: 1},      
       { path: '/:page?', exact: true,icon: "landmark", name: `MyLibraries`, url: `/my-libraries`, component: MyLibrariesListPage, sidebar: true,order: 2},
       { path: '/:library_id?/edit/:id?',exact: true,name: `Library`, url:'/my-libraries/:library_id?/edit/:id?',component: MyLibraryPage},
       

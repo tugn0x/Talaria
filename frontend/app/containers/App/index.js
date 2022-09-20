@@ -9,7 +9,7 @@
 
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route,Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -71,8 +71,9 @@ function App(props) {
         
 
         <Route path="/register-library" component={({match}) =>  props.isLogged?<RegisterLibraryPage {...authProps} headermenu={false} changeLang={changeLanguage}/>:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} /> }  />
-        <Route path="/associate-library/:library_id" component={({match}) =>  props.isLogged?<AssociateLibraryPage history={history} match={match} {...authProps}  changeLang={changeLanguage}/>:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} history={history} />}   />
-
+        {/*NOT USED <Route path="/associate-library/:library_id" component={({match}) =>  props.isLogged?<AssociateLibraryPage history={history} match={match} {...authProps}  changeLang={changeLanguage}/>:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} history={history} />}   />*/}             
+        {<Route path="/patron/my-libraries/new/:library_id" component={({match}) =>  props.isLogged?<MyLibraryPage history={history} match={match} {...authProps}  changeLang={changeLanguage}/>:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} history={history} />}   />}             
+        
         <Route path="/project/:project_id" component={({match}) =>  props.isLogged?<HomePage {...authProps}  match={match} headermenu={true} changeLang={changeLanguage}/>:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} /> }  />
         <Route path="/consortium/:consortium_id" component={({match}) =>  props.isLogged?<HomePage {...authProps}  match={match} headermenu={true} changeLang={changeLanguage}/>:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} /> }  />
         <Route path="/institution/:institution_id" component={({match}) =>  props.isLogged?<HomePage {...authProps}  match={match}  headermenu={true} changeLang={changeLanguage}/>:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} /> } />
