@@ -22,9 +22,7 @@
     .pubyear {            
     }
     
-    .authors, 
-    .university,
-    .geographic_area {
+    .authors {        
         > span
         {
             font-weight: bold;
@@ -37,4 +35,40 @@
         }
         
     } 
+
+    .university,
+    .publisher,
+    .geographic_area 
+    {
+        font-weight: bold;
+        padding-right: 10px;
+        span
+        {
+            font-weight: normal;
+            padding-right: 0px;
+        }
+    }
+        
+    .extra {
+        
+    } 
+
+    .identifiers {        
+        > span
+        {            
+            font-weight: bold;
+            padding-right: 10px;
+            span
+            {
+                font-weight: normal;
+                padding-right: 0px;
+            }
+        }
+        
+    } 
+
+
+    .toggle-extra-link {
+        margin-left: 5px;        
+    }
 }
