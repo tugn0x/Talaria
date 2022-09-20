@@ -72,6 +72,7 @@ const RegisterLibrary = (props) => {
         dispatch(requestGetCountriesOptionList())
         dispatch(requestGetInstitutionTypeOptionList())
         dispatch(requestGetlibraryProjectsOptionList())
+        dispatch(requestLibrarySubjectOptionList())
         
 
         if (ILL_REQUEST_PAYMENT===false) //RSCVD
@@ -205,7 +206,6 @@ const RegisterLibrary = (props) => {
             fields.subject_label.hidden=false;
             
             fields.showfullProfile.label=intl.formatMessage(wizardMessages.switchToBasicProfile)            
-            dispatch(requestLibrarySubjectOptionList())
         }
         //setData({...data, [field_name]: value})
     }
