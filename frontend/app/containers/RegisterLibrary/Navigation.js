@@ -11,7 +11,7 @@ const Navigation = (props) => {
         <div className="navigation-wizard">
             <Row>
                 {Object.keys(props.steps).map((key) => 
-                    <Col xs={3}>
+                    <Col xs={3} key={key}>
                         <Button 
                             key={key}
                             color="transparent"
