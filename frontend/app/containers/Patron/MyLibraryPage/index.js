@@ -25,7 +25,7 @@ import {NavLink} from 'react-router-dom';
 
 //1. find a way to pass library_id for "new registration"
 //in order to let user to subscribe directly to that library already setted
-//(display library name, not map)
+//(display library name, not map) => OK /my-libraries/new/:library_id
 
 //2. find a way to allow search library by name (calling getLibraryOptionList)
 //and store the selected library in the library_id field
@@ -35,7 +35,7 @@ function MyLibraryPage(props) {
   const intl = useIntl();
   const {dispatch, match} = props
   const {params} = match
-  const isNew = !params || !params.id || params.id === 'new'
+  const isNew = !params || !params.id || params.id === 'new'  
   const library = props.library.library
   const patron = props.library.user;
   const user_id = props.auth.user.id;
@@ -107,7 +107,7 @@ function MyLibraryPage(props) {
   return (
     <>
       <SectionTitle 
-                        back={true}
+                        back={isNew?false:true}
                         title={isNew?messages.headerNew:messages.header}
       /> 
       {!isNew &&
