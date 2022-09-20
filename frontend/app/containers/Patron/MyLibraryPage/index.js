@@ -106,10 +106,11 @@ function MyLibraryPage(props) {
 
   return (
     <>
-      <SectionTitle 
+      {//exclude home page case
+      params && params.id=="new" && <SectionTitle 
                         back={isNew?false:true}
                         title={isNew?messages.headerNew:messages.header}
-      /> 
+      />} 
       {!isNew &&
           <CustomForm 
             submitCallBack={(formData) => dispatch(requestUpdateAccessToLibrary({
