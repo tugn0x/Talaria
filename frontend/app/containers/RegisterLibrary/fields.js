@@ -28,41 +28,6 @@ export const setNewSteps = () => {
 
 export const fields = {
 
-    library_id: { 
-        type: "map-selector",
-        name: 'library_id',
-        nolabel: true,
-        width: "col-md-12",
-        group: "step_1",
-        freeSearch: true,
-        required: true,
-        order:1
-    },
-    name: {
-        type: "text",
-        required: true,
-        name: "name",
-        width: "col-sm-12",
-        group: "step_1",
-        order: 2,
-    },
-    alt_name: {
-        type: "text",
-        required: false,
-        name: "alt_name",
-        width: "col-sm-12",
-        group: "step_1",
-        order: 3,
-    },  
-    url: {
-        type: "text",
-        required: true,
-        name: "url",
-        width: "col-sm-12",
-        group: "step_1",
-        order: 4,
-    },
-
 
     library_location_label: {
         type: "Label",
@@ -73,8 +38,83 @@ export const fields = {
         width: "col-sm-12",
         size:"25px",
         group: "step_1",
+        order: 1,
+    },
+
+    library_coordinates: {
+        type: "ButtonMapPosition",
+        label:"Get Coords",
+        name: "library_coordinates",
+        width: "col-md-2",
+        group: "step_1",
+  
+        order: 2,
+    },
+
+    library_coordinates_txt_long: {
+        type: "text",
+        name: "lon",
+        width: "col-md-2",
+        group: "step_1",
+        order: 3,
+    },
+
+    library_coordinates_txt_lat: {
+        type: "text",
+        name: "lat",
+        width: "col-md-2",
+        group: "step_1",
+        order: 4,
+    },
+
+    library_coordinates_note: {
+        type: "Label",
+        required: false,
+        nolabel: true,
+        name: "library_coordinates_note",
+        width: "col-sm-12",
+        size:"13px",
+        group: "step_1",
         order: 5,
     },
+
+    // library_id: { 
+    //     type: "map-selector",
+    //     name: 'library_id',
+    //     nolabel: true,
+    //     width: "col-md-12",
+    //     group: "step_1",
+    //     freeSearch: true,
+    //     required: true,
+    //     order:1,
+    //     hidden:true
+    // },
+    name: {
+        type: "text",
+        required: true,
+        name: "name",
+        width: "col-sm-12",
+        group: "step_1",
+        order: 6,
+    },
+    alt_name: {
+        type: "text",
+        required: false,
+        name: "alt_name",
+        width: "col-sm-12",
+        group: "step_1",
+        order: 7,
+    },  
+    url: {
+        type: "text",
+        required: true,
+        name: "url",
+        width: "col-sm-12",
+        group: "step_1",
+        order: 8,
+    },
+
+
 
 
     country_id: {
@@ -84,7 +124,7 @@ export const fields = {
         width: "col-md-6",
         group: "step_1",
         options: "country_id",
-        order: 6,
+        order: 9,
     },
     state: {
         type: "text",
@@ -94,7 +134,7 @@ export const fields = {
         placeholder: 'app.global.state',
         group: "step_1",
         width: "col-sm-6",
-        order: 7,
+        order: 10,
     }, 
     town: {
         type: "text",
@@ -104,7 +144,7 @@ export const fields = {
         placeholder: 'app.global.town',
         group: "step_1",
         width: "col-sm-6",
-        order: 8,
+        order: 11,
     },
 
     postcode: {
@@ -115,7 +155,7 @@ export const fields = {
         placeholder: 'app.global.postcode',
         group: "step_1",
         width: "col-sm-6",
-        order: 9,
+        order: 12,
     },
 
     address: {
@@ -126,7 +166,7 @@ export const fields = {
         placeholder: 'app.global.address',
         group: "step_1",
         width: "col-sm-12",
-        order: 10,
+        order: 13,
     },
 
    library_contact_label: {
@@ -138,7 +178,7 @@ export const fields = {
         width: "col-sm-12",
         size:"25px",
         group: "step_1",
-        order: 11,
+        order: 14,
     },
 
     ill_email: {
@@ -148,7 +188,7 @@ export const fields = {
         label: 'app.global.ill_email',
         group: "step_1",
         width: "col-sm-6",
-        order: 12,
+        order: 15,
     },
 
     ill_phone: {
@@ -157,7 +197,7 @@ export const fields = {
         label: 'ill_phone',
         group: "step_1",
         width: "col-sm-6",
-        order: 13,
+        order: 16,
     },
 
     ill_referent_name: {
@@ -165,7 +205,7 @@ export const fields = {
         name: "ill_referent_name",
         group: "step_1",
         width: "col-sm-12",
-        order: 14,
+        order: 17,
     },
 
     ill_institution_label: {
@@ -177,7 +217,7 @@ export const fields = {
         name: "ill_institution_label",
         width: "col-sm-12",
         group: "step_1",
-        order: 15,
+        order: 18,
     },
 
     institution_type_id: {
@@ -187,7 +227,7 @@ export const fields = {
         width: "col-md-6",
         group: "step_1",
         options: "institution_type_id",
-        order: 16,
+        order: 19,
        // selectedOption: "institution_type_id"
         
     },
@@ -199,7 +239,7 @@ export const fields = {
         width: "col-md-6",
         group: "step_1",
         options: "institution_country_id",
-        order: 17,
+        order: 20,
         selectedOption: "institution_country_id"
     },
     institution_id: {
@@ -209,7 +249,7 @@ export const fields = {
         width: "col-sm-12",
         group: "step_1",
         options: "institution_id",
-        order: 18,
+        order: 21,
         selectedOption: "id"
     },
     suggested_institution_name: {
@@ -218,7 +258,7 @@ export const fields = {
         required: false,
         width: "col-md-12",
         group: "step_1",
-        order: 19,
+        order: 22,
         hidden: true,
     },
 
@@ -231,7 +271,7 @@ export const fields = {
         nolabel:true,
         width: "col-sm-12",
         group: "step_1",
-        order: 20,
+        order: 23,
     },
 
     project_id: {
@@ -240,7 +280,7 @@ export const fields = {
         name: "project_id",
         width: "col-sm-12",
         group: "step_1",
-        order: 21,
+        order: 24,
     },
 
     volunteer_library_label: {
@@ -253,7 +293,7 @@ export const fields = {
         nolabel: true,
         width: "col-sm-12",
         group: "step_1",
-        order: 22,
+        order: 25,
     },    
 
     showfullProfile: {
@@ -262,7 +302,7 @@ export const fields = {
         name: "showfullProfile",
         width: "col-md-12",
         group: "step_1",
-        order: 23,
+        order: 26,
     },
 
     opac_label: {
@@ -275,7 +315,7 @@ export const fields = {
         nolabel: true,
         width: "col-sm-12",
         group: "step_1",
-        order: 24,
+        order: 27,
     },
 
     opac: {
@@ -285,7 +325,7 @@ export const fields = {
         group: "step_1",
         width: "col-sm-12",
         hidden: true,
-        order: 25,
+        order: 28,
     },
 
     subject_label: {
@@ -298,7 +338,7 @@ export const fields = {
         nolabel: true,
         width: "col-sm-12",
         group: "step_1",
-        order: 26,
+        order: 29,
     },
 
     subject_id: {
@@ -309,7 +349,7 @@ export const fields = {
         group: "step_1",
         options: "subject_id",
         hidden: true,
-        order: 27,
+        order: 30,
     },
     
     ill_service_conditions: {
@@ -322,7 +362,7 @@ export const fields = {
         nolabel:true,
         width: "col-sm-12",
         group: "step_1",
-        order: 28
+        order: 31
     },
 
     ill_user_cost: {
@@ -331,7 +371,7 @@ export const fields = {
         name: "ill_user_cost",
         width: "col-sm-6",
         group: "step_1",
-        order: 29,
+        order: 32,
     },
 
     ill_service_conditions_other: {
@@ -344,7 +384,7 @@ export const fields = {
         nolabel: true,
         width: "col-sm-12",
         group: "step_1",
-        order: 30,
+        order: 33,
     },
 
 
@@ -354,7 +394,7 @@ export const fields = {
         name: "ill_cost",
         width: "col-sm-6",
         group: "step_1",
-        order: 31,
+        order: 34,
     },
 
     ill_imbalance: {
@@ -363,7 +403,7 @@ export const fields = {
         name: "ill_imbalance",
         width: "col-sm-6",
         group: "step_1",
-        order: 32,
+        order: 35,
     },
 
     ill_supply_conditions: {
@@ -372,7 +412,7 @@ export const fields = {
         name: "ill_supply_conditions",
         width: "col-sm-6",
         group: "step_1",
-        order: 33,
+        order: 36,
     },
 
      
@@ -386,7 +426,7 @@ export const fields = {
         nolabel:true,        
         width: "col-sm-12",
         group: "step_1",
-        order: 34,
+        order: 37,
     },    
 }
 

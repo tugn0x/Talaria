@@ -43,9 +43,32 @@ const RegisterLibrary = (props) => {
     const projectsarrname = [];
 
     const [basicProfile,setBasicProfile]=useState(LIBRARY_DIFFERENT_PROFILES);
+    const [lat, setLat] = useState(null);
+    const [lng, setLng] = useState(null);
+    const [status, setStatus] = useState(null);
 
+
+    const getLocation = () => {
+        if (!navigator.geolocation) {
+          setStatus('Geol ocation is not supported by your browser');
+        } else {
+          setStatus('Locating your library location...');
+          navigator.geolocation.getCurrentPosition((position) => {
+            setStatus(null);
+            setLat(position.coords.latitude);
+            setLng(position.coords.longitude);
+            setData({...data, 'lon': position.coords.longitude, 'lat': position.coords.latitude})
+          }, () => {
+            setStatus('Unable to retrieve your libary location');
+          });
+        }
+      }
+   
+
+     
     // Fai le chiamate per le option list
     useEffect(() => {
+       
         dispatch(requestGetCountriesOptionList())
         dispatch(requestGetInstitutionTypeOptionList())
         dispatch(requestGetlibraryProjectsOptionList())
@@ -149,7 +172,13 @@ const RegisterLibrary = (props) => {
         }
     }
 
+    const GetBrowserCoordinates = (ev) => {
+        getLocation()
+    }
+
+
     const toggleLibraryProfile = (ev) => {
+      
         setBasicProfile(!basicProfile);
 
         if (fields.opac.hidden===false)
@@ -198,7 +227,7 @@ const RegisterLibrary = (props) => {
         <>
             <h2>{intl.formatMessage(wizardMessages.header)}</h2>
             <br></br>
-            <Navigation 
+              <Navigation 
                 step={currentStep} 
                 totalSteps={totalSteps}
                 steps={steps}
@@ -222,6 +251,7 @@ const RegisterLibrary = (props) => {
                     subject_id={props.librarySubjectOptionList}
                     project_id = {props.libraryProjectsOptionList}
                     onClickData={toggleLibraryProfile}
+                    RetrievePositionData = {GetBrowserCoordinates}
                     onPlacesSearch={(search)=>dispatch(requestSearchPlacesByText(search))}
                     places={props.places}
                     placesFreeSearchPlaceholder={intl.formatMessage(wizardMessages.placesFreeSearchPlaceholder)}
