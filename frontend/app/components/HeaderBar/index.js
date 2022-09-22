@@ -103,7 +103,20 @@ function HeaderBar(props) {
                           </Row>
                           <Row className="item">
                               <NavLink to={`/admin`} activeClassName="current">
-                                Nilde Admin
+                              <FormattedMessage {...messages.AdminDashBoard} />
+                              </NavLink>    
+                          </Row>
+                        </div>
+                      )}
+                      {checkRole(auth, "manager") && !checkRole(auth, "super-admin") && (
+                        <div className="resources-menu">
+                          <Row className="head item">
+                              <i className={`fas fa-cog`}></i>
+                              <span><FormattedMessage {...messages.manager} /></span>
+                          </Row>
+                          <Row className="item">
+                              <NavLink to={`/admin`} activeClassName="current">
+                              <FormattedMessage {...messages.ManagerDashBoard} />
                               </NavLink>    
                           </Row>
                         </div>
