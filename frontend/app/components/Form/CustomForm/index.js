@@ -225,6 +225,13 @@ const CustomForm = (props) => {
                                                                     >{field.label}</Button> 
                                                                 </>  
                                                                 ||
+                                                                 field.type === 'spinner' &&
+                                                                 <>
+                                                                     <div className="spinner-container" >
+                                                                        <div className="loading-spinner"></div>
+                                                                    </div>
+                                                                 </> 
+                                                                ||
                                                                 field.type === 'Label' &&
                                                                 <>
                                                                    <Label 

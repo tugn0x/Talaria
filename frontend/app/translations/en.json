@@ -152,8 +152,7 @@
   "app.containers.RegisterNewLibrary.library_contact_label": "Service contacts",
   "app.containers.RegisterNewLibrary.library_location_label": "Library location & profile",
 
-  "app.containers.RegisterNewLibrary.library_coordinates": "Click the button below OR Enter manually",
-  "app.containers.RegisterNewLibrary.library_coordinates_note_label": "This GPS coords are needed to display the library in a map",
+  "app.containers.RegisterNewLibrary.library_coordinates": "Are you sit in to library, yes click the button otherwise enter manually",
 
   "app.containers.RegisterNewLibrary.subject_label":"Library disciplinary sector",
   "app.containers.RegisterNewLibrary.opac_label":"Library Online Catalog (OPAC)",

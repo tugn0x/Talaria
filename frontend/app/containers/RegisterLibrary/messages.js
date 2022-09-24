@@ -246,8 +246,8 @@ library_location_label: {
 },
 
 library_coordinates_note: {
-  id: 'app.containers.RegisterNewLibrary.library_coordinates_note_label',
-  defaultMessage: 'Location',
+  id: 'app.containers.RegisterNewLibrary.library_coordinates_note',
+  defaultMessage: 'This GPS coords are needed to display the library in a map',
 },
 
 

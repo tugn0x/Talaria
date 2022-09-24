@@ -50,10 +50,12 @@ const RegisterLibrary = (props) => {
 
     const getLocation = () => {
         if (!navigator.geolocation) {
-          setStatus('Geol ocation is not supported by your browser');
+          setStatus('Geolocation is not supported by your browser');
         } else {
-          setStatus('Locating your library location...');
-          navigator.geolocation.getCurrentPosition((position) => {
+            setStatus('Locating your library location...');
+            if (lng===null)  
+                fields.geolocation_spinner.hidden=false;
+            navigator.geolocation.getCurrentPosition((position) => {
             setStatus(null);
             setLat(position.coords.latitude);
             setLng(position.coords.longitude);
@@ -64,7 +66,9 @@ const RegisterLibrary = (props) => {
         }
       }
    
-
+      useEffect(() => {
+        fields.geolocation_spinner.hidden=true;
+     }, [lng])
      
     // Fai le chiamate per le option list
     useEffect(() => {
@@ -94,6 +98,8 @@ const RegisterLibrary = (props) => {
             fields.subject_id.hidden=false;
             fields.showfullProfile.hidden = true;                             
         }
+
+        fields.geolocation_spinner.hidden=true;
 
         //set profile
         setData({...data, 'profile_type': basicProfile?1:2})
@@ -174,7 +180,12 @@ const RegisterLibrary = (props) => {
     }
 
     const GetBrowserCoordinates = (ev) => {
-        getLocation()
+            getLocation()
+            if (lng===null && lat===null)
+            {    
+                setLng(0)
+                setLat(0)
+            }
     }
 
 
