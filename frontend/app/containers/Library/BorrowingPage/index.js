@@ -169,15 +169,29 @@ const BorrowingPage = (props) => {
      
 
      const updateISSNISBNReference=(refdata,borrowingReq,filter)=>{
+
+        let data = 
+        {"issn":refdata.issn,
+        "pub_title":refdata.pub_title,
+        "part_title":refdata.part_title,
+        "authors":refdata.authors}
+  
         let newBorrowing={
             id: borrowingReq.id,
             borrowing_library_id:match.params.library_id,
-            'reference': refdata,
+            'reference': data,
         }
 
         console.log("updateISSNOnBorrowing!",newBorrowing)
-
-        dispatch(requestUpdateBorrowing(borrowingReq.id,match.params.library_id,newBorrowing,intl.formatMessage({id: "app.global.updatedMessage"}),filter))         
+        dispatch(requestUpdateBorrowing(borrowingReq.id,match.params.library_id,newBorrowing,intl.formatMessage({id: "app.global.updatedMessage"}),filter))
+        
+        //dispatch another request to update in the archived table
+        let archiveddata = 
+        {"issn":refdata.issn,
+        "pub_title":refdata.pub_title,
+        "part_title":refdata.part_title,
+        "authors":refdata.authors}
+        //dispatch action to insert
      }
 
      async function setReceivedRequest (id,filter) {
