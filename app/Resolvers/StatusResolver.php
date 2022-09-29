@@ -55,7 +55,7 @@ class StatusResolver
         /*
          * Status Change Flow Tree
          */
-        $this->flow_tree = config('dd_flow.status_resolver.'.get_class($this->model).'.flow_tree');
+        $this->flow_tree = config('status_flow.status_resolver.'.get_class($this->model).'.flow_tree');
 
         /*
          * check status change possibilities
