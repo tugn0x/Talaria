@@ -1,11 +1,5 @@
 @import '../../scss/variables';
 
-/* button {
-    &.active {
-        color: red
-    }
-} */
-
 .wizard-form {
     button{
         max-width: 150px;
@@ -72,14 +66,48 @@ $circleWidth: 40px;
 
 .summary-wizard {
     .row {
-        padding: 2rem 0;
+        width: 100%;
+        padding: 1rem 0;
         border-bottom: 1px solid $dark-text;
         &:first-child {
-            border-top: 1px solid $dark-text;
+            // border-top: 1px solid $dark-text;
         }
         
     }
+    & institution_country_name {
+        display: none;
+    }
+
+
     .btn {
-        margin-top: 40px;
+        margin-top: 80px;
+        width: 200px;
+        height: 60px;
     }
 }
+
+p:first-child {
+    font-weight: bold;
+ }
+
+ .weight-bold {
+    font-weight: bold;
+ }
+
+ h3 {
+    text-align: center;
+ }
+ .container_summary {
+  columns: 3 auto;
+  margin: 5px;
+  padding: 30px;
+  font-size: 14px;
+  }
+
+  .vertical-center {
+    margin: 0;
+    text-align: center;
+    position: relative;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }

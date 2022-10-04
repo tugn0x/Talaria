@@ -18,6 +18,12 @@ export default defineMessages({
     id: 'app.libraries.subject_id',
     defaultMessage: 'Subject ID',
   },
+
+  subject_name: {
+    id: 'app.libraries.subject_name',
+    defaultMessage: 'subject_name',
+  },
+
   country_id: {
     id: 'app.libraries.country_id',
     defaultMessage: 'Country ID',

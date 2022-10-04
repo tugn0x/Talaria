@@ -50,9 +50,6 @@ export const fields = {
   
         order: 2,
     },
-
-   
-
     library_coordinates_txt_long: {
         type: "text",
         name: "lon",
@@ -60,9 +57,6 @@ export const fields = {
         group: "step_1",
         order: 3,
     },
-
-   
-
     library_coordinates_txt_lat: {
         type: "text",
         name: "lat",
@@ -70,7 +64,6 @@ export const fields = {
         group: "step_1",
         order: 4,
     },
-
     library_coordinates_note: {
         type: "Label",
         required: false,
@@ -81,7 +74,6 @@ export const fields = {
         group: "step_1",
         order: 5,
     },
-
     geolocation_spinner: {
         type: "spinner",
         name: "geolocation_spinner",
@@ -90,18 +82,6 @@ export const fields = {
         group: "step_1",
         order: 6,
     },
-
-    // library_id: { 
-    //     type: "map-selector",
-    //     name: 'library_id',
-    //     nolabel: true,
-    //     width: "col-md-12",
-    //     group: "step_1",
-    //     freeSearch: true,
-    //     required: true,
-    //     order:1,
-    //     hidden:true
-    // },
     name: {
         type: "text",
         required: true,
@@ -126,10 +106,6 @@ export const fields = {
         group: "step_1",
         order: 9,
     },
-
-
-
-
     country_id: {
         type: "custom-select",
         required: true,
@@ -159,7 +135,6 @@ export const fields = {
         width: "col-sm-6",
         order: 12,
     },
-
     postcode: {
         type: "number",
         required: true,
@@ -170,7 +145,6 @@ export const fields = {
         width: "col-sm-6",
         order: 13,
     },
-
     address: {
         type: "text",
         required: true,
@@ -181,7 +155,6 @@ export const fields = {
         width: "col-sm-12",
         order: 14,
     },
-
    library_contact_label: {
         type: "Label",
         required: false,
@@ -193,7 +166,6 @@ export const fields = {
         group: "step_1",
         order: 15,
     },
-
     ill_email: {
         type: "text",
         required: true,
@@ -203,7 +175,6 @@ export const fields = {
         width: "col-sm-6",
         order: 16,
     },
-
     ill_phone: {
         type: "text",
         name: "ill_phone",
@@ -212,7 +183,6 @@ export const fields = {
         width: "col-sm-6",
         order: 17,
     },
-
     ill_referent_name: {
         type: "text",
         name: "ill_referent_name",
@@ -220,7 +190,6 @@ export const fields = {
         width: "col-sm-12",
         order: 18,
     },
-
     ill_institution_label: {
         type: "Label",
         required: false,
@@ -232,7 +201,6 @@ export const fields = {
         group: "step_1",
         order: 19,
     },
-
     institution_type_id: {
         type: "custom-select",
         required: true,
@@ -242,9 +210,7 @@ export const fields = {
         options: "institution_type_id",
         order: 20,
        // selectedOption: "institution_type_id"
-        
     },
-
     institution_country_id: {
         type: "custom-select",
         required: true,
@@ -267,14 +233,13 @@ export const fields = {
     },
     suggested_institution_name: {
         type: "text",
-        name:"suggested_institution_name",
         required: false,
-        width: "col-md-12",
+        name: "suggested_institution_name",
         group: "step_1",
-        order: 23,
+        width: "col-sm-12",
         hidden: true,
+        order: 23,
     },
-
     projects_label: {
         type: "Label",
         required: false,
@@ -286,7 +251,6 @@ export const fields = {
         group: "step_1",
         order: 24,
     },
-
     project_id: {
         nolabel: true,
         type: "list-checkbox",
@@ -295,7 +259,6 @@ export const fields = {
         group: "step_1",
         order: 25,
     },
-
     volunteer_library_label: {
         type: "Label",
         required: false,
@@ -308,7 +271,6 @@ export const fields = {
         group: "step_1",
         order: 26,
     },    
-
     showfullProfile: {
         type: "Button",
         label:"Click here",
@@ -317,7 +279,6 @@ export const fields = {
         group: "step_1",
         order: 27,
     },
-
     opac_label: {
         type: "Label",
         required: false,
@@ -330,7 +291,6 @@ export const fields = {
         group: "step_1",
         order: 28,
     },
-
     opac: {
         type: "text",
         required: false,
@@ -340,7 +300,6 @@ export const fields = {
         hidden: true,
         order: 29,
     },
-
     subject_label: {
         type: "Label",
         required: false,
@@ -353,7 +312,6 @@ export const fields = {
         group: "step_1",
         order: 30,
     },
-
     subject_id: {
         type: "custom-select",
         required: false,
@@ -364,7 +322,6 @@ export const fields = {
         hidden: true,
         order: 31,
     },
-    
     ill_service_conditions: {
         type: "Label",
         required: false,
@@ -377,7 +334,6 @@ export const fields = {
         group: "step_1",
         order: 32
     },
-
     ill_user_cost: {
         type: "number",
         required: false,
@@ -386,7 +342,6 @@ export const fields = {
         group: "step_1",
         order: 33,
     },
-
     ill_service_conditions_other: {
         type: "Label",
         required: false,
@@ -399,8 +354,6 @@ export const fields = {
         group: "step_1",
         order: 34,
     },
-
-
     ill_cost: {
         type: "number",
         required: false,
@@ -441,5 +394,20 @@ export const fields = {
         group: "step_1",
         order: 38,
     },    
+    country_name: {
+        type: "text",
+        name: "country_name",
+        width: "col-md-6",
+        order: 39,
+        hidden:true
+    },
+
+    institution_country_name: {
+        type: "custom-select",
+        name: "institution_country_name",
+        width: "col-md-6",
+        order: 40,
+        hidden:true
+    },
 }
 

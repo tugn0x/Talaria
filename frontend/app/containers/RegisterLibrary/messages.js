@@ -29,7 +29,7 @@ export default defineMessages({
   },
   step_4: {
     id: 'app.containers.RegisterNewLibrary.step_4',
-    defaultMessage: 'Summary',
+    defaultMessage: 'Summary Report',
   },
   createMessage: {
     id: 'app.containers.RegisterNewLibrary.createMessage',
@@ -57,6 +57,12 @@ export default defineMessages({
     id: 'app.libraries.subject_id',
     defaultMessage: 'Subject',
   },
+
+  subject_name: {
+    id: 'app.libraries.subject_name',
+    defaultMessage: 'Subject',
+  },
+
   country_id: {
     id: 'app.libraries.country_id',
     defaultMessage: 'Country',
@@ -179,9 +185,25 @@ export default defineMessages({
     defaultMessage: 'Institution Type',
   },
 
+  institution_type_name: {
+    id: 'app.libraries.institution_type_name',
+    defaultMessage: 'Institution Type Name',
+  },
+  
+
   institution_country_id: {
     id: 'app.libraries.institution_country_id',
     defaultMessage: 'Institution Country',
+  },
+
+  institution_country_name: {
+    id: 'app.libraries.institution_country_name',
+    defaultMessage: 'Institution Country name',
+  },
+  
+  country_name: {
+    id: 'app.libraries.country_name',
+    defaultMessage: 'Country name',
   },
 
 ill_referent_name: {
@@ -207,6 +229,11 @@ alt_name: {
 suggested_institution_name: {
   id: 'app.libraries.suggested_institution_name',
   defaultMessage: 'Your institution Name',
+},
+
+institution_name: {
+  id: 'app.libraries.institution_name',
+  defaultMessage: 'Institution Name',
 },
 
 ill_help_other: {
