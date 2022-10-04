@@ -424,6 +424,7 @@
   "app.requests.request_pdf_editorial":"Richiesto versione originale (non versione OA)",
   "app.requests.borrowing_notes": "Note interne",
   "app.requests.lending_notes": "Note interne",
+  "app.requests.max_file_upload": "caricamento massimo del file (in MB)",
   "app.requests.fulfill_location": "Locazione in scaffale",
   "app.patronrequest.delivery_format.file":"File",
   "app.patronrequest.delivery_format.papercopy":"Carta",

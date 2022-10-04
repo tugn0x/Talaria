@@ -422,6 +422,8 @@
   "app.requests.request_pdf_editorial":"Need PDF editorial version (not OA author version",  
   "app.requests.borrowing_notes": "Internal notes",
   "app.requests.lending_notes": "Internal notes",
+  "app.requests.max_file_upload": "Max File Upload (in MB)",
+  "app.requests.exceed_max_file_upload": "Upload failed, you have exceed the allowed maximum file upload",
   "app.requests.fulfill_location": "Shelf",
   "app.patronrequest.delivery_format.file":"File",
   "app.patronrequest.delivery_format.papercopy":"Paper",
