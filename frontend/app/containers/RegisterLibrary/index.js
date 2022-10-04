@@ -108,8 +108,6 @@ const RegisterLibrary = (props) => {
         //set profile
         setData({...data, 'profile_type': basicProfile?1:2})
 
-        //alert(JSON.stringify(props.countriesOptionList)) 
-        //alert(JSON.stringify(fields.suggested_institution_name))
     },[])
 
     // Filtra i CAMPI / Fields da mostrare a seconda dello step in cui ti trovi
@@ -207,23 +205,11 @@ const RegisterLibrary = (props) => {
             fields.suggested_institution_name.hidden=true
         }
 
-        
-        // if (field_name==='institution_id' && value.value===0)
-        // {
-        //     alert('in') 
-        //     setData({...data, 'suggested_institution_name':'0000000'})    
-        //     alert(JSON.stringify(data))
-        // }
-
         if (field_name === "institution_id" && value.value === 0)
             fields.suggested_institution_name.hidden = false;
 
-        
         setData({...data, [field_name]: value})
     }
-
-
-
 
     const showlibraryposition = (position) => {
         if (position.lon!=null && position.lat!=null)
@@ -256,7 +242,6 @@ const RegisterLibrary = (props) => {
             fields.opac_label.hidden=true;
             fields.subject_id.hidden=true;
             fields.subject_label.hidden=true;
-    
             fields.showfullProfile.label=intl.formatMessage(wizardMessages.switchToFullProfile)
             
         }
@@ -264,15 +249,12 @@ const RegisterLibrary = (props) => {
         {            
             fields.subject_id.required = true;
             fields.opac.required = true;
-            
             fields.opac.hidden=false;
             fields.opac_label.hidden=false;
             fields.subject_id.hidden=false;
             fields.subject_label.hidden=false;
-            
             fields.showfullProfile.label=intl.formatMessage(wizardMessages.switchToBasicProfile)            
         }
-        //setData({...data, [field_name]: value})
     }
 
     // Check validation on change input
