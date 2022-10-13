@@ -143,7 +143,7 @@
   "app.containers.RegisterNewLibrary.step_1": "Informazioni generali 1/2",
   "app.containers.RegisterNewLibrary.step_2": "Informazioni generali 2/2",
   "app.containers.RegisterNewLibrary.step_3": "Informazioni amministrative",
-  "app.containers.RegisterNewLibrary.step_4": "Riepilogo",
+  "app.containers.RegisterNewLibrary.step_4": "Riepilogo di sintesi",
   "app.containers.RegisterNewLibrary.placesFreeSearchPlaceholder": "Trova la tua biblioteca",
   "app.containers.RegisterNewLibrary.ill_help_other": "Hai bisogno di aiuto? Scrivi una mail a  nilde-tech@area.bo.cnr.it",
   "app.containers.RegisterNewLibrary.ill_service_conditions_other": "Modalità di servizio verso le altre biblioteche",  
@@ -153,9 +153,8 @@
   "app.containers.RegisterNewLibrary.ill_institution_label": "Istituzione",
   "app.containers.RegisterNewLibrary.library_contact_label": "Contatti servizio ILL",
   "app.containers.RegisterNewLibrary.library_location_label": "Località/Indirizzo completo",
-
-  "app.containers.RegisterNewLibrary.library_coordinates": "Click the button below OR Enter manually",
-  "app.containers.RegisterNewLibrary.library_coordinates_note": "This GPS coords are needed to display the library in a map",
+  "app.containers.RegisterNewLibrary.library_coordinates": "Sei seduto in biblioteca, vero?",
+  "app.containers.RegisterNewLibrary.library_coordinates_note": "Queste coordinate GPS sono necessarie per visualizzare la libreria in una mappa",
   "app.containers.RegisterNewLibrary.subject_label":"Settore disciplinare",
   "app.containers.RegisterNewLibrary.opac_label":"Online Catalog (OPAC)",
   "app.containers.RegisterNewLibrary.switchToBasicProfile":"Scegli il profilo base",
@@ -266,6 +265,9 @@
   "app.libraries.alt_name": "Nome alternativo ",
   "app.libraries.dd_user_cost":"Costo per articolo",
   "app.libraries.suggested_institution_name":"Nome istituto suggerito ",
+  "app.libraries.lat":"Latitute",
+  "app.libraries.long":"Longitude",
+
 
   "app.references.labels": "Etichette",
   "app.references.labelAs": "Etichetta come",
@@ -424,6 +426,7 @@
   "app.requests.request_pdf_editorial":"Richiesto versione originale (non versione OA)",
   "app.requests.borrowing_notes": "Note interne",
   "app.requests.lending_notes": "Note interne",
+  "app.requests.max_file_upload": "caricamento massimo del file (in MB)",
   "app.requests.fulfill_location": "Locazione in scaffale",
   "app.patronrequest.delivery_format.file":"File",
   "app.patronrequest.delivery_format.papercopy":"Carta",

@@ -46,14 +46,20 @@ const RegisterLibrary = (props) => {
     const [lat, setLat] = useState(null);
     const [lng, setLng] = useState(null);
     const [status, setStatus] = useState(null);
+    const [countryname, setCountryName] = useState(null);
+    const [subjectname, setSubjectName] = useState(null);
+    const [institutiontypename, setInstitutionTypeName] = useState(null);
+    const [institutionname, setInstitutionName] = useState(null);
 
 
     const getLocation = () => {
         if (!navigator.geolocation) {
-          setStatus('Geol ocation is not supported by your browser');
+          setStatus('Geolocation is not supported by your browser');
         } else {
-          setStatus('Locating your library location...');
-          navigator.geolocation.getCurrentPosition((position) => {
+            setStatus('Locating your library location...');
+            if (lng===null)  
+                fields.geolocation_spinner.hidden=false;
+            navigator.geolocation.getCurrentPosition((position) => {
             setStatus(null);
             setLat(position.coords.latitude);
             setLng(position.coords.longitude);
@@ -64,7 +70,9 @@ const RegisterLibrary = (props) => {
         }
       }
    
-
+      useEffect(() => {
+        fields.geolocation_spinner.hidden=true;
+     }, [lng])
      
     // Fai le chiamate per le option list
     useEffect(() => {
@@ -95,11 +103,11 @@ const RegisterLibrary = (props) => {
             fields.showfullProfile.hidden = true;                             
         }
 
+        fields.geolocation_spinner.hidden=true;
+
         //set profile
         setData({...data, 'profile_type': basicProfile?1:2})
 
-        //alert(JSON.stringify(props.countriesOptionList)) 
-        //alert(JSON.stringify(fields.suggested_institution_name))
     },[])
 
     // Filtra i CAMPI / Fields da mostrare a seconda dello step in cui ti trovi
@@ -121,6 +129,30 @@ const RegisterLibrary = (props) => {
        setData({...data, 'profile_type': basicProfile?1:2})
     }, [basicProfile])
 
+
+    useEffect(() => {
+        setData({...data, 'country_name': countryname})
+     }, [countryname])
+
+
+     useEffect(() => {
+        setData({...data, "subject_name": subjectname})
+     }, [subjectname])
+
+     useEffect(() => {
+        setData({...data, "institution_type_name": institutiontypename})
+     }, [institutiontypename])
+
+
+     useEffect(() => {
+        setData({...data, "institution_name": institutionname})
+     }, [institutionname])
+
+     useEffect(() => {
+        setData({...data, "suggested_institution_name": null})
+     }, [custominstitutionname])
+     
+
     // Cambia Step
     const onChangeStep = (formData, newStep) => {
         setData({...data, ...formData})
@@ -133,6 +165,7 @@ const RegisterLibrary = (props) => {
         if (field_name === "institution_type_id")
         {
             setInstitutiontypeid(value.value);
+            setInstitutionTypeName(value.label);
             setInstitutiontypeid((institutiontypeid) => {
                 console.log("institution type id: " + institutiontypeid); 
                 fields.suggested_institution_name.hidden = true;
@@ -143,22 +176,37 @@ const RegisterLibrary = (props) => {
         {
             setCountryid(value.value);
             setCountryid((countryid) => {
-            console.log("Country id: " + countryid); 
+            setData({...data, "institution_country_name": value.label})
             fields.suggested_institution_name.hidden = true;
                 if (countryid!==0 && institutiontypeid!==0)
                 {
                     dispatch(requestGetInstitutionsByTypeByCountryOptionList(null,countryid,institutiontypeid));
                     setInstitutionPresent(true);
+                    console.log("Institution not present")
+                    setInstitutionName(null) 
+                   
                 }
                 return countryid;
             });
         }
 
+        if (field_name === "country_id" && value.value !== 0)
+            setCountryName(value.label)
+
+        if (field_name === "subject_id" && value.value !== 0)
+            setSubjectName(value.label)   
+
+        if (field_name === "institution_type_id" && value.value !== 0)
+            setInstitutionTypeName(value.label) 
+
+        if (field_name === "institution_id" && value.value !== 0)
+        {
+            setInstitutionName(value.label) 
+            fields.suggested_institution_name.hidden=true
+        }
+
         if (field_name === "institution_id" && value.value === 0)
             fields.suggested_institution_name.hidden = false;
-    
-        if (field_name === "institution_id" && value.value !== 0)
-            fields.suggested_institution_name.hidden = true;
 
         setData({...data, [field_name]: value})
     }
@@ -169,12 +217,15 @@ const RegisterLibrary = (props) => {
             console.log("lon:" + position.lon + " lat: " + position.lat)
             setLongtitude(position.lon);
             setLatitude(position.lat);
-            setData({...data, "lon": position.lon,"lat": position.lat, "subject_id":0 })
+            //setData({...data, "lon": position.lon,"lat": position.lat, "subject_id":0 })
+            setData({...data, "lon": position.lon,"lat": position.lat })
         }
     }
 
     const GetBrowserCoordinates = (ev) => {
         getLocation()
+        if (lng===null && lat===null)
+        {    setLng(0);setLat(0)   }
     }
 
 
@@ -191,7 +242,6 @@ const RegisterLibrary = (props) => {
             fields.opac_label.hidden=true;
             fields.subject_id.hidden=true;
             fields.subject_label.hidden=true;
-    
             fields.showfullProfile.label=intl.formatMessage(wizardMessages.switchToFullProfile)
             
         }
@@ -199,15 +249,12 @@ const RegisterLibrary = (props) => {
         {            
             fields.subject_id.required = true;
             fields.opac.required = true;
-            
             fields.opac.hidden=false;
             fields.opac_label.hidden=false;
             fields.subject_id.hidden=false;
             fields.subject_label.hidden=false;
-            
             fields.showfullProfile.label=intl.formatMessage(wizardMessages.switchToBasicProfile)            
         }
-        //setData({...data, [field_name]: value})
     }
 
     // Check validation on change input
@@ -272,26 +319,34 @@ const RegisterLibrary = (props) => {
 
                    
 
-
             {/* FINITI GLI STEP CARICA IL RIEPILOGO E FAI IL SUBMIT */}
             {currentStep === totalSteps && 
                 <div className="summary-wizard">
                     <h3>{intl.formatMessage(wizardMessages.step_4)}</h3>
-                    {Object.keys(data).map(key => 
-                        <Row key={key}>
-                            <Col sm={6}>
-                                {messages[key] && intl.formatMessage(messages[key])}
-                            </Col>
-                            <Col sm={6}>
-                                {data[key]}
-                            </Col>
-                        </Row>
-                    )}
+                   <div class="container_summary "> 
+                    {
+                            Object.keys(data).map((key, index) => {
+                                return (key!=='profile_type' && key!=='country_id'  && key!=='institution_type_id' && key!=='institution_country_id' && key!=='institution_id' && key!=='subject_id' && key!=='project_id') ? (
+                                    data[key]!==null && <div class="row" key={index}>
+                                    <>
+                                    <div className="col-md-6"> 
+                                            <div class="weight-bold">{messages[key] && intl.formatMessage(messages[key])}</div>
+                                            <div>{data[key]}</div>
+                                     </div>
+                                    </>
+                                </div> 
+                            
+                            ) : ''
+                            }
+                        )
+                    }
+                </div>
 
-
+                <div class="vertical-center">
                     <Button color="brown" onClick={() => dispatch(requestPostPublicLibrary(data, intl.formatMessage(wizardMessages.createMessage)))}>
                         {intl.formatMessage(globalMessages.submit)} 
                     </Button>
+                    </div>
 
                    
                 </div>

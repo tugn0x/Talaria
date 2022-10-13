@@ -18,6 +18,9 @@ const FulfillLendingRequest = props => {
         SetfileuploadStatus(fileupload)
     }
 
+    const MaxFileUpload = process.env.MAX_UPLOAD_FILE;
+    
+    
     useEffect(() => {      
       
         if(fileuploadstatus && fileuploadstatus.status=="uploaded")
@@ -136,6 +139,7 @@ return (
                 <Row>
                     <Col sm={12}> 
                         <FileUpload  parentCallback={callbackuploadFunction} cleanuploadprops={true} data={data} customClass="detail-body"/>
+                        <p>{intl.formatMessage({id: "app.requests.max_file_upload"})} : {MaxFileUpload}</p>
                     </Col>
                 </Row>            
                 }

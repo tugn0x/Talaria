@@ -15,6 +15,8 @@ const FileUpload = (props) => {
   const {dispatch, data, fileupload, cleanuploadprops}=props
   const [Showspinner, setShowspinner] = useState(null)
   const [ShowMessage, setShowMessage] = useState(null)
+  const MaxFileUpload = process.env.MAX_UPLOAD_FILE;
+
   const intl = useIntl()
   const uploadFile = (data, file, originalfilename, hideMessageFlag) => {
       if (hideMessageFlag==1)
@@ -52,7 +54,12 @@ return (
     }
     {
           (fileupload.status=='failed') &&  (!ShowMessage) &&
-          <span className="text-danger"> <h3>{intl.formatMessage({id: "app.requests.UploadFail"})}</h3></span>                        
+          <span className="text-danger"><h4>{intl.formatMessage({id: "app.requests.UploadFail"})}</h4></span>                        
+    }
+
+    {
+          (fileupload.status=='The Uploaded File Exceeds the defined upload_max_filesize')  &&
+          <span className="text-danger"><h4>{intl.formatMessage({id: "app.requests.exceed_max_file_upload"})}</h4></span>                        
     }
     </span>
     }

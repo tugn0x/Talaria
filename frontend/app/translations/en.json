@@ -143,7 +143,7 @@
   "app.containers.RegisterNewLibrary.step_1": "General informations 1/2",
   "app.containers.RegisterNewLibrary.step_2": "General informations 2/2",
   "app.containers.RegisterNewLibrary.step_3": "Administrative informations",
-  "app.containers.RegisterNewLibrary.step_4": "Summary",
+  "app.containers.RegisterNewLibrary.step_4": "Summary Report",
   "app.containers.RegisterNewLibrary.placesFreeSearchPlaceholder": "Search for your library",
   "app.containers.RegisterNewLibrary.ill_help_other": "Have an inquiry? Please write an email to nilde-tech@area.bo.cnr.it",
   "app.containers.RegisterNewLibrary.ill_service_conditions_other": "ILL service to other libraries",
@@ -154,8 +154,7 @@
   "app.containers.RegisterNewLibrary.library_contact_label": "Service contacts",
   "app.containers.RegisterNewLibrary.library_location_label": "Library location & profile",
 
-  "app.containers.RegisterNewLibrary.library_coordinates": "Click the button below OR Enter manually",
-  "app.containers.RegisterNewLibrary.library_coordinates_note_label": "This GPS coords are needed to display the library in a map",
+  "app.containers.RegisterNewLibrary.library_coordinates": "Are you sitting in the library, if yes?",
 
   "app.containers.RegisterNewLibrary.subject_label":"Library disciplinary sector",
   "app.containers.RegisterNewLibrary.opac_label":"Library Online Catalog (OPAC)",
@@ -425,6 +424,8 @@
   "app.requests.request_pdf_editorial":"Need PDF editorial version (not OA author version",  
   "app.requests.borrowing_notes": "Internal notes",
   "app.requests.lending_notes": "Internal notes",
+  "app.requests.max_file_upload": "Max File Upload (in MB)",
+  "app.requests.exceed_max_file_upload": "Upload failed, you have exceed the allowed maximum file upload",
   "app.requests.fulfill_location": "Shelf",
   "app.patronrequest.delivery_format.file":"File",
   "app.patronrequest.delivery_format.papercopy":"Paper",
