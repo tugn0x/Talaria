@@ -38,11 +38,13 @@ function LibraryPage(props) {
 
 
   //filter library dashboard menu/route based on profile type (1=borrow, 2=borrow+lending)
+  //TODO: filtrare route in base a STATO della biblio (es: se è disattivata nascondere tutto tranne /manage/stato o /manage/profile)
   useEffect(() => { 
     console.log("libraryRoutes routes",libroutes)
-    let libraryRoutes=libroutes    
+    let libraryRoutes=libroutes               
     
-    console.log("libraryRoutes PRIMA",libraryRoutes)
+    console.log("libraryRoutes PRIMA",libraryRoutes)          
+
       if(library.library.profile_type==1) //only borrowing
       {
         //remove lending

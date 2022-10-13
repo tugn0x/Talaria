@@ -25,7 +25,10 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_POST_PUBLIC_LIBRARY,
           REQUEST_SEARCH_PLACES_BY_TEXT,
           REQUEST_GET_LIBRARY_LIST,
-          REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST
+          REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST,
+          REQUEST_STATUS_CHANGE_LIBRARY,
+          REQUEST_STATUS_CHANGE_INSTITUTION,
+          REQUEST_DELETE_INSTITUTION
 
 } from './constants';
 import {
@@ -58,18 +61,20 @@ import {
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
 import {getUsersList, updateUser, createUser, getUsersOptionsList,
-        getRoles, getUser, getLibrary, getLibrariesList, updateLibrary,deleteLibrary,
-        createLibrary, getInstituionTypeList, getInstitutionsList,
-        getInstitution, updateInstitution, getInstitutionTypesOptionList,  getInstitutionsByTypeByCountryOptionList,
+        getRoles, getUser, getInstitution,
+        createLibrary, getInstituionTypeList, 
+        getInstitutionTypesOptionList,  getInstitutionsByTypeByCountryOptionList,
         getInstitutionsOptionList,
-        createInstitution, getCountriesOptionsList,
+        getCountriesOptionsList,
         getProject, getProjectsList, updateProject,getProjectsOptionList, getlibraryProjectsOptionList,
         createProject, getLibrariesSubjects,createPublicLibrary,
         getLibrariesListNearTo} from 'utils/api'
 
-        import {
-          getPlacesByText
-          } from 'utils/apiExternal';   
+import {admin_getLibrariesList,admin_deleteLibrary,admin_statusChangeLibrary,
+  admin_getInstitutionsList, admin_createInstitution,admin_updateInstitution,admin_deleteInstitution,admin_statusChangeInstitution,
+  admin_getLibrary, admin_updateLibrary} from 'utils/apiAdmin'
+
+import { getPlacesByText } from 'utils/apiExternal';   
 
 export function* requestUserSaga(action) {
   const options = {
@@ -193,7 +198,7 @@ export function* requestGetLibrarySaga(action) {
     id: action.id
   };
   try {
-   const request = yield call(getLibrary, options);
+   const request = yield call(admin_getLibrary, options);
    yield put(requestGetLibrarySuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
@@ -206,7 +211,7 @@ export function* requestUpdateLibrarySaga(action) {
     body: action.request
   };
   try {
-    const request = yield call(updateLibrary, options);
+    const request = yield call(admin_updateLibrary, options);
     yield call(requestGetLibrariesListSaga);
     yield put(push("/admin/libraries"));
     yield call(() => toast.success(action.message))
@@ -219,10 +224,14 @@ export function* requestGetLibrariesListSaga(action = {}) {
   const options = {
     method: 'get',
     page: action.page ? action.page : '1',
-    query: action.query ? action.query : ''
+    pageSize: action.pageSize ? action.pageSize : null,
+    /* implement library list filtering
+    query: action.query ? action.query : '',
+    filterBy: action.filterBy ? action.filterBy : '',
+    filterVal: action.filterBy ? action.filterVal : '',*/
   };
   try {
-    const request = yield call(getLibrariesList, options);
+    const request = yield call(admin_getLibrariesList, options);
     yield put(requestGetLibrariesListSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
@@ -235,7 +244,23 @@ export function* requestDeleteLibrarySaga(action) {
     id: action.id
   };
   try {
-    const request = yield call(deleteLibrary, options);
+    const request = yield call(admin_deleteLibrary, options);
+    yield call(requestGetLibrariesListSaga);
+    yield put(push("/admin/libraries"));
+    yield call(() => toast.success(action.message))
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestStatusChangeLibrarySaga(action) {  
+  const options = {
+    method: 'put',
+    body: {'status': action.status},
+    library_id: action.library_id,    
+  };
+  try {
+    const request = yield call(admin_statusChangeLibrary, options);
     yield call(requestGetLibrariesListSaga);
     yield put(push("/admin/libraries"));
     yield call(() => toast.success(action.message))
@@ -261,11 +286,31 @@ export function* requestGetInstitutionsListSaga(action = {}) {
   const options = {
     method: 'get',
     page: action.page ? action.page : '1',
-    query: action.query ? action.query : ''
+    pageSize: action.pageSize ? action.pageSize : null,
+    /* implement library list filtering
+    query: action.query ? action.query : '',
+    filterBy: action.filterBy ? action.filterBy : '',
+    filterVal: action.filterBy ? action.filterVal : '',*/
   };
   try {
-    const request = yield call(getInstitutionsList, options);
+    const request = yield call(admin_getInstitutionsList, options);
     yield put(requestGetInstitutionsListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestStatusChangeInstitutionSaga(action) {  
+  const options = {
+    method: 'put',
+    body: {'status': action.status},
+    institution_id: action.institution_id,    
+  };
+  try {
+    const request = yield call(admin_statusChangeInstitution, options);
+    yield call(requestGetInstitutionsListSaga);
+    yield put(push("/admin/institutions"));
+    yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -279,6 +324,21 @@ export function* requestGetInstitutionSaga(action) {
   try {
    const request = yield call(getInstitution, options);
    yield put(requestGetInstitutionSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestDeleteInstitutionSaga(action) {
+  const options = {
+    method: 'delete',
+    id: action.id
+  };
+  try {
+    const request = yield call(admin_deleteInstitution, options);
+    yield call(requestGetInstitutionsListSaga);
+    yield put(push("/admin/institutions"));
+    yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
   }
@@ -500,7 +560,7 @@ export function* requestLibraryListNearToSaga(action = {}) {
     yield put(requestError(e.message));
   }
 }
-
+ 
 
 /**
  * Root saga manages watcher lifecycle
@@ -515,6 +575,7 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_GET_LIBRARY, requestGetLibrarySaga);
   yield takeLatest(REQUEST_GET_LIBRARIES_LIST, requestGetLibrariesListSaga);
   yield takeLatest(REQUEST_DELETE_LIBRARY, requestDeleteLibrarySaga);
+  yield takeLatest(REQUEST_STATUS_CHANGE_LIBRARY,requestStatusChangeLibrarySaga);
   yield takeLatest(REQUEST_UPDATE_LIBRARY, requestUpdateLibrarySaga);
   yield takeLatest(REQUEST_POST_LIBRARY, requestPostLibrarySaga);
   yield takeLatest(REQUEST_POST_PUBLIC_LIBRARY, requestPostPublicLibrarySaga);
@@ -528,6 +589,8 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_UPDATE_PROJECT, requestUpdateProjectSaga);
   yield takeLatest(REQUEST_POST_PROJECT, requestPostProjectSaga);
   yield takeLatest(REQUEST_GET_INSTITUTIONS_LIST, requestGetInstitutionsListSaga);
+  yield takeLatest(REQUEST_STATUS_CHANGE_INSTITUTION,requestStatusChangeInstitutionSaga);
+  yield takeLatest(REQUEST_DELETE_INSTITUTION, requestDeleteInstitutionSaga);
   yield takeLatest(REQUEST_INSTITUTIONSTYPES_OPTIONLIST, requestInstitutionTypeOptionListSaga);
   
   

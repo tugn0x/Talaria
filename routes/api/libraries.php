@@ -12,8 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-
+//PUBLIC API
 Route::group([
     'namespace' => 'Libraries',
     'prefix' => 'libraries',
@@ -47,7 +46,7 @@ Route::group([
         Route::delete('{library}/library-users/{library_user}', 'LibraryUserController@delete')->name('delete'); //hard delete
     });
 
-    /* LIBRARY CATALOGS */
+    /* LIBRARY CATALOGS - actually not used*/
     Route::group([
         'as' => 'api.v1.libraries.library-catalogs.',
     ], function () {
@@ -92,9 +91,7 @@ Route::group([
     Route::get('option-items', 'LibraryController@optionList')->name('option-items');
     Route::get('{id}', 'LibraryController@show')->where('id', '[0-9]+')->name('show');
     Route::get('{id}/departments', 'LibraryController@departments')->where('id', '[0-9]+')->name('departments');
-    Route::put('{id}', 'LibraryController@update')->where('id', '[0-9]+')->name('update');
-    Route::post('', 'LibraryController@create')->name('create');
-    Route::delete('{id}', 'LibraryController@delete')->where('id', '[0-9]+')->name('delete'); //soft delete
+    Route::put('{id}', 'LibraryController@update')->where('id', '[0-9]+')->name('update');    
 
 
 

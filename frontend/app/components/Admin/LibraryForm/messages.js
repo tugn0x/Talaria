@@ -122,10 +122,10 @@ export default defineMessages({
     id: 'app.libraries.administrative_info',
     defaultMessage: 'Administrative Info',
   },
-  granted_permissions: {
+  /*granted_permissions: {
     id: 'app.libraries.granted_permissions',
     defaultMessage: 'Users permissions',
-  },
+  },*/
   updateSubmitText: {
     id: 'app.libraries.updateSubmitText',
     defaultMessage: 'Update Reference',

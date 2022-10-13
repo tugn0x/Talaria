@@ -25,14 +25,13 @@ function LibraryPage(props) {
     const isNew = !params.id || params.id === 'new'
     const library = admin.library
     // const libraryOptionList = patron.libraryOptionList
-    
+     
     useEffect(() => {
       if(!isLoading && !isNew) {
          dispatch(requestGetLibrary(params.id))
       }
       if(!isLoading){
-        dispatch(requestGetRoles())
-        dispatch(requestUsersOptionList())
+        dispatch(requestGetRoles())        
         dispatch(requestGetInstitutionsOptionList())
         dispatch(requestGetCountriesOptionList())
         dispatch(requestLibrarySubjectOptionList())
@@ -45,12 +44,10 @@ function LibraryPage(props) {
           <LibraryForm 
             library={!isNew ? library : null}
             loading={isLoading}
-            usersOptionList={admin.usersOptionList}
             institutionsOptionList={admin.institutionsOptionList}
             countriesOptionList={admin.countriesOptionList}
             librarySubjectOptionList={admin.librarySubjectOptionList}
             searches={{ 
-              usersOptionList: (input) => dispatch(requestUsersOptionList(input)),
               institution_type_id: (input) => dispatch(requestGetInstitutionsOptionList(input)), 
               country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
               subject_id: (input) => dispatch(requestLibrarySubjectOptionList(input)) 

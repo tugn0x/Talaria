@@ -1,0 +1,139 @@
+@import '../../../scss/vendors/variables';
+
+/*.request_id {
+    margin-left: 5px;
+    display: inline !important;
+
+    & a:hover {
+        text-decoration: none;
+    }
+}
+
+.borrowing_notes {
+    margin-left: 5px;
+}
+
+.request_note,
+.fulfill_notes,
+.deliverymethod,
+.unfilled_reason,
+.deskDeliveryFormat {
+    display: inline;
+    margin-left: 5px;
+}
+
+.status-date {
+    display: block;
+    font-size: 0.85em;
+    & .status-time {
+        padding-left:16px;
+    }
+}
+
+.status-operator {
+    font-size: 0.85em;
+}
+
+.daysago {
+    margin-top:5px;
+    display: block;
+    font-size: 0.85em;
+}
+
+.fullfilment {
+    margin-top:5px;
+    display: block;
+}
+
+.borrowing_request_icons {
+    margin-top:15px;
+    @include media-breakpoint-down(xs) {
+        background-color: $tools-menu;                
+    }
+}
+
+.lendersbox {
+    margin:0 10px 0 10px;
+}
+
+.status-text {
+    color: $alternative-text;
+    font-size: 0.85em;
+}
+
+.status-icon{
+    height: 15px;
+    width: 15px;
+    vertical-align: middle;
+    border-radius: 50%;
+    display: inline-block;
+    border:1px solid;
+    border-color: #B48372;
+    margin: 0 2px 0 0;
+    &.newrequest
+    {
+        background-color: transparent;    
+    }
+
+    &.readyToDelivery,           
+    &.documentReady,
+    &.deliveredToUserDirect,
+    &.deliveredToUser    
+    {
+        background-color: green;
+    }
+
+    &.fulfilled
+    {
+        background-color: lightgreen;
+    }
+
+    
+    &.notReceived,
+    &.canceled,
+    &.canceledDirect,
+    &.documentNotReady,
+    &.notDeliveredToUserDirect,
+    &.notDeliveredToUser  {
+        background-color: red;
+    }
+    
+    &.requested,
+    &.cancelRequested{
+        background-color: #FBB133;
+    }        
+}
+
+.access_document_icons {
+    display:block;
+    margin:5px;
+}*/
+
+.library_item {
+    border-bottom: 1px solid $active;
+}
+
+.library_operations {
+    text-align: right;
+
+    & a {
+        margin-right: 5px;
+     }
+   
+    & a:last-child {
+        margin-right: 0;
+    }
+
+}
+
+.subscriptionlink {
+    margin-right: 2px;
+}
+
+.library_info {
+    font-size: 0.9em;    
+
+    & .institution,.projects {
+        margin-top:5px;
+    }
+}

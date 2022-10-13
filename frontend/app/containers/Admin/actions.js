@@ -8,6 +8,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_ERROR, STOP_LOADING, REQUEST_USERS_LIST, REQUEST_USERS_LIST_SUCCESS,
    REQUEST_UPDATE_USER, REQUEST_UPDATE_USER_SUCCESS,
    REQUEST_USER, REQUEST_USER_SUCCESS,
+   REQUEST_STATUS_CHANGE_LIBRARY,
    REQUEST_USERS_OPTIONLIST, REQUEST_USERS_OPTIONLIST_SUCCESS,
    REQUEST_GET_LIBRARY, REQUEST_GET_LIBRARY_SUCCESS,
    REQUEST_GET_LIBRARIES_LIST, REQUEST_GET_LIBRARIES_LIST_SUCCESS,
@@ -36,7 +37,9 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
    REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
    REQUEST_GET_LIBRARY_LIST,
-   REQUEST_GET_LIBRARY_LIST_SUCCESS
+   REQUEST_GET_LIBRARY_LIST_SUCCESS,
+   REQUEST_STATUS_CHANGE_INSTITUTION,
+   REQUEST_DELETE_INSTITUTION
  
 } from "./constants";
 
@@ -126,11 +129,12 @@ export function requestUsersOptionListSuccess(result) {
   };
 }
 
-export function requestGetLibrariesList(page = '1', query) {
+export function requestGetLibrariesList(page = '1', pageSize, searchFilter) {
   return {
     type: REQUEST_GET_LIBRARIES_LIST,
     page,
-    query
+    pageSize,
+    searchFilter,    
   };
 }
 
@@ -182,10 +186,19 @@ export function requestGetLibrary(id) {
   };
 }
 
-export function deleteLibrary(id,message) {
+export function requestDeleteLibrary(id,message) {
   return {
     type: REQUEST_DELETE_LIBRARY,
     id,
+    message
+  };
+}
+
+export function requestStatusChangeLibrary(library_id,status,message) {
+  return {
+    type: REQUEST_STATUS_CHANGE_LIBRARY,
+    library_id,
+    status,
     message
   };
 }
@@ -288,11 +301,12 @@ return {
   };
 } */
 
-export function requestGetInstitutionsList(page, query) {
+export function requestGetInstitutionsList(page = '1', pageSize, searchFilter) {
   return {
     type: REQUEST_GET_INSTITUTIONS_LIST,
     page,
-    query
+    pageSize,
+    searchFilter    
   };
 }
 
@@ -307,6 +321,14 @@ export function requestUpdateInstitution(request, message) {
   return {
     type: UPDATE_INSTITUTION,
     request,
+    message
+  };
+}
+
+export function requestDeleteInstitution(id,message) {
+  return {
+    type: REQUEST_DELETE_INSTITUTION,
+    id,
     message
   };
 }
@@ -332,6 +354,16 @@ export function requestGetInstitutionSuccess(result) {
     result
   };
 }
+
+export function requestStatusChangeInstitution(institution_id,status,message) {
+  return {
+    type: REQUEST_STATUS_CHANGE_INSTITUTION,
+    institution_id,
+    status,
+    message
+  };
+}
+
 
 export function requestGetInstitutionsByTypeByCountryOptionList(request, countryid, institutiontypeid) {
   return {

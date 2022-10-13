@@ -40,7 +40,13 @@ class LibraryPolicy extends BasePolicy
     {
         return $this->canManage($user, $model);
     }
-    
+
+    public function update(User $user, Model $model)
+    {
+        //il manager puo' aggiornare i dati della sua biblio        
+        return $this->canManage($user,$model);
+    }
+
     public function manage(User $user,Model $model)
     {
         //return $this->canManage($user,$model);

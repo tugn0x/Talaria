@@ -11,6 +11,6 @@ $factory->define(Library::class, function (Faker $faker) {
         'institution_id' => 1,
         'subject_id'=>1,
         'country_id'=>1,
-        'status'=>10,
+        'status'=>1,
     ];
 });
