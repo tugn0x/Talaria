@@ -45,6 +45,10 @@ export default defineMessages({
     id: `${scope}.admin`,
     defaultMessage: 'Administration',
   },
+  accountant: {
+    id: `${scope}.accountant`,
+    defaultMessage: 'Accountant',
+  },
   manager: {
     id: `${scope}.manager`,
     defaultMessage: 'Management',
@@ -68,5 +72,9 @@ export default defineMessages({
   ManagerDashBoard: {
     id: `${scope}.ManagerDashboard`,
     defaultMessage: 'Manager Dashboard',
+  },
+  AccountantDashBoard: {
+    id: `${scope}.AccountantDashboard`,
+    defaultMessage: 'Accountant Dashboard',
   },
 });

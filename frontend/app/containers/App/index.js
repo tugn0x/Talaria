@@ -66,7 +66,7 @@ function App(props) {
 
         <Route path="/user" component={({match}) =>  props.isLogged?<UserPage {...authProps} changeLang={changeLanguage}/>:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} /> }  />
         <Route path="/patron" component={({match}) =>  props.isLogged?<PatronPage {...authProps} headermenu={true} changeLang={changeLanguage} />:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} /> }  />
-        <Route path="/admin" component={({match}) =>  props.isLogged?<AdminPage {...authProps} headermenu={true} changeLang={changeLanguage}  />:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} /> }  />
+        <Route path="/admin" component={({match}) =>  props.isLogged?<AdminPage {...authProps} headermenu={true} changeLang={changeLanguage}  />:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} /> }  />        
         <Route path="/library/:library_id" component={({match}) =>  props.isLogged?<LibraryPage {...authProps} match={match} headermenu={true} changeLang={changeLanguage} />:<LoginPage {...authProps} match={match} tokensExistsExpired={props.tokensExistsExpired}  changeLang={changeLanguage} /> }  />
         
 

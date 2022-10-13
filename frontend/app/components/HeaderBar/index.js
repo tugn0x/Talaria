@@ -108,10 +108,10 @@ function HeaderBar(props) {
                           </Row>
                         </div>
                       )}
-                      {checkRole(auth, "manager") && !checkRole(auth, "super-admin") && (
+                       {checkRole(auth, "manager") && !checkRole(auth, "super-admin") && (
                         <div className="resources-menu">
                           <Row className="head item">
-                              <i className={`fas fa-cog`}></i>
+                              <i className={`fas fa-home`}></i>
                               <span><FormattedMessage {...messages.manager} /></span>
                           </Row>
                           <Row className="item">
@@ -121,6 +121,19 @@ function HeaderBar(props) {
                           </Row>
                         </div>
                       )}
+                      {checkRole(auth, "accountant") && (
+                        <div className="resources-menu">
+                          <Row className="head item">
+                              <i className={`fas fa-wallet`}></i>
+                              <span><FormattedMessage {...messages.accountant} /></span>
+                          </Row>
+                          <Row className="item">
+                              <NavLink to={`/admin`} activeClassName="current">
+                              <FormattedMessage {...messages.AccountantDashBoard} />
+                              </NavLink>    
+                          </Row>
+                        </div>
+                      )}                     
                       {
                         checkRole(auth, "patron") && (
                         <div className="resources-menu">
