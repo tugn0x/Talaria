@@ -119,10 +119,16 @@ class RolesAndPermissionsSeeder extends Seeder
                     'create',
                     'update',
                     'delete',
+                ],
+                \App\Models\Projects\Project::class => [
+                    'show',
+                    'create',
+                    'update',
+                    'delete',                  
                 ]
             ],
         ],
-        /*'Accountant' => [
+        'Accountant' => [
             'GENERIC' => [
 //                'Query'
             ],
@@ -137,7 +143,7 @@ class RolesAndPermissionsSeeder extends Seeder
                     'show',
                 ]
             ],
-        ],*/
+        ],
 
 //
 //        'Lybrary Operator' => [

@@ -13,7 +13,7 @@ class BasePolicy
 
     public function before($user, $ability)
     {
-        if ($user->hasRole('super-admin')) {
+        if ($user->hasRole('super-admin')||$user->hasRole('manager')) {
             return true;
         }
     }
