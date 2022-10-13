@@ -56,6 +56,10 @@ export default defineMessages({
         id: `${scope}.Requests`,
         defaultMessage: 'My Requests',
     },
+    Payments: {
+        id: `${scope}.Payments`,
+        defaultMessage: 'Payments',
+    },
     Library: {
         id: `${scope}.Library`,
         defaultMessage: 'Library',
@@ -119,6 +123,10 @@ export default defineMessages({
     InstitutionTypes: {
         id: `${scope}.InstitutionTypes`,
         defaultMessage: 'Institution Types',
+    },
+    Consortiums: {
+        id: `${scope}.Consortiums`,
+        defaultMessage: 'Consortiums',
     },
     Projects: {
         id: `${scope}.Projects`,
@@ -202,4 +210,15 @@ export default defineMessages({
         id: `${scope}.Tags`,
         defaultMessage: 'Tags',
     },
+
+    Subscriptions: {
+        id: `${scope}.Subscriptions`,
+        defaultMessage: 'Subscriptions',
+    },
+
+    LibrariesSubscriptionsList: {
+        id: `${scope}.LibrariesSubscriptionsList`,
+        defaultMessage: 'Libraries Subscriptions List',
+    }
+
 });

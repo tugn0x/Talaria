@@ -1,8 +1,8 @@
 import request from "./request";
 
-const BASE_URL = process.env.API_URL;
+export const BASE_URL = process.env.API_URL;
 
-const apiTokenSingleton = () => {
+export const apiTokenSingleton = () => {
   let token = null;
   return {
     get: () => {
@@ -14,9 +14,9 @@ const apiTokenSingleton = () => {
   }
 };
 
-const apiToken = apiTokenSingleton();
+export const apiToken = apiTokenSingleton();
 
-const defaultOption = {
+export const defaultOption = {
     headers: new Headers({
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -24,7 +24,8 @@ const defaultOption = {
       }),
 };
 
-const getOption = (option) => {
+export const getOption = (option) => {
+  console.log("GETOPTION:",option)
     if(apiToken.get()) {
       if(defaultOption.headers.has("Authorization")) {
         defaultOption.headers.set('Authorization', `Bearer ${apiToken.get()}`);
@@ -628,13 +629,6 @@ export const updateLibrary = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}?include=granted_permissions,institution,country,departments`, options)
 };
 
-export const deleteLibrary = (options) => {
-  const library_id = options.id
-  options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/${library_id}`, options)
-};
-
-
 export const getLibrariesList = (options) => {
   const page = options.page;
   const query = options.query;
@@ -698,11 +692,6 @@ export const getInstitution = (options) => {
   return request(`${BASE_URL}/api/v1/institutions/${institution_id}?include=granted_permissions`, options)
 };
 
-export const updateInstitution = (options) => {
-  const institution_id = options.body.id
-  options = getOption(options);
-  return request(`${BASE_URL}/api/v1/institutions/${institution_id}?include=granted_permissions`, options)
-};
 
 export const getInstitutionTypesOptionList = (options) => {
   options = getOption(options);
@@ -731,10 +720,7 @@ export const getCountriesOptionsList = (options) => {
   return request(`${BASE_URL}/api/v1/commons/countries/option-items?label=name&q=${query}`, options)
 };
 
-export const createInstitution = (options) => {
-  options = getOption(options);
-  return request(`${BASE_URL}/api/v1/institutions?include=granted_permissions`, options)
-};
+
 
 export const getInstituionTypeList = (options) => {
   options = getOption(options);
