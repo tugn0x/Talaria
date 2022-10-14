@@ -103,18 +103,12 @@ class RolesAndPermissionsSeeder extends Seeder
 //            ],
 //        ],
 
-        'Manager Nilde' => [
+        'Manager' => [
             'GENERIC' => [
 //                'Query'
             ],
             'BY_MODEL' => [
                 \App\Models\Libraries\Library::class => [
-                    'show',
-//                    'create',
-                    'update',
-//                    'delete',
-                ],
-                \App\Models\Users\User::class => [
                     'show',
                     'create',
                     'update',
@@ -125,10 +119,16 @@ class RolesAndPermissionsSeeder extends Seeder
                     'create',
                     'update',
                     'delete',
+                ],
+                \App\Models\Projects\Project::class => [
+                    'show',
+                    'create',
+                    'update',
+                    'delete',                  
                 ]
             ],
         ],
-        'Accountant Nilde' => [
+        'Accountant' => [
             'GENERIC' => [
 //                'Query'
             ],

@@ -2,6 +2,7 @@
 
 use App\Models\BaseObserver;
 use \Auth;
+use Carbon\Carbon;
 
 class LibraryObserver extends BaseObserver
 {
@@ -23,34 +24,40 @@ class LibraryObserver extends BaseObserver
     {
          //ogni nuova biblio va messa in stato=new
          $model->status=config("constants.library_status.new");
+         $model->registration_date=Carbon::now();
          return parent::creating($model);
     }
 
 
     public function saving($model)
     {
-        return parent::saving($model);
+        //sto aggiornando lo stato e voglio abilitare la biblio
+        if($model->id && $model->isDirty('status')&&$model->status==config("constants.library_status.enabled"))
+        {
+            if(!$model->canBeEnabled()) return false;
+        } 
 
+        return parent::saving($model);
     }
 
     public function saved($model)
-    {
+    {        
         return parent::saved($model);
 
     }
 
     public function deleting($model)
     {
-        //non posso eliminare una biblio attiva
-        if(in_array($model->status,[config("constants.library_status.enabled"),config("constants.library_status.renewing"),config("constants.library_status.enabled_wait_fax")]))
-            return false;
-
-        return parent::deleting($model);
+        //posso eliminare SOLO una biblio nuova
+        if($model->status==config("constants.library_status.new"))            
+            return parent::deleting($model);
+        return false;    
     }
 
     public function restoring($model)
     {
         return parent::restoring($model);
     }
-
+    
+    
 }

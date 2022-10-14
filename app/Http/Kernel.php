@@ -81,6 +81,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'get_parameter_access_token' => \App\Http\Middleware\AccessToken::class,
+        'roles' => \App\Http\Middleware\Roles::class,
         'recaptcha' => \App\Http\Middleware\Recaptcha::class,
         'iso_18626' => \App\Http\Middleware\ISO18626::class,
     ];

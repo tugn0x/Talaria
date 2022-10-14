@@ -214,8 +214,12 @@ function SimpleList(props) {
                       <Pagination
                           current_page={current_page}
                           total_pages={total_pages}
-                          linkTopage={(page,pageSize)=>linkTo(generatePath(`${match.path}`, {
-                            page: page
+                          total={total}                         
+                          count={count}
+                          per_page={per_page}                                                    
+                          linkToPage={(page,pageSize)=>linkTo(generatePath(`${match.path}`, {
+                            page: page,
+                            pageSize: pageSize
                           }))} 
                           setPage={(page) => linkTo(generatePath(`${match.path}`, {
                             page: page

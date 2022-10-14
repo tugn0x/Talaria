@@ -16,6 +16,7 @@ use Silber\Bouncer\Database\Ability;
 use App\Models\Users\Permission;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Expression;
+use App\Resolvers\StatusResolver;
 
 class Library extends BaseModel
 {
@@ -24,7 +25,7 @@ class Library extends BaseModel
 
 
     /*
-     * Fillable attributes
+     * MASS Fillable attributes
      */
     protected $fillable = [
         'name',    
@@ -57,12 +58,10 @@ class Library extends BaseModel
         'currency_id',
         'ill_IFLA_voucher',
         'ill_cost_in_voucher',
-             
-        'status',
-        'profile_type', //1-borr, 2-borr+lend
-        'external', //true/false        
-        'registration_date',
-
+                     
+        'profile_type', //1-borr, 2-borr+lend                
+                          
+        
         /*info administrative */
          'vatnumber',   //MOVE ELSEWHERE ?
          'fiscalcode',   //MOVE ELSEWHERE ?
@@ -104,6 +103,14 @@ class Library extends BaseModel
         'administrative_phone',
     ];
 
+    //NOT MASS FILLABLE
+    protected $guarded=[
+        'status',
+        'external',
+        'registration_date',
+    ];
+    
+
     protected $constantFields=['status'];
 
     /*
@@ -118,8 +125,10 @@ class Library extends BaseModel
      */
     protected $attributes = [
       'name' => '',
-      'status' => 0
+      'status' => 0 //disabled 
     ];
+
+    
 
     protected $casts = [
       //'name' => 'json'
@@ -179,30 +188,7 @@ class Library extends BaseModel
     public function catalogs()
     {
         return $this->belongsToMany(Catalog::class);
-    }
-
-    public function operators($ability=null){               
-
-        /*$users = User::all();      //WARNING: may be slow!!   
-        $lib=self::find($this->id);
-        $filtered=new Collection();
-
-        if($ability)
-        {
-            $filtered = $users->filter(function ($user) use ($ability,$lib) 
-            {                
-                return ($user->can($ability, $lib)||$user->can("manage", $lib))&& ($user->isNotA('super-admin') );
-            });        
-        }
-
-        return $filtered;*/
-        $perms=$this->hasManyThrough(Permission::class, Ability::class, 'entity_id')
-            ->where('abilities.entity_type', self::class);    
-        $perm_ability=$ability?$perms->where('abilities.name',$ability):$perms;
-        $operators=User::whereIn('id',$perm_ability->get()->unique('entity_id')->pluck('entity_id'));
-        return $operators;
-    }
-
+    }    
 
     public function borrowingrequests()
     {
@@ -227,11 +213,11 @@ class Library extends BaseModel
 
     //filter only active (not suspended) libraries
     public function scopeActive($query) {
-        return $query->where('status','=',1); 
+        return $query->where('status',config("constants.library_status.enabled")); 
     }
 
     public function scopeLender($query) {
-        return $query->where('profile_type','=',2); //1=borrow, 2=borrow+lender
+        return $query->where('profile_type',2); //1=borrow, 2=borrow+lender
     }
 
     public function scopeNearTo($query, $latitude,$longitude,$max_range=null)
@@ -282,4 +268,43 @@ class Library extends BaseModel
         ])->orderBy("distance","asc");    
                 
     }
+
+    public function operators($ability=null){               
+
+        /*$users = User::all();      //WARNING: may be slow!!   
+        $lib=self::find($this->id);
+        $filtered=new Collection();
+
+        if($ability)
+        {
+            $filtered = $users->filter(function ($user) use ($ability,$lib) 
+            {                
+                return ($user->can($ability, $lib)||$user->can("manage", $lib))&& ($user->isNotA('super-admin') );
+            });        
+        }
+        return $filtered;*/
+        
+        $perms=$this->hasManyThrough(Permission::class, Ability::class, 'entity_id')
+            ->where('abilities.entity_type', self::class);    
+        $perm_ability=$ability?$perms->where('abilities.name',$ability):$perms;
+        $operators=User::whereIn('id',$perm_ability->get()->unique('entity_id')->pluck('entity_id'));
+        return $operators;
+    }
+
+    public function manageOperators() {
+        return $this->operators("manage");
+    }
+
+    public function changeStatus($newstatus,$others=[]) {
+        $sr=new StatusResolver($this);                                
+
+        $sr->changeStatus($newstatus,$others);
+        return $this;
+    }
+
+     //can disabled only if has no libraries
+     public function canBeEnabled() {
+        return $this->institution->isActive();
+    }
+
 }

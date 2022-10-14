@@ -8,6 +8,6 @@ trait StatusResolverTrait
     }
 
     public function getStatus() {
-        return $this->attributes[$this->statusField];
+        return $this->attributes[$this->getStatusField()];
     }    
 }

@@ -31,7 +31,9 @@ const routes = [
   {
     path: '/manage', name: `MyLibrary`, header: true, component: SubRouteSwitch, permissions: ['manage','borrow','lend','manage-users'], resource: {type: 'libraries', key: 'library_id',},
     children: [
-      { path: '/profile', icon: 'info-circle', exact: true, name: `LibraryProfile`, component: ManageLibraryPage, url: '/manage/profile',permissions: ['manage'], sidebar: true, order:1},
+      //TODO { path: '/status', icon: 'info-circle', exact: true, name: `Status`, component: Fake, url: '/manage/status',permissions: ['manage'], sidebar: true, order:1},
+      //TODO { path: '/subscription', icon: 'info-circle', exact: true, name: `Status`, component: Fake, url: '/manage/status',permissions: ['manage'], sidebar: true, order:1},
+      { path: '/profile', icon: 'info-circle', exact: true, name: `LibraryProfile`, component: ManageLibraryPage, url: '/manage/profile',permissions: ['manage'], sidebar: true, order:1},      
       // vari pezzi dei dati della biblio (dati servizio, dati anag, ...)
       { path: '/service', icon: 'cog',exact: true, name: `LibraryServices`, component: Fake,url: '/manage/service',permissions: ['manage'],sidebar: true, order:2  },
       { path: '/linkingservices', icon: 'link', name: `LibraryLinkingServices`, component: Fake,url: '/manage/linkingservices',permissions: ['manage'],sidebar: true, order:2  },

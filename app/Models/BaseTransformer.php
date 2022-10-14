@@ -65,14 +65,19 @@ class BaseTransformer extends TransformerAbstract
 
     protected function applyPolicy(Model $model, $to_merge)
     {
+
+        //disallow policy because Admin/manager haven't abilities and can manage everything!
+        $user=Auth::user();                      
+        if (!($user->hasRole('super-admin')||$user->hasRole('manager'))) 
+            $this->disallow_policy=true; 
+
         if($this->disallow_policy !== true)
         {
             $policy = $this->getPolicy();
             $excludes = [];
 
             foreach ($policy as $permission => $fields)
-            {
-                $user = Auth::user();
+            {                
                 //se l'utente non è settato nessun campo viene nascosto
                 //utile per le azioni che lanciate da command o dalla queue
                 //NOTA: 24/11/2020 ho aggiunto il controllo sul nr delle abilities altrimenti la $user->cannot si pianta! (probabile bugfix i Bouncer)

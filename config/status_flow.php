@@ -91,7 +91,12 @@ return [
                         ],
                         'jobs'=>[]
                        
-                    ],                   
+                    ],   
+                    /*'userAskCancel'	=> [
+                        'role'  =>  ['patron'],
+                        'next_statuses'  =>  ['Canceled','received','waitingForCost','notReceived','readyToDelivery'],
+                        'constraints'   =>  ['isOwner'],
+                    ],*/                
                 ],
             ],
             'App\Models\Requests\BorrowingDocdelRequest'=> [
@@ -316,30 +321,94 @@ return [
                         'jobs' => ['App\\Jobs\\BorrowingRequestUpdateNotify']
                     ],
                            
-                ]
-               
-                              
-         
-            /*
-            /* 'userAskCancel'	=> [
-                        'role'  =>  ['patron'],
-                        'next_statuses'  =>  ['Canceled','received','waitingForCost','notReceived','readyToDelivery'],
-                        'constraints'   =>  ['isOwner'],
-                    ],
-                               
-            'App\Models\Requests\LendingDocdelRequest'=> [
+                ],
+            ],
+
+            'App\Models\Libraries\Library'=> [
+
+                    'flow_tree' => [
+                        //disabled
+                        config("constants.library_status.disabled") => [
+                            'role'  =>  ['super-admin','manager'],
+                            'next_statuses'  =>  [config("constants.library_status.enabled"),config("constants.library_status.renewing")],                            
+                            'notify' => [
+                                'Model'=>'manageOperators', 
+                            ], 
+                        ],
+                        config("constants.library_status.disabled_bad") => [
+                            'role'  =>  ['super-admin','manager'],
+                            'next_statuses'  =>  [config("constants.library_status.enabled"),config("constants.library_status.renewing")],
+                            'notify' => [
+                                'Model'=>'manageOperators', 
+                            ], 
+                        ],
+                        config("constants.library_status.disabled_subscription_expired") => [
+                            'role'  =>  ['super-admin','manager'],
+                            'next_statuses'  =>  [config("constants.library_status.renewing")],
+                            'notify' => [
+                                'Model'=>'manageOperators', 
+                            ], 
+                        ],
+                        config("constants.library_status.disabled_didntpaid") => [
+                            'role'  =>  ['super-admin','manager'],
+                            'next_statuses'  =>  [config("constants.library_status.enabled"),config("constants.library_status.renewing")],
+                            'notify' => [
+                                'Model'=>'manageOperators', 
+                            ], 
+                        ],
+                        //new
+                        config("constants.library_status.new") => [
+                            'role'  =>  ['super-admin','manager'],
+                            'next_statuses'  =>  [config("constants.library_status.enabled"),config("constants.library_status.disabled")],                            
+                        ],
+                        //enabled
+                        config("constants.library_status.enabled")	=> [
+                            'role'  =>  ['super-admin','manager'],
+                            'next_statuses'  =>  [config("constants.library_status.disabled"), config("constants.library_status.disabled_bad"), config("constants.library_status.disabled_didntpaid"),config("constants.library_status.renewing")],
+                            'constraints'   =>  ["canBeEnabled"], 
+                            'notify' => [
+                                'Model'=>'manageOperators', 
+                            ],                             
+                        ],
+                        //renewing
+                        config("constants.library_status.renewing")=> [
+                            'role'  =>  ['super-admin','manager'],
+                            'next_statuses'  =>  [config("constants.library_status.enabled"),config("constants.library_status.disabled"),config("constants.library_status.disabled_subscription_expired")],
+                            'notify' => [
+                                'Model'=>'manageOperators', 
+                            ], 
+                        ],
+                ],
+            
+            ],  
+            
+            'App\Models\Institutions\Institution'=> [
 
                 'flow_tree' => [
-                    'requested'	=> [
-                        'role'  =>  [],
-                        'next_statuses'  =>  [],
-                        'constraints'   =>  ['manage'],
+                    //disabled
+                    config("constants.institution_status.disabled") => [
+                        'role'  =>  ['super-admin','manager'],
+                        'next_statuses'  =>  [config("constants.institution_status.enabled")],     
+                        'constraints'   =>  ["canBeDisabled"],                         
+                        'notify' => [
+                            'Model'=>'manageOperators', 
+                        ], 
+                    ],
+                    config("constants.institution_status.enabled") => [
+                        'role'  =>  ['super-admin','manager'],
+                        'next_statuses'  =>  [config("constants.institution_status.disabled")],
+                        'notify' => [
+                            'Model'=>'manageOperators', 
+                        ], 
+                    ],
+                    config("constants.institution_status.pending") => [
+                        'role'  =>  ['super-admin','manager'],
+                        'next_statuses'  =>  [config("constants.institution_status.enabled")],
+                        'notify' => [
+                            'Model'=>'manageOperators', 
+                        ], 
                     ],
                 ]
-            ],
-                
-                */                
+            ]
         ],
-    ],
-
-];
+    ];

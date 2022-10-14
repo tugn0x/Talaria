@@ -5,6 +5,8 @@
  *
  */
 
+//TODO: REWRITE THIS COMPONENT USING LIBRARY API NOT ADMIN!, and without using grant options
+
 import React, {useEffect} from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';

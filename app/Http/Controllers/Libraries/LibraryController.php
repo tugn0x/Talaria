@@ -11,6 +11,7 @@ use App\Models\Libraries\DeliveryTransformer;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Institutions\Institution;
 use App\Models\Projects\Project;
+//use Illuminate\Support\Facades\Auth;
 
 class LibraryController extends ApiController
 {
@@ -98,7 +99,7 @@ class LibraryController extends ApiController
             $inst=Institution::firstOrNew(['name'=>$request->input('suggested_institution_name'),'institution_type_id'=>$request->input('institution_type_id'),'country_id'=>$request->input('institution_country_id')]);
             if(!$inst->exists) //not pulled from db so will be created as new
             {
-                $inst->status=0; //new institution with status=0
+                $inst->status=config("constants.institution_status.pending");; //new institution with pending status
                 $inst->save();                
             }
             //update library with correct institution (just created or existing)
@@ -150,5 +151,17 @@ class LibraryController extends ApiController
             //return $this->response->paginator($collection, new $this->transformer())->morph();
             return $this->response->collection($collection, new $this->transformer())->morph();
         }
+    }
+
+    //override     
+    public function index(Request $request)
+    {        
+        //$u=Auth::user();                      
+        //if (!($u->hasRole('super-admin')||$u->hasRole('manager'))) 
+        
+        //filter active only
+        $this->model=$this->model->active();
+
+        return parent::index($request);    
     }
 }

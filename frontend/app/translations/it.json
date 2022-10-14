@@ -134,6 +134,8 @@
   "app.containers.LibrariesListPage.header": "Biblioteche",
   "app.containers.LibrariesListPage.createNew": "Registra nuova biblioteca",
   "app.containers.LibrariesListPage.edit": "Modifica",
+  "app.containers.LibrariesListPage.askChangeStatusMessage":"Applicare questo stato?",
+  "app.containers.LibrariesListPage.statusAppliedMessage": "Stato cambiato correttamente",
   
   
   "app.containers.RegisterNewLibrary.header": "Registra la tua biblioteca",
@@ -500,8 +502,13 @@
   "app.components.HeaderBar.Libraries": "Biblioteche",
   "app.components.HeaderBar.Logout": "Esci",
   "app.components.HeaderBar.LoginSignup": "Accedi/Iscriviti",
-  "app.components.HeaderBar.Admin": "Admin",
+  "app.components.HeaderBar.admin": "Administration",
+  "app.components.HeaderBar.manager": "Management",
+  "app.components.HeaderBar.accountant": "Accountant",
   "app.components.HeaderBar.Patron": "Patron",
+  "app.components.HeaderBar.AdminDashboard": "Admin",
+  "app.components.HeaderBar.ManagerDashboard": "Gestionale",
+  "app.components.HeaderBar.AccountantDashboard": "Pagamenti",
 
   "app.components.SignupForm.header": "Registrati",
   "app.components.SignupForm.subtitle": "Crea un profilo",
@@ -574,5 +581,9 @@
   "app.routes.Library": "Biblioteca",
   "app.routes.Stats": "Statistiche",
   "app.routes.Licenses": "Licenze",
-  "app.routes.AllRequests":"Richieste orfane"
+  "app.routes.LibrariesSubscriptionsList":"Sottoscrizioni Biblioteche",
+  "app.routes.Subscriptions":"Sottoscrizioni",
+  "app.routes.AllRequests":"Richieste orfane",
+  "app.routes.Payments":"Pagamenti",
+  "app.routes.Status":"Stato"
 }

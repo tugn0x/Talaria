@@ -28,6 +28,14 @@ export default defineMessages({
     id: 'app.global.deleteMessage',
     defaultMessage: 'Delete this item?',
   },
+  askChangeStatusMessage:{
+    id: 'app.global.changeStatusMessage',
+    defaultMessage: 'Apply this status?',
+  },
+  statusAppliedMessage:{
+    id: 'app.global.statusAppliedMessage',
+    defaultMessage: 'Status changed',
+  },
   deletedMessage:{
     id: 'app.global.deletedMessage',
     defaultMessage: 'Item deleted',

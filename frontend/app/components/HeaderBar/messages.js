@@ -45,6 +45,14 @@ export default defineMessages({
     id: `${scope}.admin`,
     defaultMessage: 'Administration',
   },
+  accountant: {
+    id: `${scope}.accountant`,
+    defaultMessage: 'Accountant',
+  },
+  manager: {
+    id: `${scope}.manager`,
+    defaultMessage: 'Management',
+  },
   patron: {
     id: `${scope}.patron`,
     defaultMessage: 'Patron',
@@ -56,5 +64,17 @@ export default defineMessages({
   LoginSignup: {
     id: `${scope}.LoginSignup`,
     defaultMessage: 'Login/Signup',
+  },
+  AdminDashBoard: {
+    id: `${scope}.AdminDashboard`,
+    defaultMessage: 'Admin Dashboard',
+  },
+  ManagerDashBoard: {
+    id: `${scope}.ManagerDashboard`,
+    defaultMessage: 'Manager Dashboard',
+  },
+  AccountantDashBoard: {
+    id: `${scope}.AccountantDashboard`,
+    defaultMessage: 'Accountant Dashboard',
   },
 });

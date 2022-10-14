@@ -1,6 +1,6 @@
 <?php  namespace App\Http\Controllers;
 
-use Dingo\Api\Auth\Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Event;
@@ -156,7 +156,8 @@ class Dispatcher extends BaseController
 
         event($model->getTable() . '.store', $model);
 
-        $fillable = $model->getFillable();
+        $fillable = $model->getFillable();       
+
         $new_model = array_filter($request->only($fillable), function($val)
         {
             return !is_null($val);
@@ -164,9 +165,20 @@ class Dispatcher extends BaseController
 
         $model = $model->fill($new_model);
 
+
+        //if admin/manager update guarded fields (if presents in request) by properties
+        $u=Auth::user();                      
+        if ($u->hasRole('super-admin')||$u->hasRole('manager')) 
+        {
+            $guarded = $request->only($model->getGuarded());
+            foreach($guarded as $key => $value)
+                $model[$key]=$value;
+        }
+
+
         if( $onStoring )
             $model = call_user_func_array($onStoring, [$model, $request]);
-
+               
         $model->save();
 
         //If create fails
@@ -204,6 +216,7 @@ class Dispatcher extends BaseController
         event($model->getTable() . '.update', $model);
 
         $fillable = $model->getFillable();
+        
         /* BUG: con questo codice non pulisce i campi passati come null/vuoti
         $new_model = array_filter($request->only($fillable), function($val)
         {
@@ -217,6 +230,16 @@ class Dispatcher extends BaseController
          * fill the model with attributes
          */
         $model->fill($new_model);
+
+        //if admin/manager update guarded fields (if presents in request) by properties
+        $u=Auth::user();                      
+        if ($u->hasRole('super-admin')||$u->hasRole('manager')) 
+        {
+            $guarded = $request->only($model->getGuarded());
+            foreach($guarded as $key => $value)
+                $model[$key]=$value;
+        }
+
 
         /*
          * launch callback
