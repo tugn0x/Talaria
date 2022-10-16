@@ -10,3 +10,7 @@ perchè tutta la logica veniva gestita in modo comodo anche direttamente dal Mid
 
 Il protocollo accetta chiamate in HTTP POST con content-type XML e xml valido
 secondo l'XSD ISO-18262.xsd 
+
+
+NOTA: prendere l'ultima versione (2021) dello standard
+L'attuale codice non è allineato al 2021 !
