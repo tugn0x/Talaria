@@ -31,5 +31,6 @@ class DatabaseSeeder extends Seeder
          //  $this->call(BibliografySeeder::class);  
          //$this->call(NotificationsTableSeeder::class);      
          $this->call(CurrenciesSeeder::class); 
+         $this->call(IdentifierSeeder::class); 
     }
 }
