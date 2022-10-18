@@ -18,9 +18,10 @@ class AddLibraryIdentifiers extends Migration
             $table->string('name',10)->nullable(false);            
         });
 
-        Schema::create('library_identifiers', function (Blueprint $table) {
+        Schema::create('library_identifier', function (Blueprint $table) {
             $table->bigInteger('library_id');
-            $table->bigInteger('identifier_id');          
+            $table->bigInteger('identifier_id');                      
+            $table->string('cod',50)->nullable(false); 
         });
     }
 
@@ -32,6 +33,6 @@ class AddLibraryIdentifiers extends Migration
     public function down()
     {
         Schema::dropIfExists('identifiers');
-        Schema::dropIfExists('library_identifiers');
+        Schema::dropIfExists('library_identifier');
     }
 }
