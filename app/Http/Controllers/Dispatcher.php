@@ -164,18 +164,15 @@ class Dispatcher extends BaseController
         });
 
         $model = $model->fill($new_model);
-
-
+       
         //if admin/manager update guarded fields (if presents in request) by properties
-        $u=Auth::user();                      
-        if ($u->hasRole('super-admin')||$u->hasRole('manager')) 
+        $u=Auth::user();                                                  
+        if (!is_null($u) && ($u->hasRole('super-admin')||$u->hasRole('manager'))) 
         {
             $guarded = $request->only($model->getGuarded());
             foreach($guarded as $key => $value)
                 $model[$key]=$value;
         }
-
-
         if( $onStoring )
             $model = call_user_func_array($onStoring, [$model, $request]);
                
@@ -232,8 +229,8 @@ class Dispatcher extends BaseController
         $model->fill($new_model);
 
         //if admin/manager update guarded fields (if presents in request) by properties
-        $u=Auth::user();                      
-        if ($u->hasRole('super-admin')||$u->hasRole('manager')) 
+        $u=Auth::user();                                                  
+        if (!is_null($u) && ($u->hasRole('super-admin')||$u->hasRole('manager'))) 
         {
             $guarded = $request->only($model->getGuarded());
             foreach($guarded as $key => $value)

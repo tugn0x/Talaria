@@ -68,7 +68,7 @@ class BaseTransformer extends TransformerAbstract
 
         //disallow policy because Admin/manager haven't abilities and can manage everything!
         $user=Auth::user();                      
-        if (!($user->hasRole('super-admin')||$user->hasRole('manager'))) 
+        if (!(!is_null($user) && ($user->hasRole('super-admin')||$user->hasRole('manager')))) 
             $this->disallow_policy=true; 
 
         if($this->disallow_policy !== true)
