@@ -148,9 +148,7 @@ const RegisterLibrary = (props) => {
         setData({...data, "institution_name": institutionname})
      }, [institutionname])
 
-     useEffect(() => {
-        setData({...data, "suggested_institution_name": null})
-     }, [custominstitutionname])
+
      
 
     // Cambia Step
