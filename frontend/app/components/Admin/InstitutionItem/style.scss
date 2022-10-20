@@ -109,11 +109,11 @@
     margin:5px;
 }*/
 
-.library_item {
+.institution_item {
     border-bottom: 1px solid $active;
 }
 
-.library_operations {
+.institution_operations {
     text-align: right;
 
     & a {
@@ -128,4 +128,10 @@
 
 .subscriptionlink {
     margin-right: 2px;
+}
+
+
+.institution_info {      
+
+    
 }

@@ -53,7 +53,7 @@ export const canEnable = (inst) => {
 }
 
 export const canDelete = (inst) => {
-    return inst.status==0||inst.status==2
+    return inst.status==2
 }
 
 export const canDisable = (inst) => {
