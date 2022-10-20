@@ -21,6 +21,7 @@ import { compose } from 'redux';
 import {useIntl} from 'react-intl';
 import OASearchReference from '../OASearchReference';
 import {generateOpenURL} from '../../utils/openurl';
+import './style.scss';
 
 //import FindOA from '../../components/FindOA'
 
@@ -49,13 +50,13 @@ function HomePage(props) {
     
     history.push(customURL);
 }
-
+ 
   
   return ( //if registered or has many roles/abilities
     <>
       <BasePage {...props} routes={[]} messages={messages} >
-       <h1 style={{color: 'green'}}>{intl.formatMessage({id:'app.containers.HomePage.header'})}</h1>
-       <h3 style={{color: 'gray'}} className="mb-5">{intl.formatMessage({id:'app.containers.HomePage.subHeader'})}</h3>
+       <h1 className="header">{intl.formatMessage({id:'app.containers.HomePage.header'})}</h1>
+       <h3 className="subheader mb-5">{intl.formatMessage({id:'app.containers.HomePage.subHeader'})}</h3>
        
       <br/>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
