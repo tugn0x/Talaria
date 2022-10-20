@@ -144,7 +144,7 @@ const ReferenceFormContent = (props) => {
                             input={formData.pub_title ? formData.pub_title : ""}
                         />
                     </FormGroup>
-                    {(formData.material_type === 1 || formData.material_type === 3 || formData.material_type === 5) && 
+                    {(formData.material_type === 1 || formData.material_type === 2 || formData.material_type === 3 || formData.material_type === 5) && 
                     <FormGroup>
                         <Input 
                             label={formData.material_type === 1 ? intl.formatMessage({id: "app.references.part_title"}) : formData.material_type === 2 ? intl.formatMessage({id: "app.references.section"}): intl.formatMessage({id: "app.references.chapter"})}
@@ -162,7 +162,7 @@ const ReferenceFormContent = (props) => {
                             required={(formData.material_type!==1)?true:false}
                         />
                     </FormGroup>}
-                    {(formData.material_type === 1) &&                     
+                    {(formData.material_type === 1 || formData.material_type === 2) &&                     
                     <FormGroup >
                         <Input 
                             label={formData.material_type === 1? intl.formatMessage({id: "app.references.authors"}):intl.formatMessage({id: "app.references.part_authors"})}
@@ -233,7 +233,7 @@ const ReferenceFormContent = (props) => {
                                 maxLength={4}
                             />
                         </FormGroup>}
-                        {(formData.material_type === 1) && 
+                        {(formData.material_type === 1 || formData.material_type === 2) && 
                         <FormGroup className="col-md-3 col-lg-2">
                             <Input 
                                 label={intl.formatMessage({id: "app.references.volume"})}
@@ -264,7 +264,7 @@ const ReferenceFormContent = (props) => {
                                 input={formData.pages ? formData.pages : ""}
                                 //required={formData.material_type===1?requiredFields:false}
                                 required={formData.material_type===1?true:false}
-                                maxLength={4}
+                                maxLength={10}
                             />
                         </FormGroup>}
                     </Row>
@@ -327,7 +327,7 @@ const ReferenceFormContent = (props) => {
                                 required={false}
                             />
                         </FormGroup>         
-                        {(formData.material_type === 1 || formData.material_type === 2)&&         
+                        {/* {(formData.material_type === 1 || formData.material_type === 2)&&         
                         <FormGroup className="col-sm-3">
                             <Input 
                                 label={intl.formatMessage({id: "app.references.acnp_cod"})}
@@ -344,7 +344,7 @@ const ReferenceFormContent = (props) => {
                                 input={formData.sbn_docid ? formData.sbn_docid : ""}
                                 required={false}
                             />
-                        </FormGroup>  }
+                        </FormGroup>  } */}
 
 
                     </Row>   
