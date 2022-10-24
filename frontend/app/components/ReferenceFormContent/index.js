@@ -86,10 +86,12 @@ const ReferenceFormContent = (props) => {
     }
 
     const clearForm=() => {
-        setFormData({});
+        setFormData({material_type: formData.material_type});
+        console.log("Send Form", formData)
+        setIsSubmitDisabled(true)
     }
 
-
+    
 
     return (                
             <FormContainer onSubmit={onSubmit} className={formClasses.join(" ")} noValidate>                
@@ -151,7 +153,7 @@ const ReferenceFormContent = (props) => {
                             required={formData.material_type === 1?true:false}
                         />
                     </FormGroup>}
-                    {(formData.material_type !== 1 ) && 
+                    {(formData.material_type === 2 || formData.material_type === 3 || formData.material_type === 4 || formData.material_type === 5 ) &&                     
                     <FormGroup >
                         <Input 
                             label={intl.formatMessage({id: "app.references.authors"})}
@@ -160,13 +162,14 @@ const ReferenceFormContent = (props) => {
                             required={(formData.material_type!==1)?true:false}
                         />
                     </FormGroup>}
-                    {(formData.material_type === 1 || formData.material_type === 2) && 
+                    {(formData.material_type === 1 || formData.material_type === 2) &&                     
                     <FormGroup >
                         <Input 
                             label={formData.material_type === 1? intl.formatMessage({id: "app.references.authors"}):intl.formatMessage({id: "app.references.part_authors"})}
                             handleChange={(value) => handleChange(value, 'part_authors')}
                             input={formData.part_authors  ? formData.part_authors : ""}
-                            required={(formData.material_type===1)?requiredFields:false}
+                            //required={(formData.material_type===1)?requiredFields:false}
+                            required={true}
                         />
                     </FormGroup>}
                     {(formData.material_type === 3) && 
@@ -218,15 +221,18 @@ const ReferenceFormContent = (props) => {
                 <h3>{intl.formatMessage({id: "app.references.institutionPlaceHead"})}</h3>
                 <Card>
                     <Row>
+                    {(formData.material_type === 1 || formData.material_type === 2 || formData.material_type === 3 || formData.material_type === 4 || formData.material_type === 5) && 
                         <FormGroup className="col-md-3 col-lg-2">
                             <Input 
                                 label={intl.formatMessage({id: "app.references.pubyear"})}
                                 type="number"
                                 handleChange={(value) => handleChange(value, 'pubyear')}
                                 input={formData.pubyear ? formData.pubyear : ""}
-                                required={formData.material_type===1?requiredFields:false}
+                                //required={formData.material_type===1?requiredFields:false}
+                                required={formData.material_type < 4 ?true:false}
+                                maxLength={4}
                             />
-                        </FormGroup>
+                        </FormGroup>}
                         {(formData.material_type === 1 || formData.material_type === 2) && 
                         <FormGroup className="col-md-3 col-lg-2">
                             <Input 
@@ -235,6 +241,7 @@ const ReferenceFormContent = (props) => {
                                 handleChange={(value) => handleChange(value, 'volume')}
                                 input={formData.volume ? formData.volume : ""}
                                 required={formData.material_type===1?requiredFields:false}
+                                maxLength={4}
                             />
                         </FormGroup>}
                         {(formData.material_type === 1) && 
@@ -245,16 +252,19 @@ const ReferenceFormContent = (props) => {
                                 handleChange={(value) => handleChange(value, 'issue')}
                                 input={formData.issue ? formData.issue : ""}
                                 required={false}
+                                maxLength={4}
                             />
                         </FormGroup>}
-                        {(formData.material_type !== 4 ) && 
+                        {(formData.material_type === 1 || formData.material_type === 2 || formData.material_type === 3 || formData.material_type === 5) && 
                         <FormGroup className="col-md-4 col-lg-3">
                             <Input 
                                 label={intl.formatMessage({id: "app.references.pages"})}
                                 type="string"
                                 handleChange={(value) => handleChange(value, 'pages')}
                                 input={formData.pages ? formData.pages : ""}
-                                required={formData.material_type===1?requiredFields:false}
+                                //required={formData.material_type===1?requiredFields:false}
+                                required={formData.material_type===1?true:false}
+                                maxLength={10}
                             />
                         </FormGroup>}
                     </Row>
@@ -300,6 +310,7 @@ const ReferenceFormContent = (props) => {
                                     required={false}
                                 />
                         </FormGroup>}
+                        {(formData.material_type!==5)&& 
                         <FormGroup className="col-sm-3">
                             <Input 
                                 label={intl.formatMessage({id: "app.references.pmid"})}
@@ -307,15 +318,35 @@ const ReferenceFormContent = (props) => {
                                 input={formData.pmid ? formData.pmid : ""}
                                 required={false}
                             />
-                        </FormGroup>      
-                        <FormGroup className="col-sm-5">
+                        </FormGroup>}      
+                        <FormGroup className="col-sm-6">
                             <Input 
                                 label={intl.formatMessage({id: "app.references.doi"})}
                                 handleChange={(value) => handleChange(value, 'doi')}
                                 input={formData.doi ? formData.doi : ""}
                                 required={false}
                             />
-                        </FormGroup>                       
+                        </FormGroup>         
+                        {/* {(formData.material_type === 1 || formData.material_type === 2)&&         
+                        <FormGroup className="col-sm-3">
+                            <Input 
+                                label={intl.formatMessage({id: "app.references.acnp_cod"})}
+                                handleChange={(value) => handleChange(value, 'acnp_cod')}
+                                input={formData.acnp_cod ? formData.acnp_cod : ""}
+                                required={false}
+                            />
+                        </FormGroup>  }
+                        {(formData.material_type === 1 || formData.material_type === 4 || formData.material_type === 5)&& 
+                        <FormGroup className="col-sm-3">
+                            <Input 
+                                label={intl.formatMessage({id: "app.references.sbn_docid"})}
+                                handleChange={(value) => handleChange(value, 'sbn_docid')}
+                                input={formData.sbn_docid ? formData.sbn_docid : ""}
+                                required={false}
+                            />
+                        </FormGroup>  } */}
+
+
                     </Row>   
                 </Card>
                 <h3>{intl.formatMessage({id: "app.references.abstract"})}</h3>

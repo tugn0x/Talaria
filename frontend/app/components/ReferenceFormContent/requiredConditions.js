@@ -33,13 +33,13 @@ export const requiredConditions = (formData) => {
                 }
             }*/
 
-            if (   
-              (pubyear!=='' && pages!=='') ||
-              (pubyear!=='' &&  part_authors!=='') ||
-              (volume!=='' && pages!=='')  ||
-              (volume!=='' && part_authors!=='')
-            ) required=false;
-            else required=true
+            // if (   
+            //   (pubyear!=='' && pages!=='') ||
+            //   (pubyear!=='' &&  part_authors!=='') ||
+            //   (volume!=='' && pages!=='')  ||
+            //   (volume!=='' && part_authors!=='')
+            // ) required=false;
+            // else required=true
     }
    /* else if (formData.material_type === 4)
     {

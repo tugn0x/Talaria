@@ -5,7 +5,7 @@ import ErrorBox from 'components/Form/ErrorBox';
 import {useIntl} from 'react-intl';
 
 
-const Input = ({label, handleChange, type, required, input,noplaceholder}) => {
+const Input = ({label, handleChange, type, required, maxLength, input,noplaceholder}) => {
     
     const [inputValue, setInptValue] = React.useState("");
     const intl = useIntl();
@@ -40,6 +40,7 @@ const Input = ({label, handleChange, type, required, input,noplaceholder}) => {
                     onChange={(e) => onChange(e)}
                     value={inputValue}
                     required={required}
+                    maxLength={maxLength}
                 />
             }
             <ErrorBox 
