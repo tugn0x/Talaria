@@ -1,10 +1,10 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {Row, Col, Button} from 'reactstrap';
 import {useIntl} from 'react-intl';
 import { generatePath } from "react-router";
 import { formatDateTime } from '../../../utils/dates';
 import CustomCheckBox from 'components/Form/CustomCheckBox';
-//import RequestTags from '../RequestTags';
+
 import './style.scss';
 import { Link } from 'react-router-dom';
 
@@ -39,12 +39,6 @@ const statusInfo = (inst) => {
 
     return <span className='institution_status'>{ret}</span>
 }
-
-/* inst status
-'disabled'=> 0, 
-'enabled'=> 1,                        
-'pending'=> 2, 
-*/
 export const canEnable = (inst) => {    
     return (  
         inst.status==2 || 
@@ -70,18 +64,23 @@ export const InstitutionInfo = (props) => {
 
     return (
         <div className={"institution_info"}>            
-            {/*<span className="status-text">{data.borrowing_status ? intl.formatMessage({id: "app.requests."+data.borrowing_status}):'xxx'}</span>*/}                    
-            <div>referent ...</div>
-            {/*data.operator && <div className="status-operator">
-                <i className="simple_icon fas fa-user-cog"></i> { data.operator.data.full_name}
-                {data.borrowing_notes && <span className="borrowing_notes">
-                <span id={`tooltip-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
-                <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${data.id}`}>
-                    {data.borrowing_notes}
-                </UncontrolledTooltip>                                
-                </span>}
-            </div>*/}            
-                          
+            <div className='address'>
+                {data.country && <span className='country_id'>{data.country.data.name}</span>}                                
+            </div>
+            {data.administrative && <div className='referent'>
+                <i className="fas fa-user"></i> {data.administrative}
+            </div>}
+            {(data.administrative_phone||data.administrative_email) && <div className='contact'>
+                {data.administrative_phone && <span><i className="fas fa-phone"></i> {data.administrative_phone} </span>}
+                {data.administrative_email && <span><i className="fas fa-envelope"></i> {data.administrative_email}</span>}
+            </div>}                    
+            <div className='administrative_fields'>                                
+                {data.vatnumber && <span className='vatnumber'><span>VAT:</span> {data.vatnumber} </span>}
+                {data.fiscalcode && <span className='fiscalcode'><span>Fiscal Code:</span> {data.fiscalcode} </span>}
+                {data.ccu && <span className='ccu'><span>CCU:</span> {data.vatnumber} </span>}
+                {data.terzo_code && <span className='terzo_code'><span>Terzo Code:</span> {data.terzo_code} </span>}
+                {data.invoice_header && <span className='invoice_header'><span>Invoid Header:</span> {data.invoice_header}</span>}
+            </div>             
         </div>
     )
 }
@@ -105,6 +104,8 @@ const InstitutionItem = (props) => {
     const {editPath,data,toggleSelection,checked,removeTag,deleteInstitution,changeStatusInstitution} = props      
     const intl = useIntl();  
 
+    const [showInstitutionInfo,setShowInstitutionInfo]=useState(false);
+
     return (
         <Row className="institution_item list-row">
             <Col sm={5}>
@@ -112,8 +113,16 @@ const InstitutionItem = (props) => {
                     handleChange={toggleSelection}
                     checked={checked}
                 /> 
-                <div className="request_id"><Link to={editurl(editPath,data.id)} className="active"><span>{data.name}</span></Link></div>
-                <InstitutionInfo data={data} customClass="institution_info"/>                                 
+                <a className="toggle-institution-info" onClick={()=>setShowInstitutionInfo(!showInstitutionInfo)} title="show extra info">      
+                        <i className={`active fas ${showInstitutionInfo?'fa-caret-square-up':'fa-caret-square-down'}`}></i> 
+                </a> 
+                <div className="institution_id"><Link to={editurl(editPath,data.id)} className="active"><span>{data.name}</span></Link>
+                <div className='institution_type'>                
+                    <span className='badge badge-secondary'>{data.institution_type.data.name}</span>
+                </div>                          
+            
+                </div>
+                {showInstitutionInfo && <InstitutionInfo data={data} customClass="institution_info"/>}                                 
             </Col>
             <Col sm={3}>
                 <>

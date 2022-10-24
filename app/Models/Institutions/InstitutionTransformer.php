@@ -16,10 +16,14 @@ class InstitutionTransformer extends BaseTransformer
     
     protected $availableIncludes = [
         'granted_permissions',
+        'institution_type',
+        'country'
     ];
 
     protected $defaultIncludes = [
         'granted_permissions',
+        'institution_type',
+        'country'
     ];
 
     public function includeGrantedPermissions(Model $model)
@@ -29,6 +33,17 @@ class InstitutionTransformer extends BaseTransformer
             return $model->user_with_permissions();
         });
         return $this->item($model, $transf);
+    }
+
+    public function includeCountry(Model $model)
+    {
+        if($model->country)
+            return $this->item($model->country, new BaseLightTransformer());
+    }
+    public function includeInstitutionType(Model $model)
+    {
+        if($model->institution_type)
+            return $this->item($model->institution_type, new BaseLightTransformer());
     }
 
 

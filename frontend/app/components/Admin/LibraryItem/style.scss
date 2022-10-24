@@ -156,6 +156,15 @@
     }
 }
 
+.library_id {
+    margin-left: 5px;
+    display: inline !important;
+
+    & a:hover {
+        text-decoration: none;
+    }
+}
+
 .toggle-library-info {
     margin-right: 5px;        
 }

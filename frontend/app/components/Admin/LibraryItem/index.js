@@ -232,7 +232,7 @@ const LibraryItem = (props) => {
                     handleChange={toggleSelection}
                     checked={checked}
                 /> 
-                <div className="request_id">
+                <div className="library_id">
                     <a className="toggle-library-info" onClick={()=>setShowLibraryInfo(!showLibraryInfo)} title="show extra info">      
                         <i className={`active fas ${showLibraryInfo?'fa-caret-square-up':'fa-caret-square-down'}`}></i> 
                     </a> 
