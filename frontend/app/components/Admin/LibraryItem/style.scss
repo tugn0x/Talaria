@@ -126,14 +126,36 @@
 
 }
 
-.subscriptionlink {
-    margin-right: 2px;
+
+.library_info {      
+    font-size: 0.95em;
+
+    .coords,
+    .identifiers,
+    .projects,
+    .institution {
+        display: block;
+    }
+
+    .contact, .referent {
+        display: block;
+    }
+
+    .contact span {
+        display: inline;
+        margin-right: 2px;
+    }
+
+    & .institution,.projects,.identifiers {                
+    }
+
+    & .project-item,
+    & .identifier-item {
+        display: inline;
+        margin-right: 2px;
+    }
 }
 
-.library_info {
-    font-size: 0.9em;    
-
-    & .institution,.projects {
-        margin-top:5px;
-    }
+.toggle-library-info {
+    margin-right: 5px;        
 }
