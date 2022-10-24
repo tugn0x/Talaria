@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3d94f33b-9de9-4751-b273-08581052a992",
+		"_postman_id": "a5f49b8f-2775-48a1-987f-55938b7b73c7",
 		"name": "Nilde",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -127,6 +127,67 @@
 			]
 		},
 		{
+			"name": "ADMIN",
+			"item": [
+				{
+					"name": "Libraries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer_manager}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/admin/libraries",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"libraries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Library Identifiers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer_manager}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/admin/libraries/1/identifiers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"libraries",
+								"1",
+								"identifiers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Libraries",
 			"request": {
 				"method": "GET",
@@ -141,13 +202,47 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/libraries/1",
+					"raw": "{{url}}/libraries/",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"libraries",
-						"1"
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Identifiers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{bearer}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/libraries/identifiers/option-items?label=name",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"libraries",
+						"identifiers",
+						"option-items"
+					],
+					"query": [
+						{
+							"key": "label",
+							"value": "name"
+						}
 					]
 				}
 			},
@@ -1441,15 +1536,15 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "http://api.nilde.local/api/v1/"
+			"value": "https://api.nilde.local/api/v1"
 		},
 		{
 			"key": "urlbase",
-			"value": "http://api.nilde.local"
+			"value": "https://api.nilde.local"
 		},
 		{
 			"key": "bearer_admin",
-			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImExYjEyZmU4M2IwZmNjYjI4ZDJmY2Q3ZDkwZWQxZWE2ZTRhZDBmYzNhMmMwZmQyZTA1ODI3YzQ3ODNjNTdhNWJmMzE5MGVhMjU0ZjMwYmY1In0.eyJhdWQiOiIxIiwianRpIjoiYTFiMTJmZTgzYjBmY2NiMjhkMmZjZDdkOTBlZDFlYTZlNGFkMGZjM2EyYzBmZDJlMDU4MjdjNDc4M2M1N2E1YmYzMTkwZWEyNTRmMzBiZjUiLCJpYXQiOjE1NjA1MDIzMDksIm5iZiI6MTU2MDUwMjMwOSwiZXhwIjoxNTYwNTg4NzA5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.PJ5hheq3c3aZY4O-lb1edWqrSno5gUrqq4-9RL3UqpqnsSTCv4ArZiPyRFCURRMv-P_voAONkEOOm0Yhox0CGlmR9NIsUDipZ7UJJHQcfkdmTNz9nGoJFVyHdNq3jrGTijQMplIjCdH8RzFWj6JMkbQkPMcl-8Co1oioIY4Ew-yaLYqhj2g95ZKjFg7VDchScFxsp0iqKp0L1Y65rEngrBW4SG_c79PBVa7R1nR0RkGtE2uMtYBva9EKJAEB9S4pPCZve874zdBtQhTOS1dyh5PIR2cDrqGLNSJyUxOt_Q5euRcpCHs8zu703WZkfOqNVPxIMX8IKlBPDWZuKMsIeU6TWe4OPIjvi3I0fvgIqQYe-8dY0t5ynTw574XHxI9CSPLB6LoEhPzC465BJDe7sGLznS8Xrc1xz5j5JeDZsx78eurWx17dlDaMZUj-31iTL1V7xJSZU7QZWBoEKs4bUyRofPZnSaAQ9YYG6edGInDnHW9eV4vnf5sbYsrSHKZM61xu5YiACiaY_H1An0bXipZDniVvcfdqFubq83fENJgds7_Ay8XTk_JatoWjvpAHGmZO7k0obr49Tr_ZjD6o2_o7LEszZ0cAjGUhi5wHqLo71tgHVBdYak3pYehbcvFPa3oYA6Ci2eHTsT2FHAnruMbOaVZh4wpObwRxPmdnKzk"
+			"value": ""
 		},
 		{
 			"key": "bearer",
@@ -1466,6 +1561,11 @@
 		{
 			"key": "bearer_librarian_mario",
 			"value": ""
+		},
+		{
+			"key": "bearer_manager",
+			"value": "",
+			"type": "default"
 		}
 	]
 }
