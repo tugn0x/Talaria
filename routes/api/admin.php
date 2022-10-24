@@ -22,6 +22,13 @@ Route::group([
         Route::put('{id}/changestatus', 'AdminLibraryController@changeStatus')->where('id', '[0-9]+')->name('changeStatus');
         Route::get('{id}', 'AdminLibraryController@show')->where('id', '[0-9]+')->name('show');        
         Route::put('{id}', 'AdminLibraryController@update')->where('id', '[0-9]+')->name('update');  
+
+        Route::get('{id}/identifiers', 'AdminIdentifierLibraryController@index')->name('index');
+        //Route::post('{id}/identifiers', 'AdminIdentifierLibraryController@store')->name('store');        
+        //Route::put('{id}/identifiers/{library_identifier}', 'AdminIdentifierLibraryController@update')->name('update');        
+        //Route::get('{id}/identifiers/{library_identifier}', 'AdminIdentifierLibraryController@show')->name('show');
+        //Route::delete('{id}/identifiers/{library_identifier}', 'AdminIdentifierLibraryController@delete')->name('delete'); //hard delete        
+    
         
         //Route::get('{id}/subscriptions', 'AdminLibraryController@subscriptions')->where('id', '[0-9]+')->name('showsubscr');        
         //Route::put('{id}/subscriptions/{subid}', 'AdminLibraryController@subscriptions')->where('id', '[0-9]+')->where('subid', '[0-9]+')->name('edotsubscr');        

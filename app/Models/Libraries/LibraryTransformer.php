@@ -24,6 +24,7 @@ class LibraryTransformer extends BaseTransformer
         'country',
         'subject',
         'catalogs',
+        'identifiers',
         'projects',
         'deliveries'
     ];
@@ -34,6 +35,8 @@ class LibraryTransformer extends BaseTransformer
         'country',
         'subject',
         'projects',
+        'catalogs',
+        'identifiers',
     ];
 
     public function includeGrantedPermissions(Model $model)
@@ -88,6 +91,15 @@ class LibraryTransformer extends BaseTransformer
             return $this->collection($model->deliveries, new DeliveryTransformer());
     }
 
+    public function includeIdentifiers(Model $model)
+    {
+        //$ident = $model->identifiers()->withPivot('cod')->get();
+        
+        if($model->identifiers)
+            return $this->collection($model->identifiers, new IdentifierLibraryTransformer());
+    }
+
+
 
 
     public function transform(Model $model)
@@ -100,8 +112,7 @@ class LibraryTransformer extends BaseTransformer
         $to_merge = [
             //just to test localization (because now we haven't such data stored)
             'lat'=> !$model->lat?$faker->latitude(35,45):$model->lat, 
-            'lon'=> !$model->lon?$faker->longitude(10,15):$model->lon 
-//            patronRoutes
+            'lon'=> !$model->lon?$faker->longitude(10,15):$model->lon,           
         ];
         return $this->applyTransform($model, $to_merge);
     }

@@ -190,6 +190,12 @@ class Library extends BaseModel
         return $this->belongsToMany(Catalog::class);
     }    
 
+    public function identifiers()
+    {
+        return $this->belongsToMany(Identifier::class)->withPivot('cod');
+    }    
+
+
     public function borrowingrequests()
     {
         return $this->hasMany(DocdelRequest::class,'borrowing_library_id');

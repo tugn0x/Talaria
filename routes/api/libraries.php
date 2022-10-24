@@ -50,6 +50,7 @@ Route::group([
     Route::group([
         'as' => 'api.v1.libraries.library-catalogs.',
     ], function () {
+        Route::get('catalogs', 'CatalogController@optionList')->name('catalogs.option-items');
         Route::post('{library}/catalogs', 'CatalogLibraryController@store')->name('store');
 
         Route::get('{library}/catalogs', 'CatalogLibraryController@index')->name('index');
@@ -81,6 +82,13 @@ Route::group([
         Route::put('{library}/deliveries/{delivery_id}', 'DeliveryController@update')->name('update');
         Route::post('{library}/deliveries', 'DeliveryController@store')->name('create');
         Route::delete('{library}/deliveries/{delivery_id}', 'DeliveryController@delete')->name('delete'); //hard delete
+    });
+    
+    /* LIBRARY IDENTIFIERS */
+    Route::group([
+        'as' => 'api.v1.libraries.library-identifiers.',
+    ], function () {
+        Route::get('identifiers/option-items', 'IdentifierController@optionList')->name('option-items');                       
     });
 
     

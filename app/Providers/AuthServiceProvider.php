@@ -14,6 +14,8 @@ use App\Models\Libraries\Delivery;
 use App\Models\Libraries\DeliveryUser;
 use App\Models\Libraries\Tag;
 use App\Models\References\Reference;
+use App\Models\Libraries\Identifier;
+use App\Models\Libraries\IdentifierLibrary;
 use App\Models\Users\User;
 use App\Models\References\Label;
 use App\Models\References\Group;
@@ -42,6 +44,7 @@ use App\Policies\BorrowingDocdelRequestPolicy;
 use App\Policies\DocdelRequestTagPolicy;
 use App\Policies\DocdelRequestPolicy;
 use App\Models\Requests\DocdelRequestTag;
+use App\Policies\IdentifierPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Laravel\Passport\Passport;
@@ -76,6 +79,8 @@ class AuthServiceProvider extends ServiceProvider
         Subject::class => ListBasePolicy::class,
         Catalog::class => ListBasePolicy::class,
         Tag::class => TagPolicy::class,
+        Identifier::class=>ListBasePolicy::class,
+        IdentifierLibrary::class=>BasePolicy::class,
         DocdelRequestTag::class => DocdelRequestTagPolicy::class,
         DocdelRequest::class => DocdelRequestPolicy::class
       
