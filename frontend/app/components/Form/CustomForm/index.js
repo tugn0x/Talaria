@@ -144,7 +144,8 @@ const CustomForm = (props) => {
                                                                 field.type === 'custom-select' &&
                                                                    <>
                                                                     <OptionList 
-                                                                        field={field}
+                                                                        disabled={field.disabled ? field.disabled : false}
+                                                                        field={field}                                                                        
                                                                         selectedOption={
                                                                             !formData[field.name] && // Primo caso: niente onChange da parte dell utente
                                                                             props.requestData &&     //             dati dal db tramite requestData

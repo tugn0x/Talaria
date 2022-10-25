@@ -30,7 +30,7 @@ const translateOptions = (options, intl) => {
 }
 
 const OptionList = (props) => {
-    const {field, label, selectedOption, options, searchOptionList, handleChange} = props
+    const {field, label, selectedOption, options, searchOptionList, handleChange,disabled} = props
     const [isRequired, setIsRequired] = useState(false)
     const intl = useIntl()
     
@@ -64,7 +64,8 @@ const OptionList = (props) => {
     return (
        // selectedOption &&
             <>
-                <Select
+                <Select     
+                    isDisabled={disabled}               
                     className={`option-list ${!isRequired || selectedOption ? '' : 'danger'}`}
                     type="custom-select"
                     value={selectedOption ? translateOptions(selectedOption, intl) : {label: intl.formatMessage(formMessages.select), value: 0}}
@@ -74,7 +75,7 @@ const OptionList = (props) => {
                     options={translateOptions(options, intl)}
                 /> 
                 <Input 
-                        type="text"
+                        type="text"                        
                         value={selectedOption || ''}
                         style={{
                             opacity: 0,
