@@ -166,6 +166,15 @@ suggested_institution_name: {
   id: 'app.libraries.suggested_institution_name',
   defaultMessage: 'Your institution Name',
 },
+
+ill_IFLA_voucher: {
+  id: 'app.libraries.ill_IFLA_voucher',
+  defaultMessage: 'IFLA voucher accepted'
+},
+ill_cost_in_voucher: {
+  id: 'app.libraries.ill_cost_in_voucher',
+  defaultMessage: 'IFLA voucher value'
+}
   
 });
 
