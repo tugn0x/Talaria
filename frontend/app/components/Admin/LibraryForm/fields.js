@@ -20,9 +20,18 @@ export const fields = {
         group: "general_info",
         order: 1,
     },
+    alt_name: {
+        type: "text",
+        required: false,
+        name: "alt_name",
+        width: "col-sm-6",
+        group: "general_info",
+        order: 1,
+    },
     institution_id: {
         type: "custom-select",
         required: true,
+        disabled: true,
         name: "institution_id",
         width: "col-sm-6",
         group: "general_info",
@@ -52,39 +61,40 @@ export const fields = {
     address: {
         type: "text",
         name: "address",
-        required: true,
-        label: 'app.global.address',
-        placeholder: 'app.global.address',
+        required: true,                
         width: "col-sm-6"
     },
     town: {
         type: "text",
-        name: "town",        
-        label: 'app.global.town',
-        placeholder: 'app.global.town',
+        name: "town",                
         width: "col-sm-6"
     },
     district: {
         type: "text",
-        name: "district",        
-        label: 'app.global.district',
-        placeholder: 'app.global.district',
+        name: "district",                
         width: "col-sm-6"
     },
     postcode: {
         type: "number",
         name: "postcode",        
-        label: 'app.global.postcode',
-        placeholder: 'app.global.postcode',
         width: "col-sm-6"
     },
     state: {
         type: "text",
         name: "state",        
-        label: 'app.global.state',
-        placeholder: 'app.global.state',
         width: "col-sm-6"
     },    
+    lat: {
+        type: "text",
+        name: "lat",        
+        width: "col-sm-6"
+    },    
+    lon: {
+        type: "text",
+        name: "lon",                
+        width: "col-sm-6"
+    },    
+
     url: {
         type: "text",
         name: "url",
@@ -93,6 +103,11 @@ export const fields = {
     opac: {
         type: "text",
         name: "opac",
+        width: "col-sm-6"
+    },
+    ill_referent_name: {
+        type: "text",
+        name: "ill_referent_name",
         width: "col-sm-6"
     },
     ill_email: {
@@ -140,6 +155,15 @@ export const fields = {
         name: "ill_susp_notification_days",
         width: "col-sm-6"
     },   
+    ill_IFLA_voucher: {
+        type: "checkbox",
+        name: "ill_IFLA_voucher",
+    },
+    ill_cost_in_voucher: {
+        type: "number",
+        name: "ill_cost_in_voucher",
+        width: "col-sm-6"
+    },
     /*status: {
         type: "custom-select",
         name: "status",

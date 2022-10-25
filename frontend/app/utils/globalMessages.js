@@ -65,6 +65,15 @@ export default defineMessages({
     id: `${scope}.fax`,
     defaultMessage: 'Fax',
   },
+  lat: {
+    id: `${scope}.lat`,
+    defaultMessage: 'Latitude',
+  },
+  lon: {
+    id: `${scope}.lon`,
+    defaultMessage: 'Longitude',
+  },
+
   url: {
     id: `${scope}.url`,
     defaultMessage: 'Web address',
