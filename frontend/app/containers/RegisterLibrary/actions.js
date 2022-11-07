@@ -6,6 +6,8 @@ import {DEFAULT_ACTION,
     REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST, REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST_SUCCESS,
     REQUEST_INSTITUTIONSTYPES_OPTIONLIST, REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
     REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST, REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST_SUCCESS,
+
+    REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST, REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST_SUCCESS,
     REQUEST_SEARCH_PLACES_BY_TEXT, REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS, REQUEST_SEARCH_PLACES_BY_TEXT_FAIL
  } from "./constants";
  
@@ -134,6 +136,21 @@ return {
   };
 }
 
+export function requestGetlibraryidentifierTypesOptionList(request)
+{
+  return {
+      type: REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST,
+      request
+  };
+}
+
+export function requestGetlibraryidentifierTypesOptionListSuccess(result)
+{
+return {
+      type: REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST_SUCCESS,
+      result
+  };
+}
 
 
 export function requestSuccess() {
@@ -144,6 +161,7 @@ export function requestSuccess() {
 
 export function requestError(errorMessage) {
   return {
+    
     type: REQUEST_ERROR,
     error: errorMessage
   };

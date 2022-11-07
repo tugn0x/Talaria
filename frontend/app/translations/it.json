@@ -150,15 +150,28 @@
   "app.containers.RegisterNewLibrary.ill_service_conditions": "Modalità del servizio ILL",  
   "app.containers.RegisterNewLibrary.volunteer_library_label":"Biblioteca volontaria?",
   "app.containers.RegisterNewLibrary.projects_label": "Progetto o Consorzio",
+  "app.containers.RegisterNewLibrary.identifiers_label": "Identificatori Biblioteca",
+  "app.containers.RegisterNewLibrary.library_identifiers_txt":"Codice",
+  "app.containers.RegisterNewLibrary.duplicate_identifer_type":"Un secondo codice per lo stesso identificativo non puo' essere aggiunto, si prega di scegliere un'altro tipo",
+
   "app.containers.RegisterNewLibrary.ill_institution_label": "Istituzione",
   "app.containers.RegisterNewLibrary.library_contact_label": "Contatti servizio ILL",
   "app.containers.RegisterNewLibrary.library_location_label": "Località/Indirizzo completo",
   "app.containers.RegisterNewLibrary.library_coordinates": "Sei seduto in biblioteca, vero?",
-  "app.containers.RegisterNewLibrary.library_coordinates_note": "Queste coordinate GPS sono necessarie per visualizzare la libreria in una mappa",
+  "app.containers.RegisterNewLibrary.library_coordinates_note": "Queste coordinate GPS sono necessarie per visualizzare la biblioteca in una mappa",
   "app.containers.RegisterNewLibrary.subject_label":"Settore disciplinare",
   "app.containers.RegisterNewLibrary.opac_label":"Online Catalog (OPAC)",
   "app.containers.RegisterNewLibrary.switchToBasicProfile":"Scegli il profilo base",
   "app.containers.RegisterNewLibrary.switchToFullProfile":"Clicca qui per continuare",
+  "app.containers.RegisterNewLibrary.identifier_type_id":"Tipo identificatore",
+  "app.containers.RegisterNewLibrary.clicktoGetRecords":"Ottieni coordinate GPS",
+
+  "app.containers.RegisterNewLibrary.stopEnterManually":"Stop to enter manually",
+  "app.containers.RegisterNewLibrary.geolocationNotSupported":"Geolocation is not supported by your browser",
+  "app.containers.RegisterNewLibrary.unableRetriveLocation":"Unable to retreive your library location",
+  "app.containers.RegisterNewLibrary.locatingLibraryLocation":"Locating your library location...",
+  "app.containers.RegisterNewLibrary.project_id":"Project",
+
 
   "app.containers.LibraryUserPage.header": "Modifica stato utente",
   "app.containers.LibraryUserPage.user_referent": "Referente",
@@ -270,7 +283,6 @@
   "app.libraries.lat":"Latitute",
   "app.libraries.long":"Longitude",
   "app.libraries.project_label": "Progetto o Consorzio",
-
 
   "app.references.labels": "Etichette",
   "app.references.labelAs": "Etichetta come",
@@ -430,6 +442,7 @@
   "app.requests.borrowing_notes": "Note interne",
   "app.requests.lending_notes": "Note interne",
   "app.requests.max_file_upload": "caricamento massimo del file (in MB)",
+  "app.requests.exceed_max_file_upload": "caricamento fallito, raggiunta massima dimensione consentita per il caricamento",
   "app.requests.fulfill_location": "Locazione in scaffale",
   "app.patronrequest.delivery_format.file":"File",
   "app.patronrequest.delivery_format.papercopy":"Carta",

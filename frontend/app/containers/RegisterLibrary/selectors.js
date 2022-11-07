@@ -37,6 +37,12 @@ createSelector(
   substate => (substate.projectsOptionList)
 );
 
+const identifierTypesOptionListSelector = () => 
+createSelector(
+  libraryRegDomain,
+  substate => (substate.identifierTypesOptionList)
+);
+
 const institutionsTypeOptionListSelector = () => 
 createSelector(
   libraryRegDomain,
@@ -55,5 +61,5 @@ createSelector(
   substate => (substate.libraryProjectsOptionList)
 );
 
-export {  institutionsOptionListSelector, countriesOptionListSelector, librarySubjectOptionListSelector,projectsOptionListSelector, 
+export {  institutionsOptionListSelector, countriesOptionListSelector, librarySubjectOptionListSelector,projectsOptionListSelector, identifierTypesOptionListSelector,
   institutionsTypeOptionListSelector, placesSelector, institutionsByTypeCountryOptionListSelector, libraryProjectsOptionListSelector };

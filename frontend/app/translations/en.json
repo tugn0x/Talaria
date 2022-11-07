@@ -150,16 +150,28 @@
   "app.containers.RegisterNewLibrary.ill_service_conditions": "ILL service conditions",
   "app.containers.RegisterNewLibrary.volunteer_library_label":"Want to be a Volunteer Library?",
   "app.containers.RegisterNewLibrary.projects_label":  "Project or Consortium",
+  "app.containers.RegisterNewLibrary.identifiers_label": "Library identifiers",
+  "app.containers.RegisterNewLibrary.library_identifiers_txt":"Identifier Code",
+  "app.containers.RegisterNewLibrary.duplicate_identifer_type":"A second code for the same type cannot be added, kindly choose another identifier type",
+
   "app.containers.RegisterNewLibrary.ill_institution_label": "Institution",
   "app.containers.RegisterNewLibrary.library_contact_label": "Service contacts",
   "app.containers.RegisterNewLibrary.library_location_label": "Library location & profile",
-
   "app.containers.RegisterNewLibrary.library_coordinates": "Are you sitting in the library, if yes?",
-
+  "app.containers.RegisterNewLibrary.library_coordinates_note": "These GPS coords are needed to show library location on a map",
   "app.containers.RegisterNewLibrary.subject_label":"Library disciplinary sector",
   "app.containers.RegisterNewLibrary.opac_label":"Library Online Catalog (OPAC)",
   "app.containers.RegisterNewLibrary.switchToBasicProfile":"Switch to Basic profile",
-  "app.containers.RegisterNewLibrary.switchToFullProfile":"Click here to continue",
+  "app.containers.RegisterNewLibrary.switchToFullProfile":"Yes, Click here",
+  "app.containers.RegisterNewLibrary.identifier_type_id":"Identifier Type",
+  "app.containers.RegisterNewLibrary.clicktoGetRecords":"Click to get coords",
+
+  "app.containers.RegisterNewLibrary.stopEnterManually":"Stop to enter manually",
+  "app.containers.RegisterNewLibrary.geolocationNotSupported":"Geolocation is not supported by your browser",
+  "app.containers.RegisterNewLibrary.unableRetriveLocation":"Unable to retreive your library location",
+  "app.containers.RegisterNewLibrary.locatingLibraryLocation":"Locating your library location...",
+  "app.containers.RegisterNewLibrary.project_id":"Project",
+
 
   "app.containers.LibraryUserPage.header": "Modifica stato utente",
   "app.containers.LibraryUserPage.user_referent": "Referente",
@@ -268,6 +280,8 @@
   "app.libraries.alt_name": "Alternative name ",
   "app.libraries.dd_user_cost":"Cost for article",
   "app.libraries.suggested_institution_name":"Suggested institution name",
+  "app.libraries.lat":"Latitute",
+  "app.libraries.long":"Longitude",
   "app.libraries.project_label": "Project or Consortium",
 
   "app.references.labels": "Labels",

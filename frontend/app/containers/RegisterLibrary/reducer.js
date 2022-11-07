@@ -10,7 +10,10 @@ import {
   REQUEST_LIBRARYSUBJECT_OPTIONLIST, REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS, 
   REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST, REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST_SUCCESS,
   REQUEST_INSTITUTIONSTYPES_OPTIONLIST, REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
-  REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST, REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST_SUCCESS,
+  REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST, 
+  REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST_SUCCESS,
+  REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST,
+  REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST_SUCCESS,
   REQUEST_ERROR,
   REQUEST_SUCCESS,
   STOP_LOADING,
@@ -24,6 +27,7 @@ export const initialState = {
   institutionsByTypeCountryOptionList: [],
   countriesOptionList: [],
   libraryProjectsOptionList: [],
+  identifierTypesOptionList: [],
   librarySubjectOptionList: [],
   places: {},
 };
@@ -56,6 +60,8 @@ case REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST_SUCCESS:
   draft.institutionsByTypeCountryOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
   draft.institutionsByTypeCountryOptionList.push({"value":0,"label":"Institution not present"})
   break;
+
+
 case REQUEST_INSTITUTIONSTYPES_OPTIONLIST:
   draft.error = action.error;
   break;
@@ -63,6 +69,8 @@ case REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS:
   draft.error = initialState.error;
   draft.institutionsTypesOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
   break;
+
+
 case REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST:
   draft.loading = true;
   draft.error = action.error;
@@ -71,6 +79,17 @@ case REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST_SUCCESS:
   draft.loading = false;
   draft.error = initialState.error;
   draft.libraryProjectsOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
+  break;
+
+
+  case REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST:
+    draft.loading = true;
+    draft.error = action.error;
+    break;
+  case REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST_SUCCESS:
+    draft.loading = false;
+    draft.error = initialState.error;
+    draft.identifierTypesOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
   break;
 
   case REQUEST_SEARCH_PLACES_BY_TEXT:
