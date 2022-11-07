@@ -84,30 +84,32 @@ $circleWidth: 40px;
         width: 200px;
         height: 60px;
     }
+
+    p:first-child {
+        font-weight: bold;
+     }
+    
+     .weight-bold {
+        font-weight: bold;
+     }
+    
+     h3 {
+        text-align: center;
+     }
+     .container_summary {
+      columns: 3 auto;
+      margin: 5px;
+      padding: 30px;
+      font-size: 14px;
+      }
+    
+      .vertical-center {
+        margin: 0;
+        text-align: center;
+        position: relative;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
 }
 
-p:first-child {
-    font-weight: bold;
- }
-
- .weight-bold {
-    font-weight: bold;
- }
-
- h3 {
-    text-align: center;
- }
- .container_summary {
-  columns: 3 auto;
-  margin: 5px;
-  padding: 30px;
-  font-size: 14px;
-  }
-
-  .vertical-center {
-    margin: 0;
-    text-align: center;
-    position: relative;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-  }
+ 
