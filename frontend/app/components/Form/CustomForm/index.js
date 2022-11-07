@@ -235,8 +235,7 @@ const CustomForm = (props) => {
                                                                 ||
                                                                 field.type === 'Label' &&
                                                                 <>
-                                                                   <Label 
-                                                                    field={field}
+                                                                   <Label                                                                     
                                                                     label={field.label && field.label}                                                                    
                                                                     style={{fontSize: field.size, paddingBottom: field.paddingbottom, paddingTop: field.paddingtop}}
                                                                     cssModule = {field.cssModule}
@@ -252,7 +251,7 @@ const CustomForm = (props) => {
                                                                         />  
                                                                     </>
                                                                 }
-                                                                <ErrorBox className="invalid-feedback" error={ field.error ?  intl.formatMessage({ id: field.error }) : intl.formatMessage(formMessages.invalid_field)} />
+                                                                {field.type !='Label' && <ErrorBox className="invalid-feedback" error={ field.error ?  intl.formatMessage({ id: field.error }) : intl.formatMessage(formMessages.invalid_field)} />}
                                                         </fieldset>
                                                     )
                                                 })}

@@ -14,6 +14,16 @@ export default defineMessages({
     id: 'app.libraries.institution_id',
     defaultMessage: "Institution ID",
   },
+  project_id: { 
+    id: 'app.libraries.institution_id',
+    defaultMessage: "Institution ID",
+  },
+
+  projects_label: {
+    id: 'app.libraries.projects_label',
+    defaultMessage: 'Project or Consortium',
+  },
+
   subject_id: {
     id: 'app.libraries.subject_id',
     defaultMessage: 'Subject ID',
@@ -124,9 +134,17 @@ export default defineMessages({
     id: 'app.libraries.general_info',
     defaultMessage: 'General info',
   },
+  service_info: {
+    id: 'app.libraries.service_info',
+    defaultMessage: 'Service info',
+  },
   administrative_info: {
     id: 'app.libraries.administrative_info',
     defaultMessage: 'Administrative Info',
+  },
+  institution_info: {
+    id: 'app.libraries.institution_info',
+    defaultMessage: 'Institution and Projects',
   },
   /*granted_permissions: {
     id: 'app.libraries.granted_permissions',
@@ -146,8 +164,8 @@ export default defineMessages({
     defaultMessage: 'Institution Type ID',
   },
 
-  int_country_id: {
-    id: 'app.libraries.int_country_id',
+  institution_country_id: {
+    id: 'app.libraries.institution_country_id',
     defaultMessage: 'Institution Country ID',
   },
 

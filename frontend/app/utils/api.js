@@ -709,8 +709,7 @@ export const getInstitutionsByTypeByCountryOptionList = (options) => {
   options = getOption(options);
   const query = options.query;
   const countryid = options.countryid;
-  const institutiontypeid = options.institutiontypeid;
-  console.log(`${BASE_URL}/api/v1/institutions/option-items/?label=name&country_id=${countryid}&institution_type_id=${institutiontypeid}`)
+  const institutiontypeid = options.institutiontypeid;  
   return request(`${BASE_URL}/api/v1/institutions/option-items/?label=name&country_id=${countryid}&institution_type_id=${institutiontypeid}`, options)
 };
 

@@ -3,7 +3,7 @@ import {CustomInput, Row} from 'reactstrap'
 import { requestApplyLabelsToReferences } from '../../../utils/api'
 
 const ListCheckBox = (props) => {
-    console.log('ListCheckBox', props)
+    //console.log('ListCheckBox', props)
     const {data, type, handleChange, selectedData} = props
     
     const [formData, setFormData] = useState(selectedData)
@@ -12,11 +12,11 @@ const ListCheckBox = (props) => {
         if(e.target.checked){
            handleChange([...formData, item.value])
         }else{            
-            var index = selectedData.indexOf(formData[0])
-            selectedData.splice(index, 1);
-            handleChange(formData.filter(name => name!==e.target.name))
+            var index = selectedData.indexOf(item.value)
+            selectedData.splice(index, 1);            
+            handleChange(formData.filter(id => id!==item.value))
         } 
-        console.log("Projectids"+ JSON.stringify(selectedData))
+        //console.log("Projectids"+ JSON.stringify(selectedData))        
     }
     useEffect(() => {
        setFormData(selectedData)

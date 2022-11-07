@@ -4,11 +4,11 @@ export const fieldsGroups = {
         order: 0,
         label: 'general_info'
     },
-    granted_permissions: {
+    /*granted_permissions: {
         name: 'granted_permissions',
         order: 1,
         label: 'granted_permissions'
-    },
+    },*/
     administrative_info: {
         name: 'administrative_info',
         order: 2,
@@ -25,7 +25,7 @@ export const fields = {
         group: "general_info",
         order: 1,
     },
-    granted_permissions: {
+    /*granted_permissions: {
         type: "granted_permissions",
         name: "granted_permissions",
         width: "col-sm-12",
@@ -33,10 +33,11 @@ export const fields = {
         searchOptionList: true,
         order: 1,
         group: "granted_permissions",
-    },
+    },*/
     institution_id: {
         type: "custom-select",
         required: true,
+        disabled: true,
         name: "institution_id",
         width: "col-sm-6",
         group: "general_info",
@@ -153,7 +154,7 @@ export const fields = {
         name: "ill_susp_notification_days",
         width: "col-sm-6"
     },    
-    status: {
+    /*status: {
         type: "custom-select",
         name: "status",
         label: "status",
@@ -163,8 +164,8 @@ export const fields = {
             { value: 1, label: 'abilitata' },
             { value: 2, label: 'in rinnovo' },
         ]
-    },
-    external: {
+    },*/
+    /*external: {
         type: "checkbox",
         name: "external",
         width: "col-sm-6",
@@ -173,7 +174,7 @@ export const fields = {
         type: "date",
         name: "registration_date",
         width: "col-sm-6"
-    },
+    },*/
     /*info amministrative */
     vatnumber: {
         type: "number",

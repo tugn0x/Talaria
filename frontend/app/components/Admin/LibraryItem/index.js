@@ -46,21 +46,13 @@ const statusInfo = (lib) => {
     return <span className='library_status'>{ret}</span>
 }
 
-/* lib status
-'new' => -1,
-'disabled'=> 0, 
-'enabled'=> 1,                        
-'renewing'=> 2, 
-'disabled_bad'=>3,
-'disabled_subscription_expired'=> 4, 
-'disabled_didntpaid' =>5 
-*/
 export const canEnable = (lib) => {    
     if( 
         (lib.status==-1 || 
         lib.status==2 || 
         lib.status==0 || 
-        lib.status==3) && (lib.institution && lib.institution.data.status==1) 
+        lib.status==3 ||
+        lib.status==5 ) && (lib.institution && lib.institution.data.status==1) 
     ) return true;
 
     return false;
@@ -71,7 +63,7 @@ export const canDelete = (lib) => {
 }
 
 export const canDisable = (lib) => {
-    if( lib.status==1 || lib.status==2)        
+    if( lib.status==1 || lib.status==2|| lib.status==4)        
      return true;
 
     return false;
@@ -100,9 +92,8 @@ export const canDisableSubscriptionExpired = (lib) => {
 export const canRenew = (lib) => {
     if( lib.status==1||
         lib.status==0||
-        lib.status==3||
-        lib.status==4||
-        lib.status==5
+        lib.status==4
+        
     )        
      return true;
 
@@ -122,19 +113,7 @@ export const LibraryInfo = (props) => {
             lat,lon
         });        
     }
-    const institutionchangesurl=(reqPath,id) => {
-        return generatePath(reqPath, {
-            id,
-            op: 'institution'
-        });        
-    }
 
-    const projectschangesurl=(reqPath,id) => {
-        return generatePath(reqPath, {
-            id,
-            op: 'projects'
-        });               
-    }
 
     const identifiersurl=(reqPath,id) => {
         return generatePath(reqPath, {
@@ -163,8 +142,7 @@ export const LibraryInfo = (props) => {
             </div>}
             <div className='institution'>
                 <i className="fas fa-building"></i> 
-                <span className='badge badge-secondary'>{data.institution.data.name} {data.institution.data.status==2? <span className='text-danger'><i className="fas fa-exclamation-triangle"></i></span>:''}</span>
-                <Link className="active" to={institutionchangesurl(editPath,data.id)}><i className="fas fa-edit"></i></Link>               
+                <span className='badge badge-secondary'>{data.institution.data.name} {data.institution.data.status!==1? <span className='text-danger'><i className="fas fa-exclamation-triangle"></i></span>:''}</span>                
             </div>
                            
             {data.projects && data.projects.data && data.projects.data.length>0 && 
@@ -173,8 +151,7 @@ export const LibraryInfo = (props) => {
                         {data.projects.data.map(prj => 
                         <span key={prj.id} className="project-item badge badge-secondary text-white">
                             {prj.name}
-                        </span>)}                    
-                    <Link className="active" to={projectschangesurl(editPath,data.id)}><i className="fas fa-edit"></i></Link>
+                        </span>)}                                        
                     </span>                                    
             }
             {data.identifiers && data.identifiers.data && data.identifiers.data.length>0 && 
@@ -246,6 +223,7 @@ const LibraryItem = (props) => {
             </Col>
             <Col sm={1}>
                 {statusInfo(data)}
+                {data.institution.data.status!=1 && <>&nbsp;<i className='fas fa-exclamation-triangle text-danger'></i></>}
             </Col>
             <Col sm={3}>      
             <LibraryOperations data={data} changeStatusLibrary={changeStatusLibrary} deleteLibrary={deleteLibrary}/>                

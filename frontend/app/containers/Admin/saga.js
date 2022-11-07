@@ -63,7 +63,7 @@ import { push } from 'connected-react-router';
 import {getUsersList, updateUser, createUser, getUsersOptionsList,
         getRoles, getUser, getInstitution,
         createLibrary, getInstituionTypeList, 
-        getInstitutionTypesOptionList,  getInstitutionsByTypeByCountryOptionList,
+        getInstitutionTypesOptionList,  
         getInstitutionsOptionList,
         getCountriesOptionsList,
         getProject, getProjectsList, updateProject,getProjectsOptionList, getlibraryProjectsOptionList,
@@ -71,7 +71,7 @@ import {getUsersList, updateUser, createUser, getUsersOptionsList,
         getLibrariesListNearTo} from 'utils/api'
 
 import {admin_getLibrariesList,admin_deleteLibrary,admin_statusChangeLibrary,
-  admin_getInstitutionsList, admin_createInstitution,admin_updateInstitution,admin_deleteInstitution,admin_statusChangeInstitution,
+  admin_getInstitutionsList, admin_createInstitution,admin_updateInstitution,admin_deleteInstitution,admin_statusChangeInstitution,admin_getInstitutionsByTypeByCountryOptionList,
   admin_getLibrary, admin_updateLibrary} from 'utils/apiAdmin'
 
 import { getPlacesByText } from 'utils/apiExternal';   
@@ -369,7 +369,7 @@ export function* requestGetInstitutionsByTypeByCountryOptionListSaga(action) {
     institutiontypeid: action.institutiontypeid
   }
   try {
-    const request = yield call(getInstitutionsByTypeByCountryOptionList, options);
+    const request = yield call(admin_getInstitutionsByTypeByCountryOptionList, options);
     yield put(requestGetInstitutionsByTypeByCountryOptionListSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));

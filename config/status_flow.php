@@ -337,21 +337,21 @@ return [
                         ],
                         config("constants.library_status.disabled_bad") => [
                             'role'  =>  ['super-admin','manager'],
-                            'next_statuses'  =>  [config("constants.library_status.enabled"),config("constants.library_status.renewing")],
+                            'next_statuses'  =>  [config("constants.library_status.enabled")],
                             'notify' => [
                                 'Model'=>'manageOperators', 
                             ], 
                         ],
                         config("constants.library_status.disabled_subscription_expired") => [
                             'role'  =>  ['super-admin','manager'],
-                            'next_statuses'  =>  [config("constants.library_status.renewing")],
+                            'next_statuses'  =>  [config("constants.library_status.disabled"),config("constants.library_status.renewing")],
                             'notify' => [
                                 'Model'=>'manageOperators', 
                             ], 
                         ],
                         config("constants.library_status.disabled_didntpaid") => [
                             'role'  =>  ['super-admin','manager'],
-                            'next_statuses'  =>  [config("constants.library_status.enabled"),config("constants.library_status.renewing")],
+                            'next_statuses'  =>  [config("constants.library_status.enabled")],
                             'notify' => [
                                 'Model'=>'manageOperators', 
                             ], 

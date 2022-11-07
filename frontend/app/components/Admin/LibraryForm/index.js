@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 // import {Row, Col} from 'reactstrap';
 import {CustomForm} from 'components';
 import {fields,fieldsGroups} from './fields';
@@ -13,24 +13,47 @@ const LibraryForm = (props) => {
     console.log('LibraryForm', props)
     const { library, 
             searches, loading, resources,
-            submitFormAction, institutionsOptionList, 
-            countriesOptionList, librarySubjectOptionList} = props
+            submitFormAction,libraryProjectsOptionList, institutionsOptionList, institutionsTypesOptionList,institutionsByTypeCountryOptionList,
+            countriesOptionList, librarySubjectOptionList,onChangeData} = props
     const intl = useIntl();
+    
+    const [requestData,setRequestData]=useState(null);
+
+    useEffect ( ()=>{
+        
+        if(!loading)
+        if(library && library.id>0)
+        {
+            setRequestData({
+                ...library,
+                'project_id': library.projects.data.map( ({id,name})=>{return id;}),
+                'institution_type_id': library.institution.data?library.institution.data.institution_type_id:null,
+                'institution_country_id': library.institution.data?library.institution.data.country_id:null
+            })                    
+        }
+
+    },[library])
+
+
     
     return (
             //<SimpleForm loading={loading}>
                  <CustomForm 
                     submitCallBack={(formData) => submitFormAction(formData)} 
-                    requestData={library ? library : null}
+                    requestData={requestData}
                     fields={fields} 
                     fieldsGroups={fieldsGroups}
-                    title={library && library.name ? library.name : intl.formatMessage(messages.header)}                    
-                    institution_id={institutionsOptionList} 
+                    title={library && library.name ? library.name : intl.formatMessage(messages.header)}                                                            
                     country_id={countriesOptionList}
+                    institution_type_id = {institutionsTypesOptionList}                    
+                    institution_country_id = {countriesOptionList}
+                    institution_id={institutionsByTypeCountryOptionList}                    
+                    project_id={libraryProjectsOptionList}   
                     subject_id={librarySubjectOptionList}
                     searchOptionList={searches} 
                     messages={{...messages, ...globalMessages}}
                     resources={resources}
+                    onChangeData={(field_name, value) => onChangeData(field_name, value)}
                 /> 
             //</SimpleForm>
     )

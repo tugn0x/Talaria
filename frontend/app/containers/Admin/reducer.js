@@ -69,7 +69,7 @@ export const initialState = {
   },
   institution: [],
   institutionsOptionList: [],
-  
+  institutionsTypesOptionList: [],
   institutionsByTypeCountryOptionList: [],
 
 
@@ -189,7 +189,7 @@ const AdminReducer = (state = initialState, action) =>
         break;
       case REQUEST_GET_INSTITUTIONS_OPTIONLIST_SUCCESS:
         draft.error = initialState.error;
-        draft.institutionsOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
+        draft.institutionsOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );        
         break;
       
       case REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST:
@@ -197,8 +197,8 @@ const AdminReducer = (state = initialState, action) =>
         break;
       case REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST_SUCCESS:
         draft.error = initialState.error;
-        draft.institutionsByTypeCountryOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
-        draft.institutionsByTypeCountryOptionList.push({"value":0,"label":"Institution not present"})
+        draft.institutionsByTypeCountryOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );        
+        //draft.institutionsByTypeCountryOptionList.push({"value":0,"label":"Institution not present"})
         break;
       case REQUEST_GET_INSTITUTIONS_LIST:
         draft.loading = true;
