@@ -43,21 +43,21 @@ case REQUEST_GET_COUNTRIES_OPTIONLIST:
   break;
 case REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS:
   draft.error = initialState.error;
-  draft.countriesOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
+  draft.countriesOptionList = action.result.sort((a, b) => { return (a.id > b.id) ? 1 : -1 }).map(item => { return {value: item.id, label: item.name} } );
   break;
 case REQUEST_LIBRARYSUBJECT_OPTIONLIST:
   draft.error = action.error;
   break;
 case REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS:
   draft.error = initialState.error;
-  draft.librarySubjectOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
+  draft.librarySubjectOptionList = action.result.sort((a, b) => { return (a.id > b.id) ? 1 : -1 }).map(item => { return {value: item.id, label: item.name} } );
   break;
 case REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST:
   draft.error = action.error;
   break;
 case REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST_SUCCESS:
   draft.error = initialState.error;
-  draft.institutionsByTypeCountryOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
+  draft.institutionsByTypeCountryOptionList = action.result.sort((a, b) => { return (a.id > b.id) ? 1 : -1 }).map(item => { return {value: item.id, label: item.name} } );
   draft.institutionsByTypeCountryOptionList.push({"value":0,"label":"Institution not present"})
   break;
 
@@ -67,7 +67,7 @@ case REQUEST_INSTITUTIONSTYPES_OPTIONLIST:
   break;
 case REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS:
   draft.error = initialState.error;
-  draft.institutionsTypesOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
+  draft.institutionsTypesOptionList = action.result.sort((a, b) => { return (a.id > b.id) ? 1 : -1 }).map(item => { return {value: item.id, label: item.name} } );
   break;
 
 
@@ -78,7 +78,7 @@ case REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST:
 case REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST_SUCCESS:
   draft.loading = false;
   draft.error = initialState.error;
-  draft.libraryProjectsOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
+  draft.libraryProjectsOptionList = action.result.sort((a, b) => { return (a.id > b.id) ? 1 : -1 }).map(item => { return {value: item.id, label: item.name} } );
   break;
 
 
@@ -89,7 +89,7 @@ case REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST_SUCCESS:
   case REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST_SUCCESS:
     draft.loading = false;
     draft.error = initialState.error;
-    draft.identifierTypesOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
+    draft.identifierTypesOptionList = action.result.sort((a, b) => { return (a.id > b.id) ? 1 : -1 }).map(item => { return {value: item.id, label: item.name} } );
   break;
 
   case REQUEST_SEARCH_PLACES_BY_TEXT:
