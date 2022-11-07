@@ -200,11 +200,9 @@ const RegisterLibrary = (props) => {
             fields.suggested_institution_name.hidden = true;
                 if (countryid!==0 && institutiontypeid!==0)
                 {
-                    dispatch(requestGetInstitutionsByTypeByCountryOptionList(null,countryid,institutiontypeid));
                     setInstitutionPresent(true);
                     console.log("Institution not present")
                     setInstitutionName(null) 
-                   
                 }
                 return countryid;
             });
@@ -243,6 +241,12 @@ const RegisterLibrary = (props) => {
     }
 
 
+    useEffect(()=>{
+        if(countryid!==0 && institutiontypeid!==0)
+            dispatch(requestGetInstitutionsByTypeByCountryOptionList(null,countryid,institutiontypeid));                   
+        },[countryid,institutiontypeid])
+     
+        
     const AddNewIdentifier = (field_name,value,newList) => {
         fields.library_identifier_list.hidden = newList.length>0 ? false : true;
         setData({...data, 'identifiers_id': newList})
