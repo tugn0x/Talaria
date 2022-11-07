@@ -26,4 +26,28 @@ class AdminLibraryController extends AdminApiController
 
         $this->broadcast = false;
     }
+
+    public function update(Request $request, $id)
+    {
+        if (!empty($this->validate))
+            $this->validate($request, $this->validate);
+
+        $model = $this->nilde->update($this->model, $request, $id, function ($model, $request) {            
+            return $this->nilde->syncGrantedPermissions($model, $request);
+        });
+
+        //sync projects
+        if($request->has('project_id'))
+                $model->projects()->sync($request->input('project_id'));   
+
+        //TODO: sync identifiers
+        //if($request->has('identifier_id'))
+        //        $model->identifiers()->sync($request->input('identifier_id'));           
+        
+        if ($this->broadcast && config('apinilde.broadcast'))
+            broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
+
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
+    }
+
 }    

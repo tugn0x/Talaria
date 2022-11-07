@@ -26,4 +26,15 @@ class AdminInstitutionController extends AdminApiController
 
         $this->broadcast = false;
     }
+
+    //override to get ALL institutions, not only active
+    public function optionList(Request $request)
+    {                   
+        $collection = $this->nilde->optionList($this->model, $request,function ($model,$request){
+            return $model->byCountryAndType($request->input('country_id'),$request->input('institution_type_id'));
+        });
+
+        return $this->response->array($collection->toArray());
+    }
+
 }    

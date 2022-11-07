@@ -94,6 +94,14 @@ export const admin_deleteInstitution = (options) => {
   return request(`${BASE_ADMIN_URL}/institutions/${institution_id}`, options)
 };
 
+export const admin_getInstitutionsByTypeByCountryOptionList = (options) => {
+  options = getOption(options);
+  const query = options.query;
+  const countryid = options.countryid;
+  const institutiontypeid = options.institutiontypeid;  
+  return request(`${BASE_ADMIN_URL}/institutions/option-items/?label=name&country_id=${countryid}&institution_type_id=${institutiontypeid}`, options)
+};
+
 
   
 

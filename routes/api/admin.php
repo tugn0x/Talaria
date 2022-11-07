@@ -45,8 +45,17 @@ Route::group([
         Route::get('', 'AdminInstitutionController@index')->name('index');    
         Route::post('', 'AdminInstitutionController@create')->name('create');
         Route::delete('{id}', 'AdminInstitutionController@delete')->where('id', '[0-9]+')->name('delete'); //soft delete
+        Route::put('{id}', 'AdminInstitutionController@update')->where('id', '[0-9]+')->name('update');
         Route::put('{id}/changestatus', 'AdminInstitutionController@changeStatus')->where('id', '[0-9]+')->name('changeStatus');
-        
+        Route::get('option-items', 'AdminInstitutionController@optionList')->name('option-items');
+
+        //TODO
+        //Route::get('consortia', 'ConsortiumController@index')->name('index');
+        //Route::put('consortia/{id}', 'ConsortiumController@update')->name('update');
+        //Route::post('consortia', 'ConsortiumController@store')->name('store');
+        //Route::put('institution-types/{id}', 'AdminInstitutionTypeController@update')->name('update');
+        //Route::post('institution-types', 'AdminInstitutionTypeController@store')->name('store');
+                    
         //Route::get('{id}/subscriptions', 'AdminLibraryController@subscriptions')->where('id', '[0-9]+')->name('showsubscr');        
         //Route::put('{id}/subscriptions/{subid}', 'AdminLibraryController@subscriptions')->where('id', '[0-9]+')->where('subid', '[0-9]+')->name('edotsubscr');        
         //Route::delete('{id}/subscriptions/{subid}', 'AdminLibraryController@subscriptions')->where('id', '[0-9]+')->where('subid', '[0-9]+')->name('delsubscr');        
@@ -55,3 +64,4 @@ Route::group([
 
 });
 
+    

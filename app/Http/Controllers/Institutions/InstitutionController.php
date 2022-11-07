@@ -55,6 +55,7 @@ class InstitutionController extends ApiController
     public function optionList(Request $request)
     {                   
         $collection = $this->nilde->optionList($this->model, $request,function ($model,$request){
+            //only active
             return $model->active()->byCountryAndType($request->input('country_id'),$request->input('institution_type_id'));
         });
 
