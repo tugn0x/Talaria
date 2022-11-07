@@ -3,23 +3,23 @@ import Navigation from './Navigation'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import {institutionsOptionListSelector,
-    countriesOptionListSelector, librarySubjectOptionListSelector, projectsOptionListSelector,institutionsTypeOptionListSelector,
-    placesSelector, 
-    institutionsByTypeCountryOptionListSelector, libraryProjectsOptionListSelector} from './selectors';
-
-    
 import wizardMessages from './messages'
 import globalMessages from 'utils/globalMessages';
 import {fields, totalSteps, setNewSteps} from './fields'
-import { requestGetInstitutionsOptionList, requestGetCountriesOptionList,
-    requestLibrarySubjectOptionList, requestPostPublicLibrary, requestGetProjectsOptionList, requestGetInstitutionsByTypeByCountryOptionList,
-    requestGetInstitutionTypeOptionList, requestGetInstitutionCountry,requestGetlibraryProjectsOptionList } from "./actions"
 import './style.scss'
-import {Button,Row, Col} from 'reactstrap'
+import {Button} from 'reactstrap'
 import {useIntl} from 'react-intl'
 import {CustomForm, BasePage} from 'components'
-import {requestSearchPlacesByText} from './actions';
+import { requestGetCountriesOptionList,
+    requestLibrarySubjectOptionList, requestPostPublicLibrary, requestGetProjectsOptionList, requestGetInstitutionsByTypeByCountryOptionList,
+    requestGetInstitutionTypeOptionList, requestGetlibraryProjectsOptionList, requestGetlibraryidentifierTypesOptionList } from "./actions"
+import {institutionsOptionListSelector,
+    countriesOptionListSelector, librarySubjectOptionListSelector, projectsOptionListSelector,institutionsByTypeCountryOptionListSelector,
+    institutionsTypeOptionListSelector,
+    placesSelector, 
+    libraryProjectsOptionListSelector,
+    identifierTypesOptionListSelector} from './selectors';
+import { acceptallLenderLendingRequest } from '../../utils/api';
 
 const ILL_REQUEST_PAYMENT=(process.env.ILL_REQUEST_PAYMENT && process.env.ILL_REQUEST_PAYMENT=="true")?true:false;
 const LIBRARY_DIFFERENT_PROFILES = (process.env.LIBRARY_DIFFERENT_PROFILES && process.env.LIBRARY_DIFFERENT_PROFILES=="true")?true:false;
@@ -29,19 +29,15 @@ const RegisterLibrary = (props) => {
     const messages= {...wizardMessages,...globalMessages}
     
     let [institutionPresent, setInstitutionPresent] = useState(false)
+    let [currentStep, setCurrentStep] = useState(1)
     const intl = useIntl()
     const {dispatch} = props
     const [data, setData] = useState({})
-    let [currentStep, setCurrentStep] = useState(1)
     const [currentFields, setCurrentFields] = useState({})
     const [steps, setSteps] = useState(setNewSteps)
-    const [longtitude, setLongtitude] = useState(1);
-    const [latitude, setLatitude] = useState(1);
-
     const [countryid, setCountryid] = useState(0);
     const [institutiontypeid, setInstitutiontypeid] = useState(0);
     const projectsarrname = [];
-
     const [basicProfile,setBasicProfile]=useState(LIBRARY_DIFFERENT_PROFILES);
     const [lat, setLat] = useState(null);
     const [lng, setLng] = useState(null);
@@ -50,38 +46,65 @@ const RegisterLibrary = (props) => {
     const [subjectname, setSubjectName] = useState(null);
     const [institutiontypename, setInstitutionTypeName] = useState(null);
     const [institutionname, setInstitutionName] = useState(null);
-
-
+    const [identifierType, setIdentifiertype] = useState(null);
+    const [identifierTypeSelected, setidentifierTypeSelected] = useState(false);
+    let [buttonStopPressed, setbuttonStopPressed] = useState(false)
+    const [projectName, setProjectName] = useState(null);
+    const [printStatus, setPrintStatus] = useState(false)
     const getLocation = () => {
         if (!navigator.geolocation) {
-          setStatus('Geolocation is not supported by your browser');
+          setStatus(intl.formatMessage(wizardMessages.geolocationNotSupported));
         } else {
-            setStatus('Locating your library location...');
+            setStatus(intl.formatMessage(wizardMessages.locatingLibraryLocation));
             if (lng===null)  
+            {
                 fields.geolocation_spinner.hidden=false;
+                fields.library_coordinates.label=intl.formatMessage(wizardMessages.stopEnterManually)  
+                fields.library_coordinates.color="orange"
+                setbuttonStopPressed(true)
+            }
             navigator.geolocation.getCurrentPosition((position) => {
-            setStatus(null);
-            setLat(position.coords.latitude);
-            setLng(position.coords.longitude);
-            setData({...data, 'lon': position.coords.longitude, 'lat': position.coords.latitude})
-          }, () => {
-            setStatus('Unable to retrieve your libary location');
-          });
+                if(!buttonStopPressed)
+                {
+                    setLat(position.coords.latitude); setLng(position.coords.longitude);
+                    setData({...data, 'lon': position.coords.longitude, 'lat': position.coords.latitude})
+                }
+            }, () => {
+                setStatus(intl.formatMessage(wizardMessages.unableRetriveLocation));
+            });
         }
       }
    
       useEffect(() => {
         fields.geolocation_spinner.hidden=true;
+        fields.library_coordinates.label=intl.formatMessage(wizardMessages.clicktoGetRecords) 
+        if (lng!==null)
+            fields.library_coordinates.disabled=true
      }, [lng])
-     
+
+     const GetBrowserCoordinates = (ev) => {
+        if (buttonStopPressed)
+        {
+            setStatus(null);
+            fields.geolocation_spinner.hidden=true;
+            fields.library_coordinates.label=intl.formatMessage(wizardMessages.clicktoGetRecords) 
+            setLng(0);setLat(0)
+        }
+        else
+            getLocation()
+
+        if (lng===null && lat===null)
+        {    setLng(0);setLat(0)   }
+    }
+
+
     // Fai le chiamate per le option list
     useEffect(() => {
-       
         dispatch(requestGetCountriesOptionList())
         dispatch(requestGetInstitutionTypeOptionList())
         dispatch(requestGetlibraryProjectsOptionList())
         dispatch(requestLibrarySubjectOptionList())
-        
+        dispatch(requestGetlibraryidentifierTypesOptionList())
 
         if (ILL_REQUEST_PAYMENT===false) //RSCVD
         {
@@ -102,12 +125,9 @@ const RegisterLibrary = (props) => {
             fields.subject_id.hidden=false;
             fields.showfullProfile.hidden = true;                             
         }
-
         fields.geolocation_spinner.hidden=true;
-
         //set profile
         setData({...data, 'profile_type': basicProfile?1:2})
-
     },[])
 
     // Filtra i CAMPI / Fields da mostrare a seconda dello step in cui ti trovi
@@ -123,6 +143,7 @@ const RegisterLibrary = (props) => {
         Object.keys(props.libraryProjectsOptionList).forEach(key => 
             projectsarrname.push(props.libraryProjectsOptionList[key].value))
     })
+
 
     useEffect(() => {
        //set profile
@@ -148,10 +169,7 @@ const RegisterLibrary = (props) => {
         setData({...data, "institution_name": institutionname})
      }, [institutionname])
 
-
-     
-
-    // Cambia Step
+     // Cambia Step
     const onChangeStep = (formData, newStep) => {
         setData({...data, ...formData})
         setCurrentStep(parseInt(newStep))
@@ -160,6 +178,10 @@ const RegisterLibrary = (props) => {
     
     // Aggiorna dati nei campi *handle change*
     const onChangeData = (field_name, value) => {
+        
+        if (field_name === "identifier_type_id")
+            setIdentifiertype(value.value);
+        
         if (field_name === "institution_type_id")
         {
             setInstitutiontypeid(value.value);
@@ -206,36 +228,41 @@ const RegisterLibrary = (props) => {
         if (field_name === "institution_id" && value.value === 0)
             fields.suggested_institution_name.hidden = false;
 
+        
+        if (field_name === "identifier_type_id" && value!==0)
+            setidentifierTypeSelected(true)
+        
+        
+        if (field_name === "library_identifiers_txt" && value !== 0 && identifierTypeSelected)
+            fields.library_identifier_add.disabled = false
+            
+        if (field_name === "library_identifiers_txt" && value.length === 0)
+            fields.library_identifier_add.disabled = true
+
         setData({...data, [field_name]: value})
     }
 
-    const showlibraryposition = (position) => {
-        if (position.lon!=null && position.lat!=null)
-        {
-            console.log("lon:" + position.lon + " lat: " + position.lat)
-            setLongtitude(position.lon);
-            setLatitude(position.lat);
-            //setData({...data, "lon": position.lon,"lat": position.lat, "subject_id":0 })
-            setData({...data, "lon": position.lon,"lat": position.lat })
-        }
+
+    const AddNewIdentifier = (field_name,value,newList) => {
+        fields.library_identifier_list.hidden = newList.length>0 ? false : true;
+        setData({...data, 'identifiers_id': newList})
+        console.log("identifier_id" + JSON.stringify(newList))
+
     }
 
-    const GetBrowserCoordinates = (ev) => {
-        getLocation()
-        if (lng===null && lat===null)
-        {    setLng(0);setLat(0)   }
+    const RemoveIdentifier = (field_name,value,newList) => {
+        fields.library_identifier_list.hidden = newList.length>0 ? false : true;
+        setData({...data, 'identifier_id': newList})
+        console.log(JSON.stringify(newList))
     }
-
 
     const toggleLibraryProfile = (ev) => {
-      
         setBasicProfile(!basicProfile);
-
         if (fields.opac.hidden===false)
         {
             fields.opac.required = false;
             fields.subject_id.required = false;
-            
+            fields.subject_id.value = 1
             fields.opac.hidden=true;
             fields.opac_label.hidden=true;
             fields.subject_id.hidden=true;
@@ -267,6 +294,15 @@ const RegisterLibrary = (props) => {
         }  
     }
 
+    // const Print = () =>{     
+    //     let printContents = document.getElementById('printablediv').innerHTML;
+    //     let originalContents = document.body.innerHTML;
+    //     document.body.innerHTML = printContents;
+    //     window.print();
+    //     document.body.innerHTML = originalContents; 
+    //     setPrintStatus(true)
+    // }
+
     return (
         /*<BasePage {...props} routes={[]} messages={wizardMessages} headermenu={false}>*/
         <>
@@ -295,58 +331,68 @@ const RegisterLibrary = (props) => {
                     institution_id={props.institutionsByTypeCountryOptionList}
                     subject_id={props.librarySubjectOptionList}
                     project_id = {props.libraryProjectsOptionList}
+                    identifier_type_id = {props.identifierTypesOptionList}
                     onClickData={toggleLibraryProfile}
                     RetrievePositionData = {GetBrowserCoordinates}
-                    onPlacesSearch={(search)=>dispatch(requestSearchPlacesByText(search))}
-                    places={props.places}
-                    placesFreeSearchPlaceholder={intl.formatMessage(wizardMessages.placesFreeSearchPlaceholder)}
-                    getMarkers={(pos)=>showlibraryposition(pos)}
-                    onMarkerClick={console.log("onMarkerClick")}
+                    AddNewIdentifier={AddNewIdentifier}
+                    RemoveIdentifier={RemoveIdentifier}
                     searchOptionList={{ 
                         institution_type_id: (input) => dispatch(requestGetInstitutionTypeOptionList(input)), 
                         country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
                         subject_id: (input) => dispatch(requestLibrarySubjectOptionList(input)), 
                         project_id: (input) => dispatch(requestGetProjectsOptionList(input)),
-                        institution_country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
-                        //disciplinary_id: (input) => dispatch(requestGetDisciplinariesOptionList(input)), 
+                        institution_country_id: (input) => dispatch(requestGetlibraryidentifierTypesOptionList(input)),
+                        identifier_type_id: (input) => dispatch(requestGetIdentifierTypesOptionList(input)),
                     }}
                     messages={messages}
                     getValidation={(validation) => checkValidation(validation) }
                 />)
             }
 
-                   
-
             {/* FINITI GLI STEP CARICA IL RIEPILOGO E FAI IL SUBMIT */}
             {currentStep === totalSteps && 
-                <div className="summary-wizard">
+                <div  id="printablediv">
                     <h3>{intl.formatMessage(wizardMessages.step_4)}</h3>
-                   <div class="container_summary "> 
-                    {
+                   {/* <div class="container_summary ">  */}
+                <div> 
+                    
+                   <div class="container-fluid">
+                        <div class="row">
+                        {
                             Object.keys(data).map((key, index) => {
-                                return (key!=='profile_type' && key!=='country_id'  && key!=='institution_type_id' && key!=='institution_country_id' && key!=='institution_id' && key!=='subject_id' && key!=='project_id') ? (
-                                    data[key]!==null && <div class="row" key={index}>
+                                return (key!==null) && (key!=='profile_type') && key!=='identifier_id' && key!=='institution_type_id' && key!=='country_id' && key!=='library_identifiers_txt' && key!=='identifier_type_id' && key!=='subject_id'
+                                && key!=='institution_country_id' && key!=='institution_id' && key!=='project_id' &&
+                                data[key]!==null && data[key]!==0 &&
+                                <div key={index} class="report_summary"> 
                                     <>
-                                    <div className="col-md-6"> 
+                                    {   
+                                        <div> 
                                             <div class="weight-bold">{messages[key] && intl.formatMessage(messages[key])}</div>
-                                            <div>{data[key]}</div>
-                                     </div>
+                                            {(key!=='identifiers_id') && <div>{data[key]}</div>}
+
+                                            {(key==='identifiers_id')&&<div> 
+                                                {data.identifiers_id.map((item) => (<div>{item[1]}</div>))}</div>}
+                                        </div>
+                                    }   
                                     </>
-                                </div> 
-                            
-                            ) : ''
-                            }
-                        )
-                    }
+                                </div>
+                                }
+                            )
+                        }
+                      </div>
+                    </div>
                 </div>
 
-                <div class="vertical-center">
-                    <Button color="brown" onClick={() => dispatch(requestPostPublicLibrary(data, intl.formatMessage(wizardMessages.createMessage)))}>
+
+
+                <div class="vertical-center" id="noprint"> 
+                    <Button color="brown" class="btn" onClick={() => dispatch(requestPostPublicLibrary(data, intl.formatMessage(wizardMessages.createMessage)))}>
                         {intl.formatMessage(globalMessages.submit)} 
                     </Button>
+                    {/* <Button color="brown" onClick={Print}>
+                        Print Summary Report
+                    </Button> */}
                     </div>
-
-                   
                 </div>
             }
         {/*</BasePage>*/}
@@ -361,6 +407,7 @@ const mapStateToProps = createStructuredSelector({
     countriesOptionList: countriesOptionListSelector(),
     librarySubjectOptionList: librarySubjectOptionListSelector(),
     projectsOptionList: projectsOptionListSelector(),
+    identifierTypesOptionList: identifierTypesOptionListSelector(),
     institutionsTypesOptionList: institutionsTypeOptionListSelector(),
     places: placesSelector(),
 

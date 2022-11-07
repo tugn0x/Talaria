@@ -68,10 +68,10 @@ $circleWidth: 40px;
     .row {
         width: 100%;
         padding: 1rem 0;
-        border-bottom: 1px solid $dark-text;
-        &:first-child {
-            // border-top: 1px solid $dark-text;
-        }
+        //border-bottom: 1px solid $dark-text;
+        // &:first-child {
+        //      border-top: 1px solid $dark-text;
+        // }
         
     }
     & institution_country_name {
@@ -84,30 +84,48 @@ $circleWidth: 40px;
         width: 200px;
         height: 60px;
     }
+
+    p:first-child {
+          font-weight: bold;
+       }
+      
 }
 
-p:first-child {
+.weight-bold {
     font-weight: bold;
  }
 
- .weight-bold {
-    font-weight: bold;
- }
-
- h3 {
+h3 {
     text-align: center;
+    padding-bottom: 50px;
  }
- .container_summary {
+
+.container_summary {
   columns: 3 auto;
   margin: 5px;
   padding: 30px;
   font-size: 14px;
-  }
+}
 
-  .vertical-center {
+.vertical-center {
+    padding-top: 50px;
     margin: 0;
     text-align: center;
     position: relative;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-  }
+    // -ms-transform: translateY(-50%);
+    // transform: translateY(-50%);
+}
+
+.report_summary {
+    columns: 2 auto;
+    margin: 10px;
+    padding: 10px 10px 25px 10px;
+    column-width: 200px;
+    border-bottom: 1px solid;
+}
+
+@media print {
+    .noprint {
+       visibility: hidden;
+    }
+ }

@@ -150,6 +150,10 @@
   "app.containers.RegisterNewLibrary.ill_service_conditions": "Modalità del servizio ILL",  
   "app.containers.RegisterNewLibrary.volunteer_library_label":"Biblioteca volontaria?",
   "app.containers.RegisterNewLibrary.projects_label": "Progetto o Consorzio",
+  "app.containers.RegisterNewLibrary.identifiers_label": "Library identifiers",
+  "app.containers.RegisterNewLibrary.library_identifiers_txt":"Identifier Code",
+  "app.containers.RegisterNewLibrary.duplicate_identifer_type":"A second code for the same type cannot be added, kindly choose another identifier type",
+
   "app.containers.RegisterNewLibrary.ill_institution_label": "Istituzione",
   "app.containers.RegisterNewLibrary.library_contact_label": "Contatti servizio ILL",
   "app.containers.RegisterNewLibrary.library_location_label": "Località/Indirizzo completo",
@@ -159,6 +163,14 @@
   "app.containers.RegisterNewLibrary.opac_label":"Online Catalog (OPAC)",
   "app.containers.RegisterNewLibrary.switchToBasicProfile":"Scegli il profilo base",
   "app.containers.RegisterNewLibrary.switchToFullProfile":"Clicca qui per continuare",
+  "app.containers.RegisterNewLibrary.clicktoGetRecords":"Click to get coords",
+
+  "app.containers.RegisterNewLibrary.stopEnterManually":"Stop to enter manually",
+  "app.containers.RegisterNewLibrary.geolocationNotSupported":"Geolocation is not supported by your browser",
+  "app.containers.RegisterNewLibrary.unableRetriveLocation":"Unable to retreive your library location",
+  "app.containers.RegisterNewLibrary.locatingLibraryLocation":"Locating your library location...",
+  "app.containers.RegisterNewLibrary.project_id":"Project",
+
 
   "app.containers.LibraryUserPage.header": "Modifica stato utente",
   "app.containers.LibraryUserPage.user_referent": "Referente",

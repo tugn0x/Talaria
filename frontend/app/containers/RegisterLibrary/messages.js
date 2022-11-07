@@ -31,6 +31,10 @@ export default defineMessages({
     id: 'app.containers.RegisterNewLibrary.step_4',
     defaultMessage: 'Summary Report',
   },
+  createIdentifier: {
+    id: 'app.containers.RegisterNewLibrary.createIdentifier',
+    defaultMessage: 'Create Identifer',
+  },
   createMessage: {
     id: 'app.containers.RegisterNewLibrary.createMessage',
     defaultMessage: 'Public Library created',
@@ -41,7 +45,30 @@ export default defineMessages({
   },
   switchToFullProfile: {
     id: 'app.containers.RegisterNewLibrary.switchToFullProfile',
-    defaultMessage:'Click here to continue'
+    defaultMessage:'Yes, Click here'
+  },
+
+  clicktoGetRecords: {
+    id: 'app.containers.RegisterNewLibrary.clicktoGetRecords',
+    defaultMessage:'Click to get coords'
+  },
+
+  stopEnterManually: {
+    id: 'app.containers.RegisterNewLibrary.stopEnterManually',
+    defaultMessage:'Stop to enter manually'
+  },
+  geolocationNotSupported: {
+    id: 'app.containers.RegisterNewLibrary.geolocationNotSupported',
+    defaultMessage:'Geolocation is not supported by your browser'
+  },
+
+  unableRetriveLocation: {
+    id: 'app.containers.RegisterNewLibrary.unableRetriveLocation',
+    defaultMessage:'Unable to retreive your library location'
+  },
+  locatingLibraryLocation: {
+    id: 'app.containers.RegisterNewLibrary.locatingLibraryLocation',
+    defaultMessage:'Locating your library location...'
   },
 
   placesFreeSearchPlaceholder: {
@@ -187,9 +214,23 @@ export default defineMessages({
 
   institution_type_name: {
     id: 'app.libraries.institution_type_name',
-    defaultMessage: 'Institution Type Name',
+    defaultMessage: 'Institution Type',
   },
   
+  library_identifiers: {
+    id: 'app.libraries.institution_type_name',
+    defaultMessage: 'Library Identifiers',
+  },
+
+  identifier_type_id: {
+    id: 'app.RegisterNewLibrary.identifier_type_id',
+    defaultMessage: 'Identifier Type',
+  },
+
+  library_identifiers_txt: {
+    id: 'app.RegisterNewLibrary.library_identifiers_txt',
+    defaultMessage: 'Identifier Code',
+  },
 
   institution_country_id: {
     id: 'app.libraries.institution_country_id',
@@ -198,7 +239,7 @@ export default defineMessages({
 
   institution_country_name: {
     id: 'app.libraries.institution_country_name',
-    defaultMessage: 'Institution Country name',
+    defaultMessage: 'Institution Country',
   },
   
   country_name: {
@@ -218,6 +259,11 @@ lat: {
 
 lon: {
   id: 'app.libraries.long',
+  defaultMessage: 'Longtitude',
+},
+
+lon: {
+  id: 'app.libraries.identifier_type_id',
   defaultMessage: 'Longtitude',
 },
 
@@ -257,6 +303,11 @@ projects_label: {
   defaultMessage: 'Project or Consortium',
 },
 
+identifiers_label: {
+  id: 'app.containers.RegisterNewLibrary.identifiers_label',
+  defaultMessage: 'Identifiers',
+},
+
 ill_institution_label: {
   id: 'app.containers.RegisterNewLibrary.ill_institution_label',
   defaultMessage: 'Institution',
@@ -272,6 +323,11 @@ library_location_label: {
   defaultMessage: 'Library location',
 },
 
+TextButtonList: {
+  id: 'app.containers.RegisterNewLibrary.library_location_label',
+  defaultMessage: 'TextButtonList',
+},
+
 library_coordinates_note: {
   id: 'app.containers.RegisterNewLibrary.library_coordinates_note',
   defaultMessage: 'This GPS coords are needed to display the library in a map',
@@ -283,6 +339,15 @@ library_coordinates: {
   defaultMessage: 'Library location',
 }, 
 
+identifiers_id: {
+  id: 'app.containers.RegisterNewLibrary.identifiers_id',
+  defaultMessage: 'Identifiers Code',
+}, 
+
+project_id: {
+  id: 'app.containers.RegisterNewLibrary.project_id',
+  defaultMessage: 'Project',
+},
 
 subject_label: {
   id: 'app.containers.RegisterNewLibrary.subject_label',
@@ -295,6 +360,9 @@ opac_label: {
 },
 
 
-
+duplicate_identifer_type: {
+  id: 'app.containers.RegisterNewLibrary.duplicate_identifer_type',
+  defaultMessage: 'A second code for the same type cannot be added, kindly choose another identifier type',
+},
 
 });

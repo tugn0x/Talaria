@@ -765,6 +765,21 @@ export const getlibraryProjectsOptionList = (options) => {
   //return request(`${BASE_URL}/api/v1/projects/option-items`, options)
 }
 
+export const getlibraryidentifierTypesOptionList = (options) => {
+  options = getOption(options);
+  const query = options.query;
+  return request(`${BASE_URL}/api/v1/libraries/identifiers/option-items?label=name&q=${query}`, options)
+};
+
+// export const getlibraryidentifierTypesOptionList = (options) => {
+//   options = getOption(options);
+//   const query = options.query ? options.query : "";
+//   return request(`${BASE_URL}/api/v1/projects/option-items?label=name&q=${query}`, options)
+  
+
+//   //return request(`${BASE_URL}/api/v1/projects/option-items`, options)
+// }
+
 
 /*
 |        | GET|HEAD | api/v1/institutions/institution-types                   | api.v1.institutions.index                              | App\Http\Controllers\Institutions\InstitutionTypeController@index         | api,auth:api                                     |

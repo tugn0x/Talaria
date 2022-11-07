@@ -6,7 +6,8 @@ import {
           REQUEST_LIBRARYSUBJECT_OPTIONLIST,
           REQUEST_POST_PUBLIC_LIBRARY,
           REQUEST_SEARCH_PLACES_BY_TEXT,
-          REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST
+          REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST,
+          REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST,
 } from './constants';
 import {
   requestError,
@@ -22,12 +23,12 @@ import {
   requestSearchPlacesByTextFail,  
   requestGetLibraryListNearToSuccess,
   requestGetlibraryProjectsOptionListSuccess,
-  
+  requestGetlibraryidentifierTypesOptionListSuccess
 } from './actions';
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
 import {getInstitutionTypesOptionList,  getInstitutionsByTypeByCountryOptionList, getCountriesOptionsList, getProjectsOptionList, getlibraryProjectsOptionList,
-        getLibrariesSubjects,createPublicLibrary} from 'utils/api'
+        getLibrariesSubjects,createPublicLibrary, getlibraryidentifierTypesOptionList} from 'utils/api'
 import { getPlacesByText } from 'utils/apiExternal';   
 
 
@@ -83,6 +84,20 @@ export function* requestLibrarySubjectOptionListSaga(action) {
     try {
       const request = yield call(getProjectsOptionList, options);
       yield put(requestGetProjectsOptionListSuccess(request));
+    } catch(e) {
+      yield put(requestError(e.message));
+    }
+  }
+
+
+  export function* requestIdentifierTypesOptionListSaga(action) {
+    const options = {
+      method: 'get',
+      query: action.request ? action.request : ""
+    }
+    try {
+      const request = yield call(getProjectsOptionList, options);
+      yield put(requestGetIdentifierTypesOptionListSuccess(request));
     } catch(e) {
       yield put(requestError(e.message));
     }
@@ -148,6 +163,19 @@ export function* findPlacesByText(action) {
     }
   }
   
+
+  export function*  requestGetlibraryidentifierTypesOptionList(action) {
+    const options = {
+      method: 'get',
+      query: action.request ? action.request : ""
+    }
+    try {
+      const request = yield call(getlibraryidentifierTypesOptionList, options);
+      yield put(requestGetlibraryidentifierTypesOptionListSuccess(request));
+    } catch(e) {
+      yield put(requestError(e.message));
+    }
+  }
   
 /**
  * Library Registration saga 
@@ -160,4 +188,6 @@ export default function* libraryregSaga() {
   yield takeLatest(REQUEST_INSTITUTIONSTYPES_OPTIONLIST, requestInstitutionTypeOptionListSaga);
   yield takeLatest(REQUEST_SEARCH_PLACES_BY_TEXT,findPlacesByText);
   yield takeLatest(REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST, requestGetlibraryProjectsOptionList)
+  yield takeLatest(REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST, requestGetlibraryidentifierTypesOptionList)
+  
 }

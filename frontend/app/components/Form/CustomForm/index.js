@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { Card, CardBody, Form, Button,Label, Row } from 'reactstrap'
-import PropTypes from 'prop-types';
-import {useIntl} from 'react-intl'
+import PropTypes, { object } from 'prop-types';
+import {FormattedHTMLMessage, useIntl} from 'react-intl'
 import formMessages from './messages'
 import {ErrorBox} from 'components';
 import {selectFieldsGroups} from './selectFieldsGroups'
@@ -16,7 +16,8 @@ import './style.scss'
 import scrollTo from 'utils/scrollTo';
 import {withRouter} from 'react-router-dom'
 import MapSelector from '../MapSelector';
-
+import { v4 as uuid } from 'uuid';
+import { filter } from 'lodash';
 // PROPS
 // fields
 // callback action
@@ -41,10 +42,61 @@ const CustomForm = (props) => {
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(props.getValidation ? false : true)
     const [formData, setFormData] = useState({})
 
+    const initialList = [];
+
+    const [list, setList] = React.useState(initialList);
+    const [identifierFound, setIdentifierFound] = useState(false)
+    const AddNewIdentifier = (e, field_name, value) => {
+        e.preventDefault();
+        setIsSubmitDisabled(false);
+
+        if (!isIdentifierFound)
+        {
+            if (formData.identifier_type_id!==null && formData.library_identifiers_txt!==null)
+            {
+                const unique_id = uuid();
+                const newList = list.concat({
+                    id: unique_id,
+                    identifiertype: formData.identifier_type_id,
+                    name: formData.library_identifiers_txt,
+                });
+
+                //To show selected identifiers in the summary report
+                const arraylist=[];
+                setList(newList);
+                const filtertedlist=newList.map(
+                    (element)=>{
+                        return arraylist.concat(element.identifiertype.value,element.name)
+                    }
+                )
+                console.log("filtertedlist" + JSON.stringify(arraylist))
+                formData.identifiers_id = filtertedlist
+                props.AddNewIdentifier &&
+                props.AddNewIdentifier(field_name, value, filtertedlist);
+                setIdentifierFound(false)
+            }
+        }
+        else
+            setIdentifierFound(true)
+    };
+
     
+    const isIdentifierFound = list.some(item => {
+        if (item.identifiertype.value === formData.identifier_type_id.value) {
+        return true;
+        }
+    });
+
+    const RemoveIdentifier = (id, field_name, value) => {
+        const newList = list.filter(item => item.id !== id);
+        setList(newList);
+        props.RemoveIdentifier &&
+        props.RemoveIdentifier(field_name, value, newList);
+    };
 
     /* HANDLE CHANGE Generic */
-    const handleChange = (value, field_name) =>{       
+    const handleChange = (value, field_name) =>{
+        
         setFormData({ ...formData, [field_name]: value   });
         setIsSubmitDisabled(false)
         // props per il wizard form registra biblioteca pubblica
@@ -211,6 +263,7 @@ const CustomForm = (props) => {
                                                                 field.type === 'Button' &&
                                                                 <>
                                                                     <Button
+                                                                    color={field.color}
                                                                     field={field}
                                                                     label={field.label && field.label}
                                                                     onClick={(e, value) => onClickData(e, value, field.name)}
@@ -220,8 +273,10 @@ const CustomForm = (props) => {
                                                                 field.type === 'ButtonMapPosition' &&
                                                                 <>
                                                                     <Button
+                                                                    color={field.color}
                                                                     field={field}
                                                                     label={field.label && field.label}
+                                                                    disabled={field.disabled ? field.disabled : false}
                                                                     onClick={(e, value) => RetrievePositionData(e, value, field.name)}
                                                                     >{field.label}</Button> 
                                                                 </>  
@@ -232,6 +287,76 @@ const CustomForm = (props) => {
                                                                         <div className="loading-spinner"></div>
                                                                     </div>
                                                                  </> 
+                                                                 ||
+                                                                 (field.type === 'list' && list.length > 0 && (
+                                                                    <>
+                                                                        {
+                                                                         (identifierFound) &&
+                                                                            <div class="alert alert-danger" role="alert">
+                                                                                <strong>{intl.formatMessage({id:'app.containers.RegisterNewLibrary.duplicate_identifer_type'})}</strong>
+                                                                            </div>
+                                                                         }
+                                                                        <table class="table table-striped">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    {/* <th scope="col">#</th> */}
+                                                                                    <th scope="col" class="col-md-6">
+                                                                                    Type
+                                                                                    </th>
+                                                                                    <th scope="col" class="col-md-4">
+                                                                                    Name
+                                                                                    </th>
+                                                                                    <th scope="col" class="col-md-2">
+                                                                                    Actions
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                        <tbody>
+                                                                            {list.map((item, id) => (
+                                                                            <>
+                                                                            <tr>
+                                                                                <td>
+                                                                                <span>
+                                                                                    {item.identifiertype.label}
+                                                                                </span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <span>{item.name}</span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <a
+                                                                                    className="btn btn-icon btn-sm"
+                                                                                    onClick={() =>
+                                                                                    RemoveIdentifier(item.id)
+                                                                                    }
+                                                                                    >
+                                                                                    <i className="fas fa-trash" />
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                            </>
+                                                                            ))}
+                                                                        </tbody>
+                                                                        </table>
+                                                                    </>
+                                                                    )) 
+                                                                    ||
+                                                                    (field.type === 'AddButton' && (
+                                                                    <>
+                                                                    <Button
+                                                                        field={field}
+                                                                        label={field.label && field.label}
+                                                                        color="brown"
+                                                                        style={{fontSize: field.size,marginTop:field.margintop,  paddingBottom: field.paddingbottom, paddingTop: field.paddingtop}}
+                                                                        disabled={field.disabled ? field.disabled : false}                                                                        onClick={(e, value, newList) =>
+                                                                        AddNewIdentifier(e, value, newList)
+                                                                    }
+                                                                    >
+                                                                    {field.label}
+                                                                    </Button>
+                                                                    </>
+                                                                    )) 
+                                                                    
                                                                 ||
                                                                 field.type === 'Label' &&
                                                                 <>

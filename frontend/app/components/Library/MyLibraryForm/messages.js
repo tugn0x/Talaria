@@ -24,6 +24,12 @@ export default defineMessages({
     id: `${scope}.country_id`,
     defaultMessage: 'Country ID',
   },
+
+  identifier_type_id: {
+    id: `${scope}.identifier_type_id`,
+    defaultMessage: 'identifier_type_id',
+  },
+
   opac: {
     id: `${scope}.opac`,
     defaultMessage: 'Url opac',
