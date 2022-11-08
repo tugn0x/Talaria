@@ -51,6 +51,7 @@ const RegisterLibrary = (props) => {
     let [buttonStopPressed, setbuttonStopPressed] = useState(false)
     const [projectName, setProjectName] = useState(null);
     const [printStatus, setPrintStatus] = useState(false)
+    const [disabled, setdisabled] = useState(false)
     const getLocation = () => {
         if (!navigator.geolocation) {
           setStatus(intl.formatMessage(wizardMessages.geolocationNotSupported));
@@ -61,14 +62,10 @@ const RegisterLibrary = (props) => {
                 fields.geolocation_spinner.hidden=false;
                 fields.library_coordinates.label=intl.formatMessage(wizardMessages.stopEnterManually)  
                 fields.library_coordinates.color="orange"
-                setbuttonStopPressed(true)
             }
             navigator.geolocation.getCurrentPosition((position) => {
-                if(!buttonStopPressed)
-                {
                     setLat(position.coords.latitude); setLng(position.coords.longitude);
                     setData({...data, 'lon': position.coords.longitude, 'lat': position.coords.latitude})
-                }
             }, () => {
                 setStatus(intl.formatMessage(wizardMessages.unableRetriveLocation));
             });
@@ -78,25 +75,32 @@ const RegisterLibrary = (props) => {
       useEffect(() => {
         fields.geolocation_spinner.hidden=true;
         fields.library_coordinates.label=intl.formatMessage(wizardMessages.clicktoGetRecords) 
-        if (lng!==null)
-            fields.library_coordinates.disabled=true
      }, [lng])
 
      const GetBrowserCoordinates = (ev) => {
-        if (buttonStopPressed)
-        {
-            setStatus(null);
-            fields.geolocation_spinner.hidden=true;
-            fields.library_coordinates.label=intl.formatMessage(wizardMessages.clicktoGetRecords) 
-            setLng(0);setLat(0)
-        }
-        else
-            getLocation()
-
-        if (lng===null && lat===null)
-        {    setLng(0);setLat(0)   }
+        setdisabled(disabled+1)
     }
 
+    useEffect(() => {
+       if(disabled >0 && disabled%2===0) //stop button pressed
+       {
+            fields.library_coordinates.label=intl.formatMessage(wizardMessages.clicktoGetRecords) 
+            setStatus(null);
+            fields.geolocation_spinner.hidden=true;
+            setLng(0);setLat(0)
+       }
+       else if (disabled > 0 && disabled%2!==0)
+       {
+                setStatus(null);
+                fields.library_coordinates.label=intl.formatMessage(wizardMessages.stopEnterManually) 
+                setLng(0);setLat(0)
+                getLocation()
+                fields.geolocation_spinner.hidden=false
+
+                if (lng===null && lat===null)
+                {    setLng(0);setLat(0)   }
+       }
+    },[disabled])
 
     // Fai le chiamate per le option list
     useEffect(() => {
@@ -203,6 +207,7 @@ const RegisterLibrary = (props) => {
                     setInstitutionPresent(true);
                     console.log("Institution not present")
                     setInstitutionName(null) 
+                   
                 }
                 return countryid;
             });
