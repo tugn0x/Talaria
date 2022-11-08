@@ -19,11 +19,7 @@ export default defineMessages({
   country_id: {
     id: `${scope}.country_id`,
     defaultMessage: 'Country',
-  },
-  granted_permissions: {
-    id: `${scope}.granted_permissions`,
-    defaultMessage: 'Users permissions',
-  },
+  },  
   vatnumber: {
     id: `app.global.vatnumber`,
     defaultMessage: 'PIVA',

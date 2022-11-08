@@ -396,7 +396,7 @@ export function* requestUpdateInstitutionSaga(action) {
   };
   try {
     // console.log(action)
-    const request = yield call(updateInstitution, options);
+    const request = yield call(admin_updateInstitution, options);
     yield call(requestGetInstitutionsListSaga);
     yield put(push("/admin/institutions"));
     yield call(() => toast.success(action.message))
