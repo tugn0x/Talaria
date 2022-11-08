@@ -376,7 +376,7 @@ const RegisterLibrary = (props) => {
                                     <>
                                     {   
                                         <div> 
-                                            <div class="weight-bold">{messages[key] && intl.formatMessage(messages[key])}</div>
+                                            <div class="font-weight-bold">{messages[key] && intl.formatMessage(messages[key])}</div>
                                             {(key!=='identifiers_id') && <div>{data[key]}</div>}
 
                                             {(key==='identifiers_id')&&<div> 
