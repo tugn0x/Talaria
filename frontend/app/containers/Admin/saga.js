@@ -61,17 +61,17 @@ import {
 import { toast } from "react-toastify";
 import { push } from 'connected-react-router';
 import {getUsersList, updateUser, createUser, getUsersOptionsList,
-        getRoles, getUser, getInstitution,
+        getRoles, getUser,
         createLibrary, getInstituionTypeList, 
         getInstitutionTypesOptionList,  
-        getInstitutionsOptionList,
+        /*getInstitutionsOptionList,*/
         getCountriesOptionsList,
         getProject, getProjectsList, updateProject,getProjectsOptionList, getlibraryProjectsOptionList,
         createProject, getLibrariesSubjects,createPublicLibrary,
         getLibrariesListNearTo} from 'utils/api'
 
 import {admin_getLibrariesList,admin_deleteLibrary,admin_statusChangeLibrary,
-  admin_getInstitutionsList, admin_createInstitution,admin_updateInstitution,admin_deleteInstitution,admin_statusChangeInstitution,admin_getInstitutionsByTypeByCountryOptionList,
+  admin_getInstitutionsList,admin_getInstitution, admin_createInstitution,admin_updateInstitution,admin_deleteInstitution,admin_statusChangeInstitution,admin_getInstitutionsByTypeByCountryOptionList,
   admin_getLibrary, admin_updateLibrary} from 'utils/apiAdmin'
 
 import { getPlacesByText } from 'utils/apiExternal';   
@@ -322,7 +322,7 @@ export function* requestGetInstitutionSaga(action) {
     id: action.id
   };
   try {
-   const request = yield call(getInstitution, options);
+   const request = yield call(admin_getInstitution, options);
    yield put(requestGetInstitutionSuccess(request));
   } catch(e) {
     yield put(requestError(e.message));
@@ -344,7 +344,7 @@ export function* requestDeleteInstitutionSaga(action) {
   }
 }
 
-export function* requestInstitutionsOptionListSaga(action) {
+/*export function* requestInstitutionsOptionListSaga(action) {
   const options = {
     method: 'get',
     query: action.request ? action.request : ""
@@ -356,7 +356,7 @@ export function* requestInstitutionsOptionListSaga(action) {
   } catch(e) {
     yield put(requestError(e.message));
   }
-}
+}*/
 
 
 
@@ -594,7 +594,7 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_INSTITUTIONSTYPES_OPTIONLIST, requestInstitutionTypeOptionListSaga);
   
   
-  yield takeLatest(REQUEST_GET_INSTITUTIONS_OPTIONLIST, requestInstitutionsOptionListSaga);
+  //yield takeLatest(REQUEST_GET_INSTITUTIONS_OPTIONLIST, requestInstitutionsOptionListSaga);
 
 
   yield takeLatest(REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST, requestGetInstitutionsByTypeByCountryOptionListSaga);

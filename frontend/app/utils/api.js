@@ -678,18 +678,27 @@ export const getLibraryDeliveriesOptionList = (options) => {
 
 
 // Institutions //
-export const getInstitutionsList = (options) => {
+
+/*export const getInstitutionsList = (options) => {
   const page = options.page;
   const query = options.query;
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/institutions/?page=${page}&q=${query}`, options)
 };
 
-
-export const getInstitution = (options) => {
-  const institution_id = options.id
+export const getInstitutionsOptionList = (options) => {
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/institutions/${institution_id}?include=granted_permissions`, options)
+  const query = options.query;
+  return request(`${BASE_URL}/api/v1/institutions/option-items?label=name&q=${query}`, options)
+};
+
+*/
+
+
+
+export const getInstituionTypeList = (options) => {
+  options = getOption(options);
+  return request(`${BASE_URL}/api/v1/institutions/institution-types`, options)
 };
 
 
@@ -699,11 +708,6 @@ export const getInstitutionTypesOptionList = (options) => {
   return request(`${BASE_URL}/api/v1/institutions/institution-types/option-items?label=name&q=${query}`, options)
 };
 
-export const getInstitutionsOptionList = (options) => {
-  options = getOption(options);
-  const query = options.query;
-  return request(`${BASE_URL}/api/v1/institutions/option-items?label=name&q=${query}`, options)
-};
 
 export const getInstitutionsByTypeByCountryOptionList = (options) => {
   options = getOption(options);
@@ -721,10 +725,6 @@ export const getCountriesOptionsList = (options) => {
 
 
 
-export const getInstituionTypeList = (options) => {
-  options = getOption(options);
-  return request(`${BASE_URL}/api/v1/institutions/institution-types`, options)
-};
 
 // Projects //
 

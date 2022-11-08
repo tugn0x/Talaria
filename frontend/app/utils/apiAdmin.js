@@ -102,6 +102,13 @@ export const admin_getInstitutionsByTypeByCountryOptionList = (options) => {
   return request(`${BASE_ADMIN_URL}/institutions/option-items/?label=name&country_id=${countryid}&institution_type_id=${institutiontypeid}`, options)
 };
 
+export const admin_getInstitution = (options) => {
+  const institution_id = options.id
+  options = getOption(options);
+  return request(`${BASE_ADMIN_URL}/institutions/${institution_id}`, options)
+};
+
+
 
   
 

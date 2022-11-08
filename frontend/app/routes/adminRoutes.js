@@ -38,9 +38,9 @@ const routes = [
       { path: '/institutions-types/type/new', icon: 'plus', name: `InstitutionTypeNew`, component: LibraryPage,  url: `/libraries/library/new`},
       { path: '/institutions-types/type/:id?', name: `InstitutionType`, component: LibraryPage, },
       { path: '/institutions-types/:page?', icon: 'fas fa-list-ul', exact: true, name: `InstitutionTypes`, url: `/institutions/institutions-types`, component: InstitutionTypeListPage,  sidebar: true},
-      { path: '/:page?', exact: true, name: `Institutions`, url: `/institutions`, component: InstitutionsListPage, },
+      { path: '/:id?/:op?', name: `Institutions`, component: InstitutionPage, sidebar: false },
+      { path: '/:page?', exact: true, name: `Institutions`, url: `/institutions`, component: InstitutionsListPage, },            
       { path: '/new', icon: 'plus', name: `InstitutionNew`, component: InstitutionPage,  url: `/institutions/institution/new`, sidebar: true},
-      { path: '/:id?/:op?', name: `Institutions`, component: InstitutionPage, },
     ]
   },
    { path: '/consortiums',  name: `Consortiums`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],

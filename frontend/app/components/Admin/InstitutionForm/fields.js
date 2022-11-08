@@ -40,7 +40,7 @@ export const fields = {
         options: "country_id",
      //   selectedOption: "country_id"
     },
-    granted_permissions: {
+    /*granted_permissions: {
         type: "granted_permissions",
         name: "granted_permissions",
         width: "col-sm-12",
@@ -48,7 +48,8 @@ export const fields = {
         searchOptionList: true,
         // order: 1,
         // group: "granted_permissions",
-    }, 
+    },*/
+     
     /*info amministrative */
     vatnumber: {
         type: "number",

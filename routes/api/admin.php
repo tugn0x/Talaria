@@ -45,6 +45,7 @@ Route::group([
         Route::get('', 'AdminInstitutionController@index')->name('index');    
         Route::post('', 'AdminInstitutionController@create')->name('create');
         Route::delete('{id}', 'AdminInstitutionController@delete')->where('id', '[0-9]+')->name('delete'); //soft delete
+        Route::get('{id}', 'AdminInstitutionController@show')->where('id', '[0-9]+')->name('show');
         Route::put('{id}', 'AdminInstitutionController@update')->where('id', '[0-9]+')->name('update');
         Route::put('{id}/changestatus', 'AdminInstitutionController@changeStatus')->where('id', '[0-9]+')->name('changeStatus');
         Route::get('option-items', 'AdminInstitutionController@optionList')->name('option-items');
