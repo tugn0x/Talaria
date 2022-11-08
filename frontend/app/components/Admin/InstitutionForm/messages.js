@@ -17,55 +17,55 @@ export default defineMessages({
     defaultMessage: "Institution Type ID",
   },
   country_id: {
-    id: `app.components.LibraryForm.country_id`,
-    defaultMessage: 'Country ID',
+    id: `${scope}.country_id`,
+    defaultMessage: 'Country',
   },
   granted_permissions: {
     id: `${scope}.granted_permissions`,
     defaultMessage: 'Users permissions',
   },
   vatnumber: {
-    id: `app.components.LibraryForm.vatnumber`,
+    id: `app.global.vatnumber`,
     defaultMessage: 'PIVA',
   },
   fiscalcode: {
-    id: `app.components.LibraryForm.fiscalcode`,
+    id: `app.global.fiscalcode`,
     defaultMessage: 'CF',
   },
   invoice_header: {
-    id: `app.components.LibraryForm.invoice_header`,
+    id: `app.global.invoice_header`,
     defaultMessage: 'invoice_header',
   },
   email_pec: {
-    id: `app.components.LibraryForm.email_pec`,
+    id: `app.global.email_pec`,
     defaultMessage: 'email_pec',
   },
   ccu: {
-    id: `app.components.LibraryForm.ccu`,
+    id: `app.global.ccu`,
     defaultMessage: 'ccu',
   },
   administrative: {
-    id: `app.components.LibraryForm.administrative`,
+    id: `app.global.administrative`,
     defaultMessage: 'administrative',
   },
   administrative_email: {
-    id: `app.components.LibraryForm.administrative_email`,
+    id: `app.global.administrative_email`,
     defaultMessage: 'administrative_email',
   },
   administrative_phone: {
-    id: `app.components.LibraryForm.administrative_phone`,
+    id: `app.global.administrative_phone`,
     defaultMessage: 'administrative_phone',
   },
   terzo_code: {
-    id: `app.components.LibraryForm.terzo_code`,
+    id: `app.global.terzo_code`,
     defaultMessage: 'terzo_code',
   },
   general_info: {
-    id: `app.components.LibraryForm.general_info`,
+    id: `app.global.general_info`,
     defaultMessage: 'General info',
   },
   administrative_info: {
-    id: `app.components.LibraryForm.administrative_info`,
+    id: `app.global.administrative_info`,
     defaultMessage: 'Administrative Info',
   },
   updateSubmitText: {
