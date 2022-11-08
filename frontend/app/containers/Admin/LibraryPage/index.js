@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import {useIntl} from 'react-intl';
 import messages from './messages';
-import { requestGetInstitutionsOptionList, requestGetLibrary, 
+import {requestGetLibrary, 
         requestUpdateLibrary, requestPostLibrary, requestGetRoles, 
-        requestUsersOptionList, requestGetCountriesOptionList, requestLibrarySubjectOptionList,requestGetInstitutionTypeOptionList,requestGetInstitutionsByTypeByCountryOptionList, requestGetlibraryProjectsOptionList} from '../actions'
+        requestGetCountriesOptionList, requestLibrarySubjectOptionList,requestGetInstitutionTypeOptionList,requestGetInstitutionsByTypeByCountryOptionList, requestGetlibraryProjectsOptionList} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
 import {LibraryForm, Loader} from 'components';
 
@@ -15,21 +15,19 @@ function LibraryPage(props) {
     const {isLoading, dispatch, admin, match} = props
     const {params} = match
     const isNew = !params.id || params.id === 'new'
-    const library = admin.library
-    // const libraryOptionList = patron.libraryOptionList
+    const library = admin.library    
     
     const [projectsIds,setProjectsIds]=useState(null)
     const [instype,setInstitutiontypeid]=useState(null)
     const [instcountry,setInstitutionCountryid]=useState(null)
      
     useEffect(() => {
-      if(!isLoading && !isNew) {        
+      if(!isLoading && !isNew)         
          dispatch(requestGetLibrary(params.id))
-     
-         dispatch(requestGetRoles())        
+        
+     if(!isLoading) {
          dispatch(requestGetCountriesOptionList())
-         dispatch(requestGetInstitutionTypeOptionList())
-         //dispatch(requestGetInstitutionsOptionList())        
+         dispatch(requestGetInstitutionTypeOptionList())         
          dispatch(requestLibrarySubjectOptionList())   
          dispatch(requestGetlibraryProjectsOptionList())     
       }

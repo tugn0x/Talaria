@@ -7,7 +7,6 @@ import messages from './messages';
 /* import Loader from 'components/Form/Loader.js';
 */
 import {useIntl} from 'react-intl';
-import SimpleForm from 'components/SimpleForm'
 
 const LibraryForm = (props) => {
     console.log('LibraryForm', props)
