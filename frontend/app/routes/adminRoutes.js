@@ -20,13 +20,12 @@ const routes = [
       { path: '/user/:id?', name: `UserUpdate`, component: UserPage, },
       { path: '/:page?', exact: true, name: `UsersList`, url: `/users/user`, component: UsersListPage, },
     ]
-  },
+  },  
   { path: '/libraries',  name: `Libraries`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],sidebar: true,
     children: [      
       { path: '/', exact: true, icon: 'fas fa-landmark', name: `Libraries`, url: `/libraries`, component: LibrariesListPage,sidebar:true,order:1},
       //{ path: '/new', icon: 'plus', name: `LibraryCreateNew`, component: LibraryPage,  url: '/library/new', sidebar: true,order:2},
       //{ path: '/:id/subscriptions', exact: true, name: `Subscription`, component: Fake, sidebar: false},      
-      { path: '/subscriptions', exact: true,icon: 'fas fa-file-contract',name: `LibrariesSubscriptionsList`, component: Fake, sidebar: true,},                 
       { path: '/:id?/:op?',  name: `Libraries`,component: LibraryPage, sidebar: false},      
       { path: '/:page?', exact: true, name: `Libraries`, url: `/libraries`, component: LibrariesListPage,sidebar: false },
       //{ path: '/:id/subscriptions/:subscriptionid?/:op?', name: `SubscriptionUpdate`, component: Fake, sidebar: false},      
@@ -35,12 +34,13 @@ const routes = [
   { path: '/institutions',  name: `Institutions`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],
     children: [
       { path: '/', exact: true, icon: 'fas fa-building', name: `Institutions`, url: `/institutions`, component: InstitutionsListPage, sidebar:true},
+      { path: '/:id?/:op?', name: `Institutions`, component: InstitutionPage, sidebar: false },
+      { path: '/:page?', exact: true, name: `Institutions`, url: `/institutions`, component: InstitutionsListPage, },            
+      { path: '/new', icon: 'plus', name: `InstitutionNew`, component: InstitutionPage,  url: `/institutions/new`, sidebar: true},      
       { path: '/institutions-types/type/new', icon: 'plus', name: `InstitutionTypeNew`, component: LibraryPage,  url: `/libraries/library/new`},
       { path: '/institutions-types/type/:id?', name: `InstitutionType`, component: LibraryPage, },
       { path: '/institutions-types/:page?', icon: 'fas fa-list-ul', exact: true, name: `InstitutionTypes`, url: `/institutions/institutions-types`, component: InstitutionTypeListPage,  sidebar: true},
-      { path: '/:id?/:op?', name: `Institutions`, component: InstitutionPage, sidebar: false },
-      { path: '/:page?', exact: true, name: `Institutions`, url: `/institutions`, component: InstitutionsListPage, },            
-      { path: '/new', icon: 'plus', name: `InstitutionNew`, component: InstitutionPage,  url: `/institutions/institution/new`, sidebar: true},
+      
     ]
   },
    { path: '/consortiums',  name: `Consortiums`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],
@@ -56,11 +56,13 @@ const routes = [
       { path: '/:page?', exact: true, name: `Projects`, url: `/projects`, component: ProjectsListPage},
     ]
   },  
-  /*{ path: '/subscription',  name: 'Subscription', component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],sidebar: true,
+  { path: '/subscriptions',  name: `Subscriptions`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],sidebar: true,
     children: [      
-      { path: '/', exact: true, icon: 'fas fa-landmark', name: `Payments`, url: `/payments`, component: Fake,sidebar:true,order:1},      
+      { path: '/settings', exact: true,icon: 'fas fa-cog',name: `SubscriptionsSettings`, url:'/subscriptions/settings', component: Fake, sidebar: true, order:1},                 
+      { path: '/libraries', exact: true,icon: 'fas fa-file-contract',name: `LibrariesSubscriptionsList`, url:'/subscriptions/libraries', component: Fake, sidebar: true, order:2},                 
+      { path: '/institutions', exact: true,icon: 'fas fa-file-contract',name: `InstitutionsSubscriptionsList` , url:'/subscriptions/institutions', component: Fake, sidebar: true, order:3},                 
     ]
-  },*/
+  },
   { path: '/payments',  name: 'Payments', component: SubRouteSwitch, header: true, roles: ['accountant'],sidebar: true,
     children: [      
       { path: '/', exact: true, icon: 'fas fa-landmark', name: `Payments`, url: `/payments`, component: Fake,sidebar:true,order:1},      
