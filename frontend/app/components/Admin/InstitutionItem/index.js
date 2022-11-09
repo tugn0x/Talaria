@@ -47,7 +47,7 @@ export const canEnable = (inst) => {
 }
 
 export const canDelete = (inst) => {
-    return inst.status==2
+    return inst.status==2||inst.status==0 
 }
 
 export const canDisable = (inst) => {
@@ -72,14 +72,17 @@ export const InstitutionInfo = (props) => {
             </div>}
             {(data.administrative_phone||data.administrative_email) && <div className='contact'>
                 {data.administrative_phone && <span><i className="fas fa-phone"></i> {data.administrative_phone} </span>}
-                {data.administrative_email && <span><i className="fas fa-envelope"></i> {data.administrative_email}</span>}
+                {data.administrative_email && <span><i className="fas fa-envelope"></i> {data.administrative_email}</span>}                
             </div>}                    
             <div className='administrative_fields'>                                
+                {data.email_pec && <span><i className="fas fa-envelope"></i>PEC: {data.email_pec}</span>}
+                
+                {data.invoice_header && <span className='invoice_header'><span>Invoid Header:</span> {data.invoice_header}</span>}
                 {data.vatnumber && <span className='vatnumber'><span>VAT:</span> {data.vatnumber} </span>}
                 {data.fiscalcode && <span className='fiscalcode'><span>Fiscal Code:</span> {data.fiscalcode} </span>}
+
                 {data.ccu && <span className='ccu'><span>CCU:</span> {data.vatnumber} </span>}
-                {data.terzo_code && <span className='terzo_code'><span>Terzo Code:</span> {data.terzo_code} </span>}
-                {data.invoice_header && <span className='invoice_header'><span>Invoid Header:</span> {data.invoice_header}</span>}
+                {data.terzo_code && <span className='terzo_code'><span>Terzo Code:</span> {data.terzo_code} </span>}                
             </div>             
         </div>
     )

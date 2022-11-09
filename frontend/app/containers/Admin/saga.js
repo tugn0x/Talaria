@@ -434,10 +434,11 @@ export function* requestLibrarySubjectOptionListSaga(action) {
 export function* requestPostInstitutionSaga(action) {
   const options = {
     method: 'post',
-    body: action.request
+    body: {...action.request}
   };
+
   try {
-    const request = yield call(createInstitution, options);
+    const request = yield call(admin_createInstitution, options);
     yield call(requestGetInstitutionsListSaga)
     yield put(push("/admin/institutions"))
     yield call(() => toast.success(action.message))

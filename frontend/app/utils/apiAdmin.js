@@ -77,7 +77,7 @@ export const admin_updateInstitution = (options) => {
 
 export const admin_createInstitution = (options) => {
   options = getOption(options);
-  return request(`${BASE_ADMIN_URL}/institutions?include=granted_permissions`, options)
+  return request(`${BASE_ADMIN_URL}/institutions`, options)
 };
 
 export const admin_statusChangeInstitution = (options) => {
