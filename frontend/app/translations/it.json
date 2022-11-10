@@ -219,8 +219,8 @@
   "app.containers.InstitutionsListPage.askChangeStatusMessage":"Apply this status?",
   "app.containers.InstitutionsListPage.statusAppliedMessage": "Status applied correctly",
   "app.components.MapSelector.positionNotAvailable":"Geolocalizzazione non disponibile",    
-  "app.components.InstitutionForm.header": "Form ente",
-  "app.components.LibraryForm.header": "Registrazione biblioteca",
+  "app.components.InstitutionForm.header": "Nuova istitutione",
+  "app.components.LibraryForm.header": "Nuova biblioteca",
   
   "app.components.findOA.oapubfound":"La pubblicazione è disponibile OA, clicca qui!",
   "app.components.findOA.oapubnotfound":"Versione OA non disponibile",
