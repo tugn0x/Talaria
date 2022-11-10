@@ -33,14 +33,15 @@ const routes = [
   },
   { path: '/institutions',  name: `Institutions`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],
     children: [
-      { path: '/', exact: true, icon: 'fas fa-building', name: `Institutions`, url: `/institutions`, component: InstitutionsListPage, sidebar:true},
+      { path: '/institutions-types', exact: true, icon: 'fas fa-list-ul',  name: `InstitutionTypes`, url: `/institutions/institutions-types`, component: Fake,  sidebar: true,order:3},      
+      { path: '/institutions-types/:id?/:op?', name: `InstitutionType`, component: Fake, sidebar: false  },
+      { path: '/institutions-types/:page?',   name: `InstitutionTypes`, url: `/institutions/institutions-types`, component: Fake,  sidebar: false},
+      { path: '/institutions-types/new', icon: 'plus', name: `InstitutionTypeNew`, url: `/institutions/institutions-types/new`, component: Fake,  sidebar: true,order:4 },      
+
+      { path: '/', exact: true, icon: 'fas fa-building', name: `Institutions`, url: `/institutions`, component: InstitutionsListPage, sidebar:true, order:1},
       { path: '/:id?/:op?', name: `Institutions`, component: InstitutionPage, sidebar: false },
       { path: '/:page?', exact: true, name: `Institutions`, url: `/institutions`, component: InstitutionsListPage, },            
-      { path: '/new', icon: 'plus', name: `InstitutionNew`, component: InstitutionPage,  url: `/institutions/new`, sidebar: true},      
-      { path: '/institutions-types/type/new', icon: 'plus', name: `InstitutionTypeNew`, component: LibraryPage,  url: `/libraries/library/new`},
-      { path: '/institutions-types/type/:id?', name: `InstitutionType`, component: LibraryPage, },
-      { path: '/institutions-types/:page?', icon: 'fas fa-list-ul', exact: true, name: `InstitutionTypes`, url: `/institutions/institutions-types`, component: InstitutionTypeListPage,  sidebar: true},
-      
+      { path: '/new', icon: 'plus', name: `InstitutionNew`, component: InstitutionPage,  url: `/institutions/new`, sidebar: true,order:2},            
     ]
   },
    { path: '/consortiums',  name: `Consortiums`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],

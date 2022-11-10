@@ -109,6 +109,25 @@ export const admin_getInstitution = (options) => {
 };
 
 
+export const admin_updateInstitutionType = (options) => {
+  const institution_type_id = options.body.id
+  options = getOption(options);
+  return request(`${BASE_ADMIN_URL}/institutions/institution-types/${institution_type_id}`, options)
+};
+
+export const admin_createInstitutionType = (options) => {
+  options = getOption(options);
+  return request(`${BASE_ADMIN_URL}/institutions/institution-types`, options)
+};
+
+
+export const admin_deleteInstitutionType = (options) => {
+  const institution_type_id = options.id
+  options = getOption(options);
+  return request(`${BASE_ADMIN_URL}/institutions/institution-types/${institution_type_id}`, options)
+};
+
+
 
   
 

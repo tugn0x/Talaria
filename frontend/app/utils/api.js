@@ -679,7 +679,9 @@ export const getLibraryDeliveriesOptionList = (options) => {
 
 // Institutions //
 
-/*export const getInstitutionsList = (options) => {
+
+/* NOT USED
+export const getInstitutionsList = (options) => {
   const page = options.page;
   const query = options.query;
   options = getOption(options);
@@ -693,8 +695,6 @@ export const getInstitutionsOptionList = (options) => {
 };
 
 */
-
-
 
 export const getInstituionTypeList = (options) => {
   options = getOption(options);
