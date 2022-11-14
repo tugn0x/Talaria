@@ -77,7 +77,7 @@ export const admin_updateInstitution = (options) => {
 
 export const admin_createInstitution = (options) => {
   options = getOption(options);
-  return request(`${BASE_ADMIN_URL}/institutions?include=granted_permissions`, options)
+  return request(`${BASE_ADMIN_URL}/institutions`, options)
 };
 
 export const admin_statusChangeInstitution = (options) => {
@@ -101,6 +101,32 @@ export const admin_getInstitutionsByTypeByCountryOptionList = (options) => {
   const institutiontypeid = options.institutiontypeid;  
   return request(`${BASE_ADMIN_URL}/institutions/option-items/?label=name&country_id=${countryid}&institution_type_id=${institutiontypeid}`, options)
 };
+
+export const admin_getInstitution = (options) => {
+  const institution_id = options.id
+  options = getOption(options);
+  return request(`${BASE_ADMIN_URL}/institutions/${institution_id}`, options)
+};
+
+
+export const admin_updateInstitutionType = (options) => {
+  const institution_type_id = options.body.id
+  options = getOption(options);
+  return request(`${BASE_ADMIN_URL}/institutions/institution-types/${institution_type_id}`, options)
+};
+
+export const admin_createInstitutionType = (options) => {
+  options = getOption(options);
+  return request(`${BASE_ADMIN_URL}/institutions/institution-types`, options)
+};
+
+
+export const admin_deleteInstitutionType = (options) => {
+  const institution_type_id = options.id
+  options = getOption(options);
+  return request(`${BASE_ADMIN_URL}/institutions/institution-types/${institution_type_id}`, options)
+};
+
 
 
   

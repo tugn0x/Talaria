@@ -21,39 +21,39 @@ export default defineMessages({
     defaultMessage: 'Users permissions',
   },
   vatnumber: {
-    id: `app.components.ProjectForm.vatnumber`,
+    id: `app.global.vatnumber`,
     defaultMessage: 'PIVA',
   },
   fiscalcode: {
-    id: `app.components.ProjectForm.fiscalcode`,
+    id: `app.global.fiscalcode`,
     defaultMessage: 'CF',
   },
   invoice_header: {
-    id: `app.components.ProjectForm.invoice_header`,
+    id: `app.global.invoice_header`,
     defaultMessage: 'invoice_header',
   },
   email_pec: {
-    id: `app.components.ProjectForm.email_pec`,
+    id: `app.global.email_pec`,
     defaultMessage: 'email_pec',
   },
   ccu: {
-    id: `app.components.ProjectForm.ccu`,
+    id: `app.global.ccu`,
     defaultMessage: 'ccu',
   },
   administrative: {
-    id: `app.components.ProjectForm.administrative`,
+    id: `app.global.administrative`,
     defaultMessage: 'administrative',
   },
   administrative_email: {
-    id: `app.components.ProjectForm.administrative_email`,
+    id: `app.global.administrative_email`,
     defaultMessage: 'administrative_email',
   },
   administrative_phone: {
-    id: `app.components.ProjectForm.administrative_phone`,
+    id: `app.global.administrative_phone`,
     defaultMessage: 'administrative_phone',
   },
   terzo_code: {
-    id: `app.components.ProjectForm.terzo_code`,
+    id: `app.global.terzo_code`,
     defaultMessage: 'terzo_code',
   },
   general_info: {
@@ -61,7 +61,7 @@ export default defineMessages({
     defaultMessage: 'General info',
   },
   administrative_info: {
-    id: `app.components.ProjectForm.administrative_info`,
+    id: `app.global.administrative_info`,
     defaultMessage: 'Administrative Info',
   },
   updateSubmitText: {

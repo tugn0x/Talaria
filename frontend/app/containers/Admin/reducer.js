@@ -164,7 +164,7 @@ const AdminReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = initialState.error;
         draft.library = action.result.data
-        draft.library.granted_permissions = action.result.data.granted_permissions ? action.result.data.granted_permissions.data : []
+        //draft.library.granted_permissions = action.result.data.granted_permissions ? action.result.data.granted_permissions.data : []
         break;
       case REQUEST_UPDATE_LIBRARY:
         draft.loading = true;
@@ -188,7 +188,7 @@ const AdminReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = initialState.error;
         draft.institution = action.result.data
-        draft.institution.granted_permissions = action.result.data.granted_permissions.data
+        //draft.institution.granted_permissions = action.result.data.granted_permissions.data
         break;
       case UPDATE_INSTITUTION:
         draft.loading = true;

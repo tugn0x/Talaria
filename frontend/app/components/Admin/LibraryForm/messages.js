@@ -91,15 +91,15 @@ export default defineMessages({
     defaultMessage: 'Registration date',
   },
   vatnumber: {
-    id: 'app.libraries.vatnumber',
+    id: 'app.global.vatnumber',
     defaultMessage: 'PIVA',
   },
   fiscalcode: {
-    id: 'app.libraries.fiscalcode',
+    id: 'app.global.fiscalcode',
     defaultMessage: 'CF',
   },
   invoice_header: {
-    id: 'app.libraries.invoice_header',
+    id: 'app.global.invoice_header',
     defaultMessage: 'invoice_header',
   },
   registration_date: {
@@ -107,27 +107,27 @@ export default defineMessages({
     defaultMessage: 'Registration date',
   },
   email_pec: {
-    id: 'app.libraries.email_pec',
+    id: 'app.global.email_pec',
     defaultMessage: 'email_pec',
   },
   ccu: {
-    id: 'app.libraries.ccu',
+    id: 'app.global.ccu',
     defaultMessage: 'ccu',
   },
   administrative: {
-    id: 'app.libraries.administrative',
+    id: 'app.global.administrative',
     defaultMessage: 'administrative',
   },
   administrative_email: {
-    id: 'app.libraries.administrative_email',
+    id: 'app.global.administrative_email',
     defaultMessage: 'administrative_email',
   },
   administrative_phone: {
-    id: 'app.libraries.administrative_phone',
+    id: 'app.global.administrative_phone',
     defaultMessage: 'administrative_phone',
   },
   terzo_code: {
-    id: 'app.libraries.terzo_code',
+    id: 'app.global.terzo_code',
     defaultMessage: 'terzo_code',
   },
   general_info: {
@@ -139,7 +139,7 @@ export default defineMessages({
     defaultMessage: 'Service info',
   },
   administrative_info: {
-    id: 'app.libraries.administrative_info',
+    id: 'app.global.administrative_info',
     defaultMessage: 'Administrative Info',
   },
   institution_info: {

@@ -23,8 +23,7 @@ class InstitutionObserver extends BaseObserver
 
     public function creating($model)
     {         
-         $model->status=config("constants.institution_status.pending");
-         $model->registration_date=Carbon::now();
+         $model->status=config("constants.institution_status.pending");     
          return parent::creating($model);
     }
 
@@ -49,7 +48,7 @@ class InstitutionObserver extends BaseObserver
 
     public function deleting($model)
     {        
-        if($model->status==config("constants.institution_status.pending"))            
+        if($model->status==config("constants.institution_status.pending")||$model->status==config("constants.institution_status.disabled"))            
             return parent::deleting($model);
         return false;    
     }

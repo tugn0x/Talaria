@@ -216,9 +216,19 @@ export default defineMessages({
         defaultMessage: 'Subscriptions',
     },
 
+    SubscriptionsSettings: {
+        id: `${scope}.SubscriptionsSettings`,
+        defaultMessage: 'Subscriptions settings' ,
+    },
+
     LibrariesSubscriptionsList: {
         id: `${scope}.LibrariesSubscriptionsList`,
         defaultMessage: 'Libraries Subscriptions List',
+    },
+
+    InstitutionsSubscriptionsList: {
+        id: `${scope}.InstitutionsSubscriptionsList`,
+        defaultMessage: 'Institutions Subscriptions List',
     }
 
 });

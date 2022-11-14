@@ -16,5 +16,6 @@ return [
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'unauthorized'=> 'You\'r not allowed to access this resource',
+    'password_reset_email_subject'=>'Password reset',
 
 ];

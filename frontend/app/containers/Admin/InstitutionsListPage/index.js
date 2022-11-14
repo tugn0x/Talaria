@@ -36,9 +36,7 @@ const InstitutionsListPage = (props) => {
             dispatch(requestDeleteInstitution(inst,intl.formatMessage(messages.deletedMessage)))
     }
 
-    async function changeStatusInstitution (inst, status,multifilter)  {
-        console.log("Changestatus: ",inst,"status:",status)
-        
+    async function changeStatusInstitution (inst, status,multifilter)  {                
             let conf = await confirm({
                 title: intl.formatMessage(messages.confirm),
                 message: intl.formatMessage(messages.askChangeStatusMessage),

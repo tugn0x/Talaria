@@ -50,15 +50,16 @@
 
     & .administrative_fields {
         > span {
-            display: block;
+            display: block;            
 
             & span {
                 font-weight: bold;
             }
-        }
+        }       
 
-        & .invoice_header {
-            font-style: italic;
+        .vatnumber,
+        .fiscalcode {
+            display: inline;
         }
         
     }

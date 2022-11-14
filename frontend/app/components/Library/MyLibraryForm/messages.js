@@ -83,15 +83,15 @@ export default defineMessages({
     defaultMessage: 'Registration date',
   },
   vatnumber: {
-    id: `${scope}.vatnumber`,
+    id: `app.global.vatnumber`,
     defaultMessage: 'PIVA',
   },
   fiscalcode: {
-    id: `${scope}.fiscalcode`,
+    id: `app.global.fiscalcode`,
     defaultMessage: 'CF',
   },
   invoice_header: {
-    id: `${scope}.invoice_header`,
+    id: `app.global.invoice_header`,
     defaultMessage: 'invoice_header',
   },
   registration_date: {
@@ -99,27 +99,27 @@ export default defineMessages({
     defaultMessage: 'Registration date',
   },
   email_pec: {
-    id: `${scope}.email_pec`,
+    id: `app.global.email_pec`,
     defaultMessage: 'email_pec',
   },
   ccu: {
-    id: `${scope}.ccu`,
+    id: `app.global.ccu`,
     defaultMessage: 'ccu',
   },
   administrative: {
-    id: `${scope}.administrative`,
+    id: `app.global.administrative`,
     defaultMessage: 'administrative',
   },
   administrative_email: {
-    id: `${scope}.administrative_email`,
+    id: `app.global.administrative_email`,
     defaultMessage: 'administrative_email',
   },
   administrative_phone: {
-    id: `${scope}.administrative_phone`,
+    id: `app.global.administrative_phone`,
     defaultMessage: 'administrative_phone',
   },
   terzo_code: {
-    id: `${scope}.terzo_code`,
+    id: `app.global.terzo_code`,
     defaultMessage: 'terzo_code',
   },
   general_info: {
@@ -127,7 +127,7 @@ export default defineMessages({
     defaultMessage: 'General info',
   },
   administrative_info: {
-    id: `${scope}.administrative_info`,
+    id: `app.global.administrative_info`,
     defaultMessage: 'Administrative Info',
   },
   granted_permissions: {
