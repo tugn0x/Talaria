@@ -183,7 +183,7 @@ export const fields = {
     
     identifier_type_id: {
         type: "custom-select",
-        required: true,
+        //required: true,
         name: "identifier_type_id",
         width: "col-md-6",
         group: "identifier_info",
@@ -195,7 +195,7 @@ export const fields = {
         type: "text",
         name: "library_identifiers_txt",
         width: "col-md-4",
-        required: true,
+        //required: true,
         group: "identifier_info",
         order: 3,
         
