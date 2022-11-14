@@ -17,7 +17,7 @@ import scrollTo from 'utils/scrollTo';
 import {withRouter} from 'react-router-dom'
 import MapSelector from '../MapSelector';
 import { v4 as uuid } from 'uuid';
-import { filter } from 'lodash';
+import { filter, isEmpty } from 'lodash';
 // PROPS
 // fields
 // callback action
@@ -38,6 +38,7 @@ const CustomForm = (props) => {
         fieldsGroups = {},
     } = props
 
+
     const intl = useIntl();
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(props.getValidation ? false : true)
     const [formData, setFormData] = useState({})
@@ -46,6 +47,11 @@ const CustomForm = (props) => {
 
     const [list, setList] = React.useState(initialList);
     const [identifierFound, setIdentifierFound] = useState(false)
+    
+    const [dblist, setdbList] = React.useState(initialList);
+
+    
+
     const AddNewIdentifier = (e, field_name, value) => {
         e.preventDefault();
         setIsSubmitDisabled(false);
@@ -61,7 +67,7 @@ const CustomForm = (props) => {
                     name: formData.library_identifiers_txt,
                 });
 
-                //To show selected identifiers in the summary report
+                // //To show selected identifiers in the summary report
                 const arraylist=[];
                 setList(newList);
                 const filtertedlist=newList.map(
@@ -82,7 +88,8 @@ const CustomForm = (props) => {
 
     
     const isIdentifierFound = list.some(item => {
-        if (item.identifiertype.value === formData.identifier_type_id.value) {
+        if (formData.identifier_type_id!== undefined)
+            if (item.identifiertype.value === formData.identifier_type_id.value) {
         return true;
         }
     });
@@ -119,6 +126,25 @@ const CustomForm = (props) => {
         setIsSubmitDisabled(false)
         props.RetrievePositionData && props.RetrievePositionData(field_name, value);
     }
+
+    useEffect ( ()=>{
+        props.requestData!==null ? setdbList(props.requestData['identifiers'].data) :  setdbList(null)
+    },[props.requestData])
+
+    useEffect ( ()=>{
+        if(dblist!==null && dblist.length>0)
+        {
+            const newList = dblist.map((element) => ({
+                id: element.id,
+                identifiertype: {value:element.pivot.identifier_id,label:element.name},
+                name: element.pivot.cod}));
+            setList(newList)
+            setIdentifierFound(false)
+        } else    setList([])
+
+    },[dblist])
+        
+    
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -332,6 +358,16 @@ const CustomForm = (props) => {
                                                                                     >
                                                                                     <i className="fas fa-trash" />
                                                                                     </a>
+
+                                                                                    {/* <a
+                                                                                    className="btn btn-icon btn-sm"
+                                                                                    onClick={() =>
+                                                                                        EditIdentifier(item.id)
+                                                                                    }
+                                                                                    >
+                                                                                    <i className="fas fa-edit" />
+                                                                                    </a> */}
+
                                                                                 </td>
                                                                             </tr>
                                                                             </>

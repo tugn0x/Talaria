@@ -18,6 +18,9 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_GET_INSTITUTIONS_OPTIONLIST,
           REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST,
           REQUEST_INSTITUTIONSTYPES_OPTIONLIST,
+
+          REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST,
+
           REQUEST_POST_INSTITUTION,
           REQUEST_GET_COUNTRIES_OPTIONLIST,
           UPDATE_INSTITUTION,
@@ -28,7 +31,8 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST,
           REQUEST_STATUS_CHANGE_LIBRARY,
           REQUEST_STATUS_CHANGE_INSTITUTION,
-          REQUEST_DELETE_INSTITUTION
+          REQUEST_DELETE_INSTITUTION,
+          
 
 } from './constants';
 import {
@@ -45,6 +49,7 @@ import {
   requestGetProjectsListSuccess,
   requestGetProjectsOptionListSuccess,
   requestGetInstitutionsListSuccess,
+  requestGetIdentifiersListSuccess,
   requestGetInstitutionTypeOptionListSuccess,
   requestGetInstitutionsOptionListSuccess,
   requestGetInstitutionsByTypeByCountryOptionListSuccess,
@@ -56,6 +61,8 @@ import {
   requestSearchPlacesByTextFail,  
   requestGetLibraryListNearToSuccess,
   requestGetlibraryProjectsOptionListSuccess,
+  requestGetlibraryIdentifiersOptionListSuccess,
+  
   
 } from './actions';
 import { toast } from "react-toastify";
@@ -68,13 +75,14 @@ import {getUsersList, updateUser, createUser, getUsersOptionsList,
         getCountriesOptionsList,
         getProject, getProjectsList, updateProject,getProjectsOptionList, getlibraryProjectsOptionList,
         createProject, getLibrariesSubjects,createPublicLibrary,
-        getLibrariesListNearTo} from 'utils/api'
+        getLibrariesListNearTo, getlibraryidentifierTypesOptionList} from 'utils/api'
 
 import {admin_getLibrariesList,admin_deleteLibrary,admin_statusChangeLibrary,
-  admin_getInstitutionsList, admin_createInstitution,admin_updateInstitution,admin_deleteInstitution,admin_statusChangeInstitution,admin_getInstitutionsByTypeByCountryOptionList,
+  admin_getInstitutionsList,admin_getIdentifiersList,  admin_createInstitution,admin_updateInstitution,admin_deleteInstitution,admin_statusChangeInstitution,admin_getInstitutionsByTypeByCountryOptionList,
   admin_getLibrary, admin_updateLibrary} from 'utils/apiAdmin'
 
 import { getPlacesByText } from 'utils/apiExternal';   
+import { Alert } from 'reactstrap';
 
 export function* requestUserSaga(action) {
   const options = {
@@ -299,6 +307,20 @@ export function* requestGetInstitutionsListSaga(action = {}) {
     yield put(requestError(e.message));
   }
 }
+
+export function* requestGetlibraryIdentifiersOptionListSaga(action) {
+  const options = {
+    method: 'get',
+    query: action.request ? action.request : ""
+  };
+  try {
+    const request = yield call(getlibraryidentifierTypesOptionList, options);
+    yield put(requestGetlibraryIdentifiersOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 
 export function* requestStatusChangeInstitutionSaga(action) {  
   const options = {
@@ -588,7 +610,10 @@ export default function* adminSaga() {
 
   yield takeLatest(REQUEST_UPDATE_PROJECT, requestUpdateProjectSaga);
   yield takeLatest(REQUEST_POST_PROJECT, requestPostProjectSaga);
+  
   yield takeLatest(REQUEST_GET_INSTITUTIONS_LIST, requestGetInstitutionsListSaga);
+
+
   yield takeLatest(REQUEST_STATUS_CHANGE_INSTITUTION,requestStatusChangeInstitutionSaga);
   yield takeLatest(REQUEST_DELETE_INSTITUTION, requestDeleteInstitutionSaga);
   yield takeLatest(REQUEST_INSTITUTIONSTYPES_OPTIONLIST, requestInstitutionTypeOptionListSaga);
@@ -600,6 +625,8 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST, requestGetInstitutionsByTypeByCountryOptionListSaga);
 
   yield takeLatest(REQUEST_LIBRARYSUBJECT_OPTIONLIST, requestLibrarySubjectOptionListSaga);
+  yield takeLatest(REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST, requestGetlibraryIdentifiersOptionListSaga);
+
   yield takeLatest(REQUEST_GET_INSTITUTION, requestGetInstitutionSaga);
   yield takeLatest(REQUEST_POST_INSTITUTION, requestPostInstitutionSaga);
   yield takeLatest(REQUEST_GET_COUNTRIES_OPTIONLIST, requestGetCountriesOptionListSaga);

@@ -146,6 +146,10 @@ export default defineMessages({
     id: 'app.libraries.institution_info',
     defaultMessage: 'Institution and Projects',
   },
+  identifier_info: {
+    id: 'app.libraries.identifier_info',
+    defaultMessage: 'Identifiers',
+  },
   /*granted_permissions: {
     id: 'app.libraries.granted_permissions',
     defaultMessage: 'Users permissions',

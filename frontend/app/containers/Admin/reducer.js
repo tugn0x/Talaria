@@ -4,6 +4,7 @@
  *
  */
 import produce from 'immer';
+import { lowerCase } from 'lodash';
 import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_ERROR, STOP_LOADING, REQUEST_USERS_LIST, REQUEST_USERS_LIST_SUCCESS,
   REQUEST_UPDATE_USER, REQUEST_UPDATE_USER_SUCCESS,
@@ -22,6 +23,11 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_GET_INSTITUTION_TYPE_LIST,
   REQUEST_GET_INSTITUTIONS_LIST,
   REQUEST_GET_INSTITUTIONS_LIST_SUCCESS,
+
+  REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST,
+  REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST_SUCCESS,
+  
+
   REQUEST_GET_INSTITUTION, REQUEST_GET_INSTITUTION_SUCCESS,
   REQUEST_GET_INSTITUTIONS_OPTIONLIST, REQUEST_GET_INSTITUTIONS_OPTIONLIST_SUCCESS,
   
@@ -67,11 +73,15 @@ export const initialState = {
     pagination: {},
     data: [],
   },
+  // identifiersList: {
+  //   pagination: {},
+  //   data: [],
+  // },
   institution: [],
   institutionsOptionList: [],
   institutionsTypesOptionList: [],
   institutionsByTypeCountryOptionList: [],
-
+  identifiersOptionList:  [],
 
   countriesOptionList: [],
   libraryProjectsOptionList: [],
@@ -210,6 +220,33 @@ const AdminReducer = (state = initialState, action) =>
         draft.institutionsList.data = action.result.data
         draft.institutionsList.pagination = action.result.meta.pagination
         break;
+
+      // case REQUEST_GET_LIBRARY_IDENTIFIERS_OPTIONLIST:
+      //   draft.loading = true;
+      //   draft.error = action.error;
+      //   break;
+      // case REQUEST_GET_LIBRARY_IDENTIFIERS_OPTIONLIST_SUCCESS:
+      //   draft.loading = false;
+      //   draft.error = initialState.error;
+      //   draft.identifiersList.data = action.result.data
+      //   draft.identifiersList.pagination = action.result.meta.pagination
+
+      //   break;
+
+
+        case REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST:
+          draft.loading = true;
+          draft.error = action.error;
+          break;
+        case REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST_SUCCESS:
+          draft.loading = false;
+          draft.error = initialState.error;
+          draft.identifiersOptionList = action.result.sort((a, b) => { return (a.id > b.id) ? 1 : -1 }).map(item => { return {value: item.id, label: item.name} } );
+
+        break;
+
+        
+
       case REQUEST_INSTITUTIONSTYPES_OPTIONLIST:
         draft.error = action.error;
         break;
