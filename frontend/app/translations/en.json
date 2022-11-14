@@ -285,6 +285,9 @@
   "app.libraries.lat":"Latitute",
   "app.libraries.long":"Longitude",
   "app.libraries.project_label": "Project or Consortium",
+  "app.libraries.identifiers_label" : "Identifiers",
+  "app.libraries.identifier_type_id" : "Identifier Type",
+  "app.libraries.Identifier Code" : "Identifier Code",
 
   "app.references.labels": "Labels",
   "app.references.labelAs": "Label by",

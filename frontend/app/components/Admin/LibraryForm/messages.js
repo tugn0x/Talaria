@@ -24,6 +24,11 @@ export default defineMessages({
     defaultMessage: 'Project or Consortium',
   },
 
+  identifiers_label: {
+    id: 'app.libraries.identifiers_label',
+    defaultMessage: 'Identifiers',
+  },
+
   subject_id: {
     id: 'app.libraries.subject_id',
     defaultMessage: 'Subject ID',
@@ -150,6 +155,16 @@ export default defineMessages({
     id: 'app.libraries.identifier_info',
     defaultMessage: 'Identifiers',
   },
+  identifier_type_id: {
+    id: 'app.libraries.identifier_type_id',
+    defaultMessage: 'Identifier Type',
+  },
+
+  library_identifiers_txt: {
+    id: 'app.libraries.library_identifiers_txt',
+    defaultMessage: 'Identifier Code',
+  },
+  
   /*granted_permissions: {
     id: 'app.libraries.granted_permissions',
     defaultMessage: 'Users permissions',

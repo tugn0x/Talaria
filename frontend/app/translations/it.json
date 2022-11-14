@@ -285,6 +285,10 @@
   "app.libraries.lat":"Latitute",
   "app.libraries.long":"Longitude",
   "app.libraries.project_label": "Progetto o Consorzio",
+  "app.libraries.identifiers_label" : "Identificatrici",
+  "app.libraries.identifier_type_id" : "Tipo di identificatore",
+  "app.libraries.Identifier Code" : "Codice identificativo",
+
 
   "app.references.labels": "Etichette",
   "app.references.labelAs": "Etichetta come",

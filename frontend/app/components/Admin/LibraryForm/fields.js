@@ -171,15 +171,6 @@ export const fields = {
         order: 5,
     },
 
-    identifiers_label: {
-        type: "Label",
-        required: false,                
-        name: "identifiers_label",
-        nolabel:true,
-        width: "col-sm-12",
-        group: "identifier_info",
-        order: 1,
-    },
     
     identifier_type_id: {
         type: "custom-select",
@@ -230,7 +221,7 @@ export const fields = {
         hidden:true
     },
 
-   
+    
 
     url: {
         type: "text",
