@@ -17,7 +17,7 @@ import scrollTo from 'utils/scrollTo';
 import {withRouter} from 'react-router-dom'
 import MapSelector from '../MapSelector';
 import { v4 as uuid } from 'uuid';
-import { filter, isEmpty } from 'lodash';
+import { filter} from 'lodash';
 // PROPS
 // fields
 // callback action
@@ -38,19 +38,13 @@ const CustomForm = (props) => {
         fieldsGroups = {},
     } = props
 
-
     const intl = useIntl();
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(props.getValidation ? false : true)
     const [formData, setFormData] = useState({})
-
     const initialList = [];
-
     const [list, setList] = React.useState(initialList);
     const [identifierFound, setIdentifierFound] = useState(false)
-    
     const [dblist, setdbList] = React.useState(initialList);
-
-    
 
     const AddNewIdentifier = (e, field_name, value) => {
         e.preventDefault();
@@ -67,7 +61,7 @@ const CustomForm = (props) => {
                     name: formData.library_identifiers_txt,
                 });
 
-                // //To show selected identifiers in the summary report
+                //To show selected identifiers in the summary report
                 const arraylist=[];
                 setList(newList);
                 const filtertedlist=newList.map(
@@ -75,7 +69,7 @@ const CustomForm = (props) => {
                         return arraylist.concat(element.identifiertype.value,element.name)
                     }
                 )
-                console.log("filtertedlist" + JSON.stringify(arraylist))
+                //console.log("filtertedlist" + JSON.stringify(filtertedlist))
                 formData.identifiers_id = filtertedlist
                 props.AddNewIdentifier &&
                 props.AddNewIdentifier(field_name, value, filtertedlist);
@@ -102,12 +96,11 @@ const CustomForm = (props) => {
     };
 
     /* HANDLE CHANGE Generic */
-    const handleChange = (value, field_name) =>{
-        
-        setFormData({ ...formData, [field_name]: value   });
+    const handleChange = (value, field_name, order) =>{
+        setFormData({ ...formData, [field_name]: value, ['order']:order});
         setIsSubmitDisabled(false)
         // props per il wizard form registra biblioteca pubblica
-        props.onChangeData && props.onChangeData(field_name, value) 
+        props.onChangeData && props.onChangeData(field_name, value, order) 
         props.getValidation &&  props.getValidation(document.querySelector('form').checkValidity()) 
     }
 
@@ -128,7 +121,7 @@ const CustomForm = (props) => {
     }
 
     useEffect ( ()=>{
-        props.requestData!==null ? setdbList(props.requestData['identifiers'].data) :  setdbList(null)
+        (props.requestData!==null && props.requestData['identifiers']!==undefined) ?  setdbList(props.requestData['identifiers'].data) : setdbList(null)
     },[props.requestData])
 
     useEffect ( ()=>{
@@ -141,7 +134,6 @@ const CustomForm = (props) => {
             setList(newList)
             setIdentifierFound(false)
         } else    setList([])
-
     },[dblist])
         
     
@@ -358,16 +350,6 @@ const CustomForm = (props) => {
                                                                                     >
                                                                                     <i className="fas fa-trash" />
                                                                                     </a>
-
-                                                                                    {/* <a
-                                                                                    className="btn btn-icon btn-sm"
-                                                                                    onClick={() =>
-                                                                                        EditIdentifier(item.id)
-                                                                                    }
-                                                                                    >
-                                                                                    <i className="fas fa-edit" />
-                                                                                    </a> */}
-
                                                                                 </td>
                                                                             </tr>
                                                                             </>
@@ -384,7 +366,7 @@ const CustomForm = (props) => {
                                                                         label={field.label && field.label}
                                                                         color="brown"
                                                                         style={{fontSize: field.size,marginTop:field.margintop,  paddingBottom: field.paddingbottom, paddingTop: field.paddingtop}}
-                                                                        disabled={field.disabled ? field.disabled : false}                                                                        onClick={(e, value, newList) =>
+                                                                        disabled={field.disabled ? field.disabled : false} onClick={(e, value, newList) =>
                                                                         AddNewIdentifier(e, value, newList)
                                                                     }
                                                                     >
@@ -408,6 +390,7 @@ const CustomForm = (props) => {
                                                                             field={field}                                                                            
                                                                             label={messages[field.name] ? messages[field.name] : ""}
                                                                             data={!formData[field.name] && props.requestData && props.requestData[field.name] ? props.requestData[field.name] : formData[field.name]}
+                                                                            //handleChange={(value) => handleChange(value, field.name, field.order)}
                                                                             handleChange={(value) => handleChange(value, field.name)}
                                                                         />  
                                                                     </>
@@ -421,7 +404,7 @@ const CustomForm = (props) => {
                             })}
                         {props.children}
                         </div>
-                                             <div className="d-flex justify-content-between">
+                            <div className="d-flex justify-content-between">
                             <Button color={submitColor} disabled={isSubmitDisabled} type="submit" block>
                             {submitText?submitText:intl.formatMessage(formMessages.submit)}
                             </Button>
