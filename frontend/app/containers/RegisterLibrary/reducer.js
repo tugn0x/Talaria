@@ -67,7 +67,7 @@ case REQUEST_INSTITUTIONSTYPES_OPTIONLIST:
   break;
 case REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS:
   draft.error = initialState.error;
-  draft.institutionsTypesOptionList = action.result.sort((a, b) => { return (a.id > b.id) ? 1 : -1 }).map(item => { return {value: item.id, label: item.name} } );
+  draft.institutionTypesOptionList = action.result.sort((a, b) => { return (a.id > b.id) ? 1 : -1 }).map(item => { return {value: item.id, label: item.name} } );
   break;
 
 

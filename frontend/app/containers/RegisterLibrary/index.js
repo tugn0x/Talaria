@@ -15,7 +15,7 @@ import { requestGetCountriesOptionList,
     requestGetInstitutionTypeOptionList, requestGetlibraryProjectsOptionList, requestGetlibraryidentifierTypesOptionList } from "./actions"
 import {institutionsOptionListSelector,
     countriesOptionListSelector, librarySubjectOptionListSelector, projectsOptionListSelector,institutionsByTypeCountryOptionListSelector,
-    institutionsTypeOptionListSelector,
+    institutionTypesOptionListSelector,
     placesSelector, 
     libraryProjectsOptionListSelector,
     identifierTypesOptionListSelector} from './selectors';
@@ -334,7 +334,7 @@ const RegisterLibrary = (props) => {
                     title={intl.formatMessage(wizardMessages[`step_${currentStep}`])}
                     submitText={intl.formatMessage(globalMessages.continue)}
                     className="wizard-form"
-                    institution_type_id = {props.institutionsTypesOptionList}
+                    institution_type_id = {props.institutionTypesOptionList}
                     country_id={props.countriesOptionList}
                     institution_country_id = {props.countriesOptionList}
                     institution_id={props.institutionsByTypeCountryOptionList}
@@ -417,7 +417,7 @@ const mapStateToProps = createStructuredSelector({
     librarySubjectOptionList: librarySubjectOptionListSelector(),
     projectsOptionList: projectsOptionListSelector(),
     identifierTypesOptionList: identifierTypesOptionListSelector(),
-    institutionsTypesOptionList: institutionsTypeOptionListSelector(),
+    institutionTypesOptionList: institutionTypesOptionListSelector(),
     places: placesSelector(),
 
   });

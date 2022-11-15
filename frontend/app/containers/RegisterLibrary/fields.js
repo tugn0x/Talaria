@@ -276,8 +276,7 @@ export const fields = {
     },
 
     identifier_type_id: {
-        type: "custom-select",
-        required: true,
+        type: "custom-select",        
         name: "identifier_type_id",
         width: "col-md-6",
         group: "step_1",
@@ -289,7 +288,6 @@ export const fields = {
         type: "text",
         name: "library_identifiers_txt",
         width: "col-md-4",
-        required: true,
         group: "step_1",
         order: 28,
         
@@ -382,7 +380,7 @@ export const fields = {
     },
     subject_id: {
         type: "custom-select",
-        required: false,
+        required: true,
         name: "subject_id",
         width: "col-sm-12",
         group: "step_1",
