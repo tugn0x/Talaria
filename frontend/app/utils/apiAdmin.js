@@ -108,6 +108,13 @@ export const admin_getInstitution = (options) => {
   return request(`${BASE_ADMIN_URL}/institutions/${institution_id}`, options)
 };
 
+export const admin_getInstitutionType = (options) => {
+  const institution_id = options.id
+  options = getOption(options);
+  return request(`${BASE_ADMIN_URL}/institutions/institution-types/${institution_id}`, options)
+};
+
+
 
 export const admin_updateInstitutionType = (options) => {
   const institution_type_id = options.body.id

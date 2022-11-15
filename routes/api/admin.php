@@ -18,7 +18,7 @@ Route::group([
         
         Route::get('', 'AdminLibraryController@index')->name('index');    
         Route::post('', 'AdminLibraryController@create')->name('create');
-        Route::delete('{id}', 'AdminLibraryController@delete')->where('id', '[0-9]+')->name('delete'); //soft delete
+        Route::delete('{id}', 'AdminLibraryController@delete')->where('id', '[0-9]+')->name('delete'); 
         Route::put('{id}/changestatus', 'AdminLibraryController@changeStatus')->where('id', '[0-9]+')->name('changeStatus');
         Route::get('{id}', 'AdminLibraryController@show')->where('id', '[0-9]+')->name('show');        
         Route::put('{id}', 'AdminLibraryController@update')->where('id', '[0-9]+')->name('update');  
@@ -45,14 +45,15 @@ Route::group([
         Route::get('', 'AdminInstitutionController@index')->name('index');    
         Route::get('option-items', 'AdminInstitutionController@optionList')->name('option-items');
         Route::post('', 'AdminInstitutionController@create')->name('create');
-        Route::delete('{id}', 'AdminInstitutionController@delete')->where('id', '[0-9]+')->name('delete'); //soft delete
+        Route::delete('{id}', 'AdminInstitutionController@delete')->where('id', '[0-9]+')->name('delete'); 
         Route::get('{id}', 'AdminInstitutionController@show')->where('id', '[0-9]+')->name('show');
         Route::put('{id}', 'AdminInstitutionController@update')->where('id', '[0-9]+')->name('update');
         Route::put('{id}/changestatus', 'AdminInstitutionController@changeStatus')->where('id', '[0-9]+')->name('changeStatus');
         
-        Route::put('institution-types/{id}', 'AdminInstitutionTypeController@update')->name('update');
-        Route::delete('institution-types/{id}', 'AdminInstitutionTypeController@delete')->where('id', '[0-9]+')->name('delete'); //soft delete
-        Route::post('institution-types', 'AdminInstitutionTypeController@store')->name('store');
+        Route::get('institution-types/{id}', 'InstitutionTypeController@show')->where('id', '[0-9]+')->name('show');
+        Route::put('institution-types/{id}', 'InstitutionTypeController@update')->name('update');
+        Route::delete('institution-types/{id}', 'InstitutionTypeController@delete')->where('id', '[0-9]+')->name('delete'); 
+        Route::post('institution-types', 'InstitutionTypeController@store')->name('store');
         
         
 

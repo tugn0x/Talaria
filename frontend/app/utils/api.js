@@ -696,9 +696,18 @@ export const getInstitutionsOptionList = (options) => {
 
 */
 
-export const getInstituionTypeList = (options) => {
+export const getInstitutionTypesList = (options) => {
+  const page = options.page;
+  const pageSize=options.pageSize
+  const query = options.query;
+  const filterBy = options.filterBy;
+  const filterVal = options.filterVal;  
+  
+  let qstringpar="";    
+  if(pageSize) qstringpar+="&pageSize="+pageSize;
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/institutions/institution-types`, options)
+
+  return request(`${BASE_URL}/api/v1/institutions/institution-types/?page=${page}&q=${qstringpar}`, options)
 };
 
 
