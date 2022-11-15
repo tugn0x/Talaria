@@ -8,6 +8,8 @@ use App\Models\Users\Title;
 class InstitutionType extends BaseModel
 {
     protected static $observerClass=InstitutionTypeObserver::class;
+    protected $forceDeleting=true; //overrides softdelete => force delete!  
+    public static function bootSoftDeletes() {}  
 
 
     protected $fillable = [

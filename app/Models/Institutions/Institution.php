@@ -16,6 +16,9 @@ class Institution extends BaseModel
 {
     use ModelPermissionsTrait;
     
+    protected $forceDeleting=true; //overrides softdelete => force delete!  
+    public static function bootSoftDeletes() {}  
+
     protected static $observerClass = InstitutionObserver::class;
 
     protected $attributes= [
