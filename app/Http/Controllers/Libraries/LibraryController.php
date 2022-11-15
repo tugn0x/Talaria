@@ -10,7 +10,10 @@ use App\Http\Controllers\ApiController;
 use App\Models\Libraries\DeliveryTransformer;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Institutions\Institution;
+use App\Models\Libraries\Identifier;
 use App\Models\Projects\Project;
+use Illuminate\Support\Facades\Log;
+
 //use Illuminate\Support\Facades\Auth;
 
 class LibraryController extends ApiController
@@ -120,15 +123,24 @@ class LibraryController extends ApiController
                 $model->projects()->attach($prjid);
             }            
         }    
-
-        //TODO Identifiers
-        //...
+        
+        //Identifiers
+        if($request->has('identifiers_id') && $request->filled('identifiers_id'))
+        {
+            $arr=[];            
+            foreach ($request->input('identifiers_id') as $identif)
+            {
+                 $arr[]=['identifier_id'=>$identif[0],'cod'=>$identif[1]];
+            }
+            $model->identifiers()->sync($arr);            
+        }
 
 
         //If create fails
         if (!$model->exists) {
             throw new \Dingo\Api\Exception\StoreResourceFailedException(trans('apinilde::response.create_failed'), $model->getInternalErrors());
         }
+        
         $model->setPermissionOnObject([
             [
                 'user_id' => $request->user()->id,

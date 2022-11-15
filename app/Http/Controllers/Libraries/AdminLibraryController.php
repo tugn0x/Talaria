@@ -40,9 +40,18 @@ class AdminLibraryController extends AdminApiController
         if($request->has('project_id'))
                 $model->projects()->sync($request->input('project_id'));   
 
-        //TODO: sync identifiers
-        //if($request->has('identifier_id'))
-        //        $model->identifiers()->sync($request->input('identifier_id'));           
+        //sync identifiers
+        if($request->has('identifiers_id'))
+        {
+            $arr=[];            
+            foreach ($request->input('identifiers_id') as $identif)
+            {
+                 $arr[]=['identifier_id'=>$identif[0],'cod'=>$identif[1]];
+            }
+            $model->identifiers()->sync($arr);            
+        }
+
+
         
         if ($this->broadcast && config('apinilde.broadcast'))
             broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
