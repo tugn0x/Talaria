@@ -12,7 +12,7 @@ const LibraryForm = (props) => {
     console.log('LibraryForm', props)
     const { library, 
             searches, loading, resources,
-            submitFormAction,libraryProjectsOptionList, institutionsOptionList, institutionsTypesOptionList,institutionsByTypeCountryOptionList,
+            submitFormAction,libraryProjectsOptionList, institutionsOptionList, institutionTypesOptionList,institutionsByTypeCountryOptionList,
             countriesOptionList, librarySubjectOptionList,onChangeData} = props
     const intl = useIntl();
     
@@ -44,7 +44,7 @@ const LibraryForm = (props) => {
                     fieldsGroups={fieldsGroups}
                     title={library && library.name ? library.name : intl.formatMessage(messages.header)}                                                            
                     country_id={countriesOptionList}
-                    institution_type_id = {institutionsTypesOptionList}                    
+                    institution_type_id = {institutionTypesOptionList}                    
                     institution_country_id = {countriesOptionList}
                     institution_id={institutionsByTypeCountryOptionList}                    
                     project_id={libraryProjectsOptionList}   

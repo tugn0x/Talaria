@@ -66,7 +66,7 @@ function LibraryPage(props) {
           <LibraryForm 
             library={!isNew ? library : null}
             loading={isLoading}                    
-            institutionsTypesOptionList={admin.institutionsTypesOptionList}
+            institutionTypesOptionList={admin.institutionTypesOptionList}
             institutionsOptionList={admin.institutionsOptionList}            
             institutionsByTypeCountryOptionList={admin.institutionsByTypeCountryOptionList}
             countriesOptionList={admin.countriesOptionList}

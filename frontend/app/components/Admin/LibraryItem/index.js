@@ -223,7 +223,7 @@ const LibraryItem = (props) => {
             </Col>
             <Col sm={1}>
                 {statusInfo(data)}
-                {data.institution.data.status!=1 && <>&nbsp;<i className='fas fa-exclamation-triangle text-danger'></i></>}
+                {data.institution && data.institution.data.status!=1 && <>&nbsp;<i className='fas fa-exclamation-triangle text-danger'></i></>}
             </Col>
             <Col sm={3}>      
             <LibraryOperations data={data} changeStatusLibrary={changeStatusLibrary} deleteLibrary={deleteLibrary}/>                
