@@ -115,13 +115,6 @@ export const LibraryInfo = (props) => {
     }
 
 
-    const identifiersurl=(reqPath,id) => {
-        return generatePath(reqPath, {
-            id,
-            op: 'identifiers'
-        });        
-    }
-
     return (
         <div className={"library_info"}>            
             {/*<span className="status-text">{data.borrowing_status ? intl.formatMessage({id: "app.requests."+data.borrowing_status}):'xxx'}</span>*/}                    
@@ -160,8 +153,7 @@ export const LibraryInfo = (props) => {
                     {data.identifiers.data.map(ident => 
                     <span key={ident.id} className="identifier-item badge badge-info text-white">
                         {ident.name}: {ident.pivot.cod}
-                    </span>)}                
-                    <Link className="active" to={identifiersurl(editPath,data.id)}><i className="fas fa-edit"></i></Link>
+                    </span>)}                                    
                 </span>
             }                                                                      
         </div>

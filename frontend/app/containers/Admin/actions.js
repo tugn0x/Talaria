@@ -24,7 +24,9 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_UPDATE_PROJECT, 
    REQUEST_POST_PROJECT,
    REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST, REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST_SUCCESS,
+   REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST, REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST_SUCCESS,
    REQUEST_GET_INSTITUTIONS_LIST, REQUEST_GET_INSTITUTIONS_LIST_SUCCESS,
+  REQUEST_GET_IDENTIFIERS_LIST, REQUEST_GET_IDENTIFIERS_LIST_SUCCESS,
    REQUEST_GET_INSTITUTIONS_OPTIONLIST, REQUEST_GET_INSTITUTIONS_OPTIONLIST_SUCCESS,
   REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST, REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST_SUCCESS,
    REQUEST_GET_INSTITUTION, REQUEST_GET_INSTITUTION_SUCCESS,
@@ -299,6 +301,24 @@ return {
 };
 }
 
+export function requestGetlibraryIdentifiersOptionList(request)
+{
+return {
+  type: REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST,
+  request
+};
+}
+
+export function requestGetlibraryIdentifiersOptionListSuccess(result)
+{
+return {
+  type: REQUEST_GET_LIBRARY_IDENTIFIER_TYPES_OPTIONLIST_SUCCESS,
+  result
+};
+}
+
+
+
 /* export function requestUpdateLibrarySuccess(result) {
   return {
     type: REQUEST_UPDATE_LIBRARY_SUCCESS,
@@ -318,6 +338,22 @@ export function requestGetInstitutionsList(page = '1', pageSize, searchFilter) {
 export function requestGetInstitutionsListSuccess(result) {
   return {
     type: REQUEST_GET_INSTITUTIONS_LIST_SUCCESS,
+    result
+  };
+}
+
+export function requestGetIdentifiersList(page = '1', pageSize, searchFilter) {
+  return {
+    type: REQUEST_GET_IDENTIFIERS_LIST,
+    page,
+    pageSize,
+    searchFilter    
+  };
+}
+
+export function requestGetIdentifiersListSuccess(result) {
+  return {
+    type: REQUEST_GET_IDENTIFIERS_LIST_SUCCESS,
     result
   };
 }

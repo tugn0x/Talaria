@@ -13,16 +13,19 @@ const LibraryForm = (props) => {
     const { library, 
             searches, loading, resources,
             submitFormAction,libraryProjectsOptionList, institutionsOptionList, institutionTypesOptionList,institutionsByTypeCountryOptionList,
-            countriesOptionList, librarySubjectOptionList,onChangeData} = props
+            countriesOptionList, librarySubjectOptionList,onChangeData,identifiertypesOptionList, identifierTypesOptionList, identifiersOptionList, identifierTypeSelected} = props            
+
     const intl = useIntl();
-    
+
     const [requestData,setRequestData]=useState(null);
+    const [listLength, setListLength] = useState(null);
 
     useEffect ( ()=>{
-        
+
         if(!loading)
         if(library && library.id>0)
         {
+            setListLength(library.identifiers.data.length)
             setRequestData({
                 ...library,
                 'project_id': library.projects.data.map( ({id,name})=>{return id;}),
@@ -34,7 +37,39 @@ const LibraryForm = (props) => {
     },[library])
 
 
+    const AddNewIdentifier = (field_name,value,newList) => {
+        fields.library_identifier_list.hidden = newList.length>0 ? false : true;
+        //setData({...data, 'identifiers_id': newList})
+        console.log("identifier_id" + JSON.stringify(newList))
+
+    }
+
+    const RemoveIdentifier = (field_name,value,newList) => {
+        fields.library_identifier_list.hidden = newList.length>0 ? false : true;
+        //setData({...data, 'identifier_id': newList})
+        console.log(JSON.stringify(newList))
+    }
+
+
+    useEffect ( ()=>{
+        if(identifierTypeSelected)
+            fields.library_identifier_add.disabled = !identifierTypeSelected
+        
+    },[identifierTypeSelected])
+
     
+    useEffect ( ()=>{
+        if(identifierTypeSelected)
+            fields.library_identifier_add.disabled = !identifierTypeSelected
+        
+    },[library])
+
+    useEffect ( ()=>{
+        fields.library_identifier_list.hidden = listLength>0 ? false : true;
+    },[listLength])
+
+    
+
     return (
             //<SimpleForm loading={loading}>
                  <CustomForm 
@@ -48,6 +83,11 @@ const LibraryForm = (props) => {
                     institution_country_id = {countriesOptionList}
                     institution_id={institutionsByTypeCountryOptionList}                    
                     project_id={libraryProjectsOptionList}   
+
+                    identifier_type_id = {identifiersOptionList}
+                    AddNewIdentifier={AddNewIdentifier}
+                    RemoveIdentifier={RemoveIdentifier}
+
                     subject_id={librarySubjectOptionList}
                     searchOptionList={searches} 
                     messages={{...messages, ...globalMessages}}

@@ -136,6 +136,10 @@ export default defineMessages({
         id: `${scope}.ProjectNew`,
         defaultMessage: 'Register new project',
     },
+    Identifiers: {
+        id: `${scope}.Identifiers`,
+        defaultMessage: 'Identifiers',
+        },
     MyLibrary: {
         id: `${scope}.MyLibrary`,
         defaultMessage: 'My Library',

@@ -7,7 +7,7 @@ export const fieldsGroups = {
     step_2: {
         name: 'step_2',
         order: 1,
-        label: 'general_info'
+        label: 'Summary Report'
     },
     step_3: {
         name: 'step_3',
@@ -276,7 +276,8 @@ export const fields = {
     },
 
     identifier_type_id: {
-        type: "custom-select",        
+        type: "custom-select",
+        //required: true,
         name: "identifier_type_id",
         width: "col-md-6",
         group: "step_1",
@@ -288,6 +289,7 @@ export const fields = {
         type: "text",
         name: "library_identifiers_txt",
         width: "col-md-4",
+        //required: true,
         group: "step_1",
         order: 28,
         

@@ -9,14 +9,19 @@ export const fieldsGroups = {
         order: 1,
         label: 'institution_info'
     },
+    identifier_info: {
+        name: 'identifier_info',
+        order: 2,
+        label: 'identifier_info'
+    },
     service_info: {
         name: 'service_info',
-        order: 2,
+        order: 3,
         label: 'service_info'
     },
     administrative_info: {
         name: 'administrative_info',
-        order: 3,
+        order: 4,
         label: 'administrative_info'
     },
 };
@@ -165,6 +170,58 @@ export const fields = {
         options: "project_id",
         order: 5,
     },
+
+    
+    identifier_type_id: {
+        type: "custom-select",
+        //required: true,
+        name: "identifier_type_id",
+        width: "col-md-6",
+        group: "identifier_info",
+        options: "identifier_type_id",
+        order: 2,
+    },
+ 
+    library_identifiers_txt: {
+        type: "text",
+        name: "library_identifiers_txt",
+        width: "col-md-4",
+        //required: true,
+        group: "identifier_info",
+        order: 3,
+        
+    },
+
+    library_identifier_add: {
+        type: "AddButton",
+        label:"Add Code",
+        name: "library_identifier_add",
+        margintop:"13px",
+        width: "col-md-2",
+        group: "identifier_info",
+        disabled: true,
+        order: 4,
+    },
+
+    library_identifier_list: {
+        type: "list",
+        label:"Add",
+        name: "library_identifier_list",
+        hidden: false,
+        width: "col-md-12",
+        group: "identifier_info",
+        order: 5,
+    },
+
+    identifiers_id: {
+        type: "text",
+        name: "identifiers_id",
+        width: "col-md-3",
+        group: "identifier_info",
+        hidden:true
+    },
+
+    
 
     url: {
         type: "text",

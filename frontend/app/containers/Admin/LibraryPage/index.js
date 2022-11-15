@@ -6,7 +6,8 @@ import {useIntl} from 'react-intl';
 import messages from './messages';
 import {requestGetLibrary, 
         requestUpdateLibrary, requestPostLibrary, requestGetRoles, 
-        requestGetCountriesOptionList, requestLibrarySubjectOptionList,requestGetInstitutionTypeOptionList,requestGetInstitutionsByTypeByCountryOptionList, requestGetlibraryProjectsOptionList} from '../actions'
+        requestGetCountriesOptionList, requestLibrarySubjectOptionList,requestGetInstitutionTypeOptionList,requestGetInstitutionsByTypeByCountryOptionList, requestGetlibraryProjectsOptionList,
+        requestGetlibraryIdentifiersOptionList} from '../actions'
 import makeSelectAdmin, {isAdminLoading} from '../selectors';
 import {LibraryForm, Loader} from 'components';
 
@@ -20,6 +21,8 @@ function LibraryPage(props) {
     const [projectsIds,setProjectsIds]=useState(null)
     const [instype,setInstitutiontypeid]=useState(null)
     const [instcountry,setInstitutionCountryid]=useState(null)
+    const [identifierTypeSelected, setidentifierTypeSelected] = useState(false);
+
      
     useEffect(() => {
       if(!isLoading && !isNew)         
@@ -29,7 +32,8 @@ function LibraryPage(props) {
          dispatch(requestGetCountriesOptionList())
          dispatch(requestGetInstitutionTypeOptionList())         
          dispatch(requestLibrarySubjectOptionList())   
-         dispatch(requestGetlibraryProjectsOptionList())     
+         dispatch(requestGetlibraryProjectsOptionList()) 
+         dispatch(requestGetlibraryIdentifiersOptionList()) 
       }
      }, [])     
 
@@ -48,6 +52,7 @@ function LibraryPage(props) {
      
  
      const onChangeData = (field_name, value) => {
+      
          console.log("LibraryForm onChangeData()",field_name,value);
  
          if (field_name === "institution_type_id")
@@ -57,7 +62,12 @@ function LibraryPage(props) {
              setInstitutionCountryid(value.value);                      
 
           if (field_name === "project_id")
-            setProjectsIds(value)          
+            setProjectsIds(value)      
+                
+          if (field_name === "identifier_type_id" && value!==0)
+            setidentifierTypeSelected(true)
+          else
+            setidentifierTypeSelected(false)
      }
   
      
@@ -72,11 +82,13 @@ function LibraryPage(props) {
             countriesOptionList={admin.countriesOptionList}
             libraryProjectsOptionList={admin.libraryProjectsOptionList}
             librarySubjectOptionList={admin.librarySubjectOptionList}
+            identifiersOptionList={admin.identifiersOptionList}
+            identifierTypeSelected={identifierTypeSelected}
             searches={{ 
               institution_type_id: (input) => dispatch(requestGetInstitutionTypeOptionList(input)),               
               country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
               subject_id: (input) => dispatch(requestLibrarySubjectOptionList(input)),                                                         
-              institution_country_id: (input) => dispatch(requestGetCountriesOptionList(input)),              
+              institution_country_id: (input) => dispatch(requestGetCountriesOptionList(input)),
             }}
             resources={admin.resources.libraries}
             titleNewLibrary={isNew ? intl.formatMessage(messages.titleNewLibrary) : ""}

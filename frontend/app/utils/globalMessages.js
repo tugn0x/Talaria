@@ -158,6 +158,10 @@ export default defineMessages({
     id: `${scope}.submit`,
     defaultMessage: "Save",
   },
+  back: {
+    id: `${scope}.back`,
+    defaultMessage: "Back",
+  },
   cancel: {
     id: `${scope}.cancel`,
     defaultMessage: "Cancel",
