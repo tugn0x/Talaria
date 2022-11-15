@@ -47,7 +47,7 @@ export const canEnable = (inst) => {
 }
 
 export const canDelete = (inst) => {
-    return inst.status==2||inst.status==0 
+    return inst.status==2 
 }
 
 export const canDisable = (inst) => {
@@ -119,7 +119,7 @@ const InstitutionItem = (props) => {
                 <a className="toggle-institution-info" onClick={()=>setShowInstitutionInfo(!showInstitutionInfo)} title="show extra info">      
                         <i className={`active fas ${showInstitutionInfo?'fa-caret-square-up':'fa-caret-square-down'}`}></i> 
                 </a> 
-                <div className="institution_id"><Link to={editurl(editPath,data.id)} className="active"><span>{data.name}</span></Link>
+                <div className="institution_id"><Link to={editurl(editPath,data.id)} className="active"><span>{data.id} - {data.name}</span></Link>
                 <div className='institution_type'>                
                     <span className='badge badge-secondary'>{data.institution_type.data.name}</span>
                 </div>                          

@@ -200,8 +200,12 @@
   "app.containers.LibraryTags.header":"Tag",
   "app.containers.LibraryTags.tagCreateNew":"Nuovo tag",  
 
-  "app.containers.InstitutionPage.createSuccess": "Nuovo ente creato",
-  "app.containers.InstitutionPage.updateSuccess": "Ente aggiornato",
+  "app.containers.InstitutionPage.createSuccess": "Nuova istituzione creata con successo",
+  "app.containers.InstitutionPage.updateSuccess": "Istituzione aggiornato con successo",
+
+  "app.containers.InstitutionTypePage.createSuccess": "Nuovo tipo istituzione creato con successo",
+  "app.containers.InstitutionTypePage.updateSuccess": "Tipo istituzione aggiornato con successo",
+  
   "app.containers.LendingPage.headerArchive":"Archivio", 
   "app.containers.LendingPage.header":"Richieste in corso", 
   "app.containers.LendingPage.headerAllRequest":"Richieste orfane", 
@@ -218,15 +222,25 @@
   "app.containers.InstitutionsListPage.edit": "Modifica",
   "app.containers.InstitutionsListPage.askChangeStatusMessage":"Apply this status?",
   "app.containers.InstitutionsListPage.statusAppliedMessage": "Status applied correctly",
+  
+  "app.containers.InstitutionTypesListPage.header": "Tipi di ente",
+  "app.containers.InstitutionTypesListPage.createNew": "Nuovo tipo ente",
+  "app.containers.InstitutionTypesListPage.edit": "Modifica",  
+    
   "app.components.MapSelector.positionNotAvailable":"Geolocalizzazione non disponibile",    
-  "app.components.InstitutionForm.header": "Nuova istitutione",
+  "app.components.InstitutionForm.header": "Nuova istituzione",
   "app.components.LibraryForm.header": "Nuova biblioteca",
+  "app.components.InstitutionTypeForm.header": "Nuovo tipo di istituzione",
   
   "app.components.findOA.oapubfound":"La pubblicazione è disponibile OA, clicca qui!",
   "app.components.findOA.oapubnotfound":"Versione OA non disponibile",
   "app.components.findOA.oapubverify":"Verifica se la pubblicazione esiste in versione OA",
-  "app.components.findOA.oafindButton":"Trova OA",
+  "app.components.findOA.oafindButton":"Trova OA",  
 
+  "app.components.InstitutionsList.InstitutionsNotFound":"Nessun ente",
+  "app.components.InstitutionsList.InstitutionSelected":"Selezionato",
+  "app.components.InstitutionsList.InstitutionTypesNotFound":"Nessun tipo ente",
+  "app.components.InstitutionsList.InstitutionTypeSelected":"Selezionato",
   
   "app.components.Notification.header": "Notifiche",
   "app.components.Notification.mark_all_as_read": "Segna tutte come lette",
@@ -573,7 +587,7 @@
   "app.routes.UserNew": "Nuovo utente",
   "app.routes.Institutions": "Enti",
   "app.routes.InstitutionNew": "Nuovo ente",
-  "app.routes.InstitutionTypeNew": "Nuovo tipo di ente",
+  "app.routes.InstitutionTypeNew": "Nuovo tipo di istituzione",
   "app.routes.InstitutionType": "Tipo di ente",
   "app.routes.InstitutionTypes": "Tipi di ente",
   "app.routes.MyInstitution": "Il mio ente",

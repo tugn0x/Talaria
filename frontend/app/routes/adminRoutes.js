@@ -4,11 +4,12 @@ import Fake from 'components/Fake';
 import LibraryPage from 'containers/Admin/LibraryPage/Loadable';
 import LibrariesListPage from 'containers/Admin/LibrariesListPage/Loadable';
 import InstitutionsListPage from 'containers/Admin/InstitutionsListPage/Loadable';
-import InstitutionTypeListPage from 'containers/Admin/InstitutionTypeListPage/Loadable';
+import InstitutionTypesListPage from 'containers/Admin/InstitutionTypesListPage/Loadable';
 import ProjectPage from 'containers/Admin/ProjectPage/Loadable';
 import ProjectsListPage from 'containers/Admin/ProjectsListPage/Loadable';
 
 import InstitutionPage from 'containers/Admin/InstitutionPage/Loadable';
+import InstitutionTypePage from 'containers/Admin/InstitutionTypePage/Loadable';
 import SubRouteSwitch from 'components/SubRouteSwitch';
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
@@ -33,13 +34,13 @@ const routes = [
   },
   { path: '/institutions',  name: `Institutions`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],
     children: [
-      { path: '/institutions-types', exact: true, icon: 'fas fa-list-ul',  name: `InstitutionTypes`, url: `/institutions/institutions-types`, component: Fake,  sidebar: true,order:3},      
-      { path: '/institutions-types/:id?/:op?', name: `InstitutionType`, component: Fake, sidebar: false  },
-      { path: '/institutions-types/:page?',   name: `InstitutionTypes`, url: `/institutions/institutions-types`, component: Fake,  sidebar: false},
-      { path: '/institutions-types/new', icon: 'plus', name: `InstitutionTypeNew`, url: `/institutions/institutions-types/new`, component: Fake,  sidebar: true,order:4 },      
+      { path: '/institution-types', exact: true, icon: 'fas fa-list-ul',  name: `InstitutionTypes`, url: `/institutions/institution-types`, component: InstitutionTypesListPage,  sidebar: true,order:3},      
+      { path: '/institution-types/:id?/:op?', exact: true, name: `InstitutionType`, component: InstitutionTypePage, sidebar: false  },
+      { path: '/institution-types/:page?', exact: true,  name: `InstitutionTypes`, url: `/institutions/institution-types`, component: InstitutionTypesListPage,  sidebar: false},
+      { path: '/institution-types/new',exact: true, icon: 'plus', name: `InstitutionTypeNew`, url: `/institutions/institution-types/new`, component: InstitutionTypePage,  sidebar: true,order:4 },      
 
       { path: '/', exact: true, icon: 'fas fa-building', name: `Institutions`, url: `/institutions`, component: InstitutionsListPage, sidebar:true, order:1},
-      { path: '/:id?/:op?', name: `Institutions`, component: InstitutionPage, sidebar: false },
+      { path: '/:id?/:op?', exact:true,name: `Institutions`, component: InstitutionPage, sidebar: false },
       { path: '/:page?', exact: true, name: `Institutions`, url: `/institutions`, component: InstitutionsListPage, },            
       { path: '/new', icon: 'plus', name: `InstitutionNew`, component: InstitutionPage,  url: `/institutions/new`, sidebar: true,order:2},            
     ]

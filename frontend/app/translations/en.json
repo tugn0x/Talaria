@@ -200,8 +200,12 @@
   "app.containers.LibraryTags.header":"Tags",
   "app.containers.LibraryTags.tagCreateNew":"New tag",  
 
-  "app.containers.InstitutionPage.createSuccess": "Nuovo ente creato",
-  "app.containers.InstitutionPage.updateSuccess": "Ente aggiornato",
+  "app.containers.InstitutionPage.createSuccess": "Institution created successfully",
+  "app.containers.InstitutionPage.updateSuccess": "Institution updated successfully",
+
+  "app.containers.InstitutionTypePage.createSuccess": "Institution type created successfully",
+  "app.containers.InstitutionTypePage.updateSuccess": "Institution type updated successfully",
+
   "app.containers.LendingPage.headerArchive":"Archive", 
   "app.containers.LendingPage.header":"Pending requests", 
   "app.containers.LendingPage.headerAllRequest":"Orphaned requests", 
@@ -218,15 +222,25 @@
   "app.containers.InstitutionsListPage.edit": "Edit",
   "app.containers.InstitutionsListPage.askChangeStatusMessage":"Apply this status?",
   "app.containers.InstitutionsListPage.statusAppliedMessage": "Status applied correctly",
+  
+  "app.containers.InstitutionTypesListPage.header": "Institution types",
+  "app.containers.InstitutionTypesListPage.createNew": "New institution type",
+  "app.containers.InstitutionTypesListPage.edit": "Edit",  
+  
   "app.components.MapSelector.positionNotAvailable":"Geolocalizzation not available",
   "app.components.InstitutionForm.header": "New Institution",
   "app.components.LibraryForm.header": "New Library",
+  "app.components.InstitutionTypeForm.header": "New Institution Type",
   
   "app.components.findOA.oapubfound":"OA version found, click here to get it!",
   "app.components.findOA.oapubnotfound":"OA version not found.",
   "app.components.findOA.oapubverify":"Check if the publication is OA available",
   "app.components.findOA.oafindButton":"Check OA availability",
 
+  "app.components.InstitutionsList.InstitutionsNotFound":"No Institutions",
+  "app.components.InstitutionsList.InstitutionSelected":"Selected",
+  "app.components.InstitutionsList.InstitutionTypesNotFound":"No Institution Types",
+  "app.components.InstitutionsList.InstitutionTypeSelected":"Selected",
   
   "app.components.Notification.header": "Notifications",
   "app.components.Notification.mark_all_as_read": "Mark all as read",

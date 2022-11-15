@@ -17,7 +17,7 @@ function InstitutionPage(props) {
     const {params} = match
     const isNew = !params.id || params.id === 'new'
     const institution = admin.institution
-    const institutionsTypesOptionList = admin.institutionsTypesOptionList
+    const institutionTypesOptionList = admin.institutionTypesOptionList
     const countriesOptionList = admin.countriesOptionList
     useEffect(() => {
       if(!isLoading && !isNew) 
@@ -39,7 +39,7 @@ function InstitutionPage(props) {
             : (formData) => dispatch(requestPostInstitution(formData, intl.formatMessage(messages.createSuccess)))
           }          
           institution={!isNew? institution : null}
-          institutionsTypesOptionList={institutionsTypesOptionList}
+          institutionTypesOptionList={institutionTypesOptionList}
           countriesOptionList={countriesOptionList}                    
           searches={{
             country_id: (input) => dispatch(requestGetCountriesOptionList(input)),

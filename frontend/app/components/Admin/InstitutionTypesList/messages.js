@@ -5,18 +5,18 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.components.InstitutionsList';
+export const scope = 'app.components.InstitutionTypesList';
 
 export default defineMessages({
-  InstitutionsNotFound: {
-    id: `${scope}.InstitutionsNotFound`,
+  InstitutionTypesNotFound: {
+    id: `${scope}.InstitutionTypesNotFound`,
     defaultMessage: 'No institutions',
   },
   ResetAll: {
     id: `app.global.resetAll`,
   },
-  InstitutionSelected: {
-    id: `${scope}.InstitutionSelected`,
+  InstitutionTypeSelected: {
+    id: `${scope}.InstitutionTypeSelected`,
     defaultMessage: 'Selected',
   },
 });

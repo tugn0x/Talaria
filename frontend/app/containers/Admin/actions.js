@@ -28,7 +28,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_GET_INSTITUTIONS_OPTIONLIST, REQUEST_GET_INSTITUTIONS_OPTIONLIST_SUCCESS,
   REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST, REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST_SUCCESS,
    REQUEST_GET_INSTITUTION, REQUEST_GET_INSTITUTION_SUCCESS,
-   REQUEST_INSTITUTIONSTYPES_OPTIONLIST, REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
+   REQUEST_INSTITUTION_TYPE_OPTIONLIST, REQUEST_INSTITUTION_TYPE_OPTIONLIST_SUCCESS,
       REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS, REQUEST_GET_INSTITUTION_TYPE_LIST,
    REQUEST_POST_INSTITUTION, UPDATE_INSTITUTION,
    REQUEST_LIBRARYSUBJECT_OPTIONLIST, REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS,
@@ -39,7 +39,12 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_GET_LIBRARY_LIST,
    REQUEST_GET_LIBRARY_LIST_SUCCESS,
    REQUEST_STATUS_CHANGE_INSTITUTION,
-   REQUEST_DELETE_INSTITUTION
+   REQUEST_DELETE_INSTITUTION,
+   REQUEST_POST_INSTITUTION_TYPE,
+   REQUEST_GET_INSTITUTION_TYPE,
+   REQUEST_GET_INSTITUTION_TYPE_SUCCESS,
+   UPDATE_INSTITUTION_TYPE,
+   REQUEST_DELETE_INSTITUTION_TYPE
  
 } from "./constants";
 
@@ -333,12 +338,46 @@ export function requestDeleteInstitution(id,message) {
   };
 }
 
+export function requestUpdateInstitutionType(request, message) {
+  return {
+    type: UPDATE_INSTITUTION_TYPE,
+    request,
+    message
+  };
+}
+
+export function requestDeleteInstitutionType(id,message) {
+  return {
+    type: REQUEST_DELETE_INSTITUTION_TYPE,
+    id,
+    message
+  };
+}
+
+
+
+
 export function requestGetInstitution(id) {
   return {
     type: REQUEST_GET_INSTITUTION,
     id
   };
 }
+
+export function requestGetInstitutionType(id) {
+  return {
+    type: REQUEST_GET_INSTITUTION_TYPE,
+    id
+  };
+}
+
+export function requestGetInstitutionTypeSuccess(result) {
+  return {
+    type: REQUEST_GET_INSTITUTION_TYPE_SUCCESS,
+    result
+  };
+}
+
 
 export function requestPostInstitution(request, message) {
   return {
@@ -347,6 +386,15 @@ export function requestPostInstitution(request, message) {
     message
   };
 }
+
+export function requestPostInstitutionType(request, message) {
+  return {
+    type: REQUEST_POST_INSTITUTION_TYPE,
+    request,
+    message
+  };
+}
+
 
 export function requestGetInstitutionSuccess(result) {
   return {
@@ -398,14 +446,14 @@ export function requestGetInstitutionsOptionListSuccess(result) {
 
 export function requestGetInstitutionTypeOptionList(request) {
   return {
-    type: REQUEST_INSTITUTIONSTYPES_OPTIONLIST,
+    type: REQUEST_INSTITUTION_TYPE_OPTIONLIST,
     request
   };
 }
 
-export function requestGetInstitutionTypeOptionListSuccess(result) {
+export function requestGetInstitutionTypesOptionListSuccess(result) {
   return {
-    type: REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
+    type: REQUEST_INSTITUTION_TYPE_OPTIONLIST_SUCCESS,
     result
   };
 }
@@ -441,14 +489,16 @@ export function requestLibrarySubjectOptionListSuccess(result) {
 }
 
 
-export function requestGetInstitutionTypeList(page) {
-  console.log('requestGetInstitutionTypeList PASSO DA QUI?')
+export function requestGetInstitutionTypesList(page = '1', pageSize, searchFilter) {  
   return {
     type: REQUEST_GET_INSTITUTION_TYPE_LIST,
-    page
+    page,
+    pageSize,
+    searchFilter
   };
 }
-export function requestGetInstitutionTypeListSuccess(result) {
+
+export function requestGetInstitutionTypesListSuccess(result) {
   return {
     type: REQUEST_GET_INSTITUTION_TYPE_LIST_SUCCESS,
     result

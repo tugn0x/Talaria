@@ -27,10 +27,13 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   
   REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST,REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST_SUCCESS,
 
-  REQUEST_INSTITUTIONSTYPES_OPTIONLIST, REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS,
+  REQUEST_INSTITUTION_TYPE_OPTIONLIST, REQUEST_INSTITUTION_TYPE_OPTIONLIST_SUCCESS,
   REQUEST_GET_COUNTRIES_OPTIONLIST, REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS,
   REQUEST_LIBRARYSUBJECT_OPTIONLIST, REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS,
   UPDATE_INSTITUTION,
+  UPDATE_INSTITUTION_TYPE,
+  REQUEST_GET_INSTITUTION_TYPE,  
+  REQUEST_GET_INSTITUTION_TYPE_SUCCESS,
   REQUEST_SEARCH_PLACES_BY_TEXT,
   REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
   REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
@@ -68,8 +71,9 @@ export const initialState = {
     data: [],
   },
   institution: [],
+  institutiontype:[],
   institutionsOptionList: [],
-  institutionsTypesOptionList: [],
+  institutionTypesOptionList: [],
   institutionsByTypeCountryOptionList: [],
 
 
@@ -191,6 +195,21 @@ const AdminReducer = (state = initialState, action) =>
         draft.error = initialState.error;
         draft.institutionsOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );        
         break;
+
+      case REQUEST_GET_INSTITUTION_TYPE:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
+      case REQUEST_GET_INSTITUTION_TYPE_SUCCESS:
+        draft.loading = false;
+        draft.error = initialState.error;
+        draft.institutiontype = action.result.data
+        //draft.institution.granted_permissions = action.result.data.granted_permissions.data
+        break;
+      case UPDATE_INSTITUTION_TYPE:
+        draft.loading = true;
+        draft.error = action.error;
+        break;
       
       case REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST:
         draft.error = action.error;
@@ -210,12 +229,12 @@ const AdminReducer = (state = initialState, action) =>
         draft.institutionsList.data = action.result.data
         draft.institutionsList.pagination = action.result.meta.pagination
         break;
-      case REQUEST_INSTITUTIONSTYPES_OPTIONLIST:
+      case REQUEST_INSTITUTION_TYPE_OPTIONLIST:
         draft.error = action.error;
         break;
-      case REQUEST_INSTITUTIONSTYPES_OPTIONLIST_SUCCESS:
+      case REQUEST_INSTITUTION_TYPE_OPTIONLIST_SUCCESS:
         draft.error = initialState.error;
-        draft.institutionsTypesOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
+        draft.institutionTypesOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );
         break;
       case REQUEST_GET_COUNTRIES_OPTIONLIST:
         draft.error = action.error;

@@ -37,10 +37,12 @@ import MyLibraryForm from './Library/MyLibraryForm';
 import LibraryForm from './Admin/LibraryForm'
 // import InstitutionsList from './Admin/InstitutionsList'
 import InstitutionForm from './Admin/InstitutionForm'
+import InstitutionTypeForm from './Admin/InstitutionTypeForm'
 import ProjectsList from './Admin/ProjectsList'
 import ProjectForm from './Admin/ProjectForm'
 import LibrariesList from './Admin/LibrariesList'
 import InstitutionsList from './Admin/InstitutionsList'
+import InstitutionTypesList from './Admin/InstitutionTypesList'
 
 /*
 FORM STUFFS
@@ -72,8 +74,10 @@ export {
   ProjectsList,
   ProjectForm,
   InstitutionForm,
+  InstitutionTypeForm,
   LibrariesList,
   InstitutionsList,
+  InstitutionTypesList,
 //  UsersList,
   CustomForm,
   ButtonPlus,

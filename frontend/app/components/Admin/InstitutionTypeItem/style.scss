@@ -1,0 +1,27 @@
+@import '../../../scss/vendors/variables';
+
+.institutiontype_id {
+    margin-left: 5px;
+    display: inline !important;
+
+    & a:hover {
+        text-decoration: none;
+    }
+}
+
+.institutiontype_item {
+    border-bottom: 1px solid $active;
+}
+
+.institutiontype_operations {
+    text-align: right;
+
+    & a {
+        margin-right: 5px;
+     }
+   
+    & a:last-child {
+        margin-right: 0;
+    }
+
+}

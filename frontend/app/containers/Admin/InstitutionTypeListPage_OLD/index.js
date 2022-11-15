@@ -11,7 +11,7 @@ import {columns} from './columns'
 import {LibraryForm} from 'components';
 import messages from "./messages";
 
-const InstitutionTypeListPage = (props) => {
+const InstitutionTypeListPage_OLD = (props) => {
     console.log('InstitutionTypeListPage', props)
     const {dispatch, isLoading, admin, match, history} = props
     const intl = useIntl();
@@ -63,4 +63,4 @@ const withConnect = connect(
     mapDispatchToProps,
 );
 
-export default compose(withConnect)(InstitutionTypeListPage);
+export default compose(withConnect)(InstitutionTypeListPage_OLD);

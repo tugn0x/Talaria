@@ -7,7 +7,7 @@ import {useIntl} from 'react-intl';
 
 const InstitutionForm = (props) => {
     console.log('InstitutionForm', props)
-    const { institution, submitFormAction, searches, institutionsTypesOptionList, countriesOptionList} = props
+    const { institution, submitFormAction, searches, institutionTypesOptionList, countriesOptionList} = props
     const intl = useIntl();    
     return (
             <CustomForm 
@@ -15,7 +15,7 @@ const InstitutionForm = (props) => {
                 requestData={institution ? institution : null}
                 fields={fields} 
                 fieldsGroups={fieldsGroups}
-                institution_type_id={institutionsTypesOptionList} 
+                institution_type_id={institutionTypesOptionList} 
                 country_id={countriesOptionList}
                 title={institution && institution.name ? institution.name : intl.formatMessage(messages.header)}
                 messages={{...messages, ...globalMessages}}
