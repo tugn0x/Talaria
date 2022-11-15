@@ -150,8 +150,8 @@
   
   "app.containers.RegisterNewLibrary.header": "Registra la tua biblioteca",
   "app.containers.RegisterNewLibrary.link": "Registra la tua biblioteca",
-  "app.containers.RegisterNewLibrary.step_1": "Informazioni generali 1/2",
-  "app.containers.RegisterNewLibrary.step_2": "Informazioni generali 2/2",
+  "app.containers.RegisterNewLibrary.step_1": "Informazioni generali",
+  "app.containers.RegisterNewLibrary.step_2": "relazione di sintesi",
   "app.containers.RegisterNewLibrary.step_3": "Informazioni amministrative",
   "app.containers.RegisterNewLibrary.step_4": "Riepilogo di sintesi",
   "app.containers.RegisterNewLibrary.placesFreeSearchPlaceholder": "Trova la tua biblioteca",
@@ -181,6 +181,7 @@
   "app.containers.RegisterNewLibrary.unableRetriveLocation":"Unable to retreive your library location",
   "app.containers.RegisterNewLibrary.locatingLibraryLocation":"Locating your library location...",
   "app.containers.RegisterNewLibrary.project_id":"Project",
+  
 
 
   "app.containers.LibraryUserPage.header": "Modifica stato utente",

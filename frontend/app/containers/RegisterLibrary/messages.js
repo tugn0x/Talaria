@@ -262,10 +262,10 @@ lon: {
   defaultMessage: 'Longtitude',
 },
 
-lon: {
-  id: 'app.libraries.identifier_type_id',
-  defaultMessage: 'Longtitude',
-},
+// lon: {
+//   id: 'app.libraries.identifier_type_id',
+//   defaultMessage: 'Longtitude',
+// },
 
 alt_name: {
   id: 'app.libraries.alt_name',

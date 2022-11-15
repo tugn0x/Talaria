@@ -180,6 +180,10 @@ const RegisterLibrary = (props) => {
         setSteps({...steps, [parseInt(newStep)]: {active: true} })      
     }
     
+    const onBackPressed = () => {
+        setCurrentStep(parseInt(1))
+    }
+    
     // Aggiorna dati nei campi *handle change*
     const onChangeData = (field_name, value) => {
         
@@ -395,12 +399,12 @@ const RegisterLibrary = (props) => {
 
 
                 <div class="vertical-center" id="noprint"> 
-                    <Button color="brown" class="btn" onClick={() => dispatch(requestPostPublicLibrary(data, intl.formatMessage(wizardMessages.createMessage)))}>
+                    <Button onClick={onBackPressed} className='backButton'> 
+                        {intl.formatMessage(globalMessages.back)} 
+                    </Button>
+                    <Button color="brown" className="rightAlignButton" onClick={() => dispatch(requestPostPublicLibrary(data, intl.formatMessage(wizardMessages.createMessage)))}>
                         {intl.formatMessage(globalMessages.submit)} 
                     </Button>
-                    {/* <Button color="brown" onClick={Print}>
-                        Print Summary Report
-                    </Button> */}
                     </div>
                 </div>
             }

@@ -150,8 +150,8 @@
   
   "app.containers.RegisterNewLibrary.header": "Register your library",
   "app.containers.RegisterNewLibrary.link": "Register your library",
-  "app.containers.RegisterNewLibrary.step_1": "General informations 1/2",
-  "app.containers.RegisterNewLibrary.step_2": "General informations 2/2",
+  "app.containers.RegisterNewLibrary.step_1": "General informations",
+  "app.containers.RegisterNewLibrary.step_2": "Summary Report",
   "app.containers.RegisterNewLibrary.step_3": "Administrative informations",
   "app.containers.RegisterNewLibrary.step_4": "Summary Report",
   "app.containers.RegisterNewLibrary.placesFreeSearchPlaceholder": "Search for your library",

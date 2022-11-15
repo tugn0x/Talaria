@@ -123,8 +123,14 @@ p:first-child {
     border-bottom: 1px solid;
 }
 
-@media print {
-    .noprint {
-       visibility: hidden;
-    }
- }
+.rightAlignButton {
+    float: right;
+    width: 150px;
+    height: 40px;
+}
+
+.backButton {
+    float: left;
+    width: 150px;
+    height: 40px;
+}
