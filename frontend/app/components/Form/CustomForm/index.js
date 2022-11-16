@@ -66,7 +66,7 @@ const CustomForm = (props) => {
                 setList(newList);
                 const filtertedlist=newList.map(
                     (element)=>{
-                        return arraylist.concat(element.identifiertype.value,element.name)
+                        return arraylist.concat(element.identifiertype.value,element.name, element.identifiertype.label)
                     }
                 )
                 //console.log("filtertedlist" + JSON.stringify(filtertedlist))

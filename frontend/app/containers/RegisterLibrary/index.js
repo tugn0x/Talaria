@@ -383,8 +383,8 @@ const RegisterLibrary = (props) => {
                                             <div class="font-weight-bold">{messages[key] && intl.formatMessage(messages[key])}</div>
                                             {(key!=='identifiers_id') && <div>{data[key]}</div>}
 
-                                            {(key==='identifiers_id')&&<div> 
-                                                {data.identifiers_id.map((item) => (<div>{item[1]}</div>))}</div>}
+                                            {(key==='identifiers_id')&&<div>
+                                                {data.identifiers_id.map((item) => (<div><b>{item[2]}: </b>{item[1]}</div>))}</div>}
                                         </div>
                                     }   
                                     </>
