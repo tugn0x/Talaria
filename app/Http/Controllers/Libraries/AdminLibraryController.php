@@ -10,6 +10,7 @@ use App\Models\Libraries\LibraryTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdminApiController;
+use Illuminate\Support\Facades\Log;
 
 class AdminLibraryController extends AdminApiController
 {
@@ -37,7 +38,7 @@ class AdminLibraryController extends AdminApiController
         });
 
         //sync projects
-        if($request->has('project_id'))
+        if( ($request->has('project_id') && (!is_null($request->input('project_id')))) )
                 $model->projects()->sync($request->input('project_id'));   
 
         //sync identifiers
@@ -48,6 +49,7 @@ class AdminLibraryController extends AdminApiController
             {
                  $arr[]=['identifier_id'=>$identif[0],'cod'=>$identif[1]];
             }
+            Log::info(print_r($arr,true));
             $model->identifiers()->sync($arr);            
         }
 
