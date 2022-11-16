@@ -89,11 +89,20 @@ const CustomForm = (props) => {
     });
 
     const RemoveIdentifier = (id, field_name, value) => {
+        setIsSubmitDisabled(false);
         const newList = list.filter(item => item.id !== id);
-        setList(newList);
-        props.RemoveIdentifier &&
-        props.RemoveIdentifier(field_name, value, newList);
-    };
+            const arraylist=[];
+            setList(newList);
+            const filtertedlist=newList.map(
+                (element)=>{
+                    return arraylist.concat(element.identifiertype.value,element.name)
+                }
+            )
+            console.log("filtertedlist" + JSON.stringify(filtertedlist))
+            formData.identifiers_id = filtertedlist
+            props.RemoveIdentifier &&
+            props.RemoveIdentifier(field_name, value, filtertedlist);
+        };
 
     /* HANDLE CHANGE Generic */
     const handleChange = (value, field_name, order) =>{
