@@ -130,6 +130,8 @@ const RegisterLibrary = (props) => {
             fields.showfullProfile.hidden = true;                             
         }
         fields.geolocation_spinner.hidden=true;
+        fields.opac.required=false;
+        fields.subject_id.required=false;
         //set profile
         setData({...data, 'profile_type': basicProfile?1:2})
     },[])
@@ -180,8 +182,13 @@ const RegisterLibrary = (props) => {
         setSteps({...steps, [parseInt(newStep)]: {active: true} })      
     }
     
-    const onBackPressed = () => {
+
+    const onBackPressed = (field_name,value,newList) => {
+        fields.library_identifier_list.hidden = true
+        setData({...data, 'backbuttonPressed': true})
+        fields.library_identifier_list.hidden = false
         setCurrentStep(parseInt(1))
+        fields.library_identifier_add.disabled = true
     }
     
     // Aggiorna dati nei campi *handle change*
@@ -233,11 +240,13 @@ const RegisterLibrary = (props) => {
         }
 
         if (field_name === "institution_id" && value.value === 0)
+        {
             fields.suggested_institution_name.hidden = false;
+            setInstitutionName (null)
+        }
 
-        
         if (field_name === "identifier_type_id" && value!==0)
-            setidentifierTypeSelected(true)
+                setidentifierTypeSelected(true)
         
         
         if (field_name === "library_identifiers_txt" && value !== 0 && identifierTypeSelected)

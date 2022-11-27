@@ -52,29 +52,30 @@ const CustomForm = (props) => {
 
         if (!isIdentifierFound)
         {
-            if (formData.identifier_type_id!==null && formData.library_identifiers_txt!==null)
-            {
-                const unique_id = uuid();
-                const newList = list.concat({
-                    id: unique_id,
-                    identifiertype: formData.identifier_type_id,
-                    name: formData.library_identifiers_txt,
-                });
+                if (formData.identifier_type_id!==null && formData.library_identifiers_txt!==null)
+                {
+                    const unique_id = uuid();
+                    const newList = list.concat({
+                        id: unique_id,
+                        identifiertype: formData.identifier_type_id,
+                        name: formData.library_identifiers_txt,
+                    });
 
-                //To show selected identifiers in the summary report
-                const arraylist=[];
-                setList(newList);
-                const filtertedlist=newList.map(
-                    (element)=>{
-                        return arraylist.concat(element.identifiertype.value,element.name, element.identifiertype.label)
-                    }
-                )
-                //console.log("filtertedlist" + JSON.stringify(filtertedlist))
-                formData.identifiers_id = filtertedlist
-                props.AddNewIdentifier &&
-                props.AddNewIdentifier(field_name, value, filtertedlist);
-                setIdentifierFound(false)
-            }
+                    //To show selected identifiers in the summary report
+                    const arraylist=[];
+                    setList(newList);
+                    const filtertedlist=newList.map(
+                        (element)=>{
+                                if (element.identifiertype!==undefined && element.name!==undefined)
+                                    return arraylist.concat(element.identifiertype.value,element.name, element.identifiertype.label)
+                        }
+                    )
+                    //console.log("filtertedlist" + JSON.stringify(filtertedlist))
+                    formData.identifiers_id = filtertedlist
+                    props.AddNewIdentifier &&
+                    props.AddNewIdentifier(field_name, value, filtertedlist);
+                    setIdentifierFound(false)
+                }
         }
         else
             setIdentifierFound(true)
@@ -133,19 +134,41 @@ const CustomForm = (props) => {
         (props.requestData && props.requestData!==null && props.requestData['identifiers']!==undefined) ?  setdbList(props.requestData['identifiers'].data) : setdbList(null)
     },[props.requestData])
 
+   
     useEffect ( ()=>{
-        if(dblist!==null && dblist.length>0)
+        if (props.requestData!==null)
         {
-            const newList = dblist.map((element) => ({
-                id: element.id,
-                identifiertype: {value:element.pivot.identifier_id,label:element.name},
-                name: element.pivot.cod}));
-            setList(newList)
-            setIdentifierFound(false)
-        } else    setList([])
+            if (props.requestData.backbuttonPressed===undefined)
+            {
+                if(props.requestData!==undefined && props.requestData!==null)
+                    if(dblist!==null)
+                        if(dblist!==null && dblist.length>0)
+                        {
+                            
+                            const newList = dblist.map((element) => ({
+                                id: element.id,
+                                identifiertype: {value:element.pivot.identifier_id,label:element.name},
+                                name: element.pivot.cod}));
+                            setList(newList)
+                            setIdentifierFound(false)
+                        } else    setList([])
+            }
+        }
     },[dblist])
         
-    
+    useEffect ( ()=>{ //backbutton pressed in library registration
+        if (props.requestData!==null && props.requestData!==undefined && props.requestData.backbuttonPressed!==undefined)
+        {
+            const newList = props.requestData.identifiers_id.map((itemof)=>({
+                            id: itemof[0],
+                            identifiertype: {label: itemof[2], value:itemof[0]},
+                            name: itemof[1]}));
+            setList(newList)
+            props.requestData.library_identifiers_txt = ""
+            props.requestData.identifier_type_id = null
+            console.log(JSON.stringify(props))
+        }
+    },[])
 
     const onSubmit = (e) => {
         e.preventDefault();

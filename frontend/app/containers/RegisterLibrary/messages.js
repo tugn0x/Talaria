@@ -341,7 +341,7 @@ library_coordinates: {
 
 identifiers_id: {
   id: 'app.containers.RegisterNewLibrary.identifiers_id',
-  defaultMessage: 'Identifiers Code',
+  defaultMessage: 'Identifiers',
 }, 
 
 project_id: {
@@ -364,5 +364,6 @@ duplicate_identifer_type: {
   id: 'app.containers.RegisterNewLibrary.duplicate_identifer_type',
   defaultMessage: 'A second code for the same type cannot be added, kindly choose another identifier type',
 },
+
 
 });

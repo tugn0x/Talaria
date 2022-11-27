@@ -181,9 +181,7 @@
   "app.containers.RegisterNewLibrary.unableRetriveLocation":"Unable to retreive your library location",
   "app.containers.RegisterNewLibrary.locatingLibraryLocation":"Locating your library location...",
   "app.containers.RegisterNewLibrary.project_id":"Project",
-  
-
-
+  "app.containers.RegisterNewLibrary.identifiers_id": "Identificatori",
   "app.containers.LibraryUserPage.header": "Modifica stato utente",
   "app.containers.LibraryUserPage.user_referent": "Referente",
   "app.containers.LibraryUserPage.user_mat": "Matricola/Tessera",

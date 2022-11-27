@@ -31,7 +31,8 @@ const LibraryForm = (props) => {
                 'project_id': library.projects.data.map( ({id,name})=>{return id;}),
                 'institution_type_id': library.institution.data?library.institution.data.institution_type_id:null,
                 'institution_country_id': library.institution.data?library.institution.data.country_id:null
-            })                    
+            })
+            fields.library_identifier_add.disabled = true
         }
 
     },[library])
