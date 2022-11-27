@@ -50,6 +50,7 @@ class AdminLibraryController extends AdminApiController
                  $arr[]=['identifier_id'=>$identif[0],'cod'=>$identif[1]];
             }
             Log::info(print_r($arr,true));
+            $model->identifiers()->sync([]); //to check for other soltion, since the problem is when Sync($arr) execute, it saves duplicate data when different data passed by the array           
             $model->identifiers()->sync($arr);            
         }
 
