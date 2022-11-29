@@ -130,10 +130,7 @@
 .library_info {      
     font-size: 0.95em;
 
-    .coords,
-    .identifiers,
-    .projects,
-    .institution {
+    .coords {
         display: block;
     }
 
@@ -144,10 +141,7 @@
     .contact span {
         display: inline;
         margin-right: 2px;
-    }
-
-    & .institution,.projects,.identifiers {                
-    }
+    }    
 
     & .project-item,
     & .identifier-item {
@@ -155,6 +149,10 @@
         margin-right: 2px;
     }
 }
+
+.identifiers, .projects, .institution {
+        display: block;
+    }
 
 .library_id {
     margin-left: 5px;

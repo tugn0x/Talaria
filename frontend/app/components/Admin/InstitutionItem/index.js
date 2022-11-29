@@ -64,11 +64,8 @@ export const InstitutionInfo = (props) => {
 
     return (
         <div className={"institution_info"}>            
-            <div className='address'>
-                {data.country && <span className='country_id'>{data.country.data.name}</span>}                                
-            </div>
             {data.administrative && <div className='referent'>
-                <i className="fas fa-user"></i> {data.administrative}
+            <i className="fas fa-user"></i> {data.administrative}
             </div>}
             {(data.administrative_phone||data.administrative_email) && <div className='contact'>
                 {data.administrative_phone && <span><i className="fas fa-phone"></i> {data.administrative_phone} </span>}
@@ -119,11 +116,14 @@ const InstitutionItem = (props) => {
                 <a className="toggle-institution-info" onClick={()=>setShowInstitutionInfo(!showInstitutionInfo)} title="show extra info">      
                         <i className={`active fas ${showInstitutionInfo?'fa-caret-square-up':'fa-caret-square-down'}`}></i> 
                 </a> 
-                <div className="institution_id"><Link to={editurl(editPath,data.id)} className="active"><span>{data.id} - {data.name}</span></Link>
-                <div className='institution_type'>                
-                    <span className='badge badge-secondary'>{data.institution_type.data.name}</span>
-                </div>                          
-            
+                <div className="institution_id">
+                    <Link to={editurl(editPath,data.id)} className="active"><span>{data.id} - {data.name}</span></Link>
+                    <div className='institution_type'>                
+                        <span className='badge badge-secondary'>{data.institution_type.data.name}</span>
+                    </div>                          
+                    <div className='address'>
+                        {data.country && <span className='country_id'>{data.country.data.name}</span>}                                
+                    </div>
                 </div>
                 {showInstitutionInfo && <InstitutionInfo data={data} customClass="institution_info"/>}                                 
             </Col>

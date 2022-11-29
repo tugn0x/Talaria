@@ -132,30 +132,7 @@ export const LibraryInfo = (props) => {
             </div>}
             {data.ill_referent_name && <div className='referent'>
                 <i className="fas fa-user"></i> {data.ill_referent_name}
-            </div>}
-            <div className='institution'>
-                <i className="fas fa-building"></i> 
-                <span className='badge badge-secondary'>{data.institution.data.name} {data.institution.data.status!==1? <span className='text-danger'><i className="fas fa-exclamation-triangle"></i></span>:''}</span>                
-            </div>
-                           
-            {data.projects && data.projects.data && data.projects.data.length>0 && 
-                    <span className='projects'>
-                        <i className="fas fa-project-diagram"></i>                                        
-                        {data.projects.data.map(prj => 
-                        <span key={prj.id} className="project-item badge badge-secondary text-white">
-                            {prj.name}
-                        </span>)}                                        
-                    </span>                                    
-            }
-            {data.identifiers && data.identifiers.data && data.identifiers.data.length>0 && 
-                <span className='identifiers'>                    
-                    <i className="fas fa-key"></i>                     
-                    {data.identifiers.data.map(ident => 
-                    <span key={ident.id} className="identifier-item badge badge-info text-white">
-                        {ident.name}: {ident.pivot.cod}
-                    </span>)}                                    
-                </span>
-            }                                                                      
+            </div>}                                                                        
         </div>
     )
 }
@@ -207,6 +184,28 @@ const LibraryItem = (props) => {
                     </a> 
                     <Link to={editurl(editPath,data.id)} className="active"><span>{data.id} - {data.name}</span></Link>
                 </div>
+                {data.institution && <div className='institution'>
+                    <i className="fas fa-building"></i> 
+                    <span className='badge badge-secondary'>{data.institution.data.name} {data.institution.data.status!==1? <span className='text-danger'><i className="fas fa-exclamation-triangle"></i></span>:''}</span>                
+                </div>}                            
+                {data.projects && data.projects.data && data.projects.data.length>0 && 
+                        <span className='projects'>
+                            <i className="fas fa-project-diagram"></i>                                        
+                            {data.projects.data.map(prj => 
+                            <span key={prj.id} className="project-item badge badge-secondary text-white">
+                                {prj.name}
+                            </span>)}                                        
+                        </span>                                    
+                }
+                {data.identifiers && data.identifiers.data && data.identifiers.data.length>0 && 
+                    <span className='identifiers'>                    
+                        <i className="fas fa-key"></i>                     
+                        {data.identifiers.data.map(ident => 
+                        <span key={ident.id} className="identifier-item badge badge-info text-white">
+                            {ident.name}: {ident.pivot.cod}
+                        </span>)}                                    
+                    </span>
+                }          
                 {showLibraryInfo && <LibraryInfo data={data} editPath={editPath} customClass="library_info"/>}                                 
             </Col>
             <Col sm={3}>                                                      
