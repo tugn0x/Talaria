@@ -52,10 +52,10 @@ const ReferenceCitation = props => {
             {data.geographic_area && data.material_type === 4 &&            
                 <span className="geographic_area">{intl.formatMessage({id: "app.references.geographic_area"})}<span> {data.geographic_area}</span></span>
             }
-            <a className="toggle-extra-link" onClick={()=>setShowExtra(!showExtra)} title="show extra info">      
+            {/*<a className="toggle-extra-link" onClick={()=>setShowExtra(!showExtra)} title="show extra info">      
                     <i className={`fas ${showExtra?'fa-caret-square-up':'fa-caret-square-down'}`}></i> 
-            </a>            
-            {showExtra && <div className='extra'>
+            </a>*/}            
+            {/*showExtra && */ <div className='extra'>
                 <div className='identifiers'>
                     {(data.isbn && (data.material_type === 2 || data.material_type=== 4 ) )&& 
                         <span className="isbn">{intl.formatMessage({id: "app.references.isbn"})} <span>{data.isbn}</span></span>

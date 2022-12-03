@@ -45,22 +45,22 @@ const routes = [
       { path: '/new', icon: 'plus', name: `InstitutionNew`, component: InstitutionPage,  url: `/institutions/new`, sidebar: true,order:2},            
     ]
   },
-   { path: '/consortiums',  name: `Consortiums`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],
+  /*{ path: '/consortiums',  name: `Consortiums`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],
     children: [
       { path: '/', exact: true, icon: 'fas fa-building', name: `Consortiums`, url: `/consortiums`, component: Fake, sidebar:true},
       ]
-  },
+  },*/
   { path: '/projects',  name: `Projects`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],
     children: [
-      { path: '/', exact: true, icon: 'fas fa-project-diagram',name: `Projects`, url: `/projects`, component: ProjectsListPage,sidebar:true},
-      { path: '/project/new', icon: 'plus', name: `ProjectNew`, component: ProjectPage,  url: `/projects/project/new`, sidebar: true},
-      { path: '/project/:id?', name: `Projects`, component: ProjectPage, },
-      { path: '/:page?', exact: true, name: `Projects`, url: `/projects`, component: ProjectsListPage},
+      { path: '/', exact: true, icon: 'fas fa-project-diagram',name: `Projects`, url: `/projects`, component: Fake /*ProjectsListPage*/,sidebar:true},
+      { path: '/project/new', icon: 'plus', name: `ProjectNew`, component: Fake /*ProjectPage*/,  url: `/projects/project/new`, sidebar: true},
+      { path: '/project/:id?', name: `Projects`, component: Fake /*ProjectPage*/, },
+      { path: '/:page?', exact: true, name: `Projects`, url: `/projects`, component: Fake /*ProjectsListPage*/},
     ]
   },  
   { path: '/subscriptions',  name: `Subscriptions`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],sidebar: true,
     children: [      
-      { path: '/settings', exact: true,icon: 'fas fa-cog',name: `SubscriptionsSettings`, url:'/subscriptions/settings', component: Fake, sidebar: true, order:1},                 
+      { path: '/', exact: true,icon: 'fas fa-cog',name: `SubscriptionsSettings`, url:'/subscriptions/', component: Fake, sidebar: true, order:1},                 
       { path: '/libraries', exact: true,icon: 'fas fa-file-contract',name: `LibrariesSubscriptionsList`, url:'/subscriptions/libraries', component: Fake, sidebar: true, order:2},                 
       { path: '/institutions', exact: true,icon: 'fas fa-file-contract',name: `InstitutionsSubscriptionsList` , url:'/subscriptions/institutions', component: Fake, sidebar: true, order:3},                 
     ]
