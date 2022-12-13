@@ -47,6 +47,13 @@ class LibraryPolicy extends BasePolicy
         return $this->canManage($user,$model);
     }
 
+
+    public function renewSubscription(User $user, Model $model)
+    {
+        //il manager puo' rinnovare la sottoscrizione della sua biblio        
+        return $this->canManage($user,$model);
+    }
+
     public function manage(User $user,Model $model)
     {
         //return $this->canManage($user,$model);

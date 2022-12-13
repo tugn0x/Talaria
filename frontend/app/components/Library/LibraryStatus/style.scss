@@ -1,0 +1,15 @@
+@import '../../../scss/variables';
+
+.projects,
+.identifiers,
+.institution {
+
+    & i {
+        margin-right: 5px;
+    }
+
+    & .project-item,
+    .identifier-item {
+        margin-right: 2px;
+    }
+}

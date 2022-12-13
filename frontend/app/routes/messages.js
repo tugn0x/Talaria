@@ -160,6 +160,10 @@ export default defineMessages({
         id: `${scope}.LibraryProfile`,
         defaultMessage: 'Profile',
     },
+    LibraryStatus: {
+        id: `${scope}.LibraryStatus`,
+        defaultMessage: 'Status',
+    },
     Lending: {
         id: `${scope}.Lending`,
         defaultMessage: 'Lending',
@@ -177,6 +181,10 @@ export default defineMessages({
         defaultMessage: 'Edit Pickup',
     },
     
+    Subscriptions: {
+        id: `${scope}.Subscriptions`,
+        defaultMessage: 'Subscriptions',
+    },
 
     Operators: {
         id: `${scope}.Operators`,
