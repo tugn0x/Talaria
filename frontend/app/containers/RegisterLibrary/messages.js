@@ -258,7 +258,7 @@ lat: {
 },
 
 lon: {
-  id: 'app.libraries.long',
+  id: 'app.libraries.lon',
   defaultMessage: 'Longtitude',
 },
 
