@@ -159,14 +159,17 @@ const CustomForm = (props) => {
     useEffect ( ()=>{ //backbutton pressed in library registration
         if (props.requestData!==null && props.requestData!==undefined && props.requestData.backbuttonPressed!==undefined)
         {
-            const newList = props.requestData.identifiers_id.map((itemof)=>({
-                            id: itemof[0],
-                            identifiertype: {label: itemof[2], value:itemof[0]},
-                            name: itemof[1]}));
-            setList(newList)
-            props.requestData.library_identifiers_txt = ""
-            props.requestData.identifier_type_id = null
-            console.log(JSON.stringify(props))
+            if (props.requestData.identifiers_id!==undefined)
+            {
+                const newList = props.requestData.identifiers_id.map((itemof)=>({
+                                id: itemof[0],
+                                identifiertype: {label: itemof[2], value:itemof[0]},
+                                name: itemof[1]}));
+                setList(newList)
+                props.requestData.library_identifiers_txt = ""
+                props.requestData.identifier_type_id = null
+                console.log(JSON.stringify(props))
+            }
         }
     },[])
 

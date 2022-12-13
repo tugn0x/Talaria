@@ -184,11 +184,14 @@ const RegisterLibrary = (props) => {
     
 
     const onBackPressed = (field_name,value,newList) => {
-        fields.library_identifier_list.hidden = true
         setData({...data, 'backbuttonPressed': true})
         fields.library_identifier_list.hidden = false
         setCurrentStep(parseInt(1))
         fields.library_identifier_add.disabled = true
+        if (data.identifiers_id!==undefined && data.identifiers_id.length>0)
+            fields.library_identifier_list.hidden = false
+        else
+            fields.library_identifier_list.hidden = true 
     }
     
     // Aggiorna dati nei campi *handle change*
@@ -404,9 +407,6 @@ const RegisterLibrary = (props) => {
                       </div>
                     </div>
                 </div>
-
-
-
                 <div class="vertical-center" id="noprint"> 
                     <Button onClick={onBackPressed} className='backButton'> 
                         {intl.formatMessage(globalMessages.back)} 
