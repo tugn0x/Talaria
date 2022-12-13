@@ -30,6 +30,9 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   REQUEST_GET_LIBRARY_DESKS_SUCCESS,
   REQUEST_GET_LIBRARY_DESK,
   REQUEST_GET_LIBRARY_DESK_SUCCESS,
+  REQUEST_GET_COUNTRIES_OPTIONLIST, REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS,
+  REQUEST_LIBRARYSUBJECT_OPTIONLIST, REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS, 
+  REQUEST_GET_INSTITUTIONS_OPTIONLIST,REQUEST_GET_INSTITUTIONS_OPTIONLIST_SUCCESS,
   UPLOAD_REQUEST,
   UPLOAD_SUCCESS,
   UPLOAD_FAILURE,
@@ -73,6 +76,9 @@ export const initialState = {
     data:[],
     pagination: {}
   },
+  librarySubjectOptionList: [],
+  countriesOptionList: [],
+  institutionsOptionList: [],
   error: null,
   user: {},
 };
@@ -156,6 +162,17 @@ const libraryReducer = (state = initialState, action) =>
         draft.loading = true;
         draft.error = action.error;
         break;
+
+        case REQUEST_GET_INSTITUTIONS_OPTIONLIST:
+          draft.error = action.error;
+          break;
+        case REQUEST_GET_INSTITUTIONS_OPTIONLIST_SUCCESS:
+          draft.error = initialState.error;
+          draft.institutionsOptionList = action.result.map(item => { return {value: item.id, label: item.name} } );        
+          break;
+
+
+
        case REQUEST_GET_LIBRARIES_LIST:
         draft.libraryOptionList.loading=true
         draft.error = action.error;
@@ -283,6 +300,21 @@ const libraryReducer = (state = initialState, action) =>
         draft.lendingsList.data = action.result.data;
         draft.lendingsList.pagination = action.result.meta.pagination
         break;          
+
+        case REQUEST_GET_COUNTRIES_OPTIONLIST:
+          draft.error = action.error;
+          break;
+        case REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS:
+          draft.error = initialState.error;
+          draft.countriesOptionList = action.result.sort((a, b) => { return (a.id > b.id) ? 1 : -1 }).map(item => { return {value: item.id, label: item.name} } );
+          break;
+        case REQUEST_LIBRARYSUBJECT_OPTIONLIST:
+          draft.error = action.error;
+          break;
+        case REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS:
+          draft.error = initialState.error;
+          draft.librarySubjectOptionList = action.result.sort((a, b) => { return (a.id > b.id) ? 1 : -1 }).map(item => { return {value: item.id, label: item.name} } );
+          break;  
 
       case UPLOAD_PROGRESS:
           draft.loading = false;

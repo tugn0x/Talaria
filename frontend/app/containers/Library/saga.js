@@ -30,6 +30,9 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER, REQUEST_DELETE_USER,
       REQUEST_GET_LIBRARY_DESKS_OPTIONLIST,
       REQUEST_GET_LIBRARY_DESKS,
       REQUEST_GET_LIBRARY_DESK,
+      REQUEST_GET_COUNTRIES_OPTIONLIST, 
+      REQUEST_LIBRARYSUBJECT_OPTIONLIST,      
+      REQUEST_GET_INSTITUTIONS_OPTIONLIST,
       UPLOAD_REQUEST
     } from './constants';
 import {
@@ -58,6 +61,9 @@ import {
   requestGetLibraryDesksOptionListSuccess,
   requestPickupListSuccess,
   requestPickupSuccess,
+  requestGetCountriesOptionListSuccess,
+  requestGetInstitutionsOptionListSuccess,
+  requestLibrarySubjectOptionListSuccess,
   uploadSuccess
 } from './actions';
 
@@ -85,7 +91,10 @@ import {getLibraryUsersList, updateLibraryUser, deleteLibraryUser, createUser,
     getLibraryDeliveriesOptionList,
     getLibraryDeliveries,
     getLibraryDelivery,
-    fileuploadRequest
+    fileuploadRequest,
+    getCountriesOptionsList,
+    getLibrariesSubjects,        
+    getInstitutionsOptionList,
 } from '../../utils/api'    
 
 import {getOA,getPubmedReferenceByPMID,getFindISSN,getFindISBN, getFindISSN_ACNP} from '../../utils/apiExternal';
@@ -192,8 +201,8 @@ export function* requestPostLibrarySaga(action) {
   };
   try {
     const request = yield call(createLibrary, options);
-    yield call(requestGetLibrariesListSaga);
-    yield put(push("/library/libraries"));
+    yield call(requestGetLibrarySaga,{id: action.request.id});
+    yield put(push("/library/"+action.request.id+"/manage"));
     yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
@@ -221,13 +230,27 @@ export function* requestUpdateLibrarySaga(action) {
   };
   try {
     const request = yield call(updateLibrary, options);
-   // yield call(requestGetLibrariesListSaga);
-    yield put(push("/library/"+action.request.id));
+    yield call(requestGetLibrarySaga,{id: action.request.id});
+    yield put(push("/library/"+action.request.id+"/manage"));
     yield call(() => toast.success(action.message))
   } catch(e) {
     yield put(requestError(e.message));
   }
 }
+
+export function* requestGetInstitutionsOptionListSaga(action) {
+  const options = {
+    method: 'get',
+    query: action.request ? action.request : ""
+  }
+  try {
+    const request = yield call(getInstitutionsOptionList, options);
+    yield put(requestGetInstitutionsOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 
 export function* requestGetLibrariesListSaga(action = {}) {
   const options = {
@@ -749,6 +772,33 @@ export function* uploadFileSaga(action) {
   }
 }
 
+export function* requestLibrarySubjectOptionListSaga(action) {
+  const options = {
+    method: 'get',
+    query: action.request ? action.request : ""
+  }
+  try {
+    const request = yield call(getLibrariesSubjects, options);
+    yield put(requestLibrarySubjectOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+export function* requestGetCountriesOptionListSaga(action) {
+  const options = {
+    method: 'get',
+    query: action.request
+  }
+  try {
+    
+    const request = yield call(getCountriesOptionsList, options);
+    yield put(requestGetCountriesOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
 export function* requestFindISSNISBNsaga(action) {
   
   //data { material_type: 1..5, issn:xxx, title:xxxx, isbn:xxxx}
@@ -840,6 +890,13 @@ export default function* librarySaga() {
   //yield takeLatest(REQUEST_CHANGE_LENDING_ARCHIVED,requestChangeLendingArchivedSaga);
 
   yield takeLatest(REQUEST_ACCEPT_ALLLENDER, requestAcceptAllLenderLendingSaga)
+
+  yield takeLatest(REQUEST_LIBRARYSUBJECT_OPTIONLIST, requestLibrarySubjectOptionListSaga);
+  yield takeLatest(REQUEST_GET_COUNTRIES_OPTIONLIST, requestGetCountriesOptionListSaga);
+
+  yield takeLatest(REQUEST_GET_INSTITUTIONS_OPTIONLIST, requestGetInstitutionsOptionListSaga);
+
+
 
   yield takeLatest(REQUEST_GET_ISSN_ISBN,requestFindISSNISBNsaga);
   yield takeEvery(REQUEST_FIND_UPDATE_BORROWING_OA,findUpdateOABorrowingSaga);

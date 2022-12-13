@@ -33,7 +33,7 @@ const MyLibraryForm = (props) => {
                     //searchOptionList={searches}
                     //usersOptionList={usersOptionList}
                     //granted_permissions={ library ? library.granted_permissions : [] }
-                    resources={resources}
+                    //resources={resources}
                 />
             // </SimpleForm>
     )
