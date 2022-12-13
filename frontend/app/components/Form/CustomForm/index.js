@@ -136,7 +136,7 @@ const CustomForm = (props) => {
 
    
     useEffect ( ()=>{
-        if (props.requestData!==null)
+        if (props.requestData)
         {
             if (props.requestData.backbuttonPressed===undefined)
             {
@@ -157,7 +157,7 @@ const CustomForm = (props) => {
     },[dblist])
         
     useEffect ( ()=>{ //backbutton pressed in library registration
-        if (props.requestData!==null && props.requestData!==undefined && props.requestData.backbuttonPressed!==undefined)
+        if (props.requestData && props.requestData!==undefined && props.requestData.backbuttonPressed!==undefined)
         {
             if (props.requestData.identifiers_id!==undefined)
             {
