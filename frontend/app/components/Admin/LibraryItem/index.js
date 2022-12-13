@@ -186,7 +186,7 @@ const LibraryItem = (props) => {
                 </div>
                 {data.institution && <div className='institution'>
                     <i className="fas fa-building"></i> 
-                    <span className='badge badge-secondary'>{data.institution.data.name} {data.institution.data.status!==1? <span className='text-danger'><i className="fas fa-exclamation-triangle"></i></span>:''}</span>                
+                    <span className='badge badge-secondary'>{data.institution.data.name} {data.institution.data.status!==1? <span className='text-danger'><i className="fas fa-exclamation-triangle"></i></span>:''} ({data.institution.data.institution_type.data.name})</span>                
                 </div>}                            
                 {data.projects && data.projects.data && data.projects.data.length>0 && 
                         <span className='projects'>
