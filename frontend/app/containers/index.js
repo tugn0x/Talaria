@@ -3,8 +3,6 @@ import App from "./App"
 
 import HomePage from "./HomePage/Loadable"
 import LanguageProvider from "./LanguageProvider"
-import NotFoundPage from "./NotFoundPage/Loadable"
-
 
 /*
 USER AUTHENTICATION
@@ -20,7 +18,9 @@ import UserPage from "./User/UserPage/Loadable"
 import PatronPage from "./Patron/PatronPage/Loadable"
 import AdminPage from "./Admin/AdminPage/Loadable"
 import RegisterLibraryPage from './RegisterLibrary'
-import NotAuthorizedPage from './NotAuthorizedPage';
+import NotAuthorizedPage from './NotAuthorizedPage/Loadable';
+import NotFoundPage from './NotFoundPage/Loadable';
+
 /*
 LIBRARY STUFFS
  */
@@ -34,7 +34,6 @@ export {
   LanguageProvider,
   NotFoundPage,
   NotAuthorizedPage,
-
   AuthProvider,
   ForgotPassword,
   IdpPage,
@@ -46,6 +45,6 @@ export {
   AdminPage,
   PatronPage,
   LibraryPage,
-  RegisterLibraryPage
+  RegisterLibraryPage,
 }
 

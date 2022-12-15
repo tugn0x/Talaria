@@ -10,8 +10,8 @@ import { FormattedMessage } from 'react-intl';
 import {ButtonBack, BasePage} from 'components'
 import messages from './messages';
 
-export default function NotFound(props) {
-  console.log("NotFound", props)
+export default function NotFoundPage(props) {
+  console.log("NotFoundPage", props)
   
   return (
     <BasePage {...props}>

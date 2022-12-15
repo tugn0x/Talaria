@@ -44,8 +44,9 @@ export const fields = {
         options: "institution_id",
         order: 3,
         // selectedOption: "institution_type_id"
-
     },
+
+
     subject_id: {
         type: "custom-select",
         required: true,
@@ -122,22 +123,26 @@ export const fields = {
     ill_supply_conditions: {
         type: "textarea",
         name: "ill_supply_conditions",
-        width: "col-sm-6"
+        width: "col-sm-6",
+        disabled: true,
     },
     ill_imbalance: {
         type: "text",
         name: "ill_imbalance",
+        disabled: true,
         width: "col-sm-6"
     },
     ill_cost: {
         type: "number",
         name: "ill_cost",
-        width: "col-sm-6"
+        width: "col-sm-6",
+        disabled: true,
     },
     ill_user_cost: {
         type: "number",
         name: "ill_user_cost",
-        width: "col-sm-6"
+        width: "col-sm-6",
+        disabled: true,
     },
     ill_susp_date_start: {
         type: "date",

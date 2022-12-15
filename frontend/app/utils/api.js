@@ -687,6 +687,7 @@ export const getInstitutionsList = (options) => {
   options = getOption(options);
   return request(`${BASE_URL}/api/v1/institutions/?page=${page}&q=${query}`, options)
 };
+*/
 
 export const getInstitutionsOptionList = (options) => {
   options = getOption(options);
@@ -694,7 +695,6 @@ export const getInstitutionsOptionList = (options) => {
   return request(`${BASE_URL}/api/v1/institutions/option-items?label=name&q=${query}`, options)
 };
 
-*/
 
 export const getInstitutionTypesList = (options) => {
   const page = options.page;

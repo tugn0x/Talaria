@@ -17,7 +17,7 @@ Route::group([
     ], function () {    
         
         Route::get('', 'AdminLibraryController@index')->name('index');    
-        Route::post('', 'AdminLibraryController@create')->name('create');
+        //Route::post('', 'AdminLibraryController@create')->name('create');
         Route::delete('{id}', 'AdminLibraryController@delete')->where('id', '[0-9]+')->name('delete'); 
         Route::put('{id}/changestatus', 'AdminLibraryController@changeStatus')->where('id', '[0-9]+')->name('changeStatus');
         Route::get('{id}', 'AdminLibraryController@show')->where('id', '[0-9]+')->name('show');        

@@ -1,8 +1,8 @@
-import UserPage from 'containers/Library/UserPage/Loadable';
-import UsersListPage from 'containers/Library/UsersListPage/Loadable';
-import SubRouteSwitch from 'components/SubRouteSwitch';
-import ManageLibraryPage from 'containers/Library/ManageLibraryPage/Loadable';
-import Fake from 'components/Fake';
+import UserPage from '../containers/Library/UserPage/Loadable';
+import UsersListPage from '../containers/Library/UsersListPage/Loadable';
+import SubRouteSwitch from '../components/SubRouteSwitch';
+import ManageLibraryPage from '../containers/Library/ManageLibraryPage/Loadable';
+import Fake from '../components/Fake';
 import BorrowingPage from '../containers/Library/BorrowingPage/Loadable'
 import DeliveryPage from '../containers/Library/DeliveryPage/Loadable'
 import BorrowingRequestPage from '../containers/Library/BorrowingRequestPage/Loadable'
@@ -11,13 +11,13 @@ import PickupsPage from '../containers/Library/PickupsPage/Loadable';
 import PickupPage from '../containers/Library/PickupPage/Loadable';
 import LendingPage from '../containers/Library/LendingPage';
 import LendingRequestPage from '../containers/Library/LendingRequestPage';
-
+import LibraryStatusPage from '../containers/Library/LibraryStatusPage/Loadable';
+ 
 const patrons_enabled=(process.env.MANAGE_PATRONS && process.env.MANAGE_PATRONS=="true")?true:false;
 
 const hidePatronRoutes = () =>{
     return !patrons_enabled;    
 }
-
 
 const routes = [
   /*
@@ -29,41 +29,43 @@ const routes = [
    */
 
   {
-    path: '/manage', name: `MyLibrary`, header: true, component: SubRouteSwitch, permissions: ['manage','borrow','lend','manage-users'], resource: {type: 'libraries', key: 'library_id',},
-    children: [
-      //TODO { path: '/status', icon: 'info-circle', exact: true, name: `Status`, component: Fake, url: '/manage/status',permissions: ['manage'], sidebar: true, order:1},
-      //TODO { path: '/subscription', icon: 'info-circle', exact: true, name: `Status`, component: Fake, url: '/manage/status',permissions: ['manage'], sidebar: true, order:1},
-      { path: '/profile', icon: 'info-circle', exact: true, name: `LibraryProfile`, component: ManageLibraryPage, url: '/manage/profile',permissions: ['manage'], sidebar: true, order:1},      
-      // vari pezzi dei dati della biblio (dati servizio, dati anag, ...)
-      { path: '/service', icon: 'cog',exact: true, name: `LibraryServices`, component: Fake,url: '/manage/service',permissions: ['manage'],sidebar: true, order:2  },
-      { path: '/linkingservices', icon: 'link', name: `LibraryLinkingServices`, component: Fake,url: '/manage/linkingservices',permissions: ['manage'],sidebar: true, order:2  },
-      { path: '/tags', icon:'tag', exact: true, name: `Tags`, url: '/manage/tags', component: TagsPage,permissions: ['manage','borrow','lend'],sidebar: true, order:3 },
-      { path: '/operators', icon: 'user-cog', name: `Operators`, component: Fake,url: '/manage/operators', permissions: ['manage'],sidebar: true, order:5 },
-      { path: '/departments', icon: 'building',  name: `LibraryDepartments`, component: Fake,url: '/manage/departments',permissions: ['manage','manage-users'], hide: hidePatronRoutes(),sidebar: true, order:4  },
-      { path: '/pickup',  exact: true,icon: 'truck',name: `Pickup`, component: PickupsPage,url: '/manage/pickup', permissions: ['manage'], hide: hidePatronRoutes(),sidebar: true, order:5 },
-      { path: '/pickup/:id?/:op?', exact: true, name: `PickupUpdate`, component: PickupPage, permissions: ['manage'], sidebar: false},      
-      { path: '/catalogs', icon: 'database', name: `Catalogs`, component: Fake,url: '/manage/catalogs', permissions: ['manage'],sidebar: true, order:5 },
-      { path: '/protocols', icon: 'network-wired', name: `Protocols`, component: Fake,url: '/manage/protocols', permissions: ['manage'],sidebar: true, order:5 },
- 
+    path: '/manage', name: `MyLibrary`, header: true, component: SubRouteSwitch, permissions: ['manage','borrow','lend','manage-users','deliver'],resource: {type: 'libraries', key: 'library_id',},
+    children: [      
+      { path: '/', icon: 'info-circle', exact: true, name: `LibraryStatus`, url: '/manage/', component: LibraryStatusPage, permissions: ['manage','borrow','lend','manage-users','deliver'], sidebar: true, order:1},            
+      { path: '/edit', icon: 'edit', exact: true, name: `LibraryProfile`,  url:'/manage/edit', component: ManageLibraryPage, permissions: ['manage'], sidebar:true,order:2},      
+      /*{ path: '/subscriptions', icon: 'file-contract', exact: true, name: `Subscriptions`, component: Fake, url: '/manage/subscriptions',permissions: ['manage'], sidebar: true, order:2},      
+      { path: '/subscriptions/renew', icon: 'calendar', exact: true, name: `RenewSubscription`, component: Fake,permissions: ['manage']},      
+      { path: '/operators', icon: 'user-cog', exact: true, name: `Operators`, component: Fake,url: '/manage/operators', permissions: ['manage'],sidebar: true, order:3 },      
+      { path: '/service', icon: 'cog',exact: true, name: `LibraryServices`, component: Fake,url: '/manage/service',permissions: ['manage'],sidebar: true, order:4  },      
+      { path: '/linkingservices', icon: 'link', exact: true, name: `LibraryLinkingServices`, component: Fake,url: '/manage/linkingservices',permissions: ['manage'],sidebar: true, order:5  },
+      */
+      { path: '/tags', icon:'tag', exact: true, name: `Tags`, url: '/manage/tags', component: TagsPage,permissions: ['manage','borrow','lend'],sidebar: true, order:6 },
+      //{ path: '/departments', icon: 'building',  name: `LibraryDepartments`, component: Fake,url: '/manage/departments',permissions: ['manage','manage-users'], hide: hidePatronRoutes(),sidebar: true, order:7  },
+      { path: '/pickup',  exact: true,icon: 'truck',name: `Pickup`, component: PickupsPage,url: '/manage/pickup', permissions: ['manage'], hide: hidePatronRoutes(),sidebar: true, order:8 },
+      { path: '/pickup/:id?/:op?', exact: true, name: `PickupUpdate`, component: PickupPage, permissions: ['manage'], sidebar: false},            
+      /*{ path: '/catalogs', icon: 'database', exact: true, name: `Catalogs`, component: Fake,url: '/manage/catalogs', permissions: ['manage'],sidebar: true, order:9 },
+      { path: '/protocols', icon: 'network-wired', exact: true, name: `Protocols`, component: Fake,url: '/manage/protocols', permissions: ['manage'],sidebar: true, order:10 },                      
+      */
      ]
   },
   {
     path: '/borrowing', name: `Borrowing`, header: true, component: SubRouteSwitch, permissions: ['manage','borrow'], resource: {type: 'libraries', key: 'library_id',},
-    children: [
-      /*{ path: '', exact: true, name: `PendingRequests`, component: Fake,sidebar: true, order:1 },*/
-      { path: '/', icon: "share", exact: true, name: `PendingRequests`, component: BorrowingPage,url: '/borrowing',sidebar: true, order:2 }, 
+    children: [      
+      { path: '/tags', icon:'tag', exact: true, name: `Tags`, url: '/borrowing/tags', component: TagsPage,permissions: ['manage','borrow','lend'],sidebar: true, order:4 },
+      { path: '/', icon: "share", exact: true, name: `PendingRequests`, component: BorrowingPage,url: '/borrowing',sidebar: true, order:2 },       
       { path: '/archive', icon: "hdd", name: `ArchivedRequests`, component: BorrowingPage,url: '/borrowing/archive',sidebar: true, order:3  },
       { path: '/new', icon: "plus", exact: true, name: `RequestNew`, component: BorrowingRequestPage,url: '/borrowing/new',sidebar: true, order:1},   
-      { path: '/:id?/:op?', exact: true, name: `RequestUpdate`, component: BorrowingRequestPage, sidebar: false},      
+      { path: '/:id?/:op?', exact: true, name: `RequestUpdate`, component: BorrowingRequestPage, sidebar: false},            
      ]
   },
   {
     path: '/lending', name: `Lending`, header: true, component: SubRouteSwitch, permissions: ['manage','lend'], resource: {type: 'libraries', key: 'library_id',},
     children: [
+      { path: '/tags', icon:'tag', exact: true, name: `Tags`, url: '/lending/tags', component: TagsPage,permissions: ['manage','borrow','lend'],sidebar: true, order:4 },
       { path: '/', icon: "share", exact: true, name: `PendingRequests`, component: LendingPage,url: '/lending',sidebar: true, order:1}, 
       { path: '/archive', icon: "hdd", name: `ArchivedRequests`, component: LendingPage,url: '/lending/archive',sidebar: true, order:3 },
       { path: '/allrequests', icon: "cloud", name: `AllRequests`, component: LendingPage,url: '/lending/allrequests',sidebar: true, order:2 },
-      { path: '/:id?/:op?', exact: true, name: `RequestUpdate`, component: LendingRequestPage, sidebar: false},      
+      { path: '/:id?/:op?', exact: true, name: `RequestUpdate`, component: LendingRequestPage, sidebar: false},            
     ]
   },
   {

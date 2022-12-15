@@ -37,27 +37,49 @@ function LibraryPage(props) {
   }, [match.params.library_id])
 
 
-  //filter library dashboard menu/route based on profile type (1=borrow, 2=borrow+lending)
-  //TODO: filtrare route in base a STATO della biblio (es: se è disattivata nascondere tutto tranne /manage/stato o /manage/profile)
   useEffect(() => { 
-    console.log("libraryRoutes routes",libroutes)
-    let libraryRoutes=libroutes               
-    
-    console.log("libraryRoutes PRIMA",libraryRoutes)          
-
-      if(library.library.profile_type==1) //only borrowing
-      {
-        //remove lending
-        libraryRoutes=libraryRoutes.filter( (route)=> {        
-          return route.path!="/lending" 
-        });                                     
-      }              
+        
+    if(library && library.library.id>0) 
+    {    
+      let libraryRoutes=libroutes               
       
-      setFilteredRoutes(libraryRoutes);            
-      setIsMounted(true)
+      console.log("libraryRoutes PRIMA",libraryRoutes)          
+      console.log("libraryRoutes CHECK",library.library.status )          
+
+        //filter library dashboard menu/route based on profile type (1=borrow, 2=borrow+lending)  
+        if(library.library.profile_type==1) //only borrowing 
+        {
+          //remove lending
+          libraryRoutes=libraryRoutes.filter( (route)=> {        
+            return route.path!="/lending" 
+          });                                     
+        }     
+
+        //filter library dashboard menu/route based on status + block route
+        //BUG: Questo filtro non funziona xke' arriva qui che library è null!!!
+        if(library.library.status!=1 && library.library.status!=2) //enabled or renewing
+        {
+          //remove all but not MyLibrary menu-item        
+          libraryRoutes=libraryRoutes.filter( (route)=> {        
+            return route.name=="MyLibrary" 
+          });                    
+
+          //remove all MyLibrary sub-items except LibraryStatus
+          if(libraryRoutes.length==1 && libraryRoutes[0].name=="MyLibrary") 
+            libraryRoutes[0].children=libraryRoutes[0].children.filter( (child) => {
+              return (child.name=="LibraryStatus"||child.name=="Subscriptions")
+            })
+          
+        }
+
+        //console.log("libraryRoutes DOPO",libraryRoutes)      
+        
+        setIsMounted(true)    
+        setFilteredRoutes(libraryRoutes);                 
+    
+      }  
     
   }, [library && library.library.id])
-
   
 
   

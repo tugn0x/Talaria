@@ -25,11 +25,14 @@ function BasePage(props) {
   };
 
   const mapRoutes = (routes, auth, resource, prefix) => {
-    // console.log(props.match)
+    // console.log("mapRoutes",routes,auth,resource)
     // console.log(prefix, 'prefix')
     return filterRoutes(routes, auth, resource).map((route)=>{
+      //console.log("mapRoutes -> filterRoutes",route,auth,resource)
       const url = route.url ? generatePath(props.match.path+route.url, props.match.params) : generatePath(props.match.path+route.path, props.match.params)
-      
+      //console.log("children route",route)
+      //console.log("children route children",route.children)
+      //console.log("children route resource",resource)
       return {
         ...route,
         path: generatePath(`${prefix+props.match.path+route.path}`, props.match.params),
@@ -56,7 +59,8 @@ function BasePage(props) {
 
   //route da visualizzare nel menu (filtrate in base al ruolo/permessi sulla risorsa)
   const lightRoutes = props.routes && mapRoutes(props.routes, props.auth, props.resource, '')
-  
+  //console.log("lightRoutes",lightRoutes)
+  //console.log("lightRoutes route",props.routes)
   const closeSideBar = () => {
     const body = document.querySelector('body')
     if(body.classList.contains('sidebar-show')){
@@ -102,7 +106,7 @@ function BasePage(props) {
                           location={props.location}/>
                       </Col>
                   }
-                  <Col md={windowSize === 'desktop' ? 9 : 12}>                     
+                  <Col md={windowSize === 'desktop' ? 9 : 12}>         
                     <Switch>
                       {props.routes && 
                       /*props.routes.filter((route)=>{

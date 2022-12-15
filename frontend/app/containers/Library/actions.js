@@ -44,12 +44,18 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
    REQUEST_GET_LIBRARY_DESKS_SUCCESS,
    REQUEST_GET_LIBRARY_DESK,
    REQUEST_GET_LIBRARY_DESK_SUCCESS,
+   REQUEST_GET_COUNTRIES_OPTIONLIST, REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS,
+   REQUEST_LIBRARYSUBJECT_OPTIONLIST, REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS,
+   REQUEST_GET_INSTITUTIONS_OPTIONLIST,
+  REQUEST_GET_INSTITUTIONS_OPTIONLIST_SUCCESS,
    UPLOAD_REQUEST,
    UPLOAD_PROGRESS,
    UPLOAD_FAILURE,
    UPLOAD_SUCCESS
    
   } from "./constants";
+
+
 
 export function defaultAction() {
   return {
@@ -165,6 +171,21 @@ export function requestUpdateLibrary(request, message) {
     type: REQUEST_UPDATE_LIBRARY,
     request,
     message
+  };
+}
+
+
+export function requestGetInstitutionsOptionList(request) {
+  return {
+    type: REQUEST_GET_INSTITUTIONS_OPTIONLIST,
+    request
+  };
+}
+
+export function requestGetInstitutionsOptionListSuccess(result) {
+  return {
+    type: REQUEST_GET_INSTITUTIONS_OPTIONLIST_SUCCESS,
+    result
   };
 }
 
@@ -597,6 +618,34 @@ export function requestFindISSNISBNFail (result) {
     result
   };
 }
+
+export function requestGetCountriesOptionList(request) {
+  return {
+      type: REQUEST_GET_COUNTRIES_OPTIONLIST,
+      request
+    };
+  }
+  
+  export function requestGetCountriesOptionListSuccess(result) {
+    return {
+      type: REQUEST_GET_COUNTRIES_OPTIONLIST_SUCCESS,
+      result
+    };
+  }
+
+  export function requestLibrarySubjectOptionList(request) {
+    return {
+      type: REQUEST_LIBRARYSUBJECT_OPTIONLIST,
+      request
+    };
+  }
+  
+  export function requestLibrarySubjectOptionListSuccess(result) {
+    return {
+      type: REQUEST_LIBRARYSUBJECT_OPTIONLIST_SUCCESS,
+      result
+    };
+  }
 
 export function requestSuccess() {
   return {

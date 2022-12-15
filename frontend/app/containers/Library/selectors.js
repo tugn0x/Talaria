@@ -6,19 +6,6 @@ import { initialState } from './reducer';
  */
 
 const selectLibraryDomain = state => state.library || initialState;
-const selectAdminDomain = state => state.admin || initialState;
-
-const makeSelectAdmin = () =>
-  createSelector(
-    selectAdminDomain,
-    substate => substate,
-  );
-
-const isAdminLoading = () => 
-createSelector(
-  selectAdminDomain,
-  substate => (substate.loading)
-);
 
 const makeSelectLibrary = () =>
   createSelector(
@@ -44,6 +31,25 @@ createSelector(
   substate => (substate.getFileUploadname)
 );
 
+const countriesOptionListSelector = () => 
+createSelector(
+  selectLibraryDomain,
+  substate => (substate.countriesOptionList)
+);
+
+const librarySubjectOptionListSelector = () => 
+createSelector(
+  selectLibraryDomain,
+  substate => (substate.librarySubjectOptionList)
+);
+
+
+const institutionsOptionListSelector = () => 
+createSelector(
+  selectLibraryDomain,
+  substate => (substate.institutionsOptionList)
+);
+
 
 export default makeSelectLibrary;
-export {  isLibraryLoading, isAdminLoading , makeSelectAdmin,tagsOptionListSelector, fileUploadNameSelector };
+export {  isLibraryLoading,tagsOptionListSelector, fileUploadNameSelector,countriesOptionListSelector,librarySubjectOptionListSelector,institutionsOptionListSelector };

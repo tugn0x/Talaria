@@ -76,6 +76,33 @@ class LibraryController extends ApiController
         if (!empty($this->validate))
             $this->validate($request, $this->validate);
 
+        //remove from fillable all fields regarding subscription (cost, imbalance, ...) 
+        if($request->filled('lat'))
+            unset ($request["lat"]);
+        if($request->filled('lon'))
+            unset ($request["lon"]);            
+
+        if($request->has('project_id'))
+            unset ($request["project_id"]);                
+
+        if($request->has('identifiers_id'))
+            unset ($request["identifiers_id"]);                            
+
+        if($request->filled('ill_cost'))
+            unset ($request["ill_cost"]);
+
+        if($request->filled('ill_user_cost'))
+            unset ($request["ill_user_cost"]);            
+
+        if($request->filled('ill_imbalance'))
+            unset ($request["ill_imbalance"]);            
+                        
+        if($request->filled('ill_supply_conditions'))
+            unset ($request["ill_supply_conditions"]);                        
+
+        if($request->filled('institution_id'))
+            unset ($request["institution_id"]);            
+        
         $model = $this->nilde->update($this->model, $request, $id, function ($model, $request) {
             return $this->nilde->syncGrantedPermissions($model, $request);
         });
@@ -84,6 +111,31 @@ class LibraryController extends ApiController
             broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
+    }
+    
+    public function renewSubscription(Request $request,$id) {
+
+        /* TODO
+        
+        if (!empty($this->validate))
+            $this->validate($request, $this->validate);
+        
+        $model = $this->nilde->update($this->model, $request, $id);
+
+        $model->status=config("constants.library_status.enabled");
+
+        $model->save();
+
+        //update Projects
+        if( ($request->has('project_id') && (!is_null($request->input('project_id')))) )
+            $model->projects()->sync($request->input('project_id'));   
+
+
+        if ($this->broadcast && config('apinilde.broadcast'))
+            broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
+
+        return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();        
+        */
     }
 
     public function publicCreate(Request $request)
