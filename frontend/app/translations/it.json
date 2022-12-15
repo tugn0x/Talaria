@@ -172,6 +172,8 @@
   "app.containers.RegisterNewLibrary.subject_label":"Settore disciplinare",
   "app.containers.RegisterNewLibrary.opac_label":"Online Catalog (OPAC)",
   "app.containers.RegisterNewLibrary.switchToBasicProfile":"Scegli il profilo base",
+  "app.containers.RegisterNewLibrary.profile_type":"Tipo profilo",
+  "app.containers.RegisterNewLibrary.profile_type_name":"Tipo profilo",
   "app.containers.RegisterNewLibrary.switchToFullProfile":"Clicca qui per continuare",
   "app.containers.RegisterNewLibrary.identifier_type_id":"Tipo identificatore",
   "app.containers.RegisterNewLibrary.clicktoGetRecords":"Ottieni coordinate GPS",

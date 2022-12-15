@@ -52,6 +52,10 @@ const RegisterLibrary = (props) => {
     const [projectName, setProjectName] = useState(null);
     const [printStatus, setPrintStatus] = useState(false)
     const [disabled, setdisabled] = useState(false)
+
+    const [itemsreport, setItemsreport] = useState([]);
+    const [sortingcount, setSortingcount] = useState(0);
+
     const getLocation = () => {
         if (!navigator.geolocation) {
           setStatus(intl.formatMessage(wizardMessages.geolocationNotSupported));
@@ -65,7 +69,8 @@ const RegisterLibrary = (props) => {
             }
             navigator.geolocation.getCurrentPosition((position) => {
                     setLat(position.coords.latitude); setLng(position.coords.longitude);
-                    setData({...data, 'lon': position.coords.longitude, 'lat': position.coords.latitude})
+                    setData({...data, 'lon': position.coords.longitude, ['order_lon']:2, 'lat': position.coords.latitude, ['order_lat']:3})
+                
             }, () => {
                 setStatus(intl.formatMessage(wizardMessages.unableRetriveLocation));
             });
@@ -82,6 +87,7 @@ const RegisterLibrary = (props) => {
     }
 
     useEffect(() => {
+
        if(disabled >0 && disabled%2===0) //stop button pressed
        {
             fields.library_coordinates.label=intl.formatMessage(wizardMessages.clicktoGetRecords) 
@@ -133,7 +139,12 @@ const RegisterLibrary = (props) => {
         fields.opac.required=false;
         fields.subject_id.required=false;
         //set profile
-        setData({...data, 'profile_type': basicProfile?1:2})
+        //setData({...data, 'profile_type': basicProfile?1:2})
+
+        setData({...data, ['profile_type']: basicProfile?1:2, ['order_profile_type']:0})
+        setData({...data, ['profile_type_name']: basicProfile?"Basic Profile":"Full Profile", ['order_profile_type_name']:1})
+
+
     },[])
 
     // Filtra i CAMPI / Fields da mostrare a seconda dello step in cui ti trovi
@@ -153,30 +164,56 @@ const RegisterLibrary = (props) => {
 
     useEffect(() => {
        //set profile
-       setData({...data, 'profile_type': basicProfile?1:2})
+       setData({...data, ['profile_type']: basicProfile?1:2, ['order_profile_type']:0})
+       setData({...data, ['profile_type_name']: basicProfile?intl.formatMessage(messages['basicprofile']):intl.formatMessage(messages['fullprofile']), ['order_profile_type_name']:1})
     }, [basicProfile])
 
 
     useEffect(() => {
-        setData({...data, 'country_name': countryname})
+       if (sortingcount===1)
+        {
+            const sorting = itemsreport.sort((a, b) => {
+                if (a.order < b.order) return -1;
+                if (a.order > b.order) return 1;
+                return 0;
+              });
+              setItemsreport(sorting)
+
+              console.log(JSON.stringify("new sorted array " + JSON.stringify(itemsreport)))
+        }
+     }, [sortingcount])
+
+    useEffect(() => {
+        setData({...data, ['country_name']: countryname, ['order_country_name']:10})
      }, [countryname])
 
 
      useEffect(() => {
-        setData({...data, "subject_name": subjectname})
+        setData({...data, ['subject_name']: subjectname, ['order_subject_name']:36})
      }, [subjectname])
 
      useEffect(() => {
-        setData({...data, "institution_type_name": institutiontypename})
+        setData({...data, ['institution_type_name']: institutiontypename, ['order_institution_type_name']:20})
      }, [institutiontypename])
 
 
      useEffect(() => {
-        setData({...data, "institution_name": institutionname})
+        setData({...data, ['institution_name']: institutionname, ['order_institution_name']:22})
      }, [institutionname])
 
      // Cambia Step
     const onChangeStep = (formData, newStep) => {
+        if (newStep==1)        
+        {
+            setData({...data, 'backbuttonPressed': true})
+            fields.library_identifier_list.hidden = false
+            setCurrentStep(parseInt(1))
+            fields.library_identifier_add.disabled = true
+            if (data.identifiers_id!==undefined && data.identifiers_id.length>0)
+                fields.library_identifier_list.hidden = false
+            else
+                fields.library_identifier_list.hidden = true 
+        }
         setData({...data, ...formData})
         setCurrentStep(parseInt(newStep))
         setSteps({...steps, [parseInt(newStep)]: {active: true} })      
@@ -195,8 +232,10 @@ const RegisterLibrary = (props) => {
     }
     
     // Aggiorna dati nei campi *handle change*
-    const onChangeData = (field_name, value) => {
+    const onChangeData = (field_name, value, order) => {
         
+        // setData({...data, [field_name]: value, ['order_'+field_name]:order})
+
         if (field_name === "identifier_type_id")
             setIdentifiertype(value.value);
         
@@ -214,7 +253,9 @@ const RegisterLibrary = (props) => {
         {
             setCountryid(value.value);
             setCountryid((countryid) => {
-            setData({...data, "institution_country_name": value.label})
+            setData({...data, "institution_country_name": value.label,['order_institution_country_name']:21 })
+            setData({...data, [field_name]: value, ['order_'+field_name]:order})
+
             fields.suggested_institution_name.hidden = true;
                 if (countryid!==0 && institutiontypeid!==0)
                 {
@@ -228,13 +269,19 @@ const RegisterLibrary = (props) => {
         }
 
         if (field_name === "country_id" && value.value !== 0)
+        {
             setCountryName(value.label)
+            setData({...data, [field_name]: value, ['order_'+field_name]:order})
+        }
 
         if (field_name === "subject_id" && value.value !== 0)
             setSubjectName(value.label)   
 
         if (field_name === "institution_type_id" && value.value !== 0)
+        {
             setInstitutionTypeName(value.label) 
+            setData({...data, [field_name]: value, ['order_'+field_name]:order})
+        }
 
         if (field_name === "institution_id" && value.value !== 0)
         {
@@ -258,7 +305,7 @@ const RegisterLibrary = (props) => {
         if (field_name === "library_identifiers_txt" && value.length === 0)
             fields.library_identifier_add.disabled = true
 
-        setData({...data, [field_name]: value})
+        setData({...data, [field_name]: value, ['order_'+field_name]:order})
     }
 
 
@@ -270,9 +317,8 @@ const RegisterLibrary = (props) => {
         
     const AddNewIdentifier = (field_name,value,newList) => {
         fields.library_identifier_list.hidden = newList.length>0 ? false : true;
-        setData({...data, 'identifiers_id': newList})
+        setData({...data, 'identifiers_id': newList, ['order_identifiers_id']:31})
         console.log("identifier_id" + JSON.stringify(newList))
-
     }
 
     const RemoveIdentifier = (field_name,value,newList) => {
@@ -293,7 +339,6 @@ const RegisterLibrary = (props) => {
             fields.subject_id.hidden=true;
             fields.subject_label.hidden=true;
             fields.showfullProfile.label=intl.formatMessage(wizardMessages.switchToFullProfile)
-            
         }
         else
         {            
@@ -319,6 +364,7 @@ const RegisterLibrary = (props) => {
         }  
     }
 
+  
     // const Print = () =>{     
     //     let printContents = document.getElementById('printablediv').innerHTML;
     //     let originalContents = document.body.innerHTML;
@@ -345,7 +391,7 @@ const RegisterLibrary = (props) => {
                 (<CustomForm 
                     submitCallBack={(formData) => onChangeStep(formData, totalSteps > currentStep ? currentStep+1 : currentStep )} 
                     requestData={data ? data : null}
-                    onChangeData={(field_name, value) => onChangeData(field_name, value)}
+                    onChangeData={(field_name, value, order) => onChangeData(field_name, value, order)}
                     fields={currentFields}
                     title={intl.formatMessage(wizardMessages[`step_${currentStep}`])}
                     submitText={intl.formatMessage(globalMessages.continue)}
@@ -384,26 +430,73 @@ const RegisterLibrary = (props) => {
                    <div class="container-fluid">
                         <div class="row">
                         {
+                            (
                             Object.keys(data).map((key, index) => {
-                                return (key!==null) && (key!=='profile_type') && key!=='identifier_id' && key!=='institution_type_id' && key!=='country_id' && key!=='library_identifiers_txt' && key!=='identifier_type_id' && key!=='subject_id'
-                                && key!=='institution_country_id' && key!=='institution_id' && key!=='project_id' &&
-                                data[key]!==null && data[key]!==0 &&
-                                <div key={index} class="report_summary"> 
-                                    <>
-                                    {   
-                                        <div> 
-                                            <div class="font-weight-bold">{messages[key] && intl.formatMessage(messages[key])}</div>
-                                            {(key!=='identifiers_id') && <div>{data[key]}</div>}
-
-                                            {(key==='identifiers_id')&&<div>
-                                                {data.identifiers_id.map((item) => (<div><b>{item[2]}: </b>{item[1]}</div>))}</div>}
-                                        </div>
-                                    }   
-                                    </>
-                                </div>
+                              if (!key.includes("order_"))
+                                {
+                                    var itemexists = itemsreport.findIndex(x => x.field_name==key); 
+                                    if (itemexists < 0)
+                                    {
+                                        itemsreport.push({
+                                            field_name: key,
+                                            value: data[key],
+                                            order: data["order_" + key]
+                                        }) 
+                                    }
                                 }
+                            })
                             )
                         }
+
+                        {
+                            itemsreport.length>0 && sortingcount === 0 ? setSortingcount(sortingcount+1):""
+                        }
+          
+                        {
+                             (
+                                 Object.keys(itemsreport).map( (item, i) => {
+                                        return (itemsreport[i].field_name!=='profile_type') && itemsreport[i].field_name!=='identifier_id' && itemsreport[i].field_name!=='institution_type_id' 
+                                        //return itemsreport[i].field_name!=='identifier_id' && itemsreport[i].field_name!=='institution_type_id' 
+                                        && itemsreport[i].field_name!=='country_id' && itemsreport[i].field_name!=='library_identifiers_txt' && itemsreport[i].field_name!=='identifier_type_id' && itemsreport[i].field_name!=='subject_id'
+                                        && itemsreport[i].field_name!=='institution_country_id' && itemsreport[i].field_name!=='institution_id' && itemsreport[i].field_name!=='project_id'
+                                        && itemsreport[i].field_name!=='institution_name' && itemsreport[i].field_name!=='order'
+                                        && 
+                                        <div key={item}  class="report_summary"> 
+                                        { 
+                                            <div> 
+                                                <div class="font-weight-bold">{messages[itemsreport[i].field_name] && intl.formatMessage(messages[itemsreport[i].field_name])}</div>
+                                                    {(itemsreport[i].field_name!=='identifiers_id') && <div>{itemsreport[i].value} {itemsreport[i].ordd}</div>}
+                                                    {(itemsreport[i].field_name==='identifiers_id')&&<div>
+                                                    {itemsreport[i].value.map((item) => (<div><b>{item[2]}: </b>{item[1]}</div>))}
+                                                    </div>} 
+                                            </div>
+                                        }   
+                                        </div>
+                                   })
+                            )
+                            //     itemsreport.map( ({key, counter}) => {
+                            //   //  setItemsreport(sorted)
+                            //      return (key!==null) && (key!=='profile_type') && key!=='identifier_id' && key!=='institution_type_id' && key!=='country_id' && key!=='library_identifiers_txt' && key!=='identifier_type_id' && key!=='subject_id'
+                            //      && key!=='institution_country_id' && key!=='institution_id' && key!=='project_id' &&
+                            //      data[key]!==null && data[key]!==0 && 
+                            //     <div key={counter} class="report_summary"> 
+                            //          <>
+                            //          { 
+                            //              <div> 
+                            //                  <div class="font-weight-bold">{messages[itemsreport[counter].field_name] && intl.formatMessage(messages[itemsreport[counter].field_name])}</div>
+                            //                  {(key!=='identifiers_id') && <div>{itemsreport[counter].value}</div>}
+                            //                  {(itemsreport[counter].field_name==='identifiers_id')&&<div>
+                            //                      {itemsreport[counter].value.map((item) => (<div><b>{item[2]}: </b>{item[1]}</div>))}
+                            //                  </div>}
+                            //              </div>
+                            //          }   
+                            //          </>
+                            //      </div>
+                            //      }
+                            //  )
+                            // )
+                        }
+                       
                       </div>
                     </div>
                 </div>
