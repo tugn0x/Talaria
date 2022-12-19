@@ -12,11 +12,17 @@ import PickupPage from '../containers/Library/PickupPage/Loadable';
 import LendingPage from '../containers/Library/LendingPage';
 import LendingRequestPage from '../containers/Library/LendingRequestPage';
 import LibraryStatusPage from '../containers/Library/LibraryStatusPage/Loadable';
+import UpgradeLibraryProfilePage from '../containers/Library/UpgradeLibraryProfilePage/Loadable';
  
 const patrons_enabled=(process.env.MANAGE_PATRONS && process.env.MANAGE_PATRONS=="true")?true:false;
+const show_upgrade_to_full_profile=(process.env.LIBRARY_DIFFERENT_PROFILES && process.env.LIBRARY_DIFFERENT_PROFILES=="true")?true:false;
 
 const hidePatronRoutes = () =>{
     return !patrons_enabled;    
+}
+
+const hideUpgradeToFullProfile = () =>{
+  return !show_upgrade_to_full_profile;    
 }
 
 const routes = [
@@ -30,9 +36,10 @@ const routes = [
 
   {
     path: '/manage', name: `MyLibrary`, header: true, component: SubRouteSwitch, permissions: ['manage','borrow','lend','manage-users','deliver'],resource: {type: 'libraries', key: 'library_id',},
-    children: [      
+    children: [            
       { path: '/', icon: 'info-circle', exact: true, name: `LibraryStatus`, url: '/manage/', component: LibraryStatusPage, permissions: ['manage','borrow','lend','manage-users','deliver'], sidebar: true, order:1},            
       { path: '/edit', icon: 'edit', exact: true, name: `LibraryProfile`,  url:'/manage/edit', component: ManageLibraryPage, permissions: ['manage'], sidebar:true,order:2},      
+      { path: '/upgrade', icon: 'tools', exact: true, name: `LibraryUpgradeProfile`,  url:'/manage/upgrade', component: UpgradeLibraryProfilePage, hide: hideUpgradeToFullProfile(), permissions: ['manage'], sidebar:false},      
       /*{ path: '/subscriptions', icon: 'file-contract', exact: true, name: `Subscriptions`, component: Fake, url: '/manage/subscriptions',permissions: ['manage'], sidebar: true, order:2},      
       { path: '/subscriptions/renew', icon: 'calendar', exact: true, name: `RenewSubscription`, component: Fake,permissions: ['manage']},      
       { path: '/operators', icon: 'user-cog', exact: true, name: `Operators`, component: Fake,url: '/manage/operators', permissions: ['manage'],sidebar: true, order:3 },      
@@ -45,7 +52,7 @@ const routes = [
       { path: '/pickup/:id?/:op?', exact: true, name: `PickupUpdate`, component: PickupPage, permissions: ['manage'], sidebar: false},            
       /*{ path: '/catalogs', icon: 'database', exact: true, name: `Catalogs`, component: Fake,url: '/manage/catalogs', permissions: ['manage'],sidebar: true, order:9 },
       { path: '/protocols', icon: 'network-wired', exact: true, name: `Protocols`, component: Fake,url: '/manage/protocols', permissions: ['manage'],sidebar: true, order:10 },                      
-      */
+      */      
      ]
   },
   {

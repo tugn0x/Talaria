@@ -3,8 +3,6 @@
  */
 
 import React, {useEffect,useState} from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 import {createStructuredSelector} from "reselect";
 import makeSelectLibrary,{isLibraryLoading} from "../selectors";
 import {compose} from "redux";
@@ -30,7 +28,7 @@ function LibraryStatusPage(props) {
   
 
   return (    
-        <LibraryStatus managePath={managePath} data={library.library} loading={isLoading}/>    
+        <LibraryStatus auth={props.auth} resource={props.resource} managePath={managePath} data={library.library} loading={isLoading}/>    
   );
 }
 const mapStateToProps = createStructuredSelector({

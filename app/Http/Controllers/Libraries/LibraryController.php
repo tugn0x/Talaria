@@ -72,7 +72,7 @@ class LibraryController extends ApiController
 
 
     public function update(Request $request, $id)
-    {
+    {       
         if (!empty($this->validate))
             $this->validate($request, $this->validate);
 
@@ -88,6 +88,11 @@ class LibraryController extends ApiController
         if($request->has('identifiers_id'))
             unset ($request["identifiers_id"]);                            
 
+        //can update profile_type only if user is library's manager (policy will check user's role)
+        //if profile=2 and LIBRARY_DIFFERENT_PROFILES=true => OK else "change profile_type not allowed"   
+        if( ! ( $request->filled('profile_type') && $request->input('profile_type')==config("constants.library_profile_type.full")  && env('LIBRARY_DIFFERENT_PROFILES',true) ) )
+            unset ($request["profile_type"]);   
+        
         if($request->filled('ill_cost'))
             unset ($request["ill_cost"]);
 

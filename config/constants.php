@@ -24,6 +24,10 @@ return [
         'disabled_subscription_expired'=> 4, //NOTA: nel nilde5 questo è 21                
 	    'disabled_didntpaid' =>5 //NOTA: nel nilde5 questo è 23,	    
     ],
+    'library_profile_type' => [
+        'basic'=>1,
+        'full'=>2
+    ],
     'libraryuser_status' => [
         'pending'=>2, //NOTA: nel nilde5 questo è 0
         'enabled'=>1,

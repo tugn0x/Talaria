@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from 'react'
-import { generatePath } from 'react-router-dom';
+import { generatePath,Link } from 'react-router-dom';
 import {Card, CardBody, CardTitle,CardHeader,Row, Col, Button} from 'reactstrap'
 import Loader from 'components/Form/Loader';
 import {useIntl} from 'react-intl';
 import './style.scss';
 import messages from './messages.js';
+import { checkPermissions } from '../../../utils/permissions';
 
 
 const LibraryStatus = (props) => {
     console.log('LibraryStatus', props)
-    const { loading, data,managePath} = props
+    const { loading, data,managePath,auth,resource} = props
     const intl = useIntl();
     const [mounted, setMounted] = useState(false)
     
@@ -40,12 +41,15 @@ const LibraryStatus = (props) => {
             op
         });
     }
+*/
 
-    const editurl=(path,id) => {
-        return generatePath(path+"/edit", {
+    const show_upgrade_to_full_profile=(process.env.LIBRARY_DIFFERENT_PROFILES && process.env.LIBRARY_DIFFERENT_PROFILES=="true")?true:false;
+
+    const upgradetofullurl=(path,id) => {
+        return generatePath(path+"/upgrade", {
             id,            
         });
-    } */
+    } 
 
     const mapLink = (lat,lon) => {
         const openstreetmapURL='https://www.openstreetmap.org/?mlat=:lat&mlon=:lon';
@@ -63,11 +67,11 @@ const LibraryStatus = (props) => {
                         <CardHeader className={"alert "+ alertClass(data)}>                        
                             <strong>{intl.formatMessage({id:'app.libraries.status'})}: {intl.formatMessage({id:'app.libraries.status.'+data.status_key})}</strong>                            
                             {/* 
-                            {data.status==2 && <Link className="btn-cta btn btn-default" to={renewsubscriptionurl(managePath,data.id,"renew")}>Renew subscription</Link>}
-                            {data.status==1 && <Link className="btn-cta btn btn-default" to={editurl(managePath,data.id)}>Edit profile data</Link>}
+                            {data.status==2 && <Link className="btn-cta btn btn-default" to={renewsubscriptionurl(managePath,data.id,"renew")}>Renew subscription</Link>}                            
                             */                                                
-                            }                                           
+                            }                                                                       
                         </CardHeader>
+                        {data.status==1 && data.profile_type==1 && checkPermissions(auth,'manage',resource) && show_upgrade_to_full_profile && <Link className="btn btn-info" to={upgradetofullurl(managePath,data.id)}>Upgrade to full profile!</Link>}                        
                         
                         <CardBody>
                             <CardTitle tag="h2">

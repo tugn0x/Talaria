@@ -160,6 +160,10 @@ export default defineMessages({
         id: `${scope}.LibraryProfile`,
         defaultMessage: 'Profile',
     },
+    LibraryUpgradeProfile: {
+        id: `${scope}.LibraryUpgradeProfile`,
+        defaultMessage: 'Upgrade profile',
+    },
     LibraryStatus: {
         id: `${scope}.LibraryStatus`,
         defaultMessage: 'Status',

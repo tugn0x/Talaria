@@ -100,7 +100,7 @@ Route::group([
     Route::get('{id}', 'LibraryController@show')->where('id', '[0-9]+')->name('show');
     Route::get('{id}/departments', 'LibraryController@departments')->where('id', '[0-9]+')->name('departments');
     Route::put('{id}', 'LibraryController@update')->where('id', '[0-9]+')->name('update');    
-    Route::put('{id}', 'LibraryController@renewSubscription')->where('id', '[0-9]+')->name('renewSubscription');    
+    //Route::put('{id}', 'LibraryController@renewSubscription')->where('id', '[0-9]+')->name('renewSubscription');    
 
 
 

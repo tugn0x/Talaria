@@ -24,8 +24,8 @@ export const defaultOption = {
       }),
 };
 
-export const getOption = (option) => {
-  console.log("GETOPTION:",option)
+export const getOption = (option) => {  
+  //console.log("GETOPTION:",option)
     if(apiToken.get()) {
       if(defaultOption.headers.has("Authorization")) {
         defaultOption.headers.set('Authorization', `Bearer ${apiToken.get()}`);
@@ -623,10 +623,10 @@ export const getLibrary = (options) => {
   return request(`${BASE_URL}/api/v1/libraries/${library_id}?include=${fullincludes}`, options)
 };
 
-export const updateLibrary = (options) => {
+export const updateLibrary = (options) => {  
   const library_id = options.body.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/${library_id}?include=granted_permissions,institution,country,departments`, options)
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}?include=institution,country,departments`, options)
 };
 
 export const getLibrariesList = (options) => {
