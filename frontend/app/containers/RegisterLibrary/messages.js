@@ -228,7 +228,7 @@ export default defineMessages({
   },
 
   library_identifiers_txt: {
-    id: 'app.RegisterNewLibrary.library_identifiers_txt',
+    id: 'app.libraries.identifier_code',
     defaultMessage: 'Identifier Code',
   },
 
@@ -253,12 +253,12 @@ ill_referent_name: {
 },
 
 lat: {
-  id: 'app.libraries.lat',
+  id: 'app.global.lat',
   defaultMessage: 'Latitude',
 },
 
 lon: {
-  id: 'app.libraries.lon',
+  id: 'app.global.lon',
   defaultMessage: 'Longtitude',
 },
 

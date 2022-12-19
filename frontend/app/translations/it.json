@@ -80,6 +80,8 @@
   "app.global.terzo_code": "Cod. Terzo",  
   "app.global.administrative_info": "Informazioni amministrative",
   "app.global.currency_id": "Valuta",
+  "app.global.lat":"Latitudine",
+  "app.global.lon":"Longitudine",
   
   "app.containers.HomePage.header": "Benvenuto su NILDE - Network Inter Library Document Exchange",
   "app.containers.HomePage.subHeader":"Un network di biblioteche e un software per un'informazione scientifica a portata di click!",
@@ -162,7 +164,6 @@
   "app.containers.RegisterNewLibrary.volunteer_library_label":"Biblioteca volontaria?",
   "app.containers.RegisterNewLibrary.projects_label": "Progetto o Consorzio",
   "app.containers.RegisterNewLibrary.identifiers_label": "Identificatori Biblioteca",
-  "app.containers.RegisterNewLibrary.library_identifiers_txt":"Codice",
   "app.containers.RegisterNewLibrary.duplicate_identifer_type":"Un secondo codice per lo stesso identificativo non puo' essere aggiunto, si prega di scegliere un'altro tipo",
 
   "app.containers.RegisterNewLibrary.ill_institution_label": "Istituzione",
@@ -189,6 +190,9 @@
   "app.containers.LibraryUserPage.user_service_phone": "Telefono servizio",
   "app.containers.LibraryUserPage.user_service_email": "Email servizio",
 
+  "app.containers.UpgradeLibraryProfilePage.upgradeProfileConfirm":"Effettuare l'upgrade a Profilo Completo?",
+  "app.containers.UpgradeLibraryProfilePage.upgradeProfileSuccessfully":"Upgrade effettuato con successo",
+
   "app.containers.LibraryUsersListPage.header": "I miei utenti",
   "app.containers.LibraryUsersListPage.user_referent": "Referente",
   "app.containers.LibraryUsersListPage.user_mat": "Matricola/Tessera",
@@ -214,6 +218,9 @@
   
   "app.components.PickupsList.PickupsNotFound":"Nessun punto di consegna",
   "app.components.PickupsList.createNewPickup":"Nuovo punto di consegna",
+
+  "app.components.LibrariesList.LibrariesNotFound": "Nessuna biblioteca",
+  "app.components.LibrariesList.LibrarySelected": "Selezionate",
   
   "app.components.Pagination.itemsPerPageDropdown": "Mostra righe",
   "app.components.Pagination.of": "di",
@@ -302,12 +309,10 @@
   "app.libraries.alt_name": "Nome alternativo ",
   "app.libraries.dd_user_cost":"Costo per articolo",
   "app.libraries.suggested_institution_name":"Nome istituto suggerito ",
-  "app.libraries.lat":"Latitudine",
-  "app.libraries.lon":"Longitudine",
   "app.libraries.projects_label": "Progetto o Consorzio",
   "app.libraries.identifiers_label" : "Identificatori Biblioteca",
   "app.libraries.identifier_type_id" : "Tipo di identificatore",
-  "app.libraries.Identifier Code" : "Codice identificativo",
+  "app.libraries.identifier_code" : "Codice identificativo",
   "app.libraries.name": "Nome della biblioteca",
   "app.libraries.profile_type": "Tipo profilo",
   "app.libraries.profile_type.basic": "Base (solo Borrowing)",
@@ -573,6 +578,7 @@
   "app.components.FileUploadForm.filechoose":"Scegli il file da inviare",
 
   "app.routes.LibraryProfile": "Profilo Biblioteca",
+  "app.routes.LibraryUpgradeProfile":"Upgrade a profilo completo",
   "app.routes.Bibliography": "Bibliografia",
   "app.routes.Reference": "Riferimenti",
   "app.routes.ReferenceList": "Riferimenti",

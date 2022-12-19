@@ -80,6 +80,8 @@
   "app.global.terzo_code": "terzo_code",  
   "app.global.administrative_info": "Administrative informations",
   "app.global.currency_id": "Currency",
+  "app.global.lat":"Latitute",
+  "app.global.lon":"Longitude",
   
   "app.containers.HomePage.header": "Welcome to NILDE - Network Inter Library Document Exchange",
   "app.containers.HomePage.subHeader":"Un network di biblioteche e un software per un'informazione scientifica a portata di click!",
@@ -162,7 +164,6 @@
   "app.containers.RegisterNewLibrary.volunteer_library_label":"Want to be a Volunteer Library?",
   "app.containers.RegisterNewLibrary.projects_label":  "Project or Consortium",
   "app.containers.RegisterNewLibrary.identifiers_label": "Library identifiers",
-  "app.containers.RegisterNewLibrary.library_identifiers_txt":"Identifier Code",
   "app.containers.RegisterNewLibrary.duplicate_identifer_type":"A second code for the same type cannot be added, kindly choose another identifier type",
 
   "app.containers.RegisterNewLibrary.ill_institution_label": "Institution",
@@ -189,6 +190,9 @@
   "app.containers.LibraryUserPage.user_service_phone": "Telefono servizio",
   "app.containers.LibraryUserPage.user_service_email": "Email servizio",
 
+  "app.containers.UpgradeLibraryProfilePage.upgradeProfileConfirm":"Upgrade to FULL Profile?",
+  "app.containers.UpgradeLibraryProfilePage.upgradeProfileSuccessfully":"Upgraded successfully",
+
   "app.containers.LibraryUsersListPage.header": "My patrons",
   "app.containers.LibraryUsersListPage.user_referent": "Referent",
   "app.containers.LibraryUsersListPage.user_mat": "Matricola/Tessera",
@@ -214,6 +218,9 @@
 
   "app.components.PickupsList.PickupsNotFound":"Pickups not found",
   "app.components.PickupsList.createNewPickup":"New pickup",
+
+  "app.components.LibrariesList.LibrariesNotFound": "No library",
+  "app.components.LibrariesList.LibrarySelected": "Selected",
 
   "app.components.Pagination.itemsPerPageDropdown": "Show rows",
   "app.components.Pagination.of": "of",
@@ -302,12 +309,10 @@
   "app.libraries.alt_name": "Alternative name ",
   "app.libraries.dd_user_cost":"Cost for article",
   "app.libraries.suggested_institution_name":"Suggested institution name",
-  "app.libraries.lat":"Latitute",
-  "app.libraries.lon":"Longitude",
   "app.libraries.projects_label": "Project or Consortium",
   "app.libraries.identifiers_label" : "Identifiers",
   "app.libraries.identifier_type_id" : "Identifier Type",
-  "app.libraries.Identifier Code" : "Identifier Code",
+  "app.libraries.identifier_code" : "Identifier Code",
   "app.libraries.name": "Name of the library",
   "app.libraries.profile_type": "Profile type",
   "app.libraries.profile_type.basic": "Basic (only Borrowing)",
@@ -573,6 +578,7 @@
   "app.components.FileUploadForm.filechoose":"Select file to upload",
 
   "app.routes.LibraryProfile": "Library Profile",
+  "app.routes.LibraryUpgradeProfile":"Upgrade to full profile",
   "app.routes.Bibliography": "Bibliography",
   "app.routes.Reference": "Reference",
   "app.routes.ReferenceList": "References",
