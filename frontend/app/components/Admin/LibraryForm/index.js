@@ -20,12 +20,16 @@ const LibraryForm = (props) => {
     const [requestData,setRequestData]=useState(null);
     const [listLength, setListLength] = useState(null);
 
+    const profileTypeOptionList =  [{value:1, label: intl.formatMessage({id:'app.libraries.profile_type.basic'})},{value:2,label:intl.formatMessage({id:'app.libraries.profile_type.full'})}];
+
+    const enable_change_profile_type=(process.env.LIBRARY_DIFFERENT_PROFILES && process.env.LIBRARY_DIFFERENT_PROFILES=="true")?true:false;
+
     useEffect ( ()=>{
 
         if(!loading)
         if(library && library.id>0)
         {
-            setListLength(library.identifiers.data.length)
+            setListLength(library.identifiers.data.length)            
             setRequestData({
                 ...library,
                 'project_id': library.projects.data.map( ({id,name})=>{return id;}),
@@ -33,6 +37,7 @@ const LibraryForm = (props) => {
                 'institution_country_id': library.institution.data?library.institution.data.country_id:null
             })
             fields.library_identifier_add.disabled = true
+
         }
 
     },[library])
@@ -50,6 +55,12 @@ const LibraryForm = (props) => {
         //setData({...data, 'identifier_id': newList})
         console.log(JSON.stringify(newList))
     }
+
+    useEffect ( ()=>{
+        //only if LIBRARY_DIFFERENT_PROFILES=true manager can change profile type
+        fields.profile_type.disabled=!enable_change_profile_type
+
+    },[])
 
 
     useEffect ( ()=>{
@@ -84,6 +95,7 @@ const LibraryForm = (props) => {
                     institution_country_id = {countriesOptionList}
                     institution_id={institutionsByTypeCountryOptionList}                    
                     project_id={libraryProjectsOptionList}   
+                    profile_type={profileTypeOptionList}
 
                     identifier_type_id = {identifiersOptionList}
                     AddNewIdentifier={AddNewIdentifier}

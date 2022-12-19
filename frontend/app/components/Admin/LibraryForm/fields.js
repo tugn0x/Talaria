@@ -50,6 +50,14 @@ export const fields = {
         group: "general_info",  
         order: 3,
     },
+    profile_type: {
+        type: "custom-select",
+        name: "profile_type",
+        width: "col-sm-6",      
+        group: "general_info",  
+        options: "profile_type",
+        order: 3,
+    },
     
     subject_id: {
         type: "custom-select",

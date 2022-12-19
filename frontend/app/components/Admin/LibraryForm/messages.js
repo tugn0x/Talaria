@@ -91,6 +91,12 @@ export default defineMessages({
     id: 'app.libraries.external',
     defaultMessage: 'external',
   },
+
+  profile_type: { 
+    id: 'app.libraries.profile_type',
+    defaultMessage: 'profile_type',
+  },
+
   registration_date: {
     id: 'app.libraries.registration_date',
     defaultMessage: 'Registration date',
@@ -152,7 +158,7 @@ export default defineMessages({
     defaultMessage: 'Institution and Projects',
   },
   identifier_info: {
-    id: 'app.libraries.identifier_info',
+    id: 'app.libraries.identifiers_label',
     defaultMessage: 'Identifiers',
   },
   identifier_type_id: {
@@ -161,7 +167,7 @@ export default defineMessages({
   },
 
   library_identifiers_txt: {
-    id: 'app.libraries.library_identifiers_txt',
+    id: 'app.libraries.identifier_code',
     defaultMessage: 'Identifier Code',
   },
   
