@@ -107,7 +107,8 @@ const CustomForm = (props) => {
 
     /* HANDLE CHANGE Generic */
     const handleChange = (value, field_name, order) =>{
-        setFormData({ ...formData, [field_name]: value, ['order']:order});
+
+        setFormData({ ...formData, [field_name]: value, 'order':order});
         setIsSubmitDisabled(false)
         // props per il wizard form registra biblioteca pubblica
         props.onChangeData && props.onChangeData(field_name, value, order) 
@@ -225,16 +226,16 @@ const CustomForm = (props) => {
                                                                         type="checkbox"
                                                                         data={props[field.name]}
                                                                         selectedData={props.requestData && props.requestData[field.name] && !formData[field.name] ? props.requestData[field.name] : formData[field.name] ? formData[field.name] : []}
-                                                                        handleChange={(value) => handleChange(value, field.name)}
-                                                                    />
+                                                                        handleChange={(value) => handleChange(value, field.name, field.order)}
+                                                                        />
                                                                 ||
                                                                 field.type === 'list-checkbox' &&
                                                                     <ListCheckBox
                                                                         type="checkbox"
                                                                         data={props[field.name]}
                                                                         selectedData={props.requestData && props.requestData[field.name] && !formData[field.name] ? props.requestData[field.name] : formData[field.name] ? formData[field.name] : []}
-                                                                        handleChange={(value) => handleChange(value, field.name)}
-                                                                    />
+                                                                        handleChange={(value) => handleChange(value, field.name, field.order)}
+                                                                        />
                                                                 ||
                                                                 field.type === 'checkbox' &&
                                                                     <>
@@ -242,8 +243,8 @@ const CustomForm = (props) => {
                                                                         field={field}
                                                                         label={field.label && field.label}
                                                                         data={formData[field.name] === undefined && props.requestData && props.requestData[field.name] ? props.requestData[field.name] : formData[field.name]}
-                                                                        handleChange={(value) => handleChange(value, field.name)}
-                                                                    />   
+                                                                        handleChange={(value) => handleChange(value, field.name, field.order)}
+                                                                        />   
                                                                     </>
                                                                 ||
                                                                 field.type === 'custom-select' &&
@@ -275,8 +276,8 @@ const CustomForm = (props) => {
                                                                             field.options
                                                                         }
                                                                         searchOptionList={field.search ? searchOptionList : {} }
-                                                                        handleChange={(value) => handleChange(value, field.name)}
-                                                                    />  
+                                                                        handleChange={(value) => handleChange(value, field.name, field.order)}
+                                                                        />  
                                                                     </>
                                                                 ||
                                                                 field.type === 'switch' &&
@@ -285,8 +286,8 @@ const CustomForm = (props) => {
                                                                         disabled={field.disabled ? field.disabled : false}
                                                                         data={!formData[field.name] && props.requestData && props.requestData[field.name] ? props.requestData[field.name] : formData[field.name]}
                                                                         label={messages[field.name]}
-                                                                        handleChange={(value) => handleChange(value, field.name)}
-                                                                    />
+                                                                        handleChange={(value) => handleChange(value, field.name, field.order)}
+                                                                        />
                                                                 ||
                                                                 field.type === 'granted_permissions' &&
                                                                     <GrantedPermissions 
@@ -426,7 +427,7 @@ const CustomForm = (props) => {
                                                                             label={messages[field.name] ? messages[field.name] : ""}
                                                                             data={!formData[field.name] && props.requestData && props.requestData[field.name] ? props.requestData[field.name] : formData[field.name]}
                                                                             //handleChange={(value) => handleChange(value, field.name, field.order)}
-                                                                            handleChange={(value) => handleChange(value, field.name)}
+                                                                            handleChange={(value) => handleChange(value, field.name, field.order)}
                                                                         />  
                                                                     </>
                                                                 }

@@ -174,6 +174,13 @@
   "app.containers.RegisterNewLibrary.subject_label":"Library disciplinary sector",
   "app.containers.RegisterNewLibrary.opac_label":"Library Online Catalog (OPAC)",
   "app.containers.RegisterNewLibrary.switchToBasicProfile":"Switch to Basic profile",
+  
+  "app.containers.RegisterNewLibrary.basicprofile":"Basic",
+  "app.containers.RegisterNewLibrary.fullprofile":"Full",
+
+
+  "app.containers.RegisterNewLibrary.profile_type":"Profile Type",
+  "app.containers.RegisterNewLibrary.profile_type_name":"Profile Type",
   "app.containers.RegisterNewLibrary.switchToFullProfile":"Yes, Click here",
   "app.containers.RegisterNewLibrary.identifier_type_id":"Identifier Type",
   "app.containers.RegisterNewLibrary.clicktoGetRecords":"Click to get coords",

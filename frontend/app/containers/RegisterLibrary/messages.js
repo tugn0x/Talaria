@@ -35,6 +35,25 @@ export default defineMessages({
     id: 'app.containers.RegisterNewLibrary.createIdentifier',
     defaultMessage: 'Create Identifer',
   },
+  profile_type: {
+    id: 'app.containers.RegisterNewLibrary.profile_type',
+    defaultMessage: 'Profile type',
+  },
+  profile_type_name: {
+    id: 'app.containers.RegisterNewLibrary.profile_type_name',
+    defaultMessage: 'Profile type',
+  },
+
+  basicprofile: {
+    id: 'app.containers.RegisterNewLibrary.basicprofile',
+    defaultMessage: 'Basic',
+  },
+
+  fullprofile: {
+    id: 'app.containers.RegisterNewLibrary.fullprofile',
+    defaultMessage: 'Full',
+  },
+
   createMessage: {
     id: 'app.containers.RegisterNewLibrary.createMessage',
     defaultMessage: 'Public Library created',
