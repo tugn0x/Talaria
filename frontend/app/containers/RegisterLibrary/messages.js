@@ -237,7 +237,7 @@ export default defineMessages({
   },
   
   library_identifiers: {
-    id: 'app.libraries.institution_type_name',
+    id: 'app.libraries.identifiers_label',
     defaultMessage: 'Library Identifiers',
   },
 
