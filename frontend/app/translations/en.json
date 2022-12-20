@@ -174,11 +174,6 @@
   "app.containers.RegisterNewLibrary.subject_label":"Library disciplinary sector",
   "app.containers.RegisterNewLibrary.opac_label":"Library Online Catalog (OPAC)",
   "app.containers.RegisterNewLibrary.switchToBasicProfile":"Switch to Basic profile",
-  
-  "app.containers.RegisterNewLibrary.basicprofile":"Basic",
-  "app.containers.RegisterNewLibrary.fullprofile":"Full",
-
-
   "app.containers.RegisterNewLibrary.profile_type":"Profile Type",
   "app.containers.RegisterNewLibrary.profile_type_name":"Profile Type",
   "app.containers.RegisterNewLibrary.switchToFullProfile":"Yes, Click here",
@@ -293,11 +288,12 @@
   "app.libraries.ill_supply_conditions": "Supply conditions",
   "app.libraries.ill_imbalance": "ILL imbalance threshold",
   "app.libraries.ill_cost": "Cost per article",
-  "app.libraries.ill_user_cost": "User cost per article",
+  "app.libraries.ill_user_cost": "User cost per article",  
   "app.libraries.ill_susp_date_start": "Suspension start date",
   "app.libraries.ill_susp_date_end": "Suspension end date",
   "app.libraries.ill_susp_notification_days": "Notify from (days)",
   "app.libraries.status": "Status",
+  "app.libraries.status.new":"New",
   "app.libraries.status.disabled":"Disabled",
   "app.libraries.status.enabled":"Active",
   "app.libraries.status.renewing":"Renewing subscription",

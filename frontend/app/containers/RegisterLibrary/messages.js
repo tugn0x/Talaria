@@ -45,12 +45,12 @@ export default defineMessages({
   },
 
   basicprofile: {
-    id: 'app.containers.RegisterNewLibrary.basicprofile',
+    id: 'app.libraries.profile_type.basic',
     defaultMessage: 'Basic',
   },
 
   fullprofile: {
-    id: 'app.containers.RegisterNewLibrary.fullprofile',
+    id: 'app.libraries.profile_type.full',
     defaultMessage: 'Full',
   },
 

@@ -97,7 +97,7 @@
   "app.containers.NotFoundPage.intro": "Ci dispiace ma non riusciamo a trovare la pagina che cerchi",
   "app.containers.NotAuthorizedPage.header": "Accesso negato",
   "app.containers.NotAuthorizedPage.intro": "Ci dispiace ma non puoi accedere alla pagina richiesta",
-  
+
   "app.containers.UserProfile.header": "Profilo utente",
   "app.containers.UserProfile.subtitle": "Aggiorna il profilo",
 
@@ -293,6 +293,7 @@
   "app.libraries.ill_susp_date_end": "Fine sospensione",
   "app.libraries.ill_susp_notification_days": "Giorni di preavviso",
   "app.libraries.status": "Stato",
+  "app.libraries.status.new":"Nuova",
   "app.libraries.status.disabled":"Disattivata",
   "app.libraries.status.enabled":"Attiva",
   "app.libraries.status.renewing":"In rinnovo sottoscrizione",
@@ -321,7 +322,7 @@
   "app.libraries.profile_type.full": "Completo (Borrowing+Lending)",
   "app.libraries.ill_IFLA_voucher": "Accettati voucher IFLA",
   "app.libraries.ill_cost_in_voucher": "Valore voucher IFLA",  
-  
+
   "app.references.labels": "Etichette",
   "app.references.labelAs": "Etichetta come",
   "app.references.groups": "Categorie",
