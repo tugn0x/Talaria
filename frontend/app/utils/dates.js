@@ -4,8 +4,12 @@ import { useIntl } from 'react-intl';
 export function formatDate(date) {
   let intl=useIntl();
   let mymoment=moment(date)
-  mymoment.locale(intl.locale)
-  return mymoment.utc().local().format('L');
+  if(mymoment.isValid())
+  {
+    mymoment.locale(intl.locale)
+    return mymoment.utc().local().format('L');
+  }
+  return '';
 }
 
 //NB: tutte le date ricevute dal frontend saranno in UTC (laravel le salva cosi)
@@ -13,8 +17,13 @@ export function formatDate(date) {
 export function formatDateTime(date/*, type*/) {
   let intl=useIntl();
   let mymoment=moment(date)
-  mymoment.locale(intl.locale)
-  return mymoment.utc().local().format('L LT');  
+  if(mymoment.isValid())
+  {
+    mymoment.locale(intl.locale)
+    return mymoment.utc().local().format('L LT');  
+  }
+  
+  return '';
 }
 
 export function daysFromToday(date) {  
@@ -22,5 +31,7 @@ export function daysFromToday(date) {
   var current = moment();
 
   //Difference in number of days
-  return current.diff(given,'days');
+  if(current.isValid() && given.isValid()) return current.diff(given,'days');
+
+  return 0;
 }
