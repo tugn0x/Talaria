@@ -443,6 +443,8 @@ export const fields = {
     ill_supply_conditions: {
         type: "textarea",
         required: false,
+        cols: 56,
+        rows:7,
         name: "ill_supply_conditions",
         width: "col-sm-6",
         group: "step_1",
