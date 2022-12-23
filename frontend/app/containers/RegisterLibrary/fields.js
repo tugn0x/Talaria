@@ -324,6 +324,27 @@ export const fields = {
         hidden:true
     },
 
+    subject_label: {
+        type: "Label",
+        required: false,
+        paddingtop:"30px",        
+        size:"25px",
+        name: "subject_label",
+        nolabel: true,
+        width: "col-sm-12",
+        group: "step_1",
+        order: 31,
+    },
+    subject_id: {
+        type: "custom-select",
+        required: true,
+        name: "subject_id",
+        width: "col-sm-12",
+        group: "step_1",
+        options: "subject_id",        
+        order: 32,
+    },
+
 
     
     volunteer_library_label: {
@@ -336,7 +357,7 @@ export const fields = {
         nolabel: true,
         width: "col-sm-12",
         group: "step_1",
-        order: 31,
+        order: 33,
     },    
     showfullProfile: {
         type: "Button",
@@ -345,8 +366,9 @@ export const fields = {
         name: "showfullProfile",
         width: "col-md-12",
         group: "step_1",
-        order: 32,
-    },
+        order: 34,
+    },    
+    
     opac_label: {
         type: "Label",
         required: false,
@@ -357,7 +379,7 @@ export const fields = {
         nolabel: true,
         width: "col-sm-12",
         group: "step_1",
-        order: 33,
+        order: 35,
     },
     opac: {
         type: "text",
@@ -365,28 +387,6 @@ export const fields = {
         name: "opac",
         group: "step_1",
         width: "col-sm-12",
-        hidden: true,
-        order: 34,
-    },
-    subject_label: {
-        type: "Label",
-        required: false,
-        paddingtop:"30px",
-        hidden: true,
-        size:"25px",
-        name: "subject_label",
-        nolabel: true,
-        width: "col-sm-12",
-        group: "step_1",
-        order: 35,
-    },
-    subject_id: {
-        type: "custom-select",
-        required: true,
-        name: "subject_id",
-        width: "col-sm-12",
-        group: "step_1",
-        options: "subject_id",
         hidden: true,
         order: 36,
     },

@@ -105,7 +105,7 @@ export default defineMessages({
   },
 
   subject_name: {
-    id: 'app.libraries.subject_name',
+    id: 'app.libraries.subject_id',
     defaultMessage: 'Subject',
   },
 

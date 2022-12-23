@@ -132,13 +132,13 @@ const RegisterLibrary = (props) => {
             fields.volunteer_library_label.hidden = true;
             fields.opac_label.hidden=false;
             fields.opac.hidden=false;
-            fields.subject_label.hidden=false;
-            fields.subject_id.hidden=false;
+            //fields.subject_label.hidden=false;
+            //fields.subject_id.hidden=false;
             fields.showfullProfile.hidden = true;                             
         }
         fields.geolocation_spinner.hidden=true;
         fields.opac.required=false;
-        fields.subject_id.required=false;
+        //fields.subject_id.required=false;
         //set profile
         //setData({...data, 'profile_type': basicProfile?1:2})
 
@@ -346,21 +346,21 @@ const RegisterLibrary = (props) => {
         if (fields.opac.hidden===false)
         {
             fields.opac.required = false;
-            fields.subject_id.required = false;
-            fields.subject_id.value = 1
+            //fields.subject_id.required = false;
+            //fields.subject_id.value = 1
             fields.opac.hidden=true;
             fields.opac_label.hidden=true;
-            fields.subject_id.hidden=true;
+            //fields.subject_id.hidden=true;
             fields.subject_label.hidden=true;
             fields.showfullProfile.label=intl.formatMessage(wizardMessages.switchToFullProfile)
         }
         else
-        {            
-            fields.subject_id.required = true;
+        {                        
+            //fields.subject_id.required = true;
             fields.opac.required = true;
             fields.opac.hidden=false;
             fields.opac_label.hidden=false;
-            fields.subject_id.hidden=false;
+            //fields.subject_id.hidden=false;
             fields.subject_label.hidden=false;
             fields.showfullProfile.label=intl.formatMessage(wizardMessages.switchToBasicProfile)            
         }
