@@ -204,7 +204,7 @@ const RegisterLibrary = (props) => {
 
      // Cambia Step
     const onChangeStep = (formData, newStep) => {
-        if (data.project_id.length > 0)
+        if (data.project_id && data.project_id.length > 0)
         {   
             arrprojectName.length = 0
             data.project_id.forEach((projectid) => {
@@ -474,7 +474,8 @@ const RegisterLibrary = (props) => {
                                         && itemsreport[i].field_name!=='country_id' && itemsreport[i].field_name!=='library_identifiers_txt' && itemsreport[i].field_name!=='identifier_type_id' 
                                         && itemsreport[i].field_name!=='subject_id' && itemsreport[i].field_name!=='institution_country_id' && itemsreport[i].field_name!=='institution_id' 
                                         && itemsreport[i].field_name!=='order' && itemsreport[i].field_name!=='backbuttonPressed'
-                                        && 
+                                        && (fields.suggested_institution_name.hidden ? itemsreport[i].field_name!=='suggested_institution_name' : itemsreport[i].field_name!=='institution_name')
+                                        &&
                                         <div key={item}  class="report_summary"> 
                                         { 
                                             <div> 
