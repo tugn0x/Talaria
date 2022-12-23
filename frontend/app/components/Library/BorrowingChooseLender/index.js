@@ -3,6 +3,7 @@ import {FormattedHTMLMessage, useIntl} from 'react-intl';
 import {Card, Form as FormContainer, FormGroup, Button} from 'reactstrap';
 import CustomCheckBox from '../../Form/CustomCheckBox';
 import Input from '../../Form/Input';
+import LibraryInformations from '../LibraryInformations';
 
 import './style.scss';
 
@@ -93,7 +94,9 @@ const BorrowingChooseLender = (props) => {
                     <ul className="librarylist">
                         <li key="alllibraries" className="alllibraries"><input name="lender" type="radio" value="0" onChange={e=>onChangeLibraryList(e.target.value)} />ALL libraries</li>
                         {lendersList.data.map ( (lib) => 
-                            <li key={lib.id}><input name="lender" type="radio" value={lib.id} onChange={e=>onChangeLibraryList(e.target.value)} />{lib.name}</li>    
+                            <li key={lib.id}><input name="lender" type="radio" value={lib.id} onChange={e=>onChangeLibraryList(e.target.value)} />
+                                <LibraryInformations data={lib} showILLInfo={true}/>
+                            </li>    
                         )}                                        
                     </ul>                    
                     {(allselected || (formData.lending_library_id && !allselected) ) && 

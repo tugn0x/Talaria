@@ -1,9 +1,14 @@
 .BorrowingChooseLender .librarylist {
     margin:10px;
 
-    li.alllibraries {
-        font-weight: bold;
+    li {
+        margin-bottom:20px;                
+
+        & .alllibraries {
+            font-weight: bold;            
+        }
     }
+    
 }
 
 .sendTolenderButtons {    

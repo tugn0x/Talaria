@@ -1,0 +1,69 @@
+@import '../../../scss/variables';
+
+
+.libraryInformations  {
+    display: inline;
+}
+
+    .library_extra_info {      
+        font-size: 0.95em;
+
+        .coords {
+            display: block;
+        }
+
+        & .project-item,
+        & .identifier-item {
+            display: inline;
+            margin-right: 2px;
+        }
+
+        & .contact, .ill_info, .payment_info {
+            display: block;
+            margin: 10px 0 10px 0;
+
+            .header {
+                font-weight: bold;
+                color: $alternative-text;
+            }
+
+            & span {
+                display: block;
+                
+                .label {
+                    font-weight: bold;
+                }
+
+                & span:first-child {
+                    display: inline;                        
+                }
+            }
+        }
+    }
+
+    .identifiers, .projects, .institution {
+            display: block;
+    }
+
+    .identifiers .identifier-item {
+        margin-right: 2px;
+    }
+
+    .institution .institutionType {
+        font-style: italic;        
+    }   
+
+    .library_name {
+        margin-left: 5px; 
+        color: $active;               
+        display: inline !important;
+
+        & a:hover {
+            text-decoration: none;
+        }
+    }
+
+    a.toggle-library-info .active{
+        margin-right: 5px;        
+                       
+    }

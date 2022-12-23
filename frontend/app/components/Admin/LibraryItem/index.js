@@ -7,6 +7,7 @@ import CustomCheckBox from 'components/Form/CustomCheckBox';
 //import RequestTags from '../RequestTags';
 import './style.scss';
 import { Link } from 'react-router-dom';
+import LibraryInformations from '../../Library/LibraryInformations';
 
 
 export const editurl=(reqPath,id,op) => {
@@ -100,42 +101,7 @@ export const canRenew = (lib) => {
     return false;
 }
 
-export const LibraryInfo = (props) => {
 
-    const intl = useIntl();
-
-    const {data,editPath,customClass}=props;
-
-    const openstreetmapURL='https://www.openstreetmap.org/?mlat=:lat&mlon=:lon';
-
-    const mapLink = (lat,lon) => {
-        return generatePath(openstreetmapURL, {
-            lat,lon
-        });        
-    }
-
-
-    return (
-        <div className={"library_info"}>            
-            {/*<span className="status-text">{data.borrowing_status ? intl.formatMessage({id: "app.requests."+data.borrowing_status}):'xxx'}</span>*/}                    
-            <div className='address'>
-                <i className="fas fa-map-marker"></i> {data.address} {data.postcode} {data.town} {data.district} {data.state}
-                <span className='country_id'>({data.country.data.name})</span>
-                
-                {data.lat && data.lon && <span className='coords'>
-                    <i className="fas fa-map-marked"></i> <a className="active" href={mapLink(data.lat,data.lon)} target='_blank'>{data.lat},{data.lon}</a>
-                </span>}
-            </div>
-            {(data.ill_phone||data.ill_email) && <div className='contact'>
-                {data.ill_phone && <span><i className="fas fa-phone"></i> {data.ill_phone} </span>}
-                {data.ill_email && <span><i className="fas fa-envelope"></i> {data.ill_email}</span>}
-            </div>}
-            {data.ill_referent_name && <div className='referent'>
-                <i className="fas fa-user"></i> {data.ill_referent_name}
-            </div>}                                                                        
-        </div>
-    )
-}
 
 
 
@@ -169,8 +135,6 @@ const LibraryItem = (props) => {
         });        
     }
 
-    const [showLibraryInfo,setShowLibraryInfo]=useState(false);
-
     return (
         <Row className="library_item list-row">
             <Col sm={5}>
@@ -178,35 +142,7 @@ const LibraryItem = (props) => {
                     handleChange={toggleSelection}
                     checked={checked}
                 /> 
-                <div className="library_id">
-                    <a className="toggle-library-info" onClick={()=>setShowLibraryInfo(!showLibraryInfo)} title="show extra info">      
-                        <i className={`active fas ${showLibraryInfo?'fa-caret-square-up':'fa-caret-square-down'}`}></i> 
-                    </a> 
-                    <Link to={editurl(editPath,data.id)} className="active"><span>{data.id} - {data.name}</span></Link>
-                </div>
-                {data.institution && <div className='institution'>
-                    <i className="fas fa-building"></i> 
-                    <span className='badge badge-secondary'>{data.institution.data.name} {data.institution.data.status!==1? <span className='text-danger'><i className="fas fa-exclamation-triangle"></i></span>:''} ({data.institution.data.institution_type.data.name})</span>                
-                </div>}                            
-                {data.projects && data.projects.data && data.projects.data.length>0 && 
-                        <span className='projects'>
-                            <i className="fas fa-project-diagram"></i>                                        
-                            {data.projects.data.map(prj => 
-                            <span key={prj.id} className="project-item badge badge-secondary text-white">
-                                {prj.name}
-                            </span>)}                                        
-                        </span>                                    
-                }
-                {data.identifiers && data.identifiers.data && data.identifiers.data.length>0 && 
-                    <span className='identifiers'>                    
-                        <i className="fas fa-key"></i>                     
-                        {data.identifiers.data.map(ident => 
-                        <span key={ident.id} className="identifier-item badge badge-info text-white">
-                            {ident.name}: {ident.pivot.cod}
-                        </span>)}                                    
-                    </span>
-                }          
-                {showLibraryInfo && <LibraryInfo data={data} editPath={editPath} customClass="library_info"/>}                                 
+               <LibraryInformations data={data} detailUrl={editurl(editPath,data.id)}  showILLInfo={false} showPaymentInfo={true}/>
             </Col>
             <Col sm={3}>                                                      
                 <Link className="btn btn-icon btn-sm" to={subscriptionurl(editPath,data.id)}><i className="fas fa-file-contract"></i></Link> 

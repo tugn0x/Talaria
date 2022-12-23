@@ -289,6 +289,7 @@
   "app.libraries.ill_imbalance": "ILL imbalance threshold",
   "app.libraries.ill_cost": "Cost per article",
   "app.libraries.ill_user_cost": "User cost per article",  
+  "app.libraries.ill_susp_date": "Suspension period",
   "app.libraries.ill_susp_date_start": "Suspension start date",
   "app.libraries.ill_susp_date_end": "Suspension end date",
   "app.libraries.ill_susp_notification_days": "Notify from (days)",
