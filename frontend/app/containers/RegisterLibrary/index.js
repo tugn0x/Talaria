@@ -37,7 +37,8 @@ const RegisterLibrary = (props) => {
     const [steps, setSteps] = useState(setNewSteps)
     const [countryid, setCountryid] = useState(0);
     const [institutiontypeid, setInstitutiontypeid] = useState(0);
-    const projectsarrname = [];
+    const[projectsarrname, setprojectsarrname]=useState([]) // functional component
+    const Selectedprojectsnamearr = [];
     const [basicProfile,setBasicProfile]=useState(LIBRARY_DIFFERENT_PROFILES);
     const [lat, setLat] = useState(null);
     const [lng, setLng] = useState(null);
@@ -49,7 +50,7 @@ const RegisterLibrary = (props) => {
     const [identifierType, setIdentifiertype] = useState(null);
     const [identifierTypeSelected, setidentifierTypeSelected] = useState(false);
     let [buttonStopPressed, setbuttonStopPressed] = useState(false)
-    const [projectName, setProjectName] = useState(null);
+    const [arrprojectName, setarrProjectName] = useState([]);
     const [printStatus, setPrintStatus] = useState(false)
     const [disabled, setdisabled] = useState(false)
 
@@ -203,6 +204,19 @@ const RegisterLibrary = (props) => {
 
      // Cambia Step
     const onChangeStep = (formData, newStep) => {
+        if (data.project_id.length > 0)
+        {   
+            arrprojectName.length = 0
+            data.project_id.forEach((projectid) => {
+                const project = props.libraryProjectsOptionList.find(obj => {
+                    return obj.value === projectid;
+                  });
+
+                  if (!arrprojectName.includes(project.label)) 
+                    arrprojectName.push(project.label)
+              });
+        }
+
         if (newStep==1)        
         {
             setData({...data, 'backbuttonPressed': true})
@@ -457,18 +471,22 @@ const RegisterLibrary = (props) => {
                                  Object.keys(itemsreport).map( (item, i) => {
                                         return (itemsreport[i].field_name!=='profile_type') && itemsreport[i].field_name!=='identifier_id' && itemsreport[i].field_name!=='institution_type_id' 
                                         //return itemsreport[i].field_name!=='identifier_id' && itemsreport[i].field_name!=='institution_type_id' 
-                                        && itemsreport[i].field_name!=='country_id' && itemsreport[i].field_name!=='library_identifiers_txt' && itemsreport[i].field_name!=='identifier_type_id' && itemsreport[i].field_name!=='subject_id'
-                                        && itemsreport[i].field_name!=='institution_country_id' && itemsreport[i].field_name!=='institution_id' && itemsreport[i].field_name!=='project_id'
-                                        && itemsreport[i].field_name!=='institution_name' && itemsreport[i].field_name!=='order'
+                                        && itemsreport[i].field_name!=='country_id' && itemsreport[i].field_name!=='library_identifiers_txt' && itemsreport[i].field_name!=='identifier_type_id' 
+                                        && itemsreport[i].field_name!=='subject_id' && itemsreport[i].field_name!=='institution_country_id' && itemsreport[i].field_name!=='institution_id' 
+                                        && itemsreport[i].field_name!=='order' && itemsreport[i].field_name!=='backbuttonPressed'
                                         && 
                                         <div key={item}  class="report_summary"> 
                                         { 
                                             <div> 
                                                 <div class="font-weight-bold">{messages[itemsreport[i].field_name] && intl.formatMessage(messages[itemsreport[i].field_name])}</div>
-                                                    {(itemsreport[i].field_name!=='identifiers_id') && <div>{itemsreport[i].value} {itemsreport[i].ordd}</div>}
+                                                    {(itemsreport[i].field_name!=='identifiers_id' && itemsreport[i].field_name!=='project_id') && <div>{itemsreport[i].value} {itemsreport[i].ordd}</div>}
                                                     {(itemsreport[i].field_name==='identifiers_id')&&<div>
                                                     {itemsreport[i].value.map((item) => (<div><b>{item[2]}: </b>{item[1]}</div>))}
-                                                    </div>} 
+                                                    </div>}
+                                                    {(itemsreport[i].field_name==='project_id')&&<div>
+                                                    {arrprojectName.map((item) => (<div><li>{item}</li></div>))}
+                                                    </div>}
+
                                             </div>
                                         }   
                                         </div>
