@@ -42,7 +42,8 @@ export const LibraryExtraInfo = (props) => {
             </div>}  
 
             {showILLInfo && <div className='ill_info'>  
-                <span className='header'>ILL Service</span>                                                                                                    
+                <span className='header'>ILL Service</span>                                                                                                                    
+                {data.subject_id && data.subject && <span className="subject_id"><span className='label'>{intl.formatMessage({id:'app.libraries.subject_id'})}:</span> {data.subject.data.name}</span>}
                 {data.ill_supply_conditions && <span className="ill_supply_conditions"><span className='label'>{intl.formatMessage({id:'app.libraries.ill_supply_conditions'})}:</span> {data.ill_supply_conditions}</span>}
                 {data.ill_imbalance &&<span className="ill_imbalance"><span className='label'>{intl.formatMessage({id:'app.libraries.ill_imbalance'})}:</span> {data.ill_imbalance}</span>}
                 {data.ill_susp_date_start && <span className="ill_susp_date"><span className='label'>{intl.formatMessage({id:'app.libraries.ill_susp_date'})}:</span> {formatDate(data.ill_susp_date_start)} - {formatDate(data.ill_susp_date_end)}</span>}
