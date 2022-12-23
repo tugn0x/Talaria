@@ -13,7 +13,7 @@ const InputField = (props) => {
             reg =  /^[0-9\g]+$/ 
         
         if (field.type === 'textarea')
-            reg =  /^.{1,255}$/
+            reg =  /^.*$/
         else
             reg =  /^.{1,50}$/
         
