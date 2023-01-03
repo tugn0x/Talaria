@@ -61,7 +61,7 @@ case REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST:
 case REQUEST_GET_INSTITUTIONS_TYPE_COUNTRY_OPTIONLIST_SUCCESS:
   draft.error = initialState.error;
   draft.institutionsByTypeCountryOptionList = action.result.sort((a, b) => { return (a.id > b.id) ? 1 : -1 }).map(item => { return {value: item.id, label: item.name} } );
-  draft.institutionsByTypeCountryOptionList.push({"value":0,"label":"Institution not present"})
+  draft.institutionsByTypeCountryOptionList.push({"value":-1,"label":"Institution not present"})
   break;
 
 

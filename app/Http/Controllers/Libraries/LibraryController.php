@@ -154,7 +154,7 @@ class LibraryController extends ApiController
         });        
 
         $model = $model->fill($new_model);        
-        if($request->has('institution_id') && $request->input('institution_id')==0 && $request->filled('suggested_institution_name') && $request->filled('institution_type_id') && $request->filled('institution_country_id')) 
+        if($request->has('institution_id') && $request->input('institution_id')==-1 && $request->filled('suggested_institution_name') && $request->filled('institution_type_id') && $request->filled('institution_country_id')) 
         {
             $inst=Institution::firstOrNew(['name'=>$request->input('suggested_institution_name'),'institution_type_id'=>$request->input('institution_type_id'),'country_id'=>$request->input('institution_country_id')]);
             if(!$inst->exists) //not pulled from db so will be created as new

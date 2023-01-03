@@ -297,13 +297,13 @@ const RegisterLibrary = (props) => {
             setData({...data, [field_name]: value, ['order_'+field_name]:order})
         }
 
-        if (field_name === "institution_id" && value.value !== 0)
+        if (field_name === "institution_id" && value.value !== -1)
         {
             setInstitutionName(value.label) 
             fields.suggested_institution_name.hidden=true
         }
 
-        if (field_name === "institution_id" && value.value === 0)
+        if (field_name === "institution_id" && value.value === -1)
         {
             fields.suggested_institution_name.hidden = false;
             setInstitutionName (null)
