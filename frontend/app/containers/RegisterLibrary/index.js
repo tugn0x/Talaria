@@ -235,6 +235,8 @@ const RegisterLibrary = (props) => {
     
 
     const onBackPressed = (field_name,value,newList) => {
+        itemsreport.length=0
+        setSortingcount(0)
         setData({...data, 'backbuttonPressed': true})
         fields.library_identifier_list.hidden = false
         setCurrentStep(parseInt(1))
@@ -448,7 +450,7 @@ const RegisterLibrary = (props) => {
                             Object.keys(data).map((key, index) => {
                               if (!key.includes("order_"))
                                 {
-                                    var itemexists = itemsreport.findIndex(x => x.field_name==key); 
+                                    var itemexists = itemsreport.findIndex(x => x.field_name==key && x.value==data[key]); 
                                     if (itemexists < 0)
                                     {
                                         itemsreport.push({
