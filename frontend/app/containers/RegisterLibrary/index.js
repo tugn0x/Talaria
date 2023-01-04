@@ -141,7 +141,7 @@ const RegisterLibrary = (props) => {
         //fields.subject_id.required=false;
         //set profile
         //setData({...data, 'profile_type': basicProfile?1:2})
-
+        setBasicProfile(1)
         setData({...data, ['profile_type']: basicProfile?1:2, ['order_profile_type']:0})
         setData({...data, ['profile_type_name']: basicProfile?"Basic Profile":"Full Profile", ['order_profile_type_name']:1})
 
@@ -204,6 +204,7 @@ const RegisterLibrary = (props) => {
 
      // Cambia Step
     const onChangeStep = (formData, newStep) => {
+
         if (data.project_id && data.project_id.length > 0)
         {   
             arrprojectName.length = 0
