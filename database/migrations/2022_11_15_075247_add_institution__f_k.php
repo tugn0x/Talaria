@@ -31,7 +31,7 @@ class AddInstitutionFK extends Migration
     public function down()
     {
         Schema::table('institutions', function (Blueprint $table) {
-            $table->dropForeign('institutions_identifier_id_foreign');
+            $table->dropForeign('institutions_institution_type_id_foreign');
             $table->dropForeign('institutions_country_id_foreign');
         });
     }
