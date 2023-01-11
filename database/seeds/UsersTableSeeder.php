@@ -107,6 +107,17 @@ class UsersTableSeeder extends Seeder
 //            'department_id'=>1,
 //            'title_id'=>2,
 //        ]);
+
+        $manager = factory(\App\Models\Users\User::class)->create([
+            'email' => 'manager@nilde.it',
+            'name' => 'Manager',
+            'surname' => 'Manager',
+            'password' => $defaultpw,
+            'password_confirmation' => $defaultpw,
+            'privacy_policy_accepted'=>now(),
+            'country_id'=>1,
+        ]);
+        $manager->assign('manager');        
     }
 
 }
