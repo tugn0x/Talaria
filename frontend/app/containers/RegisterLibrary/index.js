@@ -165,8 +165,8 @@ const RegisterLibrary = (props) => {
 
     useEffect(() => {
        //set profile
-       setData({...data, ['profile_type']: basicProfile?1:2, ['order_profile_type']:0})
-       setData({...data, ['profile_type_name']: basicProfile?intl.formatMessage(messages['basicprofile']):intl.formatMessage(messages['fullprofile']), ['order_profile_type_name']:1})
+       //setData({...data, ['profile_type']: basicProfile?1:2, ['order_profile_type']:0})
+       setData({...data, ['profile_type']: basicProfile?1:2, ['order_profile_type']:0, ['profile_type_name']: basicProfile?intl.formatMessage(messages['basicprofile']):intl.formatMessage(messages['fullprofile']), ['order_profile_type_name']:1})
     }, [basicProfile])
 
 
@@ -478,6 +478,7 @@ const RegisterLibrary = (props) => {
                                         && itemsreport[i].field_name!=='subject_id' && itemsreport[i].field_name!=='institution_country_id' && itemsreport[i].field_name!=='institution_id' 
                                         && itemsreport[i].field_name!=='order' && itemsreport[i].field_name!=='backbuttonPressed'
                                         && (fields.suggested_institution_name.hidden ? itemsreport[i].field_name!=='suggested_institution_name' : itemsreport[i].field_name!=='institution_name')
+                                        && (fields.opac.hidden ? itemsreport[i].field_name!=='opac' : itemsreport[i].field_name!=='')
                                         &&
                                         <div key={item}  class="report_summary"> 
                                         { 
