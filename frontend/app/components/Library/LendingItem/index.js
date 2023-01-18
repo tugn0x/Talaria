@@ -207,13 +207,7 @@ const LendingItem = (props) => {
                     <i className="fas fa-landmark"></i> {data.borrowinglibrary.data.name}
                     
                 </span>                
-               } 
-               {data.request_note && <div className="request_note">
-                <a href="#" id={`request_note-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
-                <UncontrolledTooltip autohide={false} placement="right" target={`request_note-${data.id}`}>
-                    {data.request_note}
-                </UncontrolledTooltip>                                
-                </div>}                
+               }                        
                {!isArchived(data) && data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}
                
                {/* <span className="fullfilment">...[Static fulfilled/unfilled status]...</span>               */}
