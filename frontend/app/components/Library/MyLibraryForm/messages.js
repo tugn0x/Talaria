@@ -13,73 +13,73 @@ export default defineMessages({
     defaultMessage: 'Library form',
   },
   institution_id: {
-    id: `${scope}.institution_id`,
+    id: `app.libraries.institution_id`,
     defaultMessage: "Institution ID",
   },
   subject_id: {
-    id: `${scope}.subject_id`,
+    id: `app.libraries.subject_id`,
     defaultMessage: 'Subject ID',
   },
   country_id: {
-    id: `${scope}.country_id`,
+    id: `app.libraries.country_id`,
     defaultMessage: 'Country ID',
   },
 
   identifier_type_id: {
-    id: `${scope}.identifier_type_id`,
+    id: `app.libraries.identifier_type_id`,
     defaultMessage: 'identifier_type_id',
   },
 
   opac: {
-    id: `${scope}.opac`,
+    id: `app.libraries.opac`,
     defaultMessage: 'Url opac',
   },
   ill_email: {
-    id: `${scope}.ill_email`,
+    id: `app.libraries.ill_email`,
     defaultMessage: 'Email LL service',
   },
   ill_phone: {
-    id: `${scope}.ill_phone`,
+    id: `app.libraries.ill_phone`,
     defaultMessage: 'Phone LL service',
   },
   ill_supply_conditions: {
-    id: `${scope}.ill_supply_conditions`,
+    id: `app.libraries.ill_supply_conditions`,
     defaultMessage: 'Supply conditions',
   },
   ill_imbalance: {
-    id: `${scope}.ill_imbalance`,
+    id: `app.libraries.ill_imbalance`,
     defaultMessage: 'Imbalance',
   },
   ill_susp_date_start: {
-    id: `${scope}.ill_susp_date_start`,
+    id: `app.libraries.ill_susp_date_start`,
     defaultMessage: 'Susp start date',
   },
   ill_susp_date_end: {
-    id: `${scope}.ill_susp_date_end`,
+    id: `app.libraries.ill_susp_date_end`,
     defaultMessage: 'Susp end date',
   },
   ill_susp_notification_days: {
-    id: `${scope}.ill_susp_notification_days`,
+    id: `app.libraries.ill_susp_notification_days`,
     defaultMessage: 'Susp notice days',
   },
   ill_cost: {
-    id: `${scope}.ill_cost`,
+    id: `app.libraries.ill_cost`,
     defaultMessage: 'ill_cost',
   },
   ill_user_cost: {
-    id: `${scope}.ill_user_cost`,
+    id: `app.libraries.ill_user_cost`,
     defaultMessage: 'ill_user_cost',
   },
   status: {
-    id: `${scope}.status`,
+    id: `app.libraries.status`,
     defaultMessage: 'status',
   },
   external: {
-    id: `${scope}.external`,
+    id: `app.libraries.external`,
     defaultMessage: 'external',
   },
   registration_date: {
-    id: `${scope}.registration_date`,
+    id: `app.libraries.registration_date`,
     defaultMessage: 'Registration date',
   },
   vatnumber: {
@@ -93,10 +93,6 @@ export default defineMessages({
   invoice_header: {
     id: `app.global.invoice_header`,
     defaultMessage: 'invoice_header',
-  },
-  registration_date: {
-    id: `${scope}.registration_date`,
-    defaultMessage: 'Registration date',
   },
   email_pec: {
     id: `app.global.email_pec`,
@@ -123,7 +119,7 @@ export default defineMessages({
     defaultMessage: 'terzo_code',
   },
   general_info: {
-    id: `${scope}.general_info`,
+    id: `app.libraries.general_info`,
     defaultMessage: 'General info',
   },
   administrative_info: {
@@ -131,7 +127,7 @@ export default defineMessages({
     defaultMessage: 'Administrative Info',
   },
   granted_permissions: {
-    id: `${scope}.granted_permissions`,
+    id: `app.libraries.granted_permissions`,
     defaultMessage: 'Users permissions',
   },
   updateSubmitText: {
