@@ -34,6 +34,7 @@ services:
     volumes:
       - ../RSCVD/frontend:/usr/src/app
       - ../RSCVD/.env:/usr/src/.env
+    #command: npm start
     command: bash -c "npm install; npm run start:production"    
     expose:
     - 3000

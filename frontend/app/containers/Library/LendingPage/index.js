@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {useIntl} from 'react-intl'
 import makeSelectLibrary, {isLibraryLoading} from '../selectors';
-import {requestLendingsList,requestLibraryTagsOptionList,requestApplyLendingTagsToDDRequests, requestRemoveDDLendingRequestTag, requestChangeStatusLending, requestAcceptAllLenderLending, FulfillLendingRequestStatus, unFulfillLendingRequestStatus} from '../actions'
+import {requestLendingsList,requestLibraryTagsOptionList,requestApplyLendingTagsToDDRequests, requestRemoveDDLendingRequestTag, requestChangeStatusLending, requestAcceptAllLenderLending} from '../actions'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -89,8 +89,6 @@ const LendingPage = (props) => {
                     searchOnChange: true
                 }}                
                 removeTagFromRequest={archive==1?undefined:removeTagFromDDRequest}                
-                FulfillLendingRequestStatus={FulfillLendingRequestStatus}
-                unFulfillLendingRequestStatus={unFulfillLendingRequestStatus}
                 applyTags={archive==1?undefined:applyLendingTagsToDDRequests}
                 UpdateLendingRequestStatus={UpdateLendingRequestStatus}
                 UpdateLendingAcceptRequest={UpdateLendingAcceptRequest}

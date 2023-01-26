@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import makeSelectLibrary, {isLibraryLoading} from '../selectors';
 import {Loader} from 'components';
-import {PickupForm} from '../../../components/Library/PickupForm'
+import PickupForm from '../../../components/Library/PickupForm';
 
 import {requestPickup} from '../actions'
 

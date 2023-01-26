@@ -11,7 +11,7 @@ The software requires docker installed in your environment.
 The frontend don't need any configuration; it's based on a nodejs container
 running the application by command `npm start` as the container starts
 
-To update packages, run these from `frontend` container:
+To download all packages the 1st time, run these from `frontend` container:
 ```bash
 npm install 
 ```

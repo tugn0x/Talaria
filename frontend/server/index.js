@@ -38,7 +38,6 @@ const customHost = argv.host || environment.HOST;
 const host = customHost || null; // Let http.Server use its default IPv6/4 host
 const prettyHost = customHost || 'localhost';
 
-console.log('eccomi....')
 console.log(`${__dirname}/../spid-smart-button/dist`)
 // use the gzipped bundle
 app.get('*.js', (req, res, next) => {

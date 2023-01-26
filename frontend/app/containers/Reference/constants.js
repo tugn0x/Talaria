@@ -1,3 +1,4 @@
+export const REQUEST_ERROR = 'app/Reference/REQUEST_ERROR';
 export const REQUEST_GET_REFERENCE = 'app/Reference/REQUEST_GET_REFERENCE';
 export const REQUEST_GET_REFERENCE_SUCCESS = 'app/Reference/REQUEST_GET_REFERENCE_SUCCESS';
 

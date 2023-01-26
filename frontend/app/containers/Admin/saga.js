@@ -9,8 +9,7 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_POST_LIBRARY,
           REQUEST_GET_INSTITUTION_TYPE_LIST,
           REQUEST_GET_PROJECT,
-          REQUEST_GET_PROJECTS_LIST,
-          REQUEST_GET_PROJECTS_OPTIONLIST,
+          REQUEST_GET_PROJECTS_LIST,          
           REQUEST_UPDATE_PROJECT,
           REQUEST_POST_PROJECT,
           REQUEST_GET_INSTITUTIONS_LIST,
@@ -23,8 +22,7 @@ import { REQUEST_USERS_LIST, REQUEST_UPDATE_USER,
           REQUEST_GET_COUNTRIES_OPTIONLIST,
           UPDATE_INSTITUTION,
           REQUEST_LIBRARYSUBJECT_OPTIONLIST,
-          REQUEST_POST_PUBLIC_LIBRARY,
-          REQUEST_SEARCH_PLACES_BY_TEXT,
+          REQUEST_POST_PUBLIC_LIBRARY,          
           REQUEST_GET_LIBRARY_LIST,
           REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST,
           REQUEST_STATUS_CHANGE_LIBRARY,
@@ -48,18 +46,15 @@ import {
   requestGetInstitutionTypesListSuccess,
   requestGetProjectSuccess,
   requestGetProjectsListSuccess,
-  requestGetProjectsOptionListSuccess,
   requestGetInstitutionsListSuccess,
-  requestGetIdentifiersListSuccess,
+  //requestGetIdentifiersListSuccess,
   requestGetInstitutionTypesOptionListSuccess,
   //requestGetInstitutionsOptionListSuccess,
   requestGetInstitutionsByTypeByCountryOptionListSuccess,
   requestGetCountriesOptionListSuccess,
   requestGetInstitutionSuccess,
   requestGetRolesSuccess,
-  requestLibrarySubjectOptionListSuccess,
-  requestSearchPlacesByTextSuccess,
-  requestSearchPlacesByTextFail,  
+  requestLibrarySubjectOptionListSuccess,  
   requestGetLibraryListNearToSuccess,
   requestGetlibraryProjectsOptionListSuccess,
   requestGetlibraryIdentifiersOptionListSuccess,
@@ -588,18 +583,6 @@ export function* requestGetProjectsListSaga(action = {}) {
   }
 }
 
-export function* requestProjectsOptionListSaga(action) {
-  const options = {
-    method: 'get',
-    query: action.request ? action.request : ""
-  }
-  try {
-    const request = yield call(getProjectsOptionList, options);
-    yield put(requestGetProjectsOptionListSuccess(request));
-  } catch(e) {
-    yield put(requestError(e.message));
-  }
-}
 
 export function*  requestGetlibraryProjectsOptionList(action) {
   const options = {
@@ -618,20 +601,6 @@ export function*  requestGetlibraryProjectsOptionList(action) {
 }
 
 
-
-export function* findPlacesByText(action) {
-  console.log("findPlacesByText:", action);
-  const options = {
-    method: 'get',    
-    search: action.search,    
-  }
-  try {
-    const result = yield call(getPlacesByText, options);
-    yield put(requestSearchPlacesByTextSuccess(result));          
-  } catch(e) {    
-    yield put(requestSearchPlacesByTextFail(e.message));
-  }
-}
 
 export function* requestLibraryListNearToSaga(action = {}) {
   console.log("SAGA-requestLibraryListNearToSaga",action)
@@ -668,8 +637,7 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_GET_INSTITUTION_TYPE_LIST, requestGetInstitutionTypesListSaga);
   yield takeLatest(REQUEST_DELETE_INSTITUTION_TYPE, requestDeleteInstitutionTypeSaga);
   yield takeLatest(REQUEST_GET_PROJECT, requestGetProjectSaga);
-  yield takeLatest(REQUEST_GET_PROJECTS_LIST, requestGetProjectsListSaga);
-  yield takeLatest(REQUEST_GET_PROJECTS_OPTIONLIST, requestProjectsOptionListSaga);
+  yield takeLatest(REQUEST_GET_PROJECTS_LIST, requestGetProjectsListSaga);  
 
   yield takeLatest(REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST, requestGetlibraryProjectsOptionList)
 
@@ -695,8 +663,7 @@ export default function* adminSaga() {
   yield takeLatest(REQUEST_GET_INSTITUTION, requestGetInstitutionSaga);
   yield takeLatest(REQUEST_POST_INSTITUTION, requestPostInstitutionSaga);
   yield takeLatest(REQUEST_GET_COUNTRIES_OPTIONLIST, requestGetCountriesOptionListSaga);
-  yield takeLatest(UPDATE_INSTITUTION, requestUpdateInstitutionSaga);
-  yield takeLatest(REQUEST_SEARCH_PLACES_BY_TEXT,findPlacesByText);
+  yield takeLatest(UPDATE_INSTITUTION, requestUpdateInstitutionSaga);  
   yield takeLatest(REQUEST_GET_LIBRARY_LIST, requestLibraryListNearToSaga);
   yield takeLatest(REQUEST_GET_INSTITUTION_TYPE, requestGetInstitutionTypeSaga);
   yield takeLatest(REQUEST_POST_INSTITUTION_TYPE, requestPostInstitutionTypeSaga);

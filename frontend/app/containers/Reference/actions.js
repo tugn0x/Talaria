@@ -1,5 +1,5 @@
 import {
-    REQUEST_FIND_REFERENCE_BY_ID,REQUEST_FIND_REFERENCE_BY_ID_SUCCESS,REQUEST_GET_REFERENCE,REQUEST_GET_REFERENCE_SUCCESS
+    REQUEST_ERROR,REQUEST_FIND_REFERENCE_BY_ID,REQUEST_FIND_REFERENCE_BY_ID_SUCCESS,REQUEST_GET_REFERENCE,REQUEST_GET_REFERENCE_SUCCESS
 } from './constants'
 
 export function requestGetReference(id) {
@@ -28,5 +28,12 @@ export function requestGetReference(id) {
     return {
       type: REQUEST_FIND_REFERENCE_BY_ID_SUCCESS,
       result
+    };
+  }
+
+  export function requestError(errorMessage) {
+    return {
+      type: REQUEST_ERROR,
+      error: errorMessage
     };
   }

@@ -39,10 +39,7 @@ import {DEFAULT_ACTION, REQUEST_SUCCESS,
   UPDATE_INSTITUTION,
   UPDATE_INSTITUTION_TYPE,
   REQUEST_GET_INSTITUTION_TYPE,  
-  REQUEST_GET_INSTITUTION_TYPE_SUCCESS,
-  REQUEST_SEARCH_PLACES_BY_TEXT,
-  REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
-  REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
+  REQUEST_GET_INSTITUTION_TYPE_SUCCESS,  
   REQUEST_GET_LIBRARY_LIST,
   REQUEST_GET_LIBRARY_LIST_SUCCESS,
   REQUEST_GET_LIBRARY_PROJECTS_OPTIONLIST,
@@ -341,21 +338,7 @@ const AdminReducer = (state = initialState, action) =>
       case REQUEST_ERROR:
         draft.loading = false;
         draft.error = action.error;
-        break;
-
-        case REQUEST_SEARCH_PLACES_BY_TEXT:
-          draft.loading=true;
-          break;
-        case REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS:
-          draft.loading=false;
-          draft.places=action.result
-          break;  
-
-        case REQUEST_SEARCH_PLACES_BY_TEXT_FAIL:
-          draft.loading = false;
-          draft.error = initialState.error;          
-          draft.places={}
-          break;   
+        break; 
 
           
           case REQUEST_GET_LIBRARY_LIST:

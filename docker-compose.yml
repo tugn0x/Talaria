@@ -121,6 +121,7 @@ services:
       - ./frontend:/usr/src/app
       - ./.env:/usr/src/.env
     command: npm start
+    #command: bash -c "npm run start:production"   
     #command: node --stack-size=3000 /usr/local/bin/npm install
     expose:
     - 3000
@@ -137,6 +138,7 @@ services:
       - ../RSCVD/frontend:/usr/src/app
       - ../RSCVD/.env:/usr/src/.env
     command: npm start
+    #command: bash -c "npm run start:production"   
     #command: node --stack-size=3000 /usr/local/bin/npm install
     expose:
     - 3000

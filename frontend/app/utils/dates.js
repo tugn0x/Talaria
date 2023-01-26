@@ -1,4 +1,4 @@
-import moment from 'moment/min/moment-with-locales'
+import moment from 'moment';
 import { useIntl } from 'react-intl';
 
 export function formatDate(date) {
