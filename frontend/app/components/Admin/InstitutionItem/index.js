@@ -47,7 +47,7 @@ export const canEnable = (inst) => {
 }
 
 export const canDelete = (inst) => {
-    return inst.status==2 
+    return (inst.status==2|| inst.status==0 )
 }
 
 export const canDisable = (inst) => {
@@ -91,7 +91,7 @@ export const InstitutionOperations = (props) => {
     const {data,changeStatusInstitution,deleteInstitution}=props;    
   
     return (        
-        <div className={"institution_operations"}>                                                                            
+        <div className={"institution_operations"}>                                                          
                 {canDelete(data) && deleteInstitution && <a className="btn btn-icon btn-sm" onClick={()=>deleteInstitution()}><i className="fas fa-trash"></i></a>}                                                
                 {canEnable(data) && changeStatusInstitution && <a className="btn btn-icon btn-sm" onClick={()=>changeStatusInstitution(1)}><i className="fas fa-check-circle"></i></a>}                                                            
                 {canDisable(data) && changeStatusInstitution && <a className="btn btn-icon btn-sm" onClick={()=>changeStatusInstitution(0)}><i className="fas fa-ban"></i></a>}                                
