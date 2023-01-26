@@ -304,11 +304,14 @@ const RegisterLibrary = (props) => {
         {
             setInstitutionName(value.label) 
             fields.suggested_institution_name.hidden=true
+            fields.suggested_institution_name.required = false
         }
 
         if (field_name === "institution_id" && value.value === -1)
         {
-            fields.suggested_institution_name.hidden = false;
+            fields.suggested_institution_name.hidden = false
+            fields.suggested_institution_name.required = true
+
             setInstitutionName (null)
         }
 
