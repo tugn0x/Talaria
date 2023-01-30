@@ -155,7 +155,7 @@ function SignupForm(props) {
                       name="password_confirmation"
                       value={formData.password_confirmation}
                       onChange={(e) => handleChange(e)}
-                      pattern={formData.password}
+                      pattern=".{8,}"
                       required
                     />
                     <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.password_match' })} />
