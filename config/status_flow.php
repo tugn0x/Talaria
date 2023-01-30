@@ -290,7 +290,7 @@ return [
                     //but it will not change TO this state cause is instad the borrow that change directly lending_status field without doing a lending->changeStatus                    
                     'cancelRequested' => [
                         'role' => [],//borrow/lend/manage?
-                        'next_statuses' => ['canceledAccepted'],
+                        'next_statuses' => ['canceledAccepted','copyCompleted'],
                         'constraints' => [],                                         
                     ],
                     'canceledAccepted' => [

@@ -102,14 +102,14 @@ return (
     <div className={customClass}>        
         {<Card>
             <Row>
-            {(data.all_lender == null || data.all_lender == 0) && data.lending_archived== null && data.lending_status=="willSupply" &&
+            {(data.all_lender == null || data.all_lender == 0) && data.lending_archived== null && (data.lending_status=="willSupply" || data.lending_status=="cancelRequested") &&
                 <Col sm={3}>                    
                         <button type="button" className="btn btn-primary btn-lg" onClick={function() { setunfilPanelActions(false); setshowPanelActions(true); }}
                         >{intl.formatMessage({id: "app.requests.fulfill"})}</button>
                       
                 </Col>}
                 <Col sm={3}> 
-                    {(data.all_lender == null || data.all_lender == 0) && data.lending_archived == null &&
+                    {(data.all_lender == null || data.all_lender == 0) && data.lending_archived == null && data.lending_status!="cancelRequested" && 
                       <button type="button" className="btn btn-danger btn-lg" onClick={function() { setunfilPanelActions(true); setshowPanelActions(false); }}>{intl.formatMessage({id: "app.requests.unfill"})}</button>
                     }
                 </Col>

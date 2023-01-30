@@ -53,7 +53,7 @@ return (<div className="lendingDetail">
                     </div>  
                 </div>                  
                 <ReferenceDetailContent reference={data.reference.data} customClass="detail-body" canCollapse={true} collapsed={true}/>                                
-                {(data.lending_status==='willSupply'||data.lending_status==='requestReceived') &&               
+                {(data.lending_status==='willSupply'||data.lending_status==='requestReceived'||data.lending_status=='cancelRequested') &&               
                 <FulfillLendingRequest FulfillLendingRequestStatus={FulfillLendingRequestStatus} unFulfillLendingRequestStatus={unFulfillLendingRequestStatus} data={data} customClass="detail-body"/>}
     </div>
     );
