@@ -239,6 +239,7 @@ return [
 //        'Route' => Dingo\Api\Facade\Route::class,
         'ApiRoute' => Dingo\Api\Facade\Route::class,
         'ApiNilde' => \App\Facade\ApiNilde::class,
+        'Helper'=> App\Helper\Helper::class,
 
     ],
 
