@@ -11,17 +11,7 @@ class LibraryDeliverySeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-         \App\Models\Libraries\Library::get()->each(function ($l) {
-         if ($l->deliveries()->count()==0) {
-                factory(\App\Models\Libraries\Delivery::class,1)->create([
-                    'library_id'=>$l->id,
-                    'deliveryable_id'=>$l->id,
-                    'deliveryable_type'=>'App\Models\Libraries\Library'
-                ]);
-            
-          }
-         });
+    {        
     }
 
 }

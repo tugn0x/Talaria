@@ -14,8 +14,8 @@ class IdentifierSeeder extends Seeder
     {
         Identifier::create(['name'=>'ISIL']);
         Identifier::create(['name'=>'OCLC']);
-        Identifier::create(['name'=>'ACNP']);
+        /*Identifier::create(['name'=>'ACNP']);
         Identifier::create(['name'=>'SBN']);
-        Identifier::create(['name'=>'GTBIB']);
+        Identifier::create(['name'=>'GTBIB']);*/
     }
 }

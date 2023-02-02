@@ -12,11 +12,6 @@ class DepartmentsTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        \App\Models\Libraries\Library::get()->each(function ($library) {
-            factory(Department::class, 2)->create([
-                'library_id' => $library->id
-            ]);
-        });
+    {        
     }
 }

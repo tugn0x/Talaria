@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
@@ -13,17 +14,31 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $defaultpw=Hash::make('password');
+        Model::unguard(); //altrienti non setta la passw perchè è unfillable
 
+        //Super-Admin
         $admin = factory(\App\Models\Users\User::class)->create([
-            'email' => 'nilde@nilde.it',
-            'name' => 'nildenilde',
-            'surname' => 'nildenilde',
+            'email' => 'admin@talaria.eu',
+            'name' => 'SuperAdmin',
+            'surname' => 'SuperAdmin',
             'password' => $defaultpw,
             'password_confirmation' => $defaultpw,
             'privacy_policy_accepted'=>now(),
             'country_id'=>1,
         ]);
         $admin->assign('super-admin');
+
+        //Library/Institutions/Project Manager
+        $manager = factory(\App\Models\Users\User::class)->create([
+            'email' => 'manager@talaria.eu',
+            'name' => 'Manager',
+            'surname' => 'Manager',
+            'password' => $defaultpw,
+            'password_confirmation' => $defaultpw,
+            'privacy_policy_accepted'=>now(),
+            'country_id'=>1,
+        ]);
+        $manager->assign('manager');        
 
 //        $admin = App\Models\Users\User::create(new App\Models\Users\User([
 //            'email' => 'nilde@nilde.it',
@@ -33,11 +48,8 @@ class UsersTableSeeder extends Seeder
 //        ]));
 //        $admin->verified = true;
 //        $admin->save();
-
-        // Crea qualche altro utente variegato
-        factory(\App\Models\Users\User::class, 5)->create();
-
-        //creo il mio utente (e non gli assegno alcun ruolo, di default=registered)
+        
+        //My user (associated to a library as a manager)
         /*$ale = factory(\App\Models\Users\User::class)->create([
             'email' => 'alessandro.tugnoli@gmail.com',
             'name' => 'Alessandro',
@@ -49,7 +61,7 @@ class UsersTableSeeder extends Seeder
             'privacy_policy_accepted'=>now(),
         ]);*/
 
-        $librarian = factory(\App\Models\Users\User::class)->create([
+        /*$librarian = factory(\App\Models\Users\User::class)->create([
             'email' => 'a.tugnoli@area.bo.cnr.it',
             'name' => 'Mario',
             'surname' => 'Rossi',
@@ -62,62 +74,9 @@ class UsersTableSeeder extends Seeder
 
         $lib1=App\Models\Libraries\Library::find(1);
 
-        $librarian->allow('manage', $lib1);
+        $librarian->allow('manage', $lib1);*/                      
 
-        /*$myuser->libraries()->sync([
-            1 => [
-                'status'=>1,
-                'department_id'=>1,
-                'title_id'=>2,
-            ]
-        ]);*/
-
-        /*$myuser = factory(\App\Models\Users\User::class)->create([
-            'email' => 'giorgio@nilde.com',
-            'name' => 'giorgio',
-            'surname' => 'giorgio',
-            'password' => 'nildenilde',
-            'password_confirmation' => 'nildenilde',
-            'status'=>1,
-            'country_id'=>1,
-            'privacy_policy_accepted'=>now(),
-        ]);*/
-
-/*
-        foreach (\App\Models\Libraries\Library::all() as $item) {
-            $myuser->allow('manage', $item);
-        }
-        */
-        factory(\App\Models\Users\User::class, 5)->create();
-
-        /*
-         *
-        $contentIds = \Auth::user()->abilities()
-            ->select('abilities.entity_id')
-            ->whereIn('abilities.entity_type', config('constants.module_classes.App\Models\Modules\Cms'))
-            ->get()
-            ->pluck('entity_id')
-            ->toArray();
-         */
-
-//        DB::table('library_user')->insert([
-//            'library_id' => 1,
-//            'user_id' => 2,
-//            'status'=>1,
-//            'department_id'=>1,
-//            'title_id'=>2,
-//        ]);
-
-        $manager = factory(\App\Models\Users\User::class)->create([
-            'email' => 'manager@nilde.it',
-            'name' => 'Manager',
-            'surname' => 'Manager',
-            'password' => $defaultpw,
-            'password_confirmation' => $defaultpw,
-            'privacy_policy_accepted'=>now(),
-            'country_id'=>1,
-        ]);
-        $manager->assign('manager');        
+        Model::reguard();
     }
 
 }

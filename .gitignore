@@ -33,3 +33,4 @@ yarn-error.log
 .vscode/settings.json
 /composer.lock
 appunti_dev_nilde.md
+docker/shibboleth/etc/idem-test-metadata-sha256.*

@@ -12,10 +12,11 @@ class ConsortiumTableSeeder extends Seeder
      */
     public function run()
     {
-        Consortium::create(['name'=>'CIBER/CASPUR']);
-        Consortium::create(['name'=>'CILEA']);
-        Consortium::create(['name'=>'CIPE']);
-        Consortium::create(['name'=>'CRUI/CARE']);
-        Consortium::create(['name'=>'CINECA']);        
+        //some Italian Libraries Consortiums
+        //Consortium::create(['name'=>'CIBER/CASPUR']);
+        //Consortium::create(['name'=>'CILEA']);
+        //Consortium::create(['name'=>'CIPE']);
+        //Consortium::create(['name'=>'CRUI/CARE']);
+        //Consortium::create(['name'=>'CINECA']);        
     }
 }
