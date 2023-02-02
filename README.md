@@ -7,7 +7,7 @@ The software requires docker installed in your environment.
 4. run `docker-compose up -d` to start all needed containers
 
 # Configuration
-## Frontend/ReactJS
+## Frontend/ReactJS 1st setup 
 The frontend don't need any configuration; it's based on a nodejs container
 running the application by command `npm start` as the container starts
 
@@ -16,14 +16,14 @@ To download all packages the 1st time, run these from `frontend` container:
 npm install 
 ```
 
-## Backend/Laravel setup 
+## Backend/Laravel 1st setup 
 (run these from `laravel` container)
 ```bash
 composer install    #download vendor folder
 php artisan key:generate  # creates a new APP_KEY and saved in .env
-php artisan migrate
-php artisan passport:install
-php artisan db:seed
+php artisan migrate # create DB
+php artisan passport:install # create oAuth2 auth keys
+php artisan db:seed # DB init
 
 
 ```
@@ -33,3 +33,17 @@ Add then these lines to your `crontab` to run Laravel scheduler:
 ```
 * * * * * cd <path-to-your-project> && php artisan schedule:run >> /dev/null 2>&1
 ```
+
+# Customization
+
+### Active features and settings
+Configuration settings are stored  in `.env`
+
+### Logo
+Used logo are stored in `/frontend/app/images/`, you can find `logo.png` (big) and `logo-mini.png` (small, used for mobile)
+
+### Mobile App Icon
+Used PWA icon is stored in `/frontend/app/images/icon-512x512.png`
+
+
+
