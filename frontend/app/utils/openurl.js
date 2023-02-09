@@ -129,7 +129,7 @@ export const parseOpenURL = (params) => {
 
     let ref={}
 
-    //TO FINISH parsing with check on pubtype, openurl version and fiels mapping (see Nilde5 OpenResolver.php)
+    //TO FINISH parsing with check on pubtype, openurl version and fiels mapping
     if(queryArr["url_ver"]=="Z39.88-2004" || queryArr["url_ctx_fmt"]=="info:ofi/fmt:kev:mtx:ctx")
     {
         Object.keys(queryArr).map( (k) => {

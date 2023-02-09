@@ -11,9 +11,7 @@ class CountriesTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-       // Country::create(['code'=>'ITA','name'=>'Italy']);
-       Country::truncate();
+    {              
        $countries = array(
         array('id' => '1','name' => 'AFGHANISTAN','code' => 'AFG'),
         array('id' => '2','name' => 'ALBANIA','code' => 'ALB'),

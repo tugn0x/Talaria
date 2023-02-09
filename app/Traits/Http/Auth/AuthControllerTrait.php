@@ -39,9 +39,9 @@ trait AuthControllerTrait
 		]);
 
 		$controller = \App::make('App\Http\Controllers\Users\UserController');
-		$controller->nilde->disableAuthorize();
+		$controller->talaria->disableAuthorize();
 		$response = $controller->store($request);
-		$controller->nilde->enableAuthorize();
+		$controller->talaria->enableAuthorize();
 		$content = $response->getOriginalContent();
 		event('auth.registered', $content);
 //		/*
@@ -124,7 +124,7 @@ trait AuthControllerTrait
 //			$token_perms = base64_encode((string)json_encode($token_perms));
 			return $this->response->array($token_perms);
 		}
-		return $this->response->errorUnauthorized(trans('apinilde::auth.unauthorized'));
+		return $this->response->errorUnauthorized(trans('apitalaria::auth.unauthorized'));
 	}
 
 	public function resources(Request $request)
@@ -173,9 +173,9 @@ trait AuthControllerTrait
 	{
 		$user = Auth::user();
 		$controller = \App::make('App\Http\Controllers\Users\UserController');
-		$controller->nilde->disableAuthorize();
+		$controller->talaria->disableAuthorize();
 		$update = $controller->update($request, $user->id);
-		$controller->nilde->enableAuthorize();
+		$controller->talaria->enableAuthorize();
 		event('auth.update', $update->getOriginalContent());
 		return $update;
 	}
@@ -197,9 +197,9 @@ trait AuthControllerTrait
 	{
 		$user = Auth::user();
         $controller = \App::make('App\Http\Controllers\UserController');
-        $controller->nilde->disableAuthorize();
+        $controller->talaria->disableAuthorize();
         $delete = $controller->delete($request, $user->id);
-        $controller->nilde->enableAuthorize();
+        $controller->talaria->enableAuthorize();
 		event('auth.delete', $delete->getOriginalContent());
 		return $delete;
 	}
@@ -219,14 +219,14 @@ trait AuthControllerTrait
         if(\Gate::allows('loginAs', $user->getModel()))
         {
             $request = (new \Zend\Diactoros\ServerRequest)->withParsedBody([
-                'grant_type' => 'nilde-password',
+                'grant_type' => 'talaria-password',
                 'client_id' => $request->input("client_id"),
                 'client_secret' => $request->input("client_secret"),
                 'user_id' => $id,
                 'scope' => '*',
             ]);
 
-            $grant = new \App\Traits\Http\Auth\NildePasswordGrant(
+            $grant = new \App\Traits\Http\Auth\TalariaPasswordGrant(
                 app(\Laravel\Passport\Bridge\UserRepository::class),
                 app(\Laravel\Passport\Bridge\RefreshTokenRepository::class)
             );

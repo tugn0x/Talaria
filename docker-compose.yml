@@ -115,142 +115,125 @@ services:
     - "6379:6379"
     restart: always
 
+
   frontend:
-    build: ./frontend
-    volumes:
-      - ./frontend:/usr/src/app
-      - ./.env:/usr/src/.env
-    command: npm start
-    #command: bash -c "npm run start:production"   
-    #command: node --stack-size=3000 /usr/local/bin/npm install
-    expose:
-    - 3000
-    restart: always
-    labels:
-    - "traefik.port=3000"
-    - "traefik.enable=true"
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/"
-    - "traefik.docker.network=proxy"
+     build: ./frontend
+     volumes:
+       - ./frontend:/usr/src/app
+       - ./.env:/usr/src/.env     
+     command: bash -c "npm install; npm run start:production"            
+     #command: npm start
+     expose:
+     - 3000
+     restart: always
+     labels:
+     - "traefik.port=3000"
+     - "traefik.enable=true"
+     - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/"
+     - "traefik.docker.network=proxy"
 
-  frontend_rscvd:
-    build: ../RSCVD/frontend
-    volumes:
-      - ../RSCVD/frontend:/usr/src/app
-      - ../RSCVD/.env:/usr/src/.env
-    command: npm start
-    #command: bash -c "npm run start:production"   
-    #command: node --stack-size=3000 /usr/local/bin/npm install
-    expose:
-    - 3000
-    restart: always
-    labels:
-    - "traefik.port=3000"
-    - "traefik.enable=true"
-    - "traefik.frontend.rule=Host:rscvd.local;PathPrefix:/"
-    - "traefik.docker.network=proxy"  
+#   shibboleth:
+# #    image: unicon/shibboleth-sp
+#     build: ./docker/shibboleth
+#     expose:
+#       - 80
+#       - 443
+#     labels:
+#     - "traefik.port=443"
+#     - "traefik.protocol=https"
+#     - "traefik.enable=true"
+#     - "traefik.backend=shibboleth"
+#     - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/Shibboleth.sso/,/sp/,/shibb/"
+#     - "traefik.docker.network=proxy"
+# #    - "traefik.frontend.passTLSCert=true"
+#     - "traefik.proxy.passTLSCert=true"
+#     volumes:
+#       - ./docker/shibboleth/etc:/etc/shibboleth
+#       - ./docker/shibboleth/html:/var/www/html
+#       - ./docker/shibboleth/shib.conf:/etc/httpd/conf.d/shibb.conf
+#       - "${SSL_CERT_PATH}:/etc/pki/tls/certs/localhost.crt"
+#       - "${SSL_KEY_PATH}:/etc/pki/tls/private/localhost.key"
+#       - ./docker/shibboleth/log/apache-native.log:/var/log/apache2/native.log
+#       - ./docker/shibboleth/log/shibd.log:/var/log/shibboleth/shibd.log
+#       - ./docker/shibboleth/log/shibd_warn.log:/var/log/shibboleth/shibd_warn.log
+#       - ./docker/shibboleth/log/transaction.log:/var/log/shibboleth/transaction.log
+#       - ./docker/shibboleth/log/signature.log:/var/log/shibboleth/signature.log
+#     environment:
+#       IDENTITY_PROVIDER_BACKEND_SIGNUP: '${APP_URL}/api/v1/auth/idp/IDEM/signup'
+#       IDENTITY_PROVIDER_FRONTEND_CALLBACK: 'https://${FRONTEND_DOMAIN}/idp-callback/'
 
-  shibboleth:
-#    image: unicon/shibboleth-sp
-    build: ./docker/shibboleth
-    expose:
-      - 80
-      - 443
-    labels:
-    - "traefik.port=443"
-    - "traefik.protocol=https"
-    - "traefik.enable=true"
-    - "traefik.backend=shibboleth"
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/Shibboleth.sso/,/sp/,/shibb/"
-    - "traefik.docker.network=proxy"
-#    - "traefik.frontend.passTLSCert=true"
-    - "traefik.proxy.passTLSCert=true"
-    volumes:
-      - ./docker/shibboleth/etc:/etc/shibboleth
-      - ./docker/shibboleth/html:/var/www/html
-      - ./docker/shibboleth/shib.conf:/etc/httpd/conf.d/shibb.conf
-      - "${SSL_CERT_PATH}:/etc/pki/tls/certs/localhost.crt"
-      - "${SSL_KEY_PATH}:/etc/pki/tls/private/localhost.key"
-      - ./docker/shibboleth/log/apache-native.log:/var/log/apache2/native.log
-      - ./docker/shibboleth/log/shibd.log:/var/log/shibboleth/shibd.log
-      - ./docker/shibboleth/log/shibd_warn.log:/var/log/shibboleth/shibd_warn.log
-      - ./docker/shibboleth/log/transaction.log:/var/log/shibboleth/transaction.log
-      - ./docker/shibboleth/log/signature.log:/var/log/shibboleth/signature.log
-    environment:
-      IDENTITY_PROVIDER_BACKEND_SIGNUP: '${APP_URL}/api/v1/auth/idp/IDEM/signup'
-      IDENTITY_PROVIDER_FRONTEND_CALLBACK: 'https://${FRONTEND_DOMAIN}/idp-callback/'
+#   #SPID
+#   authproxy:
+# #    restart: always
+#     #image: spid-auth-proxy
+#     #build: ./docker/spid
+#       #context: .
+#       #dockerfile: Dockerfile
+#     image: italia/spid-auth-docker
+#     expose:
+#       - 443
+#     labels:
+#     - "traefik.port=443"
+#     - "traefik.protocol=https"
+#     - "traefik.enable=true"
+#     - "traefik.backend=authproxy"
+#     #- "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefixStrip:/spid/"
+#     - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/iam,/metadata,/login,/access,/whoami,/spidlogin"
+#     - "traefik.docker.network=proxy"
+# #    - "traefik.frontend.passTLSCert=true"
+#     - "traefik.proxy.passTLSCert=true"
+#     volumes:
+#       #- '/docker/spid/certs:/opt/shibboleth-sp/certs'
+#       - './docker/spid/etc/httpd/conf.d/z20-auth-proxy.conf.dev:/etc/httpd/conf.d/z20-auth-proxy.conf.dev'
+#       - './docker/spid/etc/httpd/conf.d/z20-auth-proxy.conf.prod:/etc/httpd/conf.d/z20-auth-proxy.conf.prod'
+#       - './docker/spid/etc/shibboleth/shibboleth2.xml.tpl:/etc/shibboleth/shibboleth2.xml.tpl'
+#       - './docker/spid/etc/shibboleth/spid-idp.inkode.it.xml:/opt/shibboleth-sp/metadata/spid-idp.inkode.it.xml'
+#       - './docker/spid/var/www/html:/var/www/html'
+# #      - ./docker/spid/httpd/logs:/etc/httpd/logs
+#       #- './docker/spid/etc/shibboleth/shibd.logger:/etc/shibboleth/shibd.logger'
+#       - './docker/spid/log:/var/log'
+#       # Certificati SAML
+#       - './docker/spid/certs:/opt/shibboleth-sp/certs:ro'
+#       # Certificati HTTPS
+#       - '${SSL_CERT_PATH}:/etc/pki/tls/certs/server.crt:ro'
+#       - '${SSL_KEY_PATH}:/etc/pki/tls/private/server.key:ro'
 
-  #SPID
-  authproxy:
-#    restart: always
-    #image: spid-auth-proxy
-    #build: ./docker/spid
-      #context: .
-      #dockerfile: Dockerfile
-    image: italia/spid-auth-docker
-    expose:
-      - 443
-    labels:
-    - "traefik.port=443"
-    - "traefik.protocol=https"
-    - "traefik.enable=true"
-    - "traefik.backend=authproxy"
-    #- "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefixStrip:/spid/"
-    - "traefik.frontend.rule=Host:${FRONTEND_DOMAIN};PathPrefix:/iam,/metadata,/login,/access,/whoami,/spidlogin"
-    - "traefik.docker.network=proxy"
-#    - "traefik.frontend.passTLSCert=true"
-    - "traefik.proxy.passTLSCert=true"
-    volumes:
-      #- '/docker/spid/certs:/opt/shibboleth-sp/certs'
-      - './docker/spid/etc/httpd/conf.d/z20-auth-proxy.conf.dev:/etc/httpd/conf.d/z20-auth-proxy.conf.dev'
-      - './docker/spid/etc/httpd/conf.d/z20-auth-proxy.conf.prod:/etc/httpd/conf.d/z20-auth-proxy.conf.prod'
-      - './docker/spid/etc/shibboleth/shibboleth2.xml.tpl:/etc/shibboleth/shibboleth2.xml.tpl'
-      - './docker/spid/etc/shibboleth/spid-idp.inkode.it.xml:/opt/shibboleth-sp/metadata/spid-idp.inkode.it.xml'
-      - './docker/spid/var/www/html:/var/www/html'
-#      - ./docker/spid/httpd/logs:/etc/httpd/logs
-      #- './docker/spid/etc/shibboleth/shibd.logger:/etc/shibboleth/shibd.logger'
-      - './docker/spid/log:/var/log'
-      # Certificati SAML
-      - './docker/spid/certs:/opt/shibboleth-sp/certs:ro'
-      # Certificati HTTPS
-      - '${SSL_CERT_PATH}:/etc/pki/tls/certs/server.crt:ro'
-      - '${SSL_KEY_PATH}:/etc/pki/tls/private/server.key:ro'
+#     #NOTA: queste var di ambiente servono al container spid-sp per generare in automatico la config dell'apache per il proxypass e abilitare gli header shibboleth
+#     environment:
+#       MODE: 'dev'  #uso 'dev' cosi' ho anche il supporto per le url /whoami per debug
+#       ORGANIZATION: 'CNR Area della Ricerca di Bologna'
+#       SERVER_NAME: ${FRONTEND_DOMAIN}
+#       ENTITY_ID: 'https://${FRONTEND_DOMAIN}'
+#       ERROR_URL: 'https://${FRONTEND_DOMAIN}/error'
+#       TARGET_BACKEND: 'https://${FRONTEND_DOMAIN}' #url del frontend React  [NON USATA]
+#       TARGET_LOCATION: '/xx'                #path del frontend React a cui verrà rediretto (ed è in pratica quello che viene specificato nel param "target" della chiamata) [NON USATA]
+#       ACS_INDEXES: '1'
+#       ACS_1_LABEL: 'set 1'
+#       ACS_1_ATTRS: 'name;familyName;fiscalNumber;email;spidCode;fiscalNumber'
+#       IDENTITY_PROVIDER_BACKEND_SIGNUP: '${APP_URL}/api/v1/auth/idp/SPID/signup'
+#       IDENTITY_PROVIDER_FRONTEND_CALLBACK: 'https://${FRONTEND_DOMAIN}/idp-callback/'
 
-    #NOTA: queste var di ambiente servono al container spid-sp per generare in automatico la config dell'apache per il proxypass e abilitare gli header shibboleth
-    environment:
-      MODE: 'dev'  #uso 'dev' cosi' ho anche il supporto per le url /whoami per debug
-      ORGANIZATION: 'CNR Area della Ricerca di Bologna'
-      SERVER_NAME: ${FRONTEND_DOMAIN}
-      ENTITY_ID: 'https://${FRONTEND_DOMAIN}'
-      ERROR_URL: 'https://${FRONTEND_DOMAIN}/error'
-      TARGET_BACKEND: 'https://${FRONTEND_DOMAIN}' #url del frontend React  [NON USATA]
-      TARGET_LOCATION: '/xx'                #path del frontend React a cui verrà rediretto (ed è in pratica quello che viene specificato nel param "target" della chiamata) [NON USATA]
-      ACS_INDEXES: '1'
-      ACS_1_LABEL: 'set 1'
-      ACS_1_ATTRS: 'name;familyName;fiscalNumber;email;spidCode;fiscalNumber'
-      IDENTITY_PROVIDER_BACKEND_SIGNUP: '${APP_URL}/api/v1/auth/idp/SPID/signup'
-      IDENTITY_PROVIDER_FRONTEND_CALLBACK: 'https://${FRONTEND_DOMAIN}/idp-callback/'
-
-  #SPID TEST IDP
-  spidtestenv:
-    image:  italia/spid-testenv2
-    expose:
-      - 8088
-    ports:
-      - 8088:8088
-#    labels:
-#    - "traefik.port=8088"
-#    - "traefik.protocol=http"
-#    - "traefik.enable=true"
-#    - "traefik.backend=spidtestenv"
-#    - "traefik.frontend.rule=Host:spid-idp.inkode.it"
-#    - "traefik.docker.network=proxy"
-#    #- "traefik.proxy.passTLSCert=true"
-    volumes:
-      # Certificati e configurazione SAML
-      - './docker/spid-test-idp/conf:/app/conf'
-      # Certificati HTTPS
-      - '${SSL_CERT_PATH}:/app/conf/idpSSL.crt:ro'
-      - '${SSL_KEY_PATH}:/app/conf/idpSSL.key:ro'
+#   #SPID TEST IDP
+#   spidtestenv:
+#     image:  italia/spid-testenv2
+#     expose:
+#       - 8088
+#     ports:
+#       - 8088:8088
+# #    labels:
+# #    - "traefik.port=8088"
+# #    - "traefik.protocol=http"
+# #    - "traefik.enable=true"
+# #    - "traefik.backend=spidtestenv"
+# #    - "traefik.frontend.rule=Host:spid-idp.inkode.it"
+# #    - "traefik.docker.network=proxy"
+# #    #- "traefik.proxy.passTLSCert=true"
+#     volumes:
+#       # Certificati e configurazione SAML
+#       - './docker/spid-test-idp/conf:/app/conf'
+#       # Certificati HTTPS
+#       - '${SSL_CERT_PATH}:/app/conf/idpSSL.crt:ro'
+#       - '${SSL_KEY_PATH}:/app/conf/idpSSL.key:ro'
 
 #volumes:
 #  db-data:
@@ -260,4 +243,3 @@ services:
 #    ipam:
 #      config:
 #        - subnet: 172.17.0.0/16
-

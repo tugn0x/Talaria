@@ -12,15 +12,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          $this->call(Oauth2ClientsSeeder::class);    
-         $this->call(RolesAndPermissionsSeeder::class);                  
+         $this->call(RolesAndPermissionsSeeder::class);   
          $this->call(CountriesTableSeeder::class);                      
          $this->call(CurrenciesSeeder::class);               
          $this->call(UsersTableSeeder::class);                                                                                   
          $this->call(IdentifierSeeder::class);    
-
          $this->call(SubjectsTableSeeder::class);
          $this->call(InstitutionTypesTableSeeder::class);       
          $this->call(TitlesTableSeeder::class);  
+
          //$this->call(InstitutionsTableSeeder::class);                  
          //$this->call(ProjectsTableSeeder::class);                  
          

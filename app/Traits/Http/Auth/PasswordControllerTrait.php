@@ -51,7 +51,7 @@ trait PasswordControllerTrait {
 	 */
 	protected function getResetEmailSubject()
 	{
-		return isset($this->subject) ? $this->subject : trans('apinilde::auth.password_reset_email_subject');
+		return isset($this->subject) ? $this->subject : trans('apitalaria::auth.password_reset_email_subject');
 	}
 
 	/**

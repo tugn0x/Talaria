@@ -51,6 +51,16 @@ class User extends UserBase
     ];
 
     /**
+     * The attributes that are protected. When the below line is missing, it get that all fields are gaurded which return an error in query *=[] as below  
+     *  [0] => 'Mina' //if you update city
+     *  [1] => '+9372589631' //if you update mobile
+     *  etc..
+     *
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array

@@ -30,7 +30,7 @@ class AdminInstitutionController extends AdminApiController
     //override to get ALL institutions, not only active
     public function optionList(Request $request)
     {                   
-        $collection = $this->nilde->optionList($this->model, $request,function ($model,$request){
+        $collection = $this->talaria->optionList($this->model, $request,function ($model,$request){
             return $model->byCountryAndType($request->input('country_id'),$request->input('institution_type_id'));
         });
 

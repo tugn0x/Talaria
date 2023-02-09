@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" ID="_lktq5ufxkczygxl77nhtsevktafayt0l7jxmgp02ov3" entityID="https://devnilde.bo.cnr.it"><ds:Signature>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" ID="_lktq5ufxkczygxl77nhtsevktafayt0l7jxmgp02ov3" entityID="https://testsp"><ds:Signature>
 <ds:SignedInfo>
 <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
 <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/>
@@ -96,10 +96,10 @@ PhBJI8CBTxjOX2KeaHIMrao=
         </ds:X509Data>
       </ds:KeyInfo>
     </md:KeyDescriptor>
-    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://devnilde.bo.cnr.it/iam/SLO/Redirect"/>
-    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://devnilde.bo.cnr.it/iam/SLO/POST"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://testsp/iam/SLO/Redirect"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://testsp/iam/SLO/POST"/>
     <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
-    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://devnilde.bo.cnr.it/iam/SAML2/POST" index="0" isDefault="true"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://testsp/iam/SAML2/POST" index="0" isDefault="true"/>
 <md:AttributeConsumingService index="1">
   <md:ServiceName xml:lang="it">set 1</md:ServiceName>
   <md:RequestedAttribute Name="name"/>
@@ -113,6 +113,6 @@ PhBJI8CBTxjOX2KeaHIMrao=
   <md:Organization>
     <md:OrganizationName xml:lang="it">CNR Area della Ricerca di Bologna</md:OrganizationName>
     <md:OrganizationDisplayName xml:lang="it">CNR Area della Ricerca di Bologna</md:OrganizationDisplayName>
-    <md:OrganizationURL xml:lang="it">https://devnilde.bo.cnr.it</md:OrganizationURL>
+    <md:OrganizationURL xml:lang="it">https://testsp</md:OrganizationURL>
   </md:Organization>
 </md:EntityDescriptor>

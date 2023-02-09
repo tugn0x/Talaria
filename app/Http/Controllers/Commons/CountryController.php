@@ -25,6 +25,6 @@ class CountryController extends ApiController
 
         $this->broadcast = false;
 
-        $this->nilde->disableAuthorize();
+        $this->talaria->disableAuthorize();
     }
 }

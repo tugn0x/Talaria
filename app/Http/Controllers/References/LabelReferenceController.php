@@ -30,9 +30,9 @@ class LabelReferenceController extends ApiController
         if( !empty($this->validate) )
             $this->validate($request, $this->validate);
 
-        $model = $this->nilde->store($this->model, $request);
+        $model = $this->talaria->store($this->model, $request);
 
-        if($this->broadcast && config('apinilde.broadcast'))
+        if($this->broadcast && config('apitalaria.broadcast'))
             broadcast(new ApiStoreBroadcast($model, $model->getTable(), $request->input('include')));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
@@ -47,9 +47,9 @@ class LabelReferenceController extends ApiController
         $label = $request->route()->parameters['label'];
         $model=$this->model->InReference($ref)->InLabel($label);
 
-        $model = $this->nilde->update($model, $request);
+        $model = $this->talaria->update($model, $request);
 
-        if($this->broadcast && config('apinilde.broadcast'))
+        if($this->broadcast && config('apitalaria.broadcast'))
             broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
@@ -62,12 +62,12 @@ class LabelReferenceController extends ApiController
         if($rif->owner()->first()->id==$u->id)
         {
             $this->model = $this->filterRelations($request);
-            $collection = $this->nilde->index($this->model, $request);
+            $collection = $this->talaria->index($this->model, $request);
 
             return $this->response->paginator($collection, new $this->transformer())->morph();
         }
         else
-            $this->response->errorUnauthorized(trans('apinilde::auth.unauthorized'));
+            $this->response->errorUnauthorized(trans('apitalaria::auth.unauthorized'));
 
     }
 
@@ -79,7 +79,7 @@ class LabelReferenceController extends ApiController
     /*public function show(Request $request, $id)
     {
         $id = $request->route()->parameters['label_reference'];
-        $model = $this->nilde->show($this->model, $request, $id);
+        $model = $this->talaria->show($this->model, $request, $id);
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }*/
@@ -91,9 +91,9 @@ class LabelReferenceController extends ApiController
         $label = $request->route()->parameters['label'];
         $model=$this->model->InReference($ref)->InLabel($label)->first();
 
-        $model = $this->nilde->delete($model, $request);
+        $model = $this->talaria->delete($model, $request);
 
-        if($this->broadcast && config('apinilde.broadcast'))
+        if($this->broadcast && config('apitalaria.broadcast'))
             broadcast(new ApiDeleteBroadcast($model->id, $model->getTable()));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();

@@ -71,7 +71,7 @@ trait ApiControllerTrait
      */
     public function index(Request $request)
     {
-        $collection = $this->nilde->index($this->model->select('*'), $request);
+        $collection = $this->talaria->index($this->model->select('*'), $request);
 
         return $this->response->paginator($collection, new $this->transformer())->morph();
     }
@@ -85,14 +85,14 @@ trait ApiControllerTrait
      */
     public function optionList(Request $request)
     {
-        $collection = $this->nilde->optionList($this->model, $request);
+        $collection = $this->talaria->optionList($this->model, $request);
 
         return $this->response->array($collection->toArray());
     }
 
     public function show(Request $request, $id)
     {
-        $model = $this->nilde->show($this->model, $request, $id);
+        $model = $this->talaria->show($this->model, $request, $id);
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
@@ -102,9 +102,9 @@ trait ApiControllerTrait
         if( !empty($this->validate) )
             $this->validate($request, $this->validate);
 
-        $model = $this->nilde->store($this->model, $request);
+        $model = $this->talaria->store($this->model, $request);
 
-        if($this->broadcast && config('apinilde.broadcast'))
+        if($this->broadcast && config('apitalaria.broadcast'))
             broadcast(new ApiStoreBroadcast($model, $model->getTable(), $request->input('include')));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
@@ -121,9 +121,9 @@ trait ApiControllerTrait
         if(!empty($this->validate) )
             $this->validate($request, $this->validate);
 
-        $model = $this->nilde->update($this->model, $request, $id);
+        $model = $this->talaria->update($this->model, $request, $id);
 
-        if($this->broadcast && config('apinilde.broadcast'))
+        if($this->broadcast && config('apitalaria.broadcast'))
             broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
@@ -131,16 +131,16 @@ trait ApiControllerTrait
 
     public function bulkSave(Request $request)
     {
-        $collection = $this->nilde->bulkSave($this->model, $request);
+        $collection = $this->talaria->bulkSave($this->model, $request);
 
         return $this->response->collection($collection, new $this->transformer())->morph();
     }
 
     public function delete(Request $request, $id)
     {
-        $model = $this->nilde->delete($this->model, $request, $id);
+        $model = $this->talaria->delete($this->model, $request, $id);
 
-        if($this->broadcast && config('apinilde.broadcast'))
+        if($this->broadcast && config('apitalaria.broadcast'))
             broadcast(new ApiDeleteBroadcast($model->id, $model->getTable()));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
@@ -148,30 +148,30 @@ trait ApiControllerTrait
 
     public function bulkDelete(Request $request, $ids)
     {
-        $collection = $this->nilde->bulkDelete($this->model, $request, $ids);
+        $collection = $this->talaria->bulkDelete($this->model, $request, $ids);
 
         return $this->response->collection($collection, new $this->transformer())->morph();
     }
 
     public function destroy(Request $request, $id)
     {
-        $model = $this->nilde->destroy($this->model, $request, $id);
+        $model = $this->talaria->destroy($this->model, $request, $id);
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
     public function bulkDestroy(Request $request, $ids)
     {
-        $collection = $this->nilde->bulkDestroy($this->model, $request, $ids);
+        $collection = $this->talaria->bulkDestroy($this->model, $request, $ids);
 
         return $this->response->collection($collection, new $this->transformer())->morph();
     }
 
     public function restore(Request $request, $id)
     {
-        $model = $this->nilde->restore($this->model, $request, $id);
+        $model = $this->talaria->restore($this->model, $request, $id);
 
-        if($this->broadcast && config('apinilde.broadcast'))
+        if($this->broadcast && config('apitalaria.broadcast'))
             broadcast(new ApiRestoreBroadcast($model->id, $model->getTable()));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
@@ -179,7 +179,7 @@ trait ApiControllerTrait
 
     public function bulkRestore(Request $request, $ids)
     {
-        $collection = $this->nilde->bulkRestore($this->model, $request, $ids);
+        $collection = $this->talaria->bulkRestore($this->model, $request, $ids);
 
         return $this->response->collection($collection, new $this->transformer())->morph();
     }
@@ -189,7 +189,7 @@ trait ApiControllerTrait
         if(!empty($this->validate) )
             $this->validate($request, $this->validate);
 
-        $model = $this->nilde->attach($this->model, $request, $id, $relation_name, $ids);
+        $model = $this->talaria->attach($this->model, $request, $id, $relation_name, $ids);
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
@@ -199,7 +199,7 @@ trait ApiControllerTrait
         if(!empty($this->validate) )
             $this->validate($request, $this->validate);
 
-        $model = $this->nilde->detach($this->model, $request, $id, $relation_name, $ids);
+        $model = $this->talaria->detach($this->model, $request, $id, $relation_name, $ids);
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
@@ -209,7 +209,7 @@ trait ApiControllerTrait
         if(!empty($this->validate) )
             $this->validate($request, $this->validate);
 
-        $model = $this->nilde->sync($this->model, $request, $id, $relation_name, $ids);
+        $model = $this->talaria->sync($this->model, $request, $id, $relation_name, $ids);
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }

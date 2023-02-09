@@ -1,9 +1,9 @@
 {
-    "name": "laravel/nilde",
+    "name": "laravel/talaria",
     "type": "project",
-    "description": "Nilde REST API.",
+    "description": "Talaria REST API.",
     "keywords": [
-        "Nilde",
+        "Talaria",
         "laravel"
     ],
     "license": "MIT",

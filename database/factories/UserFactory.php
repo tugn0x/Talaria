@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Hash;
 
 $factory->define(User::class, function (Faker $faker) {
     $mail=$faker->unique()->safeEmail;
-    $pw='d3mo$Demo'; //NOTE: password will be encrypted by UserObserver!
+    $pw='password'; //NOTE: password will be encrypted by UserObserver!
     return [
         'name' => $faker->name,
         'surname' => $faker->name,

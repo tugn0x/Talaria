@@ -23,7 +23,7 @@ const MyLibraryForm = (props) => {
     /*
     TODO: DA FARE DOPO...
     TODO: aggiungere title_id e department_id alla request.
-    Come? Alla change select della biblioteca da parte dell'utente triggeri il get della biblioteca: https://api.nilde.local/api/v1/libraries/8
+    Come? Alla change select della biblioteca da parte dell'utente triggeri il get della biblioteca: .../api/v1/libraries/8
     TODO: nel body della biblioteca troverai departments
          "departments": [
         {

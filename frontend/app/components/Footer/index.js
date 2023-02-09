@@ -43,23 +43,11 @@ function Footer(props) {
                 <span><FormattedMessage {...messages.registerNewLibrary} /></span>
               </NavLink>
               <NavLink to="#" activeClassName="current">
-                  Manuale d' uso
+                  Manual
               </NavLink>
               <NavLink to="#" activeClassName="current">
-                  Nilde Worlds
-              </NavLink>
-              <NavLink to="#" activeClassName="current">
-                  Rinnovo sottoscrizioni
-              </NavLink>
-              <NavLink to="#" activeClassName="current">
-                  Contatti
-              </NavLink>
-              <NavLink to="#" activeClassName="current">
-                  Licenze
-              </NavLink>
-              <NavLink to="#" activeClassName="current">
-                  Avvertenze legali
-              </NavLink>
+                  Contacts
+              </NavLink>              
             </>
           }
           {!props.isLogged && 
@@ -71,7 +59,7 @@ function Footer(props) {
         <div className="bottom d-flex align-items-end">
           <img src={logoCNR1} alt="CNR" />
           <img src={logoCNR2} alt="CNR Library" />
-          <p className="copyright">Nilde &copy; {new Date().getFullYear() }</p>
+          <p className="copyright">Talaria &copy; {new Date().getFullYear() }</p>
         </div>
       </div>
     </footer>

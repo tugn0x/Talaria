@@ -39,7 +39,7 @@ class LendingDocdelRequestController extends ApiController
                  $all=$request->input("all_lender");
                  $all+=0; //force to be integer
                  $this->model = $this->model->Lendingalllender($all);   
-                 //$collection = $this->nilde->index( $this->model , $request);        
+                 //$collection = $this->talaria->index( $this->model , $request);        
             }
             else
             {
@@ -52,7 +52,7 @@ class LendingDocdelRequestController extends ApiController
                 }
                 else $this->model=$this->model->Lendingarchived(0); //not archived
                 
-                //$collection = $this->nilde->index( $this->model , $request);        
+                //$collection = $this->talaria->index( $this->model , $request);        
 
             
                 if($request->has("tagIds"))
@@ -60,10 +60,10 @@ class LendingDocdelRequestController extends ApiController
                 
             }
 
-            $collection = $this->nilde->index( $this->model , $request);                                
+            $collection = $this->talaria->index( $this->model , $request);                                
             return $this->response->paginator($collection, new $this->transformer())->morph();
         }
-        else  $this->response->errorUnauthorized(trans('apinilde::auth.unauthorized'));
+        else  $this->response->errorUnauthorized(trans('apitalaria::auth.unauthorized'));
     }
 
  
@@ -76,7 +76,7 @@ class LendingDocdelRequestController extends ApiController
     {
 
         $id = $request->route()->parameters['id'];
-        $model = $this->nilde->show($this->model, $request, $id);
+        $model = $this->talaria->show($this->model, $request, $id);
 
         Log::info(print_r( $model, true));  
 
@@ -85,8 +85,8 @@ class LendingDocdelRequestController extends ApiController
 
     public function selectAllrequests(Request $request)
     {
-        $model = $this->nilde->show($this->model, $request, $id);
-        $collection = $this->nilde->index( $this->model , $request);        
+        $model = $this->talaria->show($this->model, $request, $id);
+        $collection = $this->talaria->index( $this->model , $request);        
         return $this->response->paginator($collection, new $this->transformer())->morph();
     }
 
@@ -114,7 +114,7 @@ class LendingDocdelRequestController extends ApiController
         $alllender = $request->get('all_lender');   
         $id = $request->route()->parameters['id'];
         $arcl = LendingDocdelRequest::find($id);
-        $model = $this->nilde->show($this->model, $request, $id);
+        $model = $this->talaria->show($this->model, $request, $id);
   
         if($arcl->all_lender==1) {
             $arcl->lending_library_id=$lib;
@@ -130,7 +130,7 @@ class LendingDocdelRequestController extends ApiController
     public function update(Request $request, $id)
     {        
         $lid = $request->route()->parameters['id'];    
-        $model = $this->nilde->update($this->model, $request, $lid);
+        $model = $this->talaria->update($this->model, $request, $lid);
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
@@ -183,7 +183,7 @@ class LendingDocdelRequestController extends ApiController
         else $model=$this->model;
         
             
-        $collection = $this->nilde->index($model, $request);
+        $collection = $this->talaria->index($model, $request);
         return $this->response->paginator($collection, new $this->transformer())->morph();
     }
 

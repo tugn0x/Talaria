@@ -27,7 +27,7 @@ return (
         </>
         {institutional_login_enabled &&         
         <Col xs="12" md="6">
-          <a className="btn-garr-container" href="https://devnilde.bo.cnr.it/Shibboleth.sso/Login?target=https://devnilde.bo.cnr.it/shibb/shiblogin.php">
+          <a className="btn-garr-container" href="https://talaria.local/Shibboleth.sso/Login?target=https://talaria.local/shibb/shiblogin.php">
             <div className="btn-garr">
               <img src={GarrImg}/>
             </div>            

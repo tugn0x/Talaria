@@ -26,7 +26,7 @@ class ApiServiceProvider extends ServiceProvider {
      *
      * --> Replace with your package name <--
      */
-//    protected $packageName = 'apinilde';
+//    protected $packageName = 'apitalaria';
 
     /**
      * Bootstrap the application services.
@@ -71,8 +71,8 @@ class ApiServiceProvider extends ServiceProvider {
     protected function setupClassAliases()
     {
         $aliases = [
-            'nilde' => Dispatcher::class,
-            'nilde.dispatcher' => Dispatcher::class
+            'talaria' => Dispatcher::class,
+            'talaria.dispatcher' => Dispatcher::class
         ];
 
         foreach ($aliases as $key => $aliases) {
@@ -89,7 +89,7 @@ class ApiServiceProvider extends ServiceProvider {
      */
     public function registerDispatcher()
     {
-        $this->app->singleton('nilde.dispatcher', function ($app) {
+        $this->app->singleton('talaria.dispatcher', function ($app) {
             $dispatcher = new Dispatcher($app['\Dingo\Api\Dispatcher']);
             return $dispatcher;
         });
@@ -121,7 +121,7 @@ class ApiServiceProvider extends ServiceProvider {
 //
 //        $this->app['Dingo\Api\Exception\Handler']->register(function (\Illuminate\Auth\Access\AuthorizationException $exception) use ($response)
 //        {
-//            return $response->errorUnauthorized($exception->getMessage() ?: trans('apinilde::auth.unauthorized'));
+//            return $response->errorUnauthorized($exception->getMessage() ?: trans('apitalaria::auth.unauthorized'));
 //        });
 //    }
 

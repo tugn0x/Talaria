@@ -33,8 +33,8 @@ class AdminLibraryController extends AdminApiController
         if (!empty($this->validate))
             $this->validate($request, $this->validate);
 
-        $model = $this->nilde->update($this->model, $request, $id, function ($model, $request) {            
-            return $this->nilde->syncGrantedPermissions($model, $request);
+        $model = $this->talaria->update($this->model, $request, $id, function ($model, $request) {            
+            return $this->talaria->syncGrantedPermissions($model, $request);
         });
 
         //sync projects
@@ -56,7 +56,7 @@ class AdminLibraryController extends AdminApiController
 
 
         
-        if ($this->broadcast && config('apinilde.broadcast'))
+        if ($this->broadcast && config('apitalaria.broadcast'))
             broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();

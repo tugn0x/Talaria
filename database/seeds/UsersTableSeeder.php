@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $defaultpw=Hash::make('password');
+        $defaultpw='password'; //will be encrypted by UserObserver (called from Factory)
         Model::unguard(); //altrienti non setta la passw perchè è unfillable
 
         //Super-Admin
@@ -38,43 +38,7 @@ class UsersTableSeeder extends Seeder
             'privacy_policy_accepted'=>now(),
             'country_id'=>1,
         ]);
-        $manager->assign('manager');        
-
-//        $admin = App\Models\Users\User::create(new App\Models\Users\User([
-//            'email' => 'nilde@nilde.it',
-//            'name' => 'nildenilde',
-//            'surname' => 'nildenilde',
-//            'password' => ('nildenilde'),
-//        ]));
-//        $admin->verified = true;
-//        $admin->save();
-        
-        //My user (associated to a library as a manager)
-        /*$ale = factory(\App\Models\Users\User::class)->create([
-            'email' => 'alessandro.tugnoli@gmail.com',
-            'name' => 'Alessandro',
-            'surname' => 'Tugnoli',
-            'password' => $defaultpw,
-            'password_confirmation' => $defaultpw,
-            'status'=>1,
-            'country_id'=>1,
-            'privacy_policy_accepted'=>now(),
-        ]);*/
-
-        /*$librarian = factory(\App\Models\Users\User::class)->create([
-            'email' => 'a.tugnoli@area.bo.cnr.it',
-            'name' => 'Mario',
-            'surname' => 'Rossi',
-            'password' => $defaultpw,
-            'password_confirmation' => $defaultpw,
-            'status'=>1,
-            'country_id'=>1,
-            'privacy_policy_accepted'=>now(),
-        ]);
-
-        $lib1=App\Models\Libraries\Library::find(1);
-
-        $librarian->allow('manage', $lib1);*/                      
+        $manager->assign('manager');                        
 
         Model::reguard();
     }

@@ -137,8 +137,8 @@ class SocialAuthController extends ApiController
      *
         {
           "email" => "user@example.com",
-          "name" => "Alex",
-          "surname" => "Nilde",
+          "name" => "Myname",
+          "surname" => "MySurname",
           "provider_id" => "TENVqm9eXhOYje"
         }
      *

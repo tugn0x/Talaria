@@ -26,7 +26,7 @@ use App\Models\Users\User;
 /**
  * Password grant class.
  */
-class NildePasswordGrant extends PasswordGrant
+class TalariaPasswordGrant extends PasswordGrant
 {
 
     /**
@@ -62,7 +62,7 @@ class NildePasswordGrant extends PasswordGrant
      */
     public function getIdentifier()
     {
-        return 'nilde-password';
+        return 'talaria-password';
     }
 
 }

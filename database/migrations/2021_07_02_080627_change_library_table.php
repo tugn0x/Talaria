@@ -18,8 +18,7 @@ class ChangeLibraryTable extends Migration
             $table->dropColumn('phone');
             $table->dropColumn('fax');
             $table->dropColumn('dd_email');
-            $table->dropColumn('dd_phone');
-            $table->dropColumn('nilde');
+            $table->dropColumn('dd_phone');            
             $table->dropColumn('rank');
             $table->dropColumn('isil_code');
             $table->dropColumn('dd_user_cost');
@@ -61,8 +60,7 @@ class ChangeLibraryTable extends Migration
         Schema::table('libraries', function (Blueprint $table) {
             $table->string('email')->nullable(false);
             $table->string('phone')->nullable();
-            $table->string('fax')->nullable();
-            $table->smallInteger('nilde')->nullable();
+            $table->string('fax')->nullable();            
             $table->integer('rank')->nullable();
             $table->string('dd_email')->nullable();
             $table->string('dd_phone')->nullable();

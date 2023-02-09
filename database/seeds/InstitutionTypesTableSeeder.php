@@ -12,11 +12,15 @@ class InstitutionTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        InstitutionType::create(['name'=>'Università']);
-        InstitutionType::create(['name'=>'Ente pubblico di ricerca']);
-        InstitutionType::create(['name'=>'Ente del Servizio Sanitario Nazionale']);
-        InstitutionType::create(['name'=>'Altro Ente Pubblico']);
-        InstitutionType::create(['name'=>'Ente Privato - Senza scopo di lucro']);        
+        InstitutionType::create(['name'=>'University']);
+        InstitutionType::create(['name'=>'Public research institution']);
+        InstitutionType::create(['name'=>'Public health institution']);
+        
+        InstitutionType::create(['name'=>'Public library']);
+        InstitutionType::create(['name'=>'School']);
+
+        InstitutionType::create(['name'=>'Other public institution']);
+        InstitutionType::create(['name'=>'Private non profit organization']);        
         //InstitutionType::create(['name'=>'Ente pubblico cantonale']);
     }
 }

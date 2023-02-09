@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "a5f49b8f-2775-48a1-987f-55938b7b73c7",
-		"name": "Nilde",
+		"name": "Talaria",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -20,7 +20,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"grant_type\": \"client_credentials\",\n  \"client_id\": \"1\",\n  \"client_secret\": \"bK3vrACDLE4WM7smEPvPT5X5XUdn8DfMHDnjGHrB\"\n}"
+							"raw": "{\n  \"grant_type\": \"client_credentials\",\n  \"client_id\": \"1\",\n  \"client_secret\": \"\"\n}"
 						},
 						"url": {
 							"raw": "{{urlbase}}/oauth/token",
@@ -53,7 +53,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"grant_type\": \"password\",\n  \"client_id\": \"1\",\n  \"client_secret\": \"bK3vrACDLE4WM7smEPvPT5X5XUdn8DfMHDnjGHrB\",\n  \"username\": \"nilde@nilde.it\",\n  \"password\": \"nilde\"\n}",
+							"raw": "{\n  \"grant_type\": \"password\",\n  \"client_id\": \"1\",\n  \"client_secret\": \"\",\n  \"username\": \"\",\n  \"password\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -89,7 +89,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"grant_type\": \"password\",\n  \"client_id\": \"1\",\n  \"client_secret\": \"bK3vrACDLE4WM7smEPvPT5X5XUdn8DfMHDnjGHrB\",\n  \"username\": \"alessandro.tugnoli@gmail.com\",\n  \"password\": \"nildenilde\"\n}"
+							"raw": "{\n  \"grant_type\": \"password\",\n  \"client_id\": \"1\",\n  \"client_secret\": \"\",\n  \"username\": \"\",\n  \"password\": \"\"\n}"
 						},
 						"url": {
 							"raw": "{{urlbase}}/oauth/token",
@@ -1536,11 +1536,11 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "https://api.nilde.local/api/v1"
+			"value": "https://api.talaria.local/api/v1"
 		},
 		{
 			"key": "urlbase",
-			"value": "https://api.nilde.local"
+			"value": "https://api.talaria.local"
 		},
 		{
 			"key": "bearer_admin",

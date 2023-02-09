@@ -27,13 +27,13 @@ class GroupController extends ApiController
      */
     public function index(Request $request)
     {
-        $collection = $this->nilde->index($this->model->owned(), $request);
+        $collection = $this->talaria->index($this->model->owned(), $request);
         return $this->response->paginator($collection, new $this->transformer())->morph();
     }
 
     public function optionList(Request $request)
     {   
-        $collection = $this->nilde->optionList($this->model, $request,function ($model,$request){
+        $collection = $this->talaria->optionList($this->model, $request,function ($model,$request){
             return $model->owned();
         });
 
@@ -53,7 +53,7 @@ class GroupController extends ApiController
 
     public function store(Request $request)
     {
-        $model = $this->nilde->store($this->model, $request, null, function ($model, $request) {
+        $model = $this->talaria->store($this->model, $request, null, function ($model, $request) {
 //            $model = $model->firstOrNew([
 //                'user_id' => $model->user_id,
 //                'library_id' => $request->library,

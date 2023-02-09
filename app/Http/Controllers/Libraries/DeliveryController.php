@@ -30,7 +30,7 @@ class DeliveryController extends ApiController
         //return $this->response->collection($items, new $this->transformer())->morph();
 
         //col paginatore
-        $collection = $this->nilde->index($this->model, $request);
+        $collection = $this->talaria->index($this->model, $request);
         return $this->response->paginator($collection, new $this->transformer())->morph();
         
 
@@ -39,7 +39,7 @@ class DeliveryController extends ApiController
     public function show(Request $request, $id)
     {
         $id = $request->route()->parameters['delivery_id'];
-        $model = $this->nilde->show($this->model, $request, $id);
+        $model = $this->talaria->show($this->model, $request, $id);
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
@@ -50,9 +50,9 @@ class DeliveryController extends ApiController
              $this->validate($request, $this->validate);
  
          $id = $request->route()->parameters['delivery_id'];
-         $model = $this->nilde->update($this->model, $request, $id);
+         $model = $this->talaria->update($this->model, $request, $id);
  
-         if($this->broadcast && config('apinilde.broadcast'))
+         if($this->broadcast && config('apitalaria.broadcast'))
              broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
  
          return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
@@ -66,7 +66,7 @@ class DeliveryController extends ApiController
 
     public function store(Request $request)
     {
-        $model = $this->nilde->store($this->model, $request, null, function ($model, $request) {
+        $model = $this->talaria->store($this->model, $request, null, function ($model, $request) {
             $model = $model->firstOrNew([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -90,9 +90,9 @@ class DeliveryController extends ApiController
     public function delete(Request $request, $id)
     {
         $id = $request->route()->parameters['delivery_id'];
-        $model = $this->nilde->delete($this->model, $request, $id);
+        $model = $this->talaria->delete($this->model, $request, $id);
 
-        if($this->broadcast && config('apinilde.broadcast'))
+        if($this->broadcast && config('apitalaria.broadcast'))
             broadcast(new ApiDeleteBroadcast($model->id, $model->getTable()));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
@@ -107,18 +107,18 @@ class DeliveryController extends ApiController
         /*$u=Auth::user();
         if($u->can('manage',$l)||$u->can('deliver',$l)||$u->can('borrow',$l))
         {
-            $collection = $this->nilde->optionList($this->model, $request,function ($model,$request) use ($l) {
+            $collection = $this->talaria->optionList($this->model, $request,function ($model,$request) use ($l) {
                 return $model->inLibrary($l->id);
             });
 
             return $this->response->array($collection->toArray());
 
         }
-        else  $this->response->errorUnauthorized(trans('apinilde::auth.unauthorized'));
+        else  $this->response->errorUnauthorized(trans('apitalaria::auth.unauthorized'));
         */
 
         //option list must be public available
-        $collection = $this->nilde->optionList($this->model, $request,function ($model,$request) use ($l) {
+        $collection = $this->talaria->optionList($this->model, $request,function ($model,$request) use ($l) {
             return $model->inLibrary($l->id);
         });
         return $this->response->array($collection->toArray());

@@ -48,8 +48,7 @@ class CreateLibrariesTable extends Migration
             $table->string('susp_notice_days')->nullable();
             $table->float('ill_cost')->nullable();
             $table->float('ill_user_cost')->nullable();
-            $table->smallInteger('status')->nullable();
-            $table->smallInteger('nilde')->nullable();
+            $table->smallInteger('status')->nullable();            
             $table->integer('rank')->nullable();
             $table->dateTime('registration_date')->nullable();
             $table->string('vatnumber',50)->nullable();

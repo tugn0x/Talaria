@@ -36,7 +36,7 @@ class PatronDocdelRequestController extends ApiController
             $this->model = $this->model->InReference($rifid);
         }
         
-        $collection = $this->nilde->index($this->model->owned(), $request);
+        $collection = $this->talaria->index($this->model->owned(), $request);
 
         return $this->response->paginator($collection, new $this->transformer())->morph();
     }
@@ -57,13 +57,13 @@ class PatronDocdelRequestController extends ApiController
         if($request->has("groupIds"))
             $model=$model->byGroup($request->input("groupIds"));            
        
-        $collection = $this->nilde->index($model, $request);
+        $collection = $this->talaria->index($model, $request);
         return $this->response->paginator($collection, new $this->transformer())->morph();
     }
 
     public function store(Request $request)
     {
-        $model = $this->nilde->store($this->model, $request, null, function ($model, $request) {
+        $model = $this->talaria->store($this->model, $request, null, function ($model, $request) {
 //            $model = $model->firstOrNew([
 //                'user_id' => $model->user_id,
 //                'library_id' => $request->library,

@@ -6,7 +6,6 @@ use App\Models\Libraries\Library;
 use App\Models\Libraries\Tag;
 use App\Models\References\Reference;
 
-//TODO: CHECK against LibraryCloud Excel file
 class DocdelRequest extends BaseModel
 {
     protected $table = 'docdel_requests';
@@ -22,29 +21,27 @@ class DocdelRequest extends BaseModel
         'borrowing_status', //status req. borrow
         'lending_status', //status req. lending
         'request_type', //0=DD 1: ILL        
-        'request_date', //dd_datarichie Data richiesta alla bib lender        
-        'request_note', //dd_note_richforni
+        'request_date', 
+        'request_note', 
         'request_special_delivery', //special delivery for blind people
         'request_pdf_editorial', //want original PDF (not OA)
-        'on_cost', //dd_costofn
-        'fulfill_date', //dd_dataeva (for both fulfil/notfulfill)        
-        'fulfill_location', //dd_collocazione (ricavata da ACNP)
-        'fulfill_note', //dd_note_fornirich       
-        'fulfill_type',    //tipo evasione (=SentiVia/DeliveryMethod ISO18626: ArticleExchange,Ariel,Email,Mail,Odyssey,URL,FTP) + file + url?
-	    'notfulfill_type', //tipo inevasione (prendere da NILDE global_const $DDILL_INEVASO_xxx + "fornitore non disp" + "altro" (con descrizione in borr_notes) )        
+        'on_cost', //outside network ILL cost
+        'fulfill_date', 
+        'fulfill_location', 
+        'fulfill_note', 
+        'fulfill_type',    //tipo evasione 
+	    'notfulfill_type', //tipo inevasione 
         'filename',
         'filehash',
         //'file_id', //TODO & CHECK
         'file_status', //File status: 0-not available; 1-available; 2-available and converted by HC server
         'cancel_request_date', //data richiesta annullamento alla lender
         'cancel_date', //data accettazione richiesta annullamento da lender
-        'fulfill_inventorynr', //dd_ninventario_forni        
+        'fulfill_inventorynr',        
         'all_lender', //0=no, 1=all lending library will see this request, 2=some lending libraries will see this request        
         'url',        
 
         
-        //TODO
-        //'request_protocol', //0: NILDE, 1: ISO18626 .. (se impostato a 1 avro' dati rich ISO in altra tabella)
         
 
         //npg-> tolto

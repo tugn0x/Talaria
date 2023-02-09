@@ -29,7 +29,7 @@ class ReferenceController extends ApiController
         if($request->has("groupIds"))
             $model=$model->byGroup($request->input("groupIds"));
         
-        $collection = $this->nilde->index($model, $request);
+        $collection = $this->talaria->index($model, $request);
 
         return $this->response->paginator($collection, new $this->transformer())->morph();
     }
@@ -38,7 +38,7 @@ class ReferenceController extends ApiController
 
     public function store(Request $request)
     {
-        $model = $this->nilde->store($this->model, $request, null, function ($model, $request) {
+        $model = $this->talaria->store($this->model, $request, null, function ($model, $request) {
 //            $model = $model->firstOrNew([
 //                'user_id' => $model->user_id,
 //                'library_id' => $request->library,
@@ -109,7 +109,7 @@ class ReferenceController extends ApiController
         else $model=$this->model->owned();
         
             
-        $collection = $this->nilde->index($model, $request);
+        $collection = $this->talaria->index($model, $request);
         return $this->response->paginator($collection, new $this->transformer())->morph();
     }
 

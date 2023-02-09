@@ -10,7 +10,7 @@ trait RoleControllerTrait
 
     public function store(Request $request)
     {
-        $model = $this->nilde->store($this->model, $request, function($model, $request)
+        $model = $this->talaria->store($this->model, $request, function($model, $request)
         {
             //Update relation with permission
             if($request->has('perms'))
@@ -19,7 +19,7 @@ trait RoleControllerTrait
 
                 if( !$model->perms()->attach( $perms ) )
                 {
-                    $model->addInternalMessage(trans('apinilde::response.create_relation_failed', ['name' => 'Permissions']), 'error');
+                    $model->addInternalMessage(trans('apitalaria::response.create_relation_failed', ['name' => 'Permissions']), 'error');
                 }
             }
 
@@ -30,7 +30,7 @@ trait RoleControllerTrait
 
                 if( !$model->users()->attach( $users ) )
                 {
-                    $model->addInternalMessage(trans('apinilde::response.create_relation_failed', ['name' => 'Users']), 'error');
+                    $model->addInternalMessage(trans('apitalaria::response.create_relation_failed', ['name' => 'Users']), 'error');
                 }
             }
 
@@ -43,7 +43,7 @@ trait RoleControllerTrait
 
     public function update(Request $request, $id)
     {
-        $model = $this->nilde->update($this->model, $request, $id, function($model, $request)
+        $model = $this->talaria->update($this->model, $request, $id, function($model, $request)
         {
             //Update relation with permission
             if($request->has('perms'))
@@ -51,7 +51,7 @@ trait RoleControllerTrait
                 $perms = $model->filterIds($request->input('perms'));
                 if( !$model->perms()->sync( $perms ) )
                 {
-                    $model->addInternalMessage(trans('apinilde::response.update_relation_failed', ['name' => 'Permissions']), 'error');
+                    $model->addInternalMessage(trans('apitalaria::response.update_relation_failed', ['name' => 'Permissions']), 'error');
                 }
             }
 
@@ -61,7 +61,7 @@ trait RoleControllerTrait
                 $users = $model->filterIds($request->input('users'));
                 if( !$model->users()->sync( $users ) )
                 {
-                    $model->addInternalMessage(trans('apinilde::response.update_relation_failed', ['name' => 'Users']), 'error');
+                    $model->addInternalMessage(trans('apitalaria::response.update_relation_failed', ['name' => 'Users']), 'error');
                 }
             }
 

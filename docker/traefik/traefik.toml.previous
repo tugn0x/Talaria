@@ -49,9 +49,9 @@ entryPoint = "https"
   entryPoint = "http"
 
 [[acme.domains]]
-  main = "devnilde-api.bo.cnr.it"
+  main = "api.talaria.local"
 [[acme.domains]]
-  main = "devnilde.bo.cnr.it"
+  main = "api.talaria.local"
 
 # https://docs.traefik.io/configuration/logs/
 # Comment out the next line to enable Traefik's access logs.

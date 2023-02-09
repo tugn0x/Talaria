@@ -48,7 +48,8 @@ function LoginPage(props) {
     //LOGIN CHECK
     if(props.isLogged && props.auth)
     {
-      if(props.auth.permissions.roles && checkRole(props.auth,"super-admin"))   
+      //Admin and Manager were automatically redirected to /admin
+      if(props.auth.permissions.roles && checkRole(props.auth,["super-admin","manager"]) )   
         history.push('/admin'); 
      
       //if user has no abilities=>is just a patron

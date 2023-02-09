@@ -13,7 +13,7 @@ trait UserControllerTrait
         if( !empty($this->validate) )
             $this->validate($request, $this->validate);
 
-        $model = $this->nilde->store($this->model, $request, function($model, $request)
+        $model = $this->talaria->store($this->model, $request, function($model, $request)
         {
             //Create relation with Roles
             if($request->has('roles'))
@@ -21,7 +21,7 @@ trait UserControllerTrait
                 $roles = (is_array($request->input('roles'))) ? $request->input('roles') : [$request->input('roles')];
                 if( $model->syncRoles($roles) )
                 {
-                    $model->addInternalMessage(trans('apiclu::response.update_relation_failed', ['name' => 'Roles']), 'error');
+                    $model->addInternalMessage(trans('apitalaria::response.update_relation_failed', ['name' => 'Roles']), 'error');
                 }
             }
             //Update relation with Roles
@@ -30,7 +30,7 @@ trait UserControllerTrait
 //                $resources = (is_array($request->input('resources'))) ? $request->input('resources') : [$request->input('resources')];
 //                if( $model->syncRoles($roles) )
 //                {
-//                    $model->addInternalMessage(trans('apiclu::response.update_relation_failed', ['name' => 'Roles']), 'error');
+//                    $model->addInternalMessage(trans('apitalaria::response.update_relation_failed', ['name' => 'Roles']), 'error');
 //                }
             }
 
@@ -44,7 +44,7 @@ trait UserControllerTrait
                     {
                         if(!$model->meta()->updateOrCreate(['meta_key' => $key], ['meta_key' => $key, 'meta_value' => $meta]))
                         {
-                            $model->addInternalMessage(trans('apiclu::response.update_meta_failed'), 'error');
+                            $model->addInternalMessage(trans('apitalaria::response.update_meta_failed'), 'error');
                         }
                     }
                 }
@@ -60,7 +60,7 @@ trait UserControllerTrait
 
     public function update(Request $request, $id)
     {
-        $model = $this->nilde->update($this->model, $request, $id, function($model, $request)
+        $model = $this->talaria->update($this->model, $request, $id, function($model, $request)
         {
             //Update relation with Roles
             if($request->has('roles'))
@@ -68,7 +68,7 @@ trait UserControllerTrait
                 $roles = (is_array($request->input('roles'))) ? $request->input('roles') : [$request->input('roles')];
                 if( $model->syncRoles($roles) )
                 {
-                    $model->addInternalMessage(trans('apiclu::response.update_relation_failed', ['name' => 'Roles']), 'error');
+                    $model->addInternalMessage(trans('apitalaria::response.update_relation_failed', ['name' => 'Roles']), 'error');
                 }
             }
             //Update relation with Roles
@@ -77,7 +77,7 @@ trait UserControllerTrait
 //                $resources = (is_array($request->input('resources'))) ? $request->input('resources') : [$request->input('resources')];
 //                if( $model->syncRoles($roles) )
 //                {
-//                    $model->addInternalMessage(trans('apiclu::response.update_relation_failed', ['name' => 'Roles']), 'error');
+//                    $model->addInternalMessage(trans('apitalaria::response.update_relation_failed', ['name' => 'Roles']), 'error');
 //                }
             }
 
@@ -91,7 +91,7 @@ trait UserControllerTrait
                     {
                         if(!$model->meta()->updateOrCreate(['meta_key' => $key], ['meta_key' => $key, 'meta_value' => $meta]))
                         {
-                            $model->addInternalMessage(trans('apiclu::response.update_meta_failed'), 'error');
+                            $model->addInternalMessage(trans('apitalaria::response.update_meta_failed'), 'error');
                         }
                     }
                 }
@@ -132,7 +132,7 @@ trait UserControllerTrait
     public function index(Request $request)
     {
 
-        $collection = $this->nilde->index($this->model->select('*'), $request, function( $model, $request)
+        $collection = $this->talaria->index($this->model->select('*'), $request, function( $model, $request)
         {
 
             if($request->has('status')  && in_array($request->input('status'), ['active','lock']))

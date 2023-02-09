@@ -10,7 +10,7 @@
     -->
 
     <!-- The ApplicationDefaults element is where most of Shibboleth's SAML bits are defined. -->
-    <ApplicationDefaults entityID="https://devnilde.bo.cnr.it/sp"
+    <ApplicationDefaults entityID="https://testsp/sp"
         REMOTE_USER="eppn subject-id pairwise-id persistent-id"
         cipherSuites="DEFAULT:!EXP:!LOW:!aNULL:!eNULL:!DES:!IDEA:!SEED:!RC4:!3DES:!kRSA:!SSLv2:!SSLv3:!TLSv1:!TLSv1.1">
 
@@ -50,12 +50,12 @@
             <!-- Extension service that generates "approximate" metadata based on SP configuration. -->
             <Handler type="MetadataGenerator" Location="/Metadata" signing="false">
                 <mdui:UIInfo xmlns:mdui='urn:oasis:names:tc:SAML:metadata:ui'>
-                    <mdui:DisplayName xml:lang="en">NILDE6 SP TEST</mdui:DisplayName>
-                    <mdui:DisplayName xml:lang="it">NILDE6 SP TEST</mdui:DisplayName>
-                    <mdui:Description xml:lang="en">NILDE Web Application: document delivery service</mdui:Description>
-                    <mdui:Description xml:lang="it">NILDE Servizio di document delivery</mdui:Description>
-                    <mdui:InformationURL xml:lang="en">https://devnilde.bo.cnr.it</mdui:InformationURL>
-                    <mdui:InformationURL xml:lang="it">https://devnilde.bo.cnr.it</mdui:InformationURL>
+                    <mdui:DisplayName xml:lang="en">SP TEST</mdui:DisplayName>
+                    <mdui:DisplayName xml:lang="it">SP TEST</mdui:DisplayName>
+                    <mdui:Description xml:lang="en">SP TEST</mdui:Description>
+                    <mdui:Description xml:lang="it">SP TEST</mdui:Description>
+                    <mdui:InformationURL xml:lang="en">https://testsp</mdui:InformationURL>
+                    <mdui:InformationURL xml:lang="it">https://testsp</mdui:InformationURL>
                     <mdui:PrivacyStatementURL xml:lang="en">PRIVACYURL_ENG</mdui:PrivacyStatementURL>
                     <mdui:PrivacyStatementURL xml:lang="it">PRIVACYURL_ITA</mdui:PrivacyStatementURL>
                     <mdui:Logo height="16" width="16" xml:lang="en">FAVICON-PNG-ENG</mdui:Logo>
@@ -65,8 +65,8 @@
                 </mdui:UIInfo>
 
                 <md:AttributeConsumingService xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" index="0">
-                    <md:ServiceName xml:lang="en">NILDE document delivery service</md:ServiceName>
-                    <md:ServiceName xml:lang="it">Servizio di document delivery NILDE</md:ServiceName>
+                    <md:ServiceName xml:lang="en">TEST service</md:ServiceName>
+                    <md:ServiceName xml:lang="it">TEST service</md:ServiceName>
                     <md:ServiceDescription xml:lang="en">DESCRIPTION_ENG</md:ServiceDescription>
                     <md:ServiceDescription xml:lang="it">DESCRIPTION_ITA</md:ServiceDescription>
                     <!-- Required attribute: mail, eduPersonPrincipalName, eduPersonTargetedID, givenName, surname -->
@@ -118,14 +118,14 @@
                 </md:Organization>
 
                 <md:ContactPerson xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" contactType="technical">
-                    <md:GivenName>Alessandro</md:GivenName>
-                    <md:SurName>Tugnoli</md:SurName>
-                    <md:EmailAddress>mailto:biblio-idem@area.bo.cnr.it</md:EmailAddress>
+                    <md:GivenName>xxx</md:GivenName>
+                    <md:SurName>xxx</md:SurName>
+                    <md:EmailAddress>mailto:xxx</md:EmailAddress>
                 </md:ContactPerson>
                 <md:ContactPerson xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" contactType="technical">
-                    <md:GivenName>Silvana</md:GivenName>
-                    <md:SurName>Mangiaracina</md:SurName>
-                    <md:EmailAddress>mailto:biblio-idem@area.bo.cnr.it</md:EmailAddress>
+                    <md:GivenName>xxx</md:GivenName>
+                    <md:SurName>xxx</md:SurName>
+                    <md:EmailAddress>mailto:xxx</md:EmailAddress>
                 </md:ContactPerson>
             </Handler>
 
@@ -144,7 +144,7 @@
         also add your own attributes with values that can be plugged into the
         templates, e.g., helpLocation below.
         -->
-        <Errors supportContact="biblio-idem@area.bo.cnr.it"
+        <Errors supportContact="help@talaria.local"
             helpLocation="/about.html"
             styleSheet="/shibboleth-sp/main.css"/>
 

@@ -29,9 +29,9 @@ class CatalogLibraryController extends ApiController
             $this->validate($request, $this->validate);
 
         $id = $request->route()->parameters['library_catalog'];
-        $model = $this->nilde->update($this->model, $request, $id);
+        $model = $this->talaria->update($this->model, $request, $id);
 
-        if($this->broadcast && config('apinilde.broadcast'))
+        if($this->broadcast && config('apitalaria.broadcast'))
             broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
@@ -40,7 +40,7 @@ class CatalogLibraryController extends ApiController
     public function index(Request $request)
     {
         $this->model = $this->filterRelations($request);
-        $collection = $this->nilde->index($this->model, $request);
+        $collection = $this->talaria->index($this->model, $request);
 
         return $this->response->paginator($collection, new $this->transformer())->morph();
     }
@@ -53,7 +53,7 @@ class CatalogLibraryController extends ApiController
     public function show(Request $request, $id)
     {
         $id = $request->route()->parameters['library_catalog'];
-        $model = $this->nilde->show($this->model, $request, $id);
+        $model = $this->talaria->show($this->model, $request, $id);
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
@@ -63,9 +63,9 @@ class CatalogLibraryController extends ApiController
     public function delete(Request $request, $id)
     {
         $id = $request->route()->parameters['library_catalog'];
-        $model = $this->nilde->delete($this->model, $request, $id);
+        $model = $this->talaria->delete($this->model, $request, $id);
 
-        if($this->broadcast && config('apinilde.broadcast'))
+        if($this->broadcast && config('apitalaria.broadcast'))
             broadcast(new ApiDeleteBroadcast($model->id, $model->getTable()));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();

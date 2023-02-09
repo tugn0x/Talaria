@@ -16,14 +16,14 @@ trait OauthCustomProviderTrait
     private function getOauthToken(AuthorizationServer $authorizationServer, $id)
     {
         $request = (new \Zend\Diactoros\ServerRequest)->withParsedBody([
-            'grant_type' => 'nilde-password',
+            'grant_type' => 'talaria-password',
             'client_id' => config('api.api_client.name'),
             'client_secret' => config('api.api_client.secret'),
             'user_id' => $id,
             'scope' => '*',
         ]);
 
-        $grant = new \App\Traits\Http\Auth\NildePasswordGrant(
+        $grant = new \App\Traits\Http\Auth\TalariaPasswordGrant(
             app(\Laravel\Passport\Bridge\UserRepository::class),
             app(\Laravel\Passport\Bridge\RefreshTokenRepository::class)
         );

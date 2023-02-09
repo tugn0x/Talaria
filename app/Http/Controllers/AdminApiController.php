@@ -14,7 +14,7 @@ class AdminApiController extends Controller
     public function __construct()
     {
         //disable authorization cause admin/manager can access all models methods
-        $this->nilde->disableAuthorize();
+        $this->talaria->disableAuthorize();
     }
 
     

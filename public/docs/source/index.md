@@ -16,7 +16,7 @@ toc_footers:
 # Info
 
 Welcome to the generated API reference.
-[Get Postman Collection](http://api.nilde.local/docs/collection.json)
+[Get Postman Collection](http://api.talaria.local/docs/collection.json)
 
 <!-- END_INFO -->
 
@@ -27,10 +27,10 @@ Welcome to the generated API reference.
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/horizon/api/stats" 
+curl -X GET -G "http://api.talaria.local/horizon/api/stats" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/horizon/api/stats");
+const url = new URL("http://api.talaria.local/horizon/api/stats");
 
 let headers = {
     "Accept": "application/json",
@@ -65,10 +65,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/horizon/api/workload" 
+curl -X GET -G "http://api.talaria.local/horizon/api/workload" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/horizon/api/workload");
+const url = new URL("http://api.talaria.local/horizon/api/workload");
 
 let headers = {
     "Accept": "application/json",
@@ -103,10 +103,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/horizon/api/masters" 
+curl -X GET -G "http://api.talaria.local/horizon/api/masters" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/horizon/api/masters");
+const url = new URL("http://api.talaria.local/horizon/api/masters");
 
 let headers = {
     "Accept": "application/json",
@@ -141,10 +141,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/horizon/api/monitoring" 
+curl -X GET -G "http://api.talaria.local/horizon/api/monitoring" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/horizon/api/monitoring");
+const url = new URL("http://api.talaria.local/horizon/api/monitoring");
 
 let headers = {
     "Accept": "application/json",
@@ -179,10 +179,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X POST "http://api.nilde.local/horizon/api/monitoring" 
+curl -X POST "http://api.talaria.local/horizon/api/monitoring" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/horizon/api/monitoring");
+const url = new URL("http://api.talaria.local/horizon/api/monitoring");
 
 let headers = {
     "Accept": "application/json",
@@ -210,10 +210,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/horizon/api/monitoring/1" 
+curl -X GET -G "http://api.talaria.local/horizon/api/monitoring/1" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/horizon/api/monitoring/1");
+const url = new URL("http://api.talaria.local/horizon/api/monitoring/1");
 
 let headers = {
     "Accept": "application/json",
@@ -248,10 +248,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X DELETE "http://api.nilde.local/horizon/api/monitoring/1" 
+curl -X DELETE "http://api.talaria.local/horizon/api/monitoring/1" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/horizon/api/monitoring/1");
+const url = new URL("http://api.talaria.local/horizon/api/monitoring/1");
 
 let headers = {
     "Accept": "application/json",
@@ -279,10 +279,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/horizon/api/metrics/jobs" 
+curl -X GET -G "http://api.talaria.local/horizon/api/metrics/jobs" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/horizon/api/metrics/jobs");
+const url = new URL("http://api.talaria.local/horizon/api/metrics/jobs");
 
 let headers = {
     "Accept": "application/json",
@@ -317,10 +317,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/horizon/api/metrics/jobs/1" 
+curl -X GET -G "http://api.talaria.local/horizon/api/metrics/jobs/1" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/horizon/api/metrics/jobs/1");
+const url = new URL("http://api.talaria.local/horizon/api/metrics/jobs/1");
 
 let headers = {
     "Accept": "application/json",
@@ -355,10 +355,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/horizon/api/metrics/queues" 
+curl -X GET -G "http://api.talaria.local/horizon/api/metrics/queues" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/horizon/api/metrics/queues");
+const url = new URL("http://api.talaria.local/horizon/api/metrics/queues");
 
 let headers = {
     "Accept": "application/json",
@@ -393,10 +393,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/horizon/api/metrics/queues/1" 
+curl -X GET -G "http://api.talaria.local/horizon/api/metrics/queues/1" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/horizon/api/metrics/queues/1");
+const url = new URL("http://api.talaria.local/horizon/api/metrics/queues/1");
 
 let headers = {
     "Accept": "application/json",
@@ -431,10 +431,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/horizon/api/jobs/recent" 
+curl -X GET -G "http://api.talaria.local/horizon/api/jobs/recent" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/horizon/api/jobs/recent");
+const url = new URL("http://api.talaria.local/horizon/api/jobs/recent");
 
 let headers = {
     "Accept": "application/json",
@@ -469,10 +469,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/horizon/api/jobs/failed" 
+curl -X GET -G "http://api.talaria.local/horizon/api/jobs/failed" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/horizon/api/jobs/failed");
+const url = new URL("http://api.talaria.local/horizon/api/jobs/failed");
 
 let headers = {
     "Accept": "application/json",
@@ -507,10 +507,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/horizon/api/jobs/failed/1" 
+curl -X GET -G "http://api.talaria.local/horizon/api/jobs/failed/1" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/horizon/api/jobs/failed/1");
+const url = new URL("http://api.talaria.local/horizon/api/jobs/failed/1");
 
 let headers = {
     "Accept": "application/json",
@@ -545,10 +545,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X POST "http://api.nilde.local/horizon/api/jobs/retry/1" 
+curl -X POST "http://api.talaria.local/horizon/api/jobs/retry/1" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/horizon/api/jobs/retry/1");
+const url = new URL("http://api.talaria.local/horizon/api/jobs/retry/1");
 
 let headers = {
     "Accept": "application/json",
@@ -576,10 +576,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/horizon/1" 
+curl -X GET -G "http://api.talaria.local/horizon/1" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/horizon/1");
+const url = new URL("http://api.talaria.local/horizon/1");
 
 let headers = {
     "Accept": "application/json",
@@ -612,10 +612,10 @@ null
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/oauth/authorize" 
+curl -X GET -G "http://api.talaria.local/oauth/authorize" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/oauth/authorize");
+const url = new URL("http://api.talaria.local/oauth/authorize");
 
 let headers = {
     "Accept": "application/json",
@@ -650,10 +650,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X POST "http://api.nilde.local/oauth/authorize" 
+curl -X POST "http://api.talaria.local/oauth/authorize" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/oauth/authorize");
+const url = new URL("http://api.talaria.local/oauth/authorize");
 
 let headers = {
     "Accept": "application/json",
@@ -681,10 +681,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X DELETE "http://api.nilde.local/oauth/authorize" 
+curl -X DELETE "http://api.talaria.local/oauth/authorize" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/oauth/authorize");
+const url = new URL("http://api.talaria.local/oauth/authorize");
 
 let headers = {
     "Accept": "application/json",
@@ -712,10 +712,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X POST "http://api.nilde.local/oauth/token" 
+curl -X POST "http://api.talaria.local/oauth/token" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/oauth/token");
+const url = new URL("http://api.talaria.local/oauth/token");
 
 let headers = {
     "Accept": "application/json",
@@ -743,10 +743,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/oauth/tokens" 
+curl -X GET -G "http://api.talaria.local/oauth/tokens" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/oauth/tokens");
+const url = new URL("http://api.talaria.local/oauth/tokens");
 
 let headers = {
     "Accept": "application/json",
@@ -781,10 +781,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X DELETE "http://api.nilde.local/oauth/tokens/1" 
+curl -X DELETE "http://api.talaria.local/oauth/tokens/1" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/oauth/tokens/1");
+const url = new URL("http://api.talaria.local/oauth/tokens/1");
 
 let headers = {
     "Accept": "application/json",
@@ -812,10 +812,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X POST "http://api.nilde.local/oauth/token/refresh" 
+curl -X POST "http://api.talaria.local/oauth/token/refresh" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/oauth/token/refresh");
+const url = new URL("http://api.talaria.local/oauth/token/refresh");
 
 let headers = {
     "Accept": "application/json",
@@ -843,10 +843,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/oauth/clients" 
+curl -X GET -G "http://api.talaria.local/oauth/clients" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/oauth/clients");
+const url = new URL("http://api.talaria.local/oauth/clients");
 
 let headers = {
     "Accept": "application/json",
@@ -881,10 +881,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X POST "http://api.nilde.local/oauth/clients" 
+curl -X POST "http://api.talaria.local/oauth/clients" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/oauth/clients");
+const url = new URL("http://api.talaria.local/oauth/clients");
 
 let headers = {
     "Accept": "application/json",
@@ -912,10 +912,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X PUT "http://api.nilde.local/oauth/clients/1" 
+curl -X PUT "http://api.talaria.local/oauth/clients/1" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/oauth/clients/1");
+const url = new URL("http://api.talaria.local/oauth/clients/1");
 
 let headers = {
     "Accept": "application/json",
@@ -943,10 +943,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X DELETE "http://api.nilde.local/oauth/clients/1" 
+curl -X DELETE "http://api.talaria.local/oauth/clients/1" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/oauth/clients/1");
+const url = new URL("http://api.talaria.local/oauth/clients/1");
 
 let headers = {
     "Accept": "application/json",
@@ -974,10 +974,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/oauth/scopes" 
+curl -X GET -G "http://api.talaria.local/oauth/scopes" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/oauth/scopes");
+const url = new URL("http://api.talaria.local/oauth/scopes");
 
 let headers = {
     "Accept": "application/json",
@@ -1012,10 +1012,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/oauth/personal-access-tokens" 
+curl -X GET -G "http://api.talaria.local/oauth/personal-access-tokens" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/oauth/personal-access-tokens");
+const url = new URL("http://api.talaria.local/oauth/personal-access-tokens");
 
 let headers = {
     "Accept": "application/json",
@@ -1050,10 +1050,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X POST "http://api.nilde.local/oauth/personal-access-tokens" 
+curl -X POST "http://api.talaria.local/oauth/personal-access-tokens" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/oauth/personal-access-tokens");
+const url = new URL("http://api.talaria.local/oauth/personal-access-tokens");
 
 let headers = {
     "Accept": "application/json",
@@ -1081,10 +1081,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X DELETE "http://api.nilde.local/oauth/personal-access-tokens/1" 
+curl -X DELETE "http://api.talaria.local/oauth/personal-access-tokens/1" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/oauth/personal-access-tokens/1");
+const url = new URL("http://api.talaria.local/oauth/personal-access-tokens/1");
 
 let headers = {
     "Accept": "application/json",
@@ -1111,10 +1111,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/libraries" 
+curl -X GET -G "http://api.talaria.local/libraries" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/libraries");
+const url = new URL("http://api.talaria.local/libraries");
 
 let headers = {
     "Accept": "application/json",
@@ -1149,10 +1149,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/login" 
+curl -X GET -G "http://api.talaria.local/login" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/login");
+const url = new URL("http://api.talaria.local/login");
 
 let headers = {
     "Accept": "application/json",
@@ -1185,10 +1185,10 @@ null
 > Example request:
 
 ```bash
-curl -X POST "http://api.nilde.local/login" 
+curl -X POST "http://api.talaria.local/login" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/login");
+const url = new URL("http://api.talaria.local/login");
 
 let headers = {
     "Accept": "application/json",
@@ -1216,10 +1216,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X POST "http://api.nilde.local/logout" 
+curl -X POST "http://api.talaria.local/logout" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/logout");
+const url = new URL("http://api.talaria.local/logout");
 
 let headers = {
     "Accept": "application/json",
@@ -1247,10 +1247,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/register" 
+curl -X GET -G "http://api.talaria.local/register" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/register");
+const url = new URL("http://api.talaria.local/register");
 
 let headers = {
     "Accept": "application/json",
@@ -1283,10 +1283,10 @@ null
 > Example request:
 
 ```bash
-curl -X POST "http://api.nilde.local/register" 
+curl -X POST "http://api.talaria.local/register" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/register");
+const url = new URL("http://api.talaria.local/register");
 
 let headers = {
     "Accept": "application/json",
@@ -1314,10 +1314,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/password/reset" 
+curl -X GET -G "http://api.talaria.local/password/reset" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/password/reset");
+const url = new URL("http://api.talaria.local/password/reset");
 
 let headers = {
     "Accept": "application/json",
@@ -1350,10 +1350,10 @@ null
 > Example request:
 
 ```bash
-curl -X POST "http://api.nilde.local/password/email" 
+curl -X POST "http://api.talaria.local/password/email" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/password/email");
+const url = new URL("http://api.talaria.local/password/email");
 
 let headers = {
     "Accept": "application/json",
@@ -1383,10 +1383,10 @@ If no token is present, display the link request form.
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/password/reset/1" 
+curl -X GET -G "http://api.talaria.local/password/reset/1" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/password/reset/1");
+const url = new URL("http://api.talaria.local/password/reset/1");
 
 let headers = {
     "Accept": "application/json",
@@ -1419,10 +1419,10 @@ null
 > Example request:
 
 ```bash
-curl -X POST "http://api.nilde.local/password/reset" 
+curl -X POST "http://api.talaria.local/password/reset" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/password/reset");
+const url = new URL("http://api.talaria.local/password/reset");
 
 let headers = {
     "Accept": "application/json",
@@ -1450,10 +1450,10 @@ fetch(url, {
 > Example request:
 
 ```bash
-curl -X GET -G "http://api.nilde.local/home" 
+curl -X GET -G "http://api.talaria.local/home" 
 ```
 ```javascript
-const url = new URL("http://api.nilde.local/home");
+const url = new URL("http://api.talaria.local/home");
 
 let headers = {
     "Accept": "application/json",

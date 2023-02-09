@@ -11,12 +11,12 @@ class SubjectsTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        Subject::create(['name'=>'multidisciplinare']);
-        Subject::create(['name'=>'tecnico-scientifico']);
-        Subject::create(['name'=>'biomedico']);
-        Subject::create(['name'=>'economico-giuridico']);
-        Subject::create(['name'=>'umanistico']);
-        Subject::create(['name'=>'architettura']);        
+    {        
+        Subject::create(['name'=>'Science and technology']);
+        Subject::create(['name'=>'Biomedical sciences']);
+        Subject::create(['name'=>'Social and legal sciences']);
+        Subject::create(['name'=>'Humanities']);
+        Subject::create(['name'=>'Art and architecture']);        
+        Subject::create(['name'=>'Multidisciplinary']);
     }
 }

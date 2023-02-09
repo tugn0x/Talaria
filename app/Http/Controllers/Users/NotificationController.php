@@ -23,12 +23,12 @@ class NotificationController extends ApiController
 
         $this->broadcast = false;
 
-        $this->nilde->disableAuthorize();
+        $this->talaria->disableAuthorize();
     }
 
     public function index(Request $request)
     {
-        $collection = $this->nilde->index($this->model->owned()->select('*')->orderBy('created_at','desc'), $request, function($collection, $request)
+        $collection = $this->talaria->index($this->model->owned()->select('*')->orderBy('created_at','desc'), $request, function($collection, $request)
         {
             if($request->has("readed"))
             {
@@ -72,7 +72,7 @@ class NotificationController extends ApiController
 
     public function show(Request $request, $id)
     {
-        $model = $this->nilde->show($this->model, $request, $id, function($model, $request)
+        $model = $this->talaria->show($this->model, $request, $id, function($model, $request)
         {
             // Set message to 'read'
             if($request->input('setToRead'))
@@ -101,7 +101,7 @@ class NotificationController extends ApiController
         $notifications = \Auth::user()->unreadNotifications;
 
         if($notifications->count() && !is_null($notifications->markAsRead()))
-            throw new \Dingo\Api\Exception\UpdateResourceFailedException(trans('apinilde::response.update_failed'));
+            throw new \Dingo\Api\Exception\UpdateResourceFailedException(trans('apitalaria::response.update_failed'));
 
         return $this->response->array([]);
 

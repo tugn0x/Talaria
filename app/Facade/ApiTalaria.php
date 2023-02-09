@@ -5,7 +5,7 @@ namespace App\Facade;
 use Dingo\Api\Http\InternalRequest;
 use Illuminate\Support\Facades\Facade;
 
-class ApiNilde extends Facade
+class ApiTalaria extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -14,6 +14,6 @@ class ApiNilde extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'api.nilde';
+        return 'api.'.env('API_NAME', null);
     }
 }

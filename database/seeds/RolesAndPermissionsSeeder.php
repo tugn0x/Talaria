@@ -12,28 +12,13 @@ class RolesAndPermissionsSeeder extends Seeder
      */
 //    protected $roles = [
 //        'Super Admin' => [], // SUPER ADMIN DOESN'T ASK FOR PERMISSIONS
-//        /*
-//         * Amministratore Nilde
-//         */
-//        'Admin Nilde' => [],
-//        /*
-//         * Gestore Nilde
-//         */
-//        'Manager Nilde' => [
-//            // create, update, delete delle libraries
-//            // create, update, delete delle institution
+//        'Admin Talaria' => [],
+//        'Manager Talaria' => [
+//            // create, update, delete libraries
+//            // create, update, delete institution
 //        ],
-//        /*
-//         * Contabile Nilde
-//         */
-//        'Accountant Nilde' => [],
-//        /*
-//         * Operatore Alpe
-//         */
+//        'Accountant Talaria' => [],
 //        'Operator Standard Licenses' => [],
-//        /*
-//         * Utente semplice, ricercatore
-//         */
 //        'Patron' => [],
 ////        'Library User' => [],
 //

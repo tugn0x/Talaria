@@ -235,7 +235,7 @@ return [
 
     'api_client' => [
         'name'   => env('CLIENT_ID', '1'),
-        'secret' => env('CLIENT_SECRET', 'bK3vrACDLE4WM7smEPvPT5X5XUdn8DfMHDnjGHrB'),
+        'secret' => env('CLIENT_SECRET', 'xxxx'),
     ],
 
     'page_size' => 20,

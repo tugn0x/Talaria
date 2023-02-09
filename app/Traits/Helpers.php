@@ -12,9 +12,9 @@ trait Helpers
      *
      * @return \Clu\Api\Dispatcher
      */
-    public function nilde()
+    public function talaria()
     {
-        return app('nilde.dispatcher');
+        return app('talaria.dispatcher');
     }
 
     /**
@@ -29,7 +29,7 @@ trait Helpers
     public function __get($key)
     {
         $callable = [
-            'api', 'user', 'auth', 'response', 'nilde'
+            'api', 'user', 'auth', 'response', 'talaria'
         ];
         if (in_array($key, $callable) && method_exists($this, $key)) {
             return $this->$key();

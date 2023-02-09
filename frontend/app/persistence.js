@@ -28,7 +28,7 @@ const SYNC_PERSISTANCE_SUCCESS = "persitance/SYNC_PERSISTANCE_SUCCESS";
 // import { requestIllness, requestPerception } from './containers/SubmitPage/actions';
 
 const persistoreConfig = {
-  id: "nilde",
+  id: "talaria",
   version: 1
 }
 export const persistore = {

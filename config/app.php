@@ -14,7 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-    'frontend_domain' => env('FRONTEND_DOMAIN', 'nilde.bo.cnr.it'),
+    'frontend_domain' => env('FRONTEND_DOMAIN', 'talaria.local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -238,7 +238,7 @@ return [
         'Api' => Dingo\Api\Facade\API::class,
 //        'Route' => Dingo\Api\Facade\Route::class,
         'ApiRoute' => Dingo\Api\Facade\Route::class,
-        'ApiNilde' => \App\Facade\ApiNilde::class,
+        'ApiTalaria' => \App\Facade\ApiTalaria::class,
         'Helper'=> App\Helper\Helper::class,
 
     ],

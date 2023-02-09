@@ -1,10 +1,10 @@
 @font-face {
-  font-family: 'nilde';
-  src:  url('../fonts/nilde.eot?d0p9qk');
-  src:  url('../fonts/nilde.eot?d0p9qk#iefix') format('embedded-opentype'),
-    url('../fonts/nilde.ttf?d0p9qk') format('truetype'),
-    url('../fonts/nilde.woff?d0p9qk') format('woff'),
-    url('../fonts/nilde.svg?d0p9qk#nilde') format('svg');
+  font-family: 'talaria';
+  src:  url('../fonts/talaria.eot?d0p9qk');
+  src:  url('../fonts/talaria.eot?d0p9qk#iefix') format('embedded-opentype'),
+    url('../fonts/talaria.ttf?d0p9qk') format('truetype'),
+    url('../fonts/talaria.woff?d0p9qk') format('woff'),
+    url('../fonts/talaria.svg?d0p9qk#talaria') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -12,7 +12,7 @@
   
 [ class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'nilde' !important;
+  font-family: 'talaria' !important;
   speak: never;
   font-style: normal;
   font-weight: normal;

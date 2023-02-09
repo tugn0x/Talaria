@@ -28,7 +28,7 @@ class TagController extends ApiController
         $this->model = $this->filterRelations($request);
         $items = $this->model->get();
         return response()->json($items);
-        //$collection = $this->nilde->index($this->model, $request);
+        //$collection = $this->talaria->index($this->model, $request);
         //return $this->response->paginator($collection, new $this->transformer())->morph();
     }
 
@@ -38,9 +38,9 @@ class TagController extends ApiController
              $this->validate($request, $this->validate);
  
          $tid = $request->route()->parameters['tag_id'];
-         $model = $this->nilde->update($this->model, $request, $tid);
+         $model = $this->talaria->update($this->model, $request, $tid);
  
-         if($this->broadcast && config('apinilde.broadcast'))
+         if($this->broadcast && config('apitalaria.broadcast'))
              broadcast(new ApiUpdateBroadcast($model, $model->getTable(), $request->input('include')));
  
          return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();;
@@ -49,7 +49,7 @@ class TagController extends ApiController
      public function show(Request $request, $id)
      {
          $tid = $request->route()->parameters['tag_id'];
-         $model = $this->nilde->show($this->model, $request, $tid);
+         $model = $this->talaria->show($this->model, $request, $tid);
  
          return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
      }
@@ -66,7 +66,7 @@ class TagController extends ApiController
         $u=Auth::user();
         if($u->can('manage',$l)||$u->can('borrow',$l)||$u->can('lend',$l)||$u->can('deliver',$l))
         {
-            $model = $this->nilde->store($this->model, $request, null, function ($model, $request) {
+            $model = $this->talaria->store($this->model, $request, null, function ($model, $request) {
                 $model = $model->firstOrNew([
                     'name' => $model->name,
                     'library_id' => $request->library,
@@ -75,7 +75,7 @@ class TagController extends ApiController
             });
             return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
         }    
-        else  $this->response->errorUnauthorized(trans('apinilde::auth.unauthorized'));
+        else  $this->response->errorUnauthorized(trans('apitalaria::auth.unauthorized'));
     }
 
     //NOTE: i cannot auth the model (because is an OptionList)
@@ -86,22 +86,22 @@ class TagController extends ApiController
         $u=Auth::user();
         if($u->can('manage',$l)||$u->can('borrow',$l)||$u->can('lend',$l)||$u->can('deliver',$l))
         {
-            $collection = $this->nilde->optionList($this->model, $request,function ($model,$request) use ($l) {
+            $collection = $this->talaria->optionList($this->model, $request,function ($model,$request) use ($l) {
                 return $model->inLibrary($l->id);
             });
 
             return $this->response->array($collection->toArray());
         }
-        else  $this->response->errorUnauthorized(trans('apinilde::auth.unauthorized'));
+        else  $this->response->errorUnauthorized(trans('apitalaria::auth.unauthorized'));
     }
 
     // ApiControllerTrait@delete override    
     public function delete(Request $request, $id)
     {
         $tid = $request->route()->parameters['tag_id'];
-        $model = $this->nilde->delete($this->model, $request, $tid);
+        $model = $this->talaria->delete($this->model, $request, $tid);
 
-        if($this->broadcast && config('apinilde.broadcast'))
+        if($this->broadcast && config('apitalaria.broadcast'))
             broadcast(new ApiDeleteBroadcast($model->id, $model->getTable()));
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();

@@ -88,10 +88,6 @@ export default defineMessages({
     id: `${scope}.status`,
     defaultMessage: 'status',
   },
-  nilde: {
-    id: `${scope}.nilde`,
-    defaultMessage: 'in Nilde',
-  },
   rank: {
     id: `${scope}.rank`,
     defaultMessage: 'rank',
