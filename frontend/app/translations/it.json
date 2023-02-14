@@ -82,11 +82,11 @@
   "app.global.lat":"Latitudine",
   "app.global.lon":"Longitudine",
   
-  "app.containers.HomePage.header": "Benvenuto su TALARIA",
-  "app.containers.HomePage.subHeader":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet a lacus eget auctor. Suspendisse vitae nulla tortor. Etiam sit amet augue in enim pretium luctus. ",
-  "app.containers.HomePage.intro1":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet a lacus eget auctor. Suspendisse vitae nulla tortor. Etiam sit amet augue in enim pretium luctus.",
-  "app.containers.HomePage.intro2":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet a lacus eget auctor. Suspendisse vitae nulla tortor. Etiam sit amet augue in enim pretium luctus.",
-  "app.containers.HomePage.intro3":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet a lacus eget auctor. Suspendisse vitae nulla tortor. Etiam sit amet augue in enim pretium luctus.",
+  "app.containers.HomePage.header": "ACRONIMO e NOME esteso della tua comunità di Resource Sharing",
+  "app.containers.HomePage.subHeader":"Inserisci qui la descrizione, la missione e gli scopi della tua comunità di Resource Sharing.",
+  "app.containers.HomePage.intro1":"",
+  "app.containers.HomePage.intro2":"",
+  "app.containers.HomePage.intro3":"",
 
 
   "app.containers.UserPage.header": "ITALIANO UserPage CONTAINER",

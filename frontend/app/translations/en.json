@@ -82,11 +82,11 @@
   "app.global.lat":"Latitute",
   "app.global.lon":"Longitude",
   
-  "app.containers.HomePage.header": "Welcome to TALARIA",
-  "app.containers.HomePage.subHeader":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet a lacus eget auctor. Suspendisse vitae nulla tortor. Etiam sit amet augue in enim pretium luctus. ",
-  "app.containers.HomePage.intro1":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet a lacus eget auctor. Suspendisse vitae nulla tortor. Etiam sit amet augue in enim pretium luctus.",
-  "app.containers.HomePage.intro2":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet a lacus eget auctor. Suspendisse vitae nulla tortor. Etiam sit amet augue in enim pretium luctus.",
-  "app.containers.HomePage.intro3":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet a lacus eget auctor. Suspendisse vitae nulla tortor. Etiam sit amet augue in enim pretium luctus.",
+  "app.containers.HomePage.header": "ACRONYM and extended NAME of your Resource Sharing community",
+  "app.containers.HomePage.subHeader":"Insert here description, mission and purposes of your Resource Sharing community.",
+  "app.containers.HomePage.intro1":"",
+  "app.containers.HomePage.intro2":"",
+  "app.containers.HomePage.intro3":"",
 
   "app.containers.UserPage.header": "ITALIANO UserPage CONTAINER",
   "app.containers.ChangePassword.updateMessage": "Password modificata",
