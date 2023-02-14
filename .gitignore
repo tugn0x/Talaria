@@ -16,3 +16,5 @@ frontend/package-lock.json
 /composer.lock
 docker/shibboleth/etc/idem-test-metadata-sha256.*
 .env
+frontend/package-lock.json
+frontend/package-lock.json.OLD
