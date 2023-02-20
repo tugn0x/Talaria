@@ -1,5 +1,5 @@
 <?php
-namespace App\Helper\Helper;
+namespace App\Helper;
 
 class Helper{
   public static function import_CSV($filename, $delimiter = ','){
