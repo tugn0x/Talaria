@@ -37,9 +37,9 @@ function LandingPage(props) {
           (!props.auth.permissions.resources || props.auth.permissions.resources.length==0) 
           && 
        <>
-       <p>{intl.formatMessage({id:'app.containers.HomePage.intro1'})}</p>       
-       <p>{intl.formatMessage({id:'app.containers.HomePage.intro2'})}</p>       
-       <p>{intl.formatMessage({id:'app.containers.HomePage.intro3'})}</p>       
+       <p>{intl.formatMessage({id:'app.containers.HomePage.intro1'}) != "app.containers.HomePage.intro1" && intl.formatMessage({id:'app.containers.HomePage.intro1'})}</p>       
+       <p>{intl.formatMessage({id:'app.containers.HomePage.intro2'}) != "app.containers.HomePage.intro2" && intl.formatMessage({id:'app.containers.HomePage.intro2'})}</p>       
+       <p>{intl.formatMessage({id:'app.containers.HomePage.intro3'}) != "app.containers.HomePage.intro3" && intl.formatMessage({id:'app.containers.HomePage.intro3'})}</p>       
        <nav>
        {patrons_enabled && <NavLink
               className="btn btn-primary mx-3"
