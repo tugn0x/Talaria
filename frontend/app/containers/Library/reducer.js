@@ -48,7 +48,6 @@ export const initialState = {
   },
   pickup : {},
   departmentOptionList: [],
-  titleOptionList: [],
   usersList: {
     data: [],
     pagination: {}
@@ -153,10 +152,7 @@ const libraryReducer = (state = initialState, action) =>
         draft.library.granted_permissions = action.result.data.granted_permissions ? action.result.data.granted_permissions.data : []
         draft.departmentOptionList = action.result.data.departments? action.result.data.departments.data.map(dep => {
             return {value: dep.id, label: dep.name}
-        }):[]
-        draft.titleOptionList = action.result.data.titles? action.result.data.titles.data.map(tit => {
-          return {value: tit.id, label: tit.name}
-        }):[]
+        }):[]        
         break;
       case REQUEST_UPDATE_LIBRARY:
         draft.loading = true;

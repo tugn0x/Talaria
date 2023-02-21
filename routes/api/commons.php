@@ -13,4 +13,5 @@ Route::group([
     'as' => 'api.v1.commons.',
 ], function () {
     Route::get('countries/option-items', 'CountryController@optionList')->name('countries.option-items');
+    Route::get('titles/option-items', 'TitleController@optionList')->name('titles.option-items');        
 });

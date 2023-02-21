@@ -172,12 +172,7 @@ class Library extends BaseModel
     {
         return $this->hasMany(Department::class);
     }
-
-    //return Institution's InstitutionType's titles
-    public function titles() 
-    {
-        return $this->institution->institution_type->titles();
-    }
+    
 
     public function patronddrequests()
     {

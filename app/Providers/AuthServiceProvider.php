@@ -76,6 +76,7 @@ class AuthServiceProvider extends ServiceProvider
         InstitutionType::class => ListBasePolicy::class,
         Project::class => ListBasePolicy::class,        
         Country::class => ListBasePolicy::class,
+        Title::class => ListBasePolicy::class,
         Subject::class => ListBasePolicy::class,
         Catalog::class => ListBasePolicy::class,
         Tag::class => TagPolicy::class,

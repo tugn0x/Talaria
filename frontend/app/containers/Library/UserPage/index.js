@@ -7,6 +7,7 @@
 
 import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import {useIntl} from 'react-intl';
 import {fields} from './fields';
@@ -15,8 +16,10 @@ import messages from './messages';
 /*
 import { FormattedMessage } from 'react-intl'; */
 import {requestUser, requestUpdateUser} from '../actions'
+import {requestGetTitlesOptionList} from '../../Patron/actions'
 /* import makeSelectLibrary,{isLibraryLoading} from "../selectors"; */
 import { CustomForm } from 'components';
+import { titlesSelector } from '../../Patron/selectors';
 
 
 function UserPage(props) {
@@ -30,6 +33,7 @@ function UserPage(props) {
   /* const libraryOptionList = patron.libraryOptionList */
 
   useEffect(() => {
+    dispatch(requestGetTitlesOptionList());
     if(!isLoading && !isNew && Object.keys(user).length === 0) {
       dispatch(requestUser(params.library_id, params.id))
     }
@@ -58,7 +62,7 @@ function UserPage(props) {
           // qui si carica la lista della option list. Se vuoi una lista che venga dal back.
           // E nei fields.js in options: del campo metti lo stesso nome della prop quindi department_id
           department_id={library.departmentOptionList}
-          title_id={library.titleOptionList}
+          title_id={props.titles}
           fields={fields}
           title={intl.formatMessage(messages.header)}
           messages={messages}
@@ -74,14 +78,19 @@ function UserPage(props) {
   );
 }
 
+const mapStateToProps = createStructuredSelector({
+  titles: titlesSelector(),  
+});
+
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
   };
 }
 
+
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 

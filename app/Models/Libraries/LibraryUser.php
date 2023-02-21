@@ -5,7 +5,7 @@ namespace App\Models\Libraries;
 use App\Models\BaseModel;
 use App\Models\Libraries\Department;
 use App\Models\Libraries\Library;
-use App\Models\Users\Title;
+use App\Models\Title;
 use App\Models\Users\User;
 use App\Models\Libraries\LibraryUserObserver;
 use App\Traits\Model\OwnerTrait;

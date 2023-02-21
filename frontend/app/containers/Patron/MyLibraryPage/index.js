@@ -16,8 +16,8 @@ import makeSelectLibrary from 'containers/Library/selectors';
 import SectionTitle from 'components/SectionTitle';
 import { CustomForm } from 'components';
 import {requestUser,requestGetLibrary} from 'containers/Library/actions';
-import {requestAccessToLibrary,requestUpdateAccessToLibrary,requestSearchPlacesByText,requestGetLibraryListNearTo} from '../actions';
-import { placesSelector,libraryListSelector } from '../selectors';
+import {requestAccessToLibrary,requestUpdateAccessToLibrary,requestSearchPlacesByText,requestGetLibraryListNearTo,requestGetTitlesOptionList} from '../actions';
+import { placesSelector,libraryListSelector,titlesSelector } from '../selectors';
 
 import {NavLink} from 'react-router-dom';
 
@@ -39,14 +39,14 @@ function MyLibraryPage(props) {
   const library = props.library.library
   const patron = props.library.user;
   const user_id = props.auth.user.id;
-  const departmentOptionList = props.library.departmentOptionList 
-  const titleOptionList = props.library.titleOptionList
+  const departmentOptionList = props.library.departmentOptionList   
   //const libraryOptionList = props.libraryOptionList && props.libraryOptionList.map(lib =>  {return {value: lib.id, label: lib.name}})  
 
   const handleChangeData = (field_name, value) => {
+    
     //Usato per aggiornare le tendine con dipartimenti/... un base alla biblio scelta
     if(field_name==="library_id" && value)
-      dispatch(requestGetLibrary(value,('departments,titles')))
+      dispatch(requestGetLibrary(value,('departments')))
     
     //NOTA: le tendine dipartimenti e titles dovrebbero essere REQUIRED solo se sono piene
     //Stiamo valutando come implementarlo xke' al momento anche se si modifica il fields.x.required
@@ -71,10 +71,13 @@ function MyLibraryPage(props) {
   const [selectedMarker,setSelectedMarker]=useState({});
 
   useEffect(() => {
+
+    dispatch(requestGetTitlesOptionList());
+
     if(params && params.library_id)
     {
       console.log("GET LIB:",params.library_id)
-      dispatch(requestGetLibrary(params.library_id,('departments,titles')))      
+      dispatch(requestGetLibrary(params.library_id,('departments')))      
     }
     if(!isNew && params && params.library_id) {
       dispatch(requestUser(params.library_id, params.id))
@@ -130,7 +133,7 @@ function MyLibraryPage(props) {
               user_service_email:patron.user_service_email
             }}
             department_id={departmentOptionList} 
-            title_id={titleOptionList} 
+            title_id={props.titles} 
             fields={fields}            
             messages={messages}
             cancelButton={false}
@@ -143,7 +146,7 @@ function MyLibraryPage(props) {
             fields={fieldsIsNew}
             selectedMarker={selectedMarker}  
             department_id={departmentOptionList} 
-            title_id={titleOptionList}             
+            title_id={props.titles}             
             messages={messages}
             cancelButton={false}
             onChangeData={(field_name, value) => handleChangeData(field_name, value)}
@@ -172,6 +175,7 @@ function MyLibraryPage(props) {
 const mapStateToProps = createStructuredSelector({
   library: makeSelectLibrary(),
   places: placesSelector(),
+  titles: titlesSelector(),
   libraryList: libraryListSelector()
 });
 

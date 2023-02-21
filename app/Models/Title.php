@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Models\Users;
+namespace App\Models;
 
 use App\Models\BaseModel;
-use App\Models\Institutions\InstitutionType;
 
 class Title extends BaseModel
 {
@@ -11,8 +10,8 @@ class Title extends BaseModel
         'name'
     ];
     
-    public function institutiontypes()
+    /*public function institutiontypes()
     {
         return $this->belongsToMany(InstitutionType::class);
-    }
+    }*/
 }

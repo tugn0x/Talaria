@@ -43,7 +43,9 @@ import {DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
   REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
   REQUEST_GET_LIBRARY_LIST,
-  REQUEST_GET_LIBRARY_LIST_SUCCESS
+  REQUEST_GET_LIBRARY_LIST_SUCCESS,
+  REQUEST_GET_TITLES_OPTIONLIST,
+  REQUEST_GET_TITLES_OPTIONLIST_SUCCESS,
 
 } from "./constants";
 
@@ -471,6 +473,20 @@ export function requestSearchPlacesByTextFail(error) {
     error
   };
 }
+
+export function requestGetTitlesOptionList(request) {
+  return {
+      type: REQUEST_GET_TITLES_OPTIONLIST,
+      request
+    };
+  }
+  
+  export function requestGetTitlesOptionListSuccess(result) {
+    return {
+      type: REQUEST_GET_TITLES_OPTIONLIST_SUCCESS,
+      result
+    };
+  }
 
 
 

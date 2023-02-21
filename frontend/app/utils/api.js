@@ -224,7 +224,7 @@ export const getGroupsOptionList = (options) => {
 export const getMyLibrary = (options) => {
   const library_id = options.id
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/${library_id}?include=departments,titles`, options)
+  return request(`${BASE_URL}/api/v1/libraries/${library_id}?include=departments`, options)
 };
 
 export const requestAccessToLibrary = (options) => {
@@ -730,6 +730,12 @@ export const getCountriesOptionsList = (options) => {
   options = getOption(options);
   const query = options.query ? options.query : "";
   return request(`${BASE_URL}/api/v1/commons/countries/option-items?label=name&q=${query}`, options)
+};
+
+export const getTitlesOptionsList = (options) => {
+  options = getOption(options);
+  const query = options.query ? options.query : "";
+  return request(`${BASE_URL}/api/v1/commons/titles/option-items?label=name&q=${query}`, options)
 };
 
 

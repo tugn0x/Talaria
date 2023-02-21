@@ -3,7 +3,7 @@
 use App\Models\BaseLightTransformer;
 use App\Models\Libraries\LibraryTransformer;
 use App\Models\Users\UserLightTransformer;
-use App\Models\Users\TitleLightTransformer;
+use App\Models\TitleLightTransformer;
 use App\Models\Libraries\DepartmentLightTransformer;
 use Carbon\Carbon;
 use App\Models\BaseTransformer;

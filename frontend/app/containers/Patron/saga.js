@@ -6,7 +6,7 @@ import { REQUEST_MY_LIBRARIES, REQUEST_GET_LIBRARY_OPTIONLIST, REQUEST_ACCESS_TO
   REQUEST_UPDATE_LABEL, REQUEST_REMOVE_LABEL, REQUEST_POST_LABEL,
   REQUEST_POST_GROUP, REQUEST_REMOVE_GROUP, REQUEST_UPDATE_GROUP,
   REQUEST_GET_MY_LIBRARY, 
-  REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,REQUEST_REQUESTS_LIST,REQUEST_GET_REQUEST,REQUEST_DELETE_REFERENCE, REQUEST_GET_LIBRARY_DELIVERIES, REQUEST_POST_REQUEST, /*REQUEST_FIND_REFERENCE_BY_DOI, REQUEST_FIND_REFERENCE_BY_PMID,*/REQUEST_FIND_UPDATE_OA,REQUEST_SEARCH_PLACES_BY_TEXT,REQUEST_GET_LIBRARY_LIST} from './constants';
+  REQUEST_REMOVE_REFERENCE_LABEL,REQUEST_REMOVE_REFERENCE_GROUP,REQUEST_APPLY_LABELS_TO_REFERENCES,REQUEST_APPLY_GROUPS_TO_REFERENCES,REQUEST_REQUESTS_LIST,REQUEST_GET_REQUEST,REQUEST_DELETE_REFERENCE, REQUEST_GET_LIBRARY_DELIVERIES, REQUEST_POST_REQUEST, /*REQUEST_FIND_REFERENCE_BY_DOI, REQUEST_FIND_REFERENCE_BY_PMID,*/REQUEST_FIND_UPDATE_OA,REQUEST_SEARCH_PLACES_BY_TEXT,REQUEST_GET_LIBRARY_LIST,REQUEST_GET_TITLES_OPTIONLIST} from './constants';
 import {
   requestError,
   stopLoading,
@@ -30,7 +30,8 @@ import {
   requestFindUpdateOAFail,
   requestSearchPlacesByTextSuccess,
   requestSearchPlacesByTextFail,  
-  requestGetLibraryListNearToSuccess
+  requestGetLibraryListNearToSuccess,
+  requestGetTitlesOptionListSuccess,
 
 } from './actions';
 import { push } from 'connected-react-router';
@@ -64,7 +65,8 @@ import {  getMyLibrary,
           requestApplyGroupsToReferences,
           getLibraryDeliveries,
           createPatronRequest,  
-          getLibrariesListNearTo        
+          getLibrariesListNearTo,
+          getTitlesOptionsList        
         } from 'utils/api';
 
 import {
@@ -664,6 +666,23 @@ export function* requestLibraryListNearToSaga(action = {}) {
 }
 
 
+export function* requestGetTitlesOptionListSaga(action) {
+  const options = {
+    method: 'get',
+    query: action.request
+  }
+  try {
+    
+    const request = yield call(getTitlesOptionsList, options);
+    yield put(requestGetTitlesOptionListSuccess(request));
+  } catch(e) {
+    yield put(requestError(e.message));
+  }
+}
+
+
+
+
 
 //////////////////// END EXTERNAL API /////////////////
 
@@ -701,6 +720,7 @@ export default function* patronSaga() {
   yield takeLatest(REQUEST_POST_REQUEST, requestPostRequestSaga);
   yield takeLatest(REQUEST_CHANGE_STATUS_REQUEST,requestChangeStatusRequestSaga);
   yield takeLatest(REQUEST_GET_LIBRARY_DELIVERIES,requestLibraryDeliveriesOptionListSaga);  
+  yield takeLatest(REQUEST_GET_TITLES_OPTIONLIST, requestGetTitlesOptionListSaga);
   /*yield takeLatest(REQUEST_FIND_REFERENCE_BY_DOI,searchReferenceByDOISaga);
   yield takeLatest(REQUEST_FIND_REFERENCE_BY_PMID,searchReferenceByPMIDSaga);*/
 

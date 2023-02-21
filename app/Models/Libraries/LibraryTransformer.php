@@ -2,7 +2,7 @@
 
 use App\Models\BaseLightTransformer;
 use App\Models\Institutions\InstitutionTransformer;
-use App\Models\Users\TitleTransformer;
+// use App\Models\Users\TitleTransformer;
 use Carbon\Carbon;
 use App\Models\BaseTransformer;
 use Illuminate\Database\Eloquent\Model;
@@ -19,8 +19,7 @@ class LibraryTransformer extends BaseTransformer
     protected $availableIncludes = [
         'granted_permissions',
         'departments',
-        'institution',
-        'titles',
+        'institution',        
         'country',
         'subject',
         'catalogs',
@@ -51,11 +50,6 @@ class LibraryTransformer extends BaseTransformer
     {
         if($model->departments)
             return $this->collection($model->departments, new DepartmentTransformer());
-    }
-    public function includeTitles(Model $model)
-    {
-        if($model->titles)
-            return $this->collection($model->titles, new TitleTransformer());
     }
     public function includeInstitution(Model $model)
     {

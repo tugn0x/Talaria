@@ -36,7 +36,9 @@ import { DEFAULT_ACTION, REQUEST_MY_LIBRARIES, REQUEST_MY_LIBRARIES_SUCCESS,
   REQUEST_SEARCH_PLACES_BY_TEXT_SUCCESS,
   REQUEST_SEARCH_PLACES_BY_TEXT_FAIL,
   REQUEST_GET_LIBRARY_LIST,
-  REQUEST_GET_LIBRARY_LIST_SUCCESS
+  REQUEST_GET_LIBRARY_LIST_SUCCESS,
+  REQUEST_GET_TITLES_OPTIONLIST,
+  REQUEST_GET_TITLES_OPTIONLIST_SUCCESS
 } from './constants';
 
 export const initialState = {
@@ -51,6 +53,7 @@ export const initialState = {
   deliveryOptionList: [],
   labelsOptionList:[],
   groupsOptionList:[],
+  titlesOptionList: [],
   referencesList: {
     data: [],
     pagination: [],
@@ -108,6 +111,16 @@ const PatronReducer = (state = initialState, action) =>
       case REQUEST_POST_REQUEST:
             draft.loading = true;
             break;       
+
+      case REQUEST_GET_TITLES_OPTIONLIST:
+          draft.error = action.error;
+          break;
+      case REQUEST_GET_TITLES_OPTIONLIST_SUCCESS:
+          draft.error = initialState.error;
+          draft.titlesOptionList = action.result.sort((a, b) => { return (a.id > b.id) ? 1 : -1 }).map(item => { return {value: item.id, label: item.name} } );
+          break;
+
+
       case REQUEST_GET_MY_LIBRARY:
         draft.loading = true;
         break;

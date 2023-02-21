@@ -10,9 +10,6 @@ use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 class InstitutionTypeTransformer extends BaseTransformer
 {
 
-    protected $availableIncludes = [
-        'titles'
-    ];
 
 
 
