@@ -21,7 +21,7 @@ export default defineMessages({
     defaultMessage: 'Subject ID',
   },
   country_id: {
-    id: `app.libraries.country_id`,
+    id: `app.global.country`,
     defaultMessage: 'Country ID',
   },
 

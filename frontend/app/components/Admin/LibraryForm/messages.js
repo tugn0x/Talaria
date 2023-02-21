@@ -40,8 +40,8 @@ export default defineMessages({
   },
 
   country_id: {
-    id: 'app.libraries.country_id',
-    defaultMessage: 'Country ID',
+    id: `app.global.country`,
+    defaultMessage: 'Country',
   },
   opac: {
     id: 'app.libraries.opac',

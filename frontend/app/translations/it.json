@@ -81,6 +81,7 @@
   "app.global.currency_id": "Valuta",
   "app.global.lat":"Latitudine",
   "app.global.lon":"Longitudine",
+  "app.global.country": "Nazione",
   
   "app.containers.HomePage.header": "ACRONIMO e NOME esteso della tua comunità di Resource Sharing",
   "app.containers.HomePage.subHeader":"Inserisci qui la descrizione, la missione e gli scopi della tua comunità di Resource Sharing.",
@@ -281,7 +282,6 @@
     
   "app.libraries.institution_id": "Istituzione",
   "app.libraries.subject_id": "Disciplina",
-  "app.libraries.country_id": "Nazione",
   "app.libraries.opac": "Sito web catalogo OPAC",  
   "app.libraries.ill_email": "Email del servizio",
   "app.libraries.ill_phone": "Telefono del servizio",

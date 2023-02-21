@@ -22,7 +22,7 @@ export default defineMessages({
   },
 
   country_id: {
-    id: 'app.libraries.country_id',
+    id: `app.global.country`,
     defaultMessage: 'Country',
   },
   opac: {

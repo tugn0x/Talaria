@@ -81,6 +81,7 @@
   "app.global.currency_id": "Currency",
   "app.global.lat":"Latitute",
   "app.global.lon":"Longitude",
+  "app.global.country": "Country",
   
   "app.containers.HomePage.header": "ACRONYM and extended NAME of your Resource Sharing community",
   "app.containers.HomePage.subHeader":"Insert here description, mission and purposes of your Resource Sharing community.",
@@ -279,8 +280,7 @@
   "app.containers.DeliveryPage.header":"Pending requests",   
 
   "app.libraries.institution_id": "Institution",
-  "app.libraries.subject_id": "Disciplinary sector",
-  "app.libraries.country_id": "Nation",
+  "app.libraries.subject_id": "Disciplinary sector",  
   "app.libraries.opac": "OPAC website",  
   "app.libraries.ill_email": "Email ILL service",
   "app.libraries.ill_phone": "Phone ILL service",

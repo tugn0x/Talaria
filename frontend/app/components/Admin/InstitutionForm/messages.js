@@ -17,7 +17,7 @@ export default defineMessages({
     defaultMessage: "Institution Type ID",
   },
   country_id: {
-    id: `${scope}.country_id`,
+    id: `app.global.country`,
     defaultMessage: 'Country',
   },  
   vatnumber: {
