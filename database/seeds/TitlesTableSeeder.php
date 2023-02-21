@@ -13,6 +13,7 @@ class TitlesTableSeeder extends Seeder
     public function run()
     {
 
+        //ENGLISH
         Title::create(['name'=>'Other']);
         Title::create(['name'=>'Employee']);
         Title::create(['name'=>'Fellow']);
@@ -45,33 +46,39 @@ class TitlesTableSeeder extends Seeder
         Title::create(['name'=>'Volunteer']);
    
 
-        /* Code below can be used to init InstitutionType-Title relationship manually
-           Titles are used by patron to associate to a library
-        
-        
-        DB::table('institution_type_title')->insert([
-            'institution_type_id' => 2,
-            'title_id' => 1
-        ]);
-        DB::table('institution_type_title')->insert([
-            'institution_type_id' => 2,
-            'title_id' => 2
-        ]);
-        DB::table('institution_type_title')->insert([
-            'institution_type_id' => 2,
-            'title_id' => 3
-        ]);
-        
-        DB::table('institution_type_title')->insert([
-            'institution_type_id' => 1,
-            'title_id' => 4
-        ]);
-        DB::table('institution_type_title')->insert([
-            'institution_type_id' => 1,
-            'title_id' => 5
-        ]);*/
-
-
+        //ITALIANO
+        /*
+        Title::create(['name'=>'Altra qualifica']);
+        Title::create(['name'=>'Impiegato']);
+        Title::create(['name'=>'Borsista']);
+        Title::create(['name'=>'Professionista]);
+        Title::create(['name'=>'Bibliotecario']);
+        Title::create(['name'=>'Funzionario']);
+        Title::create(['name'=>'Post-doc']);
+        Title::create(['name'=>'Professore associato']);
+        Title::create(['name'=>'Professore a contratto']);
+        Title::create(['name'=>'Professore ordinario']);
+        Title::create(['name'=>'Ricercatore - assegnista']);
+        Title::create(['name'=>'Ricercatore']);
+        Title::create(['name'=>'Ricercatore - associato']);
+        Title::create(['name'=>'Ricercatore - dirigente']);
+        Title::create(['name'=>'Ricercatore - primo']);        
+        Title::create(['name'=>'Personale - convenzionato']);
+        Title::create(['name'=>'Personale - contrattista']);
+        Title::create(['name'=>'Personale - strutturato']); 
+        Title::create(['name'=>'Personale tecnico-amministrativo']);
+        Title::create(['name'=>'Studente']);
+        Title::create(['name'=>'Studente laurea magistrale']);
+        Title::create(['name'=>'Studente master']);
+        Title::create(['name'=>'Dottorando']);
+        Title::create(['name'=>'Studente laurea triennale']); 
+        Title::create(['name'=>'Cultore della materia']);
+        Title::create(['name'=>'Insegnante']);
+        Title::create(['name'=>'Specializzando']);
+        Title::create(['name'=>'Technologo']);
+        Title::create(['name'=>'Tirocinante']);
+        Title::create(['name'=>'Volontario']);
+        */
 
 
     }
