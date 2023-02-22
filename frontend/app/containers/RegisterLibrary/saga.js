@@ -34,6 +34,7 @@ import { push } from 'connected-react-router';
 import {getInstitutionTypesOptionList,  getInstitutionsByTypeByCountryOptionList, getCountriesOptionsList, getProjectsOptionList, getlibraryProjectsOptionList,
         getLibrariesSubjects,createPublicLibrary, getlibraryidentifierTypesOptionList} from 'utils/api'
 import { getPlacesByText } from 'utils/apiExternal';   
+import { userPermissionsSaga } from '../Auth/AuthProvider/saga';
 
 
 export function* requestLibrarySubjectOptionListSaga(action) {
@@ -73,6 +74,7 @@ export function* requestLibrarySubjectOptionListSaga(action) {
       
       const request = yield call(createPublicLibrary, options);
       // yield call(requestGetLibrariesListSaga);
+      yield call(userPermissionsSaga) //update roles in user profiles without logout
       yield put(push("/"));
       yield call(() => toast.success(action.message))
     } catch(e) {
