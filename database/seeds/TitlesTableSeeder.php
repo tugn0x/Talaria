@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Users\Title;
+use App\Models\Title;
 use Illuminate\Database\Seeder;
 
 class TitlesTableSeeder extends Seeder
