@@ -14,6 +14,9 @@ import SubRouteSwitch from 'components/SubRouteSwitch';
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
+  /*
+  BUGGY/NOT FULLY IMPLEMENTED
+  
   { path: '/users',  name: `UsersList`, component: SubRouteSwitch, header: true, roles: ['super-admin'],
     children: [
       { path: '/', exact: true, icon: 'fas fa-users',name: `UsersList`, url: `/users/user`, component: UsersListPage, sidebar:true},
@@ -21,7 +24,7 @@ const routes = [
       { path: '/user/:id?', name: `UserUpdate`, component: UserPage, },
       { path: '/:page?', exact: true, name: `UsersList`, url: `/users/user`, component: UsersListPage, },
     ]
-  },  
+  },*/  
   { path: '/libraries',  name: `Libraries`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],sidebar: true,
     children: [      
       { path: '/', exact: true, icon: 'fas fa-landmark', name: `Libraries`, url: `/libraries`, component: LibrariesListPage,sidebar:true,order:1},
@@ -45,17 +48,20 @@ const routes = [
       { path: '/new', icon: 'plus', name: `InstitutionNew`, component: InstitutionPage,  url: `/institutions/new`, sidebar: true,order:2},            
     ]
   },
-  /*{ path: '/consortiums',  name: `Consortiums`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],
+  /*
+  NOT IMPLEMENTED
+
+  { path: '/consortiums',  name: `Consortiums`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],
     children: [
       { path: '/', exact: true, icon: 'fas fa-building', name: `Consortiums`, url: `/consortiums`, component: Fake, sidebar:true},
       ]
-  },*/
+  },
   { path: '/projects',  name: `Projects`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],
     children: [
-      { path: '/', exact: true, icon: 'fas fa-project-diagram',name: `Projects`, url: `/projects`, component: Fake /*ProjectsListPage*/,sidebar:true},
-      { path: '/project/new', icon: 'plus', name: `ProjectNew`, component: Fake /*ProjectPage*/,  url: `/projects/project/new`, sidebar: true},
-      { path: '/project/:id?', name: `Projects`, component: Fake /*ProjectPage*/, },
-      { path: '/:page?', exact: true, name: `Projects`, url: `/projects`, component: Fake /*ProjectsListPage*/},
+      { path: '/', exact: true, icon: 'fas fa-project-diagram',name: `Projects`, url: `/projects`, component: ProjectsListPage,sidebar:true},
+      { path: '/project/new', icon: 'plus', name: `ProjectNew`, component: ProjectPage,  url: `/projects/project/new`, sidebar: true},
+      { path: '/project/:id?', name: `Projects`, component: ProjectPage, },
+      { path: '/:page?', exact: true, name: `Projects`, url: `/projects`, component: Fake ProjectsListPage},
     ]
   },  
   { path: '/subscriptions',  name: `Subscriptions`, component: SubRouteSwitch, header: true, roles: ['super-admin','manager'],sidebar: true,
@@ -69,7 +75,7 @@ const routes = [
     children: [      
       { path: '/', exact: true, icon: 'fas fa-landmark', name: `Payments`, url: `/payments`, component: Fake,sidebar:true,order:1},      
     ]
-  },
+  },*/
 ];
 
 export default routes;
