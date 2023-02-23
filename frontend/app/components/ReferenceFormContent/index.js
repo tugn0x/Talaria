@@ -169,7 +169,7 @@ const ReferenceFormContent = (props) => {
                             handleChange={(value) => handleChange(value, 'part_authors')}
                             input={formData.part_authors  ? formData.part_authors : ""}
                             //required={(formData.material_type===1)?requiredFields:false}
-                            required={true}
+                            required={formData.material_type === 1 ? true : false}
                         />
                     </FormGroup>}
                     {(formData.material_type === 3) && 
