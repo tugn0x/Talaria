@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
 
         //Super-Admin
         $admin = factory(\App\Models\Users\User::class)->create([
-            'email' => 'admin@talaria.eu',
+            'email' => 'admin@talaria.local',
             'name' => 'SuperAdmin',
             'surname' => 'SuperAdmin',
             'password' => $defaultpw,
@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
 
         //Library/Institutions/Project Manager
         $manager = factory(\App\Models\Users\User::class)->create([
-            'email' => 'manager@talaria.eu',
+            'email' => 'manager@talaria.local',
             'name' => 'Manager',
             'surname' => 'Manager',
             'password' => $defaultpw,

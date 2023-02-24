@@ -34,9 +34,9 @@ php artisan db:seed # DB init
 ```
 This command will initialize DB with some usefull data likes countries, identifiers, institution-types, titles, roles ... and two user account to manage the system directly from web UI:
 ```
-username: admin@talaria.eu      password: password
+username: admin@talaria.local      password: password
 
-username: manager@talaria.eu    password: password
+username: manager@talaria.local    password: password
 ```
 
 ## DB access
