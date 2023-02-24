@@ -183,10 +183,6 @@ export default defineMessages({
     defaultMessage: 'IFLA voucher value',
   },
   
-ill_referent_name: {
-  id: 'app.libraries.ill_referent_name',
-  defaultMessage: 'Ill referant name',
-},
 
 registration_date: {
     id: 'app.libraries.registration_date',

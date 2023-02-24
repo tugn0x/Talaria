@@ -30,19 +30,15 @@ export const LibraryExtraInfo = (props) => {
                 {data.lat && data.lon && <span className='coords'>
                     <i className="fas fa-map-marked"></i> <a className="active" href={mapLink(data.lat,data.lon)} target='_blank'>{data.lat},{data.lon}</a>
                 </span>}
-            </div>            
-
-            {(data.ill_referent_name || data.ill_phone||data.ill_email) && <div className='contact'>
-                <span className='header'>ILL Referent</span>
-                {data.ill_referent_name && <span className='referent'>
-                    <i className="fas fa-user"></i> {data.ill_referent_name}
-                </span>}                                                     
+            </div>                        
+            {(data.ill_phone||data.ill_email) && <div className='contact'>
+                <span className='header'>ILL Service contacts</span>
                 {data.ill_phone && <span><i className="fas fa-phone"></i> {data.ill_phone} </span>}
                 {data.ill_email && <span><i className="fas fa-envelope"></i> {data.ill_email}</span>}                                                       
             </div>}  
 
             {showILLInfo && <div className='ill_info'>  
-                <span className='header'>ILL Service</span>                                                                                                                    
+                <span className='header'>Supply coditions</span>                                                                                                                    
                 {data.subject_id && data.subject && <span className="subject_id"><span className='label'>{intl.formatMessage({id:'app.libraries.subject_id'})}:</span> {data.subject.data.name}</span>}
                 {data.ill_supply_conditions && <span className="ill_supply_conditions"><span className='label'>{intl.formatMessage({id:'app.libraries.ill_supply_conditions'})}:</span> {data.ill_supply_conditions}</span>}
                 {data.ill_imbalance &&<span className="ill_imbalance"><span className='label'>{intl.formatMessage({id:'app.libraries.ill_imbalance'})}:</span> {data.ill_imbalance}</span>}

@@ -245,13 +245,6 @@ export const fields = {
         group: "service_info",
         order: 2,
     },
-    ill_referent_name: {
-        type: "text",
-        name: "ill_referent_name",
-        width: "col-sm-6",
-        group: "service_info",
-        order: 3,
-    },
     ill_email: {
         type: "email",
         name: "ill_email",

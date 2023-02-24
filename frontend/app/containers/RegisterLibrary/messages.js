@@ -266,11 +266,6 @@ export default defineMessages({
     defaultMessage: 'Country name',
   },
 
-ill_referent_name: {
-  id: 'app.libraries.ill_referent_name',
-  defaultMessage: 'Ill referant name',
-},
-
 lat: {
   id: 'app.global.lat',
   defaultMessage: 'Latitude',

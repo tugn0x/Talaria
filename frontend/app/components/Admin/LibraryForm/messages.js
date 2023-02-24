@@ -195,11 +195,6 @@ export default defineMessages({
   },
 
 
-ill_referent_name: {
-  id: 'app.libraries.ill_referent_name',
-  defaultMessage: 'Ill referant name',
-},
-
 alt_name: {
   id: 'app.libraries.alt_name',
   defaultMessage: 'Alternative name',

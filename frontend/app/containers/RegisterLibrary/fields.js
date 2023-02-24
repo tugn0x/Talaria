@@ -185,13 +185,6 @@ export const fields = {
         width: "col-sm-6",
         order: 17,
     },
-    ill_referent_name: {
-        type: "text",
-        name: "ill_referent_name",
-        group: "step_1",
-        width: "col-sm-12",
-        order: 18,
-    },
     ill_institution_label: {
         type: "Label",
         required: false,

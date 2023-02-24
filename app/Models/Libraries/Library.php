@@ -48,7 +48,6 @@ class Library extends BaseModel
         'url',
         'opac',
         
-        'ill_referent_name',
         'ill_email',        
         'ill_phone',
         'ill_supply_conditions',
