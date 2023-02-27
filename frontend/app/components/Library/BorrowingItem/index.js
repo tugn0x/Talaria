@@ -85,7 +85,7 @@ export const documentAccess=(data) => {
             <FileDownload  reqid={data.id} libraryid={data.library.data.id} filehash={data.filehash} customClass="detail-body" />
         }                
       
-        {isURL(data) && <a href className="btn btn-primary btn-sm btn-download-icon" target="_blank" href={data.url}><i className="fas fa-external-link-alt"></i></a>}         
+        {isURL(data) && <a className="btn btn-primary btn-sm btn-download-icon" target="_blank" href={data.url}><i className="fas fa-external-link-alt"></i></a>}         
         </div>
     )
 }
