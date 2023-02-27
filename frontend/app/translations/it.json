@@ -89,7 +89,6 @@
   "app.containers.HomePage.intro2":"",
   "app.containers.HomePage.intro3":"",
 
-
   "app.containers.UserPage.header": "ITALIANO UserPage CONTAINER",
   "app.containers.ChangePassword.updateMessage": "Password modificata",
   "app.containers.ResetPassword.updateMessage": "Password aggiornata",
@@ -434,9 +433,9 @@
   "app.requests.forwardRequestMessage": "Duplicare e inoltrare come nuova richiesta?",  
   "app.requests.forwardedMessage": "Richiesta duplicata",  
   "app.requests.pendingRequest":"Pending Request",
-  "app.requests.requestReceived":"Request Received",  
+  "app.requests.requestReceived":"Nuova richiesta",  
   "app.requests.unFilled":"Inevaso",
-  "app.requests.willSupply":"Presa in carico",
+  "app.requests.willSupply":"Richiesta accettata",
   "app.requests.FulfillHeaderMessage":"Evasione richiesta",
   "app.requests.fulfilledMessage":"Evasa con successo",
   "app.requests.unFilledMessage":"Inevasa con successo",
