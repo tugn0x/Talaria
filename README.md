@@ -3,7 +3,7 @@ The software requires docker installed in your environment.
 # Install
 1. change settings in `.env.example` and rename it as `.env`
 2. check that your hostname matches `API_DOMAIN` and `FRONTEND_DOMAIN` as it was used for `traefik` load balancer 
-3. upload your server SSL certificates into `docker/certs` folder and update `SSL_CERT_PATH,SSL_KEY_PATH` variables in `.env` file accordingly
+3. upload your server (and api-server) SSL certificates into `docker/certs` folder and update `SSL_CERT_PATH,SSL_KEY_PATH,SSL_API_CERT_PATH,SSL_API_KEY_PATH` variables in `.env` file accordingly
 4. run `docker-compose up -d` to start all needed containers
 
 # Configuration

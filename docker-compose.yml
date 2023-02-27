@@ -10,8 +10,10 @@ services:
     volumes:
     - "${SSL_CERT_PATH}:/etc/ssl/traefik/localhost.crt"
     - "${SSL_KEY_PATH}:/etc/ssl/traefik/localhost.key"
+    - "${SSL_API_CERT_PATH}:/etc/ssl/traefik/localhost-api.crt"
+    - "${SSL_API_KEY_PATH}:/etc/ssl/traefik/localhost-api.key"
     - /var/run/docker.sock:/var/run/docker.sock:ro
-    - ./docker/traefik/local-dev:/etc/traefik
+    - ./docker/traefik:/etc/traefik
     restart: always
     depends_on:
     - nginx
@@ -49,7 +51,6 @@ services:
       - redis
     volumes:
       - ./:/application
-#      - /home/halphass/Scaricati:/application/dump
       - ./docker/backend/php:/usr/local/etc/php
     user: "${UID}"
     restart: always

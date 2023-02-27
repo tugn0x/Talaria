@@ -23,6 +23,10 @@ defaultEntryPoints = ["http","https"]
       [[entryPoints.https.tls.certificates]]
       certFile = "/etc/ssl/traefik/localhost.crt"
       keyFile = "/etc/ssl/traefik/localhost.key"
+    
+      [[entryPoints.https.tls.certificates]]
+      certFile = "/etc/ssl/traefik/localhost-api.crt"
+      keyFile = "/etc/ssl/traefik/localhost-api.key"    
 
 [forwardingTimeouts]
 dialTimeout = "60s"
