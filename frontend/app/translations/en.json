@@ -35,7 +35,7 @@
   "app.global.continue": "Continue",
   "app.global.cancel": "Cancel",
   "app.global.resetAll": "Reset all",
-  "app.global.request": "Riquest",
+  "app.global.request": "Request",
   "app.global.submit": "Submit",  
   "app.global.edit": "Edit",
   "app.global.save": "Salva",
@@ -85,9 +85,10 @@
   
   "app.containers.HomePage.header": "ACRONYM and extended NAME of your Resource Sharing community",
   "app.containers.HomePage.subHeader":"Insert here description, mission and purposes of your Resource Sharing community.",
-  "app.containers.HomePage.intro1":"",
-  "app.containers.HomePage.intro2":"",
-  "app.containers.HomePage.intro3":"",
+  
+  "app.containers.LandingPage.intro":"You may insert here description, mission and purposes of your Resource Sharing community. You may describe how libraries may join this community and how patrons may sign up at the libraries.",
+  "app.containers.LandingPage.intro_library":"If you are a LIBRARIAN and you want to add your library to  the [ACRONYM] community, please  refer to the appropriate tab. Please provide us information about your library name, location, ILL service contacts, your library institution and disciplinary field.",
+  "app.containers.LandingPage.intro_patron":"If you are a PATRON and you want to sign up at a library belonging to the [ACRONYM] community, please refer to the appropriate tab. Please select the library you want to enroll in and provide us information about your contacts, status and department. ",
 
   "app.containers.UserPage.header": "ITALIANO UserPage CONTAINER",
   "app.containers.ChangePassword.updateMessage": "Password modificata",
@@ -371,7 +372,7 @@
   "app.references.mathnote": "Dati matematici/Note",
   "app.references.oa_link": "Link OA",  
   "app.requests.fulfill": "Fulfill",
-  "app.requests.unfill": "Unfill",
+  "app.requests.unfill": "Cannot fulfill",
   "app.requests.sendToDesk": "Send to desk",
   "app.requests.deliveringToDesk": "Delivering to desk",
   "app.requests.deskReceived": "Received by desk",
