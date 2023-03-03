@@ -116,7 +116,7 @@ const DeliveryList = (props) => {
                     { desksOptionList && multiFilter.desksIds && multiFilter.desksIds.length>0 &&
                      <ul id="desksActiveFilter" className="filtersList">    
                       {multiFilter.desksIds.map( el => 
-                         <li key={el} className="deskFilter">{desksOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fas fa-times"  onClick={() => toggleDeskFilter(el) }></i></li>
+                         <li key={el} className="deskFilter">{desksOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fa-solid fa-xmark"  onClick={() => toggleDeskFilter(el) }></i></li>
                         ) 
                       }
                       </ul>

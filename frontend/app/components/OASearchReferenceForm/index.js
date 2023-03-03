@@ -22,7 +22,7 @@ const OASearchReferenceForm = (props) => {
                     className="w-50 m-auto"                    
                     placeholder={intl.formatMessage(messages.inputPlaceHolder)}
                 />         
-                {isLoading && <div className="w-50 mx-auto my-3 text-center"><i className="fas fa-spinner fa-pulse fa-2x"></i></div>}                  
+                {isLoading && <div className="w-50 mx-auto my-3 text-center"><i className="fa-solid fa-spinner fa-spin-pulse fa-2x"></i></div>}                  
                 
                 {oareference && Object.keys(oareference).length>0 && 
                 <>                    

@@ -56,16 +56,16 @@ export const DeliveryIcons = (props) => {
   
     return (        
         <div className={"delivery_request_icons " + (customClass?customClass:'')}>                                                  
-                {canSavedAsDeskReceived(data) && setDeskReceivedRequest && setDeskNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setDeskReceivedRequest()}><i className="fas fa-box"></i></a> <a className="btn btn-icon" onClick={()=>setDeskNotReceivedRequest()}>
+                {canSavedAsDeskReceived(data) && setDeskReceivedRequest && setDeskNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setDeskReceivedRequest()}><i className="fa-solid fa-box"></i></a> <a className="btn btn-icon" onClick={()=>setDeskNotReceivedRequest()}>
                     <span className="fa-stack fa-1x">
-                        <i className="fas fa-box fa-stack-1x"></i>
-                        <i className="fas fa-ban fa-stack-2x"></i>
+                        <i className="fa-solid fa-box fa-stack-1x"></i>
+                        <i className="fa-solid fa-ban fa-stack-2x"></i>
                     </span>
                 </a></>}                  
                 {canDeliverToPatron(data) && 
                     <>
-                    {deliverToUser && <button type="button" className="btn btn-icon" onClick={()=>deliverToUser()}><i className="fas fa-luggage-cart"></i></button>}
-                    {userNotTaken && <button type="button" className="btn btn-icon" onClick={()=>userNotTaken()}><i className="fas fa-user-alt-slash"></i></button>}
+                    {deliverToUser && <button type="button" className="btn btn-icon" onClick={()=>deliverToUser()}><i className="fa-solid fa-cart-flatbed-suitcase"></i></button>}
+                    {userNotTaken && <button type="button" className="btn btn-icon" onClick={()=>userNotTaken()}><i className="fa-solid fa-user-large-slash"></i></button>}                    
                     </>
                 }
         </div>
@@ -81,7 +81,7 @@ const DeliveryItem = (props) => {
     return (                           
         <Row className="list-row justify-content-between">
             <Col sm={3}>
-                <div className="request_id"><Link to={requesturl(editPath,data.id)} className="active"><i className="fas fa-info-circle"></i> <span>{data.id}</span></Link></div>
+                <div className="request_id"><Link to={requesturl(editPath,data.id)} className="active"><i className="fa-solid fa-circle-info"></i> <span>{data.id}</span></Link></div>
                 <BorrowingStatus data={data} customClass="request_status"/>                                 
             </Col>
             {<Col sm={3}>

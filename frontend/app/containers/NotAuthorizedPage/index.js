@@ -17,7 +17,7 @@ export default function NotAuthorizedPage(props) {
     <BasePage {...props}>
       <div className="d-flex justify-content-center">               
             <div className="p-2 text-center">
-              <i className="fas fa-lock fa-4x"></i>
+              <i className="fa-solid fa-lock fa-4x"></i>
               <h1>
                 <FormattedMessage {...messages.header} />
               </h1>

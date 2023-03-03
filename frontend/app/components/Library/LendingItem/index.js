@@ -29,7 +29,7 @@ export const documentAccess=(data) => {
     return (
         <div className="access_document_icons">
                 
-        {isURL(data) && <a href className="btn btn-primary btn-sm btn-download-icon" target="_blank" href={data.url}><i className="fas fa-external-link-alt"></i></a>}         
+        {isURL(data) && <a href className="btn btn-primary btn-sm btn-download-icon" target="_blank" href={data.url}><i className="fa-solid fa-arrow-up-right-from-square"></i></a>}         
         </div>
     )
 }
@@ -56,11 +56,11 @@ const statusInfo = (req) => {
 
   return (
       <>
-        {req.created_at && <span className="status-date"><i className="fas fa-plus"></i> {formatDateTime(req.created_at)}</span>}        
+        {req.created_at && <span className="status-date"><i className="fa-solid fa-plus"></i> {formatDateTime(req.created_at)}</span>}        
         {req.request_date && <span className="status-date">
-            <i className="fas fa-share"></i> {formatDateTime(req.request_date)}
+            <i className="fa-solid fa-share"></i> {formatDateTime(req.request_date)}
             {req.request_note && <div className="request_note">
-                <span id={`request_note-${req.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
+                <span id={`request_note-${req.id}`} className="active"><i className="fa-solid fa-note-sticky"></i></span> 
                 <UncontrolledTooltip autohide={false} placement="right" target={`request_note-${req.id}`}>
                     {req.request_note}
                 </UncontrolledTooltip>                                
@@ -70,30 +70,30 @@ const statusInfo = (req) => {
         <>            
             {req.fulfill_date && 
                 <span className="status-date">
-                    <i className="fas fa-reply"></i> {formatDateTime(req.fulfill_date)}  
+                    <i className="fa-solid fa-reply"></i> {formatDateTime(req.fulfill_date)}  
                     {req.fulfill_type && <span className="deliverymethod">{deliveryMethod(req)}</span> }                                
                     {req.notfulfill_type && <div className="unfilled_reason">
-                    <span id={`unfilled_reason-${req.id}`} className="active"><i className="fas fa-comment text-danger"></i></span> 
+                    <span id={`unfilled_reason-${req.id}`} className="active"><i className="fa-solid fa-comment text-danger"></i></span> 
                             <UncontrolledTooltip autohide={false} placement="right" target={`unfilled_reason-${req.id}`}>
                                 {lendingUnfilledReason(req)}
                             </UncontrolledTooltip>                                
                     </div>}
                     {req.fulfill_note && <div className="fulfill_notes">
-                        <span id={`fulfilnote-${req.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
+                        <span id={`fulfilnote-${req.id}`} className="active"><i className="fa-solid fa-note-sticky"></i></span> 
                         <UncontrolledTooltip autohide={false} placement="right" target={`fulfilnote-${req.id}`}>
                             {req.fulfill_note}
                         </UncontrolledTooltip>                                
                     </div>}                    
                 </span>
             }
-            {req.borrowing_status=="documentReady" && req.ready_date && <span className="status-date"><i className="fas fa-check-circle"></i> {formatDateTime(req.ready_date)} </span>}
-            {req.borrowing_status=="documentNotReady" && req.ready_date && <span className="status-date"><i className="fas fa-times-circle"></i> {formatDateTime(req.ready_date)} </span>}            
+            {req.borrowing_status=="documentReady" && req.ready_date && <span className="status-date"><i className="fa-solid fa-circle-check"></i> {formatDateTime(req.ready_date)} </span>}
+            {req.borrowing_status=="documentNotReady" && req.ready_date && <span className="status-date"><i className="fa-solid fa-xmark-circle"></i> {formatDateTime(req.ready_date)} </span>}            
         </>
-        {req.cancel_request_date && <span className="status-date"><i className="fas fa-times"></i><i className="fas fa-question"></i> {formatDateTime(req.cancel_request_date)}</span>}
-        {req.cancel_date && <span className="status-date"><i className="fas fa-times"></i> {formatDateTime(req.cancel_date)}</span>}
+        {req.cancel_request_date && <span className="status-date"><i className="fa-solid fa-xmark"></i><i className="fa-solid fa-question"></i> {formatDateTime(req.cancel_request_date)}</span>}
+        {req.cancel_date && <span className="status-date"><i className="fa-solid fa-xmark"></i> {formatDateTime(req.cancel_date)}</span>}
 
         {req.lending_archived==1 && req.lending_archived_date && 
-            <span className="status-date"><i className="fas fa-hdd"></i> {formatDateTime(req.lending_archived_date)}</span>            
+            <span className="status-date"><i className="fa-solid fa-hard-drive"></i> {formatDateTime(req.lending_archived_date)}</span>            
         }
 
       </>
@@ -129,12 +129,12 @@ export const LendingStatus = (props) => {
             </span>       
             {
             data.operator && <div className="status-operator">
-                <i className="fas fa-user-cog"></i> { 
+                <i className="fa-solid fa-user-cog"></i> { 
                 data.operator.data.full_name
                 }
                 
                 {data.lending_notes && <span className="lending_notes">
-                <a href="#" id={`tooltip-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></a> 
+                <a href="#" id={`tooltip-${data.id}`} className="active"><i className="fa-solid fa-note-sticky"></i></a> 
                 <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${data.id}`}>
                     {data.lending_notes}
                 </UncontrolledTooltip>                                
@@ -157,15 +157,15 @@ const LendingRequestIcons = (props) => {
         <div className="lending_request_icons icons d-flex">                        
                 {isRequestReceived(data) && (data.all_lender==null|| data.all_lender==0)  && 
                     <>
-                        <a className="btn btn-icon"  onClick={()=>UpdateLendingRequestStatus(data)}><i className="fas fa-parachute-box"></i></a>
-                        <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-ban"></i></Link>
+                        <a className="btn btn-icon"  onClick={()=>UpdateLendingRequestStatus(data)}><i className="fa-solid fa-parachute-box"></i></a>
+                        <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fa-solid fa-ban"></i></Link>
                     </>
                 }
                 {(data.all_lender==null || data.all_lender==0) && data.lending_archived==null && data.lending_status=="willSupply" && 
-                <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-book-open"></i></Link>}
-                {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fas fa-book-open"></i></Link>}
+                <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fa-solid fa-book-open"></i></Link>}
+                {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fa-solid fa-book-open"></i></Link>}
                 {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <a className="btn btn-icon" onClick={()=>UpdateLendingRequestStatus(data)}><i className="far fa-check-circle"></i></a>}
-                {(data.all_lender==1) && isRequestReceived(data) && !isRequestedByMe(data,libraryId) && <a className="btn btn-icon" onClick={()=>UpdateLendingAcceptRequest(data)}><i className="fas fa-parachute-box"></i></a>}
+                {(data.all_lender==1) && isRequestReceived(data) && !isRequestedByMe(data,libraryId) && <a className="btn btn-icon" onClick={()=>UpdateLendingAcceptRequest(data)}><i className="fa-solid fa-parachute-box"></i></a>}
 
                 {documentAccess(data)}
         </div>
@@ -178,7 +178,7 @@ const LendingReferenceIcons = (props) => {
     return (
         !isArchived && 
             <div className="lending_reference_icons">               
-                    <a className="btn btn-icon" onClick={()=>alert('TODO Check holding !')}><i className="fa fa-search-location"></i></a>                
+                    <a className="btn btn-icon" onClick={()=>alert('TODO Check holding !')}><i className="fa-solid fa-magnifying-glass-location"></i></a>                                    
             </div>
     )
 }
@@ -196,7 +196,7 @@ const LendingItem = (props) => {
                 /> 
               
               <div className="request_id">
-                        <Link to={requesturl(editPath,data.id)} className="active"><i className="fas fa-info-circle"></i> <span>{data.id}</span></Link>
+                        <Link to={requesturl(editPath,data.id)} className="active"><i className="fa-solid fa-circle-info"></i> <span>{data.id}</span></Link>
                         </div>
                         <LendingStatus data={data} customClass="request_status"/>                                                                             
             </Col>
@@ -204,7 +204,7 @@ const LendingItem = (props) => {
             <>
                {data.borrowinglibrary && 
                 <span>
-                    <i className="fas fa-landmark"></i> {data.borrowinglibrary.data.name}
+                    <i className="fa-solid fa-landmark"></i> {data.borrowinglibrary.data.name}
                     
                 </span>                
                }                        

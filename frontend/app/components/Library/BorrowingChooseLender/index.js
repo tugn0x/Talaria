@@ -88,7 +88,7 @@ const BorrowingChooseLender = (props) => {
                       </li>}                      
                     </ul>
                 </nav>                             
-                {lendersList.loading && <div className="w-50 mx-auto my-3 text-center"><i className="fas fa-spinner fa-pulse fa-2x"></i></div>}
+                {lendersList.loading && <div className="w-50 mx-auto my-3 text-center"><i className="fa-solid fa-spinner fa-spin-pulse fa-2x"></i></div>}
                 {lendersList.data && lendersList.data.length>0 &&
                 <>
                     <ul className="librarylist">
@@ -139,7 +139,7 @@ const BorrowingChooseLender = (props) => {
                                 </div>                                
                                 {allselected && 
                                     <div className="alert alert-warning">
-                                        <i className="fas fa-exclamation-triangle"></i> 
+                                        <i className="fa-solid fa-triangle-exclamation"></i> 
                                         <FormattedHTMLMessage id="app.requests.sendToAllLibrariesWarning"/>
                                     </div>                                
                                 }                                                                               

@@ -7,7 +7,7 @@ const ButtonClose = (props) => {
     return (
         <Button className={`${props.className && props.className} btn-close`} 
             onClick={props.handleClick}>
-            <i className="fas fa-close" />
+            <i className="fa-solid fa-close" />
         </Button>
     )
 }

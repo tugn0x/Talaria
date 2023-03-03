@@ -36,9 +36,9 @@ const RequestIcons = (props) => {
         let policy="";
         switch (data.cost_policy)
         {
-            case 0: policy=<><i className="fas fa-times-circle"></i><span>Deny any cost</span></>; break;
-            case 1: policy=<><i className="fas fa-check-circle"></i><span>Accept any cost</span></>;break;
-            case 2: policy=<><i className="fas fa-question-circle"></i><span>Ask for confirmation</span></>;break;
+            case 0: policy=<><i className="fa-solid fa-xmark-circle"></i><span>Deny any cost</span></>; break;
+            case 1: policy=<><i className="fa-solid fa-circle-check"></i><span>Accept any cost</span></>;break;
+            case 2: policy=<><i className="fa-solid fa-question-circle"></i><span>Ask for confirmation</span></>;break;
         }
         return policy;
     }
@@ -47,19 +47,19 @@ const RequestIcons = (props) => {
     return ( 
         <div className="requestIcons">
         <Link className="btn btn-icon" to={`${referenceurl(data.reference.data.id)}`}>        
-        <i className="fas fa-eye"></i>
+        <i className="fa-solid fa-eye"></i>
         </Link>
         {!data.archived && 
             <>
                 {archiveRequest && canArchive(data) && <a href="#" onClick={() => archiveRequest(data.id)} className="btn btn-icon">
-                    <i className="fas fa-hdd"></i>
+                    <i className="fa-solid fa-hard-drive"></i>
                 </a>}
                 {askCancelRequest && canDelete(data) && <a href="#" onClick={() => askCancelRequest(data.id)} className="btn btn-icon">
-                    <i className="fas fa-times"></i>
+                    <i className="fa-solid fa-xmark"></i>
                 </a> }
                 {hasToPay(data) && acceptCost && denyCost &&
                 <div className="costIcons">                    
-                    <i className="fas fa-coins"></i> {data.cost} &euro;   
+                    <i className="fa-solid fa-coins"></i> {data.cost} &euro;   
                     <span className="cost_policy">Cost Policy: {costPolicy(data)}</span>                                         
                     {data.cost_policy==2 && data.status=="waitingForCost"   &&
                         <div className="costButtons">

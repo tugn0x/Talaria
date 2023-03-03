@@ -34,12 +34,12 @@ const FilterSelect = props => {
         <UncontrolledDropdown className={`filter-select ${type}`} direction="down">
             <DropdownToggle className="d-flex justify-content-between align-items-center">
                 <span>{intl.formatMessage({id: 'app.components.FilterSelect.'+type})}</span>
-                <i className="fas fa-sort"></i>
+                <i className="fa-solid fa-sort"></i>
             </DropdownToggle>
             <DropdownMenu center="true">
                 <DropdownItem header>
                     <input type="text" name="filter-search" onChange={(e) => setQuery(e.target.value)} value={query} />
-                    <i className="fas fa-search" /> 
+                    <i className="fa-solid fa-magnifying-glass" /> 
                 </DropdownItem>
                 {data.length > 0 && data.map(item => (
                     <div className="filter-item" key={item.value}>

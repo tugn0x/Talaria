@@ -78,7 +78,7 @@ const FindISSNISBN = props => {
         <h2 class="text-center">Choose the correct ISSN/ISBN</h2>
           {results.loading && (
             <span>
-              searching for ISSN... <i className="fas fa-spinner fa-pulse" />
+              searching for ISSN... <i className="fa-solid fa-spinner fa-spin-pulse" />
             </span>
           )}
           {(!results.loading && results != null && results.data && results.data.length > 0 && (

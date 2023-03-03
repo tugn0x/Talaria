@@ -44,7 +44,7 @@ const TagsPage = (props) => {
         />
         <div className="LibraryTags tags-list">
             <InputSearch
-                icon="fas fa-save"
+                icon="fa-solid fa-floppy-disk"
                 placeholder={intl.formatMessage({id:'app.containers.LibraryTags.tagCreateNew'})}
                 submitCallBack={saveItem}
                 className="w-50 mb-5"

@@ -168,17 +168,17 @@ return (
                     }
                     {reference.pmid && <Col sm={3}>
                         <p className="text-brown">{intl.formatMessage({id: "app.references.pmid"})}</p>
-                        <a href={"https://pubmed.ncbi.nlm.nih.gov/"+reference.pmid} target="_blank"><i className="fas fa-external-link-alt"></i> {reference.pmid}</a>
+                        <a href={"https://pubmed.ncbi.nlm.nih.gov/"+reference.pmid} target="_blank"><i className="fa-solid fa-arrow-up-right-from-square"></i> {reference.pmid}</a>
                     </Col>}
                     {reference.doi && <Col sm={5}>
                         <p className="text-brown">{intl.formatMessage({id: "app.references.doi"})}</p>
-                        <a href={"https://doi.org/"+reference.doi} target="_blank"><i className="fas fa-external-link-alt"></i> {reference.doi}</a>
+                        <a href={"https://doi.org/"+reference.doi} target="_blank"><i className="fa-solid fa-arrow-up-right-from-square"></i> {reference.doi}</a>
                     </Col>}
                     </Row>
                     <Row>
                     {reference.oa_link && <Col sm={10}>
                         <p className="text-brown">{intl.formatMessage({id: "app.references.oa_link"})}</p>
-                        <a href={reference.oa_link} target="_blank"><i className="fas fa-external-link-alt"></i> {reference.oa_link}</a>
+                        <a href={reference.oa_link} target="_blank"><i className="fa-solid fa-arrow-up-right-from-square"></i> {reference.oa_link}</a>
                     </Col>}
 
                     </Row>

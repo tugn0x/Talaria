@@ -43,7 +43,7 @@ const ReferencesGroups = props => {
         />
         <div className="ReferencesGroups tags-list">
             <InputSearch
-                icon="fas fa-save"
+                icon="fa-solid fa-floppy-disk"
                 placeholder={intl.formatMessage(messages.groupCreateNew)}
                 submitCallBack={saveItem}
                 className="w-50 mb-5"

@@ -130,7 +130,7 @@ const LendingsList = (props) => {
                     { tagsOptionList && multiFilter.labelIds && multiFilter.labelIds.length>0 &&
                      <ul id="labelsActiveFilter" className="filtersList">    
                       {multiFilter.labelIds.map( el => 
-                         <li key={el} className="labelFilter">{tagsOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fas fa-times"  onClick={() => toggleTagFilter(el) }></i></li>
+                         <li key={el} className="labelFilter">{tagsOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fa-solid fa-xmark"  onClick={() => toggleTagFilter(el) }></i></li>
                         ) 
                       }
                       </ul>
@@ -145,10 +145,10 @@ const LendingsList = (props) => {
                         <div className="features-icons" >
                             <CustomCheckBox handleChange={(e)=>toggleAllCheckbox(e)} />
                             {<Button disabled={disableToolbar} color="icon" className="ml-2">
-                                <i className="fas fa-print"></i>
+                                <i className="fa-solid fa-print"></i>
                             </Button>}
                             {<Button disabled={disableToolbar} color="icon">
-                                <i className="fas fa-file-export"></i>
+                                <i className="fa-solid fa-file-export"></i>
                             </Button>}
                             {applyTags && <ApplyTag
                                 type="label"

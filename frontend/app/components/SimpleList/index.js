@@ -179,10 +179,10 @@ function SimpleList(props) {
                                             <div className={`status-point ${statusClass(item[field.name])}`}></div>
                                           ||
                                           field.type === 'check' &&
-                                            <i className={`fas fa-${checkIcon(item[field.name])} }`}></i>
+                                            <i className={`fa-solid fa-${checkIcon(item[field.name])} }`}></i>
                                             ||
                                           field.type === 'preferred' &&
-                                            <i className={`fas fa-star preferred-star ${preferredStarClass(item[field.name])} }`}></i>
+                                            <i className={`fa-solid fa-star preferred-star ${preferredStarClass(item[field.name])} }`}></i>
                                           ||
                                           field.tooltipField &&
                                             <a href="#" data-toggle="tooltip" title={`${item[field.tooltipField]}`}>
@@ -198,11 +198,11 @@ function SimpleList(props) {
                               }
                             <Col xs={2} className="edit-icons" >
                               <NavLink to={`${editurl(item)}`} key={item} className="btn btn-link">
-                                <i className="fas fa-edit"></i>
+                                <i className="fa-solid fa-pen-to-square"></i>
                               </NavLink>
 
                               {deleteCallback && <a href="#" onClick={() => getDeleteParamsAndCall(deleteCallback,item)} className="btn btn-link">
-                                <i className="fas fa-trash"></i>
+                                <i className="fa-solid fa-trash"></i>
                               </a>}
                             </Col>
                           </Row>

@@ -17,12 +17,12 @@ export const LendingRequestData = (props) => {
                 data.request_special_delivery==1||data.request_pdf_editorial==1 ) && 
                 <div className="borrowingRequestData">                      
                     {data.request_note && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.request_note"})}: </span>{data.request_note} </span>}
-                    {data.request_special_delivery==1 && <span className="requestData"><i className="fas fa-check-square"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_special_delivery"})} </span></span>}
-                    {data.request_pdf_editorial==1 &&  <span className="requestData"><i className="fas fa-check-square"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_pdf_editorial"})}</span></span>}                
+                    {data.request_special_delivery==1 && <span className="requestData"><i className="fa-solid fa-square-check"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_special_delivery"})} </span></span>}
+                    {data.request_pdf_editorial==1 &&  <span className="requestData"><i className="fa-solid fa-square-check"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_pdf_editorial"})}</span></span>}                
                 
                     {data.fulfill_location &&
                     <div className="shelflocation">
-                        <span className="requestData"><span className="label"><i className="fas fa-solid fa-thumbtack"></i> {intl.formatMessage({id: "app.requests.fulfill_location"})}: </span>{data.fulfill_location} </span>
+                        <span className="requestData"><span className="label"><i className="fa-solid fa-thumbtack"></i> {intl.formatMessage({id: "app.requests.fulfill_location"})}: </span>{data.fulfill_location} </span>
                     </div>}
                 </div>}
 

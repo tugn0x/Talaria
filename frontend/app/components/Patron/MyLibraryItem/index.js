@@ -44,7 +44,7 @@ const MyLibraryItem = props => {
         <Row className="list-row my-libraries-item justify-content-between">
             <Col sm={3} className="">
                 <Button onClick={setPreferred} color="default" disabled={data.status === 1 ? false : true}>
-                    <i className={`fas fa-star preferred-star ${preferredStarClass(data.id===preferred)}`}></i>
+                    <i className={`fa-solid fa-star preferred-star ${preferredStarClass(data.id===preferred)}`}></i>
                 </Button>
                 <div className="status-block">
                     <div className={`status-point ${statusClass(data.status)}`}></div>
@@ -68,10 +68,10 @@ const MyLibraryItem = props => {
             </Col>
             <Col sm={2} className="icons align-self-center">                
                 <NavLink to={`${editurl(data.library_id, data.id)}`}  className="btn btn-icon">
-                    <i className="fas fa-edit"></i>                    
+                    <i className="fa-solid fa-pen-to-square"></i>                    
                  </NavLink>
                 <a href="#"  className="btn btn-icon" onClick={deleteCallback}>
-                    <i className="fas fa-trash"></i>
+                    <i className="fa-solid fa-trash"></i>
                 </a>
             </Col>  
         </Row>

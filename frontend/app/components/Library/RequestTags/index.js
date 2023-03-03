@@ -8,10 +8,10 @@ const {data,removeTag}=props;
 return (data.length>0 &&                 
         <div className="request_tags">
                 <span className="tags-row">
-                    <i className="fas fa-tag"></i>
+                    <i className="fa-solid fa-tag"></i>
                     {data.map(tag => <span key={tag.id}>
                         {tag.name} 
-                        {removeTag && <i className="fas fa-times"  onClick={() => removeTag(tag.id)}></i>}
+                        {removeTag && <i className="fa-solid fa-xmark"  onClick={() => removeTag(tag.id)}></i>}
                     </span>)}
                 </span>
         </div>

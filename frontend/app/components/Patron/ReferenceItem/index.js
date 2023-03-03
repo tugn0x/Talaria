@@ -42,7 +42,7 @@ const ReferenceItem = (props) => {
                     deleteReference={deleteReference}
                     findAndUpdateOA={findAndUpdateOA}                    
                 />
-                {oaloading && <i className="fas fa-spinner fa-spin"></i>}
+                {oaloading && <i className="fa-solid fa-spinner fa-spin"></i>}
                 
             </Col> 
         </Row>

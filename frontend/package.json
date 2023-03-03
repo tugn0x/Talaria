@@ -68,7 +68,7 @@
     "@coreui/coreui": "^2.1.16",
     "@coreui/icons": "^0.4.1",
     "@coreui/react": "^2.5.8",
-    "@fortawesome/fontawesome-free": "^5.15.3",
+    "@fortawesome/fontawesome-free": "^6.3.0",
     "@react-leaflet/core": "1.0.2",
     "bootstrap": "^4.6.0",
     "chalk": "^2.4.2",

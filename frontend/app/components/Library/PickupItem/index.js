@@ -31,15 +31,15 @@ const PickupItem = (props) => {
             </Col>
             <Col sm={7}>
             <div className="pickupData">                
-                {data.address && <><span><i className="fas fa-map-marker"></i> {data.address} {data.postcode} {data.town} {data.district} {data.state} {data.country?data.country.data.name:''}</span><br/></>}                                    
-                {data.email && <><span><i className="fas fa-envelope"></i> {data.email}</span><br/></>}
-                {data.phone && <><span><i className="fas fa-phone"></i> {data.phone}</span><br/></>}
-                {data.openinghours && <><span><i className="fas fa-clock"></i> {data.openinghours}</span></>}
+                {data.address && <><span><i className="fa-solid fa-location-dot"></i> {data.address} {data.postcode} {data.town} {data.district} {data.state} {data.country?data.country.data.name:''}</span><br/></>}                                    
+                {data.email && <><span><i className="fa-solid fa-envelope"></i> {data.email}</span><br/></>}
+                {data.phone && <><span><i className="fa-solid fa-phone"></i> {data.phone}</span><br/></>}
+                {data.openinghours && <><span><i className="fa-solid fa-clock"></i> {data.openinghours}</span></>}
             </div>
             </Col>
             <Col sm={2}>      
-                {/*<Link className="btn btn-icon" to={editUrl(editPath,data.id,"edit")}></Link>*/}<i className="fas fa-edit"></i>
-                {/*deletePickup && <a className="btn btn-icon" onClick={()=>deletePickup()}></a>*/}<i className="fas fa-trash"></i> 
+                {/*<Link className="btn btn-icon" to={editUrl(editPath,data.id,"edit")}></Link>*/}<i className="fa-solid fa-pen-to-square"></i>
+                {/*deletePickup && <a className="btn btn-icon" onClick={()=>deletePickup()}></a>*/}<i className="fa-solid fa-trash"></i> 
             </Col> 
         </Row>
     )

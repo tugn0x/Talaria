@@ -27,11 +27,11 @@ const statusInfo = (inst) => {
     let ret="";
 
     switch (inst.status) {
-        case 0: ret=<i className='fas fa-ban' title={inst.status_key}></i>
+        case 0: ret=<i className='fa-solid fa-ban' title={inst.status_key}></i>
                 break;         
-        case 1: ret=<i className='fas fa-check-circle' title={inst.status_key}></i>
+        case 1: ret=<i className='fa-solid fa-circle-check' title={inst.status_key}></i>
                 break;                 
-        case 2: ret=<i className='fas fa-exclamation-triangle' title={inst.status_key}></i>
+        case 2: ret=<i className='fa-solid fa-triangle-exclamation' title={inst.status_key}></i>
         break;                         
 
         default: ret=inst.status_key
@@ -65,14 +65,14 @@ export const InstitutionInfo = (props) => {
     return (
         <div className={"institution_info"}>            
             {data.administrative && <div className='referent'>
-            <i className="fas fa-user"></i> {data.administrative}
+            <i className="fa-solid fa-user"></i> {data.administrative}
             </div>}
             {(data.administrative_phone||data.administrative_email) && <div className='contact'>
-                {data.administrative_phone && <span><i className="fas fa-phone"></i> {data.administrative_phone} </span>}
-                {data.administrative_email && <span><i className="fas fa-envelope"></i> {data.administrative_email}</span>}                
+                {data.administrative_phone && <span><i className="fa-solid fa-phone"></i> {data.administrative_phone} </span>}
+                {data.administrative_email && <span><i className="fa-solid fa-envelope"></i> {data.administrative_email}</span>}                
             </div>}                    
             <div className='administrative_fields'>                                
-                {data.email_pec && <span><i className="fas fa-envelope"></i>PEC: {data.email_pec}</span>}
+                {data.email_pec && <span><i className="fa-solid fa-envelope"></i>PEC: {data.email_pec}</span>}
                 
                 {data.invoice_header && <span className='invoice_header'><span>Invoid Header:</span> {data.invoice_header}</span>}
                 {data.vatnumber && <span className='vatnumber'><span>VAT:</span> {data.vatnumber} </span>}
@@ -92,9 +92,9 @@ export const InstitutionOperations = (props) => {
   
     return (        
         <div className={"institution_operations"}>                                                          
-                {canDelete(data) && deleteInstitution && <a className="btn btn-icon btn-sm" onClick={()=>deleteInstitution()}><i className="fas fa-trash"></i></a>}                                                
-                {canEnable(data) && changeStatusInstitution && <a className="btn btn-icon btn-sm" onClick={()=>changeStatusInstitution(1)}><i className="fas fa-check-circle"></i></a>}                                                            
-                {canDisable(data) && changeStatusInstitution && <a className="btn btn-icon btn-sm" onClick={()=>changeStatusInstitution(0)}><i className="fas fa-ban"></i></a>}                                
+                {canDelete(data) && deleteInstitution && <a className="btn btn-icon btn-sm" onClick={()=>deleteInstitution()}><i className="fa-solid fa-trash"></i></a>}                                                
+                {canEnable(data) && changeStatusInstitution && <a className="btn btn-icon btn-sm" onClick={()=>changeStatusInstitution(1)}><i className="fa-solid fa-circle-check"></i></a>}                                                            
+                {canDisable(data) && changeStatusInstitution && <a className="btn btn-icon btn-sm" onClick={()=>changeStatusInstitution(0)}><i className="fa-solid fa-ban"></i></a>}                                
         </div>
     )
 }
@@ -114,7 +114,7 @@ const InstitutionItem = (props) => {
                     checked={checked}
                 /> 
                 <a className="toggle-institution-info" onClick={()=>setShowInstitutionInfo(!showInstitutionInfo)} title="show extra info">      
-                        <i className={`active fas ${showInstitutionInfo?'fa-caret-square-up':'fa-caret-square-down'}`}></i> 
+                        <i className={`active fa-solid ${showInstitutionInfo?'fa-square-caret-up':'fa-square-caret-down'}`}></i> 
                 </a> 
                 <div className="institution_id">
                     <Link to={editurl(editPath,data.id)} className="active"><span>{data.id} - {data.name}</span></Link>
@@ -129,7 +129,7 @@ const InstitutionItem = (props) => {
             </Col>
             <Col sm={3}>
                 <>
-                <Link to={subscriptionurl(editPath,data.id)} className="active subscriptionlink"><i className="fas fa-file-contract"></i></Link>                
+                <Link to={subscriptionurl(editPath,data.id)} className="active subscriptionlink"><i className="fa-solid fa-file-contract"></i></Link>                
                 {formatDateTime(data.created_at)}                
                 </>
             </Col>

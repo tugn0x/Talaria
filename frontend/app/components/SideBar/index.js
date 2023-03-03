@@ -41,7 +41,7 @@ function SideBar(props) {
               activeClassName="current"
             >
             {route.icon && 
-              <i className={ route.icon.indexOf("icon-")==-1?`fas fa-${route.icon}`: route.icon}></i>
+              <i className={ route.icon.indexOf("icon-")==-1?`fa-solid fa-${route.icon}`: route.icon}></i>
             }
               <span><FormattedMessage {...messages[route.name]}/></span>
             </NavLink>
