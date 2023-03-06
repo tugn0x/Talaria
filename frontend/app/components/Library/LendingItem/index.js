@@ -162,9 +162,9 @@ const LendingRequestIcons = (props) => {
                     </>
                 }
                 {(data.all_lender==null || data.all_lender==0) && data.lending_archived==null && data.lending_status=="willSupply" && 
-                <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fa-solid fa-book-open"></i></Link>}
-                {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fa-solid fa-book-open"></i></Link>}
-                {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <a className="btn btn-icon" onClick={()=>UpdateLendingRequestStatus(data)}><i className="far fa-check-circle"></i></a>}
+                <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fa-solid fa-circle-right"></i></Link>}
+                {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fa-solid fa-circle-right"></i></Link>}
+                {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <a className="btn btn-icon" onClick={()=>UpdateLendingRequestStatus(data)}><i className="fa-solid fa-trash"></i></a>}
                 {(data.all_lender==1) && isRequestReceived(data) && !isRequestedByMe(data,libraryId) && <a className="btn btn-icon" onClick={()=>UpdateLendingAcceptRequest(data)}><i className="fa-solid fa-parachute-box"></i></a>}
 
                 {documentAccess(data)}

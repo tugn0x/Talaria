@@ -56,7 +56,7 @@ export const DeliveryIcons = (props) => {
   
     return (        
         <div className={"delivery_request_icons " + (customClass?customClass:'')}>                                                  
-                {canSavedAsDeskReceived(data) && setDeskReceivedRequest && setDeskNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setDeskReceivedRequest()}><i className="fa-solid fa-box"></i></a> <a className="btn btn-icon" onClick={()=>setDeskNotReceivedRequest()}>
+                {canSavedAsDeskReceived(data) && setDeskReceivedRequest && setDeskNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setDeskReceivedRequest()}><i className="fa-solid fa-box-open"></i></a> <a className="btn btn-icon" onClick={()=>setDeskNotReceivedRequest()}>
                     <span className="fa-stack fa-1x">
                         <i className="fa-solid fa-box fa-stack-1x"></i>
                         <i className="fa-solid fa-ban fa-stack-2x"></i>

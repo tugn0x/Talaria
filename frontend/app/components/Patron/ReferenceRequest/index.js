@@ -190,7 +190,7 @@ const ReferenceRequest = props => {
                                 {formData.delivery.address && <div><i className="fa-solid fa-location-dot"></i> {formData.delivery.address} {formData.delivery.postcode} {formData.delivery.town} {formData.delivery.district} {formData.delivery.state}</div>}            
                                 {formData.delivery.email &&<div><i className="fa-solid fa-envelope"></i> {formData.delivery.email}</div>}
                                 {formData.delivery.phone && <div><i className="fa-solid fa-phone"></i> {formData.delivery.phone}</div>}
-                                {formData.delivery.openinghours && <div><i className="far fa-clock"></i> {formData.delivery.openinghours}</div>}                                                            
+                                {formData.delivery.openinghours && <div><i className="fa-solid fa-clock"></i> {formData.delivery.openinghours}</div>}                                                            
                             </div>}
                         </Col>
                 </Row>                

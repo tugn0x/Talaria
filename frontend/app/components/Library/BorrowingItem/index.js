@@ -172,7 +172,7 @@ const statusInfo = (req) => {
             {req.desk_delivery_format && <span className="deskDeliveryFormat">{deskDeliveryFormat(req)}</span>}
         </span>}  
         {req.desk_received_date && <span className="status-date">
-            <i className="fa-solid fa-box"></i> {formatDateTime(req.desk_received_date)}
+            <i className="fa-solid fa-box-open"></i> {formatDateTime(req.desk_received_date)}
             {req.desk_delivery_format && <span className="deskDeliveryFormat">{deskDeliveryFormat(req)}</span>}
         </span>}
         
@@ -403,7 +403,7 @@ export const BorrowingRequestIcons = (props) => {
                         <a className="btn btn-icon" onClick={()=>savedAsDownloaded()}><i className="fa-solid fa-file-circle-check"></i></a>                   
                 }                
                 
-                {canSavedAsReceived(data) && setReceivedRequest && setNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setReceivedRequest()}><i className="fa-solid fa-box"></i></a> 
+                {canSavedAsReceived(data) && setReceivedRequest && setNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setReceivedRequest()}><i className="fa-solid fa-box-open"></i></a> 
                     <a className="btn btn-icon" onClick={()=>setNotReceivedRequest()}>
                     <span class="fa-stack fa-1x">
                         <i class="fa-solid fa-box fa-stack-1x"></i>
