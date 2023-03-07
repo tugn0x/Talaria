@@ -7,28 +7,28 @@ $font-family-base: 'Archivo', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantare
 
 
 //New colors
-$resource-header: #880021;  //resource nav header color
+$resource-header: #013A63;  //resource nav header color
 
 $main-menu: #FFFFFF;
 
-$light-bk: #F8F8F8;
+$light-bk: #DDF2FF;
 
-$dark-bk: #EBE2DF;
+$dark-bk: #61A5C2;
 
-$tools-menu: #F1F1F1;
+$tools-menu: #f9f9f9;
 
-$box-color: #F5F5F5;
+$box-color: #f3f6fb; 
 $box-border: #EBE3DD;
 
 $dark-text: #3b3d40;
 $light-text: #808080;
 
-$alternative-text: #AB725F;
+$alternative-text: #01497C;
 $form-text: #6C717A;
 
-$line: #AB725F;
+$line: #2A6F97;
 
-$active: #DF6D43;
+$active: #012A4A;
 
 
 // Typography
@@ -63,8 +63,8 @@ $heightInput: 32px;
 /*----------------*/
 
 // COLORS
-$labels-color: #DAD0EE;
-$labels-border: #8A4991;
+$labels-color: #61A5C2;
+$labels-border: #012A4A;
 
 $groups-color: #C9E3F8;
 $groups-border: #73A6CC;
@@ -84,10 +84,6 @@ $theme-colors: (
   "dark-text": $dark-text,
   "alternative": $alternative-text,
 );
-
-$consegnato: #50C950;
-$cancellato: #FF6565;
-$attesa:#FBAE2B;
 
 
 /* Biblioteca  = fa-solid fa-landmark
