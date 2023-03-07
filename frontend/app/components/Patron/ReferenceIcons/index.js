@@ -53,16 +53,16 @@ const ReferenceIcons = (props) => {
         <div className={`${customClass}`}>
                 {visibleIcon('request') && 
                  <Link to={`${requesturl(data.id)}`}  className="btn btn-icon">
-                    <i className="fas fa-share"></i>                    
+                    <i className="fa-solid fa-share"></i>                    
                  </Link>
                 }
                 {visibleIcon('oa') && data.oa_link && <a href={data.oa_link} target="_blank" className='btn btn-icon'><i className="icon-oa"></i></a>} 
-                {visibleIcon('oa') && !data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev,data.id) }><i className="fas fa-search"></i>OA</a>}
+                {visibleIcon('oa') && !data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev,data.id) }><i className="fa-solid fa-magnifying-glass"></i>OA</a>}
                 {visibleIcon('print') && <a className="btn btn-icon" onClick={() => console.log("print") }>
-                    <i className="fas fa-print"></i>
+                    <i className="fa-solid fa-print"></i>
                 </a>}
                 {visibleIcon('export') && <a className="btn btn-icon" onClick={() => console.log("export") }>
-                    <i className="fas fa-file-export"></i>
+                    <i className="fa-solid fa-file-export"></i>
                 </a>}
                 { visibleIcon('assignLabel') && applyLabels &&  
                     <ApplyTag
@@ -80,12 +80,12 @@ const ReferenceIcons = (props) => {
                 }
                 {visibleIcon('edit') && data.id &&                 
                 <Link to={canEdit(data)?editurl(data.id):'#'} className={`${canEdit(data)?'btn btn-icon':'btn btn-icon disabled'}`}>
-                    <i className="fas fa-edit"></i>
+                    <i className="fa-solid fa-pen-to-square"></i>
                 </Link>}               
                 {visibleIcon('delete') && data.id && canDelete(data) && 
                 (                                           
                         <Link to='#' className={canDelete(data) && deleteReference?"btn btn-icon":"btn btn-icon disabled"} onClick={() => deleteReference(data.id) }>
-                            <i className="fas fa-trash"></i>
+                            <i className="fa-solid fa-trash"></i>
                         </Link>
                 )
                 }                

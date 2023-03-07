@@ -1,0 +1,13 @@
+@import '../../../scss/vendors/variables';
+
+.header, .subheader {
+    text-align: left;
+}
+
+.header {
+    color:$active;    
+}
+
+.subheader {
+    color: $light-text;
+}

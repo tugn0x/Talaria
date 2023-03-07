@@ -7,11 +7,11 @@ import './style.scss';
 export const matTypeIcon = (mat) => {
     switch (mat)
     {
-      case 1: return 'simple_icon fas fa-file'; break;
-      case 2: return 'simple_icon fas fa-book'; break;
-      case 3: return 'simple_icon fas fa-scroll'; break;
-      case 4: return 'simple_icon fas fa-map'; break;
-      case 5: return 'simple_icon fas fa-bible'; break;          
+      case 1: return 'simple_icon fa-solid fa-file'; break;
+      case 2: return 'simple_icon fa-solid fa-book'; break;
+      case 3: return 'simple_icon fa-solid fa-scroll'; break;
+      case 4: return 'simple_icon fa-solid fa-map'; break;
+      case 5: return 'simple_icon fa-solid fa-book-bible'; break;          
     }
     return mat;
 }
@@ -64,10 +64,10 @@ const ReferenceCitation = props => {
                         <span className="issn">{intl.formatMessage({id: "app.references.issn"})} <span>{data.issn}</span></span>
                     }
                     {data.pmid && 
-                        <span className="pmid">{intl.formatMessage({id: "app.references.pmid"})} <span><a href={"https://pubmed.ncbi.nlm.nih.gov/"+data.pmid} target="_blank"><i className="fas fa-external-link-alt"></i> {data.pmid}</a></span></span>
+                        <span className="pmid">{intl.formatMessage({id: "app.references.pmid"})} <span><a href={"https://pubmed.ncbi.nlm.nih.gov/"+data.pmid} target="_blank"><i className="fa-solid fa-arrow-up-right-from-square"></i> {data.pmid}</a></span></span>
                     }
                     {data.doi && 
-                        <span className="pmid">{intl.formatMessage({id: "app.references.doi"})} <span><a href={"https://doi.org/"+data.doi} target="_blank"><i className="fas fa-external-link-alt"></i> {data.doi}</a></span></span>
+                        <span className="pmid">{intl.formatMessage({id: "app.references.doi"})} <span><a href={"https://doi.org/"+data.doi} target="_blank"><i className="fa-solid fa-arrow-up-right-from-square"></i> {data.doi}</a></span></span>
                     }
                 </div>
             </div>}

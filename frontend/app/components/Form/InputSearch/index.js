@@ -38,7 +38,7 @@ const InputSearch = (props) => {
                     id="inputQuery" />
                 <InputGroupAddon addonType="append">
                     <Button type="submit" color="orange" className="searchBtn">
-                        <i className={`${icon ? icon : 'fas fa-search'}`}></i>
+                        <i className={`${icon ? icon : 'fa-solid fa-magnifying-glass'}`}></i>
                     </Button>
                 </InputGroupAddon>
             </InputGroup>

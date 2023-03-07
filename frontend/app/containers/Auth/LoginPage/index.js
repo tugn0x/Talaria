@@ -16,7 +16,7 @@ import {useIntl} from 'react-intl';
 import history from 'utils/history';
 import resourcesMap from '../../../routes/resources';
 import LandingPage from '../../LandingPage';
-
+import './style.scss';
 import {checkRole} from '../../../utils/permissions'
 
 
@@ -87,6 +87,7 @@ function LoginPage(props) {
   //MAIN
   return (
   <BasePage {...props} routes={[]} messages={messages} headermenu={false}>      
+      <h1 className="header">{intl.formatMessage({id:'app.containers.HomePage.header'})}</h1>  
       {authChecked && !props.isLogged && !props.auth.oauth.token && <LoginForm {...props} login={(request) => props.dispatch(requestLogin(request))} />}    
       {authChecked && props.isLogged && <LandingPage {...props}></LandingPage>}   
       {/*{props.auth.oauth.token && !props.auth.user.is_verified && <VerificationForm {...props} auth={props.auth} verify={(request) => props.dispatch(requestVerification(request))} logout={(request) => props.dispatch(requestLogout(request))} newtoken={(request) => props.dispatch(requestNewToken(request))} />}*/}                

@@ -173,7 +173,7 @@ const ReferencesList = (props) => {
                     { groupsOptionList && multiFilter.groupIds && multiFilter.groupIds.length>0 &&
                      <ul id="groupsActiveFilter" className="filtersList">    
                       {multiFilter.groupIds.map( el => 
-                        <li key={el} className="groupFilter">{groupsOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fas fa-times"  onClick={() => toggleGroupFilter(el) }></i></li>
+                        <li key={el} className="groupFilter">{groupsOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fa-solid fa-xmark"  onClick={() => toggleGroupFilter(el) }></i></li>
                         ) 
                       }
                       </ul>
@@ -181,7 +181,7 @@ const ReferencesList = (props) => {
                     { labelsOptionList && multiFilter.labelIds && multiFilter.labelIds.length>0 &&
                      <ul id="labelsActiveFilter" className="filtersList">    
                       {multiFilter.labelIds.map( el => 
-                         <li key={el} className="labelFilter">{labelsOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fas fa-times"  onClick={() => toggleLabelFilter(el) }></i></li>
+                         <li key={el} className="labelFilter">{labelsOptionList.filter( (listItem) => (listItem.value===el))[0].label} <i className="fa-solid fa-xmark"  onClick={() => toggleLabelFilter(el) }></i></li>
                         ) 
                       }
                       </ul>
@@ -196,10 +196,10 @@ const ReferencesList = (props) => {
                         <div className="features-icons" >
                             <CustomCheckBox handleChange={(e)=>toggleAllCheckbox(e)} />
                             {<Button disabled={disableToolbar} color="icon" className="ml-2">
-                                <i className="fas fa-print"></i>
+                                <i className="fa-solid fa-print"></i>
                             </Button>}
                             {<Button disabled={disableToolbar} color="icon">
-                                <i className="fas fa-file-export"></i>
+                                <i className="fa-solid fa-file-export"></i>
                             </Button>}
                             <ApplyTag 
                                 type="label"

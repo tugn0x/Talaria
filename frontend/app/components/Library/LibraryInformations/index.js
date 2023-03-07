@@ -24,17 +24,17 @@ export const LibraryExtraInfo = (props) => {
         <div className={"library_extra_info"}>            
             {/*<span className="status-text">{data.borrowing_status ? intl.formatMessage({id: "app.requests."+data.borrowing_status}):'xxx'}</span>*/}                    
             <div className='address'>
-                <i className="fas fa-map-marker"></i> {data.address} {data.postcode} {data.town} {data.district} {data.state}
+                <i className="fa-solid fa-location-dot"></i> {data.address} {data.postcode} {data.town} {data.district} {data.state}
                 <span className='country_id'>({data.country.data.name})</span>
                 
                 {data.lat && data.lon && <span className='coords'>
-                    <i className="fas fa-map-marked"></i> <a className="active" href={mapLink(data.lat,data.lon)} target='_blank'>{data.lat},{data.lon}</a>
+                    <i className="fa-solid fa-map-location"></i> <a className="active" href={mapLink(data.lat,data.lon)} target='_blank'>{data.lat},{data.lon}</a>
                 </span>}
             </div>                        
             {(data.ill_phone||data.ill_email) && <div className='contact'>
                 <span className='header'>ILL Service contacts</span>
-                {data.ill_phone && <span><i className="fas fa-phone"></i> {data.ill_phone} </span>}
-                {data.ill_email && <span><i className="fas fa-envelope"></i> {data.ill_email}</span>}                                                       
+                {data.ill_phone && <span><i className="fa-solid fa-phone"></i> {data.ill_phone} </span>}
+                {data.ill_email && <span><i className="fa-solid fa-envelope"></i> {data.ill_email}</span>}                                                       
             </div>}  
 
             {showILLInfo && <div className='ill_info'>  
@@ -81,12 +81,12 @@ const LibraryInformations =(props) => {
 
             </div>
             {data.institution && <div className='institution'>
-            <i className="fas fa-building"></i> 
-            <span className=''>{data.institution.data.name} {data.institution.data.status!==1? <span className='text-danger'><i className="fas fa-exclamation-triangle"></i></span>:''} <span className='institutionType'>({data.institution.data.institution_type.data.name})</span></span>                            
+            <i className="fa-solid fa-building"></i> 
+            <span className=''>{data.institution.data.name} {data.institution.data.status!==1? <span className='text-danger'><i className="fa-solid fa-triangle-exclamation"></i></span>:''} <span className='institutionType'>({data.institution.data.institution_type.data.name})</span></span>                            
             </div>}                            
             {data.projects && data.projects.data && data.projects.data.length>0 && 
                 <span className='projects'>
-                    <i className="fas fa-project-diagram"></i>                                        
+                    <i className="fa-solid fa-diagram-project"></i>                                        
                     {data.projects.data.map(prj => 
                     <span key={prj.id} className="project-item badge badge-secondary text-white">
                         {prj.name}
@@ -95,7 +95,7 @@ const LibraryInformations =(props) => {
             }
             {data.identifiers && data.identifiers.data && data.identifiers.data.length>0 && 
             <span className='identifiers'>                    
-                <i className="fas fa-key"></i>                     
+                <i className="fa-solid fa-key"></i>                     
                 {data.identifiers.data.map(ident => 
                 <span key={ident.id} className="identifier-item badge badge-info text-white">
                     {ident.name}: {ident.pivot.cod}

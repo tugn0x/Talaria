@@ -35,7 +35,7 @@ const RequestItem = (props) => {
                     handleChange={toggleSelection}
                     checked={checked}
                 />} 
-               <div className="request_id active"><i className="fas fa-info-circle"></i> <span>{data.id}</span></div>               
+               <div className="request_id active"><i className="fa-solid fa-circle-info"></i> <span>{data.id}</span></div>               
                <div className="patronrequest_status">
                 <span className={statusIcon(data.status)}></span> 
                 <span className="status-text">{intl.formatMessage({id: "app.requests."+data.status})}</span>        

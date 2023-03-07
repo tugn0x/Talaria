@@ -384,7 +384,7 @@ const CustomForm = (props) => {
                                                                                     RemoveIdentifier(item.id)
                                                                                     }
                                                                                     >
-                                                                                    <i className="fas fa-trash" />
+                                                                                    <i className="fa-solid fa-trash" />
                                                                                     </a>
                                                                                 </td>
                                                                             </tr>

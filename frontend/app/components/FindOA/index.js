@@ -33,7 +33,7 @@ const FindOA = (props) => {
                         {findOA && 
                         <>
                             {intl.formatMessage({ id: 'app.components.findOA.oapubverify' })}
-                            <button type="button" className="btn-success" onClick={ () => handleFindOA()}><i className="fas fa-search"> {intl.formatMessage({ id: 'app.components.findOA.oafindButton' })}</i></button>
+                            <button type="button" className="btn-success" onClick={ () => handleFindOA()}><i className="fa-solid fa-magnifying-glass"> {intl.formatMessage({ id: 'app.components.findOA.oafindButton' })}</i></button>
                         </>
                         }
                         {!findOA && 

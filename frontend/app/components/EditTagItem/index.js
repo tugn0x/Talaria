@@ -34,7 +34,7 @@ const EditTagItem = props => {
                             onKeyDown={(e) => handleKeyPress(e)}
                         />
                         <Button onClick={() => updateItem(tag.id, tag.name)} color="icon">
-                            <i className="fas fa-save"></i>
+                            <i className="fa-solid fa-floppy-disk"></i>
                         </Button>
                     </>
                 ||
@@ -43,10 +43,10 @@ const EditTagItem = props => {
             </Col>
             <Col xs={4} md={2} className="icons align-self-center">
                 <Button className={`${tag.isEdit ? 'active' : null}`} onClick={() => setTag(state => ({...state, isEdit: !state.isEdit}))} color="icon">
-                    <i className="fas fa-edit"></i>
+                    <i className="fa-solid fa-pen-to-square"></i>
                 </Button>
                 <Button onClick={() => removeItem(tag.id)} color="icon">
-                    <i className="fas fa-trash"></i>
+                    <i className="fa-solid fa-trash"></i>
                 </Button>
                 
             </Col> 

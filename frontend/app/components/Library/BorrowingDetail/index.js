@@ -19,8 +19,8 @@ export const BorrowingRequestData = (props) => {
         {data.borrowing_notes && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.borrowing_notes"})}: </span>{data.borrowing_notes} </span>}
         {data.borrowing_protnr && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.borrowing_protnr"})}: </span>{data.borrowing_protnr} </span>}
         {data.request_note && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.request_note"})}: </span>{data.request_note} </span>}
-        {data.request_special_delivery==1 && <span className="requestData"><i className="fas fa-check-square"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_special_delivery"})} </span></span>}
-        {data.request_pdf_editorial==1 &&  <span className="requestData"><i className="fas fa-check-square"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_pdf_editorial"})}</span></span>}
+        {data.request_special_delivery==1 && <span className="requestData"><i className="fa-solid fa-square-check"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_special_delivery"})} </span></span>}
+        {data.request_pdf_editorial==1 &&  <span className="requestData"><i className="fa-solid fa-square-check"></i> <span className="label">{intl.formatMessage({id: "app.requests.request_pdf_editorial"})}</span></span>}
 
         {(data.fulfill_note||data.fulfill_inventorynr) && <div className="lendingData">                                
             {data.fulfill_note && <span className="requestData"><span className="label">{intl.formatMessage({id: "app.requests.fulfill_note"})}: </span>{data.fulfill_note} </span>}
@@ -48,7 +48,7 @@ const BorrowingDetail = (props) => {
                     {( (data.reference.data.material_type==1 && !data.reference.data.issn)||
                         (data.reference.data.material_type==2 && !!data.reference.data.isbn) ) &&                    
                     <div className="alert alert-warning" role="alert">
-                        <i className="fas fa-tasks"></i> ISSN/ISBN not filled! Please check/edit reference before continue in order to 
+                        <i className="fa-solid fa-bars-progress"></i> ISSN/ISBN not filled! Please check/edit reference before continue in order to 
                         check holdings on available catalogs !
                     </div>
                     }

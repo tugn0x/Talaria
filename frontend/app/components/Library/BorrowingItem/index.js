@@ -71,7 +71,7 @@ export const lendingUnfilledReason = (data) => {
         case 6: ret=intl.formatMessage({id: "app.requests.notfulfill_type.MaxReqNumber"}); break; 
         case 7: ret=intl.formatMessage({id: "app.requests.notfulfill_type.Other"}); break;
     }
-    //return ret!=""?<><i className="fas fa-comment text-danger"></i> {ret}</>:'';
+    //return ret!=""?<><i className="fa-solid fa-comment text-danger"></i> {ret}</>:'';
     return ret;
 }
 
@@ -79,13 +79,13 @@ export const documentAccess=(data) => {
     return (
         <div className="access_document_icons">
             
-        {!isArchived(data) && isFile(data) && !canSavedAsDownloaded(data) && data.borrowing_status=="fulfilled"  && <button type="button" className="btn btn-warning btn-sm"><i className="fas fa-hourglass-half"></i> (waiting HC)</button>}   
+        {!isArchived(data) && isFile(data) && !canSavedAsDownloaded(data) && data.borrowing_status=="fulfilled"  && <button type="button" className="btn btn-warning btn-sm"><i className="fa-solid fa-hourglass-half"></i> (waiting HC)</button>}   
         
         {!isArchived(data) && isFile(data) &&  data.filehash &&            
             <FileDownload  reqid={data.id} libraryid={data.library.data.id} filehash={data.filehash} customClass="detail-body" />
         }                
       
-        {isURL(data) && <a className="btn btn-primary btn-sm btn-download-icon" target="_blank" href={data.url}><i className="fas fa-external-link-alt"></i></a>}         
+        {isURL(data) && <a className="btn btn-primary btn-sm btn-download-icon" target="_blank" href={data.url}><i className="fa-solid fa-arrow-up-right-from-square"></i></a>}         
         </div>
     )
 }
@@ -117,11 +117,11 @@ const statusInfo = (req) => {
 
   return (
       <>
-        {req.created_at && <span className="status-date"><i className="fas fa-plus"></i> {formatDateTime(req.created_at)}</span>}        
+        {req.created_at && <span className="status-date"><i className="fa-solid fa-plus"></i> {formatDateTime(req.created_at)}</span>}        
         {req.request_date && <span className="status-date">
-            <i className="fas fa-share"></i> {formatDateTime(req.request_date)}
+            <i className="fa-solid fa-share"></i> {formatDateTime(req.request_date)}
             {req.request_note && <div className="request_note">
-                <span id={`request_note-${req.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
+                <span id={`request_note-${req.id}`} className="active"><i className="fa-solid fa-note-sticky"></i></span> 
                 <UncontrolledTooltip autohide={false} placement="right" target={`request_note-${req.id}`}>
                     {req.request_note}
                 </UncontrolledTooltip>                                
@@ -134,52 +134,52 @@ const statusInfo = (req) => {
         <>            
             {req.fulfill_date && 
                 <span className="status-date">
-                    <i className="fas fa-reply"></i> {formatDateTime(req.fulfill_date)}  
+                    <i className="fa-solid fa-reply"></i> {formatDateTime(req.fulfill_date)}  
                     {req.fulfill_type && <span className="deliverymethod">{deliveryMethod(req)}</span> }                                
                     {req.notfulfill_type && <div className="unfilled_reason">
-                    <span id={`unfilled_reason-${req.id}`} className="active"><i className="fas fa-comment text-danger"></i></span> 
+                    <span id={`unfilled_reason-${req.id}`} className="active"><i className="fa-solid fa-comment text-danger"></i></span> 
                             <UncontrolledTooltip autohide={false} placement="right" target={`unfilled_reason-${req.id}`}>
                                 {lendingUnfilledReason(req)}
                             </UncontrolledTooltip>                                
                     </div>}                    
                     {req.fulfill_note && <div className="fulfill_notes">
-                        <span id={`fulfilnote-${req.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
+                        <span id={`fulfilnote-${req.id}`} className="active"><i className="fa-solid fa-note-sticky"></i></span> 
                         <UncontrolledTooltip autohide={false} placement="right" target={`fulfilnote-${req.id}`}>
                             {req.fulfill_note}
                         </UncontrolledTooltip>                                
                     </div>}
                 </span>
             }
-            {req.borrowing_status=="documentReady" && req.ready_date && <span className="status-date"><i className="fas fa-check-circle"></i> {formatDateTime(req.ready_date)} </span>}
-            {req.borrowing_status=="documentNotReady" && req.ready_date && <span className="status-date"><i className="fas fa-times-circle"></i> {formatDateTime(req.ready_date)} </span>}            
+            {req.borrowing_status=="documentReady" && req.ready_date && <span className="status-date"><i className="fa-solid fa-circle-check"></i> {formatDateTime(req.ready_date)} </span>}
+            {req.borrowing_status=="documentNotReady" && req.ready_date && <span className="status-date"><i className="fa-solid fa-xmark-circle"></i> {formatDateTime(req.ready_date)} </span>}            
         </>
         }              
-        {req.cancel_request_date && <span className="status-date"><i className="fas fa-times"></i><i className="fas fa-question"></i> {formatDateTime(req.cancel_request_date)}</span>}
-        {req.cancel_date && <span className="status-date"><i className="fas fa-times"></i> {formatDateTime(req.cancel_date)}</span>}
+        {req.cancel_request_date && <span className="status-date"><i className="fa-solid fa-xmark"></i><i className="fa-solid fa-question"></i> {formatDateTime(req.cancel_request_date)}</span>}
+        {req.cancel_date && <span className="status-date"><i className="fa-solid fa-xmark"></i> {formatDateTime(req.cancel_date)}</span>}
        
         {req.forward==1 && req.forward_date && 
-            <span className="status-date"><i className="fas fa-redo"></i> {formatDateTime(req.forward_date)}</span>            
+            <span className="status-date"><i className="fa-solid fa-rotate-right"></i> {formatDateTime(req.forward_date)}</span>            
         }
        
         {req.download==1 && req.download_date && 
-            <span className="status-date"><i className="fas fa-download"></i> {formatDateTime(req.download_date)}</span>            
+            <span className="status-date"><i className="fa-solid fa-download"></i> {formatDateTime(req.download_date)}</span>            
         }
 
-        {req.trash_date && <span className="status-date"><i className="fas fa-trash text-danger"></i> {formatDateTime(req.trash_date)}</span>}   
+        {req.trash_date && <span className="status-date"><i className="fa-solid fa-trash text-danger"></i> {formatDateTime(req.trash_date)}</span>}   
         
         {req.desk_delivery_date && <span className="status-date">
-            <i className="fas fa-truck-loading"></i> {formatDateTime(req.desk_delivery_date)}
+            <i className="fa-solid fa-truck-ramp-box"></i>{formatDateTime(req.desk_delivery_date)}
             {req.desk_delivery_format && <span className="deskDeliveryFormat">{deskDeliveryFormat(req)}</span>}
         </span>}  
         {req.desk_received_date && <span className="status-date">
-            <i className="fas fa-box"></i> {formatDateTime(req.desk_received_date)}
+            <i className="fa-solid fa-box-open"></i> {formatDateTime(req.desk_received_date)}
             {req.desk_delivery_format && <span className="deskDeliveryFormat">{deskDeliveryFormat(req)}</span>}
         </span>}
         
-        {req.user_delivery_date && <span className="status-date"><i className="fas fa-luggage-cart"></i> {formatDateTime(req.user_delivery_date)} </span>}                                                                              
+        {req.user_delivery_date && <span className="status-date"><i className="fa-solid fa-cart-flatbed-suitcase"></i> {formatDateTime(req.user_delivery_date)} </span>}                                                                              
         
         {req.archived==1 && req.archived_date && 
-            <span className="status-date"><i className="fas fa-hdd"></i> {formatDateTime(req.archived_date)}</span>            
+            <span className="status-date"><i className="fa-solid fa-hard-drive"></i> {formatDateTime(req.archived_date)}</span>            
         }
                
       </>
@@ -344,9 +344,9 @@ export const BorrowingStatus = (props) => {
             <span className={statusIcon(data.borrowing_status)}></span> 
             <span className="status-text">{data.borrowing_status ? intl.formatMessage({id: "app.requests."+data.borrowing_status}):'xxx'}</span>                    
             {data.operator && <div className="status-operator">
-                <i className="simple_icon fas fa-user-cog"></i> { data.operator.data.full_name}
+                <i className="simple_icon fa-solid fa-user-cog"></i> { data.operator.data.full_name}
                 {data.borrowing_notes && <span className="borrowing_notes">
-                <span id={`tooltip-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
+                <span id={`tooltip-${data.id}`} className="active"><i className="fa-solid fa-note-sticky"></i></span> 
                 <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${data.id}`}>
                     {data.borrowing_notes}
                 </UncontrolledTooltip>                                
@@ -361,7 +361,7 @@ export const BorrowingReferenceIcons = (props) => {
     const {data,reqPath,findAndUpdateOABorrowingReference,oaloading,findISSNISBNtoggle}=props;    
 
     const issn_search_enabled=(process.env.ISSN_SEARCH && process.env.ISSN_SEARCH=="true")?true:false;
-    const isbn_search_enabled=(process.env.ISBN_SEARCH && process.env.ISBN_SEARCH=="true")?true:false;
+    const isbn_search_enabled=(process.env.ISBN_SEARCH && process.env.ISBN_SEARCH=="true")?true:false;    
 
     const findAndUpdateOA = (ev) => {       
         ev.preventDefault();
@@ -372,13 +372,13 @@ export const BorrowingReferenceIcons = (props) => {
 
     return (
         !isArchived(data) && <div className="borrowing_reference_icons">
-                {canEdit(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'edit')}><i className="fas fa-edit"></i></Link>}
+                {canEdit(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'edit')}><i className="fa-solid fa-pen-to-square"></i></Link>}
                 {data.reference.data.oa_link && <a href={data.reference.data.oa_link} target="_blank" className='btn btn-icon'><i className="icon-oa"></i></a>} 
-                {canRequest(data) && !oaloading && !data.reference.data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev) }><i className="fas fa-search"></i>OA</a>}
-                {canRequest(data) && (issn_search_enabled || isbn_search_enabled ) && mustCheckData(data) && <a target="_blank" className='btn btn-icon' onClick={()=>findISSNISBNtoggle()} title="checkISSN/ISBN"><i className="fas fa-keyboard"></i></a>}
-                {canRequest(data) &&  !mustCheckData(data) && <span className="btn btn-icon"><i className="fas fa-check-double"></i></span>}
-                {canRequest(data) && oaloading && <i className="fas fa-spinner fa-spin"></i>}                
-                {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO Check holding !')}><i className="fa fa-search-location"></i></a>}                                                                         
+                {canRequest(data) && !oaloading && !data.reference.data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev) } title="find OA"><i className="fa-solid fa-magnifying-glass-plus"></i></a>}
+                {canRequest(data) && (issn_search_enabled || isbn_search_enabled ) && mustCheckData(data) && <a target="_blank" className='btn btn-icon' onClick={()=>findISSNISBNtoggle()} title="checkISSN/ISBN"><i className="fa-solid fa-keyboard"></i></a>}
+                {canRequest(data) &&  !mustCheckData(data) && <span className="btn btn-icon"><i className="fa-solid fa-check-double"></i></span>}
+                {canRequest(data) && oaloading && <i className="fa-solid fa-spinner fa-spin"></i>}                
+                {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO Check holding !')} title="check my holding"><i className="fa-solid fa-school"></i></a>}                    
         </div>
     )
 }
@@ -389,25 +389,25 @@ export const BorrowingRequestIcons = (props) => {
     return (        
         <div className={"borrowing_request_icons " + (customClass?customClass:'')}>                                                  
 
-                {/*<Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fas fa-eye"></i></Link>*/}                              
-                {canRequest(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,"request")}><i className="fas fa-share"></i></Link>}
-                {canCancel(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest()}><i className="fas fa-times"></i></a>}                
-                {canDelete(data) && deleteRequest && <a className="btn btn-icon" onClick={()=>deleteRequest()}><i className="fas fa-backspace"></i></a>}                                                
-                {canTrash(data) && askTrashRequest && <a className="btn btn-icon" onClick={()=>askTrashRequest(1)}><i className="fas fa-trash"></i></a>}                
-                {canForward(data) && forwardRequest && <a className="btn btn-icon" onClick={()=>forwardRequest()}><i className="fas fa-redo"></i></a>}                
-                {canArchive(data) && askArchiveRequest && <a className="btn btn-icon" onClick={()=>askArchiveRequest()}><i className="fas fa-hdd"></i></a>}                                                
+                {/*<Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fa-solid fa-eye"></i></Link>*/}                              
+                {canRequest(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,"request")}><i className="fa-solid fa-share"></i></Link>}
+                {canCancel(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest()}><i className="fa-solid fa-xmark"></i></a>}                
+                {canDelete(data) && deleteRequest && <a className="btn btn-icon" onClick={()=>deleteRequest()}><i className="fa-solid fa-backspace"></i></a>}                                                
+                {canTrash(data) && askTrashRequest && <a className="btn btn-icon" onClick={()=>askTrashRequest(1)}><i className="fa-solid fa-trash"></i></a>}                
+                {canForward(data) && forwardRequest && <a className="btn btn-icon" onClick={()=>forwardRequest()}><i className="fa-solid fa-rotate-right"></i></a>}                
+                {canArchive(data) && askArchiveRequest && <a className="btn btn-icon" onClick={()=>askArchiveRequest()}><i className="fa-solid fa-hard-drive"></i></a>}                                                
                                    
                 
                 
-                {canSavedAsDownloaded(data) && savedAsDownloaded && (isFile(data)||isURL(data)) &&
-                        <a className="btn btn-icon" onClick={()=>savedAsDownloaded()}><i className="fas fa-arrow-circle-right"></i></a>                   
+                {canSavedAsDownloaded(data) && savedAsDownloaded && (isFile(data)||isURL(data)) &&                
+                        <a className="btn btn-icon" onClick={()=>savedAsDownloaded()}><i className="fa-solid fa-file-circle-check"></i></a>                   
                 }                
                 
-                {canSavedAsReceived(data) && setReceivedRequest && setNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setReceivedRequest()}><i className="fas fa-box"></i></a> 
+                {canSavedAsReceived(data) && setReceivedRequest && setNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setReceivedRequest()}><i className="fa-solid fa-box-open"></i></a> 
                     <a className="btn btn-icon" onClick={()=>setNotReceivedRequest()}>
                     <span class="fa-stack fa-1x">
-                        <i class="fas fa-box fa-stack-1x"></i>
-                        <i class="fas fa-ban fa-stack-2x"></i>
+                        <i class="fa-solid fa-box fa-stack-1x"></i>
+                        <i class="fa-solid fa-ban fa-stack-2x"></i>
                     </span>
                     </a></>}                                
                 
@@ -415,14 +415,14 @@ export const BorrowingRequestIcons = (props) => {
                 {canPatronReqDirectManaged(data) && canRequest(data) &&
                 <>
                     <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}>
-                        <i className="fas fa-truck text-info"></i> 
+                        <i className="fa-solid fa-truck text-info"></i> 
                     </Link>                                     
                 </>
                 }    
                 {/*casi di evasione/inevasione a patron DOPO DD*/}
-                {canFulfillToPatron(data) &&  <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}><i className="fas fa-truck text-success"></i></Link>}                                                
+                {canFulfillToPatron(data) &&  <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}><i className="fa-solid fa-truck text-success"></i></Link>}                                                
                 {canUnfillToPatron(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}>
-                <span className="fa-stack"><i className="fas fa-truck fa-stack-1x text-warning"></i><i className="fas fa-ban fa-stack-2x"></i></span>
+                <span className="fa-stack"><i className="fa-solid fa-truck fa-stack-1x text-warning"></i><i className="fa-solid fa-ban fa-stack-2x"></i></span>
                 </Link>}                                
                 
                 {/*casi di evasione/inevasione SENZA patron DOPO DD*/}
@@ -431,7 +431,7 @@ export const BorrowingRequestIcons = (props) => {
                 {/*casi di archiviazione come inevasione SENZA patron DIRETTA dopo diversi forward/inevasioni dd
                 sembra un caso di "DIRETTA" ma solo perchè è una nuova richiesta ma di fatto è collegata alle altre
                 x cui il dd c'e' stato!*/}
-                {!isPatronRequest(data) && hasParentRequest(data) && !isArchived(data) && canRequest(data) && askArchiveRequestAsNotReceived && <a className="btn btn-icon" onClick={()=>askArchiveRequestAsNotReceived()}><i className="fas fa-hdd text-warning"></i></a>} 
+                {!isPatronRequest(data) && hasParentRequest(data) && !isArchived(data) && canRequest(data) && askArchiveRequestAsNotReceived && <a className="btn btn-icon" onClick={()=>askArchiveRequestAsNotReceived()}><i className="fa-solid fa-hard-drive text-warning"></i></a>} 
         </div>
     )
 }
@@ -448,7 +448,7 @@ const BorrowingItem = (props) => {
                     handleChange={toggleSelection}
                     checked={checked}
                 /> 
-                <div className="request_id"><Link to={requesturl(editPath,data.id)} className="active"><i className="fas fa-info-circle"></i> <span>{data.id}</span></Link></div>
+                <div className="request_id"><Link to={requesturl(editPath,data.id)} className="active"><i className="fa-solid fa-circle-info"></i> <span>{data.id}</span></Link></div>
                 <BorrowingStatus data={data} customClass="request_status"/>                                 
             </Col>
             <Col sm={3}>
@@ -471,12 +471,12 @@ const BorrowingItem = (props) => {
             <>
                {data.lendingLibrary && data.lendingLibrary.data.id>0  && 
                 <span>
-                    <i className="fas fa-landmark"></i> {data.lendingLibrary.data.name}
+                    <i className="fa-solid fa-landmark"></i> {data.lendingLibrary.data.name}
                 </span>                
                }
                {!data.lendingLibrary && data.all_lender==1 &&
                 <span>
-                    <i className="fas fa-cloud"></i> {intl.formatMessage({id:'app.global.alllibraries'})} 
+                    <i className="fa-solid fa-cloud"></i> {intl.formatMessage({id:'app.global.alllibraries'})} 
                 </span>
                }
                {!isArchived(data) && data.borrowing_status=="requested" && data.request_date && <span className="daysago"><span className="badge badge-pill badge-primary">{daysFromToday(data.request_date)}</span> {intl.formatMessage({id:'app.global.daysago'})}</span>}                                                            

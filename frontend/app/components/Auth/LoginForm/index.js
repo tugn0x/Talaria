@@ -90,7 +90,7 @@ import './style.scss'
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
-                            <i className="fas fa-user"></i>
+                            <i className="fa-solid fa-user"></i>
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
@@ -105,7 +105,7 @@ import './style.scss'
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
-                            <i className="fas fa-lock"></i>
+                            <i className="fa-solid fa-lock"></i>
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input

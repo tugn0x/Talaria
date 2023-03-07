@@ -21,7 +21,7 @@ export const InstitutionTypeOperations = (props) => {
   
     return (        
         <div className={"institutiontype_operations"}>                                                                            
-                {deleteInstitutionType && <a className="btn btn-icon btn-sm" onClick={()=>deleteInstitutionType()}><i className="fas fa-trash"></i></a>}                                                
+                {deleteInstitutionType && <a className="btn btn-icon btn-sm" onClick={()=>deleteInstitutionType()}><i className="fa-solid fa-trash"></i></a>}                                                
         </div>
     )
 }

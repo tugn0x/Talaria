@@ -51,7 +51,7 @@ const RequestStatus = props => {
         return (
             <div>
                 <span className={statusIcon(patronrequest.status)}></span> {intl.formatMessage({id: "app.requests."+patronrequest.status})}<br/>  
-                <span className="archived"><i className="fas fa-hdd"></i> {intl.formatMessage({id: "app.requests.archived"}) + " "+ patronrequest.archived?intl.formatMessage({id: "app.global.yes"}):intl.formatMessage({id: "app.global.no"}) }</span>
+                <span className="archived"><i className="fa-solid fa-hard-drive"></i> {intl.formatMessage({id: "app.requests.archived"}) + " "+ patronrequest.archived?intl.formatMessage({id: "app.global.yes"}):intl.formatMessage({id: "app.global.no"}) }</span>
                 {opBlock}
             </div>
         )

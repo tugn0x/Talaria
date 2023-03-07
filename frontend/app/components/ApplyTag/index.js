@@ -30,7 +30,7 @@ const ApplyTag = props => {
     return (
         <UncontrolledDropdown className={`apply ${type}`} direction="down">
             <DropdownToggle color="icon" disabled={disabled}>
-                { (type === 'label'|| type==="tag" ) ? <i className="icon-tag-plus"></i> :  <i className="fas fa-folder-plus"></i>}
+                { (type === 'label'|| type==="tag" ) ? <i className="icon-tag-plus"></i> :  <i className="fa-solid fa-folder-plus"></i>}
             </DropdownToggle>
             <DropdownMenu center="true" className="rounded">
                 <DropdownItem header>
@@ -38,7 +38,7 @@ const ApplyTag = props => {
                     {type === 'tag' && <p>{intl.formatMessage({id: 'app.requests.tagAs'})}</p>}
                     {type === 'group' && <p>{intl.formatMessage({id: 'app.references.groupAs'})}</p>}
                     <input type="text" name="apply-search" onChange={(e) => setQuery(e.target.value)} value={query} />
-                    <i className="fas fa-search" />    
+                    <i className="fa-solid fa-magnifying-glass" />    
                 </DropdownItem>
                 {data.length > 0 && data.map(item => (
                     <div className="apply-item" key={`apply-${type}-${item.label.toLowerCase()}`}>

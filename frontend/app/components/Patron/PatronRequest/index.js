@@ -27,7 +27,7 @@ import FileDownload from '../../../containers/FileDownload';
       default: return "";
   }
   
-  return <span className="status-date"><i className="fas fa-clock"></i> {formatDateTime(date)}</span>
+  return <span className="status-date"><i className="fa-solid fa-clock"></i> {formatDateTime(date)}</span>
 }*/
 
 const isArchived=(data) => {
@@ -98,7 +98,7 @@ export const documentAccess=(data) => {
             <FileDownload reqid={data.id} libraryid={data.library.data.id} filehash={data.filehash} customClass="detail-body" />
         }                   
       
-        {isURL(data) && data.status=="received" && <a className="btn btn-primary btn-sm btn-download-icon" href={data.url} target="_blank"><i className="fas fa-external-link-alt"></i></a>}         
+        {isURL(data) && data.status=="received" && <a className="btn btn-primary btn-sm btn-download-icon" href={data.url} target="_blank"><i className="fa-solid fa-arrow-up-right-from-square"></i></a>}         
         </div>
     )
 }
@@ -113,34 +113,34 @@ export const PatronRequestStatus = (props) => {
 
     return (
         <>        
-        {<span className="costpolicy"><i className="fas fa-coins"></i> {costPolicy(data)} </span>}                
+        {<span className="costpolicy"><i className="fa-solid fa-coins"></i> {costPolicy(data)} </span>}                
         {data.request_date && 
         <span className="status-date">            
-            <i className="fas fa-share"></i> {formatDateTime(data.request_date)}
+            <i className="fa-solid fa-share"></i> {formatDateTime(data.request_date)}
             {data.forlibrary_note && <div className="forlibrary_note">
-                <span id={`tooltip-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
+                <span id={`tooltip-${data.id}`} className="active"><i className="fa-solid fa-note-sticky"></i></span> 
                 <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${data.id}`}>
                     {data.forlibrary_note}
                 </UncontrolledTooltip>                                
             </div>} 
         </span>}                    
                
-        {data.cancel_date && <span className="status-date"><i className="fas fa-times"></i> {formatDateTime(data.cancel_date)}</span>}
-        {data.delivery_ready_date && <span className="status-date"><i className="fas fa-check-circle"></i> {formatDateTime(data.delivery_ready_date)}</span>}                
+        {data.cancel_date && <span className="status-date"><i className="fa-solid fa-xmark"></i> {formatDateTime(data.cancel_date)}</span>}
+        {data.delivery_ready_date && <span className="status-date"><i className="fa-solid fa-circle-check"></i> {formatDateTime(data.delivery_ready_date)}</span>}                
         {data.fulfill_date && 
         <span className="status-date">
-            <i className="fas fa-reply"></i> {formatDateTime(data.fulfill_date)}
+            <i className="fa-solid fa-reply"></i> {formatDateTime(data.fulfill_date)}
             <span className="deliveryFormat">{deliveryFormat(data)}</span>             
         
             {data.notfulfill_type && <div className="notfulfillreason">
-            <span id={`notfulfill_type-${data.id}`} className="active"><i className="fas fa-comment text-danger"></i></span> 
+            <span id={`notfulfill_type-${data.id}`} className="active"><i className="fa-solid fa-comment text-danger"></i></span> 
                     <UncontrolledTooltip autohide={false} placement="right" target={`notfulfill_type-${data.id}`}>
                         {notfulfillReason(data)}
                     </UncontrolledTooltip>                                
             </div>}
         
             {data.fromlibrary_note && <div className="fromlibrary_note">
-                <span id={`tooltipfulfillnote-${data.id}`} className="active"><i className="fas fa-sticky-note"></i></span> 
+                <span id={`tooltipfulfillnote-${data.id}`} className="active"><i className="fa-solid fa-note-sticky"></i></span> 
                 <UncontrolledTooltip autohide={false} placement="right" target={`tooltipfulfillnote-${data.id}`}>
                     {data.fromlibrary_note}
                 </UncontrolledTooltip>                                
@@ -158,23 +158,23 @@ export const PatronRequestData = (props) => {
     return (
         <div className={"patronrequest_data " + (customClass?customClass:'')}>
             {data.library && <div className="libraryLabel pr-3">
-                <span><i className="fas fa-landmark"></i></span>                 
+                <span><i className="fa-solid fa-landmark"></i></span>                 
                 <span id={`tooltip-${data.id}-${data.library.data.id}`} className="active">{data.library_label?data.library_label.data.label:data.library.name}</span> 
                 <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-${data.id}-${data.library.data.id}`}>
                     {data.library.data.name}
                 </UncontrolledTooltip>                  
             </div> }
             {data.delivery && <div className="deliveryLabel pr-3"> 
-                <span><i className="fas fa-luggage-cart"></i></span>
+                <span><i className="fa-solid fa-cart-flatbed-suitcase"></i></span>
                     <span id={`tooltip-del-${data.id}-${data.delivery.data.id}`} className="active">{data.delivery.data.name}</span> 
                     <UncontrolledTooltip autohide={false} placement="right" target={`tooltip-del-${data.id}-${data.delivery.data.id}`}>
                     <div> 
-                        <span><i className="fas fa-luggage-cart"></i> {data.delivery.data.name}</span><br/>                        
-                        {data.delivery.data.description && <><span><i className="fas fa-info-circle"></i> {data.delivery.data.description}</span><br/></>}
-                        {data.delivery.data.address && <><span><i className="fas fa-map-marker"></i> {data.delivery.data.address} {data.delivery.data.postcode} {data.delivery.data.town} {data.delivery.data.district} {data.delivery.data.state} {data.delivery.data.country?data.delivery.data.country.data.name:''}</span><br/></>}                                    
-                        {data.delivery.data.email && <><span><i className="fas fa-envelope"></i> {data.delivery.data.email}</span><br/></>}
-                        {data.delivery.data.phone && <><span><i className="fas fa-phone"></i> {data.delivery.data.phone}</span><br/></>}
-                        {data.delivery.data.openinghours && <><span><i className="fas fa-clock"></i> {data.delivery.data.openinghours}</span></>}
+                        <span><i className="fa-solid fa-cart-flatbed-suitcase"></i> {data.delivery.data.name}</span><br/>                        
+                        {data.delivery.data.description && <><span><i className="fa-solid fa-circle-info"></i> {data.delivery.data.description}</span><br/></>}
+                        {data.delivery.data.address && <><span><i className="fa-solid fa-location-dot"></i> {data.delivery.data.address} {data.delivery.data.postcode} {data.delivery.data.town} {data.delivery.data.district} {data.delivery.data.state} {data.delivery.data.country?data.delivery.data.country.data.name:''}</span><br/></>}                                    
+                        {data.delivery.data.email && <><span><i className="fa-solid fa-envelope"></i> {data.delivery.data.email}</span><br/></>}
+                        {data.delivery.data.phone && <><span><i className="fa-solid fa-phone"></i> {data.delivery.data.phone}</span><br/></>}
+                        {data.delivery.data.openinghours && <><span><i className="fa-solid fa-clock"></i> {data.delivery.data.openinghours}</span></>}
                     </div>
                     </UncontrolledTooltip>                
             </div>}            

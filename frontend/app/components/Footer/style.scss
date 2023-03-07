@@ -9,7 +9,7 @@ footer.app-footer {
     .top {
         width: 100%;
         a {
-            color: #444444;
+            color: $dark-text;
             &:not(:last-child) {
                 margin-right: 2rem;
             }

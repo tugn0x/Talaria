@@ -9,12 +9,7 @@
 /docker/spid-test-idp/conf/idp.key
 /docker/spid-test-idp/conf/idpSSL.crt
 /docker/spid-test-idp/conf/idpSSL.key
-/frontend/.no_git
-/frontend/v8-compile-cache-0/*
-frontend/package-lock.json
 .vscode/settings.json
 /composer.lock
 docker/shibboleth/etc/idem-test-metadata-sha256.*
 .env
-frontend/package-lock.json
-frontend/package-lock.json.OLD

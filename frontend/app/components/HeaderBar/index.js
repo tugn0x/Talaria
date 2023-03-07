@@ -79,13 +79,13 @@ function HeaderBar(props) {
                   { isLogged && (
                       <>
                         <Link className="nav-link" to="/login">
-                        <i className="fas fa-2x fa-user d-table-cell"></i>                        
+                        <i className="fa-solid fa-2x fa-user d-table-cell"></i>                        
                         <span className="user-name d-none d-md-table-cell align-middle px-3">                          
                           {subStringer(auth.user.name, 10)}                          
                         </span>                        
                         </Link>
                         <DropdownToggle nav>
-                          <i className="fas fa-2x fa-sort-down d-table-cell align-middle"></i>
+                          <i className="fa-solid fa-2x fa-sort-down d-table-cell align-middle"></i>
                         </DropdownToggle>
                       </>
                     )
@@ -98,7 +98,7 @@ function HeaderBar(props) {
                       {checkRole(auth, "super-admin") && (
                         <div className="resources-menu">
                           <Row className="head item">
-                              <i className={`fas fa-cog`}></i>
+                              <i className={`fa-solid fa-gear`}></i>
                               <span><FormattedMessage {...messages.admin} /></span>
                           </Row>
                           <Row className="item">
@@ -111,7 +111,7 @@ function HeaderBar(props) {
                        {checkRole(auth, "manager") && !checkRole(auth, "super-admin") && (
                         <div className="resources-menu">
                           <Row className="head item">
-                              <i className={`fas fa-home`}></i>
+                              <i className={`fa-solid fa-home`}></i>
                               <span><FormattedMessage {...messages.manager} /></span>
                           </Row>
                           <Row className="item">
@@ -124,7 +124,7 @@ function HeaderBar(props) {
                       {checkRole(auth, "accountant") && (
                         <div className="resources-menu">
                           <Row className="head item">
-                              <i className={`fas fa-wallet`}></i>
+                              <i className={`fa-solid fa-wallet`}></i>
                               <span><FormattedMessage {...messages.accountant} /></span>
                           </Row>
                           <Row className="item">
@@ -138,7 +138,7 @@ function HeaderBar(props) {
                         checkRole(auth, "patron") && (
                         <div className="resources-menu">
                           <Row className="head item">
-                              <i className={`fas fa-book-reader`}></i>
+                              <i className={`fa-solid fa-book-open-reader`}></i>
                               <span><FormattedMessage {...messages.patron} /></span>
                           </Row>
                           <Row className="item">
@@ -155,9 +155,9 @@ function HeaderBar(props) {
                         {/*<DropdownItem header tag="div" className="text-center">
                           <FormattedMessage {...messages.UserAccount} />
                         </DropdownItem>
-                        <DropdownItem onClick={() => linkTo("/patron/my-libraries")}><i className="fas fa-user"></i><span>Patron</span></DropdownItem>*/}
+                        <DropdownItem onClick={() => linkTo("/patron/my-libraries")}><i className="fa-solid fa-user"></i><span>Patron</span></DropdownItem>*/}
                           <Row className="head item">
-                              <i className="fas fa-user"></i>
+                              <i className="fa-solid fa-user"></i>
                               <span><FormattedMessage {...messages.Profile} /></span> 
                           </Row>
                           <Row className="item">

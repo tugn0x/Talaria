@@ -16,10 +16,10 @@ function ResourceMenu(props) {
     let cl = ""
     
     switch (res) {
-      case 'institutions': cl='fas fa-building';  break;
-      case 'libraries': cl='fas fa-landmark'; break;
-      case 'projects': cl='fas fa-project-diagram'; break;
-      case 'consortium': cl='icon icon-consorzio'; break;
+      case 'institutions': cl='fa-solid fa-building';  break;
+      case 'libraries': cl='fa-solid fa-landmark'; break;
+      case 'projects': cl='fa-solid fa-diagram-project'; break;
+      case 'consortium': cl='icon icon-consorzio'; break; 
       
       default: cl='';
     }

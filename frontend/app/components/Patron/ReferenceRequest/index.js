@@ -158,7 +158,7 @@ const ReferenceRequest = props => {
                                     <ErrorBox className="invalid-feedback" error={intl.formatMessage({id: "app.global.invalid_select"})} />
                                 </>}   
                             {formData.library.id && <div className="libraryDetail">
-                                <span><i className="fas fa-landmark"></i></span> {formData.library.name} <br/>
+                                <span><i className="fa-solid fa-landmark"></i></span> {formData.library.name} <br/>
                                 {intl.formatMessage({id: "app.libraries.dd_user_cost"})}: {formData.library.dd_user_cost} &euro; <br/>                                
                                 {intl.formatMessage({id: "app.requests.extraCosts"})}:<select id="cost_policy" value={formData["cost_policy"]} onChange={ (evt) => handleChange(evt.target.value,'cost_policy')}>
                                     <option value="0">{intl.formatMessage({id: "app.requests.denyAnyExtraCost"})}</option>
@@ -185,12 +185,12 @@ const ReferenceRequest = props => {
                             }
                             {formData.delivery.id && 
                             <div className="PickupDetail">                                                            
-                                {formData.delivery.name && <div><i className="fas fa-luggage-cart"></i> {formData.delivery.name}</div>}
-                                {formData.delivery.description && <div><i className="fas fa-info-circle"></i> {formData.delivery.description}</div>}
-                                {formData.delivery.address && <div><i className="fas fa-map-marker"></i> {formData.delivery.address} {formData.delivery.postcode} {formData.delivery.town} {formData.delivery.district} {formData.delivery.state}</div>}            
-                                {formData.delivery.email &&<div><i className="fas fa-envelope"></i> {formData.delivery.email}</div>}
-                                {formData.delivery.phone && <div><i className="fas fa-phone"></i> {formData.delivery.phone}</div>}
-                                {formData.delivery.openinghours && <div><i className="far fa-clock"></i> {formData.delivery.openinghours}</div>}                                                            
+                                {formData.delivery.name && <div><i className="fa-solid fa-cart-flatbed-suitcase"></i> {formData.delivery.name}</div>}
+                                {formData.delivery.description && <div><i className="fa-solid fa-circle-info"></i> {formData.delivery.description}</div>}
+                                {formData.delivery.address && <div><i className="fa-solid fa-location-dot"></i> {formData.delivery.address} {formData.delivery.postcode} {formData.delivery.town} {formData.delivery.district} {formData.delivery.state}</div>}            
+                                {formData.delivery.email &&<div><i className="fa-solid fa-envelope"></i> {formData.delivery.email}</div>}
+                                {formData.delivery.phone && <div><i className="fa-solid fa-phone"></i> {formData.delivery.phone}</div>}
+                                {formData.delivery.openinghours && <div><i className="fa-solid fa-clock"></i> {formData.delivery.openinghours}</div>}                                                            
                             </div>}
                         </Col>
                 </Row>                

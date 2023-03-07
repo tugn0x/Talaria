@@ -3,6 +3,10 @@ coverage
 build
 node_modules
 stats.json
+.no_git
+v8-compile-cache-0/*
+package-lock.json
+package-lock.json.OLD
 
 # Cruft
 .DS_Store

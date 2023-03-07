@@ -3,8 +3,10 @@
 @import '../node_modules/@coreui/icons/css/free.css';
 // Import Flag Icons Set
 // @import '../node_modules/flag-icon-css/css/flag-icon.min.css';
-// Import Font Awesome Icons Set
-@import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+
+// Import Font Awesome Icons Set (only free)
+@import '../node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css';
+@import '../node_modules/@fortawesome/fontawesome-free/css/solid.min.css';
 // Import Simple Line Icons Set
 // @import '../node_modules/simple-line-icons/css/simple-line-icons.css';
 

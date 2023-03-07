@@ -57,7 +57,7 @@
     border-radius: 50%;
     display: inline-block;
     border:1px solid;
-    border-color: #B48372;   
+    border-color: $alternative-text;  
     margin: 0 2px 0 0;
     &.requested
     {

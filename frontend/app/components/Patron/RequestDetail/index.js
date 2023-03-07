@@ -21,10 +21,10 @@ const RequestDetail = props => {
             <>
             <div className="features-icons">
                 <NavLink to='#' className="btn btn-link">
-                    <i className="fas fa-print"></i>
+                    <i className="fa-solid fa-print"></i>
                 </NavLink>
                 <NavLink to='#' className="btn btn-link">
-                    <i className="fas fa-file-export"></i>
+                    <i className="fa-solid fa-file-export"></i>
                 </NavLink>
             </div>
             <Card className="detail-body">      

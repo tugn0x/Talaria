@@ -90,17 +90,17 @@ const LibraryStatus = (props) => {
                                                 {(key=="subject_id") && data.subject && <>{data.subject.data.name}</>}                                                
                                                 {(key=="country_id") && data.country && <>{data.country.data.name}</>}                                                
                                                 {(key=="institution_id") && data.institution && <div className='institution'>
-                                                    <i className="fas fa-building"></i> 
+                                                    <i className="fa-solid fa-building"></i> 
                                                     <span className='badge badge-secondary'>{data.institution.data.name} ({data.institution.data.institution_type.data.name})</span>                
                                                 </div>}    
 
                                                 {(key=="lat"||key=="lon") && data.lat && data.lon &&  <span className='coords'>
-                                                    <i className="fas fa-map-marked"></i> <a className="active" href={mapLink(data.lat,data.lon)} target='_blank'>{data[key]}</a>
+                                                    <i className="fa-solid fa-map-location"></i> <a className="active" href={mapLink(data.lat,data.lon)} target='_blank'>{data[key]}</a>
                                                 </span>}
                                                                                                                                                                                              
                                                 {key=="projects" && data.projects && data.projects.data && data.projects.data.length>0 && 
                                                         <span className='projects'>
-                                                            <i className="fas fa-project-diagram"></i>                                        
+                                                            <i className="fa-solid fa-diagram-project"></i>                                        
                                                             {data.projects.data.map(prj => 
                                                             <span key={prj.id} className="project-item badge badge-secondary">
                                                                 {prj.name}
@@ -109,7 +109,7 @@ const LibraryStatus = (props) => {
                                                 }
                                                 {key=="identifiers" && data.identifiers && data.identifiers.data && data.identifiers.data.length>0 && 
                                                     <span className='identifiers'>                    
-                                                        <i className="fas fa-key"></i>                     
+                                                        <i className="fa-solid fa-key"></i>                     
                                                         {data.identifiers.data.map(ident => 
                                                         <span key={ident.id} className="identifier-item badge badge-info text-white">
                                                             {ident.name}: {ident.pivot.cod}

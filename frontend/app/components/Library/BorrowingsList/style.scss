@@ -11,7 +11,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    color: #707070;
+    color: $light-text;
 }
 
 .activeFilters
@@ -43,7 +43,7 @@
             background-color: $labels-color;
             margin-right:5px;
             border: 1px solid $labels-border;
-            i.fa {
+            i.fa-solid {
                 cursor: pointer;
             }
         }           

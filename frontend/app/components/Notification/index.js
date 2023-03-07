@@ -55,7 +55,7 @@ const Notification = (props) => {
         <Nav className="notification" navbar>
         <UncontrolledDropdown nav direction="down">
             <DropdownToggle nav>
-                <i className="fas fa-bell d-table-cell">
+                <i className="fa-solid fa-bell d-table-cell">
                     {unreaded_total !== 0 &&
                     <span className="count">{unreaded_total}</span>
                     }
@@ -80,7 +80,7 @@ const Notification = (props) => {
                                 <h6><Link to={notify.data.url} className="notify-url">{notify.data.title}</Link></h6>
                                 <span>{subStringer(notify.data.message, 20)}</span>                                
                             </div>
-                            <i className="fas fa-close"></i>
+                            <i className="fa-solid fa-close"></i>
                         </DropdownItem>
                     )
                 )}

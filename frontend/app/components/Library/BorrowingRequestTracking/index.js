@@ -17,10 +17,10 @@ const BorrowingPatronTrackingItem = (props) => {
             <div className="itemHeader">                
                 <span className="id">
                     <span className="label">
-                        <i className="fas fa-info-circle"></i> 
+                        <i className="fa-solid fa-circle-info"></i> 
                     </span> {pdr.id}                                        
                 </span>
-                <i className="fas fa-user-circle"></i> {pdr.user && <span className="user">{pdr.user.data.full_name}</span>}                                
+                <i className="fa-solid fa-user-circle"></i> {pdr.user && <span className="user">{pdr.user.data.full_name}</span>}                                
                 <BorrowingPatronRequestStatus data={pdr}/>
             </div>
             <div className="itemData">
@@ -45,13 +45,13 @@ const BorrowingTrackingItem = (props) => {
     return (
             <div className="borrowingRequest">
                     <div className="itemHeader">                
-                        {/*data.lendingLibrary && <><i className="fas fa-share"></i> &nbsp;</>*/}                
+                        {/*data.lendingLibrary && <><i className="fa-solid fa-share"></i> &nbsp;</>*/}                
                         <span className="id">
                             {requestDetailPath && <Link className="requestLink" replace to={`${requestURL(data.id)}`}>                                    
-                                <span className="label"><i className="fas fa-info-circle"></i> </span> 
+                                <span className="label"><i className="fa-solid fa-circle-info"></i> </span> 
                                 {data.id}
                             </Link>}
-                            {!requestDetailPath && <><span className="label"><i className="fas fa-info-circle"></i> </span> 
+                            {!requestDetailPath && <><span className="label"><i className="fa-solid fa-circle-info"></i> </span> 
                                 {data.id}
                             </>}                    
                         </span>

@@ -37,7 +37,7 @@ $circleWidth: 40px;
             border-radius: $circleWidth;
             width: $circleWidth;
             height: $circleWidth;
-            background-color: #A6525533;
+            background-color: $dark-bk;
             margin: 0 auto;
             &:before {
                 content: "\25CF";
