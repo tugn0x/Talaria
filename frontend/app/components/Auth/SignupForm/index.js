@@ -34,7 +34,7 @@ function SignupForm(props) {
   const intl = useIntl();
   const [password, setPassword] = React.useState('');
   const [passwordError, setPasswordError] = React.useState('');
-
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$/;
   // useEffect(() => {
   //
   //   props.googleReCaptchaProps.executeRecaptcha('Signup').then(token => {
@@ -45,25 +45,34 @@ function SignupForm(props) {
   //   });
   // })
 
+  const validatePassword = (value) => {
+    if (!passwordRegex.test(value)) {
+      setPasswordError('Password must be at least 8 characters long, and contain at least one digit, one lowercase letter, one uppercase letter, and one special character.');
+      return false;
+    } else {
+      setPasswordError('');
+      return true;
+    }
+  }
+
   const handleChange = (e) =>{
 
     if (e.target.name === 'password') {
-      const passwordLengthError = e.target.value.length < 8
-        ? intl.formatMessage({ id: 'app.global.password_length' })
+      const passwordLengthError = validatePassword(e.target.value)
+        ? intl.formatMessage({ id: 'app.global.password_pattern' })
         : '';
       setPasswordError(passwordLengthError);
       setPassword(e.target.value);
     }
 
     if (e.target.name === 'password_confirmation') {
-      const isPasswordLengthValid = password.length >= 8 && e.target.value.length >= 8;
       const isPasswordMatchValid = e.target.value === password;
-      const passwordError = isPasswordLengthValid && !isPasswordMatchValid
+      const passwordError = !isPasswordMatchValid
         ? intl.formatMessage({ id: 'app.global.password_match' })
-        : isPasswordLengthValid ? '' : intl.formatMessage({ id: 'app.global.password_length' });
+        : intl.formatMessage({ id: 'app.global.password_pattern' });
       setPasswordError(passwordError);
     
-      if (!isPasswordLengthValid || !isPasswordMatchValid) {
+      if (!isPasswordMatchValid) {
         e.preventDefault();
       }
     }
@@ -163,12 +172,12 @@ function SignupForm(props) {
                       placeholder="Password"
                       autoComplete="current-password"
                       name="password"
-                      pattern=".{8,}"
+                      pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$" 
                       value={formData.password}
                       onChange={(e) => handleChange(e)}
                       required
                     />
-                      <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.password_length' })} />
+                      <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.password_pattern' })} />
                   </InputGroup>
                   <InputGroup className="mb-4">
                     <InputGroupAddon addonType="prepend">
@@ -186,10 +195,10 @@ function SignupForm(props) {
                       pattern={`^${password}$`}
                       required
                     />
-                    {passwordError !== intl.formatMessage({ id: 'app.global.password_length' }) ? (
+                    {passwordError !== intl.formatMessage({ id: 'app.global.password_pattern' }) ? (
                     <ErrorBox className="invalid-feedback" error={passwordError} />
                     ) : (
-                      <ErrorBox className="invalid-feedback" error={intl.formatMessage({ id: 'app.global.password_length' })} />
+                      <ErrorBox className="invalid-feedback" error={intl.formatMessage({ id: 'app.global.password_pattern' })} />
                     )}
 
 

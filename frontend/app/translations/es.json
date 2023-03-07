@@ -6,7 +6,7 @@
   "app.global.surname": "Surname",
   "app.global.password_repeat": "Retype password",
   "app.global.password_match": "Passwords must match",
-  "app.global.password_length": "La contraseña debe tener 8 caracteres o más",
+  "app.global.password_pattern": "La contraseña debe tener 8 caracteres, al menos un dígito, una letra mayúscula, una minúscula y al menos 1 carácter especial",
   "app.global.invalid_name": "Insert name",
   "app.global.invalid_surname": "Insert surname",
   "app.global.invalid_email": "Inserert valid email address",
