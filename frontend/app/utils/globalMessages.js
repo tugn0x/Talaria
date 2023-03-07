@@ -98,6 +98,12 @@ export default defineMessages({
     id: `${scope}.invalid_email`,
     defaultMessage: 'Please provide a valid email',
   },
+
+  password_pattern: {
+    id: `${scope}.password_pattern`,
+    defaultMessage: 'Password should be 8 characters length, at least one digit, one capital letter, one lower case and at least 1 special character'
+  },
+
   invalid_select: {
     id: `${scope}.invalid_select`,
     defaultMessage: 'Please select an item',

@@ -67,14 +67,13 @@ const ChangePassword = (props) => {
                                             placeholder="New Password"
                                             autoComplete="email"
                                             name="new_password"
-                                            pattern=".{8,}"
-                                            title="Password must be min 8 chars"
+                                            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$" 
                                             value={formData.new_password}
                                             onChange={(e) => handleChange(e)}
                                             required
                                         />
                                         <div className="invalid-feedback">
-                                            <FormattedMessage {...globalMessages.invalid_email} />
+                                            <FormattedMessage {...globalMessages.password_pattern} />
                                         </div>
                                     </InputGroup>
                                     <InputGroup className="mb-4">
@@ -94,7 +93,7 @@ const ChangePassword = (props) => {
                                             required
                                         />
                                         <div className="invalid-feedback">
-                                            {/* <FormattedMessage {...globalMessages.password_match} /> */}
+                                            <FormattedMessage {...globalMessages.password_match} />
                                         </div>
                                     </InputGroup>
                                     <Button color="success" block>
