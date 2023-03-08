@@ -259,6 +259,7 @@ export function* requestGetLibrariesListSaga(action = {}) {
     query: action.query ? action.query : '',
     filterBy: action.filterBy ? action.filterBy : '',
     filterVal: action.filterBy ? action.filterVal : '',
+    excludeIds: action.excludeIds? action.excludeIds:[]
   };
   try {
     const request = yield call(getLibrariesList, options);

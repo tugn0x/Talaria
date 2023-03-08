@@ -634,9 +634,10 @@ export const getLibrariesList = (options) => {
   const query = options.query;
   const filterBy = options.filterBy;
   const filterVal = options.filterVal;  
+  const excludeIds= options.excludeIds;
 
   options = getOption(options);
-  return request(`${BASE_URL}/api/v1/libraries/?page=${page}&q=${query}&filterBy=${filterBy}&filterVal=${filterVal}`, options)
+  return request(`${BASE_URL}/api/v1/libraries/?page=${page}&q=${query}&filterBy=${filterBy}&filterVal=${filterVal}&excludeIds=${excludeIds}`, options)
 };
 
 export const getLibrariesListNearTo = (options) => {

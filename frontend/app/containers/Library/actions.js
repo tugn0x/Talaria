@@ -126,13 +126,14 @@ export function requestDeleteUser(id,library_id,message) {
   };
 } */
 
-export function requestGetLibrariesList(page='1',query=null,filterBy=null,filterVal=null) {
+export function requestGetLibrariesList(page='1',query=null,filterBy=null,filterVal=null,excludeIds=[]) {
   return {
     type: REQUEST_GET_LIBRARIES_LIST,
     page,
     query,
     filterBy,
-    filterVal
+    filterVal,
+    excludeIds,
   };
 }
 

@@ -141,7 +141,7 @@ const BorrowingRequestPage = (props) => {
     const findLender = (options) => {
         console.log("findLender",options)        
         //todo dispatch (filtered by option, cat ...) ...
-        dispatch(requestGetLibrariesList(1,null,'profile_type',2)) //filtered by lender only
+        dispatch(requestGetLibrariesList(1,null,'profile_type',2,match.params.library_id)) //filtered by lender only (excluding this library)
     }
 
     const directUnfillCallback=(requestfields,filter=null) => {
