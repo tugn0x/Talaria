@@ -181,7 +181,29 @@ export const parseOpenURL = (params) => {
                     break;    
                 case 'rft.au': 
                     ref["part_authors"]=v.toString();                   
-                    break;                                       
+                    break;  
+                case 'rft_id':  //can be multiple value (so array not string)
+                
+                    let rft_id_arr=Array();
+
+                    if(!Array.isArray(v)) //if not array
+                        rft_id_arr.push(v); //now is array with 1 value
+                    else rft_id_arr=v; //leave it as array    
+
+                    if(Array.isArray(rft_id_arr))
+                        Object.keys(rft_id_arr).map( (k) => { 
+                            let vid=rft_id_arr[k];
+                            if(vid.startsWith('info:doi/'))
+                            {
+                                ref["doi"]=vid.substring(9);
+                            }
+                            else if(vid.startsWith('info:pmid/'))
+                            {
+                                ref["pmid"]=vid.substring(10);
+                            }          
+                        })                             
+
+                    break;                                         
             }
 
         })
