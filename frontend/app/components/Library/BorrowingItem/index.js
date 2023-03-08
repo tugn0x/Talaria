@@ -407,9 +407,9 @@ export const BorrowingRequestIcons = (props) => {
                 
                 {canSavedAsReceived(data) && setReceivedRequest && setNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setReceivedRequest()}><i className="fa-solid fa-box-open"></i></a> 
                     <a className="btn btn-icon" onClick={()=>setNotReceivedRequest()}>
-                    <span class="fa-stack fa-1x">
-                        <i class="fa-solid fa-box fa-stack-1x"></i>
-                        <i class="fa-solid fa-ban fa-stack-2x"></i>
+                    <span className="fa-stack fa-1x">
+                        <i className="fa-solid fa-box fa-stack-1x"></i>
+                        <i className="fa-solid fa-ban fa-stack-2x"></i>
                     </span>
                     </a></>}                                
                 

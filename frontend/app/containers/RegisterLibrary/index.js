@@ -444,11 +444,11 @@ const RegisterLibrary = (props) => {
             {currentStep === totalSteps && 
                 <div  id="printablediv">
                     <h3>{intl.formatMessage(wizardMessages.step_4)}</h3>
-                   {/* <div class="container_summary ">  */}
+                   {/* <div className="container_summary ">  */}
                 <div> 
                     
-                   <div class="container-fluid">
-                        <div class="row">
+                   <div className="container-fluid">
+                        <div className="row">
                         {
                             (
                             Object.keys(data).map((key, index) => {
@@ -483,10 +483,10 @@ const RegisterLibrary = (props) => {
                                         && (fields.suggested_institution_name.hidden ? itemsreport[i].field_name!=='suggested_institution_name' : itemsreport[i].field_name!=='institution_name')
                                         && (fields.opac.hidden ? itemsreport[i].field_name!=='opac' : itemsreport[i].field_name!=='')
                                         &&
-                                        <div key={item}  class="report_summary"> 
+                                        <div key={item}  className="report_summary"> 
                                         { 
                                             <div> 
-                                                <div class="font-weight-bold">{messages[itemsreport[i].field_name] && intl.formatMessage(messages[itemsreport[i].field_name])}</div>
+                                                <div className="font-weight-bold">{messages[itemsreport[i].field_name] && intl.formatMessage(messages[itemsreport[i].field_name])}</div>
                                                     {(itemsreport[i].field_name!=='identifiers_id' && itemsreport[i].field_name!=='project_id') && <div>{itemsreport[i].value} {itemsreport[i].ordd}</div>}
                                                     {(itemsreport[i].field_name==='identifiers_id')&&<div>
                                                     {itemsreport[i].value.map((item) => (<div><b>{item[2]}: </b>{item[1]}</div>))}
@@ -505,11 +505,11 @@ const RegisterLibrary = (props) => {
                             //      return (key!==null) && (key!=='profile_type') && key!=='identifier_id' && key!=='institution_type_id' && key!=='country_id' && key!=='library_identifiers_txt' && key!=='identifier_type_id' && key!=='subject_id'
                             //      && key!=='institution_country_id' && key!=='institution_id' && key!=='project_id' &&
                             //      data[key]!==null && data[key]!==0 && 
-                            //     <div key={counter} class="report_summary"> 
+                            //     <div key={counter} className="report_summary"> 
                             //          <>
                             //          { 
                             //              <div> 
-                            //                  <div class="font-weight-bold">{messages[itemsreport[counter].field_name] && intl.formatMessage(messages[itemsreport[counter].field_name])}</div>
+                            //                  <div className="font-weight-bold">{messages[itemsreport[counter].field_name] && intl.formatMessage(messages[itemsreport[counter].field_name])}</div>
                             //                  {(key!=='identifiers_id') && <div>{itemsreport[counter].value}</div>}
                             //                  {(itemsreport[counter].field_name==='identifiers_id')&&<div>
                             //                      {itemsreport[counter].value.map((item) => (<div><b>{item[2]}: </b>{item[1]}</div>))}
@@ -526,7 +526,7 @@ const RegisterLibrary = (props) => {
                       </div>
                     </div>
                 </div>
-                <div class="vertical-center" id="noprint"> 
+                <div className="vertical-center" id="noprint"> 
                     <Button onClick={onBackPressed} className='backButton'> 
                         {intl.formatMessage(globalMessages.back)} 
                     </Button>
