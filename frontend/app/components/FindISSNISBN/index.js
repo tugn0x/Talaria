@@ -45,7 +45,7 @@ const FindISSNISBN = props => {
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = results.data.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = results && results.data ? results.data.slice(indexOfFirstPost, indexOfLastPost):null;
   const paginate = pageNumber => setCurrentPage(pageNumber);
   const Paging = (postsPerPage, totalPosts) => {
     const pageNumbers = [];
@@ -75,7 +75,7 @@ const FindISSNISBN = props => {
     <>
       {reqdata && (
         <div className="findISSNISBN">
-        <h2 class="text-center">Choose the correct ISSN/ISBN</h2>
+        <h2 className="text-center">Choose the correct ISSN/ISBN</h2>
           {results.loading && (
             <span>
               searching for ISSN... <i className="fa-solid fa-spinner fa-spin-pulse" />
@@ -100,7 +100,7 @@ const FindISSNISBN = props => {
           )}
         </div>
       )}
-      {results.data.length > 0 && (
+      {results.data && results.data.length > 0 && (
         <Paging
           postsPerPage={postsPerPage}
           totalPosts={results.data.length}
