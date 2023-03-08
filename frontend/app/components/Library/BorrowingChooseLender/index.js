@@ -92,7 +92,7 @@ const BorrowingChooseLender = (props) => {
                 {lendersList.data && lendersList.data.length>0 &&
                 <>
                     <ul className="librarylist">
-                        <li key="alllibraries" className="alllibraries"><input name="lender" type="radio" value="0" onChange={e=>onChangeLibraryList(e.target.value)} />ALL libraries</li>
+                        <li key="alllibraries" className="alllibraries"><input name="lender" type="radio" value="0" onChange={e=>onChangeLibraryList(e.target.value)} /> <i class="fa-solid fa-cloud"></i> {intl.formatMessage({id: "app.global.alllibraries"})}</li>
                         {lendersList.data.map ( (lib) => 
                             <li key={lib.id}><input name="lender" type="radio" value={lib.id} onChange={e=>onChangeLibraryList(e.target.value)} />
                                 <LibraryInformations data={lib} showILLInfo={true}/>
