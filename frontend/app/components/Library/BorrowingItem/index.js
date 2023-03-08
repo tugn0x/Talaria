@@ -374,11 +374,13 @@ export const BorrowingReferenceIcons = (props) => {
         !isArchived(data) && <div className="borrowing_reference_icons">
                 {canEdit(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'edit')}><i className="fa-solid fa-pen-to-square"></i></Link>}
                 {data.reference.data.oa_link && <a href={data.reference.data.oa_link} target="_blank" className='btn btn-icon'><i className="icon-oa"></i></a>} 
-                {canRequest(data) && !oaloading && !data.reference.data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev) } title="find OA"><i className="fa-solid fa-magnifying-glass-plus"></i></a>}
+                {canRequest(data) && !oaloading && !data.reference.data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev) } title="find OA"><i className="fa-solid fa-magnifying-glass-plus"></i></a>                
+                ||canRequest(data) && oaloading && <i className="fa-solid fa-spinner fa-spin"></i>
+                }
                 {canRequest(data) && (issn_search_enabled || isbn_search_enabled ) && mustCheckData(data) && <a target="_blank" className='btn btn-icon' onClick={()=>findISSNISBNtoggle()} title="checkISSN/ISBN"><i className="fa-solid fa-keyboard"></i></a>}
-                {canRequest(data) &&  !mustCheckData(data) && <span className="btn btn-icon"><i className="fa-solid fa-check-double"></i></span>}
-                {canRequest(data) && oaloading && <i className="fa-solid fa-spinner fa-spin"></i>}                
+                {canRequest(data) &&  !mustCheckData(data) && <span className="btn btn-icon"><i className="fa-solid fa-check-double"></i></span>}                              
                 {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO Check holding !')} title="check my holding"><i className="fa-solid fa-school"></i></a>}                    
+                
         </div>
     )
 }
