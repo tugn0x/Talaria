@@ -12,8 +12,9 @@ class ProjectsTableSeeder extends Seeder
      */
     public function run()
     {
-        Project::create(['name'=>'Ministero della Salute - Progetto Bibliosan','active'=>1]);        
-        Project::create(['name'=>'ESSPER','active'=>0]);        
-        Project::create(['name'=>'BESS - Biblioteca Elettronica Scienze Sociali ed Economiche del Piemonte','active'=>1]);                        
+        //Some italian Projects
+        //Project::create(['name'=>'Ministero della Salute - Progetto Bibliosan','active'=>1]);        
+        //Project::create(['name'=>'ESSPER','active'=>0]);        
+        //Project::create(['name'=>'BESS - Biblioteca Elettronica Scienze Sociali ed Economiche del Piemonte','active'=>1]);                        
     }
 }
