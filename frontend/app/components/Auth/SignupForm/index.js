@@ -192,7 +192,7 @@ function SignupForm(props) {
                       name="password_confirmation"
                       value={formData.password_confirmation}
                       onChange={(e) => handleChange(e)}
-                      pattern={`^${password}$`}
+                      pattern={`^{password}$`}
                       required
                     />
                     {passwordError !== intl.formatMessage({ id: 'app.global.password_pattern' }) ? (
