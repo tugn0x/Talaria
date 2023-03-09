@@ -13,9 +13,14 @@ class InstitutionsTableSeeder extends Seeder
     public function run()
     {   
 
+        $dispatcher = Institution::getEventDispatcher();
+
+        // disabling the events otherwise it run observer!
+        Institution::unsetEventDispatcher();
+
         //Some sample institutions        
-        //Institution::create(['name'=>'Consiglio Nazionale delle Ricerche','institution_type_id'=>2,'country_id'=>105]);
-        //Institution::create(['name'=>'Scuola Normale Superiore','institution_type_id'=>1,'country_id'=>105]);
+        //Institution::create(['name'=>'Consiglio Nazionale delle Ricerche','institution_type_id'=>2,'country_id'=>105,'status'=>1]);
+        //Institution::create(['name'=>'Scuola Normale Superiore','institution_type_id'=>1,'country_id'=>105,'status'=>1]);
 
 
         // sample script (not tested) to import from CSV file        
@@ -35,5 +40,7 @@ class InstitutionsTableSeeder extends Seeder
             ]);
         }
         */
+
+        Institution::setEventDispatcher($dispatcher);
     }
 }
