@@ -47,7 +47,7 @@ function SignupForm(props) {
 
   const validatePassword = (value) => {
     if (!passwordRegex.test(value)) {
-      setPasswordError('Password must be at least 8 characters long, and contain at least one digit, one lowercase letter, one uppercase letter, and one special character.');
+      setPasswordError(intl.formatMessage({ id: 'app.global.password_pattern' }));
       return false;
     } else {
       setPasswordError('');
@@ -192,8 +192,9 @@ function SignupForm(props) {
                       name="password_confirmation"
                       value={formData.password_confirmation}
                       onChange={(e) => handleChange(e)}
-                      pattern={`^{password}$`}
-                      required
+                      pattern={`^${password.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`}
+                      //pattern={`^${escapedRepeatPassword}$`}
+                     required
                     />
                     {passwordError !== intl.formatMessage({ id: 'app.global.password_pattern' }) ? (
                     <ErrorBox className="invalid-feedback" error={passwordError} />
