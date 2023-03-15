@@ -172,7 +172,7 @@ function SignupForm(props) {
                       placeholder="Password"
                       autoComplete="current-password"
                       name="password"
-                      pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$" 
+                      pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[*~@#$%^&+=!()_{}><?:|\''\'])(?=\S+$).{8,}$" 
                       value={formData.password}
                       onChange={(e) => handleChange(e)}
                       required
