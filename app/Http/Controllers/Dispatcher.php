@@ -44,6 +44,7 @@ class Dispatcher extends BaseController
         $q = $request->input('q');
         $filterField=$request->input('filterBy');
         $filterValue=$request->input('filterVal');
+        $multifilter=$request->input('multiFilter');        
 
 
         if($trashed == 'true')
@@ -62,6 +63,19 @@ class Dispatcher extends BaseController
             $excludeIds = explode(',', $excludeIds);
             $collection->whereNotIn('id', $excludeIds);
         }
+
+        // multiFilter can be specified as array of pairs: [a=3,b=7,c=ghghghg]        
+        if($multifilter) 
+        {
+            $filterArr=explode(',', $multifilter);
+            foreach ($filterArr as $pair)
+            {
+                [$pairfilterName,$pairfilterVal]=explode('=',$pair);   
+                if($pairfilterName && $pairfilterVal)
+                    $collection->filterByField($pairfilterName,$pairfilterVal);             
+            }
+        }
+     
 
         if( $q )
         {

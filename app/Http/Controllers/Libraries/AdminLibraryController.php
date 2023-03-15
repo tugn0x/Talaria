@@ -62,4 +62,33 @@ class AdminLibraryController extends AdminApiController
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
 
+     //override     
+     public function index(Request $request)
+     {                          
+ 
+         if($request->has('identifier'))
+         {
+             [$identifierTyp,$identifierVal]=explode(',',$request->input('identifier'));  
+ 
+             $this->model = $this->model->byIdentifier($identifierTyp,$identifierVal); 
+         }
+ 
+         if($request->has('subject'))
+         {        
+             $this->model = $this->model->bySubject($request->input('subject')); 
+         }
+ 
+         if($request->has('country'))
+         {        
+             $this->model = $this->model->byCountry($request->input('country')); 
+         }
+ 
+         if($request->has('institution_type'))
+         {        
+             $this->model = $this->model->byInstitutionType($request->input('institution_type')); 
+         }
+ 
+         return parent::index($request);    
+     }
+
 }    

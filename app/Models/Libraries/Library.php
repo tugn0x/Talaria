@@ -224,6 +224,33 @@ class Library extends BaseModel
         return $query->where('profile_type',2); //1=borrow, 2=borrow+lender
     }
 
+    public function scopeBorrower($query) {
+        return $query->where('profile_type',1); //1=borrow, 2=borrow+lender
+    }
+
+    public function scopeBySubject($query,$subjectId) {
+        return $query->where('subject_id',$subjectId);        
+    }
+
+    public function scopeByCountry($query,$countryId) {
+        return $query->where('country_id',$countryId);        
+    }
+
+    public function scopeByInstitutionType($query,$institutionTypeId) {
+        return $query->whereHas('institution', function ($q) use ($institutionTypeId) {
+            $q->where('institution_type_id', '=', $institutionTypeId);            
+        });
+    }
+
+    public function scopeByIdentifier($query,$identifierTyp,$identifierVal) {
+        return $query->whereHas('identifiers', function ($q) use ($identifierTyp,$identifierVal) {
+            $q->where('identifier_id', '=', $identifierTyp)->where('cod','=',$identifierVal);           
+        });      
+    }
+
+
+
+ 
     public function scopeNearTo($query, $latitude,$longitude,$max_range=null)
     {
         if($max_range && $max_range!="" && $max_range!=null)

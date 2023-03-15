@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a5f49b8f-2775-48a1-987f-55938b7b73c7",
+		"_postman_id": "cabe4686-23e6-4d21-a3b2-3905079565cc",
 		"name": "Talaria",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -202,13 +202,34 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/libraries/",
+					"raw": "{{url}}/libraries?subject=1&q=ff&filterBy=town&filterVal=ffff&identifier=1,ffff",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"libraries",
-						""
+						"libraries"
+					],
+					"query": [
+						{
+							"key": "subject",
+							"value": "1"
+						},
+						{
+							"key": "q",
+							"value": "ff"
+						},
+						{
+							"key": "filterBy",
+							"value": "town"
+						},
+						{
+							"key": "filterVal",
+							"value": "ffff"
+						},
+						{
+							"key": "identifier",
+							"value": "1,ffff"
+						}
 					]
 				}
 			},
@@ -1548,7 +1569,7 @@
 		},
 		{
 			"key": "bearer",
-			"value": ""
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImE2MzA4ZTdhNzJlZjM2YWJmYzQ1NDEzNmJjYTM4MDNhMjFjNjhiZjlhYzAxNzU3ODg2ZGMwYTE1ZWE0YjQ4NzQzOTA5ZDE1ZTQ0ZGNkZDQ5In0.eyJhdWQiOiIxIiwianRpIjoiYTYzMDhlN2E3MmVmMzZhYmZjNDU0MTM2YmNhMzgwM2EyMWM2OGJmOWFjMDE3NTc4ODZkYzBhMTVlYTRiNDg3NDM5MDlkMTVlNDRkY2RkNDkiLCJpYXQiOjE2Nzg3OTE1MTcsIm5iZiI6MTY3ODc5MTUxNywiZXhwIjoxNjc4ODc3OTE3LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.IcbTEzvgnLCazb2eQVRE7PmdvWwCSOStWZtiE3W5nfunPTiVL7m4FkRjcSv8Sk6b_CXF0hcA2cGGOst0UyeEQL3mUzB7RXkdhXp45520O4TCALEUqa6-RHytFjy0XCtgueLcvFOETvFHqq_hXZ99Ldjb0oUSYoY8BKY-2Mkh60O5eaqoD-_m72HJbmcASbUmzVbT5JXbzFX0N2cfxyFYt937CmNcspnSIxhFFdFi8IyytgaKSP08BsBCKLHQsYRgyuU_tsdL3srE5xf0X81ZF_7X_sO5185z6r2LGU6aeOEofjQEwUbj1qahpX8frUzf-MMVQbZToMY-DGg5BavkHXXaVqUWSgjcHBsScPGVrvrqKGa8RWbY41kZzXnNzSsuUW0k7g91EoNlHo4-wJb6W_4D5fslPwtm5jIdvUmW6YST9aXJkzm5yvEgWmfYVVX804vXiCEGeRJqvOaB8nnJxHJukcXxInuSgbSxn0LgOwFsSoKDP2JE7KSzI298PfP8dINMpWr8DX3Od9Wonv4oSlp55IdsmeDNOBJkAqKXNlk93ETqDL1Relpd_cOolGms0xSFOF3DRJ_Zx4HorfwI9aMsGUokXl0K_ixBo9fHjD_Tcx3kqNSrmozhEwi-YOCkCdDPcdU32GgOyXegpfmafBA2AIwO8ANt89_cQDA3X_I"
 		},
 		{
 			"key": "bearer2",
@@ -1564,7 +1585,7 @@
 		},
 		{
 			"key": "bearer_manager",
-			"value": "",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImE2MzA4ZTdhNzJlZjM2YWJmYzQ1NDEzNmJjYTM4MDNhMjFjNjhiZjlhYzAxNzU3ODg2ZGMwYTE1ZWE0YjQ4NzQzOTA5ZDE1ZTQ0ZGNkZDQ5In0.eyJhdWQiOiIxIiwianRpIjoiYTYzMDhlN2E3MmVmMzZhYmZjNDU0MTM2YmNhMzgwM2EyMWM2OGJmOWFjMDE3NTc4ODZkYzBhMTVlYTRiNDg3NDM5MDlkMTVlNDRkY2RkNDkiLCJpYXQiOjE2Nzg3OTE1MTcsIm5iZiI6MTY3ODc5MTUxNywiZXhwIjoxNjc4ODc3OTE3LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.IcbTEzvgnLCazb2eQVRE7PmdvWwCSOStWZtiE3W5nfunPTiVL7m4FkRjcSv8Sk6b_CXF0hcA2cGGOst0UyeEQL3mUzB7RXkdhXp45520O4TCALEUqa6-RHytFjy0XCtgueLcvFOETvFHqq_hXZ99Ldjb0oUSYoY8BKY-2Mkh60O5eaqoD-_m72HJbmcASbUmzVbT5JXbzFX0N2cfxyFYt937CmNcspnSIxhFFdFi8IyytgaKSP08BsBCKLHQsYRgyuU_tsdL3srE5xf0X81ZF_7X_sO5185z6r2LGU6aeOEofjQEwUbj1qahpX8frUzf-MMVQbZToMY-DGg5BavkHXXaVqUWSgjcHBsScPGVrvrqKGa8RWbY41kZzXnNzSsuUW0k7g91EoNlHo4-wJb6W_4D5fslPwtm5jIdvUmW6YST9aXJkzm5yvEgWmfYVVX804vXiCEGeRJqvOaB8nnJxHJukcXxInuSgbSxn0LgOwFsSoKDP2JE7KSzI298PfP8dINMpWr8DX3Od9Wonv4oSlp55IdsmeDNOBJkAqKXNlk93ETqDL1Relpd_cOolGms0xSFOF3DRJ_Zx4HorfwI9aMsGUokXl0K_ixBo9fHjD_Tcx3kqNSrmozhEwi-YOCkCdDPcdU32GgOyXegpfmafBA2AIwO8ANt89_cQDA3X_I",
 			"type": "default"
 		}
 	]
