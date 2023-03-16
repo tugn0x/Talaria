@@ -34,7 +34,9 @@ function SignupForm(props) {
   const intl = useIntl();
   const [password, setPassword] = React.useState('');
   const [passwordError, setPasswordError] = React.useState('');
-  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$/;
+//  const passwordRegex = ^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[*~@#$%^&+=!()_{}><?:|\'\"\\])(?=\S+$).{8,}$;
+  const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*~@#$%^&+=!()_{}><?:|])(?=\S+$).{8,}$/;
+  
   // useEffect(() => {
   //
   //   props.googleReCaptchaProps.executeRecaptcha('Signup').then(token => {
@@ -172,7 +174,7 @@ function SignupForm(props) {
                       placeholder="Password"
                       autoComplete="current-password"
                       name="password"
-                      pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[*~@#$%^&+=!()_{}><?:|\''\'])(?=\S+$).{8,}$" 
+                      pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*~@#$%^&+=!()_{}><?:|])(?=\S+$).{8,}$" 
                       value={formData.password}
                       onChange={(e) => handleChange(e)}
                       required
