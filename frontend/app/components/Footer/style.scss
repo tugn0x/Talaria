@@ -18,12 +18,16 @@ footer.app-footer {
     }
     .lang-change {
         padding-bottom: 0.5rem;
-        border-bottom: 1px solid white;
-        
+        border-bottom: 1px solid white;        
     }
     .footer-menu {
         padding-top: 0.5rem;
     }
+
+    .footer-logos {        
+        height:50px;
+    }
+
     .bottom {
         > * {
             &:not(:last-child) {
