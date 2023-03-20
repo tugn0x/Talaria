@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import logoCNR1 from 'images/cnr-footer-logo.png';
-import logoCNR2 from 'images/cnr-footer-logo-2.png';
+import logoBiblioCNR from 'images/cnr-footer-logo-2.png';
 import './style.scss';
 
 function Footer(props) {
@@ -36,31 +36,31 @@ function Footer(props) {
             </NavLink>
             */}
           </div>
-          <div className="footer-menu">
-          {props.isLogged && 
+          <div className="footer-menu">          
             <>
+              {props.isLogged && 
               <NavLink to="/register-library" activeClassName="current">
                 {/* <i className="fa-solid fa-book"></i> */}
                 <span><FormattedMessage {...messages.registerNewLibrary} /></span>
               </NavLink>
+              }
               <NavLink to="#" activeClassName="current">
                   Manual
               </NavLink>
               <NavLink to="#" activeClassName="current">
                   Contacts
               </NavLink>              
-            </>
-          }
+            </>          
           {!props.isLogged && 
             <>              
             </>
           }
           </div>
         </div>
-        <div className="bottom d-flex align-items-end">
-          <img src={logoCNR1} alt="CNR" />
-          <img src={logoCNR2} alt="CNR Library" />
-          <p className="copyright">Talaria &copy; {new Date().getFullYear() }</p>
+        <div className="footer-logos bottom align-items-end">
+          <a href="https://www.cnr.it" target="_blank"><img className='mh-100' src={logoCNR1} alt="CNR" /></a>
+          <a href="http://biblioteca.bo.cnr.it" target="_blank"><img className='mh-100' src={logoBiblioCNR} alt="CNR Library" /></a>
+          <span className="copyright mh-100"><a href="https://github.com/tugn0x/Talaria" target="_blank">Powered by Talaria</a></span>
         </div>
       </div>
     </footer>
