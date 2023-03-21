@@ -1,10 +1,10 @@
 The software requires docker installed in your environment.
 
 # Install
-1. change settings in `.env.example` and rename it as `.env`
-2. check that your hostname matches `API_DOMAIN` and `FRONTEND_DOMAIN` as it was used for `traefik` load balancer 
-3. upload your server (and api-server) SSL certificates into `docker/certs` folder and update `SSL_CERT_PATH,SSL_KEY_PATH,SSL_API_CERT_PATH,SSL_API_KEY_PATH` variables in `.env` file accordingly
-4. run `docker-compose up -d` to start all needed containers
+1. Change settings in `.env.example` and rename it as `.env`
+2. Check that your hostname matches `API_DOMAIN` and `FRONTEND_DOMAIN` as it was used for `traefik` load balancer; check also that the `UID` matches the user's ID running docker
+3. Upload your server (and api-server) SSL certificates into `docker/certs` folder and update `SSL_CERT_PATH,SSL_KEY_PATH,SSL_API_CERT_PATH,SSL_API_KEY_PATH` variables in `.env` file accordingly
+4. Run `docker-compose up -d` to start all needed containers
 
 # Configuration
 ## Frontend/ReactJS
@@ -40,7 +40,7 @@ username: manager@talaria.local    password: password
 ```
 
 ## DB access
-You can access DB data using PHPMyAdmin at `http://${API_DOMAIN}/phpmyadmin/`  (see `phpmyadmin` container for configuration)
+You can access DB data using PHPMyAdmin at `https://${API_DOMAIN}/phpmyadmin/`  (see `phpmyadmin` container for configuration)
 
 # Customization
 

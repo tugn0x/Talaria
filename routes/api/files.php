@@ -13,8 +13,7 @@ Route::group([
       /*
      * FILE UPLOAD/DOWNLOAD
      */
-    Route::group([
-        'as' => 'api.v1.files.',
+    Route::group([        
     ], function () {
         Route::post('/UploadFile', 'FileUploadDocdelRequestController@UploadFile')->name('UploadFile');
         Route::get('/DownloadFile', 'FileDownloadDocdelRequestController@DownloadFile')->name('DownloadFile');    
