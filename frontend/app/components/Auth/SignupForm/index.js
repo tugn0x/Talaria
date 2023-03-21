@@ -35,7 +35,7 @@ function SignupForm(props) {
   const [password, setPassword] = React.useState('');
   const [passwordError, setPasswordError] = React.useState('');
 //  const passwordRegex = ^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[*~@#$%^&+=!()_{}><?:|\'\"\\])(?=\S+$).{8,}$;
-  const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*~@#$%^&+=!()_{}><?:|])(?=\S+$).{8,}$/;
+  const passwordRegex = /^(?=.*?[A-Z])(?=(.*[a-z]))(?=(.*[\d]))(?=(.*[\W_]))(?!=.*\s).{8,}$/;
   
   // useEffect(() => {
   //
@@ -174,7 +174,7 @@ function SignupForm(props) {
                       placeholder="Password"
                       autoComplete="current-password"
                       name="password"
-                      pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*~@#$%^&+=!()_{}><?:|])(?=\S+$).{8,}$" 
+                      pattern="^(?=.*?[A-Z])(?=(.*[a-z]))(?=(.*[\d]))(?=(.*[\W_]))(?!=.*\s).{8,}$" 
                       value={formData.password}
                       onChange={(e) => handleChange(e)}
                       required
