@@ -14,6 +14,6 @@ class ApiTalaria extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'api.'.env('API_NAME', null);
+        return env('API_DOMAIN', null);
     }
 }

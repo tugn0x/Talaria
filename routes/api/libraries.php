@@ -24,7 +24,7 @@ Route::group([
      * SUBJECTS
      */
     Route::group([
-        'as' => 'api.v1.libraries.subjects.',
+        'as' => 'subjects.',
     ], function () {
         Route::get('subjects/option-items', 'SubjectController@optionList')->name('subjects.option-items');
         //Route::get('subjects', 'SubjectController@index')->name('index');
@@ -34,7 +34,7 @@ Route::group([
      * LIBRARY USERS
      */
     Route::group([
-        'as' => 'api.v1.libraries.library-users.',
+        'as' => 'library-users.',
     ], function () {
         Route::get('my', 'LibraryUserController@my')->name('my'); //le biblio dell'utente
         Route::get('myactive', 'LibraryUserController@myactive')->name('myactivelist'); //le biblio ATTIVE dell'utente da usare in una tendina
@@ -48,7 +48,7 @@ Route::group([
 
     /* LIBRARY CATALOGS - actually not used*/
     Route::group([
-        'as' => 'api.v1.libraries.library-catalogs.',
+        'as' => 'library-catalogs.',
     ], function () {
         Route::get('catalogs', 'CatalogController@optionList')->name('catalogs.option-items');
         Route::post('{library}/catalogs', 'CatalogLibraryController@store')->name('store');
@@ -61,7 +61,7 @@ Route::group([
 
     /* LIBRARY TAGS*/
     Route::group([
-        'as' => 'api.v1.libraries.library-tags.',
+        'as' => 'library-tags.',
     ], function () {
         Route::get('{library}/tags', 'TagController@index')->name('index');
         Route::get('{library}/tags/option-items', 'TagController@optionList')->name('option-items');
@@ -73,7 +73,7 @@ Route::group([
 
     /* LIBRARY DELIVERY (pickup)*/
     Route::group([
-        'as' => 'api.v1.libraries.library-deliveries.',
+        'as' => 'library-deliveries.',
     ], function () {
         Route::get('{library}/deliveries', 'DeliveryController@index')->name('index');
         Route::get('{library}/deliveries/option-items', 'DeliveryController@optionList')->name('option-items');
@@ -86,7 +86,7 @@ Route::group([
     
     /* LIBRARY IDENTIFIERS */
     Route::group([
-        'as' => 'api.v1.libraries.library-identifiers.',
+        'as' => 'library-identifiers.',
     ], function () {
         Route::get('identifiers/option-items', 'IdentifierController@optionList')->name('option-items');                       
     });

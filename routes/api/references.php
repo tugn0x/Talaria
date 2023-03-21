@@ -23,7 +23,7 @@ Route::group([
 
     /* LABELS */
     Route::group([
-        'as' => 'api.v1.references.labels.',
+        'as' => 'labels.',
     ], function () {
         Route::get('labels', 'LabelController@index')->name('index');
         Route::get('labels/option-items', 'LabelController@optionList')->name('option-items');
@@ -37,7 +37,7 @@ Route::group([
      * REFERENCE LABELS
      */
     Route::group([
-        'as' => 'api.v1.references.reference-labels.',
+        'as' => 'reference-labels.',
     ], function () {
         Route::post('{reference}/labels', 'LabelReferenceController@store')->name('store');
         Route::get('{reference}/labels', 'LabelReferenceController@index')->name('index');
@@ -48,7 +48,7 @@ Route::group([
 
     /* GROUPS */
     Route::group([
-        'as' => 'api.v1.references.groups.',
+        'as' => 'groups.',
     ], function () {
         Route::get('groups', 'GroupController@index')->name('index');
         Route::get('groups/option-items', 'GroupController@optionList')->name('option-items');
@@ -62,7 +62,7 @@ Route::group([
      * REFERENCE GROUPS
      */
     Route::group([
-        'as' => 'api.v1.references.reference-groups.',
+        'as' => 'reference-groups.',
     ], function () {
         Route::post('{reference}/groups', 'GroupReferenceController@store')->name('store');
         Route::get('{reference}/groups', 'GroupReferenceController@index')->name('index');
