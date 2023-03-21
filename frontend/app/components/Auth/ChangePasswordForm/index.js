@@ -89,7 +89,8 @@ const ChangePassword = (props) => {
                                             name="new_confirm_password"
                                             value={formData.new_confirm_password}
                                             onChange={(e) => handleChange(e)}
-                                            pattern={formData.new_password}
+                                            pattern={`^${formData.new_password.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`}
+
                                             required
                                         />
                                         <div className="invalid-feedback">
