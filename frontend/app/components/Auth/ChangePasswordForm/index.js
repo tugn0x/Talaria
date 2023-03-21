@@ -67,7 +67,7 @@ const ChangePassword = (props) => {
                                             placeholder="New Password"
                                             autoComplete="email"
                                             name="new_password"
-                                            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$" 
+                                            pattern="^(?=.*?[A-Z])(?=(.*[a-z]))(?=(.*[\d]))(?=(.*[\W_]))(?!=.*\s).{8,}$" 
                                             value={formData.new_password}
                                             onChange={(e) => handleChange(e)}
                                             required
