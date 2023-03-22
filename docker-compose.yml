@@ -70,6 +70,25 @@ services:
       - ./docker/data/db-data:/var/lib/mysql
     restart: always
 
+  dbbackup:
+    image: fradelg/mysql-cron-backup
+    restart: always
+    depends_on:
+      - mysql
+    volumes:
+      - ${DB_BACKUP_FOLDER}:/backup  
+   
+    environment:    
+    - MYSQL_DB=${DB_DATABASE}
+    - MYSQL_USER=${DB_USERNAME}
+    - MYSQL_PASS=${DB_PASSWORD}
+    - MYSQL_PORT=${DB_PORT}
+    - MYSQL_HOST=${DB_HOST}     
+    - CRON_TIME=0 23 * * *
+    - MAX_BACKUPS=5
+    - TIMEOUT=10s
+    # - INIT_BACKUP=1              
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     depends_on:
@@ -121,8 +140,8 @@ services:
      volumes:
        - ./frontend:/usr/src/app
        - ./.env:/usr/src/.env     
-     command: bash -c "npm install; npm run start:production"            
-     #command: npm start
+     #command: bash -c "npm install; npm run start:production"            
+     command: npm start
      expose:
      - 3000
      restart: always
