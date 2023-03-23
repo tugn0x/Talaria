@@ -24,7 +24,7 @@ Then change `CLIENT_ID` and `CLIENT_SECRET` in your `.env` accordingly to ones g
 
 Add then these lines to your `crontab` to run Laravel scheduler:
 ```
-* * * * * cd <path-to-your-project> && php artisan schedule:run >> /dev/null 2>&1
+* * * * * docker exec <talaria-laravel container> /bin/bash -c ./laravel_scheduler.sh 2>&1
 ```
 
 ## Initial setup
