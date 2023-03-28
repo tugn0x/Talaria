@@ -42,13 +42,16 @@ username: manager@talaria.local    password: password
 ## DB access
 You can access DB data using PHPMyAdmin at `https://${API_DOMAIN}/phpmyadmin/`  (see `phpmyadmin` container for configuration)
 
+## File Storage
+All uploaded files are stored temporarly in the `/storage/app/public` folder and will be automatically removed everyday at 23:00 by a Laravel scheduled job (see `AutomaticDeleteUploadedFiles.php`).
+
 # Customization
 
 ### Active features and settings
 Configuration settings are stored  in `.env`
 
 ### Logo
-Used logo are stored in `/frontend/app/images/`, you can find `logo.png` (big) and `logo-mini.png` (small, used for mobile)
+Used logo are stored in `/frontend/app/images/`, you can find `logo.png` (big) and `logo-mini.png` (small, used for mobile sidebar)
 
 ### Mobile App Icon
 Used PWA icon is stored in `/frontend/app/images/icon-512x512.png`

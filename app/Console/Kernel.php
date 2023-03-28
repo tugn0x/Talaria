@@ -8,6 +8,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Jobs\AutomaticCleanDDRequests;
+use App\Jobs\AutomaticDeleteUploadedFiles;
 
 class Kernel extends ConsoleKernel
 {
@@ -29,6 +30,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {        
         $schedule->job(new AutomaticCleanDDRequests)->everyMinute();
+        $schedule->job(new AutomaticDeleteUploadedFiles)->dailyAt('23:00');
     }
 
     /**
