@@ -39,8 +39,12 @@ username: admin@talaria.local      password: password
 username: manager@talaria.local    password: password
 ```
 
-## DB access
+## Database 
 You can access DB data using PHPMyAdmin at `https://${API_DOMAIN}/phpmyadmin/`  (see `phpmyadmin` container for configuration)
+
+### Database backup
+`dbbackup` container (see configuration parameters in `docker-compose.yml` ) automatically saved a local DB dump in the folder specified by `DB_BACKUP_FOLDER` variable defined in `.env` file 
+
 
 ## File Storage
 All uploaded files are stored temporarly in the `/storage/app/public` folder and will be automatically removed everyday at 23:00 by a Laravel scheduled job (see `AutomaticDeleteUploadedFiles.php`).
