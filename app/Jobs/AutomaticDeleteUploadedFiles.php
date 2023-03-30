@@ -25,7 +25,7 @@ class AutomaticDeleteUploadedFiles implements ShouldQueue
 
     private function deleteFileFromArchivedRequests() {        
         //<1 days ago archived request
-        $requests=BorrowingDocdelRequest::where('archived','==','1')
+        $requests=BorrowingDocdelRequest::where('archived','=','1')
         ->whereRaw("DATEDIFF(now(),archived_date) <= 1")->get();        
         foreach($requests as $req)
             $req->deleteFile();
