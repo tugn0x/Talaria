@@ -194,7 +194,11 @@
   "app.containers.LibraryUserPage.user_service_phone": "Telefono servizio",
   "app.containers.LibraryUserPage.user_service_email": "Email servizio",
 
-  "app.containers.UpgradeLibraryProfilePage.upgradeProfileConfirm":"Upgrade to FULL Profile?",
+  "app.components.LibraryStatus.upgradeProfileButton":"Upgrade to FULL profile!",
+  "app.components.UpgradeLibraryProfile.upgradeProfileTitle":"Upgrade to FULL profile",
+  "app.components.UpgradeLibraryProfile.upgradeProfileButton":"Upgrade to FULL",
+  "app.components.UpgradeLibraryProfile.upgradeProfileDescription":"Upgrading to full profile you'll be able to receive ILL requests from other libraries.<br/><br/>If you want to upgrade click on button below and check your library's catalogs and identifiers settings (these informations must be filled in order to fullfill DD requests)",
+  "app.containers.UpgradeLibraryProfilePage.upgradeProfileConfirm":"Upgrade to FULL profile?",
   "app.containers.UpgradeLibraryProfilePage.upgradeProfileSuccessfully":"Upgraded successfully",
 
   "app.containers.LibraryUsersListPage.header": "My patrons",
