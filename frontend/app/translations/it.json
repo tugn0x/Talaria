@@ -194,6 +194,10 @@
   "app.containers.LibraryUserPage.user_service_phone": "Telefono servizio",
   "app.containers.LibraryUserPage.user_service_email": "Email servizio",
 
+  "app.components.LibraryStatus.upgradeProfileButton":"Aggiorna a Profilo Completo!",
+  "app.components.UpgradeLibraryProfile.upgradeProfileTitle":"Upgrade a Profilo Completo",
+  "app.components.UpgradeLibraryProfile.upgradeProfileButton":"Aggiorna il profilo",
+  "app.components.UpgradeLibraryProfile.upgradeProfileDescription":"Effettuando l'aggiornamento al profilo completo potrai ricevere richieste ILL da altre biblioteche.<br/><br/>Se desideri eseguire l'aggiornamento, fai clic sul pulsante in basso e controlla le impostazioni dei cataloghi e degli identificatori della tua biblioteca (queste informazioni devono essere compilate per poter evadere le richieste DD)",
   "app.containers.UpgradeLibraryProfilePage.upgradeProfileConfirm":"Effettuare l'upgrade a Profilo Completo?",
   "app.containers.UpgradeLibraryProfilePage.upgradeProfileSuccessfully":"Upgrade effettuato con successo",
 

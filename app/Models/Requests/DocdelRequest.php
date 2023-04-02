@@ -5,6 +5,7 @@ use App\Models\BaseModel;
 use App\Models\Libraries\Library;
 use App\Models\Libraries\Tag;
 use App\Models\References\Reference;
+use Illuminate\Support\Facades\File;
 
 class DocdelRequest extends BaseModel
 {
@@ -97,6 +98,13 @@ class DocdelRequest extends BaseModel
         //return $this->belongsTo(Library::class,'borrowing_library_id'); 
         return $this->belongsTo(Library::class,'lending_library_id'); 
     } 
+
+    public function deleteFile() {
+        if (File::exists(storage_path().'/app/public/'.$this->filehash)) {
+            File::delete(storage_path().'/app/public/'.$this->filehash);
+        }
+
+    }
     
     
     

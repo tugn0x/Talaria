@@ -24,7 +24,7 @@ Then change `CLIENT_ID` and `CLIENT_SECRET` in your `.env` accordingly to ones g
 
 Add then these lines to your `crontab` to run Laravel scheduler:
 ```
-* * * * * cd <path-to-your-project> && php artisan schedule:run >> /dev/null 2>&1
+* * * * * docker exec <talaria-laravel container> /bin/bash -c ./laravel_scheduler.sh 2>&1
 ```
 
 ## Initial setup
@@ -39,8 +39,15 @@ username: admin@talaria.local      password: password
 username: manager@talaria.local    password: password
 ```
 
-## DB access
+## Database 
 You can access DB data using PHPMyAdmin at `https://${API_DOMAIN}/phpmyadmin/`  (see `phpmyadmin` container for configuration)
+
+### Database backup
+`dbbackup` container (see configuration parameters in `docker-compose.yml` ) automatically saved a local DB dump in the folder specified by `DB_BACKUP_FOLDER` variable defined in `.env` file 
+
+
+## File Storage
+All uploaded files are stored temporarly in the `/storage/app/public` folder and will be automatically removed everyday at 23:00 by a Laravel scheduled job (see `AutomaticDeleteUploadedFiles.php`).
 
 # Customization
 
@@ -48,7 +55,7 @@ You can access DB data using PHPMyAdmin at `https://${API_DOMAIN}/phpmyadmin/`  
 Configuration settings are stored  in `.env`
 
 ### Logo
-Used logo are stored in `/frontend/app/images/`, you can find `logo.png` (big) and `logo-mini.png` (small, used for mobile)
+Used logo are stored in `/frontend/app/images/`, you can find `logo.png` (big) and `logo-mini.png` (small, used for mobile sidebar)
 
 ### Mobile App Icon
 Used PWA icon is stored in `/frontend/app/images/icon-512x512.png`

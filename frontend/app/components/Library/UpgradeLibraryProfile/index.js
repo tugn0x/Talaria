@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import Loader from 'components/Form/Loader';
-import {useIntl} from 'react-intl';
+import {FormattedHTMLMessage, useIntl} from 'react-intl';
 import './style.scss';
 import { Button } from 'reactstrap';
 
@@ -19,11 +19,10 @@ const UpgradeLibraryProfile = (props) => {
     return (
         mounted && 
           <div className="libraryStatusEditPanel">                                
-            <h1>Migrate to FULL profile</h1>
-              Upgrading to full profile you'll be able to receive ILL requests from other libraries.<br/><br/>
-              If you want to upgrade click on button below and check your library's catalogs and identifiers settings (these informations must be filled in order to fullfill DD requests)
+            <h1>{intl.formatMessage({id:'app.components.UpgradeLibraryProfile.upgradeProfileTitle'})}</h1>
+              <FormattedHTMLMessage id="app.components.UpgradeLibraryProfile.upgradeProfileDescription" defaultMessage="app.components.UpgradeLibraryProfile.upgradeProfileDescription" />              
               <br/><br/>
-              <Button type="button" onClick={()=>upgradeProfileCallback()} className="mt-0" color="success">Upgrade to full</Button>
+              <Button type="button" onClick={()=>upgradeProfileCallback()} className="mt-0" color="success">{intl.formatMessage({id:'app.components.UpgradeLibraryProfile.upgradeProfileButton'})}</Button>
             </div>            
        
     )

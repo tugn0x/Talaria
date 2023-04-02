@@ -71,7 +71,7 @@ const LibraryStatus = (props) => {
                             */                                                
                             }                                                                       
                         </CardHeader>
-                        {data.status==1 && data.profile_type==1 && checkPermissions(auth,'manage',resource) && show_upgrade_to_full_profile && <Link className="btn btn-info" to={upgradetofullurl(managePath,data.id)}>Upgrade to full profile!</Link>}                        
+                        {data.status==1 && data.profile_type==1 && checkPermissions(auth,'manage',resource) && show_upgrade_to_full_profile && <Link className="btn btn-info" to={upgradetofullurl(managePath,data.id)}>{intl.formatMessage({id:'app.components.LibraryStatus.upgradeProfileButton'})}</Link>}                        
                         
                         <CardBody>
                             <CardTitle tag="h2">
