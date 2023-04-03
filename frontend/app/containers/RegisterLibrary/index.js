@@ -144,7 +144,8 @@ const RegisterLibrary = (props) => {
         setBasicProfile(1)
         setData({...data, ['profile_type']: basicProfile?1:2, ['order_profile_type']:0})
         setData({...data, ['profile_type_name']: basicProfile?"Basic Profile":"Full Profile", ['order_profile_type_name']:1})
-
+        setData({...data, ['lon']: 0, ['order_lon']:3})
+        setData({...data, ['lat']: 0, ['order_lon']:4})
 
     },[])
 
@@ -173,14 +174,13 @@ const RegisterLibrary = (props) => {
     useEffect(() => {
        if (sortingcount===1)
         {
+            console.log(JSON.stringify("new sorted array " + JSON.stringify(itemsreport)))
             const sorting = itemsreport.sort((a, b) => {
                 if (a.order < b.order) return -1;
                 if (a.order > b.order) return 1;
                 return 0;
               });
               setItemsreport(sorting)
-
-              console.log(JSON.stringify("new sorted array " + JSON.stringify(itemsreport)))
         }
      }, [sortingcount])
 
@@ -230,6 +230,8 @@ const RegisterLibrary = (props) => {
                 fields.library_identifier_list.hidden = true 
         }
         setData({...data, ...formData})
+        //Resorting when fire next step
+        setSortingcount(1)       
         setCurrentStep(parseInt(newStep))
         setSteps({...steps, [parseInt(newStep)]: {active: true} })      
     }
@@ -487,12 +489,18 @@ const RegisterLibrary = (props) => {
                                         { 
                                             <div> 
                                                 <div className="font-weight-bold">{messages[itemsreport[i].field_name] && intl.formatMessage(messages[itemsreport[i].field_name])}</div>
-                                                    {(itemsreport[i].field_name!=='identifiers_id' && itemsreport[i].field_name!=='project_id') && <div>{itemsreport[i].value} {itemsreport[i].ordd}</div>}
+                                                    {/* to display all fields name*/}
+                                                    {(itemsreport[i].field_name!=='identifiers_id' && itemsreport[i].field_name!=='project_id') && 
+                                                    <div>{itemsreport[i].value}</div>}
+                                                    
+                                                    {/* to display all identifiers name*/}
                                                     {(itemsreport[i].field_name==='identifiers_id')&&<div>
                                                     {itemsreport[i].value.map((item) => (<div><b>{item[2]}: </b>{item[1]}</div>))}
                                                     </div>}
+
+                                                    {/* to display all project name */}
                                                     {(itemsreport[i].field_name==='project_id')&&<div>
-                                                    {arrprojectName.map((item) => (<div><li>{item}</li></div>))}
+                                                        {arrprojectName.map((item) => (<div><li>{item}</li></div>))}
                                                     </div>}
 
                                             </div>
