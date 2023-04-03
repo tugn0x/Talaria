@@ -145,7 +145,7 @@ const RegisterLibrary = (props) => {
         setData({...data, ['profile_type']: basicProfile?1:2, ['order_profile_type']:0})
         setData({...data, ['profile_type_name']: basicProfile?"Basic Profile":"Full Profile", ['order_profile_type_name']:1})
         setData({...data, ['lon']: 0, ['order_lon']:3})
-        setData({...data, ['lat']: 0, ['order_lon']:4})
+        setData({...data, ['lat']: 0, ['order_lat']:4})
 
     },[])
 
