@@ -1,4 +1,11 @@
-The software requires docker installed in your environment.
+# TALARIA ILL software
+## About
+
+## License
+This project is licensed under the terms of the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html)
+
+# Requirements
+To run the software you need docker is installed in your environment
 
 # Install
 1. Change settings in `.env.example` and rename it as `.env`
