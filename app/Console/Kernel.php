@@ -21,6 +21,11 @@ class Kernel extends ConsoleKernel
         //
     ];
 
+    protected function scheduleTimezone()
+    {
+        return env('TIMEZONE');
+    }
+
     /**
      * Define the application's command schedule.
      *
@@ -29,8 +34,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {        
-        $schedule->job(new AutomaticCleanDDRequests)->everyMinute();
-        $schedule->job(new AutomaticDeleteUploadedFiles)->dailyAt('23:00');
+        $schedule->job(new AutomaticCleanDDRequests)->everyFiveMinutes()->withoutOverlapping();
+        $schedule->job(new AutomaticDeleteUploadedFiles)->dailyAt('23:00')->withoutOverlapping();
     }
 
     /**

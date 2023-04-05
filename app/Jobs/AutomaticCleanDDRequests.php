@@ -47,7 +47,7 @@ class AutomaticCleanDDRequests implements ShouldQueue
         ->whereRaw("DATEDIFF(now(),request_date) >= 5")->get();        
         foreach($reqborrowings as $borr)
         {            
-            $borr->changeStatus("newrequest",['request_data'=>null,'lending_status'=>null,'all_lender'=>0,'lending_library_id'=>null]);                
+            $borr->changeStatus("newrequest",['request_date'=>null,'lending_status'=>null,'all_lender'=>0,'lending_library_id'=>null]);                
         }
     }
 

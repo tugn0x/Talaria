@@ -97,7 +97,7 @@ class StatusResolver
     public function checkConstraint($status)
     {
         $errors = [];
-        if(Arr::has($this->flow_tree,"$status.constraints"))
+        if($this->user && Arr::has($this->flow_tree,"$status.constraints"))
         foreach ($this->flow_tree[$status]['constraints'] as $constraint)
         {
             $verify = $this->model->$constraint();
