@@ -34,6 +34,7 @@ function SignupForm(props) {
   const intl = useIntl();
   const [password, setPassword] = React.useState('');
   const [passwordError, setPasswordError] = React.useState('');
+  const [passwordMatched, setPasswordMatched] = React.useState(false);
 //  const passwordRegex = ^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[*~@#$%^&+=!()_{}><?:|\'\"\\])(?=\S+$).{8,}$;
   const passwordRegex = /^(?=.*?[A-Z])(?=(.*[a-z]))(?=(.*[\d]))(?=(.*[\W_]))(?!=.*\s).{8,}$/;
   
@@ -61,8 +62,8 @@ function SignupForm(props) {
 
     if (e.target.name === 'password') {
       const passwordLengthError = validatePassword(e.target.value)
-        ? intl.formatMessage({ id: 'app.global.password_pattern' })
-        : '';
+        ? ''
+        : intl.formatMessage({ id: 'app.global.password_pattern' });
       setPasswordError(passwordLengthError);
       setPassword(e.target.value);
     }
@@ -75,8 +76,10 @@ function SignupForm(props) {
       setPasswordError(passwordError);
     
       if (!isPasswordMatchValid) {
+        setPasswordMatched(false)
         e.preventDefault();
       }
+      setPasswordMatched(true)
     }
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
@@ -179,7 +182,14 @@ function SignupForm(props) {
                       onChange={(e) => handleChange(e)}
                       required
                     />
-                      <ErrorBox className="invalid-feedback" error={  intl.formatMessage({ id: 'app.global.password_pattern' })} />
+                    {passwordError && !passwordMatched ? (
+                      <div className="error-text">{passwordError}</div>
+                    ) : (
+                      <ErrorBox
+                        className="invalid-feedback"
+                        error={intl.formatMessage({ id: 'app.global.password_pattern' })}
+                      />
+                    )}
                   </InputGroup>
                   <InputGroup className="mb-4">
                     <InputGroupAddon addonType="prepend">
@@ -198,10 +208,11 @@ function SignupForm(props) {
                       //pattern={`^${escapedRepeatPassword}$`}
                      required
                     />
-                    {passwordError !== intl.formatMessage({ id: 'app.global.password_pattern' }) ? (
-                    <ErrorBox className="invalid-feedback" error={passwordError} />
-                    ) : (
-                      <ErrorBox className="invalid-feedback" error={intl.formatMessage({ id: 'app.global.password_pattern' })} />
+                    {passwordError !== intl.formatMessage({ id: 'app.global.password_pattern' }) && (
+                      <ErrorBox
+                        className="invalid-feedback"
+                        error={intl.formatMessage({ id: 'app.global.password_match' })}
+                      />
                     )}
 
 
