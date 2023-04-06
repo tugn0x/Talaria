@@ -5,12 +5,15 @@ import messages from './messages';
 import globalMessages from 'utils/globalMessages'
 import {useIntl} from 'react-intl';
 import Loader from 'components/Form/Loader.js'
+import {ErrorBox} from 'components';
 
 const ChangePassword = (props) => {
 
     const { loading, changePassword} = props
 
     const intl = useIntl()
+    const [passwordError, setPasswordError] = React.useState('');
+    const passwordRegex = /^(?=.*?[A-Z])(?=(.*[a-z]))(?=(.*[\d]))(?=(.*[\W_]))(?!=.*\s).{8,}$/;
 
     const [formData,setFormData] = React.useState({
         current_password: "",
@@ -19,10 +22,28 @@ const ChangePassword = (props) => {
     });
 
     const handleChange = (e) =>{
+
+        if (e.target.name === 'new_password') {
+            const passwordLengthError = validatePassword(e.target.value)
+              ? ''
+              : intl.formatMessage({ id: 'app.global.password_pattern' });
+            setPasswordError(passwordLengthError);
+          }
+
         setFormData({
           ...formData,[e.target.name]:e.target.value
         })
     }
+
+    const validatePassword = (value) => {
+        if (!passwordRegex.test(value)) {
+          setPasswordError(intl.formatMessage({ id: 'app.global.password_pattern' }));
+          return false;
+        } else {
+          setPasswordError('');
+          return true;
+        }
+      }
 
     const submitForm = (e) =>{
         e.preventDefault();
@@ -72,9 +93,14 @@ const ChangePassword = (props) => {
                                             onChange={(e) => handleChange(e)}
                                             required
                                         />
-                                        <div className="invalid-feedback">
-                                            <FormattedMessage {...globalMessages.password_pattern} />
-                                        </div>
+                                        {passwordError  ? (
+                                            <div className="error-text">{passwordError}</div>
+                                            ) : (
+                                                <ErrorBox
+                                                    className="invalid-feedback"
+                                                    error={intl.formatMessage({ id: 'app.global.password_pattern' })}
+                                                    />
+                                        )}
                                     </InputGroup>
                                     <InputGroup className="mb-4">
                                         <InputGroupAddon addonType="prepend">
