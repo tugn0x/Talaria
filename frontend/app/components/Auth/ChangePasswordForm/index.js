@@ -43,15 +43,15 @@ const ChangePassword = (props) => {
                         <Card className="mx-4">
                             <CardBody className="p-4">
                                 <Form onSubmit={submitForm}  noValidate>
-                                    <h3>Cambia Password</h3>
+                                    <h3>{intl.formatMessage({id:'app.global.password_change'})}</h3>
                                     <InputGroup className="mb-3">
                                         <InputGroupAddon addonType="prepend">
                                             <InputGroupText><i className="icon-lock"></i></InputGroupText>
                                         </InputGroupAddon>
                                         <Input
                                             type="password"
-                                            placeholder="Current Password"
-                                            autoComplete="email"
+                                            placeholder={intl.formatMessage({id:'app.global.current_password'})}
+                                            autoComplete="current_password"
                                             name="current_password"
                                             value={formData.current_password}
                                             onChange={(e) => handleChange(e)}
@@ -64,8 +64,8 @@ const ChangePassword = (props) => {
                                         </InputGroupAddon>
                                         <Input
                                             type="password"
-                                            placeholder="New Password"
-                                            autoComplete="email"
+                                            placeholder={intl.formatMessage({id:'app.global.new_password'})}
+                                            autoComplete="new_password"
                                             name="new_password"
                                             pattern="^(?=.*?[A-Z])(?=(.*[a-z]))(?=(.*[\d]))(?=(.*[\W_]))(?!=.*\s).{8,}$" 
                                             value={formData.new_password}
@@ -98,8 +98,7 @@ const ChangePassword = (props) => {
                                         </div>
                                     </InputGroup>
                                     <Button color="success" block>
-                                        Submit
-                                        {/*  <FormattedMessage {...messages.submitFormButton} /> */}
+                                        { intl.formatMessage({ id: 'app.global.submit' })}                                        
                                     </Button>
                                 </Form>
                             </CardBody>

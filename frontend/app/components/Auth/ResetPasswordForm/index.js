@@ -107,7 +107,7 @@ function ResetPasswordForm(props){
                 </InputGroupAddon>
                 <Input
                   type="password"
-                  placeholder="Password"
+                  placeholder={  intl.formatMessage({ id: 'app.global.current_password' })}
                   autoComplete="current-password"
                   name="password"
                   value={formData.password}

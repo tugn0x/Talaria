@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {useIntl} from 'react-intl';
 import {
   Button,
   Card,
@@ -32,6 +33,9 @@ import './style.scss'
 
   function LoginForm(props) {
     console.log("LoginForm:",props)
+
+    const intl=useIntl();
+    
     const [formData,setFormData] = React.useState({
       username: "",
       password: ""
@@ -95,8 +99,8 @@ import './style.scss'
                         </InputGroupAddon>
                         <Input
                           type="text"
-                           placeholder="Email"
-                           autoComplete="email"
+                           placeholder={ intl.formatMessage({ id: 'app.global.username' })}
+                           autoComplete="username"
                            name="username"
                            value={formData.username}
                            onChange={(e) => handleChange(e, 'username')}
@@ -110,8 +114,8 @@ import './style.scss'
                         </InputGroupAddon>
                         <Input
                           type="password"
-                          placeholder="Password"
-                          autoComplete="current-password"
+                          placeholder={ intl.formatMessage({ id: 'app.global.password' })}
+                          autoComplete="password"
                           name="password"
                           value={formData.password}
                           onChange={(e) => handleChange(e, 'password')}

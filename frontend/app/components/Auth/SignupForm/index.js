@@ -154,7 +154,7 @@ function SignupForm(props) {
                     </InputGroupAddon>
                     <Input
                       type="email"
-                      placeholder="Email"
+                      placeholder={  intl.formatMessage({ id: 'app.global.email' })}
                       autoComplete="email"
                       name="email"
                       value={formData.email}
@@ -171,7 +171,7 @@ function SignupForm(props) {
                     </InputGroupAddon>
                     <Input
                       type="password"
-                      placeholder="Password"
+                      placeholder={  intl.formatMessage({ id: 'app.global.password' })}
                       autoComplete="current-password"
                       name="password"
                       pattern="^(?=.*?[A-Z])(?=(.*[a-z]))(?=(.*[\d]))(?=(.*[\W_]))(?!=.*\s).{8,}$" 

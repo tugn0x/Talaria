@@ -12,9 +12,11 @@ import {ErrorBox, Loader} from "../..";
 import messages from './messages';
 import globalMessages from 'utils/globalMessages'
 import { FormattedMessage } from 'react-intl';
-
+import {useIntl} from 'react-intl';
 
 function ForgotPasswordForm(props){
+
+  const intl=useIntl();  
 
   const [formData,setFormData] = React.useState({
     email: "",
@@ -64,7 +66,7 @@ function ForgotPasswordForm(props){
                     </InputGroupAddon>
                     <Input
                       type="email"
-                      placeholder="Email"
+                      placeholder={ intl.formatMessage({ id: 'app.global.email' })}
                       autoComplete="email"
                       name="email"
                       value={formData.email}
