@@ -96,7 +96,7 @@
   "app.containers.LandingPage.intro_library":"If you are a LIBRARIAN and you want to add your library to  the [ACRONYM] community, please  refer to the appropriate tab. Please provide us information about your library name, location, ILL service contacts, your library institution and disciplinary field.",
   "app.containers.LandingPage.intro_patron":"If you are a PATRON and you want to sign up at a library belonging to the [ACRONYM] community, please refer to the appropriate tab. Please select the library you want to enroll in and provide us information about your contacts, status and department. ",
 
-  "app.containers.UserPage.header": "ITALIANO UserPage CONTAINER",
+  "app.containers.UserPage.header": "UserPage CONTAINER",
   "app.containers.ChangePassword.updateMessage": "Password modified",
   "app.containers.ResetPassword.updateMessage": "Password updated",
   "app.containers.ProfilePage.updateMessage": "Profile updated",

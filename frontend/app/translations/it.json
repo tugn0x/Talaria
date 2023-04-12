@@ -96,7 +96,7 @@
   "app.containers.LandingPage.intro_library":"Se sei un BIBLIOTECARIO e desideri iscrivere la tua biblioteca alla comunità  [ACRONIMO], fai riferimento alla scheda appropriata.  Ti preghiamo di fornirci i dati della tua biblioteca: nome, indirizzo, contatti del servizio ILL, istituzione di appartenenza e ambito disciplinare della biblioteca. ",
   "app.containers.LandingPage.intro_patron":"Se sei un UTENTE e desideri iscriverti ad una biblioteca appartenente alla comunità [ACRONIMO], fai riferimento alla scheda appropriata.  Seleziona la biblioteca alla quale vuoi iscriverti e inserisci i tuoi contatti, la tua qualifica e l’istituto o il dipartimento a cui appartieni. ",
 
-  "app.containers.UserPage.header": "ITALIANO UserPage CONTAINER",
+  "app.containers.UserPage.header": "UserPage CONTAINER",
   "app.containers.ChangePassword.updateMessage": "Password modificata",
   "app.containers.ResetPassword.updateMessage": "Password aggiornata",
   "app.containers.ProfilePage.updateMessage": "Profilo aggiornato",
