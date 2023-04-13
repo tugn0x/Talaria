@@ -1,6 +1,8 @@
 <?php
 //To run this we have to put in cron like
 //* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
+//Every job is automatically added to queue (based on schedule) but in order to be runned you need an active WORKER
+//so run: php artisan queue:work 
 //to check if some jobs is in queue:  php artisan queue:list
 
 namespace App\Console;
@@ -34,8 +36,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {        
-        $schedule->job(new AutomaticCleanDDRequests)->everyFiveMinutes()->withoutOverlapping()->runInBackground();
-        $schedule->job(new AutomaticDeleteUploadedFiles)->dailyAt('23:00')->withoutOverlapping()->runInBackground();
+        $schedule->job(new AutomaticCleanDDRequests)->everyFiveMinutes()->withoutOverlapping();
+        $schedule->job(new AutomaticDeleteUploadedFiles)->dailyAt('23:00')->withoutOverlapping();            
     }
 
     /**
