@@ -74,7 +74,7 @@ const BorrowingChooseLender = (props) => {
     }, [])
 
     return (<div className="BorrowingChooseLender">
-                <h3>To send request choose a lender from list below:</h3>                                          
+                <h3>{intl.formatMessage({id: 'app.requests.borrowing_lender_list_title'})}</h3>                                          
                 <nav className="navbar navbar-expand-lg navbar-dark bg-primary">   
                     <ul className="navbar-nav">
                       <li className="nav-item active">

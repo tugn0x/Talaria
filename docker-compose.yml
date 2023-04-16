@@ -55,6 +55,26 @@ services:
     user: "${UID}"
     restart: always
 
+  laravelqueue:    
+    image: backend   
+    depends_on:
+      - laravel
+    volumes:
+      - ./:/application  
+    ## for the queue worker, we use the same image, but run 
+    ## artisan queue:work
+    entrypoint: php /application/artisan queue:work --verbose --tries=3 --timeout=60
+
+  laravelscheduler:
+    image: backend 
+    depends_on:
+      - laravel
+    volumes:
+      - ./:/application   
+    ## for the scheduler we use an infinite while loop (with a sleep of 5min) instead of using a cron script
+    entrypoint: sh -c "while true; do php /application/artisan schedule:run --verbose & sleep 300; done"
+  
+
   mysql:
     image: mysql:5.7
 #    ports:

@@ -16,6 +16,7 @@ const enTranslationMessages = require('./translations/en.json');
 // const deTranslationMessages = require('./translations/de.json');
 const itTranslationMessages = require('./translations/it.json');
 const esTranslationMessages = require('./translations/es.json');
+const trTranslationMessages = require('./translations/tr.json');
 
 // addLocaleData(enLocaleData);
 // addLocaleData(deLocaleData);
@@ -23,10 +24,10 @@ const esTranslationMessages = require('./translations/es.json');
 
 // prettier-ignore
 const appLocales = [
-  'en',
-  // 'de',
+  'en',  
   'it',
   'es',
+  'tr'
 ];
 
 //const DEFAULT_LOCALE = 'it';
@@ -58,10 +59,10 @@ const formatTranslationMessages = (locale, messages) => {
 };
 
 const translationMessages = {
-  en: formatTranslationMessages('en', enTranslationMessages),
-  // de: formatTranslationMessages('de', deTranslationMessages),
+  en: formatTranslationMessages('en', enTranslationMessages),  
   it: formatTranslationMessages('it', itTranslationMessages),
   es: formatTranslationMessages('es', esTranslationMessages),
+  tr: formatTranslationMessages('tr', trTranslationMessages),
 };
 
 exports.appLocales = appLocales;

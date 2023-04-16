@@ -30,6 +30,9 @@ function Footer(props) {
             <NavLink to="#" onClick={(e)=>changeLang('es')}>
               Español
             </NavLink>
+            <NavLink to="#" onClick={(e)=>changeLang('tr')}>
+              Türkçe
+            </NavLink>
             {/*<NavLink to="#" onClick={(e)=>changeLang('fr')}>
               Français (France)
             </NavLink>

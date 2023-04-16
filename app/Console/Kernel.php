@@ -1,7 +1,10 @@
 <?php
-//To run this we have to put in cron like
+//To debug scheduled job you can use: php artisan schedule:run 
+//Every job is automatically added to queue (based on schedule) but in order to be runned you need an active WORKER
+//To start worker: php artisan queue:work 
+//in a production server you may need to add sheduler to a crontab like:
 //* * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
-//to check if some jobs is in queue:  php artisan queue:list
+//and run php artisan queue:work regularly using supervisor (to check if worker is still alive) 
 
 namespace App\Console;
 
@@ -35,7 +38,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {        
         $schedule->job(new AutomaticCleanDDRequests)->everyFiveMinutes()->withoutOverlapping();
-        $schedule->job(new AutomaticDeleteUploadedFiles)->dailyAt('23:00')->withoutOverlapping();
+        $schedule->job(new AutomaticDeleteUploadedFiles)->dailyAt('23:00')->withoutOverlapping();            
     }
 
     /**
