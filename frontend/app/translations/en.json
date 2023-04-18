@@ -88,6 +88,8 @@
   "app.global.lat":"Latitute",
   "app.global.lon":"Longitude",
   "app.global.country": "Country",
+  "app.global.software_manual": "Manual",
+  "app.global.contacts":"Contacts",
   
   "app.containers.HomePage.header": "ACRONYM and extended NAME of your Resource Sharing community",
   "app.containers.HomePage.subHeader":"Insert here description, mission and purposes of your Resource Sharing community.",

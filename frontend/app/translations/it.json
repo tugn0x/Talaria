@@ -88,6 +88,8 @@
   "app.global.lat":"Latitudine",
   "app.global.lon":"Longitudine",
   "app.global.country": "Nazione",
+  "app.global.software_manual": "Manuale",
+  "app.global.contacts":"Contatti",
   
   "app.containers.HomePage.header": "Benvenuti in ACRONIMO e NOME per esteso della tua comunità di biblioteche",
   "app.containers.HomePage.subHeader":"Inserisci qui la descrizione, la missione e gli scopi della tua comunità di Resource Sharing.",

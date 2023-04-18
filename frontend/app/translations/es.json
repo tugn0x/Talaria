@@ -88,6 +88,8 @@
   "app.global.lat":"Latitute",
   "app.global.lon":"Longitude",
   "app.global.country": "Country",
+  "app.global.software_manual": "Manual",
+  "app.global.contacts":"Contactos",
   
   "app.containers.HomePage.header": "SIGLAS y NOMBRE extendido de su Comunidad de Intercambio de Recursos",
   "app.containers.HomePage.subHeader":"Inserte aquí la descripción, la misión y los propósitos de su Comunidad de Intercambio de Recursos.",

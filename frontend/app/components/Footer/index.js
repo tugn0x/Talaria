@@ -12,9 +12,13 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import logo from 'images/logo.png';
 import './style.scss';
+import {useIntl} from 'react-intl';
+
 
 function Footer(props) {
   const {changeLang}=props
+
+  const intl=useIntl();
 
   return (
     <footer className="app-footer">
@@ -46,11 +50,11 @@ function Footer(props) {
                 <span><FormattedMessage {...messages.registerNewLibrary} /></span>
               </NavLink>
               }
+              <a href="https://l.cnr.it/talaria-software-manual" target="_blank">
+                 {intl.formatMessage({id: 'app.global.software_manual'})}
+              </a>
               <NavLink to="#" activeClassName="current">
-                  Manual
-              </NavLink>
-              <NavLink to="#" activeClassName="current">
-                  Contacts
+              {intl.formatMessage({id: 'app.global.contacts'})}
               </NavLink>              
             </>          
           {!props.isLogged && 
