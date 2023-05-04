@@ -132,6 +132,11 @@ class LendingDocdelRequest extends DocdelRequest
          return $this;
     }
 
+    public function scopeNotRequestedBy($query, $library_id)
+    {        
+        return $query->where('borrowing_library_id', '<>',$library_id);
+    }
+
     public function scopeInLibrary($query, $library_id)
     {        
         return $query->where('lending_library_id', $library_id);

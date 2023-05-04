@@ -32,13 +32,13 @@ class LendingDocdelRequestController extends ApiController
 
          if($u->can('manage',$l)||$u->can('lend',$l))
          {
-
+ 
             if($request->has("all_lender"))
             {
                  //Log::info(print_r($request->has("all_lender"), true));   
                  $all=$request->input("all_lender");
                  $all+=0; //force to be integer
-                 $this->model = $this->model->Lendingalllender($all);   
+                 $this->model = $this->model->Lendingalllender($all)->NotRequestedBy($l->id);   //don't see own request
                  //$collection = $this->talaria->index( $this->model , $request);        
             }
             else
