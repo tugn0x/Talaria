@@ -241,6 +241,7 @@ const CustomForm = (props) => {
                                                                     <>
                                                                     <CheckBox 
                                                                         field={field}
+                                                                        disabled={field.disabled ? field.disabled : false}
                                                                         label={field.label && field.label}
                                                                         data={formData[field.name] === undefined && props.requestData && props.requestData[field.name] ? props.requestData[field.name] : formData[field.name]}
                                                                         handleChange={(value) => handleChange(value, field.name, field.order)}

@@ -13,6 +13,7 @@ const CheckBox = (props) => {
             id={field.name}
             type="checkbox"
             name={field.name}
+            disabled={field.disabled ? field.disabled : false}
             placeholder={label ? intl.formatMessage(label) : ""}
             onChange={(e) => handleChange(e.target.checked)}
             required={field.required ? field.required : false}
