@@ -75,13 +75,15 @@ const LibraryStatus = (props) => {
                         
                         <CardBody>
                             <CardTitle tag="h2">
-                            Profile data<br/><br/>                            
-                            </CardTitle>
+                            {intl.formatMessage({id: 'app.components.LibraryStatus.profileData'})}<br/><br/>                            
+                            </CardTitle>                            
                             {
                                 Object.keys(data).map((key, index) => 
-                                {
+                                {                                    
                                     return (key!==null) &&  (key!='id' && key!=='institution' && key!="subject" && key!="country" && key!="created_at" && key!="created_by" && key!="updated_at" && key!="updated_by" && key!=='status' && key!=='status_key') &&  (key!=='external') &&
-                                    data[key]!==null && data[key]!==0 &&
+                                    ( 
+                                     (data[key]!=null && typeof(data[key]) != 'object' && data[key]!==0) || (data[key] && data[key]!=null && typeof(data[key])== 'object' && data[key].data && data[key].data.length>0) 
+                                    ) &&
                                     <Row key={index}>                                             
                                         <>
                                             <Col sm={4}><span><strong>{messages[key] && intl.formatMessage(messages[key])}</strong></span></Col> 
@@ -96,10 +98,10 @@ const LibraryStatus = (props) => {
 
                                                 {(key=="lat"||key=="lon") && data.lat && data.lon &&  <span className='coords'>
                                                     <i className="fa-solid fa-map-location"></i> <a className="active" href={mapLink(data.lat,data.lon)} target='_blank'>{data[key]}</a>
-                                                </span>}
-                                                                                                                                                                                             
+                                                </span>}                                                
+                                                                                                
                                                 {key=="projects" && data.projects && data.projects.data && data.projects.data.length>0 && 
-                                                        <span className='projects'>
+                                                        <span className='projects'>                                                       
                                                             <i className="fa-solid fa-diagram-project"></i>                                        
                                                             {data.projects.data.map(prj => 
                                                             <span key={prj.id} className="project-item badge badge-secondary">
@@ -119,7 +121,7 @@ const LibraryStatus = (props) => {
 
                                                 {/* TODO catalogs*/}
 
-                                                {  (typeof(data[key]) != 'object' && key!="lat" && key!="lon" && key!="ill_IFLA_voucher" &&  key!="country_id" && key!="subject_id" && key!='institution_id' && key!="profile_type") && <span>{data[key]}</span> }   
+                                                {  (typeof(data[key]) != 'object' && key!="identifiers" && key!="projects" && key!="lat" && key!="lon" && key!="ill_IFLA_voucher" &&  key!="country_id" && key!="subject_id" && key!='institution_id' && key!="profile_type") && <span>{data[key]}</span> }   
                                                 {key=="ill_IFLA_voucher"&& <span>{data[key]==1?intl.formatMessage({id: 'app.global.yes'}):intl.formatMessage({id: 'app.global.no'})}</span>}
                                             </Col>                                                                                                
                                         </>
