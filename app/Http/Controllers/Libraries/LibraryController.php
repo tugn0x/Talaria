@@ -96,6 +96,12 @@ class LibraryController extends ApiController
         if($request->filled('ill_cost'))
             unset ($request["ill_cost"]);
 
+        if($request->filled('ill_IFLA_voucher'))        
+            unset ($request["ill_IFLA_voucher"]);                
+        
+        if($request->filled('ill_cost_in_voucher'))
+            unset ($request["ill_cost_in_voucher"]);                            
+
         if($request->filled('ill_user_cost'))
             unset ($request["ill_user_cost"]);            
 

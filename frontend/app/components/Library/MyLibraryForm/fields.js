@@ -25,6 +25,14 @@ export const fields = {
         group: "general_info",
         order: 1,
     },
+    alt_name: {
+        type: "text",
+        required: false,
+        name: "alt_name",
+        width: "col-sm-6",
+        group: "general_info",
+        order: 2,
+    },
     /*granted_permissions: {
         type: "granted_permissions",
         name: "granted_permissions",
@@ -142,6 +150,18 @@ export const fields = {
         type: "number",
         name: "ill_user_cost",
         width: "col-sm-6",
+        disabled: true,
+    },
+    ill_IFLA_voucher: {
+        type: "checkbox",
+        name: "ill_IFLA_voucher",
+        width: "col-sm-6",             
+        disabled: true,   
+    },
+    ill_cost_in_voucher: {
+        type: "number",
+        name: "ill_cost_in_voucher",
+        width: "col-sm-6",              
         disabled: true,
     },
     ill_susp_date_start: {

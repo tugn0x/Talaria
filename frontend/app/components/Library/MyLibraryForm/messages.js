@@ -10,7 +10,11 @@ export const scope = 'app.components.LibraryForm';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Library form',
+    defaultMessage: 'Library form',    
+  },
+  alt_name: {
+    id: 'app.libraries.alt_name',
+    defaultMessage: "Alternative name",
   },
   institution_id: {
     id: `app.libraries.institution_id`,
@@ -69,6 +73,14 @@ export default defineMessages({
   ill_user_cost: {
     id: `app.libraries.ill_user_cost`,
     defaultMessage: 'ill_user_cost',
+  },
+  ill_IFLA_voucher: {
+    id: 'app.libraries.ill_IFLA_voucher',
+    defaultMessage: 'IFLA voucher accepted'
+  },
+  ill_cost_in_voucher: {
+    id: 'app.libraries.ill_cost_in_voucher',
+    defaultMessage: 'IFLA voucher value'
   },
   status: {
     id: `app.libraries.status`,
