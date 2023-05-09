@@ -43,24 +43,24 @@ export const fields = {
         type: "number",
         name: "mobile",
     },
+    preflang: {
+        type: "custom-select",
+        name: "preflang",
+        required: false,
+        options: [
+            { value: 'it', label: 'Italiano' },
+            { value: 'en', label: 'English' },
+            { value: 'sp', label: 'Español' },                         
+            { value: 'tr', label: 'Türkçe' }
+        ]
+    },
     privacy_policy_accepted: {
         type: "switch",
         name: "privacy_policy_accepted",
         required: true,
        // error: "app.global.invalid_privacy_policy_accepted",
       //  defaultValue: moment().format('YYYY-MM-DD hh:mm:ss')
-    }, 
-    /* select: {
-        type: "select",
-        name: "select",
-        label: "app.containers.UserProfile.state",
-        placeholder: "app.containers.UserProfile.state",
-        options: [
-            { value: 'acquisto', label: 'acquisto' },
-            { value: 'donazione', label: 'donazione' },
-            { value: 'comodato', label: 'comodato' }
-        ]
-    }, */
+    },     
     email: {
         type: "email",
         required: true,

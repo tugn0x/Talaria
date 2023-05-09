@@ -73,7 +73,10 @@ export default defineMessages({
     id: `${scope}.lon`,
     defaultMessage: 'Longitude',
   },
-
+  preflang: {
+    id: `${scope}.preflang`,
+    defaultMessage: 'Preferred Language',
+  },
   url: {
     id: `${scope}.url`,
     defaultMessage: 'Web address',
