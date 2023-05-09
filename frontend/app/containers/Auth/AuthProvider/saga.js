@@ -173,7 +173,8 @@ export function* changePasswordSaga(action) {
   }
   try {
     const request = yield call(changePassword, changePasswordOption);
-    yield put(requestChangePasswordSuccess(request));
+    yield put(requestChangePasswordSuccess(request));    
+    yield put(push("/"));
     yield call(toast.success(action.message))
   } catch (error) {
     yield put(requestError(error.message));
@@ -187,7 +188,9 @@ export function* forgotPasswordSaga(action){
   }
   try {
     const request = yield call(forgotPassword, forgotPasswordOption);
-    yield put(requestForgotPasswordSuccess(request));
+    yield put(requestForgotPasswordSuccess());
+    yield put(push("/"));
+    yield call(toast.success(action.message))
   } catch (error) {
     yield put(requestError(error.message));
   }

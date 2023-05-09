@@ -60,6 +60,7 @@ function ForgotPasswordForm(props){
               <CardBody className="p-4">
                 <Form onSubmit={submitForm}  noValidate>
                   <h3><FormattedMessage {...messages.header} /></h3>
+                  <p><FormattedMessage {...messages.intro} /></p>
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>@</InputGroupText>

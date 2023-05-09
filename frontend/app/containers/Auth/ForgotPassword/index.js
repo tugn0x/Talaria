@@ -20,12 +20,12 @@ function ForgotPasswordPage(props) {
     <BasePage {...props} routes={[]} messages={messages}>
       {!props.match.params.reset_token && !props.auth.isForgotPasswordMode &&
         <Loader show={props.auth.loading}>
-          <ForgotPasswordForm forgot={ (formData) => props.dispatch(requestForgotPassword(formData)) } />
+          <ForgotPasswordForm forgot={ (formData) => props.dispatch(requestForgotPassword(formData, intl.formatMessage({ id: 'app.components.ForgotPasswordForm.mailSentMessage' }))) } />
         </Loader>
       }
       {
-         (props.match.params.reset_token || props.auth.isForgotPasswordMode) &&
-          <ResetPasswordForm  reset={(formData) => props.dispatch(requestResetPassword(formData, intl.formatMessage({ id: 'app.containers.ResetPassword.updateMessage' })))} token={props.match.params.reset_token}/>
+         (props.match.params.reset_token /*|| props.auth.isForgotPasswordMode*/) && 
+          <ResetPasswordForm  reset={(formData) => props.dispatch(requestResetPassword(formData, intl.formatMessage({ id: 'app.components.ResetPasswordForm.updateMessage' })))} token={props.match.params.reset_token}/>
       }
     </BasePage>
   );

@@ -32,6 +32,7 @@
   "app.global.status": "Stato",
   "app.global.preferred": "Preferito",
   "app.global.privacy_policy_accepted": "Privacy policy",
+  "app.global.preflang":"Lingua preferita",
   "app.global.userCreateSuccess": "Profilo utente creato con successo",
   "app.global.userUpdateSuccess": "Profilo utente aggiornato con successo",
   "app.global.title_description": "Titolo / Descrizione",
@@ -100,7 +101,6 @@
 
   "app.containers.UserPage.header": "UserPage CONTAINER",
   "app.containers.ChangePassword.updateMessage": "Password modificata",
-  "app.containers.ResetPassword.updateMessage": "Password aggiornata",
   "app.containers.ProfilePage.updateMessage": "Profilo aggiornato",
   "app.containers.NotFoundPage.header": "Pagina non trovata",
   "app.containers.NotFoundPage.intro": "Ci dispiace ma non riusciamo a trovare la pagina che cerchi",
@@ -202,6 +202,7 @@
   "app.containers.LibraryUserPage.user_service_email": "Email servizio",
 
   "app.components.LibraryStatus.upgradeProfileButton":"Aggiorna al Profilo Completo!",
+  "app.components.LibraryStatus.profileData": "Profilo Biblioteca",
   "app.components.UpgradeLibraryProfile.upgradeProfileTitle":"Aggiorna a Profilo Completo",
   "app.components.UpgradeLibraryProfile.upgradeProfileButton":"Aggiorna il profilo",
   "app.components.UpgradeLibraryProfile.upgradeProfileDescription":"Effettuando l'aggiornamento al profilo completo potrai ricevere richieste ILL da altre biblioteche.<br/><br/>Se desideri eseguire l'aggiornamento, fai clic sul pulsante in basso e controlla le impostazioni dei cataloghi e degli identificativi della tua biblioteca (queste informazioni devono essere compilate per poter evadere le richieste DD)",
@@ -302,8 +303,8 @@
   "app.libraries.ill_cost": "Costo per articolo",
   "app.libraries.ill_user_cost": "Costo utente per articolo",
   "app.libraries.ill_susp_date": "Periodo di sospensione servizio",
-  "app.libraries.ill_susp_date_start": "Inizio sospensione (YYYY-MM-dd)",
-  "app.libraries.ill_susp_date_end": "Fine sospensione (YYYY-MM-dd)",
+  "app.libraries.ill_susp_date_start": "Inizio sospensione (YYYY-MM-DD)",
+  "app.libraries.ill_susp_date_end": "Fine sospensione (YYYY-MM-DD)",
   "app.libraries.ill_susp_notification_days": "Giorni di preavviso",
   "app.libraries.status": "Stato",
   "app.libraries.status.new":"Nuova",
@@ -574,6 +575,8 @@
   "app.components.CustomForm.select": "Seleziona",
 
   "app.components.ForgotPasswordForm.submitFormButton": "Richiedi una nuova password",
+  "app.components.ForgotPasswordForm.intro":"Inserisci il tuo in indirizzo email. Ti manderemo una email con un link per reimpostare la tua password",
+  "app.components.ForgotPasswordForm.mailSentMessage":"Ti abbiamo inviato una e-mail contenente un link per il reset della password",
 
   "app.components.LoginForm.header": "Accedi",
   "app.components.LoginForm.loginButton": "Accedi",
@@ -583,6 +586,10 @@
   "app.components.Button.goBackText": "indietro",
 
   "app.components.ForgotPasswordForm.header": "Password Dimenticata",
+  "app.components.ResetPasswordForm.header": "Reimposta password",
+  "app.components.ResetPasswordForm.submitFormButton": "Reimposta la password",
+  "app.components.ResetPasswordForm.updateMessage": "La tua password è stata reimpostata",
+
   "app.components.Footer.header": "Questo l header del Footer",
   "app.components.FilterSelect.labels": "Etichette",
   "app.components.FilterSelect.groups": "Categorie",

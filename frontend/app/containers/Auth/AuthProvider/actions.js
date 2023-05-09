@@ -78,16 +78,18 @@ export function requestChangePasswordSuccess() {
   }
 }
 
-export function requestForgotPassword(request){
+export function requestForgotPassword(request,message){
   return{
     type: REQUEST_FORGOT_PASSWORD,
-    request: request
+    request: request,
+    message
   }
 }
 
-export function requestForgotPasswordSuccess(){
+export function requestForgotPasswordSuccess(request){
   return{
-    type: REQUEST_FORGOT_PASSWORD_SUCCESS
+    type: REQUEST_FORGOT_PASSWORD_SUCCESS,
+    request:request
   }
 }
 

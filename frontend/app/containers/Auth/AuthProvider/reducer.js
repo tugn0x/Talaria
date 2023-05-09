@@ -130,6 +130,7 @@ const authReducer = (state = initialState, action) =>
       case REQUEST_FORGOT_PASSWORD_SUCCESS:
         draft.loading = false;
         draft.isForgotPasswordMode = true;
+        draft.request=action.request
         break;
       case REQUEST_RESET_PASSWORD:
         draft.loading = true;

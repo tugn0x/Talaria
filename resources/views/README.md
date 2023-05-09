@@ -1,0 +1,1 @@
+We use only view inside `vendor` folder

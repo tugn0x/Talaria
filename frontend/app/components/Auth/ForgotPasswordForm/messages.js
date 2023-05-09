@@ -16,5 +16,9 @@ export default defineMessages({
   submitFormButton: {
     id: `${scope}.submitFormButton`,
     defaultMessage: 'Request Password',
+  },
+  intro: {
+    id: `${scope}.intro`,
+    defaultMessage: 'Please enter your email address. We\'ll send you an email with a link to reset your password',
   }
 });

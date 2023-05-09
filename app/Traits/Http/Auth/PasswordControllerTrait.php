@@ -1,5 +1,6 @@
 <?php namespace App\Traits\Http\Auth;
 
+use App\Models\Users\User;
 use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 use Event;
@@ -34,10 +35,13 @@ trait PasswordControllerTrait {
 
         event('password.reset', $request);
 
+		$user=User::where('email',$request->input('email'))->first();
+		$userlang=(isset($user) && $user!=null) ? $user->preferredLocale(): app()->getLocale();
+
         switch ($response)
         {
             case Password::RESET_LINK_SENT:
-                return $this->response->array(['message' => trans($response)]);
+                return $this->response->array(['message' => trans($response,[],$userlang)]);
 
             case Password::INVALID_USER:
                 return $this->response->errorUnauthorized(trans($response));
@@ -51,7 +55,7 @@ trait PasswordControllerTrait {
 	 */
 	protected function getResetEmailSubject()
 	{
-		return isset($this->subject) ? $this->subject : trans('apitalaria::auth.password_reset_email_subject');
+		return isset($this->subject) ? $this->subject : trans('passwords.password_reset_email_subject');
 	}
 
 	/**
@@ -79,8 +83,12 @@ trait PasswordControllerTrait {
 		});
 		event('password.change', $request);
 
+		$user=User::where('email',$request->input('email'))->first();
+		$userlang=(isset($user) && $user!=null) ? $user->preferredLocale(): app()->getLocale();
+
 		switch ($response)
 		{
+			
 			case Password::PASSWORD_RESET:
                 /*
                  * return an access_token
@@ -102,7 +110,8 @@ trait PasswordControllerTrait {
                 return \Route::dispatch($proxy);
 
 			default:
-				return $this->response->error($response, 422);
+				//return $this->response->error($response,422);
+				return $this->response->error(trans($response,[],$userlang), 422);				
 		}
 	}
 
@@ -129,9 +138,12 @@ trait PasswordControllerTrait {
 
         auth()->user()->updatePassword($request->new_password);
 
+		$user=User::where('email',$request->input('email'))->first();
+		$userlang=(isset($user) && $user!=null) ? $user->preferredLocale(): app()->getLocale();
 
         return $this->response->array([
-            'success' => true
+            'success' => true,
+			'message'=> trans('passwords.reset',[],$userlang), 
         ]);
     }
 

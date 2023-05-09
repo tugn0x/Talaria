@@ -58,13 +58,17 @@ class ResetPassword extends Notification
 
         $link = 'https://'.config('app.frontend_domain').'/forgot-password/'.$this->token;
 
+        //NOTE: template is in resources/views/vendor/notifications  folder
+        //language is taken from user's preferred language 
         return (new MailMessage)
-            ->subject(Lang::get('Reset Password Notification'))
-            ->line(Lang::get('You are receiving this email because we received a password reset request for your account.'))
-//            ->action(Lang::get('Reset Password'), url(config('app.url').route('password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false)))
-            ->action(Lang::get('Reset Password'), $link)
-            ->line(Lang::get('This password reset link will expire in :count minutes.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
-            ->line(Lang::get('If you did not request a password reset, no further action is required.'));
+            ->subject(trans('email.password_reset_email_subject',[]))            
+            //introLine
+            ->line(trans('email.password_reset_email_body',[])) 
+//            ->action(Lang::get('Reset Password'), url(config('app.frontend_domain').route('password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false)))
+            ->action(trans('email.password_reset_email_link',[]), $link)
+            //outroLine
+            ->line(trans('email.password_reset_email_link_expire_warning', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
+            ->line(trans('email.password_reset_email_link_no_further_action',[]));
     }
 
     /**

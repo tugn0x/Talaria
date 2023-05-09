@@ -169,7 +169,7 @@ function SignupForm(props) {
                   <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
-                        <i className="icon-lock"></i>
+                      <i className="fa-solid fa-lock"></i>
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
@@ -194,7 +194,7 @@ function SignupForm(props) {
                   <InputGroup className="mb-4">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
-                        <i className="icon-lock"></i>
+                      <i className="fa-solid fa-lock"></i>
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input

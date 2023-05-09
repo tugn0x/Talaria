@@ -32,6 +32,7 @@
   "app.global.status": "State",
   "app.global.preferred": "Preferred",
   "app.global.privacy_policy_accepted": "Privacy policy",
+  "app.global.preflang":"Preferred Language",
   "app.global.userCreateSuccess": "User profile created successfully",
   "app.global.userUpdateSuccess": "User profile updated successfully",
   "app.global.title_description": "Title / Description",
@@ -100,7 +101,6 @@
 
   "app.containers.UserPage.header": "UserPage CONTAINER",
   "app.containers.ChangePassword.updateMessage": "Password modified",
-  "app.containers.ResetPassword.updateMessage": "Password updated",
   "app.containers.ProfilePage.updateMessage": "Profile updated",
   "app.containers.NotFoundPage.header": "Page not found",
   "app.containers.NotFoundPage.intro": "We're sorry but we can't find the page you're looking for",
@@ -202,6 +202,7 @@
   "app.containers.LibraryUserPage.user_service_email": "Email",
 
   "app.components.LibraryStatus.upgradeProfileButton":"Upgrade to FULL profile!",
+  "app.components.LibraryStatus.profileData": "Library Profile",
   "app.components.UpgradeLibraryProfile.upgradeProfileTitle":"Upgrade to FULL profile",
   "app.components.UpgradeLibraryProfile.upgradeProfileButton":"Upgrade to FULL",
   "app.components.UpgradeLibraryProfile.upgradeProfileDescription":"Upgrading to full profile you'll be able to receive ILL requests from other libraries.<br/><br/>If you want to upgrade click on button below and check your library's catalogs and identifiers settings (this information must be filled in order to fullfill DD requests)",
@@ -302,8 +303,8 @@
   "app.libraries.ill_cost": "Cost per article",
   "app.libraries.ill_user_cost": "User cost per article",  
   "app.libraries.ill_susp_date": "Suspension period",
-  "app.libraries.ill_susp_date_start": "Suspension start date (YYYY-MM-dd)",
-  "app.libraries.ill_susp_date_end": "Suspension end date (YYYY-MM-dd)",
+  "app.libraries.ill_susp_date_start": "Suspension start date (YYYY-MM-DD)",
+  "app.libraries.ill_susp_date_end": "Suspension end date (YYYY-MM-DD)",
   "app.libraries.ill_susp_notification_days": "Notify from (days)",
   "app.libraries.status": "Status",
   "app.libraries.status.new":"New",
@@ -574,6 +575,9 @@
   "app.components.CustomForm.select": "Select",
 
   "app.components.ForgotPasswordForm.submitFormButton": "Request new password",
+  "app.components.ForgotPasswordForm.intro":"Please enter your email address. We'll send you an email with a password reset link",
+  "app.components.ForgotPasswordForm.mailSentMessage":"We have e-mailed you a password reset link",
+  
 
   "app.components.LoginForm.header": "Login",
   "app.components.LoginForm.loginButton": "Login",
@@ -583,6 +587,9 @@
   "app.components.Button.goBackText": "back",
 
   "app.components.ForgotPasswordForm.header": "Forgot password",
+  "app.components.ResetPasswordForm.header": "Password reset",
+  "app.components.ResetPasswordForm.submitFormButton": "Reset your password",
+  "app.components.ResetPasswordForm.updateMessage": "Your password has been reset",
   "app.components.Footer.header": "This is the footer's header",
   "app.components.FilterSelect.labels": "Tags",
   "app.components.FilterSelect.groups": "Categories",

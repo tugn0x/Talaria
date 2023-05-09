@@ -1,14 +1,15 @@
 @component('mail::message')
 {{-- Greeting --}}
 @if (! empty($greeting))
-# {{ $greeting }}
-@else
+{{ $greeting }}
+@endif
+{{--@else
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
 # @lang('Hello!')
 @endif
-@endif
+--}}
 
 {{-- Intro Lines --}}
 @foreach ($introLines as $line)
@@ -43,20 +44,20 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('Regards'),<br>{{ config('app.name') }}
+@lang('email.regards'),
+<br/>{{ config('app.name') }}
 @endif
 
 {{-- Subcopy --}}
+{{--@slot('subcopy')--}}
 @isset($actionText)
-@slot('subcopy')
 @lang(
-    "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser: [:actionURL](:actionURL)',
+    'email.link_trouble',
     [
         'actionText' => $actionText,
         'actionURL' => $actionUrl,
     ]
 )
-@endslot
+{{--@endslot--}}
 @endisset
 @endcomponent
