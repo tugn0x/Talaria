@@ -67,7 +67,7 @@ const ChangePassword = (props) => {
                                     <h3>{intl.formatMessage({id:'app.global.password_change'})}</h3>
                                     <InputGroup className="mb-3">
                                         <InputGroupAddon addonType="prepend">
-                                            <InputGroupText><i className="icon-lock"></i></InputGroupText>
+                                            <InputGroupText><i className="fa-solid fa-lock"></i></InputGroupText>
                                         </InputGroupAddon>
                                         <Input
                                             type="password"
@@ -81,7 +81,7 @@ const ChangePassword = (props) => {
                                     </InputGroup>
                                     <InputGroup className="mb-3">
                                         <InputGroupAddon addonType="prepend">
-                                            <InputGroupText><i className="icon-lock"></i></InputGroupText>
+                                            <InputGroupText><i className="fa-solid fa-lock"></i></InputGroupText>
                                         </InputGroupAddon>
                                         <Input
                                             type="password"
@@ -105,7 +105,7 @@ const ChangePassword = (props) => {
                                     <InputGroup className="mb-4">
                                         <InputGroupAddon addonType="prepend">
                                             <InputGroupText>
-                                                <i className="icon-lock"></i>
+                                                <i className="fa-solid fa-lock"></i>
                                             </InputGroupText>
                                         </InputGroupAddon>
                                         <Input
