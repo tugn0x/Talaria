@@ -14,6 +14,10 @@ const ChangePassword = (props) => {
     const intl = useIntl()
     const [passwordError, setPasswordError] = React.useState('');
     const passwordRegex = /^(?=.*?[A-Z])(?=(.*[a-z]))(?=(.*[\d]))(?=(.*[\W_]))(?!=.*\s).{8,}$/;
+    const [password, setPassword] = React.useState('');
+    const [passwordMatched, setPasswordMatched] = React.useState(false);
+
+    const [repeatpassword, setrepeatPassword] = React.useState(null);
 
     const [formData,setFormData] = React.useState({
         current_password: "",
@@ -28,7 +32,23 @@ const ChangePassword = (props) => {
               ? ''
               : intl.formatMessage({ id: 'app.global.password_pattern' });
             setPasswordError(passwordLengthError);
+            setPassword(e.target.value);
           }
+
+        if (e.target.name === 'new_confirm_password') {
+            setrepeatPassword(e.target.value)
+            const isPasswordMatchValid = e.target.value === password;
+            
+            
+            if (!isPasswordMatchValid || passwordMatched===null) {
+                setPasswordMatched(false)
+                e.preventDefault();
+            }
+
+            if (isPasswordMatchValid)
+                setPasswordMatched(true)
+        }
+
 
         setFormData({
           ...formData,[e.target.name]:e.target.value
@@ -119,6 +139,13 @@ const ChangePassword = (props) => {
 
                                             required
                                         />
+
+                                        {passwordMatched === false && repeatpassword !== null && (
+                                            <div className="error-text">
+                                                {intl.formatMessage({ id: 'app.global.password_match' })}
+                                            </div>
+                                        )}
+
                                         <div className="invalid-feedback">
                                             <FormattedMessage {...globalMessages.password_match} />
                                         </div>
