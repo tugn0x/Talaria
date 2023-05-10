@@ -11,6 +11,7 @@ import { NavLink } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import logo from 'images/logo.png';
+import poweredBy from 'images/powered_by_talaria.png';
 import './style.scss';
 import {useIntl} from 'react-intl';
 
@@ -65,7 +66,7 @@ function Footer(props) {
         </div>
         <div className="footer-logos bottom align-items-end">
           <a href="" target="_blank"><img className='mh-100' src={logo} alt="logo" /></a>                    
-          <span className="poweredby mh-100"><a href="https://github.com/tugn0x/Talaria" target="_blank">Powered by Talaria</a></span>
+          <span className="poweredby float-right"><a href="https://github.com/tugn0x/Talaria" target="_blank"><img className='' src={poweredBy} alt="Powered By Talaria" /></a></span>
         </div>
       </div>
     </footer>
