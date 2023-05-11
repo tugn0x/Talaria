@@ -497,6 +497,8 @@
   "app.requests.exceed_max_file_upload": "Upload failed, you have exceed the maximum file size upload",
   "app.requests.fulfill_location": "Shelf number",
   "app.requests.borrowing_lender_list_title":"To send request choose a lender library from the list below",
+  "app.requests.allowed_file_types": "İzin verilen dosya türleri",
+  "app.requests.message_to_display_file_extension": "Yüklenen dosya şu uzantılardan birine sahip olmalıdır:",
   "app.patronrequest.delivery_format.file":"File",
   "app.patronrequest.delivery_format.papercopy":"Paper",
   "app.patronrequest.delivery_format.url":"URL",

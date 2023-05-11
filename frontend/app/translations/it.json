@@ -497,6 +497,8 @@
   "app.requests.exceed_max_file_upload": "caricamento fallito, raggiunta dimensione massima consentita per il caricamento",
   "app.requests.fulfill_location": "Collocazione",
   "app.requests.borrowing_lender_list_title":"Scegli una biblioteca fornitrice a cui inviare la richiesta dalla lista che segue",
+  "app.requests.allowed_file_types": "I tipi di file consentiti sono",
+  "app.requests.message_to_display_file_extension": "Il file caricato deve avere una di queste estensioni: ",
   "app.patronrequest.delivery_format.file":"File",
   "app.patronrequest.delivery_format.papercopy":"Carta",
   "app.patronrequest.delivery_format.url":"URL",

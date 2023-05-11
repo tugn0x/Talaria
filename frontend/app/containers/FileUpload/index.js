@@ -17,6 +17,7 @@ const FileUpload = (props) => {
   const [ShowMessage, setShowMessage] = useState(null)
   const MaxFileUpload = process.env.MAX_UPLOAD_FILE;
 
+  const AllowedFileTypes = process.env.FILE_EXTENSION;
   const intl = useIntl()
   const uploadFile = (data, file, originalfilename, hideMessageFlag) => {
       if (hideMessageFlag==1)
@@ -45,7 +46,7 @@ const FileUpload = (props) => {
 
 return (
   <>
-    <FileUploadForm FileUploadCallBack={uploadFile} />  
+    <FileUploadForm FileUploadCallBack={uploadFile} AllowedFileTypes={AllowedFileTypes}/>  
     {(Showspinner) && <LoadingSpinner />}
     {fileupload && !Showspinner && fileupload.status && <span className={"fileuploadstatusmessage"}>
     { 
