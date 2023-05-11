@@ -23,7 +23,7 @@ class FileDownloadDocdelRequestController extends ApiController
 
     public function DownloadFile(Request $request)
     {
-        Log::info(print_r($request->get("q"), true));  
+        //Log::info(print_r($request->get("q"), true));  
         $contents = Storage::disk('public')->get($request->get("q"));
         $base64content = base64_encode($contents);
         //return \Response::json(['id' => $id,'filecontent' => $base64content]);

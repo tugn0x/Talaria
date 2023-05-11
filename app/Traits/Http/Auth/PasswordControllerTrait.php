@@ -124,7 +124,7 @@ trait PasswordControllerTrait {
 	 */
 	protected function setNewPassword($user, $password)
 	{
-	    \Log::info($password);
+	    //\Log::info($password);
 		$user->updatePassword($password);
 	}
 
