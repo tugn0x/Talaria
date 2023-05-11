@@ -202,6 +202,15 @@ const RegisterLibrary = (props) => {
         setData({...data, ['institution_name']: institutionname, ['order_institution_name']:22})
      }, [institutionname])
 
+     useEffect(() => {
+        console.log("props.libraryProjectsOptionList.length: " + props.libraryProjectsOptionList.length)
+        if (props.libraryProjectsOptionList.length > 0) {
+            fields.projects_label.hidden = false;
+        } else {
+            fields.projects_label.hidden = true;
+        }
+    }, [props.libraryProjectsOptionList]);
+
      // Cambia Step
     const onChangeStep = (formData, newStep) => {
 
