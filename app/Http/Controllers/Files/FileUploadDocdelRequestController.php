@@ -29,7 +29,7 @@ class FileUploadDocdelRequestController extends ApiController
             $size_in_mb    = $size_in_kb / 1024;
 
             $variable = env("MAX_UPLOAD_FILE", "100");
-            Log::info(print_r($variable,true));
+            //Log::info(print_r($variable,true));
 
                 if ($size_in_mb <= $variable)
                 {

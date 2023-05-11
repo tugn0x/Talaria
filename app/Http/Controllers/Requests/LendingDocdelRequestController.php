@@ -78,7 +78,7 @@ class LendingDocdelRequestController extends ApiController
         $id = $request->route()->parameters['id'];
         $model = $this->talaria->show($this->model, $request, $id);
 
-        Log::info(print_r( $model, true));  
+        //Log::info(print_r( $model, true));  
 
         return $this->response->item($model, new $this->transformer())->setMeta($model->getInternalMessages())->morph();
     }
