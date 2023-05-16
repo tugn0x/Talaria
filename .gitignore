@@ -10,6 +10,5 @@
 /docker/spid-test-idp/conf/idpSSL.crt
 /docker/spid-test-idp/conf/idpSSL.key
 .vscode/settings.json
-/composer.lock
 docker/shibboleth/etc/idem-test-metadata-sha256.*
 .env

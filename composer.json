@@ -21,7 +21,7 @@
         "laravel/tinker": "^1.0",
         "lcobucci/jwt": "3.3.3",
         "mpociot/laravel-apidoc-generator": "^3.8",
-        "silber/bouncer": "^v1.0.0-rc.8",
+        "silber/bouncer": "v1.0.0-rc.8",
         "webpatser/laravel-uuid": "2.*",
         "wildside/userstamps": "^1.1.0"
     },
