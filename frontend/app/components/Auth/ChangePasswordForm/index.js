@@ -18,6 +18,7 @@ const ChangePassword = (props) => {
     const [passwordMatched, setPasswordMatched] = React.useState(false);
 
     const [repeatpassword, setrepeatPassword] = React.useState(null);
+    const [formSubmitted, setformSubmitted] = React.useState(false);
 
     const [formData,setFormData] = React.useState({
         current_password: "",
@@ -66,6 +67,8 @@ const ChangePassword = (props) => {
       }
 
     const submitForm = (e) =>{
+        setformSubmitted(true)
+
         e.preventDefault();
         const form = e.target;
         form.classList.add('was-validated');
@@ -140,15 +143,17 @@ const ChangePassword = (props) => {
                                             required
                                         />
 
-                                        {passwordMatched === false && repeatpassword !== null && (
+                                        {!formSubmitted ? (
+                                        passwordMatched === false && repeatpassword !== null && (
                                             <div className="error-text">
-                                                {intl.formatMessage({ id: 'app.global.password_match' })}
+                                            {intl.formatMessage({ id: 'app.global.password_match' })}
                                             </div>
-                                        )}
-
-                                        <div className="invalid-feedback">
-                                            <FormattedMessage {...globalMessages.password_match} />
-                                        </div>
+                                        )
+                                        ) : (
+                                            <div className="invalid-feedback">
+                                                <FormattedMessage {...globalMessages.password_match} />
+                                            </div>
+                                        )}      
                                     </InputGroup>
                                     <Button color="success" block>
                                         { intl.formatMessage({ id: 'app.global.submit' })}                                        
