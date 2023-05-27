@@ -180,6 +180,7 @@
   "app.containers.RegisterNewLibrary.library_location_label": "Library location & profile",
   "app.containers.RegisterNewLibrary.library_coordinates": "Are you sitting in the library, if yes?",
   "app.containers.RegisterNewLibrary.library_coordinates_note": "These GPS coords are needed to show library location on a map",
+  "app.containers.library_coordinates_Validity": "Enlem veya boylam biçimi yanlış.",
   "app.containers.RegisterNewLibrary.subject_label":"Library disciplinary sector",
   "app.containers.RegisterNewLibrary.opac_label":"Library Online Catalog (OPAC)",
   "app.containers.RegisterNewLibrary.switchToBasicProfile":"Switch to Basic profile",

@@ -87,6 +87,20 @@ const RegisterLibrary = (props) => {
         setdisabled(disabled+1)
     }
 
+    const validateCoordinates = (coordinates) => {
+        const trimmedCoordinates = coordinates.replace(/\s/g, ''); // Remove spaces from the input coordinates
+        const decimalRegex = /^-?\d+(\.\d+)?$/;
+        const degreesRegex = /^-?\d+°\d+'\d+''[NSEW]$/;
+    
+        if (decimalRegex.test(trimmedCoordinates) || (degreesRegex.test(trimmedCoordinates))) {
+          console.log('Coordinates are a decimal number OR Coordinates are in degrees format');
+          return true;
+        } else {
+          console.log('Invalid coordinates');
+          return false;
+        }
+      };
+
     useEffect(() => {
 
        if(disabled >0 && disabled%2===0) //stop button pressed
@@ -336,6 +350,11 @@ const RegisterLibrary = (props) => {
         if (field_name === "library_identifiers_txt" && value.length === 0)
             fields.library_identifier_add.disabled = true
 
+        if ((field_name === 'lon' || field_name === 'lat') && !validateCoordinates(value)) 
+            fields.library_coordinates_Validity.hidden = false;
+        else
+            fields.library_coordinates_Validity.hidden = true;
+             
         setData({...data, [field_name]: value, ['order_'+field_name]:order})
     }
 

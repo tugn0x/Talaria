@@ -180,6 +180,7 @@
   "app.containers.RegisterNewLibrary.library_location_label": "Profilo e località/indirizzo della biblioteca",
   "app.containers.RegisterNewLibrary.library_coordinates": "Sei seduto in biblioteca, vero?",
   "app.containers.RegisterNewLibrary.library_coordinates_note": "Queste coordinate GPS sono necessarie per visualizzare la biblioteca in una mappa",
+  "app.containers.library_coordinates_Validity": "Il formato di latitudine o longitudine non è corretto.",
   "app.containers.RegisterNewLibrary.subject_label":"Settore disciplinare",
   "app.containers.RegisterNewLibrary.opac_label":"Online Catalog (OPAC)",
   "app.containers.RegisterNewLibrary.switchToBasicProfile":"Scegli il profilo base",

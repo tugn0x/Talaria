@@ -13,6 +13,7 @@ use App\Models\Institutions\Institution;
 use App\Models\Libraries\Identifier;
 use App\Models\Projects\Project;
 use Illuminate\Support\Facades\Log;
+use App\Helper\Helper;
 
 //use Illuminate\Support\Facades\Auth;
 
@@ -175,6 +176,18 @@ class LibraryController extends ApiController
 
         $model->status=config("constants.library_status.new");
 
+        if (!is_numeric($request->input('lon'))) {
+            $loncoordinates = $request->input('lon');
+            $lon = Helper::convertCoordinateToDecimal($loncoordinates);
+            $model->lon= $lon;
+        }
+        if (!is_numeric($request->input('lat'))) {
+            $latcoordinates = $request->input('lat');
+            $lat = Helper::convertCoordinateToDecimal($latcoordinates);
+            $model->lat= $lat;
+        }
+        //Log::info("MODEL DATA IS " . $model);
+      
         $model->save();
 
         //Projects
@@ -197,7 +210,6 @@ class LibraryController extends ApiController
             }
             $model->identifiers()->sync($arr);            
         }
-
 
         //If create fails
         if (!$model->exists) {
