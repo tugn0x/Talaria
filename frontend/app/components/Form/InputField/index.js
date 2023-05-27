@@ -15,7 +15,7 @@ const InputField = (props) => {
         if (field.type === 'textarea')
             reg =  /^.*$/
         else
-            reg =  /^.{1,50}$/
+            reg =  /^.{1,255}$/
         
         if(e.target.value == '' || reg.test(e.target.value)){
             handleChange(e.target.value)
