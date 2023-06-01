@@ -417,7 +417,7 @@ const CustomForm = (props) => {
                                                                 <>
                                                                    <Label                                                                     
                                                                     label={field.label && field.label}                                                                    
-                                                                    style={{fontSize: field.size, paddingBottom: field.paddingbottom, paddingTop: field.paddingtop}}
+                                                                    style={{fontSize: field.size, paddingBottom: field.paddingbottom, paddingTop: field.paddingtop, color:field.color}}
                                                                     cssModule = {field.cssModule}
                                                                     >{messages[field.name]?intl.formatMessage(messages[field.name]):"FIX:"+field.name}</Label>
                                                                 </>  
