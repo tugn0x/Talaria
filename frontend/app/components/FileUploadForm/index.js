@@ -35,7 +35,7 @@ const FileUploadForm = (props) => {
       console.log("invalid file extension")
       setvalidfiletype(false)
       // Display an alert message containing the allowed file types.
-      alert(`${intl.formatMessage({id: "message_to_display_file_extension"})} ${AllowedFileTypes}`);
+      alert(`${intl.formatMessage({id: "app.requests.message_to_display_file_extension"})} ${AllowedFileTypes}`);
       return;
     } 
 }
