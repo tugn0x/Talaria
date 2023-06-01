@@ -19,7 +19,7 @@ const FulfillLendingRequest = props => {
     }
 
     const MaxFileUpload = process.env.MAX_UPLOAD_FILE;
-    
+    const AllowedFileTypes = process.env.FILE_EXTENSION;
     
     useEffect(() => {      
       
@@ -138,8 +138,10 @@ return (
                 {(deliverymethod==1) && 
                 <Row>
                     <Col sm={12}> 
-                        <FileUpload  parentCallback={callbackuploadFunction} cleanuploadprops={true} data={data} customClass="detail-body"/>
-                        <p>{intl.formatMessage({id: "app.requests.max_file_upload"})} : {MaxFileUpload}</p>
+                    <p>{intl.formatMessage({id: "app.requests.allowed_file_types"})} : {AllowedFileTypes}</p>
+                    <p>{intl.formatMessage({id: "app.requests.max_file_upload"})} : {MaxFileUpload}</p>
+
+                        <FileUpload  parentCallback={callbackuploadFunction} cleanuploadprops={true} data={data} AllowedFileTypes={AllowedFileTypes} customClass="detail-body"/>
                     </Col>
                 </Row>            
                 }

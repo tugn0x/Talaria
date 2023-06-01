@@ -347,6 +347,10 @@ library_coordinates_note: {
   defaultMessage: 'This GPS coords are needed to display the library in a map',
 },
 
+library_coordinates_Validity: {
+  id: 'app.containers.RegisterNewLibrary.library_coordinates_Validity',
+  defaultMessage: 'The latitude or longitude format is incorrect.',
+},
 
 library_coordinates: {
   id: 'app.containers.RegisterNewLibrary.library_coordinates',

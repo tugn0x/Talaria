@@ -6,10 +6,11 @@ import {Label} from 'reactstrap';
 
 
 const FileUploadForm = (props) => {
-    const {FileUploadCallBack, customClass, data, File_Extension}=props;
+    const {FileUploadCallBack, customClass, data, AllowedFileTypes}=props;
     const [file, setFile] = useState(false)
     const [selectedFile, setSelectedFile] = useState(null);
-    const [originalFilename, setFilename] = useState(null)
+    const [originalFilename, setFilename] = useState(null);
+    const [validfiletype, setvalidfiletype] = useState(false);
     var hideMessageFlag = 0;
     const intl=useIntl();
 
@@ -18,10 +19,25 @@ const FileUploadForm = (props) => {
     console.log("file name is " + JSON.stringify(e.target.files[0].name))
     
     if (!files.length)
-          return;
-    setSelectedFile(e.target.files[0])
-    setFilename(e.target.files[0].name)
-    createFile(files[0]);
+        return;
+
+    const fileType = e.target.files[0].name.substring(e.target.files[0].name.lastIndexOf('.') + 1);
+  
+    if (AllowedFileTypes.includes(fileType)) {
+      setSelectedFile(e.target.files[0])
+      setFilename(e.target.files[0].name)
+      createFile(files[0]);
+      setvalidfiletype(true)  
+      console.log("valid file extension")
+    }
+    else
+    {
+      console.log("invalid file extension")
+      setvalidfiletype(false)
+      // Display an alert message containing the allowed file types.
+      alert(`${intl.formatMessage({id: "message_to_display_file_extension"})} ${AllowedFileTypes}`);
+      return;
+    } 
 }
 
 function createFile(file) {
@@ -33,11 +49,13 @@ function createFile(file) {
     FileUploadCallBack(data, file, originalFilename, hideMessageFlag)
 }
     return (          
-            <div className={customClass}>                
+            <div className={customClass}>
+              <br></br>                
                     <Label for="uploadfile">{intl.formatMessage({id: "app.components.FileUploadForm.filechoose"})}</Label>
-                    <input type="file" id="uploadfile" name="file" accept={File_Extension} onChange={onChange}  />
-                    {selectedFile && <button type="button" onClick={() => FileUploadCallBack(data, file, originalFilename, hideMessageFlag+1)} className="btn btn-info">Upload file</button>}
-            </div>         
+                    <input type="file" id="uploadfile" name="file" accept={AllowedFileTypes} capture="camera" onChange={onChange}  />
+                    {selectedFile && validfiletype && <button type="button" onClick={() => FileUploadCallBack(data, file, originalFilename, hideMessageFlag+1)} className="btn btn-info">Upload file</button>}
+            </div>    
+
     );
 };
 

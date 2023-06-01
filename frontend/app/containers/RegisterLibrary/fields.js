@@ -71,10 +71,23 @@ export const fields = {
         required: false,
         nolabel: true,
         name: "library_coordinates_note",
-        width: "col-sm-12",
+        width: "col-sm-6",
         size:"13px",
         group: "step_1",
         order: 5,
+    },
+
+    library_coordinates_Validity: {
+        type: "Label",
+        required: false,
+        nolabel: true,
+        name: "library_coordinates_Validity",
+        width: "col-sm-6",
+        size:"14px",
+        group: "step_1",
+        order: 6,
+        hidden:true,
+        color:"#FF0000"
     },
     geolocation_spinner: {
         type: "spinner",
