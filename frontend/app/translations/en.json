@@ -29,7 +29,7 @@
   "app.global.fax": "Fax",
   "app.global.postcode": "Postal code",
   "app.global.town": "City",
-  "app.global.status": "State",
+  "app.global.status": "Status",
   "app.global.preferred": "Preferred",
   "app.global.privacy_policy_accepted": "Privacy policy",
   "app.global.preflang":"Preferred Language",
@@ -589,6 +589,7 @@
   "app.components.ResetPasswordForm.header": "Password reset",
   "app.components.ResetPasswordForm.submitFormButton": "Reset your password",
   "app.components.ResetPasswordForm.updateMessage": "Your password has been reset",
+  
   "app.components.Footer.header": "This is the footer's header",
   "app.components.FilterSelect.labels": "Tags",
   "app.components.FilterSelect.groups": "Categories",
