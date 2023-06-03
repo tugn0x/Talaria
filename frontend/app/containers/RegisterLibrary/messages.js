@@ -349,7 +349,7 @@ library_coordinates_note: {
 
 library_coordinates_Validity: {
   id: 'app.containers.RegisterNewLibrary.library_coordinates_Validity',
-  defaultMessage: 'The latitude or longitude format is incorrect.',
+  defaultMessage: "The latitude or longitude can be accepted in either decimal format (e.g., +33.56, -33.56) or in degrees format (e.g., 40°20'38''N).",
 },
 
 library_coordinates: {
