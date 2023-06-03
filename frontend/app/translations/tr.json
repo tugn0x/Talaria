@@ -180,7 +180,7 @@
   "app.containers.RegisterNewLibrary.library_location_label": "Library location & profile",
   "app.containers.RegisterNewLibrary.library_coordinates": "Are you sitting in the library, if yes?",
   "app.containers.RegisterNewLibrary.library_coordinates_note": "These GPS coords are needed to show library location on a map",
-  "app.containers.library_coordinates_Validity": "Enlem veya boylam, ondalık biçimde (ör. +33.56, -33.56) veya derece biçiminde (ör. 40°20'38''K) kabul edilebilir.",
+  "app.containers.RegisterNewLibrary.library_coordinates_Validity": "Enlem veya boylam, ondalık biçimde (ör. +33.56, -33.56) veya derece biçiminde (ör. 40°20'38''K) kabul edilebilir.",
   "app.containers.RegisterNewLibrary.subject_label":"Library disciplinary sector",
   "app.containers.RegisterNewLibrary.opac_label":"Library Online Catalog (OPAC)",
   "app.containers.RegisterNewLibrary.switchToBasicProfile":"Switch to Basic profile",
@@ -336,6 +336,7 @@
   "app.libraries.profile_type.full": "Full (Borrowing+Lending)",
   "app.libraries.ill_IFLA_voucher": "IFLA vouchers are accepted",
   "app.libraries.ill_cost_in_voucher": "IFLA voucher value",  
+  "app.libraries.library_coordinates_Validity": "Enlem veya boylam, ondalık biçimde (ör. +33.56, -33.56) veya derece biçiminde (ör. 40°20'38''K) kabul edilebilir.",
 
   "app.references.labels": "Tags",
   "app.references.labelAs": "Tag as",

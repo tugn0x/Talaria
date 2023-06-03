@@ -180,7 +180,7 @@
   "app.containers.RegisterNewLibrary.library_location_label": "Profilo e località/indirizzo della biblioteca",
   "app.containers.RegisterNewLibrary.library_coordinates": "Sei seduto in biblioteca, vero?",
   "app.containers.RegisterNewLibrary.library_coordinates_note": "Queste coordinate GPS sono necessarie per visualizzare la biblioteca in una mappa",
-  "app.containers.library_coordinates_Validity": "La latitudine o la longitudine possono essere accettate sia in formato decimale (ad es. +33.56, -33.56) che in formato in gradi (ad es. 40°20'38''N).",
+  "app.containers.RegisterNewLibrary.library_coordinates_Validity": "La latitudine o la longitudine possono essere accettate sia in formato decimale (ad es. +33.56, -33.56) che in formato in gradi (ad es. 40°20'38''N).",
   "app.containers.RegisterNewLibrary.subject_label":"Settore disciplinare",
   "app.containers.RegisterNewLibrary.opac_label":"Online Catalog (OPAC)",
   "app.containers.RegisterNewLibrary.switchToBasicProfile":"Scegli il profilo base",
@@ -336,6 +336,7 @@
   "app.libraries.profile_type.full": "Completo (Borrowing+Lending)",
   "app.libraries.ill_IFLA_voucher": "Accettati voucher IFLA",
   "app.libraries.ill_cost_in_voucher": "Valore voucher IFLA",  
+  "app.libraries.library_coordinates_Validity": "La latitudine o la longitudine possono essere accettate sia in formato decimale (ad es. +33.56, -33.56) che in formato in gradi (ad es. 40°20'38''N).",
 
   "app.references.labels": "Etichette",
   "app.references.labelAs": "Etichetta come",

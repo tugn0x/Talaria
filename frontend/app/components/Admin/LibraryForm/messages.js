@@ -39,6 +39,11 @@ export default defineMessages({
     defaultMessage: 'subject_name',
   },
 
+  library_coordinates_Validity: {
+    id: 'app.libraries.library_coordinates_Validity',
+    defaultMessage: "The latitude or longitude can be accepted in either decimal format (e.g., +33.56, -33.56) or in degrees format (e.g., 40°20'38''N).",
+  },
+
   country_id: {
     id: `app.global.country`,
     defaultMessage: 'Country',

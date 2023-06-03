@@ -126,6 +126,17 @@ export const fields = {
         group: "general_info",      
         width: "col-sm-6",
         order: 12,
+    },
+    library_coordinates_Validity: {
+        type: "Label",
+        required: false,
+        nolabel: true,
+        name: "library_coordinates_Validity",
+        width: "col-sm-6",
+        group: "general_info",
+        order: 13,
+        hidden:false,
+        color:"#FF0000"
     },    
 
     institution_id: {
