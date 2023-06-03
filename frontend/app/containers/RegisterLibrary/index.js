@@ -95,7 +95,10 @@ const RegisterLibrary = (props) => {
         if (decimalRegex.test(trimmedCoordinates) || (degreesRegex.test(trimmedCoordinates))) {
           console.log('Coordinates are a decimal number OR Coordinates are in degrees format');
           return true;
-        } else {
+        } else if (trimmedCoordinates.length === 0) 
+            return true;
+        else
+        {
           console.log('Invalid coordinates');
           return false;
         }
