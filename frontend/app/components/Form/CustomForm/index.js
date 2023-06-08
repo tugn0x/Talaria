@@ -402,7 +402,7 @@ const CustomForm = (props) => {
                                                                         field={field}
                                                                         label={field.label && field.label}
                                                                         color="brown"
-                                                                        style={{fontSize: field.size,marginTop:field.margintop,  paddingBottom: field.paddingbottom, paddingTop: field.paddingtop}}
+                                                                        style={{marginTop:field.margintop,  paddingBottom: field.paddingbottom, paddingTop: field.paddingtop}}
                                                                         disabled={field.disabled ? field.disabled : false} onClick={(e, value, newList) =>
                                                                         AddNewIdentifier(e, value, newList)
                                                                     }
@@ -417,7 +417,7 @@ const CustomForm = (props) => {
                                                                 <>
                                                                    <Label                                                                     
                                                                     label={field.label && field.label}                                                                    
-                                                                    style={{fontSize: field.size, paddingBottom: field.paddingbottom, paddingTop: field.paddingtop, color:field.color}}
+                                                                    style={{fontSize: field.fontSize, paddingBottom: field.paddingbottom, paddingTop: field.paddingtop, color:field.color}}
                                                                     cssModule = {field.cssModule}
                                                                     >{messages[field.name]?intl.formatMessage(messages[field.name]):"FIX:"+field.name}</Label>
                                                                 </>  
