@@ -336,7 +336,7 @@
   "app.libraries.profile_type.full": "???Full (Borrowing+Lending)",
   "app.libraries.ill_IFLA_voucher": "Se aceptan cupones IFLA",
   "app.libraries.ill_cost_in_voucher": "Valor del cupón IFLA",  
-  "app.libraries.library_coordinates_Validity": "La latitud o la longitud se pueden aceptar en formato decimal (p. ej., +33,56, -33,56) o en formato de grados (p. ej., 40°20'38''N).",
+  "app.libraries.library_coordinates_Validity": "???La latitud o la longitud se pueden aceptar en formato decimal (p. ej., +33,56, -33,56) o en formato de grados (p. ej., 40°20'38''N).",
 
 
   "app.references.labels": "Etiquetas",

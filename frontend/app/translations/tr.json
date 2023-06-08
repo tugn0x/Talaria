@@ -336,6 +336,7 @@
   "app.libraries.profile_type.full": "Tam abonelik (ödünç alma ve verme)",
   "app.libraries.ill_IFLA_voucher": "IFLA bileti kabul edildi",
   "app.libraries.ill_cost_in_voucher": "IFLA bilet değeri",  
+  "app.libraries.library_coordinates_Validity": "???The latitude or longitude can be accepted in either decimal format (e.g., +33.56, -33.56) or in degrees format (e.g., 40°20'38''N).",
 
   "app.references.labels": "Etiketler",
   "app.references.labelAs": "Olarak etiketle",
