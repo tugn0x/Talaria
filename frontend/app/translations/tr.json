@@ -45,6 +45,7 @@
   "app.global.request": "Talep",
   "app.global.submit": "Gönder",  
   "app.global.edit": "Düzenle",
+  "app.global.delete": "???Delete",  
   "app.global.save": "Kaydet",
   "app.global.library": "Kütüphane",
   "app.global.pickup": "Alınacağı nokta",

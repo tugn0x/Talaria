@@ -44,6 +44,7 @@
   "app.global.resetAll": "Reset all",
   "app.global.request": "Request",
   "app.global.submit": "Submit",  
+  "app.global.delete": "Delete",  
   "app.global.edit": "Edit",
   "app.global.save": "Save",
   "app.global.library": "Library",

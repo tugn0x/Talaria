@@ -45,6 +45,7 @@
   "app.global.request": "Richiedi",
   "app.global.submit": "Salva",  
   "app.global.edit": "Modifica",
+  "app.global.delete": "Elimina",  
   "app.global.save": "Salva",
   "app.global.library": "Biblioteca",
   "app.global.pickup": "Punto di consegna",
