@@ -38,8 +38,8 @@ const PickupItem = (props) => {
             </div>
             </Col>
             <Col sm={2}>      
-                {/*<Link className="btn btn-icon" to={editUrl(editPath,data.id,"edit")}></Link>*/}<i className="fa-solid fa-pen-to-square"></i>
-                {/*deletePickup && <a className="btn btn-icon" onClick={()=>deletePickup()}></a>*/}<i className="fa-solid fa-trash"></i> 
+                {/*<Link className="btn btn-icon" to={editUrl(editPath,data.id,"edit")} title={intl.formatMessage({id: "app.manager.pickups.icon.details"})}></Link>*/}<i className="fa-solid fa-pen-to-square"></i>
+                {/*deletePickup && <a className="btn btn-icon" onClick={()=>deletePickup()}  title={intl.formatMessage({id: "app.manager.pickups.icon.delete"})}></a>*/}<i className="fa-solid fa-trash"></i> 
             </Col> 
         </Row>
     )
