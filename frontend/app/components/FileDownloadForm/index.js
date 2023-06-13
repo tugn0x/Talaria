@@ -9,7 +9,7 @@ const FileDownloadForm = (props) => {
     let intl=useIntl();
     
     return (
-        <button type="button" onClick={() => FileDownloadCallBack()} className="btn btn-primary btn-sm btn-download-icon" title={intl.formatMessage({id: "app.icon.file"})} ><i className="fa-solid fa-download"></i></button>                    
+        <button type="button" onClick={() => FileDownloadCallBack()} className="btn btn-primary btn-sm btn-download-icon" title={intl.formatMessage({id: "app.requests.icon.file"})} ><i className="fa-solid fa-download"></i></button>                    
                 
     );
 };

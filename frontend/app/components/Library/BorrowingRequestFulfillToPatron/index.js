@@ -65,7 +65,7 @@ return (<div>
                                         <FormGroup >                                
                                             <Input                                         
                                                 type="textarea"                                         
-                                                label={intl.formatMessage({id: "app.icon.url"})}
+                                                label={intl.formatMessage({id: "app.requests.icon.url"})}
                                                 handleChange={(value) => handleChange(value, 'url')}                                        
                                                 input={formData.url ? formData.url : ""}
                                             />
