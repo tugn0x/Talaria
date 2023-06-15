@@ -136,7 +136,12 @@ export const fields = {
         group: "general_info",
         order: 13,
         hidden:false,
-        color:"#FF0000"
+        color:"#000000",
+        hasborder: true,
+        paddingtop: "2px",
+        paddingbottom: "2px",
+        paddingleft: "2px",
+        paddingright: "2px",
     },    
 
     institution_id: {
@@ -299,14 +304,15 @@ export const fields = {
         order: 9,
     },
     ill_susp_date_start: {
-        type: "date",
+        type: "DatePicker",
         name: "ill_susp_date_start",
         width: "col-sm-6",
         group: "service_info",
         order: 10,
     },
+    
     ill_susp_date_end: {
-        type: "date",
+        type: "DatePicker",
         name: "ill_susp_date_end",
         width: "col-sm-6",
         group: "service_info",

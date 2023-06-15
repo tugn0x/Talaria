@@ -87,7 +87,8 @@ export const fields = {
         group: "step_1",
         order: 6,
         hidden:true,
-        color:"#FF0000"
+        color:"#FF0000",
+        hasborder: false
     },
     geolocation_spinner: {
         type: "spinner",

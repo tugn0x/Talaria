@@ -417,7 +417,17 @@ const CustomForm = (props) => {
                                                                 <>
                                                                    <Label                                                                     
                                                                     label={field.label && field.label}                                                                    
-                                                                    style={{fontSize: field.fontSize, paddingBottom: field.paddingbottom, paddingTop: field.paddingtop, color:field.color}}
+                                                                    style={{
+                                                                        fontSize: field.fontSize,
+                                                                        paddingBottom: field.paddingbottom,
+                                                                        paddingTop: field.paddingtop,
+                                                                        paddingLeft: field.paddingleft,
+                                                                        paddingRight: field.paddingright,
+                                                                        color: field.color,
+                                                                        border: field.hasborder === true ? '1px solid #007bff' : 'none',
+                                                                        borderRadius: field.hasborder === true ? '5px' : '0',
+                                                                        boxShadow: field.hasborder === true ? '0 0 1px rgba(243, 156, 18, 0.7)' : 'none',
+                                                                    }}
                                                                     cssModule = {field.cssModule}
                                                                     >{messages[field.name]?intl.formatMessage(messages[field.name]):"FIX:"+field.name}</Label>
                                                                 </>  
