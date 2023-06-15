@@ -65,6 +65,8 @@ const LibraryInformations =(props) => {
 
     const [showLibraryExtraInfo,setShowLibraryExtraInfo]=useState(false);
 
+    let intl=useIntl();
+
     return (
 
 
@@ -73,7 +75,7 @@ const LibraryInformations =(props) => {
             <a className="toggle-library-info" onClick={()=>setShowLibraryExtraInfo(!showLibraryExtraInfo)} title="show extra info">      
                 <i className={`active fas ${showLibraryExtraInfo?'fa-caret-square-up':'fa-caret-square-down'}`}></i> 
             </a> 
-            {detailUrl && <Link to={detailUrl} className="active">
+            {detailUrl && <Link to={detailUrl} className="active" title={intl.formatMessage({id: "app.manager.libraries.icon.details"})}>
                 <span>{data.id} - {data.name}</span>
             </Link>||
                 <span>{data.id} - {data.name}</span>
@@ -82,7 +84,7 @@ const LibraryInformations =(props) => {
             </div>
             {data.institution && <div className='institution'>
             <i className="fa-solid fa-building"></i> 
-            <span className=''>{data.institution.data.name} {data.institution.data.status!==1? <span className='text-danger'><i className="fa-solid fa-triangle-exclamation"></i></span>:''} <span className='institutionType'>({data.institution.data.institution_type.data.name})</span></span>                            
+            <span className=''>{data.institution.data.name} {data.institution.data.status!==1? <span className='text-danger'><i className="fa-solid fa-triangle-exclamation" title={intl.formatMessage({id: "app.manager.libraries.icon.institution_warning"})}></i></span>:''} <span className='institutionType'>({data.institution.data.institution_type.data.name})</span></span>                            
             </div>}                            
             {data.projects && data.projects.data && data.projects.data.length>0 && 
                 <span className='projects'>

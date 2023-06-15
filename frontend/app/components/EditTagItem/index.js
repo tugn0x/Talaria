@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Row, Col, Button} from 'reactstrap';
+import {useIntl} from 'react-intl';
 
 const EditTagItem = props => {
     const {data, updateItem, removeItem} = props
     const [tag, setTag] = useState({})
+    const intl = useIntl();
 
     useEffect(() => {
         if(data){
@@ -33,7 +35,7 @@ const EditTagItem = props => {
                             onChange={(e) => handleChangeText(e)} value={tag.name} 
                             onKeyDown={(e) => handleKeyPress(e)}
                         />
-                        <Button onClick={() => updateItem(tag.id, tag.name)} color="icon">
+                        <Button onClick={() => updateItem(tag.id, tag.name)} color="icon" title={intl.formatMessage({id: "app.global.edit"})}>
                             <i className="fa-solid fa-floppy-disk"></i>
                         </Button>
                     </>
@@ -42,10 +44,10 @@ const EditTagItem = props => {
                 }
             </Col>
             <Col xs={4} md={2} className="icons align-self-center">
-                <Button className={`${tag.isEdit ? 'active' : null}`} onClick={() => setTag(state => ({...state, isEdit: !state.isEdit}))} color="icon">
+                <Button className={`${tag.isEdit ? 'active' : null}`} onClick={() => setTag(state => ({...state, isEdit: !state.isEdit}))} color="icon" title={intl.formatMessage({id: "app.global.edit"})}>
                     <i className="fa-solid fa-pen-to-square"></i>
                 </Button>
-                <Button onClick={() => removeItem(tag.id)} color="icon">
+                <Button onClick={() => removeItem(tag.id)} color="icon" title={intl.formatMessage({id: "app.global.delete"})}>
                     <i className="fa-solid fa-trash"></i>
                 </Button>
                 

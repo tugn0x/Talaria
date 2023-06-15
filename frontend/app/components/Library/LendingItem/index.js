@@ -29,7 +29,7 @@ export const documentAccess=(data) => {
     return (
         <div className="access_document_icons">
                 
-        {isURL(data) && <a href className="btn btn-primary btn-sm btn-download-icon" target="_blank" href={data.url}><i className="fa-solid fa-arrow-up-right-from-square"></i></a>}         
+        {isURL(data) && <a className="btn btn-primary btn-sm btn-download-icon" target="_blank" href={data.url}><i className="fa-solid fa-arrow-up-right-from-square"></i></a>}         
         </div>
     )
 }
@@ -153,19 +153,20 @@ export const LendingStatus = (props) => {
 const LendingRequestIcons = (props) => {
     const {match, data,reqPath,UpdateLendingRequestStatus, UpdateLendingAcceptRequest}=props;    
     const libraryId=match.params.library_id
+    const intl = useIntl();
     return (
         <div className="lending_request_icons icons d-flex">                        
                 {isRequestReceived(data) && (data.all_lender==null|| data.all_lender==0)  && 
                     <>
-                        <a className="btn btn-icon"  onClick={()=>UpdateLendingRequestStatus(data)}><i className="fa-solid fa-parachute-box"></i></a>
-                        <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fa-solid fa-ban"></i></Link>
+                        <a className="btn btn-icon"  onClick={()=>UpdateLendingRequestStatus(data)} title={intl.formatMessage({id: "app.requests.icon.willSupply"})} ><i className="fa-solid fa-parachute-box"></i></a>
+                        <Link className="btn btn-icon" to={requesturl(reqPath,data.id)} title={intl.formatMessage({id: "app.requests.icon.cannotFulfill"})} ><i className="fa-solid fa-ban"></i></Link>
                     </>
                 }
                 {(data.all_lender==null || data.all_lender==0) && data.lending_archived==null && data.lending_status=="willSupply" && 
-                <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fa-solid fa-circle-right"></i></Link>}
-                {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}><i className="fa-solid fa-circle-right"></i></Link>}
-                {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <a className="btn btn-icon" onClick={()=>UpdateLendingRequestStatus(data)}><i className="fa-solid fa-trash"></i></a>}
-                {(data.all_lender==1) && isRequestReceived(data) && !isRequestedByMe(data,libraryId) && <a className="btn btn-icon" onClick={()=>UpdateLendingAcceptRequest(data)}><i className="fa-solid fa-parachute-box"></i></a>}
+                <Link className="btn btn-icon" to={requesturl(reqPath,data.id)} title={intl.formatMessage({id: "app.requests.icon.processRequest"})} ><i className="fa-solid fa-circle-right"></i></Link>}
+                {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <Link className="btn btn-icon" to={requesturl(reqPath,data.id)}  title={intl.formatMessage({id: "app.requests.icon.processRequest"})}><i className="fa-solid fa-circle-right"></i></Link>}
+                {(data.all_lender==null || data.all_lender==0) && data.lending_status=="cancelRequested" && <a className="btn btn-icon" onClick={()=>UpdateLendingRequestStatus(data)}  title={intl.formatMessage({id: "app.requests.icon.cancelConfirm"})}><i className="fa-solid fa-trash"></i></a>}
+                {(data.all_lender==1) && isRequestReceived(data) && !isRequestedByMe(data,libraryId) && <a className="btn btn-icon" onClick={()=>UpdateLendingAcceptRequest(data)}  title={intl.formatMessage({id: "app.requests.icon.willSupply"})}><i className="fa-solid fa-parachute-box"></i></a>}
 
                 {documentAccess(data)}
         </div>

@@ -24,14 +24,16 @@ export const subscriptionurl=(reqPath,id) => {
 
 const statusInfo = (inst) => {  
 
+    let intl=useIntl();
+
     let ret="";
 
     switch (inst.status) {
-        case 0: ret=<i className='fa-solid fa-ban' title={inst.status_key}></i>
+        case 0: ret=<i className='fa-solid fa-ban' title={intl.formatMessage({id: "app.manager.institutions.icon.disabled"})}></i>
                 break;         
-        case 1: ret=<i className='fa-solid fa-circle-check' title={inst.status_key}></i>
+        case 1: ret=<i className='fa-solid fa-circle-check' title={intl.formatMessage({id: "app.manager.institutions.icon.enabled"})}></i>
                 break;                 
-        case 2: ret=<i className='fa-solid fa-triangle-exclamation' title={inst.status_key}></i>
+        case 2: ret=<i className='fa-solid fa-triangle-exclamation' title={intl.formatMessage({id: "app.manager.institutions.icon.warning"})}></i>
         break;                         
 
         default: ret=inst.status_key
@@ -89,12 +91,13 @@ export const InstitutionInfo = (props) => {
 
 export const InstitutionOperations = (props) => {
     const {data,changeStatusInstitution,deleteInstitution}=props;    
+    let intl=useIntl();
   
     return (        
         <div className={"institution_operations"}>                                                          
-                {canDelete(data) && deleteInstitution && <a className="btn btn-icon btn-sm" onClick={()=>deleteInstitution()}><i className="fa-solid fa-trash"></i></a>}                                                
-                {canEnable(data) && changeStatusInstitution && <a className="btn btn-icon btn-sm" onClick={()=>changeStatusInstitution(1)}><i className="fa-solid fa-circle-check"></i></a>}                                                            
-                {canDisable(data) && changeStatusInstitution && <a className="btn btn-icon btn-sm" onClick={()=>changeStatusInstitution(0)}><i className="fa-solid fa-ban"></i></a>}                                
+                {canDelete(data) && deleteInstitution && <a className="btn btn-icon btn-sm" onClick={()=>deleteInstitution()} title={intl.formatMessage({id: "app.manager.institutions.icon.delete"})}><i className="fa-solid fa-trash"></i></a>}                                                
+                {canEnable(data) && changeStatusInstitution && <a className="btn btn-icon btn-sm" onClick={()=>changeStatusInstitution(1)} title={intl.formatMessage({id: "app.manager.institutions.icon.enable"})}><i className="fa-solid fa-circle-check"></i></a>}                                                            
+                {canDisable(data) && changeStatusInstitution && <a className="btn btn-icon btn-sm" onClick={()=>changeStatusInstitution(0)} title={intl.formatMessage({id: "app.manager.institutions.icon.disable"})}><i className="fa-solid fa-ban"></i></a>}                                
         </div>
     )
 }
@@ -117,7 +120,7 @@ const InstitutionItem = (props) => {
                         <i className={`active fa-solid ${showInstitutionInfo?'fa-square-caret-up':'fa-square-caret-down'}`}></i> 
                 </a> 
                 <div className="institution_id">
-                    <Link to={editurl(editPath,data.id)} className="active"><span>{data.id} - {data.name}</span></Link>
+                    <Link to={editurl(editPath,data.id)} className="active" title={intl.formatMessage({id: "app.manager.institutions.icon.details"})}><span>{data.id} - {data.name}</span></Link>
                     <div className='institution_type'>                
                         <span className='badge badge-secondary'>{data.institution_type.data.name}</span>
                     </div>                          
@@ -129,7 +132,7 @@ const InstitutionItem = (props) => {
             </Col>
             <Col sm={3}>
                 <>
-                <Link to={subscriptionurl(editPath,data.id)} className="active subscriptionlink"><i className="fa-solid fa-file-contract"></i></Link>                
+                {/*<Link to={subscriptionurl(editPath,data.id)} className="active subscriptionlink"><i className="fa-solid fa-file-contract"></i></Link>*/}                
                 {formatDateTime(data.created_at)}                
                 </>
             </Col>

@@ -18,10 +18,10 @@ export const editurl=(reqPath,id,op) => {
 
 export const InstitutionTypeOperations = (props) => {
     const {data,deleteInstitutionType}=props;    
-  
+    const intl = useIntl();  
     return (        
         <div className={"institutiontype_operations"}>                                                                            
-                {deleteInstitutionType && <a className="btn btn-icon btn-sm" onClick={()=>deleteInstitutionType()}><i className="fa-solid fa-trash"></i></a>}                                                
+                {deleteInstitutionType && <a className="btn btn-icon btn-sm" onClick={()=>deleteInstitutionType()} title={intl.formatMessage({id: "app.manager.institutions.icon.delete"})}><i className="fa-solid fa-trash"></i></a>}                                                
         </div>
     )
 }
@@ -39,7 +39,7 @@ const InstitutionTypeItem = (props) => {
                     handleChange={toggleSelection}
                     checked={checked}
                 /> 
-                <div className="institutiontype_id"><Link to={editurl(editPath,data.id)} className="active"><span>{data.name}</span></Link></div>                
+                <div className="institutiontype_id"><Link to={editurl(editPath,data.id)} className="active" title={intl.formatMessage({id: "app.manager.institutions.icon.details"})}><span>{data.name}</span></Link></div>                
             </Col>
             <Col sm={3}>
                 {formatDateTime(data.created_at)}                                

@@ -76,6 +76,9 @@ export const lendingUnfilledReason = (data) => {
 }
 
 export const documentAccess=(data) => {
+
+    let intl=useIntl();
+
     return (
         <div className="access_document_icons">
             
@@ -85,7 +88,7 @@ export const documentAccess=(data) => {
             <FileDownload  reqid={data.id} libraryid={data.library.data.id} filehash={data.filehash} customClass="detail-body" />
         }                
       
-        {isURL(data) && <a className="btn btn-primary btn-sm btn-download-icon" target="_blank" href={data.url}><i className="fa-solid fa-arrow-up-right-from-square"></i></a>}         
+        {isURL(data) && <a className="btn btn-primary btn-sm btn-download-icon" title={intl.formatMessage({id: "app.requests.icon.url"})} target="_blank" href={data.url}><i className="fa-solid fa-arrow-up-right-from-square"></i></a>}         
         </div>
     )
 }
@@ -370,16 +373,18 @@ export const BorrowingReferenceIcons = (props) => {
             findAndUpdateOABorrowingReference();
     }
 
+    const intl = useIntl();
+
     return (
         !isArchived(data) && <div className="borrowing_reference_icons">
-                {canEdit(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'edit')}><i className="fa-solid fa-pen-to-square"></i></Link>}
-                {data.reference.data.oa_link && <a href={data.reference.data.oa_link} target="_blank" className='btn btn-icon'><i className="icon-oa"></i></a>} 
-                {canRequest(data) && !oaloading && !data.reference.data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev) } title="find OA"><i className="fa-solid fa-magnifying-glass-plus"></i></a>                
+                {canEdit(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'edit')} title={intl.formatMessage({id: "app.requests.icon.referenceEdit"})}><i className="fa-solid fa-pen-to-square"></i></Link>}
+                {data.reference.data.oa_link && <a href={data.reference.data.oa_link} target="_blank" className='btn btn-icon' title={intl.formatMessage({id: "app.requests.icon.referenceOAlink"})}><i className="icon-oa"></i></a>} 
+                {canRequest(data) && !oaloading && !data.reference.data.oa_link && <a target="_blank" className='btn btn-icon' onClick={(ev) => findAndUpdateOA(ev) } title={intl.formatMessage({id: "app.requests.icon.referenceCheckOA"})}><i className="fa-solid fa-magnifying-glass-plus"></i></a>                
                 ||canRequest(data) && oaloading && <i className="fa-solid fa-spinner fa-spin"></i>
                 }
-                {canRequest(data) && (issn_search_enabled || isbn_search_enabled ) && mustCheckData(data) && <a target="_blank" className='btn btn-icon' onClick={()=>findISSNISBNtoggle()} title="checkISSN/ISBN"><i className="fa-solid fa-keyboard"></i></a>}
-                {canRequest(data) &&  !mustCheckData(data) && <span className="btn btn-icon"><i className="fa-solid fa-check-double"></i></span>}                              
-                {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO Check holding !')} title="check my holding"><i className="fa-solid fa-school"></i></a>}                    
+                {canRequest(data) && (issn_search_enabled || isbn_search_enabled ) && mustCheckData(data) && <a target="_blank" className='btn btn-icon' onClick={()=>findISSNISBNtoggle()} title={intl.formatMessage({id: "app.requests.icon.referenceCheckISSN_ISBN"})}><i className="fa-solid fa-keyboard"></i></a>}
+                {canRequest(data) &&  !mustCheckData(data) && <span className="btn btn-icon" title={intl.formatMessage({id: "app.requests.icon.referenceCheckISSN_ISBN_found"})}><i className="fa-solid fa-check-double"></i></span>}                              
+                {canRequest(data) && <a className="btn btn-icon" onClick={()=>alert('TODO Check holding !')} title={intl.formatMessage({id: "app.requests.icon.referenceCheckHoldings"})}><i className="fa-solid fa-school"></i></a>}                    
                 
         </div>
     )
@@ -387,26 +392,28 @@ export const BorrowingReferenceIcons = (props) => {
 
 export const BorrowingRequestIcons = (props) => {
     const {data,reqPath,forwardRequest,askTrashRequest,askCancelRequest,deleteRequest,askArchiveRequest,askArchiveRequestAsNotReceived,customClass,savedAsDownloaded,setReceivedRequest,setNotReceivedRequest}=props;    
+
+    const intl = useIntl();
   
     return (        
         <div className={"borrowing_request_icons " + (customClass?customClass:'')}>                                                  
 
                 {/*<Link to={requesturl(reqPath,data.id)} className="btn btn-icon"><i className="fa-solid fa-eye"></i></Link>*/}                              
-                {canRequest(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,"request")}><i className="fa-solid fa-share"></i></Link>}
-                {canCancel(data) && askCancelRequest && <a className="btn btn-icon" onClick={()=>askCancelRequest()}><i className="fa-solid fa-xmark"></i></a>}                
-                {canDelete(data) && deleteRequest && <a className="btn btn-icon" onClick={()=>deleteRequest()}><i className="fa-solid fa-backspace"></i></a>}                                                
-                {canTrash(data) && askTrashRequest && <a className="btn btn-icon" onClick={()=>askTrashRequest(1)}><i className="fa-solid fa-trash"></i></a>}                
-                {canForward(data) && forwardRequest && <a className="btn btn-icon" onClick={()=>forwardRequest()}><i className="fa-solid fa-rotate-right"></i></a>}                
-                {canArchive(data) && askArchiveRequest && <a className="btn btn-icon" onClick={()=>askArchiveRequest()}><i className="fa-solid fa-hard-drive"></i></a>}                                                
+                {canRequest(data) && <Link className="btn btn-icon" title={intl.formatMessage({id: "app.requests.icon.request"})} to={requesturl(reqPath,data.id,"request")}><i className="fa-solid fa-share"></i></Link>}
+                {canCancel(data) && askCancelRequest && <a className="btn btn-icon"  title={intl.formatMessage({id: "app.requests.icon.cancel"})} onClick={()=>askCancelRequest()}><i className="fa-solid fa-xmark"></i></a>}                
+                {canDelete(data) && deleteRequest && <a className="btn btn-icon"  title={intl.formatMessage({id: "app.requests.icon.delete"})} onClick={()=>deleteRequest()}><i className="fa-solid fa-backspace"></i></a>}                                                
+                {canTrash(data) && askTrashRequest && <a className="btn btn-icon"  title={intl.formatMessage({id: "app.requests.icon.trash"})} onClick={()=>askTrashRequest(1)}><i className="fa-solid fa-trash"></i></a>}                
+                {canForward(data) && forwardRequest && <a className="btn btn-icon" title={intl.formatMessage({id: "app.requests.icon.forward"})} onClick={()=>forwardRequest()}><i className="fa-solid fa-rotate-right"></i></a>}                
+                {canArchive(data) && askArchiveRequest && <a className="btn btn-icon" title={intl.formatMessage({id: "app.requests.icon.archive"})} onClick={()=>askArchiveRequest()}><i className="fa-solid fa-hard-drive"></i></a>}                                                
                                    
                 
                 
                 {canSavedAsDownloaded(data) && savedAsDownloaded && (isFile(data)||isURL(data)) &&                
-                        <a className="btn btn-icon" onClick={()=>savedAsDownloaded()}><i className="fa-solid fa-file-circle-check"></i></a>                   
+                        <a className="btn btn-icon" title={intl.formatMessage({id: "app.requests.icon.confirmFile"})} onClick={()=>savedAsDownloaded()}><i className="fa-solid fa-file-circle-check"></i></a>                   
                 }                
                 
-                {canSavedAsReceived(data) && setReceivedRequest && setNotReceivedRequest && <><a className="btn btn-icon" onClick={()=>setReceivedRequest()}><i className="fa-solid fa-box-open"></i></a> 
-                    <a className="btn btn-icon" onClick={()=>setNotReceivedRequest()}>
+                {canSavedAsReceived(data) && setReceivedRequest && setNotReceivedRequest && <><a className="btn btn-icon" title={intl.formatMessage({id: "app.requests.icon.received"})} onClick={()=>setReceivedRequest()}><i className="fa-solid fa-box-open"></i></a> 
+                    <a className="btn btn-icon" title={intl.formatMessage({id: "app.requests.icon.notReceived"})} onClick={()=>setNotReceivedRequest()}>
                     <span className="fa-stack fa-1x">
                         <i className="fa-solid fa-box fa-stack-1x"></i>
                         <i className="fa-solid fa-ban fa-stack-2x"></i>
@@ -416,14 +423,14 @@ export const BorrowingRequestIcons = (props) => {
                 {/*casi di evasione/inevasione a patron DIRETTA*/}
                 {canPatronReqDirectManaged(data) && canRequest(data) &&
                 <>
-                    <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}>
+                    <Link className="btn btn-icon" title={intl.formatMessage({id: "app.requests.icon.deliver"})} to={requesturl(reqPath,data.id,'deliver')}>
                         <i className="fa-solid fa-truck text-info"></i> 
                     </Link>                                     
                 </>
                 }    
                 {/*casi di evasione/inevasione a patron DOPO DD*/}
-                {canFulfillToPatron(data) &&  <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}><i className="fa-solid fa-truck text-success"></i></Link>}                                                
-                {canUnfillToPatron(data) && <Link className="btn btn-icon" to={requesturl(reqPath,data.id,'deliver')}>
+                {canFulfillToPatron(data) &&  <Link className="btn btn-icon" title={intl.formatMessage({id: "app.requests.icon.fulfillToPatron"})} to={requesturl(reqPath,data.id,'deliver')}><i className="fa-solid fa-truck text-success"></i></Link>}                                                
+                {canUnfillToPatron(data) && <Link className="btn btn-icon" title={intl.formatMessage({id: "app.requests.icon.cannotFulfillToPatron"})} to={requesturl(reqPath,data.id,'deliver')}>
                 <span className="fa-stack"><i className="fa-solid fa-truck fa-stack-1x text-warning"></i><i className="fa-solid fa-ban fa-stack-2x"></i></span>
                 </Link>}                                
                 
@@ -433,7 +440,7 @@ export const BorrowingRequestIcons = (props) => {
                 {/*casi di archiviazione come inevasione SENZA patron DIRETTA dopo diversi forward/inevasioni dd
                 sembra un caso di "DIRETTA" ma solo perchè è una nuova richiesta ma di fatto è collegata alle altre
                 x cui il dd c'e' stato!*/}
-                {!isPatronRequest(data) && hasParentRequest(data) && !isArchived(data) && canRequest(data) && askArchiveRequestAsNotReceived && <a className="btn btn-icon" onClick={()=>askArchiveRequestAsNotReceived()}><i className="fa-solid fa-hard-drive text-warning"></i></a>} 
+                {!isPatronRequest(data) && hasParentRequest(data) && !isArchived(data) && canRequest(data) && askArchiveRequestAsNotReceived && <a className="btn btn-icon" title={intl.formatMessage({id: "app.requests.icon.archiveNotReceived"})} onClick={()=>askArchiveRequestAsNotReceived()}><i className="fa-solid fa-hard-drive text-warning"></i></a>} 
         </div>
     )
 }
@@ -450,7 +457,7 @@ const BorrowingItem = (props) => {
                     handleChange={toggleSelection}
                     checked={checked}
                 /> 
-                <div className="request_id"><Link to={requesturl(editPath,data.id)} className="active"><i className="fa-solid fa-circle-info"></i> <span>{data.id}</span></Link></div>
+                <div className="request_id"><Link to={requesturl(editPath,data.id)} title={intl.formatMessage({id: "app.requests.icon.requestDetail"})} className="active"><i className="fa-solid fa-circle-info"></i> <span>{data.id}</span></Link></div>
                 <BorrowingStatus data={data} customClass="request_status"/>                                 
             </Col>
             <Col sm={3}>
