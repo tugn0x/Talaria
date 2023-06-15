@@ -353,11 +353,16 @@ const RegisterLibrary = (props) => {
         if (field_name === "library_identifiers_txt" && value.length === 0)
             fields.library_identifier_add.disabled = true
 
-        if ((field_name === 'lon' || field_name === 'lat') && !validateCoordinates(value)) 
-            fields.library_coordinates_Validity.hidden = false;
-        else
-            fields.library_coordinates_Validity.hidden = true;
-             
+        if (field_name === 'lon' || field_name === 'lat')
+        {
+            let newData = {...data, [field_name]: value, ['order_' + field_name]: order };
+            let lonIsValid = newData.lon ? validateCoordinates(newData.lon) : true;
+            let latIsValid = newData.lat ? validateCoordinates(newData.lat) : true;
+              
+            fields.library_coordinates_Validity.hidden = lonIsValid && latIsValid;
+            setData(newData);
+        }
+
         setData({...data, [field_name]: value, ['order_'+field_name]:order})
     }
 
