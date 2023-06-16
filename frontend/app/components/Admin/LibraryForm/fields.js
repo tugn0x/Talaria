@@ -304,6 +304,7 @@ export const fields = {
         order: 9,
     },
     ill_susp_date_start: {
+        label: "Suspension Start Date",
         type: "DatePicker",
         name: "ill_susp_date_start",
         width: "col-sm-6",
@@ -312,6 +313,7 @@ export const fields = {
     },
     
     ill_susp_date_end: {
+        label: "Suspension End Date",
         type: "DatePicker",
         name: "ill_susp_date_end",
         width: "col-sm-6",

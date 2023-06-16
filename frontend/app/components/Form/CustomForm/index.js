@@ -18,6 +18,7 @@ import {withRouter} from 'react-router-dom'
 import MapSelector from '../MapSelector';
 import { v4 as uuid } from 'uuid';
 import { filter} from 'lodash';
+import {DatePicker} from 'node_modules/reactstrap-date-picker'
 // PROPS
 // fields
 // callback action
@@ -45,6 +46,7 @@ const CustomForm = (props) => {
     const [list, setList] = React.useState(initialList);
     const [identifierFound, setIdentifierFound] = useState(false)
     const [dblist, setdbList] = React.useState(initialList);
+    const [selectedDate, setSelectedDate] = useState(null);
 
     const AddNewIdentifier = (e, field_name, value) => {
         e.preventDefault();
@@ -173,6 +175,14 @@ const CustomForm = (props) => {
             }
         }
     },[])
+
+    const clearDatefunction = (field_name, value) => {
+        setSelectedDate(null)
+        setFormData({ ...formData, [field_name]: null, 'order':1});
+        setIsSubmitDisabled(false)
+        props.onChangeData && props.onChangeData(field_name, null, 1) 
+        props.getValidation && props.getValidation(document.querySelector('form').checkValidity()) 
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -431,6 +441,28 @@ const CustomForm = (props) => {
                                                                     cssModule = {field.cssModule}
                                                                     >{messages[field.name]?intl.formatMessage(messages[field.name]):"FIX:"+field.name}</Label>
                                                                 </>  
+                                                                ||
+                                                                field.type === 'DatePicker' &&
+                                                                <>
+                                                                <DatePicker
+                                                                    field={field}
+                                                                    placeholder={field.label && field.label}
+                                                                    dateFormat={'YYYY-MM-DD'}
+                                                                    showTodayButton
+                                                                    isClearable={true}
+                                                                    showClearButton={true}
+                                                                    value={props.requestData && props.requestData[field.name] ? props.requestData[field.name] : formData[field.name]}
+                                                                    label={messages[field.name] ? intl.formatMessage(messages[field.name]) : ''}
+                                                                    data={!formData[field.name] && props.requestData && props.requestData[field.name] ? props.requestData[field.name] : formData[field.name]}
+                                                                    onChange={(value) => {
+                                                                    if (value)
+                                                                        handleChange(new Date(value).toISOString().split('T')[0], field.name, field.order);
+                                                                    else
+                                                                        handleChange('', field.name, field.order); // Handle the case when the date is cleared
+                                                                    }
+                                                                }
+                                                                />
+                                                                </> 
                                                                 ||
                                                                     <>  {/*  TEXT, TEXTAREA, NUMBER  */}
                                                                         <InputField 

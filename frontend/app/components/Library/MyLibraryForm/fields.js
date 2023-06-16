@@ -165,14 +165,16 @@ export const fields = {
         disabled: true,
     },
     ill_susp_date_start: {
-        type: "date",
+        type: "DatePicker",
         name: "ill_susp_date_start",
-        width: "col-sm-6"
+        width: "col-sm-6",
+        label: "Susp Date Start"
     },
     ill_susp_date_end: {
-        type: "date",
+        type: "DatePicker",
         name: "ill_susp_date_end",
-        width: "col-sm-6"
+        width: "col-sm-6",
+        label: "Susp Date End"
     },
     ill_susp_notification_days: {
         type: "number",
