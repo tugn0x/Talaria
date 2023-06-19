@@ -110,6 +110,7 @@
     "react-transition-group": "^4.4.2",
     "reactstrap": "^8.9.0",
     "reactstrap-confirm": "^1.2.0",
+    "reactstrap-date-picker": "^1.0.9",
     "redux": "4.0.1",
     "redux-saga": "1.0.2",
     "reselect": "4.0.0",
